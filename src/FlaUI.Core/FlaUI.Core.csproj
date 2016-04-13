@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="interop.UIAutomationCore">
+      <HintPath>..\libs\interop.UIAutomationCore.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,6 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Definitions\AnnotationType.cs" />
+    <Compile Include="Definitions\ControlType.cs" />
+    <Compile Include="Definitions\EventType.cs" />
+    <Compile Include="Definitions\PatternType.cs" />
+    <Compile Include="Definitions\PropertyType.cs" />
+    <Compile Include="Definitions\StyleType.cs" />
+    <Compile Include="Definitions\TextAttributeType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

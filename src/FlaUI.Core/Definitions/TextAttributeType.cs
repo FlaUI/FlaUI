@@ -1,0 +1,48 @@
+﻿using interop.UIAutomationCore;
+
+namespace FlaUI.Core.Definitions
+{
+    public enum TextAttributeType
+    {
+        AnimationStyle = UIA_TextAttributeIds.UIA_AnimationStyleAttributeId,
+        AnnotationObjects = UIA_TextAttributeIds.UIA_AnnotationObjectsAttributeId,
+        AnnotationTypes = UIA_TextAttributeIds.UIA_AnnotationTypesAttributeId,
+        BackgroundColor = UIA_TextAttributeIds.UIA_BackgroundColorAttributeId,
+        BulletStyle = UIA_TextAttributeIds.UIA_BulletStyleAttributeId,
+        CapStyle = UIA_TextAttributeIds.UIA_CapStyleAttributeId,
+        CaretBidiMode = UIA_TextAttributeIds.UIA_CaretBidiModeAttributeId,
+        CaretPosition = UIA_TextAttributeIds.UIA_CaretPositionAttributeId,
+        Culture = UIA_TextAttributeIds.UIA_CultureAttributeId,
+        FontName = UIA_TextAttributeIds.UIA_FontNameAttributeId,
+        FontSize = UIA_TextAttributeIds.UIA_FontSizeAttributeId,
+        FontWeight = UIA_TextAttributeIds.UIA_FontWeightAttributeId,
+        ForegroundColor = UIA_TextAttributeIds.UIA_ForegroundColorAttributeId,
+        HorizontalTextAlignment = UIA_TextAttributeIds.UIA_HorizontalTextAlignmentAttributeId,
+        IndentationFirstLine = UIA_TextAttributeIds.UIA_IndentationFirstLineAttributeId,
+        IndentationLeading = UIA_TextAttributeIds.UIA_IndentationLeadingAttributeId,
+        IndentationTrailing = UIA_TextAttributeIds.UIA_IndentationTrailingAttributeId,
+        IsActive = UIA_TextAttributeIds.UIA_IsActiveAttributeId,
+        IsHidden = UIA_TextAttributeIds.UIA_IsHiddenAttributeId,
+        IsItalic = UIA_TextAttributeIds.UIA_IsItalicAttributeId,
+        IsReadOnly = UIA_TextAttributeIds.UIA_IsReadOnlyAttributeId,
+        IsSubscript = UIA_TextAttributeIds.UIA_IsSubscriptAttributeId,
+        IsSuperscript = UIA_TextAttributeIds.UIA_IsSuperscriptAttributeId,
+        Link = UIA_TextAttributeIds.UIA_LinkAttributeId,
+        MarginBottom = UIA_TextAttributeIds.UIA_MarginBottomAttributeId,
+        MarginLeading = UIA_TextAttributeIds.UIA_MarginLeadingAttributeId,
+        MarginTop = UIA_TextAttributeIds.UIA_MarginTopAttributeId,
+        MarginTrailing = UIA_TextAttributeIds.UIA_MarginTrailingAttributeId,
+        OutlineStyles = UIA_TextAttributeIds.UIA_OutlineStylesAttributeId,
+        OverlineColor = UIA_TextAttributeIds.UIA_OverlineColorAttributeId,
+        OverlineStyle = UIA_TextAttributeIds.UIA_OverlineStyleAttributeId,
+        SelectionActiveEnd = UIA_TextAttributeIds.UIA_SelectionActiveEndAttributeId,
+        StrikethroughColor = UIA_TextAttributeIds.UIA_StrikethroughColorAttributeId,
+        StrikethroughStyle = UIA_TextAttributeIds.UIA_StrikethroughStyleAttributeId,
+        StyleId = UIA_TextAttributeIds.UIA_StyleIdAttributeId,
+        StyleName = UIA_TextAttributeIds.UIA_StyleNameAttributeId,
+        Tabs = UIA_TextAttributeIds.UIA_TabsAttributeId,
+        TextFlowDirections = UIA_TextAttributeIds.UIA_TextFlowDirectionsAttributeId,
+        UnderlineColor = UIA_TextAttributeIds.UIA_UnderlineColorAttributeId,
+        UnderlineStyle = UIA_TextAttributeIds.UIA_UnderlineStyleAttributeId,
+    }
+}
