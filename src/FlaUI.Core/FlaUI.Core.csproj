@@ -30,12 +30,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="interop.ShObjIdl">
+      <HintPath>..\libs\interop.ShObjIdl.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="interop.UIAutomationCore">
       <HintPath>..\libs\interop.UIAutomationCore.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,12 +58,18 @@
     <Compile Include="Definitions\PropertyType.cs" />
     <Compile Include="Definitions\StyleType.cs" />
     <Compile Include="Definitions\TextAttributeType.cs" />
+    <Compile Include="Drawing\FrameRectangle.cs" />
+    <Compile Include="Drawing\ScreenRectangle.cs" />
     <Compile Include="Elements\Button.cs" />
     <Compile Include="Elements\ElementBase.cs" />
     <Compile Include="Elements\Window.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\SystemProductNameFetcher.cs" />
+    <Compile Include="Tools\WindowsStoreAppLauncher.cs" />
+    <Compile Include="WindowsAPI\NativeWindow.cs" />
+    <Compile Include="WindowsAPI\Structures.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
