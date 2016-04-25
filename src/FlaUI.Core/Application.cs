@@ -1,6 +1,7 @@
 ﻿using FlaUI.Core.Definitions;
 using FlaUI.Core.Elements;
 using FlaUI.Core.Logging;
+using FlaUI.Core.Overlay;
 using FlaUI.Core.Tools;
 using interop.UIAutomationCore;
 using System;
@@ -8,12 +9,14 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using System.Windows.Media;
 
 namespace FlaUI.Core
 {
-    public class Application
+    public class Application : IDisposable
     {
         private readonly Process _process;
+        private readonly OverlayManager _overlayManager;
         private static readonly ILogger Log = new ConsoleLogger();
 
         public string Name
@@ -32,13 +35,16 @@ namespace FlaUI.Core
             {
                 throw new Exception("Process cannot be null");
             }
-            this._process = process;
+            _process = process;
             WaitWhileBusy();
             WaitWhileMainHandleIsMissing();
+            _overlayManager = new OverlayManager();
         }
 
         public void Close()
         {
+            Log.Info("Closing overlays");
+            _overlayManager.Dispose();
             Log.Info("Closing application");
             if (_process.HasExited)
             {
@@ -156,7 +162,7 @@ namespace FlaUI.Core
         /// <summary>
         /// Gets the root element (desktop)
         /// </summary>
-        public IUIAutomationElement GetDektop()
+        public IUIAutomationElement GetDesktop()
         {
             var desktop = Automation.Instance.GetRootElement();
             return desktop;
@@ -168,12 +174,13 @@ namespace FlaUI.Core
         public Window GetMainWindow()
         {
             var win = Automation.Instance.ElementFromHandle(_process.MainWindowHandle);
+            _overlayManager.Show(Converter.ToRect(win.CurrentBoundingRectangle), Colors.Red);
             return new Window(win);
         }
 
         public Window GetWindow(string title)
         {
-            var desktop = Automation.Instance.GetRootElement();
+            var desktop = GetDesktop();
             var windows = desktop.FindAll(TreeScope.TreeScope_Children,
                 Automation.Instance.CreateAndCondition(
                     Automation.Instance.CreatePropertyCondition((int)PropertyType.ControlType, ControlType.Window),
@@ -181,5 +188,10 @@ namespace FlaUI.Core
             return new Window(windows.GetElement(0));
         }
         #endregion Window
+
+        public void Dispose()
+        {
+            Close();
+        }
     }
 }

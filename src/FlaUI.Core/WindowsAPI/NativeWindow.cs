@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace FlaUI.Core.WindowsAPI
 {
+    // TODO: Clean this up
     public class NativeWindow
     {
         private readonly IntPtr _handle;
@@ -66,7 +67,7 @@ namespace FlaUI.Core.WindowsAPI
         [DllImport("user32.dll", SetLastError = true)]
         private static extern bool PostMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
-        private const uint WM_CLOSE = 0x0010;
+
 
         public static IEnumerable<NativeWindow> GetProcessWindows(int processId)
         {
@@ -114,7 +115,7 @@ namespace FlaUI.Core.WindowsAPI
 
         public virtual void PostCloseMessage()
         {
-            PostMessage(_handle, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+            PostMessage(_handle, Constants.WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
         }
 
         //Native methods needed for highlighting UIItems
@@ -126,7 +127,7 @@ namespace FlaUI.Core.WindowsAPI
         internal static extern int SetWindowLong(IntPtr hWnd, int nIndex, UInt32 dwNewLong);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
-        internal static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+        public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         internal static extern UInt32 GetWindowLong(IntPtr hWnd, int nIndex);

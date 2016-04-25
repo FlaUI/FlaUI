@@ -4,9 +4,9 @@ using System.Runtime.InteropServices;
 
 namespace FlaUI.Core
 {
-    public static class Automation
+    public class Automation
     {
-        private static IUIAutomation instance = null;
+        private static IUIAutomation _instance = null;
 
         // Tell the compiler not to mark the type as beforefieldinit
         static Automation()
@@ -21,11 +21,11 @@ namespace FlaUI.Core
             get
             {
                 // Try CUIAutomation8 (Windows 8)
-                if (instance == null)
+                if (_instance == null)
                 {
                     try
                     {
-                        instance = new CUIAutomation8();
+                        _instance = new CUIAutomation8();
                     }
                     catch (COMException)
                     {
@@ -33,12 +33,12 @@ namespace FlaUI.Core
                 }
 
                 // Fall back to CUIAutomation
-                if (instance == null)
+                if (_instance == null)
                 {
-                    instance = new CUIAutomation();
+                    _instance = new CUIAutomation();
                 }
 
-                return instance;
+                return _instance;
             }
         }
 

@@ -35,6 +35,8 @@ namespace FlaUI.Core.Elements
             }
         }
 
+        public PatternFactory PatternFactory { get; private set; }
+
         public Rectangle BoundingRectangle
         {
             get
@@ -50,6 +52,7 @@ namespace FlaUI.Core.Elements
         protected ElementBase(IUIAutomationElement nativeElement)
         {
             NativeElement = nativeElement;
+            PatternFactory = new PatternFactory(nativeElement);
         }
 
         public ElementBase DrawHighlight()

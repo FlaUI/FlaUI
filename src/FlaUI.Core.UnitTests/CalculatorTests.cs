@@ -15,7 +15,6 @@ namespace FlaUI.Core.UnitTests
                 : Application.Launch("calc.exe");
             var window = app.GetMainWindow();
             Console.WriteLine(window.Title);
-            window.DrawHighlight();
             app.Close();
 
 

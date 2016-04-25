@@ -1,9 +1,4 @@
 ﻿using interop.UIAutomationCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlaUI.Core.Elements
 {
@@ -11,12 +6,18 @@ namespace FlaUI.Core.Elements
     {
         public string Title
         {
-            get
-            {
-                return NativeElement.CurrentName;
-            }
+            get { return NativeElement.CurrentName; }
         }
 
         public Window(IUIAutomationElement nativeElement) : base(nativeElement) { }
+
+        public void Move(int x, int y)
+        {
+            var transformPattern = PatternFactory.GetTransformPattern();
+            if (transformPattern != null)
+            {
+                transformPattern.Move(x, y);
+            }
+        }
     }
 }
