@@ -16,8 +16,10 @@ namespace FlaUI.Core
     public class Application : IDisposable
     {
         private readonly Process _process;
-        private readonly OverlayManager _overlayManager;
+
         private static readonly ILogger Log = new ConsoleLogger();
+
+        public Automation Automation { get; private set; }
 
         public string Name
         {
@@ -38,13 +40,11 @@ namespace FlaUI.Core
             _process = process;
             WaitWhileBusy();
             WaitWhileMainHandleIsMissing();
-            _overlayManager = new OverlayManager();
+            Automation = new Automation();
         }
 
         public void Close()
         {
-            Log.Info("Closing overlays");
-            _overlayManager.Dispose();
             Log.Info("Closing application");
             if (_process.HasExited)
             {
@@ -164,7 +164,7 @@ namespace FlaUI.Core
         /// </summary>
         public IUIAutomationElement GetDesktop()
         {
-            var desktop = Automation.Instance.GetRootElement();
+            var desktop = Automation.NativeAutomation.GetRootElement();
             return desktop;
         }
 
@@ -173,19 +173,19 @@ namespace FlaUI.Core
         /// </summary>
         public Window GetMainWindow()
         {
-            var win = Automation.Instance.ElementFromHandle(_process.MainWindowHandle);
-            _overlayManager.Show(Converter.ToRect(win.CurrentBoundingRectangle), Colors.Red);
-            return new Window(win);
+            var win = Automation.NativeAutomation.ElementFromHandle(_process.MainWindowHandle);
+            Automation.OverlayManager.Show(Converter.ToRect(win.CurrentBoundingRectangle), Colors.Red);
+            return new Window(Automation, win);
         }
 
         public Window GetWindow(string title)
         {
             var desktop = GetDesktop();
             var windows = desktop.FindAll(TreeScope.TreeScope_Children,
-                Automation.Instance.CreateAndCondition(
-                    Automation.Instance.CreatePropertyCondition((int)PropertyType.ControlType, ControlType.Window),
-                    Automation.Instance.CreatePropertyCondition((int)PropertyType.ProcessId, _process.Id)));
-            return new Window(windows.GetElement(0));
+                Automation.NativeAutomation.CreateAndCondition(
+                    Automation.NativeAutomation.CreatePropertyCondition((int)PropertyType.ControlType, ControlType.Window),
+                    Automation.NativeAutomation.CreatePropertyCondition((int)PropertyType.ProcessId, _process.Id)));
+            return new Window(Automation, windows.GetElement(0));
         }
         #endregion Window
 

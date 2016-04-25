@@ -1,77 +1,109 @@
-﻿using interop.UIAutomationCore;
+﻿using FlaUI.Core.Overlay;
+using interop.UIAutomationCore;
 using System;
 using System.Runtime.InteropServices;
 
 namespace FlaUI.Core
 {
-    public class Automation
+    /// <summary>
+    /// Wrapper for the native automation object
+    /// </summary>
+    public class Automation : IDisposable
     {
-        private static IUIAutomation _instance = null;
-
-        // Tell the compiler not to mark the type as beforefieldinit
-        static Automation()
+        /// <summary>
+        /// Basic object for the ui automation
+        /// </summary>
+        public IUIAutomation NativeAutomation
         {
+            get;
+            private set;
         }
 
         /// <summary>
-        /// Basic instance for the ui automation
+        /// Object for Windows 8 automation
         /// </summary>
-        public static IUIAutomation Instance
+        public IUIAutomation2 NativeAutomation2
         {
             get
             {
-                // Try CUIAutomation8 (Windows 8)
-                if (_instance == null)
-                {
-                    try
-                    {
-                        _instance = new CUIAutomation8();
-                    }
-                    catch (COMException)
-                    {
-                    }
-                }
-
-                // Fall back to CUIAutomation
-                if (_instance == null)
-                {
-                    _instance = new CUIAutomation();
-                }
-
-                return _instance;
-            }
-        }
-
-        /// <summary>
-        /// Windows 8 automation
-        /// </summary>
-        public static IUIAutomation2 Instance2
-        {
-            get
-            {
-                var instance2 = Instance as IUIAutomation2;
-                if (instance2 == null)
+                var upgradedAutomation = NativeAutomation as IUIAutomation2;
+                if (upgradedAutomation == null)
                 {
                     throw new NotImplementedException("OS does not have IUIAutomation2 support.");
                 }
-                return instance2;
+                return upgradedAutomation;
             }
         }
 
         /// <summary>
-        /// Windows 8.1 automation
+        /// Object for Windows 8.1 automation
         /// </summary>
-        public static IUIAutomation3 Instance3
+        public IUIAutomation3 NativeAutomation3
         {
             get
             {
-                var instance3 = Instance as IUIAutomation3;
-                if (instance3 == null)
+                var upgradedAutomation = NativeAutomation as IUIAutomation3;
+                if (upgradedAutomation == null)
                 {
                     throw new NotImplementedException("OS does not have IUIAutomation3 support.");
                 }
-                return instance3;
+                return upgradedAutomation;
             }
+        }
+
+        /// <summary>
+        /// Factory object for conditions
+        /// </summary>
+        public ConditionFactory ConditionFactory
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Manager object for overlay objects
+        /// </summary>
+        public OverlayManager OverlayManager
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Creates an automation object
+        /// </summary>
+        public Automation()
+        {
+            NativeAutomation = InitializeAutomation();
+            ConditionFactory = new ConditionFactory(NativeAutomation);
+            OverlayManager = new OverlayManager();
+        }
+
+        /// <summary>
+        /// Initializes the automation object with the correct instance
+        /// </summary>
+        private IUIAutomation InitializeAutomation()
+        {
+            IUIAutomation nativeAutomation;
+            // Try CUIAutomation8 (Windows 8)
+            try
+            {
+                nativeAutomation = new CUIAutomation8();
+            }
+            catch (COMException)
+            {
+                // Fall back to CUIAutomation
+                nativeAutomation = new CUIAutomation();
+            }
+            return nativeAutomation;
+        }
+
+        /// <summary>
+        /// Cleans up the resources
+        /// </summary>
+        public void Dispose()
+        {
+            OverlayManager.Dispose();
         }
     }
 }

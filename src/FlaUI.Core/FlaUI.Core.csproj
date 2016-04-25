@@ -64,8 +64,6 @@
     <Compile Include="Definitions\PropertyType.cs" />
     <Compile Include="Definitions\StyleType.cs" />
     <Compile Include="Definitions\TextAttributeType.cs" />
-    <Compile Include="Drawing\FrameRectangle.cs" />
-    <Compile Include="Drawing\ScreenRectangle.cs" />
     <Compile Include="Elements\Button.cs" />
     <Compile Include="Elements\ElementBase.cs" />
     <Compile Include="Elements\Window.cs" />

@@ -1,10 +1,13 @@
-﻿using FlaUI.Core.Drawing;
-using interop.UIAutomationCore;
+﻿using interop.UIAutomationCore;
 using System;
-using System.Drawing;
+using System.Windows;
+using System.Windows.Media;
 
 namespace FlaUI.Core.Elements
 {
+    /// <summary>
+    /// Basic class for a wrapped ui element
+    /// </summary>
     public abstract class ElementBase
     {
         public IUIAutomationElement NativeElement { get; private set; }
@@ -35,9 +38,11 @@ namespace FlaUI.Core.Elements
             }
         }
 
+        public Automation Automation { get; private set; }
+
         public PatternFactory PatternFactory { get; private set; }
 
-        public Rectangle BoundingRectangle
+        public Rect BoundingRectangle
         {
             get
             {
@@ -45,27 +50,33 @@ namespace FlaUI.Core.Elements
                 var left = NativeElement.CurrentBoundingRectangle.left;
                 var bottom = NativeElement.CurrentBoundingRectangle.bottom;
                 var right = NativeElement.CurrentBoundingRectangle.right;
-                return new Rectangle(left, top, right - left, bottom - top);
+                return new Rect(left, top, right - left, bottom - top);
             }
         }
 
-        protected ElementBase(IUIAutomationElement nativeElement)
+        /// <summary>
+        /// Constructor for a basic ui element
+        /// </summary>
+        /// <param name="automation">The automation instance where this element belongs to</param>
+        /// <param name="nativeElement">The native element this instance wrapps</param>
+        protected ElementBase(Automation automation, IUIAutomationElement nativeElement)
         {
+            Automation = automation;
             NativeElement = nativeElement;
             PatternFactory = new PatternFactory(nativeElement);
         }
 
         public ElementBase DrawHighlight()
         {
-            return DrawHighlight(Color.Red);
+            return DrawHighlight(Colors.Red);
         }
 
         public ElementBase DrawHighlight(Color color)
         {
             var rectangle = BoundingRectangle;
-            if (rectangle != Rectangle.Empty)
+            if (rectangle != Rect.Empty)
             {
-                new FrameRectangle(color, rectangle).Highlight();
+                Automation.OverlayManager.ShowBlocking(rectangle, color);
             }
             return this;
         }

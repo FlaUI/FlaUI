@@ -9,7 +9,7 @@ namespace FlaUI.Core.Elements
             get { return NativeElement.CurrentName; }
         }
 
-        public Window(IUIAutomationElement nativeElement) : base(nativeElement) { }
+        public Window(Automation automation, IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
 
         public void Move(int x, int y)
         {

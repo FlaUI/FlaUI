@@ -46,6 +46,15 @@ namespace FlaUI.Core.Overlay
             });
         }
 
+        public void ShowBlocking(Rect rectangle, Color color)
+        {
+            _dispatcher.Invoke(() =>
+            {
+                var win = new OverlayRectangleWindow(rectangle, color);
+                win.ShowDialog();
+            });
+        }
+
         public void Dispose()
         {
             _dispatcher.InvokeShutdown();
