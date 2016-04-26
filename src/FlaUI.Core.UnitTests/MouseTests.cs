@@ -1,10 +1,7 @@
-﻿using System;
-using System.Security.Permissions;
-using System.Threading;
-using FlaUI.Core.Input;
+﻿using FlaUI.Core.Input;
 using NUnit.Framework;
+using System.Threading;
 using System.Windows;
-using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.UnitTests
 {
@@ -26,27 +23,15 @@ namespace FlaUI.Core.UnitTests
         {
             var app = Application.Launch("mspaint");
             var window = app.GetMainWindow();
-            var mouseX = window.BoundingRectangle.Top + 200;
-            var mouseY = window.BoundingRectangle.Left + 50;
+            var mouseX = window.BoundingRectangle.Left + 50;
+            var mouseY = window.BoundingRectangle.Top + 200;
             app.Automation.Mouse.Position = new Point(mouseX, mouseY);
             app.Automation.Mouse.MouseDown(MouseButton.Left);
             app.Automation.Mouse.MoveBy(100, 10);
+            app.Automation.Mouse.MoveBy(10, 50);
             app.Automation.Mouse.MouseUp(MouseButton.Left);
             Thread.Sleep(2000);
             app.Dispose();
-        }
-
-        [Test]
-        public void CursorTest()
-        {
-            var img = User32.LoadImage(IntPtr.Zero, "#32514", ImageType.IMAGE_CURSOR, 0, 0, ImageLoadOptions.LR_SHARED);
-            User32.SetCursor(img);
-          //  Thread.Sleep(5000);
-            User32.SetCursor(img);
-          //  Thread.Sleep(2000);
-            var cr = User32.LoadCursor(IntPtr.Zero, StandardCursors.IDC_CROSS);
-          //  User32.SetCursor(cr);
-            Thread.Sleep(2000);
         }
     }
 }

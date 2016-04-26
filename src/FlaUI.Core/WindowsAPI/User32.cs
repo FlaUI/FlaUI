@@ -32,13 +32,7 @@ namespace FlaUI.Core.WindowsAPI
         [DllImport("user32.dll")]
         public static extern uint SendInput(uint nInputs, [MarshalAs(UnmanagedType.LPArray), In] INPUT[] pInputs, int cbSize);
 
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        public static extern IntPtr LoadImage(IntPtr hinst, string lpszName, ImageType uType, int cxDesired, int cyDesired, ImageLoadOptions fuLoad);
-
         [DllImport("user32.dll")]
-        public static extern IntPtr LoadCursor(IntPtr hInstance, StandardCursors lpCursorName);
-
-        [DllImport("user32.dll", SetLastError = true)]
-        public static extern IntPtr SetCursor(IntPtr hCursor);
+        public static extern short VkKeyScan(char ch);
     }
 }

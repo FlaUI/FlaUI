@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace FlaUI.Core.Input
 {
+    /// <summary>
+    /// Interface for the keyboard
+    /// </summary>
     public interface IKeyboard
     {
+        void Press(ushort keyCode);
+
+        void Write(string textToWrite);
     }
 }

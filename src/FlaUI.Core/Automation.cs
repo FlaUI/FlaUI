@@ -80,6 +80,15 @@ namespace FlaUI.Core
         }
 
         /// <summary>
+        /// Object to control the keyboard
+        /// </summary>
+        public IKeyboard Keyboard
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// Creates an automation object
         /// </summary>
         public Automation()
@@ -88,6 +97,7 @@ namespace FlaUI.Core
             ConditionFactory = new ConditionFactory(NativeAutomation);
             OverlayManager = new OverlayManager();
             Mouse = new Mouse();
+            Keyboard = new Keyboard();
         }
 
         /// <summary>

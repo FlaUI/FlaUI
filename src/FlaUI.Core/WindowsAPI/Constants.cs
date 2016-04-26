@@ -145,48 +145,61 @@ namespace FlaUI.Core.WindowsAPI
         KEYEVENTF_SCANCODE = 0x0008
     }
 
-    public enum ImageType : uint
+    public enum SpecialKeys : ushort
     {
-        IMAGE_BITMAP = 0,
-        IMAGE_ICON = 1,
-        IMAGE_CURSOR = 2
-    }
-
-    public enum StandardCursors
-    {
-        IDC_ARROW = 32512,
-        IDC_IBEAM = 32513,
-        IDC_WAIT = 32514,
-        IDC_CROSS = 32515,
-        IDC_UPARROW = 32516,
-        IDC_SIZE = 32640,
-        IDC_ICON = 32641,
-        IDC_SIZENWSE = 32642,
-        IDC_SIZENESW = 32643,
-        IDC_SIZEWE = 32644,
-        IDC_SIZENS = 32645,
-        IDC_SIZEALL = 32646,
-        IDC_NO = 32648,
-        IDC_HAND = 32649,
-        IDC_APPSTARTING = 32650,
-        IDC_HELP = 32651
-    }
-
-    [Flags]
-    public enum ImageLoadOptions : uint
-    {
-        LR_DEFAULTCOLOR = 0,
-        LR_MONOCHROME = 0x1,
-        LR_COLOR = 0x2,
-        LR_COPYRETURNORG = 0x4,
-        LR_COPYDELETEORG = 0x8,
-        LR_LOADFROMFILE = 0x10,
-        LR_LOADTRANSPARENT = 0x20,
-        LR_DEFAULTSIZE = 0x40,
-        LR_VGACOLOR = 0x80,
-        LR_LOADMAP3DCOLORS = 0x1000,
-        LR_CREATEDIBSECTION = 0x2000,
-        LR_COPYFROMRESOURCE = 0x4000,
-        LR_SHARED = 0x8000
+        // References:
+        // http://pinvoke.net/default.aspx/user32/SendInput.html
+        // http://delphi.about.com/od/objectpascalide/l/blvkc.htm
+        SHIFT = 0x10,
+        CONTROL = 0x11,
+        ALT = 0x12,
+        LEFT_ALT = 0xA4,
+        RIGHT_ALT = 0xA5,
+        RETURN = 0x0D,
+        RIGHT = 0x27,
+        BACKSPACE = 0x08,
+        LEFT = 0x25,
+        ESCAPE = 0x1B,
+        TAB = 0x09,
+        HOME = 0x24,
+        END = 0x23,
+        UP = 0x26,
+        DOWN = 0x28,
+        INSERT = 0x2D,
+        DELETE = 0x2E,
+        CAPS = 0x14,
+        F1 = 0x70,
+        F2 = 0x71,
+        F3 = 0x72,
+        F4 = 0x73,
+        F5 = 0x74,
+        F6 = 0x75,
+        F7 = 0x76,
+        F8 = 0x77,
+        F9 = 0x78,
+        F10 = 0x79,
+        F11 = 0x7A,
+        F12 = 0x7B,
+        F13 = 0x7C,
+        F14 = 0x7D,
+        F15 = 0x7E,
+        F16 = 0x7F,
+        F17 = 0x80,
+        F18 = 0x81,
+        F19 = 0x82,
+        F20 = 0x83,
+        F21 = 0x84,
+        F22 = 0x85,
+        F23 = 0x86,
+        F24 = 0x87,
+        PAGEUP = 0x21,
+        PAGEDOWN = 0x22,
+        PRINT = 0x2A,
+        PRINTSCREEN = 0x2C,
+        SPACE = 0x20,
+        NUMLOCK = 0x90,
+        SCROLL = 0x91,
+        LWIN = 0x5B,
+        RWIN = 0x5C,
     }
 }
