@@ -36,8 +36,8 @@ namespace FlaUI.Core.Overlay
         private void SetWindowTransparent()
         {
             var hwnd = new WindowInteropHelper(this).Handle;
-            var extendedStyle = NativeWindow.GetWindowLong(hwnd, Constants.GWL_EXSTYLE);
-            NativeWindow.SetWindowLong(hwnd, Constants.GWL_EXSTYLE, extendedStyle | Constants.WS_EX_TRANSPARENT);
+            var extendedStyle = User32.GetWindowLong(hwnd, WindowLongParam.GWL_EXSTYLE);
+            User32.SetWindowLong(hwnd, WindowLongParam.GWL_EXSTYLE, extendedStyle | WindowStyles.WS_EX_TRANSPARENT);
         }
 
         private void StartCloseTimer(TimeSpan closeTimeout)

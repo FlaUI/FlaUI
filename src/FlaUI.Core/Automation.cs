@@ -2,6 +2,7 @@
 using interop.UIAutomationCore;
 using System;
 using System.Runtime.InteropServices;
+using FlaUI.Core.Input;
 
 namespace FlaUI.Core
 {
@@ -70,6 +71,15 @@ namespace FlaUI.Core
         }
 
         /// <summary>
+        /// Object to control the mouse
+        /// </summary>
+        public IMouse Mouse
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// Creates an automation object
         /// </summary>
         public Automation()
@@ -77,6 +87,7 @@ namespace FlaUI.Core
             NativeAutomation = InitializeAutomation();
             ConditionFactory = new ConditionFactory(NativeAutomation);
             OverlayManager = new OverlayManager();
+            Mouse = new Mouse();
         }
 
         /// <summary>

@@ -5,9 +5,9 @@ namespace FlaUI.Core.Tools
 {
     public static class Converter
     {
-        public static Rect ToRect(tagRECT rect)
+        public static Rect ToRect(this tagRECT rect)
         {
-            return new Rect(new Point(rect.left, rect.top), new Point(rect.right, rect.bottom));
+            return new Rect(rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top);
         }
     }
 }

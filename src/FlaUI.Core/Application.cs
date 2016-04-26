@@ -174,7 +174,7 @@ namespace FlaUI.Core
         public Window GetMainWindow()
         {
             var win = Automation.NativeAutomation.ElementFromHandle(_process.MainWindowHandle);
-            Automation.OverlayManager.Show(Converter.ToRect(win.CurrentBoundingRectangle), Colors.Red);
+            Automation.OverlayManager.Show(win.CurrentBoundingRectangle.ToRect(), Colors.Red);
             return new Window(Automation, win);
         }
 

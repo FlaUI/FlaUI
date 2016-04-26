@@ -2,6 +2,7 @@
 using System;
 using System.Windows;
 using System.Windows.Media;
+using FlaUI.Core.Tools;
 
 namespace FlaUI.Core.Elements
 {
@@ -46,11 +47,7 @@ namespace FlaUI.Core.Elements
         {
             get
             {
-                var top = NativeElement.CurrentBoundingRectangle.top;
-                var left = NativeElement.CurrentBoundingRectangle.left;
-                var bottom = NativeElement.CurrentBoundingRectangle.bottom;
-                var right = NativeElement.CurrentBoundingRectangle.right;
-                return new Rect(left, top, right - left, bottom - top);
+                return NativeElement.CurrentBoundingRectangle.ToRect();
             }
         }
 

@@ -44,13 +44,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +61,11 @@
     <Compile Include="Elements\Button.cs" />
     <Compile Include="Elements\ElementBase.cs" />
     <Compile Include="Elements\Window.cs" />
+    <Compile Include="Input\IKeyboard.cs" />
+    <Compile Include="Input\IMouse.cs" />
+    <Compile Include="Input\Keyboard.cs" />
+    <Compile Include="Input\Mouse.cs" />
+    <Compile Include="Input\MouseButton.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Overlay\OverlayManager.cs" />
@@ -77,8 +76,8 @@
     <Compile Include="Tools\SystemProductNameFetcher.cs" />
     <Compile Include="Tools\WindowsStoreAppLauncher.cs" />
     <Compile Include="WindowsAPI\Constants.cs" />
-    <Compile Include="WindowsAPI\NativeWindow.cs" />
     <Compile Include="WindowsAPI\Structures.cs" />
+    <Compile Include="WindowsAPI\User32.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
