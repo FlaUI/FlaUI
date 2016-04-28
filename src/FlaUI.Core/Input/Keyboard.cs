@@ -1,6 +1,7 @@
 ﻿using FlaUI.Core.WindowsAPI;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
-using System.Threading;
 
 namespace FlaUI.Core.Input
 {
@@ -9,69 +10,168 @@ namespace FlaUI.Core.Input
     /// </summary>
     public class Keyboard : IKeyboard
     {
-        public void Press(ushort keyCode)
+        public void Type(char character)
         {
-            KeyDown(keyCode);
-            KeyUp(keyCode);
+            var code = User32.VkKeyScan(character);
+            // Check if the char is unicode or no virtual key could be found
+            if (character > 0xFE || code == -1)
+            {
+                // It seems to be unicode
+                SendInput(character, true, false, false, true);
+                SendInput(character, false, false, false, true);
+            }
+            else
+            {
+                // Get the high-order and low-order byte from the code
+                var high = (byte)(code >> 8);
+                var low = (byte)(code & 0xff);
+
+                // Check if there are any modifiers
+                var modifiers = new List<VirtualKeyShort>();
+                if (HasScanModifier(high, VkKeyScanModifiers.SHIFT))
+                {
+                    modifiers.Add(VirtualKeyShort.SHIFT);
+                }
+                if (HasScanModifier(high, VkKeyScanModifiers.CONTROL))
+                {
+                    modifiers.Add(VirtualKeyShort.CONTROL);
+                }
+                if (HasScanModifier(high, VkKeyScanModifiers.ALT))
+                {
+                    modifiers.Add(VirtualKeyShort.ALT);
+                }
+                // Press the modifiers
+                foreach (var mod in modifiers)
+                {
+                    PressVirtualKeyCode(mod);
+                }
+                // Type the effective key
+                SendInput(low, true, false, false, false);
+                SendInput(low, false, false, false, false);
+                // Release the modifiers
+                foreach (var mod in Enumerable.Reverse(modifiers))
+                {
+                    ReleaseVirtualKeyCode(mod);
+                }
+            }
+        }
+
+        public void TypeScanCode(ushort scanCode, bool isExtendedKey)
+        {
+            PressScanCode(scanCode, isExtendedKey);
+            ReleaseScanCode(scanCode, isExtendedKey);
+        }
+
+        public void TypeVirtualKeyCode(ushort virtualKeyCode)
+        {
+            PressVirtualKeyCode(virtualKeyCode);
+            ReleaseVirtualKeyCode(virtualKeyCode);
+        }
+
+        public void TypeVirtualKeyCode(VirtualKeyShort virtualKey)
+        {
+            TypeVirtualKeyCode((ushort)virtualKey);
+        }
+
+        public void PressScanCode(ushort scanCode, bool isExtendedKey)
+        {
+            SendInput(scanCode, true, true, isExtendedKey, false);
+        }
+
+        public void PressVirtualKeyCode(ushort virtualKeyCode)
+        {
+            SendInput(virtualKeyCode, true, false, false, false);
+        }
+
+        public void PressVirtualKeyCode(VirtualKeyShort virtualKey)
+        {
+            PressVirtualKeyCode((ushort)virtualKey);
+        }
+
+        public void ReleaseScanCode(ushort scanCode, bool isExtendedKey)
+        {
+            SendInput(scanCode, false, true, isExtendedKey, false);
+        }
+
+        public void ReleaseVirtualKeyCode(ushort virtualKeyCode)
+        {
+            SendInput(virtualKeyCode, false, false, false, false);
+        }
+
+        public void ReleaseVirtualKeyCode(VirtualKeyShort virtualKey)
+        {
+            ReleaseVirtualKeyCode((ushort)virtualKey);
         }
 
         public void Write(string textToWrite)
         {
             foreach (var c in textToWrite)
             {
-                var keyCode = (ushort)User32.VkKeyScan(c);
-                Press(keyCode);
+                Type(c);
             }
         }
 
-        public void KeyDown(char character)
-        {
-            KeyDown((ushort)User32.VkKeyScan(character));
-        }
-
-        public void KeyDown(SpecialKeys specialKey)
-        {
-            KeyDown((ushort)specialKey);
-        }
-
-        public void KeyDown(ushort keyCode)
-        {
-            var keyboardInput = GetInputForCharacter(keyCode, true);
-            SendInput(keyboardInput);
-        }
-
-        public void KeyUp(char character)
-        {
-            KeyUp((ushort)User32.VkKeyScan(character));
-        }
-
-        public void KeyUp(SpecialKeys specialKey)
-        {
-            KeyUp((ushort)specialKey);
-        }
-
-        public void KeyUp(ushort keyCode)
-        {
-            var keyboardInput = GetInputForCharacter(keyCode, false);
-            SendInput(keyboardInput);
-        }
-
         /// <summary>
-        /// Converts the character to the correct <see cref="KEYBDINPUT"/> object
+        /// Checks if a given byte has a specific VkKeyScan-modifier set
         /// </summary>
-        private KEYBDINPUT GetInputForCharacter(ushort keyCode, bool isDown)
+        private bool HasScanModifier(byte b, VkKeyScanModifiers modifierToTest)
         {
-            var keyEvent = isDown ? KeyEventFlags.KEYEVENTF_KEYDOWN : KeyEventFlags.KEYEVENTF_KEYUP;
-            return new KEYBDINPUT(keyCode, keyEvent, User32.GetMessageExtraInfo());
+            return (VkKeyScanModifiers)(b & (byte)modifierToTest) == modifierToTest;
         }
 
         /// <summary>
         /// Effectively sends the keyboard input command
         /// </summary>
-        private void SendInput(KEYBDINPUT keyboardInput)
+        /// <param name="keyCode">The key code to send. Can be the scan code or the virtual key code</param>
+        /// <param name="isKeyDown">Flag if the key should be pressed or released</param>
+        /// <param name="isScanCode">Flag if the code is the scan code or the virtual key code</param>
+        /// <param name="isExtended">Flag if the key is an extended key</param>
+        /// <param name="isUnicode">Flag if the key is unicode</param>
+        private void SendInput(ushort keyCode, bool isKeyDown, bool isScanCode, bool isExtended, bool isUnicode)
         {
+            // Prepare the basic object
+            var keyboardInput = new KEYBDINPUT
+            {
+                time = 0,
+                dwExtraInfo = User32.GetMessageExtraInfo()
+            };
+
+            // Add the "key-up" flag if needed. By default it is "key-down"
+            if (!isKeyDown)
+            {
+                keyboardInput.dwFlags |= KeyEventFlags.KEYEVENTF_KEYUP;
+            }
+
+            if (isScanCode)
+            {
+                keyboardInput.wScan = keyCode;
+                keyboardInput.dwFlags |= KeyEventFlags.KEYEVENTF_SCANCODE;
+                // Add the extended flag if the flag is set or the keycode is prefixed with the byte 0xE0
+                // See https://msdn.microsoft.com/en-us/library/windows/desktop/ms646267(v=vs.85).aspx
+                if (isExtended || (keyCode & 0xFF00) == 0xE0)
+                {
+                    keyboardInput.dwFlags |= KeyEventFlags.KEYEVENTF_EXTENDEDKEY;
+                }
+            }
+            else if (isUnicode)
+            {
+                keyboardInput.dwFlags |= KeyEventFlags.KEYEVENTF_UNICODE;
+                keyboardInput.wScan = keyCode;
+            }
+            else
+            {
+                keyboardInput.wVk = keyCode;
+            }
+
+            // Build the input object
             var input = INPUT.KeyboardInput(keyboardInput);
-            User32.SendInput(1, new[] { input }, Marshal.SizeOf(typeof(INPUT)));
+            // Send the command
+            if (User32.SendInput(1, new[] { input }, INPUT.Size) == 0)
+            {
+                // An error occured
+                var errorCode = Marshal.GetLastWin32Error();
+                return;
+            }
         }
     }
 }

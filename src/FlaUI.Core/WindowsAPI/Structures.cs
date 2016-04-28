@@ -9,37 +9,6 @@ namespace FlaUI.Core.WindowsAPI
     {
         public int X;
         public int Y;
-
-        public POINT(int x, int y)
-        {
-            X = x;
-            Y = y;
-        }
-
-        public static implicit operator System.Drawing.Point(POINT p)
-        {
-            return new System.Drawing.Point(p.X, p.Y);
-        }
-
-        public static implicit operator POINT(System.Drawing.Point p)
-        {
-            return new POINT(p.X, p.Y);
-        }
-
-        public static implicit operator System.Windows.Point(POINT p)
-        {
-            return new System.Windows.Point(p.X, p.Y);
-        }
-
-        public static implicit operator POINT(System.Windows.Point p)
-        {
-            return new POINT((int)p.X, (int)p.Y);
-        }
-
-        public override string ToString()
-        {
-            return String.Format("X={0},Y={1}", X, Y);
-        }
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -88,6 +57,11 @@ namespace FlaUI.Core.WindowsAPI
         public InputType type;
         public INPUTUNION u;
 
+        public static int Size
+        {
+            get { return Marshal.SizeOf(typeof(INPUT)); }
+        }
+
         public static INPUT MouseInput(MOUSEINPUT mouseInput)
         {
             return new INPUT { type = InputType.INPUT_MOUSE, u = new INPUTUNION { mi = mouseInput } };
@@ -126,16 +100,6 @@ namespace FlaUI.Core.WindowsAPI
         public MouseEventFlags dwFlags;
         public uint time;
         public IntPtr dwExtraInfo;
-
-        public MOUSEINPUT(MouseEventFlags dwFlags, IntPtr dwExtraInfo, uint mouseData = 0)
-        {
-            this.dwFlags = dwFlags;
-            this.dwExtraInfo = dwExtraInfo;
-            dx = 0;
-            dy = 0;
-            time = 0;
-            this.mouseData = mouseData;
-        }
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -146,15 +110,6 @@ namespace FlaUI.Core.WindowsAPI
         public KeyEventFlags dwFlags;
         public uint time;
         public IntPtr dwExtraInfo;
-
-        public KEYBDINPUT(ushort wVk, KeyEventFlags dwFlags, IntPtr dwExtraInfo)
-        {
-            this.wVk = wVk;
-            wScan = 0;
-            this.dwFlags = dwFlags;
-            time = 0;
-            this.dwExtraInfo = dwExtraInfo;
-        }
     }
 
     [StructLayout(LayoutKind.Sequential)]

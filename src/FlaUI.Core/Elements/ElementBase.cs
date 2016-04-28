@@ -1,8 +1,7 @@
 ﻿using interop.UIAutomationCore;
 using System;
-using System.Windows;
 using System.Windows.Media;
-using FlaUI.Core.Tools;
+using FlaUI.Core.Shapes;
 
 namespace FlaUI.Core.Elements
 {
@@ -43,11 +42,11 @@ namespace FlaUI.Core.Elements
 
         public PatternFactory PatternFactory { get; private set; }
 
-        public Rect BoundingRectangle
+        public Rectangle BoundingRectangle
         {
             get
             {
-                return NativeElement.CurrentBoundingRectangle.ToRect();
+                return NativeElement.CurrentBoundingRectangle;
             }
         }
 
@@ -71,7 +70,7 @@ namespace FlaUI.Core.Elements
         public ElementBase DrawHighlight(Color color)
         {
             var rectangle = BoundingRectangle;
-            if (rectangle != Rect.Empty)
+            if (!rectangle.IsEmpty)
             {
                 Automation.OverlayManager.ShowBlocking(rectangle, color);
             }

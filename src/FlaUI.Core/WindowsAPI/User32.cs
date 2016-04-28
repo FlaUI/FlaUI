@@ -24,7 +24,7 @@ namespace FlaUI.Core.WindowsAPI
         public static extern uint GetDoubleClickTime();
 
         [DllImport("user32.dll")]
-        public static extern int GetSystemMetrics(int nIndex);
+        public static extern int GetSystemMetrics(SystemMetric nIndex);
 
         [DllImport("user32.dll")]
         public static extern IntPtr GetMessageExtraInfo();
@@ -32,7 +32,7 @@ namespace FlaUI.Core.WindowsAPI
         [DllImport("user32.dll")]
         public static extern uint SendInput(uint nInputs, [MarshalAs(UnmanagedType.LPArray), In] INPUT[] pInputs, int cbSize);
 
-        [DllImport("user32.dll")]
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         public static extern short VkKeyScan(char ch);
     }
 }

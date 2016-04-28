@@ -61,6 +61,7 @@
     <Compile Include="Elements\Button.cs" />
     <Compile Include="Elements\ElementBase.cs" />
     <Compile Include="Elements\Window.cs" />
+    <Compile Include="Input\Helpers.cs" />
     <Compile Include="Input\IKeyboard.cs" />
     <Compile Include="Input\IMouse.cs" />
     <Compile Include="Input\Keyboard.cs" />
@@ -71,8 +72,11 @@
     <Compile Include="Overlay\OverlayManager.cs" />
     <Compile Include="Overlay\OverlayRectangleWindow.cs" />
     <Compile Include="PatternFactory.cs" />
+    <Compile Include="Shapes\Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tools\Converter.cs" />
+    <Compile Include="Shapes\Rectangle.cs" />
+    <Compile Include="Shapes\ShapeBase.cs" />
+    <Compile Include="Tools\ExtensionMethods.cs" />
     <Compile Include="Tools\SystemProductNameFetcher.cs" />
     <Compile Include="Tools\WindowsStoreAppLauncher.cs" />
     <Compile Include="WindowsAPI\Constants.cs" />

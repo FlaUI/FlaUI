@@ -1,10 +1,13 @@
-﻿using FlaUI.Core.WindowsAPI;
+﻿using FlaUI.Core.Shapes;
+using FlaUI.Core.Tools;
+using FlaUI.Core.WindowsAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security;
+using System.Security.Permissions;
 using System.Threading;
-using System.Windows;
 
 namespace FlaUI.Core.Input
 {
@@ -22,6 +25,11 @@ namespace FlaUI.Core.Input
         /// Time to add to the double click time to prevent false double clicks
         /// </summary>
         private const int ExtraMillisecondsBecauseOfBugInWindows = 13;
+
+        /// <summary>
+        /// Numer which defines one wheel "click" of the mouse wheel
+        /// </summary>
+        private const int WheelDelta = 120;
 
         /// <summary>
         /// Dictionary which holds the last click time for each button
@@ -46,7 +54,8 @@ namespace FlaUI.Core.Input
             }
             set
             {
-                User32.SetCursorPos((int)value.X, (int)value.Y);
+                POINT point = value;
+                User32.SetCursorPos(point.X, point.Y);
             }
         }
 
@@ -92,9 +101,22 @@ namespace FlaUI.Core.Input
             var startX = (int)startPos.X;
             var startY = (int)startPos.Y;
 
-            // Setup variables
-            var duration = 200; // Speed
-            var steps = 20; // Smoothness
+            // Prepare variables
+            var totalDistance = startPos.Distance(newX, newY);
+
+            // Calculate the duration for the speed
+            var optimalPixelsPerMillisecond = 1;
+            var minDuration = 200;
+            var maxDuration = 500;
+            var duration = Convert.ToInt32(totalDistance / optimalPixelsPerMillisecond).Clamp(minDuration, maxDuration);
+
+            // Calculate the steps for the smoothness
+            var optimalPixelsPerStep = 10;
+            var minSteps = 10;
+            var maxSteps = 50;
+            var steps = Convert.ToInt32(totalDistance / optimalPixelsPerStep).Clamp(minSteps, maxSteps);
+
+            // Calculate the interval and the step size
             var interval = duration / steps;
             var stepX = (double)(newX - startX) / steps;
             var stepY = (double)(newY - startY) / steps;
@@ -121,6 +143,7 @@ namespace FlaUI.Core.Input
                 Position = point;
                 Thread.Sleep(interval);
             }
+            Helpers.WaitUntilInputIsProcessed();
         }
 
         /// <summary>
@@ -138,8 +161,8 @@ namespace FlaUI.Core.Input
                 if (timeout > 0) Thread.Sleep(timeout + ExtraMillisecondsBecauseOfBugInWindows);
             }
             // Perform the click
-            MouseDown(mouseButton);
-            MouseUp(mouseButton);
+            Down(mouseButton);
+            Up(mouseButton);
             // Update the time and location
             _lastClickTimes[mouseButton] = DateTime.Now;
             _lastClickPositions[mouseButton] = Position;
@@ -173,30 +196,51 @@ namespace FlaUI.Core.Input
         }
 
         /// <summary>
-        /// Implementation of <see cref="IMouse.MouseDown(MouseButton)" />
+        /// Implementation of <see cref="IMouse.Down(MouseButton)" />
         /// </summary>
-        public void MouseDown(MouseButton mouseButton)
+        public void Down(MouseButton mouseButton)
         {
-            var mouseInput = GetInputForButton(mouseButton, true);
-            SendInput(mouseInput);
+            uint data;
+            var flags = GetFlagsAndDataForButton(mouseButton, true, out data);
+            SendInput(0, 0, data, flags);
         }
 
         /// <summary>
-        /// Implementation of <see cref="IMouse.MouseUp(MouseButton)" />
+        /// Implementation of <see cref="IMouse.Up(MouseButton)" />
         /// </summary>
-        public void MouseUp(MouseButton mouseButton)
+        public void Up(MouseButton mouseButton)
         {
-            var mouseInput = GetInputForButton(mouseButton, false);
-            SendInput(mouseInput);
+            uint data;
+            var flags = GetFlagsAndDataForButton(mouseButton, false, out data);
+            SendInput(0, 0, data, flags);
         }
 
         /// <summary>
-        /// Converts the button to the correct <see cref="MOUSEINPUT"/> object
+        /// Implementation of <see cref="IMouse.Scroll" />
         /// </summary>
-        private MOUSEINPUT GetInputForButton(MouseButton mouseButton, bool isDown)
+        public void Scroll(double lines)
+        {
+            var amount = (uint)(WheelDelta * lines);
+            SendInput(0, 0, amount, MouseEventFlags.MOUSEEVENTF_WHEEL);
+        }
+
+        /// <summary>
+        /// Implementation of <see cref="IMouse.HorizontalScroll" />
+        /// </summary>
+        public void HorizontalScroll(double lines)
+        {
+            var amount = (uint)(WheelDelta * lines);
+            SendInput(0, 0, amount, MouseEventFlags.MOUSEEVENTF_HWHEEL);
+        }
+
+        /// <summary>
+        /// Converts the button to the correct <see cref="MouseEventFlags"/> object
+        /// and fills the additional data if needed
+        /// </summary>
+        private MouseEventFlags GetFlagsAndDataForButton(MouseButton mouseButton, bool isDown, out uint data)
         {
             MouseEventFlags mouseEventFlags;
-            uint mouseData = 0;
+            var mouseData = MouseEventDataXButtons.NOTHING;
             switch (SwapButtonIfNeeded(mouseButton))
             {
                 case MouseButton.Left:
@@ -210,17 +254,17 @@ namespace FlaUI.Core.Input
                     break;
                 case MouseButton.XButton1:
                     mouseEventFlags = isDown ? MouseEventFlags.MOUSEEVENTF_XDOWN : MouseEventFlags.MOUSEEVENTF_XUP;
-                    mouseData = (uint)MouseEventDataXButtons.XBUTTON1;
+                    mouseData = MouseEventDataXButtons.XBUTTON1;
                     break;
                 case MouseButton.XButton2:
                     mouseEventFlags = isDown ? MouseEventFlags.MOUSEEVENTF_XDOWN : MouseEventFlags.MOUSEEVENTF_XUP;
-                    mouseData = (uint)MouseEventDataXButtons.XBUTTON2;
+                    mouseData = MouseEventDataXButtons.XBUTTON2;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("mouseButton");
             }
-            var messageInfo = User32.GetMessageExtraInfo();
-            return new MOUSEINPUT(mouseEventFlags, messageInfo, mouseData);
+            data = (uint)mouseData;
+            return mouseEventFlags;
         }
 
         /// <summary>
@@ -229,28 +273,69 @@ namespace FlaUI.Core.Input
         private MouseButton SwapButtonIfNeeded(MouseButton mouseButton)
         {
             if (!AreButtonsSwapped) return mouseButton;
-            if (mouseButton == MouseButton.Left)
+            switch (mouseButton)
             {
-                return MouseButton.Right;
+                case MouseButton.Left:
+                    return MouseButton.Right;
+                case MouseButton.Right:
+                    return MouseButton.Left;
+                default:
+                    return mouseButton;
             }
-            if (mouseButton == MouseButton.Right)
-            {
-                return MouseButton.Left;
-            }
-            return mouseButton;
         }
 
         /// <summary>
         /// Effectively sends the mouse input command
         /// </summary>
-        private void SendInput(MOUSEINPUT mouseInput)
+        [PermissionSet(SecurityAction.Assert, Name = "FullTrust")]
+        private void SendInput(int x, int y, uint data, MouseEventFlags flags)
         {
+            // Demand the correct permissions
+            var permissions = new PermissionSet(PermissionState.Unrestricted);
+            permissions.Demand();
+
+            // Check if we are trying to do an absolute move
+            if (flags.HasFlag(MouseEventFlags.MOUSEEVENTF_ABSOLUTE))
+            {
+                // Absolute position requires normalized coordinates
+                NormalizeCoordinates(ref x, ref y);
+                flags |= MouseEventFlags.MOUSEEVENTF_VIRTUALDESK;
+            }
+
+            // Build the mouse input object
+            var mouseInput = new MOUSEINPUT
+            {
+                dx = x,
+                dy = y,
+                mouseData = data,
+                dwExtraInfo = User32.GetMessageExtraInfo(),
+                time = 0,
+                dwFlags = flags
+            };
+
+            // Build the input object
             var input = INPUT.MouseInput(mouseInput);
-            User32.SendInput(1, new[] { input }, Marshal.SizeOf(typeof(INPUT)));
-            // Let the thread some time to process the system's hardware input queue.
-            // For details see this post: http://blogs.msdn.com/b/oldnewthing/archive/2014/02/13/10499047.aspx
-            // TODO: Should this be configurable?
-            Thread.Sleep(50);
+            // Send the command
+            if (User32.SendInput(1, new[] { input }, INPUT.Size) == 0)
+            {
+                // An error occured
+                var errorCode = Marshal.GetLastWin32Error();
+                return;
+            }
+        }
+
+        /// <summary>
+        /// Normalizes the coordinates to get the absolute values from 0 to 65536
+        /// </summary>
+        private void NormalizeCoordinates(ref int x, ref int y)
+        {
+            var vScreenWidth = User32.GetSystemMetrics(SystemMetric.SM_CXVIRTUALSCREEN);
+            var vScreenHeight = User32.GetSystemMetrics(SystemMetric.SM_CYVIRTUALSCREEN);
+            var vScreenLeft = User32.GetSystemMetrics(SystemMetric.SM_XVIRTUALSCREEN);
+            var vScreenTop = User32.GetSystemMetrics(SystemMetric.SM_YVIRTUALSCREEN);
+
+            x = ((x - vScreenLeft) * 65536) / vScreenWidth + 65536 / (vScreenWidth * 2);
+            y = ((y - vScreenTop) * 65536) / vScreenHeight + 65536 / (vScreenHeight * 2);
         }
     }
 }

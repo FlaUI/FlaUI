@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.Input
 {
@@ -11,8 +7,16 @@ namespace FlaUI.Core.Input
     /// </summary>
     public interface IKeyboard
     {
-        void Press(ushort keyCode);
-
+        void Type(char character);
+        void TypeScanCode(ushort scanCode, bool isExtendedKey);
+        void TypeVirtualKeyCode(ushort virtualKeyCode);
+        void TypeVirtualKeyCode(VirtualKeyShort virtualKey);
+        void PressScanCode(ushort scanCode, bool isExtendedKey);
+        void PressVirtualKeyCode(ushort virtualKeyCode);
+        void PressVirtualKeyCode(VirtualKeyShort virtualKey);
+        void ReleaseScanCode(ushort scanCode, bool isExtendedKey);
+        void ReleaseVirtualKeyCode(ushort virtualKeyCode);
+        void ReleaseVirtualKeyCode(VirtualKeyShort virtualKey);
         void Write(string textToWrite);
     }
 }

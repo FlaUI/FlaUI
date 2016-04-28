@@ -1,7 +1,6 @@
 ﻿using FlaUI.Core.Definitions;
 using FlaUI.Core.Elements;
 using FlaUI.Core.Logging;
-using FlaUI.Core.Overlay;
 using FlaUI.Core.Tools;
 using interop.UIAutomationCore;
 using System;
@@ -173,9 +172,10 @@ namespace FlaUI.Core
         /// </summary>
         public Window GetMainWindow()
         {
-            var win = Automation.NativeAutomation.ElementFromHandle(_process.MainWindowHandle);
-            Automation.OverlayManager.Show(win.CurrentBoundingRectangle.ToRect(), Colors.Red);
-            return new Window(Automation, win);
+            var nWindow = Automation.NativeAutomation.ElementFromHandle(_process.MainWindowHandle);
+            var window =  new Window(Automation, nWindow);
+            Automation.OverlayManager.Show(window.BoundingRectangle, Colors.Red);
+            return window;
         }
 
         public Window GetWindow(string title)

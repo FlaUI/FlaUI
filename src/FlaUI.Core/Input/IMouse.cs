@@ -1,4 +1,4 @@
-﻿using System.Windows;
+﻿using FlaUI.Core.Shapes;
 
 namespace FlaUI.Core.Input
 {
@@ -61,12 +61,22 @@ namespace FlaUI.Core.Input
         /// Sends a mouse down command for the specified mouse button
         /// </summary>
         /// <param name="mouseButton">The mouse button to press</param>
-        void MouseDown(MouseButton mouseButton);
+        void Down(MouseButton mouseButton);
 
         /// <summary>
         /// Sends a mouse up command for the specified mouse button
         /// </summary>
         /// <param name="mouseButton">The mouse button to release</param>
-        void MouseUp(MouseButton mouseButton);
+        void Up(MouseButton mouseButton);
+
+        /// <summary>
+        /// Simulates scrolling of the mouse wheel up or down
+        /// </summary>
+        void Scroll(double lines);
+
+        /// <summary>
+        /// Simulates scrolling of the horizontal mouse wheel left or right
+        /// </summary>
+        void HorizontalScroll(double lines);
     }
 }
