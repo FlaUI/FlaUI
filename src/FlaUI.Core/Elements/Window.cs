@@ -2,11 +2,11 @@
 
 namespace FlaUI.Core.Elements
 {
-    public class Window : ElementBase
+    public class Window : AutomationElement
     {
         public string Title
         {
-            get { return NativeElement.CurrentName; }
+            get { return Current.Name; }
         }
 
         public Window(Automation automation, IUIAutomationElement nativeElement) : base(automation, nativeElement) { }

@@ -4,14 +4,8 @@ namespace FlaUI.Core.Definitions
 {
     public enum PatternType
     {
-        Annotation = UIA_PatternIds.UIA_AnnotationPatternId,
-        Dock = UIA_PatternIds.UIA_DockPatternId,
-        Drag = UIA_PatternIds.UIA_DragPatternId,
-        DropTarget = UIA_PatternIds.UIA_DropTargetPatternId,
-        ExpandCollapse = UIA_PatternIds.UIA_ExpandCollapsePatternId,
         GridItem = UIA_PatternIds.UIA_GridItemPatternId,
         Grid = UIA_PatternIds.UIA_GridPatternId,
-        Invoke = UIA_PatternIds.UIA_InvokePatternId,
         ItemContainer = UIA_PatternIds.UIA_ItemContainerPatternId,
         LegacyIAccessible = UIA_PatternIds.UIA_LegacyIAccessiblePatternId,
         MultipleView = UIA_PatternIds.UIA_MultipleViewPatternId,

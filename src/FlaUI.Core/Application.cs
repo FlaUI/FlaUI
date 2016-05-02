@@ -173,24 +173,25 @@ namespace FlaUI.Core
         public Window GetMainWindow()
         {
             var nWindow = Automation.NativeAutomation.ElementFromHandle(_process.MainWindowHandle);
-            var window =  new Window(Automation, nWindow);
-            Automation.OverlayManager.Show(window.BoundingRectangle, Colors.Red);
+            var window = new Window(Automation, nWindow);
+            Automation.OverlayManager.Show(window.Current.BoundingRectangle, Colors.Red);
             return window;
         }
 
         public Window GetWindow(string title)
         {
             var desktop = GetDesktop();
-            var windows = desktop.FindAll(TreeScope.TreeScope_Children,
+            var windows = desktop.FindAll(interop.UIAutomationCore.TreeScope.TreeScope_Children,
                 Automation.NativeAutomation.CreateAndCondition(
-                    Automation.NativeAutomation.CreatePropertyCondition((int)PropertyType.ControlType, ControlType.Window),
-                    Automation.NativeAutomation.CreatePropertyCondition((int)PropertyType.ProcessId, _process.Id)));
+                    Automation.NativeAutomation.CreatePropertyCondition(AutomationElement.ControlTypeProperty.Id, ControlType.Window),
+                    Automation.NativeAutomation.CreatePropertyCondition(AutomationElement.ProcessIdProperty.Id, _process.Id)));
             return new Window(Automation, windows.GetElement(0));
         }
         #endregion Window
 
         public void Dispose()
         {
+            Automation.Dispose();
             Close();
         }
     }

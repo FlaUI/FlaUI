@@ -1,4 +1,6 @@
 ﻿using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements;
+using FlaUI.Core.Patterns;
 using interop.UIAutomationCore;
 
 namespace FlaUI.Core
@@ -8,9 +10,9 @@ namespace FlaUI.Core
     /// </summary>
     public class PatternFactory
     {
-        private readonly IUIAutomationElement _automationElement;
+        private readonly AutomationElement _automationElement;
 
-        public PatternFactory(IUIAutomationElement automationElement)
+        internal PatternFactory(AutomationElement automationElement)
         {
             _automationElement = automationElement;
         }
@@ -20,33 +22,38 @@ namespace FlaUI.Core
         /// </summary>
         public T GetPatternAs<T>(PatternType patternType)
         {
-            var pattern = _automationElement.GetCurrentPattern((int)patternType);
+            var pattern = _automationElement.NativeElement.GetCurrentPattern((int)patternType);
             return (T)pattern;
         }
 
-        public IUIAutomationAnnotationPattern GetAnnotationPattern()
+        public AnnotationPattern GetAnnotationPattern()
         {
-            return GetPatternAs<IUIAutomationAnnotationPattern>(PatternType.Annotation);
+            var nativePattern = GetNativePatternAs<IUIAutomationAnnotationPattern>(AnnotationPattern.Pattern);
+            return new AnnotationPattern(_automationElement, nativePattern);
         }
 
-        public IUIAutomationDockPattern GetDockPattern()
+        public DockPattern GetDockPattern()
         {
-            return GetPatternAs<IUIAutomationDockPattern>(PatternType.Dock);
+            var nativePattern = GetNativePatternAs<IUIAutomationDockPattern>(DockPattern.Pattern);
+            return new DockPattern(_automationElement, nativePattern);
         }
 
-        public IUIAutomationDragPattern GetDragPattern()
+        public DragPattern GetDragPattern()
         {
-            return GetPatternAs<IUIAutomationDragPattern>(PatternType.Drag);
+            var nativePattern = GetNativePatternAs<IUIAutomationDragPattern>(DragPattern.Pattern);
+            return new DragPattern(_automationElement, nativePattern);
         }
 
-        public IUIAutomationDropTargetPattern GetDropTargetPattern()
+        public DropTargetPattern GetDropTargetPattern()
         {
-            return GetPatternAs<IUIAutomationDropTargetPattern>(PatternType.DropTarget);
+            var nativePattern = GetNativePatternAs<IUIAutomationDropTargetPattern>(DropTargetPattern.Pattern);
+            return new DropTargetPattern(_automationElement, nativePattern);
         }
 
-        public IUIAutomationExpandCollapsePattern GetExpandCollapsePattern()
+        public ExpandCollapsePattern GetExpandCollapsePattern()
         {
-            return GetPatternAs<IUIAutomationExpandCollapsePattern>(PatternType.ExpandCollapse);
+            var nativePattern = GetNativePatternAs<IUIAutomationExpandCollapsePattern>(ExpandCollapsePattern.Pattern);
+            return new ExpandCollapsePattern(_automationElement, nativePattern);
         }
 
         public IUIAutomationGridItemPattern GetGridItemPattern()
@@ -59,9 +66,10 @@ namespace FlaUI.Core
             return GetPatternAs<IUIAutomationGridPattern>(PatternType.Grid);
         }
 
-        public IUIAutomationInvokePattern GetInvokePattern()
+        public InvokePattern GetInvokePattern()
         {
-            return GetPatternAs<IUIAutomationInvokePattern>(PatternType.Invoke);
+            var nativePattern = GetNativePatternAs<IUIAutomationInvokePattern>(InvokePattern.Pattern);
+            return new InvokePattern(_automationElement, nativePattern);
         }
 
         public IUIAutomationItemContainerPattern GetItemContainerPattern()
@@ -187,6 +195,15 @@ namespace FlaUI.Core
         public IUIAutomationWindowPattern GetWindowPattern()
         {
             return GetPatternAs<IUIAutomationWindowPattern>(PatternType.Window);
+        }
+
+        /// <summary>
+        /// Generic method to get any native pattern and cast it to the desired type
+        /// </summary>
+        private T GetNativePatternAs<T>(AutomationPattern pattern)
+        {
+            var nativePattern = _automationElement.NativeElement.GetCurrentPattern(pattern.Id);
+            return (T)nativePattern;
         }
     }
 }

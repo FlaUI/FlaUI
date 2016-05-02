@@ -24,8 +24,8 @@ namespace FlaUI.Core.UnitTests
         {
             var app = Application.Launch("mspaint");
             var window = app.GetMainWindow();
-            var mouseX = window.BoundingRectangle.Left + 50;
-            var mouseY = window.BoundingRectangle.Top + 200;
+            var mouseX = window.Current.BoundingRectangle.Left + 50;
+            var mouseY = window.Current.BoundingRectangle.Top + 200;
             app.Automation.Mouse.Position = new Point(mouseX, mouseY);
             app.Automation.Mouse.Down(MouseButton.Left);
             app.Automation.Mouse.MoveBy(100, 10);

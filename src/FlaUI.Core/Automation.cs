@@ -1,8 +1,8 @@
-﻿using FlaUI.Core.Overlay;
+﻿using FlaUI.Core.Input;
+using FlaUI.Core.Overlay;
 using interop.UIAutomationCore;
 using System;
 using System.Runtime.InteropServices;
-using FlaUI.Core.Input;
 
 namespace FlaUI.Core
 {
@@ -12,44 +12,24 @@ namespace FlaUI.Core
     public class Automation : IDisposable
     {
         /// <summary>
-        /// Basic object for the ui automation
+        /// Native object for the ui automation
         /// </summary>
-        public IUIAutomation NativeAutomation
-        {
-            get;
-            private set;
-        }
+        public IUIAutomation NativeAutomation { get; private set; }
 
         /// <summary>
-        /// Object for Windows 8 automation
+        /// Native object for Windows 8 automation
         /// </summary>
         public IUIAutomation2 NativeAutomation2
         {
-            get
-            {
-                var upgradedAutomation = NativeAutomation as IUIAutomation2;
-                if (upgradedAutomation == null)
-                {
-                    throw new NotImplementedException("OS does not have IUIAutomation2 support.");
-                }
-                return upgradedAutomation;
-            }
+            get { return GetAutomationAs<IUIAutomation2>(); }
         }
 
         /// <summary>
-        /// Object for Windows 8.1 automation
+        /// Native object for Windows 8.1 automation
         /// </summary>
         public IUIAutomation3 NativeAutomation3
         {
-            get
-            {
-                var upgradedAutomation = NativeAutomation as IUIAutomation3;
-                if (upgradedAutomation == null)
-                {
-                    throw new NotImplementedException("OS does not have IUIAutomation3 support.");
-                }
-                return upgradedAutomation;
-            }
+            get { return GetAutomationAs<IUIAutomation3>(); }
         }
 
         /// <summary>
@@ -125,6 +105,20 @@ namespace FlaUI.Core
         public void Dispose()
         {
             OverlayManager.Dispose();
+        }
+
+        /// <summary>
+        /// Tries to cast the automation to a specific interface.
+        /// Throws an exception if that is not possible.
+        /// </summary>
+        private T GetAutomationAs<T>() where T : class, IUIAutomation
+        {
+            var element = NativeAutomation as T;
+            if (element == null)
+            {
+                throw new NotSupportedException(String.Format("OS does not have {0} support.", typeof(T).Name));
+            }
+            return element;
         }
     }
 }

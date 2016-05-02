@@ -2,7 +2,7 @@
 
 namespace FlaUI.Core.Elements
 {
-    public class Button : ElementBase
+    public class Button : AutomationElement
     {
         public Button(Automation automation, IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
 
