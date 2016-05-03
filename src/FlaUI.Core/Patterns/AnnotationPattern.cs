@@ -4,7 +4,7 @@ using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
-    public class AnnotationPattern : PatternBase<IUIAutomationAnnotationPattern>
+    public class AnnotationPattern : PatternBaseWithInformation<IUIAutomationAnnotationPattern, AnnotationPatternInformation>
     {
         public static readonly AutomationPattern Pattern = AutomationPattern.Register(UIA_PatternIds.UIA_AnnotationPatternId, "Annotation");
         public static readonly AutomationProperty AnnotationTypeIdProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_AnnotationAnnotationTypeIdPropertyId, "AnnotationTypeId");
@@ -13,48 +13,42 @@ namespace FlaUI.Core.Patterns
         public static readonly AutomationProperty DateTimeProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_AnnotationDateTimePropertyId, "DateTime");
         public static readonly AutomationProperty TargetProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_AnnotationTargetPropertyId, "Target");
 
-        public AnnotationPatternInformation Cached { get; private set; }
-
-        public AnnotationPatternInformation Current { get; private set; }
-
         internal AnnotationPattern(AutomationElement automationElement, IUIAutomationAnnotationPattern nativePattern)
-            : base(automationElement, nativePattern)
+            : base(automationElement, nativePattern, (element, cached) => new AnnotationPatternInformation(element, cached))
         {
-            Cached = new AnnotationPatternInformation(AutomationElement, true);
-            Current = new AnnotationPatternInformation(AutomationElement, false);
+        }
+    }
+
+    public class AnnotationPatternInformation : InformationBase
+    {
+        public AnnotationPatternInformation(AutomationElement automationElement, bool cached)
+            : base(automationElement, cached)
+        {
         }
 
-        public class AnnotationPatternInformation : InformationBase
+        public AnnotationType AnnotationType
         {
-            public AnnotationPatternInformation(AutomationElement automationElement, bool cached)
-                : base(automationElement, cached)
-            {
-            }
+            get { return Get<AnnotationType>(AnnotationPattern.AnnotationTypeIdProperty); }
+        }
 
-            public AnnotationType AnnotationType
-            {
-                get { return AutomationElement.SafeGetPropertyValue<AnnotationType>(AnnotationTypeIdProperty, Cached); }
-            }
+        public string AnnotationTypeName
+        {
+            get { return Get<string>(AnnotationPattern.AnnotationTypeNameProperty); }
+        }
 
-            public string AnnotationTypeName
-            {
-                get { return AutomationElement.SafeGetPropertyValue<string>(AnnotationTypeNameProperty, Cached); }
-            }
+        public string Author
+        {
+            get { return Get<string>(AnnotationPattern.AuthorProperty); }
+        }
 
-            public string Author
-            {
-                get { return AutomationElement.SafeGetPropertyValue<string>(AuthorProperty, Cached); }
-            }
+        public string DateTime
+        {
+            get { return Get<string>(AnnotationPattern.DateTimeProperty); }
+        }
 
-            public string DateTime
-            {
-                get { return AutomationElement.SafeGetPropertyValue<string>(DateTimeProperty, Cached); }
-            }
-
-            public AutomationElement Target
-            {
-                get { return NativeElementToElement(TargetProperty); }
-            }
+        public AutomationElement Target
+        {
+            get { return NativeElementToElement(AnnotationPattern.TargetProperty); }
         }
     }
 }

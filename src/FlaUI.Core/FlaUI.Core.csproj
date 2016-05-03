@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Accessibility" />
     <Reference Include="interop.ShObjIdl">
       <HintPath>..\libs\interop.ShObjIdl.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -53,6 +54,7 @@
     <Compile Include="AutomationEvent.cs" />
     <Compile Include="AutomationIdentifier.cs" />
     <Compile Include="AutomationPattern.cs" />
+    <Compile Include="AutomationTextAttribute.cs" />
     <Compile Include="ConditionFactory.cs" />
     <Compile Include="Definitions\AnnotationType.cs" />
     <Compile Include="Definitions\ControlType.cs" />
@@ -63,9 +65,14 @@
     <Compile Include="Definitions\OrientationType.cs" />
     <Compile Include="Definitions\PatternType.cs" />
     <Compile Include="Definitions\PropertyType.cs" />
+    <Compile Include="Definitions\RowOrColumnMajor.cs" />
+    <Compile Include="Definitions\ScrollAmount.cs" />
     <Compile Include="Definitions\StructureChangeType.cs" />
     <Compile Include="Definitions\StyleType.cs" />
+    <Compile Include="Definitions\SynchronizedInputType.cs" />
     <Compile Include="Definitions\TextAttributeType.cs" />
+    <Compile Include="Definitions\TextPatternRangeEndpoint.cs" />
+    <Compile Include="Definitions\TextUnit.cs" />
     <Compile Include="Definitions\TreeScope.cs" />
     <Compile Include="Elements\Button.cs" />
     <Compile Include="Elements\AutomationElement.cs" />
@@ -95,13 +102,35 @@
     <Compile Include="Patterns\DragPattern.cs" />
     <Compile Include="Patterns\DropTargetPattern.cs" />
     <Compile Include="Patterns\ExpandCollapsePattern.cs" />
+    <Compile Include="Patterns\GridItemPattern.cs" />
+    <Compile Include="Patterns\GridPattern.cs" />
     <Compile Include="Patterns\InvokePattern.cs" />
+    <Compile Include="Patterns\ItemContainerPattern.cs" />
+    <Compile Include="Patterns\LegacyIAccessiblePattern.cs" />
+    <Compile Include="Patterns\MultipleViewPattern.cs" />
+    <Compile Include="Patterns\ObjectModelPattern.cs" />
     <Compile Include="Patterns\PatternBase.cs" />
+    <Compile Include="Patterns\PatternBaseWithInformation.cs" />
+    <Compile Include="Patterns\RangeValuePattern.cs" />
+    <Compile Include="Patterns\ScrollItemPattern.cs" />
+    <Compile Include="Patterns\ScrollPattern.cs" />
+    <Compile Include="Patterns\SelectionItemPattern.cs" />
+    <Compile Include="Patterns\SelectionPattern.cs" />
+    <Compile Include="Patterns\SpreadsheetItemPattern.cs" />
+    <Compile Include="Patterns\SpreadsheetPattern.cs" />
+    <Compile Include="Patterns\StylesPattern.cs" />
+    <Compile Include="Patterns\SynchronizedInputPattern.cs" />
+    <Compile Include="Patterns\TableItemPattern.cs" />
+    <Compile Include="Patterns\TablePattern.cs" />
+    <Compile Include="Patterns\TextChildPattern.cs" />
     <Compile Include="Shapes\Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shapes\Rectangle.cs" />
     <Compile Include="Shapes\ShapeBase.cs" />
+    <Compile Include="TextRange.cs" />
+    <Compile Include="Tools\ComCallWrapper.cs" />
     <Compile Include="Tools\ExtensionMethods.cs" />
+    <Compile Include="Tools\NativeValueConverter.cs" />
     <Compile Include="Tools\SystemProductNameFetcher.cs" />
     <Compile Include="Tools\WindowsStoreAppLauncher.cs" />
     <Compile Include="TreeWalker.cs" />

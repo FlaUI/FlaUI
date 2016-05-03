@@ -14,50 +14,42 @@ namespace FlaUI.Core.Elements
 
         public string AcceleratorKey
         {
-            get { return AutomationElement.SafeGetPropertyValue<string>(AutomationElement.AcceleratorKeyProperty, Cached); }
+            get { return Get<string>(AutomationElement.AcceleratorKeyProperty); }
         }
 
         public string AccessKey
         {
-            get { return AutomationElement.SafeGetPropertyValue<string>(AutomationElement.AccessKeyProperty, Cached); }
+            get { return Get<string>(AutomationElement.AccessKeyProperty); }
         }
 
         public string AriaProperties
         {
-            get { return AutomationElement.SafeGetPropertyValue<string>(AutomationElement.AriaPropertiesProperty, Cached); }
+            get { return Get<string>(AutomationElement.AriaPropertiesProperty); }
         }
 
         public string AriaRole
         {
-            get { return AutomationElement.SafeGetPropertyValue<string>(AutomationElement.AriaRoleProperty, Cached); }
+            get { return Get<string>(AutomationElement.AriaRoleProperty); }
         }
 
         public string AutomationId
         {
-            get { return AutomationElement.SafeGetPropertyValue<string>(AutomationElement.AutomationIdProperty, Cached); }
+            get { return Get<string>(AutomationElement.AutomationIdProperty); }
         }
 
         public Rectangle BoundingRectangle
         {
-            get
-            {
-                var values = AutomationElement.SafeGetPropertyValue<double[]>(AutomationElement.BoundingRectangleProperty, Cached);
-                return new Rectangle(values[0], values[1], values[2], values[3]);
-            }
+            get { return Get<Rectangle>(AutomationElement.BoundingRectangleProperty); }
         }
 
         public string ClassName
         {
-            get { return AutomationElement.SafeGetPropertyValue<string>(AutomationElement.ClassNameProperty, Cached); }
+            get { return Get<string>(AutomationElement.ClassNameProperty); }
         }
 
         public Point ClickablePoint
         {
-            get
-            {
-                var values = AutomationElement.SafeGetPropertyValue<double[]>(AutomationElement.ClickablePointProperty, Cached);
-                return new Point(values[0], values[1]);
-            }
+            get { return Get<Point>(AutomationElement.ClickablePointProperty); }
         }
 
         public AutomationElement[] ControllerFor
@@ -67,16 +59,12 @@ namespace FlaUI.Core.Elements
 
         public ControlType ControlType
         {
-            get { return (ControlType)AutomationElement.SafeGetPropertyValue<int>(AutomationElement.ControlTypeProperty, Cached); }
+            get { return Get<ControlType>(AutomationElement.ControlTypeProperty); }
         }
 
         public CultureInfo Culture
         {
-            get
-            {
-                var cultureId = AutomationElement.SafeGetPropertyValue<int>(AutomationElement.CultureProperty, Cached);
-                return cultureId == 0 ? CultureInfo.InvariantCulture : new CultureInfo(cultureId);
-            }
+            get { return Get<CultureInfo>(AutomationElement.CultureProperty); }
         }
 
         public AutomationElement[] DescribedBy
@@ -96,72 +84,72 @@ namespace FlaUI.Core.Elements
 
         public string FrameworkId
         {
-            get { return AutomationElement.SafeGetPropertyValue<string>(AutomationElement.FrameworkIdProperty, Cached); }
+            get { return Get<string>(AutomationElement.FrameworkIdProperty); }
         }
 
         public bool HasKeyboardFocus
         {
-            get { return AutomationElement.SafeGetPropertyValue<bool>(AutomationElement.HasKeyboardFocusProperty, Cached); }
+            get { return Get<bool>(AutomationElement.HasKeyboardFocusProperty); }
         }
 
         public string HelpText
         {
-            get { return AutomationElement.SafeGetPropertyValue<string>(AutomationElement.HelpTextProperty, Cached); }
+            get { return Get<string>(AutomationElement.HelpTextProperty); }
         }
 
         public bool IsContentElement
         {
-            get { return AutomationElement.SafeGetPropertyValue<bool>(AutomationElement.IsContentElementProperty, Cached); }
+            get { return Get<bool>(AutomationElement.IsContentElementProperty); }
         }
 
         public bool IsControlElement
         {
-            get { return AutomationElement.SafeGetPropertyValue<bool>(AutomationElement.IsControlElementProperty, Cached); }
+            get { return Get<bool>(AutomationElement.IsControlElementProperty); }
         }
 
         public bool IsDataValidForForm
         {
-            get { return AutomationElement.SafeGetPropertyValue<bool>(AutomationElement.IsDataValidForFormProperty, Cached); }
+            get { return Get<bool>(AutomationElement.IsDataValidForFormProperty); }
         }
 
         public bool IsEnabled
         {
-            get { return AutomationElement.SafeGetPropertyValue<bool>(AutomationElement.IsEnabledProperty, Cached); }
+            get { return Get<bool>(AutomationElement.IsEnabledProperty); }
         }
 
         public bool IsKeyboardFocusable
         {
-            get { return AutomationElement.SafeGetPropertyValue<bool>(AutomationElement.IsKeyboardFocusableProperty, Cached); }
+            get { return Get<bool>(AutomationElement.IsKeyboardFocusableProperty); }
         }
 
         public bool IsOffscreen
         {
-            get { return AutomationElement.SafeGetPropertyValue<bool>(AutomationElement.IsOffscreenProperty, Cached); }
+            get { return Get<bool>(AutomationElement.IsOffscreenProperty); }
         }
 
         public bool IsPassword
         {
-            get { return AutomationElement.SafeGetPropertyValue<bool>(AutomationElement.IsPasswordProperty, Cached); }
+            get { return Get<bool>(AutomationElement.IsPasswordProperty); }
         }
 
         public bool IsPeripheral
         {
-            get { return AutomationElement.SafeGetPropertyValue<bool>(AutomationElement.IsPeripheralProperty, Cached); }
+            get { return Get<bool>(AutomationElement.IsPeripheralProperty); }
         }
 
         public bool IsRequiredForForm
         {
-            get { return AutomationElement.SafeGetPropertyValue<bool>(AutomationElement.IsRequiredForFormProperty, Cached); }
+            get { return Get<bool>(AutomationElement.IsRequiredForFormProperty); }
         }
 
         public string ItemStatus
         {
-            get { return AutomationElement.SafeGetPropertyValue<string>(AutomationElement.ItemStatusProperty, Cached); }
+            get { return Get<string>(AutomationElement.ItemStatusProperty); }
         }
 
         public string ItemType
         {
-            get { return AutomationElement.SafeGetPropertyValue<string>(AutomationElement.ItemTypeProperty, Cached); }
+            get { return Get<string>(AutomationElement.ItemTypeProperty); }
         }
 
         public AutomationElement LabeledBy
@@ -171,47 +159,47 @@ namespace FlaUI.Core.Elements
 
         public LiveSetting LiveSetting
         {
-            get { return AutomationElement.SafeGetPropertyValue<LiveSetting>(AutomationElement.LiveSettingProperty, Cached); }
+            get { return Get<LiveSetting>(AutomationElement.LiveSettingProperty); }
         }
 
         public string LocalizedControlType
         {
-            get { return AutomationElement.SafeGetPropertyValue<string>(AutomationElement.LocalizedControlTypeProperty, Cached); }
+            get { return Get<string>(AutomationElement.LocalizedControlTypeProperty); }
         }
 
         public string Name
         {
-            get { return AutomationElement.SafeGetPropertyValue<string>(AutomationElement.NameProperty, Cached); }
+            get { return Get<string>(AutomationElement.NameProperty); }
         }
 
         public IntPtr NativeWindowHandle
         {
-            get { return AutomationElement.SafeGetPropertyValue<IntPtr>(AutomationElement.NativeWindowHandleProperty, Cached); }
+            get { return Get<IntPtr>(AutomationElement.NativeWindowHandleProperty); }
         }
 
         public bool OptimizeForVisualContent
         {
-            get { return AutomationElement.SafeGetPropertyValue<bool>(AutomationElement.OptimizeForVisualContentProperty, Cached); }
+            get { return Get<bool>(AutomationElement.OptimizeForVisualContentProperty); }
         }
 
         public OrientationType Orientation
         {
-            get { return AutomationElement.SafeGetPropertyValue<OrientationType>(AutomationElement.OrientationProperty, Cached); }
+            get { return Get<OrientationType>(AutomationElement.OrientationProperty); }
         }
 
         public int ProcessId
         {
-            get { return AutomationElement.SafeGetPropertyValue<int>(AutomationElement.ProcessIdProperty, Cached); }
+            get { return Get<int>(AutomationElement.ProcessIdProperty); }
         }
 
         public string ProviderDescription
         {
-            get { return AutomationElement.SafeGetPropertyValue<string>(AutomationElement.ProviderDescriptionProperty, Cached); }
+            get { return Get<string>(AutomationElement.ProviderDescriptionProperty); }
         }
 
         public int[] RuntimeId
         {
-            get { return AutomationElement.SafeGetPropertyValue<int[]>(AutomationElement.RuntimeIdProperty, Cached); }
+            get { return Get<int[]>(AutomationElement.RuntimeIdProperty); }
         }
     }
 }

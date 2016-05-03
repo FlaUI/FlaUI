@@ -3,7 +3,7 @@ using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
-    public class DragPattern : PatternBase<IUIAutomationDragPattern>
+    public class DragPattern : PatternBaseWithInformation<IUIAutomationDragPattern, DragPatternInformation>
     {
         public static readonly AutomationPattern Pattern = AutomationPattern.Register(UIA_PatternIds.UIA_DragPatternId, "Drag");
         public static readonly AutomationProperty DropEffectProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_DragDropEffectPropertyId, "DropEffect");
@@ -14,43 +14,37 @@ namespace FlaUI.Core.Patterns
         public static readonly AutomationEvent DragCompleteEvent = AutomationEvent.Register(UIA_EventIds.UIA_Drag_DragCompleteEventId, "DragComplete");
         public static readonly AutomationEvent DragStartEvent = AutomationEvent.Register(UIA_EventIds.UIA_Drag_DragStartEventId, "DragStart");
 
-        public DragPatternInformation Cached { get; private set; }
-
-        public DragPatternInformation Current { get; private set; }
-
         internal DragPattern(AutomationElement automationElement, IUIAutomationDragPattern nativePattern)
-            : base(automationElement, nativePattern)
+            : base(automationElement, nativePattern, (element, cached) => new DragPatternInformation(element, cached))
         {
-            Cached = new DragPatternInformation(AutomationElement, true);
-            Current = new DragPatternInformation(AutomationElement, false);
+        }
+    }
+
+    public class DragPatternInformation : InformationBase
+    {
+        public DragPatternInformation(AutomationElement automationElement, bool cached)
+            : base(automationElement, cached)
+        {
         }
 
-        public class DragPatternInformation : InformationBase
+        public string DropEffect
         {
-            public DragPatternInformation(AutomationElement automationElement, bool cached)
-                : base(automationElement, cached)
-            {
-            }
+            get { return Get<string>(DragPattern.DropEffectProperty); }
+        }
 
-            public string DropEffect
-            {
-                get { return AutomationElement.SafeGetPropertyValue<string>(DropEffectProperty, Cached); }
-            }
+        public string[] DropEffects
+        {
+            get { return Get<string[]>(DragPattern.DropEffectsProperty); }
+        }
 
-            public string[] DropEffects
-            {
-                get { return AutomationElement.SafeGetPropertyValue<string[]>(DropEffectsProperty, Cached); }
-            }
+        public bool IsGrabbed
+        {
+            get { return Get<bool>(DragPattern.IsGrabbedProperty); }
+        }
 
-            public bool IsGrabbed
-            {
-                get { return AutomationElement.SafeGetPropertyValue<bool>(IsGrabbedProperty, Cached); }
-            }
-
-            public AutomationElement[] GrabbedItems
-            {
-                get { return NativeElementArrayToElements(GrabbedItemsProperty); }
-            }
+        public AutomationElement[] GrabbedItems
+        {
+            get { return NativeElementArrayToElements(DragPattern.GrabbedItemsProperty); }
         }
     }
 }

@@ -20,6 +20,10 @@ namespace FlaUI.Core
         /// Dictionary which holds all known patterns
         /// </summary>
         private static readonly Dictionary<int, AutomationPattern> PatternDict = new Dictionary<int, AutomationPattern>();
+        /// <summary>
+        /// Dictionary which holds all known text attributes
+        /// </summary>
+        private static readonly Dictionary<int, AutomationTextAttribute> TextAttributeDict = new Dictionary<int, AutomationTextAttribute>();
 
         /// <summary>
         /// The native id of the identifier
@@ -70,6 +74,17 @@ namespace FlaUI.Core
             return newIdObject;
         }
 
+        protected static AutomationTextAttribute RegisterTextAttribute(int id, string name)
+        {
+            if (TextAttributeDict.ContainsKey(id))
+            {
+                return TextAttributeDict[id];
+            }
+            var newIdObject = new AutomationTextAttribute(id, name);
+            TextAttributeDict[id] = newIdObject;
+            return newIdObject;
+        }
+
         protected static AutomationProperty FindProperty(int id)
         {
             if (PropertyDict.ContainsKey(id))
@@ -95,6 +110,15 @@ namespace FlaUI.Core
                 return PatternDict[id];
             }
             return new AutomationPattern(id, String.Format("Pattern#{0}", id));
+        }
+
+        protected static AutomationTextAttribute FindTextAttribute(int id)
+        {
+            if (TextAttributeDict.ContainsKey(id))
+            {
+                return TextAttributeDict[id];
+            }
+            return new AutomationTextAttribute(id, String.Format("TextAttribute#{0}", id));
         }
 
         public override string ToString()

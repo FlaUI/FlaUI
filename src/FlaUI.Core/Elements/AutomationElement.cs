@@ -4,6 +4,7 @@ using interop.UIAutomationCore;
 using System;
 using System.Linq;
 using System.Windows.Media;
+using FlaUI.Core.Tools;
 
 namespace FlaUI.Core.Elements
 {
@@ -82,7 +83,7 @@ namespace FlaUI.Core.Elements
             {
                 throw new PropertyNotSupportedException(String.Format("Property '{0}' not supported", property.Name), property);
             }
-            return (T)value;
+            return ConvertValue<T>(property, value);
         }
 
         /// <summary>
@@ -96,7 +97,7 @@ namespace FlaUI.Core.Elements
         public T SafeGetPropertyValue<T>(AutomationProperty property, bool cached)
         {
             var value = InternalGetPropertyValue(property.Id, cached, true);
-            return (T)value;
+            return ConvertValue<T>(property, value);
         }
 
         /// <summary>
@@ -115,7 +116,7 @@ namespace FlaUI.Core.Elements
                 value = default(T);
                 return false;
             }
-            value = (T)tmp;
+            value = ConvertValue<T>(property, tmp);
             return true;
         }
 
@@ -213,6 +214,13 @@ namespace FlaUI.Core.Elements
             return returnValue;
         }
 
+        /// <summary>
+        /// Converts the given value with the registered converter or simply casts it
+        /// </summary>
+        private T ConvertValue<T>(AutomationProperty property, object value)
+        {
+            return property.Convert<T>(value);
+        }
         #region Property Identifiers
         // Base element properties
         public static readonly AutomationProperty AcceleratorKeyProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_AcceleratorKeyPropertyId, "AcceleratorKey");
@@ -220,12 +228,12 @@ namespace FlaUI.Core.Elements
         public static readonly AutomationProperty AriaPropertiesProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_AriaPropertiesPropertyId, "AriaProperties");
         public static readonly AutomationProperty AriaRoleProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_AriaRolePropertyId, "AriaRole");
         public static readonly AutomationProperty AutomationIdProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_AutomationIdPropertyId, "AutomationId");
-        public static readonly AutomationProperty BoundingRectangleProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_BoundingRectanglePropertyId, "BoundingRectangle");
+        public static readonly AutomationProperty BoundingRectangleProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_BoundingRectanglePropertyId, "BoundingRectangle").SetConverter(NativeValueConverter.ToRectangle);
         public static readonly AutomationProperty ClassNameProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_ClassNamePropertyId, "ClassName");
-        public static readonly AutomationProperty ClickablePointProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_ClickablePointPropertyId, "ClickablePoint");
+        public static readonly AutomationProperty ClickablePointProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_ClickablePointPropertyId, "ClickablePoint").SetConverter(NativeValueConverter.ToPoint);
         public static readonly AutomationProperty ControllerForProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_ControllerForPropertyId, "ControllerFor");
         public static readonly AutomationProperty ControlTypeProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_ControlTypePropertyId, "ControlType");
-        public static readonly AutomationProperty CultureProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_CulturePropertyId, "Culture");
+        public static readonly AutomationProperty CultureProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_CulturePropertyId, "Culture").SetConverter(NativeValueConverter.ToCulture);
         public static readonly AutomationProperty DescribedByProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_DescribedByPropertyId, "DescribedBy");
         public static readonly AutomationProperty FlowsFromProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_FlowsFromPropertyId, "FlowsFrom");
         public static readonly AutomationProperty FlowsToProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_FlowsToPropertyId, "FlowsTo");

@@ -1,4 +1,5 @@
 ﻿using FlaUI.Core.Elements;
+using FlaUI.Core.Tools;
 using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
@@ -15,7 +16,7 @@ namespace FlaUI.Core.Patterns
 
         public void Invoke()
         {
-            NativePattern.Invoke();
+            ComCallWrapper.Call(() => NativePattern.Invoke());
         }
     }
 }

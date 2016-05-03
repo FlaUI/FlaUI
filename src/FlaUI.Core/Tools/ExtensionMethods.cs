@@ -16,5 +16,13 @@ namespace FlaUI.Core.Tools
             return source.CompareTo(smallest) < 0 ? smallest :
                 source.CompareTo(biggest) > 0 ? biggest : source;
         }
+
+        /// <summary>
+        /// Converts a boolean to an int
+        /// </summary>
+        public static int ToInt(this bool b)
+        {
+            return b ? 1 : 0;
+        }
     }
 }

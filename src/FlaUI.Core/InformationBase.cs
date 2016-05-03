@@ -1,4 +1,5 @@
 ﻿using FlaUI.Core.Elements;
+using FlaUI.Core.Tools;
 
 namespace FlaUI.Core
 {
@@ -24,26 +25,23 @@ namespace FlaUI.Core
         }
 
         /// <summary>
-        /// Converts a native element array to an enumerable of <see cref="AutomationElement"/>
+        /// Shortcut to get the property 
         /// </summary>
-        protected AutomationElement[] NativeElementArrayToElements(AutomationProperty property)
+        protected T Get<T>(AutomationProperty property)
         {
-            var controlledElements = AutomationElement.SafeGetPropertyValue<interop.UIAutomationCore.IUIAutomationElementArray>(property, Cached);
-            var retArray = new AutomationElement[controlledElements.Length];
-            for (var i = 0; i < controlledElements.Length; i++)
-            {
-                retArray[i] = new AutomationElement(AutomationElement.Automation, controlledElements.GetElement(i));
-            }
-            return retArray;
+            return AutomationElement.SafeGetPropertyValue<T>(property, Cached);
         }
 
-        /// <summary>
-        /// Converts a native element to an <see cref="AutomationElement"/>
-        /// </summary>
+        protected AutomationElement[] NativeElementArrayToElements(AutomationProperty property)
+        {
+            var nativeElements = Get<interop.UIAutomationCore.IUIAutomationElementArray>(property);
+            return NativeValueConverter.NativeElementArrayToElements(AutomationElement.Automation, nativeElements);
+        }
+
         protected AutomationElement NativeElementToElement(AutomationProperty property)
         {
-            var nativeElement = AutomationElement.SafeGetPropertyValue<interop.UIAutomationCore.IUIAutomationElement>(property, Cached);
-            return nativeElement == null ? null : new AutomationElement(AutomationElement.Automation, nativeElement);
+            var nativeElement = Get<interop.UIAutomationCore.IUIAutomationElement>(property);
+            return NativeValueConverter.NativeElementToElement(AutomationElement.Automation, nativeElement);
         }
     }
 }
