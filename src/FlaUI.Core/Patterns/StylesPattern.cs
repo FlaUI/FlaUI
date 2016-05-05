@@ -1,19 +1,20 @@
 ﻿using FlaUI.Core.Definitions;
 using FlaUI.Core.Elements;
+using FlaUI.Core.Identifiers;
 using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
     public class StylesPattern : PatternBase<IUIAutomationStylesPattern>
     {
-        public static readonly AutomationPattern Pattern = AutomationPattern.Register(UIA_PatternIds.UIA_StylesPatternId, "Styles");
-        public static readonly AutomationProperty ExtendedPropertiesProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_StylesExtendedPropertiesPropertyId, "ExtendedProperties");
-        public static readonly AutomationProperty FillColorProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_StylesFillColorPropertyId, "FillColor");
-        public static readonly AutomationProperty FillPatternColorProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_StylesFillPatternColorPropertyId, "FillPatternColor");
-        public static readonly AutomationProperty FillPatternStyleProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_StylesFillPatternStylePropertyId, "FillPatternStyle");
-        public static readonly AutomationProperty ShapeProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_StylesShapePropertyId, "Shape");
-        public static readonly AutomationProperty StyleIdProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_StylesStyleIdPropertyId, "StyleId");
-        public static readonly AutomationProperty StyleNameProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_StylesStyleNamePropertyId, "StyleName");
+        public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_StylesPatternId, "Styles");
+        public static readonly PropertyId ExtendedPropertiesProperty = PropertyId.Register(UIA_PropertyIds.UIA_StylesExtendedPropertiesPropertyId, "ExtendedProperties");
+        public static readonly PropertyId FillColorProperty = PropertyId.Register(UIA_PropertyIds.UIA_StylesFillColorPropertyId, "FillColor");
+        public static readonly PropertyId FillPatternColorProperty = PropertyId.Register(UIA_PropertyIds.UIA_StylesFillPatternColorPropertyId, "FillPatternColor");
+        public static readonly PropertyId FillPatternStyleProperty = PropertyId.Register(UIA_PropertyIds.UIA_StylesFillPatternStylePropertyId, "FillPatternStyle");
+        public static readonly PropertyId ShapeProperty = PropertyId.Register(UIA_PropertyIds.UIA_StylesShapePropertyId, "Shape");
+        public static readonly PropertyId StyleIdProperty = PropertyId.Register(UIA_PropertyIds.UIA_StylesStyleIdPropertyId, "StyleId");
+        public static readonly PropertyId StyleNameProperty = PropertyId.Register(UIA_PropertyIds.UIA_StylesStyleNamePropertyId, "StyleName");
 
         internal StylesPattern(AutomationElement automationElement, IUIAutomationStylesPattern nativePattern)
             : base(automationElement, nativePattern)

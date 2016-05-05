@@ -12,7 +12,7 @@ namespace FlaUI.Core.Tools
         /// <summary>
         /// Converts a native element array to an array of <see cref="AutomationElement"/>
         /// </summary>
-        public static AutomationElement[] NativeElementArrayToElements(Automation automation, IUIAutomationElementArray nativeElements)
+        public static AutomationElement[] NativeArrayToManaged(Automation automation, IUIAutomationElementArray nativeElements)
         {
             if (nativeElements == null) { return new AutomationElement[0]; }
             var retArray = new AutomationElement[nativeElements.Length];
@@ -24,11 +24,41 @@ namespace FlaUI.Core.Tools
         }
 
         /// <summary>
+        /// Converts a native textrange array to an array of <see cref="TextRange"/>
+        /// </summary>
+        public static TextRange[] NativeArrayToManaged(Automation automation, IUIAutomationTextRangeArray nativeElements)
+        {
+            if (nativeElements == null) { return new TextRange[0]; }
+            var retArray = new TextRange[nativeElements.Length];
+            for (var i = 0; i < nativeElements.Length; i++)
+            {
+                retArray[i] = NativeToManaged(automation, nativeElements.GetElement(i));
+            }
+            return retArray;
+        }
+
+        /// <summary>
         /// Converts a native element to an <see cref="AutomationElement"/>
         /// </summary>
-        public static AutomationElement NativeElementToElement(Automation automation, IUIAutomationElement nativeElement)
+        public static AutomationElement NativeToManaged(Automation automation, IUIAutomationElement nativeElement)
         {
             return nativeElement == null ? null : new AutomationElement(automation, nativeElement);
+        }
+
+        /// <summary>
+        /// Converts a native textrange to an <see cref="TextRange"/>
+        /// </summary>
+        public static TextRange NativeToManaged(Automation automation, IUIAutomationTextRange nativeElement)
+        {
+            return nativeElement == null ? null : new TextRange(automation, nativeElement);
+        }
+
+        /// <summary>
+        /// Converts a native textrange2 to an <see cref="TextRange2"/>
+        /// </summary>
+        public static TextRange2 NativeToManaged(Automation automation, IUIAutomationTextRange2 nativeElement)
+        {
+            return nativeElement == null ? null : new TextRange2(automation, nativeElement);
         }
 
         /// <summary>

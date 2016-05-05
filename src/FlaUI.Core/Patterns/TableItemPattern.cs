@@ -1,13 +1,14 @@
 ﻿using FlaUI.Core.Elements;
+using FlaUI.Core.Identifiers;
 using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
     public class TableItemPattern : PatternBaseWithInformation<IUIAutomationTableItemPattern, TableItemPatternInformation>
     {
-        public static readonly AutomationPattern Pattern = AutomationPattern.Register(UIA_PatternIds.UIA_TableItemPatternId, "TableItem");
-        public static readonly AutomationProperty ColumnHeaderItemsProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_TableItemColumnHeaderItemsPropertyId, "ColumnHeaderItems");
-        public static readonly AutomationProperty RowHeaderItemsProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_TableItemRowHeaderItemsPropertyId, "RowHeaderItems");
+        public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_TableItemPatternId, "TableItem");
+        public static readonly PropertyId ColumnHeaderItemsProperty = PropertyId.Register(UIA_PropertyIds.UIA_TableItemColumnHeaderItemsPropertyId, "ColumnHeaderItems");
+        public static readonly PropertyId RowHeaderItemsProperty = PropertyId.Register(UIA_PropertyIds.UIA_TableItemRowHeaderItemsPropertyId, "RowHeaderItems");
 
         internal TableItemPattern(AutomationElement automationElement, IUIAutomationTableItemPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new TableItemPatternInformation(element, cached))

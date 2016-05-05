@@ -1,14 +1,15 @@
 ﻿using FlaUI.Core.Elements;
+using FlaUI.Core.Identifiers;
 using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
     public class TablePattern : PatternBaseWithInformation<IUIAutomationTablePattern, TablePatternInformation>
     {
-        public static readonly AutomationPattern Pattern = AutomationPattern.Register(UIA_PatternIds.UIA_TablePatternId, "Table");
-        public static readonly AutomationProperty ColumnHeadersProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_TableColumnHeadersPropertyId, "ColumnHeaders");
-        public static readonly AutomationProperty RowHeadersProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_TableRowHeadersPropertyId, "RowHeaders");
-        public static readonly AutomationProperty RowOrColumnMajorProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_TableRowOrColumnMajorPropertyId, "RowOrColumnMajor");
+        public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_TablePatternId, "Table");
+        public static readonly PropertyId ColumnHeadersProperty = PropertyId.Register(UIA_PropertyIds.UIA_TableColumnHeadersPropertyId, "ColumnHeaders");
+        public static readonly PropertyId RowHeadersProperty = PropertyId.Register(UIA_PropertyIds.UIA_TableRowHeadersPropertyId, "RowHeaders");
+        public static readonly PropertyId RowOrColumnMajorProperty = PropertyId.Register(UIA_PropertyIds.UIA_TableRowOrColumnMajorPropertyId, "RowOrColumnMajor");
 
         internal TablePattern(AutomationElement automationElement, IUIAutomationTablePattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new TablePatternInformation(element, cached))

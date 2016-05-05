@@ -1,4 +1,5 @@
 ﻿using FlaUI.Core.Elements;
+using FlaUI.Core.Identifiers;
 using FlaUI.Core.Tools;
 using interop.UIAutomationCore;
 
@@ -6,9 +7,9 @@ namespace FlaUI.Core.Patterns
 {
     public class GridPattern : PatternBaseWithInformation<IUIAutomationGridPattern, GridPatternInformation>
     {
-        public static readonly AutomationPattern Pattern = AutomationPattern.Register(UIA_PatternIds.UIA_GridPatternId, "Grid");
-        public static readonly AutomationProperty ColumnCountProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_GridColumnCountPropertyId, "ColumnCount");
-        public static readonly AutomationProperty RowCountProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_GridRowCountPropertyId, "RowCount");
+        public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_GridPatternId, "Grid");
+        public static readonly PropertyId ColumnCountProperty = PropertyId.Register(UIA_PropertyIds.UIA_GridColumnCountPropertyId, "ColumnCount");
+        public static readonly PropertyId RowCountProperty = PropertyId.Register(UIA_PropertyIds.UIA_GridRowCountPropertyId, "RowCount");
 
         internal GridPattern(AutomationElement automationElement, IUIAutomationGridPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new GridPatternInformation(element, cached))

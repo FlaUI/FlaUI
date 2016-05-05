@@ -1,4 +1,5 @@
 ﻿using FlaUI.Core.Elements;
+using FlaUI.Core.Identifiers;
 using FlaUI.Core.Tools;
 using interop.UIAutomationCore;
 
@@ -6,13 +7,13 @@ namespace FlaUI.Core.Patterns
 {
     public class RangeValuePattern : PatternBaseWithInformation<IUIAutomationRangeValuePattern, RangeValuePatternInformation>
     {
-        public static readonly AutomationPattern Pattern = AutomationPattern.Register(UIA_PatternIds.UIA_RangeValuePatternId, "RangeValue");
-        public static readonly AutomationProperty IsReadOnlyProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_RangeValueIsReadOnlyPropertyId, "IsReadOnly");
-        public static readonly AutomationProperty LargeChangeProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_RangeValueLargeChangePropertyId, "LargeChange");
-        public static readonly AutomationProperty MaximumProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_RangeValueMaximumPropertyId, "Maximum");
-        public static readonly AutomationProperty MinimumProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_RangeValueMinimumPropertyId, "Minimum");
-        public static readonly AutomationProperty SmallChangeProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_RangeValueSmallChangePropertyId, "SmallChange");
-        public static readonly AutomationProperty ValueProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_RangeValueValuePropertyId, "Value");
+        public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_RangeValuePatternId, "RangeValue");
+        public static readonly PropertyId IsReadOnlyProperty = PropertyId.Register(UIA_PropertyIds.UIA_RangeValueIsReadOnlyPropertyId, "IsReadOnly");
+        public static readonly PropertyId LargeChangeProperty = PropertyId.Register(UIA_PropertyIds.UIA_RangeValueLargeChangePropertyId, "LargeChange");
+        public static readonly PropertyId MaximumProperty = PropertyId.Register(UIA_PropertyIds.UIA_RangeValueMaximumPropertyId, "Maximum");
+        public static readonly PropertyId MinimumProperty = PropertyId.Register(UIA_PropertyIds.UIA_RangeValueMinimumPropertyId, "Minimum");
+        public static readonly PropertyId SmallChangeProperty = PropertyId.Register(UIA_PropertyIds.UIA_RangeValueSmallChangePropertyId, "SmallChange");
+        public static readonly PropertyId ValueProperty = PropertyId.Register(UIA_PropertyIds.UIA_RangeValueValuePropertyId, "Value");
 
         internal RangeValuePattern(AutomationElement automationElement, IUIAutomationRangeValuePattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new RangeValuePatternInformation(element, cached))

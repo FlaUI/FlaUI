@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+using FlaUI.Core.Identifiers;
 
 namespace FlaUI.Core.Exceptions
 {
     [Serializable]
     public class PropertyNotSupportedException : Exception
     {
-        public AutomationProperty Property { get; private set; }
+        public PropertyId Property { get; private set; }
 
         public PropertyNotSupportedException()
         {
@@ -23,13 +24,13 @@ namespace FlaUI.Core.Exceptions
         {
         }
 
-        public PropertyNotSupportedException(string message, AutomationProperty property)
+        public PropertyNotSupportedException(string message, PropertyId property)
             : base(message)
         {
             Property = property;
         }
 
-        public PropertyNotSupportedException(string message, AutomationProperty property, Exception innerException)
+        public PropertyNotSupportedException(string message, PropertyId property, Exception innerException)
             : base(message, innerException)
         {
             Property = property;
@@ -39,7 +40,7 @@ namespace FlaUI.Core.Exceptions
         protected PropertyNotSupportedException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
-            Property = (AutomationProperty)info.GetValue("AutomationProperty", typeof(AutomationProperty));
+            Property = (PropertyId)info.GetValue("Property", typeof(PropertyId));
         }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -48,7 +49,7 @@ namespace FlaUI.Core.Exceptions
             {
                 throw new ArgumentNullException("info");
             }
-            info.AddValue("AutomationProperty", Property);
+            info.AddValue("Property", Property);
             base.GetObjectData(info, context);
         }
     }

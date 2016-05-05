@@ -1,5 +1,4 @@
-﻿
-namespace FlaUI.Core.Definitions
+﻿namespace FlaUI.Core.Definitions
 {
     public enum OrientationType
     {

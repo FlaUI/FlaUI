@@ -1,4 +1,5 @@
 ﻿using FlaUI.Core.Elements;
+using FlaUI.Core.Identifiers;
 using FlaUI.Core.Tools;
 using interop.UIAutomationCore;
 
@@ -6,13 +7,13 @@ namespace FlaUI.Core.Patterns
 {
     public class ScrollPattern : PatternBaseWithInformation<IUIAutomationScrollPattern, ScrollPatternInformation>
     {
-        public static readonly AutomationPattern Pattern = AutomationPattern.Register(UIA_PatternIds.UIA_ScrollPatternId, "Scroll");
-        public static readonly AutomationProperty HorizontallyScrollableProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_ScrollHorizontallyScrollablePropertyId, "HorizontallyScrollable");
-        public static readonly AutomationProperty HorizontalScrollPercentProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_ScrollHorizontalScrollPercentPropertyId, "HorizontalScrollPercent");
-        public static readonly AutomationProperty HorizontalViewSizeProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_ScrollHorizontalViewSizePropertyId, "HorizontalViewSize");
-        public static readonly AutomationProperty VerticallyScrollableProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_ScrollVerticallyScrollablePropertyId, "VerticallyScrollable");
-        public static readonly AutomationProperty VerticalScrollPercentProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_ScrollVerticalScrollPercentPropertyId, "VerticalScrollPercent");
-        public static readonly AutomationProperty VerticalViewSizeProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_ScrollVerticalViewSizePropertyId, "VerticalViewSize");
+        public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_ScrollPatternId, "Scroll");
+        public static readonly PropertyId HorizontallyScrollableProperty = PropertyId.Register(UIA_PropertyIds.UIA_ScrollHorizontallyScrollablePropertyId, "HorizontallyScrollable");
+        public static readonly PropertyId HorizontalScrollPercentProperty = PropertyId.Register(UIA_PropertyIds.UIA_ScrollHorizontalScrollPercentPropertyId, "HorizontalScrollPercent");
+        public static readonly PropertyId HorizontalViewSizeProperty = PropertyId.Register(UIA_PropertyIds.UIA_ScrollHorizontalViewSizePropertyId, "HorizontalViewSize");
+        public static readonly PropertyId VerticallyScrollableProperty = PropertyId.Register(UIA_PropertyIds.UIA_ScrollVerticallyScrollablePropertyId, "VerticallyScrollable");
+        public static readonly PropertyId VerticalScrollPercentProperty = PropertyId.Register(UIA_PropertyIds.UIA_ScrollVerticalScrollPercentPropertyId, "VerticalScrollPercent");
+        public static readonly PropertyId VerticalViewSizeProperty = PropertyId.Register(UIA_PropertyIds.UIA_ScrollVerticalViewSizePropertyId, "VerticalViewSize");
 
         internal ScrollPattern(AutomationElement automationElement, IUIAutomationScrollPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new ScrollPatternInformation(element, cached))

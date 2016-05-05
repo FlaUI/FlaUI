@@ -1,4 +1,7 @@
-﻿using interop.UIAutomationCore;
+﻿using FlaUI.Core.Conditions;
+using FlaUI.Core.Identifiers;
+using interop.UIAutomationCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,49 +16,80 @@ namespace FlaUI.Core
             _automation = automation;
         }
 
-        public IUIAutomationAndCondition CreateAndCondition(IUIAutomationCondition condition1, IUIAutomationCondition condition2)
+        public AndCondition CreateAndCondition(ICondition condition1, ICondition condition2)
         {
-            return (IUIAutomationAndCondition)_automation.CreateAndCondition(condition1, condition2);
+            return new AndCondition((IUIAutomationAndCondition)_automation.CreateAndCondition(condition1.NativeCondition, condition2.NativeCondition));
         }
 
-        public IUIAutomationAndCondition CreateAndConditionFromArray(IEnumerable<IUIAutomationCondition> conditions)
+        public AndCondition CreateAndConditionFromArray(IEnumerable<ICondition> conditions)
         {
-            return (IUIAutomationAndCondition)_automation.CreateAndConditionFromArray(conditions.ToArray());
+            return new AndCondition((IUIAutomationAndCondition)_automation.CreateAndConditionFromArray(conditions.Select(c => c.NativeCondition).ToArray()));
         }
 
-        public IUIAutomationOrCondition CreateOrCondition(IUIAutomationCondition condition1, IUIAutomationCondition condition2)
+        public OrCondition CreateOrCondition(ICondition condition1, ICondition condition2)
         {
-            return (IUIAutomationOrCondition)_automation.CreateAndCondition(condition1, condition2);
+            return new OrCondition((IUIAutomationOrCondition)_automation.CreateAndCondition(condition1.NativeCondition, condition2.NativeCondition));
         }
 
-        public IUIAutomationOrCondition CreateOrConditionFromArray(IEnumerable<IUIAutomationCondition> conditions)
+        public OrCondition CreateOrConditionFromArray(IEnumerable<ICondition> conditions)
         {
-            return (IUIAutomationOrCondition)_automation.CreateAndConditionFromArray(conditions.ToArray());
+            return new OrCondition((IUIAutomationOrCondition)_automation.CreateAndConditionFromArray(conditions.Select(c => c.NativeCondition).ToArray()));
         }
 
-        public IUIAutomationBoolCondition CreateTrueCondition()
+        public BoolCondition CreateTrueCondition()
         {
-            return (IUIAutomationBoolCondition)_automation.CreateTrueCondition();
+            return new BoolCondition((IUIAutomationBoolCondition)_automation.CreateTrueCondition());
         }
 
-        public IUIAutomationBoolCondition CreateFalseCondition()
+        public BoolCondition CreateFalseCondition()
         {
-            return (IUIAutomationBoolCondition)_automation.CreateFalseCondition();
+            return new BoolCondition((IUIAutomationBoolCondition)_automation.CreateFalseCondition());
         }
 
-        public IUIAutomationNotCondition CreateNotCondition(IUIAutomationCondition condition)
+        public NotCondition CreateNotCondition(ICondition condition)
         {
-            return (IUIAutomationNotCondition)_automation.CreateNotCondition(condition);
+            return new NotCondition((IUIAutomationNotCondition)_automation.CreateNotCondition(condition.NativeCondition));
         }
 
-        public IUIAutomationPropertyCondition CreatePropertyCondition(int propertyId, object value)
+        public PropertyCondition CreatePropertyCondition(PropertyId property, object value)
         {
-            return (IUIAutomationPropertyCondition)_automation.CreatePropertyCondition(propertyId, value);
+            return new PropertyCondition((IUIAutomationPropertyCondition)_automation.CreatePropertyCondition(property.Id, value));
         }
 
-        public IUIAutomationPropertyCondition CreatePropertyCondition(int propertyId, object value, PropertyConditionFlags flags)
+        public PropertyCondition CreatePropertyCondition(PropertyId property, object value, Definitions.PropertyConditionFlags flags)
         {
-            return (IUIAutomationPropertyCondition)_automation.CreatePropertyConditionEx(propertyId, value, flags);
+            return new PropertyCondition((IUIAutomationPropertyCondition)_automation.CreatePropertyConditionEx(property.Id, value, (PropertyConditionFlags)flags));
+        }
+
+        /// <summary>
+        /// Converts a native condition to a managed condition
+        /// </summary>
+        internal static ICondition NativeToManaged(IUIAutomationCondition nativeCondition)
+        {
+            if (nativeCondition is IUIAutomationBoolCondition)
+                return new BoolCondition((IUIAutomationBoolCondition)nativeCondition);
+            if (nativeCondition is IUIAutomationAndCondition)
+                return new AndCondition((IUIAutomationAndCondition)nativeCondition);
+            if (nativeCondition is IUIAutomationOrCondition)
+                return new OrCondition((IUIAutomationOrCondition)nativeCondition);
+            if (nativeCondition is IUIAutomationNotCondition)
+                return new NotCondition((IUIAutomationNotCondition)nativeCondition);
+            if (nativeCondition is IUIAutomationPropertyCondition)
+                return new PropertyCondition((IUIAutomationPropertyCondition)nativeCondition);
+            throw new ArgumentException("nativeCondition");
+        }
+
+        /// <summary>
+        /// Converts an array of native condtions to an array of managed conditions
+        /// </summary>
+        internal static ICondition[] NativeToManaged(IUIAutomationCondition[] conditions)
+        {
+            var managedConditions = new ICondition[conditions.Length];
+            for (var i = 0; i < conditions.Length; ++i)
+            {
+                managedConditions[i] = NativeToManaged(conditions[i]);
+            }
+            return managedConditions;
         }
     }
 }

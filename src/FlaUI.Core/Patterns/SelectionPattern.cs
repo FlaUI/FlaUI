@@ -1,15 +1,16 @@
 ﻿using FlaUI.Core.Elements;
+using FlaUI.Core.Identifiers;
 using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
     public class SelectionPattern : PatternBaseWithInformation<IUIAutomationSelectionPattern, SelectionPatternInformation>
     {
-        public static readonly AutomationPattern Pattern = AutomationPattern.Register(UIA_PatternIds.UIA_SelectionPatternId, "Selection");
-        public static readonly AutomationProperty CanSelectMultipleProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_SelectionCanSelectMultiplePropertyId, "CanSelectMultiple");
-        public static readonly AutomationProperty IsSelectionRequiredProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_SelectionIsSelectionRequiredPropertyId, "IsSelectionRequired");
-        public static readonly AutomationProperty SelectionProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_SelectionSelectionPropertyId, "Selection");
-        public static readonly AutomationEvent InvalidatedEvent = AutomationEvent.Register(UIA_EventIds.UIA_Selection_InvalidatedEventId, "Invalidated");
+        public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_SelectionPatternId, "Selection");
+        public static readonly PropertyId CanSelectMultipleProperty = PropertyId.Register(UIA_PropertyIds.UIA_SelectionCanSelectMultiplePropertyId, "CanSelectMultiple");
+        public static readonly PropertyId IsSelectionRequiredProperty = PropertyId.Register(UIA_PropertyIds.UIA_SelectionIsSelectionRequiredPropertyId, "IsSelectionRequired");
+        public static readonly PropertyId SelectionProperty = PropertyId.Register(UIA_PropertyIds.UIA_SelectionSelectionPropertyId, "Selection");
+        public static readonly EventId InvalidatedEvent = EventId.Register(UIA_EventIds.UIA_Selection_InvalidatedEventId, "Invalidated");
 
         internal SelectionPattern(AutomationElement automationElement, IUIAutomationSelectionPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new SelectionPatternInformation(element, cached))

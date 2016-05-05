@@ -4,7 +4,7 @@ namespace FlaUI.Core.Tools
 {
     public static class SystemProductNameFetcher
     {
-        public static bool IsCurrentOsContains(string name)
+        public static bool CurrentOsContains(string name)
         {
             var reg = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
             var productName = (string)reg.GetValue("ProductName");
@@ -13,12 +13,12 @@ namespace FlaUI.Core.Tools
 
         public static bool IsWindows8_1()
         {
-            return IsCurrentOsContains("Windows 8.1");
+            return CurrentOsContains("Windows 8.1");
         }
 
         public static bool IsWindows10()
         {
-            return IsCurrentOsContains("Windows 10");
+            return CurrentOsContains("Windows 10");
         }
     }
 }

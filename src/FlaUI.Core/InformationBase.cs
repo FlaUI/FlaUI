@@ -1,4 +1,5 @@
 ﻿using FlaUI.Core.Elements;
+using FlaUI.Core.Identifiers;
 using FlaUI.Core.Tools;
 
 namespace FlaUI.Core
@@ -27,21 +28,21 @@ namespace FlaUI.Core
         /// <summary>
         /// Shortcut to get the property 
         /// </summary>
-        protected T Get<T>(AutomationProperty property)
+        protected T Get<T>(PropertyId property)
         {
             return AutomationElement.SafeGetPropertyValue<T>(property, Cached);
         }
 
-        protected AutomationElement[] NativeElementArrayToElements(AutomationProperty property)
+        protected AutomationElement[] NativeElementArrayToElements(PropertyId property)
         {
             var nativeElements = Get<interop.UIAutomationCore.IUIAutomationElementArray>(property);
-            return NativeValueConverter.NativeElementArrayToElements(AutomationElement.Automation, nativeElements);
+            return NativeValueConverter.NativeArrayToManaged(AutomationElement.Automation, nativeElements);
         }
 
-        protected AutomationElement NativeElementToElement(AutomationProperty property)
+        protected AutomationElement NativeElementToElement(PropertyId property)
         {
             var nativeElement = Get<interop.UIAutomationCore.IUIAutomationElement>(property);
-            return NativeValueConverter.NativeElementToElement(AutomationElement.Automation, nativeElement);
+            return NativeValueConverter.NativeToManaged(AutomationElement.Automation, nativeElement);
         }
     }
 }

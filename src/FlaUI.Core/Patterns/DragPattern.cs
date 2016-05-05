@@ -1,18 +1,19 @@
 ﻿using FlaUI.Core.Elements;
+using FlaUI.Core.Identifiers;
 using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
     public class DragPattern : PatternBaseWithInformation<IUIAutomationDragPattern, DragPatternInformation>
     {
-        public static readonly AutomationPattern Pattern = AutomationPattern.Register(UIA_PatternIds.UIA_DragPatternId, "Drag");
-        public static readonly AutomationProperty DropEffectProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_DragDropEffectPropertyId, "DropEffect");
-        public static readonly AutomationProperty DropEffectsProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_DragDropEffectsPropertyId, "DropEffects");
-        public static readonly AutomationProperty IsGrabbedProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_DragIsGrabbedPropertyId, "IsGrabbed");
-        public static readonly AutomationProperty GrabbedItemsProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_DragGrabbedItemsPropertyId, " GrabbedItems");
-        public static readonly AutomationEvent DragCancelEvent = AutomationEvent.Register(UIA_EventIds.UIA_Drag_DragCancelEventId, "DragCancel");
-        public static readonly AutomationEvent DragCompleteEvent = AutomationEvent.Register(UIA_EventIds.UIA_Drag_DragCompleteEventId, "DragComplete");
-        public static readonly AutomationEvent DragStartEvent = AutomationEvent.Register(UIA_EventIds.UIA_Drag_DragStartEventId, "DragStart");
+        public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_DragPatternId, "Drag");
+        public static readonly PropertyId DropEffectProperty = PropertyId.Register(UIA_PropertyIds.UIA_DragDropEffectPropertyId, "DropEffect");
+        public static readonly PropertyId DropEffectsProperty = PropertyId.Register(UIA_PropertyIds.UIA_DragDropEffectsPropertyId, "DropEffects");
+        public static readonly PropertyId IsGrabbedProperty = PropertyId.Register(UIA_PropertyIds.UIA_DragIsGrabbedPropertyId, "IsGrabbed");
+        public static readonly PropertyId GrabbedItemsProperty = PropertyId.Register(UIA_PropertyIds.UIA_DragGrabbedItemsPropertyId, " GrabbedItems");
+        public static readonly EventId DragCancelEvent = EventId.Register(UIA_EventIds.UIA_Drag_DragCancelEventId, "DragCancel");
+        public static readonly EventId DragCompleteEvent = EventId.Register(UIA_EventIds.UIA_Drag_DragCompleteEventId, "DragComplete");
+        public static readonly EventId DragStartEvent = EventId.Register(UIA_EventIds.UIA_Drag_DragStartEventId, "DragStart");
 
         internal DragPattern(AutomationElement automationElement, IUIAutomationDragPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new DragPatternInformation(element, cached))

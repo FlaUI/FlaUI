@@ -1,7 +1,5 @@
 ﻿using FlaUI.Core.Elements;
-using FlaUI.Core.Tools;
 using interop.UIAutomationCore;
-using System;
 
 namespace FlaUI.Core.Patterns
 {

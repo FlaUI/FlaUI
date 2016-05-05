@@ -20,9 +20,17 @@ namespace FlaUI.Core.Tools
         /// <summary>
         /// Converts a boolean to an int
         /// </summary>
-        public static int ToInt(this bool b)
+        public static int ToInt(this bool value)
         {
-            return b ? 1 : 0;
+            return value ? 1 : 0;
+        }
+
+        /// <summary>
+        /// Converts an int to a boolean
+        /// </summary>
+        public static bool ToBool(this int value)
+        {
+            return value == 1;
         }
     }
 }

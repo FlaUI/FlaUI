@@ -1,4 +1,5 @@
 ﻿using FlaUI.Core.Elements;
+using FlaUI.Core.Identifiers;
 using FlaUI.Core.Tools;
 using interop.UIAutomationCore;
 
@@ -6,7 +7,7 @@ namespace FlaUI.Core.Patterns
 {
     public class TextChildPattern : PatternBase<IUIAutomationTextChildPattern>
     {
-        public static readonly AutomationPattern Pattern = AutomationPattern.Register(UIA_PatternIds.UIA_TextChildPatternId, "TextChild");
+        public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_TextChildPatternId, "TextChild");
 
         internal TextChildPattern(AutomationElement automationElement, IUIAutomationTextChildPattern nativePattern)
             : base(automationElement, nativePattern)
@@ -27,7 +28,7 @@ namespace FlaUI.Core.Patterns
             get
             {
                 var nativeRange = ComCallWrapper.Call(() => NativePattern.TextRange);
-                return new TextRange(Automation, nativeRange);
+                return NativeValueConverter.NativeToManaged(Automation, nativeRange);
             }
         }
     }

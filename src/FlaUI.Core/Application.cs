@@ -14,29 +14,44 @@ namespace FlaUI.Core
 {
     public class Application : IDisposable
     {
+        /// <summary>
+        /// The process of this application
+        /// </summary>
         private readonly Process _process;
 
         private static readonly ILogger Log = new ConsoleLogger();
 
+        /// <summary>
+        /// The automation object associated with this application
+        /// </summary>
         public Automation Automation { get; private set; }
 
+        /// <summary>
+        /// Flag to indicate, if the application is a windows store app
+        /// </summary>
+        public bool IsStoreApp { get; private set; }
+
+        /// <summary>
+        /// The name of the application
+        /// </summary>
         public string Name
         {
             get { return _process.ProcessName; }
         }
 
-        public Application(int processId)
-            : this(FindProcess(processId))
+        public Application(int processId, bool isStoreApp = false)
+            : this(FindProcess(processId), isStoreApp)
         {
         }
 
-        public Application(Process process)
+        public Application(Process process, bool isStoreApp = false)
         {
             if (process == null)
             {
                 throw new Exception("Process cannot be null");
             }
             _process = process;
+            IsStoreApp = isStoreApp;
             WaitWhileBusy();
             WaitWhileMainHandleIsMissing();
             Automation = new Automation();
@@ -51,6 +66,10 @@ namespace FlaUI.Core
                 return;
             }
             _process.CloseMainWindow();
+            if (IsStoreApp)
+            {
+                return;
+            }
             _process.WaitForExit(5000);
             if (!_process.HasExited)
             {
@@ -132,7 +151,7 @@ namespace FlaUI.Core
         public static Application LaunchStoreApp(string appUserModelId, string arguments = null)
         {
             var process = WindowsStoreAppLauncher.Launch(appUserModelId, arguments);
-            return new Application(process);
+            return new Application(process, true);
         }
 
         /// <summary>

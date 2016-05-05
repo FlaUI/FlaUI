@@ -1,17 +1,18 @@
 ﻿using FlaUI.Core.Definitions;
 using FlaUI.Core.Elements;
+using FlaUI.Core.Identifiers;
 using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
     public class AnnotationPattern : PatternBaseWithInformation<IUIAutomationAnnotationPattern, AnnotationPatternInformation>
     {
-        public static readonly AutomationPattern Pattern = AutomationPattern.Register(UIA_PatternIds.UIA_AnnotationPatternId, "Annotation");
-        public static readonly AutomationProperty AnnotationTypeIdProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_AnnotationAnnotationTypeIdPropertyId, "AnnotationTypeId");
-        public static readonly AutomationProperty AnnotationTypeNameProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_AnnotationAnnotationTypeNamePropertyId, "AnnotationTypeName");
-        public static readonly AutomationProperty AuthorProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_AnnotationAuthorPropertyId, "Author");
-        public static readonly AutomationProperty DateTimeProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_AnnotationDateTimePropertyId, "DateTime");
-        public static readonly AutomationProperty TargetProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_AnnotationTargetPropertyId, "Target");
+        public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_AnnotationPatternId, "Annotation");
+        public static readonly PropertyId AnnotationTypeIdProperty = PropertyId.Register(UIA_PropertyIds.UIA_AnnotationAnnotationTypeIdPropertyId, "AnnotationTypeId");
+        public static readonly PropertyId AnnotationTypeNameProperty = PropertyId.Register(UIA_PropertyIds.UIA_AnnotationAnnotationTypeNamePropertyId, "AnnotationTypeName");
+        public static readonly PropertyId AuthorProperty = PropertyId.Register(UIA_PropertyIds.UIA_AnnotationAuthorPropertyId, "Author");
+        public static readonly PropertyId DateTimeProperty = PropertyId.Register(UIA_PropertyIds.UIA_AnnotationDateTimePropertyId, "DateTime");
+        public static readonly PropertyId TargetProperty = PropertyId.Register(UIA_PropertyIds.UIA_AnnotationTargetPropertyId, "Target");
 
         internal AnnotationPattern(AutomationElement automationElement, IUIAutomationAnnotationPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new AnnotationPatternInformation(element, cached))

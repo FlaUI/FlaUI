@@ -1,5 +1,5 @@
-﻿using System.Globalization;
-using FlaUI.Core.Elements;
+﻿using FlaUI.Core.Elements;
+using FlaUI.Core.Identifiers;
 using FlaUI.Core.Shapes;
 using FlaUI.Core.Tools;
 using interop.UIAutomationCore;
@@ -26,7 +26,7 @@ namespace FlaUI.Core
         public TextRange Clone()
         {
             var clonedTextRangeNative = ComCallWrapper.Call(() => NativeRange.Clone());
-            return new TextRange(Automation, clonedTextRangeNative);
+            return NativeValueConverter.NativeToManaged(Automation, clonedTextRangeNative);
         }
 
         public int Compare(TextRange range)
@@ -44,27 +44,23 @@ namespace FlaUI.Core
             ComCallWrapper.Call(() => NativeRange.ExpandToEnclosingUnit((TextUnit)textUnit));
         }
 
-        public TextRange FindAttribute(AutomationTextAttribute attribute, object value, bool backward)
+        public TextRange FindAttribute(TextAttributeId attribute, object value, bool backward)
         {
-            if (value is CultureInfo)
-            {
-                value = ((CultureInfo)value).LCID;
-            }
-            var nativeTextRange = ComCallWrapper.Call(() => NativeRange.FindAttribute(attribute.Id, value, backward.ToInt()));
-            return new TextRange(Automation, nativeTextRange);
+            var nativeValue = NativeValueConverter.ToNative(value);
+            var nativeTextRange = ComCallWrapper.Call(() => NativeRange.FindAttribute(attribute.Id, nativeValue, backward.ToInt()));
+            return NativeValueConverter.NativeToManaged(Automation, nativeTextRange);
         }
 
         public TextRange FindText(string text, bool backward, bool ignoreCase)
         {
             var nativeTextRange = ComCallWrapper.Call(() => NativeRange.FindText(text, backward.ToInt(), ignoreCase.ToInt()));
-            return new TextRange(Automation, nativeTextRange);
+            return NativeValueConverter.NativeToManaged(Automation, nativeTextRange);
         }
 
-        public object GetAttributeValue(AutomationTextAttribute attribute)
+        public object GetAttributeValue(TextAttributeId attribute)
         {
-            var valueAsObject = ComCallWrapper.Call(() => NativeRange.GetAttributeValue(attribute.Id));
-            // TODO: Casting?
-            return valueAsObject;
+            var nativeValue = ComCallWrapper.Call(() => NativeRange.GetAttributeValue(attribute.Id));
+            return attribute.Convert<object>(nativeValue);
         }
 
         public Rectangle[] GetBoundingRectangles()
@@ -85,13 +81,13 @@ namespace FlaUI.Core
         public AutomationElement[] GetChildren()
         {
             var nativeChildren = ComCallWrapper.Call(() => NativeRange.GetChildren());
-            return NativeValueConverter.NativeElementArrayToElements(Automation, nativeChildren);
+            return NativeValueConverter.NativeArrayToManaged(Automation, nativeChildren);
         }
 
         public AutomationElement GetEnclosingElement()
         {
             var nativeElement = ComCallWrapper.Call(() => NativeRange.GetEnclosingElement());
-            return NativeValueConverter.NativeElementToElement(Automation, nativeElement);
+            return NativeValueConverter.NativeToManaged(Automation, nativeElement);
         }
 
         public string GetText(int maxLength)
@@ -127,6 +123,12 @@ namespace FlaUI.Core
         public void Select()
         {
             ComCallWrapper.Call(() => NativeRange.Select());
+        }
+
+        public TextRange2 AsTextRange2()
+        {
+            var nativeRange2 = (IUIAutomationTextRange2)NativeRange;
+            return NativeValueConverter.NativeToManaged(Automation, nativeRange2);
         }
     }
 }

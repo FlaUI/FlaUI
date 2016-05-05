@@ -32,10 +32,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
-    <Reference Include="interop.ShObjIdl">
-      <HintPath>..\libs\interop.ShObjIdl.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
     <Reference Include="interop.UIAutomationCore">
       <HintPath>..\libs\interop.UIAutomationCore.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -51,29 +47,35 @@
   <ItemGroup>
     <Compile Include="Application.cs" />
     <Compile Include="Automation.cs" />
-    <Compile Include="AutomationEvent.cs" />
-    <Compile Include="AutomationIdentifier.cs" />
-    <Compile Include="AutomationPattern.cs" />
-    <Compile Include="AutomationTextAttribute.cs" />
     <Compile Include="ConditionFactory.cs" />
+    <Compile Include="Conditions\AndCondition.cs" />
+    <Compile Include="Conditions\BoolCondition.cs" />
+    <Compile Include="Conditions\ConditionBase.cs" />
+    <Compile Include="Conditions\ICondition.cs" />
+    <Compile Include="Conditions\NotCondition.cs" />
+    <Compile Include="Conditions\OrCondition.cs" />
+    <Compile Include="Conditions\PropertyCondition.cs" />
     <Compile Include="Definitions\AnnotationType.cs" />
     <Compile Include="Definitions\ControlType.cs" />
     <Compile Include="Definitions\DockPosition.cs" />
-    <Compile Include="Definitions\EventType.cs" />
     <Compile Include="Definitions\ExpandCollapseState.cs" />
     <Compile Include="Definitions\LiveSetting.cs" />
     <Compile Include="Definitions\OrientationType.cs" />
-    <Compile Include="Definitions\PatternType.cs" />
-    <Compile Include="Definitions\PropertyType.cs" />
+    <Compile Include="Definitions\PropertyConditionFlags.cs" />
     <Compile Include="Definitions\RowOrColumnMajor.cs" />
     <Compile Include="Definitions\ScrollAmount.cs" />
     <Compile Include="Definitions\StructureChangeType.cs" />
     <Compile Include="Definitions\StyleType.cs" />
+    <Compile Include="Definitions\SupportedTextSelection.cs" />
     <Compile Include="Definitions\SynchronizedInputType.cs" />
-    <Compile Include="Definitions\TextAttributeType.cs" />
+    <Compile Include="Definitions\TextAttributes.cs" />
     <Compile Include="Definitions\TextPatternRangeEndpoint.cs" />
     <Compile Include="Definitions\TextUnit.cs" />
+    <Compile Include="Definitions\ToggleState.cs" />
     <Compile Include="Definitions\TreeScope.cs" />
+    <Compile Include="Definitions\WindowInteractionState.cs" />
+    <Compile Include="Definitions\WindowVisualState.cs" />
+    <Compile Include="Definitions\ZoomUnit.cs" />
     <Compile Include="Elements\Button.cs" />
     <Compile Include="Elements\AutomationElement.cs" />
     <Compile Include="Elements\AutomationElementInformation.cs" />
@@ -84,6 +86,12 @@
     <Compile Include="EventHandlers\PropertyChangedEventHandler.cs" />
     <Compile Include="EventHandlers\StructureChangedEventHandler.cs" />
     <Compile Include="Exceptions\PropertyNotSupportedException.cs" />
+    <Compile Include="Identifiers\ConvertibleIdentifierBase.cs" />
+    <Compile Include="Identifiers\EventId.cs" />
+    <Compile Include="Identifiers\IdentifierBase.cs" />
+    <Compile Include="Identifiers\PatternId.cs" />
+    <Compile Include="Identifiers\PropertyId.cs" />
+    <Compile Include="Identifiers\TextAttributeId.cs" />
     <Compile Include="InformationBase.cs" />
     <Compile Include="Input\Helpers.cs" />
     <Compile Include="Input\IKeyboard.cs" />
@@ -96,7 +104,6 @@
     <Compile Include="Overlay\OverlayManager.cs" />
     <Compile Include="Overlay\OverlayRectangleWindow.cs" />
     <Compile Include="PatternFactory.cs" />
-    <Compile Include="AutomationProperty.cs" />
     <Compile Include="Patterns\AnnotationPattern.cs" />
     <Compile Include="Patterns\DockPattern.cs" />
     <Compile Include="Patterns\DragPattern.cs" />
@@ -122,12 +129,22 @@
     <Compile Include="Patterns\SynchronizedInputPattern.cs" />
     <Compile Include="Patterns\TableItemPattern.cs" />
     <Compile Include="Patterns\TablePattern.cs" />
+    <Compile Include="Patterns\Text2Pattern.cs" />
     <Compile Include="Patterns\TextChildPattern.cs" />
+    <Compile Include="Patterns\TextEditPattern.cs" />
+    <Compile Include="Patterns\TextPattern.cs" />
+    <Compile Include="Patterns\TogglePattern.cs" />
+    <Compile Include="Patterns\Transform2Pattern.cs" />
+    <Compile Include="Patterns\TransformPattern.cs" />
+    <Compile Include="Patterns\ValuePattern.cs" />
+    <Compile Include="Patterns\VirtualizedItemPattern.cs" />
+    <Compile Include="Patterns\WindowPattern.cs" />
     <Compile Include="Shapes\Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shapes\Rectangle.cs" />
     <Compile Include="Shapes\ShapeBase.cs" />
     <Compile Include="TextRange.cs" />
+    <Compile Include="TextRange2.cs" />
     <Compile Include="Tools\ComCallWrapper.cs" />
     <Compile Include="Tools\ExtensionMethods.cs" />
     <Compile Include="Tools\NativeValueConverter.cs" />

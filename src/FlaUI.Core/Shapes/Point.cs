@@ -1,4 +1,5 @@
 ﻿using FlaUI.Core.WindowsAPI;
+using interop.UIAutomationCore;
 using System;
 
 namespace FlaUI.Core.Shapes
@@ -91,6 +92,22 @@ namespace FlaUI.Core.Shapes
         public static implicit operator Point(POINT p)
         {
             return new Point(p.X, p.Y);
+        }
+
+        /// <summary>
+        /// Implicit conversion to native UIA point
+        /// </summary>
+        public static implicit operator tagPOINT(Point p)
+        {
+            return new tagPOINT { x = p.ToInt32(p.X), y = p.ToInt32(p.Y) };
+        }
+
+        /// <summary>
+        /// Implicit conversion from native UIA point
+        /// </summary>
+        public static implicit operator Point(tagPOINT p)
+        {
+            return new Point(p.x, p.y);
         }
 
         public override string ToString()

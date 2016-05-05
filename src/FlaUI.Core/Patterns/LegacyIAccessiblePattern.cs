@@ -1,4 +1,5 @@
 ﻿using FlaUI.Core.Elements;
+using FlaUI.Core.Identifiers;
 using FlaUI.Core.Tools;
 using interop.UIAutomationCore;
 
@@ -6,17 +7,17 @@ namespace FlaUI.Core.Patterns
 {
     public class LegacyIAccessiblePattern : PatternBaseWithInformation<IUIAutomationLegacyIAccessiblePattern, LegacyIAccessiblePatternInformation>
     {
-        public static readonly AutomationPattern Pattern = AutomationPattern.Register(UIA_PatternIds.UIA_LegacyIAccessiblePatternId, "LegacyIAccessible");
-        public static readonly AutomationProperty ChildIdProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_LegacyIAccessibleChildIdPropertyId, "ChildId");
-        public static readonly AutomationProperty DefaultActionProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_LegacyIAccessibleDefaultActionPropertyId, "DefaultAction");
-        public static readonly AutomationProperty DescriptionProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_LegacyIAccessibleDescriptionPropertyId, "Description");
-        public static readonly AutomationProperty HelpProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_LegacyIAccessibleHelpPropertyId, "Help");
-        public static readonly AutomationProperty KeyboardShortcutProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_LegacyIAccessibleKeyboardShortcutPropertyId, "KeyboardShortcut");
-        public static readonly AutomationProperty NameProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_LegacyIAccessibleNamePropertyId, "Name");
-        public static readonly AutomationProperty RoleProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_LegacyIAccessibleRolePropertyId, "Role");
-        public static readonly AutomationProperty SelectionProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_LegacyIAccessibleSelectionPropertyId, "Selection");
-        public static readonly AutomationProperty StateProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_LegacyIAccessibleStatePropertyId, "State");
-        public static readonly AutomationProperty ValueProperty = AutomationProperty.Register(UIA_PropertyIds.UIA_LegacyIAccessibleValuePropertyId, "Value");
+        public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_LegacyIAccessiblePatternId, "LegacyIAccessible");
+        public static readonly PropertyId ChildIdProperty = PropertyId.Register(UIA_PropertyIds.UIA_LegacyIAccessibleChildIdPropertyId, "ChildId");
+        public static readonly PropertyId DefaultActionProperty = PropertyId.Register(UIA_PropertyIds.UIA_LegacyIAccessibleDefaultActionPropertyId, "DefaultAction");
+        public static readonly PropertyId DescriptionProperty = PropertyId.Register(UIA_PropertyIds.UIA_LegacyIAccessibleDescriptionPropertyId, "Description");
+        public static readonly PropertyId HelpProperty = PropertyId.Register(UIA_PropertyIds.UIA_LegacyIAccessibleHelpPropertyId, "Help");
+        public static readonly PropertyId KeyboardShortcutProperty = PropertyId.Register(UIA_PropertyIds.UIA_LegacyIAccessibleKeyboardShortcutPropertyId, "KeyboardShortcut");
+        public static readonly PropertyId NameProperty = PropertyId.Register(UIA_PropertyIds.UIA_LegacyIAccessibleNamePropertyId, "Name");
+        public static readonly PropertyId RoleProperty = PropertyId.Register(UIA_PropertyIds.UIA_LegacyIAccessibleRolePropertyId, "Role");
+        public static readonly PropertyId SelectionProperty = PropertyId.Register(UIA_PropertyIds.UIA_LegacyIAccessibleSelectionPropertyId, "Selection");
+        public static readonly PropertyId StateProperty = PropertyId.Register(UIA_PropertyIds.UIA_LegacyIAccessibleStatePropertyId, "State");
+        public static readonly PropertyId ValueProperty = PropertyId.Register(UIA_PropertyIds.UIA_LegacyIAccessibleValuePropertyId, "Value");
 
         internal LegacyIAccessiblePattern(AutomationElement automationElement, IUIAutomationLegacyIAccessiblePattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new LegacyIAccessiblePatternInformation(element, cached))
