@@ -93,30 +93,51 @@ namespace FlaUI.Core.UnitTests
     // TODO: Implement
     public class LegacyCalc : ICalculator
     {
-        public AutomationElement Button1 { get; private set; }
+        private readonly AutomationElement _mainWindow;
 
-        public AutomationElement Button2 { get; private set; }
+        public AutomationElement Button1 { get { return FindElement("1"); } }
 
-        public AutomationElement Button3 { get; private set; }
+        public AutomationElement Button2 { get { return FindElement("2"); } }
 
-        public AutomationElement Button4 { get; private set; }
+        public AutomationElement Button3 { get { return FindElement("3"); } }
 
-        public AutomationElement Button5 { get; private set; }
+        public AutomationElement Button4 { get { return FindElement("4"); } }
 
-        public AutomationElement Button6 { get; private set; }
+        public AutomationElement Button5 { get { return FindElement("5"); } }
 
-        public AutomationElement Button7 { get; private set; }
+        public AutomationElement Button6 { get { return FindElement("6"); } }
 
-        public AutomationElement Button8 { get; private set; }
+        public AutomationElement Button7 { get { return FindElement("7"); } }
 
-        public AutomationElement ButtonAdd { get; private set; }
+        public AutomationElement Button8 { get { return FindElement("8"); } }
 
-        public AutomationElement ButtonEquals { get; private set; }
+        public AutomationElement ButtonAdd { get { return FindElement("Add"); } }
 
-        public string Result { get; private set; }
+        public AutomationElement ButtonEquals { get { return FindElement("Equals"); } }
+
+        public string Result
+        {
+            get
+            {
+                var resultElement = _mainWindow.FindFirst(TreeScope.Descendants,
+                        _mainWindow.Automation.ConditionFactory.CreatePropertyCondition(
+                            AutomationElement.AutomationIdProperty, "158"));
+                var value = resultElement.Current.Name;
+                return Regex.Replace(value, "[^0-9]", "");
+            }
+        }
 
         public LegacyCalc(AutomationElement mainWindow)
         {
+            _mainWindow = mainWindow;
+        }
+
+        private AutomationElement FindElement(string text)
+        {
+            var element = _mainWindow.FindFirst(TreeScope.Descendants,
+                        _mainWindow.Automation.ConditionFactory.CreatePropertyCondition(
+                            AutomationElement.NameProperty, text));
+            return element;
         }
     }
 
