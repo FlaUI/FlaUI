@@ -1,11 +1,12 @@
-﻿using FlaUI.Core.Conditions;
+﻿using System;
+using System.Text.RegularExpressions;
+using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Elements;
+using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
 using FlaUI.Core.WindowsAPI;
 using NUnit.Framework;
-using System;
-using System.Text.RegularExpressions;
 
 namespace FlaUI.Core.UnitTests
 {
@@ -26,7 +27,7 @@ namespace FlaUI.Core.UnitTests
             window.Automation.Keyboard.PressVirtualKeyCode(VirtualKeyShort.ALT);
             window.Automation.Keyboard.TypeVirtualKeyCode(VirtualKeyShort.KEY_1);
             window.Automation.Keyboard.ReleaseVirtualKeyCode(VirtualKeyShort.ALT);
-            Input.Helpers.WaitUntilInputIsProcessed();
+            Helpers.WaitUntilInputIsProcessed();
             app.WaitWhileBusy();
 
             // Simple addition

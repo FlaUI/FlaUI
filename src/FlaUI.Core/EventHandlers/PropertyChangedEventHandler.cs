@@ -1,7 +1,7 @@
-﻿using FlaUI.Core.Elements;
-using interop.UIAutomationCore;
-using System;
+﻿using System;
+using FlaUI.Core.Elements;
 using FlaUI.Core.Identifiers;
+using interop.UIAutomationCore;
 
 namespace FlaUI.Core.EventHandlers
 {

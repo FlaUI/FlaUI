@@ -2,6 +2,7 @@
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Tools;
 using interop.UIAutomationCore;
+using ExpandCollapseState = FlaUI.Core.Definitions.ExpandCollapseState;
 
 namespace FlaUI.Core.Patterns
 {
@@ -33,9 +34,9 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public Definitions.ExpandCollapseState ExpandCollapseState
+        public ExpandCollapseState ExpandCollapseState
         {
-            get { return Get<Definitions.ExpandCollapseState>(ExpandCollapsePattern.ExpandCollapseStateProperty); }
+            get { return Get<ExpandCollapseState>(ExpandCollapsePattern.ExpandCollapseStateProperty); }
         }
     }
 }

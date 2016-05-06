@@ -1,5 +1,5 @@
-﻿using FlaUI.Core.Elements;
-using System;
+﻿using System;
+using FlaUI.Core.Elements;
 
 namespace FlaUI.Core.Patterns
 {

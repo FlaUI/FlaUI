@@ -1,9 +1,9 @@
-﻿using FlaUI.Core.Definitions;
+﻿using System.Globalization;
+using System.Linq;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.Elements;
 using FlaUI.Core.Shapes;
 using interop.UIAutomationCore;
-using System.Globalization;
-using System.Linq;
 
 namespace FlaUI.Core.Tools
 {

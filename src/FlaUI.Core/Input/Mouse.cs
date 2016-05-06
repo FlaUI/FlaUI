@@ -1,13 +1,13 @@
-﻿using FlaUI.Core.Shapes;
-using FlaUI.Core.Tools;
-using FlaUI.Core.WindowsAPI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
 using System.Threading;
+using FlaUI.Core.Shapes;
+using FlaUI.Core.Tools;
+using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.Input
 {

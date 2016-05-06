@@ -2,6 +2,7 @@
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Tools;
 using interop.UIAutomationCore;
+using IAccessible = Accessibility.IAccessible;
 
 namespace FlaUI.Core.Patterns
 {
@@ -29,10 +30,10 @@ namespace FlaUI.Core.Patterns
             ComCallWrapper.Call(() => NativePattern.DoDefaultAction());
         }
 
-        public Accessibility.IAccessible GetIAccessible()
+        public IAccessible GetIAccessible()
         {
             // ReSharper disable once SuspiciousTypeConversion.Global
-            return ComCallWrapper.Call(() => (Accessibility.IAccessible)NativePattern.GetIAccessible());
+            return ComCallWrapper.Call(() => (IAccessible)NativePattern.GetIAccessible());
         }
 
         public void Select(int flagsSelect)

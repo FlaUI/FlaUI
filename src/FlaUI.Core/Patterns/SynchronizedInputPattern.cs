@@ -2,6 +2,7 @@
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Tools;
 using interop.UIAutomationCore;
+using SynchronizedInputType = FlaUI.Core.Definitions.SynchronizedInputType;
 
 namespace FlaUI.Core.Patterns
 {
@@ -22,9 +23,9 @@ namespace FlaUI.Core.Patterns
             ComCallWrapper.Call(() => NativePattern.Cancel());
         }
 
-        public void StartListening(Definitions.SynchronizedInputType inputType)
+        public void StartListening(SynchronizedInputType inputType)
         {
-            ComCallWrapper.Call(() => NativePattern.StartListening((SynchronizedInputType)inputType));
+            ComCallWrapper.Call(() => NativePattern.StartListening((interop.UIAutomationCore.SynchronizedInputType)inputType));
         }
     }
 }

@@ -2,6 +2,8 @@
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Tools;
 using interop.UIAutomationCore;
+using WindowInteractionState = FlaUI.Core.Definitions.WindowInteractionState;
+using WindowVisualState = FlaUI.Core.Definitions.WindowVisualState;
 
 namespace FlaUI.Core.Patterns
 {
@@ -27,9 +29,9 @@ namespace FlaUI.Core.Patterns
             ComCallWrapper.Call(() => NativePattern.Close());
         }
 
-        public void SetWindowVisualState(Definitions.WindowVisualState state)
+        public void SetWindowVisualState(WindowVisualState state)
         {
-            ComCallWrapper.Call(() => NativePattern.SetWindowVisualState((WindowVisualState)state));
+            ComCallWrapper.Call(() => NativePattern.SetWindowVisualState((interop.UIAutomationCore.WindowVisualState)state));
         }
 
         public int WaitForInputIdle(int milliseconds)
@@ -65,14 +67,14 @@ namespace FlaUI.Core.Patterns
             get { return Get<bool>(WindowPattern.IsTopmostProperty); }
         }
 
-        public Definitions.WindowInteractionState WindowInteractionState
+        public WindowInteractionState WindowInteractionState
         {
-            get { return Get<Definitions.WindowInteractionState>(WindowPattern.WindowInteractionStateProperty); }
+            get { return Get<WindowInteractionState>(WindowPattern.WindowInteractionStateProperty); }
         }
 
-        public Definitions.WindowVisualState WindowVisualState
+        public WindowVisualState WindowVisualState
         {
-            get { return Get<Definitions.WindowVisualState>(WindowPattern.WindowVisualStateProperty); }
+            get { return Get<WindowVisualState>(WindowPattern.WindowVisualStateProperty); }
         }
     }
 }

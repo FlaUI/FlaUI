@@ -2,6 +2,7 @@
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Tools;
 using interop.UIAutomationCore;
+using ZoomUnit = FlaUI.Core.Definitions.ZoomUnit;
 
 namespace FlaUI.Core.Patterns
 {
@@ -26,9 +27,9 @@ namespace FlaUI.Core.Patterns
             ComCallWrapper.Call(() => ExtendedNativePattern.Zoom(zoom));
         }
 
-        public void ZoomByUnit(Definitions.ZoomUnit zoomUnit)
+        public void ZoomByUnit(ZoomUnit zoomUnit)
         {
-            ComCallWrapper.Call(() => ExtendedNativePattern.ZoomByUnit((ZoomUnit)zoomUnit));
+            ComCallWrapper.Call(() => ExtendedNativePattern.ZoomByUnit((interop.UIAutomationCore.ZoomUnit)zoomUnit));
         }
     }
 

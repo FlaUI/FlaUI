@@ -2,6 +2,7 @@
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Tools;
 using interop.UIAutomationCore;
+using ToggleState = FlaUI.Core.Definitions.ToggleState;
 
 namespace FlaUI.Core.Patterns
 {
@@ -28,9 +29,9 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public Definitions.ToggleState ToggleState
+        public ToggleState ToggleState
         {
-            get { return Get<Definitions.ToggleState>(TogglePattern.ToggleStateProperty); }
+            get { return Get<ToggleState>(TogglePattern.ToggleStateProperty); }
         }
     }
 }

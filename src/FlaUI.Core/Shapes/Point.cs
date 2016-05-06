@@ -1,6 +1,6 @@
-﻿using FlaUI.Core.WindowsAPI;
+﻿using System;
+using FlaUI.Core.WindowsAPI;
 using interop.UIAutomationCore;
-using System;
 
 namespace FlaUI.Core.Shapes
 {

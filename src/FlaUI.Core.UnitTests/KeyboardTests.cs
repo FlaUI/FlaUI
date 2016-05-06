@@ -1,4 +1,5 @@
-﻿using FlaUI.Core.WindowsAPI;
+﻿using System.Threading;
+using FlaUI.Core.WindowsAPI;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UnitTests
@@ -23,7 +24,7 @@ namespace FlaUI.Core.UnitTests
 
             app.Automation.Keyboard.Write("ঋ ঌ এ ঐ ও ঔ ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ");
 
-            System.Threading.Thread.Sleep(2000);
+            Thread.Sleep(2000);
             app.Dispose();
         }
     }

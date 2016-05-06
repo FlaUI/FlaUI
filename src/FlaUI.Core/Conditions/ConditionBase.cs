@@ -1,7 +1,7 @@
-﻿using interop.UIAutomationCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Conditions
 {

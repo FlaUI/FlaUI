@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Runtime.InteropServices;
 
 // ReSharper disable InconsistentNaming
@@ -25,12 +26,12 @@ namespace FlaUI.Core.WindowsAPI
             B = b;
         }
 
-        public static implicit operator System.Drawing.Color(COLORREF c)
+        public static implicit operator Color(COLORREF c)
         {
-            return System.Drawing.Color.FromArgb(c.R, c.G, c.B);
+            return Color.FromArgb(c.R, c.G, c.B);
         }
 
-        public static implicit operator COLORREF(System.Drawing.Color c)
+        public static implicit operator COLORREF(Color c)
         {
             return new COLORREF(c.R, c.G, c.B);
         }

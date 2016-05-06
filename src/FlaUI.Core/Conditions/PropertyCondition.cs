@@ -1,6 +1,6 @@
-﻿using FlaUI.Core.Definitions;
+﻿using System;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
-using System;
 
 namespace FlaUI.Core.Conditions
 {

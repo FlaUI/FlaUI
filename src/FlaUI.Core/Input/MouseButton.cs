@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FlaUI.Core.Input
+﻿namespace FlaUI.Core.Input
 {
     public enum MouseButton
     {

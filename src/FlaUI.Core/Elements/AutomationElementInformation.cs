@@ -1,7 +1,7 @@
-﻿using FlaUI.Core.Definitions;
-using FlaUI.Core.Shapes;
-using System;
+﻿using System;
 using System.Globalization;
+using FlaUI.Core.Definitions;
+using FlaUI.Core.Shapes;
 
 namespace FlaUI.Core.Elements
 {

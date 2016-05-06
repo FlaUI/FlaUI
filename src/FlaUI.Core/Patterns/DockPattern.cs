@@ -2,6 +2,7 @@
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Tools;
 using interop.UIAutomationCore;
+using DockPosition = FlaUI.Core.Definitions.DockPosition;
 
 namespace FlaUI.Core.Patterns
 {
@@ -15,9 +16,9 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public void SetDockPosition(Definitions.DockPosition dockPos)
+        public void SetDockPosition(DockPosition dockPos)
         {
-            ComCallWrapper.Call(() => NativePattern.SetDockPosition((DockPosition)dockPos));
+            ComCallWrapper.Call(() => NativePattern.SetDockPosition((interop.UIAutomationCore.DockPosition)dockPos));
         }
     }
 
@@ -28,9 +29,9 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public Definitions.DockPosition DockPosition
+        public DockPosition DockPosition
         {
-            get { return Get<Definitions.DockPosition>(DockPattern.DockPositionProperty); }
+            get { return Get<DockPosition>(DockPattern.DockPositionProperty); }
         }
     }
 }

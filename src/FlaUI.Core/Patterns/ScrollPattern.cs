@@ -2,6 +2,7 @@
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Tools;
 using interop.UIAutomationCore;
+using ScrollAmount = FlaUI.Core.Definitions.ScrollAmount;
 
 namespace FlaUI.Core.Patterns
 {
@@ -20,9 +21,9 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public void Scroll(Definitions.ScrollAmount horizontalAmount, Definitions.ScrollAmount verticalAmount)
+        public void Scroll(ScrollAmount horizontalAmount, ScrollAmount verticalAmount)
         {
-            ComCallWrapper.Call(() => NativePattern.Scroll((ScrollAmount)horizontalAmount, (ScrollAmount)verticalAmount));
+            ComCallWrapper.Call(() => NativePattern.Scroll((interop.UIAutomationCore.ScrollAmount)horizontalAmount, (interop.UIAutomationCore.ScrollAmount)verticalAmount));
         }
 
         public void SetScrollPercent(double horizontalPercent, double verticalPercent)

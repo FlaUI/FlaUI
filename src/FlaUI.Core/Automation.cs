@@ -1,9 +1,8 @@
-﻿using FlaUI.Core.Conditions;
+﻿using System;
+using System.Runtime.InteropServices;
 using FlaUI.Core.Input;
 using FlaUI.Core.Overlay;
 using interop.UIAutomationCore;
-using System;
-using System.Runtime.InteropServices;
 
 namespace FlaUI.Core
 {

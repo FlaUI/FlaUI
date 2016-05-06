@@ -3,6 +3,8 @@ using FlaUI.Core.Identifiers;
 using FlaUI.Core.Shapes;
 using FlaUI.Core.Tools;
 using interop.UIAutomationCore;
+using TextPatternRangeEndpoint = FlaUI.Core.Definitions.TextPatternRangeEndpoint;
+using TextUnit = FlaUI.Core.Definitions.TextUnit;
 
 namespace FlaUI.Core
 {
@@ -34,14 +36,14 @@ namespace FlaUI.Core
             return ComCallWrapper.Call(() => NativeRange.Compare(range.NativeRange));
         }
 
-        public int CompareEndpoints(Definitions.TextPatternRangeEndpoint srcEndPoint, TextRange targetRange, Definitions.TextPatternRangeEndpoint targetEndPoint)
+        public int CompareEndpoints(TextPatternRangeEndpoint srcEndPoint, TextRange targetRange, TextPatternRangeEndpoint targetEndPoint)
         {
-            return ComCallWrapper.Call(() => NativeRange.CompareEndpoints((TextPatternRangeEndpoint)srcEndPoint, targetRange.NativeRange, (TextPatternRangeEndpoint)targetEndPoint));
+            return ComCallWrapper.Call(() => NativeRange.CompareEndpoints((interop.UIAutomationCore.TextPatternRangeEndpoint)srcEndPoint, targetRange.NativeRange, (interop.UIAutomationCore.TextPatternRangeEndpoint)targetEndPoint));
         }
 
-        public void ExpandToEnclosingUnit(Definitions.TextUnit textUnit)
+        public void ExpandToEnclosingUnit(TextUnit textUnit)
         {
-            ComCallWrapper.Call(() => NativeRange.ExpandToEnclosingUnit((TextUnit)textUnit));
+            ComCallWrapper.Call(() => NativeRange.ExpandToEnclosingUnit((interop.UIAutomationCore.TextUnit)textUnit));
         }
 
         public TextRange FindAttribute(TextAttributeId attribute, object value, bool backward)
@@ -95,19 +97,19 @@ namespace FlaUI.Core
             return ComCallWrapper.Call(() => NativeRange.GetText(maxLength));
         }
 
-        public int Move(Definitions.TextUnit unit, int count)
+        public int Move(TextUnit unit, int count)
         {
-            return ComCallWrapper.Call(() => NativeRange.Move((TextUnit)unit, count));
+            return ComCallWrapper.Call(() => NativeRange.Move((interop.UIAutomationCore.TextUnit)unit, count));
         }
 
-        public void MoveEndpointByRange(Definitions.TextPatternRangeEndpoint srcEndPoint, TextRange targetRange, Definitions.TextPatternRangeEndpoint targetEndPoint)
+        public void MoveEndpointByRange(TextPatternRangeEndpoint srcEndPoint, TextRange targetRange, TextPatternRangeEndpoint targetEndPoint)
         {
-            ComCallWrapper.Call(() => NativeRange.MoveEndpointByRange((TextPatternRangeEndpoint)srcEndPoint, targetRange.NativeRange, (TextPatternRangeEndpoint)targetEndPoint));
+            ComCallWrapper.Call(() => NativeRange.MoveEndpointByRange((interop.UIAutomationCore.TextPatternRangeEndpoint)srcEndPoint, targetRange.NativeRange, (interop.UIAutomationCore.TextPatternRangeEndpoint)targetEndPoint));
         }
 
-        public int MoveEndpointByUnit(Definitions.TextPatternRangeEndpoint endpoint, Definitions.TextUnit unit, int count)
+        public int MoveEndpointByUnit(TextPatternRangeEndpoint endpoint, TextUnit unit, int count)
         {
-            return ComCallWrapper.Call(() => NativeRange.MoveEndpointByUnit((TextPatternRangeEndpoint)endpoint, (TextUnit)unit, count));
+            return ComCallWrapper.Call(() => NativeRange.MoveEndpointByUnit((interop.UIAutomationCore.TextPatternRangeEndpoint)endpoint, (interop.UIAutomationCore.TextUnit)unit, count));
         }
 
         public void RemoveFromSelection()

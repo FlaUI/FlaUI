@@ -1,8 +1,8 @@
-﻿using FlaUI.Core.Elements;
+﻿using System;
+using FlaUI.Core.Elements;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Tools;
 using interop.UIAutomationCore;
-using System;
 
 namespace FlaUI.Core.Patterns
 {

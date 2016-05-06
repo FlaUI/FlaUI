@@ -1,12 +1,14 @@
-﻿using FlaUI.Core.Conditions;
+﻿using System;
+using System.Linq;
+using System.Windows.Media;
+using FlaUI.Core.Conditions;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Exceptions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Tools;
 using interop.UIAutomationCore;
-using System;
-using System.Linq;
-using System.Windows.Media;
+using StructureChangeType = FlaUI.Core.Definitions.StructureChangeType;
+using TreeScope = FlaUI.Core.Definitions.TreeScope;
 
 namespace FlaUI.Core.Elements
 {
@@ -128,9 +130,9 @@ namespace FlaUI.Core.Elements
         /// <param name="event">The event to register to</param>
         /// <param name="treeScope">The treescope in which the event should be registered</param>
         /// <param name="action">The action to execute when the event fires</param>
-        public void RegisterEvent(EventId @event, Definitions.TreeScope treeScope, Action<AutomationElement, EventId> action)
+        public void RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
         {
-            Automation.NativeAutomation.AddAutomationEventHandler(@event.Id, NativeElement, (TreeScope)treeScope, null, new BasicEventHandler(Automation, action));
+            Automation.NativeAutomation.AddAutomationEventHandler(@event.Id, NativeElement, (interop.UIAutomationCore.TreeScope)treeScope, null, new BasicEventHandler(Automation, action));
         }
 
         /// <summary>
@@ -147,9 +149,9 @@ namespace FlaUI.Core.Elements
         /// </summary>
         /// <param name="treeScope">The treescope in which the event should be registered</param>
         /// <param name="action">The action to execute when the event fires</param>
-        public void RegisterStructureChangedEvent(Definitions.TreeScope treeScope, Action<AutomationElement, Definitions.StructureChangeType, int[]> action)
+        public void RegisterStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action)
         {
-            Automation.NativeAutomation.AddStructureChangedEventHandler(NativeElement, (TreeScope)treeScope, null, new StructureChangedEventHandler(Automation, action));
+            Automation.NativeAutomation.AddStructureChangedEventHandler(NativeElement, (interop.UIAutomationCore.TreeScope)treeScope, null, new StructureChangedEventHandler(Automation, action));
         }
 
         /// <summary>
@@ -158,11 +160,11 @@ namespace FlaUI.Core.Elements
         /// <param name="treeScope">The treescope in which the event should be registered</param>
         /// <param name="action">The action to execute when the event fires</param>
         /// <param name="properties">The properties to listen to for a change</param>
-        public void RegisterPropertyChangedEvent(Definitions.TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, params PropertyId[] properties)
+        public void RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, params PropertyId[] properties)
         {
             var propertyIds = properties.Select(p => p.Id).ToArray();
             Automation.NativeAutomation.AddPropertyChangedEventHandler(NativeElement,
-                (TreeScope)treeScope, null, new PropertyChangedEventHandler(Automation, action), propertyIds);
+                (interop.UIAutomationCore.TreeScope)treeScope, null, new PropertyChangedEventHandler(Automation, action), propertyIds);
         }
 
         /// <summary>
@@ -189,18 +191,18 @@ namespace FlaUI.Core.Elements
         /// <summary>
         /// Finds all elements in the given treescope and condition
         /// </summary>
-        public AutomationElement[] FindAll(Definitions.TreeScope treeScope, ConditionBase condition)
+        public AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition)
         {
-            var nativeFoundElements = NativeElement.FindAll((TreeScope)treeScope, condition.ToNative(Automation));
+            var nativeFoundElements = NativeElement.FindAll((interop.UIAutomationCore.TreeScope)treeScope, condition.ToNative(Automation));
             return NativeValueConverter.NativeArrayToManaged(Automation, nativeFoundElements);
         }
 
         /// <summary>
         /// Finds the first element which is in the given treescope and matches the condition
         /// </summary>
-        public AutomationElement FindFirst(Definitions.TreeScope treeScope, ConditionBase condition)
+        public AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
         {
-            var nativeFoundElement = NativeElement.FindFirst((TreeScope)treeScope, condition.ToNative(Automation));
+            var nativeFoundElement = NativeElement.FindFirst((interop.UIAutomationCore.TreeScope)treeScope, condition.ToNative(Automation));
             return NativeValueConverter.NativeToManaged(Automation, nativeFoundElement);
         }
 

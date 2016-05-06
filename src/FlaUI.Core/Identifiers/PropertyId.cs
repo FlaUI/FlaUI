@@ -1,5 +1,5 @@
-﻿using FlaUI.Core.Conditions;
-using System;
+﻿using System;
+using FlaUI.Core.Conditions;
 
 namespace FlaUI.Core.Identifiers
 {

@@ -1,8 +1,7 @@
-﻿using FlaUI.Core.Input;
-using NUnit.Framework;
-using System.Threading;
-using System.Windows;
+﻿using System.Threading;
+using FlaUI.Core.Input;
 using FlaUI.Core.Shapes;
+using NUnit.Framework;
 
 namespace FlaUI.Core.UnitTests
 {

@@ -1,6 +1,7 @@
 ﻿using FlaUI.Core.Elements;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Tools;
+using interop.UIAutomationCore;
 
 namespace FlaUI.Core
 {
@@ -35,13 +36,13 @@ namespace FlaUI.Core
 
         protected AutomationElement[] NativeElementArrayToElements(PropertyId property)
         {
-            var nativeElements = Get<interop.UIAutomationCore.IUIAutomationElementArray>(property);
+            var nativeElements = Get<IUIAutomationElementArray>(property);
             return NativeValueConverter.NativeArrayToManaged(AutomationElement.Automation, nativeElements);
         }
 
         protected AutomationElement NativeElementToElement(PropertyId property)
         {
-            var nativeElement = Get<interop.UIAutomationCore.IUIAutomationElement>(property);
+            var nativeElement = Get<IUIAutomationElement>(property);
             return NativeValueConverter.NativeToManaged(AutomationElement.Automation, nativeElement);
         }
     }

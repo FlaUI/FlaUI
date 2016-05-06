@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Shapes
@@ -50,15 +51,15 @@ namespace FlaUI.Core.Shapes
         /// <summary>
         /// Implicit conversion to WPF rectangle
         /// </summary>
-        public static implicit operator System.Windows.Rect(Rectangle r)
+        public static implicit operator Rect(Rectangle r)
         {
-            return new System.Windows.Rect(r.X, r.Y, r.Width, r.Height);
+            return new Rect(r.X, r.Y, r.Width, r.Height);
         }
 
         /// <summary>
         /// Implicit conversion from WPF rectangle
         /// </summary>
-        public static implicit operator Rectangle(System.Windows.Rect r)
+        public static implicit operator Rectangle(Rect r)
         {
             return new Rectangle(r.X, r.Y, r.Width, r.Height);
         }

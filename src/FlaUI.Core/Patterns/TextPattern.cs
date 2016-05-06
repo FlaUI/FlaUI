@@ -3,6 +3,7 @@ using FlaUI.Core.Identifiers;
 using FlaUI.Core.Shapes;
 using FlaUI.Core.Tools;
 using interop.UIAutomationCore;
+using SupportedTextSelection = FlaUI.Core.Definitions.SupportedTextSelection;
 
 namespace FlaUI.Core.Patterns
 {
@@ -26,12 +27,12 @@ namespace FlaUI.Core.Patterns
             }
         }
 
-        public Definitions.SupportedTextSelection SupportedTextSelection
+        public SupportedTextSelection SupportedTextSelection
         {
             get
             {
                 var nativeObject = ComCallWrapper.Call(() => NativePattern.SupportedTextSelection);
-                return (Definitions.SupportedTextSelection)nativeObject;
+                return (SupportedTextSelection)nativeObject;
             }
         }
 

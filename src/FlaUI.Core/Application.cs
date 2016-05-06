@@ -1,14 +1,15 @@
-﻿using FlaUI.Core.Definitions;
-using FlaUI.Core.Elements;
-using FlaUI.Core.Logging;
-using FlaUI.Core.Tools;
-using interop.UIAutomationCore;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Windows.Media;
+using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements;
+using FlaUI.Core.Logging;
+using FlaUI.Core.Tools;
+using interop.UIAutomationCore;
+using TreeScope = interop.UIAutomationCore.TreeScope;
 
 namespace FlaUI.Core
 {
@@ -200,7 +201,7 @@ namespace FlaUI.Core
         public Window GetWindow(string title)
         {
             var desktop = GetDesktop();
-            var windows = desktop.FindAll(interop.UIAutomationCore.TreeScope.TreeScope_Children,
+            var windows = desktop.FindAll(TreeScope.TreeScope_Children,
                 Automation.NativeAutomation.CreateAndCondition(
                     Automation.NativeAutomation.CreatePropertyCondition(AutomationElement.ControlTypeProperty.Id, ControlType.Window),
                     Automation.NativeAutomation.CreatePropertyCondition(AutomationElement.ProcessIdProperty.Id, _process.Id)));
