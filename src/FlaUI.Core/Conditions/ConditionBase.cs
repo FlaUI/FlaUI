@@ -1,4 +1,5 @@
 ﻿using interop.UIAutomationCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -80,19 +81,23 @@ namespace FlaUI.Core.Conditions
             {
                 if (junctCond.ChildCount == 0)
                 {
+                    // No condition in the list, so just create a true condition
                     return automation.NativeAutomation.CreateTrueCondition();
                 }
                 if (junctCond.ChildCount == 1)
                 {
+                    // Only one condition in the list, so just return that one
                     return junctCond.Conditions[0].ToNative(automation);
                 }
                 if (junctCond is AndCondition)
                 {
+                    // Create the and condition
                     return automation.NativeAutomation.CreateAndConditionFromArray(junctCond.Conditions.Select(c => c.ToNative(automation)).ToArray());
                 }
+                // Create the or condition
                 return automation.NativeAutomation.CreateOrConditionFromArray(junctCond.Conditions.Select(c => c.ToNative(automation)).ToArray());
             }
-            return null;
+            throw new ArgumentException("Unknown condition type");
         }
     }
 }

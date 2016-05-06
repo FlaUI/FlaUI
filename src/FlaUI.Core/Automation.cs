@@ -91,10 +91,19 @@ namespace FlaUI.Core
         }
 
         /// <summary>
+        /// Removes all registered event handlers
+        /// </summary>
+        public void UnregisterAllEvents()
+        {
+            NativeAutomation.RemoveAllEventHandlers();
+        }
+
+        /// <summary>
         /// Cleans up the resources
         /// </summary>
         public void Dispose()
         {
+            UnregisterAllEvents();
             OverlayManager.Dispose();
         }
 

@@ -50,6 +50,7 @@
     <Compile Include="Conditions\AndCondition.cs" />
     <Compile Include="Conditions\BoolCondition.cs" />
     <Compile Include="Conditions\ConditionBase.cs" />
+    <Compile Include="Conditions\ConditionFactory.cs" />
     <Compile Include="Conditions\JunctionConditionBase.cs" />
     <Compile Include="Conditions\NotCondition.cs" />
     <Compile Include="Conditions\OrCondition.cs" />
