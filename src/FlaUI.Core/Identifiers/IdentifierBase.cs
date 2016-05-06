@@ -43,7 +43,7 @@ namespace FlaUI.Core.Identifiers
 
         public override string ToString()
         {
-            return String.Format("{0}: {1}", Id, Name);
+            return String.Format("{0} [#{1}]", Name, Id);
         }
 
         protected static PropertyId RegisterProperty(int id, string name)

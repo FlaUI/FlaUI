@@ -1,17 +1,19 @@
-﻿using interop.UIAutomationCore;
+﻿using System;
 
 namespace FlaUI.Core.Conditions
 {
-    public class NotCondition : ConditionBase<IUIAutomationNotCondition>
+    public class NotCondition : ConditionBase
     {
-        public NotCondition(IUIAutomationNotCondition nativeCondition)
-            : base(nativeCondition)
+        public ConditionBase Condition { get; private set; }
+
+        public NotCondition(ConditionBase condition)
         {
+            Condition = condition;
         }
 
-        public ICondition Condition
+        public override string ToString()
         {
-            get { return ConditionFactory.NativeToManaged(NativeCondition.GetChild()); }
+            return String.Format("NOT ({0})", Condition);
         }
     }
 }

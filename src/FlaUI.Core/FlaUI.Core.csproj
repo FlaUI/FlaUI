@@ -47,11 +47,10 @@
   <ItemGroup>
     <Compile Include="Application.cs" />
     <Compile Include="Automation.cs" />
-    <Compile Include="ConditionFactory.cs" />
     <Compile Include="Conditions\AndCondition.cs" />
     <Compile Include="Conditions\BoolCondition.cs" />
     <Compile Include="Conditions\ConditionBase.cs" />
-    <Compile Include="Conditions\ICondition.cs" />
+    <Compile Include="Conditions\JunctionConditionBase.cs" />
     <Compile Include="Conditions\NotCondition.cs" />
     <Compile Include="Conditions\OrCondition.cs" />
     <Compile Include="Conditions\PropertyCondition.cs" />

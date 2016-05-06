@@ -1,29 +1,32 @@
-﻿using FlaUI.Core.Identifiers;
-using interop.UIAutomationCore;
+﻿using FlaUI.Core.Definitions;
+using FlaUI.Core.Identifiers;
+using System;
 
 namespace FlaUI.Core.Conditions
 {
-    public class PropertyCondition : ConditionBase<IUIAutomationPropertyCondition>
+    public class PropertyCondition : ConditionBase
     {
-        public PropertyCondition(IUIAutomationPropertyCondition nativeCondition)
-            : base(nativeCondition)
+        public PropertyCondition(PropertyId property, object value)
+            : this(property, value, PropertyConditionFlags.None)
         {
         }
 
-        public Definitions.PropertyConditionFlags PropertyConditionFlags
+        public PropertyCondition(PropertyId property, object value, PropertyConditionFlags propertyConditionFlags)
         {
-            get { return (Definitions.PropertyConditionFlags)NativeCondition.PropertyConditionFlags; }
-
+            Property = property;
+            Value = value;
+            PropertyConditionFlags = propertyConditionFlags;
         }
 
-        public PropertyId Property
-        {
-            get { return PropertyId.Find(NativeCondition.propertyId); }
-        }
+        public PropertyId Property { get; private set; }
 
-        public object PropertyValue
+        public PropertyConditionFlags PropertyConditionFlags { get; private set; }
+
+        public object Value { get; private set; }
+
+        public override string ToString()
         {
-            get { return NativeCondition.PropertyValue; }
+            return String.Format("{0}: {1}", Property, Value);
         }
     }
 }

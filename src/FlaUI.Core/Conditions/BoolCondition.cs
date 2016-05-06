@@ -1,18 +1,19 @@
-﻿using FlaUI.Core.Tools;
-using interop.UIAutomationCore;
+﻿using System;
 
 namespace FlaUI.Core.Conditions
 {
-    public class BoolCondition : ConditionBase<IUIAutomationBoolCondition>
+    public class BoolCondition : ConditionBase
     {
-        internal BoolCondition(IUIAutomationBoolCondition nativeCondition)
-            : base(nativeCondition)
+        public BoolCondition(bool booleanValue)
         {
+            BooleanValue = booleanValue;
         }
 
-        public bool BooleanValue
+        public bool BooleanValue { get; private set; }
+
+        public override string ToString()
         {
-            get { return NativeCondition.BooleanValue.ToBool(); }
+            return String.Format("BOOL: {0}", BooleanValue);
         }
     }
 }

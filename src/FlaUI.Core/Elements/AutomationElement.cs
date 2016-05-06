@@ -189,18 +189,18 @@ namespace FlaUI.Core.Elements
         /// <summary>
         /// Finds all elements in the given treescope and condition
         /// </summary>
-        public AutomationElement[] FindAll(Definitions.TreeScope treeScope, ICondition condition)
+        public AutomationElement[] FindAll(Definitions.TreeScope treeScope, ConditionBase condition)
         {
-            var nativeFoundElements = NativeElement.FindAll((TreeScope)treeScope, condition.NativeCondition);
+            var nativeFoundElements = NativeElement.FindAll((TreeScope)treeScope, condition.ToNative(Automation));
             return NativeValueConverter.NativeArrayToManaged(Automation, nativeFoundElements);
         }
 
         /// <summary>
         /// Finds the first element which is in the given treescope and matches the condition
         /// </summary>
-        public AutomationElement FindFirst(Definitions.TreeScope treeScope, ICondition condition)
+        public AutomationElement FindFirst(Definitions.TreeScope treeScope, ConditionBase condition)
         {
-            var nativeFoundElement = NativeElement.FindFirst((TreeScope)treeScope, condition.NativeCondition);
+            var nativeFoundElement = NativeElement.FindFirst((TreeScope)treeScope, condition.ToNative(Automation));
             return NativeValueConverter.NativeToManaged(Automation, nativeFoundElement);
         }
 

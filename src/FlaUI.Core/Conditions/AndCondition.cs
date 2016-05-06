@@ -1,22 +1,24 @@
-﻿using interop.UIAutomationCore;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FlaUI.Core.Conditions
 {
-    public class AndCondition : ConditionBase<IUIAutomationAndCondition>
+    public class AndCondition : JunctionConditionBase
     {
-        public AndCondition(IUIAutomationAndCondition nativeCondition)
-            : base(nativeCondition)
+        public AndCondition(ConditionBase condition1, ConditionBase condition2)
+            : this(new[] { condition1, condition2 })
         {
         }
 
-        public int ChildCount
+        public AndCondition(IEnumerable<ConditionBase> conditions)
         {
-            get { return NativeCondition.ChildCount; }
+            Conditions.AddRange(conditions);
         }
 
-        public ICondition[] Conditions
+        public override string ToString()
         {
-            get { return ConditionFactory.NativeToManaged(NativeCondition.GetChildren()); }
+            return String.Format("({0})", String.Join(" AND ", Conditions.Select(c => c.ToString())));
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using FlaUI.Core.Input;
+﻿using FlaUI.Core.Conditions;
+using FlaUI.Core.Input;
 using FlaUI.Core.Overlay;
 using interop.UIAutomationCore;
 using System;
@@ -30,15 +31,6 @@ namespace FlaUI.Core
         public IUIAutomation3 NativeAutomation3
         {
             get { return GetAutomationAs<IUIAutomation3>(); }
-        }
-
-        /// <summary>
-        /// Factory object for conditions
-        /// </summary>
-        public ConditionFactory ConditionFactory
-        {
-            get;
-            private set;
         }
 
         /// <summary>
@@ -74,7 +66,6 @@ namespace FlaUI.Core
         public Automation()
         {
             NativeAutomation = InitializeAutomation();
-            ConditionFactory = new ConditionFactory(NativeAutomation);
             OverlayManager = new OverlayManager();
             Mouse = new Mouse();
             Keyboard = new Keyboard();

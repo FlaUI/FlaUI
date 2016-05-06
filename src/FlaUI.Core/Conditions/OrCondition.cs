@@ -1,22 +1,24 @@
-﻿using interop.UIAutomationCore;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FlaUI.Core.Conditions
 {
-    public class OrCondition : ConditionBase<IUIAutomationOrCondition>
+    public class OrCondition : JunctionConditionBase
     {
-        internal OrCondition(IUIAutomationOrCondition nativeCondition)
-            : base(nativeCondition)
+        public OrCondition(ConditionBase condition1, ConditionBase condition2)
+            : this(new[] { condition1, condition2 })
         {
         }
 
-        public int ChildCount
+        public OrCondition(IEnumerable<ConditionBase> conditions)
         {
-            get { return NativeCondition.ChildCount; }
+            Conditions.AddRange(conditions);
         }
 
-        public ICondition[] Conditions
+        public override string ToString()
         {
-            get { return ConditionFactory.NativeToManaged(NativeCondition.GetChildren()); }
+            return String.Format("({0})", String.Join(" OR ", Conditions.Select(c => c.ToString())));
         }
     }
 }

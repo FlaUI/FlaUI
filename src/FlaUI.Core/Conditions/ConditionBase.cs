@@ -1,28 +1,98 @@
 ﻿using interop.UIAutomationCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FlaUI.Core.Conditions
 {
-    public abstract class ConditionBase<TCond> : ICondition
-    // Note: this is not allowed since this forces the user to also
-    // add a reference to the assembly with the type IUIAutomationCondition
-    //where TCond : IUIAutomationCondition
+    /// <summary>
+    /// Base class for the conditions
+    /// </summary>
+    public abstract class ConditionBase
     {
         /// <summary>
-        /// Implements <see cref="ICondition.NativeCondition"/>
+        /// Adds the given condition with an "and"
         /// </summary>
-        IUIAutomationCondition ICondition.NativeCondition
+        public AndCondition And(ConditionBase newCondition)
         {
-            get { return (IUIAutomationCondition)NativeCondition; }
+            // Check if this condition is already an and condition
+            var thisCondition = this as AndCondition;
+            if (thisCondition != null)
+            {
+                // If so, just add the new one
+                var newConditions = new List<ConditionBase>(thisCondition.ChildCount + 1);
+                newConditions.AddRange(thisCondition.Conditions);
+                newConditions.Add(newCondition);
+                return new AndCondition(newConditions);
+            }
+            // It is not, so pack it into an and condition
+            return new AndCondition(this, newCondition);
         }
 
         /// <summary>
-        /// The typed native condition
+        /// Adds the given condition with an "or"
         /// </summary>
-        public TCond NativeCondition { get; private set; }
-
-        protected ConditionBase(TCond nativeCondition)
+        public OrCondition Or(ConditionBase newCondition)
         {
-            NativeCondition = nativeCondition;
+            // Check if this condition is already an or condition
+            var thisCondition = this as OrCondition;
+            if (thisCondition != null)
+            {
+                // If so, just add the new one
+                var newConditions = new List<ConditionBase>(thisCondition.ChildCount + 1);
+                newConditions.AddRange(thisCondition.Conditions);
+                newConditions.Add(newCondition);
+                return new OrCondition(newConditions);
+            }
+            // It is not, so pack it into an or condition
+            return new OrCondition(this, newCondition);
+        }
+
+        /// <summary>
+        /// Packs this condition into a not condition
+        /// </summary>
+        public NotCondition Not()
+        {
+            return new NotCondition(this);
+        }
+
+        /// <summary>
+        /// Converts this condition to a native condition
+        /// </summary>
+        public IUIAutomationCondition ToNative(Automation automation)
+        {
+            var propCond = this as PropertyCondition;
+            if (propCond != null)
+            {
+                return automation.NativeAutomation.CreatePropertyConditionEx(propCond.Property.Id, propCond.Value, (PropertyConditionFlags)propCond.PropertyConditionFlags);
+            }
+            var boolCond = this as BoolCondition;
+            if (boolCond != null)
+            {
+                return boolCond.BooleanValue ? automation.NativeAutomation.CreateTrueCondition() : automation.NativeAutomation.CreateFalseCondition();
+            }
+            var notCond = this as NotCondition;
+            if (notCond != null)
+            {
+                return automation.NativeAutomation.CreateNotCondition(notCond.ToNative(automation));
+            }
+            var junctCond = this as JunctionConditionBase;
+            if (junctCond != null)
+            {
+                if (junctCond.ChildCount == 0)
+                {
+                    return automation.NativeAutomation.CreateTrueCondition();
+                }
+                if (junctCond.ChildCount == 1)
+                {
+                    return junctCond.Conditions[0].ToNative(automation);
+                }
+                if (junctCond is AndCondition)
+                {
+                    return automation.NativeAutomation.CreateAndConditionFromArray(junctCond.Conditions.Select(c => c.ToNative(automation)).ToArray());
+                }
+                return automation.NativeAutomation.CreateOrConditionFromArray(junctCond.Conditions.Select(c => c.ToNative(automation)).ToArray());
+            }
+            return null;
         }
     }
 }
