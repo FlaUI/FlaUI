@@ -1,4 +1,5 @@
-﻿using interop.UIAutomationCore;
+﻿using FlaUI.Core.Input;
+using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Elements
 {
@@ -13,6 +14,15 @@ namespace FlaUI.Core.Elements
             {
                invokePattern.Invoke();
             }
+        }
+
+        public void Click(bool moveMouse = true)
+        {
+            if (moveMouse)
+            {
+                Automation.Mouse.MoveTo(Current.ClickablePoint);
+            }
+            Automation.Mouse.Click(MouseButton.Left);
         }
     }
 }

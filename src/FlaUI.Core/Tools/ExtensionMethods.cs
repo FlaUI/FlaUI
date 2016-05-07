@@ -32,5 +32,13 @@ namespace FlaUI.Core.Tools
         {
             return value == 1;
         }
+
+        /// <summary>
+        /// Converts a double to an int
+        /// </summary>
+        public static int ToInt(this double value)
+        {
+            return Convert.ToInt32(value);
+        }
     }
 }

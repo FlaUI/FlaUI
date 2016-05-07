@@ -31,16 +31,16 @@ namespace FlaUI.Core.UnitTests
             app.WaitWhileBusy();
 
             // Simple addition
-            calc.Button1.PatternFactory.GetInvokePattern().Invoke();
-            calc.Button2.PatternFactory.GetInvokePattern().Invoke();
-            calc.Button3.PatternFactory.GetInvokePattern().Invoke();
-            calc.Button4.PatternFactory.GetInvokePattern().Invoke();
-            calc.ButtonAdd.PatternFactory.GetInvokePattern().Invoke();
-            calc.Button5.PatternFactory.GetInvokePattern().Invoke();
-            calc.Button6.PatternFactory.GetInvokePattern().Invoke();
-            calc.Button7.PatternFactory.GetInvokePattern().Invoke();
-            calc.Button8.PatternFactory.GetInvokePattern().Invoke();
-            calc.ButtonEquals.PatternFactory.GetInvokePattern().Invoke();
+            calc.Button1.Click();
+            calc.Button2.Click();
+            calc.Button3.Click();
+            calc.Button4.Click();
+            calc.ButtonAdd.Click();
+            calc.Button5.Click();
+            calc.Button6.Click();
+            calc.Button7.Click();
+            calc.Button8.Click();
+            calc.ButtonEquals.Click();
             var result = calc.Result;
             Assert.That(result, Is.EqualTo("6912"));
 
@@ -79,16 +79,16 @@ namespace FlaUI.Core.UnitTests
 
     public interface ICalculator
     {
-        AutomationElement Button1 { get; }
-        AutomationElement Button2 { get; }
-        AutomationElement Button3 { get; }
-        AutomationElement Button4 { get; }
-        AutomationElement Button5 { get; }
-        AutomationElement Button6 { get; }
-        AutomationElement Button7 { get; }
-        AutomationElement Button8 { get; }
-        AutomationElement ButtonAdd { get; }
-        AutomationElement ButtonEquals { get; }
+        Button Button1 { get; }
+        Button Button2 { get; }
+        Button Button3 { get; }
+        Button Button4 { get; }
+        Button Button5 { get; }
+        Button Button6 { get; }
+        Button Button7 { get; }
+        Button Button8 { get; }
+        Button ButtonAdd { get; }
+        Button ButtonEquals { get; }
         string Result { get; }
     }
 
@@ -97,25 +97,25 @@ namespace FlaUI.Core.UnitTests
     {
         private readonly AutomationElement _mainWindow;
 
-        public AutomationElement Button1 { get { return FindElement("1"); } }
+        public Button Button1 { get { return FindElement("1").AsButton(); } }
 
-        public AutomationElement Button2 { get { return FindElement("2"); } }
+        public Button Button2 { get { return FindElement("2").AsButton(); } }
 
-        public AutomationElement Button3 { get { return FindElement("3"); } }
+        public Button Button3 { get { return FindElement("3").AsButton(); } }
 
-        public AutomationElement Button4 { get { return FindElement("4"); } }
+        public Button Button4 { get { return FindElement("4").AsButton(); } }
 
-        public AutomationElement Button5 { get { return FindElement("5"); } }
+        public Button Button5 { get { return FindElement("5").AsButton(); } }
 
-        public AutomationElement Button6 { get { return FindElement("6"); } }
+        public Button Button6 { get { return FindElement("6").AsButton(); } }
 
-        public AutomationElement Button7 { get { return FindElement("7"); } }
+        public Button Button7 { get { return FindElement("7").AsButton(); } }
 
-        public AutomationElement Button8 { get { return FindElement("8"); } }
+        public Button Button8 { get { return FindElement("8").AsButton(); } }
 
-        public AutomationElement ButtonAdd { get { return FindElement("Add"); } }
+        public Button ButtonAdd { get { return FindElement("Add").AsButton(); } }
 
-        public AutomationElement ButtonEquals { get { return FindElement("Equals"); } }
+        public Button ButtonEquals { get { return FindElement("Equals").AsButton(); } }
 
         public string Result
         {
@@ -143,25 +143,25 @@ namespace FlaUI.Core.UnitTests
     {
         private readonly AutomationElement _mainWindow;
 
-        public AutomationElement Button1 { get { return FindElement("num1Button"); } }
+        public Button Button1 { get { return FindElement("num1Button").AsButton(); } }
 
-        public AutomationElement Button2 { get { return FindElement("num2Button"); } }
+        public Button Button2 { get { return FindElement("num2Button").AsButton(); } }
 
-        public AutomationElement Button3 { get { return FindElement("num3Button"); } }
+        public Button Button3 { get { return FindElement("num3Button").AsButton(); } }
 
-        public AutomationElement Button4 { get { return FindElement("num4Button"); } }
+        public Button Button4 { get { return FindElement("num4Button").AsButton(); } }
 
-        public AutomationElement Button5 { get { return FindElement("num5Button"); } }
+        public Button Button5 { get { return FindElement("num5Button").AsButton(); } }
 
-        public AutomationElement Button6 { get { return FindElement("num6Button"); } }
+        public Button Button6 { get { return FindElement("num6Button").AsButton(); } }
 
-        public AutomationElement Button7 { get { return FindElement("num7Button"); } }
+        public Button Button7 { get { return FindElement("num7Button").AsButton(); } }
 
-        public AutomationElement Button8 { get { return FindElement("num8Button"); } }
+        public Button Button8 { get { return FindElement("num8Button").AsButton(); } }
 
-        public AutomationElement ButtonAdd { get { return FindElement("plusButton"); } }
+        public Button ButtonAdd { get { return FindElement("plusButton").AsButton(); } }
 
-        public AutomationElement ButtonEquals { get { return FindElement("equalButton"); } }
+        public Button ButtonEquals { get { return FindElement("equalButton").AsButton(); } }
 
         public string Result
         {

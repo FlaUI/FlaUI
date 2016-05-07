@@ -32,6 +32,12 @@ namespace FlaUI.Core.Input
         void MoveTo(int newX, int newY);
 
         /// <summary>
+        /// Moves the mouse to a new position
+        /// </summary>
+        /// <param name="newPosition">The new position for the mouse</param>
+        void MoveTo(Point newPosition);
+
+        /// <summary>
         /// Clicks the specified mouse button
         /// </summary>
         /// <param name="mouseButton">The mouse button to click</param>

@@ -146,6 +146,11 @@ namespace FlaUI.Core.Input
             Helpers.WaitUntilInputIsProcessed();
         }
 
+        public void MoveTo(Point newPosition)
+        {
+            MoveTo(newPosition.X.ToInt(), newPosition.Y.ToInt());
+        }
+
         /// <summary>
         /// Implementation of <see cref="IMouse.Click(FlaUI.Core.Input.MouseButton)" />
         /// </summary>
