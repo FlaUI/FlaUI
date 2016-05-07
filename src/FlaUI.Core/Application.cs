@@ -1,14 +1,14 @@
-﻿using System;
+﻿using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements;
+using FlaUI.Core.Logging;
+using FlaUI.Core.Tools;
+using interop.UIAutomationCore;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Windows.Media;
-using FlaUI.Core.Definitions;
-using FlaUI.Core.Elements;
-using FlaUI.Core.Logging;
-using FlaUI.Core.Tools;
-using interop.UIAutomationCore;
 using TreeScope = interop.UIAutomationCore.TreeScope;
 
 namespace FlaUI.Core
@@ -194,7 +194,7 @@ namespace FlaUI.Core
         {
             var nWindow = Automation.NativeAutomation.ElementFromHandle(_process.MainWindowHandle);
             var window = new Window(Automation, nWindow);
-            Automation.OverlayManager.Show(window.Current.BoundingRectangle, Colors.Red);
+            Automation.OverlayManager.Show(window.Current.BoundingRectangle, Colors.Red, 1000);
             return window;
         }
 

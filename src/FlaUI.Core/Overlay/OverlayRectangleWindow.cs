@@ -1,16 +1,17 @@
-﻿using System;
+﻿using FlaUI.Core.Shapes;
+using FlaUI.Core.WindowsAPI;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
-using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.Overlay
 {
     public class OverlayRectangleWindow : Window
     {
-        public OverlayRectangleWindow(Rect rectangle, Color color)
+        public OverlayRectangleWindow(Rectangle rectangle, Color color, int durationInMs)
         {
             AllowsTransparency = true;
             WindowStyle = WindowStyle.None;
@@ -23,7 +24,7 @@ namespace FlaUI.Core.Overlay
             Width = rectangle.Width;
             Height = rectangle.Height;
             Content = new Border { BorderThickness = new Thickness(2), BorderBrush = new SolidColorBrush(color) };
-            StartCloseTimer(TimeSpan.FromSeconds(3));
+            StartCloseTimer(TimeSpan.FromMilliseconds(durationInMs));
         }
 
         protected override void OnSourceInitialized(EventArgs e)

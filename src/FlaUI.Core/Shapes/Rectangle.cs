@@ -1,6 +1,6 @@
-﻿using System;
+﻿using interop.UIAutomationCore;
+using System;
 using System.Windows;
-using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Shapes
 {
@@ -23,6 +23,35 @@ namespace FlaUI.Core.Shapes
         {
             get { return X.Equals(0) && Y.Equals(0) && Width.Equals(0) && Height.Equals(0); }
         }
+
+        public Point Center
+        {
+            get { return new Point(Width / 2 + Left, Height / 2 + Top); }
+        }
+
+        public Point North { get { return GetNorth(); } }
+
+        public Point East { get { return GetEast(); } }
+
+        public Point South { get { return GetSouth(); } }
+
+        public Point West { get { return GetWest(); } }
+
+        public Point ImmediateExteriorNorth { get { return GetNorth(-1); } }
+
+        public Point ImmediateInteriorNorth { get { return GetNorth(1); } }
+
+        public Point ImmediateExteriorEast { get { return GetEast(1); } }
+
+        public Point ImmediateInteriorEast { get { return GetEast(-1); } }
+
+        public Point ImmediateExteriorSouth { get { return GetSouth(1); } }
+
+        public Point ImmediateInteriorSouth { get { return GetSouth(-1); } }
+
+        public Point ImmediateExteriorWest { get { return GetWest(-1); } }
+
+        public Point ImmediateInteriorWest { get { return GetWest(1); } }
 
         public Rectangle(double x, double y, double width, double height)
         {
@@ -89,6 +118,26 @@ namespace FlaUI.Core.Shapes
         public override string ToString()
         {
             return String.Format("X={0},Y={1},Width={2},Height={3}", X, Y, Width, Height);
+        }
+
+        private Point GetNorth(int by = 0)
+        {
+            return new Point(Center.X, Top + by);
+        }
+
+        private Point GetEast(int by = 0)
+        {
+            return new Point(Right + by, Center.Y);
+        }
+
+        private Point GetSouth(int by = 0)
+        {
+            return new Point(Center.X, Bottom + by);
+        }
+
+        private Point GetWest(int by = 0)
+        {
+            return new Point(Left + by, Center.Y);
         }
     }
 }

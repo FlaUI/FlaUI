@@ -12,7 +12,7 @@ namespace FlaUI.Core.Elements
             var invokePattern = PatternFactory.GetInvokePattern();
             if (invokePattern != null)
             {
-               invokePattern.Invoke();
+                invokePattern.Invoke();
             }
         }
 

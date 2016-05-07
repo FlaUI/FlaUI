@@ -167,7 +167,7 @@ namespace FlaUI.Core.Elements
         }
 
         /// <summary>
-        /// Draws a red highlight around the ui element
+        /// Draws a red highlight around the element
         /// </summary>
         public AutomationElement DrawHighlight()
         {
@@ -175,14 +175,44 @@ namespace FlaUI.Core.Elements
         }
 
         /// <summary>
-        /// Draws a manually colored highlight around the ui element
+        /// Draws a manually colored highlight around the element
         /// </summary>
         public AutomationElement DrawHighlight(Color color)
+        {
+            return DrawHighlight(true, color, 2000);
+        }
+
+        /// <summary>
+        /// Draw a highlight around the element with the given settings 
+        /// </summary>
+        /// <param name="blocking">Flag to indicate if further execution waits until the highlight is removed</param>
+        /// <param name="color">The color to draw the hightlight</param>
+        /// <param name="durationInMs">The duration (im ms) how long the highlight is shown</param>
+        /// <remarks>Override for winforms color</remarks>
+        public AutomationElement DrawHighlight(bool blocking, System.Drawing.Color color, int durationInMs)
+        {
+            return DrawHighlight(blocking, Color.FromArgb(color.A, color.R, color.G, color.B), durationInMs);
+        }
+
+        /// <summary>
+        /// Draw a highlight around the element with the given settings
+        /// </summary>
+        /// <param name="blocking">Flag to indicate if further execution waits until the highlight is removed</param>
+        /// <param name="color">The color to draw the hightlight</param>
+        /// <param name="durationInMs">The duration (im ms) how long the highlight is shown</param>
+        public AutomationElement DrawHighlight(bool blocking, Color color, int durationInMs)
         {
             var rectangle = Current.BoundingRectangle;
             if (!rectangle.IsEmpty)
             {
-                Automation.OverlayManager.ShowBlocking(rectangle, color);
+                if (blocking)
+                {
+                    Automation.OverlayManager.ShowBlocking(rectangle, color, durationInMs);
+                }
+                else
+                {
+                    Automation.OverlayManager.Show(rectangle, color, durationInMs);
+                }
             }
             return this;
         }

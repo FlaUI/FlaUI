@@ -1,6 +1,6 @@
-﻿using System;
+﻿using FlaUI.Core.Shapes;
+using System;
 using System.Threading;
-using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
 
@@ -37,20 +37,20 @@ namespace FlaUI.Core.Overlay
             _startedEvent.Wait();
         }
 
-        public void Show(Rect rectangle, Color color)
+        public void Show(Rectangle rectangle, Color color, int durationInMs)
         {
             _dispatcher.Invoke(() =>
             {
-                var win = new OverlayRectangleWindow(rectangle, color);
+                var win = new OverlayRectangleWindow(rectangle, color, durationInMs);
                 win.Show();
             });
         }
 
-        public void ShowBlocking(Rect rectangle, Color color)
+        public void ShowBlocking(Rectangle rectangle, Color color, int durationInMs)
         {
             _dispatcher.Invoke(() =>
             {
-                var win = new OverlayRectangleWindow(rectangle, color);
+                var win = new OverlayRectangleWindow(rectangle, color, durationInMs);
                 win.ShowDialog();
             });
         }
