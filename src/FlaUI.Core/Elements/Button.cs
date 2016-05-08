@@ -22,6 +22,10 @@ namespace FlaUI.Core.Elements
             {
                 Automation.Mouse.MoveTo(Current.ClickablePoint);
             }
+            else
+            {
+                Automation.Mouse.Position = Current.ClickablePoint;
+            }
             Automation.Mouse.Click(MouseButton.Left);
         }
     }

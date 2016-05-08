@@ -8,7 +8,7 @@ using FlaUI.Core.Tools;
 using FlaUI.Core.WindowsAPI;
 using NUnit.Framework;
 
-namespace FlaUI.Core.UnitTests
+namespace FlaUI.Core.UITests
 {
     [TestFixture]
     public class CalculatorTests

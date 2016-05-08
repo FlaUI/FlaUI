@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace FlaUI.Core.UnitTests
+namespace FlaUI.Core.UITests
 {
     [TestFixture]
     public class NotepadTests
