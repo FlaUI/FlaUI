@@ -373,6 +373,11 @@ namespace FlaUI.Core.Elements
         {
             return new Window(Automation, NativeElement);
         }
+
+        public Label AsLabel()
+        {
+            return new Label(Automation, NativeElement);
+        }
         #endregion Conversion Methods
     }
 }

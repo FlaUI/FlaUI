@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalculatorTests.cs" />
+    <Compile Include="Elements\LabelTests.cs" />
     <Compile Include="KeyboardTests.cs" />
     <Compile Include="MouseTests.cs" />
     <Compile Include="NotepadTests.cs" />
