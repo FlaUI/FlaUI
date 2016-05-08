@@ -58,6 +58,11 @@
       <Project>{4d98a40f-e35d-4a88-8428-8462af75a4cf}</Project>
       <Name>FlaUI.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TestApplications\WpfApplication\WpfApplication.csproj">
+      <Project>{c8276299-fa43-409b-a969-ef030ab56224}</Project>
+      <Name>WpfApplication</Name>
+      <Private>False</Private>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

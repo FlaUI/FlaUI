@@ -13,7 +13,7 @@ namespace FlaUI.Core.UITests.Elements
         [SetUp]
         public void Setup()
         {
-            _application = Application.Launch(Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\..\TestApplications\WpfApplication\bin\debug\WpfApplication.exe"));
+            _application = Application.Launch(Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\..\TestApplications\WpfApplication\bin\WpfApplication.exe"));
         }
 
         [Test]
