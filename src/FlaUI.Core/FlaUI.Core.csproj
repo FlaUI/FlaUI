@@ -79,6 +79,7 @@
     <Compile Include="Elements\Button.cs" />
     <Compile Include="Elements\AutomationElement.cs" />
     <Compile Include="Elements\AutomationElementInformation.cs" />
+    <Compile Include="Elements\ComboBox.cs" />
     <Compile Include="Elements\Label.cs" />
     <Compile Include="Elements\Window.cs" />
     <Compile Include="EventHandlers\BasicEventHandler.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Patterns\ValuePattern.cs" />
     <Compile Include="Patterns\VirtualizedItemPattern.cs" />
     <Compile Include="Patterns\WindowPattern.cs" />
+    <Compile Include="ScreenCapture.cs" />
     <Compile Include="Shapes\Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shapes\Rectangle.cs" />

@@ -1,6 +1,7 @@
 ﻿using interop.UIAutomationCore;
 using System;
 using System.Windows;
+using FlaUI.Core.Tools;
 
 namespace FlaUI.Core.Shapes
 {
@@ -66,7 +67,7 @@ namespace FlaUI.Core.Shapes
         /// </summary>
         public static implicit operator System.Drawing.Rectangle(Rectangle r)
         {
-            return new System.Drawing.Rectangle(r.ToInt32(r.X), r.ToInt32(r.Y), r.ToInt32(r.Width), r.ToInt32(r.Height));
+            return new System.Drawing.Rectangle(r.X.ToInt(), r.Y.ToInt(), r.Width.ToInt(), r.Height.ToInt());
         }
 
         /// <summary>
@@ -100,10 +101,10 @@ namespace FlaUI.Core.Shapes
         {
             return new tagRECT
             {
-                left = r.ToInt32(r.Left),
-                top = r.ToInt32(r.Top),
-                right = r.ToInt32(r.Right),
-                bottom = r.ToInt32(r.Bottom)
+                left = r.Left.ToInt(),
+                top = r.Top.ToInt(),
+                right = r.Right.ToInt(),
+                bottom = r.Bottom.ToInt()
             };
         }
 

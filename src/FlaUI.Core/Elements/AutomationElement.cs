@@ -5,8 +5,11 @@ using FlaUI.Core.Exceptions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Tools;
 using System;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using Color = System.Windows.Media.Color;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.Core.Elements
@@ -218,6 +221,24 @@ namespace FlaUI.Core.Elements
         }
 
         /// <summary>
+        /// Captures the object as screenshot
+        /// </summary>
+        public Bitmap Capture()
+        {
+            return ScreenCapture.CaptureArea(Current.BoundingRectangle);
+        }
+
+        public BitmapImage CaptureWpf()
+        {
+            return ScreenCapture.CaptureAreaWpf(Current.BoundingRectangle);
+        }
+
+        public void CaptureToFile(string filePath)
+        {
+            ScreenCapture.CaptureAreaToFile(Current.BoundingRectangle, filePath);
+        }
+
+        /// <summary>
         /// Finds all elements in the given treescope and condition
         /// </summary>
         public AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition)
@@ -363,21 +384,26 @@ namespace FlaUI.Core.Elements
         public static readonly EventId ToolTipClosedEvent = EventId.Register(UIA.UIA_EventIds.UIA_ToolTipClosedEventId, "ToolTipClosed");
         public static readonly EventId ToolTipOpenedEvent = EventId.Register(UIA.UIA_EventIds.UIA_ToolTipOpenedEventId, "ToolTipOpened");
         #endregion Event identifiers
-        #region Conversion methods to other elements
-        public Button AsButton()
+    }
+
+    /// <summary>
+    /// Class with extension methods to convert the element to a specific class
+    /// </summary>
+    public static class AutomationElementConversionExtensions
+    {
+        public static Button AsButton(this AutomationElement automationElement)
         {
-            return new Button(Automation, NativeElement);
+            return new Button(automationElement.Automation, automationElement.NativeElement);
         }
 
-        public Window AsWindow()
+        public static Window AsWindow(this AutomationElement automationElement)
         {
-            return new Window(Automation, NativeElement);
+            return new Window(automationElement.Automation, automationElement.NativeElement);
         }
 
-        public Label AsLabel()
+        public static Label AsLabel(this AutomationElement automationElement)
         {
-            return new Label(Automation, NativeElement);
+            return new Label(automationElement.Automation, automationElement.NativeElement);
         }
-        #endregion Conversion Methods
     }
 }

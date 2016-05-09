@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication"
         mc:Ignorable="d"
-        Title="MainWindow" Height="60" Width="150">
+        Title="MainWindow" Height="141" Width="259">
     <Grid>
-        <Label Content="Test Label"/>
+        <StackPanel Orientation="Vertical">
+            <Label Content="Test Label"/>
+            <ComboBox Width="120" IsEditable="True">
+                <TextBlock Text="Item 1"/>
+                <TextBlock Text="Item 2"/>
+                <TextBlock Text="Item 3"/>
+            </ComboBox>
+        </StackPanel>
     </Grid>
 </Window>

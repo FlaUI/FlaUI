@@ -1,4 +1,5 @@
 ﻿using System;
+using FlaUI.Core.Tools;
 using FlaUI.Core.WindowsAPI;
 using interop.UIAutomationCore;
 
@@ -46,12 +47,33 @@ namespace FlaUI.Core.Shapes
             return Math.Sqrt(Math.Pow(X - otherX, 2) + Math.Pow(Y - otherY, 2));
         }
 
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (X.GetHashCode() * 397) ^ Y.GetHashCode();
+            }
+        }
+
+        public override bool Equals(object other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            if (other.GetType() != GetType()) return false;
+            return Equals((Point)other);
+        }
+
+        protected bool Equals(Point other)
+        {
+            return X.Equals(other.X) && Y.Equals(other.Y);
+        }
+
         /// <summary>
         /// Implicit conversion to GDI point
         /// </summary>
         public static implicit operator System.Drawing.Point(Point p)
         {
-            return new System.Drawing.Point(p.ToInt32(p.X), p.ToInt32(p.Y));
+            return new System.Drawing.Point(p.X.ToInt(), p.Y.ToInt());
         }
 
         /// <summary>
@@ -83,7 +105,7 @@ namespace FlaUI.Core.Shapes
         /// </summary>
         public static implicit operator POINT(Point p)
         {
-            return new POINT { X = p.ToInt32(p.X), Y = p.ToInt32(p.Y) };
+            return new POINT { X = p.X.ToInt(), Y = p.Y.ToInt() };
         }
 
         /// <summary>
@@ -99,7 +121,7 @@ namespace FlaUI.Core.Shapes
         /// </summary>
         public static implicit operator tagPOINT(Point p)
         {
-            return new tagPOINT { x = p.ToInt32(p.X), y = p.ToInt32(p.Y) };
+            return new tagPOINT { x = p.X.ToInt(), y = p.Y.ToInt() };
         }
 
         /// <summary>

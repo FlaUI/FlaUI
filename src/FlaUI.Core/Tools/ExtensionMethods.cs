@@ -34,7 +34,7 @@ namespace FlaUI.Core.Tools
         }
 
         /// <summary>
-        /// Converts a double to an int
+        /// Converts a double to the nearest int32
         /// </summary>
         public static int ToInt(this double value)
         {

@@ -1,25 +1,28 @@
-﻿using System;
-using System.Text.RegularExpressions;
-using FlaUI.Core.Conditions;
+﻿using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Elements;
 using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
+using FlaUI.Core.UITests.TestFramework;
 using FlaUI.Core.WindowsAPI;
 using NUnit.Framework;
+using System;
+using System.Text.RegularExpressions;
 
 namespace FlaUI.Core.UITests
 {
     [TestFixture]
-    public class CalculatorTests
+    public class CalculatorTests : UITestBase
     {
+        public CalculatorTests()
+            : base(TestApplicationType.Custom)
+        {
+        }
+
         [Test]
         public void CalculatorTest()
         {
-            var app = SystemProductNameFetcher.IsWindows10()
-                ? Application.LaunchStoreApp("Microsoft.WindowsCalculator_8wekyb3d8bbwe!App")
-                : Application.Launch("calc.exe");
-            var window = app.GetMainWindow();
+            var window = App.GetMainWindow();
             Console.WriteLine(window.Title);
             var calc = SystemProductNameFetcher.IsWindows10() ? (ICalculator)new Win10Calc(window) : new LegacyCalc(window);
 
@@ -28,7 +31,7 @@ namespace FlaUI.Core.UITests
             window.Automation.Keyboard.TypeVirtualKeyCode(VirtualKeyShort.KEY_1);
             window.Automation.Keyboard.ReleaseVirtualKeyCode(VirtualKeyShort.ALT);
             Helpers.WaitUntilInputIsProcessed();
-            app.WaitWhileBusy();
+            App.WaitWhileBusy();
 
             // Simple addition
             calc.Button1.Click();
@@ -41,6 +44,7 @@ namespace FlaUI.Core.UITests
             calc.Button7.Click();
             calc.Button8.Click();
             calc.ButtonEquals.Click();
+            App.WaitWhileBusy();
             var result = calc.Result;
             Assert.That(result, Is.EqualTo("6912"));
 
@@ -48,9 +52,6 @@ namespace FlaUI.Core.UITests
             window.Automation.Keyboard.PressVirtualKeyCode(VirtualKeyShort.CONTROL);
             window.Automation.Keyboard.TypeVirtualKeyCode(VirtualKeyShort.KEY_E);
             window.Automation.Keyboard.ReleaseVirtualKeyCode(VirtualKeyShort.CONTROL);
-
-            app.Close();
-
 
             /*
                 // Verify can click on menu twice
@@ -74,6 +75,14 @@ namespace FlaUI.Core.UITests
                 menuViewBasic.Click();
 
             }*/
+        }
+
+        protected override Application StartApplication()
+        {
+            var app = SystemProductNameFetcher.IsWindows10()
+                ? Application.LaunchStoreApp("Microsoft.WindowsCalculator_8wekyb3d8bbwe!App")
+                : Application.Launch("calc.exe");
+            return app;
         }
     }
 
