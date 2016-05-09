@@ -115,9 +115,9 @@ namespace FlaUI.Core.UITests.TestFramework
                 ScreenCapture.CaptureScreenToFile(imagePath);
                 Console.WriteLine(String.Format("Screenshot taken: {0}", imagePath));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Console.WriteLine(String.Format("Failed to save screenshot to directory: {0}, filename: {1}", ScreenshotDir, imagePath));
+                Console.WriteLine(String.Format("Failed to save screenshot to directory: {0}, filename: {1}, Ex: {2}", ScreenshotDir, imagePath, ex));
             }
         }
     }
