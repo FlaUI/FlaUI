@@ -448,17 +448,26 @@ namespace FlaUI.Core.Elements
     {
         public static Button AsButton(this AutomationElement automationElement)
         {
+            if (automationElement == null) { return null; }
             return new Button(automationElement.Automation, automationElement.NativeElement);
         }
 
         public static Window AsWindow(this AutomationElement automationElement)
         {
+            if (automationElement == null) { return null; }
             return new Window(automationElement.Automation, automationElement.NativeElement);
         }
 
         public static Label AsLabel(this AutomationElement automationElement)
         {
+            if (automationElement == null) { return null; }
             return new Label(automationElement.Automation, automationElement.NativeElement);
+        }
+
+        public static TitleBar AsTitleBar(this AutomationElement automationElement)
+        {
+            if (automationElement == null) { return null; }
+            return new TitleBar(automationElement.Automation, automationElement.NativeElement);
         }
     }
 }

@@ -51,6 +51,7 @@
     <Compile Include="NotepadTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestFramework\TestApplicationType.cs" />
+    <Compile Include="TestFramework\TestUtilities.cs" />
     <Compile Include="TestFramework\UITestBase.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -81,12 +81,14 @@
     <Compile Include="Elements\AutomationElementInformation.cs" />
     <Compile Include="Elements\ComboBox.cs" />
     <Compile Include="Elements\Label.cs" />
+    <Compile Include="Elements\TitleBar.cs" />
     <Compile Include="Elements\Window.cs" />
     <Compile Include="EventHandlers\BasicEventHandler.cs" />
     <Compile Include="EventHandlers\EventHandlerBase.cs" />
     <Compile Include="EventHandlers\FocusChangedEventHandler.cs" />
     <Compile Include="EventHandlers\PropertyChangedEventHandler.cs" />
     <Compile Include="EventHandlers\StructureChangedEventHandler.cs" />
+    <Compile Include="Exceptions\MethodNotSupportedException.cs" />
     <Compile Include="Exceptions\NoClickablePointException.cs" />
     <Compile Include="Exceptions\PropertyNotSupportedException.cs" />
     <Compile Include="Identifiers\ConvertibleIdentifierBase.cs" />

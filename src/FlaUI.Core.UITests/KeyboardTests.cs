@@ -1,6 +1,7 @@
-﻿using System.Threading;
+﻿using FlaUI.Core.UITests.TestFramework;
 using FlaUI.Core.WindowsAPI;
 using NUnit.Framework;
+using System.Threading;
 
 namespace FlaUI.Core.UITests
 {
@@ -11,6 +12,8 @@ namespace FlaUI.Core.UITests
         public void KeyboardTest()
         {
             var app = Application.Launch("notepad.exe");
+            var mainWindow = app.GetMainWindow();
+
             app.Automation.Keyboard.Write("ééééééööööö aaa | ");
 
             app.Automation.Keyboard.TypeVirtualKeyCode(VirtualKeyShort.KEY_Z);
@@ -24,7 +27,10 @@ namespace FlaUI.Core.UITests
 
             app.Automation.Keyboard.Write("ঋ ঌ এ ঐ ও ঔ ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ");
 
-            Thread.Sleep(2000);
+            Thread.Sleep(500);
+
+            TestUtilities.CloseWindowWithDontSave(mainWindow);
+
             app.Dispose();
         }
     }
