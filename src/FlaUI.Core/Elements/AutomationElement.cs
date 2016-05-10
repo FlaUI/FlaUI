@@ -3,16 +3,14 @@ using FlaUI.Core.Definitions;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Exceptions;
 using FlaUI.Core.Identifiers;
+using FlaUI.Core.Shapes;
 using FlaUI.Core.Tools;
 using FlaUI.Core.WindowsAPI;
 using System;
-using System.Drawing;
 using System.Linq;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using Color = System.Windows.Media.Color;
-using Point = FlaUI.Core.Shapes.Point;
+using GdiColor = System.Drawing.Color;
 using UIA = interop.UIAutomationCore;
+using WpfColor = System.Windows.Media.Color;
 
 namespace FlaUI.Core.Elements
 {
@@ -209,9 +207,8 @@ namespace FlaUI.Core.Elements
         /// <returns>True if a point was found, false otherwise</returns>
         public bool TryGetClickablePoint(out Point point)
         {
-            point = null;
             var tagPoint = new UIA.tagPOINT { x = 0, y = 0 };
-            bool success = ComCallWrapper.Call(() => NativeElement.GetClickablePoint(out tagPoint)) != 0;
+            var success = ComCallWrapper.Call(() => NativeElement.GetClickablePoint(out tagPoint)) != 0;
             point = success ? new Point(tagPoint.x, tagPoint.y) : null;
             return success;
         }
@@ -221,13 +218,21 @@ namespace FlaUI.Core.Elements
         /// </summary>
         public AutomationElement DrawHighlight()
         {
-            return DrawHighlight(Colors.Red);
+            return DrawHighlight(System.Windows.Media.Colors.Red);
         }
 
         /// <summary>
         /// Draws a manually colored highlight around the element
         /// </summary>
-        public AutomationElement DrawHighlight(Color color)
+        public AutomationElement DrawHighlight(WpfColor color)
+        {
+            return DrawHighlight(true, color, 2000);
+        }
+
+        /// <summary>
+        /// Draws a manually colored highlight around the element
+        /// </summary>
+        public AutomationElement DrawHighlight(GdiColor color)
         {
             return DrawHighlight(true, color, 2000);
         }
@@ -236,21 +241,21 @@ namespace FlaUI.Core.Elements
         /// Draw a highlight around the element with the given settings 
         /// </summary>
         /// <param name="blocking">Flag to indicate if further execution waits until the highlight is removed</param>
-        /// <param name="color">The color to draw the hightlight</param>
+        /// <param name="color">The color to draw the highlight</param>
         /// <param name="durationInMs">The duration (im ms) how long the highlight is shown</param>
         /// <remarks>Override for winforms color</remarks>
-        public AutomationElement DrawHighlight(bool blocking, System.Drawing.Color color, int durationInMs)
+        public AutomationElement DrawHighlight(bool blocking, GdiColor color, int durationInMs)
         {
-            return DrawHighlight(blocking, Color.FromArgb(color.A, color.R, color.G, color.B), durationInMs);
+            return DrawHighlight(blocking, WpfColor.FromArgb(color.A, color.R, color.G, color.B), durationInMs);
         }
 
         /// <summary>
         /// Draw a highlight around the element with the given settings
         /// </summary>
         /// <param name="blocking">Flag to indicate if further execution waits until the highlight is removed</param>
-        /// <param name="color">The color to draw the hightlight</param>
+        /// <param name="color">The color to draw the highlight</param>
         /// <param name="durationInMs">The duration (im ms) how long the highlight is shown</param>
-        public AutomationElement DrawHighlight(bool blocking, Color color, int durationInMs)
+        public AutomationElement DrawHighlight(bool blocking, WpfColor color, int durationInMs)
         {
             var rectangle = Current.BoundingRectangle;
             if (!rectangle.IsEmpty)
@@ -268,14 +273,17 @@ namespace FlaUI.Core.Elements
         }
 
         /// <summary>
-        /// Captures the object as screenshot
+        /// Captures the object as screenshot in WinForms format
         /// </summary>
-        public Bitmap Capture()
+        public System.Drawing.Bitmap Capture()
         {
             return ScreenCapture.CaptureArea(Current.BoundingRectangle);
         }
 
-        public BitmapImage CaptureWpf()
+        /// <summary>
+        /// Captures the object as screenshot in WPF format
+        /// </summary>
+        public System.Windows.Media.Imaging.BitmapImage CaptureWpf()
         {
             return ScreenCapture.CaptureAreaWpf(Current.BoundingRectangle);
         }

@@ -1,8 +1,10 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using FlaUI.Core.Elements;
 using FlaUI.Core.Input;
 using FlaUI.Core.Overlay;
+using FlaUI.Core.Shapes;
 using interop.UIAutomationCore;
+using System;
+using System.Runtime.InteropServices;
 
 namespace FlaUI.Core
 {
@@ -87,6 +89,24 @@ namespace FlaUI.Core
                 nativeAutomation = new CUIAutomation();
             }
             return nativeAutomation;
+        }
+
+        /// <summary>
+        /// Creates an <see cref="AutomationElement"/> from a given point
+        /// </summary>
+        public AutomationElement FromPoint(Point point)
+        {
+            var nativeElement = NativeAutomation.ElementFromPoint(point);
+            return nativeElement == null ? null : new AutomationElement(this, nativeElement);
+        }
+
+        /// <summary>
+        /// Creates an <see cref="AutomationElement"/> from a given windows handle (HWND)
+        /// </summary>
+        public AutomationElement FromHandle(IntPtr hwnd)
+        {
+            var nativeElement = NativeAutomation.ElementFromHandle(hwnd);
+            return nativeElement == null ? null : new AutomationElement(this, nativeElement);
         }
 
         /// <summary>
