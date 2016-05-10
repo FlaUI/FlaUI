@@ -1,7 +1,7 @@
-﻿using System;
-using System.Globalization;
-using FlaUI.Core.Definitions;
+﻿using FlaUI.Core.Definitions;
 using FlaUI.Core.Shapes;
+using System;
+using System.Globalization;
 
 namespace FlaUI.Core.Elements
 {
@@ -49,7 +49,19 @@ namespace FlaUI.Core.Elements
 
         public Point ClickablePoint
         {
-            get { return Get<Point>(AutomationElement.ClickablePointProperty); }
+            get
+            {
+                // First try getting it from the property
+                var clickablePoint = Get<Point>(AutomationElement.ClickablePointProperty);
+                // In some cases, the property is not supported but might be available
+                // by the native method, so we will try this as fallback
+                if (clickablePoint == null)
+                {
+                    // Try to get the value directly
+                    clickablePoint = AutomationElement.GetClickablePoint();
+                }
+                return clickablePoint;
+            }
         }
 
         public AutomationElement[] ControllerFor

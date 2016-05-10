@@ -136,5 +136,10 @@ namespace FlaUI.Core.Shapes
         {
             return String.Format("X={0},Y={1}", X, Y);
         }
+
+        /// <summary>
+        /// Instance of an empty point
+        /// </summary>
+        public static Point EmptyPoint = new Point(0, 0);
     }
 }

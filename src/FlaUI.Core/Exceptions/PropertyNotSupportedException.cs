@@ -19,6 +19,11 @@ namespace FlaUI.Core.Exceptions
         {
         }
 
+        public PropertyNotSupportedException(Exception innerException)
+            : base(String.Empty, innerException)
+        {
+        }
+
         public PropertyNotSupportedException(string message, Exception innerException)
             : base(message, innerException)
         {

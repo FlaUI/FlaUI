@@ -4,12 +4,14 @@ using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Exceptions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Tools;
+using FlaUI.Core.WindowsAPI;
 using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Color = System.Windows.Media.Color;
+using Point = FlaUI.Core.Shapes.Point;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.Core.Elements
@@ -167,6 +169,55 @@ namespace FlaUI.Core.Elements
             var propertyIds = properties.Select(p => p.Id).ToArray();
             Automation.NativeAutomation.AddPropertyChangedEventHandler(NativeElement,
                 (UIA.TreeScope)treeScope, null, new PropertyChangedEventHandler(Automation, action), propertyIds);
+        }
+
+        /// <summary>
+        /// Sets the focus to this element
+        /// Warning: This can be unreliable! <see cref="SetForeground"/> should be more reliable
+        /// </summary>
+        public void Focus()
+        {
+            NativeElement.SetFocus();
+        }
+
+        /// <summary>
+        /// Brings the element to the foreground
+        /// </summary>
+        public void SetForeground()
+        {
+            User32.SetForegroundWindow(Current.NativeWindowHandle);
+        }
+
+        /// <summary>
+        /// Gets a clickable point of the element
+        /// </summary>
+        /// <exception cref="NoClickablePointException">Thrown when no clickable point was found</exception>
+        public Point GetClickablePoint()
+        {
+            Point point;
+            if (!TryGetClickablePoint(out point))
+            {
+                throw new NoClickablePointException();
+            }
+            return point;
+        }
+
+        /// <summary>
+        /// Tries to get a clickable point of the element
+        /// </summary>
+        /// <param name="point">The clickable point or null, if no point was found</param>
+        /// <returns>True if a point was found, false otherwise</returns>
+        public bool TryGetClickablePoint(out Point point)
+        {
+            var tagPoint = new UIA.tagPOINT { x = 0, y = 0 };
+            var result = ComCallWrapper.Call(() => NativeElement.GetClickablePoint(out tagPoint));
+            if (result != CommonHresultValues.S_OK)
+            {
+                point = null;
+                return false;
+            }
+            point = new Point(tagPoint.x, tagPoint.y);
+            return true;
         }
 
         /// <summary>

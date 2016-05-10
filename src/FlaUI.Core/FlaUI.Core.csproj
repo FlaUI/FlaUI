@@ -87,6 +87,7 @@
     <Compile Include="EventHandlers\FocusChangedEventHandler.cs" />
     <Compile Include="EventHandlers\PropertyChangedEventHandler.cs" />
     <Compile Include="EventHandlers\StructureChangedEventHandler.cs" />
+    <Compile Include="Exceptions\NoClickablePointException.cs" />
     <Compile Include="Exceptions\PropertyNotSupportedException.cs" />
     <Compile Include="Identifiers\ConvertibleIdentifierBase.cs" />
     <Compile Include="Identifiers\EventId.cs" />
