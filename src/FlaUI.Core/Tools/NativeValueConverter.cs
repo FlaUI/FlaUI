@@ -1,9 +1,9 @@
-﻿using System.Globalization;
-using System.Linq;
-using FlaUI.Core.Definitions;
+﻿using FlaUI.Core.Definitions;
 using FlaUI.Core.Elements;
 using FlaUI.Core.Shapes;
 using interop.UIAutomationCore;
+using System.Globalization;
+using System.Linq;
 
 namespace FlaUI.Core.Tools
 {
@@ -107,15 +107,17 @@ namespace FlaUI.Core.Tools
         public static object ToRectangle(object rectangle)
         {
             var origValue = (double[])rectangle;
+            if (rectangle == null) { return null; }
             return new Rectangle(origValue[0], origValue[1], origValue[2], origValue[3]);
         }
 
         /// <summary>
         ///  Converts <see cref="T:double[2]"/> to <see cref="Point"/>
         /// </summary>
-        public static object ToPoint(object rectangle)
+        public static object ToPoint(object point)
         {
-            var origValue = (double[])rectangle;
+            var origValue = (double[])point;
+            if (point == null) { return null; }
             return new Point(origValue[0], origValue[1]);
         }
 
@@ -124,7 +126,7 @@ namespace FlaUI.Core.Tools
         /// </summary>
         public static object ToCulture(object cultureId)
         {
-            var origValue = (int) cultureId;
+            var origValue = (int)cultureId;
             return origValue == 0 ? CultureInfo.InvariantCulture : new CultureInfo(origValue);
         }
     }

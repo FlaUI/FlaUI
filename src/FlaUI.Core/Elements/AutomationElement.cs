@@ -209,15 +209,11 @@ namespace FlaUI.Core.Elements
         /// <returns>True if a point was found, false otherwise</returns>
         public bool TryGetClickablePoint(out Point point)
         {
+            point = null;
             var tagPoint = new UIA.tagPOINT { x = 0, y = 0 };
-            var result = ComCallWrapper.Call(() => NativeElement.GetClickablePoint(out tagPoint));
-            if (result != CommonHresultValues.S_OK)
-            {
-                point = null;
-                return false;
-            }
-            point = new Point(tagPoint.x, tagPoint.y);
-            return true;
+            bool success = ComCallWrapper.Call(() => NativeElement.GetClickablePoint(out tagPoint)) != 0;
+            point = success ? new Point(tagPoint.x, tagPoint.y) : null;
+            return success;
         }
 
         /// <summary>
