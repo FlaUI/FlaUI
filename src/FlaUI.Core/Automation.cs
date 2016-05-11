@@ -114,7 +114,11 @@ namespace FlaUI.Core
         /// </summary>
         public void UnregisterAllEvents()
         {
-            NativeAutomation.RemoveAllEventHandlers();
+            try
+            {
+                NativeAutomation.RemoveAllEventHandlers();
+            }
+            catch { }
         }
 
         /// <summary>

@@ -27,5 +27,13 @@ namespace FlaUI.Core.Conditions
         {
             return new PropertyCondition(AutomationElement.ClassNameProperty, className);
         }
+
+        /// <summary>
+        /// Searches for a Menu/MenuBar
+        /// </summary>
+        public static OrCondition Menu()
+        {
+            return new OrCondition(ByControlType(ControlType.Menu), ByControlType(ControlType.MenuBar));
+        }
     }
 }

@@ -29,64 +29,138 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.EditableCombo = new System.Windows.Forms.ComboBox();
+            this.SimpleCheckBox = new System.Windows.Forms.CheckBox();
+            this.ThreeStateCheckBox = new System.Windows.Forms.CheckBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.plainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fancyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 23);
+            this.label1.Location = new System.Drawing.Point(12, 39);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Test Label";
             // 
-            // comboBox1
+            // EditableCombo
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.EditableCombo.FormattingEnabled = true;
+            this.EditableCombo.Items.AddRange(new object[] {
             "Item 1",
             "Item 2",
             "Item 3"});
-            this.comboBox1.Location = new System.Drawing.Point(121, 23);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 1;
+            this.EditableCombo.Location = new System.Drawing.Point(124, 31);
+            this.EditableCombo.Name = "EditableCombo";
+            this.EditableCombo.Size = new System.Drawing.Size(121, 21);
+            this.EditableCombo.TabIndex = 1;
             // 
-            // checkBox1
+            // SimpleCheckBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(15, 76);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(98, 17);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "Test Checkbox";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.SimpleCheckBox.AutoSize = true;
+            this.SimpleCheckBox.Location = new System.Drawing.Point(15, 76);
+            this.SimpleCheckBox.Name = "SimpleCheckBox";
+            this.SimpleCheckBox.Size = new System.Drawing.Size(98, 17);
+            this.SimpleCheckBox.TabIndex = 2;
+            this.SimpleCheckBox.Text = "Test Checkbox";
+            this.SimpleCheckBox.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // ThreeStateCheckBox
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(13, 100);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(132, 17);
-            this.checkBox2.TabIndex = 3;
-            this.checkBox2.Text = "3-Way Test Checkbox";
-            this.checkBox2.ThreeState = true;
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.ThreeStateCheckBox.AutoSize = true;
+            this.ThreeStateCheckBox.Location = new System.Drawing.Point(13, 100);
+            this.ThreeStateCheckBox.Name = "ThreeStateCheckBox";
+            this.ThreeStateCheckBox.Size = new System.Drawing.Size(132, 17);
+            this.ThreeStateCheckBox.TabIndex = 3;
+            this.ThreeStateCheckBox.Text = "3-Way Test Checkbox";
+            this.ThreeStateCheckBox.ThreeState = true;
+            this.ThreeStateCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.editToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(378, 24);
+            this.menuStrip1.TabIndex = 4;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "&File";
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyToolStripMenuItem,
+            this.pasteToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Text = "&Edit";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Text = "E&xit";
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.plainToolStripMenuItem,
+            this.fancyToolStripMenuItem});
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.copyToolStripMenuItem.Text = "Copy";
+            // 
+            // pasteToolStripMenuItem
+            // 
+            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pasteToolStripMenuItem.Text = "Paste";
+            // 
+            // plainToolStripMenuItem
+            // 
+            this.plainToolStripMenuItem.Name = "plainToolStripMenuItem";
+            this.plainToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.plainToolStripMenuItem.Text = "Plain";
+            // 
+            // fancyToolStripMenuItem
+            // 
+            this.fancyToolStripMenuItem.Name = "fancyToolStripMenuItem";
+            this.fancyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fancyToolStripMenuItem.Text = "Fancy";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(378, 154);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.ThreeStateCheckBox);
+            this.Controls.Add(this.SimpleCheckBox);
+            this.Controls.Add(this.EditableCombo);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -95,9 +169,17 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.ComboBox EditableCombo;
+        private System.Windows.Forms.CheckBox SimpleCheckBox;
+        private System.Windows.Forms.CheckBox ThreeStateCheckBox;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem plainToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fancyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
     }
 }
 

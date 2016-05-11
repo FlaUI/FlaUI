@@ -3,19 +3,33 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApplication"
         mc:Ignorable="d"
         Title="MainWindow" Height="141" Width="259">
-    <Grid>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="E_xit" />
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Header="Copy">
+                    <MenuItem Header="Plain" />
+                    <MenuItem Header="Fancy" />
+                </MenuItem>
+                <MenuItem Header="Paste" />
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem></StatusBarItem>
+        </StatusBar>
         <StackPanel Orientation="Vertical">
             <Label Content="Test Label"/>
-            <ComboBox Width="120" IsEditable="True">
-                <TextBlock Text="Item 1"/>
-                <TextBlock Text="Item 2"/>
-                <TextBlock Text="Item 3"/>
+            <ComboBox Width="120" IsEditable="True" AutomationProperties.AutomationId="EditableCombo">
+                <TextBlock Text="Item 1" AutomationProperties.AutomationId="EditableComboItem1" />
+                <TextBlock Text="Item 2" AutomationProperties.AutomationId="EditableComboItem2" />
+                <TextBlock Text="Item 3" AutomationProperties.AutomationId="EditableComboItem3" />
             </ComboBox>
-            <CheckBox Content="Test Checkbox" />
-            <CheckBox Content="3-Way Test Checkbox" IsThreeState="True" />
+            <CheckBox Content="Test Checkbox" AutomationProperties.AutomationId="SimpleCheckBox" />
+            <CheckBox Content="3-Way Test Checkbox" IsThreeState="True" AutomationProperties.AutomationId="ThreeStateCheckBox" />
         </StackPanel>
-    </Grid>
+    </DockPanel>
 </Window>

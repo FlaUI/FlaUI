@@ -1,15 +1,11 @@
-﻿using FlaUI.Core.Definitions;
-using FlaUI.Core.Elements;
+﻿using FlaUI.Core.Elements;
 using FlaUI.Core.Logging;
 using FlaUI.Core.Tools;
-using interop.UIAutomationCore;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
-using System.Windows.Media;
-using TreeScope = interop.UIAutomationCore.TreeScope;
 
 namespace FlaUI.Core
 {
@@ -181,10 +177,10 @@ namespace FlaUI.Core
         /// <summary>
         /// Gets the root element (desktop)
         /// </summary>
-        public IUIAutomationElement GetDesktop()
+        public AutomationElement GetDesktop()
         {
             var desktop = Automation.NativeAutomation.GetRootElement();
-            return desktop;
+            return new AutomationElement(Automation, desktop);
         }
 
         /// <summary>
@@ -194,18 +190,7 @@ namespace FlaUI.Core
         {
             var nWindow = Automation.NativeAutomation.ElementFromHandle(_process.MainWindowHandle);
             var window = new Window(Automation, nWindow);
-            Automation.OverlayManager.Show(window.Current.BoundingRectangle, Colors.Red, 1000);
             return window;
-        }
-
-        public Window GetWindow(string title)
-        {
-            var desktop = GetDesktop();
-            var windows = desktop.FindAll(TreeScope.TreeScope_Children,
-                Automation.NativeAutomation.CreateAndCondition(
-                    Automation.NativeAutomation.CreatePropertyCondition(AutomationElement.ControlTypeProperty.Id, ControlType.Window),
-                    Automation.NativeAutomation.CreatePropertyCondition(AutomationElement.ProcessIdProperty.Id, _process.Id)));
-            return new Window(Automation, windows.GetElement(0));
         }
         #endregion Window
 

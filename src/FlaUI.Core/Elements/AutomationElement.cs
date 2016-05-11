@@ -475,5 +475,17 @@ namespace FlaUI.Core.Elements
             if (automationElement == null) { return null; }
             return new TitleBar(automationElement.Automation, automationElement.NativeElement);
         }
+
+        public static Menu AsMenu(this AutomationElement automationElement)
+        {
+            if (automationElement == null) { return null; }
+            return new Menu(automationElement.Automation, automationElement.NativeElement);
+        }
+
+        public static MenuItem AsMenuItem(this AutomationElement automationElement)
+        {
+            if (automationElement == null) { return null; }
+            return new MenuItem(automationElement.Automation, automationElement.NativeElement);
+        }
     }
 }

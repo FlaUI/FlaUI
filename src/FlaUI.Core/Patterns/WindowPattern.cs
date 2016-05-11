@@ -1,25 +1,24 @@
-﻿using FlaUI.Core.Elements;
+﻿using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Tools;
-using interop.UIAutomationCore;
-using WindowInteractionState = FlaUI.Core.Definitions.WindowInteractionState;
-using WindowVisualState = FlaUI.Core.Definitions.WindowVisualState;
+using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
-    public class WindowPattern : PatternBaseWithInformation<IUIAutomationWindowPattern, WindowPatternInformation>
+    public class WindowPattern : PatternBaseWithInformation<UIA.IUIAutomationWindowPattern, WindowPatternInformation>
     {
-        public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_WindowPatternId, "Window");
-        public static readonly PropertyId CanMaximizeProperty = PropertyId.Register(UIA_PropertyIds.UIA_WindowCanMaximizePropertyId, "CanMaximize");
-        public static readonly PropertyId CanMinimizeProperty = PropertyId.Register(UIA_PropertyIds.UIA_WindowCanMinimizePropertyId, "CanMinimize");
-        public static readonly PropertyId IsModalProperty = PropertyId.Register(UIA_PropertyIds.UIA_WindowIsModalPropertyId, "IsModal");
-        public static readonly PropertyId IsTopmostProperty = PropertyId.Register(UIA_PropertyIds.UIA_WindowIsTopmostPropertyId, "IsTopmost");
-        public static readonly PropertyId WindowInteractionStateProperty = PropertyId.Register(UIA_PropertyIds.UIA_WindowWindowInteractionStatePropertyId, "WindowInteractionState");
-        public static readonly PropertyId WindowVisualStateProperty = PropertyId.Register(UIA_PropertyIds.UIA_WindowWindowVisualStatePropertyId, "WindowVisualState");
-        public static readonly EventId WindowClosedEvent = EventId.Register(UIA_EventIds.UIA_Window_WindowClosedEventId, "WindowClosed");
-        public static readonly EventId WindowOpenedEvent = EventId.Register(UIA_EventIds.UIA_Window_WindowOpenedEventId, "WindowOpened");
+        public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_WindowPatternId, "Window");
+        public static readonly PropertyId CanMaximizeProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_WindowCanMaximizePropertyId, "CanMaximize");
+        public static readonly PropertyId CanMinimizeProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_WindowCanMinimizePropertyId, "CanMinimize");
+        public static readonly PropertyId IsModalProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_WindowIsModalPropertyId, "IsModal");
+        public static readonly PropertyId IsTopmostProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_WindowIsTopmostPropertyId, "IsTopmost");
+        public static readonly PropertyId WindowInteractionStateProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_WindowWindowInteractionStatePropertyId, "WindowInteractionState");
+        public static readonly PropertyId WindowVisualStateProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_WindowWindowVisualStatePropertyId, "WindowVisualState");
+        public static readonly EventId WindowClosedEvent = EventId.Register(UIA.UIA_EventIds.UIA_Window_WindowClosedEventId, "WindowClosed");
+        public static readonly EventId WindowOpenedEvent = EventId.Register(UIA.UIA_EventIds.UIA_Window_WindowOpenedEventId, "WindowOpened");
 
-        internal WindowPattern(AutomationElement automationElement, IUIAutomationWindowPattern nativePattern)
+        internal WindowPattern(AutomationElement automationElement, UIA.IUIAutomationWindowPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new WindowPatternInformation(element, cached))
         {
         }
