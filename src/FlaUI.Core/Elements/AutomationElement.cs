@@ -452,6 +452,12 @@ namespace FlaUI.Core.Elements
             return new Button(automationElement.Automation, automationElement.NativeElement);
         }
 
+        public static CheckBox AsCheckBox(this AutomationElement automationElement)
+        {
+            if (automationElement == null) { return null; }
+            return new CheckBox(automationElement.Automation, automationElement.NativeElement);
+        }
+
         public static Window AsWindow(this AutomationElement automationElement)
         {
             if (automationElement == null) { return null; }

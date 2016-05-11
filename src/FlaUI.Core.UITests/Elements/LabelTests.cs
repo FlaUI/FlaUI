@@ -21,7 +21,7 @@ namespace FlaUI.Core.UITests.Elements
             var window = App.GetMainWindow();
             var label = window.FindFirst(TreeScope.Descendants, ConditionFactory.ByText("Test Label")).AsLabel();
             Assert.That(label, Is.Not.Null);
-            Assert.That(label.Text(), Is.EqualTo("Test Label"));
+            Assert.That(label.Text, Is.EqualTo("Test Label"));
         }
     }
 }

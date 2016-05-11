@@ -79,6 +79,7 @@
     <Compile Include="Elements\Button.cs" />
     <Compile Include="Elements\AutomationElement.cs" />
     <Compile Include="Elements\AutomationElementInformation.cs" />
+    <Compile Include="Elements\CheckBox.cs" />
     <Compile Include="Elements\ComboBox.cs" />
     <Compile Include="Elements\Label.cs" />
     <Compile Include="Elements\TitleBar.cs" />

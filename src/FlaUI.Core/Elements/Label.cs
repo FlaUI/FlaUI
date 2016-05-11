@@ -4,13 +4,17 @@ namespace FlaUI.Core.Elements
 {
     public class Label : AutomationElement
     {
-        public Label(Automation automation, IUIAutomationElement nativeElement) : base(automation, nativeElement)
+        public Label(Automation automation, IUIAutomationElement nativeElement)
+            : base(automation, nativeElement)
         {
         }
 
-        public string Text()
+        public string Text
         {
-            return Current.Name;
+            get
+            {
+                return Current.Name;
+            }
         }
     }
 }
