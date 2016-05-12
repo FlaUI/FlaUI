@@ -4,7 +4,7 @@ using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
-    public class SelectionPattern : PatternBaseWithInformation<IUIAutomationSelectionPattern, SelectionPatternInformation>
+    public class SelectionPattern : PatternBaseWithInformation<SelectionPatternInformation>
     {
         public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_SelectionPatternId, "Selection");
         public static readonly PropertyId CanSelectMultipleProperty = PropertyId.Register(UIA_PropertyIds.UIA_SelectionCanSelectMultiplePropertyId, "CanSelectMultiple");
@@ -15,6 +15,11 @@ namespace FlaUI.Core.Patterns
         internal SelectionPattern(AutomationElement automationElement, IUIAutomationSelectionPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new SelectionPatternInformation(element, cached))
         {
+        }
+
+        public IUIAutomationSelectionPattern NativePattern
+        {
+            get { return (IUIAutomationSelectionPattern)base.NativePattern; }
         }
     }
 

@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsApplication", "Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlaUIRec", "FlaUIRec\FlaUIRec.csproj", "{4F033FA0-F39E-4C24-9D6D-625FE547F626}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlaUI.UIA2", "FlaUI.UIA2\FlaUI.UIA2.csproj", "{9060A00A-1718-4976-B6AF-02C1BE43190C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{4F033FA0-F39E-4C24-9D6D-625FE547F626}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F033FA0-F39E-4C24-9D6D-625FE547F626}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F033FA0-F39E-4C24-9D6D-625FE547F626}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9060A00A-1718-4976-B6AF-02C1BE43190C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9060A00A-1718-4976-B6AF-02C1BE43190C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9060A00A-1718-4976-B6AF-02C1BE43190C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9060A00A-1718-4976-B6AF-02C1BE43190C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,7 +5,7 @@ using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
-    public class AnnotationPattern : PatternBaseWithInformation<IUIAutomationAnnotationPattern, AnnotationPatternInformation>
+    public class AnnotationPattern : PatternBaseWithInformation<AnnotationPatternInformation>
     {
         public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_AnnotationPatternId, "Annotation");
         public static readonly PropertyId AnnotationTypeIdProperty = PropertyId.Register(UIA_PropertyIds.UIA_AnnotationAnnotationTypeIdPropertyId, "AnnotationTypeId");
@@ -17,6 +17,11 @@ namespace FlaUI.Core.Patterns
         internal AnnotationPattern(AutomationElement automationElement, IUIAutomationAnnotationPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new AnnotationPatternInformation(element, cached))
         {
+        }
+
+        public IUIAutomationAnnotationPattern NativePattern
+        {
+            get { return (IUIAutomationAnnotationPattern)base.NativePattern; }
         }
     }
 

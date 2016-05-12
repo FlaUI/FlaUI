@@ -1,5 +1,5 @@
-﻿using System;
-using FlaUI.Core.Elements;
+﻿using FlaUI.Core.Elements;
+using System;
 
 namespace FlaUI.Core.Patterns
 {
@@ -8,7 +8,7 @@ namespace FlaUI.Core.Patterns
     /// </summary>
     /// <typeparam name="T">Native type of the pattern</typeparam>
     /// <typeparam name="TProp">Type of the information object</typeparam>
-    public abstract class PatternBaseWithInformation<T, TProp> : PatternBase<T> where TProp : InformationBase
+    public abstract class PatternBaseWithInformation<TProp> : PatternBase where TProp : InformationBase
     {
         /// <summary>
         /// Cached information for this pattern
@@ -20,7 +20,7 @@ namespace FlaUI.Core.Patterns
         /// </summary>
         public TProp Current { get; private set; }
 
-        protected PatternBaseWithInformation(AutomationElement automationElement, T nativePattern, Func<AutomationElement, bool, TProp> createFunc)
+        protected PatternBaseWithInformation(AutomationElement automationElement, object nativePattern, Func<AutomationElement, bool, TProp> createFunc)
             : base(automationElement, nativePattern)
         {
             Cached = createFunc(AutomationElement, true);

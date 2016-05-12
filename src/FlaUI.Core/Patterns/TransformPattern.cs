@@ -1,17 +1,22 @@
-﻿using System;
-using FlaUI.Core.Elements;
+﻿using FlaUI.Core.Elements;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Tools;
 using interop.UIAutomationCore;
+using System;
 
 namespace FlaUI.Core.Patterns
 {
-    public abstract class TransformPattern<TProp> : PatternBaseWithInformation<IUIAutomationTransformPattern, TProp>
+    public abstract class TransformPattern<TProp> : PatternBaseWithInformation<TProp>
         where TProp : InformationBase
     {
         protected TransformPattern(AutomationElement automationElement, IUIAutomationTransformPattern nativePattern, Func<AutomationElement, bool, TProp> createFunc)
             : base(automationElement, nativePattern, createFunc)
         {
+        }
+
+        public IUIAutomationTransformPattern NativePattern
+        {
+            get { return (IUIAutomationTransformPattern)base.NativePattern; }
         }
 
         public void Move(double x, double y)

@@ -5,7 +5,7 @@ using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
-    public class MultipleViewPattern : PatternBaseWithInformation<IUIAutomationMultipleViewPattern, MultipleViewPatternInformation>
+    public class MultipleViewPattern : PatternBaseWithInformation<MultipleViewPatternInformation>
     {
         public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_MultipleViewPatternId, "MultipleView");
         public static readonly PropertyId CurrentViewProperty = PropertyId.Register(UIA_PropertyIds.UIA_MultipleViewCurrentViewPropertyId, "CurrentView");
@@ -14,6 +14,11 @@ namespace FlaUI.Core.Patterns
         internal MultipleViewPattern(AutomationElement automationElement, IUIAutomationMultipleViewPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new MultipleViewPatternInformation(element, cached))
         {
+        }
+
+        public IUIAutomationMultipleViewPattern NativePattern
+        {
+            get { return (IUIAutomationMultipleViewPattern)base.NativePattern; }
         }
 
         public string GetViewName(int view)

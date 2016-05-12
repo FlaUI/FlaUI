@@ -312,6 +312,15 @@ namespace FlaUI.Core.Elements
         }
 
         /// <summary>
+        /// Overrides the string representation of the element with something usefull
+        /// </summary>
+        public override string ToString()
+        {
+            return String.Format("AutomationId:{0}, Name:{1}, ControlType:{2}, FrameworkId:{3}", Current.AutomationId, Current.Name,
+                Current.LocalizedControlType, Current.FrameworkId);
+        }
+
+        /// <summary>
         /// Tries to cast the automation element to a specific interface.
         /// Throws an exception if that is not possible.
         /// </summary>

@@ -6,7 +6,7 @@ using IAccessible = Accessibility.IAccessible;
 
 namespace FlaUI.Core.Patterns
 {
-    public class LegacyIAccessiblePattern : PatternBaseWithInformation<IUIAutomationLegacyIAccessiblePattern, LegacyIAccessiblePatternInformation>
+    public class LegacyIAccessiblePattern : PatternBaseWithInformation<LegacyIAccessiblePatternInformation>
     {
         public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_LegacyIAccessiblePatternId, "LegacyIAccessible");
         public static readonly PropertyId ChildIdProperty = PropertyId.Register(UIA_PropertyIds.UIA_LegacyIAccessibleChildIdPropertyId, "ChildId");
@@ -23,6 +23,11 @@ namespace FlaUI.Core.Patterns
         internal LegacyIAccessiblePattern(AutomationElement automationElement, IUIAutomationLegacyIAccessiblePattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new LegacyIAccessiblePatternInformation(element, cached))
         {
+        }
+
+        public IUIAutomationLegacyIAccessiblePattern NativePattern
+        {
+            get { return (IUIAutomationLegacyIAccessiblePattern)base.NativePattern; }
         }
 
         public void DoDefaultAction()

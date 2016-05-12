@@ -4,7 +4,7 @@ using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
-    public class DragPattern : PatternBaseWithInformation<IUIAutomationDragPattern, DragPatternInformation>
+    public class DragPattern : PatternBaseWithInformation<DragPatternInformation>
     {
         public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_DragPatternId, "Drag");
         public static readonly PropertyId DropEffectProperty = PropertyId.Register(UIA_PropertyIds.UIA_DragDropEffectPropertyId, "DropEffect");
@@ -18,6 +18,11 @@ namespace FlaUI.Core.Patterns
         internal DragPattern(AutomationElement automationElement, IUIAutomationDragPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new DragPatternInformation(element, cached))
         {
+        }
+
+        public IUIAutomationDragPattern NativePattern
+        {
+            get { return (IUIAutomationDragPattern)base.NativePattern; }
         }
     }
 

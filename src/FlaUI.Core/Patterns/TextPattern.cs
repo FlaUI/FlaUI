@@ -1,21 +1,26 @@
-﻿using FlaUI.Core.Elements;
+﻿using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Shapes;
 using FlaUI.Core.Tools;
-using interop.UIAutomationCore;
-using SupportedTextSelection = FlaUI.Core.Definitions.SupportedTextSelection;
+using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
-    public class TextPattern : PatternBase<IUIAutomationTextPattern>
+    public class TextPattern : PatternBase
     {
-        public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_TextPatternId, "Text");
-        public static readonly EventId TextChangedEvent = EventId.Register(UIA_EventIds.UIA_Text_TextChangedEventId, "TextChanged");
-        public static readonly EventId TextSelectionChangedEvent = EventId.Register(UIA_EventIds.UIA_Text_TextSelectionChangedEventId, "TextSelectionChanged");
+        public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_TextPatternId, "Text");
+        public static readonly EventId TextChangedEvent = EventId.Register(UIA.UIA_EventIds.UIA_Text_TextChangedEventId, "TextChanged");
+        public static readonly EventId TextSelectionChangedEvent = EventId.Register(UIA.UIA_EventIds.UIA_Text_TextSelectionChangedEventId, "TextSelectionChanged");
 
-        internal TextPattern(AutomationElement automationElement, IUIAutomationTextPattern nativePattern)
+        internal TextPattern(AutomationElement automationElement, UIA.IUIAutomationTextPattern nativePattern)
             : base(automationElement, nativePattern)
         {
+        }
+
+        public UIA.IUIAutomationTextPattern NativePattern
+        {
+            get { return (UIA.IUIAutomationTextPattern)base.NativePattern; }
         }
 
         public TextRange DocumentRange

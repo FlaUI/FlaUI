@@ -1,9 +1,13 @@
-﻿using System;
-using System.Windows;
+﻿using FlaUI.Core;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Elements;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
+using FlaUI.UIA2;
+using Gma.System.MouseKeyHook;
+using System;
+using System.Windows;
+using System.Windows.Forms;
 using Window = System.Windows.Window;
 
 namespace FlaUIRec.Views
@@ -14,10 +18,44 @@ namespace FlaUIRec.Views
     public partial class MainWindow : Window
     {
         private FlaUI.Core.Application _app;
+        private IKeyboardMouseEvents m_GlobalHook;
+
         public MainWindow()
         {
             InitializeComponent();
             ProcessIdText.Text = "12844";
+
+            m_GlobalHook = Hook.GlobalEvents();
+            //m_GlobalHook.MouseDownExt += m_GlobalHook_MouseDownExt;
+            //m_GlobalHook.MouseMoveExt += m_GlobalHook_MouseMoveExt;
+            //m_GlobalHook.KeyPress += GlobalHookKeyPress;
+        }
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            m_GlobalHook.MouseDownExt -= m_GlobalHook_MouseDownExt;
+            m_GlobalHook.MouseMoveExt -= m_GlobalHook_MouseMoveExt;
+            m_GlobalHook.KeyPress -= GlobalHookKeyPress;
+            m_GlobalHook.Dispose();
+            base.OnClosing(e);
+        }
+
+        private void m_GlobalHook_MouseDownExt(object sender, MouseEventExtArgs e)
+        {
+            var automation = new Automation();
+            var element = automation.FromPoint(new FlaUI.Core.Shapes.Point(e.Location.X, e.Location.Y));
+            AddToList(String.Format("MouseDown ({0}) on {1} ({2})", e.Button, element, e.Location));
+        }
+
+        private void m_GlobalHook_MouseMoveExt(object sender, MouseEventExtArgs e)
+        {
+            //System.Threading.Thread.Sleep(500);
+            AddToList(String.Format("MouseMove to {0}", e.Location));
+        }
+
+        private void GlobalHookKeyPress(object sender, KeyPressEventArgs e)
+        {
+            AddToList(String.Format("KeyPress: \t{0}", e.KeyChar));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -36,11 +74,15 @@ namespace FlaUIRec.Views
             _app.GetMainWindow().RegisterStructureChangedEvent(TreeScope.Descendants, StructureAction);
             _app.GetMainWindow().RegisterPropertyChangedEvent(TreeScope.Descendants, PropertyAction, TogglePattern.ToggleStateProperty);
             _app.GetMainWindow().RegisterPropertyChangedEvent(TreeScope.Descendants, PropertyAction, ValuePattern.ValueProperty);
+
+            // Legacy
+            _app.GetMainWindow().GetUIA2().RegisterPropertyChangedEvent(TreeScope.Descendants, PropertyAction, TogglePattern.ToggleStateProperty);
         }
 
         private void TextChangedAction(AutomationElement automationElement, EventId eventId)
         {
-            AddToList(String.Format("Text changed: {0}", ElementToString(automationElement)));
+            var valuePattern = automationElement.PatternFactory.GetValuePattern();
+            AddToList(String.Format("Text changed on {0}: To {1}", ElementToString(automationElement), valuePattern.Current.Value));
         }
 
         private void SelectionAction(AutomationElement automationElement, EventId eventId)

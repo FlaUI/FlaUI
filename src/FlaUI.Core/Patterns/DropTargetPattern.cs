@@ -4,7 +4,7 @@ using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
-    public class DropTargetPattern : PatternBaseWithInformation<IUIAutomationDropTargetPattern, DropTargetPatternInformation>
+    public class DropTargetPattern : PatternBaseWithInformation<DropTargetPatternInformation>
     {
         public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_DropTargetPatternId, "DropTarget");
         public static readonly PropertyId DropTargetEffectProperty = PropertyId.Register(UIA_PropertyIds.UIA_DropTargetDropTargetEffectPropertyId, "DropTargetEffect");
@@ -16,6 +16,11 @@ namespace FlaUI.Core.Patterns
         internal DropTargetPattern(AutomationElement automationElement, IUIAutomationDropTargetPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new DropTargetPatternInformation(element, cached))
         {
+        }
+
+        public IUIAutomationDropTargetPattern NativePattern
+        {
+            get { return (IUIAutomationDropTargetPattern)base.NativePattern; }
         }
     }
 

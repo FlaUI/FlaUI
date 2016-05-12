@@ -5,7 +5,7 @@ using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
-    public class StylesPattern : PatternBase<IUIAutomationStylesPattern>
+    public class StylesPattern : PatternBase
     {
         public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_StylesPatternId, "Styles");
         public static readonly PropertyId ExtendedPropertiesProperty = PropertyId.Register(UIA_PropertyIds.UIA_StylesExtendedPropertiesPropertyId, "ExtendedProperties");
@@ -19,6 +19,11 @@ namespace FlaUI.Core.Patterns
         internal StylesPattern(AutomationElement automationElement, IUIAutomationStylesPattern nativePattern)
             : base(automationElement, nativePattern)
         {
+        }
+
+        public IUIAutomationStylesPattern NativePattern
+        {
+            get { return (IUIAutomationStylesPattern)base.NativePattern; }
         }
 
         // TODO: Any way to implement that?

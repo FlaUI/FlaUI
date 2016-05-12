@@ -5,7 +5,7 @@ using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
-    public class SelectionItemPattern : PatternBaseWithInformation<IUIAutomationSelectionItemPattern, SelectionItemPatternInformation>
+    public class SelectionItemPattern : PatternBaseWithInformation<SelectionItemPatternInformation>
     {
         public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_SelectionItemPatternId, "SelectionItem");
         public static readonly PropertyId IsSelectedProperty = PropertyId.Register(UIA_PropertyIds.UIA_SelectionItemIsSelectedPropertyId, "IsSelected");
@@ -17,6 +17,11 @@ namespace FlaUI.Core.Patterns
         internal SelectionItemPattern(AutomationElement automationElement, IUIAutomationSelectionItemPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new SelectionItemPatternInformation(element, cached))
         {
+        }
+
+        public IUIAutomationSelectionItemPattern NativePattern
+        {
+            get { return (IUIAutomationSelectionItemPattern)base.NativePattern; }
         }
 
         public void AddToSelection()

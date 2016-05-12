@@ -6,7 +6,7 @@ using ScrollAmount = FlaUI.Core.Definitions.ScrollAmount;
 
 namespace FlaUI.Core.Patterns
 {
-    public class ScrollPattern : PatternBaseWithInformation<IUIAutomationScrollPattern, ScrollPatternInformation>
+    public class ScrollPattern : PatternBaseWithInformation<ScrollPatternInformation>
     {
         public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_ScrollPatternId, "Scroll");
         public static readonly PropertyId HorizontallyScrollableProperty = PropertyId.Register(UIA_PropertyIds.UIA_ScrollHorizontallyScrollablePropertyId, "HorizontallyScrollable");
@@ -19,6 +19,11 @@ namespace FlaUI.Core.Patterns
         internal ScrollPattern(AutomationElement automationElement, IUIAutomationScrollPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new ScrollPatternInformation(element, cached))
         {
+        }
+
+        public IUIAutomationScrollPattern NativePattern
+        {
+            get { return (IUIAutomationScrollPattern)base.NativePattern; }
         }
 
         public void Scroll(ScrollAmount horizontalAmount, ScrollAmount verticalAmount)

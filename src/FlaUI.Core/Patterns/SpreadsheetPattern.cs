@@ -5,13 +5,18 @@ using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
-    public class SpreadsheetPattern : PatternBase<IUIAutomationSpreadsheetPattern>
+    public class SpreadsheetPattern : PatternBase
     {
         public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_SpreadsheetPatternId, "Spreadsheet");
 
         internal SpreadsheetPattern(AutomationElement automationElement, IUIAutomationSpreadsheetPattern nativePattern)
             : base(automationElement, nativePattern)
         {
+        }
+
+        public IUIAutomationSpreadsheetPattern NativePattern
+        {
+            get { return (IUIAutomationSpreadsheetPattern)base.NativePattern; }
         }
 
         public AutomationElement GetItemByName(string name)

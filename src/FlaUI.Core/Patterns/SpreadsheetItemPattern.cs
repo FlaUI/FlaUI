@@ -6,7 +6,7 @@ using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
-    public class SpreadsheetItemPattern : PatternBaseWithInformation<IUIAutomationSpreadsheetItemPattern, SpreadsheetItemInformation>
+    public class SpreadsheetItemPattern : PatternBaseWithInformation<SpreadsheetItemInformation>
     {
         public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_SpreadsheetItemPatternId, "SpreadsheetItem");
         public static readonly PropertyId FormulaProperty = PropertyId.Register(UIA_PropertyIds.UIA_SpreadsheetItemFormulaPropertyId, "Formula");
@@ -16,6 +16,11 @@ namespace FlaUI.Core.Patterns
         internal SpreadsheetItemPattern(AutomationElement automationElement, IUIAutomationSpreadsheetItemPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new SpreadsheetItemInformation(element, cached))
         {
+        }
+
+        public IUIAutomationSpreadsheetItemPattern NativePattern
+        {
+            get { return (IUIAutomationSpreadsheetItemPattern)base.NativePattern; }
         }
     }
 

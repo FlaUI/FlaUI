@@ -5,7 +5,7 @@ using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
-    public class RangeValuePattern : PatternBaseWithInformation<IUIAutomationRangeValuePattern, RangeValuePatternInformation>
+    public class RangeValuePattern : PatternBaseWithInformation<RangeValuePatternInformation>
     {
         public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_RangeValuePatternId, "RangeValue");
         public static readonly PropertyId IsReadOnlyProperty = PropertyId.Register(UIA_PropertyIds.UIA_RangeValueIsReadOnlyPropertyId, "IsReadOnly");
@@ -18,6 +18,11 @@ namespace FlaUI.Core.Patterns
         internal RangeValuePattern(AutomationElement automationElement, IUIAutomationRangeValuePattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new RangeValuePatternInformation(element, cached))
         {
+        }
+
+        public IUIAutomationRangeValuePattern NativePattern
+        {
+            get { return (IUIAutomationRangeValuePattern)base.NativePattern; }
         }
 
         public void SetValue(double val)

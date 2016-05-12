@@ -4,7 +4,7 @@ using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
-    public class TablePattern : PatternBaseWithInformation<IUIAutomationTablePattern, TablePatternInformation>
+    public class TablePattern : PatternBaseWithInformation<TablePatternInformation>
     {
         public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_TablePatternId, "Table");
         public static readonly PropertyId ColumnHeadersProperty = PropertyId.Register(UIA_PropertyIds.UIA_TableColumnHeadersPropertyId, "ColumnHeaders");
@@ -14,6 +14,11 @@ namespace FlaUI.Core.Patterns
         internal TablePattern(AutomationElement automationElement, IUIAutomationTablePattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new TablePatternInformation(element, cached))
         {
+        }
+
+        public IUIAutomationTablePattern NativePattern
+        {
+            get { return (IUIAutomationTablePattern)base.NativePattern; }
         }
     }
 

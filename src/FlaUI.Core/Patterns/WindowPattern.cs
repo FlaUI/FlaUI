@@ -6,7 +6,7 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
-    public class WindowPattern : PatternBaseWithInformation<UIA.IUIAutomationWindowPattern, WindowPatternInformation>
+    public class WindowPattern : PatternBaseWithInformation<WindowPatternInformation>
     {
         public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_WindowPatternId, "Window");
         public static readonly PropertyId CanMaximizeProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_WindowCanMaximizePropertyId, "CanMaximize");
@@ -21,6 +21,11 @@ namespace FlaUI.Core.Patterns
         internal WindowPattern(AutomationElement automationElement, UIA.IUIAutomationWindowPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new WindowPatternInformation(element, cached))
         {
+        }
+
+        public UIA.IUIAutomationWindowPattern NativePattern
+        {
+            get { return (UIA.IUIAutomationWindowPattern)base.NativePattern; }
         }
 
         public void Close()

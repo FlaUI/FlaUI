@@ -1,21 +1,26 @@
-﻿using FlaUI.Core.Elements;
+﻿using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Tools;
-using interop.UIAutomationCore;
-using SynchronizedInputType = FlaUI.Core.Definitions.SynchronizedInputType;
+using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
-    public class SynchronizedInputPattern : PatternBase<IUIAutomationSynchronizedInputPattern>
+    public class SynchronizedInputPattern : PatternBase
     {
-        public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_SynchronizedInputPatternId, "SynchronizedInput");
-        public static readonly EventId DiscardedEvent = EventId.Register(UIA_EventIds.UIA_InputDiscardedEventId, "Discarded");
-        public static readonly EventId ReachedOtherElementEvent = EventId.Register(UIA_EventIds.UIA_InputReachedOtherElementEventId, "ReachedOtherElement");
-        public static readonly EventId ReachedTargetEvent = EventId.Register(UIA_EventIds.UIA_InputReachedTargetEventId, "ReachedTarget");
+        public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_SynchronizedInputPatternId, "SynchronizedInput");
+        public static readonly EventId DiscardedEvent = EventId.Register(UIA.UIA_EventIds.UIA_InputDiscardedEventId, "Discarded");
+        public static readonly EventId ReachedOtherElementEvent = EventId.Register(UIA.UIA_EventIds.UIA_InputReachedOtherElementEventId, "ReachedOtherElement");
+        public static readonly EventId ReachedTargetEvent = EventId.Register(UIA.UIA_EventIds.UIA_InputReachedTargetEventId, "ReachedTarget");
 
-        internal SynchronizedInputPattern(AutomationElement automationElement, IUIAutomationSynchronizedInputPattern nativePattern)
+        internal SynchronizedInputPattern(AutomationElement automationElement, UIA.IUIAutomationSynchronizedInputPattern nativePattern)
             : base(automationElement, nativePattern)
         {
+        }
+
+        public UIA.IUIAutomationSynchronizedInputPattern NativePattern
+        {
+            get { return (UIA.IUIAutomationSynchronizedInputPattern)base.NativePattern; }
         }
 
         public void Cancel()
@@ -25,7 +30,7 @@ namespace FlaUI.Core.Patterns
 
         public void StartListening(SynchronizedInputType inputType)
         {
-            ComCallWrapper.Call(() => NativePattern.StartListening((interop.UIAutomationCore.SynchronizedInputType)inputType));
+            ComCallWrapper.Call(() => NativePattern.StartListening((UIA.SynchronizedInputType)inputType));
         }
     }
 }

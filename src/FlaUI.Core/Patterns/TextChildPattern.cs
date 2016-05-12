@@ -5,13 +5,18 @@ using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
-    public class TextChildPattern : PatternBase<IUIAutomationTextChildPattern>
+    public class TextChildPattern : PatternBase
     {
         public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_TextChildPatternId, "TextChild");
 
         internal TextChildPattern(AutomationElement automationElement, IUIAutomationTextChildPattern nativePattern)
             : base(automationElement, nativePattern)
         {
+        }
+
+        public IUIAutomationTextChildPattern NativePattern
+        {
+            get { return (IUIAutomationTextChildPattern)base.NativePattern; }
         }
 
         public AutomationElement TextContainer

@@ -5,7 +5,7 @@ using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
-    public class ValuePattern : PatternBaseWithInformation<IUIAutomationValuePattern, ValuePatternInformation>
+    public class ValuePattern : PatternBaseWithInformation<ValuePatternInformation>
     {
         public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_ValuePatternId, "Value");
         public static readonly PropertyId IsReadOnlyProperty = PropertyId.Register(UIA_PropertyIds.UIA_ValueIsReadOnlyPropertyId, "IsReadOnly");
@@ -14,6 +14,11 @@ namespace FlaUI.Core.Patterns
         internal ValuePattern(AutomationElement automationElement, IUIAutomationValuePattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new ValuePatternInformation(element, cached))
         {
+        }
+
+        public IUIAutomationValuePattern NativePattern
+        {
+            get { return (IUIAutomationValuePattern)base.NativePattern; }
         }
 
         public void SetValue(string value)

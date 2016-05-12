@@ -4,7 +4,7 @@ using interop.UIAutomationCore;
 
 namespace FlaUI.Core.Patterns
 {
-    public class GridItemPattern : PatternBaseWithInformation<IUIAutomationGridItemPattern, GridItemPatternInformation>
+    public class GridItemPattern : PatternBaseWithInformation<GridItemPatternInformation>
     {
         public static readonly PatternId Pattern = PatternId.Register(UIA_PatternIds.UIA_GridItemPatternId, "GridItem");
         public static readonly PropertyId ColumnProperty = PropertyId.Register(UIA_PropertyIds.UIA_GridItemColumnPropertyId, "Column");
@@ -16,6 +16,11 @@ namespace FlaUI.Core.Patterns
         internal GridItemPattern(AutomationElement automationElement, IUIAutomationGridItemPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new GridItemPatternInformation(element, cached))
         {
+        }
+
+        public IUIAutomationGridItemPattern NativePattern
+        {
+            get { return (IUIAutomationGridItemPattern)base.NativePattern; }
         }
     }
 
