@@ -42,7 +42,10 @@
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RadioButton2 = new System.Windows.Forms.RadioButton();
             this.RadioButton1 = new System.Windows.Forms.RadioButton();
+            this.ProgressBar = new System.Windows.Forms.ProgressBar();
+            this.Slider = new System.Windows.Forms.TrackBar();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Slider)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -170,11 +173,29 @@
             this.RadioButton1.Text = "RadioButton1";
             this.RadioButton1.UseVisualStyleBackColor = true;
             // 
+            // ProgressBar
+            // 
+            this.ProgressBar.Location = new System.Drawing.Point(12, 155);
+            this.ProgressBar.Name = "ProgressBar";
+            this.ProgressBar.Size = new System.Drawing.Size(100, 10);
+            this.ProgressBar.TabIndex = 11;
+            this.ProgressBar.Value = 50;
+            // 
+            // Slider
+            // 
+            this.Slider.LargeChange = 4;
+            this.Slider.Location = new System.Drawing.Point(12, 171);
+            this.Slider.Name = "Slider";
+            this.Slider.Size = new System.Drawing.Size(150, 45);
+            this.Slider.TabIndex = 16;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(401, 199);
+            this.ClientSize = new System.Drawing.Size(401, 242);
+            this.Controls.Add(this.Slider);
+            this.Controls.Add(this.ProgressBar);
             this.Controls.Add(this.RadioButton2);
             this.Controls.Add(this.RadioButton1);
             this.Controls.Add(this.ThreeStateCheckBox);
@@ -184,9 +205,10 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "FlaUI WinForms Test App";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Slider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -208,6 +230,8 @@
         private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
         private System.Windows.Forms.RadioButton RadioButton2;
         private System.Windows.Forms.RadioButton RadioButton1;
+        private System.Windows.Forms.ProgressBar ProgressBar;
+        private System.Windows.Forms.TrackBar Slider;
     }
 }
 

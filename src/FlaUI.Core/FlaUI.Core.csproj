@@ -59,6 +59,7 @@
     <Compile Include="Definitions\ControlType.cs" />
     <Compile Include="Definitions\DockPosition.cs" />
     <Compile Include="Definitions\ExpandCollapseState.cs" />
+    <Compile Include="Definitions\FrameworkIds.cs" />
     <Compile Include="Definitions\LiveSetting.cs" />
     <Compile Include="Definitions\OrientationType.cs" />
     <Compile Include="Definitions\PropertyConditionFlags.cs" />
@@ -84,7 +85,10 @@
     <Compile Include="Elements\Label.cs" />
     <Compile Include="Elements\Menu.cs" />
     <Compile Include="Elements\MenuItem.cs" />
+    <Compile Include="Elements\ProgressBar.cs" />
     <Compile Include="Elements\RadioButton.cs" />
+    <Compile Include="Elements\Slider.cs" />
+    <Compile Include="Elements\Thumb.cs" />
     <Compile Include="Elements\TitleBar.cs" />
     <Compile Include="Elements\Window.cs" />
     <Compile Include="EventHandlers\BasicEventHandler.cs" />

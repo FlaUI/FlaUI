@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="197" Width="387">
+        Title="FlaUI WPF Test App" Height="197" Width="387">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
@@ -32,6 +32,8 @@
             <CheckBox Content="3-Way Test Checkbox" IsThreeState="True" AutomationProperties.AutomationId="ThreeStateCheckBox" />
             <RadioButton AutomationProperties.AutomationId="RadioButton1" Content="RadioButton1" />
             <RadioButton AutomationProperties.AutomationId="RadioButton2" Content="RadioButton2" />
+            <ProgressBar Value="50" AutomationProperties.AutomationId="ProgressBar" />
+            <Slider AutomationProperties.AutomationId="Slider" LargeChange="4" SmallChange="1" Width="150"/>
         </StackPanel>
     </DockPanel>
 </Window>

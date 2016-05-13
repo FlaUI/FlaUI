@@ -2,6 +2,7 @@
 using FlaUI.Core.Elements;
 using FlaUI.Core.Shapes;
 using interop.UIAutomationCore;
+using System;
 using System.Globalization;
 using System.Linq;
 
@@ -128,6 +129,15 @@ namespace FlaUI.Core.Tools
         {
             var origValue = (int)cultureId;
             return origValue == 0 ? CultureInfo.InvariantCulture : new CultureInfo(origValue);
+        }
+
+        /// <summary>
+        ///  Converts <see cref="int"/> to <see cref="IntPtr"/>
+        /// </summary>
+        public static object IntToIntPtr(object intPtrAsInt)
+        {
+            var origValue = (int)intPtrAsInt;
+            return origValue == 0 ? IntPtr.Zero : new IntPtr(origValue);
         }
     }
 }

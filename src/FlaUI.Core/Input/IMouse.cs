@@ -84,5 +84,21 @@ namespace FlaUI.Core.Input
         /// Simulates scrolling of the horizontal mouse wheel left or right
         /// </summary>
         void HorizontalScroll(double lines);
+
+        /// <summary>
+        /// Drags the mouse horizontally
+        /// </summary>
+        /// <param name="mouseButton">The mouse button to use for dragging</param>
+        /// <param name="startingPoint">Starting point of the drag</param>
+        /// <param name="distance">The distance to drag, + for right, - for left</param>
+        void DragHorizontally(MouseButton mouseButton, Point startingPoint, double distance);
+
+        /// <summary>
+        /// Drags the mouse vertically
+        /// </summary>
+        /// <param name="mouseButton">The mouse button to use for dragging</param>
+        /// <param name="startingPoint">Starting point of the drag</param>
+        /// <param name="distance">The distance to drag, + for down, - for up</param>
+        void DragVertically(MouseButton mouseButton, Point startingPoint, double distance);
     }
 }

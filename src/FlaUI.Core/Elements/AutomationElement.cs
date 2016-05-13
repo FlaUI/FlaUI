@@ -391,7 +391,7 @@ namespace FlaUI.Core.Elements
         public static readonly PropertyId LiveSettingProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_LiveSettingPropertyId, "LiveSetting");
         public static readonly PropertyId LocalizedControlTypeProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_LocalizedControlTypePropertyId, "LocalizedControlType");
         public static readonly PropertyId NameProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_NamePropertyId, "Name");
-        public static readonly PropertyId NativeWindowHandleProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_NativeWindowHandlePropertyId, "NativeWindowHandle");
+        public static readonly PropertyId NativeWindowHandleProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_NativeWindowHandlePropertyId, "NativeWindowHandle").SetConverter(NativeValueConverter.IntToIntPtr);
         public static readonly PropertyId OptimizeForVisualContentProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_OptimizeForVisualContentPropertyId, "OptimizeForVisualContent");
         public static readonly PropertyId OrientationProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_OrientationPropertyId, "Orientation");
         public static readonly PropertyId ProcessIdProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_ProcessIdPropertyId, "ProcessId");
@@ -501,6 +501,32 @@ namespace FlaUI.Core.Elements
         {
             if (automationElement == null) { return null; }
             return new MenuItem(automationElement.Automation, automationElement.NativeElement);
+        }
+
+        public static ProgressBar AsProgressBar(this AutomationElement automationElement)
+        {
+            if (automationElement == null) { return null; }
+            return new ProgressBar(automationElement.Automation, automationElement.NativeElement);
+        }
+
+        public static Slider AsSlider(this AutomationElement automationElement)
+        {
+            if (automationElement == null) { return null; }
+            if (automationElement.Current.FrameworkId == FrameworkIds.Wpf)
+            {
+                return new WpfSlider(automationElement.Automation, automationElement.NativeElement);
+            }
+            if (automationElement.Current.FrameworkId == FrameworkIds.WinForms)
+            {
+                return new WinFormsSlider(automationElement.Automation, automationElement.NativeElement);
+            }
+            return new Slider(automationElement.Automation, automationElement.NativeElement);
+        }
+
+        public static Thumb AsThumb(this AutomationElement automationElement)
+        {
+            if (automationElement == null) { return null; }
+            return new Thumb(automationElement.Automation, automationElement.NativeElement);
         }
     }
 }
