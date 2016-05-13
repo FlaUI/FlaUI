@@ -7,9 +7,9 @@ FlaUI wraps almost everything from the UI Automation Library but also provides t
 FlaUI implements it's own wrapper around the native UIA Library. Some ideas are copied from the project UIAComWrapper and Teststack.White but rewritten from scratch to have a clean codebase.
 
 ### Build Status
-|Repo|Appveyor|
-|:---|:------------------|
-|[FlaUI](https://github.com/Roemer/FlaUI)|[![Build status](https://ci.appveyor.com/api/projects/status/mwd2o329cma50sxe?svg=true)](https://ci.appveyor.com/project/RomanBaeriswyl/flaui)|[![Test status](http://flauschig.ch/batch.php?type=tests&account=RomanBaeriswyl&slug=flaui&branch=master)](https://ci.appveyor.com/project/RomanBaeriswyl/flaui/branch/master)
+|Repo|Build|Tests|
+|:---|:------------------|:------------------|
+|[FlaUI](https://github.com/Roemer/FlaUI)|[![Build status](https://ci.appveyor.com/api/projects/status/mwd2o329cma50sxe?svg=true)](https://ci.appveyor.com/project/RomanBaeriswyl/flaui)|[![Test status](http://flauschig.ch/batch.php?type=tests&account=RomanBaeriswyl&slug=flaui&branch=master)](https://ci.appveyor.com/project/RomanBaeriswyl/flaui/branch/master)|
 
 ### Usage
 ```csharp
