@@ -87,6 +87,9 @@
     <Compile Include="Elements\MenuItem.cs" />
     <Compile Include="Elements\ProgressBar.cs" />
     <Compile Include="Elements\RadioButton.cs" />
+    <Compile Include="Elements\SelectionItem.cs" />
+    <Compile Include="Elements\Tab.cs" />
+    <Compile Include="Elements\TabItem.cs" />
     <Compile Include="Elements\Slider.cs" />
     <Compile Include="Elements\Thumb.cs" />
     <Compile Include="Elements\TitleBar.cs" />

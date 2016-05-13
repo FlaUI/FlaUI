@@ -503,6 +503,18 @@ namespace FlaUI.Core.Elements
             return new MenuItem(automationElement.Automation, automationElement.NativeElement);
         }
 
+        public static Tab AsTab(this AutomationElement automationElement)
+        {
+            if (automationElement == null) { return null; }
+            return new Tab(automationElement.Automation, automationElement.NativeElement);
+        }
+
+        public static TabItem AsTabItem(this AutomationElement automationElement)
+        {
+            if (automationElement == null) { return null; }
+            return new TabItem(automationElement.Automation, automationElement.NativeElement);
+        }
+
         public static ProgressBar AsProgressBar(this AutomationElement automationElement)
         {
             if (automationElement == null) { return null; }

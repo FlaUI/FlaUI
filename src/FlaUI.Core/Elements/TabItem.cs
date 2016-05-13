@@ -2,9 +2,9 @@
 
 namespace FlaUI.Core.Elements
 {
-    public class RadioButton : SelectionItem
+    public class TabItem : SelectionItem
     {
-        public RadioButton(Automation automation, UIA.IUIAutomationElement nativeElement)
+        public TabItem(Automation automation, UIA.IUIAutomationElement nativeElement)
             : base(automation, nativeElement) { }
     }
 }
