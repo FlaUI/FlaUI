@@ -467,6 +467,12 @@ namespace FlaUI.Core.Elements
             return new CheckBox(automationElement.Automation, automationElement.NativeElement);
         }
 
+        public static RadioButton AsRadioButton(this AutomationElement automationElement)
+        {
+            if (automationElement == null) { return null; }
+            return new RadioButton(automationElement.Automation, automationElement.NativeElement);
+        }
+
         public static Window AsWindow(this AutomationElement automationElement)
         {
             if (automationElement == null) { return null; }

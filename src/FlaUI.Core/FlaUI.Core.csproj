@@ -84,6 +84,7 @@
     <Compile Include="Elements\Label.cs" />
     <Compile Include="Elements\Menu.cs" />
     <Compile Include="Elements\MenuItem.cs" />
+    <Compile Include="Elements\RadioButton.cs" />
     <Compile Include="Elements\TitleBar.cs" />
     <Compile Include="Elements\Window.cs" />
     <Compile Include="EventHandlers\BasicEventHandler.cs" />
