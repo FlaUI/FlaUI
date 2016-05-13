@@ -502,5 +502,17 @@ namespace FlaUI.Core.Elements
             if (automationElement == null) { return null; }
             return new MenuItem(automationElement.Automation, automationElement.NativeElement);
         }
+
+        public static Tab AsTab(this AutomationElement automationElement)
+        {
+            if (automationElement == null) { return null; }
+            return new Tab(automationElement.Automation, automationElement.NativeElement);
+        }
+
+        public static TabItem AsTabItem(this AutomationElement automationElement)
+        {
+            if (automationElement == null) { return null; }
+            return new TabItem(automationElement.Automation, automationElement.NativeElement);
+        }
     }
 }
