@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="FlaUI WPF Test App" Height="197" Width="387">
+        Title="FlaUI WPF Test App" Height="244" Width="384">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
@@ -21,19 +21,35 @@
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem></StatusBarItem>
         </StatusBar>
-        <StackPanel Orientation="Vertical">
-            <Label Content="Test Label"/>
-            <ComboBox Width="120" IsEditable="True" AutomationProperties.AutomationId="EditableCombo">
-                <TextBlock Text="Item 1" AutomationProperties.AutomationId="EditableComboItem1" />
-                <TextBlock Text="Item 2" AutomationProperties.AutomationId="EditableComboItem2" />
-                <TextBlock Text="Item 3" AutomationProperties.AutomationId="EditableComboItem3" />
-            </ComboBox>
-            <CheckBox Content="Test Checkbox" AutomationProperties.AutomationId="SimpleCheckBox" />
-            <CheckBox Content="3-Way Test Checkbox" IsThreeState="True" AutomationProperties.AutomationId="ThreeStateCheckBox" />
-            <RadioButton AutomationProperties.AutomationId="RadioButton1" Content="RadioButton1" />
-            <RadioButton AutomationProperties.AutomationId="RadioButton2" Content="RadioButton2" />
-            <ProgressBar Value="50" AutomationProperties.AutomationId="ProgressBar" />
-            <Slider AutomationProperties.AutomationId="Slider" LargeChange="4" SmallChange="1" Width="150"/>
-        </StackPanel>
+        <TabControl>
+            <TabItem Header="Simple Controls">
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Test Label"/>
+                    <ComboBox Width="120" IsEditable="True" AutomationProperties.AutomationId="EditableCombo">
+                        <TextBlock Text="Item 1" AutomationProperties.AutomationId="EditableComboItem1" />
+                        <TextBlock Text="Item 2" AutomationProperties.AutomationId="EditableComboItem2" />
+                        <TextBlock Text="Item 3" AutomationProperties.AutomationId="EditableComboItem3" />
+                    </ComboBox>
+                    <CheckBox Content="Test Checkbox" AutomationProperties.AutomationId="SimpleCheckBox" />
+                    <CheckBox Content="3-Way Test Checkbox" IsThreeState="True" AutomationProperties.AutomationId="ThreeStateCheckBox" />
+                    <RadioButton AutomationProperties.AutomationId="RadioButton1" Content="RadioButton1" />
+                    <RadioButton AutomationProperties.AutomationId="RadioButton2" Content="RadioButton2" />
+                    <ProgressBar Value="50" AutomationProperties.AutomationId="ProgressBar" />
+                    <Slider AutomationProperties.AutomationId="Slider" LargeChange="4" SmallChange="1" Width="150"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Complex Controls">
+                <TreeView AutomationProperties.AutomationId="treeView1">
+                    <TreeViewItem Header="Lvl1 a">
+                        <TreeViewItem Header="Lvl2 a" />
+                        <TreeViewItem Header="Lvl2 b">
+                            <TreeViewItem Header="Lvl3 a" />
+                        </TreeViewItem>
+                        <TreeViewItem Header="Lvl2 b" />
+                    </TreeViewItem>
+                    <TreeViewItem Header="Lvl1 b" />
+                </TreeView>
+            </TabItem>
+        </TabControl>
     </DockPanel>
 </Window>

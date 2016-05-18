@@ -515,6 +515,18 @@ namespace FlaUI.Core.Elements
             return new TabItem(automationElement.Automation, automationElement.NativeElement);
         }
 
+        public static Tree AsTree(this AutomationElement automationElement)
+        {
+            if (automationElement == null) { return null; }
+            return new Tree(automationElement.Automation, automationElement.NativeElement);
+        }
+
+        public static TreeItem AsTreeItem(this AutomationElement automationElement)
+        {
+            if (automationElement == null) { return null; }
+            return new TreeItem(automationElement.Automation, automationElement.NativeElement);
+        }
+
         public static ProgressBar AsProgressBar(this AutomationElement automationElement)
         {
             if (automationElement == null) { return null; }

@@ -10,55 +10,72 @@ namespace FlaUI.Core.Elements
     {
         public Tab(Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
 
-        public TabItem SelectedTab
+        /// <summary>
+        /// The currently selected <see cref="TabItem"/>
+        /// </summary>
+        public TabItem SelectedTabItem
         {
-            get { return Tabs.FirstOrDefault(t => t.IsSelected); }
+            get { return TabItems.FirstOrDefault(t => t.IsSelected); }
         }
 
-        public int SelectedTabIndex
+        /// <summary>
+        /// The index of the currently selected <see cref="TabItem"/>
+        /// </summary>
+        public int SelectedTabItemIndex
         {
-            get { return GetIndexOfSelectedTab(Tabs); }
+            get { return GetIndexOfSelecteTabItem(); }
         }
 
-        public int TabCount
+        /// <summary>
+        /// All <see cref="TabItem"/> objects from this <see cref="Tab"/>
+        /// </summary>
+        public TabItem[] TabItems
         {
-            get { return Tabs.Length; }
+            get { return GetTabItems(); }
         }
 
-        public TabItem[] Tabs
+        /// <summary>
+        /// Selects a <see cref="TabItem"/> by index
+        /// </summary>
+        public void SelectTabItem(int index)
         {
-            get
+            var tabItem = TabItems[index];
+            tabItem.Select();
+        }
+
+        /// <summary>
+        /// Selects a <see cref="TabItem"/> by a give text (name property)
+        /// </summary>
+        public void SelectTabItem(string text)
+        {
+            var vabItems = TabItems;
+            var foundTabItemIndex = Array.FindIndex(vabItems, t => t.Current.Name == text);
+            if (foundTabItemIndex < 0)
             {
-                return FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.TabItem))
-                    .Select(e => e.AsTabItem()).ToArray();
+                throw new Exception(String.Format("No TabItem found with text '{0}'", text));
             }
-        }
-
-        public void SelectTabPage(int index)
-        {
-            var tab = Tabs[index];
-            tab.Select();
-        }
-
-        public void SelectTabPage(string tabTitle)
-        {
-            var tabs = Tabs;
-            var foundTabIndex = Array.FindIndex<TabItem>(tabs, t => t.Current.Name == tabTitle);
-            if (foundTabIndex < 0)
+            var previousSelectedTabItemIndex = SelectedTabItemIndex;
+            if (previousSelectedTabItemIndex == foundTabItemIndex)
             {
-                throw new Exception(String.Format("No tab found with title '{0}'", tabTitle));
-            }
-            var previousSelectedTabIndex = GetIndexOfSelectedTab(tabs);
-            if (previousSelectedTabIndex == foundTabIndex)
-            {
+                // It is already selected so don't do anything
                 return;
             }
-            tabs[foundTabIndex].Select();
+            // Select the item
+            vabItems[foundTabItemIndex].Select();
         }
 
-        private int GetIndexOfSelectedTab(TabItem[] tabs)
+        /// <summary>
+        /// Gets all the <see cref="TabItem"/> objects for this <see cref="Tab"/>
+        /// </summary>
+        private TabItem[] GetTabItems()
         {
-            return Array.FindIndex<TabItem>(Tabs, t => t.IsSelected);
+            return FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.TabItem))
+                .Select(e => e.AsTabItem()).ToArray();
+        }
+
+        private int GetIndexOfSelecteTabItem()
+        {
+            return Array.FindIndex(TabItems, t => t.IsSelected);
         }
     }
 }

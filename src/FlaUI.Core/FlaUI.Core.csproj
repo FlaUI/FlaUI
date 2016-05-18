@@ -93,6 +93,8 @@
     <Compile Include="Elements\Slider.cs" />
     <Compile Include="Elements\Thumb.cs" />
     <Compile Include="Elements\TitleBar.cs" />
+    <Compile Include="Elements\Tree.cs" />
+    <Compile Include="Elements\TreeItem.cs" />
     <Compile Include="Elements\Window.cs" />
     <Compile Include="EventHandlers\BasicEventHandler.cs" />
     <Compile Include="EventHandlers\EventHandlerBase.cs" />

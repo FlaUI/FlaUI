@@ -16,7 +16,7 @@ namespace FlaUI.UIA2
 
         public class LegacyUia
         {
-            private AutomationElement _element;
+            private readonly AutomationElement _element;
             public LegacyUia(AutomationElement element) { _element = element; }
 
             public void RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
@@ -24,7 +24,7 @@ namespace FlaUI.UIA2
                 var legacyEvent = LegacyUIA.AutomationEvent.LookupById(@event.Id);
                 if (legacyEvent == null) { return; }
                 LegacyUIA.Automation.AddAutomationEventHandler(legacyEvent, GetLegacyElement(), (LegacyUIA.TreeScope)treeScope,
-                    (object sender, LegacyUIA.AutomationEventArgs e) =>
+                    (sender, e) =>
                     {
                         var legacyElement = (LegacyUIA.AutomationElement)sender;
                         var senderElement = GetNewElement(legacyElement);
@@ -36,7 +36,7 @@ namespace FlaUI.UIA2
             public void RegisterFocusChangedEvent(Action<AutomationElement> action)
             {
                 LegacyUIA.Automation.AddAutomationFocusChangedEventHandler(
-                    (object sender, LegacyUIA.AutomationFocusChangedEventArgs e) =>
+                    (sender, e) =>
                     {
                         // TODO: Any way to get the element?
                         action(null);
@@ -48,7 +48,7 @@ namespace FlaUI.UIA2
             {
                 LegacyUIA.Automation.AddStructureChangedEventHandler(
                     GetLegacyElement(), (LegacyUIA.TreeScope)treeScope,
-                    (object sender, LegacyUIA.StructureChangedEventArgs e) =>
+                    (sender, e) =>
                     {
                         var legacyElement = (LegacyUIA.AutomationElement)sender;
                         var senderElement = GetNewElement(legacyElement);
@@ -62,7 +62,7 @@ namespace FlaUI.UIA2
                 var propertyIds = properties.Select(p => LegacyUIA.AutomationProperty.LookupById(p.Id)).Where(p => p != null).ToArray();
                 LegacyUIA.Automation.AddAutomationPropertyChangedEventHandler(
                     GetLegacyElement(), (LegacyUIA.TreeScope)treeScope,
-                    (object sender, LegacyUIA.AutomationPropertyChangedEventArgs e) =>
+                    (sender, e) =>
                     {
                         var legacyElement = (LegacyUIA.AutomationElement)sender;
                         var senderElement = GetNewElement(legacyElement);
