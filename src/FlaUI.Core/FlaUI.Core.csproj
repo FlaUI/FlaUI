@@ -114,9 +114,11 @@
     <Compile Include="Input\Helpers.cs" />
     <Compile Include="Input\IKeyboard.cs" />
     <Compile Include="Input\IMouse.cs" />
+    <Compile Include="Input\ITouch.cs" />
     <Compile Include="Input\Keyboard.cs" />
     <Compile Include="Input\Mouse.cs" />
     <Compile Include="Input\MouseButton.cs" />
+    <Compile Include="Input\Touch.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Overlay\OverlayManager.cs" />

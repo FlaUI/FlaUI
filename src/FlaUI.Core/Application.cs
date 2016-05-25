@@ -173,16 +173,6 @@ namespace FlaUI.Core
         }
 
         #region Window
-
-        /// <summary>
-        /// Gets the root element (desktop)
-        /// </summary>
-        public AutomationElement GetDesktop()
-        {
-            var desktop = Automation.NativeAutomation.GetRootElement();
-            return new AutomationElement(Automation, desktop);
-        }
-
         /// <summary>
         /// Gets the window from the MainWindowHandle of the process
         /// </summary>

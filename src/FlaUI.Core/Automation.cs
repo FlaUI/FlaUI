@@ -92,6 +92,15 @@ namespace FlaUI.Core
         }
 
         /// <summary>
+        /// Gets the root element (desktop)
+        /// </summary>
+        public AutomationElement GetDesktop()
+        {
+            var desktop = NativeAutomation.GetRootElement();
+            return new AutomationElement(this, desktop);
+        }
+
+        /// <summary>
         /// Creates an <see cref="AutomationElement"/> from a given point
         /// </summary>
         public AutomationElement FromPoint(Point point)

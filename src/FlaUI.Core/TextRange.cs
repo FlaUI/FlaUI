@@ -1,10 +1,9 @@
-﻿using FlaUI.Core.Elements;
+﻿using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Shapes;
 using FlaUI.Core.Tools;
-using interop.UIAutomationCore;
-using TextPatternRangeEndpoint = FlaUI.Core.Definitions.TextPatternRangeEndpoint;
-using TextUnit = FlaUI.Core.Definitions.TextUnit;
+using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.Core
 {
@@ -12,9 +11,9 @@ namespace FlaUI.Core
     {
         public Automation Automation { get; private set; }
 
-        public IUIAutomationTextRange NativeRange { get; private set; }
+        public UIA.IUIAutomationTextRange NativeRange { get; private set; }
 
-        internal TextRange(Automation automation, IUIAutomationTextRange nativeRange)
+        internal TextRange(Automation automation, UIA.IUIAutomationTextRange nativeRange)
         {
             Automation = automation;
             NativeRange = nativeRange;
@@ -129,7 +128,7 @@ namespace FlaUI.Core
 
         public TextRange2 AsTextRange2()
         {
-            var nativeRange2 = (IUIAutomationTextRange2)NativeRange;
+            var nativeRange2 = (UIA.IUIAutomationTextRange2)NativeRange;
             return NativeValueConverter.NativeToManaged(Automation, nativeRange2);
         }
     }

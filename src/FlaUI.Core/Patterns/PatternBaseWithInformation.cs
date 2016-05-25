@@ -6,7 +6,6 @@ namespace FlaUI.Core.Patterns
     /// <summary>
     /// Base pattern for patterns which have information (properties)
     /// </summary>
-    /// <typeparam name="T">Native type of the pattern</typeparam>
     /// <typeparam name="TProp">Type of the information object</typeparam>
     public abstract class PatternBaseWithInformation<TProp> : PatternBase where TProp : InformationBase
     {
