@@ -49,15 +49,10 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Elements\ElementConversionExtensions.cs" />
     <Compile Include="UIA3Automation.cs" />
-    <Compile Include="Conditions\AndCondition.cs" />
-    <Compile Include="Conditions\BoolCondition.cs" />
-    <Compile Include="Conditions\ConditionBase.cs" />
+    <Compile Include="Conditions\NativeConditionConverter.cs" />
     <Compile Include="Conditions\ConditionFactory.cs" />
-    <Compile Include="Conditions\JunctionConditionBase.cs" />
-    <Compile Include="Conditions\NotCondition.cs" />
-    <Compile Include="Conditions\OrCondition.cs" />
-    <Compile Include="Conditions\PropertyCondition.cs" />
     <Compile Include="Definitions\AnnotationType.cs" />
     <Compile Include="Definitions\ControlType.cs" />
     <Compile Include="Definitions\DockPosition.cs" />
@@ -65,7 +60,6 @@
     <Compile Include="Definitions\FrameworkIds.cs" />
     <Compile Include="Definitions\LiveSetting.cs" />
     <Compile Include="Definitions\OrientationType.cs" />
-    <Compile Include="Definitions\PropertyConditionFlags.cs" />
     <Compile Include="Definitions\RowOrColumnMajor.cs" />
     <Compile Include="Definitions\ScrollAmount.cs" />
     <Compile Include="Definitions\StructureChangeType.cs" />
@@ -104,15 +98,6 @@
     <Compile Include="EventHandlers\FocusChangedEventHandler.cs" />
     <Compile Include="EventHandlers\PropertyChangedEventHandler.cs" />
     <Compile Include="EventHandlers\StructureChangedEventHandler.cs" />
-    <Compile Include="Exceptions\MethodNotSupportedException.cs" />
-    <Compile Include="Exceptions\NoClickablePointException.cs" />
-    <Compile Include="Exceptions\PropertyNotSupportedException.cs" />
-    <Compile Include="Identifiers\ConvertibleIdentifierBase.cs" />
-    <Compile Include="Identifiers\EventId.cs" />
-    <Compile Include="Identifiers\IdentifierBase.cs" />
-    <Compile Include="Identifiers\PatternId.cs" />
-    <Compile Include="Identifiers\PropertyId.cs" />
-    <Compile Include="Identifiers\TextAttributeId.cs" />
     <Compile Include="InformationBase.cs" />
     <Compile Include="PatternFactory.cs" />
     <Compile Include="Patterns\AnnotationPattern.cs" />

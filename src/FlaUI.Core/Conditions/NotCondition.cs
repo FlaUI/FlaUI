@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FlaUI.UIA3.Conditions
+namespace FlaUI.Core.Conditions
 {
     public class NotCondition : ConditionBase
     {

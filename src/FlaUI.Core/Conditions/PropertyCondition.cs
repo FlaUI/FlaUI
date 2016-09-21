@@ -1,8 +1,8 @@
-﻿using FlaUI.UIA3.Definitions;
-using FlaUI.UIA3.Identifiers;
-using System;
+﻿using System;
+using FlaUI.Core.Definitions;
+using FlaUI.Core.Identifiers;
 
-namespace FlaUI.UIA3.Conditions
+namespace FlaUI.Core.Conditions
 {
     public class PropertyCondition : ConditionBase
     {

@@ -1,12 +1,14 @@
 ﻿using FlaUI.Core;
+using FlaUI.Core.Conditions;
+using FlaUI.Core.Elements;
+using FlaUI.Core.Exceptions;
+using FlaUI.Core.Identifiers;
 using FlaUI.Core.Shapes;
 using FlaUI.Core.Tools;
 using FlaUI.Core.WindowsAPI;
 using FlaUI.UIA3.Conditions;
 using FlaUI.UIA3.Definitions;
 using FlaUI.UIA3.EventHandlers;
-using FlaUI.UIA3.Exceptions;
-using FlaUI.UIA3.Identifiers;
 using FlaUI.UIA3.Tools;
 using System;
 using System.Linq;
@@ -19,7 +21,7 @@ namespace FlaUI.UIA3.Elements
     /// <summary>
     /// Basic class for a wrapped ui element
     /// </summary>
-    public class Element
+    public class Element : ElementBase<UIA3Automation>
     {
         /// <summary>
         /// Native object for the ui element
@@ -43,11 +45,6 @@ namespace FlaUI.UIA3.Elements
         }
 
         /// <summary>
-        /// Underlying <see cref="Automation"/> object where this element belongs to
-        /// </summary>
-        public UIA3Automation Automation { get; private set; }
-
-        /// <summary>
         /// A factory object for patterns
         /// </summary>
         public PatternFactory PatternFactory { get; private set; }
@@ -67,65 +64,12 @@ namespace FlaUI.UIA3.Elements
         /// </summary>
         /// <param name="automation">The automation instance where this element belongs to</param>
         /// <param name="nativeElement">The native element this instance wrapps</param>
-        public Element(UIA3Automation automation, UIA.IUIAutomationElement nativeElement)
+        public Element(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation)
         {
-            Automation = automation;
             NativeElement = nativeElement;
             PatternFactory = new PatternFactory(this);
             Cached = new ElementInformation(this, true);
             Current = new ElementInformation(this, false);
-        }
-
-        /// <summary>
-        /// Gets the desired property value. Ends in an exception if the property is not supported.
-        /// </summary>
-        public object GetPropertyValue(PropertyId property, bool cached)
-        {
-            return GetPropertyValue<object>(property, cached);
-        }
-
-        public T GetPropertyValue<T>(PropertyId property, bool cached)
-        {
-            var value = InternalGetPropertyValue(property.Id, cached, false);
-            if (value == Automation.NativeAutomation.ReservedNotSupportedValue)
-            {
-                throw new PropertyNotSupportedException(String.Format("Property '{0}' not supported", property.Name), property);
-            }
-            return ConvertValue<T>(property, value);
-        }
-
-        /// <summary>
-        /// Gets the desired property value or the default value, if the property is not supported
-        /// </summary>
-        public object SafeGetPropertyValue(PropertyId property, bool cached)
-        {
-            return SafeGetPropertyValue<object>(property, cached);
-        }
-
-        public T SafeGetPropertyValue<T>(PropertyId property, bool cached)
-        {
-            var value = InternalGetPropertyValue(property.Id, cached, true);
-            return ConvertValue<T>(property, value);
-        }
-
-        /// <summary>
-        /// Tries to get the property value. Fails if the property is not supported.
-        /// </summary>
-        public bool TryGetPropertyValue(PropertyId property, bool cached, out object value)
-        {
-            return TryGetPropertyValue<object>(property, cached, out value);
-        }
-
-        public bool TryGetPropertyValue<T>(PropertyId property, bool cached, out T value)
-        {
-            var tmp = InternalGetPropertyValue(property.Id, cached, false);
-            if (tmp == Automation.NativeAutomation.ReservedNotSupportedValue)
-            {
-                value = default(T);
-                return false;
-            }
-            value = ConvertValue<T>(property, tmp);
-            return true;
         }
 
         /// <summary>
@@ -300,7 +244,7 @@ namespace FlaUI.UIA3.Elements
         /// </summary>
         public Element[] FindAll(TreeScope treeScope, ConditionBase condition)
         {
-            var nativeFoundElements = NativeElement.FindAll((UIA.TreeScope)treeScope, condition.ToNative(Automation));
+            var nativeFoundElements = NativeElement.FindAll((UIA.TreeScope)treeScope, NativeConditionConverter.ToNative(Automation, condition));
             return NativeValueConverter.NativeArrayToManaged(Automation, nativeFoundElements);
         }
 
@@ -309,7 +253,7 @@ namespace FlaUI.UIA3.Elements
         /// </summary>
         public Element FindFirst(TreeScope treeScope, ConditionBase condition)
         {
-            var nativeFoundElement = NativeElement.FindFirst((UIA.TreeScope)treeScope, condition.ToNative(Automation));
+            var nativeFoundElement = NativeElement.FindFirst((UIA.TreeScope)treeScope, NativeConditionConverter.ToNative(Automation, condition));
             return NativeValueConverter.NativeToManaged(Automation, nativeFoundElement);
         }
 
@@ -336,14 +280,7 @@ namespace FlaUI.UIA3.Elements
             return element;
         }
 
-        /// <summary>
-        /// Gets the desired property value
-        /// </summary>
-        /// <param name="propertyId">The id of the property to get</param>
-        /// <param name="cached">Flag to indicate if the cached or current value should be fetched</param>
-        /// <param name="useDefaultIfNotSupported">Flag to indicate, if the default value should be used if the property is not supported</param>
-        /// <returns>The value / default value of the property or <see cref="UIA.IUIAutomation.ReservedNotSupportedValue" /></returns>
-        private object InternalGetPropertyValue(int propertyId, bool cached, bool useDefaultIfNotSupported)
+        protected override object InternalGetPropertyValue(int propertyId, bool cached, bool useDefaultIfNotSupported)
         {
             var ignoreDefaultValue = useDefaultIfNotSupported ? 0 : 1;
             var returnValue = cached ?
@@ -352,207 +289,96 @@ namespace FlaUI.UIA3.Elements
             return returnValue;
         }
 
-        /// <summary>
-        /// Converts the given value with the registered converter or simply casts it
-        /// </summary>
-        private T ConvertValue<T>(PropertyId property, object value)
-        {
-            return property.Convert<T>(value);
-        }
         #region Property Identifiers
         // Base element properties
-        public static readonly PropertyId AcceleratorKeyProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_AcceleratorKeyPropertyId, "AcceleratorKey");
-        public static readonly PropertyId AccessKeyProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_AccessKeyPropertyId, "AccessKey");
-        public static readonly PropertyId AriaPropertiesProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_AriaPropertiesPropertyId, "AriaProperties");
-        public static readonly PropertyId AriaRoleProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_AriaRolePropertyId, "AriaRole");
-        public static readonly PropertyId AutomationIdProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_AutomationIdPropertyId, "AutomationId");
-        public static readonly PropertyId BoundingRectangleProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_BoundingRectanglePropertyId, "BoundingRectangle").SetConverter(NativeValueConverter.ToRectangle);
-        public static readonly PropertyId ClassNameProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_ClassNamePropertyId, "ClassName");
-        public static readonly PropertyId ClickablePointProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_ClickablePointPropertyId, "ClickablePoint").SetConverter(NativeValueConverter.ToPoint);
-        public static readonly PropertyId ControllerForProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_ControllerForPropertyId, "ControllerFor");
-        public static readonly PropertyId ControlTypeProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_ControlTypePropertyId, "ControlType");
-        public static readonly PropertyId CultureProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_CulturePropertyId, "Culture").SetConverter(NativeValueConverter.ToCulture);
-        public static readonly PropertyId DescribedByProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_DescribedByPropertyId, "DescribedBy");
-        public static readonly PropertyId FlowsFromProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_FlowsFromPropertyId, "FlowsFrom");
-        public static readonly PropertyId FlowsToProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_FlowsToPropertyId, "FlowsTo");
-        public static readonly PropertyId FrameworkIdProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_FrameworkIdPropertyId, "FrameworkId");
-        public static readonly PropertyId HasKeyboardFocusProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_HasKeyboardFocusPropertyId, "HasKeyboardFocus");
-        public static readonly PropertyId HelpTextProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_HelpTextPropertyId, "HelpText");
-        public static readonly PropertyId IsContentElementProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsContentElementPropertyId, "IsContentElement");
-        public static readonly PropertyId IsControlElementProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsControlElementPropertyId, "IsControlElement");
-        public static readonly PropertyId IsDataValidForFormProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsDataValidForFormPropertyId, "IsDataValidForForm");
-        public static readonly PropertyId IsEnabledProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsEnabledPropertyId, "IsEnabled");
-        public static readonly PropertyId IsKeyboardFocusableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsKeyboardFocusablePropertyId, "IsKeyboardFocusable");
-        public static readonly PropertyId IsOffscreenProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsOffscreenPropertyId, "IsOffscreen");
-        public static readonly PropertyId IsPasswordProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsPasswordPropertyId, "IsPassword");
-        public static readonly PropertyId IsPeripheralProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsPeripheralPropertyId, "IsPeripheral");
-        public static readonly PropertyId IsRequiredForFormProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsRequiredForFormPropertyId, "IsRequiredForForm");
-        public static readonly PropertyId ItemStatusProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_ItemStatusPropertyId, "ItemStatus");
-        public static readonly PropertyId ItemTypeProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_ItemTypePropertyId, "ItemType");
-        public static readonly PropertyId LabeledByProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_LabeledByPropertyId, "LabeledBy");
-        public static readonly PropertyId LiveSettingProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_LiveSettingPropertyId, "LiveSetting");
-        public static readonly PropertyId LocalizedControlTypeProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_LocalizedControlTypePropertyId, "LocalizedControlType");
-        public static readonly PropertyId NameProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_NamePropertyId, "Name");
-        public static readonly PropertyId NativeWindowHandleProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_NativeWindowHandlePropertyId, "NativeWindowHandle").SetConverter(NativeValueConverter.IntToIntPtr);
-        public static readonly PropertyId OptimizeForVisualContentProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_OptimizeForVisualContentPropertyId, "OptimizeForVisualContent");
-        public static readonly PropertyId OrientationProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_OrientationPropertyId, "Orientation");
-        public static readonly PropertyId ProcessIdProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_ProcessIdPropertyId, "ProcessId");
-        public static readonly PropertyId ProviderDescriptionProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_ProviderDescriptionPropertyId, "ProviderDescription");
-        public static readonly PropertyId RuntimeIdProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_RuntimeIdPropertyId, "RuntimeId");
+        public static readonly PropertyId AcceleratorKeyProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_AcceleratorKeyPropertyId, "AcceleratorKey");
+        public static readonly PropertyId AccessKeyProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_AccessKeyPropertyId, "AccessKey");
+        public static readonly PropertyId AriaPropertiesProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_AriaPropertiesPropertyId, "AriaProperties");
+        public static readonly PropertyId AriaRoleProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_AriaRolePropertyId, "AriaRole");
+        public static readonly PropertyId AutomationIdProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_AutomationIdPropertyId, "AutomationId");
+        public static readonly PropertyId BoundingRectangleProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_BoundingRectanglePropertyId, "BoundingRectangle").SetConverter(NativeValueConverter.ToRectangle);
+        public static readonly PropertyId ClassNameProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ClassNamePropertyId, "ClassName");
+        public static readonly PropertyId ClickablePointProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ClickablePointPropertyId, "ClickablePoint").SetConverter(NativeValueConverter.ToPoint);
+        public static readonly PropertyId ControllerForProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ControllerForPropertyId, "ControllerFor");
+        public static readonly PropertyId ControlTypeProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ControlTypePropertyId, "ControlType");
+        public static readonly PropertyId CultureProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_CulturePropertyId, "Culture").SetConverter(NativeValueConverter.ToCulture);
+        public static readonly PropertyId DescribedByProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_DescribedByPropertyId, "DescribedBy");
+        public static readonly PropertyId FlowsFromProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_FlowsFromPropertyId, "FlowsFrom");
+        public static readonly PropertyId FlowsToProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_FlowsToPropertyId, "FlowsTo");
+        public static readonly PropertyId FrameworkIdProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_FrameworkIdPropertyId, "FrameworkId");
+        public static readonly PropertyId HasKeyboardFocusProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_HasKeyboardFocusPropertyId, "HasKeyboardFocus");
+        public static readonly PropertyId HelpTextProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_HelpTextPropertyId, "HelpText");
+        public static readonly PropertyId IsContentElementProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsContentElementPropertyId, "IsContentElement");
+        public static readonly PropertyId IsControlElementProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsControlElementPropertyId, "IsControlElement");
+        public static readonly PropertyId IsDataValidForFormProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsDataValidForFormPropertyId, "IsDataValidForForm");
+        public static readonly PropertyId IsEnabledProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsEnabledPropertyId, "IsEnabled");
+        public static readonly PropertyId IsKeyboardFocusableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsKeyboardFocusablePropertyId, "IsKeyboardFocusable");
+        public static readonly PropertyId IsOffscreenProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsOffscreenPropertyId, "IsOffscreen");
+        public static readonly PropertyId IsPasswordProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsPasswordPropertyId, "IsPassword");
+        public static readonly PropertyId IsPeripheralProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsPeripheralPropertyId, "IsPeripheral");
+        public static readonly PropertyId IsRequiredForFormProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsRequiredForFormPropertyId, "IsRequiredForForm");
+        public static readonly PropertyId ItemStatusProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ItemStatusPropertyId, "ItemStatus");
+        public static readonly PropertyId ItemTypeProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ItemTypePropertyId, "ItemType");
+        public static readonly PropertyId LabeledByProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LabeledByPropertyId, "LabeledBy");
+        public static readonly PropertyId LiveSettingProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LiveSettingPropertyId, "LiveSetting");
+        public static readonly PropertyId LocalizedControlTypeProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LocalizedControlTypePropertyId, "LocalizedControlType");
+        public static readonly PropertyId NameProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_NamePropertyId, "Name");
+        public static readonly PropertyId NativeWindowHandleProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_NativeWindowHandlePropertyId, "NativeWindowHandle").SetConverter(NativeValueConverter.IntToIntPtr);
+        public static readonly PropertyId OptimizeForVisualContentProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_OptimizeForVisualContentPropertyId, "OptimizeForVisualContent");
+        public static readonly PropertyId OrientationProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_OrientationPropertyId, "Orientation");
+        public static readonly PropertyId ProcessIdProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ProcessIdPropertyId, "ProcessId");
+        public static readonly PropertyId ProviderDescriptionProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ProviderDescriptionPropertyId, "ProviderDescription");
+        public static readonly PropertyId RuntimeIdProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_RuntimeIdPropertyId, "RuntimeId");
         // Pattern availability properties
-        public static readonly PropertyId IsAnnotationPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsAnnotationPatternAvailablePropertyId, "IsAnnotationPatternAvailable");
-        public static readonly PropertyId IsDockPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsDockPatternAvailablePropertyId, "IsDockPatternAvailable");
-        public static readonly PropertyId IsDragPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsDragPatternAvailablePropertyId, "IsDragPatternAvailable");
-        public static readonly PropertyId IsDropTargetPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsDropTargetPatternAvailablePropertyId, "IsDropTargetPatternAvailable");
-        public static readonly PropertyId IsExpandCollapsePatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsExpandCollapsePatternAvailablePropertyId, "IsExpandCollapsePatternAvailable");
-        public static readonly PropertyId IsGridItemPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsGridItemPatternAvailablePropertyId, "IsGridItemPatternAvailable");
-        public static readonly PropertyId IsGridPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsGridPatternAvailablePropertyId, "IsGridPatternAvailable");
-        public static readonly PropertyId IsInvokePatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsInvokePatternAvailablePropertyId, "IsInvokePatternAvailable");
-        public static readonly PropertyId IsItemContainerPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsItemContainerPatternAvailablePropertyId, "IsItemContainerPatternAvailable");
-        public static readonly PropertyId IsLegacyIAccessiblePatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsLegacyIAccessiblePatternAvailablePropertyId, "IsLegacyIAccessiblePatternAvailable");
-        public static readonly PropertyId IsMultipleViewPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsMultipleViewPatternAvailablePropertyId, "IsMultipleViewPatternAvailable");
-        public static readonly PropertyId IsObjectModelPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsObjectModelPatternAvailablePropertyId, "IsObjectModelPatternAvailable");
-        public static readonly PropertyId IsRangeValuePatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsRangeValuePatternAvailablePropertyId, "IsRangeValuePatternAvailable");
-        public static readonly PropertyId IsScrollItemPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsScrollItemPatternAvailablePropertyId, "IsScrollItemPatternAvailable");
-        public static readonly PropertyId IsScrollPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsScrollPatternAvailablePropertyId, "IsScrollPatternAvailable");
-        public static readonly PropertyId IsSelectionItemPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsSelectionItemPatternAvailablePropertyId, "IsSelectionItemPatternAvailable");
-        public static readonly PropertyId IsSelectionPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsSelectionPatternAvailablePropertyId, "IsSelectionPatternAvailable");
-        public static readonly PropertyId IsSpreadsheetPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsSpreadsheetPatternAvailablePropertyId, "IsSpreadsheetPatternAvailable");
-        public static readonly PropertyId IsSpreadsheetItemPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsSpreadsheetItemPatternAvailablePropertyId, "IsSpreadsheetItemPatternAvailable");
-        public static readonly PropertyId IsStylesPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsStylesPatternAvailablePropertyId, "IsStylesPatternAvailable");
-        public static readonly PropertyId IsSynchronizedInputPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsSynchronizedInputPatternAvailablePropertyId, "IsSynchronizedInputPatternAvailable");
-        public static readonly PropertyId IsTableItemPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsTableItemPatternAvailablePropertyId, "IsTableItemPatternAvailable");
-        public static readonly PropertyId IsTablePatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsTablePatternAvailablePropertyId, "IsTablePatternAvailable");
-        public static readonly PropertyId IsTextChildPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsTextChildPatternAvailablePropertyId, "IsTextChildPatternAvailable");
-        public static readonly PropertyId IsTextEditPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsTextEditPatternAvailablePropertyId, "IsTextEditPatternAvailable");
-        public static readonly PropertyId IsTextPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsTextPatternAvailablePropertyId, "IsTextPatternAvailable");
-        public static readonly PropertyId IsTextPattern2AvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsTextPattern2AvailablePropertyId, "IsTextPattern2Available");
-        public static readonly PropertyId IsTogglePatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsTogglePatternAvailablePropertyId, "IsTogglePatternAvailable");
-        public static readonly PropertyId IsTransformPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsTransformPatternAvailablePropertyId, "IsTransformPatternAvailable");
-        public static readonly PropertyId IsTransformPattern2AvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsTransformPattern2AvailablePropertyId, "IsTransformPattern2Available");
-        public static readonly PropertyId IsValuePatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsValuePatternAvailablePropertyId, "IsValuePatternAvailable");
-        public static readonly PropertyId IsVirtualizedItemPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsVirtualizedItemPatternAvailablePropertyId, "IsVirtualizedItemPatternAvailable");
-        public static readonly PropertyId IsWindowPatternAvailableProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_IsWindowPatternAvailablePropertyId, "IsWindowPatternAvailable");
+        public static readonly PropertyId IsAnnotationPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsAnnotationPatternAvailablePropertyId, "IsAnnotationPatternAvailable");
+        public static readonly PropertyId IsDockPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsDockPatternAvailablePropertyId, "IsDockPatternAvailable");
+        public static readonly PropertyId IsDragPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsDragPatternAvailablePropertyId, "IsDragPatternAvailable");
+        public static readonly PropertyId IsDropTargetPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsDropTargetPatternAvailablePropertyId, "IsDropTargetPatternAvailable");
+        public static readonly PropertyId IsExpandCollapsePatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsExpandCollapsePatternAvailablePropertyId, "IsExpandCollapsePatternAvailable");
+        public static readonly PropertyId IsGridItemPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsGridItemPatternAvailablePropertyId, "IsGridItemPatternAvailable");
+        public static readonly PropertyId IsGridPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsGridPatternAvailablePropertyId, "IsGridPatternAvailable");
+        public static readonly PropertyId IsInvokePatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsInvokePatternAvailablePropertyId, "IsInvokePatternAvailable");
+        public static readonly PropertyId IsItemContainerPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsItemContainerPatternAvailablePropertyId, "IsItemContainerPatternAvailable");
+        public static readonly PropertyId IsLegacyIAccessiblePatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsLegacyIAccessiblePatternAvailablePropertyId, "IsLegacyIAccessiblePatternAvailable");
+        public static readonly PropertyId IsMultipleViewPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsMultipleViewPatternAvailablePropertyId, "IsMultipleViewPatternAvailable");
+        public static readonly PropertyId IsObjectModelPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsObjectModelPatternAvailablePropertyId, "IsObjectModelPatternAvailable");
+        public static readonly PropertyId IsRangeValuePatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsRangeValuePatternAvailablePropertyId, "IsRangeValuePatternAvailable");
+        public static readonly PropertyId IsScrollItemPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsScrollItemPatternAvailablePropertyId, "IsScrollItemPatternAvailable");
+        public static readonly PropertyId IsScrollPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsScrollPatternAvailablePropertyId, "IsScrollPatternAvailable");
+        public static readonly PropertyId IsSelectionItemPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsSelectionItemPatternAvailablePropertyId, "IsSelectionItemPatternAvailable");
+        public static readonly PropertyId IsSelectionPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsSelectionPatternAvailablePropertyId, "IsSelectionPatternAvailable");
+        public static readonly PropertyId IsSpreadsheetPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsSpreadsheetPatternAvailablePropertyId, "IsSpreadsheetPatternAvailable");
+        public static readonly PropertyId IsSpreadsheetItemPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsSpreadsheetItemPatternAvailablePropertyId, "IsSpreadsheetItemPatternAvailable");
+        public static readonly PropertyId IsStylesPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsStylesPatternAvailablePropertyId, "IsStylesPatternAvailable");
+        public static readonly PropertyId IsSynchronizedInputPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsSynchronizedInputPatternAvailablePropertyId, "IsSynchronizedInputPatternAvailable");
+        public static readonly PropertyId IsTableItemPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsTableItemPatternAvailablePropertyId, "IsTableItemPatternAvailable");
+        public static readonly PropertyId IsTablePatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsTablePatternAvailablePropertyId, "IsTablePatternAvailable");
+        public static readonly PropertyId IsTextChildPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsTextChildPatternAvailablePropertyId, "IsTextChildPatternAvailable");
+        public static readonly PropertyId IsTextEditPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsTextEditPatternAvailablePropertyId, "IsTextEditPatternAvailable");
+        public static readonly PropertyId IsTextPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsTextPatternAvailablePropertyId, "IsTextPatternAvailable");
+        public static readonly PropertyId IsTextPattern2AvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsTextPattern2AvailablePropertyId, "IsTextPattern2Available");
+        public static readonly PropertyId IsTogglePatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsTogglePatternAvailablePropertyId, "IsTogglePatternAvailable");
+        public static readonly PropertyId IsTransformPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsTransformPatternAvailablePropertyId, "IsTransformPatternAvailable");
+        public static readonly PropertyId IsTransformPattern2AvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsTransformPattern2AvailablePropertyId, "IsTransformPattern2Available");
+        public static readonly PropertyId IsValuePatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsValuePatternAvailablePropertyId, "IsValuePatternAvailable");
+        public static readonly PropertyId IsVirtualizedItemPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsVirtualizedItemPatternAvailablePropertyId, "IsVirtualizedItemPatternAvailable");
+        public static readonly PropertyId IsWindowPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsWindowPatternAvailablePropertyId, "IsWindowPatternAvailable");
         #endregion Property Identifiers
         #region Event identifiers
-        public static readonly EventId AsyncContentLoadedEvent = EventId.Register(UIA.UIA_EventIds.UIA_AsyncContentLoadedEventId, "AsyncContentLoaded");
-        public static readonly EventId FocusChangedEvent = EventId.Register(UIA.UIA_EventIds.UIA_AutomationFocusChangedEventId, "AutomationFocusChanged");
-        public static readonly EventId PropertyChangedEvent = EventId.Register(UIA.UIA_EventIds.UIA_AutomationPropertyChangedEventId, "AutomationPropertyChanged");
-        public static readonly EventId HostedFragmentRootsInvalidatedEvent = EventId.Register(UIA.UIA_EventIds.UIA_HostedFragmentRootsInvalidatedEventId, "HostedFragmentRootsInvalidated");
-        public static readonly EventId LayoutInvalidatedEvent = EventId.Register(UIA.UIA_EventIds.UIA_LayoutInvalidatedEventId, "LayoutInvalidated");
-        public static readonly EventId LiveRegionChangedEvent = EventId.Register(UIA.UIA_EventIds.UIA_LiveRegionChangedEventId, "LiveRegionChanged");
-        public static readonly EventId MenuClosedEvent = EventId.Register(UIA.UIA_EventIds.UIA_MenuClosedEventId, "MenuClosed");
-        public static readonly EventId MenuModeEndEvent = EventId.Register(UIA.UIA_EventIds.UIA_MenuModeEndEventId, "MenuModeEnd");
-        public static readonly EventId MenuModeStartEvent = EventId.Register(UIA.UIA_EventIds.UIA_MenuModeStartEventId, "MenuModeStart");
-        public static readonly EventId MenuOpenedEvent = EventId.Register(UIA.UIA_EventIds.UIA_MenuOpenedEventId, "MenuOpened");
-        public static readonly EventId StructureChangedEvent = EventId.Register(UIA.UIA_EventIds.UIA_StructureChangedEventId, "StructureChanged");
-        public static readonly EventId SystemAlertEvent = EventId.Register(UIA.UIA_EventIds.UIA_SystemAlertEventId, "SystemAlert");
-        public static readonly EventId ToolTipClosedEvent = EventId.Register(UIA.UIA_EventIds.UIA_ToolTipClosedEventId, "ToolTipClosed");
-        public static readonly EventId ToolTipOpenedEvent = EventId.Register(UIA.UIA_EventIds.UIA_ToolTipOpenedEventId, "ToolTipOpened");
+        public static readonly EventId AsyncContentLoadedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_AsyncContentLoadedEventId, "AsyncContentLoaded");
+        public static readonly EventId FocusChangedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_AutomationFocusChangedEventId, "AutomationFocusChanged");
+        public static readonly EventId PropertyChangedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_AutomationPropertyChangedEventId, "AutomationPropertyChanged");
+        public static readonly EventId HostedFragmentRootsInvalidatedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_HostedFragmentRootsInvalidatedEventId, "HostedFragmentRootsInvalidated");
+        public static readonly EventId LayoutInvalidatedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_LayoutInvalidatedEventId, "LayoutInvalidated");
+        public static readonly EventId LiveRegionChangedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_LiveRegionChangedEventId, "LiveRegionChanged");
+        public static readonly EventId MenuClosedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_MenuClosedEventId, "MenuClosed");
+        public static readonly EventId MenuModeEndEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_MenuModeEndEventId, "MenuModeEnd");
+        public static readonly EventId MenuModeStartEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_MenuModeStartEventId, "MenuModeStart");
+        public static readonly EventId MenuOpenedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_MenuOpenedEventId, "MenuOpened");
+        public static readonly EventId StructureChangedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_StructureChangedEventId, "StructureChanged");
+        public static readonly EventId SystemAlertEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_SystemAlertEventId, "SystemAlert");
+        public static readonly EventId ToolTipClosedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_ToolTipClosedEventId, "ToolTipClosed");
+        public static readonly EventId ToolTipOpenedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_ToolTipOpenedEventId, "ToolTipOpened");
         #endregion Event identifiers
-    }
-
-    /// <summary>
-    /// Class with extension methods to convert the element to a specific class
-    /// </summary>
-    public static class ElementConversionExtensions
-    {
-        public static Button AsButton(this Element automationElement)
-        {
-            if (automationElement == null) { return null; }
-            return new Button(automationElement.Automation, automationElement.NativeElement);
-        }
-
-        public static CheckBox AsCheckBox(this Element automationElement)
-        {
-            if (automationElement == null) { return null; }
-            return new CheckBox(automationElement.Automation, automationElement.NativeElement);
-        }
-
-        public static RadioButton AsRadioButton(this Element automationElement)
-        {
-            if (automationElement == null) { return null; }
-            return new RadioButton(automationElement.Automation, automationElement.NativeElement);
-        }
-
-        public static Window AsWindow(this Element automationElement)
-        {
-            if (automationElement == null) { return null; }
-            return new Window(automationElement.Automation, automationElement.NativeElement);
-        }
-
-        public static Label AsLabel(this Element automationElement)
-        {
-            if (automationElement == null) { return null; }
-            return new Label(automationElement.Automation, automationElement.NativeElement);
-        }
-
-        public static TitleBar AsTitleBar(this Element automationElement)
-        {
-            if (automationElement == null) { return null; }
-            return new TitleBar(automationElement.Automation, automationElement.NativeElement);
-        }
-
-        public static Menu AsMenu(this Element automationElement)
-        {
-            if (automationElement == null) { return null; }
-            return new Menu(automationElement.Automation, automationElement.NativeElement);
-        }
-
-        public static MenuItem AsMenuItem(this Element automationElement)
-        {
-            if (automationElement == null) { return null; }
-            return new MenuItem(automationElement.Automation, automationElement.NativeElement);
-        }
-
-        public static Tab AsTab(this Element automationElement)
-        {
-            if (automationElement == null) { return null; }
-            return new Tab(automationElement.Automation, automationElement.NativeElement);
-        }
-
-        public static TabItem AsTabItem(this Element automationElement)
-        {
-            if (automationElement == null) { return null; }
-            return new TabItem(automationElement.Automation, automationElement.NativeElement);
-        }
-
-        public static Tree AsTree(this Element automationElement)
-        {
-            if (automationElement == null) { return null; }
-            return new Tree(automationElement.Automation, automationElement.NativeElement);
-        }
-
-        public static TreeItem AsTreeItem(this Element automationElement)
-        {
-            if (automationElement == null) { return null; }
-            return new TreeItem(automationElement.Automation, automationElement.NativeElement);
-        }
-
-        public static ProgressBar AsProgressBar(this Element automationElement)
-        {
-            if (automationElement == null) { return null; }
-            return new ProgressBar(automationElement.Automation, automationElement.NativeElement);
-        }
-
-        public static Slider AsSlider(this Element automationElement)
-        {
-            if (automationElement == null) { return null; }
-            if (automationElement.Current.FrameworkId == FrameworkIds.Wpf)
-            {
-                return new WpfSlider(automationElement.Automation, automationElement.NativeElement);
-            }
-            if (automationElement.Current.FrameworkId == FrameworkIds.WinForms)
-            {
-                return new WinFormsSlider(automationElement.Automation, automationElement.NativeElement);
-            }
-            return new Slider(automationElement.Automation, automationElement.NativeElement);
-        }
-
-        public static Thumb AsThumb(this Element automationElement)
-        {
-            if (automationElement == null) { return null; }
-            return new Thumb(automationElement.Automation, automationElement.NativeElement);
-        }
     }
 }

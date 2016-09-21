@@ -67,6 +67,10 @@
       <Project>{4d98a40f-e35d-4a88-8428-8462af75a4cf}</Project>
       <Name>FlaUI.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FlaUI.UIA2\FlaUI.UIA2.csproj">
+      <Project>{9060a00a-1718-4976-b6af-02c1be43190c}</Project>
+      <Name>FlaUI.UIA2</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FlaUI.UIA3\FlaUI.UIA3.csproj">
       <Project>{49952cc0-b938-4306-888e-836e247b0768}</Project>
       <Name>FlaUI.UIA3</Name>

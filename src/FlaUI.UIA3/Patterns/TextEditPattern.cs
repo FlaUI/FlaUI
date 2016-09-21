@@ -1,6 +1,7 @@
-﻿using FlaUI.Core.Tools;
+﻿using FlaUI.Core;
+using FlaUI.Core.Identifiers;
+using FlaUI.Core.Tools;
 using FlaUI.UIA3.Elements;
-using FlaUI.UIA3.Identifiers;
 using FlaUI.UIA3.Tools;
 using UIA = interop.UIAutomationCore;
 
@@ -8,9 +9,9 @@ namespace FlaUI.UIA3.Patterns
 {
     public class TextEditPattern : TextPattern
     {
-        public new static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_TextEditPatternId, "TextEdit");
-        public static readonly EventId ConversionTargetChangedEvent = EventId.Register(UIA.UIA_EventIds.UIA_TextEdit_ConversionTargetChangedEventId, "ConversionTargetChanged");
-        public static readonly EventId TextChangedEvent2 = EventId.Register(UIA.UIA_EventIds.UIA_TextEdit_TextChangedEventId, "TextChanged");
+        public new static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_TextEditPatternId, "TextEdit");
+        public static readonly EventId ConversionTargetChangedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_TextEdit_ConversionTargetChangedEventId, "ConversionTargetChanged");
+        public static readonly EventId TextChangedEvent2 = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_TextEdit_TextChangedEventId, "TextChanged");
 
         public UIA.IUIAutomationTextEditPattern ExtendedNativePattern { get; private set; }
 

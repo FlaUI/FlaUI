@@ -1,9 +1,9 @@
-﻿using FlaUI.UIA3.Identifiers;
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+using FlaUI.Core.Identifiers;
 
-namespace FlaUI.UIA3.Exceptions
+namespace FlaUI.Core.Exceptions
 {
     [Serializable]
     public class PropertyNotSupportedException : Exception

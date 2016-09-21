@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FlaUI.UIA3.Identifiers
+namespace FlaUI.Core.Identifiers
 {
     /// <summary>
     /// Base class for identifiers which are convertible

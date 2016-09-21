@@ -1,11 +1,12 @@
-﻿using System.ComponentModel;
+﻿using FlaUI.Core.Conditions;
+using FlaUI.Core.WindowsAPI;
 using FlaUI.UIA3.Conditions;
 using FlaUI.UIA3.Definitions;
-using FlaUI.UIA3.Exceptions;
 using FlaUI.UIA3.Patterns;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
-using FlaUI.Core.WindowsAPI;
+using FlaUI.Core.Exceptions;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Elements
@@ -72,9 +73,9 @@ namespace FlaUI.UIA3.Elements
         public Window[] GetModalWindows()
         {
             return FindAll(TreeScope.Children,
-                new PropertyCondition(Element.ControlTypeProperty, ControlType.Window).
+                new PropertyCondition(ControlTypeProperty, ControlType.Window).
                 And(new PropertyCondition(WindowPattern.IsModalProperty, true))).
-                Select(e => ElementConversionExtensions.AsWindow(e)).ToArray();
+                Select(e => e.AsWindow()).ToArray();
         }
 
         /// <summary>

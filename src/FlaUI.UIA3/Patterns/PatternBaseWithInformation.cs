@@ -1,6 +1,5 @@
-﻿using System;
-using FlaUI.Core;
-using FlaUI.UIA3.Elements;
+﻿using FlaUI.UIA3.Elements;
+using System;
 
 namespace FlaUI.UIA3.Patterns
 {

@@ -1,4 +1,5 @@
 ﻿using FlaUI.Core;
+using FlaUI.UIA2.Elements;
 using System;
 using UIA = System.Windows.Automation;
 
@@ -17,10 +18,10 @@ namespace FlaUI.UIA2
         /// <summary>
         /// Creates an <see cref="UIA.AutomationElement"/> from a given windows handle (HWND)
         /// </summary>
-        public UIA.AutomationElement FromHandle(IntPtr hwnd)
+        public Element FromHandle(IntPtr hwnd)
         {
             var nativeElement = UIA.AutomationElement.FromHandle(hwnd);
-            return nativeElement;
+            return nativeElement == null ? null : new Element(this, nativeElement);
         }
 
         public override void UnregisterAllEvents()

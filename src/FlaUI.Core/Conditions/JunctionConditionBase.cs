@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FlaUI.UIA3.Conditions
+namespace FlaUI.Core.Conditions
 {
     public abstract class JunctionConditionBase : ConditionBase
     {

@@ -2,7 +2,7 @@
 using FlaUI.Core;
 using FlaUI.Core.Tools;
 using FlaUI.UIA3.Elements;
-using FlaUI.UIA3.Identifiers;
+using FlaUI.Core.Identifiers;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
@@ -38,10 +38,10 @@ namespace FlaUI.UIA3.Patterns
 
     public class TransformPattern : TransformPattern<TransformPatternInformation>
     {
-        public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_TransformPatternId, "Transform");
-        public static readonly PropertyId CanMoveProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_TransformCanMovePropertyId, "CanMove");
-        public static readonly PropertyId CanResizeProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_TransformCanResizePropertyId, "CanResize");
-        public static readonly PropertyId CanRotateProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_TransformCanRotatePropertyId, "CanRotate");
+        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_TransformPatternId, "Transform");
+        public static readonly PropertyId CanMoveProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_TransformCanMovePropertyId, "CanMove");
+        public static readonly PropertyId CanResizeProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_TransformCanResizePropertyId, "CanResize");
+        public static readonly PropertyId CanRotateProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_TransformCanRotatePropertyId, "CanRotate");
 
         public TransformPattern(Element automationElement, UIA.IUIAutomationTransformPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new TransformPatternInformation(element, cached))

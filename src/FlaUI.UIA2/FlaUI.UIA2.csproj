@@ -42,7 +42,11 @@
     <Reference Include="UIAutomationTypes" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Elements\Element.cs" />
+    <Compile Include="Elements\ElementConversionExtensions.cs" />
+    <Compile Include="Elements\Window.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\ApplicationExtensions.cs" />
     <Compile Include="UIA2Automation.cs" />
   </ItemGroup>
   <ItemGroup>

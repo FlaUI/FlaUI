@@ -1,6 +1,4 @@
-﻿using FlaUI.Core;
-
-namespace FlaUI.UIA3.EventHandlers
+﻿namespace FlaUI.UIA3.EventHandlers
 {
     internal abstract class EventHandlerBase
     {

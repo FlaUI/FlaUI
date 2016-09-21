@@ -1,5 +1,4 @@
-﻿using FlaUI.Core;
-using FlaUI.Core.Input;
+﻿using FlaUI.Core.Input;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Elements

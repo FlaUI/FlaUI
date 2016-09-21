@@ -1,4 +1,5 @@
-﻿using FlaUI.UIA3.Definitions;
+﻿using FlaUI.Core.Conditions;
+using FlaUI.UIA3.Definitions;
 using FlaUI.UIA3.Elements;
 
 namespace FlaUI.UIA3.Conditions

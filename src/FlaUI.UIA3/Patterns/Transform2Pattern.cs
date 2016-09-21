@@ -1,18 +1,19 @@
-﻿using FlaUI.Core.Tools;
+﻿using FlaUI.Core;
+using FlaUI.Core.Identifiers;
+using FlaUI.Core.Tools;
 using FlaUI.UIA3.Definitions;
 using FlaUI.UIA3.Elements;
-using FlaUI.UIA3.Identifiers;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
     public class Transform2Pattern : TransformPattern<Transform2PatternInformation>
     {
-        public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_TransformPattern2Id, "Transform2");
-        public static readonly PropertyId CanZoomProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_Transform2CanZoomPropertyId, "CanZoom");
-        public static readonly PropertyId ZoomLevelProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_Transform2ZoomLevelPropertyId, "ZoomLevel");
-        public static readonly PropertyId ZoomMaximumProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_Transform2ZoomMaximumPropertyId, "ZoomMaximum");
-        public static readonly PropertyId ZoomMinimumProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_Transform2ZoomMinimumPropertyId, "ZoomMinimum");
+        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_TransformPattern2Id, "Transform2");
+        public static readonly PropertyId CanZoomProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_Transform2CanZoomPropertyId, "CanZoom");
+        public static readonly PropertyId ZoomLevelProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_Transform2ZoomLevelPropertyId, "ZoomLevel");
+        public static readonly PropertyId ZoomMaximumProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_Transform2ZoomMaximumPropertyId, "ZoomMaximum");
+        public static readonly PropertyId ZoomMinimumProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_Transform2ZoomMinimumPropertyId, "ZoomMinimum");
 
         public UIA.IUIAutomationTransformPattern2 ExtendedNativePattern { get; private set; }
 

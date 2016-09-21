@@ -2,15 +2,15 @@
 using FlaUI.Core.Tools;
 using FlaUI.UIA3.Definitions;
 using FlaUI.UIA3.Elements;
-using FlaUI.UIA3.Identifiers;
+using FlaUI.Core.Identifiers;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
     public class ExpandCollapsePattern : PatternBaseWithInformation<ExpandCollapsePatternInformation>
     {
-        public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_ExpandCollapsePatternId, "ExpandCollapse");
-        public static readonly PropertyId ExpandCollapseStateProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_ExpandCollapseExpandCollapseStatePropertyId, "ExpandCollapseState");
+        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_ExpandCollapsePatternId, "ExpandCollapse");
+        public static readonly PropertyId ExpandCollapseStateProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ExpandCollapseExpandCollapseStatePropertyId, "ExpandCollapseState");
 
         internal ExpandCollapsePattern(Element automationElement, UIA.IUIAutomationExpandCollapsePattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new ExpandCollapsePatternInformation(element, cached))

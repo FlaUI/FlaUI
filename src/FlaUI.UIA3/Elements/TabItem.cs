@@ -1,5 +1,4 @@
-﻿using FlaUI.Core;
-using UIA = interop.UIAutomationCore;
+﻿using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Elements
 {

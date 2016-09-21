@@ -2,32 +2,32 @@
 using System.Runtime.Serialization;
 using System.Security.Permissions;
 
-namespace FlaUI.UIA3.Exceptions
+namespace FlaUI.Core.Exceptions
 {
     [Serializable]
-    public class NoClickablePointException : Exception
+    public class MethodNotSupportedException : Exception
     {
-        public NoClickablePointException()
+        public MethodNotSupportedException()
         {
         }
 
-        public NoClickablePointException(string message)
+        public MethodNotSupportedException(string message)
             : base(message)
         {
         }
 
-        public NoClickablePointException(Exception innerException) :
+        public MethodNotSupportedException(Exception innerException) :
             base(String.Empty, innerException)
         {
         }
 
-        public NoClickablePointException(string message, Exception innerException)
+        public MethodNotSupportedException(string message, Exception innerException)
             : base(message, innerException)
         {
         }
 
         [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        protected NoClickablePointException(SerializationInfo info, StreamingContext context)
+        protected MethodNotSupportedException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }

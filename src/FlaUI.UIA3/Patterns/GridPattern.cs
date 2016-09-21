@@ -1,16 +1,16 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.Tools;
 using FlaUI.UIA3.Elements;
-using FlaUI.UIA3.Identifiers;
+using FlaUI.Core.Identifiers;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
     public class GridPattern : PatternBaseWithInformation<GridPatternInformation>
     {
-        public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_GridPatternId, "Grid");
-        public static readonly PropertyId ColumnCountProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_GridColumnCountPropertyId, "ColumnCount");
-        public static readonly PropertyId RowCountProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_GridRowCountPropertyId, "RowCount");
+        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_GridPatternId, "Grid");
+        public static readonly PropertyId ColumnCountProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_GridColumnCountPropertyId, "ColumnCount");
+        public static readonly PropertyId RowCountProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_GridRowCountPropertyId, "RowCount");
 
         internal GridPattern(Element automationElement, UIA.IUIAutomationGridPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new GridPatternInformation(element, cached))

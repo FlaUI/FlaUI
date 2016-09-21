@@ -1,6 +1,7 @@
-﻿using FlaUI.Core.Tools;
+﻿using FlaUI.Core;
+using FlaUI.Core.Identifiers;
+using FlaUI.Core.Tools;
 using FlaUI.UIA3.Elements;
-using FlaUI.UIA3.Identifiers;
 using FlaUI.UIA3.Tools;
 using UIA = interop.UIAutomationCore;
 
@@ -8,7 +9,7 @@ namespace FlaUI.UIA3.Patterns
 {
     public class Text2Pattern : TextPattern
     {
-        public new static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_TextPattern2Id, "Text2");
+        public new static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_TextPattern2Id, "Text2");
 
         public UIA.IUIAutomationTextPattern2 ExtendedNativePattern { get; private set; }
 

@@ -1,16 +1,16 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.Tools;
 using FlaUI.UIA3.Elements;
-using FlaUI.UIA3.Identifiers;
+using FlaUI.Core.Identifiers;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
     public class MultipleViewPattern : PatternBaseWithInformation<MultipleViewPatternInformation>
     {
-        public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_MultipleViewPatternId, "MultipleView");
-        public static readonly PropertyId CurrentViewProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_MultipleViewCurrentViewPropertyId, "CurrentView");
-        public static readonly PropertyId SupportedViewsProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_MultipleViewSupportedViewsPropertyId, "SupportedViews");
+        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_MultipleViewPatternId, "MultipleView");
+        public static readonly PropertyId CurrentViewProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_MultipleViewCurrentViewPropertyId, "CurrentView");
+        public static readonly PropertyId SupportedViewsProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_MultipleViewSupportedViewsPropertyId, "SupportedViews");
 
         internal MultipleViewPattern(Element automationElement, UIA.IUIAutomationMultipleViewPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new MultipleViewPatternInformation(element, cached))

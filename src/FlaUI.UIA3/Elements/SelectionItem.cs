@@ -1,6 +1,6 @@
-﻿using FlaUI.UIA3.Exceptions;
-using FlaUI.UIA3.Patterns;
+﻿using FlaUI.UIA3.Patterns;
 using System;
+using FlaUI.Core.Exceptions;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Elements

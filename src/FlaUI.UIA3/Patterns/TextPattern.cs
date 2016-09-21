@@ -1,8 +1,9 @@
-﻿using FlaUI.Core.Shapes;
+﻿using FlaUI.Core;
+using FlaUI.Core.Identifiers;
+using FlaUI.Core.Shapes;
 using FlaUI.Core.Tools;
 using FlaUI.UIA3.Definitions;
 using FlaUI.UIA3.Elements;
-using FlaUI.UIA3.Identifiers;
 using FlaUI.UIA3.Shapes;
 using FlaUI.UIA3.Tools;
 using UIA = interop.UIAutomationCore;
@@ -11,9 +12,9 @@ namespace FlaUI.UIA3.Patterns
 {
     public class TextPattern : PatternBase
     {
-        public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_TextPatternId, "Text");
-        public static readonly EventId TextChangedEvent = EventId.Register(UIA.UIA_EventIds.UIA_Text_TextChangedEventId, "TextChanged");
-        public static readonly EventId TextSelectionChangedEvent = EventId.Register(UIA.UIA_EventIds.UIA_Text_TextSelectionChangedEventId, "TextSelectionChanged");
+        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_TextPatternId, "Text");
+        public static readonly EventId TextChangedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_Text_TextChangedEventId, "TextChanged");
+        public static readonly EventId TextSelectionChangedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_Text_TextSelectionChangedEventId, "TextSelectionChanged");
 
         internal TextPattern(Element automationElement, UIA.IUIAutomationTextPattern nativePattern)
             : base(automationElement, nativePattern)

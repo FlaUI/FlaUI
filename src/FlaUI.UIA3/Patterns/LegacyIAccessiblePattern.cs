@@ -1,6 +1,7 @@
-﻿using FlaUI.Core.Tools;
+﻿using FlaUI.Core;
+using FlaUI.Core.Identifiers;
+using FlaUI.Core.Tools;
 using FlaUI.UIA3.Elements;
-using FlaUI.UIA3.Identifiers;
 using IAccessible = Accessibility.IAccessible;
 using UIA = interop.UIAutomationCore;
 
@@ -8,17 +9,17 @@ namespace FlaUI.UIA3.Patterns
 {
     public class LegacyIAccessiblePattern : PatternBaseWithInformation<LegacyIAccessiblePatternInformation>
     {
-        public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_LegacyIAccessiblePatternId, "LegacyIAccessible");
-        public static readonly PropertyId ChildIdProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_LegacyIAccessibleChildIdPropertyId, "ChildId");
-        public static readonly PropertyId DefaultActionProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_LegacyIAccessibleDefaultActionPropertyId, "DefaultAction");
-        public static readonly PropertyId DescriptionProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_LegacyIAccessibleDescriptionPropertyId, "Description");
-        public static readonly PropertyId HelpProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_LegacyIAccessibleHelpPropertyId, "Help");
-        public static readonly PropertyId KeyboardShortcutProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_LegacyIAccessibleKeyboardShortcutPropertyId, "KeyboardShortcut");
-        public static readonly PropertyId NameProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_LegacyIAccessibleNamePropertyId, "Name");
-        public static readonly PropertyId RoleProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_LegacyIAccessibleRolePropertyId, "Role");
-        public static readonly PropertyId SelectionProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_LegacyIAccessibleSelectionPropertyId, "Selection");
-        public static readonly PropertyId StateProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_LegacyIAccessibleStatePropertyId, "State");
-        public static readonly PropertyId ValueProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_LegacyIAccessibleValuePropertyId, "Value");
+        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_LegacyIAccessiblePatternId, "LegacyIAccessible");
+        public static readonly PropertyId ChildIdProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleChildIdPropertyId, "ChildId");
+        public static readonly PropertyId DefaultActionProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleDefaultActionPropertyId, "DefaultAction");
+        public static readonly PropertyId DescriptionProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleDescriptionPropertyId, "Description");
+        public static readonly PropertyId HelpProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleHelpPropertyId, "Help");
+        public static readonly PropertyId KeyboardShortcutProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleKeyboardShortcutPropertyId, "KeyboardShortcut");
+        public static readonly PropertyId NameProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleNamePropertyId, "Name");
+        public static readonly PropertyId RoleProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleRolePropertyId, "Role");
+        public static readonly PropertyId SelectionProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleSelectionPropertyId, "Selection");
+        public static readonly PropertyId StateProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleStatePropertyId, "State");
+        public static readonly PropertyId ValueProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleValuePropertyId, "Value");
 
         internal LegacyIAccessiblePattern(Element automationElement, UIA.IUIAutomationLegacyIAccessiblePattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new LegacyIAccessiblePatternInformation(element, cached))

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FlaUI.UIA3.Conditions
+namespace FlaUI.Core.Conditions
 {
     public class OrCondition : JunctionConditionBase
     {

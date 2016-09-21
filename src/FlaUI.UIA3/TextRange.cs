@@ -2,7 +2,7 @@
 using FlaUI.Core.Tools;
 using FlaUI.UIA3.Definitions;
 using FlaUI.UIA3.Elements;
-using FlaUI.UIA3.Identifiers;
+using FlaUI.Core.Identifiers;
 using FlaUI.UIA3.Tools;
 using UIA = interop.UIAutomationCore;
 

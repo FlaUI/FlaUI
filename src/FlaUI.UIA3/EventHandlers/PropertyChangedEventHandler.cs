@@ -1,5 +1,6 @@
-﻿using FlaUI.UIA3.Elements;
-using FlaUI.UIA3.Identifiers;
+﻿using FlaUI.Core;
+using FlaUI.Core.Identifiers;
+using FlaUI.UIA3.Elements;
 using System;
 using UIA = interop.UIAutomationCore;
 
@@ -18,7 +19,7 @@ namespace FlaUI.UIA3.EventHandlers
         public void HandlePropertyChangedEvent(UIA.IUIAutomationElement sender, int propertyId, object newValue)
         {
             var senderElement = new Element(Automation, sender);
-            var property = PropertyId.Find(propertyId);
+            var property = PropertyId.Find(AutomationType.UIA3, propertyId);
             _callAction(senderElement, property, newValue);
         }
     }

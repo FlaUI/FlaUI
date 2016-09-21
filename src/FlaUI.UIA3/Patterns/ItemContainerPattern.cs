@@ -1,6 +1,7 @@
-﻿using FlaUI.Core.Tools;
+﻿using FlaUI.Core;
+using FlaUI.Core.Identifiers;
+using FlaUI.Core.Tools;
 using FlaUI.UIA3.Elements;
-using FlaUI.UIA3.Identifiers;
 using FlaUI.UIA3.Tools;
 using UIA = interop.UIAutomationCore;
 
@@ -8,7 +9,7 @@ namespace FlaUI.UIA3.Patterns
 {
     public class ItemContainerPattern : PatternBase
     {
-        public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_ItemContainerPatternId, "ItemContainer");
+        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_ItemContainerPatternId, "ItemContainer");
 
         internal ItemContainerPattern(Element automationElement, UIA.IUIAutomationItemContainerPattern nativePattern)
             : base(automationElement, nativePattern)
