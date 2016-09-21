@@ -69,6 +69,7 @@ namespace FlaUI.Core.UITests.TestFramework
         [OneTimeTearDown]
         public void BaseTeardown()
         {
+            Uia3Automation.Dispose();
             App.Dispose();
             App = null;
         }

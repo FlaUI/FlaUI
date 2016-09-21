@@ -25,17 +25,19 @@ namespace FlaUI.Core.UITests
         public void ClickTest()
         {
             var app = Application.Launch("mspaint");
-            var automation = new Automation();
-            var mainWindow = app.GetMainWindow(automation);
-            var mouseX = mainWindow.Current.BoundingRectangle.Left + 50;
-            var mouseY = mainWindow.Current.BoundingRectangle.Top + 200;
-            Mouse.Instance.Position = new Point(mouseX, mouseY);
-            Mouse.Instance.Down(MouseButton.Left);
-            Mouse.Instance.MoveBy(100, 10);
-            Mouse.Instance.MoveBy(10, 50);
-            Mouse.Instance.Up(MouseButton.Left);
-            Thread.Sleep(500);
-            TestUtilities.CloseWindowWithDontSave(mainWindow);
+            using (var automation = new Automation())
+            {
+                var mainWindow = app.GetMainWindow(automation);
+                var mouseX = mainWindow.Current.BoundingRectangle.Left + 50;
+                var mouseY = mainWindow.Current.BoundingRectangle.Top + 200;
+                Mouse.Instance.Position = new Point(mouseX, mouseY);
+                Mouse.Instance.Down(MouseButton.Left);
+                Mouse.Instance.MoveBy(100, 10);
+                Mouse.Instance.MoveBy(10, 50);
+                Mouse.Instance.Up(MouseButton.Left);
+                Thread.Sleep(500);
+                TestUtilities.CloseWindowWithDontSave(mainWindow);
+            }
             app.Dispose();
         }
     }

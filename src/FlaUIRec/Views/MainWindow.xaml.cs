@@ -18,12 +18,14 @@ namespace FlaUIRec.Views
     public partial class MainWindow : Window
     {
         private FlaUI.Core.Application _app;
+        private Automation _automation;
         private IKeyboardMouseEvents m_GlobalHook;
 
         public MainWindow()
         {
             InitializeComponent();
             ProcessIdText.Text = "12844";
+            _automation = new Automation();
 
             m_GlobalHook = Hook.GlobalEvents();
             //m_GlobalHook.MouseDownExt += m_GlobalHook_MouseDownExt;
@@ -37,13 +39,13 @@ namespace FlaUIRec.Views
             m_GlobalHook.MouseMoveExt -= m_GlobalHook_MouseMoveExt;
             m_GlobalHook.KeyPress -= GlobalHookKeyPress;
             m_GlobalHook.Dispose();
+            _automation.Dispose();
             base.OnClosing(e);
         }
 
         private void m_GlobalHook_MouseDownExt(object sender, MouseEventExtArgs e)
         {
-            var automation = new Automation();
-            var element = automation.FromPoint(new FlaUI.Core.Shapes.Point(e.Location.X, e.Location.Y));
+            var element = _automation.FromPoint(new FlaUI.Core.Shapes.Point(e.Location.X, e.Location.Y));
             AddToList(String.Format("MouseDown ({0}) on {1} ({2})", e.Button, element, e.Location));
         }
 
@@ -67,9 +69,8 @@ namespace FlaUIRec.Views
 
         private void RegisterEvents()
         {
-            var automation = new Automation();
-            automation.UnregisterAllEvents();
-            var mainWindow = _app.GetMainWindow(automation);
+            _automation.UnregisterAllEvents();
+            var mainWindow = _app.GetMainWindow(_automation);
             mainWindow.RegisterEvent(InvokePattern.InvokedEvent, TreeScope.Descendants, InvokeAction);
             mainWindow.RegisterEvent(SelectionItemPattern.ElementSelectedEvent, TreeScope.Descendants, SelectionAction);
             mainWindow.RegisterEvent(TextPattern.TextChangedEvent, TreeScope.Descendants, TextChangedAction);

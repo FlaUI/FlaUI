@@ -12,14 +12,16 @@ namespace FlaUI.Core.UITests
         public void NotepadTest()
         {
             var app = Application.Launch("notepad.exe");
-            var automation = new Automation();
-            var window = app.GetMainWindow(automation);
-            Console.WriteLine(window.Title);
-            window.DrawHighlight();
-            window.Move(100, 100);
-            window.DrawHighlight();
-            window.Move(200, 200);
-            window.DrawHighlight();
+            using (var automation = new Automation())
+            {
+                var window = app.GetMainWindow(automation);
+                Console.WriteLine(window.Title);
+                window.DrawHighlight();
+                window.Move(100, 100);
+                window.DrawHighlight();
+                window.Move(200, 200);
+                window.DrawHighlight();
+            }
             app.Close();
         }
     }
