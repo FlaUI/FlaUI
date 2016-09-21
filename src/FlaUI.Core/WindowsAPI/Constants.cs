@@ -112,6 +112,12 @@ namespace FlaUI.Core.WindowsAPI
         //#endif /* _WIN32_WINNT >= 0x0500 */
     }
 
+    public static class LayeredWindowAttributes
+    {
+        public const uint LWA_COLORKEY = 0x1;
+        public const uint LWA_ALPHA = 0x2;
+    }
+
     public enum SystemMetric
     {
         /// <summary>

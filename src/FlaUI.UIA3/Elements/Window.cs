@@ -1,8 +1,11 @@
-﻿using FlaUI.UIA3.Conditions;
+﻿using System.ComponentModel;
+using FlaUI.UIA3.Conditions;
 using FlaUI.UIA3.Definitions;
 using FlaUI.UIA3.Exceptions;
 using FlaUI.UIA3.Patterns;
 using System.Linq;
+using System.Runtime.InteropServices;
+using FlaUI.Core.WindowsAPI;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Elements
@@ -72,6 +75,21 @@ namespace FlaUI.UIA3.Elements
                 new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Window).
                 And(new PropertyCondition(WindowPattern.IsModalProperty, true))).
                 Select(e => AutomationElementConversionExtensions.AsWindow(e)).ToArray();
+        }
+
+        /// <summary>
+        /// Brings the element to the foreground
+        /// </summary>
+        public void SetTransparency(byte alpha)
+        {
+            if (User32.SetWindowLong(Current.NativeWindowHandle, WindowLongParam.GWL_EXSTYLE, WindowStyles.WS_EX_LAYERED) == 0)
+            {
+                throw new Win32Exception(Marshal.GetLastWin32Error());
+            }
+            if (!User32.SetLayeredWindowAttributes(Current.NativeWindowHandle, 0, alpha, LayeredWindowAttributes.LWA_ALPHA))
+            {
+                throw new Win32Exception(Marshal.GetLastWin32Error());
+            }
         }
     }
 }
