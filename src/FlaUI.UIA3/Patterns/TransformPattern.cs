@@ -10,7 +10,7 @@ namespace FlaUI.UIA3.Patterns
     public abstract class TransformPattern<TProp> : PatternBaseWithInformation<TProp>
         where TProp : InformationBase
     {
-        protected TransformPattern(AutomationElement automationElement, UIA.IUIAutomationTransformPattern nativePattern, Func<AutomationElement, bool, TProp> createFunc)
+        protected TransformPattern(Element automationElement, UIA.IUIAutomationTransformPattern nativePattern, Func<Element, bool, TProp> createFunc)
             : base(automationElement, nativePattern, createFunc)
         {
         }
@@ -43,7 +43,7 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId CanResizeProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_TransformCanResizePropertyId, "CanResize");
         public static readonly PropertyId CanRotateProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_TransformCanRotatePropertyId, "CanRotate");
 
-        public TransformPattern(AutomationElement automationElement, UIA.IUIAutomationTransformPattern nativePattern)
+        public TransformPattern(Element automationElement, UIA.IUIAutomationTransformPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new TransformPatternInformation(element, cached))
         {
         }
@@ -51,7 +51,7 @@ namespace FlaUI.UIA3.Patterns
 
     public class TransformPatternInformation : InformationBase
     {
-        public TransformPatternInformation(AutomationElement automationElement, bool cached)
+        public TransformPatternInformation(Element automationElement, bool cached)
             : base(automationElement, cached)
         {
         }

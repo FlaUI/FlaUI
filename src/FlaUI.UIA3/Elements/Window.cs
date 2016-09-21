@@ -10,9 +10,9 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Elements
 {
-    public class Window : AutomationElement
+    public class Window : Element
     {
-        public Window(Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
+        public Window(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
 
         public string Title
         {
@@ -72,9 +72,9 @@ namespace FlaUI.UIA3.Elements
         public Window[] GetModalWindows()
         {
             return FindAll(TreeScope.Children,
-                new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Window).
+                new PropertyCondition(Element.ControlTypeProperty, ControlType.Window).
                 And(new PropertyCondition(WindowPattern.IsModalProperty, true))).
-                Select(e => AutomationElementConversionExtensions.AsWindow(e)).ToArray();
+                Select(e => ElementConversionExtensions.AsWindow(e)).ToArray();
         }
 
         /// <summary>

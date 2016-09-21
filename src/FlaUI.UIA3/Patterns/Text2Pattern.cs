@@ -12,7 +12,7 @@ namespace FlaUI.UIA3.Patterns
 
         public UIA.IUIAutomationTextPattern2 ExtendedNativePattern { get; private set; }
 
-        internal Text2Pattern(AutomationElement automationElement, UIA.IUIAutomationTextPattern2 nativePattern)
+        internal Text2Pattern(Element automationElement, UIA.IUIAutomationTextPattern2 nativePattern)
             : base(automationElement, nativePattern)
         {
             ExtendedNativePattern = nativePattern;
@@ -26,7 +26,7 @@ namespace FlaUI.UIA3.Patterns
             return NativeValueConverter.NativeToManaged(Automation, nativeTextRange);
         }
 
-        public TextRange RangeFromAnnotation(AutomationElement annotation)
+        public TextRange RangeFromAnnotation(Element annotation)
         {
             var nativeElement = ComCallWrapper.Call(() => ExtendedNativePattern.RangeFromAnnotation(annotation.NativeElement));
             return NativeValueConverter.NativeToManaged(Automation, nativeElement);

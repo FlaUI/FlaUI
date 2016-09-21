@@ -9,7 +9,7 @@ namespace FlaUI.UIA3.Patterns
     {
         public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_ScrollItemPatternId, "ScrollItem");
 
-        internal ScrollItemPattern(AutomationElement automationElement, UIA.IUIAutomationScrollItemPattern nativePattern)
+        internal ScrollItemPattern(Element automationElement, UIA.IUIAutomationScrollItemPattern nativePattern)
             : base(automationElement, nativePattern)
         {
         }

@@ -7,9 +7,9 @@ namespace FlaUI.UIA3.EventHandlers
 {
     internal class StructureChangedEventHandler : EventHandlerBase, UIA.IUIAutomationStructureChangedEventHandler
     {
-        private readonly Action<AutomationElement, StructureChangeType, int[]> _callAction;
+        private readonly Action<Element, StructureChangeType, int[]> _callAction;
 
-        public StructureChangedEventHandler(Automation automation, Action<AutomationElement, StructureChangeType, int[]> callAction)
+        public StructureChangedEventHandler(UIA3Automation automation, Action<Element, StructureChangeType, int[]> callAction)
             : base(automation)
         {
             _callAction = callAction;
@@ -17,7 +17,7 @@ namespace FlaUI.UIA3.EventHandlers
 
         public void HandleStructureChangedEvent(UIA.IUIAutomationElement sender, interop.UIAutomationCore.StructureChangeType changeType, int[] runtimeId)
         {
-            var senderElement = new AutomationElement(Automation, sender);
+            var senderElement = new Element(Automation, sender);
             var externChangeType = (StructureChangeType) changeType;
             _callAction(senderElement, externChangeType, runtimeId);
         }

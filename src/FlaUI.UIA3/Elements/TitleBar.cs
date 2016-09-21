@@ -4,9 +4,9 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Elements
 {
-    public class TitleBar : AutomationElement
+    public class TitleBar : Element
     {
-        public TitleBar(Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
+        public TitleBar(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
 
         public Button MinimizeButton
         {

@@ -5,9 +5,9 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Elements
 {
-    public class Tree : AutomationElement
+    public class Tree : Element
     {
-        public Tree(Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
+        public Tree(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
 
         /// <summary>
         /// The currently selected <see cref="TreeItem"/>

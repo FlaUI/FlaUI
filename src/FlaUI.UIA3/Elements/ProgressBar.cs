@@ -3,9 +3,9 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Elements
 {
-    public class ProgressBar : AutomationElement
+    public class ProgressBar : Element
     {
-        public ProgressBar(Automation automation, UIA.IUIAutomationElement nativeElement)
+        public ProgressBar(UIA3Automation automation, UIA.IUIAutomationElement nativeElement)
             : base(automation, nativeElement)
         {
         }

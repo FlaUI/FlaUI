@@ -7,9 +7,9 @@ namespace FlaUI.UIA3.EventHandlers
 {
     internal class PropertyChangedEventHandler : EventHandlerBase, UIA.IUIAutomationPropertyChangedEventHandler
     {
-        private readonly Action<AutomationElement, PropertyId, object> _callAction;
+        private readonly Action<Element, PropertyId, object> _callAction;
 
-        public PropertyChangedEventHandler(Automation automation, Action<AutomationElement, PropertyId, object> callAction)
+        public PropertyChangedEventHandler(UIA3Automation automation, Action<Element, PropertyId, object> callAction)
             : base(automation)
         {
             _callAction = callAction;
@@ -17,7 +17,7 @@ namespace FlaUI.UIA3.EventHandlers
 
         public void HandlePropertyChangedEvent(UIA.IUIAutomationElement sender, int propertyId, object newValue)
         {
-            var senderElement = new AutomationElement(Automation, sender);
+            var senderElement = new Element(Automation, sender);
             var property = PropertyId.Find(propertyId);
             _callAction(senderElement, property, newValue);
         }

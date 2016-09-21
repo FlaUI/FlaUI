@@ -7,9 +7,9 @@ namespace FlaUI.UIA3.EventHandlers
 {
     internal class BasicEventHandler : EventHandlerBase, UIA.IUIAutomationEventHandler
     {
-        private readonly Action<AutomationElement, EventId> _callAction;
+        private readonly Action<Element, EventId> _callAction;
 
-        public BasicEventHandler(Automation automation, Action<AutomationElement, EventId> callAction)
+        public BasicEventHandler(UIA3Automation automation, Action<Element, EventId> callAction)
             : base(automation)
         {
             _callAction = callAction;
@@ -17,7 +17,7 @@ namespace FlaUI.UIA3.EventHandlers
 
         public void HandleAutomationEvent(UIA.IUIAutomationElement sender, int eventId)
         {
-            var senderElement = new AutomationElement(Automation, sender);
+            var senderElement = new Element(Automation, sender);
             var @event = EventId.Find(eventId);
             _callAction(senderElement, @event);
         }

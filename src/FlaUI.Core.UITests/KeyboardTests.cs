@@ -15,7 +15,7 @@ namespace FlaUI.Core.UITests
         public void KeyboardTest()
         {
             var app = Application.Launch("notepad.exe");
-            using (var automation = new Automation())
+            using (var automation = new UIA3Automation())
             {
                 var mainWindow = app.GetMainWindow(automation);
 

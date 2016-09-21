@@ -11,15 +11,15 @@ namespace FlaUI.UIA3.Tools
     public static class NativeValueConverter
     {
         /// <summary>
-        /// Converts a native element array to an array of <see cref="AutomationElement"/>
+        /// Converts a native element array to an array of <see cref="Element"/>
         /// </summary>
-        public static AutomationElement[] NativeArrayToManaged(Automation automation, UIA.IUIAutomationElementArray nativeElements)
+        public static Element[] NativeArrayToManaged(UIA3Automation automation, UIA.IUIAutomationElementArray nativeElements)
         {
-            if (nativeElements == null) { return new AutomationElement[0]; }
-            var retArray = new AutomationElement[nativeElements.Length];
+            if (nativeElements == null) { return new Element[0]; }
+            var retArray = new Element[nativeElements.Length];
             for (var i = 0; i < nativeElements.Length; i++)
             {
-                retArray[i] = new AutomationElement(automation, nativeElements.GetElement(i));
+                retArray[i] = new Element(automation, nativeElements.GetElement(i));
             }
             return retArray;
         }
@@ -27,7 +27,7 @@ namespace FlaUI.UIA3.Tools
         /// <summary>
         /// Converts a native textrange array to an array of <see cref="TextRange"/>
         /// </summary>
-        public static TextRange[] NativeArrayToManaged(Automation automation, UIA.IUIAutomationTextRangeArray nativeElements)
+        public static TextRange[] NativeArrayToManaged(UIA3Automation automation, UIA.IUIAutomationTextRangeArray nativeElements)
         {
             if (nativeElements == null) { return new TextRange[0]; }
             var retArray = new TextRange[nativeElements.Length];
@@ -39,17 +39,17 @@ namespace FlaUI.UIA3.Tools
         }
 
         /// <summary>
-        /// Converts a native element to an <see cref="AutomationElement"/>
+        /// Converts a native element to an <see cref="Element"/>
         /// </summary>
-        public static AutomationElement NativeToManaged(Automation automation, UIA.IUIAutomationElement nativeElement)
+        public static Element NativeToManaged(UIA3Automation automation, UIA.IUIAutomationElement nativeElement)
         {
-            return nativeElement == null ? null : new AutomationElement(automation, nativeElement);
+            return nativeElement == null ? null : new Element(automation, nativeElement);
         }
 
         /// <summary>
         /// Converts a native textrange to an <see cref="TextRange"/>
         /// </summary>
-        public static TextRange NativeToManaged(Automation automation, UIA.IUIAutomationTextRange nativeElement)
+        public static TextRange NativeToManaged(UIA3Automation automation, UIA.IUIAutomationTextRange nativeElement)
         {
             return nativeElement == null ? null : new TextRange(automation, nativeElement);
         }
@@ -57,7 +57,7 @@ namespace FlaUI.UIA3.Tools
         /// <summary>
         /// Converts a native textrange2 to an <see cref="TextRange2"/>
         /// </summary>
-        public static TextRange2 NativeToManaged(Automation automation, UIA.IUIAutomationTextRange2 nativeElement)
+        public static TextRange2 NativeToManaged(UIA3Automation automation, UIA.IUIAutomationTextRange2 nativeElement)
         {
             return nativeElement == null ? null : new TextRange2(automation, nativeElement);
         }
@@ -86,9 +86,9 @@ namespace FlaUI.UIA3.Tools
             {
                 val = ((CultureInfo)val).LCID;
             }
-            else if (val is AutomationElement)
+            else if (val is Element)
             {
-                val = ((AutomationElement)val).NativeElement;
+                val = ((Element)val).NativeElement;
             }
             return val;
         }

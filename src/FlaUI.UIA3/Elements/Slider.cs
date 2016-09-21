@@ -9,9 +9,9 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Elements
 {
-    public class Slider : AutomationElement
+    public class Slider : Element
     {
-        public Slider(Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
+        public Slider(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
 
         public Thumb Thumb
         {
@@ -37,7 +37,7 @@ namespace FlaUI.UIA3.Elements
 
     public class WinFormsSlider : Slider
     {
-        public WinFormsSlider(Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
+        public WinFormsSlider(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
 
         private ValuePattern ValuePattern { get { return PatternFactory.GetValuePattern(); } }
 
@@ -92,7 +92,7 @@ namespace FlaUI.UIA3.Elements
 
     public class WpfSlider : Slider
     {
-        public WpfSlider(Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
+        public WpfSlider(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
 
         private RangeValuePattern RangeValuePattern { get { return PatternFactory.GetRangeValuePattern(); } }
 

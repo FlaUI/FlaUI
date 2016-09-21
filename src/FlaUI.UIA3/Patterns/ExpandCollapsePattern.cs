@@ -12,7 +12,7 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_ExpandCollapsePatternId, "ExpandCollapse");
         public static readonly PropertyId ExpandCollapseStateProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_ExpandCollapseExpandCollapseStatePropertyId, "ExpandCollapseState");
 
-        internal ExpandCollapsePattern(AutomationElement automationElement, UIA.IUIAutomationExpandCollapsePattern nativePattern)
+        internal ExpandCollapsePattern(Element automationElement, UIA.IUIAutomationExpandCollapsePattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new ExpandCollapsePatternInformation(element, cached))
         {
         }
@@ -35,7 +35,7 @@ namespace FlaUI.UIA3.Patterns
 
     public class ExpandCollapsePatternInformation : InformationBase
     {
-        public ExpandCollapsePatternInformation(AutomationElement automationElement, bool cached)
+        public ExpandCollapsePatternInformation(Element automationElement, bool cached)
             : base(automationElement, cached)
         {
         }

@@ -13,7 +13,7 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId AnnotationObjectsProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_SpreadsheetItemAnnotationObjectsPropertyId, "AnnotationObjects");
         public static readonly PropertyId AnnotationTypesProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_SpreadsheetItemAnnotationTypesPropertyId, "AnnotationTypes").SetConverter(NativeValueConverter.ToAnnotationTypes);
 
-        internal SpreadsheetItemPattern(AutomationElement automationElement, UIA.IUIAutomationSpreadsheetItemPattern nativePattern)
+        internal SpreadsheetItemPattern(Element automationElement, UIA.IUIAutomationSpreadsheetItemPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new SpreadsheetItemInformation(element, cached))
         {
         }
@@ -26,7 +26,7 @@ namespace FlaUI.UIA3.Patterns
 
     public class SpreadsheetItemInformation : InformationBase
     {
-        public SpreadsheetItemInformation(AutomationElement automationElement, bool cached)
+        public SpreadsheetItemInformation(Element automationElement, bool cached)
             : base(automationElement, cached)
         {
         }
@@ -36,7 +36,7 @@ namespace FlaUI.UIA3.Patterns
             get { return Get<string>(SpreadsheetItemPattern.FormulaProperty); }
         }
 
-        public AutomationElement[] AnnotationObjects
+        public Element[] AnnotationObjects
         {
             get { return NativeElementArrayToElements(SpreadsheetItemPattern.AnnotationObjectsProperty); }
         }

@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application.cs" />
+    <Compile Include="AutomationBase.cs" />
     <Compile Include="Input\Helpers.cs" />
     <Compile Include="Input\IKeyboard.cs" />
     <Compile Include="Input\IMouse.cs" />

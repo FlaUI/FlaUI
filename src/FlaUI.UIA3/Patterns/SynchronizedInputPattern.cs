@@ -13,7 +13,7 @@ namespace FlaUI.UIA3.Patterns
         public static readonly EventId ReachedOtherElementEvent = EventId.Register(UIA.UIA_EventIds.UIA_InputReachedOtherElementEventId, "ReachedOtherElement");
         public static readonly EventId ReachedTargetEvent = EventId.Register(UIA.UIA_EventIds.UIA_InputReachedTargetEventId, "ReachedTarget");
 
-        internal SynchronizedInputPattern(AutomationElement automationElement, UIA.IUIAutomationSynchronizedInputPattern nativePattern)
+        internal SynchronizedInputPattern(Element automationElement, UIA.IUIAutomationSynchronizedInputPattern nativePattern)
             : base(automationElement, nativePattern)
         {
         }

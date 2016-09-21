@@ -31,14 +31,14 @@ namespace FlaUI.Core.UITests.TestFramework
         /// </summary>
         protected Application App { get; private set; }
 
-        protected Automation Uia3Automation { get; private set; }
+        protected UIA3Automation Uia3Automation { get; private set; }
 
         protected UITestBase(TestApplicationType appType)
         {
             ApplicationType = appType;
             ScreenshotDir = @"c:\FailedTestsScreenshots";
             _wasTestRun = false;
-            Uia3Automation = new Automation();
+            Uia3Automation = new UIA3Automation();
         }
 
         /// <summary>

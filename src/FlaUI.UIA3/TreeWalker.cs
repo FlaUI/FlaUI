@@ -5,43 +5,43 @@ namespace FlaUI.UIA3
 {
     public class TreeWalker
     {
-        public Automation Automation { get; private set; }
+        public UIA3Automation Automation { get; private set; }
         public UIA.IUIAutomationTreeWalker NativeTreeWalker { get; private set; }
 
-        public TreeWalker(Automation automation)
+        public TreeWalker(UIA3Automation automation)
         {
             Automation = automation;
             NativeTreeWalker = automation.NativeAutomation.ControlViewWalker;
         }
 
-        public AutomationElement GetParent(AutomationElement element)
+        public Element GetParent(Element element)
         {
             var parent = NativeTreeWalker.GetParentElement(element.NativeElement);
-            return parent == null ? null : new AutomationElement(Automation, parent);
+            return parent == null ? null : new Element(Automation, parent);
         }
 
-        public AutomationElement GetFirstChild(AutomationElement element)
+        public Element GetFirstChild(Element element)
         {
             var child = NativeTreeWalker.GetFirstChildElement(element.NativeElement);
-            return child == null ? null : new AutomationElement(Automation, child);
+            return child == null ? null : new Element(Automation, child);
         }
 
-        public AutomationElement GetLastChild(AutomationElement element)
+        public Element GetLastChild(Element element)
         {
             var child = NativeTreeWalker.GetLastChildElement(element.NativeElement);
-            return child == null ? null : new AutomationElement(Automation, child);
+            return child == null ? null : new Element(Automation, child);
         }
 
-        public AutomationElement GetNextSibling(AutomationElement element)
+        public Element GetNextSibling(Element element)
         {
             var child = NativeTreeWalker.GetNextSiblingElement(element.NativeElement);
-            return child == null ? null : new AutomationElement(Automation, child);
+            return child == null ? null : new Element(Automation, child);
         }
 
-        public AutomationElement GetPreviousSibling(AutomationElement element)
+        public Element GetPreviousSibling(Element element)
         {
             var child = NativeTreeWalker.GetPreviousSiblingElement(element.NativeElement);
-            return child == null ? null : new AutomationElement(Automation, child);
+            return child == null ? null : new Element(Automation, child);
         }
     }
 }

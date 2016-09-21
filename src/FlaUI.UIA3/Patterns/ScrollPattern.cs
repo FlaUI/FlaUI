@@ -17,7 +17,7 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId VerticalScrollPercentProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_ScrollVerticalScrollPercentPropertyId, "VerticalScrollPercent");
         public static readonly PropertyId VerticalViewSizeProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_ScrollVerticalViewSizePropertyId, "VerticalViewSize");
 
-        internal ScrollPattern(AutomationElement automationElement, UIA.IUIAutomationScrollPattern nativePattern)
+        internal ScrollPattern(Element automationElement, UIA.IUIAutomationScrollPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new ScrollPatternInformation(element, cached))
         {
         }
@@ -40,7 +40,7 @@ namespace FlaUI.UIA3.Patterns
 
     public class ScrollPatternInformation : InformationBase
     {
-        public ScrollPatternInformation(AutomationElement automationElement, bool cached)
+        public ScrollPatternInformation(Element automationElement, bool cached)
             : base(automationElement, cached)
         {
         }

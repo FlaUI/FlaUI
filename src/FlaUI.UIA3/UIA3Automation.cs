@@ -1,4 +1,4 @@
-﻿using FlaUI.Core.Overlay;
+﻿using FlaUI.Core;
 using FlaUI.Core.Shapes;
 using FlaUI.UIA3.Elements;
 using FlaUI.UIA3.Shapes;
@@ -9,10 +9,15 @@ using UIA = interop.UIAutomationCore;
 namespace FlaUI.UIA3
 {
     /// <summary>
-    /// Wrapper for the native automation object
+    /// Automation implementation for UIA3
     /// </summary>
-    public class Automation : IDisposable
+    public class UIA3Automation : AutomationBase
     {
+        public override object NotSupportedValue
+        {
+            get { return NativeAutomation.ReservedNotSupportedValue; }
+        }
+
         /// <summary>
         /// Native object for the ui automation
         /// </summary>
@@ -35,21 +40,47 @@ namespace FlaUI.UIA3
         }
 
         /// <summary>
-        /// Manager object for overlay objects
+        /// Creates an automation object
         /// </summary>
-        public OverlayManager OverlayManager
+        public UIA3Automation()
         {
-            get;
-            private set;
+            NativeAutomation = InitializeAutomation();
         }
 
         /// <summary>
-        /// Creates an automation object
+        /// Gets the root element (desktop)
         /// </summary>
-        public Automation()
+        public Element GetDesktop()
         {
-            NativeAutomation = InitializeAutomation();
-            OverlayManager = new OverlayManager();
+            var desktop = NativeAutomation.GetRootElement();
+            return new Element(this, desktop);
+        }
+
+        /// <summary>
+        /// Creates an <see cref="Element"/> from a given point
+        /// </summary>
+        public Element FromPoint(Point point)
+        {
+            var nativeElement = NativeAutomation.ElementFromPoint(point.ToTagPoint());
+            return nativeElement == null ? null : new Element(this, nativeElement);
+        }
+
+        /// <summary>
+        /// Creates an <see cref="Element"/> from a given windows handle (HWND)
+        /// </summary>
+        public Element FromHandle(IntPtr hwnd)
+        {
+            var nativeElement = NativeAutomation.ElementFromHandle(hwnd);
+            return nativeElement == null ? null : new Element(this, nativeElement);
+        }
+
+        public override void UnregisterAllEvents()
+        {
+            try
+            {
+                NativeAutomation.RemoveAllEventHandlers();
+            }
+            catch { }
         }
 
         /// <summary>
@@ -69,54 +100,6 @@ namespace FlaUI.UIA3
                 nativeAutomation = new UIA.CUIAutomation();
             }
             return nativeAutomation;
-        }
-
-        /// <summary>
-        /// Gets the root element (desktop)
-        /// </summary>
-        public AutomationElement GetDesktop()
-        {
-            var desktop = NativeAutomation.GetRootElement();
-            return new AutomationElement(this, desktop);
-        }
-
-        /// <summary>
-        /// Creates an <see cref="FlaUI.UIA3.Elements.AutomationElement"/> from a given point
-        /// </summary>
-        public AutomationElement FromPoint(Point point)
-        {
-            var nativeElement = NativeAutomation.ElementFromPoint(point.ToTagPoint());
-            return nativeElement == null ? null : new AutomationElement(this, nativeElement);
-        }
-
-        /// <summary>
-        /// Creates an <see cref="FlaUI.UIA3.Elements.AutomationElement"/> from a given windows handle (HWND)
-        /// </summary>
-        public AutomationElement FromHandle(IntPtr hwnd)
-        {
-            var nativeElement = NativeAutomation.ElementFromHandle(hwnd);
-            return nativeElement == null ? null : new AutomationElement(this, nativeElement);
-        }
-
-        /// <summary>
-        /// Removes all registered event handlers
-        /// </summary>
-        public void UnregisterAllEvents()
-        {
-            try
-            {
-                NativeAutomation.RemoveAllEventHandlers();
-            }
-            catch { }
-        }
-
-        /// <summary>
-        /// Cleans up the resources
-        /// </summary>
-        public void Dispose()
-        {
-            UnregisterAllEvents();
-            OverlayManager.Dispose();
         }
 
         /// <summary>

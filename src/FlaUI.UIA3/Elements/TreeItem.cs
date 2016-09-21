@@ -9,7 +9,7 @@ namespace FlaUI.UIA3.Elements
 {
     public class TreeItem : SelectionItem
     {
-        public TreeItem(Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
+        public TreeItem(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
 
         public ExpandCollapsePattern ExpandCollapsePattern
         {
@@ -65,7 +65,7 @@ namespace FlaUI.UIA3.Elements
         private TreeItem[] GetTreeItems()
         {
             return FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.TreeItem))
-                .Select(e => AutomationElementConversionExtensions.AsTreeItem(e)).ToArray();
+                .Select(e => ElementConversionExtensions.AsTreeItem(e)).ToArray();
         }
     }
 }

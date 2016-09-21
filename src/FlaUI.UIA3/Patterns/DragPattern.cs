@@ -16,7 +16,7 @@ namespace FlaUI.UIA3.Patterns
         public static readonly EventId DragCompleteEvent = EventId.Register(UIA.UIA_EventIds.UIA_Drag_DragCompleteEventId, "DragComplete");
         public static readonly EventId DragStartEvent = EventId.Register(UIA.UIA_EventIds.UIA_Drag_DragStartEventId, "DragStart");
 
-        internal DragPattern(AutomationElement automationElement, UIA.IUIAutomationDragPattern nativePattern)
+        internal DragPattern(Element automationElement, UIA.IUIAutomationDragPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new DragPatternInformation(element, cached))
         {
         }
@@ -29,7 +29,7 @@ namespace FlaUI.UIA3.Patterns
 
     public class DragPatternInformation : InformationBase
     {
-        public DragPatternInformation(AutomationElement automationElement, bool cached)
+        public DragPatternInformation(Element automationElement, bool cached)
             : base(automationElement, cached)
         {
         }
@@ -49,7 +49,7 @@ namespace FlaUI.UIA3.Patterns
             get { return Get<bool>(DragPattern.IsGrabbedProperty); }
         }
 
-        public AutomationElement[] GrabbedItems
+        public Element[] GrabbedItems
         {
             get { return NativeElementArrayToElements(DragPattern.GrabbedItemsProperty); }
         }

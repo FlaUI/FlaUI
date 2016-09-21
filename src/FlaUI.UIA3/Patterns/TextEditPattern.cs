@@ -14,7 +14,7 @@ namespace FlaUI.UIA3.Patterns
 
         public UIA.IUIAutomationTextEditPattern ExtendedNativePattern { get; private set; }
 
-        internal TextEditPattern(AutomationElement automationElement, UIA.IUIAutomationTextEditPattern nativePattern)
+        internal TextEditPattern(Element automationElement, UIA.IUIAutomationTextEditPattern nativePattern)
             : base(automationElement, nativePattern)
         {
             ExtendedNativePattern = nativePattern;

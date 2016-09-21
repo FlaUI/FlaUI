@@ -2,9 +2,9 @@
 
 namespace FlaUI.UIA3.Elements
 {
-    public class Label : AutomationElement
+    public class Label : Element
     {
-        public Label(Automation automation, UIA.IUIAutomationElement nativeElement)
+        public Label(UIA3Automation automation, UIA.IUIAutomationElement nativeElement)
             : base(automation, nativeElement)
         {
         }

@@ -15,7 +15,7 @@ namespace FlaUI.UIA3.Patterns
         public static readonly EventId ElementRemovedFromSelectionEvent = EventId.Register(UIA.UIA_EventIds.UIA_SelectionItem_ElementRemovedFromSelectionEventId, "ElementRemovedFromSelection");
         public static readonly EventId ElementSelectedEvent = EventId.Register(UIA.UIA_EventIds.UIA_SelectionItem_ElementSelectedEventId, "ElementSelected");
 
-        internal SelectionItemPattern(AutomationElement automationElement, UIA.IUIAutomationSelectionItemPattern nativePattern)
+        internal SelectionItemPattern(Element automationElement, UIA.IUIAutomationSelectionItemPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new SelectionItemPatternInformation(element, cached))
         {
         }
@@ -43,7 +43,7 @@ namespace FlaUI.UIA3.Patterns
 
     public class SelectionItemPatternInformation : InformationBase
     {
-        public SelectionItemPatternInformation(AutomationElement automationElement, bool cached)
+        public SelectionItemPatternInformation(Element automationElement, bool cached)
             : base(automationElement, cached)
         {
         }
@@ -53,7 +53,7 @@ namespace FlaUI.UIA3.Patterns
             get { return Get<bool>(SelectionItemPattern.IsSelectedProperty); }
         }
 
-        public AutomationElement SelectionContainer
+        public Element SelectionContainer
         {
             get { return NativeElementToElement(SelectionItemPattern.SelectionContainerProperty); }
         }

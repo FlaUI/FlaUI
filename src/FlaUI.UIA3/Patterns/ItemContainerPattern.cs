@@ -10,7 +10,7 @@ namespace FlaUI.UIA3.Patterns
     {
         public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_ItemContainerPatternId, "ItemContainer");
 
-        internal ItemContainerPattern(AutomationElement automationElement, UIA.IUIAutomationItemContainerPattern nativePattern)
+        internal ItemContainerPattern(Element automationElement, UIA.IUIAutomationItemContainerPattern nativePattern)
             : base(automationElement, nativePattern)
         {
         }
@@ -20,7 +20,7 @@ namespace FlaUI.UIA3.Patterns
             get { return (UIA.IUIAutomationItemContainerPattern)base.NativePattern; }
         }
 
-        public AutomationElement FindItemByProperty(AutomationElement startAfter, PropertyId property, object value)
+        public Element FindItemByProperty(Element startAfter, PropertyId property, object value)
         {
             var foundNativeElement = ComCallWrapper.Call(() =>
                 NativePattern.FindItemByProperty(

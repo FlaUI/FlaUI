@@ -7,7 +7,7 @@ namespace FlaUI.UIA3
     {
         public UIA.IUIAutomationTextRange2 NativeRange2 { get; private set; }
 
-        internal TextRange2(Automation automation, UIA.IUIAutomationTextRange2 nativeRange)
+        internal TextRange2(UIA3Automation automation, UIA.IUIAutomationTextRange2 nativeRange)
             : base(automation, nativeRange)
         {
             NativeRange2 = nativeRange;

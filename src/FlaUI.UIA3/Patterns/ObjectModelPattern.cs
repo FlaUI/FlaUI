@@ -9,7 +9,7 @@ namespace FlaUI.UIA3.Patterns
     {
         public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_ObjectModelPatternId, "ObjectModel");
 
-        public ObjectModelPattern(AutomationElement automationElement, UIA.IUIAutomationObjectModelPattern nativePattern)
+        public ObjectModelPattern(Element automationElement, UIA.IUIAutomationObjectModelPattern nativePattern)
             : base(automationElement, nativePattern)
         {
         }

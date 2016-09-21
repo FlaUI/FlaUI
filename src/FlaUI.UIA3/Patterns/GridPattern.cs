@@ -12,7 +12,7 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId ColumnCountProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_GridColumnCountPropertyId, "ColumnCount");
         public static readonly PropertyId RowCountProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_GridRowCountPropertyId, "RowCount");
 
-        internal GridPattern(AutomationElement automationElement, UIA.IUIAutomationGridPattern nativePattern)
+        internal GridPattern(Element automationElement, UIA.IUIAutomationGridPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new GridPatternInformation(element, cached))
         {
         }
@@ -22,7 +22,7 @@ namespace FlaUI.UIA3.Patterns
             get { return (UIA.IUIAutomationGridPattern)base.NativePattern; }
         }
 
-        public AutomationElement GetItem(int row, int column)
+        public Element GetItem(int row, int column)
         {
             var nativeItem = ComCallWrapper.Call(() => NativePattern.GetItem(row, column));
             return ToAutomationElement(nativeItem);
@@ -31,7 +31,7 @@ namespace FlaUI.UIA3.Patterns
 
     public class GridPatternInformation : InformationBase
     {
-        public GridPatternInformation(AutomationElement automationElement, bool cached)
+        public GridPatternInformation(Element automationElement, bool cached)
             : base(automationElement, cached)
         {
         }

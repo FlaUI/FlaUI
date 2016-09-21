@@ -59,7 +59,7 @@ namespace FlaUI.UIA3.Conditions
         /// <summary>
         /// Converts this condition to a native condition
         /// </summary>
-        public IUIAutomationCondition ToNative(Automation automation)
+        public IUIAutomationCondition ToNative(UIA3Automation automation)
         {
             var propCond = this as PropertyCondition;
             if (propCond != null)

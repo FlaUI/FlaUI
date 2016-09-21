@@ -19,7 +19,7 @@ namespace FlaUI.UIA3.Elements
     /// <summary>
     /// Basic class for a wrapped ui element
     /// </summary>
-    public class AutomationElement
+    public class Element
     {
         /// <summary>
         /// Native object for the ui element
@@ -45,7 +45,7 @@ namespace FlaUI.UIA3.Elements
         /// <summary>
         /// Underlying <see cref="Automation"/> object where this element belongs to
         /// </summary>
-        public Automation Automation { get; private set; }
+        public UIA3Automation Automation { get; private set; }
 
         /// <summary>
         /// A factory object for patterns
@@ -55,25 +55,25 @@ namespace FlaUI.UIA3.Elements
         /// <summary>
         /// Basic information about this element (cached)
         /// </summary>
-        public AutomationElementInformation Cached { get; private set; }
+        public ElementInformation Cached { get; private set; }
 
         /// <summary>
         /// Basic information about this element (realtime)
         /// </summary>
-        public AutomationElementInformation Current { get; private set; }
+        public ElementInformation Current { get; private set; }
 
         /// <summary>
         /// Constructor for a basic ui element
         /// </summary>
         /// <param name="automation">The automation instance where this element belongs to</param>
         /// <param name="nativeElement">The native element this instance wrapps</param>
-        public AutomationElement(Automation automation, UIA.IUIAutomationElement nativeElement)
+        public Element(UIA3Automation automation, UIA.IUIAutomationElement nativeElement)
         {
             Automation = automation;
             NativeElement = nativeElement;
             PatternFactory = new PatternFactory(this);
-            Cached = new AutomationElementInformation(this, true);
-            Current = new AutomationElementInformation(this, false);
+            Cached = new ElementInformation(this, true);
+            Current = new ElementInformation(this, false);
         }
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace FlaUI.UIA3.Elements
         /// <param name="event">The event to register to</param>
         /// <param name="treeScope">The treescope in which the event should be registered</param>
         /// <param name="action">The action to execute when the event fires</param>
-        public void RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
+        public void RegisterEvent(EventId @event, TreeScope treeScope, Action<Element, EventId> action)
         {
             Automation.NativeAutomation.AddAutomationEventHandler(@event.Id, NativeElement, (UIA.TreeScope)treeScope, null, new BasicEventHandler(Automation, action));
         }
@@ -143,7 +143,7 @@ namespace FlaUI.UIA3.Elements
         /// Registers for a focus changed event
         /// </summary>
         /// <param name="action">The action to execute when the event fires</param>
-        public void RegisterFocusChangedEvent(Action<AutomationElement> action)
+        public void RegisterFocusChangedEvent(Action<Element> action)
         {
             Automation.NativeAutomation.AddFocusChangedEventHandler(null, new FocusChangedEventHandler(Automation, action));
         }
@@ -153,7 +153,7 @@ namespace FlaUI.UIA3.Elements
         /// </summary>
         /// <param name="treeScope">The treescope in which the event should be registered</param>
         /// <param name="action">The action to execute when the event fires</param>
-        public void RegisterStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action)
+        public void RegisterStructureChangedEvent(TreeScope treeScope, Action<Element, StructureChangeType, int[]> action)
         {
             Automation.NativeAutomation.AddStructureChangedEventHandler(NativeElement, (UIA.TreeScope)treeScope, null, new StructureChangedEventHandler(Automation, action));
         }
@@ -164,7 +164,7 @@ namespace FlaUI.UIA3.Elements
         /// <param name="treeScope">The treescope in which the event should be registered</param>
         /// <param name="action">The action to execute when the event fires</param>
         /// <param name="properties">The properties to listen to for a change</param>
-        public void RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, params PropertyId[] properties)
+        public void RegisterPropertyChangedEvent(TreeScope treeScope, Action<Element, PropertyId, object> action, params PropertyId[] properties)
         {
             var propertyIds = properties.Select(p => p.Id).ToArray();
             Automation.NativeAutomation.AddPropertyChangedEventHandler(NativeElement,
@@ -218,7 +218,7 @@ namespace FlaUI.UIA3.Elements
         /// <summary>
         /// Draws a red highlight around the element
         /// </summary>
-        public AutomationElement DrawHighlight()
+        public Element DrawHighlight()
         {
             return DrawHighlight(System.Windows.Media.Colors.Red);
         }
@@ -226,7 +226,7 @@ namespace FlaUI.UIA3.Elements
         /// <summary>
         /// Draws a manually colored highlight around the element
         /// </summary>
-        public AutomationElement DrawHighlight(WpfColor color)
+        public Element DrawHighlight(WpfColor color)
         {
             return DrawHighlight(true, color, 2000);
         }
@@ -234,7 +234,7 @@ namespace FlaUI.UIA3.Elements
         /// <summary>
         /// Draws a manually colored highlight around the element
         /// </summary>
-        public AutomationElement DrawHighlight(GdiColor color)
+        public Element DrawHighlight(GdiColor color)
         {
             return DrawHighlight(true, color, 2000);
         }
@@ -246,7 +246,7 @@ namespace FlaUI.UIA3.Elements
         /// <param name="color">The color to draw the highlight</param>
         /// <param name="durationInMs">The duration (im ms) how long the highlight is shown</param>
         /// <remarks>Override for winforms color</remarks>
-        public AutomationElement DrawHighlight(bool blocking, GdiColor color, int durationInMs)
+        public Element DrawHighlight(bool blocking, GdiColor color, int durationInMs)
         {
             return DrawHighlight(blocking, WpfColor.FromArgb(color.A, color.R, color.G, color.B), durationInMs);
         }
@@ -257,7 +257,7 @@ namespace FlaUI.UIA3.Elements
         /// <param name="blocking">Flag to indicate if further execution waits until the highlight is removed</param>
         /// <param name="color">The color to draw the highlight</param>
         /// <param name="durationInMs">The duration (im ms) how long the highlight is shown</param>
-        public AutomationElement DrawHighlight(bool blocking, WpfColor color, int durationInMs)
+        public Element DrawHighlight(bool blocking, WpfColor color, int durationInMs)
         {
             var rectangle = Current.BoundingRectangle;
             if (!rectangle.IsEmpty)
@@ -298,7 +298,7 @@ namespace FlaUI.UIA3.Elements
         /// <summary>
         /// Finds all elements in the given treescope and condition
         /// </summary>
-        public AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition)
+        public Element[] FindAll(TreeScope treeScope, ConditionBase condition)
         {
             var nativeFoundElements = NativeElement.FindAll((UIA.TreeScope)treeScope, condition.ToNative(Automation));
             return NativeValueConverter.NativeArrayToManaged(Automation, nativeFoundElements);
@@ -307,7 +307,7 @@ namespace FlaUI.UIA3.Elements
         /// <summary>
         /// Finds the first element which is in the given treescope and matches the condition
         /// </summary>
-        public AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
+        public Element FindFirst(TreeScope treeScope, ConditionBase condition)
         {
             var nativeFoundElement = NativeElement.FindFirst((UIA.TreeScope)treeScope, condition.ToNative(Automation));
             return NativeValueConverter.NativeToManaged(Automation, nativeFoundElement);
@@ -455,87 +455,87 @@ namespace FlaUI.UIA3.Elements
     /// <summary>
     /// Class with extension methods to convert the element to a specific class
     /// </summary>
-    public static class AutomationElementConversionExtensions
+    public static class ElementConversionExtensions
     {
-        public static Button AsButton(this AutomationElement automationElement)
+        public static Button AsButton(this Element automationElement)
         {
             if (automationElement == null) { return null; }
             return new Button(automationElement.Automation, automationElement.NativeElement);
         }
 
-        public static CheckBox AsCheckBox(this AutomationElement automationElement)
+        public static CheckBox AsCheckBox(this Element automationElement)
         {
             if (automationElement == null) { return null; }
             return new CheckBox(automationElement.Automation, automationElement.NativeElement);
         }
 
-        public static RadioButton AsRadioButton(this AutomationElement automationElement)
+        public static RadioButton AsRadioButton(this Element automationElement)
         {
             if (automationElement == null) { return null; }
             return new RadioButton(automationElement.Automation, automationElement.NativeElement);
         }
 
-        public static Window AsWindow(this AutomationElement automationElement)
+        public static Window AsWindow(this Element automationElement)
         {
             if (automationElement == null) { return null; }
             return new Window(automationElement.Automation, automationElement.NativeElement);
         }
 
-        public static Label AsLabel(this AutomationElement automationElement)
+        public static Label AsLabel(this Element automationElement)
         {
             if (automationElement == null) { return null; }
             return new Label(automationElement.Automation, automationElement.NativeElement);
         }
 
-        public static TitleBar AsTitleBar(this AutomationElement automationElement)
+        public static TitleBar AsTitleBar(this Element automationElement)
         {
             if (automationElement == null) { return null; }
             return new TitleBar(automationElement.Automation, automationElement.NativeElement);
         }
 
-        public static Menu AsMenu(this AutomationElement automationElement)
+        public static Menu AsMenu(this Element automationElement)
         {
             if (automationElement == null) { return null; }
             return new Menu(automationElement.Automation, automationElement.NativeElement);
         }
 
-        public static MenuItem AsMenuItem(this AutomationElement automationElement)
+        public static MenuItem AsMenuItem(this Element automationElement)
         {
             if (automationElement == null) { return null; }
             return new MenuItem(automationElement.Automation, automationElement.NativeElement);
         }
 
-        public static Tab AsTab(this AutomationElement automationElement)
+        public static Tab AsTab(this Element automationElement)
         {
             if (automationElement == null) { return null; }
             return new Tab(automationElement.Automation, automationElement.NativeElement);
         }
 
-        public static TabItem AsTabItem(this AutomationElement automationElement)
+        public static TabItem AsTabItem(this Element automationElement)
         {
             if (automationElement == null) { return null; }
             return new TabItem(automationElement.Automation, automationElement.NativeElement);
         }
 
-        public static Tree AsTree(this AutomationElement automationElement)
+        public static Tree AsTree(this Element automationElement)
         {
             if (automationElement == null) { return null; }
             return new Tree(automationElement.Automation, automationElement.NativeElement);
         }
 
-        public static TreeItem AsTreeItem(this AutomationElement automationElement)
+        public static TreeItem AsTreeItem(this Element automationElement)
         {
             if (automationElement == null) { return null; }
             return new TreeItem(automationElement.Automation, automationElement.NativeElement);
         }
 
-        public static ProgressBar AsProgressBar(this AutomationElement automationElement)
+        public static ProgressBar AsProgressBar(this Element automationElement)
         {
             if (automationElement == null) { return null; }
             return new ProgressBar(automationElement.Automation, automationElement.NativeElement);
         }
 
-        public static Slider AsSlider(this AutomationElement automationElement)
+        public static Slider AsSlider(this Element automationElement)
         {
             if (automationElement == null) { return null; }
             if (automationElement.Current.FrameworkId == FrameworkIds.Wpf)
@@ -549,7 +549,7 @@ namespace FlaUI.UIA3.Elements
             return new Slider(automationElement.Automation, automationElement.NativeElement);
         }
 
-        public static Thumb AsThumb(this AutomationElement automationElement)
+        public static Thumb AsThumb(this Element automationElement)
         {
             if (automationElement == null) { return null; }
             return new Thumb(automationElement.Automation, automationElement.NativeElement);

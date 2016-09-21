@@ -12,7 +12,7 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_DockPatternId, "Dock");
         public static readonly PropertyId DockPositionProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_DockDockPositionPropertyId, "DockPosition");
 
-        internal DockPattern(AutomationElement automationElement, UIA.IUIAutomationDockPattern nativePattern)
+        internal DockPattern(Element automationElement, UIA.IUIAutomationDockPattern nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new DockPatternInformation(element, cached))
         {
         }
@@ -30,7 +30,7 @@ namespace FlaUI.UIA3.Patterns
 
     public class DockPatternInformation : InformationBase
     {
-        public DockPatternInformation(AutomationElement automationElement, bool cached)
+        public DockPatternInformation(Element automationElement, bool cached)
             : base(automationElement, cached)
         {
         }

@@ -10,9 +10,9 @@ namespace FlaUI.UIA3
     /// </summary>
     public class PatternFactory
     {
-        private readonly AutomationElement _automationElement;
+        private readonly Element _automationElement;
 
-        internal PatternFactory(AutomationElement automationElement)
+        internal PatternFactory(Element automationElement)
         {
             _automationElement = automationElement;
         }

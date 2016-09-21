@@ -9,7 +9,7 @@ namespace FlaUI.UIA3.Patterns
     {
         public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_SpreadsheetPatternId, "Spreadsheet");
 
-        internal SpreadsheetPattern(AutomationElement automationElement, UIA.IUIAutomationSpreadsheetPattern nativePattern)
+        internal SpreadsheetPattern(Element automationElement, UIA.IUIAutomationSpreadsheetPattern nativePattern)
             : base(automationElement, nativePattern)
         {
         }
@@ -19,7 +19,7 @@ namespace FlaUI.UIA3.Patterns
             get { return (UIA.IUIAutomationSpreadsheetPattern)base.NativePattern; }
         }
 
-        public AutomationElement GetItemByName(string name)
+        public Element GetItemByName(string name)
         {
             var nativeElement = ComCallWrapper.Call(() => NativePattern.GetItemByName(name));
             return ToAutomationElement(nativeElement);

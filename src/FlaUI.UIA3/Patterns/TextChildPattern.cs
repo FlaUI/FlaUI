@@ -10,7 +10,7 @@ namespace FlaUI.UIA3.Patterns
     {
         public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_TextChildPatternId, "TextChild");
 
-        internal TextChildPattern(AutomationElement automationElement, UIA.IUIAutomationTextChildPattern nativePattern)
+        internal TextChildPattern(Element automationElement, UIA.IUIAutomationTextChildPattern nativePattern)
             : base(automationElement, nativePattern)
         {
         }
@@ -20,7 +20,7 @@ namespace FlaUI.UIA3.Patterns
             get { return (UIA.IUIAutomationTextChildPattern)base.NativePattern; }
         }
 
-        public AutomationElement TextContainer
+        public Element TextContainer
         {
             get
             {

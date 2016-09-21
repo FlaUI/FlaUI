@@ -8,13 +8,13 @@ namespace FlaUI.UIA3.Elements
     /// <summary>
     /// Represents a menu or a menubar, which contains menuitems
     /// </summary>
-    public class Menu : AutomationElement
+    public class Menu : Element
     {
-        public Menu(Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
+        public Menu(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
 
         public MenuItem[] MenuItems
         {
-            get { return FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.MenuItem)).Select(e => AutomationElementConversionExtensions.AsMenuItem(e)).ToArray(); }
+            get { return FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.MenuItem)).Select(e => ElementConversionExtensions.AsMenuItem(e)).ToArray(); }
         }
     }
 }

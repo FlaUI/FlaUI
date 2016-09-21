@@ -10,22 +10,22 @@ namespace FlaUI.UIA3.Conditions
     {
         public static PropertyCondition ByText(string text)
         {
-            return new PropertyCondition(AutomationElement.NameProperty, text);
+            return new PropertyCondition(Element.NameProperty, text);
         }
 
         public static PropertyCondition ByAutomationId(string automationId)
         {
-            return new PropertyCondition(AutomationElement.AutomationIdProperty, automationId);
+            return new PropertyCondition(Element.AutomationIdProperty, automationId);
         }
 
         public static PropertyCondition ByControlType(ControlType controlType)
         {
-            return new PropertyCondition(AutomationElement.ControlTypeProperty, controlType);
+            return new PropertyCondition(Element.ControlTypeProperty, controlType);
         }
 
         public static PropertyCondition ByClassName(string className)
         {
-            return new PropertyCondition(AutomationElement.ClassNameProperty, className);
+            return new PropertyCondition(Element.ClassNameProperty, className);
         }
 
         /// <summary>

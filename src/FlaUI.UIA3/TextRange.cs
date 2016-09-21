@@ -10,11 +10,11 @@ namespace FlaUI.UIA3
 {
     public class TextRange
     {
-        public Automation Automation { get; private set; }
+        public UIA3Automation Automation { get; private set; }
 
         public UIA.IUIAutomationTextRange NativeRange { get; private set; }
 
-        internal TextRange(Automation automation, UIA.IUIAutomationTextRange nativeRange)
+        internal TextRange(UIA3Automation automation, UIA.IUIAutomationTextRange nativeRange)
         {
             Automation = automation;
             NativeRange = nativeRange;
@@ -80,13 +80,13 @@ namespace FlaUI.UIA3
             return result;
         }
 
-        public AutomationElement[] GetChildren()
+        public Element[] GetChildren()
         {
             var nativeChildren = ComCallWrapper.Call(() => NativeRange.GetChildren());
             return NativeValueConverter.NativeArrayToManaged(Automation, nativeChildren);
         }
 
-        public AutomationElement GetEnclosingElement()
+        public Element GetEnclosingElement()
         {
             var nativeElement = ComCallWrapper.Call(() => NativeRange.GetEnclosingElement());
             return NativeValueConverter.NativeToManaged(Automation, nativeElement);

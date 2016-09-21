@@ -16,7 +16,7 @@ namespace FlaUI.UIA3.Patterns
 
         public UIA.IUIAutomationTransformPattern2 ExtendedNativePattern { get; private set; }
 
-        public Transform2Pattern(AutomationElement automationElement, UIA.IUIAutomationTransformPattern2 nativePattern)
+        public Transform2Pattern(Element automationElement, UIA.IUIAutomationTransformPattern2 nativePattern)
             : base(automationElement, nativePattern, (element, cached) => new Transform2PatternInformation(element, cached))
         {
             ExtendedNativePattern = nativePattern;
@@ -35,7 +35,7 @@ namespace FlaUI.UIA3.Patterns
 
     public class Transform2PatternInformation : TransformPatternInformation
     {
-        public Transform2PatternInformation(AutomationElement automationElement, bool cached)
+        public Transform2PatternInformation(Element automationElement, bool cached)
             : base(automationElement, cached)
         {
         }

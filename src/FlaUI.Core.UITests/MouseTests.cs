@@ -25,7 +25,7 @@ namespace FlaUI.Core.UITests
         public void ClickTest()
         {
             var app = Application.Launch("mspaint");
-            using (var automation = new Automation())
+            using (var automation = new UIA3Automation())
             {
                 var mainWindow = app.GetMainWindow(automation);
                 var mouseX = mainWindow.Current.BoundingRectangle.Left + 50;

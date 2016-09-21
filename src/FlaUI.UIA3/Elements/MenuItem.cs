@@ -10,9 +10,9 @@ namespace FlaUI.UIA3.Elements
     /// <summary>
     /// Represents a menuitem which can also contain sub-menuitems
     /// </summary>
-    public class MenuItem : AutomationElement
+    public class MenuItem : Element
     {
-        public MenuItem(Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
+        public MenuItem(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
 
         public MenuItem[] SubMenuItems
         {
@@ -24,7 +24,7 @@ namespace FlaUI.UIA3.Elements
                     ExpandCollapsePattern.Expand();
                     Thread.Sleep(250);
                 }
-                return FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.MenuItem)).Select(e => AutomationElementConversionExtensions.AsMenuItem(e)).ToArray();
+                return FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.MenuItem)).Select(e => ElementConversionExtensions.AsMenuItem(e)).ToArray();
             }
         }
 

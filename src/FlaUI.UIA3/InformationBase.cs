@@ -13,14 +13,14 @@ namespace FlaUI.UIA3
         /// <summary>
         /// The element this information belongs to
         /// </summary>
-        protected AutomationElement AutomationElement { get; private set; }
+        protected Element AutomationElement { get; private set; }
 
         /// <summary>
         /// Flag to indicate if the information is cached or not
         /// </summary>
         protected bool Cached { get; private set; }
 
-        protected InformationBase(AutomationElement automationElement, bool cached)
+        protected InformationBase(Element automationElement, bool cached)
         {
             AutomationElement = automationElement;
             Cached = cached;
@@ -34,13 +34,13 @@ namespace FlaUI.UIA3
             return AutomationElement.SafeGetPropertyValue<T>(property, Cached);
         }
 
-        protected AutomationElement[] NativeElementArrayToElements(PropertyId property)
+        protected Element[] NativeElementArrayToElements(PropertyId property)
         {
             var nativeElements = Get<UIA.IUIAutomationElementArray>(property);
             return NativeValueConverter.NativeArrayToManaged(AutomationElement.Automation, nativeElements);
         }
 
-        protected AutomationElement NativeElementToElement(PropertyId property)
+        protected Element NativeElementToElement(PropertyId property)
         {
             var nativeElement = Get<UIA.IUIAutomationElement>(property);
             return NativeValueConverter.NativeToManaged(AutomationElement.Automation, nativeElement);
