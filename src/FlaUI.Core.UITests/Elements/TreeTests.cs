@@ -1,7 +1,8 @@
-﻿using FlaUI.Core.Conditions;
-using FlaUI.Core.Definitions;
-using FlaUI.Core.Elements;
-using FlaUI.Core.UITests.TestFramework;
+﻿using FlaUI.Core.UITests.TestFramework;
+using FlaUI.UIA3.Conditions;
+using FlaUI.UIA3.Definitions;
+using FlaUI.UIA3.Elements;
+using FlaUI.UIA3.Tools;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
@@ -20,7 +21,7 @@ namespace FlaUI.Core.UITests.Elements
         [OneTimeSetUp]
         public void SelectTab()
         {
-            var mainWindow = App.GetMainWindow();
+            var mainWindow = App.GetMainWindow(Uia3Automation);
             var tab = mainWindow.FindFirst(TreeScope.Descendants, ConditionFactory.ByControlType(ControlType.Tab)).AsTab();
             tab.SelectTabItem(1);
             var tree = mainWindow.FindFirst(TreeScope.Descendants, ConditionFactory.ByAutomationId("treeView1")).AsTree();

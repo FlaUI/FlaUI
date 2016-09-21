@@ -1,9 +1,9 @@
-﻿using FlaUI.Core;
-using FlaUI.Core.Definitions;
-using FlaUI.Core.Elements;
-using FlaUI.Core.Identifiers;
-using FlaUI.Core.Patterns;
-using FlaUI.UIA2;
+﻿using FlaUI.UIA3;
+using FlaUI.UIA3.Definitions;
+using FlaUI.UIA3.Elements;
+using FlaUI.UIA3.Identifiers;
+using FlaUI.UIA3.Patterns;
+using FlaUI.UIA3.Tools;
 using Gma.System.MouseKeyHook;
 using System;
 using System.Windows;
@@ -67,16 +67,18 @@ namespace FlaUIRec.Views
 
         private void RegisterEvents()
         {
-            _app.Automation.UnregisterAllEvents();
-            _app.GetMainWindow().RegisterEvent(InvokePattern.InvokedEvent, TreeScope.Descendants, InvokeAction);
-            _app.GetMainWindow().RegisterEvent(SelectionItemPattern.ElementSelectedEvent, TreeScope.Descendants, SelectionAction);
-            _app.GetMainWindow().RegisterEvent(TextPattern.TextChangedEvent, TreeScope.Descendants, TextChangedAction);
-            _app.GetMainWindow().RegisterStructureChangedEvent(TreeScope.Descendants, StructureAction);
-            _app.GetMainWindow().RegisterPropertyChangedEvent(TreeScope.Descendants, PropertyAction, TogglePattern.ToggleStateProperty);
-            _app.GetMainWindow().RegisterPropertyChangedEvent(TreeScope.Descendants, PropertyAction, ValuePattern.ValueProperty);
+            var automation = new Automation();
+            automation.UnregisterAllEvents();
+            var mainWindow = _app.GetMainWindow(automation);
+            mainWindow.RegisterEvent(InvokePattern.InvokedEvent, TreeScope.Descendants, InvokeAction);
+            mainWindow.RegisterEvent(SelectionItemPattern.ElementSelectedEvent, TreeScope.Descendants, SelectionAction);
+            mainWindow.RegisterEvent(TextPattern.TextChangedEvent, TreeScope.Descendants, TextChangedAction);
+            mainWindow.RegisterStructureChangedEvent(TreeScope.Descendants, StructureAction);
+            mainWindow.RegisterPropertyChangedEvent(TreeScope.Descendants, PropertyAction, TogglePattern.ToggleStateProperty);
+            mainWindow.RegisterPropertyChangedEvent(TreeScope.Descendants, PropertyAction, ValuePattern.ValueProperty);
 
             // Legacy
-            _app.GetMainWindow().GetUIA2().RegisterPropertyChangedEvent(TreeScope.Descendants, PropertyAction, TogglePattern.ToggleStateProperty);
+            //mainWindow.GetUIA2().RegisterPropertyChangedEvent(TreeScope.Descendants, PropertyAction, TogglePattern.ToggleStateProperty);
         }
 
         private void TextChangedAction(AutomationElement automationElement, EventId eventId)

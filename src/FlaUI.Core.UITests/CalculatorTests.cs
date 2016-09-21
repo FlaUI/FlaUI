@@ -1,10 +1,11 @@
-﻿using FlaUI.Core.Conditions;
-using FlaUI.Core.Definitions;
-using FlaUI.Core.Elements;
-using FlaUI.Core.Input;
+﻿using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
 using FlaUI.Core.WindowsAPI;
+using FlaUI.UIA3.Conditions;
+using FlaUI.UIA3.Definitions;
+using FlaUI.UIA3.Elements;
+using FlaUI.UIA3.Tools;
 using NUnit.Framework;
 using System;
 using System.Text.RegularExpressions;
@@ -22,14 +23,14 @@ namespace FlaUI.Core.UITests
         [Test]
         public void CalculatorTest()
         {
-            var window = App.GetMainWindow();
+            var window = App.GetMainWindow(Uia3Automation);
             Console.WriteLine(window.Title);
             var calc = SystemProductNameFetcher.IsWindows10() ? (ICalculator)new Win10Calc(window) : new LegacyCalc(window);
 
             // Switch to default mode
-            window.Automation.Keyboard.PressVirtualKeyCode(VirtualKeyShort.ALT);
-            window.Automation.Keyboard.TypeVirtualKeyCode(VirtualKeyShort.KEY_1);
-            window.Automation.Keyboard.ReleaseVirtualKeyCode(VirtualKeyShort.ALT);
+            Keyboard.Instance.PressVirtualKeyCode(VirtualKeyShort.ALT);
+            Keyboard.Instance.TypeVirtualKeyCode(VirtualKeyShort.KEY_1);
+            Keyboard.Instance.ReleaseVirtualKeyCode(VirtualKeyShort.ALT);
             Helpers.WaitUntilInputIsProcessed();
             App.WaitWhileBusy();
 
@@ -49,9 +50,9 @@ namespace FlaUI.Core.UITests
             Assert.That(result, Is.EqualTo("6912"));
 
             // Date comparison
-            window.Automation.Keyboard.PressVirtualKeyCode(VirtualKeyShort.CONTROL);
-            window.Automation.Keyboard.TypeVirtualKeyCode(VirtualKeyShort.KEY_E);
-            window.Automation.Keyboard.ReleaseVirtualKeyCode(VirtualKeyShort.CONTROL);
+            Keyboard.Instance.PressVirtualKeyCode(VirtualKeyShort.CONTROL);
+            Keyboard.Instance.TypeVirtualKeyCode(VirtualKeyShort.KEY_E);
+            Keyboard.Instance.ReleaseVirtualKeyCode(VirtualKeyShort.CONTROL);
 
             /*
                 // Verify can click on menu twice

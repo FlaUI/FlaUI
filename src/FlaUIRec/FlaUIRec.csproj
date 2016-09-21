@@ -9,11 +9,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FlaUIRec</RootNamespace>
     <AssemblyName>FlaUIRec</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -111,6 +112,10 @@
     <ProjectReference Include="..\FlaUI.UIA2\FlaUI.UIA2.csproj">
       <Project>{9060a00a-1718-4976-b6af-02c1be43190c}</Project>
       <Name>FlaUI.UIA2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FlaUI.UIA3\FlaUI.UIA3.csproj">
+      <Project>{49952cc0-b938-4306-888e-836e247b0768}</Project>
+      <Name>FlaUI.UIA3</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

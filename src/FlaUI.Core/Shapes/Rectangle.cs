@@ -1,7 +1,6 @@
-﻿using interop.UIAutomationCore;
+﻿using FlaUI.Core.Tools;
 using System;
 using System.Windows;
-using FlaUI.Core.Tools;
 
 namespace FlaUI.Core.Shapes
 {
@@ -92,28 +91,6 @@ namespace FlaUI.Core.Shapes
         public static implicit operator Rectangle(Rect r)
         {
             return new Rectangle(r.X, r.Y, r.Width, r.Height);
-        }
-
-        /// <summary>
-        /// Implicit conversion to native rectangle
-        /// </summary>
-        public static implicit operator tagRECT(Rectangle r)
-        {
-            return new tagRECT
-            {
-                left = r.Left.ToInt(),
-                top = r.Top.ToInt(),
-                right = r.Right.ToInt(),
-                bottom = r.Bottom.ToInt()
-            };
-        }
-
-        /// <summary>
-        /// Implicit conversion from native rectangle
-        /// </summary>
-        public static implicit operator Rectangle(tagRECT r)
-        {
-            return new Rectangle(r.left, r.top, r.right - r.left, r.bottom - r.top);
         }
 
         public override string ToString()

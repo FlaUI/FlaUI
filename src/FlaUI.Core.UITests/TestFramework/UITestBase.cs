@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
+﻿using FlaUI.UIA3;
+using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using System;
-using System.Diagnostics;
 using System.IO;
 
 namespace FlaUI.Core.UITests.TestFramework
@@ -31,11 +31,14 @@ namespace FlaUI.Core.UITests.TestFramework
         /// </summary>
         protected Application App { get; private set; }
 
+        protected Automation Uia3Automation { get; private set; }
+
         protected UITestBase(TestApplicationType appType)
         {
             ApplicationType = appType;
             ScreenshotDir = @"c:\FailedTestsScreenshots";
             _wasTestRun = false;
+            Uia3Automation = new Automation();
         }
 
         /// <summary>

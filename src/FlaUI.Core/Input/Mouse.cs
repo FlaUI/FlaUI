@@ -16,6 +16,8 @@ namespace FlaUI.Core.Input
     /// </summary>
     public class Mouse : IMouse
     {
+        public static readonly IMouse Instance = new Mouse();
+
         /// <summary>
         /// The current max timespan (in milliseconds) for double clicks
         /// </summary>

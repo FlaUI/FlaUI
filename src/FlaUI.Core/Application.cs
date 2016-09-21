@@ -1,5 +1,4 @@
-﻿using FlaUI.Core.Elements;
-using FlaUI.Core.Logging;
+﻿using FlaUI.Core.Logging;
 using FlaUI.Core.Tools;
 using System;
 using System.ComponentModel;
@@ -19,11 +18,6 @@ namespace FlaUI.Core
         private static readonly ILogger Log = new ConsoleLogger();
 
         /// <summary>
-        /// The automation object associated with this application
-        /// </summary>
-        public Automation Automation { get; private set; }
-
-        /// <summary>
         /// Flag to indicate, if the application is a windows store app
         /// </summary>
         public bool IsStoreApp { get; private set; }
@@ -34,6 +28,11 @@ namespace FlaUI.Core
         public string Name
         {
             get { return _process.ProcessName; }
+        }
+
+        public IntPtr MainWindowHandle
+        {
+            get { return _process.MainWindowHandle; }
         }
 
         public Application(int processId, bool isStoreApp = false)
@@ -51,7 +50,6 @@ namespace FlaUI.Core
             IsStoreApp = isStoreApp;
             WaitWhileBusy();
             WaitWhileMainHandleIsMissing();
-            Automation = new Automation();
         }
 
         public void Close()
@@ -172,21 +170,8 @@ namespace FlaUI.Core
             }
         }
 
-        #region Window
-        /// <summary>
-        /// Gets the window from the MainWindowHandle of the process
-        /// </summary>
-        public Window GetMainWindow()
-        {
-            var nWindow = Automation.NativeAutomation.ElementFromHandle(_process.MainWindowHandle);
-            var window = new Window(Automation, nWindow);
-            return window;
-        }
-        #endregion Window
-
         public void Dispose()
         {
-            Automation.Dispose();
             Close();
         }
     }

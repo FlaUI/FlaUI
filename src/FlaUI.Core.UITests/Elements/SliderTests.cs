@@ -1,9 +1,10 @@
-﻿using FlaUI.Core.Conditions;
-using FlaUI.Core.Definitions;
-using FlaUI.Core.Elements;
-using FlaUI.Core.Input;
+﻿using FlaUI.Core.Input;
 using FlaUI.Core.Shapes;
 using FlaUI.Core.UITests.TestFramework;
+using FlaUI.UIA3.Conditions;
+using FlaUI.UIA3.Definitions;
+using FlaUI.UIA3.Elements;
+using FlaUI.UIA3.Tools;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
@@ -73,7 +74,7 @@ namespace FlaUI.Core.UITests.Elements
 
         private Slider GetSlider()
         {
-            var element = App.GetMainWindow().FindFirst(TreeScope.Descendants, ConditionFactory.ByAutomationId("Slider")).AsSlider();
+            var element = App.GetMainWindow(Uia3Automation).FindFirst(TreeScope.Descendants, ConditionFactory.ByAutomationId("Slider")).AsSlider();
             return element;
         }
 

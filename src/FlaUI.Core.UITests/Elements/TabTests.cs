@@ -1,8 +1,9 @@
-﻿using FlaUI.Core.Conditions;
-using FlaUI.Core.Definitions;
-using FlaUI.Core.Elements;
-using FlaUI.Core.Input;
+﻿using FlaUI.Core.Input;
 using FlaUI.Core.UITests.TestFramework;
+using FlaUI.UIA3.Conditions;
+using FlaUI.UIA3.Definitions;
+using FlaUI.UIA3.Elements;
+using FlaUI.UIA3.Tools;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
@@ -20,7 +21,7 @@ namespace FlaUI.Core.UITests.Elements
         public void TabSelectTest()
         {
             RestartApp();
-            var mainWindow = App.GetMainWindow();
+            var mainWindow = App.GetMainWindow(Uia3Automation);
             var tab = mainWindow.FindFirst(TreeScope.Descendants, ConditionFactory.ByControlType(ControlType.Tab)).AsTab();
             Assert.That(tab.TabItems, Has.Length.EqualTo(2));
             Assert.That(tab.SelectedTabItemIndex, Is.EqualTo(0));

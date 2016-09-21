@@ -1,0 +1,32 @@
+﻿using FlaUI.UIA3.Definitions;
+using FlaUI.UIA3.Identifiers;
+using System;
+
+namespace FlaUI.UIA3.Conditions
+{
+    public class PropertyCondition : ConditionBase
+    {
+        public PropertyCondition(PropertyId property, object value)
+            : this(property, value, PropertyConditionFlags.None)
+        {
+        }
+
+        public PropertyCondition(PropertyId property, object value, PropertyConditionFlags propertyConditionFlags)
+        {
+            Property = property;
+            Value = value;
+            PropertyConditionFlags = propertyConditionFlags;
+        }
+
+        public PropertyId Property { get; private set; }
+
+        public PropertyConditionFlags PropertyConditionFlags { get; private set; }
+
+        public object Value { get; private set; }
+
+        public override string ToString()
+        {
+            return String.Format("{0}: {1}", Property, Value);
+        }
+    }
+}
