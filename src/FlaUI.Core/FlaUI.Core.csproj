@@ -59,7 +59,6 @@
     <Compile Include="Definitions\FrameworkIds.cs" />
     <Compile Include="Definitions\PropertyConditionFlags.cs" />
     <Compile Include="Elements\ElementBase.cs" />
-    <Compile Include="Elements\Slider.cs" />
     <Compile Include="Exceptions\MethodNotSupportedException.cs" />
     <Compile Include="Exceptions\NoClickablePointException.cs" />
     <Compile Include="Exceptions\PropertyNotSupportedException.cs" />
