@@ -58,7 +58,6 @@
     <Compile Include="Definitions\ControlType.cs" />
     <Compile Include="Definitions\DockPosition.cs" />
     <Compile Include="Definitions\ExpandCollapseState.cs" />
-    <Compile Include="Definitions\FrameworkIds.cs" />
     <Compile Include="Definitions\LiveSetting.cs" />
     <Compile Include="Definitions\OrientationType.cs" />
     <Compile Include="Definitions\RowOrColumnMajor.cs" />

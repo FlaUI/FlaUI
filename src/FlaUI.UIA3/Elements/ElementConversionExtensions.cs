@@ -1,4 +1,4 @@
-﻿using FlaUI.UIA3.Definitions;
+﻿using FlaUI.Core;
 
 namespace FlaUI.UIA3.Elements
 {
@@ -94,11 +94,11 @@ namespace FlaUI.UIA3.Elements
         public static Slider AsSlider(this Element automationElement)
         {
             if (automationElement == null) { return null; }
-            if (automationElement.Current.FrameworkId == FrameworkIds.Wpf)
+            if (automationElement.FrameworkType == FrameworkType.Wpf)
             {
                 return new WpfSlider(automationElement.Automation, automationElement.NativeElement);
             }
-            if (automationElement.Current.FrameworkId == FrameworkIds.WinForms)
+            if (automationElement.FrameworkType == FrameworkType.WinForms)
             {
                 return new WinFormsSlider(automationElement.Automation, automationElement.NativeElement);
             }

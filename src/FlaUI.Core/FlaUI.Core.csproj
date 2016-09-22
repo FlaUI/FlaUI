@@ -56,11 +56,14 @@
     <Compile Include="Conditions\NotCondition.cs" />
     <Compile Include="Conditions\OrCondition.cs" />
     <Compile Include="Conditions\PropertyCondition.cs" />
+    <Compile Include="Definitions\FrameworkIds.cs" />
     <Compile Include="Definitions\PropertyConditionFlags.cs" />
     <Compile Include="Elements\ElementBase.cs" />
+    <Compile Include="Elements\Slider.cs" />
     <Compile Include="Exceptions\MethodNotSupportedException.cs" />
     <Compile Include="Exceptions\NoClickablePointException.cs" />
     <Compile Include="Exceptions\PropertyNotSupportedException.cs" />
+    <Compile Include="FrameworkType.cs" />
     <Compile Include="Identifiers\ConvertibleIdentifierBase.cs" />
     <Compile Include="Identifiers\EventId.cs" />
     <Compile Include="Identifiers\IdentifierBase.cs" />

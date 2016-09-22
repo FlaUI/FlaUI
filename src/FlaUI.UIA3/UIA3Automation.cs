@@ -13,6 +13,8 @@ namespace FlaUI.UIA3
     /// </summary>
     public class UIA3Automation : AutomationBase
     {
+        public override AutomationType AutomationType { get { return AutomationType.UIA3; } }
+
         public override object NotSupportedValue
         {
             get { return NativeAutomation.ReservedNotSupportedValue; }

@@ -10,6 +10,8 @@ namespace FlaUI.UIA2
     /// </summary>
     public class UIA2Automation : AutomationBase
     {
+        public override AutomationType AutomationType { get { return AutomationType.UIA2; } }
+
         public override object NotSupportedValue
         {
             get { return UIA.AutomationElement.NotSupported; }

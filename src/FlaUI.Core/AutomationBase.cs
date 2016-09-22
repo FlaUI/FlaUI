@@ -18,6 +18,11 @@ namespace FlaUI.Core
         }
 
         /// <summary>
+        /// The automation type of the automation implementation
+        /// </summary>
+        public abstract AutomationType AutomationType { get; }
+
+        /// <summary>
         /// Creates an automation object
         /// </summary>
         protected AutomationBase()

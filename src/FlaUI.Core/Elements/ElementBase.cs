@@ -11,6 +11,8 @@ namespace FlaUI.Core.Elements
         /// </summary>
         public TAuto Automation { get; private set; }
 
+        public abstract FrameworkType FrameworkType { get; }
+
         protected ElementBase(TAuto automation)
         {
             Automation = automation;

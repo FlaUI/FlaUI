@@ -1,4 +1,6 @@
-﻿using FlaUI.Core.Elements;
+﻿using FlaUI.Core;
+using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Elements
@@ -14,6 +16,8 @@ namespace FlaUI.UIA2.Elements
         {
             NativeElement = nativeElement;
         }
+
+        public override FrameworkType FrameworkType { get { return FrameworkIds.ConvertToFrameworkType(NativeElement.Current.FrameworkId); } }
 
         protected override object InternalGetPropertyValue(int propertyId, bool cached, bool useDefaultIfNotSupported)
         {

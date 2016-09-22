@@ -12,6 +12,7 @@ using FlaUI.UIA3.EventHandlers;
 using FlaUI.UIA3.Tools;
 using System;
 using System.Linq;
+using FlaUI.Core.Definitions;
 using GdiColor = System.Drawing.Color;
 using UIA = interop.UIAutomationCore;
 using WpfColor = System.Windows.Media.Color;
@@ -279,6 +280,8 @@ namespace FlaUI.UIA3.Elements
             }
             return element;
         }
+
+        public override FrameworkType FrameworkType { get { return FrameworkIds.ConvertToFrameworkType(Current.FrameworkId); } }
 
         protected override object InternalGetPropertyValue(int propertyId, bool cached, bool useDefaultIfNotSupported)
         {
