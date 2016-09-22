@@ -19,6 +19,12 @@ namespace FlaUI.UIA3.Elements
             return new CheckBox(automationElement.Automation, automationElement.NativeElement);
         }
 
+        public static TextBox AsTextBox(this Element automationElement)
+        {
+            if (automationElement == null) { return null; }
+            return new TextBox(automationElement.Automation, automationElement.NativeElement);
+        }
+
         public static RadioButton AsRadioButton(this Element automationElement)
         {
             if (automationElement == null) { return null; }

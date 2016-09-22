@@ -57,8 +57,9 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.treeView1 = new System.Windows.Forms.TreeView();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.TextBox = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Slider)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -220,6 +221,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.TextBox);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.Slider);
             this.tabPage1.Controls.Add(this.EditableCombo);
@@ -247,14 +249,6 @@
             this.tabPage2.Text = "Complex Controls";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 297);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(491, 22);
-            this.statusStrip1.TabIndex = 18;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
             // treeView1
             // 
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -277,6 +271,21 @@
             treeNode6});
             this.treeView1.Size = new System.Drawing.Size(477, 241);
             this.treeView1.TabIndex = 0;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Location = new System.Drawing.Point(0, 297);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(491, 22);
+            this.statusStrip1.TabIndex = 18;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // TextBox
+            // 
+            this.TextBox.Location = new System.Drawing.Point(232, 9);
+            this.TextBox.Name = "TextBox";
+            this.TextBox.Size = new System.Drawing.Size(100, 20);
+            this.TextBox.TabIndex = 17;
             // 
             // Form1
             // 
@@ -324,6 +333,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.TextBox TextBox;
     }
 }
 
