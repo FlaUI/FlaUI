@@ -1,48 +1,29 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.Tools;
-using FlaUI.UIA3.Elements;
 using FlaUI.Core.Identifiers;
+using FlaUI.Core.Patterns;
+using FlaUI.Core.Tools;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class ValuePattern : PatternBaseWithInformation<ValuePatternInformation>
+    public class ValuePattern : ValuePattern<UIA.IUIAutomationValuePattern, ValuePatternInformation>
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_ValuePatternId, "Value");
         public static readonly PropertyId IsReadOnlyProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ValueIsReadOnlyPropertyId, "IsReadOnly");
         public static readonly PropertyId ValueProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ValueValuePropertyId, "Value");
 
-        internal ValuePattern(Element automationElement, UIA.IUIAutomationValuePattern nativePattern)
-            : base(automationElement, nativePattern, (element, cached) => new ValuePatternInformation(element, cached))
+        public ValuePattern(AutomationObjectBase automationObject, UIA.IUIAutomationValuePattern nativePattern) : base(automationObject, nativePattern)
         {
         }
 
-        public new UIA.IUIAutomationValuePattern NativePattern
-        {
-            get { return (UIA.IUIAutomationValuePattern)base.NativePattern; }
-        }
-
-        public void SetValue(string value)
+        public override void SetValue(string value)
         {
             ComCallWrapper.Call(() => NativePattern.SetValue(value));
         }
-    }
 
-    public class ValuePatternInformation : InformationBase
-    {
-        public ValuePatternInformation(Element automationElement, bool cached)
-            : base(automationElement, cached)
+        protected override ValuePatternInformation CreateInformation(bool cached)
         {
-        }
-
-        public bool IsReadOnly
-        {
-            get { return Get<bool>(ValuePattern.IsReadOnlyProperty); }
-        }
-
-        public string Value
-        {
-            get { return Get<string>(ValuePattern.ValueProperty); }
+            return new ValuePatternInformation(AutomationObject, cached);
         }
     }
 }

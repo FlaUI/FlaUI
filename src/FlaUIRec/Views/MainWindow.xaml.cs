@@ -1,9 +1,7 @@
-﻿using FlaUI.UIA3;
-using FlaUI.UIA3.Definitions;
-using FlaUI.UIA3.Elements;
+﻿using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.Identifiers;
-using FlaUI.UIA3.Patterns;
-using FlaUI.UIA3.Tools;
+using FlaUI.UIA3;
+using FlaUI.UIA3.Definitions;
 using Gma.System.MouseKeyHook;
 using System;
 using System.Windows;
@@ -71,12 +69,12 @@ namespace FlaUIRec.Views
         {
             _automation.UnregisterAllEvents();
             var mainWindow = _app.GetMainWindow(_automation);
-            mainWindow.RegisterEvent(InvokePattern.InvokedEvent, TreeScope.Descendants, InvokeAction);
-            mainWindow.RegisterEvent(SelectionItemPattern.ElementSelectedEvent, TreeScope.Descendants, SelectionAction);
-            mainWindow.RegisterEvent(TextPattern.TextChangedEvent, TreeScope.Descendants, TextChangedAction);
-            mainWindow.RegisterStructureChangedEvent(TreeScope.Descendants, StructureAction);
-            mainWindow.RegisterPropertyChangedEvent(TreeScope.Descendants, PropertyAction, TogglePattern.ToggleStateProperty);
-            mainWindow.RegisterPropertyChangedEvent(TreeScope.Descendants, PropertyAction, ValuePattern.ValueProperty);
+            //mainWindow.RegisterEvent(InvokePattern.InvokedEvent, TreeScope.Descendants, InvokeAction);
+            //mainWindow.RegisterEvent(SelectionItemPattern.ElementSelectedEvent, TreeScope.Descendants, SelectionAction);
+            //mainWindow.RegisterEvent(TextPattern.TextChangedEvent, TreeScope.Descendants, TextChangedAction);
+            //mainWindow.RegisterStructureChangedEvent(TreeScope.Descendants, StructureAction);
+            //mainWindow.RegisterPropertyChangedEvent(TreeScope.Descendants, PropertyAction, TogglePattern.ToggleStateProperty);
+            //mainWindow.RegisterPropertyChangedEvent(TreeScope.Descendants, PropertyAction, ValuePattern.ValueProperty);
 
             // Legacy
             //mainWindow.GetUIA2().RegisterPropertyChangedEvent(TreeScope.Descendants, PropertyAction, TogglePattern.ToggleStateProperty);
@@ -120,7 +118,8 @@ namespace FlaUIRec.Views
 
         private string ElementToString(Element element)
         {
-            return String.Format("{0} (#{1}) [{2}]", element.Current.Name, element.Current.AutomationId, element.Current.ControlType);
+            throw new NotImplementedException();
+            //return String.Format("{0} (#{1}) [{2}]", element.Current.Name, element.Current.AutomationId, element.Current.ControlType);
         }
     }
 }

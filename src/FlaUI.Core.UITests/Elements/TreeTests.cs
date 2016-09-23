@@ -1,4 +1,5 @@
-﻿using FlaUI.Core.UITests.TestFramework;
+﻿using FlaUI.Core.Elements;
+using FlaUI.Core.UITests.TestFramework;
 using FlaUI.UIA3.Conditions;
 using FlaUI.UIA3.Definitions;
 using FlaUI.UIA3.Elements;

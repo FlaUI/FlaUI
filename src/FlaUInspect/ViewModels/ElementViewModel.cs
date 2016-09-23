@@ -1,6 +1,6 @@
 ﻿using FlaUI.Core.Conditions;
-using FlaUI.UIA3.Definitions;
-using FlaUI.UIA3.Elements;
+using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements.Infrastructure;
 using FlaUInspect.Core;
 using System;
 using System.Collections.ObjectModel;

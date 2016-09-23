@@ -1,6 +1,6 @@
 ﻿using FlaUI.Core;
+using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.Shapes;
-using FlaUI.UIA3.Elements;
 using FlaUI.UIA3.Shapes;
 using System;
 using System.Runtime.InteropServices;
@@ -52,28 +52,28 @@ namespace FlaUI.UIA3
         /// <summary>
         /// Gets the root element (desktop)
         /// </summary>
-        public Element GetDesktop()
+        public override Element GetDesktop()
         {
             var desktop = NativeAutomation.GetRootElement();
-            return new Element(this, desktop);
+            return new Element(WrapNativeElement(desktop));
         }
 
         /// <summary>
         /// Creates an <see cref="Element"/> from a given point
         /// </summary>
-        public Element FromPoint(Point point)
+        public override Element FromPoint(Point point)
         {
             var nativeElement = NativeAutomation.ElementFromPoint(point.ToTagPoint());
-            return nativeElement == null ? null : new Element(this, nativeElement);
+            return nativeElement == null ? null : new Element(WrapNativeElement(nativeElement));
         }
 
         /// <summary>
         /// Creates an <see cref="Element"/> from a given windows handle (HWND)
         /// </summary>
-        public Element FromHandle(IntPtr hwnd)
+        public override Element FromHandle(IntPtr hwnd)
         {
             var nativeElement = NativeAutomation.ElementFromHandle(hwnd);
-            return nativeElement == null ? null : new Element(this, nativeElement);
+            return nativeElement == null ? null : new Element(WrapNativeElement(nativeElement));
         }
 
         public override void UnregisterAllEvents()
@@ -116,6 +116,11 @@ namespace FlaUI.UIA3
                 throw new NotSupportedException(String.Format("OS does not have {0} support.", typeof(T).Name));
             }
             return element;
+        }
+
+        public UIA3AutomationObject WrapNativeElement(UIA.IUIAutomationElement nativeElement)
+        {
+            return new UIA3AutomationObject(this, nativeElement);
         }
     }
 }

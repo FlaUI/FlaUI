@@ -3,6 +3,7 @@ using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using System;
 using System.IO;
+using FlaUI.UIA2;
 
 namespace FlaUI.Core.UITests.TestFramework
 {
@@ -32,6 +33,7 @@ namespace FlaUI.Core.UITests.TestFramework
         protected Application App { get; private set; }
 
         protected UIA3Automation Uia3Automation { get; private set; }
+        protected UIA2Automation Uia2Automation { get; private set; }
 
         protected UITestBase(TestApplicationType appType)
         {
@@ -39,6 +41,7 @@ namespace FlaUI.Core.UITests.TestFramework
             ScreenshotDir = @"c:\FailedTestsScreenshots";
             _wasTestRun = false;
             Uia3Automation = new UIA3Automation();
+            Uia2Automation = new UIA2Automation();
         }
 
         /// <summary>
@@ -70,6 +73,7 @@ namespace FlaUI.Core.UITests.TestFramework
         public void BaseTeardown()
         {
             Uia3Automation.Dispose();
+            Uia2Automation.Dispose();
             App.Dispose();
             App = null;
         }

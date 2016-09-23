@@ -1,8 +1,8 @@
-﻿using FlaUI.Core.Shapes;
+﻿using FlaUI.Core.Elements.Infrastructure;
+using FlaUI.Core.Identifiers;
+using FlaUI.Core.Shapes;
 using FlaUI.Core.Tools;
 using FlaUI.UIA3.Definitions;
-using FlaUI.UIA3.Elements;
-using FlaUI.Core.Identifiers;
 using FlaUI.UIA3.Tools;
 using UIA = interop.UIAutomationCore;
 

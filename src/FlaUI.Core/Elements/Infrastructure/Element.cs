@@ -1,0 +1,178 @@
+﻿using FlaUI.Core.Conditions;
+using FlaUI.Core.Definitions;
+using FlaUI.Core.Shapes;
+using FlaUI.Core.WindowsAPI;
+using System;
+using GdiColor = System.Drawing.Color;
+using WpfColor = System.Windows.Media.Color;
+
+namespace FlaUI.Core.Elements.Infrastructure
+{
+    public class Element
+    {
+        public Element(AutomationObjectBase automationObject)
+        {
+            AutomationObject = automationObject;
+            PatternFactory = AutomationObject.CreatePatternFactory();
+            Cached = AutomationObject.CreateInformation(true);
+            Current = AutomationObject.CreateInformation(false);
+        }
+
+        public AutomationObjectBase AutomationObject { get; set; }
+
+        public FrameworkType FrameworkType { get { return FrameworkIds.ConvertToFrameworkType(Current.FrameworkId); } }
+
+        public IPatternFactory PatternFactory { get; private set; }
+
+        /// <summary>
+        /// Basic information about this element (cached)
+        /// </summary>
+        public IElementInformation Cached { get; private set; }
+
+        /// <summary>
+        /// Basic information about this element (realtime)
+        /// </summary>
+        public IElementInformation Current { get; private set; }
+
+        /// <summary>
+        /// Sets the focus to this element
+        /// Warning: This can be unreliable! <see cref="SetForeground"/> should be more reliable
+        /// </summary>
+        public void Focus()
+        {
+            AutomationObject.SetFocus();
+        }
+
+        /// <summary>
+        /// Brings the element to the foreground
+        /// </summary>
+        public void SetForeground()
+        {
+            User32.SetForegroundWindow(Current.NativeWindowHandle);
+        }
+
+        /// <summary>
+        /// Draws a red highlight around the element
+        /// </summary>
+        public Element DrawHighlight()
+        {
+            return DrawHighlight(System.Windows.Media.Colors.Red);
+        }
+
+        /// <summary>
+        /// Draws a manually colored highlight around the element
+        /// </summary>
+        public Element DrawHighlight(WpfColor color)
+        {
+            return DrawHighlight(true, color, 2000);
+        }
+
+        /// <summary>
+        /// Draws a manually colored highlight around the element
+        /// </summary>
+        public Element DrawHighlight(GdiColor color)
+        {
+            return DrawHighlight(true, color, 2000);
+        }
+
+        /// <summary>
+        /// Draw a highlight around the element with the given settings 
+        /// </summary>
+        /// <param name="blocking">Flag to indicate if further execution waits until the highlight is removed</param>
+        /// <param name="color">The color to draw the highlight</param>
+        /// <param name="durationInMs">The duration (im ms) how long the highlight is shown</param>
+        /// <remarks>Override for winforms color</remarks>
+        public Element DrawHighlight(bool blocking, GdiColor color, int durationInMs)
+        {
+            return DrawHighlight(blocking, WpfColor.FromArgb(color.A, color.R, color.G, color.B), durationInMs);
+        }
+
+        /// <summary>
+        /// Draw a highlight around the element with the given settings
+        /// </summary>
+        /// <param name="blocking">Flag to indicate if further execution waits until the highlight is removed</param>
+        /// <param name="color">The color to draw the highlight</param>
+        /// <param name="durationInMs">The duration (im ms) how long the highlight is shown</param>
+        public Element DrawHighlight(bool blocking, WpfColor color, int durationInMs)
+        {
+            var rectangle = Current.BoundingRectangle;
+            if (!rectangle.IsEmpty)
+            {
+                if (blocking)
+                {
+                    AutomationObject.Automation.OverlayManager.ShowBlocking(rectangle, color, durationInMs);
+                }
+                else
+                {
+                    AutomationObject.Automation.OverlayManager.Show(rectangle, color, durationInMs);
+                }
+            }
+            return this;
+        }
+
+        /// <summary>
+        /// Captures the object as screenshot in WinForms format
+        /// </summary>
+        public System.Drawing.Bitmap Capture()
+        {
+            return ScreenCapture.CaptureArea(Current.BoundingRectangle);
+        }
+
+        /// <summary>
+        /// Captures the object as screenshot in WPF format
+        /// </summary>
+        public System.Windows.Media.Imaging.BitmapImage CaptureWpf()
+        {
+            return ScreenCapture.CaptureAreaWpf(Current.BoundingRectangle);
+        }
+
+        public void CaptureToFile(string filePath)
+        {
+            ScreenCapture.CaptureAreaToFile(Current.BoundingRectangle, filePath);
+        }
+
+        /// <summary>
+        /// Finds all elements in the given treescope and condition
+        /// </summary>
+        public Element[] FindAll(TreeScope treeScope, ConditionBase condition)
+        {
+            return AutomationObject.FindAll(treeScope, condition);
+        }
+
+        /// <summary>
+        /// Finds the first element which is in the given treescope and matches the condition
+        /// </summary>
+        public Element FindFirst(TreeScope treeScope, ConditionBase condition)
+        {
+            return AutomationObject.FindFirst(treeScope, condition);
+        }
+        
+        /// <summary>
+        /// Gets a clickable point of the element
+        /// </summary>
+        /// <exception cref="NoClickablePointException">Thrown when no clickable point was found</exception>
+        public Point GetClickablePoint()
+        {
+            return AutomationObject.GetClickablePoint();
+        }
+
+        /// <summary>
+        /// Tries to get a clickable point of the element
+        /// </summary>
+        /// <param name="point">The clickable point or null, if no point was found</param>
+        /// <returns>True if a point was found, false otherwise</returns>
+        public bool TryGetClickablePoint(out Point point)
+        {
+            return AutomationObject.TryGetClickablePoint(out point);
+        }
+
+        /// <summary>
+        /// Overrides the string representation of the element with something usefull
+        /// </summary>
+        public override string ToString()
+        {
+            return String.Format("AutomationId:{0}, Name:{1}, ControlType:{2}, FrameworkId:{3}",
+                Current.AutomationId, Current.Name, Current.LocalizedControlType, Current.FrameworkId);
+        }
+    }
+}

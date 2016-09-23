@@ -1,4 +1,6 @@
-﻿using FlaUI.Core.Logging;
+﻿using FlaUI.Core.Elements;
+using FlaUI.Core.Elements.Infrastructure;
+using FlaUI.Core.Logging;
 using FlaUI.Core.Tools;
 using System;
 using System.ComponentModel;
@@ -168,6 +170,11 @@ namespace FlaUI.Core
                 Thread.Sleep(50);
                 _process.Refresh();
             }
+        }
+
+        public Window GetMainWindow(AutomationBase automation)
+        {
+            return automation.FromHandle(MainWindowHandle).AsWindow();
         }
 
         public void Dispose()

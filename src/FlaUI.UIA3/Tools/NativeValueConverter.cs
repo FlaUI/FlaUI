@@ -1,9 +1,9 @@
 ﻿using FlaUI.Core.Shapes;
 using FlaUI.UIA3.Definitions;
-using FlaUI.UIA3.Elements;
 using System;
 using System.Globalization;
 using System.Linq;
+using FlaUI.Core.Elements.Infrastructure;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Tools
@@ -19,7 +19,9 @@ namespace FlaUI.UIA3.Tools
             var retArray = new Element[nativeElements.Length];
             for (var i = 0; i < nativeElements.Length; i++)
             {
-                retArray[i] = new Element(automation, nativeElements.GetElement(i));
+                var nativeElement = nativeElements.GetElement(i);
+                var automationObject = automation.WrapNativeElement(nativeElement);
+                retArray[i] = new Element(automationObject);
             }
             return retArray;
         }
@@ -43,7 +45,8 @@ namespace FlaUI.UIA3.Tools
         /// </summary>
         public static Element NativeToManaged(UIA3Automation automation, UIA.IUIAutomationElement nativeElement)
         {
-            return nativeElement == null ? null : new Element(automation, nativeElement);
+            var automationObject = automation.WrapNativeElement(nativeElement);
+            return nativeElement == null ? null : new Element(automationObject);
         }
 
         /// <summary>
@@ -88,7 +91,8 @@ namespace FlaUI.UIA3.Tools
             }
             else if (val is Element)
             {
-                val = ((Element)val).NativeElement;
+                throw new NotImplementedException();
+                //val = ((Element)val).NativeElement;
             }
             return val;
         }

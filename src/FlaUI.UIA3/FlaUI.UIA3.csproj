@@ -49,10 +49,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Elements\ElementConversionExtensions.cs" />
-    <Compile Include="Elements\TextBox.cs" />
+    <Compile Include="AutomationObjectIds.cs" />
+    <Compile Include="Patterns\InvokePattern.cs" />
+    <Compile Include="Patterns\ValuePatternInformation.cs" />
+    <Compile Include="Patterns\WindowPattern.cs" />
+    <Compile Include="Patterns\WindowPatternIds.cs" />
+    <Compile Include="Patterns\WindowPatternInformation.cs" />
+    <Compile Include="Tools\NativeConditionConverter.cs" />
     <Compile Include="UIA3Automation.cs" />
-    <Compile Include="Conditions\NativeConditionConverter.cs" />
     <Compile Include="Conditions\ConditionFactory.cs" />
     <Compile Include="Definitions\AnnotationType.cs" />
     <Compile Include="Definitions\ControlType.cs" />
@@ -70,85 +74,33 @@
     <Compile Include="Definitions\TextPatternRangeEndpoint.cs" />
     <Compile Include="Definitions\TextUnit.cs" />
     <Compile Include="Definitions\ToggleState.cs" />
-    <Compile Include="Definitions\TreeScope.cs" />
-    <Compile Include="Definitions\WindowInteractionState.cs" />
-    <Compile Include="Definitions\WindowVisualState.cs" />
     <Compile Include="Definitions\ZoomUnit.cs" />
     <Compile Include="Elements\Element.cs" />
-    <Compile Include="Elements\ElementInformation.cs" />
-    <Compile Include="Elements\Button.cs" />
-    <Compile Include="Elements\CheckBox.cs" />
-    <Compile Include="Elements\ComboBox.cs" />
-    <Compile Include="Elements\Label.cs" />
-    <Compile Include="Elements\Menu.cs" />
-    <Compile Include="Elements\MenuItem.cs" />
-    <Compile Include="Elements\ProgressBar.cs" />
-    <Compile Include="Elements\RadioButton.cs" />
-    <Compile Include="Elements\SelectionItem.cs" />
-    <Compile Include="Elements\Slider.cs" />
-    <Compile Include="Elements\Tab.cs" />
-    <Compile Include="Elements\TabItem.cs" />
-    <Compile Include="Elements\Thumb.cs" />
-    <Compile Include="Elements\TitleBar.cs" />
-    <Compile Include="Elements\Tree.cs" />
-    <Compile Include="Elements\TreeItem.cs" />
-    <Compile Include="Elements\Window.cs" />
     <Compile Include="EventHandlers\BasicEventHandler.cs" />
     <Compile Include="EventHandlers\EventHandlerBase.cs" />
     <Compile Include="EventHandlers\FocusChangedEventHandler.cs" />
     <Compile Include="EventHandlers\PropertyChangedEventHandler.cs" />
     <Compile Include="EventHandlers\StructureChangedEventHandler.cs" />
-    <Compile Include="InformationBase.cs" />
-    <Compile Include="PatternFactory.cs" />
-    <Compile Include="Patterns\AnnotationPattern.cs" />
-    <Compile Include="Patterns\DockPattern.cs" />
-    <Compile Include="Patterns\DragPattern.cs" />
-    <Compile Include="Patterns\DropTargetPattern.cs" />
-    <Compile Include="Patterns\ExpandCollapsePattern.cs" />
-    <Compile Include="Patterns\GridItemPattern.cs" />
-    <Compile Include="Patterns\GridPattern.cs" />
-    <Compile Include="Patterns\InvokePattern.cs" />
-    <Compile Include="Patterns\ItemContainerPattern.cs" />
-    <Compile Include="Patterns\LegacyIAccessiblePattern.cs" />
-    <Compile Include="Patterns\MultipleViewPattern.cs" />
-    <Compile Include="Patterns\ObjectModelPattern.cs" />
-    <Compile Include="Patterns\PatternBase.cs" />
-    <Compile Include="Patterns\PatternBaseWithInformation.cs" />
-    <Compile Include="Patterns\RangeValuePattern.cs" />
-    <Compile Include="Patterns\ScrollItemPattern.cs" />
-    <Compile Include="Patterns\ScrollPattern.cs" />
-    <Compile Include="Patterns\SelectionItemPattern.cs" />
-    <Compile Include="Patterns\SelectionPattern.cs" />
-    <Compile Include="Patterns\SpreadsheetItemPattern.cs" />
-    <Compile Include="Patterns\SpreadsheetPattern.cs" />
-    <Compile Include="Patterns\StylesPattern.cs" />
-    <Compile Include="Patterns\SynchronizedInputPattern.cs" />
-    <Compile Include="Patterns\TableItemPattern.cs" />
-    <Compile Include="Patterns\TablePattern.cs" />
-    <Compile Include="Patterns\Text2Pattern.cs" />
-    <Compile Include="Patterns\TextChildPattern.cs" />
-    <Compile Include="Patterns\TextEditPattern.cs" />
-    <Compile Include="Patterns\TextPattern.cs" />
-    <Compile Include="Patterns\TogglePattern.cs" />
-    <Compile Include="Patterns\Transform2Pattern.cs" />
-    <Compile Include="Patterns\TransformPattern.cs" />
     <Compile Include="Patterns\ValuePattern.cs" />
-    <Compile Include="Patterns\VirtualizedItemPattern.cs" />
-    <Compile Include="Patterns\WindowPattern.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shapes\PointExtensions.cs" />
     <Compile Include="Shapes\RectangleExtensions.cs" />
     <Compile Include="TextRange.cs" />
     <Compile Include="TextRange2.cs" />
-    <Compile Include="Tools\ApplicationExtensions.cs" />
     <Compile Include="Tools\NativeValueConverter.cs" />
     <Compile Include="TreeWalker.cs" />
+    <Compile Include="UIA3AutomationObject.cs" />
+    <Compile Include="UIA3ElementInformation.cs" />
+    <Compile Include="UIA3PatternFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlaUI.Core\FlaUI.Core.csproj">
       <Project>{0224cee1-30c0-4539-b609-bcf2b38a8870}</Project>
       <Name>FlaUI.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

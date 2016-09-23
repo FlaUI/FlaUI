@@ -1,4 +1,6 @@
-﻿using FlaUI.Core.Overlay;
+﻿using FlaUI.Core.Elements.Infrastructure;
+using FlaUI.Core.Overlay;
+using FlaUI.Core.Shapes;
 using System;
 
 namespace FlaUI.Core
@@ -11,16 +13,17 @@ namespace FlaUI.Core
         /// <summary>
         /// Manager object for overlays
         /// </summary>
-        public OverlayManager OverlayManager
-        {
-            get;
-            private set;
-        }
+        public OverlayManager OverlayManager { get; private set; }
 
         /// <summary>
         /// The automation type of the automation implementation
         /// </summary>
         public abstract AutomationType AutomationType { get; }
+
+        /// <summary>
+        /// Object which represents the "Not Supported" value
+        /// </summary>
+        public abstract object NotSupportedValue { get; }
 
         /// <summary>
         /// Creates an automation object
@@ -30,10 +33,17 @@ namespace FlaUI.Core
             OverlayManager = new OverlayManager();
         }
 
+        public abstract Element GetDesktop();
+
         /// <summary>
-        /// Object which represents the "Not Supported" value
+        /// Creates an <see cref="Element"/> from a given point
         /// </summary>
-        public abstract object NotSupportedValue { get; }
+        public abstract Element FromPoint(Point point);
+
+        /// <summary>
+        /// Creates an <see cref="Element"/> from a given windows handle (HWND)
+        /// </summary>
+        public abstract Element FromHandle(IntPtr hwnd);
 
         /// <summary>
         /// Removes all registered event handlers

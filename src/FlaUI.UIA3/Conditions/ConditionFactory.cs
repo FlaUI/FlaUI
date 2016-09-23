@@ -1,6 +1,5 @@
 ﻿using FlaUI.Core.Conditions;
 using FlaUI.UIA3.Definitions;
-using FlaUI.UIA3.Elements;
 
 namespace FlaUI.UIA3.Conditions
 {
@@ -11,22 +10,22 @@ namespace FlaUI.UIA3.Conditions
     {
         public static PropertyCondition ByText(string text)
         {
-            return new PropertyCondition(Element.NameProperty, text);
+            return new PropertyCondition(AutomationObjectIds.NameProperty, text);
         }
 
         public static PropertyCondition ByAutomationId(string automationId)
         {
-            return new PropertyCondition(Element.AutomationIdProperty, automationId);
+            return new PropertyCondition(AutomationObjectIds.AutomationIdProperty, automationId);
         }
 
         public static PropertyCondition ByControlType(ControlType controlType)
         {
-            return new PropertyCondition(Element.ControlTypeProperty, controlType);
+            return new PropertyCondition(AutomationObjectIds.ControlTypeProperty, controlType);
         }
 
         public static PropertyCondition ByClassName(string className)
         {
-            return new PropertyCondition(Element.ClassNameProperty, className);
+            return new PropertyCondition(AutomationObjectIds.ClassNameProperty, className);
         }
 
         /// <summary>
