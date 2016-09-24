@@ -1,6 +1,7 @@
 ﻿using FlaUI.UIA3.Definitions;
 using FlaUI.UIA3.Elements;
 using System;
+using FlaUI.Core.Definitions;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.EventHandlers

@@ -6,6 +6,7 @@ using Gma.System.MouseKeyHook;
 using System;
 using System.Windows;
 using System.Windows.Forms;
+using FlaUI.Core.Definitions;
 using Window = System.Windows.Window;
 
 namespace FlaUIRec.Views

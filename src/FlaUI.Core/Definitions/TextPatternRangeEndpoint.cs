@@ -1,4 +1,4 @@
-﻿namespace FlaUI.UIA3.Definitions
+﻿namespace FlaUI.Core.Definitions
 {
     public enum TextPatternRangeEndpoint
     {
