@@ -1,11 +1,13 @@
-﻿using FlaUI.Core.Input;
-using UIA = interop.UIAutomationCore;
+﻿using FlaUI.Core.Elements.Infrastructure;
+using FlaUI.Core.Input;
 
 namespace FlaUI.Core.Elements
 {
     public class Thumb : Element
     {
-        public Thumb(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
+        public Thumb(AutomationObjectBase automationObject) : base(automationObject)
+        {
+        }
 
         /// <summary>
         /// Moves the slider horizontally

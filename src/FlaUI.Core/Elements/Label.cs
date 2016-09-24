@@ -1,20 +1,16 @@
-﻿using UIA = interop.UIAutomationCore;
+﻿using FlaUI.Core.Elements.Infrastructure;
 
 namespace FlaUI.Core.Elements
 {
     public class Label : Element
     {
-        public Label(UIA3Automation automation, UIA.IUIAutomationElement nativeElement)
-            : base(automation, nativeElement)
+        public Label(AutomationObjectBase automationObject) : base(automationObject)
         {
         }
 
         public string Text
         {
-            get
-            {
-                return Current.Name;
-            }
+            get { return Current.Name; }
         }
     }
 }

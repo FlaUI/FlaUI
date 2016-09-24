@@ -77,11 +77,14 @@
     <Compile Include="Definitions\WindowVisualState.cs" />
     <Compile Include="Definitions\ZoomUnit.cs" />
     <Compile Include="Elements\Button.cs" />
+    <Compile Include="Elements\ComboBox.cs" />
     <Compile Include="Elements\Infrastructure\Element.cs" />
     <Compile Include="Elements\Infrastructure\ElementConversionExtensions.cs" />
     <Compile Include="Elements\Infrastructure\ElementInformationBase.cs" />
     <Compile Include="Elements\Infrastructure\IElementInformation.cs" />
+    <Compile Include="Elements\Label.cs" />
     <Compile Include="Elements\TextBox.cs" />
+    <Compile Include="Elements\Thumb.cs" />
     <Compile Include="Elements\Window.cs" />
     <Compile Include="Exceptions\MethodNotSupportedException.cs" />
     <Compile Include="Exceptions\NoClickablePointException.cs" />
