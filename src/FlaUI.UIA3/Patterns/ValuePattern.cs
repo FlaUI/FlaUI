@@ -1,22 +1,29 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
+using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.Tools;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class ValuePattern : ValuePattern<UIA.IUIAutomationValuePattern, ValuePatternInformation>
+    public class ValuePattern : PatternBaseWithInformation<UIA.IUIAutomationValuePattern, ValuePatternInformation>, IValuePattern
     {
-        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_ValuePatternId, "Value");
-        public static readonly PropertyId IsReadOnlyProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ValueIsReadOnlyPropertyId, "IsReadOnly");
-        public static readonly PropertyId ValueProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ValueValuePropertyId, "Value");
-
         public ValuePattern(AutomationObjectBase automationObject, UIA.IUIAutomationValuePattern nativePattern) : base(automationObject, nativePattern)
         {
         }
 
-        public override void SetValue(string value)
+        IValuePatternInformation IPatternWithInformation<IValuePatternInformation>.Cached
+        {
+            get { return Cached; }
+        }
+
+        IValuePatternInformation IPatternWithInformation<IValuePatternInformation>.Current
+        {
+            get { return Current; }
+        }
+
+        public void SetValue(string value)
         {
             ComCallWrapper.Call(() => NativePattern.SetValue(value));
         }

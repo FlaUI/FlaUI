@@ -20,6 +20,16 @@ namespace FlaUI.UIA2
             return nativePattern == null ? null : new InvokePattern(AutomationObject, nativePattern);
         }
 
+        public ITransform2Pattern GetTransform2Pattern()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ITransformPattern GetTransformPattern()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IValuePattern GetValuePattern()
         {
             var nativePattern = GetNativePatternAs<UIA.ValuePattern>(UIA.ValuePattern.Pattern);

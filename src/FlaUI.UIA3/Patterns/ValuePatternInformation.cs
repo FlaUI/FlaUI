@@ -10,8 +10,8 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
-        public bool IsReadOnly { get { return Get<bool>(ValuePattern.IsReadOnlyProperty); } }
+        public bool IsReadOnly { get { return Get<bool>(ValuePatternIds.IsReadOnlyProperty); } }
 
-        public string Value { get { return Get<string>(ValuePattern.ValueProperty); } }
+        public string Value { get { return Get<string>(ValuePatternIds.ValueProperty); } }
     }
 }

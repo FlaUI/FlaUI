@@ -112,11 +112,14 @@
     <Compile Include="Patterns\Infrastructure\IPatternWithInformation.cs" />
     <Compile Include="Patterns\Infrastructure\PatternBase.cs" />
     <Compile Include="Patterns\Infrastructure\PatternBaseWithInformation.cs" />
+    <Compile Include="Patterns\ITransform2Pattern.cs" />
+    <Compile Include="Patterns\ITransformPattern.cs" />
+    <Compile Include="Patterns\ITransformPatternInformation.cs" />
     <Compile Include="Patterns\IValuePattern.cs" />
     <Compile Include="Patterns\IValuePatternInformation.cs" />
     <Compile Include="Patterns\IWindowPattern.cs" />
     <Compile Include="Patterns\IWindowPatternInformation.cs" />
-    <Compile Include="Patterns\ValuePattern.cs" />
+    <Compile Include="Patterns\ITransform2PatternInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenCapture.cs" />
     <Compile Include="Shapes\Point.cs" />

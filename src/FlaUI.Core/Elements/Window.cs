@@ -40,10 +40,10 @@ namespace FlaUI.Core.Elements
             get { return PatternFactory.GetWindowPattern(); }
         }
 
-        //public TransformPattern TransformPattern
-        //{
-        //    get { return PatternFactory.GetTransformPattern(); }
-        //}
+        public ITransformPattern TransformPattern
+        {
+            get { return PatternFactory.GetTransformPattern(); }
+        }
 
         public void Close()
         {
@@ -62,14 +62,14 @@ namespace FlaUI.Core.Elements
             throw new MethodNotSupportedException("Close is not supported");
         }
 
-        //public void Move(int x, int y)
-        //{
-        //    var transformPattern = TransformPattern;
-        //    if (transformPattern != null)
-        //    {
-        //        transformPattern.Move(x, y);
-        //    }
-        //}
+        public void Move(int x, int y)
+        {
+            var transformPattern = TransformPattern;
+            if (transformPattern != null)
+            {
+                transformPattern.Move(x, y);
+            }
+        }
 
         public Window[] GetModalWindows()
         {

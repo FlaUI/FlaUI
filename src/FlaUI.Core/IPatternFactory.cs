@@ -60,9 +60,9 @@ namespace FlaUI.Core
 
         //ITogglePattern GetTogglePattern();
 
-        //ITransform2Pattern GetTransform2Pattern();
+        ITransform2Pattern GetTransform2Pattern();
 
-        //ITransformPattern GetTransformPattern();
+        ITransformPattern GetTransformPattern();
 
         IValuePattern GetValuePattern();
 

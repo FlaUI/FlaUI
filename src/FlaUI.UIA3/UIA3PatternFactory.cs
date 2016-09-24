@@ -183,21 +183,21 @@ namespace FlaUI.UIA3
         //    return nativePattern == null ? null : new TogglePattern(AutomationObject, nativePattern);
         //}
 
-        //public Transform2Pattern GetTransform2Pattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationTransformPattern2>(Transform2Pattern.Pattern);
-        //    return nativePattern == null ? null : new Transform2Pattern(AutomationObject, nativePattern);
-        //}
+        public ITransform2Pattern GetTransform2Pattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationTransformPattern2>(Transform2PatternIds.Pattern);
+            return nativePattern == null ? null : new Transform2Pattern(AutomationObject, nativePattern);
+        }
 
-        //public TransformPattern GetTransformPattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationTransformPattern>(TransformPattern.Pattern);
-        //    return nativePattern == null ? null : new TransformPattern(AutomationObject, nativePattern);
-        //}
+        public ITransformPattern GetTransformPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationTransformPattern>(TransformPatternIds.Pattern);
+            return nativePattern == null ? null : new TransformPattern(AutomationObject, nativePattern);
+        }
 
         public IValuePattern GetValuePattern()
         {
-            var nativePattern = GetNativePatternAs<UIA.IUIAutomationValuePattern>(ValuePattern.Pattern);
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationValuePattern>(ValuePatternIds.Pattern);
             return nativePattern == null ? null : new ValuePattern(AutomationObject, nativePattern);
         }
 
