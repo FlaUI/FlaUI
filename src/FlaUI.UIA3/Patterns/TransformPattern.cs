@@ -2,7 +2,6 @@
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.Tools;
-using System;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
@@ -49,7 +48,7 @@ namespace FlaUI.UIA3.Patterns
 
         protected override TransformPatternInformation CreateInformation(bool cached)
         {
-            throw new NotImplementedException();
+            return new TransformPatternInformation(AutomationObject, cached);
         }
     }
 }

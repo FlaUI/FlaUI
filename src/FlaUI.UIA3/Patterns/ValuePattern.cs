@@ -1,5 +1,5 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.Identifiers;
+using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.Tools;
@@ -11,6 +11,7 @@ namespace FlaUI.UIA3.Patterns
     {
         public ValuePattern(AutomationObjectBase automationObject, UIA.IUIAutomationValuePattern nativePattern) : base(automationObject, nativePattern)
         {
+            Properties = new ValuePatternProperties();
         }
 
         IValuePatternInformation IPatternWithInformation<IValuePatternInformation>.Cached
@@ -23,6 +24,8 @@ namespace FlaUI.UIA3.Patterns
             get { return Current; }
         }
 
+        public IValuePatternProperties Properties { get; private set; }
+
         public void SetValue(string value)
         {
             ComCallWrapper.Call(() => NativePattern.SetValue(value));
@@ -32,5 +35,16 @@ namespace FlaUI.UIA3.Patterns
         {
             return new ValuePatternInformation(AutomationObject, cached);
         }
+    }
+
+    public class ValuePatternInformation : ElementInformationBase, IValuePatternInformation
+    {
+        public ValuePatternInformation(AutomationObjectBase automationObject, bool cached) : base(automationObject, cached)
+        {
+        }
+
+        public bool IsReadOnly { get { return Get<bool>(ValuePatternIds.IsReadOnlyProperty); } }
+
+        public string Value { get { return Get<string>(ValuePatternIds.ValueProperty); } }
     }
 }

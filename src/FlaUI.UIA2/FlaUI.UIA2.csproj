@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Patterns\InvokePattern.cs" />
-    <Compile Include="Patterns\ValuePatternInformation.cs" />
+    <Compile Include="Patterns\ValuePatternIds.cs" />
     <Compile Include="Tools\NativeConditionConverter.cs" />
     <Compile Include="Tools\NativeValueConverter.cs" />
     <Compile Include="UIA2PatternFactory.cs" />
