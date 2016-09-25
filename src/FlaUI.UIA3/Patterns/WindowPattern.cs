@@ -1,6 +1,6 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.Definitions;
-using FlaUI.Core.Identifiers;
+using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.Tools;
@@ -12,6 +12,8 @@ namespace FlaUI.UIA3.Patterns
     {
         public WindowPattern(AutomationObjectBase automationObject, UIA.IUIAutomationWindowPattern nativePattern) : base(automationObject, nativePattern)
         {
+            Properties = new WindowPatternProperties();
+            Events = new WindowPatternEvents();
         }
 
         IWindowPatternInformation IPatternWithInformation<IWindowPatternInformation>.Cached
@@ -24,35 +26,9 @@ namespace FlaUI.UIA3.Patterns
             get { return Current; }
         }
 
-        public PropertyId CanMaximizeProperty
-        {
-            get { return WindowPatternIds.CanMinimizeProperty; }
-        }
+        public IWindowPatternProperties Properties { get; private set; }
 
-        public PropertyId CanMinimizeProperty
-        {
-            get { return WindowPatternIds.CanMinimizeProperty; }
-        }
-
-        public PropertyId IsModalProperty
-        {
-            get { return WindowPatternIds.IsModalProperty; }
-        }
-
-        public PropertyId IsTopmostProperty
-        {
-            get { return WindowPatternIds.IsTopmostProperty; }
-        }
-
-        public PropertyId WindowInteractionStateProperty
-        {
-            get { return WindowPatternIds.WindowInteractionStateProperty; }
-        }
-
-        public PropertyId WindowVisualStateProperty
-        {
-            get { return WindowPatternIds.WindowVisualStateProperty; }
-        }
+        public IWindowPatternEvents Events { get; private set; }
 
         public void Close()
         {
@@ -73,5 +49,19 @@ namespace FlaUI.UIA3.Patterns
         {
             return new WindowPatternInformation(AutomationObject, cached);
         }
+    }
+
+    public class WindowPatternInformation : ElementInformationBase, IWindowPatternInformation
+    {
+        public WindowPatternInformation(AutomationObjectBase automationObject, bool cached) : base(automationObject, cached)
+        {
+        }
+
+        public bool CanMaximize { get { return Get<bool>(WindowPatternIds.CanMaximizeProperty); } }
+        public bool CanMinimize { get { return Get<bool>(WindowPatternIds.CanMinimizeProperty); } }
+        public bool IsModal { get { return Get<bool>(WindowPatternIds.IsModalProperty); } }
+        public bool IsTopmost { get { return Get<bool>(WindowPatternIds.IsTopmostProperty); } }
+        public WindowInteractionState WindowInteractionState { get { return Get<WindowInteractionState>(WindowPatternIds.WindowInteractionStateProperty); } }
+        public WindowVisualState WindowVisualState { get { return Get<WindowVisualState>(WindowPatternIds.WindowVisualStateProperty); } }
     }
 }

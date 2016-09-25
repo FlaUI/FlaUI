@@ -121,7 +121,6 @@
     <Compile Include="Patterns\IValuePattern.cs" />
     <Compile Include="Patterns\IValuePatternInformation.cs" />
     <Compile Include="Patterns\IWindowPattern.cs" />
-    <Compile Include="Patterns\IWindowPatternInformation.cs" />
     <Compile Include="Patterns\ITransform2PatternInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenCapture.cs" />

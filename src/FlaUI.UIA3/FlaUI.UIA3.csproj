@@ -61,7 +61,6 @@
     <Compile Include="Patterns\ValuePatternInformation.cs" />
     <Compile Include="Patterns\WindowPattern.cs" />
     <Compile Include="Patterns\WindowPatternIds.cs" />
-    <Compile Include="Patterns\WindowPatternInformation.cs" />
     <Compile Include="Tools\NativeConditionConverter.cs" />
     <Compile Include="UIA3Automation.cs" />
     <Compile Include="Conditions\ConditionFactory.cs" />

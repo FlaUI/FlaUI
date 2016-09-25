@@ -1,5 +1,6 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.Identifiers;
+using FlaUI.Core.Patterns;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
@@ -15,5 +16,51 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId WindowVisualStateProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_WindowWindowVisualStatePropertyId, "WindowVisualState");
         public static readonly EventId WindowClosedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_Window_WindowClosedEventId, "WindowClosed");
         public static readonly EventId WindowOpenedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_Window_WindowOpenedEventId, "WindowOpened");
+    }
+
+    public class WindowPatternProperties : IWindowPatternProperties
+    {
+        public PropertyId CanMaximizeProperty
+        {
+            get { return WindowPatternIds.CanMinimizeProperty; }
+        }
+
+        public PropertyId CanMinimizeProperty
+        {
+            get { return WindowPatternIds.CanMinimizeProperty; }
+        }
+
+        public PropertyId IsModalProperty
+        {
+            get { return WindowPatternIds.IsModalProperty; }
+        }
+
+        public PropertyId IsTopmostProperty
+        {
+            get { return WindowPatternIds.IsTopmostProperty; }
+        }
+
+        public PropertyId WindowInteractionStateProperty
+        {
+            get { return WindowPatternIds.WindowInteractionStateProperty; }
+        }
+
+        public PropertyId WindowVisualStateProperty
+        {
+            get { return WindowPatternIds.WindowVisualStateProperty; }
+        }
+    }
+
+    public class WindowPatternEvents : IWindowPatternEvents
+    {
+        public EventId WindowClosedEvent
+        {
+            get { return WindowPatternIds.WindowClosedEvent; }
+        }
+
+        public EventId WindowOpenedEvent
+        {
+            get { return WindowPatternIds.WindowOpenedEvent; }
+        }
     }
 }
