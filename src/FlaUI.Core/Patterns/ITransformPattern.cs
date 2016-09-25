@@ -1,13 +1,27 @@
-﻿using FlaUI.Core.Patterns.Infrastructure;
+﻿using FlaUI.Core.Identifiers;
+using FlaUI.Core.Patterns.Infrastructure;
 
 namespace FlaUI.Core.Patterns
 {
-    public interface ITransformPattern: IPatternWithInformation<ITransformPatternInformation>
+    public interface ITransformPattern : IPatternWithInformation<ITransformPatternInformation>
     {
-       void Move(double x, double y);
+        ITransformPatternProperties Properties { get; }
+        void Move(double x, double y);
+        void Resize(double width, double height);
+        void Rotate(double degrees);
+    }
 
-       void Resize(double width, double height);
+    public interface ITransformPatternProperties
+    {
+        PropertyId CanMoveProperty { get; }
+        PropertyId CanResizeProperty { get; }
+        PropertyId CanRotateProperty { get; }
+    }
 
-       void Rotate(double degrees);
+    public interface ITransformPatternInformation : IPatternInformation
+    {
+        bool CanMove { get; }
+        bool CanResize { get; }
+        bool CanRotate { get; }
     }
 }

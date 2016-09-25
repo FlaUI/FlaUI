@@ -53,10 +53,8 @@
     <Compile Include="Patterns\InvokePattern.cs" />
     <Compile Include="Patterns\Transform2Pattern.cs" />
     <Compile Include="Patterns\Transform2PatternIds.cs" />
-    <Compile Include="Patterns\Transform2PatternInformation.cs" />
     <Compile Include="Patterns\TransformPattern.cs" />
     <Compile Include="Patterns\TransformPatternIds.cs" />
-    <Compile Include="Patterns\TransformPatternInformation.cs" />
     <Compile Include="Patterns\ValuePatternIds.cs" />
     <Compile Include="Patterns\WindowPattern.cs" />
     <Compile Include="Patterns\WindowPatternIds.cs" />

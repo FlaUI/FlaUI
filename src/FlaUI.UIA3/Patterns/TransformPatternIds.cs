@@ -1,5 +1,6 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.Identifiers;
+using FlaUI.Core.Patterns;
 
 namespace FlaUI.UIA3.Patterns
 {
@@ -9,5 +10,23 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId CanMoveProperty = PropertyId.Register(AutomationType.UIA3, interop.UIAutomationCore.UIA_PropertyIds.UIA_TransformCanMovePropertyId, "CanMove");
         public static readonly PropertyId CanResizeProperty = PropertyId.Register(AutomationType.UIA3, interop.UIAutomationCore.UIA_PropertyIds.UIA_TransformCanResizePropertyId, "CanResize");
         public static readonly PropertyId CanRotateProperty = PropertyId.Register(AutomationType.UIA3, interop.UIAutomationCore.UIA_PropertyIds.UIA_TransformCanRotatePropertyId, "CanRotate");
+    }
+
+    public class TransformPatternProperties : ITransformPatternProperties
+    {
+        public PropertyId CanMoveProperty
+        {
+            get { return TransformPatternIds.CanMoveProperty; }
+        }
+
+        public PropertyId CanResizeProperty
+        {
+            get { return TransformPatternIds.CanResizeProperty; }
+        }
+
+        public PropertyId CanRotateProperty
+        {
+            get { return TransformPatternIds.CanRotateProperty; }
+        }
     }
 }

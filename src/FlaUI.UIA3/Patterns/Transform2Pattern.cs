@@ -11,6 +11,7 @@ namespace FlaUI.UIA3.Patterns
     {
         public Transform2Pattern(AutomationObjectBase automationObject, UIA.IUIAutomationTransformPattern2 nativePattern) : base(automationObject, nativePattern)
         {
+            Properties = new Transform2PatternProperties();
         }
 
         ITransform2PatternInformation IPatternWithInformation<ITransform2PatternInformation>.Cached
@@ -22,6 +23,10 @@ namespace FlaUI.UIA3.Patterns
         {
             get { return Current; }
         }
+
+        public ITransform2PatternProperties Properties { get; private set; }
+
+         ITransformPatternProperties ITransformPattern.Properties { get { return Properties; } }
 
         public void Zoom(double zoom)
         {
@@ -37,6 +42,33 @@ namespace FlaUI.UIA3.Patterns
         protected override Transform2PatternInformation CreateInformation(bool cached)
         {
            return new Transform2PatternInformation(AutomationObject, cached);
+        }
+    }
+
+    public class Transform2PatternInformation : TransformPatternInformation, ITransform2PatternInformation
+    {
+        public Transform2PatternInformation(AutomationObjectBase automationObject, bool cached) : base(automationObject, cached)
+        {
+        }
+
+        public bool CanZoom
+        {
+            get { return Get<bool>(Transform2PatternIds.CanZoomProperty); }
+        }
+
+        public double ZoomLevel
+        {
+            get { return Get<double>(Transform2PatternIds.ZoomLevelProperty); }
+        }
+
+        public double ZoomMaximum
+        {
+            get { return Get<double>(Transform2PatternIds.ZoomMaximumProperty); }
+        }
+
+        public double ZoomMinimum
+        {
+            get { return Get<double>(Transform2PatternIds.ZoomMinimumProperty); }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using FlaUI.Core;
+using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.Tools;
@@ -12,6 +13,7 @@ namespace FlaUI.UIA3.Patterns
     {
         protected TransformPattern(AutomationObjectBase automationObject, TNativePattern nativePattern) : base(automationObject, nativePattern)
         {
+            Properties = new Transform2PatternProperties();
         }
 
         ITransformPatternInformation IPatternWithInformation<ITransformPatternInformation>.Cached
@@ -23,6 +25,8 @@ namespace FlaUI.UIA3.Patterns
         {
             get { return Current; }
         }
+
+        public ITransformPatternProperties Properties { get; private set; }
 
         public void Move(double x, double y)
         {
@@ -49,6 +53,28 @@ namespace FlaUI.UIA3.Patterns
         protected override TransformPatternInformation CreateInformation(bool cached)
         {
             return new TransformPatternInformation(AutomationObject, cached);
+        }
+    }
+
+    public class TransformPatternInformation : ElementInformationBase, ITransformPatternInformation
+    {
+        public TransformPatternInformation(AutomationObjectBase automationObject, bool cached) : base(automationObject, cached)
+        {
+        }
+
+        public bool CanMove
+        {
+            get { return Get<bool>(TransformPatternIds.CanMoveProperty); }
+        }
+
+        public bool CanResize
+        {
+            get { return Get<bool>(TransformPatternIds.CanResizeProperty); }
+        }
+
+        public bool CanRotate
+        {
+            get { return Get<bool>(TransformPatternIds.CanRotateProperty); }
         }
     }
 }
