@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FlaUI.Core.UITests</RootNamespace>
     <AssemblyName>FlaUI.Core.UITests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=3.2.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.2.0\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=3.4.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.4.1\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -44,22 +45,36 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalculatorTests.cs" />
+    <Compile Include="Elements\CheckBoxTests.cs" />
     <Compile Include="Elements\ComboBoxTests.cs" />
     <Compile Include="Elements\LabelTests.cs" />
+    <Compile Include="Elements\MenuTests.cs" />
+    <Compile Include="Elements\ProgressBarTests.cs" />
+    <Compile Include="Elements\RadioButtonTests.cs" />
+    <Compile Include="Elements\SliderTests.cs" />
+    <Compile Include="Elements\TabTests.cs" />
+    <Compile Include="Elements\TextBoxTests.cs" />
+    <Compile Include="Elements\TreeTests.cs" />
     <Compile Include="KeyboardTests.cs" />
     <Compile Include="MouseTests.cs" />
     <Compile Include="NotepadTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestFramework\TestApplicationType.cs" />
+    <Compile Include="TestFramework\TestUtilities.cs" />
     <Compile Include="TestFramework\UITestBase.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlaUI.Core\FlaUI.Core.csproj">
       <Project>{4d98a40f-e35d-4a88-8428-8462af75a4cf}</Project>
       <Name>FlaUI.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FlaUI.UIA2\FlaUI.UIA2.csproj">
+      <Project>{9060a00a-1718-4976-b6af-02c1be43190c}</Project>
+      <Name>FlaUI.UIA2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FlaUI.UIA3\FlaUI.UIA3.csproj">
+      <Project>{49952cc0-b938-4306-888e-836e247b0768}</Project>
+      <Name>FlaUI.UIA3</Name>
     </ProjectReference>
     <ProjectReference Include="..\TestApplications\WinFormsApplication\WinFormsApplication.csproj">
       <Project>{faebbdd3-8230-4fc9-a316-05f5243c94da}</Project>
@@ -73,6 +88,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

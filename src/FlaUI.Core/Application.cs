@@ -1,15 +1,10 @@
-﻿using FlaUI.Core.Definitions;
-using FlaUI.Core.Elements;
-using FlaUI.Core.Logging;
+﻿using FlaUI.Core.Logging;
 using FlaUI.Core.Tools;
-using interop.UIAutomationCore;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
-using System.Windows.Media;
-using TreeScope = interop.UIAutomationCore.TreeScope;
 
 namespace FlaUI.Core
 {
@@ -23,11 +18,6 @@ namespace FlaUI.Core
         private static readonly ILogger Log = new ConsoleLogger();
 
         /// <summary>
-        /// The automation object associated with this application
-        /// </summary>
-        public Automation Automation { get; private set; }
-
-        /// <summary>
         /// Flag to indicate, if the application is a windows store app
         /// </summary>
         public bool IsStoreApp { get; private set; }
@@ -38,6 +28,11 @@ namespace FlaUI.Core
         public string Name
         {
             get { return _process.ProcessName; }
+        }
+
+        public IntPtr MainWindowHandle
+        {
+            get { return _process.MainWindowHandle; }
         }
 
         public Application(int processId, bool isStoreApp = false)
@@ -55,7 +50,6 @@ namespace FlaUI.Core
             IsStoreApp = isStoreApp;
             WaitWhileBusy();
             WaitWhileMainHandleIsMissing();
-            Automation = new Automation();
         }
 
         public void Close()
@@ -176,42 +170,8 @@ namespace FlaUI.Core
             }
         }
 
-        #region Window
-
-        /// <summary>
-        /// Gets the root element (desktop)
-        /// </summary>
-        public IUIAutomationElement GetDesktop()
-        {
-            var desktop = Automation.NativeAutomation.GetRootElement();
-            return desktop;
-        }
-
-        /// <summary>
-        /// Gets the window from the MainWindowHandle of the process
-        /// </summary>
-        public Window GetMainWindow()
-        {
-            var nWindow = Automation.NativeAutomation.ElementFromHandle(_process.MainWindowHandle);
-            var window = new Window(Automation, nWindow);
-            Automation.OverlayManager.Show(window.Current.BoundingRectangle, Colors.Red, 1000);
-            return window;
-        }
-
-        public Window GetWindow(string title)
-        {
-            var desktop = GetDesktop();
-            var windows = desktop.FindAll(TreeScope.TreeScope_Children,
-                Automation.NativeAutomation.CreateAndCondition(
-                    Automation.NativeAutomation.CreatePropertyCondition(AutomationElement.ControlTypeProperty.Id, ControlType.Window),
-                    Automation.NativeAutomation.CreatePropertyCondition(AutomationElement.ProcessIdProperty.Id, _process.Id)));
-            return new Window(Automation, windows.GetElement(0));
-        }
-        #endregion Window
-
         public void Dispose()
         {
-            Automation.Dispose();
             Close();
         }
     }

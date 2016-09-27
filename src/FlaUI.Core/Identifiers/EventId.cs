@@ -10,14 +10,14 @@
         {
         }
 
-        public static EventId Register(int id, string name)
+        public static EventId Register(AutomationType automationType, int id, string name)
         {
-            return RegisterEvent(id, name);
+            return RegisterEvent(automationType, id, name);
         }
 
-        public static EventId Find(int id)
+        public static EventId Find(AutomationType automationType, int id)
         {
-            return FindEvent(id);
+            return FindEvent(automationType, id);
         }
     }
 }

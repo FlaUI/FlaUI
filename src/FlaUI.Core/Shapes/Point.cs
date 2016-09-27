@@ -1,7 +1,6 @@
-﻿using System;
-using FlaUI.Core.Tools;
+﻿using FlaUI.Core.Tools;
 using FlaUI.Core.WindowsAPI;
-using interop.UIAutomationCore;
+using System;
 
 namespace FlaUI.Core.Shapes
 {
@@ -116,25 +115,14 @@ namespace FlaUI.Core.Shapes
             return new Point(p.X, p.Y);
         }
 
-        /// <summary>
-        /// Implicit conversion to native UIA point
-        /// </summary>
-        public static implicit operator tagPOINT(Point p)
-        {
-            return new tagPOINT { x = p.X.ToInt(), y = p.Y.ToInt() };
-        }
-
-        /// <summary>
-        /// Implicit conversion from native UIA point
-        /// </summary>
-        public static implicit operator Point(tagPOINT p)
-        {
-            return new Point(p.x, p.y);
-        }
-
         public override string ToString()
         {
             return String.Format("X={0},Y={1}", X, Y);
         }
+
+        /// <summary>
+        /// Instance of an empty point
+        /// </summary>
+        public static Point EmptyPoint = new Point(0, 0);
     }
 }

@@ -10,14 +10,14 @@
         {
         }
 
-        public static PatternId Register(int id, string name)
+        public static PatternId Register(AutomationType automationType, int id, string name)
         {
-            return RegisterPattern(id, name);
+            return RegisterPattern(automationType, id, name);
         }
 
-        public static PatternId Find(int id)
+        public static PatternId Find(AutomationType automationType, int id)
         {
-            return FindPattern(id);
+            return FindPattern(automationType, id);
         }
     }
 }

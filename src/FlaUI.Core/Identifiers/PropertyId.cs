@@ -1,5 +1,5 @@
-﻿using System;
-using FlaUI.Core.Conditions;
+﻿using FlaUI.Core.Conditions;
+using System;
 
 namespace FlaUI.Core.Identifiers
 {
@@ -26,14 +26,14 @@ namespace FlaUI.Core.Identifiers
             return new PropertyCondition(this, value);
         }
 
-        public static PropertyId Register(int id, string name)
+        public static PropertyId Register(AutomationType automationType, int id, string name)
         {
-            return RegisterProperty(id, name);
+            return RegisterProperty(automationType, id, name);
         }
 
-        public static PropertyId Find(int id)
+        public static PropertyId Find(AutomationType automationType, int id)
         {
-            return FindProperty(id);
+            return FindProperty(automationType, id);
         }
     }
 }

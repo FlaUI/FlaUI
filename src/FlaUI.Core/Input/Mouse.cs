@@ -1,13 +1,13 @@
-﻿using System;
+﻿using FlaUI.Core.Shapes;
+using FlaUI.Core.Tools;
+using FlaUI.Core.WindowsAPI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
 using System.Threading;
-using FlaUI.Core.Shapes;
-using FlaUI.Core.Tools;
-using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.Input
 {
@@ -16,6 +16,8 @@ namespace FlaUI.Core.Input
     /// </summary>
     public class Mouse : IMouse
     {
+        public static readonly IMouse Instance = new Mouse();
+
         /// <summary>
         /// The current max timespan (in milliseconds) for double clicks
         /// </summary>
@@ -236,6 +238,32 @@ namespace FlaUI.Core.Input
         {
             var amount = (uint)(WheelDelta * lines);
             SendInput(0, 0, amount, MouseEventFlags.MOUSEEVENTF_HWHEEL);
+        }
+
+        /// <summary>
+        /// Implementation of <see cref="IMouse.DragHorizontally" />
+        /// </summary>
+        public void DragHorizontally(MouseButton mouseButton, Point startingPoint, double distance)
+        {
+            Position = startingPoint;
+            var currentX = Position.X;
+            var currentY = Position.Y;
+            Down(mouseButton);
+            Position = new Point(currentX + distance, currentY);
+            Up(mouseButton);
+        }
+
+        /// <summary>
+        /// Implementation of <see cref="IMouse.DragVertically" />
+        /// </summary>
+        public void DragVertically(MouseButton mouseButton, Point startingPoint, double distance)
+        {
+            Position = startingPoint;
+            var currentX = Position.X;
+            var currentY = Position.Y;
+            Down(mouseButton);
+            Position = new Point(currentX, currentY + distance);
+            Up(mouseButton);
         }
 
         /// <summary>

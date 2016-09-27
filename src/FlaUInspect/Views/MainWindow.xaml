@@ -1,0 +1,35 @@
+﻿<Window x:Class="FlaUInspect.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:models="clr-namespace:FlaUInspect.Models"
+        Title="FlaUI Inspect Tool" Height="350" Width="525" ResizeMode="CanResizeWithGrip">
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <MenuItem Header="E_xit" />
+                </MenuItem>
+            </Menu>
+            <StatusBar DockPanel.Dock="Bottom">
+                <StatusBarItem></StatusBarItem>
+            </StatusBar>
+            <Grid>
+                <TreeView ItemsSource="{Binding Elements}" Margin="10">
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Children}" DataType="{x:Type models:Element}">
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0} &quot;{1}&quot; &quot;{2}&quot;">
+                                        <Binding Path="ControlType" />
+                                        <Binding Path="Name" />
+                                        <Binding Path="AutomationId" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</Window>

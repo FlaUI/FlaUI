@@ -10,6 +10,8 @@ namespace FlaUI.Core.Input
     /// </summary>
     public class Keyboard : IKeyboard
     {
+        public static readonly IKeyboard Instance = new Keyboard();
+
         public void Type(char character)
         {
             var code = User32.VkKeyScan(character);

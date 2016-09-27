@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using interop.UIAutomationCore;
+﻿using System.Collections.Generic;
 
 namespace FlaUI.Core.Conditions
 {
@@ -54,50 +51,6 @@ namespace FlaUI.Core.Conditions
         public NotCondition Not()
         {
             return new NotCondition(this);
-        }
-
-        /// <summary>
-        /// Converts this condition to a native condition
-        /// </summary>
-        public IUIAutomationCondition ToNative(Automation automation)
-        {
-            var propCond = this as PropertyCondition;
-            if (propCond != null)
-            {
-                return automation.NativeAutomation.CreatePropertyConditionEx(propCond.Property.Id, propCond.Value, (PropertyConditionFlags)propCond.PropertyConditionFlags);
-            }
-            var boolCond = this as BoolCondition;
-            if (boolCond != null)
-            {
-                return boolCond.BooleanValue ? automation.NativeAutomation.CreateTrueCondition() : automation.NativeAutomation.CreateFalseCondition();
-            }
-            var notCond = this as NotCondition;
-            if (notCond != null)
-            {
-                return automation.NativeAutomation.CreateNotCondition(notCond.ToNative(automation));
-            }
-            var junctCond = this as JunctionConditionBase;
-            if (junctCond != null)
-            {
-                if (junctCond.ChildCount == 0)
-                {
-                    // No condition in the list, so just create a true condition
-                    return automation.NativeAutomation.CreateTrueCondition();
-                }
-                if (junctCond.ChildCount == 1)
-                {
-                    // Only one condition in the list, so just return that one
-                    return junctCond.Conditions[0].ToNative(automation);
-                }
-                if (junctCond is AndCondition)
-                {
-                    // Create the and condition
-                    return automation.NativeAutomation.CreateAndConditionFromArray(junctCond.Conditions.Select(c => c.ToNative(automation)).ToArray());
-                }
-                // Create the or condition
-                return automation.NativeAutomation.CreateOrConditionFromArray(junctCond.Conditions.Select(c => c.ToNative(automation)).ToArray());
-            }
-            throw new ArgumentException("Unknown condition type");
         }
     }
 }
