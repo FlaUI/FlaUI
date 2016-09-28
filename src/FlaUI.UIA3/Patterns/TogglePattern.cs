@@ -1,25 +1,39 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.Tools;
-using FlaUI.UIA3.Definitions;
-using FlaUI.UIA3.Elements;
+using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.Identifiers;
+using FlaUI.Core.Patterns;
+using FlaUI.Core.Patterns.Infrastructure;
+using FlaUI.Core.Tools;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class TogglePattern : PatternBaseWithInformation<TogglePatternInformation>
+    public class TogglePattern : PatternBaseWithInformation<UIA.IUIAutomationTogglePattern, TogglePatternInformation>, ITogglePattern
     {
-        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_TogglePatternId, "Drag");
+        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_TogglePatternId, "Toggle");
         public static readonly PropertyId ToggleStateProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ToggleToggleStatePropertyId, "ToggleState");
 
-        internal TogglePattern(Element automationElement, UIA.IUIAutomationTogglePattern nativePattern)
-            : base(automationElement, nativePattern, (element, cached) => new TogglePatternInformation(element, cached))
+        public TogglePattern(AutomationObjectBase automationObject, UIA.IUIAutomationTogglePattern nativePattern) : base(automationObject, nativePattern)
         {
+            Properties = new TogglePatternProperties();
         }
 
-        public new UIA.IUIAutomationTogglePattern NativePattern
+        ITogglePatternInformation IPatternWithInformation<ITogglePatternInformation>.Cached
         {
-            get { return (UIA.IUIAutomationTogglePattern)base.NativePattern; }
+            get { return Cached; }
+        }
+
+        public ITogglePatternProperties Properties { get; private set; }
+
+        ITogglePatternInformation IPatternWithInformation<ITogglePatternInformation>.Current
+        {
+            get { return Current; }
+        }
+
+        protected override TogglePatternInformation CreateInformation(bool cached)
+        {
+            return new TogglePatternInformation(AutomationObject, cached);
         }
 
         public void Toggle()
@@ -28,16 +42,23 @@ namespace FlaUI.UIA3.Patterns
         }
     }
 
-    public class TogglePatternInformation : InformationBase
+    public class TogglePatternInformation : ElementInformationBase, ITogglePatternInformation
     {
-        public TogglePatternInformation(Element automationElement, bool cached)
-            : base(automationElement, cached)
+        public TogglePatternInformation(AutomationObjectBase automationObject, bool cached) : base(automationObject, cached)
         {
         }
 
         public ToggleState ToggleState
         {
             get { return Get<ToggleState>(TogglePattern.ToggleStateProperty); }
+        }
+    }
+
+    public class TogglePatternProperties : ITogglePatternProperties
+    {
+        public PropertyId ToggleStateProperty
+        {
+            get { return TogglePattern.ToggleStateProperty; }
         }
     }
 }

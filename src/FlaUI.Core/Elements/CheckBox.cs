@@ -1,20 +1,24 @@
-﻿using System;
-using UIA = interop.UIAutomationCore;
+﻿using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements.Infrastructure;
+using FlaUI.Core.Patterns;
+using System;
 
 namespace FlaUI.Core.Elements
 {
     public class CheckBox : Element
     {
-        public CheckBox(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
+        public CheckBox(AutomationObjectBase automationObject) : base(automationObject)
+        {
+        }
 
-        public TogglePattern TogglePattern
+        public ITogglePattern TogglePattern
         {
             get { return PatternFactory.GetTogglePattern(); }
         }
 
         public ToggleState State
         {
-            get { return GetPropertyValue<ToggleState>(TogglePattern.ToggleStateProperty, false); }
+            get { return AutomationObject.GetPropertyValue<ToggleState>(TogglePattern.Properties.ToggleStateProperty, false); }
             set
             {
                 // Loop for all states
@@ -28,7 +32,7 @@ namespace FlaUI.Core.Elements
             }
         }
 
-        public virtual void Toggle()
+        public void Toggle()
         {
             var togglePattern = TogglePattern;
             if (togglePattern != null)

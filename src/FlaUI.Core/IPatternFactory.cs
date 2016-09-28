@@ -58,7 +58,7 @@ namespace FlaUI.Core
 
         //ITextPattern GetTextPattern();
 
-        //ITogglePattern GetTogglePattern();
+        ITogglePattern GetTogglePattern();
 
         ITransform2Pattern GetTransform2Pattern();
 
@@ -66,7 +66,7 @@ namespace FlaUI.Core
 
         IValuePattern GetValuePattern();
 
-        //IVirtualizedItemPattern GetVirtualizedItemPattern();
+        IVirtualizedItemPattern GetVirtualizedItemPattern();
 
         IWindowPattern GetWindowPattern();
     }

@@ -20,6 +20,11 @@ namespace FlaUI.UIA2
             return nativePattern == null ? null : new InvokePattern(AutomationObject, nativePattern);
         }
 
+        public ITogglePattern GetTogglePattern()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public ITransform2Pattern GetTransform2Pattern()
         {
             throw new System.NotImplementedException();
@@ -34,6 +39,11 @@ namespace FlaUI.UIA2
         {
             var nativePattern = GetNativePatternAs<UIA.ValuePattern>(UIA.ValuePattern.Pattern);
             return nativePattern == null ? null : new ValuePattern(AutomationObject, nativePattern);
+        }
+
+        public IVirtualizedItemPattern GetVirtualizedItemPattern()
+        {
+            throw new System.NotImplementedException();
         }
 
         public IWindowPattern GetWindowPattern()
