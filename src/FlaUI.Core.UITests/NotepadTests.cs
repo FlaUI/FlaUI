@@ -1,5 +1,4 @@
 ﻿using FlaUI.UIA3;
-using FlaUI.UIA3.Tools;
 using NUnit.Framework;
 using System;
 

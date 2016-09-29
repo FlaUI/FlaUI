@@ -8,6 +8,24 @@
             return new Button(element.AutomationObject);
         }
 
+        public static CheckBox AsCheckBox(this Element element)
+        {
+            if (element == null) { return null; }
+            return new CheckBox(element.AutomationObject);
+        }
+
+        public static Label AsLabel(this Element element)
+        {
+            if (element == null) { return null; }
+            return new Label(element.AutomationObject);
+        }
+
+        public static TextBox AsTextBox(this Element element)
+        {
+            if (element == null) { return null; }
+            return new TextBox(element.AutomationObject);
+        }
+
         public static Window AsWindow(this Element element)
         {
             if (element == null) { return null; }

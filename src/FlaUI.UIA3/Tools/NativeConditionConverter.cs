@@ -12,7 +12,7 @@ namespace FlaUI.UIA3.Tools
             var propCond = condition as PropertyCondition;
             if (propCond != null)
             {
-                return automation.NativeAutomation.CreatePropertyConditionEx(propCond.Property.Id, propCond.Value, (UIA.PropertyConditionFlags)propCond.PropertyConditionFlags);
+                return automation.NativeAutomation.CreatePropertyConditionEx(propCond.Property.Id, NativeValueConverter.ToNative(propCond.Value), (UIA.PropertyConditionFlags)propCond.PropertyConditionFlags);
             }
             var boolCond = condition as BoolCondition;
             if (boolCond != null)

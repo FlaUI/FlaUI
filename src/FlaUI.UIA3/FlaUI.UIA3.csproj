@@ -64,7 +64,6 @@
     <Compile Include="UIA3Automation.cs" />
     <Compile Include="Conditions\ConditionFactory.cs" />
     <Compile Include="Definitions\AnnotationType.cs" />
-    <Compile Include="Definitions\ControlType.cs" />
     <Compile Include="Definitions\StyleType.cs" />
     <Compile Include="Definitions\TextAttributes.cs" />
     <Compile Include="Elements\Element.cs" />

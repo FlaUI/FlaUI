@@ -45,6 +45,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalculatorTests.cs" />
+    <Compile Include="Elements\CheckBoxTests.cs" />
+    <Compile Include="Elements\ComboBoxTests.cs" />
+    <Compile Include="Elements\LabelTests.cs" />
+    <Compile Include="Elements\TextBoxTests.cs" />
+    <Compile Include="KeyboardTests.cs" />
+    <Compile Include="MouseTests.cs" />
+    <Compile Include="NotepadTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestFramework\TestApplicationType.cs" />
     <Compile Include="TestFramework\TestUtilities.cs" />

@@ -1,9 +1,10 @@
-﻿using FlaUI.Core.Shapes;
+﻿using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements.Infrastructure;
+using FlaUI.Core.Shapes;
 using FlaUI.UIA3.Definitions;
 using System;
 using System.Globalization;
 using System.Linq;
-using FlaUI.Core.Elements.Infrastructure;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Tools
@@ -73,7 +74,7 @@ namespace FlaUI.UIA3.Tools
             if (val == null) { return null; }
             if (val is ControlType)
             {
-                val = (int)((ControlType)val);
+                val = (int)ToControlTypeId((ControlType)val);
             }
             else if (val is Rectangle)
             {
@@ -142,6 +143,97 @@ namespace FlaUI.UIA3.Tools
         {
             var origValue = (int)intPtrAsInt;
             return origValue == 0 ? IntPtr.Zero : new IntPtr(origValue);
+        }
+
+        public static object ToControlTypeId(ControlType controlType)
+        {
+            switch (controlType)
+            {
+                case ControlType.AppBar:
+                    return UIA.UIA_ControlTypeIds.UIA_AppBarControlTypeId;
+                case ControlType.Button:
+                    return UIA.UIA_ControlTypeIds.UIA_ButtonControlTypeId;
+                case ControlType.Calendar:
+                    return UIA.UIA_ControlTypeIds.UIA_CalendarControlTypeId;
+                case ControlType.CheckBox:
+                    return UIA.UIA_ControlTypeIds.UIA_CheckBoxControlTypeId;
+                case ControlType.ComboBox:
+                    return UIA.UIA_ControlTypeIds.UIA_ComboBoxControlTypeId;
+                case ControlType.Custom:
+                    return UIA.UIA_ControlTypeIds.UIA_CustomControlTypeId;
+                case ControlType.DataGrid:
+                    return UIA.UIA_ControlTypeIds.UIA_DataGridControlTypeId;
+                case ControlType.DataItem:
+                    return UIA.UIA_ControlTypeIds.UIA_DataItemControlTypeId;
+                case ControlType.Document:
+                    return UIA.UIA_ControlTypeIds.UIA_DocumentControlTypeId;
+                case ControlType.Edit:
+                    return UIA.UIA_ControlTypeIds.UIA_EditControlTypeId;
+                case ControlType.Group:
+                    return UIA.UIA_ControlTypeIds.UIA_GroupControlTypeId;
+                case ControlType.Header:
+                    return UIA.UIA_ControlTypeIds.UIA_HeaderControlTypeId;
+                case ControlType.HeaderItem:
+                    return UIA.UIA_ControlTypeIds.UIA_HeaderItemControlTypeId;
+                case ControlType.Hyperlink:
+                    return UIA.UIA_ControlTypeIds.UIA_HyperlinkControlTypeId;
+                case ControlType.Image:
+                    return UIA.UIA_ControlTypeIds.UIA_ImageControlTypeId;
+                case ControlType.List:
+                    return UIA.UIA_ControlTypeIds.UIA_ListControlTypeId;
+                case ControlType.ListItem:
+                    return UIA.UIA_ControlTypeIds.UIA_ListItemControlTypeId;
+                case ControlType.MenuBar:
+                    return UIA.UIA_ControlTypeIds.UIA_MenuBarControlTypeId;
+                case ControlType.Menu:
+                    return UIA.UIA_ControlTypeIds.UIA_MenuControlTypeId;
+                case ControlType.MenuItem:
+                    return UIA.UIA_ControlTypeIds.UIA_MenuItemControlTypeId;
+                case ControlType.Pane:
+                    return UIA.UIA_ControlTypeIds.UIA_PaneControlTypeId;
+                case ControlType.ProgressBar:
+                    return UIA.UIA_ControlTypeIds.UIA_ProgressBarControlTypeId;
+                case ControlType.RadioButton:
+                    return UIA.UIA_ControlTypeIds.UIA_RadioButtonControlTypeId;
+                case ControlType.ScrollBar:
+                    return UIA.UIA_ControlTypeIds.UIA_ScrollBarControlTypeId;
+                case ControlType.SemanticZoom:
+                    return UIA.UIA_ControlTypeIds.UIA_SemanticZoomControlTypeId;
+                case ControlType.Separator:
+                    return UIA.UIA_ControlTypeIds.UIA_SeparatorControlTypeId;
+                case ControlType.Slider:
+                    return UIA.UIA_ControlTypeIds.UIA_SliderControlTypeId;
+                case ControlType.Spinner:
+                    return UIA.UIA_ControlTypeIds.UIA_SpinnerControlTypeId;
+                case ControlType.SplitButton:
+                    return UIA.UIA_ControlTypeIds.UIA_SplitButtonControlTypeId;
+                case ControlType.StatusBar:
+                    return UIA.UIA_ControlTypeIds.UIA_StatusBarControlTypeId;
+                case ControlType.Tab:
+                    return UIA.UIA_ControlTypeIds.UIA_TabControlTypeId;
+                case ControlType.TabItem:
+                    return UIA.UIA_ControlTypeIds.UIA_TabItemControlTypeId;
+                case ControlType.Table:
+                    return UIA.UIA_ControlTypeIds.UIA_TableControlTypeId;
+                case ControlType.Text:
+                    return UIA.UIA_ControlTypeIds.UIA_TextControlTypeId;
+                case ControlType.Thumb:
+                    return UIA.UIA_ControlTypeIds.UIA_ThumbControlTypeId;
+                case ControlType.TitleBar:
+                    return UIA.UIA_ControlTypeIds.UIA_TitleBarControlTypeId;
+                case ControlType.ToolBar:
+                    return UIA.UIA_ControlTypeIds.UIA_ToolBarControlTypeId;
+                case ControlType.ToolTip:
+                    return UIA.UIA_ControlTypeIds.UIA_ToolTipControlTypeId;
+                case ControlType.Tree:
+                    return UIA.UIA_ControlTypeIds.UIA_TreeControlTypeId;
+                case ControlType.TreeItem:
+                    return UIA.UIA_ControlTypeIds.UIA_TreeItemControlTypeId;
+                case ControlType.Window:
+                    return UIA.UIA_ControlTypeIds.UIA_WindowControlTypeId;
+                default:
+                    throw new NotSupportedException();
+            }
         }
     }
 }
