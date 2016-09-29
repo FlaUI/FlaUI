@@ -1,8 +1,9 @@
 ﻿using FlaUI.Core.Definitions;
 using FlaUI.Core.Elements.Infrastructure;
+using FlaUI.Core.Exceptions;
 using FlaUI.Core.Shapes;
 using System;
-using FlaUI.Core.Exceptions;
+using System.Globalization;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Tools
@@ -34,11 +35,18 @@ namespace FlaUI.UIA2.Tools
         public static object ToPoint(object point)
         {
             var origValue = (System.Windows.Point) point;
-            if (point == null)
+            if (origValue == null)
             {
                 return null;
             }
             return new Point(origValue.X, origValue.Y);
+        }
+
+        public static object ToRectangle(object rectangle)
+        {
+            var origValue = (System.Windows.Rect)rectangle;
+            if (origValue == null) { return null; }
+            return new Rectangle(origValue.X, origValue.Y, origValue.Width, origValue.Height);
         }
 
         /// <summary>
@@ -55,6 +63,18 @@ namespace FlaUI.UIA2.Tools
                 val = (int) ToControlTypeId((ControlType) val);
             }
             return val;
+        }
+
+        public static object ToCulture(object cultureId)
+        {
+            var origValue = (int)cultureId;
+            return origValue == 0 ? CultureInfo.InvariantCulture : new CultureInfo(origValue);
+        }
+
+        public static object IntToIntPtr(object intPtrAsInt)
+        {
+            var origValue = (int)intPtrAsInt;
+            return origValue == 0 ? IntPtr.Zero : new IntPtr(origValue);
         }
 
         public static object ToControlTypeId(ControlType controlType)

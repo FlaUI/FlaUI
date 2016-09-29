@@ -43,10 +43,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutomationObjectIds.cs" />
     <Compile Include="Patterns\InvokePattern.cs" />
     <Compile Include="Patterns\ValuePatternIds.cs" />
     <Compile Include="Tools\NativeConditionConverter.cs" />
     <Compile Include="Tools\NativeValueConverter.cs" />
+    <Compile Include="UIA2ElementProperties.cs" />
     <Compile Include="UIA2PatternFactory.cs" />
     <Compile Include="Patterns\ValuePattern.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

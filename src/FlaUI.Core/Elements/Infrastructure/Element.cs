@@ -16,9 +16,12 @@ namespace FlaUI.Core.Elements.Infrastructure
             PatternFactory = AutomationObject.CreatePatternFactory();
             Cached = AutomationObject.CreateInformation(true);
             Current = AutomationObject.CreateInformation(false);
+            Properties = AutomationObject.CreateProperties();
         }
 
         public AutomationObjectBase AutomationObject { get; set; }
+
+        public IElementProperties Properties { get; set; }
 
         public FrameworkType FrameworkType { get { return FrameworkIds.ConvertToFrameworkType(Current.FrameworkId); } }
 
@@ -146,7 +149,7 @@ namespace FlaUI.Core.Elements.Infrastructure
         {
             return AutomationObject.FindFirst(treeScope, condition);
         }
-        
+
         /// <summary>
         /// Gets a clickable point of the element
         /// </summary>

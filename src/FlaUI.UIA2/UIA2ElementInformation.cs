@@ -1,12 +1,9 @@
 ﻿using FlaUI.Core;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.Elements.Infrastructure;
-using FlaUI.Core.Identifiers;
 using FlaUI.Core.Shapes;
 using System;
 using System.Globalization;
-using FlaUI.Core.Definitions;
-using FlaUI.UIA2.Tools;
-using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2
 {
@@ -20,9 +17,9 @@ namespace FlaUI.UIA2
         public string AccessKey { get; }
         public string AriaProperties { get; }
         public string AriaRole { get; }
-        public string AutomationId { get { return Get<string>(AutomationIdProperty); } }
+        public string AutomationId { get { return Get<string>(AutomationObjectIds.AutomationIdProperty); } }
         public Element[] FlowsTo { get; }
-        public string FrameworkId { get { return Get<string>(FrameworkIdProperty); } }
+        public string FrameworkId { get { return Get<string>(AutomationObjectIds.FrameworkIdProperty); } }
         public bool HasKeyboardFocus { get; }
         public string HelpText { get; }
         public bool IsContentElement { get; }
@@ -38,27 +35,19 @@ namespace FlaUI.UIA2
         public string ItemType { get; }
         public Element LabeledBy { get; }
         public string LocalizedControlType { get; }
-        public Rectangle BoundingRectangle { get { return Get<Rectangle>(BoundingRectangleProperty); } }
+        public Rectangle BoundingRectangle { get { return Get<Rectangle>(AutomationObjectIds.BoundingRectangleProperty); } }
         public string ClassName { get; }
-        public Point ClickablePoint { get { return Get<Point>(ClickablePointProperty); } }
+        public Point ClickablePoint { get { return Get<Point>(AutomationObjectIds.ClickablePointProperty); } }
         public Element[] ControllerFor { get; }
         public ControlType ControlType { get; }
         public CultureInfo Culture { get; }
         public Element[] DescribedBy { get; }
         public Element[] FlowsFrom { get; }
-        public string Name { get { return Get<string>(NameProperty); } }
+        public string Name { get { return Get<string>(AutomationObjectIds.NameProperty); } }
         public IntPtr NativeWindowHandle { get; }
         public bool OptimizeForVisualContent { get; }
         public int ProcessId { get; }
         public string ProviderDescription { get; }
         public int[] RuntimeId { get; }
-
-        #region Ids
-        public static readonly PropertyId AutomationIdProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.AutomationIdProperty.Id, "AutomationId");
-        public static readonly PropertyId FrameworkIdProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.FrameworkIdProperty.Id, "FrameworkId");
-        public static readonly PropertyId BoundingRectangleProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.BoundingRectangleProperty.Id, "BoundingRectangle");
-        public static readonly PropertyId ClickablePointProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.ClickablePointProperty.Id, "ClickablePoint").SetConverter(NativeValueConverter.ToPoint);
-        public static readonly PropertyId NameProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.NameProperty.Id, "Name");
-        #endregion Ids
     }
 }

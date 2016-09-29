@@ -82,6 +82,7 @@
     <Compile Include="TreeWalker.cs" />
     <Compile Include="UIA3AutomationObject.cs" />
     <Compile Include="UIA3ElementInformation.cs" />
+    <Compile Include="UIA3ElementProperties.cs" />
     <Compile Include="UIA3PatternFactory.cs" />
   </ItemGroup>
   <ItemGroup>

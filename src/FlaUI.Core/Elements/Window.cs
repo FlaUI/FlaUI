@@ -74,7 +74,7 @@ namespace FlaUI.Core.Elements
         public Window[] GetModalWindows()
         {
             return FindAll(TreeScope.Children,
-                new PropertyCondition(AutomationObject.ControlTypeProperty, ControlType.Window).
+                new PropertyCondition(Properties.ControlTypeProperty, ControlType.Window).
                 And(new PropertyCondition(WindowPattern.Properties.IsModalProperty, true))).
                 Select(e => e.AsWindow()).ToArray();
         }

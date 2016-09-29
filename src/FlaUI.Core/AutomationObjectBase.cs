@@ -100,46 +100,6 @@ namespace FlaUI.Core
         public abstract Element[] FindAll(TreeScope treeScope, ConditionBase condition);
         public abstract Element FindFirst(TreeScope treeScope, ConditionBase condition);
         public abstract bool TryGetClickablePoint(out Point point);
-
-        #region Properties
-        public abstract PropertyId AcceleratorKeyProperty { get; }
-        public abstract PropertyId AccessKeyProperty { get; }
-        public abstract PropertyId AriaPropertiesProperty { get; }
-        public abstract PropertyId AriaRoleProperty { get; }
-        public abstract PropertyId AutomationIdProperty { get; }
-        public abstract PropertyId BoundingRectangleProperty { get; }
-        public abstract PropertyId ClassNameProperty { get; }
-        public abstract PropertyId ClickablePointProperty { get; }
-        public abstract PropertyId ControllerForProperty { get; }
-        public abstract PropertyId ControlTypeProperty { get; }
-        public abstract PropertyId CultureProperty { get; }
-        public abstract PropertyId DescribedByProperty { get; }
-        public abstract PropertyId FlowsFromProperty { get; }
-        public abstract PropertyId FlowsToProperty { get; }
-        public abstract PropertyId FrameworkIdProperty { get; }
-        public abstract PropertyId HasKeyboardFocusProperty { get; }
-        public abstract PropertyId HelpTextProperty { get; }
-        public abstract PropertyId IsContentElementProperty { get; }
-        public abstract PropertyId IsControlElementProperty { get; }
-        public abstract PropertyId IsDataValidForFormProperty { get; }
-        public abstract PropertyId IsEnabledProperty { get; }
-        public abstract PropertyId IsKeyboardFocusableProperty { get; }
-        public abstract PropertyId IsOffscreenProperty { get; }
-        public abstract PropertyId IsPasswordProperty { get; }
-        public abstract PropertyId IsPeripheralProperty { get; }
-        public abstract PropertyId IsRequiredForFormProperty { get; }
-        public abstract PropertyId ItemStatusProperty { get; }
-        public abstract PropertyId ItemTypeProperty { get; }
-        public abstract PropertyId LabeledByProperty { get; }
-        public abstract PropertyId LiveSettingProperty { get; }
-        public abstract PropertyId LocalizedControlTypeProperty { get; }
-        public abstract PropertyId NameProperty { get; }
-        public abstract PropertyId NativeWindowHandleProperty { get; }
-        public abstract PropertyId OptimizeForVisualContentProperty { get; }
-        public abstract PropertyId OrientationProperty { get; }
-        public abstract PropertyId ProcessIdProperty { get; }
-        public abstract PropertyId ProviderDescriptionProperty { get; }
-        public abstract PropertyId RuntimeIdProperty { get; }
-        #endregion Properties
+        public abstract IElementProperties CreateProperties();
     }
 }

@@ -24,7 +24,7 @@ namespace FlaUI.UIA3.Patterns
             get { return Current; }
         }
 
-        public ITransform2PatternProperties Properties { get; private set; }
+        public new ITransform2PatternProperties Properties { get; private set; }
 
          ITransformPatternProperties ITransformPattern.Properties { get { return Properties; } }
 
