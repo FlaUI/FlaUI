@@ -89,6 +89,7 @@
     <Compile Include="Elements\Window.cs" />
     <Compile Include="Exceptions\MethodNotSupportedException.cs" />
     <Compile Include="Exceptions\NoClickablePointException.cs" />
+    <Compile Include="Exceptions\NotSupportedByUIA2Exception.cs" />
     <Compile Include="Exceptions\PropertyNotSupportedException.cs" />
     <Compile Include="FrameworkType.cs" />
     <Compile Include="Identifiers\ConvertibleIdentifierBase.cs" />

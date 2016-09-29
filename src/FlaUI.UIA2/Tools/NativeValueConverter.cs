@@ -2,6 +2,7 @@
 using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.Shapes;
 using System;
+using FlaUI.Core.Exceptions;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Tools
@@ -61,7 +62,7 @@ namespace FlaUI.UIA2.Tools
             switch (controlType)
             {
                 case ControlType.AppBar:
-                    throw new NotSupportedException();
+                    throw new NotSupportedByUIA2Exception();
                 case ControlType.Button:
                     return UIA.ControlType.Button;
                 case ControlType.Calendar:
@@ -109,7 +110,7 @@ namespace FlaUI.UIA2.Tools
                 case ControlType.ScrollBar:
                     return UIA.ControlType.ScrollBar;
                 case ControlType.SemanticZoom:
-                    throw new NotSupportedException();
+                    throw new NotSupportedByUIA2Exception();
                 case ControlType.Separator:
                     return UIA.ControlType.Separator;
                 case ControlType.Slider:
