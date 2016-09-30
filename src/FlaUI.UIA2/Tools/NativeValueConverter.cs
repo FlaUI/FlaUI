@@ -34,7 +34,7 @@ namespace FlaUI.UIA2.Tools
 
         public static object ToPoint(object point)
         {
-            var origValue = (System.Windows.Point) point;
+            var origValue = (System.Windows.Point)point;
             if (origValue == null)
             {
                 return null;
@@ -60,7 +60,7 @@ namespace FlaUI.UIA2.Tools
             }
             if (val is ControlType)
             {
-                val = (int) ToControlTypeId((ControlType) val);
+                val = (UIA.ControlType)ToControlTypeId((ControlType)val);
             }
             return val;
         }

@@ -49,6 +49,7 @@
     <Compile Include="Elements\ComboBoxTests.cs" />
     <Compile Include="Elements\LabelTests.cs" />
     <Compile Include="Elements\TextBoxTests.cs" />
+    <Compile Include="EventHandlers\FocusChangedTests.cs" />
     <Compile Include="KeyboardTests.cs" />
     <Compile Include="MouseTests.cs" />
     <Compile Include="NotepadTests.cs" />

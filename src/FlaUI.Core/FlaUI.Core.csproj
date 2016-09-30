@@ -88,6 +88,15 @@
     <Compile Include="Elements\TextBox.cs" />
     <Compile Include="Elements\Thumb.cs" />
     <Compile Include="Elements\Window.cs" />
+    <Compile Include="EventHandlers\BasicEventHandlerBase.cs" />
+    <Compile Include="EventHandlers\EventHandlerBase.cs" />
+    <Compile Include="EventHandlers\FocusChangedEventHandlerBase.cs" />
+    <Compile Include="EventHandlers\IAutomationEventHandler.cs" />
+    <Compile Include="EventHandlers\IAutomationFocusChangedEventHandler.cs" />
+    <Compile Include="EventHandlers\IAutomationPropertyChangedEventHandler.cs" />
+    <Compile Include="EventHandlers\IAutomationStructureChangedEventHandler.cs" />
+    <Compile Include="EventHandlers\PropertyChangedEventHandlerBase.cs" />
+    <Compile Include="EventHandlers\StructureChangedEventHandlerBase.cs" />
     <Compile Include="Exceptions\MethodNotSupportedException.cs" />
     <Compile Include="Exceptions\NoClickablePointException.cs" />
     <Compile Include="Exceptions\NotSupportedByUIA2Exception.cs" />

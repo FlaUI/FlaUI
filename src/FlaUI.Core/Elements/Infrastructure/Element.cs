@@ -1,5 +1,7 @@
 ﻿using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
+using FlaUI.Core.EventHandlers;
+using FlaUI.Core.Identifiers;
 using FlaUI.Core.Shapes;
 using FlaUI.Core.WindowsAPI;
 using System;
@@ -167,6 +169,36 @@ namespace FlaUI.Core.Elements.Infrastructure
         public bool TryGetClickablePoint(out Point point)
         {
             return AutomationObject.TryGetClickablePoint(out point);
+        }
+
+        public IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<Element, EventId> action)
+        {
+            return AutomationObject.RegisterEvent(@event, treeScope, action);
+        }
+
+        public IAutomationPropertyChangedEventHandler RegisterPropertyChangedEvent(TreeScope treeScope, Action<Element, PropertyId, object> action, params PropertyId[] properties)
+        {
+            return AutomationObject.RegisterPropertyChangedEvent(treeScope, action, properties);
+        }
+
+        public IAutomationStructureChangedEventHandler RegisterStructureChangedEvent(TreeScope treeScope, Action<Element, StructureChangeType, int[]> action)
+        {
+            return AutomationObject.RegisterStructureChangedEvent(treeScope, action);
+        }
+
+        public void RemoveAutomationEventHandler(EventId @event, IAutomationEventHandler eventHandler)
+        {
+            AutomationObject.RemoveAutomationEventHandler(@event, eventHandler);
+        }
+
+        public void RemovePropertyChangedEventHandler(IAutomationPropertyChangedEventHandler eventHandler)
+        {
+            AutomationObject.RemovePropertyChangedEventHandler(eventHandler);
+        }
+
+        public void RemoveStructureChangedEventHandler(IAutomationStructureChangedEventHandler eventHandler)
+        {
+            AutomationObject.RemoveStructureChangedEventHandler(eventHandler);
         }
 
         /// <summary>

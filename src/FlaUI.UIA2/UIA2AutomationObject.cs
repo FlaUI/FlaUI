@@ -2,8 +2,12 @@
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Elements.Infrastructure;
+using FlaUI.Core.EventHandlers;
+using FlaUI.Core.Identifiers;
 using FlaUI.Core.Shapes;
+using FlaUI.UIA2.EventHandlers;
 using FlaUI.UIA2.Tools;
+using System;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2
@@ -74,6 +78,42 @@ namespace FlaUI.UIA2
         public override IElementProperties CreateProperties()
         {
             return new UIA2ElementProperties();
+        }
+
+        public override IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<Element, EventId> action)
+        {
+            var eventHandler = new UIA2BasicEventHandler(Automation, action);
+            UIA.Automation.AddAutomationEventHandler(UIA.AutomationEvent.LookupById(@event.Id), NativeElement, (UIA.TreeScope)treeScope, eventHandler.EventHandler);
+            return eventHandler;
+        }
+
+        public override IAutomationPropertyChangedEventHandler RegisterPropertyChangedEvent(TreeScope treeScope, Action<Element, PropertyId, object> action, PropertyId[] properties)
+        {
+            var eventHandler = new UIA2PropertyChangedEventHandler(Automation, action);
+            UIA.Automation.AddAutomationPropertyChangedEventHandler(NativeElement, (UIA.TreeScope)treeScope, eventHandler.EventHandler);
+            return eventHandler;
+        }
+
+        public override IAutomationStructureChangedEventHandler RegisterStructureChangedEvent(TreeScope treeScope, Action<Element, StructureChangeType, int[]> action)
+        {
+            var eventHandler = new UIA2StructureChangedEventHandler(Automation, action);
+            UIA.Automation.AddStructureChangedEventHandler(NativeElement, (UIA.TreeScope)treeScope, eventHandler.EventHandler);
+            return eventHandler;
+        }
+
+        public override void RemoveAutomationEventHandler(EventId @event, IAutomationEventHandler eventHandler)
+        {
+            UIA.Automation.RemoveAutomationEventHandler(UIA.AutomationEvent.LookupById(@event.Id), NativeElement, ((UIA2BasicEventHandler)eventHandler).EventHandler);
+        }
+
+        public override void RemovePropertyChangedEventHandler(IAutomationPropertyChangedEventHandler eventHandler)
+        {
+            UIA.Automation.RemoveAutomationPropertyChangedEventHandler(NativeElement, ((UIA2PropertyChangedEventHandler)eventHandler).EventHandler);
+        }
+
+        public override void RemoveStructureChangedEventHandler(IAutomationStructureChangedEventHandler eventHandler)
+        {
+            UIA.Automation.RemoveStructureChangedEventHandler(NativeElement, ((UIA2StructureChangedEventHandler)eventHandler).EventHandler);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.Elements.Infrastructure;
+using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Shapes;
+using FlaUI.UIA2.EventHandlers;
 using System;
 using UIA = System.Windows.Automation;
 
@@ -37,6 +39,18 @@ namespace FlaUI.UIA2
         {
             var nativeElement = UIA.AutomationElement.FromHandle(hwnd);
             return nativeElement == null ? null : new Element(WrapNativeElement(nativeElement));
+        }
+
+        public override IAutomationFocusChangedEventHandler RegisterFocusChangedEvent(Action<Element> action)
+        {
+            var eventHandler = new UIA2FocusChangedEventHandler(this, action);
+            UIA.Automation.AddAutomationFocusChangedEventHandler(eventHandler.EventHandler);
+            return eventHandler;
+        }
+
+        public override void UnRegisterFocusChangedEvent(IAutomationFocusChangedEventHandler eventHandler)
+        {
+            UIA.Automation.RemoveAutomationFocusChangedEventHandler(((UIA2FocusChangedEventHandler)eventHandler).EventHandler);
         }
 
         public override void UnregisterAllEvents()

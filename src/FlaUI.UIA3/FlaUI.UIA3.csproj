@@ -50,6 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutomationObjectIds.cs" />
+    <Compile Include="EventHandlers\UIA3BasicEventHandler.cs" />
+    <Compile Include="EventHandlers\UIA3FocusChangedEventHandler.cs" />
+    <Compile Include="EventHandlers\UIA3PropertyChangedEventHandler.cs" />
+    <Compile Include="EventHandlers\UIA3StructureChangedEventHandlerBase.cs" />
     <Compile Include="Patterns\InvokePattern.cs" />
     <Compile Include="Patterns\TogglePattern.cs" />
     <Compile Include="Patterns\Transform2Pattern.cs" />
@@ -66,12 +70,6 @@
     <Compile Include="Definitions\AnnotationType.cs" />
     <Compile Include="Definitions\StyleType.cs" />
     <Compile Include="Definitions\TextAttributes.cs" />
-    <Compile Include="Elements\Element.cs" />
-    <Compile Include="EventHandlers\BasicEventHandler.cs" />
-    <Compile Include="EventHandlers\EventHandlerBase.cs" />
-    <Compile Include="EventHandlers\FocusChangedEventHandler.cs" />
-    <Compile Include="EventHandlers\PropertyChangedEventHandler.cs" />
-    <Compile Include="EventHandlers\StructureChangedEventHandler.cs" />
     <Compile Include="Patterns\ValuePattern.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shapes\PointExtensions.cs" />
@@ -91,9 +89,7 @@
       <Name>FlaUI.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -4,6 +4,7 @@ using FlaUI.Core.Identifiers;
 using System;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
+using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Shapes;
 
 namespace FlaUI.Core
@@ -101,5 +102,11 @@ namespace FlaUI.Core
         public abstract Element FindFirst(TreeScope treeScope, ConditionBase condition);
         public abstract bool TryGetClickablePoint(out Point point);
         public abstract IElementProperties CreateProperties();
+        public abstract IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<Element, EventId> action);
+        public abstract IAutomationPropertyChangedEventHandler RegisterPropertyChangedEvent(TreeScope treeScope, Action<Element, PropertyId, object> action, PropertyId[] properties);
+        public abstract IAutomationStructureChangedEventHandler RegisterStructureChangedEvent(TreeScope treeScope, Action<Element, StructureChangeType, int[]> action);
+        public abstract void RemoveAutomationEventHandler(EventId @event, IAutomationEventHandler eventHandler);
+        public abstract void RemovePropertyChangedEventHandler(IAutomationPropertyChangedEventHandler eventHandler);
+        public abstract void RemoveStructureChangedEventHandler(IAutomationStructureChangedEventHandler eventHandler);
     }
 }

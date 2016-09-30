@@ -2,11 +2,14 @@
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Elements.Infrastructure;
+using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Shapes;
 using FlaUI.Core.Tools;
+using FlaUI.UIA3.EventHandlers;
 using FlaUI.UIA3.Tools;
 using System;
+using System.Linq;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3
@@ -94,6 +97,44 @@ namespace FlaUI.UIA3
             return new UIA3ElementProperties();
         }
 
+        public override IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<Element, EventId> action)
+        {
+            var eventHandler = new UIA3BasicEventHandler(Automation, action);
+            Automation.NativeAutomation.AddAutomationEventHandler(@event.Id, NativeElement, (UIA.TreeScope)treeScope, null, eventHandler);
+            return eventHandler;
+        }
+
+        public override IAutomationPropertyChangedEventHandler RegisterPropertyChangedEvent(TreeScope treeScope, Action<Element, PropertyId, object> action, PropertyId[] properties)
+        {
+            var eventHandler = new UIA3PropertyChangedEventHandler(Automation, action);
+            var propertyIds = properties.Select(p => p.Id).ToArray();
+            Automation.NativeAutomation.AddPropertyChangedEventHandler(NativeElement,
+                (UIA.TreeScope)treeScope, null, eventHandler, propertyIds);
+            return eventHandler;
+        }
+
+        public override IAutomationStructureChangedEventHandler RegisterStructureChangedEvent(TreeScope treeScope, Action<Element, StructureChangeType, int[]> action)
+        {
+            var eventHandler = new UIA3StructureChangedEventHandler(Automation, action);
+            Automation.NativeAutomation.AddStructureChangedEventHandler(NativeElement, (UIA.TreeScope)treeScope, null, eventHandler);
+            return eventHandler;
+        }
+
+        public override void RemoveAutomationEventHandler(EventId @event, IAutomationEventHandler eventHandler)
+        {
+            Automation.NativeAutomation.RemoveAutomationEventHandler(@event.Id, NativeElement, (UIA3BasicEventHandler)eventHandler);
+        }
+
+        public override void RemovePropertyChangedEventHandler(IAutomationPropertyChangedEventHandler eventHandler)
+        {
+            Automation.NativeAutomation.RemovePropertyChangedEventHandler(NativeElement, (UIA3PropertyChangedEventHandler)eventHandler);
+        }
+
+        public override void RemoveStructureChangedEventHandler(IAutomationStructureChangedEventHandler eventHandler)
+        {
+            Automation.NativeAutomation.RemoveStructureChangedEventHandler(NativeElement, (UIA3StructureChangedEventHandler)eventHandler);
+        }
+
         /// <summary>
         /// Tries to cast the automation element to a specific interface.
         /// Throws an exception if that is not possible.
@@ -106,6 +147,6 @@ namespace FlaUI.UIA3
                 throw new NotSupportedException(String.Format("OS does not have {0} support.", typeof(T).Name));
             }
             return element;
-        }        
+        }
     }
 }
