@@ -34,7 +34,7 @@ namespace FlaUI.Core
 
         //IScrollPattern GetScrollPattern();
 
-        //ISelectionItemPattern GetSelectionItemPattern();
+        ISelectionItemPattern GetSelectionItemPattern();
 
         //ISelectionPattern GetSelectionPattern();
 

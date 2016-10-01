@@ -48,6 +48,7 @@
     <Compile Include="Elements\CheckBoxTests.cs" />
     <Compile Include="Elements\ComboBoxTests.cs" />
     <Compile Include="Elements\LabelTests.cs" />
+    <Compile Include="Elements\RadioButtonTests.cs" />
     <Compile Include="Elements\TextBoxTests.cs" />
     <Compile Include="EventHandlers\FocusChangedTests.cs" />
     <Compile Include="KeyboardTests.cs" />

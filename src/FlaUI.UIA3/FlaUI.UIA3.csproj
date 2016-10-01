@@ -55,6 +55,7 @@
     <Compile Include="EventHandlers\UIA3PropertyChangedEventHandler.cs" />
     <Compile Include="EventHandlers\UIA3StructureChangedEventHandlerBase.cs" />
     <Compile Include="Patterns\InvokePattern.cs" />
+    <Compile Include="Patterns\SelectionItemPattern.cs" />
     <Compile Include="Patterns\TogglePattern.cs" />
     <Compile Include="Patterns\Transform2Pattern.cs" />
     <Compile Include="Patterns\Transform2PatternIds.cs" />

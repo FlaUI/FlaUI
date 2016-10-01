@@ -20,6 +20,11 @@ namespace FlaUI.UIA2
             return nativePattern == null ? null : new InvokePattern(AutomationObject, nativePattern);
         }
 
+        public ISelectionItemPattern GetSelectionItemPattern()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public ITogglePattern GetTogglePattern()
         {
             throw new System.NotImplementedException();

@@ -20,6 +20,12 @@
             return new Label(element.AutomationObject);
         }
 
+        public static RadioButton AsRadioButton(this Element element)
+        {
+            if (element == null) { return null; }
+            return new RadioButton(element.AutomationObject);
+        }
+
         public static TextBox AsTextBox(this Element element)
         {
             if (element == null) { return null; }

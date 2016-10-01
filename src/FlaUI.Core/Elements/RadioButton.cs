@@ -1,10 +1,9 @@
-﻿using UIA = interop.UIAutomationCore;
-
-namespace FlaUI.Core.Elements
+﻿namespace FlaUI.Core.Elements
 {
-    public class RadioButton : SelectionItem
+    public class RadioButton : Selectable
     {
-        public RadioButton(UIA3Automation automation, UIA.IUIAutomationElement nativeElement)
-            : base(automation, nativeElement) { }
+        public RadioButton(AutomationObjectBase automationObject) : base(automationObject)
+        {
+        }
     }
 }

@@ -1,17 +1,20 @@
 ﻿using System;
+using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.Exceptions;
-using UIA = interop.UIAutomationCore;
+using FlaUI.Core.Patterns;
 
 namespace FlaUI.Core.Elements
 {
     /// <summary>
     /// An UI-item which supports the <see cref="SelectionItemPattern"/>
     /// </summary>
-    public class SelectionItem : Element
+    public class Selectable : Element
     {
-        public SelectionItem(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
+        public Selectable(AutomationObjectBase automationObject) : base(automationObject)
+        {
+        }
 
-        public SelectionItemPattern SelectionItemPattern
+        public ISelectionItemPattern SelectionItemPattern
         {
             get { return PatternFactory.GetSelectionItemPattern(); }
         }

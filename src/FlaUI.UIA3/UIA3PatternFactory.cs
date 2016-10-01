@@ -105,11 +105,11 @@ namespace FlaUI.UIA3
         //    return nativePattern == null ? null : new ScrollPattern(AutomationObject, nativePattern);
         //}
 
-        //public SelectionItemPattern GetSelectionItemPattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationSelectionItemPattern>(SelectionItemPattern.Pattern);
-        //    return nativePattern == null ? null : new SelectionItemPattern(AutomationObject, nativePattern);
-        //}
+        public ISelectionItemPattern GetSelectionItemPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationSelectionItemPattern>(SelectionItemPattern.Pattern);
+            return nativePattern == null ? null : new SelectionItemPattern(AutomationObject, nativePattern);
+        }
 
         //public SelectionPattern GetSelectionPattern()
         //{
