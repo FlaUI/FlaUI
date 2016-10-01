@@ -14,6 +14,11 @@ namespace FlaUI.UIA2
             AutomationObject = automationObject;
         }
 
+        public IExpandCollapsePattern GetExpandCollapsePattern()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IInvokePattern GetInvokePattern()
         {
             var nativePattern = GetNativePatternAs<UIA.InvokePattern>(UIA.InvokePattern.Pattern);

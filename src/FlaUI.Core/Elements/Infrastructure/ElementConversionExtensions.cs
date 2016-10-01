@@ -20,6 +20,18 @@
             return new Label(element.AutomationObject);
         }
 
+        public static Menu AsMenu(this Element element)
+        {
+            if (element == null) { return null; }
+            return new Menu(element.AutomationObject);
+        }
+
+        public static MenuItem AsMenuItem(this Element element)
+        {
+            if (element == null) { return null; }
+            return new MenuItem(element.AutomationObject);
+        }
+
         public static RadioButton AsRadioButton(this Element element)
         {
             if (element == null) { return null; }

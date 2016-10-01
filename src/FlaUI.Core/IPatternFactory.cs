@@ -12,7 +12,7 @@ namespace FlaUI.Core
 
         //IDropTargetPattern GetDropTargetPattern();
 
-        //IExpandCollapsePattern GetExpandCollapsePattern();
+        IExpandCollapsePattern GetExpandCollapsePattern();
 
         //IGridItemPattern GetGridItemPattern();
 

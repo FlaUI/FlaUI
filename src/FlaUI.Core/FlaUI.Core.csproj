@@ -86,6 +86,8 @@
     <Compile Include="Elements\Infrastructure\IElementInformation.cs" />
     <Compile Include="Elements\Infrastructure\IElementProperties.cs" />
     <Compile Include="Elements\Label.cs" />
+    <Compile Include="Elements\Menu.cs" />
+    <Compile Include="Elements\MenuItem.cs" />
     <Compile Include="Elements\RadioButton.cs" />
     <Compile Include="Elements\Selectable.cs" />
     <Compile Include="Elements\TextBox.cs" />
@@ -124,6 +126,7 @@
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Overlay\OverlayManager.cs" />
     <Compile Include="Overlay\OverlayRectangleWindow.cs" />
+    <Compile Include="Patterns\IExpandCollapsePattern.cs" />
     <Compile Include="Patterns\IInvokePattern.cs" />
     <Compile Include="Patterns\Infrastructure\IPattern.cs" />
     <Compile Include="Patterns\Infrastructure\IPatternInformation.cs" />

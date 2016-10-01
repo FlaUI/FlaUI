@@ -1,5 +1,4 @@
-﻿using FlaUI.Core.Conditions;
-using FlaUI.Core.Definitions;
+﻿using FlaUI.Core.Definitions;
 using FlaUI.Core.Elements.Infrastructure;
 using System.Linq;
 
@@ -16,7 +15,7 @@ namespace FlaUI.Core.Elements
 
         public MenuItem[] MenuItems
         {
-            get { return Enumerable.ToArray<MenuItem>(FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.MenuItem)).Select(e => ElementConversionExtensions.AsMenuItem(e))); }
+            get { return FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.MenuItem)).Select(e => e.AsMenuItem()).ToArray(); }
         }
     }
 }

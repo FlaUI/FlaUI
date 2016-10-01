@@ -39,11 +39,11 @@ namespace FlaUI.UIA3
         //    return nativePattern == null ? null : new DropTargetPattern(AutomationObject, nativePattern);
         //}
 
-        //public ExpandCollapsePattern GetExpandCollapsePattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationExpandCollapsePattern>(ExpandCollapsePattern.Pattern);
-        //    return nativePattern == null ? null : new ExpandCollapsePattern(AutomationObject, nativePattern);
-        //}
+        public IExpandCollapsePattern GetExpandCollapsePattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationExpandCollapsePattern>(ExpandCollapsePattern.Pattern);
+            return nativePattern == null ? null : new ExpandCollapsePattern(AutomationObject, nativePattern);
+        }
 
         //public GridItemPattern GetGridItemPattern()
         //{

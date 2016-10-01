@@ -1,8 +1,6 @@
-﻿using FlaUI.Core.UITests.TestFramework;
-using FlaUI.UIA3.Conditions;
-using FlaUI.UIA3.Definitions;
-using FlaUI.UIA3.Elements;
-using FlaUI.UIA3.Tools;
+﻿using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements.Infrastructure;
+using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
@@ -20,7 +18,7 @@ namespace FlaUI.Core.UITests.Elements
         public void TestMenuWithSubMenus()
         {
             var window = App.GetMainWindow(Uia3Automation);
-            var menu = window.FindFirst(TreeScope.Children, ConditionFactory.Menu()).AsMenu();
+            var menu = window.FindFirst(TreeScope.Children, Uia3Automation.ConditionFactory.Menu()).AsMenu();
             Assert.That(menu, Is.Not.Null);
             var items = menu.MenuItems;
             Assert.That(items, Has.Length.EqualTo(2));
