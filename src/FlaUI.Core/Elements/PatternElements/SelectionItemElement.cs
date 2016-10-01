@@ -1,16 +1,15 @@
-﻿using System;
-using FlaUI.Core.Elements.Infrastructure;
-using FlaUI.Core.Exceptions;
+﻿using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.Patterns;
+using System;
 
-namespace FlaUI.Core.Elements
+namespace FlaUI.Core.Elements.PatternElements
 {
     /// <summary>
     /// An UI-item which supports the <see cref="SelectionItemPattern"/>
     /// </summary>
-    public class Selectable : Element
+    public class SelectionItemElement : Element
     {
-        public Selectable(AutomationObjectBase automationObject) : base(automationObject)
+        public SelectionItemElement(AutomationObjectBase automationObject) : base(automationObject)
         {
         }
 
@@ -32,11 +31,14 @@ namespace FlaUI.Core.Elements
         public void Select()
         {
             var selectionItemPattern = SelectionItemPattern;
-            if (selectionItemPattern == null)
+            if (selectionItemPattern != null)
             {
-                throw new MethodNotSupportedException(String.Format("Select on '{0}' is not supported", ToString()));
+                selectionItemPattern.Select();
             }
-            selectionItemPattern.Select();
+            else
+            {
+                throw new NotSupportedException();
+            }
         }
     }
 }

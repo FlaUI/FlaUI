@@ -1,10 +1,11 @@
-﻿using UIA = interop.UIAutomationCore;
+﻿using FlaUI.Core.Elements.PatternElements;
 
 namespace FlaUI.Core.Elements
 {
-    public class TabItem : SelectionItem
+    public class TabItem : SelectionItemElement
     {
-        public TabItem(UIA3Automation automation, UIA.IUIAutomationElement nativeElement)
-            : base(automation, nativeElement) { }
+        public TabItem(AutomationObjectBase automationObject) : base(automationObject)
+        {
+        }
     }
 }

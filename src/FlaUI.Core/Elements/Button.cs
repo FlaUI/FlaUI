@@ -1,21 +1,12 @@
-﻿using FlaUI.Core.Elements.Infrastructure;
+﻿using FlaUI.Core.Elements.PatternElements;
 using FlaUI.Core.Input;
 
 namespace FlaUI.Core.Elements
 {
-    public class Button : Element
+    public class Button : InvokeElement
     {
         public Button(AutomationObjectBase automationObject) : base(automationObject)
         {
-        }
-
-        public void Invoke()
-        {
-            var invokePattern = PatternFactory.GetInvokePattern();
-            if (invokePattern != null)
-            {
-                invokePattern.Invoke();
-            }
         }
 
         public void Click(bool moveMouse = true)

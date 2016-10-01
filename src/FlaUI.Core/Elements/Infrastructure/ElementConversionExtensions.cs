@@ -38,6 +38,18 @@
             return new RadioButton(element.AutomationObject);
         }
 
+        public static Tab AsTab(this Element element)
+        {
+            if (element == null) { return null; }
+            return new Tab(element.AutomationObject);
+        }
+
+        public static TabItem AsTabItem(this Element element)
+        {
+            if (element == null) { return null; }
+            return new TabItem(element.AutomationObject);
+        }
+
         public static TextBox AsTextBox(this Element element)
         {
             if (element == null) { return null; }

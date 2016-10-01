@@ -88,8 +88,13 @@
     <Compile Include="Elements\Label.cs" />
     <Compile Include="Elements\Menu.cs" />
     <Compile Include="Elements\MenuItem.cs" />
+    <Compile Include="Elements\PatternElements\ExpandCollapseElement.cs" />
+    <Compile Include="Elements\PatternElements\InvokeElement.cs" />
+    <Compile Include="Elements\PatternElements\SelectionItemElement.cs" />
+    <Compile Include="Elements\PatternElements\ToggleElement.cs" />
     <Compile Include="Elements\RadioButton.cs" />
-    <Compile Include="Elements\Selectable.cs" />
+    <Compile Include="Elements\Tab.cs" />
+    <Compile Include="Elements\TabItem.cs" />
     <Compile Include="Elements\TextBox.cs" />
     <Compile Include="Elements\Thumb.cs" />
     <Compile Include="Elements\Window.cs" />
@@ -154,6 +159,7 @@
     <Compile Include="WindowsAPI\Structures.cs" />
     <Compile Include="WindowsAPI\User32.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

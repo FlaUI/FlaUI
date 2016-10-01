@@ -1,12 +1,15 @@
-﻿using System;
+﻿using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements.Infrastructure;
+using System;
 using System.Linq;
-using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.Core.Elements
 {
     public class Tab : Element
     {
-        public Tab(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
+        public Tab(AutomationObjectBase automationObject) : base(automationObject)
+        {
+        }
 
         /// <summary>
         /// The currently selected <see cref="TabItem"/>
@@ -19,18 +22,12 @@ namespace FlaUI.Core.Elements
         /// <summary>
         /// The index of the currently selected <see cref="TabItem"/>
         /// </summary>
-        public int SelectedTabItemIndex
-        {
-            get { return GetIndexOfSelecteTabItem(); }
-        }
+        public int SelectedTabItemIndex => GetIndexOfSelectedTabItem();
 
         /// <summary>
         /// All <see cref="TabItem"/> objects from this <see cref="Tab"/>
         /// </summary>
-        public TabItem[] TabItems
-        {
-            get { return GetTabItems(); }
-        }
+        public TabItem[] TabItems => GetTabItems();
 
         /// <summary>
         /// Selects a <see cref="TabItem"/> by index
@@ -46,8 +43,8 @@ namespace FlaUI.Core.Elements
         /// </summary>
         public void SelectTabItem(string text)
         {
-            var vabItems = TabItems;
-            var foundTabItemIndex = Array.FindIndex(vabItems, t => t.Current.Name == text);
+            var tabItems = TabItems;
+            var foundTabItemIndex = Array.FindIndex(tabItems, t => t.Current.Name == text);
             if (foundTabItemIndex < 0)
             {
                 throw new Exception(String.Format("No TabItem found with text '{0}'", text));
@@ -59,7 +56,7 @@ namespace FlaUI.Core.Elements
                 return;
             }
             // Select the item
-            vabItems[foundTabItemIndex].Select();
+            tabItems[foundTabItemIndex].Select();
         }
 
         /// <summary>
@@ -67,11 +64,11 @@ namespace FlaUI.Core.Elements
         /// </summary>
         private TabItem[] GetTabItems()
         {
-            return Enumerable.ToArray<TabItem>(FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.TabItem))
-                    .Select(e => e.AsTabItem()));
+            return FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.TabItem))
+                .Select(e => e.AsTabItem()).ToArray();
         }
 
-        private int GetIndexOfSelecteTabItem()
+        private int GetIndexOfSelectedTabItem()
         {
             return Array.FindIndex(TabItems, t => t.IsSelected);
         }
