@@ -52,6 +52,7 @@
     <Compile Include="Elements\RadioButtonTests.cs" />
     <Compile Include="Elements\TabTests.cs" />
     <Compile Include="Elements\TextBoxTests.cs" />
+    <Compile Include="Elements\TreeTests.cs" />
     <Compile Include="EventHandlers\FocusChangedTests.cs" />
     <Compile Include="KeyboardTests.cs" />
     <Compile Include="MouseTests.cs" />

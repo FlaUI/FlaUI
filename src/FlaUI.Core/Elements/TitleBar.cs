@@ -1,30 +1,21 @@
-﻿using UIA = interop.UIAutomationCore;
+﻿using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements.Infrastructure;
 
 namespace FlaUI.Core.Elements
 {
     public class TitleBar : Element
     {
-        public TitleBar(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
-
-        public Button MinimizeButton
+        public TitleBar(AutomationObjectBase automationObject) : base(automationObject)
         {
-            get { return FindButton("Minimize"); }
         }
 
-        public Button MaximizeButton
-        {
-            get { return FindButton("Maximize"); }
-        }
+        public Button MinimizeButton => FindButton("Minimize");
 
-        public Button RestoreButton
-        {
-            get { return FindButton("Restore"); }
-        }
+        public Button MaximizeButton => FindButton("Maximize");
 
-        public Button CloseButton
-        {
-            get { return FindButton("Close"); }
-        }
+        public Button RestoreButton => FindButton("Restore");
+
+        public Button CloseButton => FindButton("Close");
 
         private Button FindButton(string automationId)
         {

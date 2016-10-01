@@ -1,25 +1,26 @@
-﻿using System;
+﻿using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements.Infrastructure;
+using FlaUI.Core.Elements.PatternElements;
+using System;
 using System.Linq;
-using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.Core.Elements
 {
-    public class TreeItem : SelectionItem
+    public class TreeItem : Element
     {
-        public TreeItem(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
+        private readonly SelectionItemElement _selectionItemElement;
+        private readonly ExpandCollapseElement _expandCollapseElement;
 
-        public ExpandCollapsePattern ExpandCollapsePattern
+        public TreeItem(AutomationObjectBase automationObject) : base(automationObject)
         {
-            get { return PatternFactory.GetExpandCollapsePattern(); }
+            _selectionItemElement= new SelectionItemElement(automationObject);
+            _expandCollapseElement = new ExpandCollapseElement(automationObject);
         }
 
         /// <summary>
         /// All child <see cref="TreeItem"/> objects from this <see cref="TreeItem"/>
         /// </summary>
-        public TreeItem[] TreeItems
-        {
-            get { return GetTreeItems(); }
-        }
+        public TreeItem[] TreeItems => GetTreeItems();
 
         /// <summary>
         /// The text of the <see cref="TreeItem"/>
@@ -38,22 +39,25 @@ namespace FlaUI.Core.Elements
             }
         }
 
+        public bool IsSelected
+        {
+            get { return _selectionItemElement.IsSelected; }
+            set { _selectionItemElement.IsSelected = value; }
+        }
+
         public void Expand()
         {
-            var expandCollapsePattern = ExpandCollapsePattern;
-            if (expandCollapsePattern != null)
-            {
-                expandCollapsePattern.Expand();
-            }
+            _expandCollapseElement.Expand();
         }
 
         public void Collapse()
         {
-            var expandCollapsePattern = ExpandCollapsePattern;
-            if (expandCollapsePattern != null)
-            {
-                expandCollapsePattern.Expand();
-            }
+            _expandCollapseElement.Collapse();
+        }
+
+        public void Select()
+        {
+            _selectionItemElement.Select();
         }
 
         /// <summary>
@@ -61,8 +65,8 @@ namespace FlaUI.Core.Elements
         /// </summary>
         private TreeItem[] GetTreeItems()
         {
-            return Enumerable.ToArray<TreeItem>(FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.TreeItem))
-                    .Select(e => ElementConversionExtensions.AsTreeItem(e)));
+            return FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.TreeItem))
+                .Select(e => ElementConversionExtensions.AsTreeItem(e)).ToArray();
         }
     }
 }

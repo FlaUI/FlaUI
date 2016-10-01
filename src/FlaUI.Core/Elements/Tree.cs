@@ -1,19 +1,19 @@
-﻿using System.Linq;
-using UIA = interop.UIAutomationCore;
+﻿using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements.Infrastructure;
+using System.Linq;
 
 namespace FlaUI.Core.Elements
 {
     public class Tree : Element
     {
-        public Tree(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
+        public Tree(AutomationObjectBase automationObject) : base(automationObject)
+        {
+        }
 
         /// <summary>
         /// The currently selected <see cref="TreeItem"/>
         /// </summary>
-        public TreeItem SelectedTreeItem
-        {
-            get { return SearchSelectedItem(TreeItems); }
-        }
+        public TreeItem SelectedTreeItem => SearchSelectedItem(TreeItems);
 
         private TreeItem SearchSelectedItem(TreeItem[] treeItems)
         {
@@ -32,18 +32,15 @@ namespace FlaUI.Core.Elements
         /// <summary>
         /// All child <see cref="TreeItem"/> objects from this <see cref="Tree"/>
         /// </summary>
-        public TreeItem[] TreeItems
-        {
-            get { return GetTreeItems(); }
-        }
+        public TreeItem[] TreeItems => GetTreeItems();
 
         /// <summary>
         /// Gets all the <see cref="TreeItem"/> objects for this <see cref="Tree"/>
         /// </summary>
         private TreeItem[] GetTreeItems()
         {
-            return Enumerable.ToArray<TreeItem>(FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.TreeItem))
-                    .Select(e => e.AsTreeItem()));
+            return FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.TreeItem))
+                .Select(e => e.AsTreeItem()).ToArray();
         }
     }
 }

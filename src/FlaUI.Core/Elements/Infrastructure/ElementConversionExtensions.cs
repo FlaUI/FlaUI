@@ -56,6 +56,24 @@
             return new TextBox(element.AutomationObject);
         }
 
+        public static TitleBar AsTitleBar(this Element element)
+        {
+            if (element == null) { return null; }
+            return new TitleBar(element.AutomationObject);
+        }
+
+        public static Tree AsTree(this Element element)
+        {
+            if (element == null) { return null; }
+            return new Tree(element.AutomationObject);
+        }
+
+        public static TreeItem AsTreeItem(this Element element)
+        {
+            if (element == null) { return null; }
+            return new TreeItem(element.AutomationObject);
+        }
+
         public static Window AsWindow(this Element element)
         {
             if (element == null) { return null; }
