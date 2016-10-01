@@ -3,6 +3,7 @@ using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Overlay;
 using FlaUI.Core.Shapes;
 using System;
+using FlaUI.Core.Conditions;
 
 namespace FlaUI.Core
 {
@@ -11,10 +12,18 @@ namespace FlaUI.Core
     /// </summary>
     public abstract class AutomationBase : IDisposable
     {
-        /// <summary>
-        /// Manager object for overlays
-        /// </summary>
-        public OverlayManager OverlayManager { get; private set; }
+        protected AutomationBase(IPropertyLibray propertyLibrary)
+        {
+            OverlayManager = new OverlayManager();
+            PropertyLibrary = propertyLibrary;
+            ConditionFactory = new ConditionFactory(propertyLibrary);
+        }
+
+        public OverlayManager OverlayManager { get; }
+
+        public ConditionFactory ConditionFactory { get; }
+
+        public IPropertyLibray PropertyLibrary { get; }
 
         /// <summary>
         /// The automation type of the automation implementation
@@ -25,14 +34,6 @@ namespace FlaUI.Core
         /// Object which represents the "Not Supported" value
         /// </summary>
         public abstract object NotSupportedValue { get; }
-
-        /// <summary>
-        /// Creates an automation object
-        /// </summary>
-        protected AutomationBase()
-        {
-            OverlayManager = new OverlayManager();
-        }
 
         public abstract Element GetDesktop();
 
@@ -45,7 +46,7 @@ namespace FlaUI.Core
         /// Creates an <see cref="Element"/> from a given windows handle (HWND)
         /// </summary>
         public abstract Element FromHandle(IntPtr hwnd);
-        
+
         public abstract IAutomationFocusChangedEventHandler RegisterFocusChangedEvent(Action<Element> action);
 
         public abstract void UnRegisterFocusChangedEvent(IAutomationFocusChangedEventHandler eventHandler);

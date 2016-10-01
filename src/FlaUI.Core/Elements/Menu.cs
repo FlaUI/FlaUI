@@ -1,5 +1,8 @@
 ﻿using System.Linq;
-using UIA = interop.UIAutomationCore;
+using System.Windows.Controls;
+using FlaUI.Core.Conditions;
+using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements.Infrastructure;
 
 namespace FlaUI.Core.Elements
 {
@@ -8,7 +11,9 @@ namespace FlaUI.Core.Elements
     /// </summary>
     public class Menu : Element
     {
-        public Menu(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
+        public Menu(AutomationObjectBase automationObject) : base(automationObject)
+        {
+        }
 
         public MenuItem[] MenuItems
         {

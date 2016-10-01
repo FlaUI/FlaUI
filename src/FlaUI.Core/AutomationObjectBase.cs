@@ -11,15 +11,15 @@ namespace FlaUI.Core
 {
     public abstract class AutomationObjectBase
     {
-        /// <summary>
-        /// Underlying <see cref="AutomationBase"/> object where this element belongs to
-        /// </summary>
-        public AutomationBase Automation { get; private set; }
-
         protected AutomationObjectBase(AutomationBase automation)
         {
             Automation = automation;
         }
+
+        /// <summary>
+        /// Underlying <see cref="AutomationBase"/> object where this element belongs to
+        /// </summary>
+        public AutomationBase Automation { get; private set; }
 
         /// <summary>
         /// Gets the desired property value. Ends in an exception if the property is not supported.

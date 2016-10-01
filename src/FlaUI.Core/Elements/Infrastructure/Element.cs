@@ -23,6 +23,8 @@ namespace FlaUI.Core.Elements.Infrastructure
 
         public AutomationObjectBase AutomationObject { get; set; }
 
+        public ConditionFactory ConditionFactory => AutomationObject.Automation.ConditionFactory;
+
         public IElementProperties Properties { get; set; }
 
         public FrameworkType FrameworkType { get { return FrameworkIds.ConvertToFrameworkType(Current.FrameworkId); } }

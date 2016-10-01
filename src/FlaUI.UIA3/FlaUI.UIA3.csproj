@@ -67,7 +67,6 @@
     <Compile Include="Patterns\WindowPatternIds.cs" />
     <Compile Include="Tools\NativeConditionConverter.cs" />
     <Compile Include="UIA3Automation.cs" />
-    <Compile Include="Conditions\ConditionFactory.cs" />
     <Compile Include="Definitions\AnnotationType.cs" />
     <Compile Include="Definitions\StyleType.cs" />
     <Compile Include="Definitions\TextAttributes.cs" />
@@ -83,6 +82,7 @@
     <Compile Include="UIA3ElementInformation.cs" />
     <Compile Include="UIA3ElementProperties.cs" />
     <Compile Include="UIA3PatternFactory.cs" />
+    <Compile Include="UIA3PropertyLibrary.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlaUI.Core\FlaUI.Core.csproj">

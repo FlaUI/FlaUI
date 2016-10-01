@@ -1,11 +1,11 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.Elements.Infrastructure;
+using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Shapes;
+using FlaUI.UIA3.EventHandlers;
 using FlaUI.UIA3.Shapes;
 using System;
 using System.Runtime.InteropServices;
-using FlaUI.Core.EventHandlers;
-using FlaUI.UIA3.EventHandlers;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3
@@ -15,7 +15,12 @@ namespace FlaUI.UIA3
     /// </summary>
     public class UIA3Automation : AutomationBase
     {
-        public override AutomationType AutomationType { get { return AutomationType.UIA3; } }
+        public UIA3Automation() : base(new UIA3PropertyLibrary())
+        {
+            NativeAutomation = InitializeAutomation();
+        }
+
+        public override AutomationType AutomationType => AutomationType.UIA3;
 
         public override object NotSupportedValue
         {
@@ -41,14 +46,6 @@ namespace FlaUI.UIA3
         public UIA.IUIAutomation3 NativeAutomation3
         {
             get { return GetAutomationAs<UIA.IUIAutomation3>(); }
-        }
-
-        /// <summary>
-        /// Creates an automation object
-        /// </summary>
-        public UIA3Automation()
-        {
-            NativeAutomation = InitializeAutomation();
         }
 
         /// <summary>

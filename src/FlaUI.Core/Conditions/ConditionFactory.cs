@@ -1,0 +1,45 @@
+﻿using FlaUI.Core.Definitions;
+
+namespace FlaUI.Core.Conditions
+{
+    /// <summary>
+    /// Helper class with some commonly used conditions
+    /// </summary>
+    public class ConditionFactory
+    {
+        private readonly IPropertyLibray _propertyLibrary;
+
+        public ConditionFactory(IPropertyLibray propertyLibrary)
+        {
+            _propertyLibrary = propertyLibrary;
+        }
+
+        public PropertyCondition ByText(string text)
+        {
+            return new PropertyCondition(_propertyLibrary.Generic.NameProperty, text);
+        }
+
+        public PropertyCondition ByAutomationId(string automationId)
+        {
+            return new PropertyCondition(_propertyLibrary.Generic.AutomationIdProperty, automationId);
+        }
+
+        public PropertyCondition ByControlType(ControlType controlType)
+        {
+            return new PropertyCondition(_propertyLibrary.Generic.ControlTypeProperty, controlType);
+        }
+
+        public PropertyCondition ByClassName(string className)
+        {
+            return new PropertyCondition(_propertyLibrary.Generic.ClassNameProperty, className);
+        }
+
+        /// <summary>
+        /// Searches for a Menu/MenuBar
+        /// </summary>
+        public OrCondition Menu()
+        {
+            return new OrCondition(ByControlType(ControlType.Menu), ByControlType(ControlType.MenuBar));
+        }
+    }
+}

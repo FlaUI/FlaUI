@@ -53,6 +53,7 @@
     <Compile Include="Conditions\AndCondition.cs" />
     <Compile Include="Conditions\BoolCondition.cs" />
     <Compile Include="Conditions\ConditionBase.cs" />
+    <Compile Include="Conditions\ConditionFactory.cs" />
     <Compile Include="Conditions\JunctionConditionBase.cs" />
     <Compile Include="Conditions\NotCondition.cs" />
     <Compile Include="Conditions\OrCondition.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Patterns\IVirtualizedItemPattern.cs" />
     <Compile Include="Patterns\IWindowPattern.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IPropertyLibray.cs" />
     <Compile Include="ScreenCapture.cs" />
     <Compile Include="Shapes\Point.cs" />
     <Compile Include="Shapes\Rectangle.cs" />

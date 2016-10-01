@@ -5,7 +5,6 @@ using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
 using FlaUI.Core.WindowsAPI;
-using FlaUI.UIA3.Conditions;
 using NUnit.Framework;
 using System;
 using System.Text.RegularExpressions;
@@ -101,7 +100,7 @@ namespace FlaUI.Core.UITests
         Button ButtonEquals { get; }
         string Result { get; }
     }
-    
+
     public class LegacyCalc : ICalculator
     {
         private readonly Element _mainWindow;
@@ -121,7 +120,7 @@ namespace FlaUI.Core.UITests
         {
             get
             {
-                var resultElement = _mainWindow.FindFirst(TreeScope.Descendants, ConditionFactory.ByAutomationId("158"));
+                var resultElement = _mainWindow.FindFirst(TreeScope.Descendants, _mainWindow.AutomationObject.Automation.ConditionFactory.ByAutomationId("158"));
                 var value = resultElement.Current.Name;
                 return Regex.Replace(value, "[^0-9]", "");
             }
@@ -134,7 +133,7 @@ namespace FlaUI.Core.UITests
 
         private Element FindElement(string text)
         {
-            var element = _mainWindow.FindFirst(TreeScope.Descendants, ConditionFactory.ByText(text));
+            var element = _mainWindow.FindFirst(TreeScope.Descendants, _mainWindow.AutomationObject.Automation.ConditionFactory.ByText(text));
             return element;
         }
     }
@@ -170,7 +169,7 @@ namespace FlaUI.Core.UITests
 
         private Element FindElement(string text)
         {
-            var element = _mainWindow.FindFirst(TreeScope.Descendants, ConditionFactory.ByAutomationId(text));
+            var element = _mainWindow.FindFirst(TreeScope.Descendants, _mainWindow.AutomationObject.Automation.ConditionFactory.ByAutomationId(text));
             return element;
         }
     }
