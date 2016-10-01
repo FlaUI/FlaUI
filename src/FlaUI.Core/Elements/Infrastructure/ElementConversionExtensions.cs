@@ -32,6 +32,12 @@
             return new MenuItem(element.AutomationObject);
         }
 
+        public static ProgressBar AsProgressBar(this Element element)
+        {
+            if (element == null) { return null; }
+            return new ProgressBar(element.AutomationObject);
+        }
+
         public static RadioButton AsRadioButton(this Element element)
         {
             if (element == null) { return null; }

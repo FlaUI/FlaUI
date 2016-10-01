@@ -1,15 +1,15 @@
-﻿using UIA = interop.UIAutomationCore;
+﻿using FlaUI.Core.Elements.Infrastructure;
+using FlaUI.Core.Patterns;
 
 namespace FlaUI.Core.Elements
 {
     public class ProgressBar : Element
     {
-        public ProgressBar(UIA3Automation automation, UIA.IUIAutomationElement nativeElement)
-            : base(automation, nativeElement)
+        public ProgressBar(AutomationObjectBase automationObject) : base(automationObject)
         {
         }
 
-        public RangeValuePattern RangeValuePattern
+        public IRangeValuePattern RangeValuePattern
         {
             get { return PatternFactory.GetRangeValuePattern(); }
         }

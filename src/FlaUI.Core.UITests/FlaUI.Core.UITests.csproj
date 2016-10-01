@@ -49,6 +49,7 @@
     <Compile Include="Elements\ComboBoxTests.cs" />
     <Compile Include="Elements\LabelTests.cs" />
     <Compile Include="Elements\MenuTests.cs" />
+    <Compile Include="Elements\ProgressBarTests.cs" />
     <Compile Include="Elements\RadioButtonTests.cs" />
     <Compile Include="Elements\TabTests.cs" />
     <Compile Include="Elements\TextBoxTests.cs" />

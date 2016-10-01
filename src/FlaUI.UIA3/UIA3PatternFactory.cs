@@ -87,11 +87,11 @@ namespace FlaUI.UIA3
         //    return nativePattern == null ? null : new ObjectModelPattern(AutomationObject, nativePattern);
         //}
 
-        //public RangeValuePattern GetRangeValuePattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationRangeValuePattern>(RangeValuePattern.Pattern);
-        //    return nativePattern == null ? null : new RangeValuePattern(AutomationObject, nativePattern);
-        //}
+        public IRangeValuePattern GetRangeValuePattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationRangeValuePattern>(RangeValuePattern.Pattern);
+            return nativePattern == null ? null : new RangeValuePattern(AutomationObject, nativePattern);
+        }
 
         //public ScrollItemPattern GetScrollItemPattern()
         //{
@@ -185,19 +185,19 @@ namespace FlaUI.UIA3
 
         public ITransform2Pattern GetTransform2Pattern()
         {
-            var nativePattern = GetNativePatternAs<UIA.IUIAutomationTransformPattern2>(Transform2PatternIds.Pattern);
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationTransformPattern2>(Transform2Pattern.Pattern);
             return nativePattern == null ? null : new Transform2Pattern(AutomationObject, nativePattern);
         }
 
         public ITransformPattern GetTransformPattern()
         {
-            var nativePattern = GetNativePatternAs<UIA.IUIAutomationTransformPattern>(TransformPatternIds.Pattern);
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationTransformPattern>(TransformPattern.Pattern);
             return nativePattern == null ? null : new TransformPattern(AutomationObject, nativePattern);
         }
 
         public IValuePattern GetValuePattern()
         {
-            var nativePattern = GetNativePatternAs<UIA.IUIAutomationValuePattern>(ValuePatternIds.Pattern);
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationValuePattern>(ValuePattern.Pattern);
             return nativePattern == null ? null : new ValuePattern(AutomationObject, nativePattern);
         }
 
@@ -209,7 +209,7 @@ namespace FlaUI.UIA3
 
         public IWindowPattern GetWindowPattern()
         {
-            var nativePattern = GetNativePatternAs<UIA.IUIAutomationWindowPattern>(WindowPatternIds.Pattern);
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationWindowPattern>(WindowPattern.Pattern);
             return nativePattern == null ? null : new WindowPattern(AutomationObject, nativePattern);
         }
 

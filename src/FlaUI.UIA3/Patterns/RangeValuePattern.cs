@@ -1,12 +1,14 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.Tools;
-using FlaUI.UIA3.Elements;
+using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.Identifiers;
+using FlaUI.Core.Patterns;
+using FlaUI.Core.Patterns.Infrastructure;
+using FlaUI.Core.Tools;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class RangeValuePattern : PatternBaseWithInformation<RangeValuePatternInformation>
+    public class RangeValuePattern : PatternBaseWithInformation<UIA.IUIAutomationRangeValuePattern, RangeValuePatternInformation>, IRangeValuePattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_RangeValuePatternId, "RangeValue");
         public static readonly PropertyId IsReadOnlyProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_RangeValueIsReadOnlyPropertyId, "IsReadOnly");
@@ -16,14 +18,20 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId SmallChangeProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_RangeValueSmallChangePropertyId, "SmallChange");
         public static readonly PropertyId ValueProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_RangeValueValuePropertyId, "Value");
 
-        internal RangeValuePattern(Element automationElement, UIA.IUIAutomationRangeValuePattern nativePattern)
-            : base(automationElement, nativePattern, (element, cached) => new RangeValuePatternInformation(element, cached))
+        public RangeValuePattern(AutomationObjectBase automationObject, UIA.IUIAutomationRangeValuePattern nativePattern) : base(automationObject, nativePattern)
         {
+            Properties = new RangeValuePatternProperties();
         }
 
-        public new UIA.IUIAutomationRangeValuePattern NativePattern
+        IRangeValuePatternInformation IPatternWithInformation<IRangeValuePatternInformation>.Cached => Cached;
+
+        IRangeValuePatternInformation IPatternWithInformation<IRangeValuePatternInformation>.Current => Current;
+
+        public IRangeValuePatternProperties Properties { get; }
+
+        protected override RangeValuePatternInformation CreateInformation(bool cached)
         {
-            get { return (UIA.IUIAutomationRangeValuePattern)base.NativePattern; }
+            return new RangeValuePatternInformation(AutomationObject, cached);
         }
 
         public void SetValue(double val)
@@ -32,41 +40,37 @@ namespace FlaUI.UIA3.Patterns
         }
     }
 
-    public class RangeValuePatternInformation : InformationBase
+    public class RangeValuePatternInformation : ElementInformationBase, IRangeValuePatternInformation
     {
-        public RangeValuePatternInformation(Element automationElement, bool cached)
-            : base(automationElement, cached)
+        public RangeValuePatternInformation(AutomationObjectBase automationObject, bool cached) : base(automationObject, cached)
         {
         }
 
-        public bool IsReadOnly
-        {
-            get { return Get<bool>(RangeValuePattern.IsReadOnlyProperty); }
-        }
+        public bool IsReadOnly => Get<bool>(RangeValuePattern.IsReadOnlyProperty);
 
-        public double LargeChange
-        {
-            get { return Get<double>(RangeValuePattern.LargeChangeProperty); }
-        }
+        public double LargeChange => Get<double>(RangeValuePattern.LargeChangeProperty);
 
-        public double Maximum
-        {
-            get { return Get<double>(RangeValuePattern.MaximumProperty); }
-        }
+        public double Maximum => Get<double>(RangeValuePattern.MaximumProperty);
 
-        public double Minimum
-        {
-            get { return Get<double>(RangeValuePattern.MinimumProperty); }
-        }
+        public double Minimum => Get<double>(RangeValuePattern.MinimumProperty);
 
-        public double SmallChange
-        {
-            get { return Get<double>(RangeValuePattern.SmallChangeProperty); }
-        }
+        public double SmallChange => Get<double>(RangeValuePattern.SmallChangeProperty);
 
-        public double Value
-        {
-            get { return Get<double>(RangeValuePattern.ValueProperty); }
-        }
+        public double Value => Get<double>(RangeValuePattern.ValueProperty);
+    }
+
+    public class RangeValuePatternProperties : IRangeValuePatternProperties
+    {
+        public PropertyId IsReadOnlyProperty => RangeValuePattern.IsReadOnlyProperty;
+
+        public PropertyId LargeChangeProperty => RangeValuePattern.LargeChangeProperty;
+
+        public PropertyId MaximumProperty => RangeValuePattern.MaximumProperty;
+
+        public PropertyId MinimumProperty => RangeValuePattern.MinimumProperty;
+
+        public PropertyId SmallChangeProperty => RangeValuePattern.SmallChangeProperty;
+
+        public PropertyId ValueProperty => RangeValuePattern.ValueProperty;
     }
 }

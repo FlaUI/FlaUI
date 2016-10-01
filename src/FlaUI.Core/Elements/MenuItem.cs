@@ -24,16 +24,20 @@ namespace FlaUI.Core.Elements
         {
             get
             {
-                ExpandCollapseState state;
-                do
+                // WinForms dies not have the expand pattern but all children are already there to fetch
+                if (_expandCollapseElement.ExpandCollapsePattern != null)
                 {
-                    state = _expandCollapseElement.ExpandCollapseState;
-                    if (state == ExpandCollapseState.Collapsed)
+                    ExpandCollapseState state;
+                    do
                     {
-                        Expand();
-                    }
-                    Thread.Sleep(50);
-                } while (state != ExpandCollapseState.Expanded);
+                        state = _expandCollapseElement.ExpandCollapseState;
+                        if (state == ExpandCollapseState.Collapsed)
+                        {
+                            Expand();
+                        }
+                        Thread.Sleep(50);
+                    } while (state != ExpandCollapseState.Expanded);
+                }
                 return FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.MenuItem)).Select(e => e.AsMenuItem()).ToArray();
             }
         }

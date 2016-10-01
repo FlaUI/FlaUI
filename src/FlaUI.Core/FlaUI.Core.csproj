@@ -92,6 +92,7 @@
     <Compile Include="Elements\PatternElements\InvokeElement.cs" />
     <Compile Include="Elements\PatternElements\SelectionItemElement.cs" />
     <Compile Include="Elements\PatternElements\ToggleElement.cs" />
+    <Compile Include="Elements\ProgressBar.cs" />
     <Compile Include="Elements\RadioButton.cs" />
     <Compile Include="Elements\Tab.cs" />
     <Compile Include="Elements\TabItem.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Patterns\Infrastructure\IPatternWithInformation.cs" />
     <Compile Include="Patterns\Infrastructure\PatternBase.cs" />
     <Compile Include="Patterns\Infrastructure\PatternBaseWithInformation.cs" />
+    <Compile Include="Patterns\IRangeValuePattern.cs" />
     <Compile Include="Patterns\ISelectionItemPattern.cs" />
     <Compile Include="Patterns\ITogglePattern.cs" />
     <Compile Include="Patterns\ITransform2Pattern.cs" />

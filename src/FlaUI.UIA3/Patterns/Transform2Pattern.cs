@@ -1,5 +1,6 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.Definitions;
+using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.Tools;
@@ -7,8 +8,14 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class Transform2Pattern : TransformPattern<UIA.IUIAutomationTransformPattern2, Transform2PatternInformation>, ITransform2Pattern
+    public class Transform2Pattern : TransformPatternBase<UIA.IUIAutomationTransformPattern2, Transform2PatternInformation>, ITransform2Pattern
     {
+        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_TransformPattern2Id, "Transform2");
+        public static readonly PropertyId CanZoomProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_Transform2CanZoomPropertyId, "CanZoom");
+        public static readonly PropertyId ZoomLevelProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_Transform2ZoomLevelPropertyId, "ZoomLevel");
+        public static readonly PropertyId ZoomMaximumProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_Transform2ZoomMaximumPropertyId, "ZoomMaximum");
+        public static readonly PropertyId ZoomMinimumProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_Transform2ZoomMinimumPropertyId, "ZoomMinimum");
+
         public Transform2Pattern(AutomationObjectBase automationObject, UIA.IUIAutomationTransformPattern2 nativePattern) : base(automationObject, nativePattern)
         {
             Properties = new Transform2PatternProperties();
@@ -45,12 +52,23 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
-        public bool CanZoom => Get<bool>(Transform2PatternIds.CanZoomProperty);
+        public bool CanZoom => Get<bool>(Transform2Pattern.CanZoomProperty);
 
-        public double ZoomLevel => Get<double>(Transform2PatternIds.ZoomLevelProperty);
+        public double ZoomLevel => Get<double>(Transform2Pattern.ZoomLevelProperty);
 
-        public double ZoomMaximum => Get<double>(Transform2PatternIds.ZoomMaximumProperty);
+        public double ZoomMaximum => Get<double>(Transform2Pattern.ZoomMaximumProperty);
 
-        public double ZoomMinimum => Get<double>(Transform2PatternIds.ZoomMinimumProperty);
+        public double ZoomMinimum => Get<double>(Transform2Pattern.ZoomMinimumProperty);
+    }
+
+    public class Transform2PatternProperties : TransformPatternProperties, ITransform2PatternProperties
+    {
+        public PropertyId CanZoomProperty => Transform2Pattern.CanZoomProperty;
+
+        public PropertyId ZoomLevelProperty => Transform2Pattern.ZoomLevelProperty;
+
+        public PropertyId ZoomMaximumProperty => Transform2Pattern.ZoomMaximumProperty;
+
+        public PropertyId ZoomMinimumProperty => Transform2Pattern.ZoomMinimumProperty;
     }
 }

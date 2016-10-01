@@ -28,7 +28,7 @@ namespace FlaUI.Core
 
         //IObjectModelPattern GetObjectModelPattern();
 
-        //IRangeValuePattern GetRangeValuePattern();
+        IRangeValuePattern GetRangeValuePattern();
 
         //IScrollItemPattern GetScrollItemPattern();
 
