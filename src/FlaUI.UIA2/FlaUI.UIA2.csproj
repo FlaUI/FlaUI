@@ -49,7 +49,6 @@
     <Compile Include="EventHandlers\UIA2PropertyChangedEventHandler.cs" />
     <Compile Include="EventHandlers\UIA2StructureChangedEventHandler.cs" />
     <Compile Include="Patterns\InvokePattern.cs" />
-    <Compile Include="Patterns\ValuePatternIds.cs" />
     <Compile Include="Tools\NativeConditionConverter.cs" />
     <Compile Include="Tools\NativeValueConverter.cs" />
     <Compile Include="UIA2ElementProperties.cs" />
