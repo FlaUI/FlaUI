@@ -11,10 +11,7 @@ namespace FlaUI.Core.Elements
         {
         }
 
-        public ITogglePattern TogglePattern
-        {
-            get { return PatternFactory.GetTogglePattern(); }
-        }
+        public ITogglePattern TogglePattern => PatternFactory.GetTogglePattern();
 
         public ToggleState State
         {

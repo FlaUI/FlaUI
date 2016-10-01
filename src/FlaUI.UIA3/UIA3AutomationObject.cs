@@ -25,28 +25,22 @@ namespace FlaUI.UIA3
         /// <summary>
         /// Concrete implementation of the automation object
         /// </summary>
-        public new UIA3Automation Automation { get; private set; }
+        public new UIA3Automation Automation { get; }
 
         /// <summary>
         /// Native object for the ui element
         /// </summary>
-        public UIA.IUIAutomationElement NativeElement { get; private set; }
+        public UIA.IUIAutomationElement NativeElement { get; }
 
         /// <summary>
         /// Native object for Windows 8 ui element
         /// </summary>
-        public UIA.IUIAutomationElement NativeElement2
-        {
-            get { return GetAutomationElementAs<UIA.IUIAutomationElement2>(); }
-        }
+        public UIA.IUIAutomationElement NativeElement2 => GetAutomationElementAs<UIA.IUIAutomationElement2>();
 
         /// <summary>
         /// Native object for Windows 8.1 ui element
         /// </summary>
-        public UIA.IUIAutomationElement NativeElement3
-        {
-            get { return GetAutomationElementAs<UIA.IUIAutomationElement3>(); }
-        }
+        public UIA.IUIAutomationElement NativeElement3 => GetAutomationElementAs<UIA.IUIAutomationElement3>();
 
         public override void SetFocus()
         {

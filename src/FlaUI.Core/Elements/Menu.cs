@@ -1,8 +1,7 @@
-﻿using System.Linq;
-using System.Windows.Controls;
-using FlaUI.Core.Conditions;
+﻿using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Elements.Infrastructure;
+using System.Linq;
 
 namespace FlaUI.Core.Elements
 {

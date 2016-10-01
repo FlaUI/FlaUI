@@ -13,14 +13,8 @@ namespace FlaUI.UIA3.Patterns
 
     public class ValuePatternProperties : IValuePatternProperties
     {
-        public PropertyId IsReadOnlyProperty
-        {
-            get { return ValuePatternIds.IsReadOnlyProperty; }
-        }
+        public PropertyId IsReadOnlyProperty => ValuePatternIds.IsReadOnlyProperty;
 
-        public PropertyId ValueProperty
-        {
-            get { return ValuePatternIds.ValueProperty; }
-        }
+        public PropertyId ValueProperty => ValuePatternIds.ValueProperty;
     }
 }

@@ -20,47 +20,23 @@ namespace FlaUI.UIA3.Patterns
 
     public class WindowPatternProperties : IWindowPatternProperties
     {
-        public PropertyId CanMaximizeProperty
-        {
-            get { return WindowPatternIds.CanMinimizeProperty; }
-        }
+        public PropertyId CanMaximizeProperty => WindowPatternIds.CanMinimizeProperty;
 
-        public PropertyId CanMinimizeProperty
-        {
-            get { return WindowPatternIds.CanMinimizeProperty; }
-        }
+        public PropertyId CanMinimizeProperty => WindowPatternIds.CanMinimizeProperty;
 
-        public PropertyId IsModalProperty
-        {
-            get { return WindowPatternIds.IsModalProperty; }
-        }
+        public PropertyId IsModalProperty => WindowPatternIds.IsModalProperty;
 
-        public PropertyId IsTopmostProperty
-        {
-            get { return WindowPatternIds.IsTopmostProperty; }
-        }
+        public PropertyId IsTopmostProperty => WindowPatternIds.IsTopmostProperty;
 
-        public PropertyId WindowInteractionStateProperty
-        {
-            get { return WindowPatternIds.WindowInteractionStateProperty; }
-        }
+        public PropertyId WindowInteractionStateProperty => WindowPatternIds.WindowInteractionStateProperty;
 
-        public PropertyId WindowVisualStateProperty
-        {
-            get { return WindowPatternIds.WindowVisualStateProperty; }
-        }
+        public PropertyId WindowVisualStateProperty => WindowPatternIds.WindowVisualStateProperty;
     }
 
     public class WindowPatternEvents : IWindowPatternEvents
     {
-        public EventId WindowClosedEvent
-        {
-            get { return WindowPatternIds.WindowClosedEvent; }
-        }
+        public EventId WindowClosedEvent => WindowPatternIds.WindowClosedEvent;
 
-        public EventId WindowOpenedEvent
-        {
-            get { return WindowPatternIds.WindowOpenedEvent; }
-        }
+        public EventId WindowOpenedEvent => WindowPatternIds.WindowOpenedEvent;
     }
 }

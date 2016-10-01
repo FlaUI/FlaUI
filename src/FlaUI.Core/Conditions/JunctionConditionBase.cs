@@ -9,11 +9,8 @@ namespace FlaUI.Core.Conditions
             Conditions = new List<ConditionBase>();
         }
 
-        public List<ConditionBase> Conditions { get; private set; }
+        public List<ConditionBase> Conditions { get; }
 
-        public int ChildCount
-        {
-            get { return Conditions.Count; }
-        }
+        public int ChildCount => Conditions.Count;
     }
 }

@@ -22,10 +22,7 @@ namespace FlaUI.Core.Shapes
         /// <summary>
         ///  Gets a value indicating whether this point is empty (all coordinates are 0)
         /// </summary>
-        public bool IsEmpty
-        {
-            get { return X.Equals(0) && Y.Equals(0); }
-        }
+        public bool IsEmpty => X.Equals(0) && Y.Equals(0);
 
         public Point(double x, double y)
         {

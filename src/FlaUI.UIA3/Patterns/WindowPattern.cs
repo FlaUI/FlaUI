@@ -16,19 +16,13 @@ namespace FlaUI.UIA3.Patterns
             Events = new WindowPatternEvents();
         }
 
-        IWindowPatternInformation IPatternWithInformation<IWindowPatternInformation>.Cached
-        {
-            get { return Cached; }
-        }
+        IWindowPatternInformation IPatternWithInformation<IWindowPatternInformation>.Cached => Cached;
 
-        IWindowPatternInformation IPatternWithInformation<IWindowPatternInformation>.Current
-        {
-            get { return Current; }
-        }
+        IWindowPatternInformation IPatternWithInformation<IWindowPatternInformation>.Current => Current;
 
-        public IWindowPatternProperties Properties { get; private set; }
+        public IWindowPatternProperties Properties { get; }
 
-        public IWindowPatternEvents Events { get; private set; }
+        public IWindowPatternEvents Events { get; }
 
         public void Close()
         {
@@ -57,11 +51,11 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
-        public bool CanMaximize { get { return Get<bool>(WindowPatternIds.CanMaximizeProperty); } }
-        public bool CanMinimize { get { return Get<bool>(WindowPatternIds.CanMinimizeProperty); } }
-        public bool IsModal { get { return Get<bool>(WindowPatternIds.IsModalProperty); } }
-        public bool IsTopmost { get { return Get<bool>(WindowPatternIds.IsTopmostProperty); } }
-        public WindowInteractionState WindowInteractionState { get { return Get<WindowInteractionState>(WindowPatternIds.WindowInteractionStateProperty); } }
-        public WindowVisualState WindowVisualState { get { return Get<WindowVisualState>(WindowPatternIds.WindowVisualStateProperty); } }
+        public bool CanMaximize => Get<bool>(WindowPatternIds.CanMaximizeProperty);
+        public bool CanMinimize => Get<bool>(WindowPatternIds.CanMinimizeProperty);
+        public bool IsModal => Get<bool>(WindowPatternIds.IsModalProperty);
+        public bool IsTopmost => Get<bool>(WindowPatternIds.IsTopmostProperty);
+        public WindowInteractionState WindowInteractionState => Get<WindowInteractionState>(WindowPatternIds.WindowInteractionStateProperty);
+        public WindowVisualState WindowVisualState => Get<WindowVisualState>(WindowPatternIds.WindowVisualStateProperty);
     }
 }

@@ -19,17 +19,11 @@ namespace FlaUI.UIA3.Patterns
             Properties = new TogglePatternProperties();
         }
 
-        ITogglePatternInformation IPatternWithInformation<ITogglePatternInformation>.Cached
-        {
-            get { return Cached; }
-        }
+        ITogglePatternInformation IPatternWithInformation<ITogglePatternInformation>.Cached => Cached;
 
-        public ITogglePatternProperties Properties { get; private set; }
+        public ITogglePatternProperties Properties { get; }
 
-        ITogglePatternInformation IPatternWithInformation<ITogglePatternInformation>.Current
-        {
-            get { return Current; }
-        }
+        ITogglePatternInformation IPatternWithInformation<ITogglePatternInformation>.Current => Current;
 
         protected override TogglePatternInformation CreateInformation(bool cached)
         {
@@ -48,17 +42,11 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
-        public ToggleState ToggleState
-        {
-            get { return Get<ToggleState>(TogglePattern.ToggleStateProperty); }
-        }
+        public ToggleState ToggleState => Get<ToggleState>(TogglePattern.ToggleStateProperty);
     }
 
     public class TogglePatternProperties : ITogglePatternProperties
     {
-        public PropertyId ToggleStateProperty
-        {
-            get { return TogglePattern.ToggleStateProperty; }
-        }
+        public PropertyId ToggleStateProperty => TogglePattern.ToggleStateProperty;
     }
 }

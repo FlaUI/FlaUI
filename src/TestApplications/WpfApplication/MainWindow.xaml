@@ -19,13 +19,13 @@
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
-            <StatusBarItem></StatusBarItem>
+            <StatusBarItem />
         </StatusBar>
         <TabControl>
             <TabItem Header="Simple Controls">
                 <StackPanel Orientation="Vertical">
                     <Label Content="Test Label"/>
-                    <TextBox AutomationProperties.AutomationId="TextBox"></TextBox>
+                    <TextBox AutomationProperties.AutomationId="TextBox" />
                     <ComboBox Width="120" IsEditable="True" AutomationProperties.AutomationId="EditableCombo">
                         <TextBlock Text="Item 1" AutomationProperties.AutomationId="EditableComboItem1" />
                         <TextBlock Text="Item 2" AutomationProperties.AutomationId="EditableComboItem2" />

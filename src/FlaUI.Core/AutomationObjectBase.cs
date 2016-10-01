@@ -19,7 +19,7 @@ namespace FlaUI.Core
         /// <summary>
         /// Underlying <see cref="AutomationBase"/> object where this element belongs to
         /// </summary>
-        public AutomationBase Automation { get; private set; }
+        public AutomationBase Automation { get; }
 
         /// <summary>
         /// Gets the desired property value. Ends in an exception if the property is not supported.

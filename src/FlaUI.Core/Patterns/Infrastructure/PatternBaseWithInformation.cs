@@ -11,8 +11,8 @@
             // ReSharper restore VirtualMemberCallInConstructor
         }
 
-        public TInfo Cached { get; private set; }
-        public TInfo Current { get; private set; }
+        public TInfo Cached { get; }
+        public TInfo Current { get; }
 
         protected abstract TInfo CreateInformation(bool cached);
     }

@@ -7,7 +7,7 @@ namespace FlaUI.UIA2
 {
     public class UIA2PatternFactory : IPatternFactory
     {
-        public UIA2AutomationObject AutomationObject { get; private set; }
+        public UIA2AutomationObject AutomationObject { get; }
 
         internal UIA2PatternFactory(UIA2AutomationObject automationObject)
         {

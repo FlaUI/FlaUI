@@ -18,11 +18,11 @@ namespace FlaUI.Core.Conditions
             PropertyConditionFlags = propertyConditionFlags;
         }
 
-        public PropertyId Property { get; private set; }
+        public PropertyId Property { get; }
 
         public PropertyConditionFlags PropertyConditionFlags { get; private set; }
 
-        public object Value { get; private set; }
+        public object Value { get; }
 
         public override string ToString()
         {

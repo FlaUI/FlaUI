@@ -22,31 +22,22 @@ namespace FlaUI.UIA3
 
         public override AutomationType AutomationType => AutomationType.UIA3;
 
-        public override object NotSupportedValue
-        {
-            get { return NativeAutomation.ReservedNotSupportedValue; }
-        }
+        public override object NotSupportedValue => NativeAutomation.ReservedNotSupportedValue;
 
         /// <summary>
         /// Native object for the ui automation
         /// </summary>
-        public UIA.IUIAutomation NativeAutomation { get; private set; }
+        public UIA.IUIAutomation NativeAutomation { get; }
 
         /// <summary>
         /// Native object for Windows 8 automation
         /// </summary>
-        public UIA.IUIAutomation2 NativeAutomation2
-        {
-            get { return GetAutomationAs<UIA.IUIAutomation2>(); }
-        }
+        public UIA.IUIAutomation2 NativeAutomation2 => GetAutomationAs<UIA.IUIAutomation2>();
 
         /// <summary>
         /// Native object for Windows 8.1 automation
         /// </summary>
-        public UIA.IUIAutomation3 NativeAutomation3
-        {
-            get { return GetAutomationAs<UIA.IUIAutomation3>(); }
-        }
+        public UIA.IUIAutomation3 NativeAutomation3 => GetAutomationAs<UIA.IUIAutomation3>();
 
         /// <summary>
         /// Gets the root element (desktop)

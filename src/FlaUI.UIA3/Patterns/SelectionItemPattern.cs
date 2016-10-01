@@ -24,19 +24,13 @@ namespace FlaUI.UIA3.Patterns
             Events = new SelectionItemPatternEvents();
         }
 
-        ISelectionItemPatternInformation IPatternWithInformation<ISelectionItemPatternInformation>.Cached
-        {
-            get { return Cached; }
-        }
+        ISelectionItemPatternInformation IPatternWithInformation<ISelectionItemPatternInformation>.Cached => Cached;
 
-        ISelectionItemPatternInformation IPatternWithInformation<ISelectionItemPatternInformation>.Current
-        {
-            get { return Current; }
-        }
+        ISelectionItemPatternInformation IPatternWithInformation<ISelectionItemPatternInformation>.Current => Current;
 
-        public ISelectionItemPatternProperties Properties { get; private set; }
+        public ISelectionItemPatternProperties Properties { get; }
 
-        public ISelectionItemPatternEvents Events { get; private set; }
+        public ISelectionItemPatternEvents Events { get; }
 
         protected override SelectionItemPatternInformation CreateInformation(bool cached)
         {
@@ -65,10 +59,7 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
-        public bool IsSelected
-        {
-            get { return Get<bool>(SelectionItemPattern.IsSelectedProperty); }
-        }
+        public bool IsSelected => Get<bool>(SelectionItemPattern.IsSelectedProperty);
 
         public Element SelectionContainer
         {
@@ -82,32 +73,17 @@ namespace FlaUI.UIA3.Patterns
 
     public class SelectionItemPatternProperties : ISelectionItemPatternProperties
     {
-        public PropertyId IsSelectedProperty
-        {
-            get { return SelectionItemPattern.IsSelectedProperty; }
-        }
+        public PropertyId IsSelectedProperty => SelectionItemPattern.IsSelectedProperty;
 
-        public PropertyId SelectionContainerProperty
-        {
-            get { return SelectionItemPattern.SelectionContainerProperty; }
-        }
+        public PropertyId SelectionContainerProperty => SelectionItemPattern.SelectionContainerProperty;
     }
 
     public class SelectionItemPatternEvents : ISelectionItemPatternEvents
     {
-        public EventId ElementAddedToSelectionEvent
-        {
-            get { return SelectionItemPattern.ElementAddedToSelectionEvent; }
-        }
+        public EventId ElementAddedToSelectionEvent => SelectionItemPattern.ElementAddedToSelectionEvent;
 
-        public EventId ElementRemovedFromSelectionEvent
-        {
-            get { return SelectionItemPattern.ElementRemovedFromSelectionEvent; }
-        }
+        public EventId ElementRemovedFromSelectionEvent => SelectionItemPattern.ElementRemovedFromSelectionEvent;
 
-        public EventId ElementSelectedEvent
-        {
-            get { return SelectionItemPattern.ElementSelectedEvent; }
-        }
+        public EventId ElementSelectedEvent => SelectionItemPattern.ElementSelectedEvent;
     }
 }

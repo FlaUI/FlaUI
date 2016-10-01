@@ -14,19 +14,10 @@ namespace FlaUI.UIA3.Patterns
 
     public class TransformPatternProperties : ITransformPatternProperties
     {
-        public PropertyId CanMoveProperty
-        {
-            get { return TransformPatternIds.CanMoveProperty; }
-        }
+        public PropertyId CanMoveProperty => TransformPatternIds.CanMoveProperty;
 
-        public PropertyId CanResizeProperty
-        {
-            get { return TransformPatternIds.CanResizeProperty; }
-        }
+        public PropertyId CanResizeProperty => TransformPatternIds.CanResizeProperty;
 
-        public PropertyId CanRotateProperty
-        {
-            get { return TransformPatternIds.CanRotateProperty; }
-        }
+        public PropertyId CanRotateProperty => TransformPatternIds.CanRotateProperty;
     }
 }

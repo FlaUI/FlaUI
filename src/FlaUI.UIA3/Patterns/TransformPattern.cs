@@ -16,17 +16,11 @@ namespace FlaUI.UIA3.Patterns
             Properties = new Transform2PatternProperties();
         }
 
-        ITransformPatternInformation IPatternWithInformation<ITransformPatternInformation>.Cached
-        {
-            get { return Cached; }
-        }
+        ITransformPatternInformation IPatternWithInformation<ITransformPatternInformation>.Cached => Cached;
 
-        ITransformPatternInformation IPatternWithInformation<ITransformPatternInformation>.Current
-        {
-            get { return Current; }
-        }
+        ITransformPatternInformation IPatternWithInformation<ITransformPatternInformation>.Current => Current;
 
-        public ITransformPatternProperties Properties { get; private set; }
+        public ITransformPatternProperties Properties { get; }
 
         public void Move(double x, double y)
         {
@@ -62,19 +56,10 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
-        public bool CanMove
-        {
-            get { return Get<bool>(TransformPatternIds.CanMoveProperty); }
-        }
+        public bool CanMove => Get<bool>(TransformPatternIds.CanMoveProperty);
 
-        public bool CanResize
-        {
-            get { return Get<bool>(TransformPatternIds.CanResizeProperty); }
-        }
+        public bool CanResize => Get<bool>(TransformPatternIds.CanResizeProperty);
 
-        public bool CanRotate
-        {
-            get { return Get<bool>(TransformPatternIds.CanRotateProperty); }
-        }
+        public bool CanRotate => Get<bool>(TransformPatternIds.CanRotateProperty);
     }
 }

@@ -23,12 +23,12 @@ namespace FlaUI.UIA2
         /// <summary>
         /// Concrete implementation of the automation object
         /// </summary>
-        public new UIA2Automation Automation { get; private set; }
+        public new UIA2Automation Automation { get; }
 
         /// <summary>
         /// Native object for the ui element
         /// </summary>
-        public UIA.AutomationElement NativeElement { get; private set; }
+        public UIA.AutomationElement NativeElement { get; }
 
         public override void SetFocus()
         {

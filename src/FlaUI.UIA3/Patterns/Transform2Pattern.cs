@@ -14,19 +14,13 @@ namespace FlaUI.UIA3.Patterns
             Properties = new Transform2PatternProperties();
         }
 
-        ITransform2PatternInformation IPatternWithInformation<ITransform2PatternInformation>.Cached
-        {
-            get { return Cached; }
-        }
+        ITransform2PatternInformation IPatternWithInformation<ITransform2PatternInformation>.Cached => Cached;
 
-        ITransform2PatternInformation IPatternWithInformation<ITransform2PatternInformation>.Current
-        {
-            get { return Current; }
-        }
+        ITransform2PatternInformation IPatternWithInformation<ITransform2PatternInformation>.Current => Current;
 
-        public new ITransform2PatternProperties Properties { get; private set; }
+        public new ITransform2PatternProperties Properties { get; }
 
-         ITransformPatternProperties ITransformPattern.Properties { get { return Properties; } }
+         ITransformPatternProperties ITransformPattern.Properties => Properties;
 
         public void Zoom(double zoom)
         {
@@ -51,24 +45,12 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
-        public bool CanZoom
-        {
-            get { return Get<bool>(Transform2PatternIds.CanZoomProperty); }
-        }
+        public bool CanZoom => Get<bool>(Transform2PatternIds.CanZoomProperty);
 
-        public double ZoomLevel
-        {
-            get { return Get<double>(Transform2PatternIds.ZoomLevelProperty); }
-        }
+        public double ZoomLevel => Get<double>(Transform2PatternIds.ZoomLevelProperty);
 
-        public double ZoomMaximum
-        {
-            get { return Get<double>(Transform2PatternIds.ZoomMaximumProperty); }
-        }
+        public double ZoomMaximum => Get<double>(Transform2PatternIds.ZoomMaximumProperty);
 
-        public double ZoomMinimum
-        {
-            get { return Get<double>(Transform2PatternIds.ZoomMinimumProperty); }
-        }
+        public double ZoomMinimum => Get<double>(Transform2PatternIds.ZoomMinimumProperty);
     }
 }

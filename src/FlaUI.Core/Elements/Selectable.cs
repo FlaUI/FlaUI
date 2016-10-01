@@ -14,10 +14,7 @@ namespace FlaUI.Core.Elements
         {
         }
 
-        public ISelectionItemPattern SelectionItemPattern
-        {
-            get { return PatternFactory.GetSelectionItemPattern(); }
-        }
+        public ISelectionItemPattern SelectionItemPattern => PatternFactory.GetSelectionItemPattern();
 
         public bool IsSelected
         {

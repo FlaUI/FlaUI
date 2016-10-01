@@ -8,9 +8,6 @@ namespace FlaUI.Core.Elements
         {
         }
 
-        public string Text
-        {
-            get { return Current.Name; }
-        }
+        public string Text => Current.Name;
     }
 }

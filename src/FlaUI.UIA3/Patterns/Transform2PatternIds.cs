@@ -16,24 +16,12 @@ namespace FlaUI.UIA3.Patterns
 
     public class Transform2PatternProperties : TransformPatternProperties, ITransform2PatternProperties
     {
-        public PropertyId CanZoomProperty
-        {
-            get { return Transform2PatternIds.CanZoomProperty; }
-        }
+        public PropertyId CanZoomProperty => Transform2PatternIds.CanZoomProperty;
 
-        public PropertyId ZoomLevelProperty
-        {
-            get { return Transform2PatternIds.ZoomLevelProperty; }
-        }
+        public PropertyId ZoomLevelProperty => Transform2PatternIds.ZoomLevelProperty;
 
-        public PropertyId ZoomMaximumProperty
-        {
-            get { return Transform2PatternIds.ZoomMaximumProperty; }
-        }
+        public PropertyId ZoomMaximumProperty => Transform2PatternIds.ZoomMaximumProperty;
 
-        public PropertyId ZoomMinimumProperty
-        {
-            get {return Transform2PatternIds.ZoomMinimumProperty; }
-        }
+        public PropertyId ZoomMinimumProperty => Transform2PatternIds.ZoomMinimumProperty;
     }
 }

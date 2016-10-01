@@ -8,7 +8,7 @@ namespace FlaUI.UIA3
 {
     public class UIA3PatternFactory : IPatternFactory
     {
-        public UIA3AutomationObject AutomationObject { get; private set; }
+        public UIA3AutomationObject AutomationObject { get; }
 
         internal UIA3PatternFactory(UIA3AutomationObject automationObject)
         {

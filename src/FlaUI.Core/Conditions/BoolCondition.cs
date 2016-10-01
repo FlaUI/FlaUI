@@ -9,7 +9,7 @@ namespace FlaUI.Core.Conditions
             BooleanValue = booleanValue;
         }
 
-        public bool BooleanValue { get; private set; }
+        public bool BooleanValue { get; }
 
         public override string ToString()
         {

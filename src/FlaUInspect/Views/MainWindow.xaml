@@ -11,7 +11,7 @@
                 </MenuItem>
             </Menu>
             <StatusBar DockPanel.Dock="Bottom">
-                <StatusBarItem></StatusBarItem>
+                <StatusBarItem />
             </StatusBar>
             <Grid>
                 <TreeView ItemsSource="{Binding Elements}" Margin="10">

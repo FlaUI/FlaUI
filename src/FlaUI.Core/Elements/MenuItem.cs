@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading;
-using UIA = interop.UIAutomationCore;
+using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements.Infrastructure;
 
 namespace FlaUI.Core.Elements
 {

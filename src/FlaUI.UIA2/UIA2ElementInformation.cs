@@ -17,9 +17,9 @@ namespace FlaUI.UIA2
         public string AccessKey { get; }
         public string AriaProperties { get; }
         public string AriaRole { get; }
-        public string AutomationId { get { return Get<string>(AutomationObjectIds.AutomationIdProperty); } }
+        public string AutomationId => Get<string>(AutomationObjectIds.AutomationIdProperty);
         public Element[] FlowsTo { get; }
-        public string FrameworkId { get { return Get<string>(AutomationObjectIds.FrameworkIdProperty); } }
+        public string FrameworkId => Get<string>(AutomationObjectIds.FrameworkIdProperty);
         public bool HasKeyboardFocus { get; }
         public string HelpText { get; }
         public bool IsContentElement { get; }
@@ -35,15 +35,15 @@ namespace FlaUI.UIA2
         public string ItemType { get; }
         public Element LabeledBy { get; }
         public string LocalizedControlType { get; }
-        public Rectangle BoundingRectangle { get { return Get<Rectangle>(AutomationObjectIds.BoundingRectangleProperty); } }
+        public Rectangle BoundingRectangle => Get<Rectangle>(AutomationObjectIds.BoundingRectangleProperty);
         public string ClassName { get; }
-        public Point ClickablePoint { get { return Get<Point>(AutomationObjectIds.ClickablePointProperty); } }
+        public Point ClickablePoint => Get<Point>(AutomationObjectIds.ClickablePointProperty);
         public Element[] ControllerFor { get; }
         public ControlType ControlType { get; }
         public CultureInfo Culture { get; }
         public Element[] DescribedBy { get; }
         public Element[] FlowsFrom { get; }
-        public string Name { get { return Get<string>(AutomationObjectIds.NameProperty); } }
+        public string Name => Get<string>(AutomationObjectIds.NameProperty);
         public IntPtr NativeWindowHandle { get; }
         public bool OptimizeForVisualContent { get; }
         public int ProcessId { get; }

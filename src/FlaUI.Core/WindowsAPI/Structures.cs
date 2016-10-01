@@ -58,10 +58,7 @@ namespace FlaUI.Core.WindowsAPI
         public InputType type;
         public INPUTUNION u;
 
-        public static int Size
-        {
-            get { return Marshal.SizeOf(typeof(INPUT)); }
-        }
+        public static int Size => Marshal.SizeOf(typeof(INPUT));
 
         public static INPUT MouseInput(MOUSEINPUT mouseInput)
         {

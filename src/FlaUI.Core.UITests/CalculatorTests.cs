@@ -105,16 +105,16 @@ namespace FlaUI.Core.UITests
     {
         private readonly Element _mainWindow;
 
-        public Button Button1 { get { return FindElement("1").AsButton(); } }
-        public Button Button2 { get { return FindElement("2").AsButton(); } }
-        public Button Button3 { get { return FindElement("3").AsButton(); } }
-        public Button Button4 { get { return FindElement("4").AsButton(); } }
-        public Button Button5 { get { return FindElement("5").AsButton(); } }
-        public Button Button6 { get { return FindElement("6").AsButton(); } }
-        public Button Button7 { get { return FindElement("7").AsButton(); } }
-        public Button Button8 { get { return FindElement("8").AsButton(); } }
-        public Button ButtonAdd { get { return FindElement("Add").AsButton(); } }
-        public Button ButtonEquals { get { return FindElement("Equals").AsButton(); } }
+        public Button Button1 => FindElement("1").AsButton();
+        public Button Button2 => FindElement("2").AsButton();
+        public Button Button3 => FindElement("3").AsButton();
+        public Button Button4 => FindElement("4").AsButton();
+        public Button Button5 => FindElement("5").AsButton();
+        public Button Button6 => FindElement("6").AsButton();
+        public Button Button7 => FindElement("7").AsButton();
+        public Button Button8 => FindElement("8").AsButton();
+        public Button ButtonAdd => FindElement("Add").AsButton();
+        public Button ButtonEquals => FindElement("Equals").AsButton();
 
         public string Result
         {
@@ -142,16 +142,17 @@ namespace FlaUI.Core.UITests
     {
         private readonly Element _mainWindow;
 
-        public Button Button1 { get { return FindElement("num1Button").AsButton(); } }
-        public Button Button2 { get { return FindElement("num2Button").AsButton(); } }
-        public Button Button3 { get { return FindElement("num3Button").AsButton(); } }
-        public Button Button4 { get { return FindElement("num4Button").AsButton(); } }
-        public Button Button5 { get { return FindElement("num5Button").AsButton(); } }
-        public Button Button6 { get { return FindElement("num6Button").AsButton(); } }
-        public Button Button7 { get { return FindElement("num7Button").AsButton(); } }
-        public Button Button8 { get { return FindElement("num8Button").AsButton(); } }
-        public Button ButtonAdd { get { return FindElement("plusButton").AsButton(); } }
-        public Button ButtonEquals { get { return FindElement("equalButton").AsButton(); } }
+        public Button Button1 => FindElement("num1Button").AsButton();
+        public Button Button2 => FindElement("num2Button").AsButton();
+        public Button Button3 => FindElement("num3Button").AsButton();
+        public Button Button4 => FindElement("num4Button").AsButton();
+        public Button Button5 => FindElement("num5Button").AsButton();
+        public Button Button6 => FindElement("num6Button").AsButton();
+        public Button Button7 => FindElement("num7Button").AsButton();
+        public Button Button8 => FindElement("num8Button").AsButton();
+        public Button ButtonAdd => FindElement("plusButton").AsButton();
+        public Button ButtonEquals => FindElement("equalButton").AsButton();
+
         public string Result
         {
             get

@@ -16,15 +16,9 @@ namespace FlaUI.Core.Elements
         {
         }
 
-        public string Title
-        {
-            get { return Current.Name; }
-        }
+        public string Title => Current.Name;
 
-        public bool IsModal
-        {
-            get { return WindowPattern.Current.IsModal; }
-        }
+        public bool IsModal => WindowPattern.Current.IsModal;
 
         //public TitleBar TitleBar
         //{
@@ -35,15 +29,9 @@ namespace FlaUI.Core.Elements
         //    }
         //}
 
-        public IWindowPattern WindowPattern
-        {
-            get { return PatternFactory.GetWindowPattern(); }
-        }
+        public IWindowPattern WindowPattern => PatternFactory.GetWindowPattern();
 
-        public ITransformPattern TransformPattern
-        {
-            get { return PatternFactory.GetTransformPattern(); }
-        }
+        public ITransformPattern TransformPattern => PatternFactory.GetTransformPattern();
 
         public void Close()
         {

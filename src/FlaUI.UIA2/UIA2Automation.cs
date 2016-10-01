@@ -19,10 +19,7 @@ namespace FlaUI.UIA2
 
         public override AutomationType AutomationType => AutomationType.UIA2;
 
-        public override object NotSupportedValue
-        {
-            get { return UIA.AutomationElement.NotSupported; }
-        }
+        public override object NotSupportedValue => UIA.AutomationElement.NotSupported;
 
         public override Element GetDesktop()
         {

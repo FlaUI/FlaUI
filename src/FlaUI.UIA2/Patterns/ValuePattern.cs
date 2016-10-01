@@ -13,22 +13,16 @@ namespace FlaUI.UIA2.Patterns
             Properties = new ValuePatternProperties();
         }
 
-        IValuePatternInformation IPatternWithInformation<IValuePatternInformation>.Cached
-        {
-            get { return Cached; }
-        }
+        IValuePatternInformation IPatternWithInformation<IValuePatternInformation>.Cached => Cached;
 
-        IValuePatternInformation IPatternWithInformation<IValuePatternInformation>.Current
-        {
-            get { return Current; }
-        }
+        IValuePatternInformation IPatternWithInformation<IValuePatternInformation>.Current => Current;
 
         protected override ValuePatternInformation CreateInformation(bool cached)
         {
             return new ValuePatternInformation(AutomationObject, cached);
         }
 
-        public IValuePatternProperties Properties { get; private set; }
+        public IValuePatternProperties Properties { get; }
 
         public void SetValue(string value)
         {
@@ -42,8 +36,8 @@ namespace FlaUI.UIA2.Patterns
         {
         }
 
-        public bool IsReadOnly { get { return Get<bool>(ValuePatternIds.IsReadOnlyProperty); } }
+        public bool IsReadOnly => Get<bool>(ValuePatternIds.IsReadOnlyProperty);
 
-        public string Value { get { return Get<string>(ValuePatternIds.ValueProperty); } }
+        public string Value => Get<string>(ValuePatternIds.ValueProperty);
     }
 }

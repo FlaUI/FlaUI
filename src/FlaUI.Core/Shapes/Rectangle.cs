@@ -19,39 +19,33 @@ namespace FlaUI.Core.Shapes
         public double Width { get { return Right - Left; } set { Right = Left + value; } }
         public double Height { get { return Bottom - Top; } set { Bottom = Top + value; } }
 
-        public bool IsEmpty
-        {
-            get { return X.Equals(0) && Y.Equals(0) && Width.Equals(0) && Height.Equals(0); }
-        }
+        public bool IsEmpty => X.Equals(0) && Y.Equals(0) && Width.Equals(0) && Height.Equals(0);
 
-        public Point Center
-        {
-            get { return new Point(Width / 2 + Left, Height / 2 + Top); }
-        }
+        public Point Center => new Point(Width / 2 + Left, Height / 2 + Top);
 
-        public Point North { get { return GetNorth(); } }
+        public Point North => GetNorth();
 
-        public Point East { get { return GetEast(); } }
+        public Point East => GetEast();
 
-        public Point South { get { return GetSouth(); } }
+        public Point South => GetSouth();
 
-        public Point West { get { return GetWest(); } }
+        public Point West => GetWest();
 
-        public Point ImmediateExteriorNorth { get { return GetNorth(-1); } }
+        public Point ImmediateExteriorNorth => GetNorth(-1);
 
-        public Point ImmediateInteriorNorth { get { return GetNorth(1); } }
+        public Point ImmediateInteriorNorth => GetNorth(1);
 
-        public Point ImmediateExteriorEast { get { return GetEast(1); } }
+        public Point ImmediateExteriorEast => GetEast(1);
 
-        public Point ImmediateInteriorEast { get { return GetEast(-1); } }
+        public Point ImmediateInteriorEast => GetEast(-1);
 
-        public Point ImmediateExteriorSouth { get { return GetSouth(1); } }
+        public Point ImmediateExteriorSouth => GetSouth(1);
 
-        public Point ImmediateInteriorSouth { get { return GetSouth(-1); } }
+        public Point ImmediateInteriorSouth => GetSouth(-1);
 
-        public Point ImmediateExteriorWest { get { return GetWest(-1); } }
+        public Point ImmediateExteriorWest => GetWest(-1);
 
-        public Point ImmediateInteriorWest { get { return GetWest(1); } }
+        public Point ImmediateInteriorWest => GetWest(1);
 
         public Rectangle(double x, double y, double width, double height)
         {

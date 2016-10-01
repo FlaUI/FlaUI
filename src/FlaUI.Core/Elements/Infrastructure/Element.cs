@@ -21,25 +21,25 @@ namespace FlaUI.Core.Elements.Infrastructure
             Properties = AutomationObject.CreateProperties();
         }
 
-        public AutomationObjectBase AutomationObject { get; set; }
+        public AutomationObjectBase AutomationObject { get; }
 
         public ConditionFactory ConditionFactory => AutomationObject.Automation.ConditionFactory;
 
-        public IElementProperties Properties { get; set; }
+        public IElementProperties Properties { get; private set; }
 
-        public FrameworkType FrameworkType { get { return FrameworkIds.ConvertToFrameworkType(Current.FrameworkId); } }
+        public FrameworkType FrameworkType => FrameworkIds.ConvertToFrameworkType(Current.FrameworkId);
 
         public IPatternFactory PatternFactory { get; private set; }
 
         /// <summary>
         /// Basic information about this element (cached)
         /// </summary>
-        public IElementInformation Cached { get; private set; }
+        public IElementInformation Cached { get; }
 
         /// <summary>
         /// Basic information about this element (realtime)
         /// </summary>
-        public IElementInformation Current { get; private set; }
+        public IElementInformation Current { get; }
 
         /// <summary>
         /// Sets the focus to this element

@@ -4,9 +4,9 @@ namespace FlaUI.Core.Elements.Infrastructure
 {
     public abstract class ElementInformationBase
     {
-        protected AutomationObjectBase AutomationObject { get; private set; }
+        protected AutomationObjectBase AutomationObject { get; }
 
-        protected bool Cached { get; private set; }
+        protected bool Cached { get; }
 
         protected ElementInformationBase(AutomationObjectBase automationObject, bool cached)
         {
