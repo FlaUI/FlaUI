@@ -6,17 +6,6 @@ namespace FlaUI.UIA3.Tools
     public static class Retry
     {
         private static readonly TimeSpan DefaultRetryInterval = TimeSpan.FromMilliseconds(200);
-        private static readonly TimeSpan DefaultRetryFor = TimeSpan.Zero;
-
-        public static T ForDefault<T>(Func<T> func, Predicate<T> shouldRetry)
-        {
-            return For(func, shouldRetry, DefaultRetryFor);
-        }
-
-        public static void ForDefault(Action action)
-        {
-            For(action, DefaultRetryFor);
-        }
 
         public static void For(Action action, TimeSpan retryFor, TimeSpan? retryInterval = null)
         {
