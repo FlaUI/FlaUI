@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Elements\ElementConversionExtensions.cs" />
     <Compile Include="Elements\TextBox.cs" />
+    <Compile Include="Tools\Retry.cs" />
     <Compile Include="UIA3Automation.cs" />
     <Compile Include="Conditions\NativeConditionConverter.cs" />
     <Compile Include="Conditions\ConditionFactory.cs" />

@@ -245,14 +245,58 @@ namespace FlaUI.UIA3.Elements
         /// </summary>
         public Element[] FindAll(TreeScope treeScope, ConditionBase condition)
         {
+            Predicate<Element[]> shouldRetry = element => element.Length > 0;
+            Func<Element[]> func = () => FindAllCallback(treeScope, condition);
+
+            return Retry.For(func, shouldRetry, TimeSpan.Zero);
+        }
+
+        /// <summary>
+        /// Finds all elements in the given treescope and condition
+        /// </summary>
+        public Element[] FindAll(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
+        {
+            Predicate<Element[]> shouldRetry = element => element == null;
+            Func<Element[]> func = () => FindAllCallback(treeScope, condition);
+
+            return Retry.For(func, shouldRetry, timeOut);
+        }
+
+        /// <summary>
+        /// Finds all elements in the given treescope and condition
+        /// </summary>
+        private Element[] FindAllCallback(TreeScope treeScope, ConditionBase condition)
+        {
             var nativeFoundElements = NativeElement.FindAll((UIA.TreeScope)treeScope, NativeConditionConverter.ToNative(Automation, condition));
             return NativeValueConverter.NativeArrayToManaged(Automation, nativeFoundElements);
         }
 
         /// <summary>
-        /// Finds the first element which is in the given treescope and matches the condition
+        /// Finds the first element which is in the given treescope and matches the condition within the default timeout period.
         /// </summary>
         public Element FindFirst(TreeScope treeScope, ConditionBase condition)
+        {
+            Predicate<Element> shouldRetry = element => element == null;
+            Func<Element> func = () => FindFirstCallback(treeScope, condition);
+
+            return Retry.For(func, shouldRetry, TimeSpan.Zero);
+        }
+
+        /// <summary>
+        /// Finds the first element which is in the given treescope and matches the condition within the given timeout period.
+        /// </summary>
+        public Element FindFirst(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
+        {
+            Predicate<Element> shouldRetry = element => element == null;
+            Func<Element> func = () => FindFirstCallback(treeScope, condition);
+
+            return Retry.For(func, shouldRetry, timeOut);
+        }
+
+        /// <summary>
+        /// Finds the first element which is in the given treescope and matches the condition
+        /// </summary>
+        private Element FindFirstCallback(TreeScope treeScope, ConditionBase condition)
         {
             var nativeFoundElement = NativeElement.FindFirst((UIA.TreeScope)treeScope, NativeConditionConverter.ToNative(Automation, condition));
             return NativeValueConverter.NativeToManaged(Automation, nativeFoundElement);
