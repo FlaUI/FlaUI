@@ -1,4 +1,5 @@
-﻿using FlaUI.Core;
+﻿using System;
+using FlaUI.Core;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
@@ -8,7 +9,7 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class Transform2Pattern : TransformPatternBase<UIA.IUIAutomationTransformPattern2, Transform2PatternInformation>, ITransform2Pattern
+    public class Transform2Pattern : TransformPatternBase<UIA.IUIAutomationTransformPattern2, Transform2PatternInformation, Transform2PatternProperties>, ITransform2Pattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_TransformPattern2Id, "Transform2");
         public static readonly PropertyId CanZoomProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_Transform2CanZoomPropertyId, "CanZoom");
@@ -25,9 +26,14 @@ namespace FlaUI.UIA3.Patterns
 
         ITransform2PatternInformation IPatternWithInformation<ITransform2PatternInformation>.Current => Current;
 
-        public new ITransform2PatternProperties Properties { get; }
+        ITransform2PatternProperties ITransform2Pattern.Properties { get { return Properties; } }
 
-         ITransformPatternProperties ITransformPattern.Properties => Properties;
+        public override Transform2PatternProperties Properties { get; }
+
+        protected override Transform2PatternInformation CreateInformation(bool cached)
+        {
+            return new Transform2PatternInformation(AutomationObject, cached);
+        }
 
         public void Zoom(double zoom)
         {
@@ -37,12 +43,6 @@ namespace FlaUI.UIA3.Patterns
         public void ZoomByUnit(ZoomUnit zoomUnit)
         {
             ComCallWrapper.Call(() => NativePattern.ZoomByUnit((UIA.ZoomUnit)zoomUnit));
-        }
-
-
-        protected override Transform2PatternInformation CreateInformation(bool cached)
-        {
-           return new Transform2PatternInformation(AutomationObject, cached);
         }
     }
 

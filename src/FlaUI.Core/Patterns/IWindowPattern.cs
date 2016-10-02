@@ -10,7 +10,7 @@ namespace FlaUI.Core.Patterns
         IWindowPatternEvents Events { get; }
         void Close();
         void SetWindowVisualState(WindowVisualState state);
-        int WaitForInputIdle(int milliseconds);
+        bool WaitForInputIdle(int milliseconds);
     }
 
     public interface IWindowPatternProperties

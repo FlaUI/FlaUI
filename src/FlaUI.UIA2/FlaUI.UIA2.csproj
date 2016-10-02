@@ -48,7 +48,14 @@
     <Compile Include="EventHandlers\UIA2FocusChangedEventHandler.cs" />
     <Compile Include="EventHandlers\UIA2PropertyChangedEventHandler.cs" />
     <Compile Include="EventHandlers\UIA2StructureChangedEventHandler.cs" />
+    <Compile Include="Patterns\ExpandCollapsePattern.cs" />
     <Compile Include="Patterns\InvokePattern.cs" />
+    <Compile Include="Patterns\RangeValuePattern.cs" />
+    <Compile Include="Patterns\SelectionItemPattern.cs" />
+    <Compile Include="Patterns\TogglePattern.cs" />
+    <Compile Include="Patterns\TransformPattern.cs" />
+    <Compile Include="Patterns\VirtualizedItemPattern.cs" />
+    <Compile Include="Patterns\WindowPattern.cs" />
     <Compile Include="Tools\NativeConditionConverter.cs" />
     <Compile Include="Tools\NativeValueConverter.cs" />
     <Compile Include="UIA2ElementProperties.cs" />

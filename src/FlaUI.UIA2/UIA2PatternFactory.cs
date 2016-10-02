@@ -1,4 +1,5 @@
 ﻿using FlaUI.Core;
+using FlaUI.Core.Exceptions;
 using FlaUI.Core.Patterns;
 using FlaUI.UIA2.Patterns;
 using UIA = System.Windows.Automation;
@@ -16,7 +17,8 @@ namespace FlaUI.UIA2
 
         public IExpandCollapsePattern GetExpandCollapsePattern()
         {
-            throw new System.NotImplementedException();
+            var nativePattern = GetNativePatternAs<UIA.ExpandCollapsePattern>(UIA.ExpandCollapsePattern.Pattern);
+            return nativePattern == null ? null : new ExpandCollapsePattern(AutomationObject, nativePattern);
         }
 
         public IInvokePattern GetInvokePattern()
@@ -27,27 +29,31 @@ namespace FlaUI.UIA2
 
         public IRangeValuePattern GetRangeValuePattern()
         {
-            throw new System.NotImplementedException();
+            var nativePattern = GetNativePatternAs<UIA.RangeValuePattern>(UIA.RangeValuePattern.Pattern);
+            return nativePattern == null ? null : new RangeValuePattern(AutomationObject, nativePattern);
         }
 
         public ISelectionItemPattern GetSelectionItemPattern()
         {
-            throw new System.NotImplementedException();
+            var nativePattern = GetNativePatternAs<UIA.SelectionItemPattern>(UIA.SelectionItemPattern.Pattern);
+            return nativePattern == null ? null : new SelectionItemPattern(AutomationObject, nativePattern);
         }
 
         public ITogglePattern GetTogglePattern()
         {
-            throw new System.NotImplementedException();
+            var nativePattern = GetNativePatternAs<UIA.TogglePattern>(UIA.TogglePattern.Pattern);
+            return nativePattern == null ? null : new TogglePattern(AutomationObject, nativePattern);
         }
 
         public ITransform2Pattern GetTransform2Pattern()
         {
-            throw new System.NotImplementedException();
+            throw new NotSupportedByUIA2Exception();
         }
 
         public ITransformPattern GetTransformPattern()
         {
-            throw new System.NotImplementedException();
+            var nativePattern = GetNativePatternAs<UIA.TransformPattern>(UIA.TransformPattern.Pattern);
+            return nativePattern == null ? null : new TransformPattern(AutomationObject, nativePattern);
         }
 
         public IValuePattern GetValuePattern()
@@ -58,12 +64,14 @@ namespace FlaUI.UIA2
 
         public IVirtualizedItemPattern GetVirtualizedItemPattern()
         {
-            throw new System.NotImplementedException();
+            var nativePattern = GetNativePatternAs<UIA.VirtualizedItemPattern>(UIA.VirtualizedItemPattern.Pattern);
+            return nativePattern == null ? null : new VirtualizedItemPattern(AutomationObject, nativePattern);
         }
 
         public IWindowPattern GetWindowPattern()
         {
-            throw new System.NotImplementedException();
+            var nativePattern = GetNativePatternAs<UIA.WindowPattern>(UIA.WindowPattern.Pattern);
+            return nativePattern == null ? null : new WindowPattern(AutomationObject, nativePattern);
         }
 
         private T GetNativePatternAs<T>(UIA.AutomationPattern pattern) where T : UIA.BasePattern
