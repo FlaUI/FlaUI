@@ -10,18 +10,18 @@ namespace FlaUInspect.ViewModels
 {
     public class ElementViewModel : ObservableObject
     {
-        private readonly Element _element;
+        private readonly AutomationElement _automationElement;
 
-        public ElementViewModel(Element element)
+        public ElementViewModel(AutomationElement automationElement)
         {
-            _element = element;
-            var childElements = _element.FindAll(TreeScope.Children, new BoolCondition(true));
+            _automationElement = automationElement;
+            var childElements = _automationElement.FindAll(TreeScope.Children, new BoolCondition(true));
             Children = new ObservableCollection<ElementViewModel>(childElements.Select(e => new ElementViewModel(e)));
         }
 
-        public string Name => NormalizeString(_element.Current.Name);
-        public string AutomationId => NormalizeString(_element.Current.AutomationId);
-        public ControlType ControlType => _element.Current.ControlType;
+        public string Name => NormalizeString(_automationElement.Current.Name);
+        public string AutomationId => NormalizeString(_automationElement.Current.AutomationId);
+        public ControlType ControlType => _automationElement.Current.ControlType;
         public ObservableCollection<ElementViewModel> Children { get; set; }
 
         private string NormalizeString(string value)

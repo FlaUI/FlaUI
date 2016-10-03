@@ -7,9 +7,9 @@ namespace FlaUI.Core.Elements.PatternElements
     /// <summary>
     /// An UI-item which supports the <see cref="SelectionItemPattern"/>
     /// </summary>
-    public class SelectionItemElement : Element
+    public class SelectionItemAutomationElement : AutomationElement
     {
-        public SelectionItemElement(AutomationObjectBase automationObject) : base(automationObject)
+        public SelectionItemAutomationElement(AutomationObjectBase automationObject) : base(automationObject)
         {
         }
 

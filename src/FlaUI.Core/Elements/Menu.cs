@@ -7,7 +7,7 @@ namespace FlaUI.Core.Elements
     /// <summary>
     /// Represents a menu or a menubar, which contains menuitems
     /// </summary>
-    public class Menu : Element
+    public class Menu : AutomationElement
     {
         public Menu(AutomationObjectBase automationObject) : base(automationObject)
         {

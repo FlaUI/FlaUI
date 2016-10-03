@@ -5,6 +5,6 @@ namespace FlaUI.Core.EventHandlers
 {
     public interface IAutomationPropertyChangedEventHandler
     {
-        void HandlePropertyChangedEvent(Element sender, PropertyId propertyId, object newValue);
+        void HandlePropertyChangedEvent(AutomationElement sender, PropertyId propertyId, object newValue);
     }
 }

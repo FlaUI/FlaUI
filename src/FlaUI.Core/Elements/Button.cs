@@ -3,7 +3,7 @@ using FlaUI.Core.Input;
 
 namespace FlaUI.Core.Elements
 {
-    public class Button : InvokeElement
+    public class Button : InvokeAutomationElement
     {
         public Button(AutomationObjectBase automationObject) : base(automationObject)
         {

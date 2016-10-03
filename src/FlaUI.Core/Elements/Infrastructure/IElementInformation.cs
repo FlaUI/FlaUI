@@ -23,17 +23,17 @@ namespace FlaUI.Core.Elements.Infrastructure
 
         Point ClickablePoint { get; }
 
-        Element[] ControllerFor { get; }
+        AutomationElement[] ControllerFor { get; }
 
         ControlType ControlType { get; }
 
         CultureInfo Culture { get; }
 
-        Element[] DescribedBy { get; }
+        AutomationElement[] DescribedBy { get; }
 
-        Element[] FlowsFrom { get; }
+        AutomationElement[] FlowsFrom { get; }
 
-        Element[] FlowsTo { get; }
+        AutomationElement[] FlowsTo { get; }
 
         string FrameworkId { get; }
 
@@ -63,7 +63,7 @@ namespace FlaUI.Core.Elements.Infrastructure
 
         string ItemType { get; }
 
-        Element LabeledBy { get; }
+        AutomationElement LabeledBy { get; }
 
         //LiveSetting LiveSetting { get; }
 
