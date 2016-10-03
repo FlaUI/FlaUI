@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlaUI.Core", "FlaUI.Core\FlaUI.Core.csproj", "{0224CEE1-30C0-4539-B609-BCF2B38A8870}"
 EndProject
@@ -24,6 +24,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlaUIRec", "FlaUIRec\FlaUIRec.csproj", "{4F033FA0-F39E-4C24-9D6D-625FE547F626}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlaUInspect", "FlaUInspect\FlaUInspect.csproj", "{B1C3A9D6-326F-4A42-A2B8-C7605D111F47}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5DEEC181-27D2-412A-9914-8C069E69154A}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
