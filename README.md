@@ -1,5 +1,7 @@
 # FlaUI
 
+[![Join the chat at https://gitter.im/FlaUI/Lobby](https://badges.gitter.im/FlaUI/Lobby.svg)](https://gitter.im/FlaUI/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ### Introduction
 FlaUI is a .NET library which helps with automated UI testing of Windows applications (Win32, WinForms, WPF, Store Apps, ...).<br />
 It is based on native UI Automation libraries from Microsoft and therefore kind of a wrapper around them.<br />
