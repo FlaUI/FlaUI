@@ -22,7 +22,7 @@ namespace FlaUI.UIA3.Elements
     /// <summary>
     /// Basic class for a wrapped ui element
     /// </summary>
-    public class Element : ElementBase<UIA3Automation>
+    public class AutomationElement : ElementBase<UIA3Automation>
     {
         /// <summary>
         /// Native object for the ui element
@@ -65,7 +65,7 @@ namespace FlaUI.UIA3.Elements
         /// </summary>
         /// <param name="automation">The automation instance where this element belongs to</param>
         /// <param name="nativeElement">The native element this instance wrapps</param>
-        public Element(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation)
+        public AutomationElement(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation)
         {
             NativeElement = nativeElement;
             PatternFactory = new PatternFactory(this);
@@ -79,7 +79,7 @@ namespace FlaUI.UIA3.Elements
         /// <param name="event">The event to register to</param>
         /// <param name="treeScope">The treescope in which the event should be registered</param>
         /// <param name="action">The action to execute when the event fires</param>
-        public void RegisterEvent(EventId @event, TreeScope treeScope, Action<Element, EventId> action)
+        public void RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
         {
             Automation.NativeAutomation.AddAutomationEventHandler(@event.Id, NativeElement, (UIA.TreeScope)treeScope, null, new BasicEventHandler(Automation, action));
         }
@@ -88,7 +88,7 @@ namespace FlaUI.UIA3.Elements
         /// Registers for a focus changed event
         /// </summary>
         /// <param name="action">The action to execute when the event fires</param>
-        public void RegisterFocusChangedEvent(Action<Element> action)
+        public void RegisterFocusChangedEvent(Action<AutomationElement> action)
         {
             Automation.NativeAutomation.AddFocusChangedEventHandler(null, new FocusChangedEventHandler(Automation, action));
         }
@@ -98,7 +98,7 @@ namespace FlaUI.UIA3.Elements
         /// </summary>
         /// <param name="treeScope">The treescope in which the event should be registered</param>
         /// <param name="action">The action to execute when the event fires</param>
-        public void RegisterStructureChangedEvent(TreeScope treeScope, Action<Element, StructureChangeType, int[]> action)
+        public void RegisterStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action)
         {
             Automation.NativeAutomation.AddStructureChangedEventHandler(NativeElement, (UIA.TreeScope)treeScope, null, new StructureChangedEventHandler(Automation, action));
         }
@@ -109,7 +109,7 @@ namespace FlaUI.UIA3.Elements
         /// <param name="treeScope">The treescope in which the event should be registered</param>
         /// <param name="action">The action to execute when the event fires</param>
         /// <param name="properties">The properties to listen to for a change</param>
-        public void RegisterPropertyChangedEvent(TreeScope treeScope, Action<Element, PropertyId, object> action, params PropertyId[] properties)
+        public void RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, params PropertyId[] properties)
         {
             var propertyIds = properties.Select(p => p.Id).ToArray();
             Automation.NativeAutomation.AddPropertyChangedEventHandler(NativeElement,
@@ -163,7 +163,7 @@ namespace FlaUI.UIA3.Elements
         /// <summary>
         /// Draws a red highlight around the element
         /// </summary>
-        public Element DrawHighlight()
+        public AutomationElement DrawHighlight()
         {
             return DrawHighlight(System.Windows.Media.Colors.Red);
         }
@@ -171,7 +171,7 @@ namespace FlaUI.UIA3.Elements
         /// <summary>
         /// Draws a manually colored highlight around the element
         /// </summary>
-        public Element DrawHighlight(WpfColor color)
+        public AutomationElement DrawHighlight(WpfColor color)
         {
             return DrawHighlight(true, color, 2000);
         }
@@ -179,7 +179,7 @@ namespace FlaUI.UIA3.Elements
         /// <summary>
         /// Draws a manually colored highlight around the element
         /// </summary>
-        public Element DrawHighlight(GdiColor color)
+        public AutomationElement DrawHighlight(GdiColor color)
         {
             return DrawHighlight(true, color, 2000);
         }
@@ -191,7 +191,7 @@ namespace FlaUI.UIA3.Elements
         /// <param name="color">The color to draw the highlight</param>
         /// <param name="durationInMs">The duration (im ms) how long the highlight is shown</param>
         /// <remarks>Override for winforms color</remarks>
-        public Element DrawHighlight(bool blocking, GdiColor color, int durationInMs)
+        public AutomationElement DrawHighlight(bool blocking, GdiColor color, int durationInMs)
         {
             return DrawHighlight(blocking, WpfColor.FromArgb(color.A, color.R, color.G, color.B), durationInMs);
         }
@@ -202,7 +202,7 @@ namespace FlaUI.UIA3.Elements
         /// <param name="blocking">Flag to indicate if further execution waits until the highlight is removed</param>
         /// <param name="color">The color to draw the highlight</param>
         /// <param name="durationInMs">The duration (im ms) how long the highlight is shown</param>
-        public Element DrawHighlight(bool blocking, WpfColor color, int durationInMs)
+        public AutomationElement DrawHighlight(bool blocking, WpfColor color, int durationInMs)
         {
             var rectangle = Current.BoundingRectangle;
             if (!rectangle.IsEmpty)
@@ -243,7 +243,7 @@ namespace FlaUI.UIA3.Elements
         /// <summary>
         /// Finds all elements in the given treescope and condition
         /// </summary>
-        public Element[] FindAll(TreeScope treeScope, ConditionBase condition)
+        public AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition)
         {
             var nativeFoundElements = NativeElement.FindAll((UIA.TreeScope)treeScope, NativeConditionConverter.ToNative(Automation, condition));
             return NativeValueConverter.NativeArrayToManaged(Automation, nativeFoundElements);
@@ -252,7 +252,7 @@ namespace FlaUI.UIA3.Elements
         /// <summary>
         /// Finds the first element which is in the given treescope and matches the condition
         /// </summary>
-        public Element FindFirst(TreeScope treeScope, ConditionBase condition)
+        public AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
         {
             var nativeFoundElement = NativeElement.FindFirst((UIA.TreeScope)treeScope, NativeConditionConverter.ToNative(Automation, condition));
             return NativeValueConverter.NativeToManaged(Automation, nativeFoundElement);

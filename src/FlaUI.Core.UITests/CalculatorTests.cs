@@ -105,7 +105,7 @@ namespace FlaUI.Core.UITests
     // TODO: Implement
     public class LegacyCalc : ICalculator
     {
-        private readonly Element _mainWindow;
+        private readonly AutomationElement _mainWindow;
 
         public Button Button1 { get { return FindElement("1").AsButton(); } }
 
@@ -137,12 +137,12 @@ namespace FlaUI.Core.UITests
             }
         }
 
-        public LegacyCalc(Element mainWindow)
+        public LegacyCalc(AutomationElement mainWindow)
         {
             _mainWindow = mainWindow;
         }
 
-        private Element FindElement(string text)
+        private AutomationElement FindElement(string text)
         {
             var element = _mainWindow.FindFirst(TreeScope.Descendants, ConditionFactory.ByText(text));
             return element;
@@ -151,7 +151,7 @@ namespace FlaUI.Core.UITests
 
     public class Win10Calc : ICalculator
     {
-        private readonly Element _mainWindow;
+        private readonly AutomationElement _mainWindow;
 
         public Button Button1 { get { return FindElement("num1Button").AsButton(); } }
 
@@ -183,12 +183,12 @@ namespace FlaUI.Core.UITests
             }
         }
 
-        public Win10Calc(Element mainWindow)
+        public Win10Calc(AutomationElement mainWindow)
         {
             _mainWindow = mainWindow;
         }
 
-        private Element FindElement(string text)
+        private AutomationElement FindElement(string text)
         {
             var element = _mainWindow.FindFirst(TreeScope.Descendants, ConditionFactory.ByAutomationId(text));
             return element;

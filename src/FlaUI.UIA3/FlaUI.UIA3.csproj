@@ -74,7 +74,7 @@
     <Compile Include="Definitions\WindowInteractionState.cs" />
     <Compile Include="Definitions\WindowVisualState.cs" />
     <Compile Include="Definitions\ZoomUnit.cs" />
-    <Compile Include="Elements\Element.cs" />
+    <Compile Include="Elements\AutomationElement.cs" />
     <Compile Include="Elements\ElementInformation.cs" />
     <Compile Include="Elements\Button.cs" />
     <Compile Include="Elements\CheckBox.cs" />
