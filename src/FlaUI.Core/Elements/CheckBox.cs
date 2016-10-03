@@ -2,7 +2,7 @@
 
 namespace FlaUI.Core.Elements
 {
-    public class CheckBox : ToggleElement
+    public class CheckBox : ToggleAutomationElement
     {
         public CheckBox(AutomationObjectBase automationObject) : base(automationObject)
         {

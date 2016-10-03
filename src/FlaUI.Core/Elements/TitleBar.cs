@@ -3,7 +3,7 @@ using FlaUI.Core.Elements.Infrastructure;
 
 namespace FlaUI.Core.Elements
 {
-    public class TitleBar : Element
+    public class TitleBar : AutomationElement
     {
         public TitleBar(AutomationObjectBase automationObject) : base(automationObject)
         {

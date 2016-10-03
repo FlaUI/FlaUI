@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace FlaUI.Core.Elements
 {
-    public class Tree : Element
+    public class Tree : AutomationElement
     {
         public Tree(AutomationObjectBase automationObject) : base(automationObject)
         {

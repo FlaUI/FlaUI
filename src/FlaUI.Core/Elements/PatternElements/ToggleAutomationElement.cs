@@ -5,9 +5,9 @@ using System;
 
 namespace FlaUI.Core.Elements.PatternElements
 {
-    public class ToggleElement : Element
+    public class ToggleAutomationElement : AutomationElement
     {
-        public ToggleElement(AutomationObjectBase automationObject) : base(automationObject)
+        public ToggleAutomationElement(AutomationObjectBase automationObject) : base(automationObject)
         {
         }
 

@@ -60,7 +60,7 @@ namespace FlaUI.UIA2.Patterns
 
         public bool IsSelected => Get<bool>(SelectionItemPattern.IsSelectedProperty);
 
-        public Element SelectionContainer
+        public AutomationElement SelectionContainer
         {
             get
             {

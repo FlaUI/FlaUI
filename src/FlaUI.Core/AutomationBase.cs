@@ -35,21 +35,21 @@ namespace FlaUI.Core
         /// </summary>
         public abstract object NotSupportedValue { get; }
 
-        public abstract Element GetDesktop();
+        public abstract AutomationElement GetDesktop();
 
         /// <summary>
-        /// Creates an <see cref="Element"/> from a given point
+        /// Creates an <see cref="AutomationElement"/> from a given point
         /// </summary>
-        public abstract Element FromPoint(Point point);
+        public abstract AutomationElement FromPoint(Point point);
 
         /// <summary>
-        /// Creates an <see cref="Element"/> from a given windows handle (HWND)
+        /// Creates an <see cref="AutomationElement"/> from a given windows handle (HWND)
         /// </summary>
-        public abstract Element FromHandle(IntPtr hwnd);
+        public abstract AutomationElement FromHandle(IntPtr hwnd);
 
-        public abstract Element FocusedElement();
+        public abstract AutomationElement FocusedElement();
 
-        public abstract IAutomationFocusChangedEventHandler RegisterFocusChangedEvent(Action<Element> action);
+        public abstract IAutomationFocusChangedEventHandler RegisterFocusChangedEvent(Action<AutomationElement> action);
 
         public abstract void UnRegisterFocusChangedEvent(IAutomationFocusChangedEventHandler eventHandler);
 

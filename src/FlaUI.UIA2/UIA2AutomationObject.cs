@@ -55,13 +55,13 @@ namespace FlaUI.UIA2
             return returnValue;
         }
 
-        public override Element[] FindAll(TreeScope treeScope, ConditionBase condition)
+        public override AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition)
         {
             var nativeFoundElements = NativeElement.FindAll((UIA.TreeScope)treeScope, NativeConditionConverter.ToNative(condition));
             return NativeValueConverter.NativeArrayToManaged(Automation, nativeFoundElements);
         }
 
-        public override Element FindFirst(TreeScope treeScope, ConditionBase condition)
+        public override AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
         {
             var nativeFoundElement = NativeElement.FindFirst((UIA.TreeScope)treeScope, NativeConditionConverter.ToNative(condition));
             return NativeValueConverter.NativeToManaged(Automation, nativeFoundElement);
@@ -80,21 +80,21 @@ namespace FlaUI.UIA2
             return new UIA2ElementProperties();
         }
 
-        public override IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<Element, EventId> action)
+        public override IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
         {
             var eventHandler = new UIA2BasicEventHandler(Automation, action);
             UIA.Automation.AddAutomationEventHandler(UIA.AutomationEvent.LookupById(@event.Id), NativeElement, (UIA.TreeScope)treeScope, eventHandler.EventHandler);
             return eventHandler;
         }
 
-        public override IAutomationPropertyChangedEventHandler RegisterPropertyChangedEvent(TreeScope treeScope, Action<Element, PropertyId, object> action, PropertyId[] properties)
+        public override IAutomationPropertyChangedEventHandler RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, PropertyId[] properties)
         {
             var eventHandler = new UIA2PropertyChangedEventHandler(Automation, action);
             UIA.Automation.AddAutomationPropertyChangedEventHandler(NativeElement, (UIA.TreeScope)treeScope, eventHandler.EventHandler);
             return eventHandler;
         }
 
-        public override IAutomationStructureChangedEventHandler RegisterStructureChangedEvent(TreeScope treeScope, Action<Element, StructureChangeType, int[]> action)
+        public override IAutomationStructureChangedEventHandler RegisterStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action)
         {
             var eventHandler = new UIA2StructureChangedEventHandler(Automation, action);
             UIA.Automation.AddStructureChangedEventHandler(NativeElement, (UIA.TreeScope)treeScope, eventHandler.EventHandler);

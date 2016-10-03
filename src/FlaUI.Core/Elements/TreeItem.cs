@@ -6,15 +6,15 @@ using System.Linq;
 
 namespace FlaUI.Core.Elements
 {
-    public class TreeItem : Element
+    public class TreeItem : AutomationElement
     {
-        private readonly SelectionItemElement _selectionItemElement;
-        private readonly ExpandCollapseElement _expandCollapseElement;
+        private readonly SelectionItemAutomationElement _selectionItemAutomationElement;
+        private readonly ExpandCollapseAutomationElement _expandCollapseAutomationElement;
 
         public TreeItem(AutomationObjectBase automationObject) : base(automationObject)
         {
-            _selectionItemElement= new SelectionItemElement(automationObject);
-            _expandCollapseElement = new ExpandCollapseElement(automationObject);
+            _selectionItemAutomationElement= new SelectionItemAutomationElement(automationObject);
+            _expandCollapseAutomationElement = new ExpandCollapseAutomationElement(automationObject);
         }
 
         /// <summary>
@@ -41,23 +41,23 @@ namespace FlaUI.Core.Elements
 
         public bool IsSelected
         {
-            get { return _selectionItemElement.IsSelected; }
-            set { _selectionItemElement.IsSelected = value; }
+            get { return _selectionItemAutomationElement.IsSelected; }
+            set { _selectionItemAutomationElement.IsSelected = value; }
         }
 
         public void Expand()
         {
-            _expandCollapseElement.Expand();
+            _expandCollapseAutomationElement.Expand();
         }
 
         public void Collapse()
         {
-            _expandCollapseElement.Collapse();
+            _expandCollapseAutomationElement.Collapse();
         }
 
         public void Select()
         {
-            _selectionItemElement.Select();
+            _selectionItemAutomationElement.Select();
         }
 
         /// <summary>

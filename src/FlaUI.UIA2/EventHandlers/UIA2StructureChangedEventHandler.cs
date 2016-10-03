@@ -11,7 +11,7 @@ namespace FlaUI.UIA2.EventHandlers
     {
         public UIA.StructureChangedEventHandler EventHandler { get; private set; }
 
-        public UIA2StructureChangedEventHandler(AutomationBase automation, Action<Element, StructureChangeType, int[]> callAction) : base(automation, callAction)
+        public UIA2StructureChangedEventHandler(AutomationBase automation, Action<AutomationElement, StructureChangeType, int[]> callAction) : base(automation, callAction)
         {
             EventHandler = HandleStructureChangedEvent;
         }
@@ -19,7 +19,7 @@ namespace FlaUI.UIA2.EventHandlers
         private void HandleStructureChangedEvent(object sender, UIA.StructureChangedEventArgs structureChangedEventArgs)
         {
             var automationObject = new UIA2AutomationObject((UIA2Automation)Automation, (UIA.AutomationElement)sender);
-            var senderElement = new Element(automationObject);
+            var senderElement = new AutomationElement(automationObject);
             HandleStructureChangedEvent(senderElement, (StructureChangeType) structureChangedEventArgs.StructureChangeType, structureChangedEventArgs.GetRuntimeId());
         }
     }

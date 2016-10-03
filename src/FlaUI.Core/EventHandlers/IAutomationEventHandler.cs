@@ -5,6 +5,6 @@ namespace FlaUI.Core.EventHandlers
 {
     public interface IAutomationEventHandler
     {
-        void HandleAutomationEvent(Element sender, EventId eventId);
+        void HandleAutomationEvent(AutomationElement sender, EventId eventId);
     }
 }

@@ -10,7 +10,7 @@ namespace FlaUI.UIA2.EventHandlers
     {
         public UIA.AutomationFocusChangedEventHandler EventHandler { get; private set; }
 
-        public UIA2FocusChangedEventHandler(AutomationBase automation, Action<Element> callAction) : base(automation, callAction)
+        public UIA2FocusChangedEventHandler(AutomationBase automation, Action<AutomationElement> callAction) : base(automation, callAction)
         {
             EventHandler = HandleFocusChangedEvent;
         }
@@ -18,7 +18,7 @@ namespace FlaUI.UIA2.EventHandlers
         private void HandleFocusChangedEvent(object sender, UIA.AutomationFocusChangedEventArgs automationFocusChangedEventArgs)
         {
             var automationObject = new UIA2AutomationObject((UIA2Automation)Automation, (UIA.AutomationElement)sender);
-            var senderElement = new Element(automationObject);
+            var senderElement = new AutomationElement(automationObject);
             HandleFocusChangedEvent(senderElement);
         }
     }

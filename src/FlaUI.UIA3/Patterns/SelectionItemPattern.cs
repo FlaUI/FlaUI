@@ -61,7 +61,7 @@ namespace FlaUI.UIA3.Patterns
 
         public bool IsSelected => Get<bool>(SelectionItemPattern.IsSelectedProperty);
 
-        public Element SelectionContainer
+        public AutomationElement SelectionContainer
         {
             get
             {
