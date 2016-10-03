@@ -4,7 +4,7 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Elements
 {
-    public class TitleBar : Element
+    public class TitleBar : AutomationElement
     {
         public TitleBar(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
 

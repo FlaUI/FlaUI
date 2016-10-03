@@ -11,8 +11,8 @@ namespace FlaUI.UIA3.Patterns
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_TextChildPatternId, "TextChild");
 
-        internal TextChildPattern(Element automationElement, UIA.IUIAutomationTextChildPattern nativePattern)
-            : base(automationElement, nativePattern)
+        internal TextChildPattern(AutomationElement automationAutomationElement, UIA.IUIAutomationTextChildPattern nativePattern)
+            : base(automationAutomationElement, nativePattern)
         {
         }
 
@@ -21,7 +21,7 @@ namespace FlaUI.UIA3.Patterns
             get { return (UIA.IUIAutomationTextChildPattern)base.NativePattern; }
         }
 
-        public Element TextContainer
+        public AutomationElement TextContainer
         {
             get
             {

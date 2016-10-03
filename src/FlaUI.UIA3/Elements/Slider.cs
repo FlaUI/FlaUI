@@ -9,7 +9,7 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Elements
 {
-    public class Slider : Element
+    public class Slider : AutomationElement
     {
         public Slider(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
 

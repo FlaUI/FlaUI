@@ -16,8 +16,8 @@ namespace FlaUI.UIA3.Patterns
         public static readonly EventId TextChangedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_Text_TextChangedEventId, "TextChanged");
         public static readonly EventId TextSelectionChangedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_Text_TextSelectionChangedEventId, "TextSelectionChanged");
 
-        internal TextPattern(Element automationElement, UIA.IUIAutomationTextPattern nativePattern)
-            : base(automationElement, nativePattern)
+        internal TextPattern(AutomationElement automationAutomationElement, UIA.IUIAutomationTextPattern nativePattern)
+            : base(automationAutomationElement, nativePattern)
         {
         }
 
@@ -56,7 +56,7 @@ namespace FlaUI.UIA3.Patterns
             return NativeValueConverter.NativeArrayToManaged(Automation, nativeRanges);
         }
 
-        public TextRange RangeFromChild(Element child)
+        public TextRange RangeFromChild(AutomationElement child)
         {
             var nativeRange = ComCallWrapper.Call(() => NativePattern.RangeFromChild(child.NativeElement));
             return NativeValueConverter.NativeToManaged(Automation, nativeRange);

@@ -3,7 +3,7 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Elements
 {
-    public class Thumb : Element
+    public class Thumb : AutomationElement
     {
         public Thumb(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
 

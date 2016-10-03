@@ -8,7 +8,7 @@ namespace FlaUI.UIA3.Elements
     /// <summary>
     /// An UI-item which supports the <see cref="SelectionItemPattern"/>
     /// </summary>
-    public class SelectionItem : Element
+    public class SelectionItem : AutomationElement
     {
         public SelectionItem(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
 

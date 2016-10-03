@@ -52,28 +52,28 @@ namespace FlaUI.UIA3
         /// <summary>
         /// Gets the root element (desktop)
         /// </summary>
-        public Element GetDesktop()
+        public AutomationElement GetDesktop()
         {
             var desktop = NativeAutomation.GetRootElement();
-            return new Element(this, desktop);
+            return new AutomationElement(this, desktop);
         }
 
         /// <summary>
-        /// Creates an <see cref="Element"/> from a given point
+        /// Creates an <see cref="AutomationElement"/> from a given point
         /// </summary>
-        public Element FromPoint(Point point)
+        public AutomationElement FromPoint(Point point)
         {
             var nativeElement = NativeAutomation.ElementFromPoint(point.ToTagPoint());
-            return nativeElement == null ? null : new Element(this, nativeElement);
+            return nativeElement == null ? null : new AutomationElement(this, nativeElement);
         }
 
         /// <summary>
-        /// Creates an <see cref="Element"/> from a given windows handle (HWND)
+        /// Creates an <see cref="AutomationElement"/> from a given windows handle (HWND)
         /// </summary>
-        public Element FromHandle(IntPtr hwnd)
+        public AutomationElement FromHandle(IntPtr hwnd)
         {
             var nativeElement = NativeAutomation.ElementFromHandle(hwnd);
-            return nativeElement == null ? null : new Element(this, nativeElement);
+            return nativeElement == null ? null : new AutomationElement(this, nativeElement);
         }
 
         public override void UnregisterAllEvents()

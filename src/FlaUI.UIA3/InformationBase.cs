@@ -11,18 +11,18 @@ namespace FlaUI.UIA3
     public abstract class InformationBase
     {
         /// <summary>
-        /// The element this information belongs to
+        /// The automationElement this information belongs to
         /// </summary>
-        protected Element AutomationElement { get; private set; }
+        protected AutomationElement AutomationAutomationElement { get; private set; }
 
         /// <summary>
         /// Flag to indicate if the information is cached or not
         /// </summary>
         protected bool Cached { get; private set; }
 
-        protected InformationBase(Element automationElement, bool cached)
+        protected InformationBase(AutomationElement automationAutomationElement, bool cached)
         {
-            AutomationElement = automationElement;
+            AutomationAutomationElement = automationAutomationElement;
             Cached = cached;
         }
 
@@ -31,19 +31,19 @@ namespace FlaUI.UIA3
         /// </summary>
         protected T Get<T>(PropertyId property)
         {
-            return AutomationElement.SafeGetPropertyValue<T>(property, Cached);
+            return AutomationAutomationElement.SafeGetPropertyValue<T>(property, Cached);
         }
 
-        protected Element[] NativeElementArrayToElements(PropertyId property)
+        protected AutomationElement[] NativeElementArrayToElements(PropertyId property)
         {
             var nativeElements = Get<UIA.IUIAutomationElementArray>(property);
-            return NativeValueConverter.NativeArrayToManaged(AutomationElement.Automation, nativeElements);
+            return NativeValueConverter.NativeArrayToManaged(AutomationAutomationElement.Automation, nativeElements);
         }
 
-        protected Element NativeElementToElement(PropertyId property)
+        protected AutomationElement NativeElementToElement(PropertyId property)
         {
             var nativeElement = Get<UIA.IUIAutomationElement>(property);
-            return NativeValueConverter.NativeToManaged(AutomationElement.Automation, nativeElement);
+            return NativeValueConverter.NativeToManaged(AutomationAutomationElement.Automation, nativeElement);
         }
     }
 }

@@ -12,8 +12,8 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId IsReadOnlyProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ValueIsReadOnlyPropertyId, "IsReadOnly");
         public static readonly PropertyId ValueProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ValueValuePropertyId, "Value");
 
-        internal ValuePattern(Element automationElement, UIA.IUIAutomationValuePattern nativePattern)
-            : base(automationElement, nativePattern, (element, cached) => new ValuePatternInformation(element, cached))
+        internal ValuePattern(AutomationElement automationAutomationElement, UIA.IUIAutomationValuePattern nativePattern)
+            : base(automationAutomationElement, nativePattern, (element, cached) => new ValuePatternInformation(element, cached))
         {
         }
 
@@ -30,8 +30,8 @@ namespace FlaUI.UIA3.Patterns
 
     public class ValuePatternInformation : InformationBase
     {
-        public ValuePatternInformation(Element automationElement, bool cached)
-            : base(automationElement, cached)
+        public ValuePatternInformation(AutomationElement automationAutomationElement, bool cached)
+            : base(automationAutomationElement, cached)
         {
         }
 

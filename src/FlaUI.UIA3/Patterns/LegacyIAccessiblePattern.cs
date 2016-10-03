@@ -21,8 +21,8 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId StateProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleStatePropertyId, "State");
         public static readonly PropertyId ValueProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleValuePropertyId, "Value");
 
-        internal LegacyIAccessiblePattern(Element automationElement, UIA.IUIAutomationLegacyIAccessiblePattern nativePattern)
-            : base(automationElement, nativePattern, (element, cached) => new LegacyIAccessiblePatternInformation(element, cached))
+        internal LegacyIAccessiblePattern(AutomationElement automationAutomationElement, UIA.IUIAutomationLegacyIAccessiblePattern nativePattern)
+            : base(automationAutomationElement, nativePattern, (element, cached) => new LegacyIAccessiblePatternInformation(element, cached))
         {
         }
 
@@ -55,8 +55,8 @@ namespace FlaUI.UIA3.Patterns
 
     public class LegacyIAccessiblePatternInformation : InformationBase
     {
-        public LegacyIAccessiblePatternInformation(Element automationElement, bool cached)
-            : base(automationElement, cached)
+        public LegacyIAccessiblePatternInformation(AutomationElement automationAutomationElement, bool cached)
+            : base(automationAutomationElement, cached)
         {
         }
 
@@ -95,7 +95,7 @@ namespace FlaUI.UIA3.Patterns
             get { return Get<uint>(LegacyIAccessiblePattern.RoleProperty); }
         }
 
-        public Element[] Selection
+        public AutomationElement[] Selection
         {
             get { return NativeElementArrayToElements(LegacyIAccessiblePattern.SelectionProperty); }
         }

@@ -14,8 +14,8 @@ namespace FlaUI.UIA3.Patterns
         public static readonly EventId DragLeaveEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_DropTarget_DragLeaveEventId, "DragLeave");
         public static readonly EventId DragCompleteEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_Drag_DragCompleteEventId, "DragComplete");
 
-        internal DropTargetPattern(Element automationElement, UIA.IUIAutomationDropTargetPattern nativePattern)
-            : base(automationElement, nativePattern, (element, cached) => new DropTargetPatternInformation(element, cached))
+        internal DropTargetPattern(AutomationElement automationAutomationElement, UIA.IUIAutomationDropTargetPattern nativePattern)
+            : base(automationAutomationElement, nativePattern, (element, cached) => new DropTargetPatternInformation(element, cached))
         {
         }
 
@@ -27,8 +27,8 @@ namespace FlaUI.UIA3.Patterns
 
     public class DropTargetPatternInformation : InformationBase
     {
-        public DropTargetPatternInformation(Element automationElement, bool cached)
-            : base(automationElement, cached)
+        public DropTargetPatternInformation(AutomationElement automationAutomationElement, bool cached)
+            : base(automationAutomationElement, cached)
         {
         }
 

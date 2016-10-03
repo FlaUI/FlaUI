@@ -82,30 +82,30 @@ namespace FlaUIRec.Views
             //mainWindow.GetUIA2().RegisterPropertyChangedEvent(TreeScope.Descendants, PropertyAction, TogglePattern.ToggleStateProperty);
         }
 
-        private void TextChangedAction(Element automationElement, EventId eventId)
+        private void TextChangedAction(AutomationElement automationAutomationElement, EventId eventId)
         {
-            var valuePattern = automationElement.PatternFactory.GetValuePattern();
-            AddToList(String.Format("Text changed on {0}: To {1}", ElementToString(automationElement), valuePattern.Current.Value));
+            var valuePattern = automationAutomationElement.PatternFactory.GetValuePattern();
+            AddToList(String.Format("Text changed on {0}: To {1}", ElementToString(automationAutomationElement), valuePattern.Current.Value));
         }
 
-        private void SelectionAction(Element automationElement, EventId eventId)
+        private void SelectionAction(AutomationElement automationAutomationElement, EventId eventId)
         {
-            AddToList(String.Format("Selected: {0}", ElementToString(automationElement)));
+            AddToList(String.Format("Selected: {0}", ElementToString(automationAutomationElement)));
         }
 
-        private void StructureAction(Element automationElement, StructureChangeType arg2, int[] arg3)
+        private void StructureAction(AutomationElement automationAutomationElement, StructureChangeType arg2, int[] arg3)
         {
-            AddToList(String.Format("Structure change on {0}: {1}", ElementToString(automationElement), arg2));
+            AddToList(String.Format("Structure change on {0}: {1}", ElementToString(automationAutomationElement), arg2));
         }
 
-        private void PropertyAction(Element automationElement, PropertyId propertyId, object arg3)
+        private void PropertyAction(AutomationElement automationAutomationElement, PropertyId propertyId, object arg3)
         {
-            AddToList(String.Format("Property change on {0}: {1} to {2}", ElementToString(automationElement), propertyId.Name, arg3));
+            AddToList(String.Format("Property change on {0}: {1} to {2}", ElementToString(automationAutomationElement), propertyId.Name, arg3));
         }
 
-        private void InvokeAction(Element automationElement, EventId eventId)
+        private void InvokeAction(AutomationElement automationAutomationElement, EventId eventId)
         {
-            AddToList(String.Format("Invoked: {0}", ElementToString(automationElement)));
+            AddToList(String.Format("Invoked: {0}", ElementToString(automationAutomationElement)));
         }
 
         private void AddToList(string msg)
@@ -118,9 +118,9 @@ namespace FlaUIRec.Views
             myList.Items.Insert(0, msg);
         }
 
-        private string ElementToString(Element element)
+        private string ElementToString(AutomationElement automationElement)
         {
-            return String.Format("{0} (#{1}) [{2}]", element.Current.Name, element.Current.AutomationId, element.Current.ControlType);
+            return String.Format("{0} (#{1}) [{2}]", automationElement.Current.Name, automationElement.Current.AutomationId, automationElement.Current.ControlType);
         }
     }
 }

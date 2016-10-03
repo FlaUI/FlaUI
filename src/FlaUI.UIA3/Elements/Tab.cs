@@ -6,7 +6,7 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Elements
 {
-    public class Tab : Element
+    public class Tab : AutomationElement
     {
         public Tab(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
 

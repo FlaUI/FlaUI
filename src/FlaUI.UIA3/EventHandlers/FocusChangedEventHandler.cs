@@ -6,9 +6,9 @@ namespace FlaUI.UIA3.EventHandlers
 {
     internal class FocusChangedEventHandler :EventHandlerBase, UIA.IUIAutomationFocusChangedEventHandler
     {
-        private readonly Action<Element> _callAction;
+        private readonly Action<AutomationElement> _callAction;
 
-        public FocusChangedEventHandler(UIA3Automation automation, Action<Element> callAction)
+        public FocusChangedEventHandler(UIA3Automation automation, Action<AutomationElement> callAction)
             : base(automation)
         {
             _callAction = callAction;
@@ -16,7 +16,7 @@ namespace FlaUI.UIA3.EventHandlers
 
         public void HandleFocusChangedEvent(UIA.IUIAutomationElement sender)
         {
-            var senderElement = new Element(Automation, sender);
+            var senderElement = new AutomationElement(Automation, sender);
             _callAction(senderElement);
         }
     }

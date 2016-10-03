@@ -17,8 +17,8 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId StyleIdProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_StylesStyleIdPropertyId, "StyleId");
         public static readonly PropertyId StyleNameProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_StylesStyleNamePropertyId, "StyleName");
 
-        internal StylesPattern(Element automationElement, UIA.IUIAutomationStylesPattern nativePattern)
-            : base(automationElement, nativePattern)
+        internal StylesPattern(AutomationElement automationAutomationElement, UIA.IUIAutomationStylesPattern nativePattern)
+            : base(automationAutomationElement, nativePattern)
         {
         }
 
@@ -34,8 +34,8 @@ namespace FlaUI.UIA3.Patterns
 
     public class StylesPatternInformation : InformationBase
     {
-        public StylesPatternInformation(Element automationElement, bool cached)
-            : base(automationElement, cached)
+        public StylesPatternInformation(AutomationElement automationAutomationElement, bool cached)
+            : base(automationAutomationElement, cached)
         {
         }
 

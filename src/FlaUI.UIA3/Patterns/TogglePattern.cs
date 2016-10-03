@@ -12,8 +12,8 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_TogglePatternId, "Drag");
         public static readonly PropertyId ToggleStateProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ToggleToggleStatePropertyId, "ToggleState");
 
-        internal TogglePattern(Element automationElement, UIA.IUIAutomationTogglePattern nativePattern)
-            : base(automationElement, nativePattern, (element, cached) => new TogglePatternInformation(element, cached))
+        internal TogglePattern(AutomationElement automationAutomationElement, UIA.IUIAutomationTogglePattern nativePattern)
+            : base(automationAutomationElement, nativePattern, (element, cached) => new TogglePatternInformation(element, cached))
         {
         }
 
@@ -30,8 +30,8 @@ namespace FlaUI.UIA3.Patterns
 
     public class TogglePatternInformation : InformationBase
     {
-        public TogglePatternInformation(Element automationElement, bool cached)
-            : base(automationElement, cached)
+        public TogglePatternInformation(AutomationElement automationAutomationElement, bool cached)
+            : base(automationAutomationElement, cached)
         {
         }
 

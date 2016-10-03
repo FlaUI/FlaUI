@@ -2,13 +2,13 @@
 
 namespace FlaUI.UIA3.Elements
 {
-    public class ComboBox : Element
+    public class ComboBox : AutomationElement
     {
         public ComboBox(UIA3Automation automation, UIA.IUIAutomationElement nativeElement)
             : base(automation, nativeElement)
         {
         }
 
-        public Element EditElement { get; set; }
+        public AutomationElement EditAutomationElement { get; set; }
     }
 }

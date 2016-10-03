@@ -16,8 +16,8 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId SmallChangeProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_RangeValueSmallChangePropertyId, "SmallChange");
         public static readonly PropertyId ValueProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_RangeValueValuePropertyId, "Value");
 
-        internal RangeValuePattern(Element automationElement, UIA.IUIAutomationRangeValuePattern nativePattern)
-            : base(automationElement, nativePattern, (element, cached) => new RangeValuePatternInformation(element, cached))
+        internal RangeValuePattern(AutomationElement automationAutomationElement, UIA.IUIAutomationRangeValuePattern nativePattern)
+            : base(automationAutomationElement, nativePattern, (element, cached) => new RangeValuePatternInformation(element, cached))
         {
         }
 
@@ -34,8 +34,8 @@ namespace FlaUI.UIA3.Patterns
 
     public class RangeValuePatternInformation : InformationBase
     {
-        public RangeValuePatternInformation(Element automationElement, bool cached)
-            : base(automationElement, cached)
+        public RangeValuePatternInformation(AutomationElement automationAutomationElement, bool cached)
+            : base(automationAutomationElement, cached)
         {
         }
 

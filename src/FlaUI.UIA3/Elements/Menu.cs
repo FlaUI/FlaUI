@@ -8,7 +8,7 @@ namespace FlaUI.UIA3.Elements
     /// <summary>
     /// Represents a menu or a menubar, which contains menuitems
     /// </summary>
-    public class Menu : Element
+    public class Menu : AutomationElement
     {
         public Menu(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
 

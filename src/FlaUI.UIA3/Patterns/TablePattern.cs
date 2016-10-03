@@ -13,8 +13,8 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId RowHeadersProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_TableRowHeadersPropertyId, "RowHeaders");
         public static readonly PropertyId RowOrColumnMajorProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_TableRowOrColumnMajorPropertyId, "RowOrColumnMajor");
 
-        internal TablePattern(Element automationElement, UIA.IUIAutomationTablePattern nativePattern)
-            : base(automationElement, nativePattern, (element, cached) => new TablePatternInformation(element, cached))
+        internal TablePattern(AutomationElement automationAutomationElement, UIA.IUIAutomationTablePattern nativePattern)
+            : base(automationAutomationElement, nativePattern, (element, cached) => new TablePatternInformation(element, cached))
         {
         }
 
@@ -26,17 +26,17 @@ namespace FlaUI.UIA3.Patterns
 
     public class TablePatternInformation : InformationBase
     {
-        public TablePatternInformation(Element automationElement, bool cached)
-            : base(automationElement, cached)
+        public TablePatternInformation(AutomationElement automationAutomationElement, bool cached)
+            : base(automationAutomationElement, cached)
         {
         }
 
-        public Element[] ColumnHeaders
+        public AutomationElement[] ColumnHeaders
         {
             get { return NativeElementArrayToElements(TablePattern.ColumnHeadersProperty); }
         }
 
-        public Element[] RowHeaders
+        public AutomationElement[] RowHeaders
         {
             get { return NativeElementArrayToElements(TablePattern.RowHeadersProperty); }
         }

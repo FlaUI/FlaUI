@@ -13,8 +13,8 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId SelectionProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_SelectionSelectionPropertyId, "Selection");
         public static readonly EventId InvalidatedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_Selection_InvalidatedEventId, "Invalidated");
 
-        internal SelectionPattern(Element automationElement, UIA.IUIAutomationSelectionPattern nativePattern)
-            : base(automationElement, nativePattern, (element, cached) => new SelectionPatternInformation(element, cached))
+        internal SelectionPattern(AutomationElement automationAutomationElement, UIA.IUIAutomationSelectionPattern nativePattern)
+            : base(automationAutomationElement, nativePattern, (element, cached) => new SelectionPatternInformation(element, cached))
         {
         }
 
@@ -26,8 +26,8 @@ namespace FlaUI.UIA3.Patterns
 
     public class SelectionPatternInformation : InformationBase
     {
-        public SelectionPatternInformation(Element automationElement, bool cached)
-            : base(automationElement, cached)
+        public SelectionPatternInformation(AutomationElement automationAutomationElement, bool cached)
+            : base(automationAutomationElement, cached)
         {
         }
 
@@ -41,7 +41,7 @@ namespace FlaUI.UIA3.Patterns
             get { return Get<bool>(SelectionPattern.IsSelectionRequiredProperty); }
         }
 
-        public Element[] Selection
+        public AutomationElement[] Selection
         {
             get { return NativeElementArrayToElements(SelectionPattern.SelectionProperty); }
         }

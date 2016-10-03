@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace FlaUI.UIA3.Elements
 {
-    public class TextBox : Element
+    public class TextBox : AutomationElement
     {
         public TextBox(UIA3Automation automation, IUIAutomationElement nativeElement) : base(automation, nativeElement)
         {
@@ -31,7 +31,7 @@ namespace FlaUI.UIA3.Elements
                 {
                     return textPattern.DocumentRange.GetText(Int32.MaxValue);
                 }                
-                throw new MethodNotSupportedException(String.Format("Element '{0}' supports neither ValuePattern or TextPattern", ToString()));
+                throw new MethodNotSupportedException(String.Format("AutomationElement '{0}' supports neither ValuePattern or TextPattern", ToString()));
             }
             set
             {

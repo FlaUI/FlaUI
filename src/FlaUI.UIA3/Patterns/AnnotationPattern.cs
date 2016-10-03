@@ -15,8 +15,8 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId DateTimeProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_AnnotationDateTimePropertyId, "DateTime");
         public static readonly PropertyId TargetProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_AnnotationTargetPropertyId, "Target");
 
-        internal AnnotationPattern(Element automationElement, UIA.IUIAutomationAnnotationPattern nativePattern)
-            : base(automationElement, nativePattern, (element, cached) => new AnnotationPatternInformation(element, cached))
+        internal AnnotationPattern(AutomationElement automationAutomationElement, UIA.IUIAutomationAnnotationPattern nativePattern)
+            : base(automationAutomationElement, nativePattern, (element, cached) => new AnnotationPatternInformation(element, cached))
         {
         }
 
@@ -28,8 +28,8 @@ namespace FlaUI.UIA3.Patterns
 
     public class AnnotationPatternInformation : InformationBase
     {
-        public AnnotationPatternInformation(Element automationElement, bool cached)
-            : base(automationElement, cached)
+        public AnnotationPatternInformation(AutomationElement automationAutomationElement, bool cached)
+            : base(automationAutomationElement, cached)
         {
         }
 
@@ -53,7 +53,7 @@ namespace FlaUI.UIA3.Patterns
             get { return Get<string>(AnnotationPattern.DateTimeProperty); }
         }
 
-        public Element Target
+        public AutomationElement Target
         {
             get { return NativeElementToElement(AnnotationPattern.TargetProperty); }
         }

@@ -14,8 +14,8 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId RowProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_GridItemRowPropertyId, "Row");
         public static readonly PropertyId RowSpanProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_GridItemRowSpanPropertyId, "RowSpan");
 
-        internal GridItemPattern(Element automationElement, UIA.IUIAutomationGridItemPattern nativePattern)
-            : base(automationElement, nativePattern, (element, cached) => new GridItemPatternInformation(element, cached))
+        internal GridItemPattern(AutomationElement automationAutomationElement, UIA.IUIAutomationGridItemPattern nativePattern)
+            : base(automationAutomationElement, nativePattern, (element, cached) => new GridItemPatternInformation(element, cached))
         {
         }
 
@@ -27,8 +27,8 @@ namespace FlaUI.UIA3.Patterns
 
     public class GridItemPatternInformation : InformationBase
     {
-        public GridItemPatternInformation(Element automationElement, bool cached)
-            : base(automationElement, cached)
+        public GridItemPatternInformation(AutomationElement automationAutomationElement, bool cached)
+            : base(automationAutomationElement, cached)
         {
         }
 
@@ -42,7 +42,7 @@ namespace FlaUI.UIA3.Patterns
             get { return Get<int>(GridItemPattern.ColumnSpanProperty); }
         }
 
-        public Element ContainingGrid
+        public AutomationElement ContainingGrid
         {
             get { return NativeElementToElement(GridItemPattern.ContainingGridProperty); }
         }

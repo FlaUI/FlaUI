@@ -19,11 +19,11 @@ namespace FlaUI.UIA3.Patterns
         /// </summary>
         public TProp Current { get; private set; }
 
-        protected PatternBaseWithInformation(Element automationElement, object nativePattern, Func<Element, bool, TProp> createFunc)
-            : base(automationElement, nativePattern)
+        protected PatternBaseWithInformation(AutomationElement automationAutomationElement, object nativePattern, Func<AutomationElement, bool, TProp> createFunc)
+            : base(automationAutomationElement, nativePattern)
         {
-            Cached = createFunc(AutomationElement, true);
-            Current = createFunc(AutomationElement, false);
+            Cached = createFunc(AutomationAutomationElement, true);
+            Current = createFunc(AutomationAutomationElement, false);
         }
     }
 }

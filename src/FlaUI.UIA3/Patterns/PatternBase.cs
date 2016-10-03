@@ -6,19 +6,19 @@ namespace FlaUI.UIA3.Patterns
     public abstract class PatternBase
     {
         public UIA3Automation Automation { get; private set; }
-        public Element AutomationElement { get; private set; }
+        public AutomationElement AutomationAutomationElement { get; private set; }
         protected object NativePattern { get; private set; }
 
-        protected PatternBase(Element automationElement, object nativePattern)
+        protected PatternBase(AutomationElement automationAutomationElement, object nativePattern)
         {
-            Automation = automationElement.Automation;
-            AutomationElement = automationElement;
+            Automation = automationAutomationElement.Automation;
+            AutomationAutomationElement = automationAutomationElement;
             NativePattern = nativePattern;
         }
 
-        public Element ToAutomationElement(UIA.IUIAutomationElement nativeElement)
+        public AutomationElement ToAutomationElement(UIA.IUIAutomationElement nativeElement)
         {
-            return nativeElement == null ? null : new Element(Automation, nativeElement);
+            return nativeElement == null ? null : new AutomationElement(Automation, nativeElement);
         }
     }
 }

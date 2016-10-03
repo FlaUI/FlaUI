@@ -19,8 +19,8 @@ namespace FlaUI.UIA3.Patterns
         public static readonly EventId WindowClosedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_Window_WindowClosedEventId, "WindowClosed");
         public static readonly EventId WindowOpenedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_Window_WindowOpenedEventId, "WindowOpened");
 
-        internal WindowPattern(Element automationElement, UIA.IUIAutomationWindowPattern nativePattern)
-            : base(automationElement, nativePattern, (element, cached) => new WindowPatternInformation(element, cached))
+        internal WindowPattern(AutomationElement automationAutomationElement, UIA.IUIAutomationWindowPattern nativePattern)
+            : base(automationAutomationElement, nativePattern, (element, cached) => new WindowPatternInformation(element, cached))
         {
         }
 
@@ -47,8 +47,8 @@ namespace FlaUI.UIA3.Patterns
 
     public class WindowPatternInformation : InformationBase
     {
-        public WindowPatternInformation(Element automationElement, bool cached)
-            : base(automationElement, cached)
+        public WindowPatternInformation(AutomationElement automationAutomationElement, bool cached)
+            : base(automationAutomationElement, cached)
         {
         }
 
