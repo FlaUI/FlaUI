@@ -21,7 +21,7 @@ namespace FlaUI.Core.UITests.Elements
             RestartApp();
             var mainWindow = App.GetMainWindow(Uia3Automation);
             var tab = mainWindow.FindFirst(TreeScope.Descendants, mainWindow.ConditionFactory.ByControlType(ControlType.Tab)).AsTab();
-            Assert.That(tab.TabItems, Has.Length.EqualTo(2));
+            Assert.That(tab.TabItemsAutomation, Has.Length.EqualTo(2));
             Assert.That(tab.SelectedTabItemIndex, Is.EqualTo(0));
             tab.SelectTabItem(1);
             Helpers.WaitUntilInputIsProcessed();

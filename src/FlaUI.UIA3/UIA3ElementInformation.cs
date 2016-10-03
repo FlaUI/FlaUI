@@ -36,12 +36,12 @@ namespace FlaUI.UIA3
                 return clickablePoint;
             }
         }
-        public Element[] ControllerFor { get; }
+        public AutomationElement[] ControllerFor { get; }
         public ControlType ControlType => Get<ControlType>(AutomationObjectIds.ControlTypeProperty);
         public CultureInfo Culture { get; }
-        public Element[] DescribedBy { get; }
-        public Element[] FlowsFrom { get; }
-        public Element[] FlowsTo { get; }
+        public AutomationElement[] DescribedBy { get; }
+        public AutomationElement[] FlowsFrom { get; }
+        public AutomationElement[] FlowsTo { get; }
         public string FrameworkId => Get<string>(AutomationObjectIds.FrameworkIdProperty);
         public bool HasKeyboardFocus { get; }
         public string HelpText { get; }
@@ -56,7 +56,7 @@ namespace FlaUI.UIA3
         public bool IsRequiredForForm { get; }
         public string ItemStatus { get; }
         public string ItemType { get; }
-        public Element LabeledBy { get; }
+        public AutomationElement LabeledBy { get; }
         public string LocalizedControlType { get; }
         public string Name => Get<string>(AutomationObjectIds.NameProperty);
         public IntPtr NativeWindowHandle { get; }

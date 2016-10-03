@@ -5,49 +5,49 @@ using System.Linq;
 
 namespace FlaUI.Core.Elements
 {
-    public class Tab : Element
+    public class Tab : AutomationElement
     {
         public Tab(AutomationObjectBase automationObject) : base(automationObject)
         {
         }
 
         /// <summary>
-        /// The currently selected <see cref="TabItem"/>
+        /// The currently selected <see cref="TabItemAutomation"/>
         /// </summary>
-        public TabItem SelectedTabItem
+        public TabItemAutomation SelectedTabItemAutomation
         {
-            get { return TabItems.FirstOrDefault(t => t.IsSelected); }
+            get { return TabItemsAutomation.FirstOrDefault(t => t.IsSelected); }
         }
 
         /// <summary>
-        /// The index of the currently selected <see cref="TabItem"/>
+        /// The index of the currently selected <see cref="TabItemAutomation"/>
         /// </summary>
         public int SelectedTabItemIndex => GetIndexOfSelectedTabItem();
 
         /// <summary>
-        /// All <see cref="TabItem"/> objects from this <see cref="Tab"/>
+        /// All <see cref="TabItemAutomation"/> objects from this <see cref="Tab"/>
         /// </summary>
-        public TabItem[] TabItems => GetTabItems();
+        public TabItemAutomation[] TabItemsAutomation => GetTabItems();
 
         /// <summary>
-        /// Selects a <see cref="TabItem"/> by index
+        /// Selects a <see cref="TabItemAutomation"/> by index
         /// </summary>
         public void SelectTabItem(int index)
         {
-            var tabItem = TabItems[index];
+            var tabItem = TabItemsAutomation[index];
             tabItem.Select();
         }
 
         /// <summary>
-        /// Selects a <see cref="TabItem"/> by a give text (name property)
+        /// Selects a <see cref="TabItemAutomation"/> by a give text (name property)
         /// </summary>
         public void SelectTabItem(string text)
         {
-            var tabItems = TabItems;
+            var tabItems = TabItemsAutomation;
             var foundTabItemIndex = Array.FindIndex(tabItems, t => t.Current.Name == text);
             if (foundTabItemIndex < 0)
             {
-                throw new Exception(String.Format("No TabItem found with text '{0}'", text));
+                throw new Exception(String.Format("No TabItemAutomation found with text '{0}'", text));
             }
             var previousSelectedTabItemIndex = SelectedTabItemIndex;
             if (previousSelectedTabItemIndex == foundTabItemIndex)
@@ -60,9 +60,9 @@ namespace FlaUI.Core.Elements
         }
 
         /// <summary>
-        /// Gets all the <see cref="TabItem"/> objects for this <see cref="Tab"/>
+        /// Gets all the <see cref="TabItemAutomation"/> objects for this <see cref="Tab"/>
         /// </summary>
-        private TabItem[] GetTabItems()
+        private TabItemAutomation[] GetTabItems()
         {
             return FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.TabItem))
                 .Select(e => e.AsTabItem()).ToArray();
@@ -70,7 +70,7 @@ namespace FlaUI.Core.Elements
 
         private int GetIndexOfSelectedTabItem()
         {
-            return Array.FindIndex(TabItems, t => t.IsSelected);
+            return Array.FindIndex(TabItemsAutomation, t => t.IsSelected);
         }
     }
 }

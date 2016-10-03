@@ -2,7 +2,7 @@
 
 namespace FlaUI.Core.Elements
 {
-    public class Label : Element
+    public class Label : AutomationElement
     {
         public Label(AutomationObjectBase automationObject) : base(automationObject)
         {

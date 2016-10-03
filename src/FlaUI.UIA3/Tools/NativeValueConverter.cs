@@ -12,17 +12,17 @@ namespace FlaUI.UIA3.Tools
     public static class NativeValueConverter
     {
         /// <summary>
-        /// Converts a native element array to an array of <see cref="Element"/>
+        /// Converts a native automationElement array to an array of <see cref="AutomationElement"/>
         /// </summary>
-        public static Element[] NativeArrayToManaged(UIA3Automation automation, UIA.IUIAutomationElementArray nativeElements)
+        public static AutomationElement[] NativeArrayToManaged(UIA3Automation automation, UIA.IUIAutomationElementArray nativeElements)
         {
-            if (nativeElements == null) { return new Element[0]; }
-            var retArray = new Element[nativeElements.Length];
+            if (nativeElements == null) { return new AutomationElement[0]; }
+            var retArray = new AutomationElement[nativeElements.Length];
             for (var i = 0; i < nativeElements.Length; i++)
             {
                 var nativeElement = nativeElements.GetElement(i);
                 var automationObject = automation.WrapNativeElement(nativeElement);
-                retArray[i] = new Element(automationObject);
+                retArray[i] = new AutomationElement(automationObject);
             }
             return retArray;
         }
@@ -42,11 +42,11 @@ namespace FlaUI.UIA3.Tools
         }
 
         /// <summary>
-        /// Converts a native element to an <see cref="Element"/>
+        /// Converts a native automationElement to an <see cref="AutomationElement"/>
         /// </summary>
-        public static Element NativeToManaged(UIA3Automation automation, UIA.IUIAutomationElement nativeElement)
+        public static AutomationElement NativeToManaged(UIA3Automation automation, UIA.IUIAutomationElement nativeElement)
         {
-            return nativeElement == null ? null : new Element(automation.WrapNativeElement(nativeElement));
+            return nativeElement == null ? null : new AutomationElement(automation.WrapNativeElement(nativeElement));
         }
 
         /// <summary>
@@ -89,10 +89,10 @@ namespace FlaUI.UIA3.Tools
             {
                 val = ((CultureInfo)val).LCID;
             }
-            else if (val is Element)
+            else if (val is AutomationElement)
             {
                 throw new NotImplementedException();
-                //val = ((Element)val).NativeElement;
+                //val = ((AutomationElement)val).NativeElement;
             }
             return val;
         }

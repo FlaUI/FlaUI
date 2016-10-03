@@ -29,6 +29,6 @@ namespace FlaUI.Core.Patterns
     public interface ISelectionItemPatternInformation : IPatternInformation
     {
         bool IsSelected { get; }
-        Element SelectionContainer { get; }
+        AutomationElement SelectionContainer { get; }
     }
 }

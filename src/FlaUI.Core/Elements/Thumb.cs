@@ -3,7 +3,7 @@ using FlaUI.Core.Input;
 
 namespace FlaUI.Core.Elements
 {
-    public class Thumb : Element
+    public class Thumb : AutomationElement
     {
         public Thumb(AutomationObjectBase automationObject) : base(automationObject)
         {

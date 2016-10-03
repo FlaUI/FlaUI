@@ -18,7 +18,7 @@ namespace FlaUI.UIA2
         public string AriaProperties { get; }
         public string AriaRole { get; }
         public string AutomationId => Get<string>(AutomationObjectIds.AutomationIdProperty);
-        public Element[] FlowsTo { get; }
+        public AutomationElement[] FlowsTo { get; }
         public string FrameworkId => Get<string>(AutomationObjectIds.FrameworkIdProperty);
         public bool HasKeyboardFocus { get; }
         public string HelpText { get; }
@@ -33,16 +33,16 @@ namespace FlaUI.UIA2
         public bool IsRequiredForForm { get; }
         public string ItemStatus { get; }
         public string ItemType { get; }
-        public Element LabeledBy { get; }
+        public AutomationElement LabeledBy { get; }
         public string LocalizedControlType { get; }
         public Rectangle BoundingRectangle => Get<Rectangle>(AutomationObjectIds.BoundingRectangleProperty);
         public string ClassName { get; }
         public Point ClickablePoint => Get<Point>(AutomationObjectIds.ClickablePointProperty);
-        public Element[] ControllerFor { get; }
+        public AutomationElement[] ControllerFor { get; }
         public ControlType ControlType { get; }
         public CultureInfo Culture { get; }
-        public Element[] DescribedBy { get; }
-        public Element[] FlowsFrom { get; }
+        public AutomationElement[] DescribedBy { get; }
+        public AutomationElement[] FlowsFrom { get; }
         public string Name => Get<string>(AutomationObjectIds.NameProperty);
         public IntPtr NativeWindowHandle { get; }
         public bool OptimizeForVisualContent { get; }

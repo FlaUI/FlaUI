@@ -5,6 +5,6 @@ namespace FlaUI.Core.EventHandlers
 {
     public interface IAutomationStructureChangedEventHandler
     {
-        void HandleStructureChangedEvent(Element sender, StructureChangeType changeType, int[] runtimeId);
+        void HandleStructureChangedEvent(AutomationElement sender, StructureChangeType changeType, int[] runtimeId);
     }
 }
