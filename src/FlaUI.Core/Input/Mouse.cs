@@ -64,10 +64,7 @@ namespace FlaUI.Core.Input
         /// <summary>
         /// Implementation of <see cref="IMouse.AreButtonsSwapped" />
         /// </summary>
-        public bool AreButtonsSwapped
-        {
-            get { return User32.GetSystemMetrics(SystemMetric.SM_SWAPBUTTON) != 0; }
-        }
+        public bool AreButtonsSwapped => User32.GetSystemMetrics(SystemMetric.SM_SWAPBUTTON) != 0;
 
         /// <summary>
         /// Creates an instance

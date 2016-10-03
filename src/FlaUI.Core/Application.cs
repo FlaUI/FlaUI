@@ -1,4 +1,6 @@
-﻿using FlaUI.Core.Logging;
+﻿using FlaUI.Core.Elements;
+using FlaUI.Core.Elements.Infrastructure;
+using FlaUI.Core.Logging;
 using FlaUI.Core.Tools;
 using System;
 using System.ComponentModel;
@@ -20,20 +22,14 @@ namespace FlaUI.Core
         /// <summary>
         /// Flag to indicate, if the application is a windows store app
         /// </summary>
-        public bool IsStoreApp { get; private set; }
+        public bool IsStoreApp { get; }
 
         /// <summary>
         /// The name of the application
         /// </summary>
-        public string Name
-        {
-            get { return _process.ProcessName; }
-        }
+        public string Name => _process.ProcessName;
 
-        public IntPtr MainWindowHandle
-        {
-            get { return _process.MainWindowHandle; }
-        }
+        public IntPtr MainWindowHandle => _process.MainWindowHandle;
 
         public Application(int processId, bool isStoreApp = false)
             : this(FindProcess(processId), isStoreApp)
@@ -168,6 +164,11 @@ namespace FlaUI.Core
                 Thread.Sleep(50);
                 _process.Refresh();
             }
+        }
+
+        public Window GetMainWindow(AutomationBase automation)
+        {
+            return automation.FromHandle(MainWindowHandle).AsWindow();
         }
 
         public void Dispose()

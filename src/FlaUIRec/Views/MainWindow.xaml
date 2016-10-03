@@ -10,7 +10,7 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0">
             <Label>Process ID:</Label>
-            <TextBox Width="70" x:Name="ProcessIdText"></TextBox>
+            <TextBox Width="70" x:Name="ProcessIdText" />
         </StackPanel>
         <Button Grid.Row="1" Content="Start" HorizontalAlignment="Left" Width="75" Click="Button_Click"/>
         <ListBox Grid.Row="2" x:Name="myList"/>

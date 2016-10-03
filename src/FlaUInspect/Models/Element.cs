@@ -1,6 +1,5 @@
 ﻿using FlaUI.Core.Definitions;
 using System.Collections.Generic;
-using FlaUI.UIA3.Definitions;
 
 namespace FlaUInspect.Models
 {

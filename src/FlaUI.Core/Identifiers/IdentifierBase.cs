@@ -40,12 +40,12 @@ namespace FlaUI.Core.Identifiers
         /// <summary>
         /// The native id of the identifier
         /// </summary>
-        public int Id { get; private set; }
+        public int Id { get; }
 
         /// <summary>
         /// A readable name for the identifier
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; }
 
         protected IdentifierBase(int id, string name)
         {

@@ -8,7 +8,7 @@ namespace FlaUI.Core.Exceptions
     [Serializable]
     public class PropertyNotSupportedException : Exception
     {
-        public PropertyId Property { get; private set; }
+        public PropertyId Property { get; }
 
         public PropertyNotSupportedException()
         {

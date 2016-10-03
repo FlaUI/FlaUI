@@ -1,13 +1,15 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.Tools;
-using FlaUI.UIA3.Definitions;
-using FlaUI.UIA3.Elements;
+using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.Identifiers;
+using FlaUI.Core.Patterns;
+using FlaUI.Core.Patterns.Infrastructure;
+using FlaUI.Core.Tools;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class WindowPattern : PatternBaseWithInformation<WindowPatternInformation>
+    public class WindowPattern : PatternBaseWithInformation<UIA.IUIAutomationWindowPattern, WindowPatternInformation>, IWindowPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_WindowPatternId, "Window");
         public static readonly PropertyId CanMaximizeProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_WindowCanMaximizePropertyId, "CanMaximize");
@@ -19,15 +21,19 @@ namespace FlaUI.UIA3.Patterns
         public static readonly EventId WindowClosedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_Window_WindowClosedEventId, "WindowClosed");
         public static readonly EventId WindowOpenedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_Window_WindowOpenedEventId, "WindowOpened");
 
-        internal WindowPattern(Element automationElement, UIA.IUIAutomationWindowPattern nativePattern)
-            : base(automationElement, nativePattern, (element, cached) => new WindowPatternInformation(element, cached))
+        public WindowPattern(AutomationObjectBase automationObject, UIA.IUIAutomationWindowPattern nativePattern) : base(automationObject, nativePattern)
         {
+            Properties = new WindowPatternProperties();
+            Events = new WindowPatternEvents();
         }
 
-        public new UIA.IUIAutomationWindowPattern NativePattern
-        {
-            get { return (UIA.IUIAutomationWindowPattern)base.NativePattern; }
-        }
+        IWindowPatternInformation IPatternWithInformation<IWindowPatternInformation>.Cached => Cached;
+
+        IWindowPatternInformation IPatternWithInformation<IWindowPatternInformation>.Current => Current;
+
+        public IWindowPatternProperties Properties { get; }
+
+        public IWindowPatternEvents Events { get; }
 
         public void Close()
         {
@@ -39,47 +45,50 @@ namespace FlaUI.UIA3.Patterns
             ComCallWrapper.Call(() => NativePattern.SetWindowVisualState((interop.UIAutomationCore.WindowVisualState)state));
         }
 
-        public int WaitForInputIdle(int milliseconds)
+        public bool WaitForInputIdle(int milliseconds)
         {
-            return ComCallWrapper.Call(() => NativePattern.WaitForInputIdle(milliseconds));
+            return ComCallWrapper.Call(() => NativePattern.WaitForInputIdle(milliseconds)) != 0;
+        }
+
+        protected override WindowPatternInformation CreateInformation(bool cached)
+        {
+            return new WindowPatternInformation(AutomationObject, cached);
         }
     }
 
-    public class WindowPatternInformation : InformationBase
+    public class WindowPatternInformation : ElementInformationBase, IWindowPatternInformation
     {
-        public WindowPatternInformation(Element automationElement, bool cached)
-            : base(automationElement, cached)
+        public WindowPatternInformation(AutomationObjectBase automationObject, bool cached) : base(automationObject, cached)
         {
         }
 
-        public bool CanMaximize
-        {
-            get { return Get<bool>(WindowPattern.CanMaximizeProperty); }
-        }
+        public bool CanMaximize => Get<bool>(WindowPattern.CanMaximizeProperty);
+        public bool CanMinimize => Get<bool>(WindowPattern.CanMinimizeProperty);
+        public bool IsModal => Get<bool>(WindowPattern.IsModalProperty);
+        public bool IsTopmost => Get<bool>(WindowPattern.IsTopmostProperty);
+        public WindowInteractionState WindowInteractionState => Get<WindowInteractionState>(WindowPattern.WindowInteractionStateProperty);
+        public WindowVisualState WindowVisualState => Get<WindowVisualState>(WindowPattern.WindowVisualStateProperty);
+    }
 
-        public bool CanMinimize
-        {
-            get { return Get<bool>(WindowPattern.CanMinimizeProperty); }
-        }
+    public class WindowPatternProperties : IWindowPatternProperties
+    {
+        public PropertyId CanMaximizeProperty => WindowPattern.CanMinimizeProperty;
 
-        public bool IsModal
-        {
-            get { return Get<bool>(WindowPattern.IsModalProperty); }
-        }
+        public PropertyId CanMinimizeProperty => WindowPattern.CanMinimizeProperty;
 
-        public bool IsTopmost
-        {
-            get { return Get<bool>(WindowPattern.IsTopmostProperty); }
-        }
+        public PropertyId IsModalProperty => WindowPattern.IsModalProperty;
 
-        public WindowInteractionState WindowInteractionState
-        {
-            get { return Get<WindowInteractionState>(WindowPattern.WindowInteractionStateProperty); }
-        }
+        public PropertyId IsTopmostProperty => WindowPattern.IsTopmostProperty;
 
-        public WindowVisualState WindowVisualState
-        {
-            get { return Get<WindowVisualState>(WindowPattern.WindowVisualStateProperty); }
-        }
+        public PropertyId WindowInteractionStateProperty => WindowPattern.WindowInteractionStateProperty;
+
+        public PropertyId WindowVisualStateProperty => WindowPattern.WindowVisualStateProperty;
+    }
+
+    public class WindowPatternEvents : IWindowPatternEvents
+    {
+        public EventId WindowClosedEvent => WindowPattern.WindowClosedEvent;
+
+        public EventId WindowOpenedEvent => WindowPattern.WindowOpenedEvent;
     }
 }

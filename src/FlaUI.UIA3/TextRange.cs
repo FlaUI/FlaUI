@@ -1,8 +1,9 @@
-﻿using FlaUI.Core.Shapes;
+﻿using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements.Infrastructure;
+using FlaUI.Core.Identifiers;
+using FlaUI.Core.Shapes;
 using FlaUI.Core.Tools;
 using FlaUI.UIA3.Definitions;
-using FlaUI.UIA3.Elements;
-using FlaUI.Core.Identifiers;
 using FlaUI.UIA3.Tools;
 using UIA = interop.UIAutomationCore;
 
@@ -10,9 +11,9 @@ namespace FlaUI.UIA3
 {
     public class TextRange
     {
-        public UIA3Automation Automation { get; private set; }
+        public UIA3Automation Automation { get; }
 
-        public UIA.IUIAutomationTextRange NativeRange { get; private set; }
+        public UIA.IUIAutomationTextRange NativeRange { get; }
 
         internal TextRange(UIA3Automation automation, UIA.IUIAutomationTextRange nativeRange)
         {

@@ -2,7 +2,6 @@
 using FlaUI.Core.Shapes;
 using FlaUI.Core.UITests.TestFramework;
 using FlaUI.UIA3;
-using FlaUI.UIA3.Tools;
 using NUnit.Framework;
 using System.Threading;
 

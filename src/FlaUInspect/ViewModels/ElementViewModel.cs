@@ -1,6 +1,6 @@
 ﻿using FlaUI.Core.Conditions;
-using FlaUI.UIA3.Definitions;
-using FlaUI.UIA3.Elements;
+using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements.Infrastructure;
 using FlaUInspect.Core;
 using System;
 using System.Collections.ObjectModel;
@@ -19,9 +19,9 @@ namespace FlaUInspect.ViewModels
             Children = new ObservableCollection<ElementViewModel>(childElements.Select(e => new ElementViewModel(e)));
         }
 
-        public string Name { get { return NormalizeString(_element.Current.Name); } }
-        public string AutomationId { get { return NormalizeString(_element.Current.AutomationId); } }
-        public ControlType ControlType { get { return _element.Current.ControlType; } }
+        public string Name => NormalizeString(_element.Current.Name);
+        public string AutomationId => NormalizeString(_element.Current.AutomationId);
+        public ControlType ControlType => _element.Current.ControlType;
         public ObservableCollection<ElementViewModel> Children { get; set; }
 
         private string NormalizeString(string value)

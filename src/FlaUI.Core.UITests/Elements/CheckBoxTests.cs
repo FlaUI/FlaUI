@@ -1,8 +1,7 @@
-﻿using FlaUI.Core.UITests.TestFramework;
-using FlaUI.UIA3.Conditions;
-using FlaUI.UIA3.Definitions;
-using FlaUI.UIA3.Elements;
-using FlaUI.UIA3.Tools;
+﻿using FlaUI.Core.Conditions;
+using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements.Infrastructure;
+using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
@@ -21,7 +20,7 @@ namespace FlaUI.Core.UITests.Elements
         {
             RestartApp();
             var window = App.GetMainWindow(Uia3Automation);
-            var checkBox = window.FindFirst(TreeScope.Descendants, ConditionFactory.ByText("Test Checkbox")).AsCheckBox();
+            var checkBox = window.FindFirst(TreeScope.Descendants, Uia3Automation.ConditionFactory.ByText("Test Checkbox")).AsCheckBox();
             Assert.That(checkBox.State, Is.EqualTo(ToggleState.Off));
             checkBox.Toggle();
             Assert.That(checkBox.State, Is.EqualTo(ToggleState.On));
@@ -31,7 +30,7 @@ namespace FlaUI.Core.UITests.Elements
         public void SetStateTest()
         {
             var window = App.GetMainWindow(Uia3Automation);
-            var checkBox = window.FindFirst(TreeScope.Descendants, ConditionFactory.ByText("Test Checkbox")).AsCheckBox();
+            var checkBox = window.FindFirst(TreeScope.Descendants, Uia3Automation.ConditionFactory.ByText("Test Checkbox")).AsCheckBox();
             checkBox.State = ToggleState.On;
             Assert.That(checkBox.State, Is.EqualTo(ToggleState.On));
             checkBox.State = ToggleState.Off;
@@ -45,7 +44,7 @@ namespace FlaUI.Core.UITests.Elements
         {
             RestartApp();
             var window = App.GetMainWindow(Uia3Automation);
-            var checkBox = window.FindFirst(TreeScope.Descendants, ConditionFactory.ByText("3-Way Test Checkbox")).AsCheckBox();
+            var checkBox = window.FindFirst(TreeScope.Descendants, Uia3Automation.ConditionFactory.ByText("3-Way Test Checkbox")).AsCheckBox();
             Assert.That(checkBox.State, Is.EqualTo(ToggleState.Off));
             checkBox.Toggle();
             Assert.That(checkBox.State, Is.EqualTo(ToggleState.On));
@@ -57,7 +56,7 @@ namespace FlaUI.Core.UITests.Elements
         public void ThreeWaySetStateTest()
         {
             var window = App.GetMainWindow(Uia3Automation);
-            var checkBox = window.FindFirst(TreeScope.Descendants, ConditionFactory.ByText("3-Way Test Checkbox")).AsCheckBox();
+            var checkBox = window.FindFirst(TreeScope.Descendants, Uia3Automation.ConditionFactory.ByText("3-Way Test Checkbox")).AsCheckBox();
             checkBox.State = ToggleState.On;
             Assert.That(checkBox.State, Is.EqualTo(ToggleState.On));
             checkBox.State = ToggleState.Off;
