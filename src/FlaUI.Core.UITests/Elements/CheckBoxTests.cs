@@ -20,7 +20,7 @@ namespace FlaUI.Core.UITests.Elements
         {
             RestartApp();
             var window = App.GetMainWindow(Uia3Automation);
-            var checkBox = window.FindFirst(TreeScope.Descendants, Uia3Automation.ConditionFactory.ByText("Test Checkbox")).AsCheckBox();
+            var checkBox = window.FindFirst(TreeScope.Descendants, Uia3Automation.ConditionFactory.ByName("Test Checkbox")).AsCheckBox();
             Assert.That(checkBox.State, Is.EqualTo(ToggleState.Off));
             checkBox.Toggle();
             Assert.That(checkBox.State, Is.EqualTo(ToggleState.On));
