@@ -46,8 +46,7 @@ namespace FlaUI.UIA3.Tools
         /// </summary>
         public static Element NativeToManaged(UIA3Automation automation, UIA.IUIAutomationElement nativeElement)
         {
-            var automationObject = automation.WrapNativeElement(nativeElement);
-            return nativeElement == null ? null : new Element(automationObject);
+            return nativeElement == null ? null : new Element(automation.WrapNativeElement(nativeElement));
         }
 
         /// <summary>

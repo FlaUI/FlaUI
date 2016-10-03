@@ -3,6 +3,7 @@ using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Shapes;
 using FlaUI.UIA2.EventHandlers;
+using FlaUI.UIA2.Tools;
 using System;
 using UIA = System.Windows.Automation;
 
@@ -24,13 +25,13 @@ namespace FlaUI.UIA2
         public override Element GetDesktop()
         {
             var desktop = UIA.AutomationElement.RootElement;
-            return new Element(WrapNativeElement(desktop));
+            return NativeValueConverter.NativeToManaged(this, desktop);
         }
 
         public override Element FromPoint(Point point)
         {
             var nativeElement = UIA.AutomationElement.FromPoint(point);
-            return nativeElement == null ? null : new Element(WrapNativeElement(nativeElement));
+            return NativeValueConverter.NativeToManaged(this, nativeElement);
         }
 
         /// <summary>
@@ -39,7 +40,13 @@ namespace FlaUI.UIA2
         public override Element FromHandle(IntPtr hwnd)
         {
             var nativeElement = UIA.AutomationElement.FromHandle(hwnd);
-            return nativeElement == null ? null : new Element(WrapNativeElement(nativeElement));
+            return NativeValueConverter.NativeToManaged(this, nativeElement);
+        }
+
+        public override Element FocusedElement()
+        {
+            var nativeFocusedElement = UIA.AutomationElement.FocusedElement;
+            return NativeValueConverter.NativeToManaged(this, nativeFocusedElement);
         }
 
         public override IAutomationFocusChangedEventHandler RegisterFocusChangedEvent(Action<Element> action)

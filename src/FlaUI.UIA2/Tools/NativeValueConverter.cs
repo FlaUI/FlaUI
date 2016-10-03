@@ -28,8 +28,7 @@ namespace FlaUI.UIA2.Tools
 
         public static Element NativeToManaged(UIA2Automation automation, UIA.AutomationElement nativeElement)
         {
-            var automationObject = automation.WrapNativeElement(nativeElement);
-            return nativeElement == null ? null : new Element(automationObject);
+            return nativeElement == null ? null : new Element(automation.WrapNativeElement(nativeElement));
         }
 
         public static object ToPoint(object point)

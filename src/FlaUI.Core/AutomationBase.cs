@@ -1,9 +1,9 @@
-﻿using FlaUI.Core.Elements.Infrastructure;
+﻿using FlaUI.Core.Conditions;
+using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Overlay;
 using FlaUI.Core.Shapes;
 using System;
-using FlaUI.Core.Conditions;
 
 namespace FlaUI.Core
 {
@@ -46,6 +46,8 @@ namespace FlaUI.Core
         /// Creates an <see cref="Element"/> from a given windows handle (HWND)
         /// </summary>
         public abstract Element FromHandle(IntPtr hwnd);
+
+        public abstract Element FocusedElement();
 
         public abstract IAutomationFocusChangedEventHandler RegisterFocusChangedEvent(Action<Element> action);
 
