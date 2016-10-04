@@ -1,6 +1,8 @@
 # FlaUI
 
 [![Join the chat at https://gitter.im/FlaUI/Lobby](https://badges.gitter.im/FlaUI/Lobby.svg)](https://gitter.im/FlaUI/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build status](https://ci.appveyor.com/api/projects/status/mwd2o329cma50sxe?svg=true)](https://ci.appveyor.com/project/RomanBaeriswyl/flaui)
+[![Test status](http://flauschig.ch/batch.php?type=tests&account=RomanBaeriswyl&slug=flaui&branch=master)](https://ci.appveyor.com/project/RomanBaeriswyl/flaui/branch/master)
 
 ### Introduction
 FlaUI is a .NET library which helps with automated UI testing of Windows applications (Win32, WinForms, WPF, Store Apps, ...).<br />
@@ -21,11 +23,6 @@ All of them are based on what Microsoft provides. These are the UI Automation li
 So, the commercial solutions are mostly based on multiple of those and/or implement a lot of workaround code to fix those issues.
 TestStack.White has two versions, one for UIA2 and one for UIA3 but because of the old codebase, it's fairly hard to bring UIA3 to work. For this, it also uses an additional library, the UIAComWrapper which uses the same naming as the managed UIA2 and wraps the UIA3 com interop with them (one more source for errors).
 FlaUI now tries to provide an interface for UIA2 and UIA3 where the developer can choose, which version he wants to use.
-
-### Build Status
-|Repo|Build|Tests|
-|:---|:------------------|:------------------|
-|[FlaUI](https://github.com/Roemer/FlaUI)|[![Build status](https://ci.appveyor.com/api/projects/status/mwd2o329cma50sxe?svg=true)](https://ci.appveyor.com/project/RomanBaeriswyl/flaui)|[![Test status](http://flauschig.ch/batch.php?type=tests&account=RomanBaeriswyl&slug=flaui&branch=master)](https://ci.appveyor.com/project/RomanBaeriswyl/flaui/branch/master)|
 
 ### Usage
 The entry point is usually an application or the desktop so you get an automation element (like a window).
