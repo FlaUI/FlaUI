@@ -5,6 +5,7 @@ namespace FlaUI.Core.Tools
 {
     public static class Retry
     {
+        public static readonly TimeSpan DefaultRetryFor = TimeSpan.FromMilliseconds(1000);
         private static readonly TimeSpan DefaultRetryInterval = TimeSpan.FromMilliseconds(200);
 
         public static void For(Action action, TimeSpan retryFor, TimeSpan? retryInterval = null)
@@ -43,8 +44,10 @@ namespace FlaUI.Core.Tools
                     continue;
                 }
 
-                if (!shouldRetry(element))
-                    return element;
+               if (!shouldRetry(element))
+               {
+                  return element;
+               }
             }
 
             return func();

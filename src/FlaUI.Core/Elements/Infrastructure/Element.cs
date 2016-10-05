@@ -145,7 +145,7 @@ namespace FlaUI.Core.Elements.Infrastructure
         /// </summary>
         public Element[] FindAll(TreeScope treeScope, ConditionBase condition)
         {
-            return FindAll(treeScope, condition, TimeSpan.FromMilliseconds(200));
+            return FindAll(treeScope, condition, Retry.DefaultRetryFor);
         }
 
         /// <summary> 
@@ -164,7 +164,7 @@ namespace FlaUI.Core.Elements.Infrastructure
         /// </summary>
         public Element FindFirst(TreeScope treeScope, ConditionBase condition)
         {
-            return FindFirst(treeScope, condition, TimeSpan.FromMilliseconds(200));
+            return FindFirst(treeScope, condition, Retry.DefaultRetryFor);
         }
 
         /// <summary> 
