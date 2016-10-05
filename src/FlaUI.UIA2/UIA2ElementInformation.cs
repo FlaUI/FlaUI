@@ -1,6 +1,7 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Elements.Infrastructure;
+using FlaUI.Core.Exceptions;
 using FlaUI.Core.Shapes;
 using System;
 using System.Globalization;
@@ -13,41 +14,43 @@ namespace FlaUI.UIA2
         {
         }
 
-        public string AcceleratorKey { get; }
-        public string AccessKey { get; }
-        public string AriaProperties { get; }
-        public string AriaRole { get; }
+        public string AcceleratorKey => Get<string>(AutomationObjectIds.AcceleratorKeyProperty);
+        public string AccessKey => Get<string>(AutomationObjectIds.AccessKeyProperty);
+        public string AriaProperties { get { throw new NotSupportedByUIA2Exception(); } }
+        public string AriaRole { get { throw new NotSupportedByUIA2Exception(); } }
         public string AutomationId => Get<string>(AutomationObjectIds.AutomationIdProperty);
-        public Element[] FlowsTo { get; }
-        public string FrameworkId => Get<string>(AutomationObjectIds.FrameworkIdProperty);
-        public bool HasKeyboardFocus { get; }
-        public string HelpText { get; }
-        public bool IsContentElement { get; }
-        public bool IsControlElement { get; }
-        public bool IsDataValidForForm { get; }
-        public bool IsEnabled { get; }
-        public bool IsKeyboardFocusable { get; }
-        public bool IsOffscreen { get; }
-        public bool IsPassword { get; }
-        public bool IsPeripheral { get; }
-        public bool IsRequiredForForm { get; }
-        public string ItemStatus { get; }
-        public string ItemType { get; }
-        public Element LabeledBy { get; }
-        public string LocalizedControlType { get; }
         public Rectangle BoundingRectangle => Get<Rectangle>(AutomationObjectIds.BoundingRectangleProperty);
-        public string ClassName { get; }
+        public string ClassName => Get<string>(AutomationObjectIds.ClassNameProperty);
         public Point ClickablePoint => Get<Point>(AutomationObjectIds.ClickablePointProperty);
-        public Element[] ControllerFor { get; }
-        public ControlType ControlType { get; }
-        public CultureInfo Culture { get; }
-        public Element[] DescribedBy { get; }
-        public Element[] FlowsFrom { get; }
+        public Element[] ControllerFor { get { throw new NotSupportedByUIA2Exception(); } }
+        public ControlType ControlType => Get<ControlType>(AutomationObjectIds.ControlTypeProperty);
+        public CultureInfo Culture => Get<CultureInfo>(AutomationObjectIds.CultureProperty);
+        public Element[] DescribedBy { get { throw new NotSupportedByUIA2Exception(); } }
+        public Element[] FlowsFrom { get { throw new NotSupportedByUIA2Exception(); } }
+        public Element[] FlowsTo { get { throw new NotSupportedByUIA2Exception(); } }
+        public string FrameworkId => Get<string>(AutomationObjectIds.FrameworkIdProperty);
+        public bool HasKeyboardFocus => Get<bool>(AutomationObjectIds.HasKeyboardFocusProperty);
+        public string HelpText => Get<string>(AutomationObjectIds.HelpTextProperty);
+        public bool IsContentElement => Get<bool>(AutomationObjectIds.IsContentElementProperty);
+        public bool IsControlElement => Get<bool>(AutomationObjectIds.IsControlElementProperty);
+        public bool IsDataValidForForm { get { throw new NotSupportedByUIA2Exception(); } }
+        public bool IsEnabled => Get<bool>(AutomationObjectIds.IsEnabledProperty);
+        public bool IsKeyboardFocusable => Get<bool>(AutomationObjectIds.IsKeyboardFocusableProperty);
+        public bool IsOffscreen => Get<bool>(AutomationObjectIds.IsOffscreenProperty);
+        public bool IsPassword => Get<bool>(AutomationObjectIds.IsPasswordProperty);
+        public bool IsPeripheral { get { throw new NotSupportedByUIA2Exception(); } }
+        public bool IsRequiredForForm => Get<bool>(AutomationObjectIds.IsRequiredForFormProperty);
+        public string ItemStatus => Get<string>(AutomationObjectIds.ItemStatusProperty);
+        public string ItemType => Get<string>(AutomationObjectIds.ItemTypeProperty);
+        public Element LabeledBy => Get<Element>(AutomationObjectIds.LabeledByProperty);
+        public LiveSetting LiveSetting { get { throw new NotSupportedByUIA2Exception(); } }
+        public string LocalizedControlType => Get<string>(AutomationObjectIds.LocalizedControlTypeProperty);
         public string Name => Get<string>(AutomationObjectIds.NameProperty);
-        public IntPtr NativeWindowHandle { get; }
-        public bool OptimizeForVisualContent { get; }
-        public int ProcessId { get; }
-        public string ProviderDescription { get; }
-        public int[] RuntimeId { get; }
+        public IntPtr NativeWindowHandle => Get<IntPtr>(AutomationObjectIds.NativeWindowHandleProperty);
+        public bool OptimizeForVisualContent { get { throw new NotSupportedByUIA2Exception(); } }
+        public OrientationType Orientation => Get<OrientationType>(AutomationObjectIds.OrientationProperty);
+        public int ProcessId => Get<int>(AutomationObjectIds.ProcessIdProperty);
+        public string ProviderDescription { get { throw new NotSupportedByUIA2Exception(); } }
+        public int[] RuntimeId => Get<int[]>(AutomationObjectIds.RuntimeIdProperty);
     }
 }

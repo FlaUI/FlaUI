@@ -1,9 +1,9 @@
 ﻿using FlaUI.Core;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.Shapes;
 using System;
 using System.Globalization;
-using FlaUI.Core.Definitions;
 
 namespace FlaUI.UIA3
 {
@@ -13,56 +13,43 @@ namespace FlaUI.UIA3
         {
         }
 
-        public string AcceleratorKey { get; }
-        public string AccessKey { get; }
-        public string AriaProperties { get; }
-        public string AriaRole { get; }
+        public string AcceleratorKey => Get<string>(AutomationObjectIds.AcceleratorKeyProperty);
+        public string AccessKey => Get<string>(AutomationObjectIds.AccessKeyProperty);
+        public string AriaProperties => Get<string>(AutomationObjectIds.AriaPropertiesProperty);
+        public string AriaRole => Get<string>(AutomationObjectIds.AriaRoleProperty);
         public string AutomationId => Get<string>(AutomationObjectIds.AutomationIdProperty);
         public Rectangle BoundingRectangle => Get<Rectangle>(AutomationObjectIds.BoundingRectangleProperty);
-        public string ClassName { get; }
-        public Point ClickablePoint
-        {
-            get
-            {
-                // First try getting it from the property
-                var clickablePoint = Get<Point>(AutomationObjectIds.ClickablePointProperty);
-                // In some cases, the property is not supported but might be available
-                // by the native method, so we will try this as fallback
-                if (clickablePoint == null)
-                {
-                    // Try to get the value directly
-                    clickablePoint = AutomationObject.GetClickablePoint();
-                }
-                return clickablePoint;
-            }
-        }
-        public Element[] ControllerFor { get; }
+        public string ClassName => Get<string>(AutomationObjectIds.ClassNameProperty);
+        public Point ClickablePoint => Get<Point>(AutomationObjectIds.ClickablePointProperty);
+        public Element[] ControllerFor => Get<Element[]>(AutomationObjectIds.ControllerForProperty);
         public ControlType ControlType => Get<ControlType>(AutomationObjectIds.ControlTypeProperty);
-        public CultureInfo Culture { get; }
-        public Element[] DescribedBy { get; }
-        public Element[] FlowsFrom { get; }
-        public Element[] FlowsTo { get; }
+        public CultureInfo Culture => Get<CultureInfo>(AutomationObjectIds.CultureProperty);
+        public Element[] DescribedBy => Get<Element[]>(AutomationObjectIds.DescribedByProperty);
+        public Element[] FlowsFrom => Get<Element[]>(AutomationObjectIds.FlowsFromProperty);
+        public Element[] FlowsTo => Get<Element[]>(AutomationObjectIds.FlowsToProperty);
         public string FrameworkId => Get<string>(AutomationObjectIds.FrameworkIdProperty);
-        public bool HasKeyboardFocus { get; }
-        public string HelpText { get; }
-        public bool IsContentElement { get; }
-        public bool IsControlElement { get; }
-        public bool IsDataValidForForm { get; }
-        public bool IsEnabled { get; }
-        public bool IsKeyboardFocusable { get; }
-        public bool IsOffscreen { get; }
-        public bool IsPassword { get; }
-        public bool IsPeripheral { get; }
-        public bool IsRequiredForForm { get; }
-        public string ItemStatus { get; }
-        public string ItemType { get; }
-        public Element LabeledBy { get; }
-        public string LocalizedControlType { get; }
+        public bool HasKeyboardFocus => Get<bool>(AutomationObjectIds.HasKeyboardFocusProperty);
+        public string HelpText => Get<string>(AutomationObjectIds.HelpTextProperty);
+        public bool IsContentElement => Get<bool>(AutomationObjectIds.IsContentElementProperty);
+        public bool IsControlElement => Get<bool>(AutomationObjectIds.IsControlElementProperty);
+        public bool IsDataValidForForm => Get<bool>(AutomationObjectIds.IsDataValidForFormProperty);
+        public bool IsEnabled => Get<bool>(AutomationObjectIds.IsEnabledProperty);
+        public bool IsKeyboardFocusable => Get<bool>(AutomationObjectIds.IsKeyboardFocusableProperty);
+        public bool IsOffscreen => Get<bool>(AutomationObjectIds.IsOffscreenProperty);
+        public bool IsPassword => Get<bool>(AutomationObjectIds.IsPasswordProperty);
+        public bool IsPeripheral => Get<bool>(AutomationObjectIds.IsPeripheralProperty);
+        public bool IsRequiredForForm => Get<bool>(AutomationObjectIds.IsRequiredForFormProperty);
+        public string ItemStatus => Get<string>(AutomationObjectIds.ItemStatusProperty);
+        public string ItemType => Get<string>(AutomationObjectIds.ItemTypeProperty);
+        public Element LabeledBy => Get<Element>(AutomationObjectIds.LabeledByProperty);
+        public LiveSetting LiveSetting => Get<LiveSetting>(AutomationObjectIds.LiveSettingProperty);
+        public string LocalizedControlType => Get<string>(AutomationObjectIds.LocalizedControlTypeProperty);
         public string Name => Get<string>(AutomationObjectIds.NameProperty);
-        public IntPtr NativeWindowHandle { get; }
-        public bool OptimizeForVisualContent { get; }
-        public int ProcessId { get; }
-        public string ProviderDescription { get; }
-        public int[] RuntimeId { get; }
+        public IntPtr NativeWindowHandle => Get<IntPtr>(AutomationObjectIds.NativeWindowHandleProperty);
+        public bool OptimizeForVisualContent => Get<bool>(AutomationObjectIds.OptimizeForVisualContentProperty);
+        public OrientationType Orientation => Get<OrientationType>(AutomationObjectIds.OrientationProperty);
+        public int ProcessId => Get<int>(AutomationObjectIds.ProcessIdProperty);
+        public string ProviderDescription => Get<string>(AutomationObjectIds.ProviderDescriptionProperty);
+        public int[] RuntimeId => Get<int[]>(AutomationObjectIds.RuntimeIdProperty);
     }
 }
