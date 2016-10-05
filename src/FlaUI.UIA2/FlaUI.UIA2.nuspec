@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/Roemer/FlaUI/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Roemer/FlaUI</projectUrl>
+    <iconUrl>https://github.com/Roemer/FlaUI/blob/master/FlaUI.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>UI Automation UIA2 UIA3 UIA System.Windows.Automation</tags>
+  </metadata>
+</package>
