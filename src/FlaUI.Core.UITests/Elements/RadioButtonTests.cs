@@ -5,17 +5,19 @@ using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
 {
-    [TestFixture(TestApplicationType.WinForms)]
-    [TestFixture(TestApplicationType.Wpf)]
+    [TestFixture(AutomationType.UIA2, TestApplicationType.WinForms)]
+    [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
+    [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
+    [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class RadioButtonTests : UITestBase
     {
-        public RadioButtonTests(TestApplicationType appType) : base(appType) { }
+        public RadioButtonTests(AutomationType automationType, TestApplicationType appType) : base(automationType, appType) { }
 
         [Test]
         public void SelectSingleRadioButtonTest()
         {
             RestartApp();
-            var radioButton = App.GetMainWindow(Uia3Automation).FindFirst(TreeScope.Descendants, Uia3Automation.ConditionFactory.ByAutomationId("RadioButton1")).AsRadioButton();
+            var radioButton = App.GetMainWindow(Automation).FindFirst(TreeScope.Descendants, Automation.ConditionFactory.ByAutomationId("RadioButton1")).AsRadioButton();
             Assert.That(radioButton.IsSelected, Is.False);
             radioButton.Select();
             Assert.That(radioButton.IsSelected, Is.True);
@@ -25,8 +27,8 @@ namespace FlaUI.Core.UITests.Elements
         public void SelectRadioButtonGroupTest()
         {
             RestartApp();
-            var radioButton1 = App.GetMainWindow(Uia3Automation).FindFirst(TreeScope.Descendants, Uia3Automation.ConditionFactory.ByAutomationId("RadioButton1")).AsRadioButton();
-            var radioButton2 = App.GetMainWindow(Uia3Automation).FindFirst(TreeScope.Descendants, Uia3Automation.ConditionFactory.ByAutomationId("RadioButton2")).AsRadioButton();
+            var radioButton1 = App.GetMainWindow(Automation).FindFirst(TreeScope.Descendants, Automation.ConditionFactory.ByAutomationId("RadioButton1")).AsRadioButton();
+            var radioButton2 = App.GetMainWindow(Automation).FindFirst(TreeScope.Descendants, Automation.ConditionFactory.ByAutomationId("RadioButton2")).AsRadioButton();
 
             Assert.That(radioButton1.IsSelected && radioButton2.IsSelected, Is.False);
 

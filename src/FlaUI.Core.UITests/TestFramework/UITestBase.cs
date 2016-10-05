@@ -1,9 +1,9 @@
-﻿using FlaUI.UIA3;
+﻿using FlaUI.UIA2;
+using FlaUI.UIA3;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using System;
 using System.IO;
-using FlaUI.UIA2;
 
 namespace FlaUI.Core.UITests.TestFramework
 {
@@ -13,13 +13,12 @@ namespace FlaUI.Core.UITests.TestFramework
     public abstract class UITestBase
     {
         /// <summary>
-        /// Flag which indicates if a test was run on a new instance of the app
+        /// Flag which indicates if any test was run on a new instance of the app
         /// </summary>
         private bool _wasTestRun;
 
-        /// <summary>
-        /// The type of the application to start
-        /// </summary>
+        protected AutomationType AutomationType { get; }
+
         protected TestApplicationType ApplicationType { get; }
 
         /// <summary>
@@ -32,16 +31,15 @@ namespace FlaUI.Core.UITests.TestFramework
         /// </summary>
         protected Application App { get; private set; }
 
-        protected UIA3Automation Uia3Automation { get; }
-        protected UIA2Automation Uia2Automation { get; }
+        protected AutomationBase Automation { get; }
 
-        protected UITestBase(TestApplicationType appType)
+        protected UITestBase(AutomationType automationType, TestApplicationType appType)
         {
+            AutomationType = automationType;
             ApplicationType = appType;
             ScreenshotDir = @"c:\FailedTestsScreenshots";
             _wasTestRun = false;
-            Uia3Automation = new UIA3Automation();
-            Uia2Automation = new UIA2Automation();
+            Automation = AutomationType == AutomationType.UIA2 ? (AutomationBase)new UIA2Automation() : new UIA3Automation();
         }
 
         /// <summary>
@@ -72,8 +70,7 @@ namespace FlaUI.Core.UITests.TestFramework
         [OneTimeTearDown]
         public void BaseTeardown()
         {
-            Uia3Automation.Dispose();
-            Uia2Automation.Dispose();
+            Automation.Dispose();
             App.Dispose();
             App = null;
         }

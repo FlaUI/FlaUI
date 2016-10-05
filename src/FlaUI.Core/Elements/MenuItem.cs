@@ -24,7 +24,7 @@ namespace FlaUI.Core.Elements
         {
             get
             {
-                // WinForms dies not have the expand pattern but all children are already there to fetch
+                // WinForms does not have the expand pattern but all children are already there to fetch so we can just continue
                 if (_expandCollapseElement.ExpandCollapsePattern != null)
                 {
                     ExpandCollapseState state;

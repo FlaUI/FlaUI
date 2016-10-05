@@ -15,14 +15,14 @@ namespace FlaUI.Core.UITests
     public class CalculatorTests : UITestBase
     {
         public CalculatorTests()
-            : base(TestApplicationType.Custom)
+            : base(AutomationType.UIA3, TestApplicationType.Custom)
         {
         }
 
         [Test]
         public void CalculatorTest()
         {
-            var window = App.GetMainWindow(Uia2Automation);
+            var window = App.GetMainWindow(Automation);
             Console.WriteLine(window.Title);
             var calc = SystemProductNameFetcher.IsWindows10() ? (ICalculator)new Win10Calc(window) : new LegacyCalc(window);
 

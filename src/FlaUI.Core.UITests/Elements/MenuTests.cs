@@ -5,20 +5,22 @@ using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
 {
-    [TestFixture(TestApplicationType.WinForms)]
-    [TestFixture(TestApplicationType.Wpf)]
+    [TestFixture(AutomationType.UIA2, TestApplicationType.WinForms)]
+    [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
+    [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
+    [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class MenuTests : UITestBase
     {
-        public MenuTests(TestApplicationType appType)
-            : base(appType)
+        public MenuTests(AutomationType automationType, TestApplicationType appType)
+            : base(automationType, appType)
         {
         }
 
         [Test]
         public void TestMenuWithSubMenus()
         {
-            var window = App.GetMainWindow(Uia3Automation);
-            var menu = window.FindFirst(TreeScope.Children, Uia3Automation.ConditionFactory.Menu()).AsMenu();
+            var window = App.GetMainWindow(Automation);
+            var menu = window.FindFirst(TreeScope.Children, Automation.ConditionFactory.Menu()).AsMenu();
             Assert.That(menu, Is.Not.Null);
             var items = menu.MenuItems;
             Assert.That(items, Has.Length.EqualTo(2));

@@ -6,11 +6,13 @@ using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
 {
-    [TestFixture(TestApplicationType.WinForms)]
-    [TestFixture(TestApplicationType.Wpf)]
+    [TestFixture(AutomationType.UIA2, TestApplicationType.WinForms)]
+    [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
+    [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
+    [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class ProgressBarTests : UITestBase
     {
-        public ProgressBarTests(TestApplicationType appType) : base(appType) { }
+        public ProgressBarTests(AutomationType automationType, TestApplicationType appType) : base(automationType, appType) { }
 
         [Test]
         public void MinimumValueTest()
@@ -35,8 +37,8 @@ namespace FlaUI.Core.UITests.Elements
 
         private ProgressBar GetProgressBar()
         {
-            var mainWindow = App.GetMainWindow(Uia3Automation);
-            var element = mainWindow.FindFirst(TreeScope.Descendants, mainWindow.ConditionFactory.ByAutomationId("ProgressBar")).AsProgressBar();
+            var mainWindow = App.GetMainWindow(Automation);
+            var element = mainWindow.FindFirst(TreeScope.Descendants, Automation.ConditionFactory.ByAutomationId("ProgressBar")).AsProgressBar();
             return element;
         }
     }

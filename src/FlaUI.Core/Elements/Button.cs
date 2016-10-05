@@ -11,13 +11,14 @@ namespace FlaUI.Core.Elements
 
         public void Click(bool moveMouse = true)
         {
+            var clickablePoint = GetClickablePoint();
             if (moveMouse)
             {
-                Mouse.Instance.MoveTo(Current.ClickablePoint);
+                Mouse.Instance.MoveTo(clickablePoint);
             }
             else
             {
-                Mouse.Instance.Position = Current.ClickablePoint;
+                Mouse.Instance.Position = clickablePoint;
             }
             Mouse.Instance.Click(MouseButton.Left);
         }

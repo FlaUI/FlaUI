@@ -6,12 +6,14 @@ using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
 {
-    [TestFixture(TestApplicationType.WinForms)]
-    [TestFixture(TestApplicationType.Wpf)]
+    [TestFixture(AutomationType.UIA2, TestApplicationType.WinForms)]
+    [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
+    [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
+    [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class TabTests : UITestBase
     {
-        public TabTests(TestApplicationType appType)
-            : base(appType)
+        public TabTests(AutomationType automationType, TestApplicationType appType)
+            : base(automationType, appType)
         {
         }
 
@@ -19,8 +21,8 @@ namespace FlaUI.Core.UITests.Elements
         public void TabSelectTest()
         {
             RestartApp();
-            var mainWindow = App.GetMainWindow(Uia3Automation);
-            var tab = mainWindow.FindFirst(TreeScope.Descendants, mainWindow.ConditionFactory.ByControlType(ControlType.Tab)).AsTab();
+            var mainWindow = App.GetMainWindow(Automation);
+            var tab = mainWindow.FindFirst(TreeScope.Descendants, Automation.ConditionFactory.ByControlType(ControlType.Tab)).AsTab();
             Assert.That(tab.TabItems, Has.Length.EqualTo(2));
             Assert.That(tab.SelectedTabItemIndex, Is.EqualTo(0));
             tab.SelectTabItem(1);

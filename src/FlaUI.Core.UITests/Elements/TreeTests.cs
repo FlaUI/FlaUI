@@ -6,21 +6,23 @@ using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
 {
-    [TestFixture(TestApplicationType.WinForms)]
-    [TestFixture(TestApplicationType.Wpf)]
+    [TestFixture(AutomationType.UIA2,TestApplicationType.WinForms)]
+    [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
+    [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
+    [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class TreeTests : UITestBase
     {
         private Tree _tree;
 
-        public TreeTests(TestApplicationType appType)
-            : base(appType)
+        public TreeTests(AutomationType automationType, TestApplicationType appType)
+            : base(automationType, appType)
         {
         }
 
         [OneTimeSetUp]
         public void SelectTab()
         {
-            var mainWindow = App.GetMainWindow(Uia3Automation);
+            var mainWindow = App.GetMainWindow(Automation);
             var tab = mainWindow.FindFirst(TreeScope.Descendants, mainWindow.ConditionFactory.ByControlType(ControlType.Tab)).AsTab();
             tab.SelectTabItem(1);
             var tree = mainWindow.FindFirst(TreeScope.Descendants, mainWindow.ConditionFactory.ByAutomationId("treeView1")).AsTree();

@@ -76,7 +76,8 @@ namespace FlaUI.UIA2
 
         private T GetNativePatternAs<T>(UIA.AutomationPattern pattern) where T : UIA.BasePattern
         {
-            var nativePattern = AutomationObject.NativeElement.GetCurrentPattern(pattern);
+            object nativePattern;
+            AutomationObject.NativeElement.TryGetCurrentPattern(pattern, out nativePattern);
             return (T)nativePattern;
         }
     }
