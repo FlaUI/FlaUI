@@ -34,6 +34,11 @@ namespace FlaUI.Core.Conditions
             return new PropertyCondition(_propertyLibrary.Generic.ClassNameProperty, className);
         }
 
+        public PropertyCondition ByName(string name)
+        {
+            return new PropertyCondition(_propertyLibrary.Generic.NameProperty, name);
+        }
+
         /// <summary>
         /// Searches for a Menu/MenuBar
         /// </summary>
