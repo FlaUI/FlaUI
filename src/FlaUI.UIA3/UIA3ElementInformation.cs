@@ -21,12 +21,12 @@ namespace FlaUI.UIA3
         public Rectangle BoundingRectangle => Get<Rectangle>(AutomationObjectIds.BoundingRectangleProperty);
         public string ClassName => Get<string>(AutomationObjectIds.ClassNameProperty);
         public Point ClickablePoint => Get<Point>(AutomationObjectIds.ClickablePointProperty);
-        public Element[] ControllerFor => Get<Element[]>(AutomationObjectIds.ControllerForProperty);
+        public AutomationElement[] ControllerFor => Get<AutomationElement[]>(AutomationObjectIds.ControllerForProperty);
         public ControlType ControlType => Get<ControlType>(AutomationObjectIds.ControlTypeProperty);
         public CultureInfo Culture => Get<CultureInfo>(AutomationObjectIds.CultureProperty);
-        public Element[] DescribedBy => Get<Element[]>(AutomationObjectIds.DescribedByProperty);
-        public Element[] FlowsFrom => Get<Element[]>(AutomationObjectIds.FlowsFromProperty);
-        public Element[] FlowsTo => Get<Element[]>(AutomationObjectIds.FlowsToProperty);
+        public AutomationElement[] DescribedBy => Get<AutomationElement[]>(AutomationObjectIds.DescribedByProperty);
+        public AutomationElement[] FlowsFrom => Get<AutomationElement[]>(AutomationObjectIds.FlowsFromProperty);
+        public AutomationElement[] FlowsTo => Get<AutomationElement[]>(AutomationObjectIds.FlowsToProperty);
         public string FrameworkId => Get<string>(AutomationObjectIds.FrameworkIdProperty);
         public bool HasKeyboardFocus => Get<bool>(AutomationObjectIds.HasKeyboardFocusProperty);
         public string HelpText => Get<string>(AutomationObjectIds.HelpTextProperty);
@@ -41,7 +41,7 @@ namespace FlaUI.UIA3
         public bool IsRequiredForForm => Get<bool>(AutomationObjectIds.IsRequiredForFormProperty);
         public string ItemStatus => Get<string>(AutomationObjectIds.ItemStatusProperty);
         public string ItemType => Get<string>(AutomationObjectIds.ItemTypeProperty);
-        public Element LabeledBy => Get<Element>(AutomationObjectIds.LabeledByProperty);
+        public AutomationElement LabeledBy => Get<AutomationElement>(AutomationObjectIds.LabeledByProperty);
         public LiveSetting LiveSetting => Get<LiveSetting>(AutomationObjectIds.LiveSettingProperty);
         public string LocalizedControlType => Get<string>(AutomationObjectIds.LocalizedControlTypeProperty);
         public string Name => Get<string>(AutomationObjectIds.NameProperty);

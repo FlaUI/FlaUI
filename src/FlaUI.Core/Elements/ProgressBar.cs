@@ -3,7 +3,7 @@ using FlaUI.Core.Patterns;
 
 namespace FlaUI.Core.Elements
 {
-    public class ProgressBar : Element
+    public class ProgressBar : AutomationElement
     {
         public ProgressBar(AutomationObjectBase automationObject) : base(automationObject)
         {

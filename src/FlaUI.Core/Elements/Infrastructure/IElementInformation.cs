@@ -15,12 +15,12 @@ namespace FlaUI.Core.Elements.Infrastructure
         Rectangle BoundingRectangle { get; }
         string ClassName { get; }
         Point ClickablePoint { get; }
-        Element[] ControllerFor { get; }
+        AutomationElement[] ControllerFor { get; }
         ControlType ControlType { get; }
         CultureInfo Culture { get; }
-        Element[] DescribedBy { get; }
-        Element[] FlowsFrom { get; }
-        Element[] FlowsTo { get; }
+        AutomationElement[] DescribedBy { get; }
+        AutomationElement[] FlowsFrom { get; }
+        AutomationElement[] FlowsTo { get; }
         string FrameworkId { get; }
         bool HasKeyboardFocus { get; }
         string HelpText { get; }
@@ -35,7 +35,7 @@ namespace FlaUI.Core.Elements.Infrastructure
         bool IsRequiredForForm { get; }
         string ItemStatus { get; }
         string ItemType { get; }
-        Element LabeledBy { get; }
+        AutomationElement LabeledBy { get; }
         LiveSetting LiveSetting { get; }
         string LocalizedControlType { get; }
         string Name { get; }

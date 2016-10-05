@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace FlaUI.Core.Elements
 {
-    public class Tab : Element
+    public class Tab : AutomationElement
     {
         public Tab(AutomationObjectBase automationObject) : base(automationObject)
         {
@@ -47,7 +47,7 @@ namespace FlaUI.Core.Elements
             var foundTabItemIndex = Array.FindIndex(tabItems, t => t.Current.Name == text);
             if (foundTabItemIndex < 0)
             {
-                throw new Exception(String.Format("No TabItem found with text '{0}'", text));
+                throw new Exception(String.Format("No TabItemAutomation found with text '{0}'", text));
             }
             var previousSelectedTabItemIndex = SelectedTabItemIndex;
             if (previousSelectedTabItemIndex == foundTabItemIndex)

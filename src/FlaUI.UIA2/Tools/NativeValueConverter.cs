@@ -10,25 +10,25 @@ namespace FlaUI.UIA2.Tools
 {
     public static class NativeValueConverter
     {
-        public static Element[] NativeArrayToManaged(UIA2Automation automation, UIA.AutomationElementCollection nativeElements)
+        public static AutomationElement[] NativeArrayToManaged(UIA2Automation automation, UIA.AutomationElementCollection nativeElements)
         {
             if (nativeElements == null)
             {
-                return new Element[0];
+                return new AutomationElement[0];
             }
-            var retArray = new Element[nativeElements.Count];
+            var retArray = new AutomationElement[nativeElements.Count];
             for (var i = 0; i < nativeElements.Count; i++)
             {
                 var nativeElement = nativeElements[i];
                 var automationObject = automation.WrapNativeElement(nativeElement);
-                retArray[i] = new Element(automationObject);
+                retArray[i] = new AutomationElement(automationObject);
             }
             return retArray;
         }
 
-        public static Element NativeToManaged(UIA2Automation automation, UIA.AutomationElement nativeElement)
+        public static AutomationElement NativeToManaged(UIA2Automation automation, UIA.AutomationElement nativeElement)
         {
-            return nativeElement == null ? null : new Element(automation.WrapNativeElement(nativeElement));
+            return nativeElement == null ? null : new AutomationElement(automation.WrapNativeElement(nativeElement));
         }
 
         public static object ToPoint(object point)

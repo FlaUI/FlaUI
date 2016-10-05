@@ -5,9 +5,9 @@ using FlaUI.Core.Definitions;
 
 namespace FlaUI.Core.Elements.PatternElements
 {
-    public class ExpandCollapseElement : Element
+    public class ExpandCollapseAutomationElement : AutomationElement
     {
-        public ExpandCollapseElement(AutomationObjectBase automationObject) : base(automationObject)
+        public ExpandCollapseAutomationElement(AutomationObjectBase automationObject) : base(automationObject)
         {
         }
 
