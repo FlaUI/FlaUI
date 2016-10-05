@@ -42,7 +42,7 @@ namespace FlaUI.UIA2
         public bool IsRequiredForForm => Get<bool>(AutomationObjectIds.IsRequiredForFormProperty);
         public string ItemStatus => Get<string>(AutomationObjectIds.ItemStatusProperty);
         public string ItemType => Get<string>(AutomationObjectIds.ItemTypeProperty);
-        Automationpublic Element LabeledBy => Get<AutomationElement>(AutomationObjectIds.LabeledByProperty);
+        public AutomationElement LabeledBy => Get<AutomationElement>(AutomationObjectIds.LabeledByProperty);
         public LiveSetting LiveSetting { get { throw new NotSupportedByUIA2Exception(); } }
         public string LocalizedControlType => Get<string>(AutomationObjectIds.LocalizedControlTypeProperty);
         public string Name => Get<string>(AutomationObjectIds.NameProperty);

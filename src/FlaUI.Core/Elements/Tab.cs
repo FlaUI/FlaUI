@@ -16,7 +16,7 @@ namespace FlaUI.Core.Elements
         /// </summary>
         public TabItemAutomation SelectedTabItemAutomation
         {
-            get { return TabItemsAutomation.FirstOrDefault(t => t.IsSelected); }
+            get { return TabItems.FirstOrDefault(t => t.IsSelected); }
         }
 
         /// <summary>
@@ -27,14 +27,14 @@ namespace FlaUI.Core.Elements
         /// <summary>
         /// All <see cref="TabItemAutomation"/> objects from this <see cref="Tab"/>
         /// </summary>
-        public TabItemAutomation[] TabItemsAutomation => GetTabItems();
+        public TabItemAutomation[] TabItems => GetTabItems();
 
         /// <summary>
         /// Selects a <see cref="TabItemAutomation"/> by index
         /// </summary>
         public void SelectTabItem(int index)
         {
-            var tabItem = TabItemsAutomation[index];
+            var tabItem = TabItems[index];
             tabItem.Select();
         }
 
@@ -43,7 +43,7 @@ namespace FlaUI.Core.Elements
         /// </summary>
         public void SelectTabItem(string text)
         {
-            var tabItems = TabItemsAutomation;
+            var tabItems = TabItems;
             var foundTabItemIndex = Array.FindIndex(tabItems, t => t.Current.Name == text);
             if (foundTabItemIndex < 0)
             {
@@ -70,7 +70,7 @@ namespace FlaUI.Core.Elements
 
         private int GetIndexOfSelectedTabItem()
         {
-            return Array.FindIndex(TabItemsAutomation, t => t.IsSelected);
+            return Array.FindIndex(TabItems, t => t.IsSelected);
         }
     }
 }
