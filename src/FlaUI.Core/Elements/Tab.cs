@@ -12,25 +12,25 @@ namespace FlaUI.Core.Elements
         }
 
         /// <summary>
-        /// The currently selected <see cref="TabItemAutomation"/>
+        /// The currently selected <see cref="TabItem"/>
         /// </summary>
-        public TabItemAutomation SelectedTabItemAutomation
+        public TabItem SelectedTabItem
         {
             get { return TabItems.FirstOrDefault(t => t.IsSelected); }
         }
 
         /// <summary>
-        /// The index of the currently selected <see cref="TabItemAutomation"/>
+        /// The index of the currently selected <see cref="TabItem"/>
         /// </summary>
         public int SelectedTabItemIndex => GetIndexOfSelectedTabItem();
 
         /// <summary>
-        /// All <see cref="TabItemAutomation"/> objects from this <see cref="Tab"/>
+        /// All <see cref="TabItem"/> objects from this <see cref="Tab"/>
         /// </summary>
-        public TabItemAutomation[] TabItems => GetTabItems();
+        public TabItem[] TabItems => GetTabItems();
 
         /// <summary>
-        /// Selects a <see cref="TabItemAutomation"/> by index
+        /// Selects a <see cref="TabItem"/> by index
         /// </summary>
         public void SelectTabItem(int index)
         {
@@ -39,7 +39,7 @@ namespace FlaUI.Core.Elements
         }
 
         /// <summary>
-        /// Selects a <see cref="TabItemAutomation"/> by a give text (name property)
+        /// Selects a <see cref="TabItem"/> by a give text (name property)
         /// </summary>
         public void SelectTabItem(string text)
         {
@@ -60,9 +60,9 @@ namespace FlaUI.Core.Elements
         }
 
         /// <summary>
-        /// Gets all the <see cref="TabItemAutomation"/> objects for this <see cref="Tab"/>
+        /// Gets all the <see cref="TabItem"/> objects for this <see cref="Tab"/>
         /// </summary>
-        private TabItemAutomation[] GetTabItems()
+        private TabItem[] GetTabItems()
         {
             return FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.TabItem))
                 .Select(e => e.AsTabItem()).ToArray();

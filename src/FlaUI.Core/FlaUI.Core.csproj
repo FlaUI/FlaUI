@@ -95,7 +95,7 @@
     <Compile Include="Elements\ProgressBar.cs" />
     <Compile Include="Elements\RadioButton.cs" />
     <Compile Include="Elements\Tab.cs" />
-    <Compile Include="Elements\TabItemAutomation.cs" />
+    <Compile Include="Elements\TabItem.cs" />
     <Compile Include="Elements\TextBox.cs" />
     <Compile Include="Elements\Thumb.cs" />
     <Compile Include="Elements\TitleBar.cs" />

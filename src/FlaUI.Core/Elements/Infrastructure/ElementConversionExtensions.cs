@@ -50,10 +50,10 @@
             return new Tab(automationElement.AutomationObject);
         }
 
-        public static TabItemAutomation AsTabItem(this AutomationElement automationElement)
+        public static TabItem AsTabItem(this AutomationElement automationElement)
         {
             if (automationElement == null) { return null; }
-            return new TabItemAutomation(automationElement.AutomationObject);
+            return new TabItem(automationElement.AutomationObject);
         }
 
         public static TextBox AsTextBox(this AutomationElement automationElement)
