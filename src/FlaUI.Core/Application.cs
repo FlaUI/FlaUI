@@ -122,9 +122,14 @@ namespace FlaUI.Core
             return new Application(process);
         }
 
-        public static Application Attach(string executable)
+        public static Application Attach(string executable, int index = 0)
         {
-            return new Application(FindProcess(executable)[0]);        
+            var processes = FindProcess(executable);
+            if (processes.Length > 0)
+            {
+                return new Application(FindProcess(executable)[index]);
+            }
+            throw new Exception("Unable to find process with name: " + executable);
         }
 
         public static Application AttachOrLaunch(ProcessStartInfo processStartInfo)
