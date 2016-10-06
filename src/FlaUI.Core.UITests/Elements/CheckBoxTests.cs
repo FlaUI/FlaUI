@@ -21,7 +21,7 @@ namespace FlaUI.Core.UITests.Elements
         {
             RestartApp();
             var window = App.GetMainWindow(Automation);
-            var checkBox = window.FindFirst(TreeScope.Descendants, Automation.ConditionFactory.ByText("Test Checkbox")).AsCheckBox();
+            var checkBox = window.FindFirst(TreeScope.Descendants, Automation.ConditionFactory.ByName("Test Checkbox")).AsCheckBox();
             Assert.That(checkBox.State, Is.EqualTo(ToggleState.Off));
             checkBox.Toggle();
             Assert.That(checkBox.State, Is.EqualTo(ToggleState.On));
