@@ -125,7 +125,7 @@ namespace FlaUI.Core
         public static Application Attach(string executable, int index = 0)
         {
             var processes = FindProcess(executable);
-            if (processes.Length > 0)
+            if (processes.Length > index)
             {
                 return new Application(FindProcess(executable)[index]);
             }
