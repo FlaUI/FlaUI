@@ -1,8 +1,8 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.Definitions;
-using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.EventHandlers;
 using System;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.EventHandlers
@@ -15,8 +15,8 @@ namespace FlaUI.UIA3.EventHandlers
 
         public void HandleStructureChangedEvent(UIA.IUIAutomationElement sender, UIA.StructureChangeType changeType, int[] runtimeId)
         {
-            var automationObject = new UIA3AutomationObject((UIA3Automation)Automation, sender);
-            var senderElement = new AutomationElement(automationObject);
+            var basicAutomationElement = new UIA3BasicAutomationElement((UIA3Automation)Automation, sender);
+            var senderElement = new AutomationElement(basicAutomationElement);
             HandleStructureChangedEvent(senderElement, (StructureChangeType) changeType, runtimeId);
         }
     }

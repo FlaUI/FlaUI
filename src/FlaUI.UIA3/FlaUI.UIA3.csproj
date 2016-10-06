@@ -77,9 +77,9 @@
     <Compile Include="TextRange2.cs" />
     <Compile Include="Tools\NativeValueConverter.cs" />
     <Compile Include="TreeWalker.cs" />
-    <Compile Include="UIA3AutomationObject.cs" />
-    <Compile Include="UIA3ElementInformation.cs" />
-    <Compile Include="UIA3ElementProperties.cs" />
+    <Compile Include="UIA3BasicAutomationElement.cs" />
+    <Compile Include="UIA3AutomationElementInformation.cs" />
+    <Compile Include="UIA3AutomationElementProperties.cs" />
     <Compile Include="UIA3PatternFactory.cs" />
     <Compile Include="UIA3PropertyLibrary.cs" />
   </ItemGroup>

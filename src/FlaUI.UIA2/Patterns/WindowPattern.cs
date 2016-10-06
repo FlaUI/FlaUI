@@ -1,6 +1,6 @@
 ﻿using FlaUI.Core;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
-using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
@@ -20,7 +20,7 @@ namespace FlaUI.UIA2.Patterns
         public static readonly EventId WindowClosedEvent = EventId.Register(AutomationType.UIA2, UIA.WindowPattern.WindowClosedEvent.Id, "WindowClosed");
         public static readonly EventId WindowOpenedEvent = EventId.Register(AutomationType.UIA2, UIA.WindowPattern.WindowOpenedEvent.Id, "WindowOpened");
 
-        public WindowPattern(AutomationObjectBase automationObject, UIA.WindowPattern nativePattern) : base(automationObject, nativePattern)
+        public WindowPattern(BasicAutomationElementBase basicAutomationElement, UIA.WindowPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
             Properties = new WindowPatternProperties();
             Events = new WindowPatternEvents();
@@ -51,13 +51,13 @@ namespace FlaUI.UIA2.Patterns
 
         protected override WindowPatternInformation CreateInformation(bool cached)
         {
-            return new WindowPatternInformation(AutomationObject, cached);
+            return new WindowPatternInformation(BasicAutomationElement, cached);
         }
     }
 
-    public class WindowPatternInformation : ElementInformationBase, IWindowPatternInformation
+    public class WindowPatternInformation : InformationBase, IWindowPatternInformation
     {
-        public WindowPatternInformation(AutomationObjectBase automationObject, bool cached) : base(automationObject, cached)
+        public WindowPatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
         {
         }
 

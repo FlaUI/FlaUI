@@ -1,7 +1,7 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.EventHandlers;
 using System;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.EventHandlers
@@ -17,8 +17,8 @@ namespace FlaUI.UIA2.EventHandlers
 
         private void HandleFocusChangedEvent(object sender, UIA.AutomationFocusChangedEventArgs automationFocusChangedEventArgs)
         {
-            var automationObject = new UIA2AutomationObject((UIA2Automation)Automation, (UIA.AutomationElement)sender);
-            var senderElement = new AutomationElement(automationObject);
+            var basicAutomationElement = new UIA2BasicAutomationElement((UIA2Automation)Automation, (UIA.AutomationElement)sender);
+            var senderElement = new AutomationElement(basicAutomationElement);
             HandleFocusChangedEvent(senderElement);
         }
     }

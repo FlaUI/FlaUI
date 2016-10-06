@@ -1,5 +1,4 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Shapes;
 using FlaUI.UIA3.EventHandlers;
@@ -7,6 +6,7 @@ using FlaUI.UIA3.Shapes;
 using FlaUI.UIA3.Tools;
 using System;
 using System.Runtime.InteropServices;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3
@@ -127,9 +127,9 @@ namespace FlaUI.UIA3
             return element;
         }
 
-        public UIA3AutomationObject WrapNativeElement(UIA.IUIAutomationElement nativeElement)
+        public UIA3BasicAutomationElement WrapNativeElement(UIA.IUIAutomationElement nativeElement)
         {
-            return new UIA3AutomationObject(this, nativeElement);
+            return new UIA3BasicAutomationElement(this, nativeElement);
         }
     }
 }

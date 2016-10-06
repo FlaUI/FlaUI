@@ -58,13 +58,13 @@
     <Compile Include="Patterns\WindowPattern.cs" />
     <Compile Include="Tools\NativeConditionConverter.cs" />
     <Compile Include="Tools\NativeValueConverter.cs" />
-    <Compile Include="UIA2ElementProperties.cs" />
+    <Compile Include="UIA2AutomationElementProperties.cs" />
     <Compile Include="UIA2PatternFactory.cs" />
     <Compile Include="Patterns\ValuePattern.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UIA2Automation.cs" />
-    <Compile Include="UIA2AutomationObject.cs" />
-    <Compile Include="UIA2ElementInformation.cs" />
+    <Compile Include="UIA2BasicAutomationElement.cs" />
+    <Compile Include="UIA2AutomationElementInformation.cs" />
     <Compile Include="UIA2PropertyLibrary.cs" />
   </ItemGroup>
   <ItemGroup>

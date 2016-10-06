@@ -10,7 +10,7 @@ namespace FlaUI.UIA2.Patterns
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.InvokePattern.Pattern.Id, "Invoke");
 
-        public InvokePattern(AutomationObjectBase automationObject, UIA.InvokePattern nativePattern) : base(automationObject, nativePattern)
+        public InvokePattern(BasicAutomationElementBase basicAutomationElement, UIA.InvokePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
         }
 

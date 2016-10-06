@@ -1,6 +1,6 @@
 ﻿using FlaUI.Core;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
-using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
@@ -14,7 +14,7 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_TogglePatternId, "Toggle");
         public static readonly PropertyId ToggleStateProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ToggleToggleStatePropertyId, "ToggleState");
 
-        public TogglePattern(AutomationObjectBase automationObject, UIA.IUIAutomationTogglePattern nativePattern) : base(automationObject, nativePattern)
+        public TogglePattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTogglePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
             Properties = new TogglePatternProperties();
         }
@@ -27,7 +27,7 @@ namespace FlaUI.UIA3.Patterns
 
         protected override TogglePatternInformation CreateInformation(bool cached)
         {
-            return new TogglePatternInformation(AutomationObject, cached);
+            return new TogglePatternInformation(BasicAutomationElement, cached);
         }
 
         public void Toggle()
@@ -36,9 +36,9 @@ namespace FlaUI.UIA3.Patterns
         }
     }
 
-    public class TogglePatternInformation : ElementInformationBase, ITogglePatternInformation
+    public class TogglePatternInformation : InformationBase, ITogglePatternInformation
     {
-        public TogglePatternInformation(AutomationObjectBase automationObject, bool cached) : base(automationObject, cached)
+        public TogglePatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
         {
         }
 

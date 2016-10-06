@@ -1,5 +1,5 @@
-﻿using FlaUI.Core.Elements.Infrastructure;
-using System;
+﻿using System;
+using FlaUI.Core.AutomationElements.Infrastructure;
 
 namespace FlaUI.Core.EventHandlers
 {

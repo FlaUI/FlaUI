@@ -1,6 +1,6 @@
 ﻿using FlaUI.Core.Definitions;
-using FlaUI.Core.Elements.Infrastructure;
 using System;
+using FlaUI.Core.AutomationElements.Infrastructure;
 
 namespace FlaUI.Core.EventHandlers
 {

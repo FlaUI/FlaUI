@@ -1,5 +1,5 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.Elements.Infrastructure;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
@@ -14,7 +14,7 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId IsReadOnlyProperty = PropertyId.Register(AutomationType.UIA3, interop.UIAutomationCore.UIA_PropertyIds.UIA_ValueIsReadOnlyPropertyId, "IsReadOnly");
         public static readonly PropertyId ValueProperty = PropertyId.Register(AutomationType.UIA3, interop.UIAutomationCore.UIA_PropertyIds.UIA_ValueValuePropertyId, "Value");
 
-        public ValuePattern(AutomationObjectBase automationObject, UIA.IUIAutomationValuePattern nativePattern) : base(automationObject, nativePattern)
+        public ValuePattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationValuePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
             Properties = new ValuePatternProperties();
         }
@@ -32,13 +32,13 @@ namespace FlaUI.UIA3.Patterns
 
         protected override ValuePatternInformation CreateInformation(bool cached)
         {
-            return new ValuePatternInformation(AutomationObject, cached);
+            return new ValuePatternInformation(BasicAutomationElement, cached);
         }
     }
 
-    public class ValuePatternInformation : ElementInformationBase, IValuePatternInformation
+    public class ValuePatternInformation : InformationBase, IValuePatternInformation
     {
-        public ValuePatternInformation(AutomationObjectBase automationObject, bool cached) : base(automationObject, cached)
+        public ValuePatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
         {
         }
 

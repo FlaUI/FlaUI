@@ -1,11 +1,11 @@
-﻿using FlaUI.Core.Elements.Infrastructure;
-using FlaUI.Core.Identifiers;
+﻿using FlaUI.Core.Identifiers;
 using FlaUI.UIA3;
 using FlaUI.UIA3.Definitions;
 using Gma.System.MouseKeyHook;
 using System;
 using System.Windows;
 using System.Windows.Forms;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using Window = System.Windows.Window;
 

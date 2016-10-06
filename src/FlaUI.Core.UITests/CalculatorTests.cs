@@ -1,6 +1,4 @@
 ﻿using FlaUI.Core.Definitions;
-using FlaUI.Core.Elements;
-using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
@@ -8,6 +6,8 @@ using FlaUI.Core.WindowsAPI;
 using NUnit.Framework;
 using System;
 using System.Text.RegularExpressions;
+using FlaUI.Core.AutomationElements;
+using FlaUI.Core.AutomationElements.Infrastructure;
 
 namespace FlaUI.Core.UITests
 {
@@ -120,7 +120,7 @@ namespace FlaUI.Core.UITests
         {
             get
             {
-                var resultElement = _mainWindow.FindFirst(TreeScope.Descendants, _mainWindow.AutomationObject.Automation.ConditionFactory.ByAutomationId("158"));
+                var resultElement = _mainWindow.FindFirst(TreeScope.Descendants, _mainWindow.BasicAutomationElement.Automation.ConditionFactory.ByAutomationId("158"));
                 var value = resultElement.Current.Name;
                 return Regex.Replace(value, "[^0-9]", "");
             }
@@ -133,7 +133,7 @@ namespace FlaUI.Core.UITests
 
         private AutomationElement FindElement(string text)
         {
-            var element = _mainWindow.FindFirst(TreeScope.Descendants, _mainWindow.AutomationObject.Automation.ConditionFactory.ByText(text));
+            var element = _mainWindow.FindFirst(TreeScope.Descendants, _mainWindow.BasicAutomationElement.Automation.ConditionFactory.ByText(text));
             return element;
         }
     }
@@ -170,7 +170,7 @@ namespace FlaUI.Core.UITests
 
         private AutomationElement FindElement(string text)
         {
-            var element = _mainWindow.FindFirst(TreeScope.Descendants, _mainWindow.AutomationObject.Automation.ConditionFactory.ByAutomationId(text));
+            var element = _mainWindow.FindFirst(TreeScope.Descendants, _mainWindow.BasicAutomationElement.Automation.ConditionFactory.ByAutomationId(text));
             return element;
         }
     }

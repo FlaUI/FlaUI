@@ -1,9 +1,9 @@
 ﻿using FlaUI.Core.Definitions;
-using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.Exceptions;
 using FlaUI.Core.Shapes;
 using System;
 using System.Globalization;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Tools
@@ -20,8 +20,8 @@ namespace FlaUI.UIA2.Tools
             for (var i = 0; i < nativeElements.Count; i++)
             {
                 var nativeElement = nativeElements[i];
-                var automationObject = automation.WrapNativeElement(nativeElement);
-                retArray[i] = new AutomationElement(automationObject);
+                var basicAutomationElement = automation.WrapNativeElement(nativeElement);
+                retArray[i] = new AutomationElement(basicAutomationElement);
             }
             return retArray;
         }

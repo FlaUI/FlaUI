@@ -12,7 +12,7 @@ namespace FlaUI.UIA3.Patterns
          where TInfo : ITransformPatternInformation
          where TProp : ITransformPatternProperties
     {
-        protected TransformPatternBase(AutomationObjectBase automationObject, TNativePattern nativePattern) : base(automationObject, nativePattern)
+        protected TransformPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
         }
 

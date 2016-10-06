@@ -1,9 +1,9 @@
-﻿using FlaUI.Core.Elements.Infrastructure;
+﻿using FlaUI.Core.AutomationElements.Infrastructure;
 
 namespace FlaUI.Core
 {
     public interface IPropertyLibray
     {
-        IElementProperties Generic { get; }
+        IAutomationElementProperties Generic { get; }
     }
 }

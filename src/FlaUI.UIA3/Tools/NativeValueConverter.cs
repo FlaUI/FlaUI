@@ -1,10 +1,10 @@
 ﻿using FlaUI.Core.Definitions;
-using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.Shapes;
 using FlaUI.UIA3.Definitions;
 using System;
 using System.Globalization;
 using System.Linq;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Tools
@@ -21,8 +21,8 @@ namespace FlaUI.UIA3.Tools
             for (var i = 0; i < nativeElements.Length; i++)
             {
                 var nativeElement = nativeElements.GetElement(i);
-                var automationObject = automation.WrapNativeElement(nativeElement);
-                retArray[i] = new AutomationElement(automationObject);
+                var basicAutomationElement = automation.WrapNativeElement(nativeElement);
+                retArray[i] = new AutomationElement(basicAutomationElement);
             }
             return retArray;
         }

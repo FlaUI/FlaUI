@@ -1,10 +1,10 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Shapes;
 using FlaUI.UIA2.EventHandlers;
 using FlaUI.UIA2.Tools;
 using System;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2
@@ -66,9 +66,9 @@ namespace FlaUI.UIA2
             UIA.Automation.RemoveAllEventHandlers();
         }
 
-        public UIA2AutomationObject WrapNativeElement(UIA.AutomationElement nativeElement)
+        public UIA2BasicAutomationElement WrapNativeElement(UIA.AutomationElement nativeElement)
         {
-            return new UIA2AutomationObject(this, nativeElement);
+            return new UIA2BasicAutomationElement(this, nativeElement);
         }
     }
 }

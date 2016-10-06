@@ -1,8 +1,8 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Identifiers;
 using System;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.EventHandlers
@@ -18,8 +18,8 @@ namespace FlaUI.UIA2.EventHandlers
 
         private void HandleAutomationEvent(object sender, UIA.AutomationEventArgs automationEventArgs)
         {
-            var automationObject = new UIA2AutomationObject((UIA2Automation)Automation, (UIA.AutomationElement)sender);
-            var senderElement = new AutomationElement(automationObject);
+            var basicAutomationElement = new UIA2BasicAutomationElement((UIA2Automation)Automation, (UIA.AutomationElement)sender);
+            var senderElement = new AutomationElement(basicAutomationElement);
             var @event = EventId.Find(AutomationType.UIA2, automationEventArgs.EventId.Id);
             HandleAutomationEvent(senderElement, @event);
         }

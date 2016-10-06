@@ -17,7 +17,7 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId ZoomMaximumProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_Transform2ZoomMaximumPropertyId, "ZoomMaximum");
         public static readonly PropertyId ZoomMinimumProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_Transform2ZoomMinimumPropertyId, "ZoomMinimum");
 
-        public Transform2Pattern(AutomationObjectBase automationObject, UIA.IUIAutomationTransformPattern2 nativePattern) : base(automationObject, nativePattern)
+        public Transform2Pattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTransformPattern2 nativePattern) : base(basicAutomationElement, nativePattern)
         {
             Properties = new Transform2PatternProperties();
         }
@@ -32,7 +32,7 @@ namespace FlaUI.UIA3.Patterns
 
         protected override Transform2PatternInformation CreateInformation(bool cached)
         {
-            return new Transform2PatternInformation(AutomationObject, cached);
+            return new Transform2PatternInformation(BasicAutomationElement, cached);
         }
 
         public void Zoom(double zoom)
@@ -48,7 +48,7 @@ namespace FlaUI.UIA3.Patterns
 
     public class Transform2PatternInformation : TransformPatternInformation, ITransform2PatternInformation
     {
-        public Transform2PatternInformation(AutomationObjectBase automationObject, bool cached) : base(automationObject, cached)
+        public Transform2PatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
         {
         }
 

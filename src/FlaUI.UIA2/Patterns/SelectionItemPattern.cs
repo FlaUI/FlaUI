@@ -1,5 +1,5 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.Elements.Infrastructure;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
@@ -17,7 +17,7 @@ namespace FlaUI.UIA2.Patterns
         public static readonly EventId ElementRemovedFromSelectionEvent = EventId.Register(AutomationType.UIA2, UIA.SelectionItemPattern.ElementRemovedFromSelectionEvent.Id, "ElementRemovedFromSelection");
         public static readonly EventId ElementSelectedEvent = EventId.Register(AutomationType.UIA2, UIA.SelectionItemPattern.ElementSelectedEvent.Id, "ElementSelected");
 
-        public SelectionItemPattern(AutomationObjectBase automationObject, UIA.SelectionItemPattern nativePattern) : base(automationObject, nativePattern)
+        public SelectionItemPattern(BasicAutomationElementBase basicAutomationElement, UIA.SelectionItemPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
             Properties = new SelectionItemPatternProperties();
             Events = new SelectionItemPatternEvents();
@@ -33,7 +33,7 @@ namespace FlaUI.UIA2.Patterns
 
         protected override SelectionItemPatternInformation CreateInformation(bool cached)
         {
-            return new SelectionItemPatternInformation(AutomationObject, cached);
+            return new SelectionItemPatternInformation(BasicAutomationElement, cached);
         }
 
         public void AddToSelection()
@@ -52,9 +52,9 @@ namespace FlaUI.UIA2.Patterns
         }
     }
 
-    public class SelectionItemPatternInformation : ElementInformationBase, ISelectionItemPatternInformation
+    public class SelectionItemPatternInformation : InformationBase, ISelectionItemPatternInformation
     {
-        public SelectionItemPatternInformation(AutomationObjectBase automationObject, bool cached) : base(automationObject, cached)
+        public SelectionItemPatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
         {
         }
 
@@ -65,7 +65,7 @@ namespace FlaUI.UIA2.Patterns
             get
             {
                 var nativeElement = Get<UIA.AutomationElement>(SelectionItemPattern.SelectionContainerProperty);
-                return NativeValueConverter.NativeToManaged((UIA2Automation)AutomationObject.Automation, nativeElement);
+                return NativeValueConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeElement);
             }
         }
     }

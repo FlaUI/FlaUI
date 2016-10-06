@@ -2,8 +2,8 @@
 {
     public abstract class PatternBaseWithInformation<TNativePattern, TInfo> : PatternBase<TNativePattern>, IPatternWithInformation<TInfo> where TInfo : IPatternInformation
     {
-        protected PatternBaseWithInformation(AutomationObjectBase automationObject, TNativePattern nativePattern)
-            : base(automationObject, nativePattern)
+        protected PatternBaseWithInformation(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
             // ReSharper disable VirtualMemberCallInConstructor
             Cached = CreateInformation(true);

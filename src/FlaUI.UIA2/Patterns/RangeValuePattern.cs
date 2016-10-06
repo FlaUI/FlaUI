@@ -1,5 +1,5 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.Elements.Infrastructure;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
@@ -17,7 +17,7 @@ namespace FlaUI.UIA2.Patterns
         public static readonly PropertyId SmallChangeProperty = PropertyId.Register(AutomationType.UIA2, UIA.RangeValuePattern.SmallChangeProperty.Id, "SmallChange");
         public static readonly PropertyId ValueProperty = PropertyId.Register(AutomationType.UIA2, UIA.RangeValuePattern.ValueProperty.Id, "Value");
 
-        public RangeValuePattern(AutomationObjectBase automationObject, UIA.RangeValuePattern nativePattern) : base(automationObject, nativePattern)
+        public RangeValuePattern(BasicAutomationElementBase basicAutomationElement, UIA.RangeValuePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
             Properties = new RangeValuePatternProperties();
         }
@@ -30,7 +30,7 @@ namespace FlaUI.UIA2.Patterns
 
         protected override RangeValuePatternInformation CreateInformation(bool cached)
         {
-            return new RangeValuePatternInformation(AutomationObject, cached);
+            return new RangeValuePatternInformation(BasicAutomationElement, cached);
         }
 
         public void SetValue(double val)
@@ -39,9 +39,9 @@ namespace FlaUI.UIA2.Patterns
         }
     }
 
-    public class RangeValuePatternInformation : ElementInformationBase, IRangeValuePatternInformation
+    public class RangeValuePatternInformation : InformationBase, IRangeValuePatternInformation
     {
-        public RangeValuePatternInformation(AutomationObjectBase automationObject, bool cached) : base(automationObject, cached)
+        public RangeValuePatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
         {
         }
 

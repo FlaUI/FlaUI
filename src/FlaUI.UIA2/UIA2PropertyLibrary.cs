@@ -1,5 +1,5 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.Elements.Infrastructure;
+using FlaUI.Core.AutomationElements.Infrastructure;
 
 namespace FlaUI.UIA2
 {
@@ -7,9 +7,9 @@ namespace FlaUI.UIA2
     {
         public UIA2PropertyLibrary()
         {
-            Generic = new UIA2ElementProperties();
+            Generic = new UIA2AutomationElementProperties();
         }
 
-        public IElementProperties Generic { get; }
+        public IAutomationElementProperties Generic { get; }
     }
 }

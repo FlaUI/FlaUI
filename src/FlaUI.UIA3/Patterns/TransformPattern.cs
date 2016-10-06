@@ -1,5 +1,5 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.Elements.Infrastructure;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using UIA = interop.UIAutomationCore;
@@ -13,7 +13,7 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId CanResizeProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_TransformCanResizePropertyId, "CanResize");
         public static readonly PropertyId CanRotateProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_TransformCanRotatePropertyId, "CanRotate");
         
-        public TransformPattern(AutomationObjectBase automationObject, UIA.IUIAutomationTransformPattern nativePattern) : base(automationObject, nativePattern)
+        public TransformPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTransformPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
             Properties = new TransformPatternProperties();
         }
@@ -22,13 +22,13 @@ namespace FlaUI.UIA3.Patterns
 
         protected override TransformPatternInformation CreateInformation(bool cached)
         {
-            return new TransformPatternInformation(AutomationObject, cached);
+            return new TransformPatternInformation(BasicAutomationElement, cached);
         }
     }
 
-    public class TransformPatternInformation : ElementInformationBase, ITransformPatternInformation
+    public class TransformPatternInformation : InformationBase, ITransformPatternInformation
     {
-        public TransformPatternInformation(AutomationObjectBase automationObject, bool cached) : base(automationObject, cached)
+        public TransformPatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
         {
         }
 

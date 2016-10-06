@@ -12,7 +12,7 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_InvokePatternId, "Invoke");
         public static readonly EventId InvokedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_Invoke_InvokedEventId, "Invoked");
 
-        public InvokePattern(AutomationObjectBase automationObject, UIA.IUIAutomationInvokePattern nativePattern) : base(automationObject, nativePattern)
+        public InvokePattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationInvokePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
         }
 

@@ -1,5 +1,5 @@
-﻿using FlaUI.Core.Definitions;
-using FlaUI.Core.Elements.Infrastructure;
+﻿using FlaUI.Core.AutomationElements.Infrastructure;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
 

@@ -1,12 +1,12 @@
-﻿using FlaUI.Core.Elements;
-using FlaUI.Core.Elements.Infrastructure;
-using FlaUI.Core.Logging;
+﻿using FlaUI.Core.Logging;
 using FlaUI.Core.Tools;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using FlaUI.Core.AutomationElements;
+using FlaUI.Core.AutomationElements.Infrastructure;
 
 namespace FlaUI.Core
 {
