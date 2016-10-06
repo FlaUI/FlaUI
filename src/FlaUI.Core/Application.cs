@@ -127,7 +127,7 @@ namespace FlaUI.Core
             var processes = FindProcess(executable);
             if (processes.Length > index)
             {
-                return new Application(FindProcess(executable)[index]);
+                return new Application(processes[index]);
             }
             throw new Exception("Unable to find process with name: " + executable);
         }
