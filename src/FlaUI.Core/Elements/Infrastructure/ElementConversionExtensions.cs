@@ -44,6 +44,12 @@
             return new RadioButton(element.AutomationObject);
         }
 
+        //public static Slider AsSlider(this Element element)
+        //{
+        //    if (element == null) { return null; }
+        //    return new Slider(element.AutomationObject);
+        //}
+
         public static Tab AsTab(this Element element)
         {
             if (element == null) { return null; }
@@ -60,6 +66,12 @@
         {
             if (element == null) { return null; }
             return new TextBox(element.AutomationObject);
+        }
+
+        public static Thumb AsThumb(this Element element)
+        {
+            if (element == null) { return null; }
+            return new Thumb(element.AutomationObject);
         }
 
         public static TitleBar AsTitleBar(this Element element)

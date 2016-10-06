@@ -1,21 +1,21 @@
-﻿using FlaUI.Core.Elements;
+﻿using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements;
+using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.Input;
 using FlaUI.Core.Shapes;
 using FlaUI.Core.UITests.TestFramework;
-using FlaUI.UIA3.Conditions;
-using FlaUI.UIA3.Definitions;
-using FlaUI.UIA3.Elements;
-using FlaUI.UIA3.Tools;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
 {
-    [TestFixture(TestApplicationType.WinForms)]
-    [TestFixture(TestApplicationType.Wpf)]
+    [TestFixture(AutomationType.UIA2, TestApplicationType.WinForms)]
+    [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
+    [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
+    [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class SliderTests : UITestBase
     {
-        public SliderTests(TestApplicationType appType)
-            : base(appType)
+        public SliderTests(AutomationType automationType, TestApplicationType appType)
+            : base(automationType, appType)
         {
         }
 
@@ -37,6 +37,7 @@ namespace FlaUI.Core.UITests.Elements
             slider.Value = FixNumberForWinforms(5);
             Assert.That(slider.Value, Is.EqualTo(FixNumberForWinforms(5)));
         }
+
         [Test]
         public void SmallIncrementTest()
         {
@@ -75,7 +76,7 @@ namespace FlaUI.Core.UITests.Elements
 
         private Slider GetSlider()
         {
-            var element = App.GetMainWindow(Uia3Automation).FindFirst(TreeScope.Descendants, ConditionFactory.ByAutomationId("Slider")).AsSlider();
+            var element = App.GetMainWindow(Automation).FindFirst(TreeScope.Descendants, Automation.ConditionFactory.ByAutomationId("Slider")).AsSlider();
             return element;
         }
 

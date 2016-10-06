@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Globalization;
+using FlaUI.Core.Definitions;
+using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.Input;
 using FlaUI.Core.WindowsAPI;
-using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.Core.Elements
 {
     public class Slider : Element
     {
-        public Slider(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
-
-        public Thumb Thumb
+        public Slider(AutomationObjectBase automationObject) : base(automationObject)
         {
-            get { return FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Thumb)).AsThumb(); }
         }
+
+        public Thumb Thumb => FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Thumb)).AsThumb();
 
         public virtual double Value { get; set; }
 
