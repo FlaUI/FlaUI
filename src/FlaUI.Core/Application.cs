@@ -105,6 +105,12 @@ namespace FlaUI.Core
             }
         }
 
+        private static Process[] FindProcess(string executable)
+        {
+            var processes = Process.GetProcessesByName(executable.Replace(".exe", string.Empty));
+            return processes;
+        }
+
         public static Application Attach(int processId)
         {
             return Attach(FindProcess(processId));
@@ -118,20 +124,12 @@ namespace FlaUI.Core
 
         public static Application Attach(string executable)
         {
-            var processes = Process.GetProcessesByName(executable.Replace(".exe", string.Empty));           
-            if (processes.Length == 0)
-            {
-                Log.Error("Could not find process for: " + executable);
-                return null;
-            }
-            return new Application(processes[0]);        
+            return new Application(FindProcess(executable)[0]);        
         }
 
         public static Application AttachOrLaunch(ProcessStartInfo processStartInfo)
         {
-            string processName = processStartInfo.FileName.Replace(".exe", string.Empty);
-            processName = Path.GetFileName(processName);
-            var processes = Process.GetProcessesByName(processName);
+            var processes = FindProcess(processStartInfo.FileName);
             return processes.Length == 0 ? Launch(processStartInfo) : Attach(processes[0]);
         }
 
