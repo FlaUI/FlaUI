@@ -14,11 +14,6 @@ namespace FlaUI.Core.Conditions
             _propertyLibrary = propertyLibrary;
         }
 
-        public PropertyCondition ByText(string text)
-        {
-            return new PropertyCondition(_propertyLibrary.Generic.NameProperty, text);
-        }
-
         public PropertyCondition ByAutomationId(string automationId)
         {
             return new PropertyCondition(_propertyLibrary.Generic.AutomationIdProperty, automationId);
@@ -37,6 +32,11 @@ namespace FlaUI.Core.Conditions
         public PropertyCondition ByName(string name)
         {
             return new PropertyCondition(_propertyLibrary.Generic.NameProperty, name);
+        }
+
+        public PropertyCondition ByText(string text)
+        {
+            return ByName(text);
         }
 
         /// <summary>
