@@ -5,6 +5,8 @@ using FlaUI.Core.Identifiers;
 using FlaUI.Core.Shapes;
 using FlaUI.Core.WindowsAPI;
 using System;
+using FlaUI.Core.Exceptions;
+using FlaUI.Core.Tools;
 using GdiColor = System.Drawing.Color;
 using WpfColor = System.Windows.Media.Color;
 
@@ -143,7 +145,18 @@ namespace FlaUI.Core.Elements.Infrastructure
         /// </summary>
         public Element[] FindAll(TreeScope treeScope, ConditionBase condition)
         {
-            return AutomationObject.FindAll(treeScope, condition);
+            return FindAll(treeScope, condition, Retry.DefaultRetryFor);
+        }
+
+        /// <summary> 
+        /// Finds all elements in the given treescope and condition within the given timeout.
+        /// </summary> 
+        public Element[] FindAll(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
+        {
+            Predicate<Element[]> shouldRetry = elements => elements.Length > 0;
+            Func<Element[]> func = () => AutomationObject.FindAll(treeScope, condition);
+
+            return Retry.For(func, shouldRetry, timeOut);
         }
 
         /// <summary>
@@ -151,7 +164,18 @@ namespace FlaUI.Core.Elements.Infrastructure
         /// </summary>
         public Element FindFirst(TreeScope treeScope, ConditionBase condition)
         {
-            return AutomationObject.FindFirst(treeScope, condition);
+            return FindFirst(treeScope, condition, Retry.DefaultRetryFor);
+        }
+
+        /// <summary> 
+        /// Finds the first element which is in the given treescope and matches the condition within the given timeout period. 
+        /// </summary> 
+        public Element FindFirst(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
+        {
+            Predicate<Element> shouldRetry = element => element == null;
+            Func<Element> func = () => AutomationObject.FindFirst(treeScope, condition);
+
+            return Retry.For(func, shouldRetry, timeOut);
         }
 
         /// <summary>
