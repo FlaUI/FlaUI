@@ -30,6 +30,8 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
 
         public FrameworkType FrameworkType => FrameworkIds.ConvertToFrameworkType(Current.FrameworkId);
 
+        public AutomationType AutomationType => BasicAutomationElement.Automation.AutomationType;
+
         public IPatternFactory PatternFactory { get; private set; }
 
         /// <summary>

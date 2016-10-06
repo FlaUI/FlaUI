@@ -1,122 +1,118 @@
 ﻿using System;
 using System.Globalization;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
-using FlaUI.Core.Elements.Infrastructure;
 using FlaUI.Core.Input;
+using FlaUI.Core.Patterns;
 using FlaUI.Core.WindowsAPI;
 
-namespace FlaUI.Core.Elements
+namespace FlaUI.Core.AutomationElements
 {
-    public class Slider : Element
+    public class Slider : AutomationElement
     {
-        public Slider(AutomationObjectBase automationObject) : base(automationObject)
+        public Slider(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 
+        private IRangeValuePattern RangeValuePattern => PatternFactory.GetRangeValuePattern();
+
+        private IValuePattern ValuePattern => PatternFactory.GetValuePattern();
+
+        private Button LargeIncreaseButton => GetLargeIncreaseButton();
+
+        private Button LargeDecreaseButton => GetLargeDecreaseButton();
+
         public Thumb Thumb => FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Thumb)).AsThumb();
 
-        public virtual double Value { get; set; }
+        public bool IsOnlyValue => RangeValuePattern == null;
+
+        public double Value
+        {
+            get
+            {
+                var rangeValuePattern = RangeValuePattern;
+                if (rangeValuePattern != null)
+                {
+                    return RangeValuePattern.Current.Value;
+                }
+                // UIA3 for WinForms does not have the RangeValue pattern, only the value pattern
+                // The value in this case is always between 0 and 100
+                return Convert.ToDouble(ValuePattern.Current.Value);
+            }
+            set
+            {
+                var rangeValuePattern = RangeValuePattern;
+                if (rangeValuePattern != null)
+                {
+                    RangeValuePattern.SetValue(value);
+                }
+                else
+                {
+                    // UIA3 for WinForms does not have the RangeValue pattern, only the value pattern
+                    // The value in this case is always between 0 and 100
+                    ValuePattern.SetValue(value.ToString(CultureInfo.InvariantCulture));
+                }
+            }
+        }
 
         public void SmallIncrement()
         {
             Keyboard.Instance.PressVirtualKeyCode(VirtualKeyShort.RIGHT);
+            Helpers.WaitUntilInputIsProcessed();
         }
 
         public void SmallDecrement()
         {
             Keyboard.Instance.PressVirtualKeyCode(VirtualKeyShort.LEFT);
+            Helpers.WaitUntilInputIsProcessed();
         }
 
-        public virtual void LargeIncrement() { }
-
-        public virtual void LargeDecrement() { }
-    }
-
-    public class WinFormsSlider : Slider
-    {
-        public WinFormsSlider(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
-
-        private ValuePattern ValuePattern { get { return PatternFactory.GetValuePattern(); } }
-
-        private Button LargeIncreaseButton
+        public void LargeIncrement()
         {
-            get
+            LargeIncreaseButton.Invoke();
+        }
+
+        public void LargeDecrement()
+        {
+            LargeDecreaseButton.Invoke();
+        }
+
+        private Button GetLargeIncreaseButton()
+        {
+            if (FrameworkType == FrameworkType.Wpf)
             {
-                var buttons = FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Button));
-                foreach (var button in buttons)
-                {
-                    if (button.Current.BoundingRectangle.Left > Thumb.Current.BoundingRectangle.Left)
-                    {
-                        return button.AsButton();
-                    }
-                }
-                return null;
+                // For WPF, this is simple
+                return FindFirst(TreeScope.Children, ConditionFactory.ByAutomationId("IncreaseLarge")).AsButton();
             }
-        }
-
-        private Button LargeDecreaseButton
-        {
-            get
+            // For WinForms, we loop thru the buttons and find the one right of the thumb
+            var buttons = FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Button));
+            foreach (var button in buttons)
             {
-                var buttons = FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Button));
-                foreach (var button in buttons)
+                if (button.Current.BoundingRectangle.Left > Thumb.Current.BoundingRectangle.Left)
                 {
-                    if (button.Current.BoundingRectangle.Right < Thumb.Current.BoundingRectangle.Right)
-                    {
-                        return button.AsButton();
-                    }
+                    return button.AsButton();
                 }
-                return null;
             }
+            return null;
         }
 
-        public override double Value
+        private Button GetLargeDecreaseButton()
         {
-            get { return Convert.ToDouble((string) ValuePattern.Current.Value); }
-            set { ValuePattern.SetValue(value.ToString(CultureInfo.InvariantCulture)); }
-        }
-
-        public override void LargeIncrement()
-        {
-            LargeIncreaseButton.Click(false);
-        }
-
-        public override void LargeDecrement()
-        {
-            LargeDecreaseButton.Click(false);
-        }
-    }
-
-    public class WpfSlider : Slider
-    {
-        public WpfSlider(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation, nativeElement) { }
-
-        private RangeValuePattern RangeValuePattern { get { return PatternFactory.GetRangeValuePattern(); } }
-
-        private Button LargeIncreaseButton
-        {
-            get { return FindFirst(TreeScope.Children, ConditionFactory.ByAutomationId("IncreaseLarge")).AsButton(); }
-        }
-
-        private Button LargeDecreaseButton
-        {
-            get { return FindFirst(TreeScope.Children, ConditionFactory.ByAutomationId("DecreaseLarge")).AsButton(); }
-        }
-
-        public override double Value
-        {
-            get { return RangeValuePattern.Current.Value; }
-            set { RangeValuePattern.SetValue(value); }
-        }
-
-        public override void LargeIncrement()
-        {
-            LargeIncreaseButton.Click(false);
-        }
-
-        public override void LargeDecrement()
-        {
-            LargeDecreaseButton.Click(false);
+            if (FrameworkType == FrameworkType.Wpf)
+            {
+                // For WPF, this is simple
+                return FindFirst(TreeScope.Children, ConditionFactory.ByAutomationId("DecreaseLarge")).AsButton();
+            }
+            // For WinForms, we loop thru the buttons and find the one left of the thumb
+            var buttons = FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Button));
+            foreach (var button in buttons)
+            {
+                if (button.Current.BoundingRectangle.Right < Thumb.Current.BoundingRectangle.Right)
+                {
+                    return button.AsButton();
+                }
+            }
+            return null;
         }
     }
 }

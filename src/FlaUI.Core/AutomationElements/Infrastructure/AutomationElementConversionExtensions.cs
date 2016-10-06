@@ -44,11 +44,11 @@
             return new RadioButton(automationElement.BasicAutomationElement);
         }
 
-        //public static Slider AsSlider(this AutomationElement automationElement)
-        //{
-        //    if (automationElement == null) { return null; }
-        //    return new Slider(automationElement.BasicAutomationElement);
-        //}
+        public static Slider AsSlider(this AutomationElement automationElement)
+        {
+            if (automationElement == null) { return null; }
+            return new Slider(automationElement.BasicAutomationElement);
+        }
 
         public static Tab AsTab(this AutomationElement automationElement)
         {

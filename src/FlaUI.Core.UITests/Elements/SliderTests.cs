@@ -1,6 +1,6 @@
-﻿using FlaUI.Core.Definitions;
-using FlaUI.Core.Elements;
-using FlaUI.Core.Elements.Infrastructure;
+﻿using FlaUI.Core.AutomationElements;
+using FlaUI.Core.AutomationElements.Infrastructure;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
 using FlaUI.Core.Shapes;
 using FlaUI.Core.UITests.TestFramework;
@@ -34,44 +34,48 @@ namespace FlaUI.Core.UITests.Elements
         public void SetValueTest()
         {
             var slider = GetSlider();
-            slider.Value = FixNumberForWinforms(5);
-            Assert.That(slider.Value, Is.EqualTo(FixNumberForWinforms(5)));
+            var number1 = AdjustNumberIfOnlyValue(slider, 6);
+            slider.Value = number1;
+            Assert.That(slider.Value, Is.EqualTo(number1));
+            var number2 = AdjustNumberIfOnlyValue(slider, 4);
+            slider.Value = number2;
+            Assert.That(slider.Value, Is.EqualTo(number2));
         }
 
         [Test]
         public void SmallIncrementTest()
         {
             var slider = GetSlider();
-            slider.Value = FixNumberForWinforms(5);
+            ResetToCenter(slider);
             slider.SmallIncrement();
-            Assert.That(slider.Value, Is.EqualTo(FixNumberForWinforms(6)));
+            Assert.That(slider.Value, Is.EqualTo(AdjustNumberIfOnlyValue(slider, 6)));
         }
 
         [Test]
         public void SmallDecrementTest()
         {
             var slider = GetSlider();
-            slider.Value = FixNumberForWinforms(5);
+            ResetToCenter(slider);
             slider.SmallDecrement();
-            Assert.That(slider.Value, Is.EqualTo(FixNumberForWinforms(4)));
+            Assert.That(slider.Value, Is.EqualTo(AdjustNumberIfOnlyValue(slider, 4)));
         }
 
         [Test]
         public void LargeIncrementTest()
         {
             var slider = GetSlider();
-            slider.Value = FixNumberForWinforms(5);
+            ResetToCenter(slider);
             slider.LargeIncrement();
-            Assert.That(slider.Value, Is.EqualTo(FixNumberForWinforms(9)));
+            Assert.That(slider.Value, Is.EqualTo(AdjustNumberIfOnlyValue(slider, 9)));
         }
 
         [Test]
         public void LargeDecrementTest()
         {
             var slider = GetSlider();
-            slider.Value = FixNumberForWinforms(5);
+            ResetToCenter(slider);
             slider.LargeDecrement();
-            Assert.That(slider.Value, Is.EqualTo(FixNumberForWinforms(1)));
+            Assert.That(slider.Value, Is.EqualTo(AdjustNumberIfOnlyValue(slider, 1)));
         }
 
         private Slider GetSlider()
@@ -81,16 +85,21 @@ namespace FlaUI.Core.UITests.Elements
         }
 
         /// <summary>
-        /// The range of the slider is 0-10, but in UIA 3.0 Winforms,
+        /// The range of the test slider is set to 0-10, but in UIA3 WinForms,
         /// the range is always 0-100, so we fix this here
         /// </summary>
-        private double FixNumberForWinforms(double number)
+        private double AdjustNumberIfOnlyValue(Slider slider, double number)
         {
-            if (ApplicationType == TestApplicationType.Wpf)
+            if (slider.IsOnlyValue)
             {
-                return number;
+                return number * 10;
             }
-            return number * 10;
+            return number;
+        }
+
+        private void ResetToCenter(Slider slider)
+        {
+            slider.Value = AdjustNumberIfOnlyValue(slider, 5);
         }
     }
 }

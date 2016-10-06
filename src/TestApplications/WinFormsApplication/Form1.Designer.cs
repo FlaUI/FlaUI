@@ -56,10 +56,10 @@
             this.Slider = new System.Windows.Forms.TrackBar();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.TextBox = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.TextBox = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Slider)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -207,6 +207,7 @@
             this.Slider.Name = "Slider";
             this.Slider.Size = new System.Drawing.Size(150, 45);
             this.Slider.TabIndex = 16;
+            this.Slider.Value = 5;
             // 
             // tabControl1
             // 
@@ -237,6 +238,13 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Simple Controls";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // TextBox
+            // 
+            this.TextBox.Location = new System.Drawing.Point(232, 9);
+            this.TextBox.Name = "TextBox";
+            this.TextBox.Size = new System.Drawing.Size(100, 20);
+            this.TextBox.TabIndex = 17;
             // 
             // tabPage2
             // 
@@ -279,13 +287,6 @@
             this.statusStrip1.Size = new System.Drawing.Size(491, 22);
             this.statusStrip1.TabIndex = 18;
             this.statusStrip1.Text = "statusStrip1";
-            // 
-            // TextBox
-            // 
-            this.TextBox.Location = new System.Drawing.Point(232, 9);
-            this.TextBox.Name = "TextBox";
-            this.TextBox.Size = new System.Drawing.Size(100, 20);
-            this.TextBox.TabIndex = 17;
             // 
             // Form1
             // 
