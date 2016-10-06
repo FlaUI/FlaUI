@@ -22,13 +22,13 @@ namespace FlaUI.UIA2
 
         public override object NotSupportedValue => UIA.AutomationElement.NotSupported;
 
-        public override Element GetDesktop()
+        public override AutomationElement GetDesktop()
         {
             var desktop = UIA.AutomationElement.RootElement;
             return NativeValueConverter.NativeToManaged(this, desktop);
         }
 
-        public override Element FromPoint(Point point)
+        public override AutomationElement FromPoint(Point point)
         {
             var nativeElement = UIA.AutomationElement.FromPoint(point);
             return NativeValueConverter.NativeToManaged(this, nativeElement);
@@ -37,19 +37,19 @@ namespace FlaUI.UIA2
         /// <summary>
         /// Creates an <see cref="UIA.AutomationElement"/> from a given windows handle (HWND)
         /// </summary>
-        public override Element FromHandle(IntPtr hwnd)
+        public override AutomationElement FromHandle(IntPtr hwnd)
         {
             var nativeElement = UIA.AutomationElement.FromHandle(hwnd);
             return NativeValueConverter.NativeToManaged(this, nativeElement);
         }
 
-        public override Element FocusedElement()
+        public override AutomationElement FocusedElement()
         {
             var nativeFocusedElement = UIA.AutomationElement.FocusedElement;
             return NativeValueConverter.NativeToManaged(this, nativeFocusedElement);
         }
 
-        public override IAutomationFocusChangedEventHandler RegisterFocusChangedEvent(Action<Element> action)
+        public override IAutomationFocusChangedEventHandler RegisterFocusChangedEvent(Action<AutomationElement> action)
         {
             var eventHandler = new UIA2FocusChangedEventHandler(this, action);
             UIA.Automation.AddAutomationFocusChangedEventHandler(eventHandler.EventHandler);

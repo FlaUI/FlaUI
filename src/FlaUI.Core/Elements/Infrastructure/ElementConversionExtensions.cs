@@ -2,100 +2,100 @@
 {
     public static class ElementConversionExtensions
     {
-        public static Button AsButton(this Element element)
+        public static Button AsButton(this AutomationElement automationElement)
         {
-            if (element == null) { return null; }
-            return new Button(element.AutomationObject);
+            if (automationElement == null) { return null; }
+            return new Button(automationElement.AutomationObject);
         }
 
-        public static CheckBox AsCheckBox(this Element element)
+        public static CheckBox AsCheckBox(this AutomationElement automationElement)
         {
-            if (element == null) { return null; }
-            return new CheckBox(element.AutomationObject);
+            if (automationElement == null) { return null; }
+            return new CheckBox(automationElement.AutomationObject);
         }
 
-        public static Label AsLabel(this Element element)
+        public static Label AsLabel(this AutomationElement automationElement)
         {
-            if (element == null) { return null; }
-            return new Label(element.AutomationObject);
+            if (automationElement == null) { return null; }
+            return new Label(automationElement.AutomationObject);
         }
 
-        public static Menu AsMenu(this Element element)
+        public static Menu AsMenu(this AutomationElement automationElement)
         {
-            if (element == null) { return null; }
-            return new Menu(element.AutomationObject);
+            if (automationElement == null) { return null; }
+            return new Menu(automationElement.AutomationObject);
         }
 
-        public static MenuItem AsMenuItem(this Element element)
+        public static MenuItem AsMenuItem(this AutomationElement automationElement)
         {
-            if (element == null) { return null; }
-            return new MenuItem(element.AutomationObject);
+            if (automationElement == null) { return null; }
+            return new MenuItem(automationElement.AutomationObject);
         }
 
-        public static ProgressBar AsProgressBar(this Element element)
+        public static ProgressBar AsProgressBar(this AutomationElement automationElement)
         {
-            if (element == null) { return null; }
-            return new ProgressBar(element.AutomationObject);
+            if (automationElement == null) { return null; }
+            return new ProgressBar(automationElement.AutomationObject);
         }
 
-        public static RadioButton AsRadioButton(this Element element)
+        public static RadioButton AsRadioButton(this AutomationElement automationElement)
         {
-            if (element == null) { return null; }
-            return new RadioButton(element.AutomationObject);
+            if (automationElement == null) { return null; }
+            return new RadioButton(automationElement.AutomationObject);
         }
 
-        //public static Slider AsSlider(this Element element)
+        //public static Slider AsSlider(this AutomationElement automationElement)
         //{
-        //    if (element == null) { return null; }
-        //    return new Slider(element.AutomationObject);
+        //    if (automationElement == null) { return null; }
+        //    return new Slider(automationElement.AutomationObject);
         //}
 
-        public static Tab AsTab(this Element element)
+        public static Tab AsTab(this AutomationElement automationElement)
         {
-            if (element == null) { return null; }
-            return new Tab(element.AutomationObject);
+            if (automationElement == null) { return null; }
+            return new Tab(automationElement.AutomationObject);
         }
 
-        public static TabItem AsTabItem(this Element element)
+        public static TabItem AsTabItem(this AutomationElement automationElement)
         {
-            if (element == null) { return null; }
-            return new TabItem(element.AutomationObject);
+            if (automationElement == null) { return null; }
+            return new TabItem(automationElement.AutomationObject);
         }
 
-        public static TextBox AsTextBox(this Element element)
+        public static TextBox AsTextBox(this AutomationElement automationElement)
         {
-            if (element == null) { return null; }
-            return new TextBox(element.AutomationObject);
+            if (automationElement == null) { return null; }
+            return new TextBox(automationElement.AutomationObject);
         }
 
-        public static Thumb AsThumb(this Element element)
+        public static Thumb AsThumb(this AutomationElement automationElement)
         {
-            if (element == null) { return null; }
-            return new Thumb(element.AutomationObject);
+            if (automationElement == null) { return null; }
+            return new Thumb(automationElement.AutomationObject);
         }
 
-        public static TitleBar AsTitleBar(this Element element)
+        public static TitleBar AsTitleBar(this AutomationElement automationElement)
         {
-            if (element == null) { return null; }
-            return new TitleBar(element.AutomationObject);
+            if (automationElement == null) { return null; }
+            return new TitleBar(automationElement.AutomationObject);
         }
 
-        public static Tree AsTree(this Element element)
+        public static Tree AsTree(this AutomationElement automationElement)
         {
-            if (element == null) { return null; }
-            return new Tree(element.AutomationObject);
+            if (automationElement == null) { return null; }
+            return new Tree(automationElement.AutomationObject);
         }
 
-        public static TreeItem AsTreeItem(this Element element)
+        public static TreeItem AsTreeItem(this AutomationElement automationElement)
         {
-            if (element == null) { return null; }
-            return new TreeItem(element.AutomationObject);
+            if (automationElement == null) { return null; }
+            return new TreeItem(automationElement.AutomationObject);
         }
 
-        public static Window AsWindow(this Element element)
+        public static Window AsWindow(this AutomationElement automationElement)
         {
-            if (element == null) { return null; }
-            return new Window(element.AutomationObject);
+            if (automationElement == null) { return null; }
+            return new Window(automationElement.AutomationObject);
         }
     }
 }

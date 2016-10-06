@@ -6,15 +6,15 @@ namespace FlaUI.Core.EventHandlers
 {
     public abstract class BasicEventHandlerBase : EventHandlerBase, IAutomationEventHandler
     {
-        private readonly Action<Element, EventId> _callAction;
+        private readonly Action<AutomationElement, EventId> _callAction;
 
-        protected BasicEventHandlerBase(AutomationBase automation, Action<Element, EventId> callAction)
+        protected BasicEventHandlerBase(AutomationBase automation, Action<AutomationElement, EventId> callAction)
             : base(automation)
         {
             _callAction = callAction;
         }
 
-        public void HandleAutomationEvent(Element sender, EventId eventId)
+        public void HandleAutomationEvent(AutomationElement sender, EventId eventId)
         {
             _callAction(sender, eventId);
         }

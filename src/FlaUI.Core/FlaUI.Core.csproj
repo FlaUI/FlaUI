@@ -80,7 +80,7 @@
     <Compile Include="Elements\Button.cs" />
     <Compile Include="Elements\CheckBox.cs" />
     <Compile Include="Elements\ComboBox.cs" />
-    <Compile Include="Elements\Infrastructure\Element.cs" />
+    <Compile Include="Elements\Infrastructure\AutomationElement.cs" />
     <Compile Include="Elements\Infrastructure\ElementConversionExtensions.cs" />
     <Compile Include="Elements\Infrastructure\ElementInformationBase.cs" />
     <Compile Include="Elements\Infrastructure\IElementInformation.cs" />
@@ -88,10 +88,10 @@
     <Compile Include="Elements\Label.cs" />
     <Compile Include="Elements\Menu.cs" />
     <Compile Include="Elements\MenuItem.cs" />
-    <Compile Include="Elements\PatternElements\ExpandCollapseElement.cs" />
-    <Compile Include="Elements\PatternElements\InvokeElement.cs" />
-    <Compile Include="Elements\PatternElements\SelectionItemElement.cs" />
-    <Compile Include="Elements\PatternElements\ToggleElement.cs" />
+    <Compile Include="Elements\PatternElements\ExpandCollapseAutomationElement.cs" />
+    <Compile Include="Elements\PatternElements\InvokeAutomationElement.cs" />
+    <Compile Include="Elements\PatternElements\SelectionItemAutomationElement.cs" />
+    <Compile Include="Elements\PatternElements\ToggleAutomationElement.cs" />
     <Compile Include="Elements\ProgressBar.cs" />
     <Compile Include="Elements\RadioButton.cs" />
     <Compile Include="Elements\Tab.cs" />

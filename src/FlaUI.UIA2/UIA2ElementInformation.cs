@@ -22,12 +22,12 @@ namespace FlaUI.UIA2
         public Rectangle BoundingRectangle => Get<Rectangle>(AutomationObjectIds.BoundingRectangleProperty);
         public string ClassName => Get<string>(AutomationObjectIds.ClassNameProperty);
         public Point ClickablePoint => Get<Point>(AutomationObjectIds.ClickablePointProperty);
-        public Element[] ControllerFor { get { throw new NotSupportedByUIA2Exception(); } }
+        public AutomationElement[] ControllerFor { get { throw new NotSupportedByUIA2Exception(); } }
         public ControlType ControlType => Get<ControlType>(AutomationObjectIds.ControlTypeProperty);
         public CultureInfo Culture => Get<CultureInfo>(AutomationObjectIds.CultureProperty);
-        public Element[] DescribedBy { get { throw new NotSupportedByUIA2Exception(); } }
-        public Element[] FlowsFrom { get { throw new NotSupportedByUIA2Exception(); } }
-        public Element[] FlowsTo { get { throw new NotSupportedByUIA2Exception(); } }
+        public AutomationElement[] DescribedBy { get { throw new NotSupportedByUIA2Exception(); } }
+        public AutomationElement[] FlowsFrom { get { throw new NotSupportedByUIA2Exception(); } }
+        public AutomationElement[] FlowsTo { get { throw new NotSupportedByUIA2Exception(); } }
         public string FrameworkId => Get<string>(AutomationObjectIds.FrameworkIdProperty);
         public bool HasKeyboardFocus => Get<bool>(AutomationObjectIds.HasKeyboardFocusProperty);
         public string HelpText => Get<string>(AutomationObjectIds.HelpTextProperty);
@@ -42,7 +42,7 @@ namespace FlaUI.UIA2
         public bool IsRequiredForForm => Get<bool>(AutomationObjectIds.IsRequiredForFormProperty);
         public string ItemStatus => Get<string>(AutomationObjectIds.ItemStatusProperty);
         public string ItemType => Get<string>(AutomationObjectIds.ItemTypeProperty);
-        public Element LabeledBy => Get<Element>(AutomationObjectIds.LabeledByProperty);
+        public AutomationElement LabeledBy => Get<AutomationElement>(AutomationObjectIds.LabeledByProperty);
         public LiveSetting LiveSetting { get { throw new NotSupportedByUIA2Exception(); } }
         public string LocalizedControlType => Get<string>(AutomationObjectIds.LocalizedControlTypeProperty);
         public string Name => Get<string>(AutomationObjectIds.NameProperty);

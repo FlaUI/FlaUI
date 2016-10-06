@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace FlaUI.Core.Elements
 {
-    public class Tab : Element
+    public class Tab : AutomationElement
     {
         public Tab(AutomationObjectBase automationObject) : base(automationObject)
         {

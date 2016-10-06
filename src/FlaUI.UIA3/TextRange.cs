@@ -81,13 +81,13 @@ namespace FlaUI.UIA3
             return result;
         }
 
-        public Element[] GetChildren()
+        public AutomationElement[] GetChildren()
         {
             var nativeChildren = ComCallWrapper.Call(() => NativeRange.GetChildren());
             return NativeValueConverter.NativeArrayToManaged(Automation, nativeChildren);
         }
 
-        public Element GetEnclosingElement()
+        public AutomationElement GetEnclosingElement()
         {
             var nativeElement = ComCallWrapper.Call(() => NativeRange.GetEnclosingElement());
             return NativeValueConverter.NativeToManaged(Automation, nativeElement);

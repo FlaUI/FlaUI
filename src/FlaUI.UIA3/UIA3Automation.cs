@@ -43,37 +43,37 @@ namespace FlaUI.UIA3
         /// <summary>
         /// Gets the root element (desktop)
         /// </summary>
-        public override Element GetDesktop()
+        public override AutomationElement GetDesktop()
         {
             var desktop = NativeAutomation.GetRootElement();
-            return new Element(WrapNativeElement(desktop));
+            return new AutomationElement(WrapNativeElement(desktop));
         }
 
         /// <summary>
-        /// Creates an <see cref="Element"/> from a given point
+        /// Creates an <see cref="AutomationElement"/> from a given point
         /// </summary>
-        public override Element FromPoint(Point point)
+        public override AutomationElement FromPoint(Point point)
         {
             var nativeElement = NativeAutomation.ElementFromPoint(point.ToTagPoint());
-            return nativeElement == null ? null : new Element(WrapNativeElement(nativeElement));
+            return nativeElement == null ? null : new AutomationElement(WrapNativeElement(nativeElement));
         }
 
         /// <summary>
-        /// Creates an <see cref="Element"/> from a given windows handle (HWND)
+        /// Creates an <see cref="AutomationElement"/> from a given windows handle (HWND)
         /// </summary>
-        public override Element FromHandle(IntPtr hwnd)
+        public override AutomationElement FromHandle(IntPtr hwnd)
         {
             var nativeElement = NativeAutomation.ElementFromHandle(hwnd);
-            return nativeElement == null ? null : new Element(WrapNativeElement(nativeElement));
+            return nativeElement == null ? null : new AutomationElement(WrapNativeElement(nativeElement));
         }
 
-        public override Element FocusedElement()
+        public override AutomationElement FocusedElement()
         {
             var nativeFocusedElement = NativeAutomation.GetFocusedElement();
             return NativeValueConverter.NativeToManaged(this, nativeFocusedElement);
         }
 
-        public override IAutomationFocusChangedEventHandler RegisterFocusChangedEvent(Action<Element> action)
+        public override IAutomationFocusChangedEventHandler RegisterFocusChangedEvent(Action<AutomationElement> action)
         {
             var eventHandler = new UIA3FocusChangedEventHandler(this, action);
             NativeAutomation.AddFocusChangedEventHandler(null, eventHandler);

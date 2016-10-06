@@ -98,13 +98,13 @@ namespace FlaUI.Core
         /// <returns>The value / default value of the property or <see cref="AutomationBase.NotSupportedValue" /></returns>
         protected abstract object InternalGetPropertyValue(int propertyId, bool cached, bool useDefaultIfNotSupported);
 
-        public abstract Element[] FindAll(TreeScope treeScope, ConditionBase condition);
-        public abstract Element FindFirst(TreeScope treeScope, ConditionBase condition);
+        public abstract AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition);
+        public abstract AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition);
         public abstract bool TryGetClickablePoint(out Point point);
         public abstract IElementProperties CreateProperties();
-        public abstract IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<Element, EventId> action);
-        public abstract IAutomationPropertyChangedEventHandler RegisterPropertyChangedEvent(TreeScope treeScope, Action<Element, PropertyId, object> action, PropertyId[] properties);
-        public abstract IAutomationStructureChangedEventHandler RegisterStructureChangedEvent(TreeScope treeScope, Action<Element, StructureChangeType, int[]> action);
+        public abstract IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action);
+        public abstract IAutomationPropertyChangedEventHandler RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, PropertyId[] properties);
+        public abstract IAutomationStructureChangedEventHandler RegisterStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action);
         public abstract void RemoveAutomationEventHandler(EventId @event, IAutomationEventHandler eventHandler);
         public abstract void RemovePropertyChangedEventHandler(IAutomationPropertyChangedEventHandler eventHandler);
         public abstract void RemoveStructureChangedEventHandler(IAutomationStructureChangedEventHandler eventHandler);

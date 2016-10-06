@@ -2,7 +2,7 @@
 
 namespace FlaUI.Core.Elements
 {
-    public class TabItem : SelectionItemElement
+    public class TabItem : SelectionItemAutomationElement
     {
         public TabItem(AutomationObjectBase automationObject) : base(automationObject)
         {

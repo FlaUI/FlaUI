@@ -11,7 +11,7 @@ namespace FlaUI.UIA2.EventHandlers
     {
         public UIA.AutomationPropertyChangedEventHandler EventHandler { get; private set; }
 
-        public UIA2PropertyChangedEventHandler(AutomationBase automation, Action<Element, PropertyId, object> callAction) : base(automation, callAction)
+        public UIA2PropertyChangedEventHandler(AutomationBase automation, Action<AutomationElement, PropertyId, object> callAction) : base(automation, callAction)
         {
             EventHandler = HandlePropertyChangedEvent;
         }
@@ -19,7 +19,7 @@ namespace FlaUI.UIA2.EventHandlers
         private void HandlePropertyChangedEvent(object sender, UIA.AutomationPropertyChangedEventArgs automationPropertyChangedEventArgs)
         {
             var automationObject = new UIA2AutomationObject((UIA2Automation)Automation, (UIA.AutomationElement)sender);
-            var senderElement = new Element(automationObject);
+            var senderElement = new AutomationElement(automationObject);
             var propertyId = PropertyId.Find(AutomationType.UIA2, automationPropertyChangedEventArgs.Property.Id);
             HandlePropertyChangedEvent(senderElement, propertyId, automationPropertyChangedEventArgs.NewValue);
         }

@@ -11,7 +11,7 @@ namespace FlaUI.UIA2.EventHandlers
     {
         public UIA.AutomationEventHandler EventHandler { get; private set; }
 
-        public UIA2BasicEventHandler(AutomationBase automation, Action<Element, EventId> callAction) : base(automation, callAction)
+        public UIA2BasicEventHandler(AutomationBase automation, Action<AutomationElement, EventId> callAction) : base(automation, callAction)
         {
             EventHandler = HandleAutomationEvent;
         }
@@ -19,7 +19,7 @@ namespace FlaUI.UIA2.EventHandlers
         private void HandleAutomationEvent(object sender, UIA.AutomationEventArgs automationEventArgs)
         {
             var automationObject = new UIA2AutomationObject((UIA2Automation)Automation, (UIA.AutomationElement)sender);
-            var senderElement = new Element(automationObject);
+            var senderElement = new AutomationElement(automationObject);
             var @event = EventId.Find(AutomationType.UIA2, automationEventArgs.EventId.Id);
             HandleAutomationEvent(senderElement, @event);
         }

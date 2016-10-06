@@ -14,34 +14,34 @@ namespace FlaUI.UIA3
             NativeTreeWalker = automation.NativeAutomation.ControlViewWalker;
         }
 
-        //public Element GetParent(Element element)
+        //public AutomationElement GetParent(AutomationElement element)
         //{
         //    var parent = NativeTreeWalker.GetParentElement(element.NativeElement);
-        //    return parent == null ? null : new Element(Automation, parent);
+        //    return parent == null ? null : new AutomationElement(Automation, parent);
         //}
 
-        //public Element GetFirstChild(Element element)
+        //public AutomationElement GetFirstChild(AutomationElement element)
         //{
         //    var child = NativeTreeWalker.GetFirstChildElement(element.NativeElement);
-        //    return child == null ? null : new Element(Automation, child);
+        //    return child == null ? null : new AutomationElement(Automation, child);
         //}
 
-        //public Element GetLastChild(Element element)
+        //public AutomationElement GetLastChild(AutomationElement element)
         //{
         //    var child = NativeTreeWalker.GetLastChildElement(element.NativeElement);
-        //    return child == null ? null : new Element(Automation, child);
+        //    return child == null ? null : new AutomationElement(Automation, child);
         //}
 
-        //public Element GetNextSibling(Element element)
+        //public AutomationElement GetNextSibling(AutomationElement element)
         //{
         //    var child = NativeTreeWalker.GetNextSiblingElement(element.NativeElement);
-        //    return child == null ? null : new Element(Automation, child);
+        //    return child == null ? null : new AutomationElement(Automation, child);
         //}
 
-        //public Element GetPreviousSibling(Element element)
+        //public AutomationElement GetPreviousSibling(AutomationElement element)
         //{
         //    var child = NativeTreeWalker.GetPreviousSiblingElement(element.NativeElement);
-        //    return child == null ? null : new Element(Automation, child);
+        //    return child == null ? null : new AutomationElement(Automation, child);
         //}
     }
 }

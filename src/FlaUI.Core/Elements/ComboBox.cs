@@ -2,12 +2,12 @@
 
 namespace FlaUI.Core.Elements
 {
-    public class ComboBox : Element
+    public class ComboBox : AutomationElement
     {
         public ComboBox(AutomationObjectBase automationObject) : base(automationObject)
         {
         }
 
-        public Element EditElement { get; set; }
+        public AutomationElement EditAutomationElement { get; set; }
     }
 }

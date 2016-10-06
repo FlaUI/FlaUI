@@ -3,18 +3,17 @@ using FlaUI.Core.Definitions;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Shapes;
+using FlaUI.Core.Tools;
 using FlaUI.Core.WindowsAPI;
 using System;
-using FlaUI.Core.Exceptions;
-using FlaUI.Core.Tools;
 using GdiColor = System.Drawing.Color;
 using WpfColor = System.Windows.Media.Color;
 
 namespace FlaUI.Core.Elements.Infrastructure
 {
-    public class Element
+    public class AutomationElement
     {
-        public Element(AutomationObjectBase automationObject)
+        public AutomationElement(AutomationObjectBase automationObject)
         {
             AutomationObject = automationObject;
             PatternFactory = AutomationObject.CreatePatternFactory();
@@ -63,7 +62,7 @@ namespace FlaUI.Core.Elements.Infrastructure
         /// <summary>
         /// Draws a red highlight around the element
         /// </summary>
-        public Element DrawHighlight()
+        public AutomationElement DrawHighlight()
         {
             return DrawHighlight(System.Windows.Media.Colors.Red);
         }
@@ -71,7 +70,7 @@ namespace FlaUI.Core.Elements.Infrastructure
         /// <summary>
         /// Draws a manually colored highlight around the element
         /// </summary>
-        public Element DrawHighlight(WpfColor color)
+        public AutomationElement DrawHighlight(WpfColor color)
         {
             return DrawHighlight(true, color, 2000);
         }
@@ -79,7 +78,7 @@ namespace FlaUI.Core.Elements.Infrastructure
         /// <summary>
         /// Draws a manually colored highlight around the element
         /// </summary>
-        public Element DrawHighlight(GdiColor color)
+        public AutomationElement DrawHighlight(GdiColor color)
         {
             return DrawHighlight(true, color, 2000);
         }
@@ -91,7 +90,7 @@ namespace FlaUI.Core.Elements.Infrastructure
         /// <param name="color">The color to draw the highlight</param>
         /// <param name="durationInMs">The duration (im ms) how long the highlight is shown</param>
         /// <remarks>Override for winforms color</remarks>
-        public Element DrawHighlight(bool blocking, GdiColor color, int durationInMs)
+        public AutomationElement DrawHighlight(bool blocking, GdiColor color, int durationInMs)
         {
             return DrawHighlight(blocking, WpfColor.FromArgb(color.A, color.R, color.G, color.B), durationInMs);
         }
@@ -102,7 +101,7 @@ namespace FlaUI.Core.Elements.Infrastructure
         /// <param name="blocking">Flag to indicate if further execution waits until the highlight is removed</param>
         /// <param name="color">The color to draw the highlight</param>
         /// <param name="durationInMs">The duration (im ms) how long the highlight is shown</param>
-        public Element DrawHighlight(bool blocking, WpfColor color, int durationInMs)
+        public AutomationElement DrawHighlight(bool blocking, WpfColor color, int durationInMs)
         {
             var rectangle = Current.BoundingRectangle;
             if (!rectangle.IsEmpty)
@@ -143,7 +142,7 @@ namespace FlaUI.Core.Elements.Infrastructure
         /// <summary>
         /// Finds all elements in the given treescope and condition
         /// </summary>
-        public Element[] FindAll(TreeScope treeScope, ConditionBase condition)
+        public AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition)
         {
             return FindAll(treeScope, condition, Retry.DefaultRetryFor);
         }
@@ -151,10 +150,10 @@ namespace FlaUI.Core.Elements.Infrastructure
         /// <summary> 
         /// Finds all elements in the given treescope and condition within the given timeout.
         /// </summary> 
-        public Element[] FindAll(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
+        public AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
         {
-            Predicate<Element[]> shouldRetry = elements => elements.Length > 0;
-            Func<Element[]> func = () => AutomationObject.FindAll(treeScope, condition);
+            Predicate<AutomationElement[]> shouldRetry = elements => elements.Length > 0;
+            Func<AutomationElement[]> func = () => AutomationObject.FindAll(treeScope, condition);
 
             return Retry.For(func, shouldRetry, timeOut);
         }
@@ -162,7 +161,7 @@ namespace FlaUI.Core.Elements.Infrastructure
         /// <summary>
         /// Finds the first element which is in the given treescope and matches the condition
         /// </summary>
-        public Element FindFirst(TreeScope treeScope, ConditionBase condition)
+        public AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
         {
             return FindFirst(treeScope, condition, Retry.DefaultRetryFor);
         }
@@ -170,10 +169,10 @@ namespace FlaUI.Core.Elements.Infrastructure
         /// <summary> 
         /// Finds the first element which is in the given treescope and matches the condition within the given timeout period. 
         /// </summary> 
-        public Element FindFirst(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
+        public AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
         {
-            Predicate<Element> shouldRetry = element => element == null;
-            Func<Element> func = () => AutomationObject.FindFirst(treeScope, condition);
+            Predicate<AutomationElement> shouldRetry = element => element == null;
+            Func<AutomationElement> func = () => AutomationObject.FindFirst(treeScope, condition);
 
             return Retry.For(func, shouldRetry, timeOut);
         }
@@ -197,17 +196,17 @@ namespace FlaUI.Core.Elements.Infrastructure
             return AutomationObject.TryGetClickablePoint(out point);
         }
 
-        public IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<Element, EventId> action)
+        public IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
         {
             return AutomationObject.RegisterEvent(@event, treeScope, action);
         }
 
-        public IAutomationPropertyChangedEventHandler RegisterPropertyChangedEvent(TreeScope treeScope, Action<Element, PropertyId, object> action, params PropertyId[] properties)
+        public IAutomationPropertyChangedEventHandler RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, params PropertyId[] properties)
         {
             return AutomationObject.RegisterPropertyChangedEvent(treeScope, action, properties);
         }
 
-        public IAutomationStructureChangedEventHandler RegisterStructureChangedEvent(TreeScope treeScope, Action<Element, StructureChangeType, int[]> action)
+        public IAutomationStructureChangedEventHandler RegisterStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action)
         {
             return AutomationObject.RegisterStructureChangedEvent(treeScope, action);
         }

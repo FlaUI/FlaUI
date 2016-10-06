@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 
 namespace FlaUI.Core.Elements
 {
-    public class Window : Element
+    public class Window : AutomationElement
     {
         public Window(AutomationObjectBase automationObject) : base(automationObject)
         {

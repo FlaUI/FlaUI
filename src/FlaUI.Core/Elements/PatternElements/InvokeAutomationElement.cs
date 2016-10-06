@@ -4,9 +4,9 @@ using System;
 
 namespace FlaUI.Core.Elements.PatternElements
 {
-    public class InvokeElement : Element
+    public class InvokeAutomationElement : AutomationElement
     {
-        public InvokeElement(AutomationObjectBase automationObject) : base(automationObject)
+        public InvokeAutomationElement(AutomationObjectBase automationObject) : base(automationObject)
         {
         }
 

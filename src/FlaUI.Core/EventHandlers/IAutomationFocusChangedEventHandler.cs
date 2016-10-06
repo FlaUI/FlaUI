@@ -4,6 +4,6 @@ namespace FlaUI.Core.EventHandlers
 {
     public interface IAutomationFocusChangedEventHandler
     {
-        void HandleFocusChangedEvent(Element sender);
+        void HandleFocusChangedEvent(AutomationElement sender);
     }
 }

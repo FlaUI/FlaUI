@@ -9,15 +9,15 @@ namespace FlaUI.Core.Elements
     /// <summary>
     /// Represents a menuitem which can also contain sub-menuitems
     /// </summary>
-    public class MenuItem : Element
+    public class MenuItem : AutomationElement
     {
-        private readonly InvokeElement _invokeElement;
-        private readonly ExpandCollapseElement _expandCollapseElement;
+        private readonly InvokeAutomationElement _invokeAutomationElement;
+        private readonly ExpandCollapseAutomationElement _expandCollapseAutomationElement;
 
         public MenuItem(AutomationObjectBase automationObject) : base(automationObject)
         {
-            _invokeElement = new InvokeElement(automationObject);
-            _expandCollapseElement = new ExpandCollapseElement(automationObject);
+            _invokeAutomationElement = new InvokeAutomationElement(automationObject);
+            _expandCollapseAutomationElement = new ExpandCollapseAutomationElement(automationObject);
         }
 
         public MenuItem[] SubMenuItems
@@ -25,12 +25,12 @@ namespace FlaUI.Core.Elements
             get
             {
                 // WinForms does not have the expand pattern but all children are already there to fetch so we can just continue
-                if (_expandCollapseElement.ExpandCollapsePattern != null)
+                if (_expandCollapseAutomationElement.ExpandCollapsePattern != null)
                 {
                     ExpandCollapseState state;
                     do
                     {
-                        state = _expandCollapseElement.ExpandCollapseState;
+                        state = _expandCollapseAutomationElement.ExpandCollapseState;
                         if (state == ExpandCollapseState.Collapsed)
                         {
                             Expand();
@@ -44,17 +44,17 @@ namespace FlaUI.Core.Elements
 
         public void Invoke()
         {
-            _invokeElement.Invoke();
+            _invokeAutomationElement.Invoke();
         }
 
         public void Expand()
         {
-            _expandCollapseElement.Expand();
+            _expandCollapseAutomationElement.Expand();
         }
 
         public void Collapse()
         {
-            _expandCollapseElement.Collapse();
+            _expandCollapseAutomationElement.Collapse();
         }
     }
 }
