@@ -25,6 +25,11 @@ namespace FlaUI.Core
         public bool IsStoreApp { get; }
 
         /// <summary>
+        /// Application process id
+        /// </summary>
+        public int ProcessId => _process.Id;
+
+        /// <summary>
         /// The name of the application
         /// </summary>
         public string Name => _process.ProcessName;
@@ -98,6 +103,39 @@ namespace FlaUI.Core
             {
                 throw new Exception("Could not find process with id: " + processId, ex);
             }
+        }
+
+        private static Process[] FindProcess(string executable)
+        {
+            var processes = Process.GetProcessesByName(executable.Replace(".exe", string.Empty));
+            return processes;
+        }
+
+        public static Application Attach(int processId)
+        {
+            return Attach(FindProcess(processId));
+        }
+
+        public static Application Attach(Process process)
+        {
+            Log.DebugFormat("[Attaching process:{0}] [Process name {1}] [Process full path:{1}]", process.Id, process.ProcessName, process.MainModule.FileName);
+            return new Application(process);
+        }
+
+        public static Application Attach(string executable, int index = 0)
+        {
+            var processes = FindProcess(executable);
+            if (processes.Length > index)
+            {
+                return new Application(processes[index]);
+            }
+            throw new Exception("Unable to find process with name: " + executable);
+        }
+
+        public static Application AttachOrLaunch(ProcessStartInfo processStartInfo)
+        {
+            var processes = FindProcess(processStartInfo.FileName);
+            return processes.Length == 0 ? Launch(processStartInfo) : Attach(processes[0]);
         }
 
         public static Application Launch(string executable)
