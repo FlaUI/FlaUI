@@ -107,8 +107,7 @@ namespace FlaUI.Core
 
         private static Process[] FindProcess(string executable)
         {
-            var processes = Process.GetProcessesByName(executable.Replace(".exe", string.Empty));
-            return processes;
+            return Process.GetProcessesByName(Path.GetFileNameWithoutExtension(executable));
         }
 
         public static Application Attach(int processId)
@@ -118,7 +117,7 @@ namespace FlaUI.Core
 
         public static Application Attach(Process process)
         {
-            Log.DebugFormat("[Attaching process:{0}] [Process name {1}] [Process full path:{1}]", process.Id, process.ProcessName, process.MainModule.FileName);
+            Log.DebugFormat("[Attaching process:{0}] [Process name:{1}] [Process full path:{2}]", process.Id, process.ProcessName, process.MainModule.FileName);
             return new Application(process);
         }
 
@@ -127,7 +126,7 @@ namespace FlaUI.Core
             var processes = FindProcess(executable);
             if (processes.Length > index)
             {
-                return new Application(processes[index]);
+                return Attach(processes[index]);
             }
             throw new Exception("Unable to find process with name: " + executable);
         }
