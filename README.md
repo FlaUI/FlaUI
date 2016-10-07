@@ -16,7 +16,7 @@ It is based on native UI Automation libraries from Microsoft and therefore kind 
 FlaUI wraps almost everything from the UI Automation libraries but also provides the native objects in case someone has a special need which is not covered (yet) by FlaUI.<br />
 Some ideas are copied from the UIAComWrapper project or TestStack.White but rewritten from scratch to have a clean codebase.
 
-### Why FlaUI
+### Why another library?
 There are quite some automation solutions out there. Commercial ones like TestComplete, Ranorex, CodedUI just to name a few. And also free ones which are mainly TestStack.White.<br />
 All of them are based on what Microsoft provides. These are the UI Automation libraries. There are three versions of it:
 - MSAA
@@ -31,10 +31,13 @@ TestStack.White has two versions, one for UIA2 and one for UIA3 but because of t
 FlaUI now tries to provide an interface for UIA2 and UIA3 where the developer can choose, which version he wants to use. It should also provide a very clean and modern codebase so that collaboration and further development is as easy as possible.
 
 ### Usage
-The entry point is usually an application or the desktop so you get an automation element (like a window).
+##### Installation
+To use FlaUI, you need to reference the appropriate assemblies. So you should decide, if you want to use UIA2 or UIA3 or both and install the appropriate library from NuGet. You can of course always download the source and compile it yourself.
+##### Usage in Code
+The entry point is usually an application or the desktop so you get an automation element (like a the main window of the application).
 On this, you can then search sub-elements and interact with them.
 There is a helper class to launch, attach or close applications.
-Since the application is not related to any UIA library, you need to create the automation you want and use it to get your first element.
+Since the application is not related to any UIA library, you need to create the automation you want and use it to get your first element, which then is your entry point.
 ```csharp
 var app =  Application.Launch("notepad.exe");
 using (var automation = new UIA3Automation())
