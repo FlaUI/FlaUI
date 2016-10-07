@@ -14,9 +14,9 @@ namespace FlaUI.Core
 
         IExpandCollapsePattern GetExpandCollapsePattern();
 
-        //IGridItemPattern GetGridItemPattern();
+        IGridItemPattern GetGridItemPattern();
 
-        //IGridPattern GetGridPattern();
+        IGridPattern GetGridPattern();
 
         IInvokePattern GetInvokePattern();
 

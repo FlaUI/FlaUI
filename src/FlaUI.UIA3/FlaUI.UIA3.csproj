@@ -56,6 +56,8 @@
     <Compile Include="EventHandlers\UIA3PropertyChangedEventHandler.cs" />
     <Compile Include="EventHandlers\UIA3StructureChangedEventHandlerBase.cs" />
     <Compile Include="Patterns\ExpandCollapsePattern.cs" />
+    <Compile Include="Patterns\GridItemPattern.cs" />
+    <Compile Include="Patterns\GridPattern.cs" />
     <Compile Include="Patterns\InvokePattern.cs" />
     <Compile Include="Patterns\RangeValuePattern.cs" />
     <Compile Include="Patterns\SelectionItemPattern.cs" />

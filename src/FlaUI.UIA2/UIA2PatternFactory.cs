@@ -21,6 +21,18 @@ namespace FlaUI.UIA2
             return nativePattern == null ? null : new ExpandCollapsePattern(BasicAutomationElement, nativePattern);
         }
 
+        public IGridItemPattern GetGridItemPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.GridItemPattern>(UIA.GridItemPattern.Pattern);
+            return nativePattern == null ? null : new GridItemPattern(BasicAutomationElement, nativePattern);
+        }
+
+        public IGridPattern GetGridPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.GridPattern>(UIA.GridPattern.Pattern);
+            return nativePattern == null ? null : new GridPattern(BasicAutomationElement, nativePattern);
+        }
+
         public IInvokePattern GetInvokePattern()
         {
             var nativePattern = GetNativePatternAs<UIA.InvokePattern>(UIA.InvokePattern.Pattern);

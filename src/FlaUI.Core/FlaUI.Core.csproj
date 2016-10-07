@@ -44,7 +44,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="UIAutomationClient" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +138,8 @@
     <Compile Include="Overlay\OverlayManager.cs" />
     <Compile Include="Overlay\OverlayRectangleWindow.cs" />
     <Compile Include="Patterns\IExpandCollapsePattern.cs" />
+    <Compile Include="Patterns\IGridItemPattern.cs" />
+    <Compile Include="Patterns\IGridPattern.cs" />
     <Compile Include="Patterns\IInvokePattern.cs" />
     <Compile Include="Patterns\Infrastructure\IPattern.cs" />
     <Compile Include="Patterns\Infrastructure\IPatternInformation.cs" />

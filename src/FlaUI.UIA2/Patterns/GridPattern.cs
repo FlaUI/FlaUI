@@ -4,18 +4,18 @@ using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.Tools;
-using FlaUI.UIA3.Tools;
-using UIA = interop.UIAutomationCore;
+using FlaUI.UIA2.Tools;
+using UIA = System.Windows.Automation;
 
-namespace FlaUI.UIA3.Patterns
+namespace FlaUI.UIA2.Patterns
 {
-    public class GridPattern : PatternBaseWithInformation<UIA.IUIAutomationGridPattern, GridPatternInformation>, IGridPattern
+    public class GridPattern : PatternBaseWithInformation<UIA.GridPattern, GridPatternInformation>, IGridPattern
     {
-        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_GridPatternId, "Grid");
-        public static readonly PropertyId ColumnCountProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_GridColumnCountPropertyId, "ColumnCount");
-        public static readonly PropertyId RowCountProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_GridRowCountPropertyId, "RowCount");
+        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.GridPattern.Pattern.Id, "Grid");
+        public static readonly PropertyId ColumnCountProperty = PropertyId.Register(AutomationType.UIA2, UIA.GridPattern.ColumnCountProperty.Id, "ColumnCount");
+        public static readonly PropertyId RowCountProperty = PropertyId.Register(AutomationType.UIA2, UIA.GridPattern.RowCountProperty.Id, "RowCount");
 
-        public GridPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationGridPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public GridPattern(BasicAutomationElementBase basicAutomationElement, UIA.GridPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
             Properties = new GridPatternProperties();
         }
@@ -34,7 +34,7 @@ namespace FlaUI.UIA3.Patterns
         public AutomationElement GetItem(int row, int column)
         {
             var nativeItem = ComCallWrapper.Call(() => NativePattern.GetItem(row, column));
-            return NativeValueConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeItem);
+            return NativeValueConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeItem);
         }
     }
 

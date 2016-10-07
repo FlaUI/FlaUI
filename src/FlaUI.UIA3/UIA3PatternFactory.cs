@@ -45,17 +45,17 @@ namespace FlaUI.UIA3
             return nativePattern == null ? null : new ExpandCollapsePattern(BasicAutomationElement, nativePattern);
         }
 
-        //public GridItemPattern GetGridItemPattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationGridItemPattern>(GridItemPattern.Pattern);
-        //    return nativePattern == null ? null : new GridItemPattern(BasicAutomationElement, nativePattern);
-        //}
+        public IGridItemPattern GetGridItemPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationGridItemPattern>(GridItemPattern.Pattern);
+            return nativePattern == null ? null : new GridItemPattern(BasicAutomationElement, nativePattern);
+        }
 
-        //public GridPattern GetGridPattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationGridPattern>(GridPattern.Pattern);
-        //    return nativePattern == null ? null : new GridPattern(BasicAutomationElement, nativePattern);
-        //}
+        public IGridPattern GetGridPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationGridPattern>(GridPattern.Pattern);
+            return nativePattern == null ? null : new GridPattern(BasicAutomationElement, nativePattern);
+        }
 
         public IInvokePattern GetInvokePattern()
         {
