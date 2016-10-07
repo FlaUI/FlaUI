@@ -14,4 +14,7 @@
     <copyright>Copyright 2016</copyright>
     <tags>UI Automation UIA2 UIA3 UIA System.Windows.Automation</tags>
   </metadata>
+  <files>
+    <file src="bin\$configuration$\interop.UIAutomationCore.dll" target="lib\net45\" />
+  </files>
 </package>
