@@ -3,6 +3,6 @@
     public enum AutomationType
     {
         UIA2,
-        UIA3,
+        UIA3
     }
 }

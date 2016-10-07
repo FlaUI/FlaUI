@@ -12,7 +12,7 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <summary>
-        /// The currently selected <see cref="TabItem"/>
+        /// The currently selected <see cref="TabItem" />
         /// </summary>
         public TabItem SelectedTabItem
         {
@@ -20,17 +20,17 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <summary>
-        /// The index of the currently selected <see cref="TabItem"/>
+        /// The index of the currently selected <see cref="TabItem" />
         /// </summary>
         public int SelectedTabItemIndex => GetIndexOfSelectedTabItem();
 
         /// <summary>
-        /// All <see cref="TabItem"/> objects from this <see cref="Tab"/>
+        /// All <see cref="TabItem" /> objects from this <see cref="Tab" />
         /// </summary>
         public TabItem[] TabItems => GetTabItems();
 
         /// <summary>
-        /// Selects a <see cref="TabItem"/> by index
+        /// Selects a <see cref="TabItem" /> by index
         /// </summary>
         public void SelectTabItem(int index)
         {
@@ -39,7 +39,7 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <summary>
-        /// Selects a <see cref="TabItem"/> by a give text (name property)
+        /// Selects a <see cref="TabItem" /> by a give text (name property)
         /// </summary>
         public void SelectTabItem(string text)
         {
@@ -60,7 +60,7 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <summary>
-        /// Gets all the <see cref="TabItem"/> objects for this <see cref="Tab"/>
+        /// Gets all the <see cref="TabItem" /> objects for this <see cref="Tab" />
         /// </summary>
         private TabItem[] GetTabItems()
         {

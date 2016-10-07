@@ -1,13 +1,12 @@
-﻿using FlaUI.Core.Identifiers;
-using FlaUI.UIA3;
-using FlaUI.UIA3.Definitions;
-using Gma.System.MouseKeyHook;
-using System;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Forms;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
-using Window = System.Windows.Window;
+using FlaUI.Core.Identifiers;
+using FlaUI.UIA3;
+using Gma.System.MouseKeyHook;
 
 namespace FlaUIRec.Views
 {
@@ -17,8 +16,8 @@ namespace FlaUIRec.Views
     public partial class MainWindow : Window
     {
         private FlaUI.Core.Application _app;
-        private UIA3Automation _automation;
-        private IKeyboardMouseEvents m_GlobalHook;
+        private readonly UIA3Automation _automation;
+        private readonly IKeyboardMouseEvents m_GlobalHook;
 
         public MainWindow()
         {
@@ -32,7 +31,7 @@ namespace FlaUIRec.Views
             //m_GlobalHook.KeyPress += GlobalHookKeyPress;
         }
 
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        protected override void OnClosing(CancelEventArgs e)
         {
             m_GlobalHook.MouseDownExt -= m_GlobalHook_MouseDownExt;
             m_GlobalHook.MouseMoveExt -= m_GlobalHook_MouseMoveExt;

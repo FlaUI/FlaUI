@@ -7,6 +7,6 @@
         LeftMouseUp = 4,
         LeftMouseDown = 8,
         RightMouseUp = 16,
-        RightMouseDown = 32,
+        RightMouseDown = 32
     }
 }

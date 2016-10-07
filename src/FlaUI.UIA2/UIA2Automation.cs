@@ -1,10 +1,10 @@
-﻿using FlaUI.Core;
+﻿using System;
+using FlaUI.Core;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Shapes;
 using FlaUI.UIA2.EventHandlers;
 using FlaUI.UIA2.Tools;
-using System;
-using FlaUI.Core.AutomationElements.Infrastructure;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2
@@ -35,7 +35,7 @@ namespace FlaUI.UIA2
         }
 
         /// <summary>
-        /// Creates an <see cref="UIA.AutomationElement"/> from a given windows handle (HWND)
+        /// Creates an <see cref="UIA.AutomationElement" /> from a given windows handle (HWND)
         /// </summary>
         public override AutomationElement FromHandle(IntPtr hwnd)
         {

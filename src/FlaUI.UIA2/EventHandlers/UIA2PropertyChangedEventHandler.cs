@@ -1,8 +1,8 @@
-﻿using FlaUI.Core;
+﻿using System;
+using FlaUI.Core;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Identifiers;
-using System;
-using FlaUI.Core.AutomationElements.Infrastructure;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.EventHandlers

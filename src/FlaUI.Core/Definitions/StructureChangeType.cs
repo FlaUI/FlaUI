@@ -7,6 +7,6 @@
         ChildrenInvalidated = 2,
         ChildrenBulkAdded = 3,
         ChildrenBulkRemoved = 4,
-        ChildrenReordered = 5,
+        ChildrenReordered = 5
     }
 }

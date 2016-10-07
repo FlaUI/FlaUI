@@ -2,7 +2,7 @@
 {
     public enum TestApplicationType
     {
-        Custom,        
+        Custom,
         WinForms,
         Wpf
     }

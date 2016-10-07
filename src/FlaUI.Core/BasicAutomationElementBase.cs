@@ -1,10 +1,10 @@
-﻿using FlaUI.Core.Exceptions;
-using FlaUI.Core.Identifiers;
-using System;
+﻿using System;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.EventHandlers;
+using FlaUI.Core.Exceptions;
+using FlaUI.Core.Identifiers;
 using FlaUI.Core.Shapes;
 
 namespace FlaUI.Core
@@ -17,7 +17,7 @@ namespace FlaUI.Core
         }
 
         /// <summary>
-        /// Underlying <see cref="AutomationBase"/> object where this element belongs to
+        /// Underlying <see cref="AutomationBase" /> object where this element belongs to
         /// </summary>
         public AutomationBase Automation { get; }
 
@@ -94,7 +94,10 @@ namespace FlaUI.Core
         /// </summary>
         /// <param name="propertyId">The id of the property to get</param>
         /// <param name="cached">Flag to indicate if the cached or current value should be fetched</param>
-        /// <param name="useDefaultIfNotSupported">Flag to indicate, if the default value should be used if the property is not supported</param>
+        /// <param name="useDefaultIfNotSupported">
+        /// Flag to indicate, if the default value should be used if the property is not
+        /// supported
+        /// </param>
         /// <returns>The value / default value of the property or <see cref="AutomationBase.NotSupportedValue" /></returns>
         protected abstract object InternalGetPropertyValue(int propertyId, bool cached, bool useDefaultIfNotSupported);
 

@@ -1,4 +1,7 @@
-﻿using FlaUI.Core;
+﻿using System;
+using System.Linq;
+using FlaUI.Core;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.EventHandlers;
@@ -7,9 +10,6 @@ using FlaUI.Core.Shapes;
 using FlaUI.Core.Tools;
 using FlaUI.UIA3.EventHandlers;
 using FlaUI.UIA3.Tools;
-using System;
-using System.Linq;
-using FlaUI.Core.AutomationElements.Infrastructure;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3

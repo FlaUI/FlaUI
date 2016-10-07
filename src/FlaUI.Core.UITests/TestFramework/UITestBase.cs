@@ -1,9 +1,9 @@
-﻿using FlaUI.UIA2;
+﻿using System;
+using System.IO;
+using FlaUI.UIA2;
 using FlaUI.UIA3;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
-using System;
-using System.IO;
 
 namespace FlaUI.Core.UITests.TestFramework
 {
@@ -119,11 +119,11 @@ namespace FlaUI.Core.UITests.TestFramework
             {
                 Directory.CreateDirectory(ScreenshotDir);
                 ScreenCapture.CaptureScreenToFile(imagePath);
-                Console.WriteLine(String.Format("Screenshot taken: {0}", imagePath));
+                Console.WriteLine("Screenshot taken: {0}", imagePath);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(String.Format("Failed to save screenshot to directory: {0}, filename: {1}, Ex: {2}", ScreenshotDir, imagePath, ex));
+                Console.WriteLine("Failed to save screenshot to directory: {0}, filename: {1}, Ex: {2}", ScreenshotDir, imagePath, ex);
             }
         }
     }

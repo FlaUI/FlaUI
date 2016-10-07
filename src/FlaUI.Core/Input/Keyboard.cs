@@ -172,7 +172,6 @@ namespace FlaUI.Core.Input
             {
                 // An error occured
                 var errorCode = Marshal.GetLastWin32Error();
-                return;
             }
         }
     }

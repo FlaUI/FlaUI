@@ -1,5 +1,4 @@
-﻿using System;
-using FlaUI.Core;
+﻿using FlaUI.Core;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
@@ -26,7 +25,10 @@ namespace FlaUI.UIA3.Patterns
 
         ITransform2PatternInformation IPatternWithInformation<ITransform2PatternInformation>.Current => Current;
 
-        ITransform2PatternProperties ITransform2Pattern.Properties { get { return Properties; } }
+        ITransform2PatternProperties ITransform2Pattern.Properties
+        {
+            get { return Properties; }
+        }
 
         public override Transform2PatternProperties Properties { get; }
 

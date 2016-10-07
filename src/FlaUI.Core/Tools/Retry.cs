@@ -44,10 +44,10 @@ namespace FlaUI.Core.Tools
                     continue;
                 }
 
-               if (!shouldRetry(element))
-               {
-                  return element;
-               }
+                if (!shouldRetry(element))
+                {
+                    return element;
+                }
             }
 
             return func();

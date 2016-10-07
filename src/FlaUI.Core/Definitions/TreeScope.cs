@@ -7,6 +7,6 @@
         Descendants = 4,
         Subtree = 7,
         Parent = 8,
-        Ancestors = 16,
+        Ancestors = 16
     }
 }

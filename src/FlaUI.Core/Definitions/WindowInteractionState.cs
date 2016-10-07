@@ -6,6 +6,6 @@
         Closing = 1,
         ReadyForUserInteraction = 2,
         BlockedByModalWindow = 3,
-        NotResponding = 4,
+        NotResponding = 4
     }
 }

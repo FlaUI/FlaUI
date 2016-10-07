@@ -4,6 +4,6 @@
     {
         None = 0,
         Single = 1,
-        Multiple = 2,
+        Multiple = 2
     }
 }

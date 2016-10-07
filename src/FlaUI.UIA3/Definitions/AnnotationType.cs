@@ -12,6 +12,6 @@ namespace FlaUI.UIA3.Definitions
         Highlighted = UIA.UIA_AnnotationTypes.AnnotationType_Highlighted,
         SpellingError = UIA.UIA_AnnotationTypes.AnnotationType_SpellingError,
         TrackChanges = UIA.UIA_AnnotationTypes.AnnotationType_TrackChanges,
-        Unknown = UIA.UIA_AnnotationTypes.AnnotationType_Unknown,
+        Unknown = UIA.UIA_AnnotationTypes.AnnotationType_Unknown
     }
 }

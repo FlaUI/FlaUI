@@ -11,7 +11,7 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <summary>
-        /// The currently selected <see cref="TreeItem"/>
+        /// The currently selected <see cref="TreeItem" />
         /// </summary>
         public TreeItem SelectedTreeItem => SearchSelectedItem(TreeItems);
 
@@ -19,23 +19,29 @@ namespace FlaUI.Core.AutomationElements
         {
             // Search for a selected item in the direct children
             var directSelectedItem = treeItems.FirstOrDefault(t => t.IsSelected);
-            if (directSelectedItem != null) { return directSelectedItem; }
+            if (directSelectedItem != null)
+            {
+                return directSelectedItem;
+            }
             // Loop thru the children and search in their children
             foreach (var treeItem in treeItems)
             {
                 var selectedInChildItem = SearchSelectedItem(treeItem.TreeItems);
-                if (selectedInChildItem != null) { return selectedInChildItem; }
+                if (selectedInChildItem != null)
+                {
+                    return selectedInChildItem;
+                }
             }
             return null;
         }
 
         /// <summary>
-        /// All child <see cref="TreeItem"/> objects from this <see cref="Tree"/>
+        /// All child <see cref="TreeItem" /> objects from this <see cref="Tree" />
         /// </summary>
         public TreeItem[] TreeItems => GetTreeItems();
 
         /// <summary>
-        /// Gets all the <see cref="TreeItem"/> objects for this <see cref="Tree"/>
+        /// Gets all the <see cref="TreeItem" /> objects for this <see cref="Tree" />
         /// </summary>
         private TreeItem[] GetTreeItems()
         {

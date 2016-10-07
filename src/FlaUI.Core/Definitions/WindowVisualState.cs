@@ -4,6 +4,6 @@
     {
         Normal = 0,
         Maximized = 1,
-        Minimized = 2,
+        Minimized = 2
     }
 }

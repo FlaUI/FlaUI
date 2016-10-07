@@ -1,10 +1,10 @@
-﻿using FlaUI.Core.Definitions;
-using FlaUI.Core.Shapes;
-using FlaUI.UIA3.Definitions;
-using System;
+﻿using System;
 using System.Globalization;
 using System.Linq;
 using FlaUI.Core.AutomationElements.Infrastructure;
+using FlaUI.Core.Definitions;
+using FlaUI.Core.Shapes;
+using FlaUI.UIA3.Definitions;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Tools
@@ -12,11 +12,14 @@ namespace FlaUI.UIA3.Tools
     public static class NativeValueConverter
     {
         /// <summary>
-        /// Converts a native automationElement array to an array of <see cref="AutomationElement"/>
+        /// Converts a native automationElement array to an array of <see cref="AutomationElement" />
         /// </summary>
         public static AutomationElement[] NativeArrayToManaged(UIA3Automation automation, UIA.IUIAutomationElementArray nativeElements)
         {
-            if (nativeElements == null) { return new AutomationElement[0]; }
+            if (nativeElements == null)
+            {
+                return new AutomationElement[0];
+            }
             var retArray = new AutomationElement[nativeElements.Length];
             for (var i = 0; i < nativeElements.Length; i++)
             {
@@ -28,11 +31,14 @@ namespace FlaUI.UIA3.Tools
         }
 
         /// <summary>
-        /// Converts a native textrange array to an array of <see cref="TextRange"/>
+        /// Converts a native textrange array to an array of <see cref="TextRange" />
         /// </summary>
         public static TextRange[] NativeArrayToManaged(UIA3Automation automation, UIA.IUIAutomationTextRangeArray nativeElements)
         {
-            if (nativeElements == null) { return new TextRange[0]; }
+            if (nativeElements == null)
+            {
+                return new TextRange[0];
+            }
             var retArray = new TextRange[nativeElements.Length];
             for (var i = 0; i < nativeElements.Length; i++)
             {
@@ -42,7 +48,7 @@ namespace FlaUI.UIA3.Tools
         }
 
         /// <summary>
-        /// Converts a native automationElement to an <see cref="AutomationElement"/>
+        /// Converts a native automationElement to an <see cref="AutomationElement" />
         /// </summary>
         public static AutomationElement NativeToManaged(UIA3Automation automation, UIA.IUIAutomationElement nativeElement)
         {
@@ -50,7 +56,7 @@ namespace FlaUI.UIA3.Tools
         }
 
         /// <summary>
-        /// Converts a native textrange to an <see cref="TextRange"/>
+        /// Converts a native textrange to an <see cref="TextRange" />
         /// </summary>
         public static TextRange NativeToManaged(UIA3Automation automation, UIA.IUIAutomationTextRange nativeElement)
         {
@@ -58,7 +64,7 @@ namespace FlaUI.UIA3.Tools
         }
 
         /// <summary>
-        /// Converts a native textrange2 to an <see cref="TextRange2"/>
+        /// Converts a native textrange2 to an <see cref="TextRange2" />
         /// </summary>
         public static TextRange2 NativeToManaged(UIA3Automation automation, UIA.IUIAutomationTextRange2 nativeElement)
         {
@@ -70,7 +76,10 @@ namespace FlaUI.UIA3.Tools
         /// </summary>
         public static object ToNative(object val)
         {
-            if (val == null) { return null; }
+            if (val == null)
+            {
+                return null;
+            }
             if (val is ControlType)
             {
                 val = (int)ToControlTypeId((ControlType)val);
@@ -98,7 +107,7 @@ namespace FlaUI.UIA3.Tools
         }
 
         /// <summary>
-        /// Converts <see cref="T:int[]"/> to <see cref="T:AnnotationType[]"/>
+        /// Converts <see cref="T:int[]" /> to <see cref="T:AnnotationType[]" />
         /// </summary>
         public static object ToAnnotationTypes(object annotationTypes)
         {
@@ -107,27 +116,33 @@ namespace FlaUI.UIA3.Tools
         }
 
         /// <summary>
-        ///  Converts <see cref="T:double[4]"/> to <see cref="Rectangle"/>
+        /// Converts <see cref="T:double[4]" /> to <see cref="Rectangle" />
         /// </summary>
         public static object ToRectangle(object rectangle)
         {
             var origValue = (double[])rectangle;
-            if (rectangle == null) { return null; }
+            if (rectangle == null)
+            {
+                return null;
+            }
             return new Rectangle(origValue[0], origValue[1], origValue[2], origValue[3]);
         }
 
         /// <summary>
-        ///  Converts <see cref="T:double[2]"/> to <see cref="Point"/>
+        /// Converts <see cref="T:double[2]" /> to <see cref="Point" />
         /// </summary>
         public static object ToPoint(object point)
         {
             var origValue = (double[])point;
-            if (point == null) { return null; }
+            if (point == null)
+            {
+                return null;
+            }
             return new Point(origValue[0], origValue[1]);
         }
 
         /// <summary>
-        ///  Converts <see cref="int"/> to <see cref="CultureInfo"/>
+        /// Converts <see cref="int" /> to <see cref="CultureInfo" />
         /// </summary>
         public static object ToCulture(object cultureId)
         {
@@ -136,7 +151,7 @@ namespace FlaUI.UIA3.Tools
         }
 
         /// <summary>
-        ///  Converts <see cref="int"/> to <see cref="IntPtr"/>
+        /// Converts <see cref="int" /> to <see cref="IntPtr" />
         /// </summary>
         public static object IntToIntPtr(object intPtrAsInt)
         {

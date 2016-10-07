@@ -1,9 +1,9 @@
-﻿using FlaUI.Core.Conditions;
+﻿using System;
+using FlaUI.Core.AutomationElements.Infrastructure;
+using FlaUI.Core.Conditions;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Overlay;
 using FlaUI.Core.Shapes;
-using System;
-using FlaUI.Core.AutomationElements.Infrastructure;
 
 namespace FlaUI.Core
 {
@@ -38,12 +38,12 @@ namespace FlaUI.Core
         public abstract AutomationElement GetDesktop();
 
         /// <summary>
-        /// Creates an <see cref="AutomationElement"/> from a given point
+        /// Creates an <see cref="AutomationElement" /> from a given point
         /// </summary>
         public abstract AutomationElement FromPoint(Point point);
 
         /// <summary>
-        /// Creates an <see cref="AutomationElement"/> from a given windows handle (HWND)
+        /// Creates an <see cref="AutomationElement" /> from a given windows handle (HWND)
         /// </summary>
         public abstract AutomationElement FromHandle(IntPtr hwnd);
 

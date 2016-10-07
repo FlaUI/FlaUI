@@ -1,10 +1,10 @@
-﻿using FlaUI.Core.Conditions;
-using FlaUI.Core.Definitions;
-using FlaUInspect.Core;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using FlaUI.Core.AutomationElements.Infrastructure;
+using FlaUI.Core.Conditions;
+using FlaUI.Core.Definitions;
+using FlaUInspect.Core;
 
 namespace FlaUInspect.ViewModels
 {

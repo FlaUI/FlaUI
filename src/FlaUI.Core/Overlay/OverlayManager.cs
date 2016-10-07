@@ -1,8 +1,8 @@
-﻿using FlaUI.Core.Shapes;
-using System;
+﻿using System;
 using System.Threading;
 using System.Windows.Media;
 using System.Windows.Threading;
+using FlaUI.Core.Shapes;
 
 namespace FlaUI.Core.Overlay
 {

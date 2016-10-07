@@ -13,17 +13,17 @@ namespace FlaUI.Core.AutomationElements
 
         public TreeItem(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
-            _selectionItemAutomationElement= new SelectionItemAutomationElement(basicAutomationElement);
+            _selectionItemAutomationElement = new SelectionItemAutomationElement(basicAutomationElement);
             _expandCollapseAutomationElement = new ExpandCollapseAutomationElement(basicAutomationElement);
         }
 
         /// <summary>
-        /// All child <see cref="TreeItem"/> objects from this <see cref="TreeItem"/>
+        /// All child <see cref="TreeItem" /> objects from this <see cref="TreeItem" />
         /// </summary>
         public TreeItem[] TreeItems => GetTreeItems();
 
         /// <summary>
-        /// The text of the <see cref="TreeItem"/>
+        /// The text of the <see cref="TreeItem" />
         /// </summary>
         public string Text
         {
@@ -61,12 +61,12 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <summary>
-        /// Gets all the <see cref="TreeItem"/> objects for this <see cref="TreeItem"/>
+        /// Gets all the <see cref="TreeItem" /> objects for this <see cref="TreeItem" />
         /// </summary>
         private TreeItem[] GetTreeItems()
         {
             return FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.TreeItem))
-                .Select(e => AutomationElementConversionExtensions.AsTreeItem(e)).ToArray();
+                .Select(e => e.AsTreeItem()).ToArray();
         }
     }
 }

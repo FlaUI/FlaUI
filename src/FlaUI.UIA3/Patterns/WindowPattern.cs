@@ -42,7 +42,7 @@ namespace FlaUI.UIA3.Patterns
 
         public void SetWindowVisualState(WindowVisualState state)
         {
-            ComCallWrapper.Call(() => NativePattern.SetWindowVisualState((interop.UIAutomationCore.WindowVisualState)state));
+            ComCallWrapper.Call(() => NativePattern.SetWindowVisualState((UIA.WindowVisualState)state));
         }
 
         public bool WaitForInputIdle(int milliseconds)

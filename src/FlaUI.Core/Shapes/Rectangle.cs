@@ -1,6 +1,6 @@
-﻿using FlaUI.Core.Tools;
-using System;
+﻿using System;
 using System.Windows;
+using FlaUI.Core.Tools;
 
 namespace FlaUI.Core.Shapes
 {
@@ -14,10 +14,29 @@ namespace FlaUI.Core.Shapes
         public double Right { get; set; }
         public double Bottom { get; set; }
 
-        public double X { get { return Left; } set { Left = value; } }
-        public double Y { get { return Top; } set { Top = value; } }
-        public double Width { get { return Right - Left; } set { Right = Left + value; } }
-        public double Height { get { return Bottom - Top; } set { Bottom = Top + value; } }
+        public double X
+        {
+            get { return Left; }
+            set { Left = value; }
+        }
+
+        public double Y
+        {
+            get { return Top; }
+            set { Top = value; }
+        }
+
+        public double Width
+        {
+            get { return Right - Left; }
+            set { Right = Left + value; }
+        }
+
+        public double Height
+        {
+            get { return Bottom - Top; }
+            set { Bottom = Top + value; }
+        }
 
         public bool IsEmpty => X.Equals(0) && Y.Equals(0) && Width.Equals(0) && Height.Equals(0);
 

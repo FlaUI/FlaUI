@@ -1,9 +1,10 @@
-﻿using FlaUI.Core.Definitions;
+﻿using System;
+using System.Globalization;
+using System.Windows;
+using FlaUI.Core.AutomationElements.Infrastructure;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.Exceptions;
 using FlaUI.Core.Shapes;
-using System;
-using System.Globalization;
-using FlaUI.Core.AutomationElements.Infrastructure;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Tools
@@ -38,13 +39,16 @@ namespace FlaUI.UIA2.Tools
             {
                 return null;
             }
-            return new Point(origValue.X, origValue.Y);
+            return new Core.Shapes.Point(origValue.X, origValue.Y);
         }
 
         public static object ToRectangle(object rectangle)
         {
-            var origValue = (System.Windows.Rect)rectangle;
-            if (origValue == null) { return null; }
+            var origValue = (Rect)rectangle;
+            if (origValue == null)
+            {
+                return null;
+            }
             return new Rectangle(origValue.X, origValue.Y, origValue.Width, origValue.Height);
         }
 

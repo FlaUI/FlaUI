@@ -7,6 +7,6 @@
         Bottom = 2,
         Right = 3,
         Fill = 4,
-        None = 5,
+        None = 5
     }
 }

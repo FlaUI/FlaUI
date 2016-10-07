@@ -1,7 +1,7 @@
-﻿using FlaUI.UIA3;
-using NUnit.Framework;
-using System;
+﻿using System;
 using System.Diagnostics;
+using FlaUI.UIA3;
+using NUnit.Framework;
 
 namespace FlaUI.Core.UITests
 {

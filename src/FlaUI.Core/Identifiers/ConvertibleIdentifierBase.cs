@@ -13,7 +13,7 @@ namespace FlaUI.Core.Identifiers
             : base(id, name)
         {
         }
-        
+
         /// <summary>
         /// Sets a custom convert method to convert the values for this id
         /// </summary>

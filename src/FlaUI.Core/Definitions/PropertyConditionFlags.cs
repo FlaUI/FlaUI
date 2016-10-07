@@ -3,6 +3,6 @@
     public enum PropertyConditionFlags
     {
         None = 0,
-        IgnoreCase = 1,
+        IgnoreCase = 1
     }
 }

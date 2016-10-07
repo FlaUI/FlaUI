@@ -1,6 +1,6 @@
-﻿using FlaUI.Core.Tools;
+﻿using System;
+using FlaUI.Core.Tools;
 using FlaUI.Core.WindowsAPI;
-using System;
 
 namespace FlaUI.Core.Shapes
 {
@@ -20,7 +20,7 @@ namespace FlaUI.Core.Shapes
         public double Y { get; set; }
 
         /// <summary>
-        ///  Gets a value indicating whether this point is empty (all coordinates are 0)
+        /// Gets a value indicating whether this point is empty (all coordinates are 0)
         /// </summary>
         public bool IsEmpty => X.Equals(0) && Y.Equals(0);
 

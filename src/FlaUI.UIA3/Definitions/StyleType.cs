@@ -20,6 +20,6 @@ namespace FlaUI.UIA3.Definitions
         NumberedList = UIA.UIA_StyleIds.StyleId_NumberedList,
         Quote = UIA.UIA_StyleIds.StyleId_Quote,
         Subtitle = UIA.UIA_StyleIds.StyleId_Subtitle,
-        Title = UIA.UIA_StyleIds.StyleId_Title,
+        Title = UIA.UIA_StyleIds.StyleId_Title
     }
 }

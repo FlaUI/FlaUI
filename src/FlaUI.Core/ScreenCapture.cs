@@ -1,11 +1,10 @@
-﻿using FlaUI.Core.Tools;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using Rectangle = FlaUI.Core.Shapes.Rectangle;
+using FlaUI.Core.Tools;
 
 namespace FlaUI.Core
 {
@@ -23,7 +22,7 @@ namespace FlaUI.Core
             var screenLeft = Convert.ToInt32(SystemParameters.VirtualScreenLeft);
             var screenWidth = Convert.ToInt32(SystemParameters.VirtualScreenWidth);
             var screenHeight = Convert.ToInt32(SystemParameters.VirtualScreenHeight);
-            return CaptureArea(new Rectangle(screenLeft, screenTop, screenWidth, screenHeight));
+            return CaptureArea(new Shapes.Rectangle(screenLeft, screenTop, screenWidth, screenHeight));
         }
 
         public static BitmapImage CaptureScreenWpf()
@@ -34,7 +33,7 @@ namespace FlaUI.Core
         /// <summary>
         /// Captures a specific area from the screen
         /// </summary>
-        public static Bitmap CaptureArea(Rectangle rectangle)
+        public static Bitmap CaptureArea(Shapes.Rectangle rectangle)
         {
             var width = rectangle.Width.ToInt();
             var height = rectangle.Height.ToInt();
@@ -44,7 +43,7 @@ namespace FlaUI.Core
             return bmp;
         }
 
-        public static BitmapImage CaptureAreaWpf(Rectangle rectangle)
+        public static BitmapImage CaptureAreaWpf(Shapes.Rectangle rectangle)
         {
             return CaptureArea(rectangle).ToWpf();
         }
@@ -61,7 +60,7 @@ namespace FlaUI.Core
         /// <summary>
         /// Captures a specific area and saves it to a file
         /// </summary>
-        public static void CaptureAreaToFile(Rectangle rectangle, string filePath)
+        public static void CaptureAreaToFile(Shapes.Rectangle rectangle, string filePath)
         {
             var bmp = CaptureArea(rectangle);
             bmp.Save(filePath, ImageFormat.Png);

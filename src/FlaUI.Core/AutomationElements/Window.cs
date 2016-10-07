@@ -63,7 +63,7 @@ namespace FlaUI.Core.AutomationElements
         {
             return FindAll(TreeScope.Children,
                 new PropertyCondition(Properties.ControlTypeProperty, ControlType.Window).
-                And(new PropertyCondition(WindowPattern.Properties.IsModalProperty, true))).
+                    And(new PropertyCondition(WindowPattern.Properties.IsModalProperty, true))).
                 Select(e => e.AsWindow()).ToArray();
         }
 

@@ -1,9 +1,8 @@
-﻿using FlaUI.Core;
+﻿using System;
+using System.Collections.ObjectModel;
 using FlaUI.UIA2;
 using FlaUI.UIA3;
 using FlaUInspect.Core;
-using System;
-using System.Collections.ObjectModel;
 
 namespace FlaUInspect.ViewModels
 {

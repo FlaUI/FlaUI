@@ -11,10 +11,12 @@ namespace FlaUInspect.Core
     public class RelayCommand : ICommand
     {
         private readonly Action<object> _methodToExecute;
-        readonly Func<object, bool> _canExecuteEvaluator;
+        private readonly Func<object, bool> _canExecuteEvaluator;
 
         public RelayCommand(Action<object> methodToExecute)
-            : this(methodToExecute, null) { }
+            : this(methodToExecute, null)
+        {
+        }
 
         public RelayCommand(Action<object> methodToExecute, Func<object, bool> canExecuteEvaluator)
         {

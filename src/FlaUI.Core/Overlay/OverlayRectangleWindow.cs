@@ -1,11 +1,11 @@
-﻿using FlaUI.Core.Shapes;
-using FlaUI.Core.WindowsAPI;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
+using FlaUI.Core.Shapes;
+using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.Overlay
 {

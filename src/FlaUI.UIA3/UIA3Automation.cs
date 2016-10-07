@@ -1,12 +1,12 @@
-﻿using FlaUI.Core;
+﻿using System;
+using System.Runtime.InteropServices;
+using FlaUI.Core;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Shapes;
 using FlaUI.UIA3.EventHandlers;
 using FlaUI.UIA3.Shapes;
 using FlaUI.UIA3.Tools;
-using System;
-using System.Runtime.InteropServices;
-using FlaUI.Core.AutomationElements.Infrastructure;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3
@@ -50,7 +50,7 @@ namespace FlaUI.UIA3
         }
 
         /// <summary>
-        /// Creates an <see cref="AutomationElement"/> from a given point
+        /// Creates an <see cref="AutomationElement" /> from a given point
         /// </summary>
         public override AutomationElement FromPoint(Point point)
         {
@@ -59,7 +59,7 @@ namespace FlaUI.UIA3
         }
 
         /// <summary>
-        /// Creates an <see cref="AutomationElement"/> from a given windows handle (HWND)
+        /// Creates an <see cref="AutomationElement" /> from a given windows handle (HWND)
         /// </summary>
         public override AutomationElement FromHandle(IntPtr hwnd)
         {
@@ -91,7 +91,9 @@ namespace FlaUI.UIA3
             {
                 NativeAutomation.RemoveAllEventHandlers();
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         /// <summary>

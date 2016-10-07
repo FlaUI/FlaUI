@@ -4,6 +4,6 @@
     {
         RowMajor = 0,
         ColumnMajor = 1,
-        Indeterminate = 2,
+        Indeterminate = 2
     }
 }

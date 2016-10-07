@@ -4,6 +4,6 @@
     {
         Off = 0,
         Polite = 1,
-        Assertive = 2,
+        Assertive = 2
     }
 }

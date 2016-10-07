@@ -5,7 +5,7 @@ using FlaUI.Core.Patterns;
 namespace FlaUI.Core.AutomationElements.PatternElements
 {
     /// <summary>
-    /// An UI-item which supports the <see cref="SelectionItemPattern"/>
+    /// An UI-item which supports the <see cref="SelectionItemPattern" />
     /// </summary>
     public class SelectionItemAutomationElement : AutomationElement
     {

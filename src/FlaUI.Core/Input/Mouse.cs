@@ -1,13 +1,13 @@
-﻿using FlaUI.Core.Shapes;
-using FlaUI.Core.Tools;
-using FlaUI.Core.WindowsAPI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
 using System.Threading;
+using FlaUI.Core.Shapes;
+using FlaUI.Core.Tools;
+using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.Input
 {
@@ -264,7 +264,7 @@ namespace FlaUI.Core.Input
         }
 
         /// <summary>
-        /// Converts the button to the correct <see cref="MouseEventFlags"/> object
+        /// Converts the button to the correct <see cref="MouseEventFlags" /> object
         /// and fills the additional data if needed
         /// </summary>
         private MouseEventFlags GetFlagsAndDataForButton(MouseButton mouseButton, bool isDown, out uint data)
@@ -298,7 +298,7 @@ namespace FlaUI.Core.Input
         }
 
         /// <summary>
-        /// Swaps the left/right button if <see cref="AreButtonsSwapped"/> is set
+        /// Swaps the left/right button if <see cref="AreButtonsSwapped" /> is set
         /// </summary>
         private MouseButton SwapButtonIfNeeded(MouseButton mouseButton)
         {
@@ -350,7 +350,6 @@ namespace FlaUI.Core.Input
             {
                 // An error occured
                 var errorCode = Marshal.GetLastWin32Error();
-                return;
             }
         }
 
@@ -364,8 +363,8 @@ namespace FlaUI.Core.Input
             var vScreenLeft = User32.GetSystemMetrics(SystemMetric.SM_XVIRTUALSCREEN);
             var vScreenTop = User32.GetSystemMetrics(SystemMetric.SM_YVIRTUALSCREEN);
 
-            x = ((x - vScreenLeft) * 65536) / vScreenWidth + 65536 / (vScreenWidth * 2);
-            y = ((y - vScreenTop) * 65536) / vScreenHeight + 65536 / (vScreenHeight * 2);
+            x = (x - vScreenLeft) * 65536 / vScreenWidth + 65536 / (vScreenWidth * 2);
+            y = (y - vScreenTop) * 65536 / vScreenHeight + 65536 / (vScreenHeight * 2);
         }
     }
 }

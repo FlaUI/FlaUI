@@ -4,6 +4,6 @@
     {
         Unknown,
         Wpf,
-        WinForms,
+        WinForms
     }
 }

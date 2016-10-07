@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Drawing;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Identifiers;
-using FlaUI.Core.Shapes;
 using FlaUI.Core.Tools;
 using FlaUI.Core.WindowsAPI;
 using GdiColor = System.Drawing.Color;
@@ -46,7 +48,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
 
         /// <summary>
         /// Sets the focus to this element
-        /// Warning: This can be unreliable! <see cref="SetForeground"/> should be more reliable
+        /// Warning: This can be unreliable! <see cref="SetForeground" /> should be more reliable
         /// </summary>
         public void Focus()
         {
@@ -66,7 +68,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public AutomationElement DrawHighlight()
         {
-            return DrawHighlight(System.Windows.Media.Colors.Red);
+            return DrawHighlight(Colors.Red);
         }
 
         /// <summary>
@@ -86,7 +88,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Draw a highlight around the element with the given settings 
+        /// Draw a highlight around the element with the given settings
         /// </summary>
         /// <param name="blocking">Flag to indicate if further execution waits until the highlight is removed</param>
         /// <param name="color">The color to draw the highlight</param>
@@ -123,7 +125,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <summary>
         /// Captures the object as screenshot in WinForms format
         /// </summary>
-        public System.Drawing.Bitmap Capture()
+        public Bitmap Capture()
         {
             return ScreenCapture.CaptureArea(Current.BoundingRectangle);
         }
@@ -131,7 +133,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <summary>
         /// Captures the object as screenshot in WPF format
         /// </summary>
-        public System.Windows.Media.Imaging.BitmapImage CaptureWpf()
+        public BitmapImage CaptureWpf()
         {
             return ScreenCapture.CaptureAreaWpf(Current.BoundingRectangle);
         }
@@ -149,9 +151,9 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             return FindAll(treeScope, condition, Retry.DefaultRetryFor);
         }
 
-        /// <summary> 
+        /// <summary>
         /// Finds all elements in the given treescope and condition within the given timeout.
-        /// </summary> 
+        /// </summary>
         public AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
         {
             Predicate<AutomationElement[]> shouldRetry = elements => elements.Length > 0;
@@ -168,9 +170,9 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             return FindFirst(treeScope, condition, Retry.DefaultRetryFor);
         }
 
-        /// <summary> 
-        /// Finds the first element which is in the given treescope and matches the condition within the given timeout period. 
-        /// </summary> 
+        /// <summary>
+        /// Finds the first element which is in the given treescope and matches the condition within the given timeout period.
+        /// </summary>
         public AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
         {
             Predicate<AutomationElement> shouldRetry = element => element == null;
@@ -183,7 +185,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// Gets a clickable point of the element
         /// </summary>
         /// <exception cref="NoClickablePointException">Thrown when no clickable point was found</exception>
-        public Point GetClickablePoint()
+        public Shapes.Point GetClickablePoint()
         {
             return BasicAutomationElement.GetClickablePoint();
         }
@@ -193,7 +195,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         /// <param name="point">The clickable point or null, if no point was found</param>
         /// <returns>True if a point was found, false otherwise</returns>
-        public bool TryGetClickablePoint(out Point point)
+        public bool TryGetClickablePoint(out Shapes.Point point)
         {
             return BasicAutomationElement.TryGetClickablePoint(out point);
         }

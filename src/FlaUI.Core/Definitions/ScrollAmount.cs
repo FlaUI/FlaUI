@@ -6,6 +6,6 @@
         SmallDecrement = 1,
         NoAmount = 2,
         LargeIncrement = 3,
-        SmallIncrement = 4,
+        SmallIncrement = 4
     }
 }

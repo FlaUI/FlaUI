@@ -1,9 +1,9 @@
-﻿using FlaUI.Core.Input;
+﻿using System.Threading;
+using FlaUI.Core.Input;
 using FlaUI.Core.Shapes;
 using FlaUI.Core.UITests.TestFramework;
 using FlaUI.UIA3;
 using NUnit.Framework;
-using System.Threading;
 
 namespace FlaUI.Core.UITests
 {

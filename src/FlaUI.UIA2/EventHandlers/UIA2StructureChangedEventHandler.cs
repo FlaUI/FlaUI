@@ -1,8 +1,8 @@
-﻿using FlaUI.Core;
+﻿using System;
+using FlaUI.Core;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.EventHandlers;
-using System;
-using FlaUI.Core.AutomationElements.Infrastructure;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.EventHandlers
@@ -20,7 +20,7 @@ namespace FlaUI.UIA2.EventHandlers
         {
             var basicAutomationElement = new UIA2BasicAutomationElement((UIA2Automation)Automation, (UIA.AutomationElement)sender);
             var senderElement = new AutomationElement(basicAutomationElement);
-            HandleStructureChangedEvent(senderElement, (StructureChangeType) structureChangedEventArgs.StructureChangeType, structureChangedEventArgs.GetRuntimeId());
+            HandleStructureChangedEvent(senderElement, (StructureChangeType)structureChangedEventArgs.StructureChangeType, structureChangedEventArgs.GetRuntimeId());
         }
     }
 }

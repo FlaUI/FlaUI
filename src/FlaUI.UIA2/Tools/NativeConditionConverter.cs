@@ -1,6 +1,6 @@
-﻿using FlaUI.Core.Conditions;
-using System;
+﻿using System;
 using System.Linq;
+using FlaUI.Core.Conditions;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Tools

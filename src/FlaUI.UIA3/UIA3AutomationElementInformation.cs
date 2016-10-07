@@ -1,9 +1,9 @@
-﻿using FlaUI.Core;
+﻿using System;
+using System.Globalization;
+using FlaUI.Core;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Shapes;
-using System;
-using System.Globalization;
-using FlaUI.Core.AutomationElements.Infrastructure;
 
 namespace FlaUI.UIA3
 {

@@ -12,7 +12,9 @@ namespace FlaUI.Core.UITests.Elements
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class ProgressBarTests : UITestBase
     {
-        public ProgressBarTests(AutomationType automationType, TestApplicationType appType) : base(automationType, appType) { }
+        public ProgressBarTests(AutomationType automationType, TestApplicationType appType) : base(automationType, appType)
+        {
+        }
 
         [Test]
         public void MinimumValueTest()

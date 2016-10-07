@@ -1,12 +1,12 @@
-﻿using FlaUI.Core.Logging;
-using FlaUI.Core.Tools;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.AutomationElements.Infrastructure;
+using FlaUI.Core.Logging;
+using FlaUI.Core.Tools;
 
 namespace FlaUI.Core
 {
@@ -89,7 +89,9 @@ namespace FlaUI.Core
                 _process.WaitForExit();
                 _process.Dispose();
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         private static Process FindProcess(int processId)

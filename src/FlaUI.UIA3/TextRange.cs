@@ -3,7 +3,6 @@ using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Shapes;
 using FlaUI.Core.Tools;
-using FlaUI.UIA3.Definitions;
 using FlaUI.UIA3.Tools;
 using UIA = interop.UIAutomationCore;
 
@@ -69,7 +68,10 @@ namespace FlaUI.UIA3
         public Rectangle[] GetBoundingRectangles()
         {
             var unrolledRects = ComCallWrapper.Call(() => NativeRange.GetBoundingRectangles());
-            if (unrolledRects == null) { return null; }
+            if (unrolledRects == null)
+            {
+                return null;
+            }
             // If unrolledRects is somehow not a multiple of 4, we still will not 
             // overrun it, since (x / 4) * 4 <= x for C# integer math.
             var result = new Rectangle[unrolledRects.Length / 4];

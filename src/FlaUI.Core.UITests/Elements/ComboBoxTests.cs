@@ -1,4 +1,5 @@
-﻿using FlaUI.Core.Conditions;
+﻿using System.Threading;
+using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
 using FlaUI.Core.UITests.TestFramework;
@@ -23,7 +24,7 @@ namespace FlaUI.Core.UITests.Elements
             var combo = App.GetMainWindow(Automation).FindFirst(TreeScope.Descendants, Automation.ConditionFactory.ByAutomationId("EditableCombo"));
             Mouse.Instance.Click(MouseButton.Left, combo.Current.BoundingRectangle.ImmediateInteriorEast);
             var items = combo.FindAll(TreeScope.Descendants, new BoolCondition(true));
-            System.Threading.Thread.Sleep(2000);
+            Thread.Sleep(2000);
         }
     }
 }

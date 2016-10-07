@@ -3,7 +3,7 @@ using FlaUI.Core.Patterns.Infrastructure;
 
 namespace FlaUI.Core.Patterns
 {
-    public interface IRangeValuePattern: IPatternWithInformation<IRangeValuePatternInformation>
+    public interface IRangeValuePattern : IPatternWithInformation<IRangeValuePatternInformation>
     {
         IRangeValuePatternProperties Properties { get; }
         void SetValue(double val);

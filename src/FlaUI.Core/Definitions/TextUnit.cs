@@ -8,6 +8,6 @@
         Line = 3,
         Paragraph = 4,
         Page = 5,
-        Document = 6,
+        Document = 6
     }
 }

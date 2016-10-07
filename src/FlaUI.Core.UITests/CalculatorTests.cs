@@ -1,13 +1,13 @@
-﻿using FlaUI.Core.Definitions;
+﻿using System;
+using System.Text.RegularExpressions;
+using FlaUI.Core.AutomationElements;
+using FlaUI.Core.AutomationElements.Infrastructure;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
 using FlaUI.Core.WindowsAPI;
 using NUnit.Framework;
-using System;
-using System.Text.RegularExpressions;
-using FlaUI.Core.AutomationElements;
-using FlaUI.Core.AutomationElements.Infrastructure;
 
 namespace FlaUI.Core.UITests
 {
