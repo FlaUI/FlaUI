@@ -67,7 +67,7 @@ namespace FlaUI.Core.UITests
         public void NotepadAttachOrLauchIdTest()
         {
             Application.Launch("notepad.exe");
-            var app = Application.AttachOrLaunch(new ProcessStartInfo("notepad.exe"));
+            var app = Application.AttachOrLaunch(new ProcessStartInfo(@"C:\WINDOWS\system32\notepad.exe"));
 
             using (var automation = new UIA3Automation())
             {
@@ -91,6 +91,24 @@ namespace FlaUI.Core.UITests
                 window.Move(100, 100);
                 window.DrawHighlight();
                 window.Move(200, 200);
+                window.DrawHighlight();
+            }
+            app.Close();
+        }
+
+        [Test]
+        public void NotepadAttachWithAbsoluteExePath()
+        {
+            Application.Launch("notepad.exe");
+            var app = Application.Attach(@"C:\WINDOWS\system32\notepad.exe");
+
+            using (var automation = new UIA3Automation())
+            {
+                var window = app.GetMainWindow(automation);
+                Console.WriteLine(window.Title);
+                window.Move(250, 250);
+                window.DrawHighlight();
+                window.Move(100, 100);
                 window.DrawHighlight();
             }
             app.Close();
