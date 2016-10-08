@@ -24,7 +24,7 @@ namespace FlaUI.Core
 
         //ILegacyIAccessiblePattern GetLegacyIAccessiblePattern();
 
-        //IMultipleViewPattern GetMultipleViewPattern();
+        IMultipleViewPattern GetMultipleViewPattern();
 
         IObjectModelPattern GetObjectModelPattern();
 

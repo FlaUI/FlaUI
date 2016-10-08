@@ -53,6 +53,7 @@
     <Compile Include="Patterns\GridPattern.cs" />
     <Compile Include="Patterns\InvokePattern.cs" />
     <Compile Include="Patterns\ItemContainerPattern.cs" />
+    <Compile Include="Patterns\MultipleViewPattern.cs" />
     <Compile Include="Patterns\RangeValuePattern.cs" />
     <Compile Include="Patterns\ScrollItemPattern.cs" />
     <Compile Include="Patterns\ScrollPattern.cs" />

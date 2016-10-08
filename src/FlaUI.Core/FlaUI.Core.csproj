@@ -142,6 +142,7 @@
     <Compile Include="Patterns\IGridPattern.cs" />
     <Compile Include="Patterns\IInvokePattern.cs" />
     <Compile Include="Patterns\IItemContainerPattern.cs" />
+    <Compile Include="Patterns\IMultipleViewPattern.cs" />
     <Compile Include="Patterns\Infrastructure\IPattern.cs" />
     <Compile Include="Patterns\Infrastructure\IPatternInformation.cs" />
     <Compile Include="Patterns\Infrastructure\IPatternWithInformation.cs" />

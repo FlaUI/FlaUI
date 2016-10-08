@@ -4,17 +4,17 @@ using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.Tools;
-using UIA = interop.UIAutomationCore;
+using UIA = System.Windows.Automation;
 
-namespace FlaUI.UIA3.Patterns
+namespace FlaUI.UIA2.Patterns
 {
-    public class MultipleViewPattern : PatternBaseWithInformation<UIA.IUIAutomationMultipleViewPattern, MultipleViewPatternInformation>,IMultipleViewPattern
+    public class MultipleViewPattern : PatternBaseWithInformation<UIA.MultipleViewPattern, MultipleViewPatternInformation>,IMultipleViewPattern
     {
-        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_MultipleViewPatternId, "MultipleView");
-        public static readonly PropertyId CurrentViewProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_MultipleViewCurrentViewPropertyId, "CurrentView");
-        public static readonly PropertyId SupportedViewsProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_MultipleViewSupportedViewsPropertyId, "SupportedViews");
+        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.MultipleViewPattern.Pattern.Id, "MultipleView");
+        public static readonly PropertyId CurrentViewProperty = PropertyId.Register(AutomationType.UIA2, UIA.MultipleViewPattern.CurrentViewProperty.Id, "CurrentView");
+        public static readonly PropertyId SupportedViewsProperty = PropertyId.Register(AutomationType.UIA2, UIA.MultipleViewPattern.SupportedViewsProperty.Id, "SupportedViews");
 
-        public MultipleViewPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationMultipleViewPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public MultipleViewPattern(BasicAutomationElementBase basicAutomationElement, UIA.MultipleViewPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
             Properties = new MultipleViewPatternProperties();
         }

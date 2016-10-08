@@ -45,6 +45,12 @@ namespace FlaUI.UIA2
             return nativePattern == null ? null : new ItemContainerPattern(BasicAutomationElement, nativePattern);
         }
 
+        public IMultipleViewPattern GetMultipleViewPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.MultipleViewPattern>(UIA.MultipleViewPattern.Pattern);
+            return nativePattern == null ? null : new MultipleViewPattern(BasicAutomationElement, nativePattern);
+        }
+
         public IObjectModelPattern GetObjectModelPattern()
         {
             throw new NotSupportedByUIA2Exception();
