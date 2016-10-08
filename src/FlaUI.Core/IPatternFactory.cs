@@ -26,7 +26,7 @@ namespace FlaUI.Core
 
         //IMultipleViewPattern GetMultipleViewPattern();
 
-        //IObjectModelPattern GetObjectModelPattern();
+        IObjectModelPattern GetObjectModelPattern();
 
         IRangeValuePattern GetRangeValuePattern();
 

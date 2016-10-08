@@ -81,11 +81,11 @@ namespace FlaUI.UIA3
         //    return nativePattern == null ? null : new MultipleViewPattern(BasicAutomationElement, nativePattern);
         //}
 
-        //public ObjectModelPattern GetObjectModelPattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationObjectModelPattern>(ObjectModelPattern.Pattern);
-        //    return nativePattern == null ? null : new ObjectModelPattern(BasicAutomationElement, nativePattern);
-        //}
+        public IObjectModelPattern GetObjectModelPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationObjectModelPattern>(ObjectModelPattern.Pattern);
+            return nativePattern == null ? null : new ObjectModelPattern(BasicAutomationElement, nativePattern);
+        }
 
         public IRangeValuePattern GetRangeValuePattern()
         {

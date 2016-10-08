@@ -147,6 +147,7 @@
     <Compile Include="Patterns\Infrastructure\IPatternWithInformation.cs" />
     <Compile Include="Patterns\Infrastructure\PatternBase.cs" />
     <Compile Include="Patterns\Infrastructure\PatternBaseWithInformation.cs" />
+    <Compile Include="Patterns\IObjectModelPattern.cs" />
     <Compile Include="Patterns\IRangeValuePattern.cs" />
     <Compile Include="Patterns\IScrollItemPattern.cs" />
     <Compile Include="Patterns\IScrollPattern.cs" />

@@ -46,6 +46,11 @@ namespace FlaUI.UIA2
             return nativePattern == null ? null : new ItemContainerPattern(BasicAutomationElement, nativePattern);
         }
 
+        public IObjectModelPattern GetObjectModelPattern()
+        {
+            throw new NotSupportedByUIA2Exception();
+        }
+
         public IRangeValuePattern GetRangeValuePattern()
         {
             var nativePattern = GetNativePatternAs<UIA.RangeValuePattern>(UIA.RangeValuePattern.Pattern);
