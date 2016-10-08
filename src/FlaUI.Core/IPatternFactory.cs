@@ -46,9 +46,9 @@ namespace FlaUI.Core
 
         //ISynchronizedInputPattern GetSynchronizedInputPattern();
 
-        //ITableItemPattern GetTableItemPattern();
+        ITableItemPattern GetTableItemPattern();
 
-        //ITablePattern GetTablePattern();
+        ITablePattern GetTablePattern();
 
         //ITextChildPattern GetTextChildPattern();
 

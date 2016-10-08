@@ -52,35 +52,17 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
-        public bool HorizontallyScrollable
-        {
-            get { return Get<bool>(ScrollPattern.HorizontallyScrollableProperty); }
-        }
+        public bool HorizontallyScrollable => Get<bool>(ScrollPattern.HorizontallyScrollableProperty);
 
-        public double HorizontalScrollPercent
-        {
-            get { return Get<double>(ScrollPattern.HorizontalScrollPercentProperty); }
-        }
+        public double HorizontalScrollPercent => Get<double>(ScrollPattern.HorizontalScrollPercentProperty);
 
-        public double HorizontalViewSize
-        {
-            get { return Get<double>(ScrollPattern.HorizontalViewSizeProperty); }
-        }
+        public double HorizontalViewSize => Get<double>(ScrollPattern.HorizontalViewSizeProperty);
 
-        public bool VerticallyScrollable
-        {
-            get { return Get<bool>(ScrollPattern.VerticallyScrollableProperty); }
-        }
+        public bool VerticallyScrollable => Get<bool>(ScrollPattern.VerticallyScrollableProperty);
 
-        public double VerticalScrollPercent
-        {
-            get { return Get<double>(ScrollPattern.VerticalScrollPercentProperty); }
-        }
+        public double VerticalScrollPercent => Get<double>(ScrollPattern.VerticalScrollPercentProperty);
 
-        public double VerticalViewSize
-        {
-            get { return Get<double>(ScrollPattern.VerticalViewSizeProperty); }
-        }
+        public double VerticalViewSize => Get<double>(ScrollPattern.VerticalViewSizeProperty);
     }
 
     public class ScrollPatternProperties : IScrollPatternProperties

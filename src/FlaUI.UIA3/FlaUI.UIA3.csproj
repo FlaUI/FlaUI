@@ -66,6 +66,8 @@
     <Compile Include="Patterns\ScrollPattern.cs" />
     <Compile Include="Patterns\SelectionItemPattern.cs" />
     <Compile Include="Patterns\SelectionPattern.cs" />
+    <Compile Include="Patterns\TableItemPattern.cs" />
+    <Compile Include="Patterns\TablePattern.cs" />
     <Compile Include="Patterns\TogglePattern.cs" />
     <Compile Include="Patterns\Transform2Pattern.cs" />
     <Compile Include="Patterns\TransformPattern.cs" />

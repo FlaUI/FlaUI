@@ -141,17 +141,17 @@ namespace FlaUI.UIA3
         //    return nativePattern == null ? null : new SynchronizedInputPattern(BasicAutomationElement, nativePattern);
         //}
 
-        //public TableItemPattern GetTableItemPattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationTableItemPattern>(TableItemPattern.Pattern);
-        //    return nativePattern == null ? null : new TableItemPattern(BasicAutomationElement, nativePattern);
-        //}
+        public ITableItemPattern GetTableItemPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationTableItemPattern>(TableItemPattern.Pattern);
+            return nativePattern == null ? null : new TableItemPattern(BasicAutomationElement, nativePattern);
+        }
 
-        //public TablePattern GetTablePattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationTablePattern>(TablePattern.Pattern);
-        //    return nativePattern == null ? null : new TablePattern(BasicAutomationElement, nativePattern);
-        //}
+        public ITablePattern GetTablePattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationTablePattern>(TablePattern.Pattern);
+            return nativePattern == null ? null : new TablePattern(BasicAutomationElement, nativePattern);
+        }
 
         //public TextChildPattern GetTextChildPattern()
         //{

@@ -1,5 +1,4 @@
-﻿using System;
-using FlaUI.Core;
+﻿using FlaUI.Core;
 using FlaUI.Core.Exceptions;
 using FlaUI.Core.Patterns;
 using FlaUI.UIA2.Patterns;
@@ -79,6 +78,18 @@ namespace FlaUI.UIA2
         {
             var nativePattern = GetNativePatternAs<UIA.SelectionPattern>(UIA.SelectionPattern.Pattern);
             return nativePattern == null ? null : new SelectionPattern(BasicAutomationElement, nativePattern);
+        }
+
+        public ITableItemPattern GetTableItemPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.TableItemPattern>(UIA.TableItemPattern.Pattern);
+            return nativePattern == null ? null : new TableItemPattern(BasicAutomationElement, nativePattern);
+        }
+
+        public ITablePattern GetTablePattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.TablePattern>(UIA.TablePattern.Pattern);
+            return nativePattern == null ? null : new TablePattern(BasicAutomationElement, nativePattern);
         }
 
         public ITogglePattern GetTogglePattern()
