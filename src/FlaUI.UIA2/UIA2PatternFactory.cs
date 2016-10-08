@@ -40,6 +40,12 @@ namespace FlaUI.UIA2
             return nativePattern == null ? null : new InvokePattern(BasicAutomationElement, nativePattern);
         }
 
+        public IItemContainerPattern GetItemContainerPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.ItemContainerPattern>(UIA.ItemContainerPattern.Pattern);
+            return nativePattern == null ? null : new ItemContainerPattern(BasicAutomationElement, nativePattern);
+        }
+
         public IRangeValuePattern GetRangeValuePattern()
         {
             var nativePattern = GetNativePatternAs<UIA.RangeValuePattern>(UIA.RangeValuePattern.Pattern);

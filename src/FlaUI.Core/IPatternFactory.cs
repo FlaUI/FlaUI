@@ -20,7 +20,7 @@ namespace FlaUI.Core
 
         IInvokePattern GetInvokePattern();
 
-        //IItemContainerPattern GetItemContainerPattern();
+        IItemContainerPattern GetItemContainerPattern();
 
         //ILegacyIAccessiblePattern GetLegacyIAccessiblePattern();
 

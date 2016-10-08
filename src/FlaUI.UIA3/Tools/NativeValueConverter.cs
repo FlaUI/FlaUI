@@ -71,6 +71,12 @@ namespace FlaUI.UIA3.Tools
             return nativeElement == null ? null : new TextRange2(automation, nativeElement);
         }
 
+        public static UIA.IUIAutomationElement ToNative(AutomationElement automationElement)
+        {
+            var basicAutomationElement = (UIA3BasicAutomationElement)automationElement.BasicAutomationElement;
+            return basicAutomationElement.NativeElement;
+        }
+
         /// <summary>
         /// Converts the given object to an object the native client expects
         /// </summary>
@@ -100,8 +106,7 @@ namespace FlaUI.UIA3.Tools
             }
             else if (val is AutomationElement)
             {
-                throw new NotImplementedException();
-                //val = ((AutomationElement)val).NativeElement;
+                val = ToNative((AutomationElement)val);
             }
             return val;
         }

@@ -63,11 +63,11 @@ namespace FlaUI.UIA3
             return nativePattern == null ? null : new InvokePattern(BasicAutomationElement, nativePattern);
         }
 
-        //public ItemContainerPattern GetItemContainerPattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationItemContainerPattern>(ItemContainerPattern.Pattern);
-        //    return nativePattern == null ? null : new ItemContainerPattern(BasicAutomationElement, nativePattern);
-        //}
+        public IItemContainerPattern GetItemContainerPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationItemContainerPattern>(ItemContainerPattern.Pattern);
+            return nativePattern == null ? null : new ItemContainerPattern(BasicAutomationElement, nativePattern);
+        }
 
         //public LegacyIAccessiblePattern GetLegacyIAccessiblePattern()
         //{

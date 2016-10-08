@@ -52,6 +52,12 @@ namespace FlaUI.UIA2.Tools
             return new Rectangle(origValue.X, origValue.Y, origValue.Width, origValue.Height);
         }
 
+        public static UIA.AutomationElement ToNative(AutomationElement automationElement)
+        {
+            var basicAutomationElement = (UIA2BasicAutomationElement)automationElement.BasicAutomationElement;
+            return basicAutomationElement.NativeElement;
+        }
+
         /// <summary>
         /// Converts the given object to an object the native client expects
         /// </summary>
@@ -64,6 +70,10 @@ namespace FlaUI.UIA2.Tools
             if (val is ControlType)
             {
                 val = (UIA.ControlType)ToControlTypeId((ControlType)val);
+            }
+            else if (val is AutomationElement)
+            {
+                val = ToNative((AutomationElement)val);
             }
             return val;
         }
