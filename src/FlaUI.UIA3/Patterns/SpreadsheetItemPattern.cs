@@ -1,50 +1,62 @@
 ﻿using FlaUI.Core;
+using FlaUI.Core.AutomationElements.Infrastructure;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
-using FlaUI.UIA3.Definitions;
-using FlaUI.UIA3.Elements;
+using FlaUI.Core.Patterns;
+using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.UIA3.Tools;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class SpreadsheetItemPattern : PatternBaseWithInformation<SpreadsheetItemInformation>
+    public class SpreadsheetItemPattern : PatternBaseWithInformation<UIA.IUIAutomationSpreadsheetItemPattern, SpreadsheetItemPatternInformation>, ISpreadsheetItemPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_SpreadsheetItemPatternId, "SpreadsheetItem");
         public static readonly PropertyId FormulaProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_SpreadsheetItemFormulaPropertyId, "Formula");
         public static readonly PropertyId AnnotationObjectsProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_SpreadsheetItemAnnotationObjectsPropertyId, "AnnotationObjects");
-        public static readonly PropertyId AnnotationTypesProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_SpreadsheetItemAnnotationTypesPropertyId, "AnnotationTypes").SetConverter(NativeValueConverter.ToAnnotationTypes);
+        public static readonly PropertyId AnnotationTypesProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_SpreadsheetItemAnnotationTypesPropertyId, "AnnotationTypes").SetConverter(NativeValueConverter.ToAnnotationTypeArray);
 
-        internal SpreadsheetItemPattern(Element automationElement, UIA.IUIAutomationSpreadsheetItemPattern nativePattern)
-            : base(automationElement, nativePattern, (element, cached) => new SpreadsheetItemInformation(element, cached))
+        public SpreadsheetItemPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationSpreadsheetItemPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
+            Properties = new SpreadsheetItemPatternProperties();
         }
 
-        public new UIA.IUIAutomationSpreadsheetItemPattern NativePattern
+        ISpreadsheetItemPatternInformation IPatternWithInformation<ISpreadsheetItemPatternInformation>.Cached => Cached;
+
+        ISpreadsheetItemPatternInformation IPatternWithInformation<ISpreadsheetItemPatternInformation>.Current => Current;
+
+        public ISpreadsheetItemPatternProperties Properties { get; }
+
+        protected override SpreadsheetItemPatternInformation CreateInformation(bool cached)
         {
-            get { return (UIA.IUIAutomationSpreadsheetItemPattern)base.NativePattern; }
+            return new SpreadsheetItemPatternInformation(BasicAutomationElement, cached);
         }
     }
 
-    public class SpreadsheetItemInformation : InformationBase
+    public class SpreadsheetItemPatternInformation : InformationBase, ISpreadsheetItemPatternInformation
     {
-        public SpreadsheetItemInformation(Element automationElement, bool cached)
-            : base(automationElement, cached)
+        public SpreadsheetItemPatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
         {
         }
 
-        public string Formula
+        public string Formula => Get<string>(SpreadsheetItemPattern.FormulaProperty);
+
+        public AutomationElement[] AnnotationObjects
         {
-            get { return Get<string>(SpreadsheetItemPattern.FormulaProperty); }
+            get
+            {
+                var nativeElement = Get<UIA.IUIAutomationElementArray>(SpreadsheetItemPattern.AnnotationObjectsProperty);
+                return NativeValueConverter.NativeArrayToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
+            }
         }
 
-        public Element[] AnnotationObjects
-        {
-            get { return NativeElementArrayToElements(SpreadsheetItemPattern.AnnotationObjectsProperty); }
-        }
+        public AnnotationType[] AnnotationTypes => Get<AnnotationType[]>(SpreadsheetItemPattern.AnnotationTypesProperty);
+    }
 
-        public AnnotationType[] AnnotationTypes
-        {
-            get { return Get<AnnotationType[]>(SpreadsheetItemPattern.AnnotationTypesProperty); }
-        }
+    public class SpreadsheetItemPatternProperties : ISpreadsheetItemPatternProperties
+    {
+        public PropertyId FormulaProperty => SpreadsheetItemPattern.FormulaProperty;
+        public PropertyId AnnotationObjectsProperty => SpreadsheetItemPattern.AnnotationObjectsProperty;
+        public PropertyId AnnotationTypesProperty => SpreadsheetItemPattern.AnnotationTypesProperty;
     }
 }

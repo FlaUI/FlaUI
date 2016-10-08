@@ -40,6 +40,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -67,6 +68,8 @@
     <Compile Include="Patterns\ScrollPattern.cs" />
     <Compile Include="Patterns\SelectionItemPattern.cs" />
     <Compile Include="Patterns\SelectionPattern.cs" />
+    <Compile Include="Patterns\SpreadsheetItemPattern.cs" />
+    <Compile Include="Patterns\SpreadsheetPattern.cs" />
     <Compile Include="Patterns\SynchronizedInputPattern.cs" />
     <Compile Include="Patterns\TableItemPattern.cs" />
     <Compile Include="Patterns\TablePattern.cs" />
@@ -78,7 +81,6 @@
     <Compile Include="Patterns\WindowPattern.cs" />
     <Compile Include="Tools\NativeConditionConverter.cs" />
     <Compile Include="UIA3Automation.cs" />
-    <Compile Include="Definitions\AnnotationType.cs" />
     <Compile Include="Definitions\StyleType.cs" />
     <Compile Include="Definitions\TextAttributes.cs" />
     <Compile Include="Patterns\ValuePattern.cs" />

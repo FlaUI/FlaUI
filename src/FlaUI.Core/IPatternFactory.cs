@@ -38,9 +38,9 @@ namespace FlaUI.Core
 
         ISelectionPattern GetSelectionPattern();
 
-        //ISpreadsheetItemPattern GetSpreadsheetItemPattern();
+        ISpreadsheetItemPattern GetSpreadsheetItemPattern();
 
-        //ISpreadsheetPattern GetSpreadsheetPattern();
+        ISpreadsheetPattern GetSpreadsheetPattern();
 
         //IStylesPattern GetStylesPattern();
 

@@ -60,6 +60,7 @@
     <Compile Include="Conditions\NotCondition.cs" />
     <Compile Include="Conditions\OrCondition.cs" />
     <Compile Include="Conditions\PropertyCondition.cs" />
+    <Compile Include="Definitions\AnnotationType.cs" />
     <Compile Include="Definitions\ControlType.cs" />
     <Compile Include="Definitions\DockPosition.cs" />
     <Compile Include="Definitions\ExpandCollapseState.cs" />
@@ -154,6 +155,8 @@
     <Compile Include="Patterns\IScrollPattern.cs" />
     <Compile Include="Patterns\ISelectionItemPattern.cs" />
     <Compile Include="Patterns\ISelectionPattern.cs" />
+    <Compile Include="Patterns\ISpreadsheetItemPattern.cs" />
+    <Compile Include="Patterns\ISpreadsheetPattern.cs" />
     <Compile Include="Patterns\ISynchronizedInputPattern.cs" />
     <Compile Include="Patterns\ITableItemPattern.cs" />
     <Compile Include="Patterns\ITablePattern.cs" />

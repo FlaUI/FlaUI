@@ -117,17 +117,17 @@ namespace FlaUI.UIA3
             return nativePattern == null ? null : new SelectionPattern(BasicAutomationElement, nativePattern);
         }
 
-        //public SpreadsheetItemPattern GetSpreadsheetItemPattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationSpreadsheetItemPattern>(SpreadsheetItemPattern.Pattern);
-        //    return nativePattern == null ? null : new SpreadsheetItemPattern(BasicAutomationElement, nativePattern);
-        //}
+        public ISpreadsheetItemPattern GetSpreadsheetItemPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationSpreadsheetItemPattern>(SpreadsheetItemPattern.Pattern);
+            return nativePattern == null ? null : new SpreadsheetItemPattern(BasicAutomationElement, nativePattern);
+        }
 
-        //public SpreadsheetPattern GetSpreadsheetPattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationSpreadsheetPattern>(SpreadsheetPattern.Pattern);
-        //    return nativePattern == null ? null : new SpreadsheetPattern(BasicAutomationElement, nativePattern);
-        //}
+        public ISpreadsheetPattern GetSpreadsheetPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationSpreadsheetPattern>(SpreadsheetPattern.Pattern);
+            return nativePattern == null ? null : new SpreadsheetPattern(BasicAutomationElement, nativePattern);
+        }
 
         //public StylesPattern GetStylesPattern()
         //{

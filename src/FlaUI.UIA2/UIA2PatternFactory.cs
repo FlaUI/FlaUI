@@ -86,6 +86,16 @@ namespace FlaUI.UIA2
             return nativePattern == null ? null : new SelectionPattern(BasicAutomationElement, nativePattern);
         }
 
+        public ISpreadsheetItemPattern GetSpreadsheetItemPattern()
+        {
+            throw new NotSupportedByUIA2Exception();
+        }
+
+        public ISpreadsheetPattern GetSpreadsheetPattern()
+        {
+            throw new NotSupportedByUIA2Exception();
+        }
+
         public ISynchronizedInputPattern GetSynchronizedInputPattern()
         {
             var nativePattern = GetNativePatternAs<UIA.SynchronizedInputPattern>(UIA.SynchronizedInputPattern.Pattern);
