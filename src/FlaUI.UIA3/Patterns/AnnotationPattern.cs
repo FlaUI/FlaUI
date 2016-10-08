@@ -1,12 +1,15 @@
 ﻿using FlaUI.Core;
-using FlaUI.UIA3.Definitions;
-using FlaUI.UIA3.Elements;
+using FlaUI.Core.AutomationElements.Infrastructure;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
+using FlaUI.Core.Patterns;
+using FlaUI.Core.Patterns.Infrastructure;
+using FlaUI.UIA3.Tools;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class AnnotationPattern : PatternBaseWithInformation<AnnotationPatternInformation>
+    public class AnnotationPattern : PatternBaseWithInformation<UIA.IUIAutomationAnnotationPattern, AnnotationPatternInformation>, IAnnotationPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_AnnotationPatternId, "Annotation");
         public static readonly PropertyId AnnotationTypeIdProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_AnnotationAnnotationTypeIdPropertyId, "AnnotationTypeId");
@@ -15,47 +18,53 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId DateTimeProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_AnnotationDateTimePropertyId, "DateTime");
         public static readonly PropertyId TargetProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_AnnotationTargetPropertyId, "Target");
 
-        internal AnnotationPattern(Element automationElement, UIA.IUIAutomationAnnotationPattern nativePattern)
-            : base(automationElement, nativePattern, (element, cached) => new AnnotationPatternInformation(element, cached))
+        public AnnotationPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationAnnotationPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
+            Properties = new AnnotationPatternProperties();
         }
 
-        public new UIA.IUIAutomationAnnotationPattern NativePattern
+        IAnnotationPatternInformation IPatternWithInformation<IAnnotationPatternInformation>.Cached => Cached;
+
+        IAnnotationPatternInformation IPatternWithInformation<IAnnotationPatternInformation>.Current => Current;
+
+        public IAnnotationPatternProperties Properties { get; }
+
+        protected override AnnotationPatternInformation CreateInformation(bool cached)
         {
-            get { return (UIA.IUIAutomationAnnotationPattern)base.NativePattern; }
+            return new AnnotationPatternInformation(BasicAutomationElement, cached);
         }
     }
 
-    public class AnnotationPatternInformation : InformationBase
+    public class AnnotationPatternInformation : InformationBase, IAnnotationPatternInformation
     {
-        public AnnotationPatternInformation(Element automationElement, bool cached)
-            : base(automationElement, cached)
+        public AnnotationPatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
         {
         }
 
-        public AnnotationType AnnotationType
-        {
-            get { return Get<AnnotationType>(AnnotationPattern.AnnotationTypeIdProperty); }
-        }
+        public AnnotationType AnnotationType => Get<AnnotationType>(AnnotationPattern.AnnotationTypeIdProperty);
 
-        public string AnnotationTypeName
-        {
-            get { return Get<string>(AnnotationPattern.AnnotationTypeNameProperty); }
-        }
+        public string AnnotationTypeName => Get<string>(AnnotationPattern.AnnotationTypeNameProperty);
 
-        public string Author
-        {
-            get { return Get<string>(AnnotationPattern.AuthorProperty); }
-        }
+        public string Author => Get<string>(AnnotationPattern.AuthorProperty);
 
-        public string DateTime
-        {
-            get { return Get<string>(AnnotationPattern.DateTimeProperty); }
-        }
+        public string DateTime => Get<string>(AnnotationPattern.DateTimeProperty);
 
-        public Element Target
+        public AutomationElement Target
         {
-            get { return NativeElementToElement(AnnotationPattern.TargetProperty); }
+            get
+            {
+                var nativeElement = Get<UIA.IUIAutomationElement>(AnnotationPattern.TargetProperty);
+                return NativeValueConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
+            }
         }
+    }
+
+    public class AnnotationPatternProperties : IAnnotationPatternProperties
+    {
+        public PropertyId AnnotationTypeIdProperty => AnnotationPattern.AnnotationTypeIdProperty;
+        public PropertyId AnnotationTypeNameProperty => AnnotationPattern.AnnotationTypeNameProperty;
+        public PropertyId AuthorProperty => AnnotationPattern.AuthorProperty;
+        public PropertyId DateTimeProperty => AnnotationPattern.DateTimeProperty;
+        public PropertyId TargetProperty => AnnotationPattern.TargetProperty;
     }
 }

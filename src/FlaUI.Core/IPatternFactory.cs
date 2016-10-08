@@ -4,7 +4,7 @@ namespace FlaUI.Core
 {
     public interface IPatternFactory
     {
-        //IAnnotationPattern GetAnnotationPattern();
+        IAnnotationPattern GetAnnotationPattern();
 
         //IDockPattern GetDockPattern();
 

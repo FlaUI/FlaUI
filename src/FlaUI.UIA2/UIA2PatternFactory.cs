@@ -15,6 +15,11 @@ namespace FlaUI.UIA2
             BasicAutomationElement = basicAutomationElement;
         }
 
+        public IAnnotationPattern GetAnnotationPattern()
+        {
+            throw new NotSupportedByUIA2Exception();
+        }
+
         public IExpandCollapsePattern GetExpandCollapsePattern()
         {
             var nativePattern = GetNativePatternAs<UIA.ExpandCollapsePattern>(UIA.ExpandCollapsePattern.Pattern);

@@ -138,6 +138,7 @@
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Overlay\OverlayManager.cs" />
     <Compile Include="Overlay\OverlayRectangleWindow.cs" />
+    <Compile Include="Patterns\IAnnotationPattern.cs" />
     <Compile Include="Patterns\IExpandCollapsePattern.cs" />
     <Compile Include="Patterns\IGridItemPattern.cs" />
     <Compile Include="Patterns\IGridPattern.cs" />

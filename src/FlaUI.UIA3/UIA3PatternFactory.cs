@@ -15,11 +15,11 @@ namespace FlaUI.UIA3
             BasicAutomationElement = basicAutomationElement;
         }
 
-        //public AnnotationPattern GetAnnotationPattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationAnnotationPattern>(AnnotationPattern.Pattern);
-        //    return nativePattern == null ? null : new AnnotationPattern(BasicAutomationElement, nativePattern);
-        //}
+        public IAnnotationPattern GetAnnotationPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationAnnotationPattern>(AnnotationPattern.Pattern);
+            return nativePattern == null ? null : new AnnotationPattern(BasicAutomationElement, nativePattern);
+        }
 
         //public DockPattern GetDockPattern()
         //{
