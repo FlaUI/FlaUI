@@ -21,11 +21,11 @@ namespace FlaUI.UIA3
             return nativePattern == null ? null : new AnnotationPattern(BasicAutomationElement, nativePattern);
         }
 
-        //public DockPattern GetDockPattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationDockPattern>(DockPattern.Pattern);
-        //    return nativePattern == null ? null : new DockPattern(BasicAutomationElement, nativePattern);
-        //}
+        public IDockPattern GetDockPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationDockPattern>(DockPattern.Pattern);
+            return nativePattern == null ? null : new DockPattern(BasicAutomationElement, nativePattern);
+        }
 
         //public DragPattern GetDragPattern()
         //{

@@ -5,16 +5,16 @@ using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.Tools;
-using UIA = interop.UIAutomationCore;
+using UIA = System.Windows.Automation;
 
-namespace FlaUI.UIA3.Patterns
+namespace FlaUI.UIA2.Patterns
 {
-    public class DockPattern : PatternBaseWithInformation<UIA.IUIAutomationDockPattern, DockPatternInformation>, IDockPattern
+    public class DockPattern : PatternBaseWithInformation<UIA.DockPattern, DockPatternInformation>, IDockPattern
     {
-        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_DockPatternId, "Dock");
-        public static readonly PropertyId DockPositionProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_DockDockPositionPropertyId, "DockPosition");
+        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.DockPattern.Pattern.Id, "Dock");
+        public static readonly PropertyId DockPositionProperty = PropertyId.Register(AutomationType.UIA2, UIA.DockPattern.DockPositionProperty.Id, "DockPosition");
 
-        public DockPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationDockPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public DockPattern(BasicAutomationElementBase basicAutomationElement, UIA.DockPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
             Properties = new DockPatternProperties();
         }
@@ -32,7 +32,7 @@ namespace FlaUI.UIA3.Patterns
 
         public void SetDockPosition(DockPosition dockPos)
         {
-            ComCallWrapper.Call(() => NativePattern.SetDockPosition((UIA.DockPosition)dockPos));
+            NativePattern.SetDockPosition((UIA.DockPosition)dockPos);
         }
     }
 

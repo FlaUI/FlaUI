@@ -20,6 +20,12 @@ namespace FlaUI.UIA2
             throw new NotSupportedByUIA2Exception();
         }
 
+        public IDockPattern GetDockPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.DockPattern>(UIA.DockPattern.Pattern);
+            return nativePattern == null ? null : new DockPattern(BasicAutomationElement, nativePattern);
+        }
+
         public IExpandCollapsePattern GetExpandCollapsePattern()
         {
             var nativePattern = GetNativePatternAs<UIA.ExpandCollapsePattern>(UIA.ExpandCollapsePattern.Pattern);

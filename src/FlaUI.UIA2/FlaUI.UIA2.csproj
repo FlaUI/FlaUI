@@ -48,6 +48,7 @@
     <Compile Include="EventHandlers\UIA2FocusChangedEventHandler.cs" />
     <Compile Include="EventHandlers\UIA2PropertyChangedEventHandler.cs" />
     <Compile Include="EventHandlers\UIA2StructureChangedEventHandler.cs" />
+    <Compile Include="Patterns\DockPattern.cs" />
     <Compile Include="Patterns\ExpandCollapsePattern.cs" />
     <Compile Include="Patterns\GridItemPattern.cs" />
     <Compile Include="Patterns\GridPattern.cs" />

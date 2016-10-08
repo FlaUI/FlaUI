@@ -57,6 +57,7 @@
     <Compile Include="EventHandlers\UIA3PropertyChangedEventHandler.cs" />
     <Compile Include="EventHandlers\UIA3StructureChangedEventHandlerBase.cs" />
     <Compile Include="Patterns\AnnotationPattern.cs" />
+    <Compile Include="Patterns\DockPattern.cs" />
     <Compile Include="Patterns\ExpandCollapsePattern.cs" />
     <Compile Include="Patterns\GridItemPattern.cs" />
     <Compile Include="Patterns\GridPattern.cs" />

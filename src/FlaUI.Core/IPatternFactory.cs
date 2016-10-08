@@ -6,7 +6,7 @@ namespace FlaUI.Core
     {
         IAnnotationPattern GetAnnotationPattern();
 
-        //IDockPattern GetDockPattern();
+        IDockPattern GetDockPattern();
 
         //IDragPattern GetDragPattern();
 
