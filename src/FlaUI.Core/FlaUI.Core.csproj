@@ -151,6 +151,7 @@
     <Compile Include="Patterns\IScrollItemPattern.cs" />
     <Compile Include="Patterns\IScrollPattern.cs" />
     <Compile Include="Patterns\ISelectionItemPattern.cs" />
+    <Compile Include="Patterns\ISelectionPattern.cs" />
     <Compile Include="Patterns\ITogglePattern.cs" />
     <Compile Include="Patterns\ITransform2Pattern.cs" />
     <Compile Include="Patterns\ITransformPattern.cs" />

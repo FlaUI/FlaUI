@@ -111,11 +111,11 @@ namespace FlaUI.UIA3
             return nativePattern == null ? null : new SelectionItemPattern(BasicAutomationElement, nativePattern);
         }
 
-        //public SelectionPattern GetSelectionPattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationSelectionPattern>(SelectionPattern.Pattern);
-        //    return nativePattern == null ? null : new SelectionPattern(BasicAutomationElement, nativePattern);
-        //}
+        public ISelectionPattern GetSelectionPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationSelectionPattern>(SelectionPattern.Pattern);
+            return nativePattern == null ? null : new SelectionPattern(BasicAutomationElement, nativePattern);
+        }
 
         //public SpreadsheetItemPattern GetSpreadsheetItemPattern()
         //{

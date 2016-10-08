@@ -57,6 +57,7 @@
     <Compile Include="Patterns\ScrollItemPattern.cs" />
     <Compile Include="Patterns\ScrollPattern.cs" />
     <Compile Include="Patterns\SelectionItemPattern.cs" />
+    <Compile Include="Patterns\SelectionPattern.cs" />
     <Compile Include="Patterns\TogglePattern.cs" />
     <Compile Include="Patterns\TransformPattern.cs" />
     <Compile Include="Patterns\VirtualizedItemPattern.cs" />

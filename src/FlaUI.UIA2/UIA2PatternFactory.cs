@@ -70,6 +70,12 @@ namespace FlaUI.UIA2
             return nativePattern == null ? null : new SelectionItemPattern(BasicAutomationElement, nativePattern);
         }
 
+        public ISelectionPattern GetSelectionPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.SelectionPattern>(UIA.SelectionPattern.Pattern);
+            return nativePattern == null ? null : new SelectionPattern(BasicAutomationElement, nativePattern);
+        }
+
         public ITogglePattern GetTogglePattern()
         {
             var nativePattern = GetNativePatternAs<UIA.TogglePattern>(UIA.TogglePattern.Pattern);
