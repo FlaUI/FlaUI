@@ -135,11 +135,11 @@ namespace FlaUI.UIA3
         //    return nativePattern == null ? null : new StylesPattern(BasicAutomationElement, nativePattern);
         //}
 
-        //public SynchronizedInputPattern GetSynchronizedInputPattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationSynchronizedInputPattern>(SynchronizedInputPattern.Pattern);
-        //    return nativePattern == null ? null : new SynchronizedInputPattern(BasicAutomationElement, nativePattern);
-        //}
+        public ISynchronizedInputPattern GetSynchronizedInputPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationSynchronizedInputPattern>(SynchronizedInputPattern.Pattern);
+            return nativePattern == null ? null : new SynchronizedInputPattern(BasicAutomationElement, nativePattern);
+        }
 
         public ITableItemPattern GetTableItemPattern()
         {

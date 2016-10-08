@@ -80,6 +80,12 @@ namespace FlaUI.UIA2
             return nativePattern == null ? null : new SelectionPattern(BasicAutomationElement, nativePattern);
         }
 
+        public ISynchronizedInputPattern GetSynchronizedInputPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.SynchronizedInputPattern>(UIA.SynchronizedInputPattern.Pattern);
+            return nativePattern == null ? null : new SynchronizedInputPattern(BasicAutomationElement, nativePattern);
+        }
+
         public ITableItemPattern GetTableItemPattern()
         {
             var nativePattern = GetNativePatternAs<UIA.TableItemPattern>(UIA.TableItemPattern.Pattern);

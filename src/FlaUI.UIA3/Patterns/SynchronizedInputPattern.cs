@@ -1,28 +1,26 @@
 ﻿using FlaUI.Core;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
+using FlaUI.Core.Patterns;
+using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.Tools;
-using FlaUI.UIA3.Definitions;
-using FlaUI.UIA3.Elements;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class SynchronizedInputPattern : PatternBase
+    public class SynchronizedInputPattern : PatternBase<UIA.IUIAutomationSynchronizedInputPattern>, ISynchronizedInputPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_SynchronizedInputPatternId, "SynchronizedInput");
         public static readonly EventId DiscardedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_InputDiscardedEventId, "Discarded");
         public static readonly EventId ReachedOtherElementEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_InputReachedOtherElementEventId, "ReachedOtherElement");
         public static readonly EventId ReachedTargetEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_InputReachedTargetEventId, "ReachedTarget");
 
-        internal SynchronizedInputPattern(Element automationElement, UIA.IUIAutomationSynchronizedInputPattern nativePattern)
-            : base(automationElement, nativePattern)
+        public SynchronizedInputPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationSynchronizedInputPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
+            Events = new SynchronizedInputPatternEvents();
         }
 
-        public new UIA.IUIAutomationSynchronizedInputPattern NativePattern
-        {
-            get { return (UIA.IUIAutomationSynchronizedInputPattern)base.NativePattern; }
-        }
+        public ISynchronizedInputPatternEvents Events { get; }
 
         public void Cancel()
         {
@@ -33,5 +31,12 @@ namespace FlaUI.UIA3.Patterns
         {
             ComCallWrapper.Call(() => NativePattern.StartListening((UIA.SynchronizedInputType)inputType));
         }
+    }
+
+    public class SynchronizedInputPatternEvents : ISynchronizedInputPatternEvents
+    {
+        public EventId DiscardedEvent => SynchronizedInputPattern.DiscardedEvent;
+        public EventId ReachedOtherElementEvent => SynchronizedInputPattern.ReachedOtherElementEvent;
+        public EventId ReachedTargetEvent => SynchronizedInputPattern.ReachedTargetEvent;
     }
 }
