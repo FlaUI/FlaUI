@@ -1,4 +1,5 @@
-﻿using FlaUI.Core;
+﻿using System;
+using FlaUI.Core;
 using FlaUI.Core.Exceptions;
 using FlaUI.Core.Patterns;
 using FlaUI.UIA2.Patterns;
@@ -43,6 +44,18 @@ namespace FlaUI.UIA2
         {
             var nativePattern = GetNativePatternAs<UIA.RangeValuePattern>(UIA.RangeValuePattern.Pattern);
             return nativePattern == null ? null : new RangeValuePattern(BasicAutomationElement, nativePattern);
+        }
+
+        public IScrollItemPattern GetScrollItemPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.ScrollItemPattern>(UIA.ScrollItemPattern.Pattern);
+            return nativePattern == null ? null : new ScrollItemPattern(BasicAutomationElement, nativePattern);
+        }
+
+        public IScrollPattern GetScrollPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.ScrollPattern>(UIA.ScrollPattern.Pattern);
+            return nativePattern == null ? null : new ScrollPattern(BasicAutomationElement, nativePattern);
         }
 
         public ISelectionItemPattern GetSelectionItemPattern()

@@ -30,9 +30,9 @@ namespace FlaUI.Core
 
         IRangeValuePattern GetRangeValuePattern();
 
-        //IScrollItemPattern GetScrollItemPattern();
+        IScrollItemPattern GetScrollItemPattern();
 
-        //IScrollPattern GetScrollPattern();
+        IScrollPattern GetScrollPattern();
 
         ISelectionItemPattern GetSelectionItemPattern();
 

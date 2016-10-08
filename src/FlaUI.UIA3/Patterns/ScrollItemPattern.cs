@@ -1,23 +1,18 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.Identifiers;
+using FlaUI.Core.Patterns;
+using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.Tools;
-using FlaUI.UIA3.Elements;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class ScrollItemPattern : PatternBase
+    public class ScrollItemPattern : PatternBase<UIA.IUIAutomationScrollItemPattern>, IScrollItemPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_ScrollItemPatternId, "ScrollItem");
 
-        internal ScrollItemPattern(Element automationElement, UIA.IUIAutomationScrollItemPattern nativePattern)
-            : base(automationElement, nativePattern)
+        public ScrollItemPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationScrollItemPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-        }
-
-        public new UIA.IUIAutomationScrollItemPattern NativePattern
-        {
-            get { return (UIA.IUIAutomationScrollItemPattern)base.NativePattern; }
         }
 
         public void ScrollIntoView()

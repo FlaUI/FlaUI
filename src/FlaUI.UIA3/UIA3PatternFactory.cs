@@ -93,17 +93,17 @@ namespace FlaUI.UIA3
             return nativePattern == null ? null : new RangeValuePattern(BasicAutomationElement, nativePattern);
         }
 
-        //public ScrollItemPattern GetScrollItemPattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationScrollItemPattern>(ScrollItemPattern.Pattern);
-        //    return nativePattern == null ? null : new ScrollItemPattern(BasicAutomationElement, nativePattern);
-        //}
+        public IScrollItemPattern GetScrollItemPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationScrollItemPattern>(ScrollItemPattern.Pattern);
+            return nativePattern == null ? null : new ScrollItemPattern(BasicAutomationElement, nativePattern);
+        }
 
-        //public ScrollPattern GetScrollPattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationScrollPattern>(ScrollPattern.Pattern);
-        //    return nativePattern == null ? null : new ScrollPattern(BasicAutomationElement, nativePattern);
-        //}
+        public IScrollPattern GetScrollPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationScrollPattern>(ScrollPattern.Pattern);
+            return nativePattern == null ? null : new ScrollPattern(BasicAutomationElement, nativePattern);
+        }
 
         public ISelectionItemPattern GetSelectionItemPattern()
         {
