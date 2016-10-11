@@ -1,5 +1,6 @@
 ﻿using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Identifiers;
+using FlaUI.UIA3.Identifiers;
 
 namespace FlaUI.UIA3
 {

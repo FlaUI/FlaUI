@@ -3,7 +3,7 @@ using FlaUI.Core.Identifiers;
 using FlaUI.UIA3.Converters;
 using UIA = interop.UIAutomationCore;
 
-namespace FlaUI.UIA3.Definitions
+namespace FlaUI.UIA3.Identifiers
 {
     public static class TextAttributes
     {

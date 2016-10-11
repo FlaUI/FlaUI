@@ -1,6 +1,7 @@
 ﻿using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Exceptions;
 using FlaUI.Core.Identifiers;
+using FlaUI.UIA2.Identifiers;
 
 namespace FlaUI.UIA2
 {

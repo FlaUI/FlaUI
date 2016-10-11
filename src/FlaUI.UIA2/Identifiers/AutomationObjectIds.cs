@@ -3,7 +3,7 @@ using FlaUI.Core.Identifiers;
 using FlaUI.UIA2.Converters;
 using UIA = System.Windows.Automation;
 
-namespace FlaUI.UIA2
+namespace FlaUI.UIA2.Identifiers
 {
     public static class AutomationObjectIds
     {

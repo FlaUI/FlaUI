@@ -5,6 +5,7 @@ using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Exceptions;
 using FlaUI.Core.Shapes;
+using FlaUI.UIA2.Identifiers;
 
 namespace FlaUI.UIA2
 {

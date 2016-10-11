@@ -4,6 +4,7 @@ using FlaUI.Core;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Shapes;
+using FlaUI.UIA3.Identifiers;
 
 namespace FlaUI.UIA3
 {
