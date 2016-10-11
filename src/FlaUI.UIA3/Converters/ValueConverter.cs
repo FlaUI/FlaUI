@@ -6,9 +6,9 @@ using FlaUI.Core.Definitions;
 using FlaUI.Core.Shapes;
 using UIA = interop.UIAutomationCore;
 
-namespace FlaUI.UIA3.Tools
+namespace FlaUI.UIA3.Converters
 {
-    public static class NativeValueConverter
+    public static class ValueConverter
     {
         /// <summary>
         /// Converts a native automationElement array to an array of <see cref="AutomationElement" />

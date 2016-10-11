@@ -2,14 +2,13 @@
 using System.Globalization;
 using System.Windows;
 using FlaUI.Core.AutomationElements.Infrastructure;
-using FlaUI.Core.Definitions;
 using FlaUI.Core.Exceptions;
 using FlaUI.Core.Shapes;
 using UIA = System.Windows.Automation;
 
-namespace FlaUI.UIA2.Tools
+namespace FlaUI.UIA2.Converters
 {
-    public static class NativeValueConverter
+    public static class ValueConverter
     {
         public static AutomationElement[] NativeArrayToManaged(UIA2Automation automation, UIA.AutomationElementCollection nativeElements)
         {
@@ -67,9 +66,9 @@ namespace FlaUI.UIA2.Tools
             {
                 return null;
             }
-            if (val is ControlType)
+            if (val is Core.Definitions.ControlType)
             {
-                val = (UIA.ControlType)ToControlTypeId((ControlType)val);
+                val = (UIA.ControlType)ToControlTypeId((Core.Definitions.ControlType)val);
             }
             else if (val is AutomationElement)
             {
@@ -90,91 +89,91 @@ namespace FlaUI.UIA2.Tools
             return origValue == 0 ? IntPtr.Zero : new IntPtr(origValue);
         }
 
-        public static object ToControlTypeId(ControlType controlType)
+        public static object ToControlTypeId(Core.Definitions.ControlType controlType)
         {
             switch (controlType)
             {
-                case ControlType.AppBar:
+                case Core.Definitions.ControlType.AppBar:
                     throw new NotSupportedByUIA2Exception();
-                case ControlType.Button:
+                case Core.Definitions.ControlType.Button:
                     return UIA.ControlType.Button;
-                case ControlType.Calendar:
+                case Core.Definitions.ControlType.Calendar:
                     return UIA.ControlType.Calendar;
-                case ControlType.CheckBox:
+                case Core.Definitions.ControlType.CheckBox:
                     return UIA.ControlType.CheckBox;
-                case ControlType.ComboBox:
+                case Core.Definitions.ControlType.ComboBox:
                     return UIA.ControlType.ComboBox;
-                case ControlType.Custom:
+                case Core.Definitions.ControlType.Custom:
                     return UIA.ControlType.Custom;
-                case ControlType.DataGrid:
+                case Core.Definitions.ControlType.DataGrid:
                     return UIA.ControlType.DataGrid;
-                case ControlType.DataItem:
+                case Core.Definitions.ControlType.DataItem:
                     return UIA.ControlType.DataItem;
-                case ControlType.Document:
+                case Core.Definitions.ControlType.Document:
                     return UIA.ControlType.Document;
-                case ControlType.Edit:
+                case Core.Definitions.ControlType.Edit:
                     return UIA.ControlType.Edit;
-                case ControlType.Group:
+                case Core.Definitions.ControlType.Group:
                     return UIA.ControlType.Group;
-                case ControlType.Header:
+                case Core.Definitions.ControlType.Header:
                     return UIA.ControlType.Header;
-                case ControlType.HeaderItem:
+                case Core.Definitions.ControlType.HeaderItem:
                     return UIA.ControlType.HeaderItem;
-                case ControlType.Hyperlink:
+                case Core.Definitions.ControlType.Hyperlink:
                     return UIA.ControlType.Hyperlink;
-                case ControlType.Image:
+                case Core.Definitions.ControlType.Image:
                     return UIA.ControlType.Image;
-                case ControlType.List:
+                case Core.Definitions.ControlType.List:
                     return UIA.ControlType.List;
-                case ControlType.ListItem:
+                case Core.Definitions.ControlType.ListItem:
                     return UIA.ControlType.ListItem;
-                case ControlType.MenuBar:
+                case Core.Definitions.ControlType.MenuBar:
                     return UIA.ControlType.MenuBar;
-                case ControlType.Menu:
+                case Core.Definitions.ControlType.Menu:
                     return UIA.ControlType.Menu;
-                case ControlType.MenuItem:
+                case Core.Definitions.ControlType.MenuItem:
                     return UIA.ControlType.MenuItem;
-                case ControlType.Pane:
+                case Core.Definitions.ControlType.Pane:
                     return UIA.ControlType.Pane;
-                case ControlType.ProgressBar:
+                case Core.Definitions.ControlType.ProgressBar:
                     return UIA.ControlType.ProgressBar;
-                case ControlType.RadioButton:
+                case Core.Definitions.ControlType.RadioButton:
                     return UIA.ControlType.RadioButton;
-                case ControlType.ScrollBar:
+                case Core.Definitions.ControlType.ScrollBar:
                     return UIA.ControlType.ScrollBar;
-                case ControlType.SemanticZoom:
+                case Core.Definitions.ControlType.SemanticZoom:
                     throw new NotSupportedByUIA2Exception();
-                case ControlType.Separator:
+                case Core.Definitions.ControlType.Separator:
                     return UIA.ControlType.Separator;
-                case ControlType.Slider:
+                case Core.Definitions.ControlType.Slider:
                     return UIA.ControlType.Slider;
-                case ControlType.Spinner:
+                case Core.Definitions.ControlType.Spinner:
                     return UIA.ControlType.Spinner;
-                case ControlType.SplitButton:
+                case Core.Definitions.ControlType.SplitButton:
                     return UIA.ControlType.SplitButton;
-                case ControlType.StatusBar:
+                case Core.Definitions.ControlType.StatusBar:
                     return UIA.ControlType.StatusBar;
-                case ControlType.Tab:
+                case Core.Definitions.ControlType.Tab:
                     return UIA.ControlType.Tab;
-                case ControlType.TabItem:
+                case Core.Definitions.ControlType.TabItem:
                     return UIA.ControlType.TabItem;
-                case ControlType.Table:
+                case Core.Definitions.ControlType.Table:
                     return UIA.ControlType.Table;
-                case ControlType.Text:
+                case Core.Definitions.ControlType.Text:
                     return UIA.ControlType.Text;
-                case ControlType.Thumb:
+                case Core.Definitions.ControlType.Thumb:
                     return UIA.ControlType.Thumb;
-                case ControlType.TitleBar:
+                case Core.Definitions.ControlType.TitleBar:
                     return UIA.ControlType.TitleBar;
-                case ControlType.ToolBar:
+                case Core.Definitions.ControlType.ToolBar:
                     return UIA.ControlType.ToolBar;
-                case ControlType.ToolTip:
+                case Core.Definitions.ControlType.ToolTip:
                     return UIA.ControlType.ToolTip;
-                case ControlType.Tree:
+                case Core.Definitions.ControlType.Tree:
                     return UIA.ControlType.Tree;
-                case ControlType.TreeItem:
+                case Core.Definitions.ControlType.TreeItem:
                     return UIA.ControlType.TreeItem;
-                case ControlType.Window:
+                case Core.Definitions.ControlType.Window:
                     return UIA.ControlType.Window;
                 default:
                     throw new NotSupportedException();

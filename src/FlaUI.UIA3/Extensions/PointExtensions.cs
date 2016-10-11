@@ -2,7 +2,7 @@
 using FlaUI.Core.Tools;
 using UIA = interop.UIAutomationCore;
 
-namespace FlaUI.UIA3.Shapes
+namespace FlaUI.UIA3.Extensions
 {
     public static class PointExtensions
     {

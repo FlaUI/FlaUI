@@ -6,8 +6,8 @@ using FlaUI.Core.Definitions;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Shapes;
+using FlaUI.UIA2.Converters;
 using FlaUI.UIA2.EventHandlers;
-using FlaUI.UIA2.Tools;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2
@@ -57,14 +57,14 @@ namespace FlaUI.UIA2
 
         public override AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition)
         {
-            var nativeFoundElements = NativeElement.FindAll((UIA.TreeScope)treeScope, NativeConditionConverter.ToNative(condition));
-            return NativeValueConverter.NativeArrayToManaged(Automation, nativeFoundElements);
+            var nativeFoundElements = NativeElement.FindAll((UIA.TreeScope)treeScope, ConditionConverter.ToNative(condition));
+            return ValueConverter.NativeArrayToManaged(Automation, nativeFoundElements);
         }
 
         public override AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
         {
-            var nativeFoundElement = NativeElement.FindFirst((UIA.TreeScope)treeScope, NativeConditionConverter.ToNative(condition));
-            return NativeValueConverter.NativeToManaged(Automation, nativeFoundElement);
+            var nativeFoundElement = NativeElement.FindFirst((UIA.TreeScope)treeScope, ConditionConverter.ToNative(condition));
+            return ValueConverter.NativeToManaged(Automation, nativeFoundElement);
         }
 
         public override bool TryGetClickablePoint(out Point point)

@@ -8,8 +8,8 @@ using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Shapes;
 using FlaUI.Core.Tools;
+using FlaUI.UIA3.Converters;
 using FlaUI.UIA3.EventHandlers;
-using FlaUI.UIA3.Tools;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3
@@ -68,14 +68,14 @@ namespace FlaUI.UIA3
 
         public override AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition)
         {
-            var nativeFoundElements = NativeElement.FindAll((UIA.TreeScope)treeScope, NativeConditionConverter.ToNative(Automation, condition));
-            return NativeValueConverter.NativeArrayToManaged(Automation, nativeFoundElements);
+            var nativeFoundElements = NativeElement.FindAll((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition));
+            return ValueConverter.NativeArrayToManaged(Automation, nativeFoundElements);
         }
 
         public override AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
         {
-            var nativeFoundElement = NativeElement.FindFirst((UIA.TreeScope)treeScope, NativeConditionConverter.ToNative(Automation, condition));
-            return NativeValueConverter.NativeToManaged(Automation, nativeFoundElement);
+            var nativeFoundElement = NativeElement.FindFirst((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition));
+            return ValueConverter.NativeToManaged(Automation, nativeFoundElement);
         }
 
         public override bool TryGetClickablePoint(out Point point)

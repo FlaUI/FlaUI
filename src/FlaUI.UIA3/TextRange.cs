@@ -3,7 +3,7 @@ using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Shapes;
 using FlaUI.Core.Tools;
-using FlaUI.UIA3.Tools;
+using FlaUI.UIA3.Converters;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3
@@ -28,7 +28,7 @@ namespace FlaUI.UIA3
         public TextRange Clone()
         {
             var clonedTextRangeNative = ComCallWrapper.Call(() => NativeRange.Clone());
-            return NativeValueConverter.NativeToManaged(Automation, clonedTextRangeNative);
+            return ValueConverter.NativeToManaged(Automation, clonedTextRangeNative);
         }
 
         public int Compare(TextRange range)
@@ -48,15 +48,15 @@ namespace FlaUI.UIA3
 
         public TextRange FindAttribute(TextAttributeId attribute, object value, bool backward)
         {
-            var nativeValue = NativeValueConverter.ToNative(value);
+            var nativeValue = ValueConverter.ToNative(value);
             var nativeTextRange = ComCallWrapper.Call(() => NativeRange.FindAttribute(attribute.Id, nativeValue, backward.ToInt()));
-            return NativeValueConverter.NativeToManaged(Automation, nativeTextRange);
+            return ValueConverter.NativeToManaged(Automation, nativeTextRange);
         }
 
         public TextRange FindText(string text, bool backward, bool ignoreCase)
         {
             var nativeTextRange = ComCallWrapper.Call(() => NativeRange.FindText(text, backward.ToInt(), ignoreCase.ToInt()));
-            return NativeValueConverter.NativeToManaged(Automation, nativeTextRange);
+            return ValueConverter.NativeToManaged(Automation, nativeTextRange);
         }
 
         public object GetAttributeValue(TextAttributeId attribute)
@@ -86,13 +86,13 @@ namespace FlaUI.UIA3
         public AutomationElement[] GetChildren()
         {
             var nativeChildren = ComCallWrapper.Call(() => NativeRange.GetChildren());
-            return NativeValueConverter.NativeArrayToManaged(Automation, nativeChildren);
+            return ValueConverter.NativeArrayToManaged(Automation, nativeChildren);
         }
 
         public AutomationElement GetEnclosingElement()
         {
             var nativeElement = ComCallWrapper.Call(() => NativeRange.GetEnclosingElement());
-            return NativeValueConverter.NativeToManaged(Automation, nativeElement);
+            return ValueConverter.NativeToManaged(Automation, nativeElement);
         }
 
         public string GetText(int maxLength)
@@ -133,7 +133,7 @@ namespace FlaUI.UIA3
         public TextRange2 AsTextRange2()
         {
             var nativeRange2 = (UIA.IUIAutomationTextRange2)NativeRange;
-            return NativeValueConverter.NativeToManaged(Automation, nativeRange2);
+            return ValueConverter.NativeToManaged(Automation, nativeRange2);
         }
     }
 }

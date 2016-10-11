@@ -3,16 +3,16 @@ using System.Linq;
 using FlaUI.Core.Conditions;
 using UIA = interop.UIAutomationCore;
 
-namespace FlaUI.UIA3.Tools
+namespace FlaUI.UIA3.Converters
 {
-    public static class NativeConditionConverter
+    public static class ConditionConverter
     {
         public static UIA.IUIAutomationCondition ToNative(UIA3Automation automation, ConditionBase condition)
         {
             var propCond = condition as PropertyCondition;
             if (propCond != null)
             {
-                return automation.NativeAutomation.CreatePropertyConditionEx(propCond.Property.Id, NativeValueConverter.ToNative(propCond.Value), (UIA.PropertyConditionFlags)propCond.PropertyConditionFlags);
+                return automation.NativeAutomation.CreatePropertyConditionEx(propCond.Property.Id, ValueConverter.ToNative(propCond.Value), (UIA.PropertyConditionFlags)propCond.PropertyConditionFlags);
             }
             var boolCond = condition as BoolCondition;
             if (boolCond != null)

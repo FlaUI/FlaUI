@@ -3,7 +3,7 @@ using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
-using FlaUI.UIA2.Tools;
+using FlaUI.UIA2.Converters;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Patterns
@@ -19,9 +19,9 @@ namespace FlaUI.UIA2.Patterns
         public AutomationElement FindItemByProperty(AutomationElement startAfter, PropertyId property, object value)
         {
             var foundNativeElement = NativePattern.FindItemByProperty(
-                    startAfter == null ? null : NativeValueConverter.ToNative(startAfter),
-                    property == null ? null : UIA.AutomationProperty.LookupById(property.Id), NativeValueConverter.ToNative(value));
-            return NativeValueConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, foundNativeElement);
+                    startAfter == null ? null : ValueConverter.ToNative(startAfter),
+                    property == null ? null : UIA.AutomationProperty.LookupById(property.Id), ValueConverter.ToNative(value));
+            return ValueConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, foundNativeElement);
         }
     }
 }

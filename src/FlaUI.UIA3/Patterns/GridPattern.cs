@@ -4,7 +4,7 @@ using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.Tools;
-using FlaUI.UIA3.Tools;
+using FlaUI.UIA3.Converters;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
@@ -34,7 +34,7 @@ namespace FlaUI.UIA3.Patterns
         public AutomationElement GetItem(int row, int column)
         {
             var nativeItem = ComCallWrapper.Call(() => NativePattern.GetItem(row, column));
-            return NativeValueConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeItem);
+            return ValueConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeItem);
         }
     }
 

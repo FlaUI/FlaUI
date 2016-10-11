@@ -4,9 +4,9 @@ using FlaUI.Core;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Shapes;
+using FlaUI.UIA3.Converters;
 using FlaUI.UIA3.EventHandlers;
-using FlaUI.UIA3.Shapes;
-using FlaUI.UIA3.Tools;
+using FlaUI.UIA3.Extensions;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3
@@ -70,7 +70,7 @@ namespace FlaUI.UIA3
         public override AutomationElement FocusedElement()
         {
             var nativeFocusedElement = NativeAutomation.GetFocusedElement();
-            return NativeValueConverter.NativeToManaged(this, nativeFocusedElement);
+            return ValueConverter.NativeToManaged(this, nativeFocusedElement);
         }
 
         public override IAutomationFocusChangedEventHandler RegisterFocusChangedEvent(Action<AutomationElement> action)

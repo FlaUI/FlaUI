@@ -67,8 +67,8 @@
     <Compile Include="Patterns\TransformPattern.cs" />
     <Compile Include="Patterns\VirtualizedItemPattern.cs" />
     <Compile Include="Patterns\WindowPattern.cs" />
-    <Compile Include="Tools\NativeConditionConverter.cs" />
-    <Compile Include="Tools\NativeValueConverter.cs" />
+    <Compile Include="Converters\ConditionConverter.cs" />
+    <Compile Include="Converters\ValueConverter.cs" />
     <Compile Include="UIA2AutomationElementProperties.cs" />
     <Compile Include="UIA2PatternFactory.cs" />
     <Compile Include="Patterns\ValuePattern.cs" />

@@ -1,6 +1,6 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.Identifiers;
-using FlaUI.UIA3.Tools;
+using FlaUI.UIA3.Converters;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Definitions
@@ -15,7 +15,7 @@ namespace FlaUI.UIA3.Definitions
         public static readonly TextAttributeId CapStyle = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_CapStyleAttributeId, "CapStyle");
         public static readonly TextAttributeId CaretBidiMode = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_CaretBidiModeAttributeId, "CaretBidiMode");
         public static readonly TextAttributeId CaretPosition = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_CaretPositionAttributeId, "CaretPosition");
-        public static readonly TextAttributeId Culture = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_CultureAttributeId, "Culture").SetConverter(NativeValueConverter.ToCulture);
+        public static readonly TextAttributeId Culture = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_CultureAttributeId, "Culture").SetConverter(ValueConverter.ToCulture);
         public static readonly TextAttributeId FontName = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_FontNameAttributeId, "FontName");
         public static readonly TextAttributeId FontSize = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_FontSizeAttributeId, "FontSize");
         public static readonly TextAttributeId FontWeight = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_FontWeightAttributeId, "FontWeight");

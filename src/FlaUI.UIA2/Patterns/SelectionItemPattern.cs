@@ -3,7 +3,7 @@ using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
-using FlaUI.UIA2.Tools;
+using FlaUI.UIA2.Converters;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Patterns
@@ -65,7 +65,7 @@ namespace FlaUI.UIA2.Patterns
             get
             {
                 var nativeElement = Get<UIA.AutomationElement>(SelectionItemPattern.SelectionContainerProperty);
-                return NativeValueConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeElement);
+                return ValueConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeElement);
             }
         }
     }

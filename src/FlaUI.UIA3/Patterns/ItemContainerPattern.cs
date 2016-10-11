@@ -4,7 +4,7 @@ using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.Tools;
-using FlaUI.UIA3.Tools;
+using FlaUI.UIA3.Converters;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
@@ -21,9 +21,9 @@ namespace FlaUI.UIA3.Patterns
         {
             var foundNativeElement = ComCallWrapper.Call(() =>
                 NativePattern.FindItemByProperty(
-                    startAfter == null ? null : NativeValueConverter.ToNative(startAfter),
-                    property == null ? 0 : property.Id, NativeValueConverter.ToNative(value)));
-            return NativeValueConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, foundNativeElement);
+                    startAfter == null ? null : ValueConverter.ToNative(startAfter),
+                    property == null ? 0 : property.Id, ValueConverter.ToNative(value)));
+            return ValueConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, foundNativeElement);
         }
     }
 }

@@ -3,23 +3,23 @@ using System.Linq;
 using FlaUI.Core.Conditions;
 using UIA = System.Windows.Automation;
 
-namespace FlaUI.UIA2.Tools
+namespace FlaUI.UIA2.Converters
 {
-    public static class NativeConditionConverter
+    public static class ConditionConverter
     {
         public static UIA.Condition ToNative(ConditionBase condition)
         {
-            var propCond = condition as PropertyCondition;
+            var propCond = condition as Core.Conditions.PropertyCondition;
             if (propCond != null)
             {
-                return new UIA.PropertyCondition(UIA.AutomationProperty.LookupById(propCond.Property.Id), NativeValueConverter.ToNative(propCond.Value), (UIA.PropertyConditionFlags)propCond.PropertyConditionFlags);
+                return new UIA.PropertyCondition(UIA.AutomationProperty.LookupById(propCond.Property.Id), ValueConverter.ToNative(propCond.Value), (UIA.PropertyConditionFlags)propCond.PropertyConditionFlags);
             }
             var boolCond = condition as BoolCondition;
             if (boolCond != null)
             {
                 return boolCond.BooleanValue ? UIA.Condition.TrueCondition : UIA.Condition.FalseCondition;
             }
-            var notCond = condition as NotCondition;
+            var notCond = condition as Core.Conditions.NotCondition;
             if (notCond != null)
             {
                 return new UIA.NotCondition(ToNative(notCond.Condition));
@@ -37,7 +37,7 @@ namespace FlaUI.UIA2.Tools
                     // Only one condition in the list, so just return that one
                     return ToNative(junctCond.Conditions[0]);
                 }
-                if (junctCond is AndCondition)
+                if (junctCond is Core.Conditions.AndCondition)
                 {
                     // Create the and condition
                     return new UIA.AndCondition(junctCond.Conditions.Select(ToNative).ToArray());

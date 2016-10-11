@@ -4,7 +4,7 @@ using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
-using FlaUI.UIA2.Tools;
+using FlaUI.UIA2.Converters;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Patterns
@@ -44,7 +44,7 @@ namespace FlaUI.UIA2.Patterns
             get
             {
                 var nativeElement = Get<UIA.AutomationElementCollection>(TablePattern.ColumnHeadersProperty);
-                return NativeValueConverter.NativeArrayToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeElement);
+                return ValueConverter.NativeArrayToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeElement);
             }
         }
 
@@ -53,7 +53,7 @@ namespace FlaUI.UIA2.Patterns
             get
             {
                 var nativeElement = Get<UIA.AutomationElementCollection>(TablePattern.RowHeadersProperty);
-                return NativeValueConverter.NativeArrayToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeElement);
+                return ValueConverter.NativeArrayToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeElement);
             }
         }
 
