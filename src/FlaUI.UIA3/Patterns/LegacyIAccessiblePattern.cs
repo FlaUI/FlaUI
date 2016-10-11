@@ -1,13 +1,16 @@
-﻿using FlaUI.Core;
+﻿using Accessibility;
+using FlaUI.Core;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Identifiers;
+using FlaUI.Core.Patterns;
+using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.Tools;
-using FlaUI.UIA3.Elements;
-using IAccessible = Accessibility.IAccessible;
+using FlaUI.UIA3.Tools;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class LegacyIAccessiblePattern : PatternBaseWithInformation<LegacyIAccessiblePatternInformation>
+    public class LegacyIAccessiblePattern : PatternBaseWithInformation<UIA.IUIAutomationLegacyIAccessiblePattern, LegacyIAccessiblePatternInformation>, ILegacyIAccessiblePattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_LegacyIAccessiblePatternId, "LegacyIAccessible");
         public static readonly PropertyId ChildIdProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleChildIdPropertyId, "ChildId");
@@ -21,14 +24,20 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId StateProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleStatePropertyId, "State");
         public static readonly PropertyId ValueProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleValuePropertyId, "Value");
 
-        internal LegacyIAccessiblePattern(Element automationElement, UIA.IUIAutomationLegacyIAccessiblePattern nativePattern)
-            : base(automationElement, nativePattern, (element, cached) => new LegacyIAccessiblePatternInformation(element, cached))
+        public LegacyIAccessiblePattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationLegacyIAccessiblePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
+            Properties = new LegacyIAccessiblePatternProperties();
         }
 
-        public new UIA.IUIAutomationLegacyIAccessiblePattern NativePattern
+        ILegacyIAccessiblePatternInformation IPatternWithInformation<ILegacyIAccessiblePatternInformation>.Cached => Cached;
+
+        ILegacyIAccessiblePatternInformation IPatternWithInformation<ILegacyIAccessiblePatternInformation>.Current => Current;
+
+        public ILegacyIAccessiblePatternProperties Properties { get; }
+
+        protected override LegacyIAccessiblePatternInformation CreateInformation(bool cached)
         {
-            get { return (UIA.IUIAutomationLegacyIAccessiblePattern)base.NativePattern; }
+            return new LegacyIAccessiblePatternInformation(BasicAutomationElement, cached);
         }
 
         public void DoDefaultAction()
@@ -53,61 +62,51 @@ namespace FlaUI.UIA3.Patterns
         }
     }
 
-    public class LegacyIAccessiblePatternInformation : InformationBase
+    public class LegacyIAccessiblePatternInformation : InformationBase, ILegacyIAccessiblePatternInformation
     {
-        public LegacyIAccessiblePatternInformation(Element automationElement, bool cached)
-            : base(automationElement, cached)
+        public LegacyIAccessiblePatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
         {
         }
 
-        public int ChildId
+        public int ChildId => Get<int>(LegacyIAccessiblePattern.ChildIdProperty);
+
+        public string DefaultAction => Get<string>(LegacyIAccessiblePattern.DefaultActionProperty);
+
+        public string Description => Get<string>(LegacyIAccessiblePattern.DescriptionProperty);
+
+        public string Help => Get<string>(LegacyIAccessiblePattern.HelpProperty);
+
+        public string KeyboardShortcut => Get<string>(LegacyIAccessiblePattern.KeyboardShortcutProperty);
+
+        public string Name => Get<string>(LegacyIAccessiblePattern.NameProperty);
+
+        public uint Role => Get<uint>(LegacyIAccessiblePattern.RoleProperty);
+
+        public AutomationElement[] Selection
         {
-            get { return Get<int>(LegacyIAccessiblePattern.ChildIdProperty); }
+            get
+            {
+                var nativeElement = Get<UIA.IUIAutomationElementArray>(LegacyIAccessiblePattern.SelectionProperty);
+                return NativeValueConverter.NativeArrayToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
+            }
         }
 
-        public string DefaultAction
-        {
-            get { return Get<string>(LegacyIAccessiblePattern.DefaultActionProperty); }
-        }
+        public uint State => Get<uint>(LegacyIAccessiblePattern.StateProperty);
 
-        public string Description
-        {
-            get { return Get<string>(LegacyIAccessiblePattern.DescriptionProperty); }
-        }
+        public string Value => Get<string>(LegacyIAccessiblePattern.ValueProperty);
+    }
 
-        public string Help
-        {
-            get { return Get<string>(LegacyIAccessiblePattern.HelpProperty); }
-        }
-
-        public string KeyboardShortcut
-        {
-            get { return Get<string>(LegacyIAccessiblePattern.KeyboardShortcutProperty); }
-        }
-
-        public string Name
-        {
-            get { return Get<string>(LegacyIAccessiblePattern.NameProperty); }
-        }
-
-        public uint Role
-        {
-            get { return Get<uint>(LegacyIAccessiblePattern.RoleProperty); }
-        }
-
-        public Element[] Selection
-        {
-            get { return NativeElementArrayToElements(LegacyIAccessiblePattern.SelectionProperty); }
-        }
-
-        public uint State
-        {
-            get { return Get<uint>(LegacyIAccessiblePattern.StateProperty); }
-        }
-
-        public string Value
-        {
-            get { return Get<string>(LegacyIAccessiblePattern.ValueProperty); }
-        }
+    public class LegacyIAccessiblePatternProperties : ILegacyIAccessiblePatternProperties
+    {
+        public PropertyId ChildIdProperty => LegacyIAccessiblePattern.ChildIdProperty;
+        public PropertyId DefaultActionProperty => LegacyIAccessiblePattern.DefaultActionProperty;
+        public PropertyId DescriptionProperty => LegacyIAccessiblePattern.DescriptionProperty;
+        public PropertyId HelpProperty => LegacyIAccessiblePattern.HelpProperty;
+        public PropertyId KeyboardShortcutProperty => LegacyIAccessiblePattern.KeyboardShortcutProperty;
+        public PropertyId NameProperty => LegacyIAccessiblePattern.NameProperty;
+        public PropertyId RoleProperty => LegacyIAccessiblePattern.RoleProperty;
+        public PropertyId SelectionProperty => LegacyIAccessiblePattern.SelectionProperty;
+        public PropertyId StateProperty => LegacyIAccessiblePattern.StateProperty;
+        public PropertyId ValueProperty => LegacyIAccessiblePattern.ValueProperty;
     }
 }

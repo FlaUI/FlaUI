@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Accessibility" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -71,6 +72,7 @@
     <Compile Include="Definitions\RowOrColumnMajor.cs" />
     <Compile Include="Definitions\ScrollAmount.cs" />
     <Compile Include="Definitions\StructureChangeType.cs" />
+    <Compile Include="Definitions\StyleType.cs" />
     <Compile Include="Definitions\SupportedTextSelection.cs" />
     <Compile Include="Definitions\SynchronizedInputType.cs" />
     <Compile Include="Definitions\TextPatternRangeEndpoint.cs" />
@@ -140,11 +142,14 @@
     <Compile Include="Overlay\OverlayRectangleWindow.cs" />
     <Compile Include="Patterns\IAnnotationPattern.cs" />
     <Compile Include="Patterns\IDockPattern.cs" />
+    <Compile Include="Patterns\IDragPattern.cs" />
+    <Compile Include="Patterns\IDropTargetPattern.cs" />
     <Compile Include="Patterns\IExpandCollapsePattern.cs" />
     <Compile Include="Patterns\IGridItemPattern.cs" />
     <Compile Include="Patterns\IGridPattern.cs" />
     <Compile Include="Patterns\IInvokePattern.cs" />
     <Compile Include="Patterns\IItemContainerPattern.cs" />
+    <Compile Include="Patterns\ILegacyIAccessiblePattern.cs" />
     <Compile Include="Patterns\IMultipleViewPattern.cs" />
     <Compile Include="Patterns\Infrastructure\IPattern.cs" />
     <Compile Include="Patterns\Infrastructure\IPatternInformation.cs" />
@@ -159,6 +164,7 @@
     <Compile Include="Patterns\ISelectionPattern.cs" />
     <Compile Include="Patterns\ISpreadsheetItemPattern.cs" />
     <Compile Include="Patterns\ISpreadsheetPattern.cs" />
+    <Compile Include="Patterns\IStylesPattern.cs" />
     <Compile Include="Patterns\ISynchronizedInputPattern.cs" />
     <Compile Include="Patterns\ITableItemPattern.cs" />
     <Compile Include="Patterns\ITablePattern.cs" />

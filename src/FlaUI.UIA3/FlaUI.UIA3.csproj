@@ -58,11 +58,14 @@
     <Compile Include="EventHandlers\UIA3StructureChangedEventHandlerBase.cs" />
     <Compile Include="Patterns\AnnotationPattern.cs" />
     <Compile Include="Patterns\DockPattern.cs" />
+    <Compile Include="Patterns\DragPattern.cs" />
+    <Compile Include="Patterns\DropTargetPattern.cs" />
     <Compile Include="Patterns\ExpandCollapsePattern.cs" />
     <Compile Include="Patterns\GridItemPattern.cs" />
     <Compile Include="Patterns\GridPattern.cs" />
     <Compile Include="Patterns\InvokePattern.cs" />
     <Compile Include="Patterns\ItemContainerPattern.cs" />
+    <Compile Include="Patterns\LegacyIAccessiblePattern.cs" />
     <Compile Include="Patterns\MultipleViewPattern.cs" />
     <Compile Include="Patterns\ObjectModelPattern.cs" />
     <Compile Include="Patterns\RangeValuePattern.cs" />
@@ -72,6 +75,7 @@
     <Compile Include="Patterns\SelectionPattern.cs" />
     <Compile Include="Patterns\SpreadsheetItemPattern.cs" />
     <Compile Include="Patterns\SpreadsheetPattern.cs" />
+    <Compile Include="Patterns\StylesPattern.cs" />
     <Compile Include="Patterns\SynchronizedInputPattern.cs" />
     <Compile Include="Patterns\TableItemPattern.cs" />
     <Compile Include="Patterns\TablePattern.cs" />
@@ -83,7 +87,6 @@
     <Compile Include="Patterns\WindowPattern.cs" />
     <Compile Include="Tools\NativeConditionConverter.cs" />
     <Compile Include="UIA3Automation.cs" />
-    <Compile Include="Definitions\StyleType.cs" />
     <Compile Include="Definitions\TextAttributes.cs" />
     <Compile Include="Patterns\ValuePattern.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -26,6 +26,16 @@ namespace FlaUI.UIA2
             return nativePattern == null ? null : new DockPattern(BasicAutomationElement, nativePattern);
         }
 
+        public IDragPattern GetDragPattern()
+        {
+            throw new NotSupportedByUIA2Exception();
+        }
+
+        public IDropTargetPattern GetDropTargetPattern()
+        {
+            throw new NotSupportedByUIA2Exception();
+        }
+
         public IExpandCollapsePattern GetExpandCollapsePattern()
         {
             var nativePattern = GetNativePatternAs<UIA.ExpandCollapsePattern>(UIA.ExpandCollapsePattern.Pattern);
@@ -54,6 +64,11 @@ namespace FlaUI.UIA2
         {
             var nativePattern = GetNativePatternAs<UIA.ItemContainerPattern>(UIA.ItemContainerPattern.Pattern);
             return nativePattern == null ? null : new ItemContainerPattern(BasicAutomationElement, nativePattern);
+        }
+
+        public ILegacyIAccessiblePattern GetLegacyIAccessiblePattern()
+        {
+            throw new NotSupportedByUIA2Exception();
         }
 
         public IMultipleViewPattern GetMultipleViewPattern()
@@ -103,6 +118,11 @@ namespace FlaUI.UIA2
         }
 
         public ISpreadsheetPattern GetSpreadsheetPattern()
+        {
+            throw new NotSupportedByUIA2Exception();
+        }
+
+        public IStylesPattern GetStylesPattern()
         {
             throw new NotSupportedByUIA2Exception();
         }

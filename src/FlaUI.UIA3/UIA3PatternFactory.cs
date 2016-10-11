@@ -27,17 +27,17 @@ namespace FlaUI.UIA3
             return nativePattern == null ? null : new DockPattern(BasicAutomationElement, nativePattern);
         }
 
-        //public DragPattern GetDragPattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationDragPattern>(DragPattern.Pattern);
-        //    return nativePattern == null ? null : new DragPattern(BasicAutomationElement, nativePattern);
-        //}
+        public IDragPattern GetDragPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationDragPattern>(DragPattern.Pattern);
+            return nativePattern == null ? null : new DragPattern(BasicAutomationElement, nativePattern);
+        }
 
-        //public DropTargetPattern GetDropTargetPattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationDropTargetPattern>(DropTargetPattern.Pattern);
-        //    return nativePattern == null ? null : new DropTargetPattern(BasicAutomationElement, nativePattern);
-        //}
+        public IDropTargetPattern GetDropTargetPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationDropTargetPattern>(DropTargetPattern.Pattern);
+            return nativePattern == null ? null : new DropTargetPattern(BasicAutomationElement, nativePattern);
+        }
 
         public IExpandCollapsePattern GetExpandCollapsePattern()
         {
@@ -69,11 +69,11 @@ namespace FlaUI.UIA3
             return nativePattern == null ? null : new ItemContainerPattern(BasicAutomationElement, nativePattern);
         }
 
-        //public LegacyIAccessiblePattern GetLegacyIAccessiblePattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationLegacyIAccessiblePattern>(LegacyIAccessiblePattern.Pattern);
-        //    return nativePattern == null ? null : new LegacyIAccessiblePattern(BasicAutomationElement, nativePattern);
-        //}
+        public ILegacyIAccessiblePattern GetLegacyIAccessiblePattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationLegacyIAccessiblePattern>(LegacyIAccessiblePattern.Pattern);
+            return nativePattern == null ? null : new LegacyIAccessiblePattern(BasicAutomationElement, nativePattern);
+        }
 
         public IMultipleViewPattern GetMultipleViewPattern()
         {
@@ -129,11 +129,11 @@ namespace FlaUI.UIA3
             return nativePattern == null ? null : new SpreadsheetPattern(BasicAutomationElement, nativePattern);
         }
 
-        //public StylesPattern GetStylesPattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationStylesPattern>(StylesPattern.Pattern);
-        //    return nativePattern == null ? null : new StylesPattern(BasicAutomationElement, nativePattern);
-        //}
+        public IStylesPattern GetStylesPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationStylesPattern>(StylesPattern.Pattern);
+            return nativePattern == null ? null : new StylesPattern(BasicAutomationElement, nativePattern);
+        }
 
         public ISynchronizedInputPattern GetSynchronizedInputPattern()
         {

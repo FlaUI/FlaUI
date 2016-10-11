@@ -1,11 +1,14 @@
 ﻿using FlaUI.Core;
-using FlaUI.UIA3.Elements;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Identifiers;
+using FlaUI.Core.Patterns;
+using FlaUI.Core.Patterns.Infrastructure;
+using FlaUI.UIA3.Tools;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class DragPattern : PatternBaseWithInformation<DragPatternInformation>
+    public class DragPattern : PatternBaseWithInformation<UIA.IUIAutomationDragPattern, DragPatternInformation>, IDragPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_DragPatternId, "Drag");
         public static readonly PropertyId DropEffectProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_DragDropEffectPropertyId, "DropEffect");
@@ -16,42 +19,59 @@ namespace FlaUI.UIA3.Patterns
         public static readonly EventId DragCompleteEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_Drag_DragCompleteEventId, "DragComplete");
         public static readonly EventId DragStartEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_Drag_DragStartEventId, "DragStart");
 
-        internal DragPattern(Element automationElement, UIA.IUIAutomationDragPattern nativePattern)
-            : base(automationElement, nativePattern, (element, cached) => new DragPatternInformation(element, cached))
+        public DragPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationDragPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
+            Properties = new DragPatternProperties();
+            Events = new DragPatternEvents();
         }
 
-        public new UIA.IUIAutomationDragPattern NativePattern
+        IDragPatternInformation IPatternWithInformation<IDragPatternInformation>.Cached => Cached;
+
+        IDragPatternInformation IPatternWithInformation<IDragPatternInformation>.Current => Current;
+
+        public IDragPatternProperties Properties { get; }
+        public IDragPatternEvents Events { get; }
+
+        protected override DragPatternInformation CreateInformation(bool cached)
         {
-            get { return (UIA.IUIAutomationDragPattern)base.NativePattern; }
+            return new DragPatternInformation(BasicAutomationElement, cached);
         }
     }
 
-    public class DragPatternInformation : InformationBase
+    public class DragPatternInformation : InformationBase, IDragPatternInformation
     {
-        public DragPatternInformation(Element automationElement, bool cached)
-            : base(automationElement, cached)
+        public DragPatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
         {
         }
 
-        public string DropEffect
-        {
-            get { return Get<string>(DragPattern.DropEffectProperty); }
-        }
+        public string DropEffect => Get<string>(DragPattern.DropEffectProperty);
 
-        public string[] DropEffects
-        {
-            get { return Get<string[]>(DragPattern.DropEffectsProperty); }
-        }
+        public string[] DropEffects => Get<string[]>(DragPattern.DropEffectsProperty);
 
-        public bool IsGrabbed
-        {
-            get { return Get<bool>(DragPattern.IsGrabbedProperty); }
-        }
+        public bool IsGrabbed => Get<bool>(DragPattern.IsGrabbedProperty);
 
-        public Element[] GrabbedItems
+        public AutomationElement[] GrabbedItems
         {
-            get { return NativeElementArrayToElements(DragPattern.GrabbedItemsProperty); }
+            get
+            {
+                var nativeElement = Get<UIA.IUIAutomationElementArray>(DragPattern.GrabbedItemsProperty);
+                return NativeValueConverter.NativeArrayToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
+            }
         }
+    }
+
+    public class DragPatternProperties : IDragPatternProperties
+    {
+        public PropertyId DropEffectProperty => DragPattern.DropEffectProperty;
+        public PropertyId DropEffectsProperty => DragPattern.DropEffectsProperty;
+        public PropertyId IsGrabbedProperty => DragPattern.IsGrabbedProperty;
+        public PropertyId GrabbedItemsProperty => DragPattern.GrabbedItemsProperty;
+    }
+
+    public class DragPatternEvents : IDragPatternEvents
+    {
+        public EventId DragCancelEvent => DragPattern.DragCancelEvent;
+        public EventId DragCompleteEvent => DragPattern.DragCompleteEvent;
+        public EventId DragStartEvent => DragPattern.DragStartEvent;
     }
 }

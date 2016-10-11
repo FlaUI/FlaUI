@@ -8,9 +8,9 @@ namespace FlaUI.Core
 
         IDockPattern GetDockPattern();
 
-        //IDragPattern GetDragPattern();
+        IDragPattern GetDragPattern();
 
-        //IDropTargetPattern GetDropTargetPattern();
+        IDropTargetPattern GetDropTargetPattern();
 
         IExpandCollapsePattern GetExpandCollapsePattern();
 
@@ -22,7 +22,7 @@ namespace FlaUI.Core
 
         IItemContainerPattern GetItemContainerPattern();
 
-        //ILegacyIAccessiblePattern GetLegacyIAccessiblePattern();
+        ILegacyIAccessiblePattern GetLegacyIAccessiblePattern();
 
         IMultipleViewPattern GetMultipleViewPattern();
 
@@ -42,7 +42,7 @@ namespace FlaUI.Core
 
         ISpreadsheetPattern GetSpreadsheetPattern();
 
-        //IStylesPattern GetStylesPattern();
+        IStylesPattern GetStylesPattern();
 
         ISynchronizedInputPattern GetSynchronizedInputPattern();
 
