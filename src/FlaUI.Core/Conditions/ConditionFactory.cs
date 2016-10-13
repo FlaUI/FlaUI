@@ -44,6 +44,16 @@ namespace FlaUI.Core.Conditions
             return new PropertyCondition(_propertyLibrary.Generic.ProcessIdProperty, processId);
         }
 
+        public PropertyCondition ByLocalizedControlType(string localizedControlType)
+        {
+           return new PropertyCondition(_propertyLibrary.Generic.LocalizedControlTypeProperty, localizedControlType);
+        }
+
+        public PropertyCondition ByHelpTextProperty(string helpText)
+        {
+           return new PropertyCondition(_propertyLibrary.Generic.HelpTextProperty, helpText);  
+        }
+
         /// <summary>
         /// Searches for a Menu/MenuBar
         /// </summary>
