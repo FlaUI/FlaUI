@@ -20,6 +20,11 @@ namespace FlaUI.Core.AutomationElements
             _expandCollapseAutomationElement = new ExpandCollapseAutomationElement(basicAutomationElement);
         }
 
+        /// <summary>
+        /// Flag to indicate, if the containing menu is a Win32 context menu because that one needs special handling
+        /// </summary>
+        internal bool IsWin32ContextMenu { get; set; }
+
         public string Text => Current.Name;
 
         public MenuItem[] SubMenuItems
@@ -27,7 +32,7 @@ namespace FlaUI.Core.AutomationElements
             get
             {
                 // Special handling for Win32 context menus
-                if (FrameworkType == FrameworkType.Win32 || FrameworkType == FrameworkType.None)
+                if (IsWin32ContextMenu)
                 {
                     // Click the item to load the child items
                     Click(false);

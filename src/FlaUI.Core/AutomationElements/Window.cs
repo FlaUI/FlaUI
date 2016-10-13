@@ -50,8 +50,9 @@ namespace FlaUI.Core.AutomationElements
                     // The main menu is directly under the desktop with the name "Context" or in a few cases "System"
                     var desktop = BasicAutomationElement.Automation.GetDesktop();
                     var nameCondition = ConditionFactory.ByName("Context").Or(ConditionFactory.ByName("System"));
-                    var ctxMenu = desktop.FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Menu).And(nameCondition));
-                    return ctxMenu.AsMenu();
+                    var ctxMenu = desktop.FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Menu).And(nameCondition)).AsMenu();
+                    ctxMenu.IsWin32ContextMenu = true;
+                    return ctxMenu;
                 }
                 return null;
             }
