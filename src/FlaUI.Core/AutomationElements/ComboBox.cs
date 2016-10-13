@@ -1,4 +1,6 @@
-﻿using FlaUI.Core.AutomationElements.Infrastructure;
+﻿using System;
+using FlaUI.Core.AutomationElements.Infrastructure;
+using FlaUI.Core.Definitions;
 
 namespace FlaUI.Core.AutomationElements
 {
@@ -9,5 +11,24 @@ namespace FlaUI.Core.AutomationElements
         }
 
         public AutomationElement EditAutomationElement { get; set; }
+
+        public string EditableText
+        {
+            get { return EditableItem.Text; }
+            set { EditableItem.Text = value; }
+        }
+
+        protected TextBox EditableItem
+        {
+            get
+            {
+                var edit = FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Edit)).AsTextBox();
+                if (edit != null)
+                {
+                    return edit;
+                }
+                throw new Exception("ComboBox is not editable.");
+            }
+        }
     }
 }

@@ -26,6 +26,7 @@ namespace FlaUI.Core.AutomationElements
                 {
                     return valuePattern.Current.Value;
                 }
+                // TODO: Activate this when the text pattern is implemented
                 //var textPattern = PatternFactory.GetTextPattern();
                 //if (textPattern != null)
                 //{

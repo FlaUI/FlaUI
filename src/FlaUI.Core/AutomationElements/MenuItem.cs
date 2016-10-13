@@ -41,6 +41,7 @@ namespace FlaUI.Core.AutomationElements
                     var appWindow = BasicAutomationElement.Automation.GetDesktop().FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Window).And(ConditionFactory.ByProcessId(Current.ProcessId)));
                     // Then search the menu below the window
                     var menu = appWindow.FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Menu).And(ConditionFactory.ByName(Text))).AsMenu();
+                    menu.IsWin32ContextMenu = true;
                     // Now return the menu items
                     return menu.MenuItems;
                 }

@@ -20,6 +20,15 @@
             return new CheckBox(automationElement.BasicAutomationElement);
         }
 
+        public static ComboBox AsComboBox(this AutomationElement automationElement)
+        {
+            if (automationElement == null)
+            {
+                return null;
+            }
+            return new ComboBox(automationElement.BasicAutomationElement);
+        }
+
         public static Label AsLabel(this AutomationElement automationElement)
         {
             if (automationElement == null)
