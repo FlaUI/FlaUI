@@ -6,6 +6,7 @@ using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Identifiers;
+using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
 using FlaUI.Core.WindowsAPI;
 using GdiColor = System.Drawing.Color;
@@ -45,6 +46,21 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// Basic information about this element (realtime)
         /// </summary>
         public IAutomationElementInformation Current { get; }
+
+        public void Click(bool moveMouse = true)
+        {
+            var clickablePoint = GetClickablePoint();
+            if (moveMouse)
+            {
+                Mouse.Instance.MoveTo(clickablePoint);
+            }
+            else
+            {
+                Mouse.Instance.Position = clickablePoint;
+            }
+            Mouse.Instance.Click(MouseButton.Left);
+            Helpers.WaitUntilInputIsProcessed();
+        }
 
         /// <summary>
         /// Sets the focus to this element

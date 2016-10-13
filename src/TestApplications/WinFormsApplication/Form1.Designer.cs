@@ -28,16 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Lvl2 a");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Lvl3 a");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Lvl2 b", new System.Windows.Forms.TreeNode[] {
-            treeNode2});
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Lvl2 c");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Lvl1 a", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode3,
-            treeNode4});
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Lvl1 b");
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Lvl2 a");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Lvl3 a");
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Lvl2 b", new System.Windows.Forms.TreeNode[] {
+            treeNode14});
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Lvl2 c");
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Lvl1 a", new System.Windows.Forms.TreeNode[] {
+            treeNode13,
+            treeNode15,
+            treeNode16});
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Lvl1 b");
             this.label1 = new System.Windows.Forms.Label();
             this.EditableCombo = new System.Windows.Forms.ComboBox();
             this.SimpleCheckBox = new System.Windows.Forms.CheckBox();
@@ -60,11 +61,17 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.button1 = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.context1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.context2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.innerContextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Slider)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -222,6 +229,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.TextBox);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.Slider);
@@ -262,21 +270,21 @@
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Location = new System.Drawing.Point(3, 3);
             this.treeView1.Name = "treeView1";
-            treeNode1.Name = "Lvl2 a";
-            treeNode1.Text = "Lvl2 a";
-            treeNode2.Name = "Lvl3 a";
-            treeNode2.Text = "Lvl3 a";
-            treeNode3.Name = "Lvl2 b";
-            treeNode3.Text = "Lvl2 b";
-            treeNode4.Name = "Lvl2 c";
-            treeNode4.Text = "Lvl2 c";
-            treeNode5.Name = "Lvl1 a";
-            treeNode5.Text = "Lvl1 a";
-            treeNode6.Name = "Lvl1 b";
-            treeNode6.Text = "Lvl1 b";
+            treeNode13.Name = "Lvl2 a";
+            treeNode13.Text = "Lvl2 a";
+            treeNode14.Name = "Lvl3 a";
+            treeNode14.Text = "Lvl3 a";
+            treeNode15.Name = "Lvl2 b";
+            treeNode15.Text = "Lvl2 b";
+            treeNode16.Name = "Lvl2 c";
+            treeNode16.Text = "Lvl2 c";
+            treeNode17.Name = "Lvl1 a";
+            treeNode17.Text = "Lvl1 a";
+            treeNode18.Name = "Lvl1 b";
+            treeNode18.Text = "Lvl1 b";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6});
+            treeNode17,
+            treeNode18});
             this.treeView1.Size = new System.Drawing.Size(477, 241);
             this.treeView1.TabIndex = 0;
             // 
@@ -287,6 +295,44 @@
             this.statusStrip1.Size = new System.Drawing.Size(491, 22);
             this.statusStrip1.TabIndex = 18;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // button1
+            // 
+            this.button1.ContextMenuStrip = this.contextMenuStrip1;
+            this.button1.Location = new System.Drawing.Point(10, 193);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(90, 23);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "ContextMenu";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.context1ToolStripMenuItem,
+            this.context2ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 48);
+            // 
+            // context1ToolStripMenuItem
+            // 
+            this.context1ToolStripMenuItem.Name = "context1ToolStripMenuItem";
+            this.context1ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.context1ToolStripMenuItem.Text = "Context 1";
+            // 
+            // context2ToolStripMenuItem
+            // 
+            this.context2ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.innerContextToolStripMenuItem});
+            this.context2ToolStripMenuItem.Name = "context2ToolStripMenuItem";
+            this.context2ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.context2ToolStripMenuItem.Text = "Context 2";
+            // 
+            // innerContextToolStripMenuItem
+            // 
+            this.innerContextToolStripMenuItem.Name = "innerContextToolStripMenuItem";
+            this.innerContextToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.innerContextToolStripMenuItem.Text = "Inner Context";
             // 
             // Form1
             // 
@@ -306,6 +352,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -335,6 +382,11 @@
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.TextBox TextBox;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem context1ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem context2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem innerContextToolStripMenuItem;
     }
 }
 

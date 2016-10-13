@@ -39,6 +39,11 @@ namespace FlaUI.Core.Conditions
             return ByName(text);
         }
 
+        public PropertyCondition ByProcessId(int processId)
+        {
+            return new PropertyCondition(_propertyLibrary.Generic.ProcessIdProperty, processId);
+        }
+
         /// <summary>
         /// Searches for a Menu/MenuBar
         /// </summary>

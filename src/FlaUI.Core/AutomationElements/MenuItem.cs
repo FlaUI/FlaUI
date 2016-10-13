@@ -20,11 +20,26 @@ namespace FlaUI.Core.AutomationElements
             _expandCollapseAutomationElement = new ExpandCollapseAutomationElement(basicAutomationElement);
         }
 
+        public string Text => Current.Name;
+
         public MenuItem[] SubMenuItems
         {
             get
             {
-                // WinForms does not have the expand pattern but all children are already there to fetch so we can just continue
+                // Special handling for Win32 context menus
+                if (FrameworkType == FrameworkType.Win32 || FrameworkType == FrameworkType.None)
+                {
+                    // Click the item to load the child items
+                    Click(false);
+                    // In Win32, the nested menu items are below a menu control which is below the application window
+                    // So search the app window first
+                    var appWindow = BasicAutomationElement.Automation.GetDesktop().FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Window).And(ConditionFactory.ByProcessId(Current.ProcessId)));
+                    // Then search the menu below the window
+                    var menu = appWindow.FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Menu).And(ConditionFactory.ByName(Text))).AsMenu();
+                    // Now return the menu items
+                    return menu.MenuItems;
+                }
+                // WinForms does not have the expand pattern but all children are already visible so it works as well
                 if (_expandCollapseAutomationElement.ExpandCollapsePattern != null)
                 {
                     ExpandCollapseState state;

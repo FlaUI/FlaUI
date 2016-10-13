@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="FlaUI WPF Test App" Height="244" Width="384">
+        Title="FlaUI WPF Test App" Height="280" Width="400">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
@@ -37,6 +37,16 @@
                     <RadioButton AutomationProperties.AutomationId="RadioButton2" Content="RadioButton2" />
                     <ProgressBar Value="50" AutomationProperties.AutomationId="ProgressBar" />
                     <Slider AutomationProperties.AutomationId="Slider" LargeChange="4" SmallChange="1" Minimum="0" Maximum="10" Value="5" Width="150"/>
+                    <Button AutomationProperties.AutomationId="ContextMenu" Content="ContextMenu">
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Context 1"></MenuItem>
+                                <MenuItem Header="Context 2">
+                                    <MenuItem Header="Inner Context"></MenuItem>
+                                </MenuItem>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+</Button>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Complex Controls">

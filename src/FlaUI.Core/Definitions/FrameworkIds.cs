@@ -8,6 +8,10 @@
 
         public static FrameworkType ConvertToFrameworkType(string frameworkId)
         {
+            if (frameworkId == "")
+            {
+                return FrameworkType.None;
+            }
             if (frameworkId == Wpf)
             {
                 return FrameworkType.Wpf;

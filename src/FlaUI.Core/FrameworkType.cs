@@ -2,6 +2,7 @@
 {
     public enum FrameworkType
     {
+        None,
         Unknown,
         Wpf,
         WinForms,
