@@ -16,4 +16,18 @@ namespace FlaUI.Core.Conditions
             return String.Format("BOOL: {0}", BooleanValue);
         }
     }
+
+    public class TrueCondition : BoolCondition
+    {
+        public TrueCondition() : base(true)
+        {
+        }
+    }
+
+    public class FalseCondition : BoolCondition
+    {
+        public FalseCondition() : base(false)
+        {
+        }
+    }
 }
