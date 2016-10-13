@@ -51,5 +51,10 @@ namespace FlaUI.Core.Conditions
         {
             return new OrCondition(ByControlType(ControlType.Menu), ByControlType(ControlType.MenuBar));
         }
+
+        public OrCondition ListView()
+        {
+            return new OrCondition(ByControlType(ControlType.DataGrid), ByControlType(ControlType.List));
+        }
     }
 }

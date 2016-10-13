@@ -38,6 +38,15 @@
             return new Label(automationElement.BasicAutomationElement);
         }
 
+        public static ListView AsListView(this AutomationElement automationElement)
+        {
+            if (automationElement == null)
+            {
+                return null;
+            }
+            return new ListView(automationElement.BasicAutomationElement);
+        }
+
         public static Menu AsMenu(this AutomationElement automationElement)
         {
             if (automationElement == null)

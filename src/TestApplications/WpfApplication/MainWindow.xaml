@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApplication"
         mc:Ignorable="d"
-        Title="FlaUI WPF Test App" Height="280" Width="400">
+        Title="FlaUI WPF Test App" Height="350" Width="600">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
@@ -46,21 +47,45 @@
                                 </MenuItem>
                             </ContextMenu>
                         </Button.ContextMenu>
-</Button>
+                    </Button>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Complex Controls">
-                <TreeView AutomationProperties.AutomationId="treeView1">
-                    <TreeViewItem Header="Lvl1 a">
-                        <TreeViewItem Header="Lvl2 a" />
-                        <TreeViewItem Header="Lvl2 b">
-                            <TreeViewItem Header="Lvl3 a" />
-                        </TreeViewItem>
-                        <TreeViewItem Header="Lvl2 b" />
-                    </TreeViewItem>
-                    <TreeViewItem Header="Lvl1 b" />
-                </TreeView>
+                <StackPanel>
+                    <GroupBox Header="Tree">
+                        <TreeView AutomationProperties.AutomationId="treeView1">
+                            <TreeViewItem Header="Lvl1 a">
+                                <TreeViewItem Header="Lvl2 a" />
+                                <TreeViewItem Header="Lvl2 b">
+                                    <TreeViewItem Header="Lvl3 a" />
+                                </TreeViewItem>
+                                <TreeViewItem Header="Lvl2 b" />
+                            </TreeViewItem>
+                            <TreeViewItem Header="Lvl1 b" />
+                        </TreeView>
+                    </GroupBox>
+                    <GroupBox Header="ListView">
+                        <ListView AutomationProperties.AutomationId="listView1">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Key" DisplayMemberBinding="{Binding Key}" />
+                                    <GridViewColumn Header="Value" DisplayMemberBinding="{Binding Value}" />
+                                </GridView>
+                            </ListView.View>
+                            <ListViewItem>
+                                <local:ListViewItem Key="1" Value="10" />
+                            </ListViewItem>
+                            <ListViewItem>
+                                <local:ListViewItem Key="2" Value="20" />
+                            </ListViewItem>
+                            <ListViewItem>
+                                <local:ListViewItem Key="3" Value="30" />
+                            </ListViewItem>
+                        </ListView>
+                    </GroupBox>
+                </StackPanel>
             </TabItem>
         </TabControl>
     </DockPanel>
 </Window>
+

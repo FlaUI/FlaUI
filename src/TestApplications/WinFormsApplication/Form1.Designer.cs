@@ -29,16 +29,26 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Lvl2 a");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Lvl3 a");
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Lvl2 b", new System.Windows.Forms.TreeNode[] {
-            treeNode14});
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Lvl2 c");
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Lvl1 a", new System.Windows.Forms.TreeNode[] {
-            treeNode13,
-            treeNode15,
-            treeNode16});
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Lvl1 b");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Lvl2 a");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Lvl3 a");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Lvl2 b", new System.Windows.Forms.TreeNode[] {
+            treeNode2});
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Lvl2 c");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Lvl1 a", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode3,
+            treeNode4});
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Lvl1 b");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            "1",
+            "10",
+            "10"}, -1);
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            "2",
+            "20"}, -1);
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+            "3",
+            "30"}, -1);
             this.label1 = new System.Windows.Forms.Label();
             this.EditableCombo = new System.Windows.Forms.ComboBox();
             this.SimpleCheckBox = new System.Windows.Forms.CheckBox();
@@ -57,21 +67,28 @@
             this.Slider = new System.Windows.Forms.TrackBar();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.TextBox = new System.Windows.Forms.TextBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.button1 = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.context1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.context2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.innerContextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TextBox = new System.Windows.Forms.TextBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Slider)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -247,55 +264,6 @@
             this.tabPage1.Text = "Simple Controls";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // TextBox
-            // 
-            this.TextBox.Location = new System.Drawing.Point(232, 9);
-            this.TextBox.Name = "TextBox";
-            this.TextBox.Size = new System.Drawing.Size(100, 20);
-            this.TextBox.TabIndex = 17;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.treeView1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(483, 247);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Complex Controls";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // treeView1
-            // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.Location = new System.Drawing.Point(3, 3);
-            this.treeView1.Name = "treeView1";
-            treeNode13.Name = "Lvl2 a";
-            treeNode13.Text = "Lvl2 a";
-            treeNode14.Name = "Lvl3 a";
-            treeNode14.Text = "Lvl3 a";
-            treeNode15.Name = "Lvl2 b";
-            treeNode15.Text = "Lvl2 b";
-            treeNode16.Name = "Lvl2 c";
-            treeNode16.Text = "Lvl2 c";
-            treeNode17.Name = "Lvl1 a";
-            treeNode17.Text = "Lvl1 a";
-            treeNode18.Name = "Lvl1 b";
-            treeNode18.Text = "Lvl1 b";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode17,
-            treeNode18});
-            this.treeView1.Size = new System.Drawing.Size(477, 241);
-            this.treeView1.TabIndex = 0;
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 297);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(491, 22);
-            this.statusStrip1.TabIndex = 18;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
             // button1
             // 
             this.button1.ContextMenuStrip = this.contextMenuStrip1;
@@ -317,7 +285,7 @@
             // context1ToolStripMenuItem
             // 
             this.context1ToolStripMenuItem.Name = "context1ToolStripMenuItem";
-            this.context1ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.context1ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.context1ToolStripMenuItem.Text = "Context 1";
             // 
             // context2ToolStripMenuItem
@@ -331,8 +299,107 @@
             // innerContextToolStripMenuItem
             // 
             this.innerContextToolStripMenuItem.Name = "innerContextToolStripMenuItem";
-            this.innerContextToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.innerContextToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.innerContextToolStripMenuItem.Text = "Inner Context";
+            // 
+            // TextBox
+            // 
+            this.TextBox.Location = new System.Drawing.Point(232, 9);
+            this.TextBox.Name = "TextBox";
+            this.TextBox.Size = new System.Drawing.Size(100, 20);
+            this.TextBox.TabIndex = 17;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.groupBox2);
+            this.tabPage2.Controls.Add(this.groupBox1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(483, 247);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Complex Controls";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // treeView1
+            // 
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView1.Location = new System.Drawing.Point(3, 16);
+            this.treeView1.Name = "treeView1";
+            treeNode1.Name = "Lvl2 a";
+            treeNode1.Text = "Lvl2 a";
+            treeNode2.Name = "Lvl3 a";
+            treeNode2.Text = "Lvl3 a";
+            treeNode3.Name = "Lvl2 b";
+            treeNode3.Text = "Lvl2 b";
+            treeNode4.Name = "Lvl2 c";
+            treeNode4.Text = "Lvl2 c";
+            treeNode5.Name = "Lvl1 a";
+            treeNode5.Text = "Lvl1 a";
+            treeNode6.Name = "Lvl1 b";
+            treeNode6.Text = "Lvl1 b";
+            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode5,
+            treeNode6});
+            this.treeView1.Size = new System.Drawing.Size(461, 57);
+            this.treeView1.TabIndex = 0;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Location = new System.Drawing.Point(0, 297);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(491, 22);
+            this.statusStrip1.TabIndex = 18;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.treeView1);
+            this.groupBox1.Location = new System.Drawing.Point(8, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(467, 76);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Tree";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.listView1);
+            this.groupBox2.Location = new System.Drawing.Point(8, 88);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(467, 100);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "ListView";
+            // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1,
+            listViewItem2,
+            listViewItem3});
+            this.listView1.Location = new System.Drawing.Point(3, 16);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(461, 81);
+            this.listView1.TabIndex = 0;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Key";
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Value";
             // 
             // Form1
             // 
@@ -351,8 +418,10 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -387,6 +456,11 @@
         private System.Windows.Forms.ToolStripMenuItem context1ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem context2ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem innerContextToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }
 
