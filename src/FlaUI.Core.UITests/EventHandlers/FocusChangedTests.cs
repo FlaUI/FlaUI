@@ -3,6 +3,7 @@ using System.Threading;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
+using FlaUI.Core.Tools;
 using FlaUI.Core.WindowsAPI;
 using FlaUI.UIA3;
 using NUnit.Framework;
@@ -22,10 +23,10 @@ namespace FlaUI.Core.UITests.EventHandlers
                 var mainWindow = app.GetMainWindow(automation);
                 var x = automation.RegisterFocusChangedEvent(element => { focusChangedElements.Add(element.ToString()); });
                 Thread.Sleep(100);
-                var button1 = mainWindow.FindFirst(TreeScope.Descendants, automation.ConditionFactory.ByControlType(ControlType.Button).And(automation.ConditionFactory.ByText("Resize")));
+                var button1 = mainWindow.FindFirst(TreeScope.Descendants, automation.ConditionFactory.ByControlType(ControlType.Button).And(automation.ConditionFactory.ByText(GetResizeText())));
                 button1.AsButton().Invoke();
                 Thread.Sleep(100);
-                var radio2 = mainWindow.FindFirst(TreeScope.Descendants, automation.ConditionFactory.ByControlType(ControlType.RadioButton).And(automation.ConditionFactory.ByText("Pixels")));
+                var radio2 = mainWindow.FindFirst(TreeScope.Descendants, automation.ConditionFactory.ByControlType(ControlType.RadioButton).And(automation.ConditionFactory.ByText(GetPixelsText())));
                 Mouse.Instance.Click(MouseButton.Left, radio2.GetClickablePoint());
                 Thread.Sleep(100);
                 Keyboard.Instance.PressVirtualKeyCode(VirtualKeyShort.ESCAPE);
@@ -35,6 +36,28 @@ namespace FlaUI.Core.UITests.EventHandlers
             }
             app.Dispose();
             Assert.That(focusChangedElements.Count, Is.GreaterThan(0));
+        }
+
+        private string GetResizeText()
+        {
+            switch (SystemLanguageRetreiver.GetCurrentOsCulture().TwoLetterISOLanguageName)
+            {
+                case "de":
+                    return "Größe ändern";
+                default:
+                    return "Resize";
+            }
+        }
+
+        private string GetPixelsText()
+        {
+            switch (SystemLanguageRetreiver.GetCurrentOsCulture().TwoLetterISOLanguageName)
+            {
+                case "de":
+                    return "Pixel";
+                default:
+                    return "Pixels";
+            }
         }
     }
 }

@@ -184,6 +184,7 @@
     <Compile Include="Tools\ComCallWrapper.cs" />
     <Compile Include="Tools\ExtensionMethods.cs" />
     <Compile Include="Tools\Retry.cs" />
+    <Compile Include="Tools\SystemLanguageRetreiver.cs" />
     <Compile Include="Tools\SystemProductNameFetcher.cs" />
     <Compile Include="Tools\WindowsStoreAppLauncher.cs" />
     <Compile Include="WindowsAPI\Constants.cs" />
