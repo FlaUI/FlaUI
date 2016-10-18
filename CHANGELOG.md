@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.4 (2016-10-18)
+
+### Enhancements
+  * Added some convenience methods for searching
+
+### Bug fixes
+  * Tests now run on German Windows
+  * ControlType is now properly reported for UIA2
+  * DoubleClick now does a real double click
+
 ## 0.3.3 (2016-10-14)
 
 ### Enhancements
