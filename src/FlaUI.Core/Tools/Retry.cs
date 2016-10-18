@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 
 namespace FlaUI.Core.Tools
@@ -31,6 +32,7 @@ namespace FlaUI.Core.Tools
             TimeSpan? retryInterval = null)
         {
             var startTime = DateTime.Now;
+
             while (DateTime.Now.Subtract(startTime).TotalMilliseconds < retryFor.TotalMilliseconds)
             {
                 T element;
@@ -44,12 +46,14 @@ namespace FlaUI.Core.Tools
                     continue;
                 }
 
-                if (!shouldRetry(element))
-                {
-                    return element;
-                }
+               if (shouldRetry(element))
+               {
+                  Thread.Sleep(retryInterval ?? DefaultRetryInterval);
+                  continue;
+               }
+                
+                return element;
             }
-
             return func();
         }
     }
