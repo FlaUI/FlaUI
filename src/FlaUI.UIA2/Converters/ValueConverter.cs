@@ -91,7 +91,7 @@ namespace FlaUI.UIA2.Converters
 
         public static object ToControlType(object controlType)
         {
-            UIA.ControlType uia2ControlType = (UIA.ControlType)controlType;
+            var uia2ControlType = (UIA.ControlType)controlType;
 
             if (uia2ControlType == UIA.ControlType.Button)
             {

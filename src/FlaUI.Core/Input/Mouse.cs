@@ -186,8 +186,10 @@ namespace FlaUI.Core.Input
         /// </summary>
         public void DoubleClick(MouseButton mouseButton)
         {
-            Click(mouseButton);
-            Click(mouseButton);
+            Down(mouseButton);
+            Up(mouseButton);
+            Down(mouseButton);
+            Up(mouseButton);
         }
 
         /// <summary>
