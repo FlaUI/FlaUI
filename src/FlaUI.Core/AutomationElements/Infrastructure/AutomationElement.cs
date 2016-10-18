@@ -254,5 +254,27 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             return String.Format("AutomationId:{0}, Name:{1}, ControlType:{2}, FrameworkId:{3}",
                 Current.AutomationId, Current.Name, Current.LocalizedControlType, Current.FrameworkId);
         }
+
+        #region Convenience methods
+        public AutomationElement[] FindAllChildren(ConditionBase condition)
+        {
+            return FindAll(TreeScope.Children, condition);
+        }
+
+        public AutomationElement FindFirstChild(ConditionBase condition)
+        {
+            return FindFirst(TreeScope.Children, condition);
+        }
+
+        public AutomationElement[] FindAllDescendants(ConditionBase condition)
+        {
+            return FindAll(TreeScope.Descendants, condition);
+        }
+
+        public AutomationElement FindFirstDescendant(ConditionBase condition)
+        {
+            return FindFirst(TreeScope.Descendants, condition);
+        }
+        #endregion Convenience methods
     }
 }

@@ -368,5 +368,47 @@ namespace FlaUI.Core.Input
             x = (x - vScreenLeft) * 65536 / vScreenWidth + 65536 / (vScreenWidth * 2);
             y = (y - vScreenTop) * 65536 / vScreenHeight + 65536 / (vScreenHeight * 2);
         }
+
+        #region Convenience methods
+        public void LeftClick(MouseButton mouseButton)
+        {
+            Click(MouseButton.Left);
+        }
+
+        public void LeftClick(MouseButton mouseButton, Point point)
+        {
+            Click(MouseButton.Left, point);
+        }
+
+        public void LeftDoubleClick(MouseButton mouseButton)
+        {
+            DoubleClick(MouseButton.Left);
+        }
+
+        public void LeftDoubleClick(MouseButton mouseButton, Point point)
+        {
+            DoubleClick(MouseButton.Left, point);
+        }
+
+        public void RightClick(MouseButton mouseButton)
+        {
+            Click(MouseButton.Right);
+        }
+
+        public void RightClick(MouseButton mouseButton, Point point)
+        {
+            Click(MouseButton.Right, point);
+        }
+
+        public void RightDoubleClick(MouseButton mouseButton)
+        {
+            DoubleClick(MouseButton.Right);
+        }
+
+        public void RightDoubleClick(MouseButton mouseButton, Point point)
+        {
+            DoubleClick(MouseButton.Right, point);
+        }
+        #endregion Convenience methods
     }
 }

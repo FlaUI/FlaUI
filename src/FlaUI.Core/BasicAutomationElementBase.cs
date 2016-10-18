@@ -111,27 +111,5 @@ namespace FlaUI.Core
         public abstract void RemoveAutomationEventHandler(EventId @event, IAutomationEventHandler eventHandler);
         public abstract void RemovePropertyChangedEventHandler(IAutomationPropertyChangedEventHandler eventHandler);
         public abstract void RemoveStructureChangedEventHandler(IAutomationStructureChangedEventHandler eventHandler);
-
-        #region Convenience methods
-        public AutomationElement[] FindAllChildren(ConditionBase condition)
-        {
-            return FindAll(TreeScope.Children, condition);
-        }
-
-        public AutomationElement FindFirstChild(ConditionBase condition)
-        {
-            return FindFirst(TreeScope.Children, condition);
-        }
-
-        public AutomationElement[] FindAllDescendants(ConditionBase condition)
-        {
-            return FindAll(TreeScope.Descendants, condition);
-        }
-
-        public AutomationElement FindFirstDescendant(ConditionBase condition)
-        {
-            return FindFirst(TreeScope.Descendants, condition);
-        }
-        #endregion
     }
 }
