@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -172,7 +173,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
         {
-            Predicate<AutomationElement[]> shouldRetry = elements => elements.Length > 0;
+            Predicate<AutomationElement[]> shouldRetry = elements => elements.Length == 0;
             Func<AutomationElement[]> func = () => BasicAutomationElement.FindAll(treeScope, condition);
 
             return Retry.For(func, shouldRetry, timeOut);
