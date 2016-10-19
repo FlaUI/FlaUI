@@ -194,7 +194,6 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         {
             Predicate<AutomationElement[]> shouldRetry = elements => elements.Length == 0;
             Func<AutomationElement[]> func = () => BasicAutomationElement.FindAll(treeScope, condition);
-
             return Retry.For(func, shouldRetry, timeOut);
         }
 
@@ -213,7 +212,6 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         {
             Predicate<AutomationElement> shouldRetry = element => element == null;
             Func<AutomationElement> func = () => BasicAutomationElement.FindFirst(treeScope, condition);
-
             return Retry.For(func, shouldRetry, timeOut);
         }
 
