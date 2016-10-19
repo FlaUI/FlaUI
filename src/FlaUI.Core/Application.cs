@@ -207,7 +207,12 @@ namespace FlaUI.Core
 
         public Window GetMainWindow(AutomationBase automation)
         {
-            return automation.FromHandle(MainWindowHandle).AsWindow();
+            var mainWindow = automation.FromHandle(MainWindowHandle).AsWindow();
+            if (mainWindow != null)
+            {
+                mainWindow.IsMainWindow = true;
+            }
+            return mainWindow;
         }
 
         public void Dispose()

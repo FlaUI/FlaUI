@@ -26,36 +26,51 @@ namespace FlaUI.Core.AutomationElements
 
         public ITransformPattern TransformPattern => PatternFactory.GetTransformPattern();
 
-        public Menu ContextMenu
+        internal bool IsMainWindow { get; set; }
+
+        /// <summary>
+        /// Gets the contest menu for the window.
+        /// Note: It uses the FrameworkType of the window as lookup logic. Use <see cref="GetContextMenuByFrameworkType" /> if you want to control this.
+        /// </summary>
+        public Menu ContextMenu => GetContextMenuByFrameworkType(FrameworkType);
+
+        public Menu GetContextMenuByFrameworkType(FrameworkType frameworkType)
         {
-            get
+            var mainWindow = this;
+            if (!IsMainWindow)
             {
-                if (FrameworkType == FrameworkType.WinForms)
+                // Find the main application window first
+                var newMainWindow = BasicAutomationElement.Automation.GetDesktop().FindFirstChild(ConditionFactory.ByProcessId(Current.ProcessId)).AsWindow();
+                if (newMainWindow != null)
                 {
-                    var ctxMenu = FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Menu).And(ConditionFactory.ByName("DropDown")));
+                    mainWindow = newMainWindow;
+                }
+            }
+            if (frameworkType == FrameworkType.WinForms)
+            {
+                var ctxMenu = mainWindow.FindFirstChild(ConditionFactory.ByControlType(ControlType.Menu).And(ConditionFactory.ByName("DropDown")));
+                return ctxMenu.AsMenu();
+            }
+            if (frameworkType == FrameworkType.Wpf)
+            {
+                // In WPF, there is a window without title and inside is the menu
+                var windows = mainWindow.FindAllChildren(ConditionFactory.ByControlType(ControlType.Window).And(ConditionFactory.ByText("")));
+                foreach (var window in windows)
+                {
+                    var ctxMenu = window.FindFirstChild(ConditionFactory.ByControlType(ControlType.Menu));
                     return ctxMenu.AsMenu();
                 }
-                if (FrameworkType == FrameworkType.Wpf)
-                {
-                    // In WPF, there is a window without title and inside is the menu
-                    var windows = FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Window).And(ConditionFactory.ByText("")));
-                    foreach (var window in windows)
-                    {
-                        var ctxMenu = window.FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Menu));
-                        return ctxMenu.AsMenu();
-                    }
-                }
-                if (FrameworkType == FrameworkType.Win32)
-                {
-                    // The main menu is directly under the desktop with the name "Context" or in a few cases "System"
-                    var desktop = BasicAutomationElement.Automation.GetDesktop();
-                    var nameCondition = ConditionFactory.ByName("Context").Or(ConditionFactory.ByName("System"));
-                    var ctxMenu = desktop.FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Menu).And(nameCondition)).AsMenu();
-                    ctxMenu.IsWin32ContextMenu = true;
-                    return ctxMenu;
-                }
-                return null;
             }
+            if (frameworkType == FrameworkType.Win32)
+            {
+                // The main menu is directly under the desktop with the name "Context" or in a few cases "System"
+                var desktop = BasicAutomationElement.Automation.GetDesktop();
+                var nameCondition = ConditionFactory.ByName("Context").Or(ConditionFactory.ByName("System"));
+                var ctxMenu = desktop.FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Menu).And(nameCondition)).AsMenu();
+                ctxMenu.IsWin32ContextMenu = true;
+                return ctxMenu;
+            }
+            return null;
         }
 
         public void Close()
