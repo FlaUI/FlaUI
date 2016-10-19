@@ -1,12 +1,12 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using FlaUI.Core;
+﻿using FlaUI.Core;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Shapes;
 using FlaUI.UIA3.Converters;
 using FlaUI.UIA3.EventHandlers;
 using FlaUI.UIA3.Extensions;
+using System;
+using System.Runtime.InteropServices;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3
@@ -46,7 +46,7 @@ namespace FlaUI.UIA3
         public override AutomationElement GetDesktop()
         {
             var desktop = NativeAutomation.GetRootElement();
-            return new AutomationElement(WrapNativeElement(desktop));
+            return WrapNativeElement(desktop);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace FlaUI.UIA3
         public override AutomationElement FromPoint(Point point)
         {
             var nativeElement = NativeAutomation.ElementFromPoint(point.ToTagPoint());
-            return nativeElement == null ? null : new AutomationElement(WrapNativeElement(nativeElement));
+            return WrapNativeElement(nativeElement);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace FlaUI.UIA3
         public override AutomationElement FromHandle(IntPtr hwnd)
         {
             var nativeElement = NativeAutomation.ElementFromHandle(hwnd);
-            return nativeElement == null ? null : new AutomationElement(WrapNativeElement(nativeElement));
+            return WrapNativeElement(nativeElement);
         }
 
         public override AutomationElement FocusedElement()
@@ -129,9 +129,9 @@ namespace FlaUI.UIA3
             return element;
         }
 
-        public UIA3BasicAutomationElement WrapNativeElement(UIA.IUIAutomationElement nativeElement)
+        public AutomationElement WrapNativeElement(UIA.IUIAutomationElement nativeElement)
         {
-            return new UIA3BasicAutomationElement(this, nativeElement);
+            return nativeElement == null ? null : new AutomationElement(new UIA3BasicAutomationElement(this, nativeElement));
         }
     }
 }

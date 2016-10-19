@@ -20,15 +20,15 @@ namespace FlaUI.UIA2.Converters
             for (var i = 0; i < nativeElements.Count; i++)
             {
                 var nativeElement = nativeElements[i];
-                var basicAutomationElement = automation.WrapNativeElement(nativeElement);
-                retArray[i] = new AutomationElement(basicAutomationElement);
+                var automationElement = automation.WrapNativeElement(nativeElement);
+                retArray[i] = automationElement;
             }
             return retArray;
         }
 
         public static AutomationElement NativeToManaged(UIA2Automation automation, UIA.AutomationElement nativeElement)
         {
-            return nativeElement == null ? null : new AutomationElement(automation.WrapNativeElement(nativeElement));
+            return automation.WrapNativeElement(nativeElement);
         }
 
         public static object ToPoint(object point)

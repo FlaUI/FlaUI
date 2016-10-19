@@ -32,12 +32,12 @@ namespace FlaUI.UIA2.Patterns
 
         public string GetViewName(int view)
         {
-            return ComCallWrapper.Call(() => NativePattern.GetViewName(view));
+            return NativePattern.GetViewName(view);
         }
 
         public void SetCurrentView(int view)
         {
-            ComCallWrapper.Call(() => NativePattern.SetCurrentView(view));
+            NativePattern.SetCurrentView(view);
         }
     }
 

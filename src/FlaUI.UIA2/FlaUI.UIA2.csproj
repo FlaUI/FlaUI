@@ -77,6 +77,7 @@
     <Compile Include="UIA2BasicAutomationElement.cs" />
     <Compile Include="UIA2AutomationElementInformation.cs" />
     <Compile Include="UIA2PropertyLibrary.cs" />
+    <Compile Include="UIA2TreeWalker.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlaUI.Core\FlaUI.Core.csproj">

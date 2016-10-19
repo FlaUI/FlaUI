@@ -23,8 +23,8 @@ namespace FlaUI.UIA3.Converters
             for (var i = 0; i < nativeElements.Length; i++)
             {
                 var nativeElement = nativeElements.GetElement(i);
-                var basicAutomationElement = automation.WrapNativeElement(nativeElement);
-                retArray[i] = new AutomationElement(basicAutomationElement);
+                var automationElement = automation.WrapNativeElement(nativeElement);
+                retArray[i] = automationElement;
             }
             return retArray;
         }
@@ -51,7 +51,7 @@ namespace FlaUI.UIA3.Converters
         /// </summary>
         public static AutomationElement NativeToManaged(UIA3Automation automation, UIA.IUIAutomationElement nativeElement)
         {
-            return nativeElement == null ? null : new AutomationElement(automation.WrapNativeElement(nativeElement));
+            return automation.WrapNativeElement(nativeElement);
         }
 
         /// <summary>
