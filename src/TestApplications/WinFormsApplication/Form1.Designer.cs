@@ -74,13 +74,14 @@
             this.innerContextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TextBox = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.NonEditableCombo = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Slider)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -107,7 +108,7 @@
             "Item 1",
             "Item 2",
             "Item 3"});
-            this.EditableCombo.Location = new System.Drawing.Point(70, 6);
+            this.EditableCombo.Location = new System.Drawing.Point(176, 6);
             this.EditableCombo.Name = "EditableCombo";
             this.EditableCombo.Size = new System.Drawing.Size(121, 21);
             this.EditableCombo.TabIndex = 1;
@@ -246,6 +247,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.NonEditableCombo);
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.TextBox);
             this.tabPage1.Controls.Add(this.label1);
@@ -304,7 +306,7 @@
             // 
             // TextBox
             // 
-            this.TextBox.Location = new System.Drawing.Point(232, 9);
+            this.TextBox.Location = new System.Drawing.Point(70, 6);
             this.TextBox.Name = "TextBox";
             this.TextBox.Size = new System.Drawing.Size(100, 20);
             this.TextBox.TabIndex = 17;
@@ -320,6 +322,18 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Complex Controls";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.treeView1);
+            this.groupBox1.Location = new System.Drawing.Point(8, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(467, 76);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Tree";
             // 
             // treeView1
             // 
@@ -343,26 +357,6 @@
             treeNode6});
             this.treeView1.Size = new System.Drawing.Size(461, 57);
             this.treeView1.TabIndex = 0;
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 297);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(491, 22);
-            this.statusStrip1.TabIndex = 18;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.treeView1);
-            this.groupBox1.Location = new System.Drawing.Point(8, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(467, 76);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Tree";
             // 
             // groupBox2
             // 
@@ -400,6 +394,27 @@
             // columnHeader2
             // 
             this.columnHeader2.Text = "Value";
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Location = new System.Drawing.Point(0, 297);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(491, 22);
+            this.statusStrip1.TabIndex = 18;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // NonEditableCombo
+            // 
+            this.NonEditableCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.NonEditableCombo.FormattingEnabled = true;
+            this.NonEditableCombo.Items.AddRange(new object[] {
+            "Item 1",
+            "Item 2",
+            "Item 3"});
+            this.NonEditableCombo.Location = new System.Drawing.Point(303, 6);
+            this.NonEditableCombo.Name = "NonEditableCombo";
+            this.NonEditableCombo.Size = new System.Drawing.Size(121, 21);
+            this.NonEditableCombo.TabIndex = 19;
             // 
             // Form1
             // 
@@ -461,6 +476,7 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ComboBox NonEditableCombo;
     }
 }
 

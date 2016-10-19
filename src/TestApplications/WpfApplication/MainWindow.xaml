@@ -32,6 +32,11 @@
                         <TextBlock Text="Item 2" AutomationProperties.AutomationId="EditableComboItem2" />
                         <TextBlock Text="Item 3" AutomationProperties.AutomationId="EditableComboItem3" />
                     </ComboBox>
+                    <ComboBox Width="120" IsEditable="False" AutomationProperties.AutomationId="NonEditableCombo">
+                        <TextBlock Text="Item 1" AutomationProperties.AutomationId="EditableComboItem1" />
+                        <TextBlock Text="Item 2" AutomationProperties.AutomationId="EditableComboItem2" />
+                        <TextBlock Text="Item 3" AutomationProperties.AutomationId="EditableComboItem3" />
+                    </ComboBox>
                     <CheckBox Content="Test Checkbox" AutomationProperties.AutomationId="SimpleCheckBox" />
                     <CheckBox Content="3-Way Test Checkbox" IsThreeState="True" AutomationProperties.AutomationId="ThreeStateCheckBox" />
                     <RadioButton AutomationProperties.AutomationId="RadioButton1" Content="RadioButton1" />

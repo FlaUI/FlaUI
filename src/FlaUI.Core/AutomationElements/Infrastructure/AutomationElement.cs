@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -50,6 +49,26 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
 
         public void Click(bool moveMouse = true)
         {
+            PerformMouseAction(moveMouse, mouse => mouse.Click(MouseButton.Left));
+        }
+
+        public void DoubleClick(bool moveMouse = true)
+        {
+            PerformMouseAction(moveMouse, mouse => mouse.DoubleClick(MouseButton.Left));
+        }
+
+        public void RightClick(bool moveMouse = true)
+        {
+            PerformMouseAction(moveMouse, mouse => mouse.Click(MouseButton.Right));
+        }
+
+        public void RightDoubleClick(bool moveMouse = true)
+        {
+            PerformMouseAction(moveMouse, mouse => mouse.DoubleClick(MouseButton.Right));
+        }
+
+        private void PerformMouseAction(bool moveMouse, Action<IMouse> action)
+        {
             var clickablePoint = GetClickablePoint();
             if (moveMouse)
             {
@@ -59,7 +78,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             {
                 Mouse.Instance.Position = clickablePoint;
             }
-            Mouse.Instance.Click(MouseButton.Left);
+            action(Mouse.Instance);
             Helpers.WaitUntilInputIsProcessed();
         }
 

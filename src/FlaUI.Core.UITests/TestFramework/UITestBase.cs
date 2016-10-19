@@ -114,6 +114,7 @@ namespace FlaUI.Core.UITests.TestFramework
         private void TakeScreenshot(string screenshotName)
         {
             var imagename = screenshotName + ".png";
+            imagename = imagename.Replace("\"", "");
             var imagePath = Path.Combine(ScreenshotDir, imagename);
             try
             {

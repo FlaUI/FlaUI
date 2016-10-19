@@ -1,5 +1,4 @@
-﻿using System;
-using FlaUI.Core.AutomationElements.Infrastructure;
+﻿using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Patterns;
 
 namespace FlaUI.Core.AutomationElements.PatternElements
@@ -28,19 +27,22 @@ namespace FlaUI.Core.AutomationElements.PatternElements
             }
         }
 
-        public void Select()
+        public SelectionItemAutomationElement Select()
         {
             ExecuteInPattern(SelectionItemPattern, true, pattern => pattern.Select());
+            return this;
         }
 
-        public void AddToSelection()
+        public SelectionItemAutomationElement AddToSelection()
         {
             ExecuteInPattern(SelectionItemPattern, true, pattern => pattern.AddToSelection());
+            return this;
         }
 
-        public void RemoveFromSelection()
+        public SelectionItemAutomationElement RemoveFromSelection()
         {
             ExecuteInPattern(SelectionItemPattern, true, pattern => pattern.RemoveFromSelection());
+            return this;
         }
     }
 }

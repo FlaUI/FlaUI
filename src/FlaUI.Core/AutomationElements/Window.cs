@@ -67,8 +67,11 @@ namespace FlaUI.Core.AutomationElements
                 var desktop = BasicAutomationElement.Automation.GetDesktop();
                 var nameCondition = ConditionFactory.ByName("Context").Or(ConditionFactory.ByName("System"));
                 var ctxMenu = desktop.FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Menu).And(nameCondition)).AsMenu();
-                ctxMenu.IsWin32ContextMenu = true;
-                return ctxMenu;
+                if (ctxMenu != null)
+                {
+                    ctxMenu.IsWin32ContextMenu = true;
+                    return ctxMenu;
+                }
             }
             return null;
         }
