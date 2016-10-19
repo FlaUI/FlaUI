@@ -255,6 +255,31 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
                 Current.AutomationId, Current.Name, Current.LocalizedControlType, Current.FrameworkId);
         }
 
+        internal protected void ExecuteInPattern<TPattern>(TPattern pattern, bool throwIfNotSupported, Action<TPattern> action)
+        {
+            if (pattern != null)
+            {
+                action(pattern);
+            }
+            else if (throwIfNotSupported)
+            {
+                throw new NotSupportedException();
+            }
+        }
+
+        internal protected TRet ExecuteInPattern<TPattern, TRet>(TPattern pattern, bool throwIfNotSupported, Func<TPattern, TRet> func)
+        {
+            if (pattern != null)
+            {
+                return func(pattern);
+            }
+            if (throwIfNotSupported)
+            {
+                throw new NotSupportedException();
+            }
+            return default(TRet);
+        }
+
         #region Convenience methods
         public AutomationElement[] FindAllChildren(ConditionBase condition)
         {

@@ -63,14 +63,39 @@ namespace FlaUI.Core.AutomationElements
         public ListViewRow Select(int index)
         {
             var rows = Rows;
-            if (rows.Length <= index)
-            {
-                throw new Exception($"ListView contains only {rows.Length} rows but index {index} were requested");
-            }
+            PreCheckRow(rows.Length, index);
             var rowToSelect = rows[index];
             rowToSelect.ScrollIntoView();
             rowToSelect.Select();
             return rowToSelect;
+        }
+
+        public ListViewRow AddToSelection(int index)
+        {
+            var rows = Rows;
+            PreCheckRow(rows.Length, index);
+            var rowToSelect = rows[index];
+            rowToSelect.ScrollIntoView();
+            rowToSelect.AddToSelection();
+            return rowToSelect;
+        }
+
+        public ListViewRow RemoveFromSelection(int index)
+        {
+            var rows = Rows;
+            PreCheckRow(rows.Length, index);
+            var rowToSelect = rows[index];
+            rowToSelect.ScrollIntoView();
+            rowToSelect.RemoveFromSelection();
+            return rowToSelect;
+        }
+
+        private void PreCheckRow(int numRows, int index)
+        {
+            if (numRows <= index)
+            {
+                throw new Exception($"ListView contains only {numRows} rows but index {index} were requested");
+            }
         }
     }
 

@@ -30,15 +30,17 @@ namespace FlaUI.Core.AutomationElements.PatternElements
 
         public void Select()
         {
-            var selectionItemPattern = SelectionItemPattern;
-            if (selectionItemPattern != null)
-            {
-                selectionItemPattern.Select();
-            }
-            else
-            {
-                throw new NotSupportedException();
-            }
+            ExecuteInPattern(SelectionItemPattern, true, pattern => pattern.Select());
+        }
+
+        public void AddToSelection()
+        {
+            ExecuteInPattern(SelectionItemPattern, true, pattern => pattern.AddToSelection());
+        }
+
+        public void RemoveFromSelection()
+        {
+            ExecuteInPattern(SelectionItemPattern, true, pattern => pattern.RemoveFromSelection());
         }
     }
 }
