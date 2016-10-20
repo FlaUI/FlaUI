@@ -14,16 +14,18 @@ namespace FlaUI.Core
     {
         protected AutomationBase(IPropertyLibray propertyLibrary)
         {
-            OverlayManager = new OverlayManager();
             PropertyLibrary = propertyLibrary;
             ConditionFactory = new ConditionFactory(propertyLibrary);
+            OverlayManager = new OverlayManager();
         }
 
-        public OverlayManager OverlayManager { get; }
+        public IPropertyLibray PropertyLibrary { get; }
+
+        public abstract ITreeWalkerFactory TreeWalkerFactory { get; }
 
         public ConditionFactory ConditionFactory { get; }
 
-        public IPropertyLibray PropertyLibrary { get; }
+        public OverlayManager OverlayManager { get; }
 
         /// <summary>
         /// The automation type of the automation implementation

@@ -1,17 +1,18 @@
-﻿using FlaUI.Core.AutomationElements.Infrastructure;
+﻿using FlaUI.Core;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3
 {
-    public class UIA3TreeWalker
+    public class UIA3TreeWalker : ITreeWalker
     {
-        public UIA3Automation Automation { get; private set; }
-        public UIA.IUIAutomationTreeWalker NativeTreeWalker { get; private set; }
+        public UIA3Automation Automation { get; }
+        public UIA.IUIAutomationTreeWalker NativeTreeWalker { get; }
 
-        public UIA3TreeWalker(UIA3Automation automation)
+        public UIA3TreeWalker(UIA3Automation automation, UIA.IUIAutomationTreeWalker nativeTreeWalker)
         {
             Automation = automation;
-            NativeTreeWalker = automation.NativeAutomation.ControlViewWalker;
+            NativeTreeWalker = nativeTreeWalker;
         }
 
         public AutomationElement GetParent(AutomationElement element)

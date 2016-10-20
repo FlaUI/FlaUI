@@ -137,6 +137,8 @@
     <Compile Include="Input\MouseButton.cs" />
     <Compile Include="Input\Touch.cs" />
     <Compile Include="IPatternFactory.cs" />
+    <Compile Include="ITreeWalker.cs" />
+    <Compile Include="ITreeWalkerFactory.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Overlay\OverlayManager.cs" />

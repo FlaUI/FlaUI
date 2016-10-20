@@ -1,17 +1,18 @@
-﻿using FlaUI.Core.AutomationElements.Infrastructure;
+﻿using FlaUI.Core;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2
 {
-    public class UIA2TreeWalker
+    public class UIA2TreeWalker : ITreeWalker
     {
-        public UIA2Automation Automation { get; private set; }
-        public UIA.TreeWalker NativeTreeWalker { get; private set; }
+        public UIA2Automation Automation { get; }
+        public UIA.TreeWalker NativeTreeWalker { get; }
 
-        public UIA2TreeWalker(UIA2Automation automation)
+        public UIA2TreeWalker(UIA2Automation automation, UIA.TreeWalker nativeTreeWalker)
         {
             Automation = automation;
-            NativeTreeWalker = UIA.TreeWalker.ControlViewWalker;
+            NativeTreeWalker = nativeTreeWalker;
         }
 
         public AutomationElement GetParent(AutomationElement element)

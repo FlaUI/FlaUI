@@ -1,10 +1,10 @@
-﻿using FlaUI.Core;
+﻿using System;
+using FlaUI.Core;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Shapes;
 using FlaUI.UIA2.Converters;
 using FlaUI.UIA2.EventHandlers;
-using System;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2
@@ -16,7 +16,10 @@ namespace FlaUI.UIA2
     {
         public UIA2Automation() : base(new UIA2PropertyLibrary())
         {
+            TreeWalkerFactory = new UIA2TreeWalkerFactory(this);
         }
+
+        public override ITreeWalkerFactory TreeWalkerFactory { get; }
 
         public override AutomationType AutomationType => AutomationType.UIA2;
 

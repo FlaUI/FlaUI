@@ -1,12 +1,12 @@
-﻿using FlaUI.Core;
+﻿using System;
+using System.Runtime.InteropServices;
+using FlaUI.Core;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Shapes;
 using FlaUI.UIA3.Converters;
 using FlaUI.UIA3.EventHandlers;
 using FlaUI.UIA3.Extensions;
-using System;
-using System.Runtime.InteropServices;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3
@@ -19,7 +19,10 @@ namespace FlaUI.UIA3
         public UIA3Automation() : base(new UIA3PropertyLibrary())
         {
             NativeAutomation = InitializeAutomation();
+            TreeWalkerFactory = new UIA3TreeWalkerFactory(this);
         }
+
+        public override ITreeWalkerFactory TreeWalkerFactory { get; }
 
         public override AutomationType AutomationType => AutomationType.UIA3;
 

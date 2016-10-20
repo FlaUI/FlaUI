@@ -101,6 +101,7 @@
     <Compile Include="UIA3AutomationElementProperties.cs" />
     <Compile Include="UIA3PatternFactory.cs" />
     <Compile Include="UIA3PropertyLibrary.cs" />
+    <Compile Include="UIA3TreeWalkerFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlaUI.Core\FlaUI.Core.csproj">
