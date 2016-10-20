@@ -48,6 +48,7 @@
     <Compile Include="EventHandlers\UIA2PropertyChangedEventHandler.cs" />
     <Compile Include="EventHandlers\UIA2StructureChangedEventHandler.cs" />
     <Compile Include="Identifiers\AutomationObjectIds.cs" />
+    <Compile Include="Identifiers\TextAttributes.cs" />
     <Compile Include="Patterns\DockPattern.cs" />
     <Compile Include="Patterns\ExpandCollapsePattern.cs" />
     <Compile Include="Patterns\GridItemPattern.cs" />

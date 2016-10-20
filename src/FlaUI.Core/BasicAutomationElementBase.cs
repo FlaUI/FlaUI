@@ -34,7 +34,7 @@ namespace FlaUI.Core
             var value = InternalGetPropertyValue(property.Id, cached, false);
             if (value == Automation.NotSupportedValue)
             {
-                throw new PropertyNotSupportedException(String.Format("Property '{0}' not supported", property.Name), property);
+                throw new PropertyNotSupportedException($"Property '{property.Name}' not supported", property);
             }
             return property.Convert<T>(value);
         }

@@ -7,6 +7,7 @@ namespace FlaUI.UIA2.Identifiers
 {
     public static class AutomationObjectIds
     {
+        #region Property Identifiers
         // Base element properties
         public static readonly PropertyId AcceleratorKeyProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.AcceleratorKeyProperty.Id, "AcceleratorKey");
         public static readonly PropertyId AccessKeyProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.AccessKeyProperty.Id, "AccessKey");
@@ -35,5 +36,40 @@ namespace FlaUI.UIA2.Identifiers
         public static readonly PropertyId OrientationProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.OrientationProperty.Id, "Orientation");
         public static readonly PropertyId ProcessIdProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.ProcessIdProperty.Id, "ProcessId");
         public static readonly PropertyId RuntimeIdProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.RuntimeIdProperty.Id, "RuntimeId");
+        // Pattern availability properties
+        public static readonly PropertyId IsDockPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsDockPatternAvailableProperty.Id, "IsDockPatternAvailable");
+        public static readonly PropertyId IsExpandCollapsePatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsExpandCollapsePatternAvailableProperty.Id, "IsExpandCollapsePatternAvailable");
+        public static readonly PropertyId IsGridItemPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsGridItemPatternAvailableProperty.Id, "IsGridItemPatternAvailable");
+        public static readonly PropertyId IsGridPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsGridPatternAvailableProperty.Id, "IsGridPatternAvailable");
+        public static readonly PropertyId IsInvokePatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsInvokePatternAvailableProperty.Id, "IsInvokePatternAvailable");
+        public static readonly PropertyId IsItemContainerPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsItemContainerPatternAvailableProperty.Id, "IsItemContainerPatternAvailable");
+        public static readonly PropertyId IsMultipleViewPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsMultipleViewPatternAvailableProperty.Id, "IsMultipleViewPatternAvailable");
+        public static readonly PropertyId IsRangeValuePatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsRangeValuePatternAvailableProperty.Id, "IsRangeValuePatternAvailable");
+        public static readonly PropertyId IsScrollItemPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsScrollItemPatternAvailableProperty.Id, "IsScrollItemPatternAvailable");
+        public static readonly PropertyId IsScrollPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsScrollPatternAvailableProperty.Id, "IsScrollPatternAvailable");
+        public static readonly PropertyId IsSelectionItemPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsSelectionItemPatternAvailableProperty.Id, "IsSelectionItemPatternAvailable");
+        public static readonly PropertyId IsSelectionPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsSelectionPatternAvailableProperty.Id, "IsSelectionPatternAvailable");
+        public static readonly PropertyId IsSynchronizedInputPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsSynchronizedInputPatternAvailableProperty.Id, "IsSynchronizedInputPatternAvailable");
+        public static readonly PropertyId IsTableItemPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsTableItemPatternAvailableProperty.Id, "IsTableItemPatternAvailable");
+        public static readonly PropertyId IsTablePatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsTablePatternAvailableProperty.Id, "IsTablePatternAvailable");
+        public static readonly PropertyId IsTextPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsTextPatternAvailableProperty.Id, "IsTextPatternAvailable");
+        public static readonly PropertyId IsTogglePatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsTogglePatternAvailableProperty.Id, "IsTogglePatternAvailable");
+        public static readonly PropertyId IsTransformPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsTransformPatternAvailableProperty.Id, "IsTransformPatternAvailable");
+        public static readonly PropertyId IsValuePatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsValuePatternAvailableProperty.Id, "IsValuePatternAvailable");
+        public static readonly PropertyId IsVirtualizedItemPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsVirtualizedItemPatternAvailableProperty.Id, "IsVirtualizedItemPatternAvailable");
+        public static readonly PropertyId IsWindowPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsWindowPatternAvailableProperty.Id, "IsWindowPatternAvailable");
+        #endregion Property Identifiers
+
+        #region Event identifiers
+        public static readonly EventId AsyncContentLoadedEvent = EventId.Register(AutomationType.UIA2, UIA.AutomationElement.AsyncContentLoadedEvent.Id, "AsyncContentLoaded");
+        public static readonly EventId FocusChangedEvent = EventId.Register(AutomationType.UIA2, UIA.AutomationElement.AutomationFocusChangedEvent.Id, "AutomationFocusChanged");
+        public static readonly EventId PropertyChangedEvent = EventId.Register(AutomationType.UIA2, UIA.AutomationElement.AutomationPropertyChangedEvent.Id, "AutomationPropertyChanged");
+        public static readonly EventId LayoutInvalidatedEvent = EventId.Register(AutomationType.UIA2, UIA.AutomationElement.LayoutInvalidatedEvent.Id, "LayoutInvalidated");
+        public static readonly EventId MenuClosedEvent = EventId.Register(AutomationType.UIA2, UIA.AutomationElement.MenuClosedEvent.Id, "MenuClosed");
+        public static readonly EventId MenuOpenedEvent = EventId.Register(AutomationType.UIA2, UIA.AutomationElement.MenuOpenedEvent.Id, "MenuOpened");
+        public static readonly EventId StructureChangedEvent = EventId.Register(AutomationType.UIA2, UIA.AutomationElement.StructureChangedEvent.Id, "StructureChanged");
+        public static readonly EventId ToolTipClosedEvent = EventId.Register(AutomationType.UIA2, UIA.AutomationElement.ToolTipClosedEvent.Id, "ToolTipClosed");
+        public static readonly EventId ToolTipOpenedEvent = EventId.Register(AutomationType.UIA2, UIA.AutomationElement.ToolTipOpenedEvent.Id, "ToolTipOpened");
+        #endregion Event identifiers
     }
 }
