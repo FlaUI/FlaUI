@@ -79,7 +79,9 @@
     <Compile Include="Patterns\SynchronizedInputPattern.cs" />
     <Compile Include="Patterns\TableItemPattern.cs" />
     <Compile Include="Patterns\TablePattern.cs" />
+    <Compile Include="Patterns\Text2Pattern.cs" />
     <Compile Include="Patterns\TextChildPattern.cs" />
+    <Compile Include="Patterns\TextEditPattern.cs" />
     <Compile Include="Patterns\TextPattern.cs" />
     <Compile Include="Patterns\TogglePattern.cs" />
     <Compile Include="Patterns\Transform2Pattern.cs" />

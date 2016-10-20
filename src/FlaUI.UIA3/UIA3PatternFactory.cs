@@ -153,29 +153,29 @@ namespace FlaUI.UIA3
             return nativePattern == null ? null : new TablePattern(BasicAutomationElement, nativePattern);
         }
 
-        //public TextChildPattern GetTextChildPattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationTextChildPattern>(TextChildPattern.Pattern);
-        //    return nativePattern == null ? null : new TextChildPattern(BasicAutomationElement, nativePattern);
-        //}
+        public ITextChildPattern GetTextChildPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationTextChildPattern>(TextChildPattern.Pattern);
+            return nativePattern == null ? null : new TextChildPattern(BasicAutomationElement, nativePattern);
+        }
 
-        //public TextEditPattern GetTextEditPattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationTextEditPattern>(TextEditPattern.Pattern);
-        //    return nativePattern == null ? null : new TextEditPattern(BasicAutomationElement, nativePattern);
-        //}
+        public ITextEditPattern GetTextEditPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationTextEditPattern>(TextEditPattern.Pattern);
+            return nativePattern == null ? null : new TextEditPattern(BasicAutomationElement, nativePattern);
+        }
 
-        //public Text2Pattern GetText2Pattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationTextPattern2>(Text2Pattern.Pattern);
-        //    return nativePattern == null ? null : new Text2Pattern(BasicAutomationElement, nativePattern);
-        //}
+        public IText2Pattern GetText2Pattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationTextPattern2>(Text2Pattern.Pattern);
+            return nativePattern == null ? null : new Text2Pattern(BasicAutomationElement, nativePattern);
+        }
 
-        //public TextPattern GetTextPattern()
-        //{
-        //    var nativePattern = GetNativePatternAs<UIA.IUIAutomationTextPattern>(TextPattern.Pattern);
-        //    return nativePattern == null ? null : new TextPattern(BasicAutomationElement, nativePattern);
-        //}
+        public ITextPattern GetTextPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.IUIAutomationTextPattern>(TextPattern.Pattern);
+            return nativePattern == null ? null : new TextPattern(BasicAutomationElement, nativePattern);
+        }
 
         public ITogglePattern GetTogglePattern()
         {

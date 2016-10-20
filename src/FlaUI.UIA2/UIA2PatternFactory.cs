@@ -145,6 +145,27 @@ namespace FlaUI.UIA2
             return nativePattern == null ? null : new TablePattern(BasicAutomationElement, nativePattern);
         }
 
+        public ITextChildPattern GetTextChildPattern()
+        {
+            throw new NotSupportedByUIA2Exception();
+        }
+
+        public ITextEditPattern GetTextEditPattern()
+        {
+            throw new NotSupportedByUIA2Exception();
+        }
+
+        public IText2Pattern GetText2Pattern()
+        {
+            throw new NotSupportedByUIA2Exception();
+        }
+
+        public ITextPattern GetTextPattern()
+        {
+            var nativePattern = GetNativePatternAs<UIA.TextPattern>(UIA.TextPattern.Pattern);
+            return nativePattern == null ? null : new TextPattern(BasicAutomationElement, nativePattern);
+        }
+
         public ITogglePattern GetTogglePattern()
         {
             var nativePattern = GetNativePatternAs<UIA.TogglePattern>(UIA.TogglePattern.Pattern);

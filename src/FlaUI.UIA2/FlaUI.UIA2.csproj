@@ -63,6 +63,7 @@
     <Compile Include="Patterns\SynchronizedInputPattern.cs" />
     <Compile Include="Patterns\TableItemPattern.cs" />
     <Compile Include="Patterns\TablePattern.cs" />
+    <Compile Include="Patterns\TextPattern.cs" />
     <Compile Include="Patterns\TogglePattern.cs" />
     <Compile Include="Patterns\TransformPattern.cs" />
     <Compile Include="Patterns\VirtualizedItemPattern.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="UIA2PropertyLibrary.cs" />
     <Compile Include="UIA2TreeWalker.cs" />
     <Compile Include="UIA2TreeWalkerFactory.cs" />
+    <Compile Include="UIA2TextRange.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlaUI.Core\FlaUI.Core.csproj">

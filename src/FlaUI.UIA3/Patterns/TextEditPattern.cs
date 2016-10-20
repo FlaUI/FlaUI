@@ -1,36 +1,44 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.Identifiers;
+using FlaUI.Core.Patterns;
 using FlaUI.Core.Tools;
-using FlaUI.UIA3.Elements;
-using FlaUI.UIA3.Tools;
+using FlaUI.UIA3.Converters;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class TextEditPattern : TextPattern
+    public class TextEditPattern : TextPattern, ITextEditPattern
     {
         public new static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_TextEditPatternId, "TextEdit");
         public static readonly EventId ConversionTargetChangedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_TextEdit_ConversionTargetChangedEventId, "ConversionTargetChanged");
         public static readonly EventId TextChangedEvent2 = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_TextEdit_TextChangedEventId, "TextChanged");
 
-        public UIA.IUIAutomationTextEditPattern ExtendedNativePattern { get; private set; }
-
-        internal TextEditPattern(Element automationElement, UIA.IUIAutomationTextEditPattern nativePattern)
-            : base(automationElement, nativePattern)
+        public TextEditPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTextPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            ExtendedNativePattern = nativePattern;
+            ExtendedNativePattern = (UIA.IUIAutomationTextEditPattern)NativePattern;
+            Events = new TextEditPatternEvents();
         }
 
-        public TextRange GetActiveComposition()
+        public UIA.IUIAutomationTextEditPattern ExtendedNativePattern { get; }
+
+        public new ITextEditPatternEvents Events { get; }
+
+        public ITextRange GetActiveComposition()
         {
-            var nativeTextRange = ComCallWrapper.Call(() => ExtendedNativePattern.GetActiveComposition());
-            return NativeValueConverter.NativeToManaged(Automation, nativeTextRange);
+            var nativeRange = ComCallWrapper.Call(() => ExtendedNativePattern.GetActiveComposition());
+            return ValueConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRange);
         }
 
-        public TextRange GetConversionTarget()
+        public ITextRange GetConversionTarget()
         {
-            var nativeTextRange = ComCallWrapper.Call(() => ExtendedNativePattern.GetConversionTarget());
-            return NativeValueConverter.NativeToManaged(Automation, nativeTextRange);
+            var nativeRange = ComCallWrapper.Call(() => ExtendedNativePattern.GetConversionTarget());
+            return ValueConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRange);
         }
+    }
+
+    public class TextEditPatternEvents : ITextEditPatternEvents
+    {
+        public EventId ConversionTargetChangedEvent => TextEditPattern.ConversionTargetChangedEvent;
+        public EventId TextChangedEvent2 => TextEditPattern.TextChangedEvent2;
     }
 }

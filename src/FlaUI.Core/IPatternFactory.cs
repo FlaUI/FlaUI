@@ -50,13 +50,13 @@ namespace FlaUI.Core
 
         ITablePattern GetTablePattern();
 
-        //ITextChildPattern GetTextChildPattern();
+        ITextChildPattern GetTextChildPattern();
 
-        //ITextEditPattern GetTextEditPattern();
+        ITextEditPattern GetTextEditPattern();
 
-        //IText2Pattern GetText2Pattern();
+        IText2Pattern GetText2Pattern();
 
-        //ITextPattern GetTextPattern();
+        ITextPattern GetTextPattern();
 
         ITogglePattern GetTogglePattern();
 

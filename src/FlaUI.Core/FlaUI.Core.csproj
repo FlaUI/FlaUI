@@ -174,6 +174,7 @@
     <Compile Include="Patterns\ITableItemPattern.cs" />
     <Compile Include="Patterns\ITablePattern.cs" />
     <Compile Include="Patterns\IText2Pattern.cs" />
+    <Compile Include="Patterns\ITextChildPattern.cs" />
     <Compile Include="Patterns\ITextEditPattern.cs" />
     <Compile Include="Patterns\ITextPattern.cs" />
     <Compile Include="Patterns\ITogglePattern.cs" />

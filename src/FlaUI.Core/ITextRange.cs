@@ -9,7 +9,7 @@ namespace FlaUI.Core
     {
         void AddToSelection();
         ITextRange Clone();
-        int Compare(ITextRange range);
+        bool Compare(ITextRange range);
         int CompareEndpoints(TextPatternRangeEndpoint srcEndPoint, ITextRange targetRange, TextPatternRangeEndpoint targetEndPoint);
         void ExpandToEnclosingUnit(TextUnit textUnit);
         ITextRange FindAttribute(TextAttributeId attribute, object value, bool backward);

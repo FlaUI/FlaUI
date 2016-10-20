@@ -33,10 +33,10 @@ namespace FlaUI.UIA3
             return ValueConverter.NativeToManaged(Automation, clonedTextRangeNative);
         }
 
-        public int Compare(ITextRange range)
+        public bool Compare(ITextRange range)
         {
             var nativeRange = ToNativeRange(range);
-            return ComCallWrapper.Call(() => NativeRange.Compare(nativeRange));
+            return ComCallWrapper.Call(() => NativeRange.Compare(nativeRange)) != 0;
         }
 
         public int CompareEndpoints(TextPatternRangeEndpoint srcEndPoint, ITextRange targetRange, TextPatternRangeEndpoint targetEndPoint)
