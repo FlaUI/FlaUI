@@ -82,6 +82,7 @@
     <Compile Include="UIA2TreeWalker.cs" />
     <Compile Include="UIA2TreeWalkerFactory.cs" />
     <Compile Include="UIA2TextRange.cs" />
+    <Compile Include="UIA2AutomationElementEvents.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlaUI.Core\FlaUI.Core.csproj">

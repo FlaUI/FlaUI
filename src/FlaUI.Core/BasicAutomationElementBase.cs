@@ -105,6 +105,7 @@ namespace FlaUI.Core
         public abstract AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition);
         public abstract bool TryGetClickablePoint(out Point point);
         public abstract IAutomationElementProperties CreateProperties();
+        public abstract IAutomationElementEvents CreateEvents();
         public abstract IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action);
         public abstract IAutomationPropertyChangedEventHandler RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, PropertyId[] properties);
         public abstract IAutomationStructureChangedEventHandler RegisterStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action);

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using FlaUI.Core;
+﻿using FlaUI.Core;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
@@ -10,6 +8,8 @@ using FlaUI.Core.Shapes;
 using FlaUI.Core.Tools;
 using FlaUI.UIA3.Converters;
 using FlaUI.UIA3.EventHandlers;
+using System;
+using System.Linq;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3
@@ -89,6 +89,11 @@ namespace FlaUI.UIA3
         public override IAutomationElementProperties CreateProperties()
         {
             return new UIA3AutomationElementProperties();
+        }
+
+        public override IAutomationElementEvents CreateEvents()
+        {
+            return new UIA3AutomationElementEvents();
         }
 
         public override IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)

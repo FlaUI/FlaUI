@@ -96,6 +96,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\PointExtensions.cs" />
     <Compile Include="Extensions\RectangleExtensions.cs" />
+    <Compile Include="UIA3AutomationElementEvents.cs" />
     <Compile Include="UIA3TextRange.cs" />
     <Compile Include="UIA3TextRange2.cs" />
     <Compile Include="Converters\ValueConverter.cs" />
