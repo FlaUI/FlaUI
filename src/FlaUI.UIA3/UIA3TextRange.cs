@@ -1,4 +1,6 @@
-﻿using FlaUI.Core.AutomationElements.Infrastructure;
+﻿using System;
+using FlaUI.Core;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Shapes;
@@ -8,13 +10,13 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3
 {
-    public class TextRange
+    public class UIA3TextRange : ITextRange
     {
         public UIA3Automation Automation { get; }
 
         public UIA.IUIAutomationTextRange NativeRange { get; }
 
-        internal TextRange(UIA3Automation automation, UIA.IUIAutomationTextRange nativeRange)
+        internal UIA3TextRange(UIA3Automation automation, UIA.IUIAutomationTextRange nativeRange)
         {
             Automation = automation;
             NativeRange = nativeRange;
@@ -25,20 +27,22 @@ namespace FlaUI.UIA3
             ComCallWrapper.Call(() => NativeRange.AddToSelection());
         }
 
-        public TextRange Clone()
+        public ITextRange Clone()
         {
             var clonedTextRangeNative = ComCallWrapper.Call(() => NativeRange.Clone());
             return ValueConverter.NativeToManaged(Automation, clonedTextRangeNative);
         }
 
-        public int Compare(TextRange range)
+        public int Compare(ITextRange range)
         {
-            return ComCallWrapper.Call(() => NativeRange.Compare(range.NativeRange));
+            var nativeRange = ToNativeRange(range);
+            return ComCallWrapper.Call(() => NativeRange.Compare(nativeRange));
         }
 
-        public int CompareEndpoints(TextPatternRangeEndpoint srcEndPoint, TextRange targetRange, TextPatternRangeEndpoint targetEndPoint)
+        public int CompareEndpoints(TextPatternRangeEndpoint srcEndPoint, ITextRange targetRange, TextPatternRangeEndpoint targetEndPoint)
         {
-            return ComCallWrapper.Call(() => NativeRange.CompareEndpoints((UIA.TextPatternRangeEndpoint)srcEndPoint, targetRange.NativeRange, (UIA.TextPatternRangeEndpoint)targetEndPoint));
+            var nativeRange = ToNativeRange(targetRange);
+            return ComCallWrapper.Call(() => NativeRange.CompareEndpoints((UIA.TextPatternRangeEndpoint)srcEndPoint, nativeRange, (UIA.TextPatternRangeEndpoint)targetEndPoint));
         }
 
         public void ExpandToEnclosingUnit(TextUnit textUnit)
@@ -46,14 +50,14 @@ namespace FlaUI.UIA3
             ComCallWrapper.Call(() => NativeRange.ExpandToEnclosingUnit((UIA.TextUnit)textUnit));
         }
 
-        public TextRange FindAttribute(TextAttributeId attribute, object value, bool backward)
+        public ITextRange FindAttribute(TextAttributeId attribute, object value, bool backward)
         {
             var nativeValue = ValueConverter.ToNative(value);
             var nativeTextRange = ComCallWrapper.Call(() => NativeRange.FindAttribute(attribute.Id, nativeValue, backward.ToInt()));
             return ValueConverter.NativeToManaged(Automation, nativeTextRange);
         }
 
-        public TextRange FindText(string text, bool backward, bool ignoreCase)
+        public ITextRange FindText(string text, bool backward, bool ignoreCase)
         {
             var nativeTextRange = ComCallWrapper.Call(() => NativeRange.FindText(text, backward.ToInt(), ignoreCase.ToInt()));
             return ValueConverter.NativeToManaged(Automation, nativeTextRange);
@@ -105,9 +109,10 @@ namespace FlaUI.UIA3
             return ComCallWrapper.Call(() => NativeRange.Move((UIA.TextUnit)unit, count));
         }
 
-        public void MoveEndpointByRange(TextPatternRangeEndpoint srcEndPoint, TextRange targetRange, TextPatternRangeEndpoint targetEndPoint)
+        public void MoveEndpointByRange(TextPatternRangeEndpoint srcEndPoint, ITextRange targetRange, TextPatternRangeEndpoint targetEndPoint)
         {
-            ComCallWrapper.Call(() => NativeRange.MoveEndpointByRange((UIA.TextPatternRangeEndpoint)srcEndPoint, targetRange.NativeRange, (UIA.TextPatternRangeEndpoint)targetEndPoint));
+            var nativeRange = ToNativeRange(targetRange);
+            ComCallWrapper.Call(() => NativeRange.MoveEndpointByRange((UIA.TextPatternRangeEndpoint)srcEndPoint, nativeRange, (UIA.TextPatternRangeEndpoint)targetEndPoint));
         }
 
         public int MoveEndpointByUnit(TextPatternRangeEndpoint endpoint, TextUnit unit, int count)
@@ -130,10 +135,20 @@ namespace FlaUI.UIA3
             ComCallWrapper.Call(() => NativeRange.Select());
         }
 
-        public TextRange2 AsTextRange2()
+        public UIA3TextRange2 AsTextRange2()
         {
             var nativeRange2 = (UIA.IUIAutomationTextRange2)NativeRange;
             return ValueConverter.NativeToManaged(Automation, nativeRange2);
+        }
+
+        protected UIA.IUIAutomationTextRange ToNativeRange(ITextRange range)
+        {
+            var concreteTextRange = range as UIA3TextRange;
+            if (concreteTextRange == null)
+            {
+                throw new Exception("TextRange is no UIA3 TextRange");
+            }
+            return concreteTextRange.NativeRange;
         }
     }
 }

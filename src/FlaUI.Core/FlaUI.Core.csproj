@@ -137,6 +137,8 @@
     <Compile Include="Input\MouseButton.cs" />
     <Compile Include="Input\Touch.cs" />
     <Compile Include="IPatternFactory.cs" />
+    <Compile Include="ITextRange.cs" />
+    <Compile Include="ITextRange2.cs" />
     <Compile Include="ITreeWalker.cs" />
     <Compile Include="ITreeWalkerFactory.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
@@ -171,6 +173,9 @@
     <Compile Include="Patterns\ISynchronizedInputPattern.cs" />
     <Compile Include="Patterns\ITableItemPattern.cs" />
     <Compile Include="Patterns\ITablePattern.cs" />
+    <Compile Include="Patterns\IText2Pattern.cs" />
+    <Compile Include="Patterns\ITextEditPattern.cs" />
+    <Compile Include="Patterns\ITextPattern.cs" />
     <Compile Include="Patterns\ITogglePattern.cs" />
     <Compile Include="Patterns\ITransform2Pattern.cs" />
     <Compile Include="Patterns\ITransformPattern.cs" />

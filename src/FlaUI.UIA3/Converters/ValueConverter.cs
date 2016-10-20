@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using FlaUI.Core;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Shapes;
@@ -30,15 +31,15 @@ namespace FlaUI.UIA3.Converters
         }
 
         /// <summary>
-        /// Converts a native textrange array to an array of <see cref="TextRange" />
+        /// Converts a native textrange array to an array of <see cref="UIA3TextRange" />
         /// </summary>
-        public static TextRange[] NativeArrayToManaged(UIA3Automation automation, UIA.IUIAutomationTextRangeArray nativeElements)
+        public static ITextRange[] NativeArrayToManaged(UIA3Automation automation, UIA.IUIAutomationTextRangeArray nativeElements)
         {
             if (nativeElements == null)
             {
-                return new TextRange[0];
+                return new ITextRange[0];
             }
-            var retArray = new TextRange[nativeElements.Length];
+            var retArray = new ITextRange[nativeElements.Length];
             for (var i = 0; i < nativeElements.Length; i++)
             {
                 retArray[i] = NativeToManaged(automation, nativeElements.GetElement(i));
@@ -55,19 +56,19 @@ namespace FlaUI.UIA3.Converters
         }
 
         /// <summary>
-        /// Converts a native textrange to an <see cref="TextRange" />
+        /// Converts a native textrange to an <see cref="UIA3TextRange" />
         /// </summary>
-        public static TextRange NativeToManaged(UIA3Automation automation, UIA.IUIAutomationTextRange nativeElement)
+        public static UIA3TextRange NativeToManaged(UIA3Automation automation, UIA.IUIAutomationTextRange nativeElement)
         {
-            return nativeElement == null ? null : new TextRange(automation, nativeElement);
+            return nativeElement == null ? null : new UIA3TextRange(automation, nativeElement);
         }
 
         /// <summary>
-        /// Converts a native textrange2 to an <see cref="TextRange2" />
+        /// Converts a native textrange2 to an <see cref="UIA3TextRange2" />
         /// </summary>
-        public static TextRange2 NativeToManaged(UIA3Automation automation, UIA.IUIAutomationTextRange2 nativeElement)
+        public static UIA3TextRange2 NativeToManaged(UIA3Automation automation, UIA.IUIAutomationTextRange2 nativeElement)
         {
-            return nativeElement == null ? null : new TextRange2(automation, nativeElement);
+            return nativeElement == null ? null : new UIA3TextRange2(automation, nativeElement);
         }
 
         public static UIA.IUIAutomationElement ToNative(AutomationElement automationElement)
