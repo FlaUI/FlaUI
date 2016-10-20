@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.4.0 (2016-10-20)
+
+### Enhancements
+  * Exposed AddToSelection and RemoveFromSelection
+  * Improved the logic for ContextMenu finding (you can manually pass the desired logic)
+  * Implemented ComboBox
+  * Implemented TreeWalkers
+
+### Bug fixes
+  * Fixed a bug with the retry to speed things up quite a bit
+
 ## 0.3.4 (2016-10-18)
 
 ### Enhancements
