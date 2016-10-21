@@ -26,14 +26,13 @@ namespace FlaUI.UIA3.Patterns
 
         public LegacyIAccessiblePattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationLegacyIAccessiblePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new LegacyIAccessiblePatternProperties();
         }
 
         ILegacyIAccessiblePatternInformation IPatternWithInformation<ILegacyIAccessiblePatternInformation>.Cached => Cached;
 
         ILegacyIAccessiblePatternInformation IPatternWithInformation<ILegacyIAccessiblePatternInformation>.Current => Current;
 
-        public ILegacyIAccessiblePatternProperties Properties { get; }
+        public ILegacyIAccessiblePatternProperties Properties => Automation.PropertyLibrary.LegacyIAccessible;
 
         protected override LegacyIAccessiblePatternInformation CreateInformation(bool cached)
         {

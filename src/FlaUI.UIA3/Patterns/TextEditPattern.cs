@@ -16,12 +16,11 @@ namespace FlaUI.UIA3.Patterns
         public TextEditPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTextPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
             ExtendedNativePattern = (UIA.IUIAutomationTextEditPattern)NativePattern;
-            Events = new TextEditPatternEvents();
         }
 
         public UIA.IUIAutomationTextEditPattern ExtendedNativePattern { get; }
 
-        public new ITextEditPatternEvents Events { get; }
+        public new ITextEditPatternEvents Events => Automation.EventLibrary.TextEdit;
 
         public ITextRange GetActiveComposition()
         {

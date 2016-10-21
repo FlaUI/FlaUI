@@ -6,6 +6,7 @@ namespace FlaUI.Core.Patterns
 {
     public interface IExpandCollapsePattern : IPatternWithInformation<IExpandCollapsePatternInformation>
     {
+        IExpandCollapsePatternProperties Properties { get; }
         void Collapse();
         void Expand();
     }

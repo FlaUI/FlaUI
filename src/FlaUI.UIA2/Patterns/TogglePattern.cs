@@ -15,14 +15,13 @@ namespace FlaUI.UIA2.Patterns
 
         public TogglePattern(BasicAutomationElementBase basicAutomationElement, UIA.TogglePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new TogglePatternProperties();
         }
 
         ITogglePatternInformation IPatternWithInformation<ITogglePatternInformation>.Cached => Cached;
 
-        public ITogglePatternProperties Properties { get; }
-
         ITogglePatternInformation IPatternWithInformation<ITogglePatternInformation>.Current => Current;
+
+        public ITogglePatternProperties Properties => Automation.PropertyLibrary.Toggle;
 
         protected override TogglePatternInformation CreateInformation(bool cached)
         {

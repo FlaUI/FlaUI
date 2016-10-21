@@ -8,7 +8,7 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class MultipleViewPattern : PatternBaseWithInformation<UIA.IUIAutomationMultipleViewPattern, MultipleViewPatternInformation>,IMultipleViewPattern
+    public class MultipleViewPattern : PatternBaseWithInformation<UIA.IUIAutomationMultipleViewPattern, MultipleViewPatternInformation>, IMultipleViewPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_MultipleViewPatternId, "MultipleView");
         public static readonly PropertyId CurrentViewProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_MultipleViewCurrentViewPropertyId, "CurrentView");
@@ -16,14 +16,13 @@ namespace FlaUI.UIA3.Patterns
 
         public MultipleViewPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationMultipleViewPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new MultipleViewPatternProperties();
         }
 
         IMultipleViewPatternInformation IPatternWithInformation<IMultipleViewPatternInformation>.Cached => Cached;
 
         IMultipleViewPatternInformation IPatternWithInformation<IMultipleViewPatternInformation>.Current => Current;
 
-        public IMultipleViewPatternProperties Properties { get; }
+        public IMultipleViewPatternProperties Properties => Automation.PropertyLibrary.MultipleView;
 
         protected override MultipleViewPatternInformation CreateInformation(bool cached)
         {

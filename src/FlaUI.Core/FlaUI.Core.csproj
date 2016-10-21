@@ -129,6 +129,7 @@
     <Compile Include="Identifiers\PatternId.cs" />
     <Compile Include="Identifiers\PropertyId.cs" />
     <Compile Include="Identifiers\TextAttributeId.cs" />
+    <Compile Include="IEventLibrary.cs" />
     <Compile Include="Input\Helpers.cs" />
     <Compile Include="Input\IKeyboard.cs" />
     <Compile Include="Input\IMouse.cs" />

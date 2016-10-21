@@ -16,14 +16,13 @@ namespace FlaUI.UIA2.Patterns
 
         public TableItemPattern(BasicAutomationElementBase basicAutomationElement, UIA.TableItemPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new TableItemPatternProperties();
         }
 
         ITableItemPatternInformation IPatternWithInformation<ITableItemPatternInformation>.Cached => Cached;
 
         ITableItemPatternInformation IPatternWithInformation<ITableItemPatternInformation>.Current => Current;
 
-        public ITableItemPatternProperties Properties { get; }
+        public ITableItemPatternProperties Properties => Automation.PropertyLibrary.TableItem;
 
         protected override TableItemPatternInformation CreateInformation(bool cached)
         {

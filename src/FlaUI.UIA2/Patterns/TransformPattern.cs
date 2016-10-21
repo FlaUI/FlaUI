@@ -16,14 +16,13 @@ namespace FlaUI.UIA2.Patterns
 
         public TransformPattern(BasicAutomationElementBase basicAutomationElement, UIA.TransformPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new TransformPatternProperties();
         }
 
         ITransformPatternInformation IPatternWithInformation<ITransformPatternInformation>.Cached => Cached;
 
         ITransformPatternInformation IPatternWithInformation<ITransformPatternInformation>.Current => Current;
 
-        public ITransformPatternProperties Properties { get; }
+        public ITransformPatternProperties Properties => Automation.PropertyLibrary.Transform;
 
         protected override TransformPatternInformation CreateInformation(bool cached)
         {

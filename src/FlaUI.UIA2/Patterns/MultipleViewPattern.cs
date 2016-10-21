@@ -3,7 +3,6 @@ using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
-using FlaUI.Core.Tools;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Patterns
@@ -16,14 +15,13 @@ namespace FlaUI.UIA2.Patterns
 
         public MultipleViewPattern(BasicAutomationElementBase basicAutomationElement, UIA.MultipleViewPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new MultipleViewPatternProperties();
         }
 
         IMultipleViewPatternInformation IPatternWithInformation<IMultipleViewPatternInformation>.Cached => Cached;
 
         IMultipleViewPatternInformation IPatternWithInformation<IMultipleViewPatternInformation>.Current => Current;
 
-        public IMultipleViewPatternProperties Properties { get; }
+        public IMultipleViewPatternProperties Properties => Automation.PropertyLibrary.MultipleView;
 
         protected override MultipleViewPatternInformation CreateInformation(bool cached)
         {

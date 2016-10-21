@@ -17,10 +17,9 @@ namespace FlaUI.UIA3.Patterns
 
         public SynchronizedInputPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationSynchronizedInputPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Events = new SynchronizedInputPatternEvents();
         }
 
-        public ISynchronizedInputPatternEvents Events { get; }
+        public ISynchronizedInputPatternEvents Events => Automation.EventLibrary.SynchronizedInput;
 
         public void Cancel()
         {

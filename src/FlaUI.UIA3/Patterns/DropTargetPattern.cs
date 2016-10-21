@@ -18,16 +18,15 @@ namespace FlaUI.UIA3.Patterns
 
         public DropTargetPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationDropTargetPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new DropTargetPatternProperties();
-            Events = new DropTargetPatternEvents();
         }
 
         IDropTargetPatternInformation IPatternWithInformation<IDropTargetPatternInformation>.Cached => Cached;
 
         IDropTargetPatternInformation IPatternWithInformation<IDropTargetPatternInformation>.Current => Current;
 
-        public IDropTargetPatternProperties Properties { get; }
-        public IDropTargetPatternEvents Events { get; }
+        public IDropTargetPatternProperties Properties => Automation.PropertyLibrary.DropTarget;
+
+        public IDropTargetPatternEvents Events => Automation.EventLibrary.DropTarget;
 
         protected override DropTargetPatternInformation CreateInformation(bool cached)
         {

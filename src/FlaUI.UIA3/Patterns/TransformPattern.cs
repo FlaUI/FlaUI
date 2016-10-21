@@ -15,10 +15,9 @@ namespace FlaUI.UIA3.Patterns
 
         public TransformPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTransformPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new TransformPatternProperties();
         }
 
-        public override TransformPatternProperties Properties { get; }
+        public override TransformPatternProperties Properties => (TransformPatternProperties)Automation.PropertyLibrary.Transform;
 
         protected override TransformPatternInformation CreateInformation(bool cached)
         {

@@ -10,28 +10,52 @@ namespace FlaUI.UIA3
         public UIA3PropertyLibrary()
         {
             Element = new UIA3AutomationElementProperties();
-            AnnotationPattern = new AnnotationPatternProperties();
-            DragPattern = new DragPatternProperties();
-            LegacyIAccessiblePattern = new LegacyIAccessiblePatternProperties();
-            RangeValuePattern = new RangeValuePatternProperties();
-            SelectionItemPattern = new SelectionItemPatternProperties();
-            SelectionPattern = new SelectionPatternProperties();
-            StylesPattern = new StylesPatternProperties();
-            TableItemPattern = new TableItemPatternProperties();
-            ValuePattern = new ValuePatternProperties();
-            WindowPattern = new WindowPatternProperties();
+            Annotation = new AnnotationPatternProperties();
+            Dock = new DockPatternProperties();
+            Drag = new DragPatternProperties();
+            DropTarget = new DropTargetPatternProperties();
+            ExpandCollapse = new ExpandCollapsePatternProperties();
+            GridItem = new GridItemPatternProperties();
+            Grid = new GridPatternProperties();
+            LegacyIAccessible = new LegacyIAccessiblePatternProperties();
+            MultipleView = new MultipleViewPatternProperties();
+            RangeValue = new RangeValuePatternProperties();
+            Scroll = new ScrollPatternProperties();
+            SelectionItem = new SelectionItemPatternProperties();
+            Selection = new SelectionPatternProperties();
+            SpreadsheetItem = new SpreadsheetItemPatternProperties();
+            Styles = new StylesPatternProperties();
+            TableItem = new TableItemPatternProperties();
+            Table = new TablePatternProperties();
+            Toggle = new TogglePatternProperties();
+            Transform2 = new Transform2PatternProperties();
+            Transform = new TransformPatternProperties();
+            Value = new ValuePatternProperties();
+            Window = new WindowPatternProperties();
         }
 
         public IAutomationElementProperties Element { get; }
-        public IAnnotationPatternProperties AnnotationPattern { get; }
-        public IDragPatternProperties DragPattern { get; }
-        public ILegacyIAccessiblePatternProperties LegacyIAccessiblePattern { get; }
-        public IRangeValuePatternProperties RangeValuePattern { get; }
-        public ISelectionItemPatternProperties SelectionItemPattern { get; }
-        public ISelectionPatternProperties SelectionPattern { get; }
-        public IStylesPatternProperties StylesPattern { get; }
-        public ITableItemPatternProperties TableItemPattern { get; }
-        public IValuePatternProperties ValuePattern { get; }
-        public IWindowPatternProperties WindowPattern { get; }
+        public IAnnotationPatternProperties Annotation { get; }
+        public IDockPatternProperties Dock { get; }
+        public IDragPatternProperties Drag { get; }
+        public IDropTargetPatternProperties DropTarget { get; }
+        public IExpandCollapsePatternProperties ExpandCollapse { get; }
+        public IGridItemPatternProperties GridItem { get; }
+        public IGridPatternProperties Grid { get; }
+        public ILegacyIAccessiblePatternProperties LegacyIAccessible { get; }
+        public IMultipleViewPatternProperties MultipleView { get; }
+        public IRangeValuePatternProperties RangeValue { get; }
+        public IScrollPatternProperties Scroll { get; }
+        public ISelectionItemPatternProperties SelectionItem { get; }
+        public ISelectionPatternProperties Selection { get; }
+        public ISpreadsheetItemPatternProperties SpreadsheetItem { get; }
+        public IStylesPatternProperties Styles { get; }
+        public ITableItemPatternProperties TableItem { get; }
+        public ITablePatternProperties Table { get; }
+        public ITogglePatternProperties Toggle { get; }
+        public ITransform2PatternProperties Transform2 { get; }
+        public ITransformPatternProperties Transform { get; }
+        public IValuePatternProperties Value { get; }
+        public IWindowPatternProperties Window { get; }
     }
 }

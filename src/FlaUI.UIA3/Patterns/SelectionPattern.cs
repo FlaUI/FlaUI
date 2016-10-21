@@ -18,16 +18,15 @@ namespace FlaUI.UIA3.Patterns
 
         public SelectionPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationSelectionPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new SelectionPatternProperties();
-            Events = new SelectionPatternEvents();
         }
 
         ISelectionPatternInformation IPatternWithInformation<ISelectionPatternInformation>.Cached => Cached;
 
         ISelectionPatternInformation IPatternWithInformation<ISelectionPatternInformation>.Current => Current;
 
-        public ISelectionPatternProperties Properties { get; }
-        public ISelectionPatternEvents Events { get; }
+        public ISelectionPatternProperties Properties => Automation.PropertyLibrary.Selection;
+
+        public ISelectionPatternEvents Events => Automation.EventLibrary.Selection;
 
         protected override SelectionPatternInformation CreateInformation(bool cached)
         {

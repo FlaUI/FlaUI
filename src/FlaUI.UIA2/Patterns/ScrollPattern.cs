@@ -20,14 +20,13 @@ namespace FlaUI.UIA2.Patterns
 
         public ScrollPattern(BasicAutomationElementBase basicAutomationElement, UIA.ScrollPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new ScrollPatternProperties();
         }
 
         IScrollPatternInformation IPatternWithInformation<IScrollPatternInformation>.Cached => Cached;
 
         IScrollPatternInformation IPatternWithInformation<IScrollPatternInformation>.Current => Current;
 
-        public IScrollPatternProperties Properties { get; }
+        public IScrollPatternProperties Properties => Automation.PropertyLibrary.Scroll;
 
         protected override ScrollPatternInformation CreateInformation(bool cached)
         {

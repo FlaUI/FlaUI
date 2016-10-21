@@ -17,14 +17,13 @@ namespace FlaUI.UIA3.Patterns
 
         public GridPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationGridPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new GridPatternProperties();
         }
 
         IGridPatternInformation IPatternWithInformation<IGridPatternInformation>.Cached => Cached;
 
         IGridPatternInformation IPatternWithInformation<IGridPatternInformation>.Current => Current;
 
-        public IGridPatternProperties Properties { get; }
+        public IGridPatternProperties Properties => Automation.PropertyLibrary.Grid;
 
         protected override GridPatternInformation CreateInformation(bool cached)
         {

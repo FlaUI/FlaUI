@@ -22,17 +22,17 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             PatternFactory = BasicAutomationElement.CreatePatternFactory();
             Cached = BasicAutomationElement.CreateInformation(true);
             Current = BasicAutomationElement.CreateInformation(false);
-            Properties = BasicAutomationElement.CreateProperties();
-            Events = BasicAutomationElement.CreateEvents();
         }
 
         public BasicAutomationElementBase BasicAutomationElement { get; }
 
+        public AutomationBase Automation => BasicAutomationElement.Automation;
+
         public ConditionFactory ConditionFactory => BasicAutomationElement.Automation.ConditionFactory;
 
-        public IAutomationElementProperties Properties { get; private set; }
+        public IAutomationElementProperties Properties => Automation.PropertyLibrary.Element;
 
-        public IAutomationElementEvents Events { get; private set; }
+        public IAutomationElementEvents Events => Automation.EventLibrary.Element;
 
         public FrameworkType FrameworkType => FrameworkIds.ConvertToFrameworkType(Current.FrameworkId);
 

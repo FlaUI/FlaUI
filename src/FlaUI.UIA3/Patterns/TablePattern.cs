@@ -18,14 +18,13 @@ namespace FlaUI.UIA3.Patterns
 
         public TablePattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTablePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new TablePatternProperties();
         }
 
         ITablePatternInformation IPatternWithInformation<ITablePatternInformation>.Cached => Cached;
 
         ITablePatternInformation IPatternWithInformation<ITablePatternInformation>.Current => Current;
 
-        public ITablePatternProperties Properties { get; }
+        public ITablePatternProperties Properties => Automation.PropertyLibrary.Table;
 
         protected override TablePatternInformation CreateInformation(bool cached)
         {

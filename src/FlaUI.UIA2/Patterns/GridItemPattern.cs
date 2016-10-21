@@ -19,14 +19,13 @@ namespace FlaUI.UIA2.Patterns
 
         public GridItemPattern(BasicAutomationElementBase basicAutomationElement, UIA.GridItemPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new GridItemPatternProperties();
         }
-
-        public IGridItemPatternProperties Properties { get; }
 
         IGridItemPatternInformation IPatternWithInformation<IGridItemPatternInformation>.Cached => Cached;
 
         IGridItemPatternInformation IPatternWithInformation<IGridItemPatternInformation>.Current => Current;
+
+        public IGridItemPatternProperties Properties => Automation.PropertyLibrary.GridItem;
 
         protected override GridItemPatternInformation CreateInformation(bool cached)
         {

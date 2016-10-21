@@ -19,10 +19,9 @@ namespace FlaUI.UIA3.Patterns
 
         public GridItemPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationGridItemPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new GridItemPatternProperties();
         }
 
-        public IGridItemPatternProperties Properties { get; }
+        public IGridItemPatternProperties Properties => Automation.PropertyLibrary.GridItem;
 
         IGridItemPatternInformation IPatternWithInformation<IGridItemPatternInformation>.Cached => Cached;
 

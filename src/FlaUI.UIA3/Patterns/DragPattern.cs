@@ -21,16 +21,15 @@ namespace FlaUI.UIA3.Patterns
 
         public DragPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationDragPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new DragPatternProperties();
-            Events = new DragPatternEvents();
         }
 
         IDragPatternInformation IPatternWithInformation<IDragPatternInformation>.Cached => Cached;
 
         IDragPatternInformation IPatternWithInformation<IDragPatternInformation>.Current => Current;
 
-        public IDragPatternProperties Properties { get; }
-        public IDragPatternEvents Events { get; }
+        public IDragPatternProperties Properties => Automation.PropertyLibrary.Drag;
+
+        public IDragPatternEvents Events => Automation.EventLibrary.Drag;
 
         protected override DragPatternInformation CreateInformation(bool cached)
         {

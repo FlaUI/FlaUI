@@ -16,9 +16,16 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
+        public IInvokePatternEvents Events => Automation.EventLibrary.Invoke;
+
         public void Invoke()
         {
             ComCallWrapper.Call(() => NativePattern.Invoke());
         }
+    }
+
+    public class InvokePatternEvents : IInvokePatternEvents
+    {
+        public EventId InvokedEvent => InvokePattern.InvokedEvent;
     }
 }

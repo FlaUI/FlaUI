@@ -85,17 +85,7 @@ namespace FlaUI.UIA3
             point = success ? new Point(tagPoint.x, tagPoint.y) : null;
             return success;
         }
-
-        public override IAutomationElementProperties CreateProperties()
-        {
-            return new UIA3AutomationElementProperties();
-        }
-
-        public override IAutomationElementEvents CreateEvents()
-        {
-            return new UIA3AutomationElementEvents();
-        }
-
+        
         public override IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
         {
             var eventHandler = new UIA3BasicEventHandler(Automation, action);
@@ -143,7 +133,7 @@ namespace FlaUI.UIA3
             var element = NativeElement as T;
             if (element == null)
             {
-                throw new NotSupportedException(String.Format("OS does not have {0} support.", typeof(T).Name));
+                throw new NotSupportedException($"OS does not have {typeof(T).Name} support.");
             }
             return element;
         }

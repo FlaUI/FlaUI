@@ -23,17 +23,15 @@ namespace FlaUI.UIA3.Patterns
 
         public WindowPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationWindowPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new WindowPatternProperties();
-            Events = new WindowPatternEvents();
         }
 
         IWindowPatternInformation IPatternWithInformation<IWindowPatternInformation>.Cached => Cached;
 
         IWindowPatternInformation IPatternWithInformation<IWindowPatternInformation>.Current => Current;
 
-        public IWindowPatternProperties Properties { get; }
+        public IWindowPatternProperties Properties => Automation.PropertyLibrary.Window;
 
-        public IWindowPatternEvents Events { get; }
+        public IWindowPatternEvents Events => Automation.EventLibrary.Window;
 
         public void Close()
         {

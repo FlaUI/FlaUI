@@ -4,7 +4,6 @@ using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
-using FlaUI.Core.Tools;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Patterns
@@ -16,14 +15,13 @@ namespace FlaUI.UIA2.Patterns
 
         public DockPattern(BasicAutomationElementBase basicAutomationElement, UIA.DockPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new DockPatternProperties();
         }
 
         IDockPatternInformation IPatternWithInformation<IDockPatternInformation>.Cached => Cached;
 
         IDockPatternInformation IPatternWithInformation<IDockPatternInformation>.Current => Current;
 
-        public IDockPatternProperties Properties { get; }
+        public IDockPatternProperties Properties => Automation.PropertyLibrary.Dock;
 
         protected override DockPatternInformation CreateInformation(bool cached)
         {

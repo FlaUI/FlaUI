@@ -18,14 +18,13 @@ namespace FlaUI.UIA3.Patterns
 
         public SpreadsheetItemPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationSpreadsheetItemPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new SpreadsheetItemPatternProperties();
         }
 
         ISpreadsheetItemPatternInformation IPatternWithInformation<ISpreadsheetItemPatternInformation>.Cached => Cached;
 
         ISpreadsheetItemPatternInformation IPatternWithInformation<ISpreadsheetItemPatternInformation>.Current => Current;
 
-        public ISpreadsheetItemPatternProperties Properties { get; }
+        public ISpreadsheetItemPatternProperties Properties => Automation.PropertyLibrary.SpreadsheetItem;
 
         protected override SpreadsheetItemPatternInformation CreateInformation(bool cached)
         {

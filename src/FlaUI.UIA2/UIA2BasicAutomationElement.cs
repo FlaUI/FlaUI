@@ -75,16 +75,6 @@ namespace FlaUI.UIA2
             return success;
         }
 
-        public override IAutomationElementProperties CreateProperties()
-        {
-            return new UIA2AutomationElementProperties();
-        }
-
-        public override IAutomationElementEvents CreateEvents()
-        {
-            return new UIA2AutomationElementEvents();
-        }
-
         public override IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
         {
             var eventHandler = new UIA2BasicEventHandler(Automation, action);

@@ -16,14 +16,13 @@ namespace FlaUI.UIA3.Patterns
 
         public ValuePattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationValuePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new ValuePatternProperties();
         }
 
         IValuePatternInformation IPatternWithInformation<IValuePatternInformation>.Cached => Cached;
 
         IValuePatternInformation IPatternWithInformation<IValuePatternInformation>.Current => Current;
 
-        public IValuePatternProperties Properties { get; }
+        public IValuePatternProperties Properties => Automation.PropertyLibrary.Value;
 
         public void SetValue(string value)
         {

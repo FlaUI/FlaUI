@@ -22,14 +22,13 @@ namespace FlaUI.UIA3.Patterns
 
         public StylesPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationStylesPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new StylesPatternProperties();
         }
 
         IStylesPatternInformation IPatternWithInformation<IStylesPatternInformation>.Cached => Cached;
 
         IStylesPatternInformation IPatternWithInformation<IStylesPatternInformation>.Current => Current;
 
-        public IStylesPatternProperties Properties { get; }
+        public IStylesPatternProperties Properties => Automation.PropertyLibrary.Styles;
 
         protected override StylesPatternInformation CreateInformation(bool cached)
         {

@@ -18,10 +18,9 @@ namespace FlaUI.UIA2.Patterns
 
         public TextPattern(BasicAutomationElementBase basicAutomationElement, UIA.TextPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Events = new TextPatternEvents();
         }
 
-        public ITextPatternEvents Events { get; }
+        public ITextPatternEvents Events => Automation.EventLibrary.Text;
 
         public ITextRange DocumentRange
         {

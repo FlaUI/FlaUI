@@ -19,14 +19,13 @@ namespace FlaUI.UIA2.Patterns
 
         public RangeValuePattern(BasicAutomationElementBase basicAutomationElement, UIA.RangeValuePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new RangeValuePatternProperties();
         }
 
         IRangeValuePatternInformation IPatternWithInformation<IRangeValuePatternInformation>.Cached => Cached;
 
         IRangeValuePatternInformation IPatternWithInformation<IRangeValuePatternInformation>.Current => Current;
 
-        public IRangeValuePatternProperties Properties { get; }
+        public IRangeValuePatternProperties Properties => Automation.PropertyLibrary.RangeValue;
 
         protected override RangeValuePatternInformation CreateInformation(bool cached)
         {

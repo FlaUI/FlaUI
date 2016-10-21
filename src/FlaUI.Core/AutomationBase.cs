@@ -12,14 +12,17 @@ namespace FlaUI.Core
     /// </summary>
     public abstract class AutomationBase : IDisposable
     {
-        protected AutomationBase(IPropertyLibray propertyLibrary)
+        protected AutomationBase(IPropertyLibray propertyLibrary, IEventLibrary eventLibrary)
         {
             PropertyLibrary = propertyLibrary;
+            EventLibrary = eventLibrary;
             ConditionFactory = new ConditionFactory(propertyLibrary);
             OverlayManager = new OverlayManager();
         }
 
         public IPropertyLibray PropertyLibrary { get; }
+
+        public IEventLibrary EventLibrary { get; }
 
         public abstract ITreeWalkerFactory TreeWalkerFactory { get; }
 

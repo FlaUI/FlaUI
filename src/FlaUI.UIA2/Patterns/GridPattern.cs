@@ -3,7 +3,6 @@ using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
-using FlaUI.Core.Tools;
 using FlaUI.UIA2.Converters;
 using UIA = System.Windows.Automation;
 
@@ -17,14 +16,13 @@ namespace FlaUI.UIA2.Patterns
 
         public GridPattern(BasicAutomationElementBase basicAutomationElement, UIA.GridPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new GridPatternProperties();
         }
 
         IGridPatternInformation IPatternWithInformation<IGridPatternInformation>.Cached => Cached;
 
         IGridPatternInformation IPatternWithInformation<IGridPatternInformation>.Current => Current;
 
-        public IGridPatternProperties Properties { get; }
+        public IGridPatternProperties Properties => Automation.PropertyLibrary.Grid;
 
         protected override GridPatternInformation CreateInformation(bool cached)
         {

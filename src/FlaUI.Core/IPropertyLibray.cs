@@ -6,15 +6,27 @@ namespace FlaUI.Core
     public interface IPropertyLibray
     {
         IAutomationElementProperties Element { get; }
-        IAnnotationPatternProperties AnnotationPattern { get; }
-        IDragPatternProperties DragPattern { get; }
-        ILegacyIAccessiblePatternProperties LegacyIAccessiblePattern { get; }
-        IRangeValuePatternProperties RangeValuePattern { get; }
-        ISelectionItemPatternProperties SelectionItemPattern { get; }
-        ISelectionPatternProperties SelectionPattern { get; }
-        IStylesPatternProperties StylesPattern { get; }
-        ITableItemPatternProperties TableItemPattern { get; }
-        IValuePatternProperties ValuePattern { get; }
-        IWindowPatternProperties WindowPattern { get; }
+        IAnnotationPatternProperties Annotation { get; }
+        IDockPatternProperties Dock { get; }
+        IDragPatternProperties Drag { get; }
+        IDropTargetPatternProperties DropTarget { get; }
+        IExpandCollapsePatternProperties ExpandCollapse { get; }
+        IGridItemPatternProperties GridItem { get; }
+        IGridPatternProperties Grid { get; }
+        ILegacyIAccessiblePatternProperties LegacyIAccessible { get; }
+        IMultipleViewPatternProperties MultipleView { get; }
+        IRangeValuePatternProperties RangeValue { get; }
+        IScrollPatternProperties Scroll { get; }
+        ISelectionItemPatternProperties SelectionItem { get; }
+        ISelectionPatternProperties Selection { get; }
+        ISpreadsheetItemPatternProperties SpreadsheetItem { get; }
+        IStylesPatternProperties Styles { get; }
+        ITableItemPatternProperties TableItem { get; }
+        ITablePatternProperties Table { get; }
+        ITogglePatternProperties Toggle { get; }
+        ITransform2PatternProperties Transform2 { get; }
+        ITransformPatternProperties Transform { get; }
+        IValuePatternProperties Value { get; }
+        IWindowPatternProperties Window { get; }
     }
 }

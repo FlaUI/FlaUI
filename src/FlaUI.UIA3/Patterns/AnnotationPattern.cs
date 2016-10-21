@@ -20,14 +20,13 @@ namespace FlaUI.UIA3.Patterns
 
         public AnnotationPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationAnnotationPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new AnnotationPatternProperties();
         }
 
         IAnnotationPatternInformation IPatternWithInformation<IAnnotationPatternInformation>.Cached => Cached;
 
         IAnnotationPatternInformation IPatternWithInformation<IAnnotationPatternInformation>.Current => Current;
 
-        public IAnnotationPatternProperties Properties { get; }
+        public IAnnotationPatternProperties Properties => Automation.PropertyLibrary.Annotation;
 
         protected override AnnotationPatternInformation CreateInformation(bool cached)
         {

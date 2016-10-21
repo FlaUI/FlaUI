@@ -16,14 +16,13 @@ namespace FlaUI.UIA3.Patterns
 
         public DockPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationDockPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Properties = new DockPatternProperties();
         }
 
         IDockPatternInformation IPatternWithInformation<IDockPatternInformation>.Cached => Cached;
 
         IDockPatternInformation IPatternWithInformation<IDockPatternInformation>.Current => Current;
 
-        public IDockPatternProperties Properties { get; }
+        public IDockPatternProperties Properties => Automation.PropertyLibrary.Dock;
 
         protected override DockPatternInformation CreateInformation(bool cached)
         {

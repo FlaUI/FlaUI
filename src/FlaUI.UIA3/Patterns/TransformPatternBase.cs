@@ -19,10 +19,7 @@ namespace FlaUI.UIA3.Patterns
 
         ITransformPatternInformation IPatternWithInformation<ITransformPatternInformation>.Current => Current;
 
-        ITransformPatternProperties ITransformPattern.Properties
-        {
-            get { return Properties; }
-        }
+        ITransformPatternProperties ITransformPattern.Properties => Properties;
 
         public abstract TProp Properties { get; }
 
