@@ -69,13 +69,13 @@ namespace FlaUI.UIA3
         public override AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition)
         {
             var nativeFoundElements = NativeElement.FindAll((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition));
-            return ValueConverter.NativeArrayToManaged(Automation, nativeFoundElements);
+            return AutomationElementConverter.NativeArrayToManaged(Automation, nativeFoundElements);
         }
 
         public override AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
         {
             var nativeFoundElement = NativeElement.FindFirst((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition));
-            return ValueConverter.NativeToManaged(Automation, nativeFoundElement);
+            return AutomationElementConverter.NativeToManaged(Automation, nativeFoundElement);
         }
 
         public override bool TryGetClickablePoint(out Point point)

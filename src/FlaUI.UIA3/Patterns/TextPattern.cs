@@ -29,7 +29,7 @@ namespace FlaUI.UIA3.Patterns
             get
             {
                 var nativeRange = ComCallWrapper.Call(() => NativePattern.DocumentRange);
-                return ValueConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRange);
+                return TextRangeConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRange);
             }
         }
 
@@ -45,26 +45,26 @@ namespace FlaUI.UIA3.Patterns
         public ITextRange[] GetSelection()
         {
             var nativeRanges = ComCallWrapper.Call(() => NativePattern.GetSelection());
-            return ValueConverter.NativeArrayToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRanges);
+            return TextRangeConverter.NativeArrayToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRanges);
         }
 
         public ITextRange[] GetVisibleRanges()
         {
             var nativeRanges = ComCallWrapper.Call(() => NativePattern.GetVisibleRanges());
-            return ValueConverter.NativeArrayToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRanges);
+            return TextRangeConverter.NativeArrayToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRanges);
         }
 
         public ITextRange RangeFromChild(AutomationElement child)
         {
-            var nativeChild = ValueConverter.ToNative(child);
+            var nativeChild = AutomationElementConverter.ToNative(child);
             var nativeRange = ComCallWrapper.Call(() => NativePattern.RangeFromChild(nativeChild));
-            return ValueConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRange);
+            return TextRangeConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRange);
         }
 
         public ITextRange RangeFromPoint(Point point)
         {
             var nativeRange = ComCallWrapper.Call(() => NativePattern.RangeFromPoint(point.ToTagPoint()));
-            return ValueConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRange);
+            return TextRangeConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRange);
         }
     }
 

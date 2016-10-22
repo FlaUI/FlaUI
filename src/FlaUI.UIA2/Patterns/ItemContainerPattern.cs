@@ -19,9 +19,9 @@ namespace FlaUI.UIA2.Patterns
         public AutomationElement FindItemByProperty(AutomationElement startAfter, PropertyId property, object value)
         {
             var foundNativeElement = NativePattern.FindItemByProperty(
-                    startAfter == null ? null : ValueConverter.ToNative(startAfter),
+                    startAfter == null ? null : AutomationElementConverter.ToNative(startAfter),
                     property == null ? null : UIA.AutomationProperty.LookupById(property.Id), ValueConverter.ToNative(value));
-            return ValueConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, foundNativeElement);
+            return AutomationElementConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, foundNativeElement);
         }
     }
 }

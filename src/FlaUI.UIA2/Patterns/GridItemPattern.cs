@@ -48,7 +48,7 @@ namespace FlaUI.UIA2.Patterns
             get
             {
                 var nativeElement = Get<UIA.AutomationElement>(GridItemPattern.ContainingGridProperty);
-                return ValueConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeElement);
+                return AutomationElementConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeElement);
             }
         }
 

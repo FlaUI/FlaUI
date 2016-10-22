@@ -15,7 +15,7 @@ namespace FlaUI.UIA2.Identifiers
         public static readonly PropertyId BoundingRectangleProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.BoundingRectangleProperty.Id, "BoundingRectangle").SetConverter(ValueConverter.ToRectangle);
         public static readonly PropertyId ClassNameProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.ClassNameProperty.Id, "ClassName");
         public static readonly PropertyId ClickablePointProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.ClickablePointProperty.Id, "ClickablePoint").SetConverter(ValueConverter.ToPoint);
-        public static readonly PropertyId ControlTypeProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.ControlTypeProperty.Id, "ControlType").SetConverter(ValueConverter.ToControlType);
+        public static readonly PropertyId ControlTypeProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.ControlTypeProperty.Id, "ControlType").SetConverter(ControlTypeConverter.ToControlType);
         public static readonly PropertyId CultureProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.CultureProperty.Id, "Culture").SetConverter(ValueConverter.ToCulture);
         public static readonly PropertyId FrameworkIdProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.FrameworkIdProperty.Id, "FrameworkId");
         public static readonly PropertyId HasKeyboardFocusProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.HasKeyboardFocusProperty.Id, "HasKeyboardFocus");

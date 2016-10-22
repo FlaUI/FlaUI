@@ -43,6 +43,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\AutomationElementConverter.cs" />
+    <Compile Include="Converters\ControlTypeConverter.cs" />
+    <Compile Include="Converters\TextRangeConverter.cs" />
     <Compile Include="EventHandlers\UIA2BasicEventHandler.cs" />
     <Compile Include="EventHandlers\UIA2FocusChangedEventHandler.cs" />
     <Compile Include="EventHandlers\UIA2PropertyChangedEventHandler.cs" />

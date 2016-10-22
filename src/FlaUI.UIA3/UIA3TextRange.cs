@@ -30,7 +30,7 @@ namespace FlaUI.UIA3
         public ITextRange Clone()
         {
             var clonedTextRangeNative = ComCallWrapper.Call(() => NativeRange.Clone());
-            return ValueConverter.NativeToManaged(Automation, clonedTextRangeNative);
+            return TextRangeConverter.NativeToManaged(Automation, clonedTextRangeNative);
         }
 
         public bool Compare(ITextRange range)
@@ -54,13 +54,13 @@ namespace FlaUI.UIA3
         {
             var nativeValue = ValueConverter.ToNative(value);
             var nativeTextRange = ComCallWrapper.Call(() => NativeRange.FindAttribute(attribute.Id, nativeValue, backward.ToInt()));
-            return ValueConverter.NativeToManaged(Automation, nativeTextRange);
+            return TextRangeConverter.NativeToManaged(Automation, nativeTextRange);
         }
 
         public ITextRange FindText(string text, bool backward, bool ignoreCase)
         {
             var nativeTextRange = ComCallWrapper.Call(() => NativeRange.FindText(text, backward.ToInt(), ignoreCase.ToInt()));
-            return ValueConverter.NativeToManaged(Automation, nativeTextRange);
+            return TextRangeConverter.NativeToManaged(Automation, nativeTextRange);
         }
 
         public object GetAttributeValue(TextAttributeId attribute)
@@ -90,13 +90,13 @@ namespace FlaUI.UIA3
         public AutomationElement[] GetChildren()
         {
             var nativeChildren = ComCallWrapper.Call(() => NativeRange.GetChildren());
-            return ValueConverter.NativeArrayToManaged(Automation, nativeChildren);
+            return AutomationElementConverter.NativeArrayToManaged(Automation, nativeChildren);
         }
 
         public AutomationElement GetEnclosingElement()
         {
             var nativeElement = ComCallWrapper.Call(() => NativeRange.GetEnclosingElement());
-            return ValueConverter.NativeToManaged(Automation, nativeElement);
+            return AutomationElementConverter.NativeToManaged(Automation, nativeElement);
         }
 
         public string GetText(int maxLength)
@@ -138,7 +138,7 @@ namespace FlaUI.UIA3
         public UIA3TextRange2 AsTextRange2()
         {
             var nativeRange2 = (UIA.IUIAutomationTextRange2)NativeRange;
-            return ValueConverter.NativeToManaged(Automation, nativeRange2);
+            return TextRangeConverter.NativeToManaged(Automation, nativeRange2);
         }
 
         protected UIA.IUIAutomationTextRange ToNativeRange(ITextRange range)

@@ -1,11 +1,11 @@
-﻿using FlaUI.Core;
+﻿using System;
+using System.Linq;
+using FlaUI.Core;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Shapes;
 using FlaUI.UIA2.Converters;
-using System;
-using System.Linq;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2
@@ -30,7 +30,7 @@ namespace FlaUI.UIA2
         public ITextRange Clone()
         {
             var clonedTextRangeNative = NativeRange.Clone();
-            return ValueConverter.NativeToManaged(Automation, clonedTextRangeNative);
+            return TextRangeConverter.NativeToManaged(Automation, clonedTextRangeNative);
         }
 
         public bool Compare(ITextRange range)
@@ -55,13 +55,13 @@ namespace FlaUI.UIA2
             var nativeValue = ValueConverter.ToNative(value);
             var nativeAttribute = UIA.AutomationTextAttribute.LookupById(attribute.Id);
             var nativeTextRange = NativeRange.FindAttribute(nativeAttribute, nativeValue, backward);
-            return ValueConverter.NativeToManaged(Automation, nativeTextRange);
+            return TextRangeConverter.NativeToManaged(Automation, nativeTextRange);
         }
 
         public ITextRange FindText(string text, bool backward, bool ignoreCase)
         {
             var nativeTextRange = NativeRange.FindText(text, backward, ignoreCase);
-            return ValueConverter.NativeToManaged(Automation, nativeTextRange);
+            return TextRangeConverter.NativeToManaged(Automation, nativeTextRange);
         }
 
         public object GetAttributeValue(TextAttributeId attribute)
@@ -84,13 +84,13 @@ namespace FlaUI.UIA2
         public AutomationElement[] GetChildren()
         {
             var nativeChildren = NativeRange.GetChildren();
-            return ValueConverter.NativeArrayToManaged(Automation, nativeChildren);
+            return AutomationElementConverter.NativeArrayToManaged(Automation, nativeChildren);
         }
 
         public AutomationElement GetEnclosingElement()
         {
             var nativeElement = NativeRange.GetEnclosingElement();
-            return ValueConverter.NativeToManaged(Automation, nativeElement);
+            return AutomationElementConverter.NativeToManaged(Automation, nativeElement);
         }
 
         public string GetText(int maxLength)

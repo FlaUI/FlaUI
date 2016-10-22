@@ -64,7 +64,7 @@ namespace FlaUI.UIA3.Patterns
             get
             {
                 var nativeElement = Get<UIA.IUIAutomationElement>(SelectionItemPattern.SelectionContainerProperty);
-                return ValueConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
+                return AutomationElementConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
             }
         }
     }

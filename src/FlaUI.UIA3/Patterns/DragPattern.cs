@@ -54,7 +54,7 @@ namespace FlaUI.UIA3.Patterns
             get
             {
                 var nativeElement = Get<UIA.IUIAutomationElementArray>(DragPattern.GrabbedItemsProperty);
-                return ValueConverter.NativeArrayToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
+                return AutomationElementConverter.NativeArrayToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
             }
         }
     }

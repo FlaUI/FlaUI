@@ -27,7 +27,7 @@ namespace FlaUI.UIA2.Patterns
             get
             {
                 var nativeRange = NativePattern.DocumentRange;
-                return ValueConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeRange);
+                return TextRangeConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeRange);
             }
         }
 
@@ -43,26 +43,26 @@ namespace FlaUI.UIA2.Patterns
         public ITextRange[] GetSelection()
         {
             var nativeRanges = NativePattern.GetSelection();
-            return ValueConverter.NativeArrayToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeRanges);
+            return TextRangeConverter.NativeArrayToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeRanges);
         }
 
         public ITextRange[] GetVisibleRanges()
         {
             var nativeRanges = NativePattern.GetVisibleRanges();
-            return ValueConverter.NativeArrayToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeRanges);
+            return TextRangeConverter.NativeArrayToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeRanges);
         }
 
         public ITextRange RangeFromChild(AutomationElement child)
         {
-            var nativeChild = ValueConverter.ToNative(child);
+            var nativeChild = AutomationElementConverter.ToNative(child);
             var nativeRange = NativePattern.RangeFromChild(nativeChild);
-            return ValueConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeRange);
+            return TextRangeConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeRange);
         }
 
         public ITextRange RangeFromPoint(Point point)
         {
             var nativeRange = NativePattern.RangeFromPoint(ValueConverter.ToNative(point));
-            return ValueConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeRange);
+            return TextRangeConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeRange);
         }
     }
 

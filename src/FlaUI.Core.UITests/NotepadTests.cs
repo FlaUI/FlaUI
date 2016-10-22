@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using FlaUI.UIA3;
 using NUnit.Framework;
 
@@ -15,12 +14,8 @@ namespace FlaUI.Core.UITests
             using (var automation = new UIA3Automation())
             {
                 var window = app.GetMainWindow(automation);
-                Console.WriteLine(window.Title);
-                window.DrawHighlight();
-                window.Move(100, 100);
-                window.DrawHighlight();
-                window.Move(200, 200);
-                window.DrawHighlight();
+                Assert.That(window, Is.Not.Null);
+                Assert.That(window.Title, Is.Not.Null);
             }
             app.Close();
         }
@@ -34,12 +29,8 @@ namespace FlaUI.Core.UITests
             using (var automation = new UIA3Automation())
             {
                 var window = app.GetMainWindow(automation);
-                Console.WriteLine(window.Title);
-                window.DrawHighlight();
-                window.Move(100, 100);
-                window.DrawHighlight();
-                window.Move(200, 200);
-                window.DrawHighlight();
+                Assert.That(window, Is.Not.Null);
+                Assert.That(window.Title, Is.Not.Null);
             }
             app.Close();
         }
@@ -53,12 +44,8 @@ namespace FlaUI.Core.UITests
             using (var automation = new UIA3Automation())
             {
                 var window = app.GetMainWindow(automation);
-                Console.WriteLine(window.Title);
-                window.DrawHighlight();
-                window.Move(100, 100);
-                window.DrawHighlight();
-                window.Move(200, 200);
-                window.DrawHighlight();
+                Assert.That(window, Is.Not.Null);
+                Assert.That(window.Title, Is.Not.Null);
             }
             app.Close();
         }
@@ -72,12 +59,8 @@ namespace FlaUI.Core.UITests
             using (var automation = new UIA3Automation())
             {
                 var window = app.GetMainWindow(automation);
-                Console.WriteLine(window.Title);
-                window.DrawHighlight();
-                window.Move(100, 100);
-                window.DrawHighlight();
-                window.Move(200, 200);
-                window.DrawHighlight();
+                Assert.That(window, Is.Not.Null);
+                Assert.That(window.Title, Is.Not.Null);
             }
             app.Close();
 
@@ -86,12 +69,8 @@ namespace FlaUI.Core.UITests
             using (var automation = new UIA3Automation())
             {
                 var window = app.GetMainWindow(automation);
-                Console.WriteLine(window.Title);
-                window.DrawHighlight();
-                window.Move(100, 100);
-                window.DrawHighlight();
-                window.Move(200, 200);
-                window.DrawHighlight();
+                Assert.That(window, Is.Not.Null);
+                Assert.That(window.Title, Is.Not.Null);
             }
             app.Close();
         }
@@ -105,11 +84,8 @@ namespace FlaUI.Core.UITests
             using (var automation = new UIA3Automation())
             {
                 var window = app.GetMainWindow(automation);
-                Console.WriteLine(window.Title);
-                window.Move(250, 250);
-                window.DrawHighlight();
-                window.Move(100, 100);
-                window.DrawHighlight();
+                Assert.That(window, Is.Not.Null);
+                Assert.That(window.Title, Is.Not.Null);
             }
             app.Close();
         }

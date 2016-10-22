@@ -51,6 +51,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\AnnotationTypeConverter.cs" />
+    <Compile Include="Converters\AutomationElementConverter.cs" />
+    <Compile Include="Converters\ControlTypeConverter.cs" />
+    <Compile Include="Converters\StyleTypeConverter.cs" />
+    <Compile Include="Converters\TextRangeConverter.cs" />
     <Compile Include="EventHandlers\UIA3BasicEventHandler.cs" />
     <Compile Include="EventHandlers\UIA3FocusChangedEventHandler.cs" />
     <Compile Include="EventHandlers\UIA3PropertyChangedEventHandler.cs" />

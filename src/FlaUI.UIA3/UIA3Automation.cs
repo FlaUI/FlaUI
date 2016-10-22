@@ -73,7 +73,7 @@ namespace FlaUI.UIA3
         public override AutomationElement FocusedElement()
         {
             var nativeFocusedElement = NativeAutomation.GetFocusedElement();
-            return ValueConverter.NativeToManaged(this, nativeFocusedElement);
+            return AutomationElementConverter.NativeToManaged(this, nativeFocusedElement);
         }
 
         public override IAutomationFocusChangedEventHandler RegisterFocusChangedEvent(Action<AutomationElement> action)

@@ -32,7 +32,7 @@ namespace FlaUI.UIA2.Patterns
         public AutomationElement GetItem(int row, int column)
         {
             var nativeItem = NativePattern.GetItem(row, column);
-            return ValueConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeItem);
+            return AutomationElementConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeItem);
         }
     }
 

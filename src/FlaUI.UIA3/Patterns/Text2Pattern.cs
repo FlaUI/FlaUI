@@ -24,14 +24,14 @@ namespace FlaUI.UIA3.Patterns
             var rawIsActive = 0;
             var nativeTextRange = ComCallWrapper.Call(() => ExtendedNativePattern.GetCaretRange(out rawIsActive));
             isActive = rawIsActive != 0;
-            return ValueConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeTextRange);
+            return TextRangeConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeTextRange);
         }
 
         public ITextRange RangeFromAnnotation(AutomationElement annotation)
         {
-            var nativeInputElement = ValueConverter.ToNative(annotation);
+            var nativeInputElement = AutomationElementConverter.ToNative(annotation);
             var nativeElement = ComCallWrapper.Call(() => ExtendedNativePattern.RangeFromAnnotation(nativeInputElement));
-            return ValueConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
+            return TextRangeConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
         }
     }
 }

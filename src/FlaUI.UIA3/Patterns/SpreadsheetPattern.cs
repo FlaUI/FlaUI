@@ -20,7 +20,7 @@ namespace FlaUI.UIA3.Patterns
         public AutomationElement GetItemByName(string name)
         {
             var nativeElement = ComCallWrapper.Call(() => NativePattern.GetItemByName(name));
-            return ValueConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation,nativeElement);
+            return AutomationElementConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation,nativeElement);
         }
     }
 }
