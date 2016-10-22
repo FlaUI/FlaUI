@@ -88,6 +88,13 @@
                             </ListViewItem>
                         </ListView>
                     </GroupBox>
+                    <Expander Header="More Options" AutomationProperties.AutomationId="Expander">
+                        <StackPanel Margin="10,4,0,0">
+                            <CheckBox Margin="4" Content="Option 1" />
+                            <CheckBox Margin="4" Content="Option 2" />
+                            <CheckBox Margin="4" Content="Option 3" />
+                        </StackPanel>
+                    </Expander>
                 </StackPanel>
             </TabItem>
         </TabControl>

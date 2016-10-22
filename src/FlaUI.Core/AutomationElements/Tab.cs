@@ -32,31 +32,31 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Selects a <see cref="TabItem" /> by index
         /// </summary>
-        public void SelectTabItem(int index)
+        public TabItem SelectTabItem(int index)
         {
             var tabItem = TabItems[index];
             tabItem.Select();
+            return tabItem;
         }
 
         /// <summary>
         /// Selects a <see cref="TabItem" /> by a give text (name property)
         /// </summary>
-        public void SelectTabItem(string text)
+        public TabItem SelectTabItem(string text)
         {
             var tabItems = TabItems;
             var foundTabItemIndex = Array.FindIndex(tabItems, t => t.Current.Name == text);
             if (foundTabItemIndex < 0)
             {
-                throw new Exception(String.Format("No TabItem found with text '{0}'", text));
+                throw new Exception($"No TabItem found with text '{text}'");
             }
-            var previousSelectedTabItemIndex = SelectedTabItemIndex;
-            if (previousSelectedTabItemIndex == foundTabItemIndex)
+            var tabItem = tabItems[foundTabItemIndex];
+            if (SelectedTabItemIndex != foundTabItemIndex)
             {
-                // It is already selected so don't do anything
-                return;
+                // It is not the selected one, so select it
+                tabItem.Select();
             }
-            // Select the item
-            tabItems[foundTabItemIndex].Select();
+            return tabItem;
         }
 
         /// <summary>
