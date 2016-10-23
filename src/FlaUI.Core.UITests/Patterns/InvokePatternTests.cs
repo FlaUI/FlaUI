@@ -1,5 +1,6 @@
 ﻿using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
+using FlaUI.Core.Input;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
 
@@ -31,6 +32,7 @@ namespace FlaUI.Core.UITests.Patterns
                 invokeFired = true;
             });
             invokePattern.Invoke();
+            Helpers.WaitUntilInputIsProcessed();
             Assert.That(button.Current.Name, Is.Not.EqualTo(origButtonText));
             Assert.That(invokeFired, Is.True);
             button.RemoveAutomationEventHandler(invokePattern.Events.InvokedEvent, registeredEvent);
