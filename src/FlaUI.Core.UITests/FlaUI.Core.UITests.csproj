@@ -69,6 +69,7 @@
     <Compile Include="Patterns\ExpandCollapsePatternTests.cs" />
     <Compile Include="Patterns\GridItemPatternTests.cs" />
     <Compile Include="Patterns\GridPatternTests.cs" />
+    <Compile Include="Patterns\InvokePatternTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestFramework\TestApplicationType.cs" />
     <Compile Include="TestFramework\TestUtilities.cs" />

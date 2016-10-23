@@ -54,6 +54,7 @@
                             </ContextMenu>
                         </Button.ContextMenu>
                     </Button>
+                    <Button AutomationProperties.AutomationId="InvokableButton" Command="{Binding InvokeButtonCommand}" Content="{Binding InvokeButtonText, FallbackValue=InvokableButton}"></Button>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Complex Controls">
