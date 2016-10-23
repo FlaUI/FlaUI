@@ -10,6 +10,8 @@ namespace WpfApplication
         public MainWindow()
         {
             InitializeComponent();
+            var vm = new MainViewModel();
+            DataContext = vm;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace FlaUI.Core.UITests.Patterns
         public void SelectTab()
         {
             var mainWindow = App.GetMainWindow(Automation);
-            var tab = mainWindow.FindFirst(TreeScope.Descendants, mainWindow.ConditionFactory.ByControlType(ControlType.Tab)).AsTab();
+            var tab = mainWindow.FindFirstDescendant(mainWindow.ConditionFactory.ByControlType(ControlType.Tab)).AsTab();
             var tabItem = tab.SelectTabItem(1);
             _expander = tabItem.FindFirstChild(mainWindow.ConditionFactory.ByAutomationId("Expander"));
         }

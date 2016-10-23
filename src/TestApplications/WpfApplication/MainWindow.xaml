@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication"
         mc:Ignorable="d"
-        Title="FlaUI WPF Test App" Height="350" Width="600">
+        Title="FlaUI WPF Test App" Height="450
+        " Width="600" ResizeMode="CanResize">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
@@ -95,6 +96,11 @@
                             <CheckBox Margin="4" Content="Option 3" />
                         </StackPanel>
                     </Expander>
+                    <GroupBox Header="Grid">
+                        <DataGrid ItemsSource="{Binding DataGridItems}" AutomationProperties.AutomationId="dataGrid1" CanUserAddRows="False">
+                            
+                        </DataGrid>
+                    </GroupBox>
                 </StackPanel>
             </TabItem>
         </TabControl>
