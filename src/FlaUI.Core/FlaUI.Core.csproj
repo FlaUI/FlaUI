@@ -193,6 +193,7 @@
     <Compile Include="Shapes\ShapeBase.cs" />
     <Compile Include="Tools\ComCallWrapper.cs" />
     <Compile Include="Tools\ExtensionMethods.cs" />
+    <Compile Include="Tools\ItemRealizer.cs" />
     <Compile Include="Tools\Retry.cs" />
     <Compile Include="Tools\SystemLanguageRetreiver.cs" />
     <Compile Include="Tools\SystemProductNameFetcher.cs" />

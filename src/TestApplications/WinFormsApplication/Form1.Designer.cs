@@ -39,6 +39,16 @@
             treeNode3,
             treeNode4});
             System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Lvl1 b");
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem(new string[] {
+            "1",
+            "10",
+            "10"}, -1);
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem(new string[] {
+            "2",
+            "20"}, -1);
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem(new string[] {
+            "3",
+            "30"}, -1);
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "1",
             "10",
@@ -49,6 +59,18 @@
             System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
             "3",
             "30"}, -1);
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
+            "4",
+            "40"}, -1);
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
+            "5",
+            "50"}, -1);
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
+            "6",
+            "60"}, -1);
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
+            "VeryLongKey",
+            "VeryLongValue"}, -1);
             this.label1 = new System.Windows.Forms.Label();
             this.EditableCombo = new System.Windows.Forms.ComboBox();
             this.SimpleCheckBox = new System.Windows.Forms.CheckBox();
@@ -67,6 +89,7 @@
             this.Slider = new System.Windows.Forms.TrackBar();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.NonEditableCombo = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.context1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,7 +104,10 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.NonEditableCombo = new System.Windows.Forms.ComboBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.LargeListView = new System.Windows.Forms.ListView();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Slider)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -90,6 +116,7 @@
             this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -266,6 +293,19 @@
             this.tabPage1.Text = "Simple Controls";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // NonEditableCombo
+            // 
+            this.NonEditableCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.NonEditableCombo.FormattingEnabled = true;
+            this.NonEditableCombo.Items.AddRange(new object[] {
+            "Item 1",
+            "Item 2",
+            "Item 3"});
+            this.NonEditableCombo.Location = new System.Drawing.Point(303, 6);
+            this.NonEditableCombo.Name = "NonEditableCombo";
+            this.NonEditableCombo.Size = new System.Drawing.Size(121, 21);
+            this.NonEditableCombo.TabIndex = 19;
+            // 
             // button1
             // 
             this.button1.ContextMenuStrip = this.contextMenuStrip1;
@@ -313,6 +353,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.AutoScroll = true;
+            this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -330,7 +372,7 @@
             this.groupBox1.Controls.Add(this.treeView1);
             this.groupBox1.Location = new System.Drawing.Point(8, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(467, 76);
+            this.groupBox1.Size = new System.Drawing.Size(450, 76);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tree";
@@ -355,7 +397,7 @@
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode5,
             treeNode6});
-            this.treeView1.Size = new System.Drawing.Size(461, 57);
+            this.treeView1.Size = new System.Drawing.Size(444, 57);
             this.treeView1.TabIndex = 0;
             // 
             // groupBox2
@@ -365,7 +407,7 @@
             this.groupBox2.Controls.Add(this.listView1);
             this.groupBox2.Location = new System.Drawing.Point(8, 88);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(467, 100);
+            this.groupBox2.Size = new System.Drawing.Size(450, 100);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "ListView";
@@ -377,12 +419,12 @@
             this.columnHeader2});
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3});
+            listViewItem8,
+            listViewItem9,
+            listViewItem10});
             this.listView1.Location = new System.Drawing.Point(3, 16);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(461, 81);
+            this.listView1.Size = new System.Drawing.Size(444, 81);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -403,18 +445,48 @@
             this.statusStrip1.TabIndex = 18;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // NonEditableCombo
+            // groupBox3
             // 
-            this.NonEditableCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.NonEditableCombo.FormattingEnabled = true;
-            this.NonEditableCombo.Items.AddRange(new object[] {
-            "Item 1",
-            "Item 2",
-            "Item 3"});
-            this.NonEditableCombo.Location = new System.Drawing.Point(303, 6);
-            this.NonEditableCombo.Name = "NonEditableCombo";
-            this.NonEditableCombo.Size = new System.Drawing.Size(121, 21);
-            this.NonEditableCombo.TabIndex = 19;
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.LargeListView);
+            this.groupBox3.Location = new System.Drawing.Point(8, 194);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(150, 100);
+            this.groupBox3.TabIndex = 3;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Large List with Scroll";
+            // 
+            // LargeListView
+            // 
+            this.LargeListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4});
+            this.LargeListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LargeListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4,
+            listViewItem5,
+            listViewItem6,
+            listViewItem7});
+            this.LargeListView.Location = new System.Drawing.Point(3, 16);
+            this.LargeListView.Name = "LargeListView";
+            this.LargeListView.Size = new System.Drawing.Size(144, 81);
+            this.LargeListView.TabIndex = 1;
+            this.LargeListView.UseCompatibleStateImageBehavior = false;
+            this.LargeListView.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Key";
+            this.columnHeader3.Width = 80;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Value";
+            this.columnHeader4.Width = 80;
             // 
             // Form1
             // 
@@ -437,6 +509,7 @@
             this.tabPage2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -477,6 +550,10 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ComboBox NonEditableCombo;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.ListView LargeListView;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }
 

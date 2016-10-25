@@ -58,51 +58,84 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="Complex Controls">
-                <StackPanel>
-                    <GroupBox Header="Tree">
-                        <TreeView AutomationProperties.AutomationId="treeView1">
-                            <TreeViewItem Header="Lvl1 a">
-                                <TreeViewItem Header="Lvl2 a" />
-                                <TreeViewItem Header="Lvl2 b">
-                                    <TreeViewItem Header="Lvl3 a" />
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <GroupBox Header="Tree">
+                            <TreeView AutomationProperties.AutomationId="treeView1">
+                                <TreeViewItem Header="Lvl1 a">
+                                    <TreeViewItem Header="Lvl2 a" />
+                                    <TreeViewItem Header="Lvl2 b">
+                                        <TreeViewItem Header="Lvl3 a" />
+                                    </TreeViewItem>
+                                    <TreeViewItem Header="Lvl2 b" />
                                 </TreeViewItem>
-                                <TreeViewItem Header="Lvl2 b" />
-                            </TreeViewItem>
-                            <TreeViewItem Header="Lvl1 b" />
-                        </TreeView>
-                    </GroupBox>
-                    <GroupBox Header="ListView">
-                        <ListView AutomationProperties.AutomationId="listView1">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Key" DisplayMemberBinding="{Binding Key}" />
-                                    <GridViewColumn Header="Value" DisplayMemberBinding="{Binding Value}" />
-                                </GridView>
-                            </ListView.View>
-                            <ListViewItem>
-                                <local:ListViewItem Key="1" Value="10" />
-                            </ListViewItem>
-                            <ListViewItem>
-                                <local:ListViewItem Key="2" Value="20" />
-                            </ListViewItem>
-                            <ListViewItem>
-                                <local:ListViewItem Key="3" Value="30" />
-                            </ListViewItem>
-                        </ListView>
-                    </GroupBox>
-                    <Expander Header="More Options" AutomationProperties.AutomationId="Expander">
-                        <StackPanel Margin="10,4,0,0">
-                            <CheckBox Margin="4" Content="Option 1" />
-                            <CheckBox Margin="4" Content="Option 2" />
-                            <CheckBox Margin="4" Content="Option 3" />
-                        </StackPanel>
-                    </Expander>
-                    <GroupBox Header="Grid">
-                        <DataGrid ItemsSource="{Binding DataGridItems}" AutomationProperties.AutomationId="dataGrid1" CanUserAddRows="False">
-                            
-                        </DataGrid>
-                    </GroupBox>
-                </StackPanel>
+                                <TreeViewItem Header="Lvl1 b" />
+                            </TreeView>
+                        </GroupBox>
+                        <GroupBox Header="ListView">
+                            <ListView AutomationProperties.AutomationId="listView1">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Key" DisplayMemberBinding="{Binding Key}" />
+                                        <GridViewColumn Header="Value" DisplayMemberBinding="{Binding Value}" />
+                                    </GridView>
+                                </ListView.View>
+                                <ListViewItem>
+                                    <local:ListViewItem Key="1" Value="10" />
+                                </ListViewItem>
+                                <ListViewItem>
+                                    <local:ListViewItem Key="2" Value="20" />
+                                </ListViewItem>
+                                <ListViewItem>
+                                    <local:ListViewItem Key="3" Value="30" />
+                                </ListViewItem>
+                            </ListView>
+                        </GroupBox>
+                        <Expander Header="More Options" AutomationProperties.AutomationId="Expander">
+                            <StackPanel Margin="10,4,0,0">
+                                <CheckBox Margin="4" Content="Option 1" />
+                                <CheckBox Margin="4" Content="Option 2" />
+                                <CheckBox Margin="4" Content="Option 3" />
+                            </StackPanel>
+                        </Expander>
+                        <GroupBox Header="Large List with Scroll">
+                            <ListView AutomationProperties.AutomationId="LargeListView" Height="100" Width="150">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Key" Width="80" DisplayMemberBinding="{Binding Key}" />
+                                        <GridViewColumn Header="Value" Width="80"  DisplayMemberBinding="{Binding Value}" />
+                                    </GridView>
+                                </ListView.View>
+                                <ListViewItem>
+                                    <local:ListViewItem Key="1" Value="10" />
+                                </ListViewItem>
+                                <ListViewItem>
+                                    <local:ListViewItem Key="2" Value="20" />
+                                </ListViewItem>
+                                <ListViewItem>
+                                    <local:ListViewItem Key="3" Value="30" />
+                                </ListViewItem>
+                                <ListViewItem>
+                                    <local:ListViewItem Key="4" Value="40" />
+                                </ListViewItem>
+                                <ListViewItem>
+                                    <local:ListViewItem Key="5" Value="50" />
+                                </ListViewItem>
+                                <ListViewItem>
+                                    <local:ListViewItem Key="6" Value="60" />
+                                </ListViewItem>
+                                <ListViewItem>
+                                    <local:ListViewItem Key="VeryLongKey" Value="VeryLongValue" />
+                                </ListViewItem>
+                            </ListView>
+                        </GroupBox>
+                        <GroupBox Header="Grid">
+                            <DataGrid ItemsSource="{Binding DataGridItems}" AutomationProperties.AutomationId="dataGrid1" CanUserAddRows="False">
+
+                            </DataGrid>
+                        </GroupBox>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
     </DockPanel>
