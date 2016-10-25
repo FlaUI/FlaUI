@@ -1,4 +1,5 @@
 ﻿using FlaUI.Core.Definitions;
+using FlaUI.Core.Tools;
 
 namespace FlaUI.Core.Conditions
 {
@@ -62,9 +63,22 @@ namespace FlaUI.Core.Conditions
             return new OrCondition(ByControlType(ControlType.Menu), ByControlType(ControlType.MenuBar));
         }
 
+        /// <summary>
+        /// Searches for a DataGrid/List
+        /// </summary>
         public OrCondition ListView()
         {
             return new OrCondition(ByControlType(ControlType.DataGrid), ByControlType(ControlType.List));
+        }
+
+        public OrCondition HScrollBar()
+        {
+            return new OrCondition(ByControlType(ControlType.ScrollBar), ByName(TranslatableStrings.HorizontalScrollBar));
+        }
+
+        public OrCondition VScrollBar()
+        {
+            return new OrCondition(ByControlType(ControlType.ScrollBar), ByName(TranslatableStrings.VerticalScrollBar));
         }
     }
 }

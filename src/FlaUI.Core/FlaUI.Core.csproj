@@ -52,6 +52,9 @@
     <Compile Include="AutomationBase.cs" />
     <Compile Include="AutomationElements\Infrastructure\IAutomationElementEvents.cs" />
     <Compile Include="AutomationElements\ListView.cs" />
+    <Compile Include="AutomationElements\Scrolling\HScrollBar.cs" />
+    <Compile Include="AutomationElements\Scrolling\ScrollBarBase.cs" />
+    <Compile Include="AutomationElements\Scrolling\VScrollBar.cs" />
     <Compile Include="AutomationElements\Slider.cs" />
     <Compile Include="BasicAutomationElementBase.cs" />
     <Compile Include="AutomationType.cs" />
@@ -197,6 +200,7 @@
     <Compile Include="Tools\Retry.cs" />
     <Compile Include="Tools\SystemLanguageRetreiver.cs" />
     <Compile Include="Tools\SystemProductNameFetcher.cs" />
+    <Compile Include="Tools\TranslatableStrings.cs" />
     <Compile Include="Tools\WindowsStoreAppLauncher.cs" />
     <Compile Include="WindowsAPI\Constants.cs" />
     <Compile Include="WindowsAPI\Structures.cs" />

@@ -55,6 +55,9 @@
                         </Button.ContextMenu>
                     </Button>
                     <Button AutomationProperties.AutomationId="InvokableButton" Command="{Binding InvokeButtonCommand}" Content="{Binding InvokeButtonText, FallbackValue=InvokableButton}"></Button>
+                    <ScrollViewer Width="80" Height="80" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <Button Width="200" Height="200" Content="BigButton"></Button>
+                    </ScrollViewer>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Complex Controls">
