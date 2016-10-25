@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using FlaUI.Core.Conditions;
@@ -218,10 +219,39 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             return Retry.For(func, shouldRetry, timeOut);
         }
 
+        public AutomationElement FindFirstNested(params ConditionBase[] nestedConditions)
+        {
+            var currentElement = this;
+            foreach (var condition in nestedConditions)
+            {
+                currentElement = currentElement.FindFirstChild(condition);
+                if (currentElement == null)
+                {
+                    return null;
+                }
+            }
+            return currentElement;
+        }
+
+        public AutomationElement[] FindAllNested(params ConditionBase[] nestedConditions)
+        {
+            var currentElement = this;
+            for (var i = 0; i < nestedConditions.Length - 1; i++)
+            {
+                var condition = nestedConditions[i];
+                currentElement = currentElement.FindFirstChild(condition);
+                if (currentElement == null)
+                {
+                    return null;
+                }
+            }
+            return currentElement.FindAllChildren(nestedConditions.Last());
+        }
+
         /// <summary>
         /// Gets a clickable point of the element
         /// </summary>
-        /// <exception cref="NoClickablePointException">Thrown when no clickable point was found</exception>
+        /// <exception cref="FlaUI.Core.Exceptions.NoClickablePointException">Thrown when no clickable point was found</exception>
         public Shapes.Point GetClickablePoint()
         {
             return BasicAutomationElement.GetClickablePoint();
@@ -276,7 +306,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
                 Current.AutomationId, Current.Name, Current.LocalizedControlType, Current.FrameworkId);
         }
 
-        internal protected void ExecuteInPattern<TPattern>(TPattern pattern, bool throwIfNotSupported, Action<TPattern> action)
+        protected internal void ExecuteInPattern<TPattern>(TPattern pattern, bool throwIfNotSupported, Action<TPattern> action)
         {
             if (pattern != null)
             {
@@ -288,7 +318,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             }
         }
 
-        internal protected TRet ExecuteInPattern<TPattern, TRet>(TPattern pattern, bool throwIfNotSupported, Func<TPattern, TRet> func)
+        protected internal TRet ExecuteInPattern<TPattern, TRet>(TPattern pattern, bool throwIfNotSupported, Func<TPattern, TRet> func)
         {
             if (pattern != null)
             {
