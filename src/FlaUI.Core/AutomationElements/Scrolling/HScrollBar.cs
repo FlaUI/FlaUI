@@ -6,13 +6,69 @@
         {
         }
 
-        protected override string SmallDecrementText => FrameworkType == FrameworkType.Wpf ? "PART_LineLeftButton" : "SmallDecrement";
+        protected override string SmallDecrementText
+        {
+            get
+            {
+                switch (FrameworkType)
+                {
+                    case FrameworkType.Wpf:
+                        return "PART_LineLeftButton";
+                    case FrameworkType.WinForms:
+                        return "UpButton";
+                    default:
+                        return "SmallDecrement";
+                }
+            }
+        }
 
-        protected override string SmallIncrementText => FrameworkType == FrameworkType.Wpf ? "PART_LineRightButton" : "SmallIncrement";
+        protected override string SmallIncrementText
+        {
+            get
+            {
+                switch (FrameworkType)
+                {
+                    case FrameworkType.Wpf:
+                        return "PART_LineRightButton";
+                    case FrameworkType.WinForms:
+                        return "DownButton";
+                    default:
+                        return "SmallIncrement";
+                }
+            }
+        }
 
-        protected override string LargeDecrementText => FrameworkType == FrameworkType.Wpf ? "PageLeft" : "LargeDecrement";
+        protected override string LargeDecrementText
+        {
+            get
+            {
+                switch (FrameworkType)
+                {
+                    case FrameworkType.Wpf:
+                        return "PageLeft";
+                    case FrameworkType.WinForms:
+                        return "DownPageButton";
+                    default:
+                        return "LargeDecrement";
+                }
+            }
+        }
 
-        protected override string LargeIncrementText => FrameworkType == FrameworkType.Wpf ? "PageRight" : "LargeIncrement";
+        protected override string LargeIncrementText
+        {
+            get
+            {
+                switch (FrameworkType)
+                {
+                    case FrameworkType.Wpf:
+                        return "PageRight";
+                    case FrameworkType.WinForms:
+                        return "UpPageButton";
+                    default:
+                        return "LargeIncrement";
+                }
+            }
+        }
 
         public virtual void ScrollLeft()
         {

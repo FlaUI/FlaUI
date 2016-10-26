@@ -20,11 +20,19 @@ namespace FlaUI.Core.AutomationElements.Scrolling
 
         protected Button LargeIncrementButton => FindButton(LargeIncrementText);
 
+        protected Thumb Thumb => FindThumb();
+
         public double Value => RangeValuePattern.Current.Value;
 
         public double MinimumValue => RangeValuePattern.Current.Minimum;
 
         public double MaximumValue => RangeValuePattern.Current.Maximum;
+
+        public double SmallChange => RangeValuePattern.Current.SmallChange;
+
+        public double LargeChange => RangeValuePattern.Current.LargeChange;
+
+        public bool IsReadOnly => RangeValuePattern.Current.IsReadOnly;
 
         protected abstract string SmallDecrementText { get; }
 
@@ -38,6 +46,12 @@ namespace FlaUI.Core.AutomationElements.Scrolling
         {
             var button = FindFirstChild(ConditionFactory.ByControlType(ControlType.Button).And(ConditionFactory.ByAutomationId(automationId)));
             return button.AsButton();
+        }
+
+        private Thumb FindThumb()
+        {
+            var thumb = FindFirstChild(ConditionFactory.ByControlType(ControlType.Thumb));
+            return thumb.AsThumb();
         }
     }
 }
