@@ -16,7 +16,7 @@ namespace FlaUI.UIA3
     /// </summary>
     public class UIA3Automation : AutomationBase
     {
-        public UIA3Automation() : base(new UIA3PropertyLibrary(), new UIA3EventLibrary())
+        public UIA3Automation() : base(new UIA3PropertyLibrary(), new UIA3EventLibrary(), new UIA3PatternLibrary())
         {
             NativeAutomation = InitializeAutomation();
             TreeWalkerFactory = new UIA3TreeWalkerFactory(this);

@@ -108,7 +108,7 @@ namespace FlaUI.Core.Shapes
 
         public override string ToString()
         {
-            return String.Format("X={0},Y={1},Width={2},Height={3}", X, Y, Width, Height);
+            return $"X={X},Y={Y},Width={Width},Height={Height}";
         }
 
         private Point GetNorth(int by = 0)

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using FlaUI.Core;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Conditions;
@@ -109,6 +111,12 @@ namespace FlaUI.UIA2
         public override void RemoveStructureChangedEventHandler(IAutomationStructureChangedEventHandler eventHandler)
         {
             UIA.Automation.RemoveStructureChangedEventHandler(NativeElement, ((UIA2StructureChangedEventHandler)eventHandler).EventHandler);
+        }
+
+        public override PatternId[] GetSupportedPatterns()
+        {
+            var rawPatterns = NativeElement.GetSupportedPatterns();
+            return rawPatterns.Select(rawPattern => PatternId.Find(AutomationType.UIA2, rawPattern.Id)).ToArray();
         }
     }
 }

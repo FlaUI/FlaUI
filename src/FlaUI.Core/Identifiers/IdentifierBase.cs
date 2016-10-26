@@ -7,7 +7,7 @@ namespace FlaUI.Core.Identifiers
     /// <summary>
     /// Base class for wrappers around various identifiers
     /// </summary>
-    public abstract class IdentifierBase
+    public abstract class IdentifierBase : IEquatable<IdentifierBase>
     {
         /// <summary>
         /// Class which capsules all identifiers which can be used for an automation library
@@ -56,9 +56,24 @@ namespace FlaUI.Core.Identifiers
             Name = name;
         }
 
+        public bool Equals(IdentifierBase other)
+        {
+            return other != null && Id.Equals(other.Id);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as IdentifierBase);
+        }
+
+        public override int GetHashCode()
+        {
+            return Id;
+        }
+
         public override string ToString()
         {
-            return String.Format("{0} [#{1}]", Name, Id);
+            return $"{Name} [#{Id}]";
         }
 
         protected static PropertyId RegisterProperty(AutomationType automationType, int id, string name)

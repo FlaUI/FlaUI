@@ -1,4 +1,7 @@
-﻿using FlaUI.Core;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using FlaUI.Core;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
@@ -8,8 +11,6 @@ using FlaUI.Core.Shapes;
 using FlaUI.Core.Tools;
 using FlaUI.UIA3.Converters;
 using FlaUI.UIA3.EventHandlers;
-using System;
-using System.Linq;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3
@@ -122,6 +123,14 @@ namespace FlaUI.UIA3
         public override void RemoveStructureChangedEventHandler(IAutomationStructureChangedEventHandler eventHandler)
         {
             Automation.NativeAutomation.RemoveStructureChangedEventHandler(NativeElement, (UIA3StructureChangedEventHandler)eventHandler);
+        }
+
+        public override PatternId[] GetSupportedPatterns()
+        {
+            int[] rawPatternIds;
+            string[] rawPatternNames;
+            Automation.NativeAutomation.PollForPotentialSupportedPatterns(NativeElement, out rawPatternIds, out rawPatternNames);
+            return rawPatternIds.Select(patternId => PatternId.Find(AutomationType.UIA3, patternId)).ToArray();
         }
 
         /// <summary>

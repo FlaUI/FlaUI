@@ -1,7 +1,11 @@
-﻿using FlaUI.UIA2;
+﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Reflection;
+using System.Windows.Input;
+using FlaUI.Core;
+using FlaUI.UIA2;
 using FlaUI.UIA3;
 using FlaUInspect.Core;
-using System.Collections.ObjectModel;
 
 namespace FlaUInspect.ViewModels
 {
@@ -9,22 +13,48 @@ namespace FlaUInspect.ViewModels
     {
         public MainViewModel()
         {
-            var auto2 = new UIA2Automation();
-            var desktop2 = auto2.GetDesktop();
-            var desktopViewModel2 = new ElementViewModel(desktop2);
-            desktopViewModel2.LoadChildren(false);
-            ElementsV2 = new ObservableCollection<ElementViewModel>();
-            ElementsV2.Add(desktopViewModel2);
-
-            var auto3 = new UIA3Automation();
-            var desktop3 = auto3.GetDesktop();
-            var desktopViewModel3 = new ElementViewModel(desktop3);
-            desktopViewModel3.LoadChildren(false);
-            ElementsV3 = new ObservableCollection<ElementViewModel>();
-            ElementsV3.Add(desktopViewModel3);
+            Elements = new ObservableCollection<ElementViewModel>();
+            StartNewInstanceCommand = new RelayCommand(o => {
+                var info = new ProcessStartInfo(Assembly.GetExecutingAssembly().Location);
+                Process.Start(info);
+            });
         }
 
-        public ObservableCollection<ElementViewModel> ElementsV2 { get; set; }
-        public ObservableCollection<ElementViewModel> ElementsV3 { get; set; }
+        public bool IsInitialized { get { return GetProperty<bool>(); } private set { SetProperty(value); } }
+
+        public AutomationType SelectedAutomationType { get { return GetProperty<AutomationType>(); } private set { SetProperty(value); } }
+
+        public ObservableCollection<ElementViewModel> Elements { get; private set; }
+
+        public ICommand StartNewInstanceCommand { get; private set; }
+
+        public ObservableCollection<DetailViewModel> SelectedItemDetails { get; set; }
+
+        public void Initialize(AutomationType selectedAutomationType)
+        {
+            SelectedAutomationType = selectedAutomationType;
+            IsInitialized = true;
+
+            AutomationBase automation;
+            if (selectedAutomationType == AutomationType.UIA2)
+            {
+                automation = new UIA2Automation();
+            }
+            else
+            {
+                automation = new UIA3Automation();
+            }
+            var desktop = automation.GetDesktop();
+            var desktopViewModel = new ElementViewModel(desktop);
+            desktopViewModel.SelectionChanged += DesktopViewModel_SelectionChanged;
+            desktopViewModel.LoadChildren(false);
+            Elements.Add(desktopViewModel);
+        }
+
+        private void DesktopViewModel_SelectionChanged(ElementViewModel obj)
+        {
+            SelectedItemDetails = obj.ItemDetails;
+            OnPropertyChanged(() => SelectedItemDetails);
+        }
     }
 }

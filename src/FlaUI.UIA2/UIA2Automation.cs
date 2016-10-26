@@ -14,7 +14,7 @@ namespace FlaUI.UIA2
     /// </summary>
     public class UIA2Automation : AutomationBase
     {
-        public UIA2Automation() : base(new UIA2PropertyLibrary(), new UIA2EventLibrary())
+        public UIA2Automation() : base(new UIA2PropertyLibrary(), new UIA2EventLibrary(), new UIA2PatternLibrary())
         {
             TreeWalkerFactory = new UIA2TreeWalkerFactory(this);
         }

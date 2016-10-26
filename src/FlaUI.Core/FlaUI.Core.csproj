@@ -142,6 +142,7 @@
     <Compile Include="Input\MouseButton.cs" />
     <Compile Include="Input\Touch.cs" />
     <Compile Include="IPatternFactory.cs" />
+    <Compile Include="IPatternLibrary.cs" />
     <Compile Include="ITextRange.cs" />
     <Compile Include="ITextRange2.cs" />
     <Compile Include="ITreeWalker.cs" />

@@ -59,8 +59,12 @@
     <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="Models\Element.cs" />
+    <Compile Include="ViewModels\DetailViewModel.cs" />
     <Compile Include="ViewModels\ElementViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\ChooseVersionWindow.xaml.cs">
+      <DependentUpon>ChooseVersionWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -68,6 +72,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ChooseVersionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -100,7 +108,21 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Button.png" />
+    <Resource Include="Resources\CheckBox.png" />
+    <Resource Include="Resources\ComboBox.png" />
+    <Resource Include="Resources\Group.png" />
+    <Resource Include="Resources\Image.png" />
+    <Resource Include="Resources\Text.png" />
+    <Resource Include="Resources\Pane.png" />
+    <Resource Include="Resources\RadioButton.png" />
+    <Resource Include="Resources\Spinner.png" />
+    <Resource Include="Resources\Tab.png" />
+    <Resource Include="Resources\Edit.png" />
+    <Resource Include="Resources\Tree.png" />
+    <Resource Include="Resources\Window.png" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlaUI.Core\FlaUI.Core.csproj">
       <Project>{4d98a40f-e35d-4a88-8428-8462af75a4cf}</Project>
@@ -114,6 +136,33 @@
       <Project>{2d4efc0f-06ff-459f-949e-34e2ced559e9}</Project>
       <Name>FlaUI.UIA3</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\DataGrid.png" />
+    <Resource Include="Resources\HyperLink.png" />
+    <Resource Include="Resources\Item.png" />
+    <Resource Include="Resources\List.png" />
+    <Resource Include="Resources\Menu.png" />
+    <Resource Include="Resources\MenuItem.png" />
+    <Resource Include="Resources\ProgressBar.png" />
+    <Resource Include="Resources\ScrollBar.png" />
+    <Resource Include="Resources\Slider.png" />
+    <Resource Include="Resources\SplitButton.png" />
+    <Resource Include="Resources\StatusBar.png" />
+    <Resource Include="Resources\Thumb.png" />
+    <Resource Include="Resources\TitleBar.png" />
+    <Resource Include="Resources\ToolBar.png" />
+    <Resource Include="Resources\ToolTip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Header.png" />
+    <Resource Include="Resources\HeaderItem.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Custom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Document.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

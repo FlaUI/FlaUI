@@ -1,0 +1,28 @@
+﻿<Window x:Class="FlaUInspect.Views.ChooseVersionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FlaUInspect.Views"
+        mc:Ignorable="d"
+        Title="Choose UIA Version" Height="150" Width="270"
+        ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow" ShowInTaskbar="False">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" Margin="10">
+            <Label>Chose which UIA version you want to use:</Label>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Margin" Value="10"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Button Padding="10" Click="UIA2ButtonClick">
+                    <TextBlock TextAlignment="Center">UIA2<LineBreak/>Managed</TextBlock>
+                </Button>
+                <Button Padding="10" Click="UIA3ButtonClick">
+                    <TextBlock TextAlignment="Center">UIA3<LineBreak/>Interop</TextBlock>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
