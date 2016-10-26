@@ -99,6 +99,11 @@ namespace FlaUI.UIA3
             }
         }
 
+        public override bool Compare(AutomationElement element1, AutomationElement element2)
+        {
+            return NativeAutomation.CompareElements(AutomationElementConverter.ToNative(element1), AutomationElementConverter.ToNative(element2)) != 0;
+        }
+
         /// <summary>
         /// Initializes the automation object with the correct instance
         /// </summary>

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using FlaUI.Core.Tools;
 
 namespace FlaUI.Core.Shapes
@@ -39,6 +38,8 @@ namespace FlaUI.Core.Shapes
         }
 
         public bool IsEmpty => X.Equals(0) && Y.Equals(0) && Width.Equals(0) && Height.Equals(0);
+
+        public bool IsValid => X.HasValue() && Y.HasValue() && Width.HasValue() && Height.HasValue();
 
         public Point Center => new Point(Width / 2 + Left, Height / 2 + Top);
 

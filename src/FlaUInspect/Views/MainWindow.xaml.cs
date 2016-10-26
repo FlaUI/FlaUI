@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using FlaUInspect.ViewModels;
 
 namespace FlaUInspect.Views
@@ -34,6 +35,16 @@ namespace FlaUInspect.Views
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void TreeViewSelectedHandler(object sender, RoutedEventArgs e)
+        {
+            var item = sender as TreeViewItem;
+            if (item != null)
+            {
+                item.BringIntoView();
+                e.Handled = true;
+            }
         }
     }
 }

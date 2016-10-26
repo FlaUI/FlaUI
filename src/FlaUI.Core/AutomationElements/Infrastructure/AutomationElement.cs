@@ -15,7 +15,7 @@ using WpfColor = System.Windows.Media.Color;
 
 namespace FlaUI.Core.AutomationElements.Infrastructure
 {
-    public class AutomationElement
+    public class AutomationElement : IEquatable<AutomationElement>
     {
         public AutomationElement(BasicAutomationElementBase basicAutomationElement)
         {
@@ -295,6 +295,21 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         public void RemoveStructureChangedEventHandler(IAutomationStructureChangedEventHandler eventHandler)
         {
             BasicAutomationElement.RemoveStructureChangedEventHandler(eventHandler);
+        }
+
+        public bool Equals(AutomationElement other)
+        {
+            return other != null && Automation.Compare(this, other);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as AutomationElement);
+        }
+
+        public override int GetHashCode()
+        {
+            return BasicAutomationElement?.GetHashCode() ?? 0;
         }
 
         /// <summary>

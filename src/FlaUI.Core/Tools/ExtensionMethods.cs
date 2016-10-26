@@ -40,5 +40,13 @@ namespace FlaUI.Core.Tools
         {
             return Convert.ToInt32(value);
         }
+
+        /// <summary>
+        /// Checks if a double is not NaN and not Infinity
+        /// </summary>
+        public static bool HasValue(this double value)
+        {
+            return !Double.IsNaN(value) && !Double.IsInfinity(value);
+        }
     }
 }

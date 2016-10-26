@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using FlaUI.Core;
 using FlaUI.Core.AutomationElements.Infrastructure;
@@ -131,6 +130,11 @@ namespace FlaUI.UIA3
             string[] rawPatternNames;
             Automation.NativeAutomation.PollForPotentialSupportedPatterns(NativeElement, out rawPatternIds, out rawPatternNames);
             return rawPatternIds.Select(patternId => PatternId.Find(AutomationType.UIA3, patternId)).ToArray();
+        }
+
+        public override int GetHashCode()
+        {
+            return NativeElement.GetHashCode();
         }
 
         /// <summary>

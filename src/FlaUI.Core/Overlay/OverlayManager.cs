@@ -39,20 +39,26 @@ namespace FlaUI.Core.Overlay
 
         public void Show(Rectangle rectangle, Color color, int durationInMs)
         {
-            _dispatcher.Invoke(() =>
+            if (rectangle.IsValid)
             {
-                var win = new OverlayRectangleWindow(rectangle, color, durationInMs);
-                win.Show();
-            });
+                _dispatcher.Invoke(() =>
+                {
+                    var win = new OverlayRectangleWindow(rectangle, color, durationInMs);
+                    win.Show();
+                });
+            }
         }
 
         public void ShowBlocking(Rectangle rectangle, Color color, int durationInMs)
         {
-            _dispatcher.Invoke(() =>
+            if (rectangle.IsValid)
             {
-                var win = new OverlayRectangleWindow(rectangle, color, durationInMs);
-                win.ShowDialog();
-            });
+                _dispatcher.Invoke(() =>
+                {
+                    var win = new OverlayRectangleWindow(rectangle, color, durationInMs);
+                    win.ShowDialog();
+                });
+            }
         }
 
         public void Dispose()

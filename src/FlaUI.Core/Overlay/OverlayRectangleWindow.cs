@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -13,6 +14,8 @@ namespace FlaUI.Core.Overlay
     {
         public OverlayRectangleWindow(Rectangle rectangle, Color color, int durationInMs)
         {
+            AutomationProperties.SetAutomationId(this, "FlaUIOverlayWindow");
+            AutomationProperties.SetName(this, "FlaUIOverlayWindow");
             AllowsTransparency = true;
             WindowStyle = WindowStyle.None;
             Topmost = true;

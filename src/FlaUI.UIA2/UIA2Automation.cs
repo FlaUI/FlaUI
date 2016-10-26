@@ -69,6 +69,11 @@ namespace FlaUI.UIA2
             UIA.Automation.RemoveAllEventHandlers();
         }
 
+        public override bool Compare(AutomationElement element1, AutomationElement element2)
+        {
+            return UIA.Automation.Compare(AutomationElementConverter.ToNative(element1), AutomationElementConverter.ToNative(element2));
+        }
+
         public AutomationElement WrapNativeElement(UIA.AutomationElement nativeElement)
         {
             return nativeElement == null ? null : new AutomationElement(new UIA2BasicAutomationElement(this, nativeElement));

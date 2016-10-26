@@ -1,4 +1,5 @@
-﻿using FlaUInspect.Core;
+﻿using System;
+using FlaUInspect.Core;
 
 namespace FlaUInspect.ViewModels
 {
@@ -7,7 +8,7 @@ namespace FlaUInspect.ViewModels
         public DetailViewModel(string key, object value)
         {
             Key = key;
-            Value = value.ToString();
+            Value = value?.ToString() ?? String.Empty;
         }
 
         public string Key { get { return GetProperty<string>(); } set { SetProperty(value); } }

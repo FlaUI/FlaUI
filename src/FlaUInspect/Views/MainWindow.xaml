@@ -12,6 +12,9 @@
                     <Separator />
                     <MenuItem Header="E_xit" Click="MenuItem_Click" />
                 </MenuItem>
+                <MenuItem Header="_Mode">
+                    <MenuItem Header="H_over Mode (use Ctrl)" IsCheckable="True" IsChecked="{Binding EnableHoverMode}" />
+                </MenuItem>
             </Menu>
             <StatusBar DockPanel.Dock="Bottom">
                 <StatusBarItem>
@@ -31,6 +34,7 @@
                                 <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
                                 <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
                                 <Setter Property="FontWeight" Value="Normal" />
+                                <EventSetter Event="Selected" Handler="TreeViewSelectedHandler" />
                                 <Style.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
                                         <Setter Property="FontWeight" Value="Bold" />
