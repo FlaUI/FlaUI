@@ -15,6 +15,7 @@ namespace FlaUInspect.ViewModels
     public class MainViewModel : ObservableObject
     {
         private HoverMode _hoverMode;
+        private FocusTrackingMode _focusTrackingMode;
         private ITreeWalker _treeWalker;
         private AutomationBase _automation;
         private AutomationElement _rootElement;
@@ -33,16 +34,26 @@ namespace FlaUInspect.ViewModels
 
         public bool EnableHoverMode
         {
-            get
-            {
-                return GetProperty<bool>();
-            }
+            get { return GetProperty<bool>(); }
             set
             {
                 if (SetProperty(value))
                 {
                     if (value) { _hoverMode.Start(); }
                     else { _hoverMode.Stop(); }
+                }
+            }
+        }
+
+        public bool EnableFocusTrackingMode
+        {
+            get { return GetProperty<bool>(); }
+            set
+            {
+                if (SetProperty(value))
+                {
+                    if (value) { _focusTrackingMode.Start(); }
+                    else { _focusTrackingMode.Stop(); }
                 }
             }
         }
@@ -79,12 +90,16 @@ namespace FlaUInspect.ViewModels
 
             // Initialize hover
             _hoverMode = new HoverMode(_automation);
-            _hoverMode.ElementHovered += ElementHovered;
+            _hoverMode.ElementHovered += ElementToSelectChanged;
+
+            // Initialize focus tracking
+            _focusTrackingMode = new FocusTrackingMode(_automation);
+            _focusTrackingMode.ElementFocused += ElementToSelectChanged;
         }
 
-        private void ElementHovered(AutomationElement obj)
+        private void ElementToSelectChanged(AutomationElement obj)
         {
-            Console.WriteLine($"Hovered over: {obj}");
+            Console.WriteLine($"Element to select: {obj}");
             // Build a stack from the root to the hovered item
             var pathToRoot = new Stack<AutomationElement>();
             while (obj != null)
@@ -96,20 +111,25 @@ namespace FlaUInspect.ViewModels
                 try
                 {
                     obj = _treeWalker.GetParent(obj);
+                    Console.WriteLine($"Found Parent: {obj}");
                 }
                 catch (Exception ex)
                 {
                     // TODO: Log
+                    Console.WriteLine($"Exception: {ex.Message}");
                 }
             }
 
             // Expand the root element if needed
             if (!Elements[0].IsExpanded)
             {
+                Console.WriteLine("Expanding Root");
                 Elements[0].IsExpanded = true;
+                System.Threading.Thread.Sleep(1000);
             }
 
             var elementVm = Elements[0];
+            Console.WriteLine($"Starting here: {elementVm.AutomationElement}");
             while (pathToRoot.Count > 0)
             {
                 var elementOnPath = pathToRoot.Pop();
@@ -133,6 +153,7 @@ namespace FlaUInspect.ViewModels
 
         private ElementViewModel FindElement(ElementViewModel parent, AutomationElement element)
         {
+            Console.WriteLine($"Searching {parent.Children.Count} Elements");
             foreach (var child in parent.Children)
             {
                 if (child.AutomationElement.Equals(element))

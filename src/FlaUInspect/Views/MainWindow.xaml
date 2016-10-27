@@ -14,6 +14,7 @@
                 </MenuItem>
                 <MenuItem Header="_Mode">
                     <MenuItem Header="H_over Mode (use Ctrl)" IsCheckable="True" IsChecked="{Binding EnableHoverMode}" />
+                    <MenuItem Header="_Focus Tracking" IsCheckable="True" IsChecked="{Binding EnableFocusTrackingMode}" />
                 </MenuItem>
             </Menu>
             <StatusBar DockPanel.Dock="Bottom">

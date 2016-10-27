@@ -50,8 +50,7 @@ namespace FlaUInspect.Core
                 if (!Equals(_currentHoveredElement, hoveredElement))
                 {
                     _currentHoveredElement = hoveredElement;
-                    var handler = ElementHovered;
-                    handler?.Invoke(hoveredElement);
+                    ElementHovered?.Invoke(hoveredElement);
                 }
             }
         }
