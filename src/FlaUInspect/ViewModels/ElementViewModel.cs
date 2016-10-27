@@ -59,11 +59,9 @@ namespace FlaUInspect.ViewModels
             get { return GetProperty<bool>(); }
             set
             {
-                Console.WriteLine("Setting IsExpanded to true");
                 SetProperty(value);
                 if (value)
                 {
-                    Console.WriteLine("Loading children");
                     LoadChildren(true);
                 }
             }
@@ -101,7 +99,6 @@ namespace FlaUInspect.ViewModels
                 }
                 Children.Add(childViewModel);
             }
-            Console.WriteLine($"Loaded {Children.Count} Elements");
         }
     }
 }

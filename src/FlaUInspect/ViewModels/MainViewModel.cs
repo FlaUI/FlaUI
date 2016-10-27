@@ -99,7 +99,6 @@ namespace FlaUInspect.ViewModels
 
         private void ElementToSelectChanged(AutomationElement obj)
         {
-            Console.WriteLine($"Element to select: {obj}");
             // Build a stack from the root to the hovered item
             var pathToRoot = new Stack<AutomationElement>();
             while (obj != null)
@@ -111,7 +110,6 @@ namespace FlaUInspect.ViewModels
                 try
                 {
                     obj = _treeWalker.GetParent(obj);
-                    Console.WriteLine($"Found Parent: {obj}");
                 }
                 catch (Exception ex)
                 {
@@ -123,17 +121,14 @@ namespace FlaUInspect.ViewModels
             // Expand the root element if needed
             if (!Elements[0].IsExpanded)
             {
-                Console.WriteLine("Expanding Root");
                 Elements[0].IsExpanded = true;
                 System.Threading.Thread.Sleep(1000);
             }
 
             var elementVm = Elements[0];
-            Console.WriteLine($"Starting here: {elementVm.AutomationElement}");
             while (pathToRoot.Count > 0)
             {
                 var elementOnPath = pathToRoot.Pop();
-                Console.WriteLine($"Next: {elementOnPath}");
                 var nextElementVm = FindElement(elementVm, elementOnPath);
                 if (nextElementVm == null)
                 {
@@ -144,7 +139,7 @@ namespace FlaUInspect.ViewModels
                     if (nextElementVm == null)
                     {
                         // The next element is still not found, exit the loop
-                        Console.WriteLine("NOT FOUND!");
+                        Console.WriteLine("Could not find the next element!");
                         break;
                     }
                 }
@@ -160,7 +155,6 @@ namespace FlaUInspect.ViewModels
 
         private ElementViewModel FindElement(ElementViewModel parent, AutomationElement element)
         {
-            Console.WriteLine($"Searching {parent.Children.Count} Elements");
             foreach (var child in parent.Children)
             {
                 if (child.AutomationElement.Equals(element))
