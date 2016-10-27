@@ -10,6 +10,8 @@
 [![NuGet FlaUI.UIA2](http://flauschig.ch/nubadge.php?id=FlaUI.UIA2)](https://www.nuget.org/packages/FlaUI.UIA2)
 [![NuGet FlaUI.UIA3](http://flauschig.ch/nubadge.php?id=FlaUI.UIA3)](https://www.nuget.org/packages/FlaUI.UIA3)
 
+[![FlaUInspect](https://img.shields.io/badge/FLaUInspect-CI%20build-brightgreen.svg)](https://ci.appveyor.com/api/projects/RomanBaeriswyl/flaui/artifacts/src%2FFlaUInspect%2Fbin%2FFlaUInspect.zip?branch=master)
+
 ### Introduction
 FlaUI is a .NET library which helps with automated UI testing of Windows applications (Win32, WinForms, WPF, Store Apps, ...).<br />
 It is based on native UI Automation libraries from Microsoft and therefore kind of a wrapper around them.<br />
