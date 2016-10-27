@@ -137,9 +137,16 @@ namespace FlaUInspect.ViewModels
                 var nextElementVm = FindElement(elementVm, elementOnPath);
                 if (nextElementVm == null)
                 {
-                    // The next element was not found but it should have been found
-                    Console.WriteLine("NOT FOUND!");
-                    break;
+                    // Could not find next element, try reloading the parent
+                    elementVm.LoadChildren(true);
+                    // Now search again
+                    nextElementVm = FindElement(elementVm, elementOnPath);
+                    if (nextElementVm == null)
+                    {
+                        // The next element is still not found, exit the loop
+                        Console.WriteLine("NOT FOUND!");
+                        break;
+                    }
                 }
                 elementVm = nextElementVm;
                 if (!elementVm.IsExpanded)

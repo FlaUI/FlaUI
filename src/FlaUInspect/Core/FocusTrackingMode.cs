@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Windows.Threading;
 using FlaUI.Core;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.EventHandlers;
@@ -30,10 +32,19 @@ namespace FlaUInspect.Core
 
         private void OnFocusChanged(AutomationElement automationElement)
         {
+            // Skip items in the current process
+            // Like Inspect itself or the overlay window
+            if (automationElement.Current.ProcessId == Process.GetCurrentProcess().Id)
+            {
+                return;
+            }
             if (!Equals(_currentFocusedElement, automationElement))
             {
                 _currentFocusedElement = automationElement;
-                ElementFocused?.Invoke(automationElement);
+                System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                {
+                    ElementFocused?.Invoke(automationElement);
+                });
             }
         }
     }
