@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Windows.Threading;
+using System.Threading.Tasks;
 using FlaUI.Core;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.EventHandlers;
@@ -22,7 +22,9 @@ namespace FlaUInspect.Core
 
         public void Start()
         {
-            _eventHandler = _automation.RegisterFocusChangedEvent(OnFocusChanged);
+            // Might give problems because inspect is registered as well.
+            // MS recommends to call UIA commands on a thread outside of an UI thread.
+            Task.Factory.StartNew(() => _eventHandler = _automation.RegisterFocusChangedEvent(OnFocusChanged));
         }
 
         public void Stop()
