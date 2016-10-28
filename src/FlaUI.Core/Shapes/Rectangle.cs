@@ -131,5 +131,7 @@ namespace FlaUI.Core.Shapes
         {
             return new Point(Left + by, Center.Y);
         }
+
+        public static Rectangle Empty => new Rectangle(0, 0, 0, 0);
     }
 }

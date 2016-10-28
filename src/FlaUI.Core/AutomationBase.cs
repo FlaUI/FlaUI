@@ -18,7 +18,7 @@ namespace FlaUI.Core
             EventLibrary = eventLibrary;
             PatternLibrary = patternLibrary;
             ConditionFactory = new ConditionFactory(propertyLibrary);
-            OverlayManager = new OverlayManager();
+            OverlayManager = new WinFormsOverlayManager();
         }
 
         public IPropertyLibray PropertyLibrary { get; }
@@ -31,7 +31,7 @@ namespace FlaUI.Core
 
         public ConditionFactory ConditionFactory { get; }
 
-        public OverlayManager OverlayManager { get; }
+        public IOverlayManager OverlayManager { get; }
 
         /// <summary>
         /// The automation type of the automation implementation

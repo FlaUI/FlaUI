@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Controls;
@@ -21,12 +22,14 @@ namespace FlaUI.Core.Overlay
             Topmost = true;
             ShowActivated = false;
             ShowInTaskbar = false;
-            Background = new SolidColorBrush(Colors.White) { Opacity = 0 };
+            Background = Brushes.Transparent;
             Top = rectangle.Top;
             Left = rectangle.Left;
             Width = rectangle.Width;
             Height = rectangle.Height;
-            Content = new Border { BorderThickness = new Thickness(2), BorderBrush = new SolidColorBrush(color) };
+            var borderBrush = new SolidColorBrush(color);
+            borderBrush.Freeze();
+            Content = new Border { BorderThickness = new Thickness(2), BorderBrush = borderBrush };
             StartCloseTimer(TimeSpan.FromMilliseconds(durationInMs));
         }
 
@@ -46,7 +49,7 @@ namespace FlaUI.Core.Overlay
 
         private void StartCloseTimer(TimeSpan closeTimeout)
         {
-            var timer = new DispatcherTimer { Interval = closeTimeout };
+            var timer = new DispatcherTimer {Interval = closeTimeout};
             timer.Tick += TimerTick;
             timer.Start();
         }
@@ -54,8 +57,8 @@ namespace FlaUI.Core.Overlay
         private void TimerTick(object sender, EventArgs e)
         {
             var timer = (DispatcherTimer)sender;
-            timer.Stop();
             timer.Tick -= TimerTick;
+            timer.Stop();
             Close();
         }
     }

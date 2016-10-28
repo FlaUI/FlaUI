@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Media;
+using System.Threading.Tasks;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
@@ -16,8 +16,8 @@ namespace FlaUInspect.ViewModels
         public ElementViewModel(AutomationElement automationElement)
         {
             AutomationElement = automationElement;
-            Children = new ObservableCollection<ElementViewModel>();
-            ItemDetails = new ObservableCollection<DetailViewModel>();
+            Children = new ExtendedObservableCollection<ElementViewModel>();
+            ItemDetails = new ExtendedObservableCollection<DetailViewModel>();
         }
 
         public AutomationElement AutomationElement { get; }
@@ -30,25 +30,18 @@ namespace FlaUInspect.ViewModels
                 SetProperty(value);
                 if (value)
                 {
-                    AutomationElement.DrawHighlight(false, Colors.Red, 1000);
-                    ItemDetails.Clear();
-                    ItemDetails.Add(new DetailViewModel("AutomationId", AutomationElement.Current.AutomationId));
-                    ItemDetails.Add(new DetailViewModel("Name", AutomationElement.Current.Name));
-                    ItemDetails.Add(new DetailViewModel("ClassName", AutomationElement.Current.ClassName));
-                    ItemDetails.Add(new DetailViewModel("ControlType", AutomationElement.Current.ControlType));
-                    ItemDetails.Add(new DetailViewModel("LocalizedControlType", AutomationElement.Current.LocalizedControlType));
-                    ItemDetails.Add(new DetailViewModel("FrameworkType", AutomationElement.FrameworkType));
-                    ItemDetails.Add(new DetailViewModel("FrameworkId", AutomationElement.Current.FrameworkId));
-                    ItemDetails.Add(new DetailViewModel("ProcessId", AutomationElement.Current.ProcessId));
-                    ItemDetails.Add(new DetailViewModel("BoundingRectangle", AutomationElement.Current.BoundingRectangle));
-
-                    var allPatterns = AutomationElement.Automation.PatternLibrary.AllSupportedPatterns;
-                    var allElementPatterns = AutomationElement.BasicAutomationElement.GetSupportedPatterns();
-                    foreach (var pattern in allPatterns)
+                    ElementHighlighter.HighlightElement(AutomationElement);
+                    // Async load details
+                    var task = Task.Run(() =>
                     {
-                        ItemDetails.Add(new DetailViewModel(pattern.Name + "Pattern", allElementPatterns.Contains(pattern) ? "yes" : "no"));
-                    }
+                        var details = LoadDetails();
+                        return details;
+                    }).ContinueWith(items =>
+                    {
+                        ItemDetails.Reset(items.Result);
+                    }, TaskScheduler.FromCurrentSynchronizationContext());
 
+                    // Fire the selection event
                     SelectionChanged?.Invoke(this);
                 }
             }
@@ -70,8 +63,51 @@ namespace FlaUInspect.ViewModels
         public string Name => NormalizeString(AutomationElement.Current.Name);
         public string AutomationId => NormalizeString(AutomationElement.Current.AutomationId);
         public ControlType ControlType => AutomationElement.Current.ControlType;
-        public ObservableCollection<ElementViewModel> Children { get; set; }
-        public ObservableCollection<DetailViewModel> ItemDetails { get; set; }
+        public ExtendedObservableCollection<ElementViewModel> Children { get; set; }
+        public ExtendedObservableCollection<DetailViewModel> ItemDetails { get; set; }
+
+        public void LoadChildren(bool loadInnerChildren)
+        {
+            foreach (var child in Children)
+            {
+                child.SelectionChanged -= SelectionChanged;
+            }
+            var childrenViewModels = new List<ElementViewModel>();
+            foreach (var child in AutomationElement.FindAll(TreeScope.Children, new TrueCondition(), TimeSpan.Zero))
+            {
+                var childViewModel = new ElementViewModel(child);
+                childViewModel.SelectionChanged += SelectionChanged;
+                childrenViewModels.Add(childViewModel);
+                if (loadInnerChildren)
+                {
+                    childViewModel.LoadChildren(false);
+                }                
+            }
+            Children.Reset(childrenViewModels);
+        }
+
+        private List<DetailViewModel> LoadDetails()
+        {
+            var details = new List<DetailViewModel>();
+            // Element details
+            details.Add(new DetailViewModel("AutomationId", AutomationElement.Current.AutomationId));
+            details.Add(new DetailViewModel("Name", AutomationElement.Current.Name));
+            details.Add(new DetailViewModel("ClassName", AutomationElement.Current.ClassName));
+            details.Add(new DetailViewModel("ControlType", AutomationElement.Current.ControlType));
+            details.Add(new DetailViewModel("LocalizedControlType", AutomationElement.Current.LocalizedControlType));
+            details.Add(new DetailViewModel("FrameworkType", AutomationElement.FrameworkType));
+            details.Add(new DetailViewModel("FrameworkId", AutomationElement.Current.FrameworkId));
+            details.Add(new DetailViewModel("ProcessId", AutomationElement.Current.ProcessId));
+            details.Add(new DetailViewModel("BoundingRectangle", AutomationElement.Current.BoundingRectangle));
+            // Pattern details
+            var allSupportedPatterns = AutomationElement.BasicAutomationElement.GetSupportedPatterns();
+            var allPatterns = AutomationElement.Automation.PatternLibrary.AllSupportedPatterns;
+            foreach (var pattern in allPatterns)
+            {
+                details.Add(new DetailViewModel(pattern.Name + "Pattern", allSupportedPatterns.Contains(pattern) ? "Yes" : "No"));
+            }
+            return details;
+        }
 
         private string NormalizeString(string value)
         {
@@ -82,23 +118,5 @@ namespace FlaUInspect.ViewModels
             return value.Replace(Environment.NewLine, " ").Replace('\r', ' ').Replace('\n', ' ');
         }
 
-        public void LoadChildren(bool loadChild)
-        {
-            foreach (var child in Children)
-            {
-                child.SelectionChanged -= SelectionChanged;
-            }
-            Children.Clear();
-            foreach (var child in AutomationElement.FindAll(TreeScope.Children, new TrueCondition(), TimeSpan.Zero))
-            {
-                var childViewModel = new ElementViewModel(child);
-                childViewModel.SelectionChanged += SelectionChanged;
-                if (loadChild)
-                {
-                    childViewModel.LoadChildren(false);
-                }
-                Children.Add(childViewModel);
-            }
-        }
     }
 }

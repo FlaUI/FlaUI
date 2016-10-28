@@ -57,6 +57,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Core\ElementHighlighter.cs" />
+    <Compile Include="Core\ExtendedObservableCollection.cs" />
     <Compile Include="Core\FocusTrackingMode.cs" />
     <Compile Include="Core\HoverMode.cs" />
     <Compile Include="Core\ObservableObject.cs" />

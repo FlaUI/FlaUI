@@ -38,6 +38,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -149,7 +150,12 @@
     <Compile Include="ITreeWalkerFactory.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
-    <Compile Include="Overlay\OverlayManager.cs" />
+    <Compile Include="Overlay\IOverlayManager.cs" />
+    <Compile Include="Overlay\OverlayRectangleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Overlay\WinFormsOverlayManager.cs" />
+    <Compile Include="Overlay\WpfOverlayManager.cs" />
     <Compile Include="Overlay\OverlayRectangleWindow.cs" />
     <Compile Include="Patterns\IAnnotationPattern.cs" />
     <Compile Include="Patterns\IDockPattern.cs" />

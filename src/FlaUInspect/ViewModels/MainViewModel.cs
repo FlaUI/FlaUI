@@ -64,7 +64,9 @@ namespace FlaUInspect.ViewModels
 
         public ICommand StartNewInstanceCommand { get; private set; }
 
-        public ObservableCollection<DetailViewModel> SelectedItemDetails { get; set; }
+        public ObservableCollection<DetailViewModel> SelectedItemDetails => SelectedItemInTree?.ItemDetails;
+
+        public ElementViewModel SelectedItemInTree { get { return GetProperty<ElementViewModel>(); } private set { SetProperty(value); } }
 
         public void Initialize(AutomationType selectedAutomationType)
         {
@@ -167,7 +169,7 @@ namespace FlaUInspect.ViewModels
 
         private void DesktopViewModel_SelectionChanged(ElementViewModel obj)
         {
-            SelectedItemDetails = obj.ItemDetails;
+            SelectedItemInTree = obj;
             OnPropertyChanged(() => SelectedItemDetails);
         }
     }

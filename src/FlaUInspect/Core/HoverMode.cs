@@ -52,6 +52,10 @@ namespace FlaUInspect.Core
                     _currentHoveredElement = hoveredElement;
                     ElementHovered?.Invoke(hoveredElement);
                 }
+                else
+                {
+                    ElementHighlighter.HighlightElement(hoveredElement);
+                }
             }
         }
     }
