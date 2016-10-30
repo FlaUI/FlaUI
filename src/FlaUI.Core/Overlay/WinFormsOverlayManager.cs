@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using FlaUI.Core.Shapes;
 using FlaUI.Core.Tools;
 using FlaUI.Core.WindowsAPI;
@@ -16,11 +17,7 @@ namespace FlaUI.Core.Overlay
         {
             if (rectangle.IsValid)
             {
-                var showThread = new Thread(() =>
-                {
-                    CreateAndShowForms(rectangle, color, durationInMs);
-                });
-                showThread.Start();
+                Task.Run(() => CreateAndShowForms(rectangle, color, durationInMs));
             }
         }
 
