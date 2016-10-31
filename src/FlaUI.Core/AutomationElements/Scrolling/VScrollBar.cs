@@ -1,4 +1,6 @@
-﻿namespace FlaUI.Core.AutomationElements.Scrolling
+﻿using System;
+
+namespace FlaUI.Core.AutomationElements.Scrolling
 {
     public class VScrollBar : ScrollBarBase
     {
@@ -15,9 +17,17 @@
                     case FrameworkType.Wpf:
                         return "PART_LineUpButton";
                     case FrameworkType.WinForms:
-                        return "UpButton";
+                        switch (AutomationType)
+                        {
+                            case AutomationType.UIA2:
+                                return "SmallDecrement";
+                            case AutomationType.UIA3:
+                                return "UpButton";
+                            default:
+                                throw new ArgumentOutOfRangeException();
+                        }
                     default:
-                        return "SmallDecrement";
+                        throw new ArgumentOutOfRangeException();
                 }
             }
         }
@@ -31,9 +41,17 @@
                     case FrameworkType.Wpf:
                         return "PART_LineDownButton";
                     case FrameworkType.WinForms:
-                        return "DownButton";
+                        switch (AutomationType)
+                        {
+                            case AutomationType.UIA2:
+                                return "SmallIncrement";
+                            case AutomationType.UIA3:
+                                return "DownButton";
+                            default:
+                                throw new ArgumentOutOfRangeException();
+                        }
                     default:
-                        return "SmallIncrement";
+                        throw new ArgumentOutOfRangeException();
                 }
             }
         }
@@ -47,9 +65,17 @@
                     case FrameworkType.Wpf:
                         return "PageUp";
                     case FrameworkType.WinForms:
-                        return "DownPageButton";
+                        switch (AutomationType)
+                        {
+                            case AutomationType.UIA2:
+                                return "LargeDecrement";
+                            case AutomationType.UIA3:
+                                return "DownPageButton";
+                            default:
+                                throw new ArgumentOutOfRangeException();
+                        }
                     default:
-                        return "LargeDecrement";
+                        throw new ArgumentOutOfRangeException();
                 }
             }
         }
@@ -63,9 +89,17 @@
                     case FrameworkType.Wpf:
                         return "PageDown";
                     case FrameworkType.WinForms:
-                        return "UpPageButton";
+                        switch (AutomationType)
+                        {
+                            case AutomationType.UIA2:
+                                return "LargeIncrement";
+                            case AutomationType.UIA3:
+                                return "UpPageButton";
+                            default:
+                                throw new ArgumentOutOfRangeException();
+                        }
                     default:
-                        return "LargeIncrement";
+                        throw new ArgumentOutOfRangeException();
                 }
             }
         }
