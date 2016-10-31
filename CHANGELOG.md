@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.4.1 (2016-10-31)
+
+### Enhancements
+  * Implemented all text patterns
+  * Exposed all property, event and textAttrbute ids
+  * Implemented ScrollBars
+  * Changed the OverlayManager to WinForms (faster and needs less memory than the WPF one)
+
+### Bug fixes
+  * Reduced the amount of classes created
+
 ## 0.4.0 (2016-10-20)
 
 ### Enhancements
