@@ -53,6 +53,9 @@
                                                     <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.Button}">
                                                         <Setter Property="Source" Value="/Resources/Button.png" />
                                                     </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.Calendar}">
+                                                        <Setter Property="Source" Value="/Resources/Calendar.png" />
+                                                    </DataTrigger>
                                                     <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.CheckBox}">
                                                         <Setter Property="Source" Value="/Resources/CheckBox.png" />
                                                     </DataTrigger>
@@ -187,7 +190,20 @@
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <TextBox Grid.Column="0" IsReadOnly="True" Text="{Binding Key}" />
-                                    <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding Value}" Margin="5,0,0,0"/>
+                                    <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding Value}" Margin="5,0,0,0">
+                                        <TextBox.Style>
+                                            <Style>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Value}" Value="No">
+                                                        <Setter Property="TextBox.Foreground" Value="Red" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Value}" Value="Yes">
+                                                        <Setter Property="TextBox.Foreground" Value="Green" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBox.Style>
+                                    </TextBox>
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

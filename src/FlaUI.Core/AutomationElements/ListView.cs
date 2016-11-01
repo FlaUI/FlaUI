@@ -132,12 +132,12 @@ namespace FlaUI.Core.AutomationElements
 
         public IScrollItemPattern ScrollItemPattern => PatternFactory.GetScrollItemPattern();
 
-        public AutomationElement[] Cells
+        public ListViewCell[] Cells
         {
             get
             {
                 var cells = FindAll(TreeScope.Children, new BoolCondition(true));
-                return cells.ToArray();
+                return cells.Select(x => new ListViewCell(x.BasicAutomationElement)).ToArray();
             }
         }
 
@@ -150,5 +150,14 @@ namespace FlaUI.Core.AutomationElements
             }
             return this;
         }
+    }
+
+    public class ListViewCell : AutomationElement
+    {
+        public ListViewCell(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        {
+        }
+
+        public IGridItemPattern GridItemPattern => PatternFactory.GetGridItemPattern();
     }
 }
