@@ -2,15 +2,14 @@
 using System.Linq;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.AutomationElements.PatternElements;
-using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Patterns;
 
 namespace FlaUI.Core.AutomationElements
 {
-    public class ListView : AutomationElement
+    public class Grid : AutomationElement
     {
-        public ListView(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public Grid(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 
@@ -42,25 +41,25 @@ namespace FlaUI.Core.AutomationElements
             }
         }
 
-        public ListViewHeader Header
+        public GridHeader Header
         {
             get
             {
                 var header = FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Header));
-                return new ListViewHeader(header.BasicAutomationElement);
+                return new GridHeader(header.BasicAutomationElement);
             }
         }
 
-        public ListViewRow[] Rows
+        public GridRow[] Rows
         {
             get
             {
                 var rows = FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.DataItem).Or(ConditionFactory.ByControlType(ControlType.ListItem)));
-                return rows.Select(x => new ListViewRow(x.BasicAutomationElement)).ToArray();
+                return rows.Select(x => new GridRow(x.BasicAutomationElement)).ToArray();
             }
         }
 
-        public ListViewRow Select(int index)
+        public GridRow Select(int index)
         {
             var rows = Rows;
             PreCheckRow(rows.Length, index);
@@ -70,7 +69,7 @@ namespace FlaUI.Core.AutomationElements
             return rowToSelect;
         }
 
-        public ListViewRow AddToSelection(int index)
+        public GridRow AddToSelection(int index)
         {
             var rows = Rows;
             PreCheckRow(rows.Length, index);
@@ -80,7 +79,7 @@ namespace FlaUI.Core.AutomationElements
             return rowToSelect;
         }
 
-        public ListViewRow RemoveFromSelection(int index)
+        public GridRow RemoveFromSelection(int index)
         {
             var rows = Rows;
             PreCheckRow(rows.Length, index);
@@ -94,54 +93,63 @@ namespace FlaUI.Core.AutomationElements
         {
             if (numRows <= index)
             {
-                throw new Exception($"ListView contains only {numRows} rows but index {index} were requested");
+                throw new Exception($"Grid contains only {numRows} rows but index {index} were requested");
             }
         }
     }
 
-    public class ListViewHeader : AutomationElement
+    public class GridHeader : AutomationElement
     {
-        public ListViewHeader(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public GridHeader(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 
-        public ListViewColumn[] Columns
+        public GridHeaderItem[] Columns
         {
             get
             {
-                var columns = FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.HeaderItem));
-                return columns.Select(x => new ListViewColumn(x.BasicAutomationElement)).ToArray();
+                var headerItems = FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.HeaderItem));
+                return headerItems.Select(x => new GridHeaderItem(x.BasicAutomationElement)).ToArray();
             }
         }
     }
 
-    public class ListViewColumn : AutomationElement
+    public class GridHeaderItem : AutomationElement
     {
-        public ListViewColumn(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public GridHeaderItem(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 
         public string Text => Current.Name;
     }
 
-    public class ListViewRow : SelectionItemAutomationElement
+    public class GridRow : SelectionItemAutomationElement
     {
-        public ListViewRow(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public GridRow(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 
         public IScrollItemPattern ScrollItemPattern => PatternFactory.GetScrollItemPattern();
 
-        public ListViewCell[] Cells
+        public GridCell[] Cells
         {
             get
             {
-                var cells = FindAll(TreeScope.Children, new BoolCondition(true));
-                return cells.Select(x => new ListViewCell(x.BasicAutomationElement)).ToArray();
+                var cells = FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.HeaderItem).Not());
+                return cells.Select(x => new GridCell(x.BasicAutomationElement)).ToArray();
             }
         }
 
-        public ListViewRow ScrollIntoView()
+        public GridHeaderItem Header
+        {
+            get
+            {
+                var headerItem = FindFirstChild(ConditionFactory.ByControlType(ControlType.HeaderItem));
+                return headerItem == null ? null : new GridHeaderItem(headerItem.BasicAutomationElement);
+            }
+        }
+
+        public GridRow ScrollIntoView()
         {
             var scrollItemPattern = ScrollItemPattern;
             if (scrollItemPattern != null)
@@ -152,9 +160,9 @@ namespace FlaUI.Core.AutomationElements
         }
     }
 
-    public class ListViewCell : AutomationElement
+    public class GridCell : AutomationElement
     {
-        public ListViewCell(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public GridCell(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

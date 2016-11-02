@@ -26,12 +26,11 @@ namespace FlaUI.Core.AutomationElements
                 {
                     return valuePattern.Current.Value;
                 }
-                // TODO: Activate this when the text pattern is implemented
-                //var textPattern = PatternFactory.GetTextPattern();
-                //if (textPattern != null)
-                //{
-                //    return textPattern.DocumentRange.GetText(Int32.MaxValue);
-                //}
+                var textPattern = PatternFactory.GetTextPattern();
+                if (textPattern != null)
+                {
+                    return textPattern.DocumentRange.GetText(Int32.MaxValue);
+                }
                 throw new MethodNotSupportedException(String.Format("AutomationElement '{0}' supports neither ValuePattern or TextPattern", ToString()));
             }
             set

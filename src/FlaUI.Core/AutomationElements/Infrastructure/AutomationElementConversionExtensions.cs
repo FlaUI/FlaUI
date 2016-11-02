@@ -38,13 +38,13 @@
             return new Label(automationElement.BasicAutomationElement);
         }
 
-        public static ListView AsListView(this AutomationElement automationElement)
+        public static Grid AsGrid(this AutomationElement automationElement)
         {
             if (automationElement == null)
             {
                 return null;
             }
-            return new ListView(automationElement.BasicAutomationElement);
+            return new Grid(automationElement.BasicAutomationElement);
         }
 
         public static Menu AsMenu(this AutomationElement automationElement)

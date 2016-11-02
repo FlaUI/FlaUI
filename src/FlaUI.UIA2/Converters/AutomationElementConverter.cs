@@ -37,7 +37,7 @@ namespace FlaUI.UIA2.Converters
             return automation.WrapNativeElement(nativeElement);
         }
 
-        public static UIA.AutomationElement ToNative(AutomationElement automationElement)
+        public static UIA.AutomationElement ToNative(this AutomationElement automationElement)
         {
             if (automationElement == null)
             {

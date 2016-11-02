@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading;
 
 namespace FlaUI.Core.Tools
@@ -8,15 +7,15 @@ namespace FlaUI.Core.Tools
     {
         public static readonly TimeSpan DefaultRetryFor = TimeSpan.FromMilliseconds(1000);
         private static readonly TimeSpan DefaultRetryInterval = TimeSpan.FromMilliseconds(200);
-
-        public static void For(Action action, TimeSpan retryFor, TimeSpan? retryInterval = null)
+        
+        public static void WhileException(Action retryAction, TimeSpan timeout, TimeSpan? retryInterval = null)
         {
             var startTime = DateTime.Now;
-            while (DateTime.Now.Subtract(startTime).TotalMilliseconds < retryFor.TotalMilliseconds)
+            while (DateTime.Now.Subtract(startTime) < timeout)
             {
                 try
                 {
-                    action();
+                    retryAction();
                     return;
                 }
                 catch (Exception)
@@ -24,21 +23,35 @@ namespace FlaUI.Core.Tools
                     Thread.Sleep(retryInterval ?? DefaultRetryInterval);
                 }
             }
-
-            action();
+            retryAction();
         }
 
-        public static T For<T>(Func<T> func, Predicate<T> shouldRetry, TimeSpan retryFor,
-            TimeSpan? retryInterval = null)
+        public static T WhileException<T>(Func<T> retryMethod, TimeSpan timeout, TimeSpan? retryInterval = null)
         {
             var startTime = DateTime.Now;
+            while (DateTime.Now.Subtract(startTime) < timeout)
+            {
+                try
+                {
+                    return retryMethod();
+                }
+                catch (Exception)
+                {
+                    Thread.Sleep(retryInterval ?? DefaultRetryInterval);
+                }
+            }
+            return retryMethod();
+        }
 
-            while (DateTime.Now.Subtract(startTime).TotalMilliseconds < retryFor.TotalMilliseconds)
+        public static T While<T>(Func<T> retryMethod, Predicate<T> whilePredicate, TimeSpan timeout, TimeSpan? retryInterval = null)
+        {
+            var startTime = DateTime.Now;
+            while (DateTime.Now.Subtract(startTime) < timeout)
             {
                 T element;
                 try
                 {
-                    element = func();
+                    element = retryMethod();
                 }
                 catch (Exception)
                 {
@@ -46,15 +59,15 @@ namespace FlaUI.Core.Tools
                     continue;
                 }
 
-               if (shouldRetry(element))
-               {
-                  Thread.Sleep(retryInterval ?? DefaultRetryInterval);
-                  continue;
-               }
-                
+                if (whilePredicate(element))
+                {
+                    Thread.Sleep(retryInterval ?? DefaultRetryInterval);
+                    continue;
+                }
+
                 return element;
             }
-            return func();
+            return retryMethod();
         }
     }
 }

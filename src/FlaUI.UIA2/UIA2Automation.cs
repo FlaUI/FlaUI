@@ -69,6 +69,11 @@ namespace FlaUI.UIA2
             UIA.Automation.RemoveAllEventHandlers();
         }
 
+        public override ICacheRequest CreateCacheRequest()
+        {
+            return new UIA2CacheRequest(this);
+        }
+
         public override bool Compare(AutomationElement element1, AutomationElement element2)
         {
             return UIA.Automation.Compare(AutomationElementConverter.ToNative(element1), AutomationElementConverter.ToNative(element2));

@@ -95,6 +95,11 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             BasicAutomationElement.SetFocus();
         }
 
+        public void FocusNative()
+        {
+            User32.SetFocus(Current.NativeWindowHandle);
+        }
+
         /// <summary>
         /// Brings the element to the foreground
         /// </summary>
@@ -198,7 +203,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         {
             Predicate<AutomationElement[]> shouldRetry = elements => elements.Length == 0;
             Func<AutomationElement[]> func = () => BasicAutomationElement.FindAll(treeScope, condition);
-            return Retry.For(func, shouldRetry, timeOut);
+            return Retry.While(func, shouldRetry, timeOut);
         }
 
         /// <summary>
@@ -216,7 +221,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         {
             Predicate<AutomationElement> shouldRetry = element => element == null;
             Func<AutomationElement> func = () => BasicAutomationElement.FindFirst(treeScope, condition);
-            return Retry.For(func, shouldRetry, timeOut);
+            return Retry.While(func, shouldRetry, timeOut);
         }
 
         public AutomationElement FindFirstNested(params ConditionBase[] nestedConditions)

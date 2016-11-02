@@ -36,7 +36,7 @@ namespace FlaUI.Core.UITests.Patterns
             Assert.That(gridPattern.Current.ColumnCount, Is.EqualTo(2));
             Assert.That(gridPattern.Current.RowCount, Is.EqualTo(7));
             ItemRealizer.RealizeItems(grid);
-            var items = grid.AsListView().Rows;
+            var items = grid.AsGrid().Rows;
             Assert.That(items, Has.Length.EqualTo(gridPattern.Current.RowCount));
             var scrollPattern = grid.PatternFactory.GetScrollPattern();
             Assert.That(scrollPattern, Is.Not.Null);

@@ -66,7 +66,7 @@ namespace FlaUI.Core.Conditions
         /// <summary>
         /// Searches for a DataGrid/List
         /// </summary>
-        public OrCondition ListView()
+        public OrCondition Grid()
         {
             return new OrCondition(ByControlType(ControlType.DataGrid), ByControlType(ControlType.List));
         }

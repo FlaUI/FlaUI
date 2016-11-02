@@ -1,5 +1,7 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.AutomationElements.Infrastructure;
+using FlaUI.UIA2.Converters;
+using FlaUI.UIA2.Tools;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2
@@ -15,33 +17,33 @@ namespace FlaUI.UIA2
             NativeTreeWalker = nativeTreeWalker;
         }
 
-        public AutomationElement GetParent(AutomationElement element)
+        public AutomationElement GetParent(AutomationElement element, ICacheRequest cacheRequest = null)
         {
-            var parent = NativeTreeWalker.GetParent(((UIA2BasicAutomationElement)element.BasicAutomationElement).NativeElement);
+            var parent = NativeTreeWalker.GetParent(element.ToNative(), cacheRequest.ToNative());
             return Automation.WrapNativeElement(parent);
         }
 
-        public AutomationElement GetFirstChild(AutomationElement element)
+        public AutomationElement GetFirstChild(AutomationElement element, ICacheRequest cacheRequest = null)
         {
-            var child = NativeTreeWalker.GetFirstChild(((UIA2BasicAutomationElement)element.BasicAutomationElement).NativeElement);
+            var child = NativeTreeWalker.GetFirstChild(element.ToNative(), cacheRequest.ToNative());
             return Automation.WrapNativeElement(child);
         }
 
-        public AutomationElement GetLastChild(AutomationElement element)
+        public AutomationElement GetLastChild(AutomationElement element, ICacheRequest cacheRequest = null)
         {
-            var child = NativeTreeWalker.GetLastChild(((UIA2BasicAutomationElement)element.BasicAutomationElement).NativeElement);
+            var child = NativeTreeWalker.GetLastChild(element.ToNative(), cacheRequest.ToNative());
             return Automation.WrapNativeElement(child);
         }
 
-        public AutomationElement GetNextSibling(AutomationElement element)
+        public AutomationElement GetNextSibling(AutomationElement element, ICacheRequest cacheRequest = null)
         {
-            var child = NativeTreeWalker.GetNextSibling(((UIA2BasicAutomationElement)element.BasicAutomationElement).NativeElement);
+            var child = NativeTreeWalker.GetNextSibling(element.ToNative(), cacheRequest.ToNative());
             return Automation.WrapNativeElement(child);
         }
 
-        public AutomationElement GetPreviousSibling(AutomationElement element)
+        public AutomationElement GetPreviousSibling(AutomationElement element, ICacheRequest cacheRequest = null)
         {
-            var child = NativeTreeWalker.GetPreviousSibling(((UIA2BasicAutomationElement)element.BasicAutomationElement).NativeElement);
+            var child = NativeTreeWalker.GetPreviousSibling(element.ToNative(), cacheRequest.ToNative());
             return Automation.WrapNativeElement(child);
         }
     }

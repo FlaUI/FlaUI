@@ -18,6 +18,9 @@ namespace FlaUI.Core.WindowsAPI
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool SetForegroundWindow(IntPtr windowHandle);
 
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern IntPtr SetFocus(IntPtr hWnd);
+
         [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true, SetLastError = true)]
         internal static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 

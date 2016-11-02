@@ -100,6 +100,11 @@ namespace FlaUI.UIA3
             }
         }
 
+        public override ICacheRequest CreateCacheRequest()
+        {
+            return new UIA3CacheRequest(this);
+        }
+
         public override bool Compare(AutomationElement element1, AutomationElement element2)
         {
             return NativeAutomation.CompareElements(AutomationElementConverter.ToNative(element1), AutomationElementConverter.ToNative(element2)) != 0;

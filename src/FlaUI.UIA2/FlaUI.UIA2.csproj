@@ -74,6 +74,7 @@
     <Compile Include="Patterns\WindowPattern.cs" />
     <Compile Include="Converters\ConditionConverter.cs" />
     <Compile Include="Converters\ValueConverter.cs" />
+    <Compile Include="Tools\CacheRequestExtensions.cs" />
     <Compile Include="UIA2AutomationElementProperties.cs" />
     <Compile Include="UIA2PatternFactory.cs" />
     <Compile Include="Patterns\ValuePattern.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="UIA2TextRange.cs" />
     <Compile Include="UIA2AutomationElementEvents.cs" />
     <Compile Include="UIA2EventLibrary.cs" />
+    <Compile Include="UIA2CacheRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlaUI.Core\FlaUI.Core.csproj">
