@@ -53,36 +53,36 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
 
         public void Click(bool moveMouse = true)
         {
-            PerformMouseAction(moveMouse, mouse => mouse.Click(MouseButton.Left));
+            PerformMouseAction(moveMouse, Mouse.LeftClick);
         }
 
         public void DoubleClick(bool moveMouse = true)
         {
-            PerformMouseAction(moveMouse, mouse => mouse.DoubleClick(MouseButton.Left));
+            PerformMouseAction(moveMouse, Mouse.LeftDoubleClick);
         }
 
         public void RightClick(bool moveMouse = true)
         {
-            PerformMouseAction(moveMouse, mouse => mouse.Click(MouseButton.Right));
+            PerformMouseAction(moveMouse, Mouse.RightClick);
         }
 
         public void RightDoubleClick(bool moveMouse = true)
         {
-            PerformMouseAction(moveMouse, mouse => mouse.DoubleClick(MouseButton.Right));
+            PerformMouseAction(moveMouse, Mouse.RightDoubleClick);
         }
 
-        private void PerformMouseAction(bool moveMouse, Action<IMouse> action)
+        private void PerformMouseAction(bool moveMouse, Action action)
         {
             var clickablePoint = GetClickablePoint();
             if (moveMouse)
             {
-                Mouse.Instance.MoveTo(clickablePoint);
+                Mouse.MoveTo(clickablePoint);
             }
             else
             {
-                Mouse.Instance.Position = clickablePoint;
+                Mouse.Position = clickablePoint;
             }
-            action(Mouse.Instance);
+            action();
             Helpers.WaitUntilInputIsProcessed();
         }
 
@@ -90,7 +90,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// Sets the focus to this element
         /// Warning: This can be unreliable! <see cref="SetForeground" /> should be more reliable
         /// </summary>
-        public void Focus()
+        public virtual void Focus()
         {
             BasicAutomationElement.SetFocus();
         }

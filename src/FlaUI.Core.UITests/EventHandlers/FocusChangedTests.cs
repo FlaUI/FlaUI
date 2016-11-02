@@ -27,9 +27,9 @@ namespace FlaUI.Core.UITests.EventHandlers
                 button1.AsButton().Invoke();
                 Thread.Sleep(100);
                 var radio2 = mainWindow.FindFirst(TreeScope.Descendants, automation.ConditionFactory.ByControlType(ControlType.RadioButton).And(automation.ConditionFactory.ByText(GetPixelsText())));
-                Mouse.Instance.Click(MouseButton.Left, radio2.GetClickablePoint());
+                Mouse.Click(MouseButton.Left, radio2.GetClickablePoint());
                 Thread.Sleep(100);
-                Keyboard.Instance.PressVirtualKeyCode(VirtualKeyShort.ESCAPE);
+                Keyboard.PressVirtualKeyCode(VirtualKeyShort.ESCAPE);
                 Thread.Sleep(100);
                 automation.UnRegisterFocusChangedEvent(x);
                 mainWindow.Close();

@@ -13,11 +13,10 @@ namespace FlaUI.Core.UITests
         [Test]
         public void MoveTest()
         {
-            var mouse = new Mouse();
-            mouse.Position = new Point(0, 0);
-            mouse.MoveBy(800, 0);
-            mouse.MoveBy(0, 400);
-            mouse.MoveBy(-400, -200);
+            Mouse.Position = new Point(0, 0);
+            Mouse.MoveBy(800, 0);
+            Mouse.MoveBy(0, 400);
+            Mouse.MoveBy(-400, -200);
         }
 
         [Test]
@@ -29,11 +28,11 @@ namespace FlaUI.Core.UITests
                 var mainWindow = app.GetMainWindow(automation);
                 var mouseX = mainWindow.Current.BoundingRectangle.Left + 50;
                 var mouseY = mainWindow.Current.BoundingRectangle.Top + 200;
-                Mouse.Instance.Position = new Point(mouseX, mouseY);
-                Mouse.Instance.Down(MouseButton.Left);
-                Mouse.Instance.MoveBy(100, 10);
-                Mouse.Instance.MoveBy(10, 50);
-                Mouse.Instance.Up(MouseButton.Left);
+                Mouse.Position = new Point(mouseX, mouseY);
+                Mouse.Down(MouseButton.Left);
+                Mouse.MoveBy(100, 10);
+                Mouse.MoveBy(10, 50);
+                Mouse.Up(MouseButton.Left);
                 Thread.Sleep(500);
                 TestUtilities.CloseWindowWithDontSave(mainWindow);
             }

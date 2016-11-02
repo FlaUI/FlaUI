@@ -23,7 +23,7 @@ namespace FlaUI.Core.UITests.Elements
             RestartApp();
             var window = App.GetMainWindow(Automation);
             var btn = window.FindFirst(TreeScope.Descendants, Automation.ConditionFactory.ByName("ContextMenu")).AsButton();
-            Mouse.Instance.Click(MouseButton.Right, btn.GetClickablePoint());
+            Mouse.Click(MouseButton.Right, btn.GetClickablePoint());
             Helpers.WaitUntilInputIsProcessed();
             var ctxMenu = window.ContextMenu;
             Assert.That(ctxMenu, Is.Not.Null);

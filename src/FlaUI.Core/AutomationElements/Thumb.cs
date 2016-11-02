@@ -15,7 +15,7 @@ namespace FlaUI.Core.AutomationElements
         /// <param name="distance">+ for right, - for left</param>
         public void SlideHorizontally(int distance)
         {
-            Mouse.Instance.DragHorizontally(MouseButton.Left, Current.BoundingRectangle.Center, distance);
+            Mouse.DragHorizontally(MouseButton.Left, Current.BoundingRectangle.Center, distance);
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace FlaUI.Core.AutomationElements
         /// <param name="distance">+ for down, - for up</param>
         public void SlideVertically(int distance)
         {
-            Mouse.Instance.DragVertically(MouseButton.Left, Current.BoundingRectangle.Center, distance);
+            Mouse.DragVertically(MouseButton.Left, Current.BoundingRectangle.Center, distance);
         }
     }
 }

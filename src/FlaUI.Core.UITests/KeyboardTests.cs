@@ -18,18 +18,18 @@ namespace FlaUI.Core.UITests
             {
                 var mainWindow = app.GetMainWindow(automation);
 
-                Keyboard.Instance.Write("ééééééööööö aaa | ");
+                Keyboard.Write("ééééééööööö aaa | ");
 
-                Keyboard.Instance.TypeVirtualKeyCode(VirtualKeyShort.KEY_Z);
-                Keyboard.Instance.TypeVirtualKeyCode(VirtualKeyShort.LEFT);
-                Keyboard.Instance.TypeVirtualKeyCode(VirtualKeyShort.DELETE);
-                Keyboard.Instance.TypeVirtualKeyCode(VirtualKeyShort.KEY_Y);
-                Keyboard.Instance.TypeVirtualKeyCode(VirtualKeyShort.BACK);
-                Keyboard.Instance.TypeVirtualKeyCode(VirtualKeyShort.KEY_X);
+                Keyboard.TypeVirtualKeyCode(VirtualKeyShort.KEY_Z);
+                Keyboard.TypeVirtualKeyCode(VirtualKeyShort.LEFT);
+                Keyboard.TypeVirtualKeyCode(VirtualKeyShort.DELETE);
+                Keyboard.TypeVirtualKeyCode(VirtualKeyShort.KEY_Y);
+                Keyboard.TypeVirtualKeyCode(VirtualKeyShort.BACK);
+                Keyboard.TypeVirtualKeyCode(VirtualKeyShort.KEY_X);
 
-                Keyboard.Instance.Write(" | ");
+                Keyboard.Write(" | ");
 
-                Keyboard.Instance.Write("ঋ ঌ এ ঐ ও ঔ ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ");
+                Keyboard.Write("ঋ ঌ এ ঐ ও ঔ ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ");
 
                 Thread.Sleep(500);
 

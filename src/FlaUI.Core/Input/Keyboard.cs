@@ -8,11 +8,9 @@ namespace FlaUI.Core.Input
     /// <summary>
     /// Implementation for the keyboard
     /// </summary>
-    public class Keyboard : IKeyboard
+    public static class Keyboard
     {
-        public static readonly IKeyboard Instance = new Keyboard();
-
-        public void Type(char character)
+        public static void Type(char character)
         {
             var code = User32.VkKeyScan(character);
             // Check if the char is unicode or no virtual key could be found
@@ -58,54 +56,54 @@ namespace FlaUI.Core.Input
             }
         }
 
-        public void TypeScanCode(ushort scanCode, bool isExtendedKey)
+        public static void TypeScanCode(ushort scanCode, bool isExtendedKey)
         {
             PressScanCode(scanCode, isExtendedKey);
             ReleaseScanCode(scanCode, isExtendedKey);
         }
 
-        public void TypeVirtualKeyCode(ushort virtualKeyCode)
+        public static void TypeVirtualKeyCode(ushort virtualKeyCode)
         {
             PressVirtualKeyCode(virtualKeyCode);
             ReleaseVirtualKeyCode(virtualKeyCode);
         }
 
-        public void TypeVirtualKeyCode(VirtualKeyShort virtualKey)
+        public static void TypeVirtualKeyCode(VirtualKeyShort virtualKey)
         {
             TypeVirtualKeyCode((ushort)virtualKey);
         }
 
-        public void PressScanCode(ushort scanCode, bool isExtendedKey)
+        public static void PressScanCode(ushort scanCode, bool isExtendedKey)
         {
             SendInput(scanCode, true, true, isExtendedKey, false);
         }
 
-        public void PressVirtualKeyCode(ushort virtualKeyCode)
+        public static void PressVirtualKeyCode(ushort virtualKeyCode)
         {
             SendInput(virtualKeyCode, true, false, false, false);
         }
 
-        public void PressVirtualKeyCode(VirtualKeyShort virtualKey)
+        public static void PressVirtualKeyCode(VirtualKeyShort virtualKey)
         {
             PressVirtualKeyCode((ushort)virtualKey);
         }
 
-        public void ReleaseScanCode(ushort scanCode, bool isExtendedKey)
+        public static void ReleaseScanCode(ushort scanCode, bool isExtendedKey)
         {
             SendInput(scanCode, false, true, isExtendedKey, false);
         }
 
-        public void ReleaseVirtualKeyCode(ushort virtualKeyCode)
+        public static void ReleaseVirtualKeyCode(ushort virtualKeyCode)
         {
             SendInput(virtualKeyCode, false, false, false, false);
         }
 
-        public void ReleaseVirtualKeyCode(VirtualKeyShort virtualKey)
+        public static void ReleaseVirtualKeyCode(VirtualKeyShort virtualKey)
         {
             ReleaseVirtualKeyCode((ushort)virtualKey);
         }
 
-        public void Write(string textToWrite)
+        public static void Write(string textToWrite)
         {
             foreach (var c in textToWrite)
             {
@@ -116,7 +114,7 @@ namespace FlaUI.Core.Input
         /// <summary>
         /// Checks if a given byte has a specific VkKeyScan-modifier set
         /// </summary>
-        private bool HasScanModifier(byte b, VkKeyScanModifiers modifierToTest)
+        private static bool HasScanModifier(byte b, VkKeyScanModifiers modifierToTest)
         {
             return (VkKeyScanModifiers)(b & (byte)modifierToTest) == modifierToTest;
         }
@@ -129,7 +127,7 @@ namespace FlaUI.Core.Input
         /// <param name="isScanCode">Flag if the code is the scan code or the virtual key code</param>
         /// <param name="isExtended">Flag if the key is an extended key</param>
         /// <param name="isUnicode">Flag if the key is unicode</param>
-        private void SendInput(ushort keyCode, bool isKeyDown, bool isScanCode, bool isExtended, bool isUnicode)
+        private static void SendInput(ushort keyCode, bool isKeyDown, bool isScanCode, bool isExtended, bool isUnicode)
         {
             // Prepare the basic object
             var keyboardInput = new KEYBDINPUT

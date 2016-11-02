@@ -138,9 +138,6 @@
     <Compile Include="Identifiers\TextAttributeId.cs" />
     <Compile Include="IEventLibrary.cs" />
     <Compile Include="Input\Helpers.cs" />
-    <Compile Include="Input\IKeyboard.cs" />
-    <Compile Include="Input\IMouse.cs" />
-    <Compile Include="Input\ITouch.cs" />
     <Compile Include="Input\Keyboard.cs" />
     <Compile Include="Input\Mouse.cs" />
     <Compile Include="Input\MouseButton.cs" />

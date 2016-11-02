@@ -39,7 +39,7 @@ namespace FlaUInspect.Core
         {
             if (System.Windows.Input.Keyboard.Modifiers.HasFlag(System.Windows.Input.ModifierKeys.Control))
             {
-                var screenPos = Mouse.Instance.Position;
+                var screenPos = Mouse.Position;
                 var hoveredElement = _automation.FromPoint(screenPos);
                 // Skip items in the current process
                 // Like Inspect itself or the overlay window

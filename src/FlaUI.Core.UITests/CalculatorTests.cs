@@ -27,9 +27,9 @@ namespace FlaUI.Core.UITests
             var calc = SystemProductNameFetcher.IsWindows10() ? (ICalculator)new Win10Calc(window) : new LegacyCalc(window);
 
             // Switch to default mode
-            Keyboard.Instance.PressVirtualKeyCode(VirtualKeyShort.ALT);
-            Keyboard.Instance.TypeVirtualKeyCode(VirtualKeyShort.KEY_1);
-            Keyboard.Instance.ReleaseVirtualKeyCode(VirtualKeyShort.ALT);
+            Keyboard.PressVirtualKeyCode(VirtualKeyShort.ALT);
+            Keyboard.TypeVirtualKeyCode(VirtualKeyShort.KEY_1);
+            Keyboard.ReleaseVirtualKeyCode(VirtualKeyShort.ALT);
             Helpers.WaitUntilInputIsProcessed();
             App.WaitWhileBusy();
 
@@ -49,9 +49,9 @@ namespace FlaUI.Core.UITests
             Assert.That(result, Is.EqualTo("6912"));
 
             // Date comparison
-            Keyboard.Instance.PressVirtualKeyCode(VirtualKeyShort.CONTROL);
-            Keyboard.Instance.TypeVirtualKeyCode(VirtualKeyShort.KEY_E);
-            Keyboard.Instance.ReleaseVirtualKeyCode(VirtualKeyShort.CONTROL);
+            Keyboard.PressVirtualKeyCode(VirtualKeyShort.CONTROL);
+            Keyboard.TypeVirtualKeyCode(VirtualKeyShort.KEY_E);
+            Keyboard.ReleaseVirtualKeyCode(VirtualKeyShort.CONTROL);
 
             /*
                 // Verify can click on menu twice
