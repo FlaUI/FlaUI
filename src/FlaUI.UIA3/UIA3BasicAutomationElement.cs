@@ -20,7 +20,14 @@ namespace FlaUI.UIA3
         {
             Automation = automation;
             NativeElement = nativeElement;
+            PatternFactory = new UIA3PatternFactory(this);
+            Cached = new UIA3AutomationElementInformation(this, true);
+            Current = new UIA3AutomationElementInformation(this, false);
         }
+
+        public override IPatternFactory PatternFactory { get; }
+        public override IAutomationElementInformation Cached { get; }
+        public override IAutomationElementInformation Current { get; }
 
         /// <summary>
         /// Concrete implementation of the automation object
@@ -45,16 +52,6 @@ namespace FlaUI.UIA3
         public override void SetFocus()
         {
             NativeElement.SetFocus();
-        }
-
-        public override IAutomationElementInformation CreateInformation(bool cached)
-        {
-            return new UIA3AutomationElementInformation(this, cached);
-        }
-
-        public override IPatternFactory CreatePatternFactory()
-        {
-            return new UIA3PatternFactory(this);
         }
 
         protected override object InternalGetPropertyValue(int propertyId, bool cached, bool useDefaultIfNotSupported)

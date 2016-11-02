@@ -20,9 +20,6 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         public AutomationElement(BasicAutomationElementBase basicAutomationElement)
         {
             BasicAutomationElement = basicAutomationElement;
-            PatternFactory = BasicAutomationElement.CreatePatternFactory();
-            Cached = BasicAutomationElement.CreateInformation(true);
-            Current = BasicAutomationElement.CreateInformation(false);
         }
 
         public BasicAutomationElementBase BasicAutomationElement { get; }
@@ -39,17 +36,17 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
 
         public AutomationType AutomationType => BasicAutomationElement.Automation.AutomationType;
 
-        public IPatternFactory PatternFactory { get; private set; }
+        public IPatternFactory PatternFactory => BasicAutomationElement.PatternFactory;
 
         /// <summary>
         /// Basic information about this element (cached)
         /// </summary>
-        public IAutomationElementInformation Cached { get; }
+        public IAutomationElementInformation Cached => BasicAutomationElement.Cached;
 
         /// <summary>
         /// Basic information about this element (realtime)
         /// </summary>
-        public IAutomationElementInformation Current { get; }
+        public IAutomationElementInformation Current => BasicAutomationElement.Current;
 
         public void Click(bool moveMouse = true)
         {
@@ -201,9 +198,9 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
         {
-            Predicate<AutomationElement[]> shouldRetry = elements => elements.Length == 0;
-            Func<AutomationElement[]> func = () => BasicAutomationElement.FindAll(treeScope, condition);
-            return Retry.While(func, shouldRetry, timeOut);
+            Predicate<AutomationElement[]> whilePredicate = elements => elements.Length == 0;
+            Func<AutomationElement[]> retryMethod = () => BasicAutomationElement.FindAll(treeScope, condition);
+            return Retry.While(retryMethod, whilePredicate, timeOut);
         }
 
         /// <summary>
@@ -219,9 +216,9 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
         {
-            Predicate<AutomationElement> shouldRetry = element => element == null;
-            Func<AutomationElement> func = () => BasicAutomationElement.FindFirst(treeScope, condition);
-            return Retry.While(func, shouldRetry, timeOut);
+            Predicate<AutomationElement> whilePredicate = element => element == null;
+            Func<AutomationElement> retryMethod = () => BasicAutomationElement.FindFirst(treeScope, condition);
+            return Retry.While(retryMethod, whilePredicate, timeOut);
         }
 
         public AutomationElement FindFirstNested(params ConditionBase[] nestedConditions)
@@ -256,7 +253,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <summary>
         /// Gets a clickable point of the element
         /// </summary>
-        /// <exception cref="FlaUI.Core.Exceptions.NoClickablePointException">Thrown when no clickable point was found</exception>
+        /// <exception cref="Exceptions.NoClickablePointException">Thrown when no clickable point was found</exception>
         public Shapes.Point GetClickablePoint()
         {
             return BasicAutomationElement.GetClickablePoint();

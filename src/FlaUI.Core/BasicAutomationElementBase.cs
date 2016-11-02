@@ -16,6 +16,12 @@ namespace FlaUI.Core
             Automation = automation;
         }
 
+        public abstract IPatternFactory PatternFactory { get; }
+
+        public abstract IAutomationElementInformation Cached { get; }
+
+        public abstract IAutomationElementInformation Current { get; }
+
         /// <summary>
         /// Underlying <see cref="AutomationBase" /> object where this element belongs to
         /// </summary>
@@ -84,10 +90,6 @@ namespace FlaUI.Core
         }
 
         public abstract void SetFocus();
-
-        public abstract IAutomationElementInformation CreateInformation(bool cached);
-
-        public abstract IPatternFactory CreatePatternFactory();
 
         /// <summary>
         /// Gets the desired property value
