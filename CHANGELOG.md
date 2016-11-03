@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.1 (2016-11-03)
+
+### Enhancements
+  * Added more convenience methods to chain the searching
+
 ## 0.5.0 (2016-11-03)
 
 ### Breaking changes

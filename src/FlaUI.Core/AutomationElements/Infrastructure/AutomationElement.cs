@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Media;
@@ -391,6 +392,18 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         {
             var condition = newConditionFunc(ConditionFactory);
             return FindAllDescendants(condition);
+        }
+        
+        public AutomationElement FindFirstNested(Func<ConditionFactory, IList<ConditionBase>> nestedConditionsFunc)
+        {
+            var conditions = nestedConditionsFunc(ConditionFactory);
+            return FindFirstNested(conditions.ToArray());
+        }
+
+        public AutomationElement[] FindAllNested(Func<ConditionFactory, IList<ConditionBase>> nestedConditionsFunc)
+        {
+            var conditions = nestedConditionsFunc(ConditionFactory);
+            return FindAllNested(conditions.ToArray());
         }
         #endregion Convenience methods
     }
