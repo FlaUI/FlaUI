@@ -349,14 +349,37 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         #region Convenience methods
+        public AutomationElement FindFirstChild(ConditionBase condition)
+        {
+            return FindFirst(TreeScope.Children, condition);
+        }
+
+        public AutomationElement FindFirstChild(Func<ConditionFactory, ConditionBase> newConditionFunc)
+        {
+            var condition = newConditionFunc(ConditionFactory);
+            return FindFirstChild(condition);
+        }
+
         public AutomationElement[] FindAllChildren(ConditionBase condition)
         {
             return FindAll(TreeScope.Children, condition);
         }
 
-        public AutomationElement FindFirstChild(ConditionBase condition)
+        public AutomationElement[] FindAllChildren(Func<ConditionFactory, ConditionBase> newConditionFunc)
         {
-            return FindFirst(TreeScope.Children, condition);
+            var condition = newConditionFunc(ConditionFactory);
+            return FindAllChildren(condition);
+        }
+
+        public AutomationElement FindFirstDescendant(ConditionBase condition)
+        {
+            return FindFirst(TreeScope.Descendants, condition);
+        }
+
+        public AutomationElement FindFirstDescendant(Func<ConditionFactory, ConditionBase> newConditionFunc)
+        {
+            var condition = newConditionFunc(ConditionFactory);
+            return FindFirstDescendant(condition);
         }
 
         public AutomationElement[] FindAllDescendants(ConditionBase condition)
@@ -364,9 +387,10 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             return FindAll(TreeScope.Descendants, condition);
         }
 
-        public AutomationElement FindFirstDescendant(ConditionBase condition)
+        public AutomationElement[] FindAllDescendants(Func<ConditionFactory, ConditionBase> newConditionFunc)
         {
-            return FindFirst(TreeScope.Descendants, condition);
+            var condition = newConditionFunc(ConditionFactory);
+            return FindAllDescendants(condition);
         }
         #endregion Convenience methods
     }

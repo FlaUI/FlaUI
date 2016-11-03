@@ -26,7 +26,7 @@ namespace FlaUI.Core.Conditions
 
         public override string ToString()
         {
-            return String.Format("{0}: {1}", Property, Value);
+            return $"{Property}: {Value}";
         }
     }
 }
