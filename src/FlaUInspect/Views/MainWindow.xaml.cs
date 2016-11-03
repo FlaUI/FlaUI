@@ -14,6 +14,8 @@ namespace FlaUInspect.Views
         public MainWindow()
         {
             InitializeComponent();
+            Height = 550;
+            Width = 700;
             Loaded += MainWindow_Loaded;
             _vm = new MainViewModel();
             DataContext = _vm;
@@ -29,6 +31,7 @@ namespace FlaUInspect.Views
                     Close();
                 }
                 _vm.Initialize(dlg.SelectedAutomationType);
+                Loaded -= MainWindow_Loaded;
             }
         }
 

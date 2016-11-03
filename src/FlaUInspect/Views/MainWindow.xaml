@@ -1,9 +1,12 @@
 ﻿<Window x:Class="FlaUInspect.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
         xmlns:models="clr-namespace:FlaUInspect.Models"
         xmlns:flauidef="clr-namespace:FlaUI.Core.Definitions;assembly=FlaUI.Core"
-        Title="FlaUI Inspect Tool" Height="350" Width="525" ResizeMode="CanResizeWithGrip">
+        Title="FlaUI Inspect Tool" d:DesignHeight="350" d:DesignWidth="500" d:LayoutOverrides="Width, Height" ResizeMode="CanResizeWithGrip">
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Top">

@@ -110,6 +110,15 @@
             return new TabItem(automationElement.BasicAutomationElement);
         }
 
+        public static Table AsTable(this AutomationElement automationElement)
+        {
+            if (automationElement == null)
+            {
+                return null;
+            }
+            return new Table(automationElement.BasicAutomationElement);
+        }
+
         public static TextBox AsTextBox(this AutomationElement automationElement)
         {
             if (automationElement == null)

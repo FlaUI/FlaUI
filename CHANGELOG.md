@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.5.0 (2016-11-03)
+
+### Breaking changes
+  * Removed made mouse and keyboard static, removed their interfaces
+  * Renamed ListView to Grid
+  * Renamed the retry methods
+
+### Enhancements
+  * Implemented Table
+  * Added caching to TreeWalkers
+
+### Bug fixes
+  * Further reduced the amount of classes created
+
 ## 0.4.1 (2016-10-31)
 
 ### Enhancements

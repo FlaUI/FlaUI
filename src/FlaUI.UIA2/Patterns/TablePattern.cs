@@ -42,8 +42,8 @@ namespace FlaUI.UIA2.Patterns
         {
             get
             {
-                var nativeElement = Get<UIA.AutomationElementCollection>(TablePattern.ColumnHeadersProperty);
-                return AutomationElementConverter.NativeArrayToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeElement);
+                var nativeElements = Get<UIA.AutomationElement[]>(TablePattern.ColumnHeadersProperty);
+                return AutomationElementConverter.NativeArrayToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeElements);
             }
         }
 
@@ -51,8 +51,8 @@ namespace FlaUI.UIA2.Patterns
         {
             get
             {
-                var nativeElement = Get<UIA.AutomationElementCollection>(TablePattern.RowHeadersProperty);
-                return AutomationElementConverter.NativeArrayToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeElement);
+                var nativeElements = Get<UIA.AutomationElement[]>(TablePattern.RowHeadersProperty);
+                return AutomationElementConverter.NativeArrayToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeElements);
             }
         }
 
