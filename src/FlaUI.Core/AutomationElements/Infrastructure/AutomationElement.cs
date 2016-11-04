@@ -350,6 +350,11 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         #region Convenience methods
+        public AutomationElement FindFirstChild()
+        {
+            return FindFirst(TreeScope.Children, new TrueCondition());
+        }
+
         public AutomationElement FindFirstChild(ConditionBase condition)
         {
             return FindFirst(TreeScope.Children, condition);
@@ -359,6 +364,11 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         {
             var condition = newConditionFunc(ConditionFactory);
             return FindFirstChild(condition);
+        }
+
+        public AutomationElement[] FindAllChildren()
+        {
+            return FindAll(TreeScope.Children, new TrueCondition());
         }
 
         public AutomationElement[] FindAllChildren(ConditionBase condition)
@@ -372,6 +382,11 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             return FindAllChildren(condition);
         }
 
+        public AutomationElement FindFirstDescendant()
+        {
+            return FindFirst(TreeScope.Descendants, new TrueCondition());
+        }
+
         public AutomationElement FindFirstDescendant(ConditionBase condition)
         {
             return FindFirst(TreeScope.Descendants, condition);
@@ -381,6 +396,11 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         {
             var condition = newConditionFunc(ConditionFactory);
             return FindFirstDescendant(condition);
+        }
+
+        public AutomationElement[] FindAllDescendants()
+        {
+            return FindAll(TreeScope.Descendants, new TrueCondition());
         }
 
         public AutomationElement[] FindAllDescendants(ConditionBase condition)
