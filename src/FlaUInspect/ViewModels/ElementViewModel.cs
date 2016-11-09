@@ -17,7 +17,7 @@ namespace FlaUInspect.ViewModels
         {
             AutomationElement = automationElement;
             Children = new ExtendedObservableCollection<ElementViewModel>();
-            ItemDetails = new ExtendedObservableCollection<DetailViewModel>();
+            ItemDetails = new ExtendedObservableCollection<DetailGroupViewModel>();
         }
 
         public AutomationElement AutomationElement { get; }
@@ -64,7 +64,7 @@ namespace FlaUInspect.ViewModels
         public string AutomationId => NormalizeString(AutomationElement.Current.AutomationId);
         public ControlType ControlType => AutomationElement.Current.ControlType;
         public ExtendedObservableCollection<ElementViewModel> Children { get; set; }
-        public ExtendedObservableCollection<DetailViewModel> ItemDetails { get; set; }
+        public ExtendedObservableCollection<DetailGroupViewModel> ItemDetails { get; set; }
 
         public void LoadChildren(bool loadInnerChildren)
         {
@@ -81,32 +81,63 @@ namespace FlaUInspect.ViewModels
                 if (loadInnerChildren)
                 {
                     childViewModel.LoadChildren(false);
-                }                
+                }
             }
             Children.Reset(childrenViewModels);
         }
 
-        private List<DetailViewModel> LoadDetails()
+        private List<DetailGroupViewModel> LoadDetails()
         {
-            var details = new List<DetailViewModel>();
+            var detailGroups = new List<DetailGroupViewModel>();
+            // Element identification
+            var identification = new List<DetailViewModel>
+            {
+                new DetailViewModel("AutomationId", AutomationElement.Current.AutomationId),
+                new DetailViewModel("Name", AutomationElement.Current.Name),
+                new DetailViewModel("ClassName", AutomationElement.Current.ClassName),
+                new DetailViewModel("ControlType", AutomationElement.Current.ControlType),
+                new DetailViewModel("LocalizedControlType", AutomationElement.Current.LocalizedControlType),
+                new DetailViewModel("FrameworkType", AutomationElement.FrameworkType),
+                new DetailViewModel("FrameworkId", AutomationElement.Current.FrameworkId),
+                new DetailViewModel("ProcessId", AutomationElement.Current.ProcessId),
+            };
+            detailGroups.Add(new DetailGroupViewModel("Identification", identification));
+
             // Element details
-            details.Add(new DetailViewModel("AutomationId", AutomationElement.Current.AutomationId));
-            details.Add(new DetailViewModel("Name", AutomationElement.Current.Name));
-            details.Add(new DetailViewModel("ClassName", AutomationElement.Current.ClassName));
-            details.Add(new DetailViewModel("ControlType", AutomationElement.Current.ControlType));
-            details.Add(new DetailViewModel("LocalizedControlType", AutomationElement.Current.LocalizedControlType));
-            details.Add(new DetailViewModel("FrameworkType", AutomationElement.FrameworkType));
-            details.Add(new DetailViewModel("FrameworkId", AutomationElement.Current.FrameworkId));
-            details.Add(new DetailViewModel("ProcessId", AutomationElement.Current.ProcessId));
-            details.Add(new DetailViewModel("BoundingRectangle", AutomationElement.Current.BoundingRectangle));
+            var details = new List<DetailViewModel>
+            {
+                new DetailViewModel("IsEnabled", AutomationElement.Current.IsEnabled),
+                new DetailViewModel("IsOffscreen", AutomationElement.Current.IsOffscreen),
+                new DetailViewModel("BoundingRectangle", AutomationElement.Current.BoundingRectangle),
+                new DetailViewModel("HelpText", AutomationElement.Current.HelpText),
+                new DetailViewModel("IsPassword", AutomationElement.Current.IsPassword),
+                new DetailViewModel("NativeWindowHandle", String.Format("{0} ({0:X8})", AutomationElement.Current.NativeWindowHandle.ToInt32()))
+            };
+            detailGroups.Add(new DetailGroupViewModel("Details", details));
+
             // Pattern details
             var allSupportedPatterns = AutomationElement.BasicAutomationElement.GetSupportedPatterns();
             var allPatterns = AutomationElement.Automation.PatternLibrary.AllSupportedPatterns;
+            var patterns = new List<DetailViewModel>();
             foreach (var pattern in allPatterns)
             {
-                details.Add(new DetailViewModel(pattern.Name + "Pattern", allSupportedPatterns.Contains(pattern) ? "Yes" : "No"));
+                patterns.Add(new DetailViewModel(pattern.Name + "Pattern", allSupportedPatterns.Contains(pattern) ? "Yes" : "No"));
             }
-            return details;
+            detailGroups.Add(new DetailGroupViewModel("Pattern Support", patterns));
+
+            // TODO: Pattern Properties
+            if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.ValuePattern))
+            {
+                var pattern = AutomationElement.PatternFactory.GetValuePattern();
+                var patternDetails = new List<DetailViewModel>
+                {
+                    new DetailViewModel("IsReadOnly", pattern.Current.IsReadOnly),
+                    new DetailViewModel("Value", pattern.Current.Value)
+                };
+                detailGroups.Add(new DetailGroupViewModel("Value Pattern", patternDetails));
+            }
+
+            return detailGroups;
         }
 
         private string NormalizeString(string value)

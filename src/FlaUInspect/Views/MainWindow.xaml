@@ -183,35 +183,45 @@
                     </TreeView>
                 </GroupBox>
                 <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" />
-                <GroupBox Header="Details" Grid.Column="2">
-                    <ListBox ItemsSource="{Binding SelectedItemDetails}" Grid.IsSharedSizeScope="True">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" SharedSizeGroup="DetailColumnKey" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBox Grid.Column="0" IsReadOnly="True" Text="{Binding Key}" />
-                                    <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding Value}" Margin="5,0,0,0">
-                                        <TextBox.Style>
-                                            <Style>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Value}" Value="No">
-                                                        <Setter Property="TextBox.Foreground" Value="Red" />
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Value}" Value="Yes">
-                                                        <Setter Property="TextBox.Foreground" Value="Green" />
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </TextBox.Style>
-                                    </TextBox>
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </GroupBox>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="2">
+                    <GroupBox Header="Details">
+                        <ItemsControl ItemsSource="{Binding SelectedItemDetails}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Expander Header="{Binding Name}" IsExpanded="True">
+                                        <ItemsControl ItemsSource="{Binding Details}" Grid.IsSharedSizeScope="True">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" SharedSizeGroup="DetailColumnKey" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBox Grid.Column="0" IsReadOnly="True" Text="{Binding Key}" />
+                                                        <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding Value}" Margin="5,0,0,0">
+                                                            <TextBox.Style>
+                                                                <Style>
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding Value}" Value="No">
+                                                                            <Setter Property="TextBox.Foreground" Value="Red" />
+                                                                        </DataTrigger>
+                                                                        <DataTrigger Binding="{Binding Value}" Value="Yes">
+                                                                            <Setter Property="TextBox.Foreground" Value="Green" />
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </TextBox.Style>
+                                                        </TextBox>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Expander>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </GroupBox>
+                </ScrollViewer>
             </Grid>
         </DockPanel>
     </Grid>

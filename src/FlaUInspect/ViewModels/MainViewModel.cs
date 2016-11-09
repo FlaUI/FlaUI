@@ -64,7 +64,7 @@ namespace FlaUInspect.ViewModels
 
         public ICommand StartNewInstanceCommand { get; private set; }
 
-        public ObservableCollection<DetailViewModel> SelectedItemDetails => SelectedItemInTree?.ItemDetails;
+        public ObservableCollection<DetailGroupViewModel> SelectedItemDetails => SelectedItemInTree?.ItemDetails;
 
         public ElementViewModel SelectedItemInTree { get { return GetProperty<ElementViewModel>(); } private set { SetProperty(value); } }
 

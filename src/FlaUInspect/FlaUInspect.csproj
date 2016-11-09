@@ -67,6 +67,7 @@
     <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="Models\Element.cs" />
+    <Compile Include="ViewModels\DetailGroupViewModel.cs" />
     <Compile Include="ViewModels\DetailViewModel.cs" />
     <Compile Include="ViewModels\ElementViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
