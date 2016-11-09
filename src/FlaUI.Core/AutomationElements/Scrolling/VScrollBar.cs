@@ -17,6 +17,7 @@ namespace FlaUI.Core.AutomationElements.Scrolling
                     case FrameworkType.Wpf:
                         return "PART_LineUpButton";
                     case FrameworkType.WinForms:
+                    case FrameworkType.Win32:
                         switch (AutomationType)
                         {
                             case AutomationType.UIA2:
@@ -41,6 +42,7 @@ namespace FlaUI.Core.AutomationElements.Scrolling
                     case FrameworkType.Wpf:
                         return "PART_LineDownButton";
                     case FrameworkType.WinForms:
+                    case FrameworkType.Win32:
                         switch (AutomationType)
                         {
                             case AutomationType.UIA2:
@@ -65,6 +67,7 @@ namespace FlaUI.Core.AutomationElements.Scrolling
                     case FrameworkType.Wpf:
                         return "PageUp";
                     case FrameworkType.WinForms:
+                    case FrameworkType.Win32:
                         switch (AutomationType)
                         {
                             case AutomationType.UIA2:
@@ -89,6 +92,7 @@ namespace FlaUI.Core.AutomationElements.Scrolling
                     case FrameworkType.Wpf:
                         return "PageDown";
                     case FrameworkType.WinForms:
+                    case FrameworkType.Win32:
                         switch (AutomationType)
                         {
                             case AutomationType.UIA2:

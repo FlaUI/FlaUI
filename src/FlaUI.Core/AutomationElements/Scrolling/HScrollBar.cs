@@ -17,6 +17,7 @@ namespace FlaUI.Core.AutomationElements.Scrolling
                     case FrameworkType.Wpf:
                         return "PART_LineLeftButton";
                     case FrameworkType.WinForms:
+                    case FrameworkType.Win32:
                         switch (AutomationType)
                         {
                             case AutomationType.UIA2:
@@ -41,6 +42,7 @@ namespace FlaUI.Core.AutomationElements.Scrolling
                     case FrameworkType.Wpf:
                         return "PART_LineRightButton";
                     case FrameworkType.WinForms:
+                    case FrameworkType.Win32:
                         switch (AutomationType)
                         {
                             case AutomationType.UIA2:
@@ -65,6 +67,7 @@ namespace FlaUI.Core.AutomationElements.Scrolling
                     case FrameworkType.Wpf:
                         return "PageLeft";
                     case FrameworkType.WinForms:
+                    case FrameworkType.Win32:
                         switch (AutomationType)
                         {
                             case AutomationType.UIA2:
@@ -89,6 +92,7 @@ namespace FlaUI.Core.AutomationElements.Scrolling
                     case FrameworkType.Wpf:
                         return "PageRight";
                     case FrameworkType.WinForms:
+                    case FrameworkType.Win32:
                         switch (AutomationType)
                         {
                             case AutomationType.UIA2:

@@ -7,6 +7,12 @@
         xmlns:models="clr-namespace:FlaUInspect.Models"
         xmlns:flauidef="clr-namespace:FlaUI.Core.Definitions;assembly=FlaUI.Core"
         Title="FlaUI Inspect Tool" d:DesignHeight="350" d:DesignWidth="500" d:LayoutOverrides="Width, Height" ResizeMode="CanResizeWithGrip">
+    <Window.Resources>
+        <Style x:Key="SelectableLabel" TargetType="{x:Type TextBox}">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="IsReadOnly" Value="True" />
+        </Style>
+    </Window.Resources>
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Top">
@@ -197,10 +203,10 @@
                                                             <ColumnDefinition Width="Auto" SharedSizeGroup="DetailColumnKey" />
                                                             <ColumnDefinition Width="*" />
                                                         </Grid.ColumnDefinitions>
-                                                        <TextBox Grid.Column="0" IsReadOnly="True" Text="{Binding Key}" />
+                                                        <TextBox Grid.Column="0" IsReadOnly="True" Text="{Binding Key}" Style="{StaticResource SelectableLabel}" />
                                                         <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding Value}" Margin="5,0,0,0">
                                                             <TextBox.Style>
-                                                                <Style>
+                                                                <Style BasedOn="{StaticResource SelectableLabel}" TargetType="{x:Type TextBox}">
                                                                     <Style.Triggers>
                                                                         <DataTrigger Binding="{Binding Value}" Value="No">
                                                                             <Setter Property="TextBox.Foreground" Value="Red" />
