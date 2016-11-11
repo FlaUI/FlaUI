@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.0 (2016-11-11)
+
+### Enhancements
+  * Added .NET 3.5 and 4.0 versions of FlaUI
+
 ## 0.5.2 (2016-11-11)
 
 ### Enhancements
