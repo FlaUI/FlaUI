@@ -16,6 +16,10 @@
   </metadata>
   <files>
     <file src="install.ps1" target="tools" />
-    <file src="bin\$configuration$\interop.UIAutomationCore.dll" target="lib\net45\" />
+	<file src="bin/$configuration$/net-3.5/FlaUI.UIA3.dll" target="lib/net35" />
+	<file src="bin/$configuration$/net-4.0/FlaUI.UIA3.dll" target="lib/net40" />
+	<file src="bin/$configuration$/net-3.5/interop.UIAutomationCore.dll" target="lib/net35/" />
+	<file src="bin/$configuration$/interop.UIAutomationCore.dll" target="lib/net40/" />
+    <file src="bin/$configuration$/interop.UIAutomationCore.dll" target="lib/net45/" />
   </files>
 </package>
