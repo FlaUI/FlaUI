@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Windows.Media;
 using System.Windows.Threading;
 using FlaUI.Core.Shapes;
@@ -49,13 +50,13 @@ namespace FlaUI.Core.Overlay
         {
             if (rectangle.IsValid)
             {
-                _dispatcher.Invoke(() =>
+                _dispatcher.Invoke(new Action(() =>
                 {
                     _currWin?.Close();
                     var win = new OverlayRectangleWindow(rectangle, color, durationInMs);
                     win.Show();
                     _currWin = win;
-                });
+                }));
             }
         }
 
@@ -63,13 +64,13 @@ namespace FlaUI.Core.Overlay
         {
             if (rectangle.IsValid)
             {
-                _dispatcher.Invoke(() =>
+                _dispatcher.Invoke(new Action(() =>
                 {
                     _currWin?.Close();
                     var win = new OverlayRectangleWindow(rectangle, color, durationInMs);
                     win.ShowDialog();
                     _currWin = win;
-                });
+                }));
             }
         }
 

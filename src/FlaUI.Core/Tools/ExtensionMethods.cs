@@ -48,5 +48,22 @@ namespace FlaUI.Core.Tools
         {
             return !Double.IsNaN(value) && !Double.IsInfinity(value);
         }
+        
+#if NET35
+        public static bool HasFlag(this Enum variable, Enum flag)
+        {
+            if (flag == null)
+            {
+                throw new ArgumentNullException(nameof(flag));
+            }
+            if (variable.GetType() != flag.GetType())
+            {
+                throw new ArgumentException("The checked flag is not from the same type as the checked variable.");
+            }
+            var num = Convert.ToUInt64(flag);
+            var num2 = Convert.ToUInt64(variable);
+            return (num2 & num) == num;
+        }
+#endif
     }
 }
