@@ -7,6 +7,7 @@ using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Patterns
 {
+#if !NET35
     public class SynchronizedInputPattern : PatternBase<UIA.SynchronizedInputPattern>, ISynchronizedInputPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.SynchronizedInputPattern.Pattern.Id, "SynchronizedInput");
@@ -37,4 +38,5 @@ namespace FlaUI.UIA2.Patterns
         public EventId ReachedOtherElementEvent => SynchronizedInputPattern.ReachedOtherElementEvent;
         public EventId ReachedTargetEvent => SynchronizedInputPattern.ReachedTargetEvent;
     }
+#endif
 }

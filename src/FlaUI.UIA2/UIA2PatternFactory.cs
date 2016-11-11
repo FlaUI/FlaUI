@@ -62,8 +62,12 @@ namespace FlaUI.UIA2
 
         public IItemContainerPattern GetItemContainerPattern()
         {
+#if NET35
+            throw new NotSupportedByUIA2Exception();
+#else
             var nativePattern = GetNativePatternAs<UIA.ItemContainerPattern>(UIA.ItemContainerPattern.Pattern);
             return nativePattern == null ? null : new ItemContainerPattern(BasicAutomationElement, nativePattern);
+#endif
         }
 
         public ILegacyIAccessiblePattern GetLegacyIAccessiblePattern()
@@ -129,8 +133,12 @@ namespace FlaUI.UIA2
 
         public ISynchronizedInputPattern GetSynchronizedInputPattern()
         {
+#if NET35
+            throw new NotSupportedByUIA2Exception();
+#else
             var nativePattern = GetNativePatternAs<UIA.SynchronizedInputPattern>(UIA.SynchronizedInputPattern.Pattern);
             return nativePattern == null ? null : new SynchronizedInputPattern(BasicAutomationElement, nativePattern);
+#endif
         }
 
         public ITableItemPattern GetTableItemPattern()
@@ -191,8 +199,12 @@ namespace FlaUI.UIA2
 
         public IVirtualizedItemPattern GetVirtualizedItemPattern()
         {
+#if NET35
+            throw new NotSupportedByUIA2Exception();
+#else
             var nativePattern = GetNativePatternAs<UIA.VirtualizedItemPattern>(UIA.VirtualizedItemPattern.Pattern);
             return nativePattern == null ? null : new VirtualizedItemPattern(BasicAutomationElement, nativePattern);
+#endif
         }
 
         public IWindowPattern GetWindowPattern()

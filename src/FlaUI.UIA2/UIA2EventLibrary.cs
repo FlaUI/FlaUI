@@ -14,7 +14,9 @@ namespace FlaUI.UIA2
             Invoke = new InvokePatternEvents();
             SelectionItem = new SelectionItemPatternEvents();
             Selection = new SelectionPatternEvents();
+#if !NET35
             SynchronizedInput = new SynchronizedInputPatternEvents();
+#endif
             Text = new TextPatternEvents();
             Window = new WindowPatternEvents();
         }
@@ -25,7 +27,12 @@ namespace FlaUI.UIA2
         public IInvokePatternEvents Invoke { get; }
         public ISelectionItemPatternEvents SelectionItem { get; }
         public ISelectionPatternEvents Selection { get; }
+#if NET35
+        public ISynchronizedInputPatternEvents SynchronizedInput { get { throw new NotSupportedByUIA2Exception(); } }
+#else
         public ISynchronizedInputPatternEvents SynchronizedInput { get; }
+#endif
+
         public ITextEditPatternEvents TextEdit { get { throw new NotSupportedByUIA2Exception(); } }
         public ITextPatternEvents Text { get; }
         public IWindowPatternEvents Window { get; }

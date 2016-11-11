@@ -42,21 +42,27 @@ namespace FlaUI.UIA2.Identifiers
         public static readonly PropertyId IsGridItemPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsGridItemPatternAvailableProperty.Id, "IsGridItemPatternAvailable");
         public static readonly PropertyId IsGridPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsGridPatternAvailableProperty.Id, "IsGridPatternAvailable");
         public static readonly PropertyId IsInvokePatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsInvokePatternAvailableProperty.Id, "IsInvokePatternAvailable");
+#if !NET35
         public static readonly PropertyId IsItemContainerPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsItemContainerPatternAvailableProperty.Id, "IsItemContainerPatternAvailable");
+#endif
         public static readonly PropertyId IsMultipleViewPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsMultipleViewPatternAvailableProperty.Id, "IsMultipleViewPatternAvailable");
         public static readonly PropertyId IsRangeValuePatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsRangeValuePatternAvailableProperty.Id, "IsRangeValuePatternAvailable");
         public static readonly PropertyId IsScrollItemPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsScrollItemPatternAvailableProperty.Id, "IsScrollItemPatternAvailable");
         public static readonly PropertyId IsScrollPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsScrollPatternAvailableProperty.Id, "IsScrollPatternAvailable");
         public static readonly PropertyId IsSelectionItemPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsSelectionItemPatternAvailableProperty.Id, "IsSelectionItemPatternAvailable");
         public static readonly PropertyId IsSelectionPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsSelectionPatternAvailableProperty.Id, "IsSelectionPatternAvailable");
+#if !NET35
         public static readonly PropertyId IsSynchronizedInputPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsSynchronizedInputPatternAvailableProperty.Id, "IsSynchronizedInputPatternAvailable");
+#endif
         public static readonly PropertyId IsTableItemPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsTableItemPatternAvailableProperty.Id, "IsTableItemPatternAvailable");
         public static readonly PropertyId IsTablePatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsTablePatternAvailableProperty.Id, "IsTablePatternAvailable");
         public static readonly PropertyId IsTextPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsTextPatternAvailableProperty.Id, "IsTextPatternAvailable");
         public static readonly PropertyId IsTogglePatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsTogglePatternAvailableProperty.Id, "IsTogglePatternAvailable");
         public static readonly PropertyId IsTransformPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsTransformPatternAvailableProperty.Id, "IsTransformPatternAvailable");
         public static readonly PropertyId IsValuePatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsValuePatternAvailableProperty.Id, "IsValuePatternAvailable");
+#if !NET35
         public static readonly PropertyId IsVirtualizedItemPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsVirtualizedItemPatternAvailableProperty.Id, "IsVirtualizedItemPatternAvailable");
+#endif
         public static readonly PropertyId IsWindowPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsWindowPatternAvailableProperty.Id, "IsWindowPatternAvailable");
         #endregion Property Identifiers
 
