@@ -16,5 +16,6 @@
   </metadata>
   <files>
     <file src="bin/$configuration$/net-3.5/FlaUI.Core.dll" target="lib/net35" />
+	<file src="bin/$configuration$/net-4.0/FlaUI.Core.dll" target="lib/net40" />
   </files>
 </package>

@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{24612B07-17D9-4DC7-9705-78F9426C499B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FlaUI.Core</RootNamespace>
+    <AssemblyName>FlaUI.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+	<IntermediateOutputPath>obj\$(Configuration)\net-4.0\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\net-4.0\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET40</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\net-4.0\</OutputPath>
+    <DefineConstants>TRACE;NET40</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Application.cs" />
+    <Compile Include="AutomationBase.cs" />
+    <Compile Include="AutomationElements\Infrastructure\IAutomationElementEvents.cs" />
+    <Compile Include="AutomationElements\Grid.cs" />
+    <Compile Include="AutomationElements\Scrolling\HScrollBar.cs" />
+    <Compile Include="AutomationElements\Scrolling\ScrollBarBase.cs" />
+    <Compile Include="AutomationElements\Scrolling\VScrollBar.cs" />
+    <Compile Include="AutomationElements\Slider.cs" />
+    <Compile Include="AutomationElements\Table.cs" />
+    <Compile Include="BasicAutomationElementBase.cs" />
+    <Compile Include="AutomationType.cs" />
+    <Compile Include="Conditions\AndCondition.cs" />
+    <Compile Include="Conditions\BoolCondition.cs" />
+    <Compile Include="Conditions\ConditionBase.cs" />
+    <Compile Include="Conditions\ConditionFactory.cs" />
+    <Compile Include="Conditions\ConditionList.cs" />
+    <Compile Include="Conditions\JunctionConditionBase.cs" />
+    <Compile Include="Conditions\NotCondition.cs" />
+    <Compile Include="Conditions\OrCondition.cs" />
+    <Compile Include="Conditions\PropertyCondition.cs" />
+    <Compile Include="Definitions\AnnotationType.cs" />
+    <Compile Include="Definitions\AutomationElementMode.cs" />
+    <Compile Include="Definitions\ControlType.cs" />
+    <Compile Include="Definitions\DockPosition.cs" />
+    <Compile Include="Definitions\ExpandCollapseState.cs" />
+    <Compile Include="Definitions\FrameworkIds.cs" />
+    <Compile Include="Definitions\LiveSetting.cs" />
+    <Compile Include="Definitions\OrientationType.cs" />
+    <Compile Include="Definitions\PropertyConditionFlags.cs" />
+    <Compile Include="Definitions\RowOrColumnMajor.cs" />
+    <Compile Include="Definitions\ScrollAmount.cs" />
+    <Compile Include="Definitions\StructureChangeType.cs" />
+    <Compile Include="Definitions\StyleType.cs" />
+    <Compile Include="Definitions\SupportedTextSelection.cs" />
+    <Compile Include="Definitions\SynchronizedInputType.cs" />
+    <Compile Include="Definitions\TextPatternRangeEndpoint.cs" />
+    <Compile Include="Definitions\TextUnit.cs" />
+    <Compile Include="Definitions\ToggleState.cs" />
+    <Compile Include="Definitions\TreeScope.cs" />
+    <Compile Include="Definitions\WindowInteractionState.cs" />
+    <Compile Include="Definitions\WindowVisualState.cs" />
+    <Compile Include="Definitions\ZoomUnit.cs" />
+    <Compile Include="AutomationElements\Button.cs" />
+    <Compile Include="AutomationElements\CheckBox.cs" />
+    <Compile Include="AutomationElements\ComboBox.cs" />
+    <Compile Include="AutomationElements\Infrastructure\AutomationElement.cs" />
+    <Compile Include="AutomationElements\Infrastructure\AutomationElementConversionExtensions.cs" />
+    <Compile Include="AutomationElements\Infrastructure\InformationBase.cs" />
+    <Compile Include="AutomationElements\Infrastructure\IAutomationElementInformation.cs" />
+    <Compile Include="AutomationElements\Infrastructure\IAutomationElementProperties.cs" />
+    <Compile Include="AutomationElements\Label.cs" />
+    <Compile Include="AutomationElements\Menu.cs" />
+    <Compile Include="AutomationElements\MenuItem.cs" />
+    <Compile Include="AutomationElements\PatternElements\ExpandCollapseAutomationElement.cs" />
+    <Compile Include="AutomationElements\PatternElements\InvokeAutomationElement.cs" />
+    <Compile Include="AutomationElements\PatternElements\SelectionItemAutomationElement.cs" />
+    <Compile Include="AutomationElements\PatternElements\ToggleAutomationElement.cs" />
+    <Compile Include="AutomationElements\ProgressBar.cs" />
+    <Compile Include="AutomationElements\RadioButton.cs" />
+    <Compile Include="AutomationElements\Tab.cs" />
+    <Compile Include="AutomationElements\TabItem.cs" />
+    <Compile Include="AutomationElements\TextBox.cs" />
+    <Compile Include="AutomationElements\Thumb.cs" />
+    <Compile Include="AutomationElements\TitleBar.cs" />
+    <Compile Include="AutomationElements\Tree.cs" />
+    <Compile Include="AutomationElements\TreeItem.cs" />
+    <Compile Include="AutomationElements\Window.cs" />
+    <Compile Include="EventHandlers\BasicEventHandlerBase.cs" />
+    <Compile Include="EventHandlers\EventHandlerBase.cs" />
+    <Compile Include="EventHandlers\FocusChangedEventHandlerBase.cs" />
+    <Compile Include="EventHandlers\IAutomationEventHandler.cs" />
+    <Compile Include="EventHandlers\IAutomationFocusChangedEventHandler.cs" />
+    <Compile Include="EventHandlers\IAutomationPropertyChangedEventHandler.cs" />
+    <Compile Include="EventHandlers\IAutomationStructureChangedEventHandler.cs" />
+    <Compile Include="EventHandlers\PropertyChangedEventHandlerBase.cs" />
+    <Compile Include="EventHandlers\StructureChangedEventHandlerBase.cs" />
+    <Compile Include="Exceptions\MethodNotSupportedException.cs" />
+    <Compile Include="Exceptions\NoClickablePointException.cs" />
+    <Compile Include="Exceptions\NotSupportedByUIA2Exception.cs" />
+    <Compile Include="Exceptions\PropertyNotSupportedException.cs" />
+    <Compile Include="FrameworkType.cs" />
+    <Compile Include="ICacheRequest.cs" />
+    <Compile Include="Identifiers\ConvertibleIdentifierBase.cs" />
+    <Compile Include="Identifiers\EventId.cs" />
+    <Compile Include="Identifiers\IdentifierBase.cs" />
+    <Compile Include="Identifiers\PatternId.cs" />
+    <Compile Include="Identifiers\PropertyId.cs" />
+    <Compile Include="Identifiers\TextAttributeId.cs" />
+    <Compile Include="IEventLibrary.cs" />
+    <Compile Include="Input\Helpers.cs" />
+    <Compile Include="Input\Keyboard.cs" />
+    <Compile Include="Input\Mouse.cs" />
+    <Compile Include="Input\MouseButton.cs" />
+    <Compile Include="Input\Touch.cs" />
+    <Compile Include="IPatternFactory.cs" />
+    <Compile Include="IPatternLibrary.cs" />
+    <Compile Include="ITextRange.cs" />
+    <Compile Include="ITextRange2.cs" />
+    <Compile Include="ITreeWalker.cs" />
+    <Compile Include="ITreeWalkerFactory.cs" />
+    <Compile Include="Logging\ConsoleLogger.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Overlay\IOverlayManager.cs" />
+    <Compile Include="Overlay\OverlayRectangleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Overlay\WinFormsOverlayManager.cs" />
+    <Compile Include="Overlay\WpfOverlayManager.cs" />
+    <Compile Include="Overlay\OverlayRectangleWindow.cs" />
+    <Compile Include="Patterns\IAnnotationPattern.cs" />
+    <Compile Include="Patterns\IDockPattern.cs" />
+    <Compile Include="Patterns\IDragPattern.cs" />
+    <Compile Include="Patterns\IDropTargetPattern.cs" />
+    <Compile Include="Patterns\IExpandCollapsePattern.cs" />
+    <Compile Include="Patterns\IGridItemPattern.cs" />
+    <Compile Include="Patterns\IGridPattern.cs" />
+    <Compile Include="Patterns\IInvokePattern.cs" />
+    <Compile Include="Patterns\IItemContainerPattern.cs" />
+    <Compile Include="Patterns\ILegacyIAccessiblePattern.cs" />
+    <Compile Include="Patterns\IMultipleViewPattern.cs" />
+    <Compile Include="Patterns\Infrastructure\IPattern.cs" />
+    <Compile Include="Patterns\Infrastructure\IPatternInformation.cs" />
+    <Compile Include="Patterns\Infrastructure\IPatternWithInformation.cs" />
+    <Compile Include="Patterns\Infrastructure\PatternBase.cs" />
+    <Compile Include="Patterns\Infrastructure\PatternBaseWithInformation.cs" />
+    <Compile Include="Patterns\IObjectModelPattern.cs" />
+    <Compile Include="Patterns\IRangeValuePattern.cs" />
+    <Compile Include="Patterns\IScrollItemPattern.cs" />
+    <Compile Include="Patterns\IScrollPattern.cs" />
+    <Compile Include="Patterns\ISelectionItemPattern.cs" />
+    <Compile Include="Patterns\ISelectionPattern.cs" />
+    <Compile Include="Patterns\ISpreadsheetItemPattern.cs" />
+    <Compile Include="Patterns\ISpreadsheetPattern.cs" />
+    <Compile Include="Patterns\IStylesPattern.cs" />
+    <Compile Include="Patterns\ISynchronizedInputPattern.cs" />
+    <Compile Include="Patterns\ITableItemPattern.cs" />
+    <Compile Include="Patterns\ITablePattern.cs" />
+    <Compile Include="Patterns\IText2Pattern.cs" />
+    <Compile Include="Patterns\ITextChildPattern.cs" />
+    <Compile Include="Patterns\ITextEditPattern.cs" />
+    <Compile Include="Patterns\ITextPattern.cs" />
+    <Compile Include="Patterns\ITogglePattern.cs" />
+    <Compile Include="Patterns\ITransform2Pattern.cs" />
+    <Compile Include="Patterns\ITransformPattern.cs" />
+    <Compile Include="Patterns\IValuePattern.cs" />
+    <Compile Include="Patterns\IVirtualizedItemPattern.cs" />
+    <Compile Include="Patterns\IWindowPattern.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IPropertyLibray.cs" />
+    <Compile Include="ScreenCapture.cs" />
+    <Compile Include="Shapes\Point.cs" />
+    <Compile Include="Shapes\Rectangle.cs" />
+    <Compile Include="Shapes\ShapeBase.cs" />
+    <Compile Include="Tools\ComCallWrapper.cs" />
+    <Compile Include="Tools\ExtensionMethods.cs" />
+    <Compile Include="Tools\ItemRealizer.cs" />
+    <Compile Include="Tools\Retry.cs" />
+    <Compile Include="Tools\SystemLanguageRetreiver.cs" />
+    <Compile Include="Tools\SystemProductNameFetcher.cs" />
+    <Compile Include="Tools\TranslatableStrings.cs" />
+    <Compile Include="Tools\WindowsStoreAppLauncher.cs" />
+    <Compile Include="WindowsAPI\Constants.cs" />
+    <Compile Include="WindowsAPI\Structures.cs" />
+    <Compile Include="WindowsAPI\User32.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

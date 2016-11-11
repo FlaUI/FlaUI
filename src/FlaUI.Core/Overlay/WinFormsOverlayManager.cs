@@ -21,6 +21,10 @@ namespace FlaUI.Core.Overlay
                 {
                     CreateAndShowForms(rectangle, color, durationInMs);
                 }).Start();
+#elif NET40
+                System.Threading.Tasks.Task.Factory.StartNew(() => {
+                    CreateAndShowForms(rectangle, color, durationInMs);
+                });
 #else
                 System.Threading.Tasks.Task.Run(() => CreateAndShowForms(rectangle, color, durationInMs));
 #endif
