@@ -8,7 +8,11 @@ namespace FlaUI.Core.Overlay
     public class WpfOverlayManager : IOverlayManager
     {
         private readonly Thread _uiThread;
+#if NET35
+        private readonly ManualResetEvent _startedEvent = new ManualResetEvent(false);
+#else
         private readonly ManualResetEventSlim _startedEvent = new ManualResetEventSlim(false);
+#endif
         private Dispatcher _dispatcher;
         private OverlayRectangleWindow _currWin;
 
@@ -34,7 +38,11 @@ namespace FlaUI.Core.Overlay
             _uiThread.IsBackground = true;
             // Start the thread
             _uiThread.Start();
+#if NET35
+            _startedEvent.WaitOne();
+#else
             _startedEvent.Wait();
+#endif
         }
 
         public void Show(Rectangle rectangle, Color color, int durationInMs)
