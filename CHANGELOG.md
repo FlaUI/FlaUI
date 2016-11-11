@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.2 (2016-11-11)
+
+### Enhancements
+  * Added more convenience methods to chain the searching
+  * Added search methods without conditions
+  * Theoretical support for Win32 scrollbars
+
 ## 0.5.1 (2016-11-03)
 
 ### Enhancements
