@@ -2,7 +2,6 @@
 using System.Text.RegularExpressions;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.AutomationElements.Infrastructure;
-using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
@@ -52,29 +51,6 @@ namespace FlaUI.Core.UITests
             Keyboard.PressVirtualKeyCode(VirtualKeyShort.CONTROL);
             Keyboard.TypeVirtualKeyCode(VirtualKeyShort.KEY_E);
             Keyboard.ReleaseVirtualKeyCode(VirtualKeyShort.CONTROL);
-
-            /*
-                // Verify can click on menu twice
-                var menuBar = mainWindow.Get<MenuBar>(SearchCriteria.ByText("Application"));
-                menuBar.MenuItem("Edit", "Copy").Click();
-                menuBar.MenuItem("Edit", "Copy").Click();
-
-                //On Date window find the difference between dates.
-                //Set value into combobox
-                mainWindow.Get<ComboBox>(SearchCriteria.ByAutomationId("4003")).Select("Calculate the difference between two dates");
-                //Click on Calculate button
-                mainWindow.Get<Button>(SearchCriteria.ByAutomationId("4009")).Click();
-
-                mainWindow.Keyboard.HoldKey(KeyboardInput.SpecialKeys.CONTROL);
-                mainWindow.Keyboard.PressSpecialKey(KeyboardInput.SpecialKeys.F4);
-                mainWindow.Keyboard.LeaveKey(KeyboardInput.SpecialKeys.CONTROL);
-
-                var menuView = mainWindow.Get<Menu>(SearchCriteria.ByText("View"));
-                menuView.Click();
-                var menuViewBasic = mainWindow.Get<Menu>(SearchCriteria.ByText("Basic"));
-                menuViewBasic.Click();
-
-            }*/
         }
 
         protected override Application StartApplication()
@@ -120,7 +96,7 @@ namespace FlaUI.Core.UITests
         {
             get
             {
-                var resultElement = _mainWindow.FindFirst(TreeScope.Descendants, _mainWindow.BasicAutomationElement.Automation.ConditionFactory.ByAutomationId("158"));
+                var resultElement = _mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("158"));
                 var value = resultElement.Current.Name;
                 return Regex.Replace(value, "[^0-9]", "");
             }
@@ -133,7 +109,7 @@ namespace FlaUI.Core.UITests
 
         private AutomationElement FindElement(string text)
         {
-            var element = _mainWindow.FindFirst(TreeScope.Descendants, _mainWindow.BasicAutomationElement.Automation.ConditionFactory.ByText(text));
+            var element = _mainWindow.FindFirstDescendant(cf => cf.ByText(text));
             return element;
         }
     }
@@ -170,7 +146,7 @@ namespace FlaUI.Core.UITests
 
         private AutomationElement FindElement(string text)
         {
-            var element = _mainWindow.FindFirst(TreeScope.Descendants, _mainWindow.BasicAutomationElement.Automation.ConditionFactory.ByAutomationId(text));
+            var element = _mainWindow.FindFirstDescendant(cf => cf.ByAutomationId(text));
             return element;
         }
     }
