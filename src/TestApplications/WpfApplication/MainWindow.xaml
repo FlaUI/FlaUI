@@ -58,6 +58,14 @@
                     <ScrollViewer Width="80" Height="80" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                         <Button Width="200" Height="200" Content="BigButton"></Button>
                     </ScrollViewer>
+                    <ToggleButton Name="button">Popup Toggle</ToggleButton>
+                    <Popup IsOpen="{Binding IsChecked, ElementName=button}" StaysOpen="False" Placement="Bottom" PlacementTarget="{Binding ElementName=button}">
+                        <Border Background="LightYellow">
+                            <Border BorderBrush="Black" BorderThickness="1" Background="LightYellow">
+                                <CheckBox Content="This is a popup"/>
+                            </Border>
+                        </Border>
+                    </Popup>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Complex Controls">
