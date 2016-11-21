@@ -131,12 +131,9 @@ namespace FlaUI.Core.AutomationElements
             {
                 // WPF
                 var ecp = PatternFactory.GetExpandCollapsePattern();
-                if (ecp != null)
-                {
-                    ecp.Collapse();
-                }
+                ecp?.Collapse();
             }
-            Helpers.WaitUntilInputIsProcessed();
+            Helpers.WaitUntilResponsive(this);
         }
 
         private AutomationElement GetEditableElement()

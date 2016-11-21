@@ -7,7 +7,7 @@ namespace FlaUI.UIA2.Tools
     {
         public static UIA.CacheRequest ToNative(this ICacheRequest cacheRequest)
         {
-            return cacheRequest == null ? null : ((UIA2CacheRequest)cacheRequest).NativeCacheRequest;
+            return ((UIA2CacheRequest)cacheRequest)?.NativeCacheRequest;
         }
     }
 }

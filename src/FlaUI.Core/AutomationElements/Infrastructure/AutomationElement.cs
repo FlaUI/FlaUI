@@ -95,7 +95,17 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
 
         public void FocusNative()
         {
-            User32.SetFocus(Current.NativeWindowHandle);
+            var windowHandle = Current.NativeWindowHandle;
+            if (windowHandle != new IntPtr(0))
+            {
+                User32.SetFocus(windowHandle);
+                Helpers.WaitUntilResponsive(this);
+            }
+            else
+            {
+                // Fallback to the UIA Version
+                Focus();
+            }
         }
 
         /// <summary>
@@ -103,7 +113,17 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public void SetForeground()
         {
-            User32.SetForegroundWindow(Current.NativeWindowHandle);
+            var windowHandle = Current.NativeWindowHandle;
+            if (windowHandle != new IntPtr(0))
+            {
+                User32.SetForegroundWindow(windowHandle);
+                Helpers.WaitUntilResponsive(this);
+            }
+            else
+            {
+                // Fallback to the UIA Version
+                Focus();
+            }
         }
 
         /// <summary>
@@ -413,7 +433,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             var condition = newConditionFunc(ConditionFactory);
             return FindAllDescendants(condition);
         }
-        
+
         public AutomationElement FindFirstNested(Func<ConditionFactory, IList<ConditionBase>> nestedConditionsFunc)
         {
             var conditions = nestedConditionsFunc(ConditionFactory);

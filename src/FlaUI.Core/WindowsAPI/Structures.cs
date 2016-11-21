@@ -49,7 +49,7 @@ namespace FlaUI.Core.WindowsAPI
 
         public override string ToString()
         {
-            return String.Format("R={0},G={1},B={2}", R, G, B);
+            return $"R={R},G={G},B={B}";
         }
     }
 

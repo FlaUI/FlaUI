@@ -19,31 +19,41 @@ namespace FlaUI.UIA2
 
         public AutomationElement GetParent(AutomationElement element, ICacheRequest cacheRequest = null)
         {
-            var parent = NativeTreeWalker.GetParent(element.ToNative(), cacheRequest.ToNative());
+            var parent = cacheRequest == null ?
+                NativeTreeWalker.GetParent(element.ToNative()) :
+                NativeTreeWalker.GetParent(element.ToNative(), cacheRequest.ToNative());
             return Automation.WrapNativeElement(parent);
         }
 
         public AutomationElement GetFirstChild(AutomationElement element, ICacheRequest cacheRequest = null)
         {
-            var child = NativeTreeWalker.GetFirstChild(element.ToNative(), cacheRequest.ToNative());
+            var child = cacheRequest == null ?
+                NativeTreeWalker.GetFirstChild(element.ToNative()) :
+                NativeTreeWalker.GetFirstChild(element.ToNative(), cacheRequest.ToNative());
             return Automation.WrapNativeElement(child);
         }
 
         public AutomationElement GetLastChild(AutomationElement element, ICacheRequest cacheRequest = null)
         {
-            var child = NativeTreeWalker.GetLastChild(element.ToNative(), cacheRequest.ToNative());
+            var child = cacheRequest == null ?
+                NativeTreeWalker.GetLastChild(element.ToNative()) :
+                NativeTreeWalker.GetLastChild(element.ToNative(), cacheRequest.ToNative());
             return Automation.WrapNativeElement(child);
         }
 
         public AutomationElement GetNextSibling(AutomationElement element, ICacheRequest cacheRequest = null)
         {
-            var child = NativeTreeWalker.GetNextSibling(element.ToNative(), cacheRequest.ToNative());
+            var child = cacheRequest == null ?
+                NativeTreeWalker.GetNextSibling(element.ToNative()) :
+                NativeTreeWalker.GetNextSibling(element.ToNative(), cacheRequest.ToNative());
             return Automation.WrapNativeElement(child);
         }
 
         public AutomationElement GetPreviousSibling(AutomationElement element, ICacheRequest cacheRequest = null)
         {
-            var child = NativeTreeWalker.GetPreviousSibling(element.ToNative(), cacheRequest.ToNative());
+            var child = cacheRequest == null ?
+                NativeTreeWalker.GetPreviousSibling(element.ToNative()) :
+                NativeTreeWalker.GetPreviousSibling(element.ToNative(), cacheRequest.ToNative());
             return Automation.WrapNativeElement(child);
         }
     }

@@ -19,7 +19,7 @@ namespace FlaUI.Core.AutomationElements
             {
                 if (Current.IsPassword)
                 {
-                    throw new MethodNotSupportedException(String.Format("Text from element '{0}' cannot be retrieved because it is set as password.", ToString()));
+                    throw new MethodNotSupportedException($"Text from element '{ToString()}' cannot be retrieved because it is set as password.");
                 }
                 var valuePattern = PatternFactory.GetValuePattern();
                 if (valuePattern != null)
@@ -31,7 +31,7 @@ namespace FlaUI.Core.AutomationElements
                 {
                     return textPattern.DocumentRange.GetText(Int32.MaxValue);
                 }
-                throw new MethodNotSupportedException(String.Format("AutomationElement '{0}' supports neither ValuePattern or TextPattern", ToString()));
+                throw new MethodNotSupportedException($"AutomationElement '{ToString()}' supports neither ValuePattern or TextPattern");
             }
             set
             {
@@ -49,6 +49,7 @@ namespace FlaUI.Core.AutomationElements
 
         public void Enter(string value)
         {
+            Focus();
             var valuePattern = PatternFactory.GetValuePattern();
             if (valuePattern != null)
             {
