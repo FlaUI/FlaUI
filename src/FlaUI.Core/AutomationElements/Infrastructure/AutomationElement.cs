@@ -33,7 +33,21 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
 
         public IAutomationElementEvents Events => Automation.EventLibrary.Element;
 
-        public FrameworkType FrameworkType => FrameworkIds.ConvertToFrameworkType(Current.FrameworkId);
+        public FrameworkType FrameworkType
+        {
+            get
+            {
+                var currentElement = this;
+                var currentFrameworkId = currentElement.Current.FrameworkId;
+                var treeWalker = Automation.TreeWalkerFactory.GetControlViewWalker();
+                while (String.IsNullOrEmpty(currentFrameworkId))
+                {
+                    currentElement = treeWalker.GetParent(currentElement);
+                    currentFrameworkId = currentElement.Current.FrameworkId;
+                }
+                return FrameworkIds.ConvertToFrameworkType(currentFrameworkId);
+            }
+        }
 
         public AutomationType AutomationType => BasicAutomationElement.Automation.AutomationType;
 

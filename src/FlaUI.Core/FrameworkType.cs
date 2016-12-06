@@ -6,6 +6,7 @@
         Unknown,
         Wpf,
         WinForms,
-        Win32
+        Win32,
+        Xaml
     }
 }
