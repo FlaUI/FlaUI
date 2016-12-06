@@ -7,5 +7,7 @@ namespace FlaUI.Core.AutomationElements
         public CheckBox(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
+
+        public string Text => Current.Name;
     }
 }

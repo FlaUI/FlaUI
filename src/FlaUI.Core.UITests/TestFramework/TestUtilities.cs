@@ -19,7 +19,7 @@ namespace FlaUI.Core.UITests.TestFramework
         {
             window.Close();
             Helpers.WaitUntilInputIsProcessed();
-            var modal = window.GetModalWindows();
+            var modal = window.ModalWindows;
             var dontSaveButton = modal[0].FindFirst(TreeScope.Descendants, window.BasicAutomationElement.Automation.ConditionFactory.ByAutomationId("CommandButton_7")).AsButton();
             dontSaveButton.Invoke();
         }

@@ -5,8 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication"
         mc:Ignorable="d"
-        Title="FlaUI WPF Test App" Height="450
-        " Width="600" ResizeMode="CanResize">
+        Title="FlaUI WPF Test App"
+        Height="450" Width="600"
+        ResizeMode="CanResize">
+    <Window.Resources>
+        <ResourceDictionary>
+            <Menu x:Key="ViewsMenu">
+                <MenuItem Header="Some MenuItem" />
+            </Menu>
+        </ResourceDictionary>
+    </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
@@ -58,14 +66,20 @@
                     <ScrollViewer Width="80" Height="80" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                         <Button Width="200" Height="200" Content="BigButton"></Button>
                     </ScrollViewer>
-                    <ToggleButton Name="button">Popup Toggle</ToggleButton>
-                    <Popup IsOpen="{Binding IsChecked, ElementName=button}" StaysOpen="False" Placement="Bottom" PlacementTarget="{Binding ElementName=button}">
+                    <ToggleButton Name="PopupToggleButton1">Popup Toggle 1</ToggleButton>
+                    <Popup IsOpen="{Binding IsChecked, ElementName=PopupToggleButton1}" StaysOpen="False" Placement="Bottom" PlacementTarget="{Binding ElementName=PopupToggleButton1}">
                         <Border Background="LightYellow">
                             <Border BorderBrush="Black" BorderThickness="1" Background="LightYellow">
                                 <CheckBox Content="This is a popup"/>
                             </Border>
                         </Border>
                     </Popup>
+                    <ToggleButton Name="PopupToggleButton2">Popup Toggle 2</ToggleButton>
+                    <Popup IsOpen="{Binding IsChecked, ElementName=PopupToggleButton2}"
+                        Child="{DynamicResource ViewsMenu}"
+                        Placement="Top"
+                        PlacementTarget="{Binding ElementName=PopupToggleButton2}"
+                        StaysOpen="False" />
                 </StackPanel>
             </TabItem>
             <TabItem Header="Complex Controls">

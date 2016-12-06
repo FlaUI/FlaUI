@@ -28,6 +28,28 @@ namespace FlaUI.Core.AutomationElements
 
         internal bool IsMainWindow { get; set; }
 
+        public Window[] ModalWindows
+        {
+            get
+            {
+                return FindAllChildren(cf => cf.ByControlType(ControlType.Window).And(new PropertyCondition(Automation.PropertyLibrary.Window.IsModalProperty, true))).
+                    Select(e => e.AsWindow()).ToArray();
+            }
+        }
+
+        /// <summary>
+        /// Gets the current WPF popup window
+        /// </summary>
+        public Window Popup
+        {
+            get
+            {
+                var mainWindow = GetMainWindow();
+                var popup = mainWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Window).And(cf.ByText("").And(cf.ByClassName("Popup"))));
+                return popup.AsWindow();
+            }
+        }
+
         /// <summary>
         /// Gets the contest menu for the window.
         /// Note: It uses the FrameworkType of the window as lookup logic. Use <see cref="GetContextMenuByFrameworkType" /> if you want to control this.
@@ -36,50 +58,39 @@ namespace FlaUI.Core.AutomationElements
 
         public Menu GetContextMenuByFrameworkType(FrameworkType frameworkType)
         {
-            var mainWindow = this;
-            if (!IsMainWindow)
-            {
-                // Find the main application window first
-                var newMainWindow = BasicAutomationElement.Automation.GetDesktop().FindFirstChild(ConditionFactory.ByProcessId(Current.ProcessId)).AsWindow();
-                if (newMainWindow != null)
-                {
-                    mainWindow = newMainWindow;
-                }
-            }
-            if (frameworkType == FrameworkType.WinForms)
-            {
-                var ctxMenu = mainWindow.FindFirstChild(ConditionFactory.ByControlType(ControlType.Menu).And(ConditionFactory.ByName("DropDown")));
-                return ctxMenu.AsMenu();
-            }
-            if (frameworkType == FrameworkType.Wpf)
-            {
-                // In WPF, there is a window without title and inside is the menu
-                var windows = mainWindow.FindAllChildren(ConditionFactory.ByControlType(ControlType.Window).And(ConditionFactory.ByText("")));
-                foreach (var window in windows)
-                {
-                    var ctxMenu = window.FindFirstChild(ConditionFactory.ByControlType(ControlType.Menu));
-                    return ctxMenu.AsMenu();
-                }
-            }
             if (frameworkType == FrameworkType.Win32)
             {
                 // The main menu is directly under the desktop with the name "Context" or in a few cases "System"
                 var desktop = BasicAutomationElement.Automation.GetDesktop();
                 var nameCondition = ConditionFactory.ByName("Context").Or(ConditionFactory.ByName("System"));
-                var ctxMenu = desktop.FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Menu).And(nameCondition)).AsMenu();
+                var ctxMenu = desktop.FindFirstChild(cf => cf.ByControlType(ControlType.Menu).And(nameCondition)).AsMenu();
                 if (ctxMenu != null)
                 {
                     ctxMenu.IsWin32ContextMenu = true;
                     return ctxMenu;
                 }
             }
+            var mainWindow = GetMainWindow();
+            if (frameworkType == FrameworkType.WinForms)
+            {
+                var ctxMenu = mainWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Menu).And(cf.ByName("DropDown")));
+                return ctxMenu.AsMenu();
+            }
+            if (frameworkType == FrameworkType.Wpf)
+            {
+                // In WPF, there is a window (Popup) where the menu is inside
+                var popup = Popup;
+                var ctxMenu = popup.FindFirstChild(cf => cf.ByControlType(ControlType.Menu));
+                return ctxMenu.AsMenu();
+            }
+            // No menu found
             return null;
         }
 
         public void Close()
         {
             var titleBar = TitleBar;
-            if (titleBar != null && titleBar.CloseButton != null)
+            if (titleBar?.CloseButton != null)
             {
                 titleBar.CloseButton.Invoke();
                 return;
@@ -95,19 +106,7 @@ namespace FlaUI.Core.AutomationElements
 
         public void Move(int x, int y)
         {
-            var transformPattern = TransformPattern;
-            if (transformPattern != null)
-            {
-                transformPattern.Move(x, y);
-            }
-        }
-
-        public Window[] GetModalWindows()
-        {
-            return FindAll(TreeScope.Children,
-                new PropertyCondition(Properties.ControlTypeProperty, ControlType.Window).
-                    And(new PropertyCondition(WindowPattern.Properties.IsModalProperty, true))).
-                Select(e => e.AsWindow()).ToArray();
+            TransformPattern?.Move(x, y);
         }
 
         /// <summary>
@@ -123,6 +122,19 @@ namespace FlaUI.Core.AutomationElements
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }
+        }
+
+        /// <summary>
+        /// Gets the main window (first window on desktop with the same process as this window)
+        /// </summary>
+        private Window GetMainWindow()
+        {
+            if (IsMainWindow)
+            {
+                return this;
+            }
+            var mainWindow = BasicAutomationElement.Automation.GetDesktop().FindFirstChild(ConditionFactory.ByProcessId(Current.ProcessId)).AsWindow();
+            return mainWindow ?? this;
         }
     }
 }
