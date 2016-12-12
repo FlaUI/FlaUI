@@ -6,6 +6,7 @@ using FlaUI.Core.AutomationElements.PatternElements;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
+using FlaUI.Core.Patterns;
 
 namespace FlaUI.Core.AutomationElements
 {
@@ -36,6 +37,12 @@ namespace FlaUI.Core.AutomationElements
             }
         }
 
+        public string Value
+        {
+            get { return ValuePattern.Current.Value; }
+            set { ValuePattern.SetValue(value);}
+        }
+
         public SelectionItemAutomationElement SelectedItem => Items.FirstOrDefault(x => x.IsSelected);
 
         public SelectionItemAutomationElement[] SelectedItems => Items.Where(x => x.IsSelected).ToArray();
@@ -46,9 +53,9 @@ namespace FlaUI.Core.AutomationElements
             {
                 Expand();
                 AutomationElement[] items;
-                if (FrameworkType == FrameworkType.WinForms)
+                if (FrameworkType == FrameworkType.WinForms || FrameworkType == FrameworkType.Win32)
                 {
-                    // WinForms
+                    // WinForms and Win32
                     var listElement = FindFirstChild(ConditionFactory.ByControlType(ControlType.List));
                     items = listElement.FindAllChildren(new TrueCondition());
                 }
@@ -60,6 +67,8 @@ namespace FlaUI.Core.AutomationElements
                 return items.Select(x => new SelectionItemAutomationElement(x.BasicAutomationElement)).ToArray();
             }
         }
+
+        public IValuePattern ValuePattern => PatternFactory.GetValuePattern();
 
         public ExpandCollapseState ExpandCollapseState
         {
