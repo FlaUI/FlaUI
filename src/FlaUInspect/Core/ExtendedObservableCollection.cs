@@ -77,7 +77,7 @@ namespace FlaUInspect.Core
 
         public void Reset(IEnumerable<T> range)
         {
-            Items.Clear();
+            ClearItems();
             AddRange(range);
         }
     }
