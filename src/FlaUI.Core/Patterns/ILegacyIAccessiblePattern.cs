@@ -2,6 +2,7 @@
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns.Infrastructure;
+using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.Patterns
 {
@@ -22,9 +23,9 @@ namespace FlaUI.Core.Patterns
         string Help { get; }
         string KeyboardShortcut { get; }
         string Name { get; }
-        uint Role { get; }
+        AccessibilityRole Role { get; }
         AutomationElement[] Selection { get; }
-        uint State { get; }
+        AccessibilityState State { get; }
         string Value { get; }}
 
     public interface ILegacyIAccessiblePatternProperties

@@ -1,10 +1,12 @@
-﻿using Accessibility;
+﻿using System;
+using Accessibility;
 using FlaUI.Core;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.Tools;
+using FlaUI.Core.WindowsAPI;
 using FlaUI.UIA3.Converters;
 using UIA = interop.UIAutomationCore;
 
@@ -19,9 +21,9 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId HelpProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleHelpPropertyId, "Help");
         public static readonly PropertyId KeyboardShortcutProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleKeyboardShortcutPropertyId, "KeyboardShortcut");
         public static readonly PropertyId NameProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleNamePropertyId, "Name");
-        public static readonly PropertyId RoleProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleRolePropertyId, "Role");
+        public static readonly PropertyId RoleProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleRolePropertyId, "Role").SetConverter(o => (AccessibilityRole)Convert.ToUInt32(o));
         public static readonly PropertyId SelectionProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleSelectionPropertyId, "Selection");
-        public static readonly PropertyId StateProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleStatePropertyId, "State");
+        public static readonly PropertyId StateProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleStatePropertyId, "State").SetConverter(o => (AccessibilityState)Convert.ToUInt32(o));
         public static readonly PropertyId ValueProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleValuePropertyId, "Value");
 
         public LegacyIAccessiblePattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationLegacyIAccessiblePattern nativePattern) : base(basicAutomationElement, nativePattern)
@@ -79,7 +81,7 @@ namespace FlaUI.UIA3.Patterns
 
         public string Name => Get<string>(LegacyIAccessiblePattern.NameProperty);
 
-        public uint Role => Get<uint>(LegacyIAccessiblePattern.RoleProperty);
+        public AccessibilityRole Role => Get<AccessibilityRole>(LegacyIAccessiblePattern.RoleProperty);
 
         public AutomationElement[] Selection
         {
@@ -90,7 +92,7 @@ namespace FlaUI.UIA3.Patterns
             }
         }
 
-        public uint State => Get<uint>(LegacyIAccessiblePattern.StateProperty);
+        public AccessibilityState State => Get<AccessibilityState>(LegacyIAccessiblePattern.StateProperty);
 
         public string Value => Get<string>(LegacyIAccessiblePattern.ValueProperty);
     }

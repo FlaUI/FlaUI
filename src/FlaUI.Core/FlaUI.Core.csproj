@@ -197,6 +197,7 @@
     <Compile Include="Shapes\Point.cs" />
     <Compile Include="Shapes\Rectangle.cs" />
     <Compile Include="Shapes\ShapeBase.cs" />
+    <Compile Include="Tools\AccessibilityTextResolver.cs" />
     <Compile Include="Tools\ComCallWrapper.cs" />
     <Compile Include="Tools\ExtensionMethods.cs" />
     <Compile Include="Tools\ItemRealizer.cs" />
@@ -206,6 +207,7 @@
     <Compile Include="Tools\TranslatableStrings.cs" />
     <Compile Include="Tools\WindowsStoreAppLauncher.cs" />
     <Compile Include="WindowsAPI\Constants.cs" />
+    <Compile Include="WindowsAPI\Oleacc.cs" />
     <Compile Include="WindowsAPI\Structures.cs" />
     <Compile Include="WindowsAPI\User32.cs" />
   </ItemGroup>

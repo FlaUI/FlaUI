@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FlaUI.Core.Tools
 {
@@ -48,7 +50,7 @@ namespace FlaUI.Core.Tools
         {
             return !Double.IsNaN(value) && !Double.IsInfinity(value);
         }
-        
+
 #if NET35
         public static bool HasFlag(this Enum variable, Enum flag)
         {
@@ -65,5 +67,10 @@ namespace FlaUI.Core.Tools
             return (num2 & num) == num;
         }
 #endif
+
+        public static IEnumerable<Enum> GetFlags(this Enum variable)
+        {
+            return Enum.GetValues(variable.GetType()).Cast<Enum>().Where(variable.HasFlag);
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace FlaUI.Core.Tools
             {
                 return Process.GetProcessById((int)processId);
             }
-            throw new Exception(String.Format("Could not launch Store App '{0}'", appUserModelId));
+            throw new Exception($"Could not launch Store App '{appUserModelId}'");
         }
 
         #region Win32
