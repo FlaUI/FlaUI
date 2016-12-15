@@ -9,10 +9,13 @@
     <licenseUrl>https://github.com/Roemer/FlaUI/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/Roemer/FlaUI</projectUrl>
     <iconUrl>https://github.com/Roemer/FlaUI/blob/master/FlaUI.png?raw=true</iconUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Tool to inspect applications from an UI side.</description>
+	<packageSourceUrl>https://github.com/Roemer/FlaUI</packageSourceUrl>
+	<releaseNotes>https://github.com/Roemer/FlaUI/blob/master/CHANGELOG.md</releaseNotes>
+	<requireLicenseAcceptance>false</requireLicenseAcceptance>
+	<summary>Tool to inspect Windows applications how UIA sees them.</summary>
+    <description>This application allows to inspect Windows applications with Microsoft UIA (UI Automation) and shows how UIA sees the application.</description>
     <copyright>Copyright 2016</copyright>
-    <tags>UI Automation UIA2 UIA3 UIA System.Windows.Automation</tags>
+    <tags>UI Automation UIA2 UIA3 UIA System.Windows.Automation Inspect</tags>
   </metadata>
   <files>
 	<file src="bin\Release\**\*.*" exclude="bin\**\*.pdb;bin\**\*.xml;bin\*.vshost.*;**\*RANDOM_SEED*" target="tools" />
