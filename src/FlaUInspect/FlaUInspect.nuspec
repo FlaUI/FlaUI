@@ -1,0 +1,20 @@
+<?xml version="1.0"?> 
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>flauinspect</id>
+    <version>0.6.1</version>
+    <title>FlaUInspect</title>
+    <authors>Roemer</authors>
+    <owners>Roemer</owners>
+    <licenseUrl>https://github.com/Roemer/FlaUI/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Roemer/FlaUI</projectUrl>
+    <iconUrl>https://github.com/Roemer/FlaUI/blob/master/FlaUI.png?raw=true</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Tool to inspect applications from an UI side.</description>
+    <copyright>Copyright 2016</copyright>
+    <tags>UI Automation UIA2 UIA3 UIA System.Windows.Automation</tags>
+  </metadata>
+  <files>
+	<file src="bin\Release\**\*.*" exclude="bin\**\*.pdb;bin\**\*.xml;bin\*.vshost.*;**\*RANDOM_SEED*" target="tools" />
+  </files>
+</package>
