@@ -1,6 +1,6 @@
 # FlaUI
 
-## Badges
+### Badges
 | What | Badge |
 | ---- | ----- |
 | *Chat* | [![Join the chat at https://gitter.im/FlaUI/Lobby](https://badges.gitter.im/FlaUI/Lobby.svg)](https://gitter.im/FlaUI/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) |
