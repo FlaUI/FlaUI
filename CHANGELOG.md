@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.6.1 (2016-12-15)
+
+### Breaking changes
+  * Made ModalWindows a property
+
+### Enhancements
+  * Walk the parents to get a FrameworkType if no FrameWorkType was found
+  * Added XAML FrameworkType (UWP apps)
+  * Implemented WPF Popup
+  * Fixed single items added multiple times (FlaUInspect)
+  * Added some more pattern information (FlaUInspect)
+
+### Bug fixes
+  * Fixed UIA2 tree walker
+  * Fixed role and state of LegacyIAccessiblePattern
+
 ## 0.6.0 (2016-11-11)
 
 ### Enhancements
