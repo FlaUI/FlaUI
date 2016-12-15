@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Reflection;
+using System.Windows;
 using System.Windows.Controls;
 using FlaUInspect.ViewModels;
 
@@ -14,11 +15,21 @@ namespace FlaUInspect.Views
         public MainWindow()
         {
             InitializeComponent();
+            AppendVersionToTitle();
             Height = 550;
             Width = 700;
             Loaded += MainWindow_Loaded;
             _vm = new MainViewModel();
             DataContext = _vm;
+        }
+
+        private void AppendVersionToTitle()
+        {
+            var attr = Assembly.GetEntryAssembly().GetCustomAttribute(typeof(AssemblyInformationalVersionAttribute)) as AssemblyInformationalVersionAttribute;
+            if (attr != null)
+            {
+                Title += " v" + attr.InformationalVersion;
+            }
         }
 
         private void MainWindow_Loaded(object sender, System.EventArgs e)
