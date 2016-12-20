@@ -1,4 +1,4 @@
-<?xml version="1.0"?> 
+<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>flauinspect</id>
@@ -19,5 +19,8 @@
   </metadata>
   <files>
 	<file src="bin\Release\**\*.*" exclude="bin\**\*.pdb;bin\**\*.xml;bin\*.vshost.*;**\*RANDOM_SEED*" target="tools" />
+	<file src="..\..\LICENSE.txt" target="tools" />
+	<file src="..\..\CHANGELOG.md" target="tools" />
+	<file src="..\..\VERIFICATION.txt" target="tools" />
   </files>
 </package>
