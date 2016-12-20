@@ -1,7 +1,13 @@
-$newVersion = "0.6.1"
+$newVersion = "0.6.2"
+$newConfiguration = "Release"
 
 function Main() {
-    RegexReplaceTextInFile "CreateArtefacts.ps1" "(?<=\`$version = `").*?(?=`")" $newVersion
+	ReplaceVersion
+	ReplaceConfiguration
+}
+
+function ReplaceVersion {
+	RegexReplaceTextInFile "CreateArtefacts.ps1" "(?<=\`$version = `").*?(?=`")" $newVersion
     RegexReplaceTextInFile "src\FlaUInspect\FlaUInspect.nuspec" "(?<=<version>).*?(?=</version>)" $newVersion
 
     ReplaceAssemblyVersion "src\FlaUI.Core\Properties\AssemblyInfo.cs" $newVersion
@@ -10,16 +16,21 @@ function Main() {
     ReplaceAssemblyVersion "src\FlaUInspect\Properties\AssemblyInfo.cs" $newVersion
 }
 
-function RegexReplaceTextInFile($file, $from, $to) {
-    $content = [System.IO.File]::ReadAllText($file)
-    $content = $content -replace $from, $to
-    [System.IO.File]::WriteAllText($file, $content)
+function ReplaceConfiguration {
+	RegexReplaceTextInFile "CreateArtefacts.ps1" "(?<=\`$configuration = `").*?(?=`")" $newConfiguration
+	RegexReplaceTextInFile "src\FlaUInspect\FlaUInspect.nuspec" "(?<=src=`"bin\\).*?(?=\\)" $newConfiguration
 }
 
 function ReplaceAssemblyVersion($assemblyFile, $version) {
     RegexReplaceTextInFile $assemblyFile "(?<=AssemblyVersion\(`").*?(?=`"\))" $version
     RegexReplaceTextInFile $assemblyFile "(?<=AssemblyFileVersion\(`").*?(?=`"\))" $version
     RegexReplaceTextInFile $assemblyFile "(?<=AssemblyInformationalVersion\(`").*?(?=`"\))" $version
+}
+
+function RegexReplaceTextInFile($file, $from, $to) {
+    $content = [System.IO.File]::ReadAllText($file)
+    $content = $content -replace $from, $to
+    [System.IO.File]::WriteAllText($file, $content)
 }
 
 Main

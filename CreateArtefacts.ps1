@@ -17,7 +17,7 @@ function Main {
 
     # FlaUInspect
     $inspectDir = Join-Path $tempDir "FlaUInspect-$version"
-    Copy-Item -Path $rootPath\src\FlaUInspect\bin\$configuration -Destination $inspectDir �Recurse
+    Copy-Item -Path $rootPath\src\FlaUInspect\bin\$configuration -Destination $inspectDir -Recurse
     Get-ChildItem $inspectDir -Include *.pdb,*.xml,*.vshost.*,*RANDOM_SEED* -Recurse | Remove-Item
     Deploy-License $inspectDir
 
