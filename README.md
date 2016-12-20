@@ -6,8 +6,9 @@
 | *Chat* | [![Join the chat at https://gitter.im/FlaUI/Lobby](https://badges.gitter.im/FlaUI/Lobby.svg)](https://gitter.im/FlaUI/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) |
 | *Build* | [![Build status](https://ci.appveyor.com/api/projects/status/mwd2o329cma50sxe?svg=true)](https://ci.appveyor.com/project/RomanBaeriswyl/flaui) |
 | *Tests* | [![Test status](http://flauschig.ch/batch.php?type=tests&account=RomanBaeriswyl&slug=flaui&branch=master)](https://ci.appveyor.com/project/RomanBaeriswyl/flaui/branch/master) |
-| *Libraries (NuGet)* | [![NuGet FlaUI.Core](http://flauschig.ch/nubadge.php?id=FlaUI.Core)](https://www.nuget.org/packages/FlaUI.Core) [![NuGet FlaUI.UIA2](http://flauschig.ch/nubadge.php?id=FlaUI.UIA2)](https://www.nuget.org/packages/FlaUI.UIA2) [![NuGet FlaUI.UIA3](http://flauschig.ch/nubadge.php?id=FlaUI.UIA3)](https://www.nuget.org/packages/FlaUI.UIA3) |
-| *FlaUInspect* | [![FlaUInspect](https://img.shields.io/badge/FlaUInspect-choco-brightgreen.svg)](https://chocolatey.org/packages/flauinspect) [![FlaUInspect](https://img.shields.io/badge/FlaUInspect-dev%20build-brightgreen.svg)](https://ci.appveyor.com/api/projects/RomanBaeriswyl/flaui/artifacts/src%2FFlaUInspect%2Fbin%2FFlaUInspect.zip?branch=master)<br />`choco install flauinspect` |
+| *Libraries (NuGet)* | [![NuGet FlaUI.Core](https://buildstats.info/nuget/FlaUI.Core)](https://www.nuget.org/packages/FlaUI.Core) [![NuGet FlaUI.UIA2](https://buildstats.info/nuget/FlaUI.UIA2)](https://www.nuget.org/packages/FlaUI.UIA2) [![NuGet FlaUI.UIA3](https://buildstats.info/nuget/FlaUI.UIA3)](https://www.nuget.org/packages/FlaUI.UIA3) |
+| *FlaUInspect* | [![FlaUInspect](https://img.shields.io/badge/FlaUInspect-choco-brightgreen.svg)](https://chocolatey.org/packages/flauinspect)<br />`choco install flauinspect` |
+| *CI Artefacts* | [FlaUI CI](https://ci.appveyor.com/project/RomanBaeriswyl/flaui/build/artifacts) |
 
 ### Introduction
 FlaUI is a .NET library which helps with automated UI testing of Windows applications (Win32, WinForms, WPF, Store Apps, ...).<br />
