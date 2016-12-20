@@ -1,6 +1,6 @@
 $artefactDir = "Artefacts"
 $tempDir = "Temp"
-$configuration = "Release"
+$configuration = "Debug"
 $version = "0.6.1"
 $rootPath = "."
 

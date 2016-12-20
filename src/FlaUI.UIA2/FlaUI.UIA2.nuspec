@@ -6,7 +6,7 @@
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
-    <licenseUrl>https://github.com/Roemer/FlaUI/blob/master/LICENSE</licenseUrl>
+    <licenseUrl>https://github.com/Roemer/FlaUI/blob/master/LICENSE.txt</licenseUrl>
     <projectUrl>https://github.com/Roemer/FlaUI</projectUrl>
     <iconUrl>https://github.com/Roemer/FlaUI/blob/master/FlaUI.png?raw=true</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -17,5 +17,7 @@
   <files>
     <file src="bin/$configuration$/net-3.5/FlaUI.UIA2.dll" target="lib/net35" />
 	<file src="bin/$configuration$/net-4.0/FlaUI.UIA2.dll" target="lib/net40" />
+	<file src="..\..\LICENSE.txt" target="" />
+	<file src="..\..\CHANGELOG.md" target="" />
   </files>
 </package>
