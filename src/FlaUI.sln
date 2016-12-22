@@ -27,9 +27,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlaUInspect", "FlaUInspect\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5DEEC181-27D2-412A-9914-8C069E69154A}"
 	ProjectSection(SolutionItems) = preProject
+		..\AdjustConfig.ps1 = ..\AdjustConfig.ps1
 		..\CHANGELOG.md = ..\CHANGELOG.md
+		..\CreateArtefacts.ps1 = ..\CreateArtefacts.ps1
 		..\FlaUI.png = ..\FlaUI.png
+		..\LICENSE.txt = ..\LICENSE.txt
 		..\README.md = ..\README.md
+		..\VERIFICATION.txt = ..\VERIFICATION.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlaUI.Core-3.5", "FlaUI.Core\FlaUI.Core-3.5.csproj", "{AD1BB3FB-FCD4-441D-B9D5-DEE99CD18D79}"

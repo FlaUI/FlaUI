@@ -21,7 +21,7 @@ namespace FlaUI.Core.Conditions
 #if NET35
             var conditions = String.Join(" AND ", Conditions.Select(c => c.ToString()).ToArray());
 #else
-            var conditions = String.Join(" OR ", Conditions.Select(c => c.ToString()));
+            var conditions = String.Join(" AND ", Conditions.Select(c => c.ToString()));
 #endif
             return $"({conditions})";
         }
