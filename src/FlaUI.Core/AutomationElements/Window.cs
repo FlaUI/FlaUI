@@ -26,6 +26,10 @@ namespace FlaUI.Core.AutomationElements
 
         public ITransformPattern TransformPattern => PatternFactory.GetTransformPattern();
 
+        /// <summary>
+        /// Flag to indicate, if the window is the application's main window.
+        /// Is used so that it does not need to be looked up again in some cases (e.g. Context Menu).
+        /// </summary>
         internal bool IsMainWindow { get; set; }
 
         public Window[] ModalWindows

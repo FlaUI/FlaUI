@@ -2,9 +2,11 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.AutomationElements.Infrastructure;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.Logging;
 using FlaUI.Core.Tools;
 
@@ -12,12 +14,12 @@ namespace FlaUI.Core
 {
     public class Application : IDisposable
     {
+        private static readonly ILogger Log = new ConsoleLogger();
+
         /// <summary>
         /// The process of this application
         /// </summary>
         private readonly Process _process;
-
-        private static readonly ILogger Log = new ConsoleLogger();
 
         /// <summary>
         /// Flag to indicate, if the application is a windows store app
@@ -25,15 +27,18 @@ namespace FlaUI.Core
         public bool IsStoreApp { get; }
 
         /// <summary>
-        /// Application process id
+        /// The proces Id of the application
         /// </summary>
         public int ProcessId => _process.Id;
 
         /// <summary>
-        /// The name of the application
+        /// The name of the application's process
         /// </summary>
         public string Name => _process.ProcessName;
 
+        /// <summary>
+        /// The handle (Win32) of the application's main window
+        /// </summary>
         public IntPtr MainWindowHandle => _process.MainWindowHandle;
 
         public Application(int processId, bool isStoreApp = false)
@@ -78,7 +83,7 @@ namespace FlaUI.Core
         }
 
         /// <summary>
-        /// Kills the applications and waits till it is closed
+        /// Kills the applications and waits until it is closed
         /// </summary>
         public void Kill()
         {
@@ -94,22 +99,9 @@ namespace FlaUI.Core
             }
         }
 
-        private static Process FindProcess(int processId)
+        public void Dispose()
         {
-            try
-            {
-                var process = Process.GetProcessById(processId);
-                return process;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Could not find process with id: " + processId, ex);
-            }
-        }
-
-        private static Process[] FindProcess(string executable)
-        {
-            return Process.GetProcessesByName(Path.GetFileNameWithoutExtension(executable));
+            Close();
         }
 
         public static Application Attach(int processId)
@@ -119,7 +111,7 @@ namespace FlaUI.Core
 
         public static Application Attach(Process process)
         {
-            Log.DebugFormat("[Attaching process:{0}] [Process name:{1}] [Process full path:{2}]", process.Id, process.ProcessName, process.MainModule.FileName);
+            Log.DebugFormat("[Attaching to process:{0}] [Process name:{1}] [Process full path:{2}]", process.Id, process.ProcessName, process.MainModule.FileName);
             return new Application(process);
         }
 
@@ -205,6 +197,9 @@ namespace FlaUI.Core
             }
         }
 
+        /// <summary>
+        /// Gets the main window of the application's process
+        /// </summary>
         public Window GetMainWindow(AutomationBase automation)
         {
             var mainWindow = automation.FromHandle(MainWindowHandle).AsWindow();
@@ -215,9 +210,32 @@ namespace FlaUI.Core
             return mainWindow;
         }
 
-        public void Dispose()
+        /// <summary>
+        /// Gets all top level windows from the application
+        /// </summary>
+        public Window[] GetAllTopLevelWindows(AutomationBase automation)
         {
-            Close();
+            var desktop = automation.GetDesktop();
+            var foundElements = desktop.FindAllChildren(cf => cf.ByControlType(ControlType.Window).And(cf.ByProcessId(ProcessId)));
+            return foundElements.Select(x => x.AsWindow()).ToArray();
+        }
+
+        private static Process FindProcess(int processId)
+        {
+            try
+            {
+                var process = Process.GetProcessById(processId);
+                return process;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Could not find process with id: " + processId, ex);
+            }
+        }
+
+        private static Process[] FindProcess(string executable)
+        {
+            return Process.GetProcessesByName(Path.GetFileNameWithoutExtension(executable));
         }
     }
 }
