@@ -62,10 +62,7 @@ namespace FlaUI.Core.Tools
 
         private static void ResetScroll(IScrollPattern scrollPattern, double hScrollPercentage, double vScrollPercentage)
         {
-            if (scrollPattern != null)
-            {
-                scrollPattern.SetScrollPercent(hScrollPercentage, vScrollPercentage);
-            }
+            scrollPattern?.SetScrollPercent(hScrollPercentage, vScrollPercentage);
         }
     }
 }

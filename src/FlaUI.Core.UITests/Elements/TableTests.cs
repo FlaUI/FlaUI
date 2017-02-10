@@ -12,7 +12,7 @@ namespace FlaUI.Core.UITests.Elements
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class TableTests : UITestBase
     {
-        private Table _table;
+        private Grid _table;
 
         public TableTests(AutomationType automationType, TestApplicationType appType)
             : base(automationType, appType)
@@ -25,7 +25,7 @@ namespace FlaUI.Core.UITests.Elements
             var mainWindow = App.GetMainWindow(Automation);
             var tab = mainWindow.FindFirst(TreeScope.Descendants, mainWindow.ConditionFactory.ByControlType(ControlType.Tab)).AsTab();
             tab.SelectTabItem(1);
-            var table = mainWindow.FindFirst(TreeScope.Descendants, mainWindow.ConditionFactory.ByAutomationId("listView1")).AsTable();
+            var table = mainWindow.FindFirst(TreeScope.Descendants, mainWindow.ConditionFactory.ByAutomationId("listView1")).AsGrid();
             _table = table;
         }
 
@@ -41,7 +41,7 @@ namespace FlaUI.Core.UITests.Elements
         {
             var table = _table;
             var header = table.Header;
-            var columns = header.Items;
+            var columns = header.Columns;
             Assert.That(header, Is.Not.Null);
             Assert.That(columns, Has.Length.EqualTo(2));
             Assert.That(columns[0].Text, Is.EqualTo("Key"));
@@ -59,7 +59,7 @@ namespace FlaUI.Core.UITests.Elements
             CheckRow(rows[2], "3", "30");
         }
 
-        private void CheckRow(TableRow tableRow, string cell1Value, string cell2Value)
+        private void CheckRow(GridRow tableRow, string cell1Value, string cell2Value)
         {
             var cells = tableRow.Cells;
             Assert.That(cells, Has.Length.EqualTo(2));

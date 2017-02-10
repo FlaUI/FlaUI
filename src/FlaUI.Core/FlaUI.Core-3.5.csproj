@@ -56,7 +56,6 @@
     <Compile Include="AutomationElements\Scrolling\ScrollBarBase.cs" />
     <Compile Include="AutomationElements\Scrolling\VScrollBar.cs" />
     <Compile Include="AutomationElements\Slider.cs" />
-    <Compile Include="AutomationElements\Table.cs" />
     <Compile Include="BasicAutomationElementBase.cs" />
     <Compile Include="AutomationType.cs" />
     <Compile Include="Conditions\AndCondition.cs" />

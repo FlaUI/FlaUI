@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.AutomationElements.PatternElements;
@@ -15,85 +16,113 @@ namespace FlaUI.Core.AutomationElements
 
         public IGridPattern GridPattern => PatternFactory.GetGridPattern();
 
-        public int RowCount
-        {
-            get
-            {
-                var gridPattern = GridPattern;
-                if (gridPattern != null)
-                {
-                    return GridPattern.Current.RowCount;
-                }
-                return Rows.Length;
-            }
-        }
+        public ITablePattern TablePattern => PatternFactory.GetTablePattern();
 
-        public int ColumnCount
-        {
-            get
-            {
-                var gridPattern = GridPattern;
-                if (gridPattern != null)
-                {
-                    return GridPattern.Current.ColumnCount;
-                }
-                return Header.Columns.Length;
-            }
-        }
+        public int RowCount => GridPattern.Current.RowCount;
+
+        public int ColumnCount => GridPattern.Current.ColumnCount;
+
+        public AutomationElement[] ColumnHeaders => TablePattern.Current.ColumnHeaders;
+
+        public AutomationElement[] RowHeaders => TablePattern.Current.RowHeaders;
+
+        public RowOrColumnMajor RowOrColumnMajor => TablePattern.Current.RowOrColumnMajor;
 
         public GridHeader Header
         {
             get
             {
-                var header = FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Header));
-                return new GridHeader(header.BasicAutomationElement);
+                var header = FindFirstChild(cf => cf.ByControlType(ControlType.Header));
+                return header.AsGridHeader();
             }
         }
 
+        /// <summary>
+        /// Returns the rows which are currently visible to UIA. Might not be the full list!
+        /// Use <see cref="GetRowByIndex" /> to make sure to get the correct row.
+        /// </summary>
         public GridRow[] Rows
         {
             get
             {
-                var rows = FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.DataItem).Or(ConditionFactory.ByControlType(ControlType.ListItem)));
-                return rows.Select(x => new GridRow(x.BasicAutomationElement)).ToArray();
+                var rows = FindAllChildren(cf => cf.ByControlType(ControlType.DataItem).Or(cf.ByControlType(ControlType.ListItem)));
+                return rows.Select(x => x.AsGridRow()).ToArray();
             }
         }
 
-        public GridRow Select(int index)
+        public GridRow Select(int rowIndex)
         {
-            var rows = Rows;
-            PreCheckRow(rows.Length, index);
-            var rowToSelect = rows[index];
-            rowToSelect.ScrollIntoView();
-            rowToSelect.Select();
-            return rowToSelect;
+            var gridRow = GetRowByIndex(rowIndex);
+            gridRow.Select();
+            return gridRow;
         }
 
-        public GridRow AddToSelection(int index)
+        public GridRow AddToSelection(int rowIndex)
         {
-            var rows = Rows;
-            PreCheckRow(rows.Length, index);
-            var rowToSelect = rows[index];
-            rowToSelect.ScrollIntoView();
-            rowToSelect.AddToSelection();
-            return rowToSelect;
+            var gridRow = GetRowByIndex(rowIndex);
+            gridRow.AddToSelection();
+            return gridRow;
         }
 
-        public GridRow RemoveFromSelection(int index)
+        public GridRow RemoveFromSelection(int rowIndex)
         {
-            var rows = Rows;
-            PreCheckRow(rows.Length, index);
-            var rowToSelect = rows[index];
-            rowToSelect.ScrollIntoView();
-            rowToSelect.RemoveFromSelection();
-            return rowToSelect;
+            var gridRow = GetRowByIndex(rowIndex);
+            gridRow.RemoveFromSelection();
+            return gridRow;
         }
 
-        private void PreCheckRow(int numRows, int index)
+        public GridRow GetRowByIndex(int rowIndex)
         {
-            if (numRows <= index)
+            PreCheckRow(rowIndex);
+            var gridCell = GridPattern.GetItem(rowIndex, 0).AsGridCell();
+            return gridCell.ContainingRow;
+        }
+
+        public GridRow GetRowByValue(int columnIndex, string value)
+        {
+            return GetRowsByValue(columnIndex, value, 1).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Get all rows where the value of the given column matches the given value
+        /// </summary>
+        /// <param name="columnIndex">The column index to check</param>
+        /// <param name="value">The value to check</param>
+        /// <param name="maxItems">Maximum numbers of items to return, 0 for all</param>
+        /// <returns>List of found rows</returns>
+        public GridRow[] GetRowsByValue(int columnIndex, string value, int maxItems = 0)
+        {
+            PreCheckColumn(columnIndex);
+            var gridPattern = GridPattern;
+            var returnList = new List<GridRow>();
+            for (var rowIndex = 0; rowIndex < RowCount; rowIndex++)
             {
-                throw new Exception($"Grid contains only {numRows} rows but index {index} were requested");
+                var currentCell = gridPattern.GetItem(rowIndex, columnIndex).AsGridCell();
+                if (currentCell.Value == value)
+                {
+                    returnList.Add(currentCell.ContainingRow);
+                    if (maxItems > 0 && returnList.Count >= maxItems)
+                    {
+                        break;
+                    }
+                }
+            }
+            return returnList.ToArray();
+        }
+
+        private void PreCheckRow(int rowIndex)
+        {
+            if (RowCount <= rowIndex)
+            {
+                throw new Exception($"Grid contains only {RowCount} row(s) but index {rowIndex} was requested");
+            }
+        }
+
+        private void PreCheckColumn(int columnIndex)
+        {
+            if (ColumnCount <= columnIndex)
+            {
+                throw new Exception($"Grid contains only {ColumnCount} columns(s) but index {columnIndex} was requested");
             }
         }
     }
@@ -108,8 +137,8 @@ namespace FlaUI.Core.AutomationElements
         {
             get
             {
-                var headerItems = FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.HeaderItem));
-                return headerItems.Select(x => new GridHeaderItem(x.BasicAutomationElement)).ToArray();
+                var headerItems = FindAllChildren(cf => cf.ByControlType(ControlType.HeaderItem));
+                return headerItems.Select(x => x.AsGridHeaderItem()).ToArray();
             }
         }
     }
@@ -135,8 +164,8 @@ namespace FlaUI.Core.AutomationElements
         {
             get
             {
-                var cells = FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.HeaderItem).Not());
-                return cells.Select(x => new GridCell(x.BasicAutomationElement)).ToArray();
+                var cells = FindAllChildren(cf => cf.ByControlType(ControlType.HeaderItem).Not());
+                return cells.Select(x => x.AsGridCell()).ToArray();
             }
         }
 
@@ -145,17 +174,13 @@ namespace FlaUI.Core.AutomationElements
             get
             {
                 var headerItem = FindFirstChild(ConditionFactory.ByControlType(ControlType.HeaderItem));
-                return headerItem == null ? null : new GridHeaderItem(headerItem.BasicAutomationElement);
+                return headerItem.AsGridHeaderItem();
             }
         }
 
         public GridRow ScrollIntoView()
         {
-            var scrollItemPattern = ScrollItemPattern;
-            if (scrollItemPattern != null)
-            {
-                scrollItemPattern.ScrollIntoView();
-            }
+            ScrollItemPattern?.ScrollIntoView();
             return this;
         }
     }
@@ -167,5 +192,27 @@ namespace FlaUI.Core.AutomationElements
         }
 
         public IGridItemPattern GridItemPattern => PatternFactory.GetGridItemPattern();
+
+        public ITableItemPattern TableItemPattern => PatternFactory.GetTableItemPattern();
+
+        public IValuePattern ValuePattern => PatternFactory.GetValuePattern();
+
+        public Grid ContainingGrid => GridItemPattern.Current.ContainingGrid.AsGrid();
+
+        public GridRow ContainingRow
+        {
+            get
+            {
+                // Get the parent of the cell (which should be the row)
+                var rowElement = Automation.TreeWalkerFactory.GetControlViewWalker().GetParent(this);
+                return rowElement.AsGridRow();
+            }
+        }
+
+        public string Value
+        {
+            get { return ValuePattern.Current.Value; }
+            set { ValuePattern.SetValue(value); }
+        }
     }
 }

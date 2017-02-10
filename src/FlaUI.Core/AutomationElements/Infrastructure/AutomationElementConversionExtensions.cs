@@ -47,6 +47,42 @@
             return new Grid(automationElement.BasicAutomationElement);
         }
 
+        public static GridRow AsGridRow(this AutomationElement automationElement)
+        {
+            if (automationElement == null)
+            {
+                return null;
+            }
+            return new GridRow(automationElement.BasicAutomationElement);
+        }
+
+        public static GridCell AsGridCell(this AutomationElement automationElement)
+        {
+            if (automationElement == null)
+            {
+                return null;
+            }
+            return new GridCell(automationElement.BasicAutomationElement);
+        }
+
+        public static GridHeader AsGridHeader(this AutomationElement automationElement)
+        {
+            if (automationElement == null)
+            {
+                return null;
+            }
+            return new GridHeader(automationElement.BasicAutomationElement);
+        }
+
+        public static GridHeaderItem AsGridHeaderItem(this AutomationElement automationElement)
+        {
+            if (automationElement == null)
+            {
+                return null;
+            }
+            return new GridHeaderItem(automationElement.BasicAutomationElement);
+        }
+
         public static Menu AsMenu(this AutomationElement automationElement)
         {
             if (automationElement == null)
@@ -108,15 +144,6 @@
                 return null;
             }
             return new TabItem(automationElement.BasicAutomationElement);
-        }
-
-        public static Table AsTable(this AutomationElement automationElement)
-        {
-            if (automationElement == null)
-            {
-                return null;
-            }
-            return new Table(automationElement.BasicAutomationElement);
         }
 
         public static TextBox AsTextBox(this AutomationElement automationElement)
