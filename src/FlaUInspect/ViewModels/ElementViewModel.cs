@@ -225,6 +225,29 @@ namespace FlaUInspect.ViewModels
                 };
                 detailGroups.Add(new DetailGroupViewModel("Selection Pattern", patternDetails));
             }
+            // TableItemPattern
+            if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.TableItemPattern))
+            {
+                var pattern = AutomationElement.PatternFactory.GetTableItemPattern();
+                var patternDetails = new List<DetailViewModel>
+                {
+                    new DetailViewModel("ColumnHeaderItems", pattern.Current.ColumnHeaderItems),
+                    new DetailViewModel("RowHeaderItems", pattern.Current.RowHeaderItems)
+                };
+                detailGroups.Add(new DetailGroupViewModel("TableItem Pattern", patternDetails));
+            }
+            // TablePattern
+            if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.TablePattern))
+            {
+                var pattern = AutomationElement.PatternFactory.GetTablePattern();
+                var patternDetails = new List<DetailViewModel>
+                {
+                    new DetailViewModel("ColumnHeaderItems", pattern.Current.ColumnHeaders),
+                    new DetailViewModel("RowHeaderItems", pattern.Current.RowHeaders),
+                    new DetailViewModel("RowOrColumnMajor", pattern.Current.RowOrColumnMajor)
+                };
+                detailGroups.Add(new DetailGroupViewModel("Table Pattern", patternDetails));
+            }
             // TogglePattern
             if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.TogglePattern))
             {
