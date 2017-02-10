@@ -63,22 +63,22 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public IAutomationElementInformation Current => BasicAutomationElement.Current;
 
-        public void Click(bool moveMouse = true)
+        public void Click(bool moveMouse = false)
         {
             PerformMouseAction(moveMouse, Mouse.LeftClick);
         }
 
-        public void DoubleClick(bool moveMouse = true)
+        public void DoubleClick(bool moveMouse = false)
         {
             PerformMouseAction(moveMouse, Mouse.LeftDoubleClick);
         }
 
-        public void RightClick(bool moveMouse = true)
+        public void RightClick(bool moveMouse = false)
         {
             PerformMouseAction(moveMouse, Mouse.RightClick);
         }
 
-        public void RightDoubleClick(bool moveMouse = true)
+        public void RightDoubleClick(bool moveMouse = false)
         {
             PerformMouseAction(moveMouse, Mouse.RightDoubleClick);
         }
