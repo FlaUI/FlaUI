@@ -4,6 +4,11 @@ using FlaUI.Core.Patterns.Infrastructure;
 
 namespace FlaUI.Core.Patterns
 {
+    public class ScrollPatternConstants
+    {
+        public const double NoScroll = -1.0;
+    }
+
     public interface IScrollPattern : IPatternWithInformation<IScrollPatternInformation>
     {
         IScrollPatternProperties Properties { get; }
