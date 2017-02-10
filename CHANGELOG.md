@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.6.2 (2017-02-10)
+
+### Enhancements
+  * [Core] Set move mouse to false by default
+  * [Core] Added NoScroll ScrollPatternConstant for SetScrollPercent
+  * [Inspect] Made supported patterns bold, added more pattern details
+  * [Core] Added GetAllTopLevelWindows to Application
+  
+### Bug fixes
+  * [Core] Fixed AndCondition.ToString
+
 ## 0.6.1 (2016-12-15)
 
 ### Breaking changes
