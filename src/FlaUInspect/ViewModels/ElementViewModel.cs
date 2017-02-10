@@ -122,62 +122,38 @@ namespace FlaUInspect.ViewModels
             var patterns = new List<DetailViewModel>();
             foreach (var pattern in allPatterns)
             {
-                patterns.Add(new DetailViewModel(pattern.Name + "Pattern", allSupportedPatterns.Contains(pattern) ? "Yes" : "No"));
+                var hasPattern = allSupportedPatterns.Contains(pattern);
+                patterns.Add(new DetailViewModel(pattern.Name + "Pattern", hasPattern ? "Yes" : "No") { Important = hasPattern });
             }
             detailGroups.Add(new DetailGroupViewModel("Pattern Support", patterns));
 
             // TODO: Add all missing pattern properties
-            if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.RangeValuePattern))
+            // GridItemPattern
+            if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.GridItemPattern))
             {
-                var pattern = AutomationElement.PatternFactory.GetRangeValuePattern();
+                var pattern = AutomationElement.PatternFactory.GetGridItemPattern();
                 var patternDetails = new List<DetailViewModel>
                 {
-                    new DetailViewModel("IsReadOnly", pattern.Current.IsReadOnly),
-                    new DetailViewModel("SmallChange", pattern.Current.SmallChange),
-                    new DetailViewModel("LargeChange", pattern.Current.LargeChange),
-                    new DetailViewModel("Minimum", pattern.Current.Minimum),
-                    new DetailViewModel("Maximum", pattern.Current.Maximum),
-                    new DetailViewModel("Value", pattern.Current.Value)
+                    new DetailViewModel("Column", pattern.Current.Column),
+                    new DetailViewModel("ColumnSpan", pattern.Current.ColumnSpan),
+                    new DetailViewModel("Row", pattern.Current.Row),
+                    new DetailViewModel("RowSpan", pattern.Current.RowSpan),
+                    new DetailViewModel("ContainingGrid", pattern.Current.ContainingGrid)
                 };
-                detailGroups.Add(new DetailGroupViewModel("RangeValue Pattern", patternDetails));
+                detailGroups.Add(new DetailGroupViewModel("GridItem Pattern", patternDetails));
             }
-
-            if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.TogglePattern))
+            // GridPattern
+            if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.GridPattern))
             {
-                var pattern = AutomationElement.PatternFactory.GetTogglePattern();
+                var pattern = AutomationElement.PatternFactory.GetGridPattern();
                 var patternDetails = new List<DetailViewModel>
                 {
-                    new DetailViewModel("ToggleState", pattern.Current.ToggleState)
+                    new DetailViewModel("ColumnCount", pattern.Current.ColumnCount),
+                    new DetailViewModel("RowCount", pattern.Current.RowCount)
                 };
-                detailGroups.Add(new DetailGroupViewModel("Toggle Pattern", patternDetails));
+                detailGroups.Add(new DetailGroupViewModel("Grid Pattern", patternDetails));
             }
-
-            if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.ValuePattern))
-            {
-                var pattern = AutomationElement.PatternFactory.GetValuePattern();
-                var patternDetails = new List<DetailViewModel>
-                {
-                    new DetailViewModel("IsReadOnly", pattern.Current.IsReadOnly),
-                    new DetailViewModel("Value", pattern.Current.Value)
-                };
-                detailGroups.Add(new DetailGroupViewModel("Value Pattern", patternDetails));
-            }
-
-            if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.WindowPattern))
-            {
-                var pattern = AutomationElement.PatternFactory.GetWindowPattern();
-                var patternDetails = new List<DetailViewModel>
-                {
-                    new DetailViewModel("IsModal", pattern.Current.IsModal),
-                    new DetailViewModel("IsTopmost", pattern.Current.IsTopmost),
-                    new DetailViewModel("CanMinimize", pattern.Current.CanMinimize),
-                    new DetailViewModel("CanMaximize", pattern.Current.CanMaximize),
-                    new DetailViewModel("WindowVisualState", pattern.Current.WindowVisualState),
-                    new DetailViewModel("WindowInteractionState", pattern.Current.WindowInteractionState)
-                };
-                detailGroups.Add(new DetailGroupViewModel("Window Pattern", patternDetails));
-            }
-
+            // LegacyIAccessiblePattern
             if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.LegacyIAccessiblePattern))
             {
                 var pattern = AutomationElement.PatternFactory.GetLegacyIAccessiblePattern();
@@ -195,6 +171,95 @@ namespace FlaUInspect.ViewModels
                     new DetailViewModel("Selection", pattern.Current.Selection)
                 };
                 detailGroups.Add(new DetailGroupViewModel("LegacyIAccessible Pattern", patternDetails));
+            }
+            // RangeValuePattern
+            if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.RangeValuePattern))
+            {
+                var pattern = AutomationElement.PatternFactory.GetRangeValuePattern();
+                var patternDetails = new List<DetailViewModel>
+                {
+                    new DetailViewModel("IsReadOnly", pattern.Current.IsReadOnly),
+                    new DetailViewModel("SmallChange", pattern.Current.SmallChange),
+                    new DetailViewModel("LargeChange", pattern.Current.LargeChange),
+                    new DetailViewModel("Minimum", pattern.Current.Minimum),
+                    new DetailViewModel("Maximum", pattern.Current.Maximum),
+                    new DetailViewModel("Value", pattern.Current.Value)
+                };
+                detailGroups.Add(new DetailGroupViewModel("RangeValue Pattern", patternDetails));
+            }
+            // ScrollPattern
+            if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.ScrollPattern))
+            {
+                var pattern = AutomationElement.PatternFactory.GetScrollPattern();
+                var patternDetails = new List<DetailViewModel>
+                {
+                    new DetailViewModel("HorizontalScrollPercent", pattern.Current.HorizontalScrollPercent),
+                    new DetailViewModel("HorizontalViewSize", pattern.Current.HorizontalViewSize),
+                    new DetailViewModel("HorizontallyScrollable", pattern.Current.HorizontallyScrollable),
+                    new DetailViewModel("VerticalScrollPercent", pattern.Current.VerticalScrollPercent),
+                    new DetailViewModel("VerticalViewSize", pattern.Current.VerticalViewSize),
+                    new DetailViewModel("VerticallyScrollable", pattern.Current.VerticallyScrollable)
+                };
+                detailGroups.Add(new DetailGroupViewModel("Scroll Pattern", patternDetails));
+            }
+            // SelectionItemPattern
+            if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.SelectionItemPattern))
+            {
+                var pattern = AutomationElement.PatternFactory.GetSelectionItemPattern();
+                var patternDetails = new List<DetailViewModel>
+                {
+                    new DetailViewModel("IsSelected", pattern.Current.IsSelected),
+                    new DetailViewModel("SelectionContainer", pattern.Current.SelectionContainer)
+                };
+                detailGroups.Add(new DetailGroupViewModel("SelectionItem Pattern", patternDetails));
+            }
+            // SelectionPattern
+            if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.SelectionPattern))
+            {
+                var pattern = AutomationElement.PatternFactory.GetSelectionPattern();
+                var patternDetails = new List<DetailViewModel>
+                {
+                    new DetailViewModel("Selection", pattern.Current.Selection),
+                    new DetailViewModel("CanSelectMultiple", pattern.Current.CanSelectMultiple),
+                    new DetailViewModel("IsSelectionRequired", pattern.Current.IsSelectionRequired)
+                };
+                detailGroups.Add(new DetailGroupViewModel("Selection Pattern", patternDetails));
+            }
+            // TogglePattern
+            if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.TogglePattern))
+            {
+                var pattern = AutomationElement.PatternFactory.GetTogglePattern();
+                var patternDetails = new List<DetailViewModel>
+                {
+                    new DetailViewModel("ToggleState", pattern.Current.ToggleState)
+                };
+                detailGroups.Add(new DetailGroupViewModel("Toggle Pattern", patternDetails));
+            }
+            // ValuePattern
+            if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.ValuePattern))
+            {
+                var pattern = AutomationElement.PatternFactory.GetValuePattern();
+                var patternDetails = new List<DetailViewModel>
+                {
+                    new DetailViewModel("IsReadOnly", pattern.Current.IsReadOnly),
+                    new DetailViewModel("Value", pattern.Current.Value)
+                };
+                detailGroups.Add(new DetailGroupViewModel("Value Pattern", patternDetails));
+            }
+            // WindowPattern
+            if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.WindowPattern))
+            {
+                var pattern = AutomationElement.PatternFactory.GetWindowPattern();
+                var patternDetails = new List<DetailViewModel>
+                {
+                    new DetailViewModel("IsModal", pattern.Current.IsModal),
+                    new DetailViewModel("IsTopmost", pattern.Current.IsTopmost),
+                    new DetailViewModel("CanMinimize", pattern.Current.CanMinimize),
+                    new DetailViewModel("CanMaximize", pattern.Current.CanMaximize),
+                    new DetailViewModel("WindowVisualState", pattern.Current.WindowVisualState),
+                    new DetailViewModel("WindowInteractionState", pattern.Current.WindowInteractionState)
+                };
+                detailGroups.Add(new DetailGroupViewModel("Window Pattern", patternDetails));
             }
 
             return detailGroups;

@@ -203,7 +203,17 @@
                                                             <ColumnDefinition Width="Auto" SharedSizeGroup="DetailColumnKey" />
                                                             <ColumnDefinition Width="*" />
                                                         </Grid.ColumnDefinitions>
-                                                        <TextBox Grid.Column="0" IsReadOnly="True" Text="{Binding Key}" Style="{StaticResource SelectableLabel}" />
+                                                        <TextBox Grid.Column="0" IsReadOnly="True" Text="{Binding Key}">
+                                                            <TextBox.Style>
+                                                                <Style BasedOn="{StaticResource SelectableLabel}" TargetType="{x:Type TextBox}">
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding Important}" Value="True">
+                                                                            <Setter Property="FontWeight" Value="Bold"/>
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </TextBox.Style>
+                                                        </TextBox>
                                                         <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding Value}" Margin="5,0,0,0">
                                                             <TextBox.Style>
                                                                 <Style BasedOn="{StaticResource SelectableLabel}" TargetType="{x:Type TextBox}">

@@ -13,5 +13,6 @@ namespace FlaUInspect.ViewModels
 
         public string Key { get { return GetProperty<string>(); } set { SetProperty(value); } }
         public string Value { get { return GetProperty<string>(); } set { SetProperty(value); } }
+        public bool Important { get { return GetProperty<bool>(); } set { SetProperty(value); } }
     }
 }
