@@ -129,7 +129,7 @@ namespace FlaUI.Core.AutomationElements
                 if (IsEditable)
                 {
                     // WinForms editable combo box only closes on click and not on invoke
-                    openButton.Click(false);
+                    openButton.Click();
                 }
                 else
                 {

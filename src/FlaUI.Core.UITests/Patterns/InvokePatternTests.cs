@@ -20,9 +20,9 @@ namespace FlaUI.Core.UITests.Patterns
         public void InvokeWithEventTest()
         {
             var mainWindow = App.GetMainWindow(Automation);
-            var tab = mainWindow.FindFirstDescendant(mainWindow.ConditionFactory.ByControlType(ControlType.Tab)).AsTab();
+            var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
             var tabItem = tab.TabItems[0];
-            var button = tabItem.FindFirstDescendant(mainWindow.ConditionFactory.ByAutomationId("InvokableButton"));
+            var button = tabItem.FindFirstDescendant(cf => cf.ByAutomationId("InvokableButton"));
             Assert.That(button, Is.Not.Null);
             var origButtonText = button.Current.Name;
             var invokePattern = button.PatternFactory.GetInvokePattern();

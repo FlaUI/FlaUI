@@ -35,7 +35,7 @@ namespace FlaUI.Core.UITests.Patterns
 
         private AutomationElement GetSlider()
         {
-            var element = App.GetMainWindow(Automation).FindFirstDescendant(Automation.ConditionFactory.ByAutomationId("Slider"));
+            var element = App.GetMainWindow(Automation).FindFirstDescendant(cf => cf.ByAutomationId("Slider"));
             return element;
         }
     }

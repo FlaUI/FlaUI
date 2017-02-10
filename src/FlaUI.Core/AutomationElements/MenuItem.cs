@@ -35,7 +35,7 @@ namespace FlaUI.Core.AutomationElements
                 if (IsWin32ContextMenu)
                 {
                     // Click the item to load the child items
-                    Click(false);
+                    Click();
                     // In Win32, the nested menu items are below a menu control which is below the application window
                     // So search the app window first
                     var appWindow = BasicAutomationElement.Automation.GetDesktop().FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Window).And(ConditionFactory.ByProcessId(Current.ProcessId)));

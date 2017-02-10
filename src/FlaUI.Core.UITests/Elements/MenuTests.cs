@@ -1,5 +1,4 @@
 ﻿using FlaUI.Core.AutomationElements.Infrastructure;
-using FlaUI.Core.Definitions;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
 
@@ -20,7 +19,7 @@ namespace FlaUI.Core.UITests.Elements
         public void TestMenuWithSubMenus()
         {
             var window = App.GetMainWindow(Automation);
-            var menu = window.FindFirst(TreeScope.Children, Automation.ConditionFactory.Menu()).AsMenu();
+            var menu = window.FindFirstChild(cf => cf.Menu()).AsMenu();
             Assert.That(menu, Is.Not.Null);
             var items = menu.MenuItems;
             Assert.That(items, Has.Length.EqualTo(2));

@@ -1,5 +1,4 @@
 ﻿using FlaUI.Core.AutomationElements.Infrastructure;
-using FlaUI.Core.Definitions;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
 
@@ -19,7 +18,7 @@ namespace FlaUI.Core.UITests.Elements
         public void DirectSetTest()
         {
             var window = App.GetMainWindow(Automation);
-            var textBox = window.FindFirst(TreeScope.Descendants, Automation.ConditionFactory.ByAutomationId("TextBox")).AsTextBox();
+            var textBox = window.FindFirstDescendant(cf => cf.ByAutomationId("TextBox")).AsTextBox();
             var text = textBox.Text;
             Assert.That(text, Is.Empty);
             var textToSet = "Hello World";
@@ -33,7 +32,7 @@ namespace FlaUI.Core.UITests.Elements
         public void EnterTest()
         {
             var window = App.GetMainWindow(Automation);
-            var textBox = window.FindFirst(TreeScope.Descendants, Automation.ConditionFactory.ByAutomationId("TextBox")).AsTextBox();
+            var textBox = window.FindFirstDescendant(cf => cf.ByAutomationId("TextBox")).AsTextBox();
             var text = textBox.Text;
             Assert.That(text, Is.Empty);
             var textToSet = "Hello World";

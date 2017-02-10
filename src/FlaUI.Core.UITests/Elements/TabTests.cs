@@ -22,7 +22,7 @@ namespace FlaUI.Core.UITests.Elements
         {
             RestartApp();
             var mainWindow = App.GetMainWindow(Automation);
-            var tab = mainWindow.FindFirst(TreeScope.Descendants, mainWindow.ConditionFactory.ByControlType(ControlType.Tab)).AsTab();
+            var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
             Assert.That(tab.TabItems, Has.Length.EqualTo(2));
             Assert.That(tab.SelectedTabItemIndex, Is.EqualTo(0));
             tab.SelectTabItem(1);

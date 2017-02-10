@@ -20,9 +20,9 @@ namespace FlaUI.Core.UITests.Patterns
         public void SelectTab()
         {
             var mainWindow = App.GetMainWindow(Automation);
-            var tab = mainWindow.FindFirstDescendant(mainWindow.ConditionFactory.ByControlType(ControlType.Tab)).AsTab();
+            var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
             var tabItem = tab.SelectTabItem(1);
-            _dataGrid = tabItem.FindFirstDescendant(mainWindow.ConditionFactory.ByAutomationId("dataGrid1"));
+            _dataGrid = tabItem.FindFirstDescendant(cf => cf.ByAutomationId("dataGrid1"));
         }
 
         [Test]

@@ -1,4 +1,5 @@
 ﻿using FlaUI.Core.AutomationElements.Infrastructure;
+using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
@@ -19,9 +20,9 @@ namespace FlaUI.Core.UITests.Patterns
         public void SelectTab()
         {
             var mainWindow = App.GetMainWindow(Automation);
-            var tab = mainWindow.FindFirstDescendant(mainWindow.ConditionFactory.ByControlType(ControlType.Tab)).AsTab();
+            var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
             var tabItem = tab.SelectTabItem(1);
-            _expander = tabItem.FindFirstNested(mainWindow.ConditionFactory.ByControlType(ControlType.Pane), mainWindow.ConditionFactory.ByAutomationId("Expander"));
+            _expander = tabItem.FindFirstNested(cf => new ConditionBase[] { cf.ByControlType(ControlType.Pane), cf.ByAutomationId("Expander") });
         }
 
         [Test]

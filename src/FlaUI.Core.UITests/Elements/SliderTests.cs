@@ -1,6 +1,5 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.AutomationElements.Infrastructure;
-using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
 using FlaUI.Core.Shapes;
 using FlaUI.Core.UITests.TestFramework;
@@ -80,7 +79,7 @@ namespace FlaUI.Core.UITests.Elements
 
         private Slider GetSlider()
         {
-            var element = App.GetMainWindow(Automation).FindFirst(TreeScope.Descendants, Automation.ConditionFactory.ByAutomationId("Slider")).AsSlider();
+            var element = App.GetMainWindow(Automation).FindFirstDescendant(cf => cf.ByAutomationId("Slider")).AsSlider();
             return element;
         }
 

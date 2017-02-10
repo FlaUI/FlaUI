@@ -19,7 +19,7 @@ namespace FlaUI.Core.UITests.Elements
         {
             var window = App.GetMainWindow(Automation);
             var btn = window.FindFirstDescendant(cf => cf.ByAutomationId("PopupToggleButton1"));
-            btn.Click(false);
+            btn.Click();
             Helpers.WaitUntilInputIsProcessed();
             var popup = window.Popup;
             Assert.That(popup, Is.Not.Null);
@@ -34,7 +34,7 @@ namespace FlaUI.Core.UITests.Elements
         {
             var window = App.GetMainWindow(Automation);
             var btn = window.FindFirstDescendant(cf => cf.ByAutomationId("PopupToggleButton2"));
-            btn.Click(false);
+            btn.Click();
             Helpers.WaitUntilInputIsProcessed();
             var popup = window.Popup;
             Assert.That(popup, Is.Not.Null);

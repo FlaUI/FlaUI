@@ -22,7 +22,7 @@ namespace FlaUI.Core.UITests.Elements
         public void SelectedItemTest(string comboBoxId)
         {
             var mainWindow = App.GetMainWindow(Automation);
-            var combo = mainWindow.FindFirstDescendant(Automation.ConditionFactory.ByAutomationId(comboBoxId)).AsComboBox();
+            var combo = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId(comboBoxId)).AsComboBox();
             combo.Items[1].Select();
             var selectedItem = combo.SelectedItem;
             Assert.That(selectedItem, Is.Not.Null);
@@ -35,7 +35,7 @@ namespace FlaUI.Core.UITests.Elements
         public void ExpandCollapseTest(string comboBoxId)
         {
             var mainWindow = App.GetMainWindow(Automation);
-            var combo = mainWindow.FindFirstDescendant(Automation.ConditionFactory.ByAutomationId(comboBoxId)).AsComboBox();
+            var combo = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId(comboBoxId)).AsComboBox();
             combo.Expand();
             Assert.That(combo.ExpandCollapseState, Is.EqualTo(ExpandCollapseState.Expanded));
             combo.Collapse();
@@ -46,7 +46,7 @@ namespace FlaUI.Core.UITests.Elements
         public void EditableTextTest()
         {
             var mainWindow = App.GetMainWindow(Automation);
-            var combo = mainWindow.FindFirstDescendant(Automation.ConditionFactory.ByAutomationId("EditableCombo")).AsComboBox();
+            var combo = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("EditableCombo")).AsComboBox();
             combo.EditableText = "Item 3";
             Assert.That(combo.SelectedItem.Current.Name, Is.EqualTo("Item 3"));
         }

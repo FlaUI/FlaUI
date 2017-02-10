@@ -1,5 +1,4 @@
 ﻿using FlaUI.Core.AutomationElements.Infrastructure;
-using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
@@ -22,7 +21,7 @@ namespace FlaUI.Core.UITests.Elements
         {
             RestartApp();
             var window = App.GetMainWindow(Automation);
-            var btn = window.FindFirst(TreeScope.Descendants, Automation.ConditionFactory.ByName("ContextMenu")).AsButton();
+            var btn = window.FindFirstDescendant(cf => cf.ByName("ContextMenu")).AsButton();
             Mouse.Click(MouseButton.Right, btn.GetClickablePoint());
             Helpers.WaitUntilInputIsProcessed();
             var ctxMenu = window.ContextMenu;

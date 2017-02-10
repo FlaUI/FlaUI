@@ -1,5 +1,4 @@
 ﻿using FlaUI.Core.AutomationElements.Infrastructure;
-using FlaUI.Core.Definitions;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
 
@@ -19,7 +18,7 @@ namespace FlaUI.Core.UITests.Elements
         public void SelectSingleRadioButtonTest()
         {
             RestartApp();
-            var radioButton = App.GetMainWindow(Automation).FindFirst(TreeScope.Descendants, Automation.ConditionFactory.ByAutomationId("RadioButton1")).AsRadioButton();
+            var radioButton = App.GetMainWindow(Automation).FindFirstDescendant(cf => cf.ByAutomationId("RadioButton1")).AsRadioButton();
             Assert.That(radioButton.IsSelected, Is.False);
             radioButton.Select();
             Assert.That(radioButton.IsSelected, Is.True);
@@ -29,8 +28,8 @@ namespace FlaUI.Core.UITests.Elements
         public void SelectRadioButtonGroupTest()
         {
             RestartApp();
-            var radioButton1 = App.GetMainWindow(Automation).FindFirst(TreeScope.Descendants, Automation.ConditionFactory.ByAutomationId("RadioButton1")).AsRadioButton();
-            var radioButton2 = App.GetMainWindow(Automation).FindFirst(TreeScope.Descendants, Automation.ConditionFactory.ByAutomationId("RadioButton2")).AsRadioButton();
+            var radioButton1 = App.GetMainWindow(Automation).FindFirstDescendant(cf => cf.ByAutomationId("RadioButton1")).AsRadioButton();
+            var radioButton2 = App.GetMainWindow(Automation).FindFirstDescendant(cf => cf.ByAutomationId("RadioButton2")).AsRadioButton();
 
             Assert.That(radioButton1.IsSelected && radioButton2.IsSelected, Is.False);
 
