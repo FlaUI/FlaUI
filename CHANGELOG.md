@@ -1,5 +1,17 @@
 # Changelog
 
+## vNext (xxxx-xx-xx)
+
+### Breaking changes
+  * [Core] Merged Table into Grid
+
+### Enhancements
+  * [Inspect] Added Table Patterns support
+  * [Code] Various code cleanups
+
+### Bug fixes
+  * None yet
+
 ## 0.6.2 (2017-02-10)
 
 ### Enhancements
