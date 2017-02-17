@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using FlaUI.Core.Conditions;
@@ -309,43 +310,6 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
                 itemList.Add(automationItem);
             }
             return itemList.ToArray();
-        }
-
-        /// <summary>
-        /// Gets the XPath to the element until the desktop or the given root element.
-        /// Warning: This is quite a heavy operation
-        /// </summary>
-        public string GetXPathToElement(AutomationElement rootElement = null)
-        {
-            var treeWalker = Automation.TreeWalkerFactory.GetControlViewWalker();
-            return GetXPathToElement(this, treeWalker, rootElement);
-        }
-        
-        private string GetXPathToElement(AutomationElement element, ITreeWalker treeWalker, AutomationElement rootElement = null)
-        {
-            var parent = treeWalker.GetParent(element);
-            if (parent == null || (rootElement != null && parent.Equals(rootElement)))
-            {
-                return String.Empty;
-            }
-            // Get the index
-            var allChildren = parent.FindAllChildren(cf => cf.ByControlType(element.Current.ControlType));
-            var currentItemText = $"{element.Current.ControlType}";
-            if (allChildren.Length > 1)
-            {
-                // There is more than one matching child, find out the index
-                var indexInParent = 0;
-                foreach (var child in allChildren)
-                {
-                    if (child.Equals(element))
-                    {
-                        break;
-                    }
-                    indexInParent++;
-                }
-                currentItemText += $"[{indexInParent}]";
-            }
-            return $"{GetXPathToElement(parent, treeWalker, rootElement)}/{currentItemText}";
         }
 
         /// <summary>

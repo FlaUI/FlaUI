@@ -71,6 +71,7 @@
     <Compile Include="Conditions\NotCondition.cs" />
     <Compile Include="Conditions\OrCondition.cs" />
     <Compile Include="Conditions\PropertyCondition.cs" />
+    <Compile Include="Debug.cs" />
     <Compile Include="Definitions\AnnotationType.cs" />
     <Compile Include="Definitions\AutomationElementMode.cs" />
     <Compile Include="Definitions\ControlType.cs" />

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FlaUI.Core;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
@@ -72,7 +73,7 @@ namespace FlaUInspect.ViewModels
 
         public ExtendedObservableCollection<DetailGroupViewModel> ItemDetails { get; set; }
         
-        public string XPath => AutomationElement.GetXPathToElement();
+        public string XPath => Debug.GetXPathToElement(AutomationElement);
 
         public void LoadChildren(bool loadInnerChildren)
         {
