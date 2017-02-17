@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Input;
 using FlaUI.Core;
@@ -30,7 +31,11 @@ namespace FlaUInspect.ViewModels
             });
         }
 
-        public bool IsInitialized { get { return GetProperty<bool>(); } private set { SetProperty(value); } }
+        public bool IsInitialized
+        {
+            get { return GetProperty<bool>(); }
+            private set { SetProperty(value); }
+        }
 
         public bool EnableHoverMode
         {
@@ -58,7 +63,17 @@ namespace FlaUInspect.ViewModels
             }
         }
 
-        public AutomationType SelectedAutomationType { get { return GetProperty<AutomationType>(); } private set { SetProperty(value); } }
+        public bool EnableXPath
+        {
+            get { return GetProperty<bool>(); }
+            set { SetProperty(value); }
+        }
+
+        public AutomationType SelectedAutomationType
+        {
+            get { return GetProperty<AutomationType>(); }
+            private set { SetProperty(value); }
+        }
 
         public ObservableCollection<ElementViewModel> Elements { get; private set; }
 
@@ -66,21 +81,18 @@ namespace FlaUInspect.ViewModels
 
         public ObservableCollection<DetailGroupViewModel> SelectedItemDetails => SelectedItemInTree?.ItemDetails;
 
-        public ElementViewModel SelectedItemInTree { get { return GetProperty<ElementViewModel>(); } private set { SetProperty(value); } }
+        public ElementViewModel SelectedItemInTree
+        {
+            get { return GetProperty<ElementViewModel>(); }
+            private set { SetProperty(value); }
+        }
 
         public void Initialize(AutomationType selectedAutomationType)
         {
             SelectedAutomationType = selectedAutomationType;
             IsInitialized = true;
 
-            if (selectedAutomationType == AutomationType.UIA2)
-            {
-                _automation = new UIA2Automation();
-            }
-            else
-            {
-                _automation = new UIA3Automation();
-            }
+            _automation = selectedAutomationType == AutomationType.UIA2 ? (AutomationBase)new UIA2Automation() : new UIA3Automation();
             _rootElement = _automation.GetDesktop();
             var desktopViewModel = new ElementViewModel(_rootElement);
             desktopViewModel.SelectionChanged += DesktopViewModel_SelectionChanged;
@@ -157,14 +169,7 @@ namespace FlaUInspect.ViewModels
 
         private ElementViewModel FindElement(ElementViewModel parent, AutomationElement element)
         {
-            foreach (var child in parent.Children)
-            {
-                if (child.AutomationElement.Equals(element))
-                {
-                    return child;
-                }
-            }
-            return null;
+            return parent.Children.FirstOrDefault(child => child.AutomationElement.Equals(element));
         }
 
         private void DesktopViewModel_SelectionChanged(ElementViewModel obj)

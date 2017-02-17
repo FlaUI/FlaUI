@@ -62,10 +62,17 @@ namespace FlaUInspect.ViewModels
         }
 
         public string Name => NormalizeString(AutomationElement.Current.Name);
+
+
         public string AutomationId => NormalizeString(AutomationElement.Current.AutomationId);
+
         public ControlType ControlType => AutomationElement.Current.ControlType;
+
         public ExtendedObservableCollection<ElementViewModel> Children { get; set; }
+
         public ExtendedObservableCollection<DetailGroupViewModel> ItemDetails { get; set; }
+        
+        public string XPath => AutomationElement.GetXPathToElement();
 
         public void LoadChildren(bool loadInnerChildren)
         {

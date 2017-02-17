@@ -9,9 +9,11 @@
         Title="FlaUI Inspect Tool" d:DesignHeight="350" d:DesignWidth="500" d:LayoutOverrides="Width, Height" ResizeMode="CanResizeWithGrip">
     <Window.Resources>
         <Style x:Key="SelectableLabel" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="IsReadOnly" Value="True" />
         </Style>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Window.Resources>
     <Grid>
         <DockPanel>
@@ -24,11 +26,28 @@
                 <MenuItem Header="_Mode">
                     <MenuItem Header="H_over Mode (use Ctrl)" IsCheckable="True" IsChecked="{Binding EnableHoverMode}" />
                     <MenuItem Header="_Focus Tracking" IsCheckable="True" IsChecked="{Binding EnableFocusTrackingMode}" />
+                    <MenuItem Header="Show _XPath" IsCheckable="True" IsChecked="{Binding EnableXPath}" />
                 </MenuItem>
             </Menu>
             <StatusBar DockPanel.Dock="Bottom">
                 <StatusBarItem>
-                    <Label Content="{Binding SelectedAutomationType, FallbackValue=None}"></Label>
+                    <Label Content="{Binding SelectedAutomationType, FallbackValue=None}" />
+                </StatusBarItem>
+                <StatusBarItem>
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding EnableXPath, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Label>XPath:</Label>
+                        <TextBox VerticalAlignment="Center">
+                            <TextBox.Style>
+                                <Style BasedOn="{StaticResource SelectableLabel}" TargetType="{x:Type TextBox}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding EnableXPath}" Value="True">
+                                            <Setter Property="Text" Value="{Binding SelectedItemInTree.XPath, FallbackValue=None, Mode=OneWay}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </StackPanel>
                 </StatusBarItem>
             </StatusBar>
             <Grid>
