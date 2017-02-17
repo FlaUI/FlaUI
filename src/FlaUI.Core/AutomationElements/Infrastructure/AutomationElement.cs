@@ -286,6 +286,32 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
+        /// Finds for the first item which matches the given xpath
+        /// </summary>
+        public AutomationElement FindFirstByXPath(string xPath)
+        {
+            var xPathNavigator = new AutomationElementXPathNavigator(this);
+            var nodeItem = xPathNavigator.SelectSingleNode(xPath);
+            return (AutomationElement)nodeItem?.UnderlyingObject;
+        }
+
+        /// <summary>
+        /// Finds all items which match the given xpath
+        /// </summary>
+        public AutomationElement[] FindAllByXPath(string xPath)
+        {
+            var xPathNavigator = new AutomationElementXPathNavigator(this);
+            var itemNodeIterator = xPathNavigator.Select(xPath);
+            var itemList = new List<AutomationElement>();
+            while (itemNodeIterator.MoveNext())
+            {
+                var automationItem = (AutomationElement)itemNodeIterator.Current.UnderlyingObject;
+                itemList.Add(automationItem);
+            }
+            return itemList.ToArray();
+        }
+
+        /// <summary>
         /// Gets a clickable point of the element
         /// </summary>
         /// <exception cref="Exceptions.NoClickablePointException">Thrown when no clickable point was found</exception>

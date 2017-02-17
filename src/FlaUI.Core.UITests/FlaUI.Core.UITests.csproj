@@ -82,6 +82,7 @@
     <Compile Include="TestFramework\TestApplicationType.cs" />
     <Compile Include="TestFramework\TestUtilities.cs" />
     <Compile Include="TestFramework\UITestBase.cs" />
+    <Compile Include="XPathTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlaUI.Core\FlaUI.Core.csproj">

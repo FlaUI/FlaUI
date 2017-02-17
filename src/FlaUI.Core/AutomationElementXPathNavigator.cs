@@ -2,16 +2,22 @@
 using System.Xml;
 using System.Xml.XPath;
 using FlaUI.Core.AutomationElements.Infrastructure;
+#if NET35
 using FlaUI.Core.Tools;
+#endif
 
 namespace FlaUI.Core
 {
+    /// <summary>
+    /// Custom implementation of a <see cref="XPathNavigator" /> which allows
+    /// selecting items by xpath by using the <see cref="ITreeWalker" />.
+    /// </summary>
     public class AutomationElementXPathNavigator : XPathNavigator
     {
         private const int NoAttributeValue = -1;
         private readonly AutomationElement _rootElement;
-        private AutomationElement _currentElement;
         private readonly ITreeWalker _treeWalker;
+        private AutomationElement _currentElement;
         private int _attributeIndex = NoAttributeValue;
 
         public AutomationElementXPathNavigator(AutomationElement rootElement)
@@ -25,17 +31,7 @@ namespace FlaUI.Core
 
         public override bool HasAttributes => !IsInAttribute;
 
-        public override string Value
-        {
-            get
-            {
-                if (IsInAttribute)
-                {
-                    return GetAttributeValue(_attributeIndex);
-                }
-                return _currentElement.ToString();
-            }
-        }
+        public override string Value => IsInAttribute ? GetAttributeValue(_attributeIndex) : _currentElement.ToString();
 
         public override object UnderlyingObject => _currentElement;
 
@@ -55,17 +51,7 @@ namespace FlaUI.Core
             }
         }
 
-        public override string LocalName
-        {
-            get
-            {
-                if (IsInAttribute)
-                {
-                    return GetAttributeName(_attributeIndex);
-                }
-                return _currentElement.Current.ControlType.ToString();
-            }
-        }
+        public override string LocalName => IsInAttribute ? GetAttributeName(_attributeIndex) : _currentElement.Current.ControlType.ToString();
 
         public override string Name => LocalName;
 
@@ -94,6 +80,10 @@ namespace FlaUI.Core
 
         public override bool MoveToFirstAttribute()
         {
+            if (IsInAttribute)
+            {
+                return false;
+            }
             _attributeIndex = 0;
             return true;
         }
@@ -103,6 +93,10 @@ namespace FlaUI.Core
             if (_attributeIndex >= Enum.GetNames(typeof(ElementAttributes)).Length - 1)
             {
                 // No more attributes
+                return false;
+            }
+            if (!IsInAttribute)
+            {
                 return false;
             }
             _attributeIndex++;
@@ -125,6 +119,10 @@ namespace FlaUI.Core
 
         public override bool MoveToAttribute(string localName, string namespaceURI)
         {
+            if (IsInAttribute)
+            {
+                return false;
+            }
             var attributeIndex = GetAttributeIndexFromName(localName);
             if (attributeIndex != NoAttributeValue)
             {
@@ -213,6 +211,7 @@ namespace FlaUI.Core
                 return false;
             }
             _currentElement = specificNavigator._currentElement;
+            _attributeIndex = specificNavigator._attributeIndex;
             return true;
         }
 
@@ -223,7 +222,17 @@ namespace FlaUI.Core
 
         public override bool IsSamePosition(XPathNavigator other)
         {
-            throw new NotImplementedException();
+            var specificNavigator = other as AutomationElementXPathNavigator;
+            if (specificNavigator == null)
+            {
+                return false;
+            }
+            if (!Equals(_rootElement, specificNavigator._rootElement))
+            {
+                return false;
+            }
+            return Equals(_currentElement, specificNavigator._currentElement)
+                && _attributeIndex == specificNavigator._attributeIndex;
         }
 
         private string GetAttributeValue(int attributeIndex)
@@ -236,6 +245,8 @@ namespace FlaUI.Core
                     return _currentElement.Current.Name;
                 case ElementAttributes.ClassName:
                     return _currentElement.Current.ClassName;
+                case ElementAttributes.HelpText:
+                    return _currentElement.Current.HelpText;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(attributeIndex));
             }
@@ -269,7 +280,8 @@ namespace FlaUI.Core
         {
             AutomationId,
             Name,
-            ClassName
+            ClassName,
+            HelpText
         }
     }
 }
