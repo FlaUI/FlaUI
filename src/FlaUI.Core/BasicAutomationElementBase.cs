@@ -113,5 +113,6 @@ namespace FlaUI.Core
         public abstract void RemovePropertyChangedEventHandler(IAutomationPropertyChangedEventHandler eventHandler);
         public abstract void RemoveStructureChangedEventHandler(IAutomationStructureChangedEventHandler eventHandler);
         public abstract PatternId[] GetSupportedPatterns();
+        public abstract PropertyId[] GetSupportedProperties();
     }
 }

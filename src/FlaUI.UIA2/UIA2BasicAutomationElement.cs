@@ -111,8 +111,14 @@ namespace FlaUI.UIA2
 
         public override PatternId[] GetSupportedPatterns()
         {
-            var rawPatterns = NativeElement.GetSupportedPatterns();
-            return rawPatterns.Select(rawPattern => PatternId.Find(AutomationType.UIA2, rawPattern.Id)).ToArray();
+            var raw = NativeElement.GetSupportedPatterns();
+            return raw.Select(r => PatternId.Find(AutomationType.UIA2, r.Id)).ToArray();
+        }
+
+        public override PropertyId[] GetSupportedProperties()
+        {
+            var raw = NativeElement.GetSupportedProperties();
+            return raw.Select(r => PropertyId.Find(AutomationType.UIA2, r.Id)).ToArray();
         }
 
         public override int GetHashCode()

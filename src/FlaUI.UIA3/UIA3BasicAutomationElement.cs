@@ -82,7 +82,7 @@ namespace FlaUI.UIA3
             point = success ? new Point(tagPoint.x, tagPoint.y) : null;
             return success;
         }
-        
+
         public override IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
         {
             var eventHandler = new UIA3BasicEventHandler(Automation, action);
@@ -123,10 +123,18 @@ namespace FlaUI.UIA3
 
         public override PatternId[] GetSupportedPatterns()
         {
-            int[] rawPatternIds;
+            int[] rawIds;
             string[] rawPatternNames;
-            Automation.NativeAutomation.PollForPotentialSupportedPatterns(NativeElement, out rawPatternIds, out rawPatternNames);
-            return rawPatternIds.Select(patternId => PatternId.Find(AutomationType.UIA3, patternId)).ToArray();
+            Automation.NativeAutomation.PollForPotentialSupportedPatterns(NativeElement, out rawIds, out rawPatternNames);
+            return rawIds.Select(id => PatternId.Find(AutomationType.UIA3, id)).ToArray();
+        }
+
+        public override PropertyId[] GetSupportedProperties()
+        {
+            int[] rawIds;
+            string[] rawPatternNames;
+            Automation.NativeAutomation.PollForPotentialSupportedProperties(NativeElement, out rawIds, out rawPatternNames);
+            return rawIds.Select(id => PropertyId.Find(AutomationType.UIA3, id)).ToArray();
         }
 
         public override int GetHashCode()
