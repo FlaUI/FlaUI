@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
 using System.Text;
 using FlaUI.Core.AutomationElements.Infrastructure;
-using FlaUI.Core.Identifiers;
 
 namespace FlaUI.Core
 {

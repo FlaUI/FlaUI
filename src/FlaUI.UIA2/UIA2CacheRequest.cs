@@ -28,7 +28,7 @@ namespace FlaUI.UIA2
 
         public ConditionBase TreeFilter
         {
-            get{throw new NotImplementedException();}
+            get { throw new NotImplementedException(); }
             set { NativeCacheRequest.TreeFilter = ConditionConverter.ToNative(value); }
         }
 
@@ -50,7 +50,13 @@ namespace FlaUI.UIA2
 
         public ICacheRequest Clone()
         {
-            throw new NotImplementedException();
+            var clone = new UIA2CacheRequest(Automation)
+            {
+                AutomationElementMode = AutomationElementMode,
+                TreeScope = TreeScope
+            };
+            clone.NativeCacheRequest.TreeFilter = NativeCacheRequest.TreeFilter;
+            return clone;
         }
     }
 }
