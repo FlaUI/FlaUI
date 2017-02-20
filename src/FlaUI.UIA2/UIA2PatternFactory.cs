@@ -15,209 +15,202 @@ namespace FlaUI.UIA2
             BasicAutomationElement = basicAutomationElement;
         }
 
-        public IAnnotationPattern GetAnnotationPattern()
+        public IAnnotationPattern GetAnnotationPattern(bool cached = false)
         {
             throw new NotSupportedByUIA2Exception();
         }
 
-        public IDockPattern GetDockPattern()
+        public IDockPattern GetDockPattern(bool cached = false)
         {
-            var nativePattern = GetNativePatternAs<UIA.DockPattern>(UIA.DockPattern.Pattern);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.DockPattern>(DockPattern.Pattern, cached);
             return nativePattern == null ? null : new DockPattern(BasicAutomationElement, nativePattern);
         }
 
-        public IDragPattern GetDragPattern()
+        public IDragPattern GetDragPattern(bool cached = false)
         {
             throw new NotSupportedByUIA2Exception();
         }
 
-        public IDropTargetPattern GetDropTargetPattern()
+        public IDropTargetPattern GetDropTargetPattern(bool cached = false)
         {
             throw new NotSupportedByUIA2Exception();
         }
 
-        public IExpandCollapsePattern GetExpandCollapsePattern()
+        public IExpandCollapsePattern GetExpandCollapsePattern(bool cached = false)
         {
-            var nativePattern = GetNativePatternAs<UIA.ExpandCollapsePattern>(UIA.ExpandCollapsePattern.Pattern);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.ExpandCollapsePattern>(ExpandCollapsePattern.Pattern, cached);
             return nativePattern == null ? null : new ExpandCollapsePattern(BasicAutomationElement, nativePattern);
         }
 
-        public IGridItemPattern GetGridItemPattern()
+        public IGridItemPattern GetGridItemPattern(bool cached = false)
         {
-            var nativePattern = GetNativePatternAs<UIA.GridItemPattern>(UIA.GridItemPattern.Pattern);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.GridItemPattern>(GridItemPattern.Pattern, cached);
             return nativePattern == null ? null : new GridItemPattern(BasicAutomationElement, nativePattern);
         }
 
-        public IGridPattern GetGridPattern()
+        public IGridPattern GetGridPattern(bool cached = false)
         {
-            var nativePattern = GetNativePatternAs<UIA.GridPattern>(UIA.GridPattern.Pattern);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.GridPattern>(GridPattern.Pattern, cached);
             return nativePattern == null ? null : new GridPattern(BasicAutomationElement, nativePattern);
         }
 
-        public IInvokePattern GetInvokePattern()
+        public IInvokePattern GetInvokePattern(bool cached = false)
         {
-            var nativePattern = GetNativePatternAs<UIA.InvokePattern>(UIA.InvokePattern.Pattern);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.InvokePattern>(InvokePattern.Pattern, cached);
             return nativePattern == null ? null : new InvokePattern(BasicAutomationElement, nativePattern);
         }
 
-        public IItemContainerPattern GetItemContainerPattern()
+        public IItemContainerPattern GetItemContainerPattern(bool cached = false)
         {
 #if NET35
             throw new NotSupportedByUIA2Exception();
 #else
-            var nativePattern = GetNativePatternAs<UIA.ItemContainerPattern>(UIA.ItemContainerPattern.Pattern);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.ItemContainerPattern>(ItemContainerPattern.Pattern, cached);
             return nativePattern == null ? null : new ItemContainerPattern(BasicAutomationElement, nativePattern);
 #endif
         }
 
-        public ILegacyIAccessiblePattern GetLegacyIAccessiblePattern()
+        public ILegacyIAccessiblePattern GetLegacyIAccessiblePattern(bool cached = false)
         {
             throw new NotSupportedByUIA2Exception();
         }
 
-        public IMultipleViewPattern GetMultipleViewPattern()
+        public IMultipleViewPattern GetMultipleViewPattern(bool cached = false)
         {
-            var nativePattern = GetNativePatternAs<UIA.MultipleViewPattern>(UIA.MultipleViewPattern.Pattern);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.MultipleViewPattern>(MultipleViewPattern.Pattern, cached);
             return nativePattern == null ? null : new MultipleViewPattern(BasicAutomationElement, nativePattern);
         }
 
-        public IObjectModelPattern GetObjectModelPattern()
+        public IObjectModelPattern GetObjectModelPattern(bool cached = false)
         {
             throw new NotSupportedByUIA2Exception();
         }
 
-        public IRangeValuePattern GetRangeValuePattern()
+        public IRangeValuePattern GetRangeValuePattern(bool cached = false)
         {
-            var nativePattern = GetNativePatternAs<UIA.RangeValuePattern>(UIA.RangeValuePattern.Pattern);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.RangeValuePattern>(RangeValuePattern.Pattern, cached);
             return nativePattern == null ? null : new RangeValuePattern(BasicAutomationElement, nativePattern);
         }
 
-        public IScrollItemPattern GetScrollItemPattern()
+        public IScrollItemPattern GetScrollItemPattern(bool cached = false)
         {
-            var nativePattern = GetNativePatternAs<UIA.ScrollItemPattern>(UIA.ScrollItemPattern.Pattern);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.ScrollItemPattern>(ScrollItemPattern.Pattern, cached);
             return nativePattern == null ? null : new ScrollItemPattern(BasicAutomationElement, nativePattern);
         }
 
-        public IScrollPattern GetScrollPattern()
+        public IScrollPattern GetScrollPattern(bool cached = false)
         {
-            var nativePattern = GetNativePatternAs<UIA.ScrollPattern>(UIA.ScrollPattern.Pattern);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.ScrollPattern>(ScrollPattern.Pattern, cached);
             return nativePattern == null ? null : new ScrollPattern(BasicAutomationElement, nativePattern);
         }
 
-        public ISelectionItemPattern GetSelectionItemPattern()
+        public ISelectionItemPattern GetSelectionItemPattern(bool cached = false)
         {
-            var nativePattern = GetNativePatternAs<UIA.SelectionItemPattern>(UIA.SelectionItemPattern.Pattern);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.SelectionItemPattern>(SelectionItemPattern.Pattern, cached);
             return nativePattern == null ? null : new SelectionItemPattern(BasicAutomationElement, nativePattern);
         }
 
-        public ISelectionPattern GetSelectionPattern()
+        public ISelectionPattern GetSelectionPattern(bool cached = false)
         {
-            var nativePattern = GetNativePatternAs<UIA.SelectionPattern>(UIA.SelectionPattern.Pattern);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.SelectionPattern>(SelectionPattern.Pattern, cached);
             return nativePattern == null ? null : new SelectionPattern(BasicAutomationElement, nativePattern);
         }
 
-        public ISpreadsheetItemPattern GetSpreadsheetItemPattern()
+        public ISpreadsheetItemPattern GetSpreadsheetItemPattern(bool cached = false)
         {
             throw new NotSupportedByUIA2Exception();
         }
 
-        public ISpreadsheetPattern GetSpreadsheetPattern()
+        public ISpreadsheetPattern GetSpreadsheetPattern(bool cached = false)
         {
             throw new NotSupportedByUIA2Exception();
         }
 
-        public IStylesPattern GetStylesPattern()
+        public IStylesPattern GetStylesPattern(bool cached = false)
         {
             throw new NotSupportedByUIA2Exception();
         }
 
-        public ISynchronizedInputPattern GetSynchronizedInputPattern()
+        public ISynchronizedInputPattern GetSynchronizedInputPattern(bool cached = false)
         {
 #if NET35
             throw new NotSupportedByUIA2Exception();
 #else
-            var nativePattern = GetNativePatternAs<UIA.SynchronizedInputPattern>(UIA.SynchronizedInputPattern.Pattern);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.SynchronizedInputPattern>(SynchronizedInputPattern.Pattern, cached);
             return nativePattern == null ? null : new SynchronizedInputPattern(BasicAutomationElement, nativePattern);
 #endif
         }
 
-        public ITableItemPattern GetTableItemPattern()
+        public ITableItemPattern GetTableItemPattern(bool cached = false)
         {
-            var nativePattern = GetNativePatternAs<UIA.TableItemPattern>(UIA.TableItemPattern.Pattern);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.TableItemPattern>(TableItemPattern.Pattern, cached);
             return nativePattern == null ? null : new TableItemPattern(BasicAutomationElement, nativePattern);
         }
 
-        public ITablePattern GetTablePattern()
+        public ITablePattern GetTablePattern(bool cached = false)
         {
-            var nativePattern = GetNativePatternAs<UIA.TablePattern>(UIA.TablePattern.Pattern);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.TablePattern>(TablePattern.Pattern, cached);
             return nativePattern == null ? null : new TablePattern(BasicAutomationElement, nativePattern);
         }
 
-        public ITextChildPattern GetTextChildPattern()
+        public ITextChildPattern GetTextChildPattern(bool cached = false)
         {
             throw new NotSupportedByUIA2Exception();
         }
 
-        public ITextEditPattern GetTextEditPattern()
+        public ITextEditPattern GetTextEditPattern(bool cached = false)
         {
             throw new NotSupportedByUIA2Exception();
         }
 
-        public IText2Pattern GetText2Pattern()
+        public IText2Pattern GetText2Pattern(bool cached = false)
         {
             throw new NotSupportedByUIA2Exception();
         }
 
-        public ITextPattern GetTextPattern()
+        public ITextPattern GetTextPattern(bool cached = false)
         {
-            var nativePattern = GetNativePatternAs<UIA.TextPattern>(UIA.TextPattern.Pattern);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.TextPattern>(TextPattern.Pattern, cached);
             return nativePattern == null ? null : new TextPattern(BasicAutomationElement, nativePattern);
         }
 
-        public ITogglePattern GetTogglePattern()
+        public ITogglePattern GetTogglePattern(bool cached = false)
         {
-            var nativePattern = GetNativePatternAs<UIA.TogglePattern>(UIA.TogglePattern.Pattern);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.TogglePattern>(TogglePattern.Pattern, cached);
             return nativePattern == null ? null : new TogglePattern(BasicAutomationElement, nativePattern);
         }
 
-        public ITransform2Pattern GetTransform2Pattern()
+        public ITransform2Pattern GetTransform2Pattern(bool cached = false)
         {
             throw new NotSupportedByUIA2Exception();
         }
 
-        public ITransformPattern GetTransformPattern()
+        public ITransformPattern GetTransformPattern(bool cached = false)
         {
-            var nativePattern = GetNativePatternAs<UIA.TransformPattern>(UIA.TransformPattern.Pattern);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.TransformPattern>(TransformPattern.Pattern, cached);
             return nativePattern == null ? null : new TransformPattern(BasicAutomationElement, nativePattern);
         }
 
-        public IValuePattern GetValuePattern()
+        public IValuePattern GetValuePattern(bool cached = false)
         {
-            var nativePattern = GetNativePatternAs<UIA.ValuePattern>(UIA.ValuePattern.Pattern);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.ValuePattern>(ValuePattern.Pattern, cached);
             return nativePattern == null ? null : new ValuePattern(BasicAutomationElement, nativePattern);
         }
 
-        public IVirtualizedItemPattern GetVirtualizedItemPattern()
+        public IVirtualizedItemPattern GetVirtualizedItemPattern(bool cached = false)
         {
 #if NET35
             throw new NotSupportedByUIA2Exception();
 #else
-            var nativePattern = GetNativePatternAs<UIA.VirtualizedItemPattern>(UIA.VirtualizedItemPattern.Pattern);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.VirtualizedItemPattern>(VirtualizedItemPattern.Pattern, cached);
             return nativePattern == null ? null : new VirtualizedItemPattern(BasicAutomationElement, nativePattern);
 #endif
         }
 
-        public IWindowPattern GetWindowPattern()
+        public IWindowPattern GetWindowPattern(bool cached = false)
         {
-            var nativePattern = GetNativePatternAs<UIA.WindowPattern>(UIA.WindowPattern.Pattern);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.WindowPattern>(WindowPattern.Pattern, cached);
             return nativePattern == null ? null : new WindowPattern(BasicAutomationElement, nativePattern);
-        }
-
-        private T GetNativePatternAs<T>(UIA.AutomationPattern pattern) where T : UIA.BasePattern
-        {
-            object nativePattern;
-            BasicAutomationElement.NativeElement.TryGetCurrentPattern(pattern, out nativePattern);
-            return (T)nativePattern;
         }
     }
 }

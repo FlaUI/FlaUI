@@ -4,7 +4,7 @@ using FlaUI.Core.Identifiers;
 
 namespace FlaUI.Core
 {
-    public interface ICacheRequest
+    public interface IBasicCacheRequest
     {
         AutomationElementMode AutomationElementMode { get; set; }
 
@@ -12,10 +12,10 @@ namespace FlaUI.Core
 
         TreeScope TreeScope { get; set; }
 
-        void AddPattern(PatternId pattern);
+        void Add(PatternId pattern);
 
-        void AddProperty(PropertyId property);
+        void Add(PropertyId property);
 
-        ICacheRequest Clone();
+        IBasicCacheRequest Clone();
     }
 }

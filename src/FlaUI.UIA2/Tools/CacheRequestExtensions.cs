@@ -5,9 +5,9 @@ namespace FlaUI.UIA2.Tools
 {
     public static class CacheRequestExtensions
     {
-        public static UIA.CacheRequest ToNative(this ICacheRequest cacheRequest)
+        public static UIA.CacheRequest ToNative(this IBasicCacheRequest cacheRequest)
         {
-            return ((UIA2CacheRequest)cacheRequest)?.NativeCacheRequest;
+            return ((UIA2BasicCacheRequest)cacheRequest)?.NativeCacheRequest;
         }
     }
 }

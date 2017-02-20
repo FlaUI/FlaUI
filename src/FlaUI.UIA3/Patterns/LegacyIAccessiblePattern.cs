@@ -8,13 +8,14 @@ using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.Tools;
 using FlaUI.Core.WindowsAPI;
 using FlaUI.UIA3.Converters;
+using FlaUI.UIA3.Identifiers;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
     public class LegacyIAccessiblePattern : PatternBaseWithInformation<UIA.IUIAutomationLegacyIAccessiblePattern, LegacyIAccessiblePatternInformation>, ILegacyIAccessiblePattern
     {
-        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_LegacyIAccessiblePatternId, "LegacyIAccessible");
+        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_LegacyIAccessiblePatternId, "LegacyIAccessible", AutomationObjectIds.IsLegacyIAccessiblePatternAvailableProperty);
         public static readonly PropertyId ChildIdProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleChildIdPropertyId, "ChildId");
         public static readonly PropertyId DefaultActionProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleDefaultActionPropertyId, "DefaultAction");
         public static readonly PropertyId DescriptionProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleDescriptionPropertyId, "Description");

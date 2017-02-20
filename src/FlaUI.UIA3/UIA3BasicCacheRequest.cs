@@ -3,21 +3,21 @@ using FlaUI.Core;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
-using FlaUI.UIA2.Converters;
-using UIA = System.Windows.Automation;
+using FlaUI.UIA3.Converters;
+using UIA = interop.UIAutomationCore;
 
-namespace FlaUI.UIA2
+namespace FlaUI.UIA3
 {
-    public class UIA2CacheRequest : ICacheRequest
+  public class UIA3BasicCacheRequest : IBasicCacheRequest
     {
-        public UIA.CacheRequest NativeCacheRequest { get; }
+        public UIA.IUIAutomationCacheRequest NativeCacheRequest { get; }
 
-        public UIA2Automation Automation { get; }
+        public UIA3Automation Automation { get; }
 
-        public UIA2CacheRequest(UIA2Automation automation)
+        public UIA3BasicCacheRequest(UIA3Automation automation)
         {
             Automation = automation;
-            NativeCacheRequest = new UIA.CacheRequest();
+            NativeCacheRequest = Automation.NativeAutomation.CreateCacheRequest();
         }
 
         public AutomationElementMode AutomationElementMode
@@ -29,7 +29,7 @@ namespace FlaUI.UIA2
         public ConditionBase TreeFilter
         {
             get { throw new NotImplementedException(); }
-            set { NativeCacheRequest.TreeFilter = ConditionConverter.ToNative(value); }
+            set { NativeCacheRequest.TreeFilter = ConditionConverter.ToNative(Automation, value); }
         }
 
         public TreeScope TreeScope
@@ -38,19 +38,19 @@ namespace FlaUI.UIA2
             set { NativeCacheRequest.TreeScope = (UIA.TreeScope)value; }
         }
 
-        public void AddPattern(PatternId pattern)
+        public void Add(PatternId pattern)
         {
-            NativeCacheRequest.Add(UIA.AutomationPattern.LookupById(pattern.Id));
+            NativeCacheRequest.AddPattern(pattern.Id);
         }
 
-        public void AddProperty(PropertyId property)
+        public void Add(PropertyId property)
         {
-            NativeCacheRequest.Add(UIA.AutomationProperty.LookupById(property.Id));
+            NativeCacheRequest.AddProperty(property.Id);
         }
 
-        public ICacheRequest Clone()
+        public IBasicCacheRequest Clone()
         {
-            var clone = new UIA2CacheRequest(Automation)
+            var clone = new UIA3BasicCacheRequest(Automation)
             {
                 AutomationElementMode = AutomationElementMode,
                 TreeScope = TreeScope

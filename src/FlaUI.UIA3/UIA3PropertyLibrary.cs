@@ -9,6 +9,7 @@ namespace FlaUI.UIA3
     {
         public UIA3PropertyLibrary()
         {
+            PatternAvailability = new UIA3AutomationElementPatternAvailabilityProperties();
             Element = new UIA3AutomationElementProperties();
             Annotation = new AnnotationPatternProperties();
             Dock = new DockPatternProperties();
@@ -34,6 +35,7 @@ namespace FlaUI.UIA3
             Window = new WindowPatternProperties();
         }
 
+        public IAutomationElementPatternAvailabilityProperties PatternAvailability { get; }
         public IAutomationElementProperties Element { get; }
         public IAnnotationPatternProperties Annotation { get; }
         public IDockPatternProperties Dock { get; }

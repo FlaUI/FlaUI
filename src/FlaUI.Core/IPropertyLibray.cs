@@ -5,6 +5,7 @@ namespace FlaUI.Core
 {
     public interface IPropertyLibray
     {
+        IAutomationElementPatternAvailabilityProperties PatternAvailability { get; }
         IAutomationElementProperties Element { get; }
         IAnnotationPatternProperties Annotation { get; }
         IDockPatternProperties Dock { get; }

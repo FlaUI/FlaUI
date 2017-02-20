@@ -126,7 +126,7 @@ namespace FlaUInspect.ViewModels
 
             // Pattern details
             var allSupportedPatterns = AutomationElement.BasicAutomationElement.GetSupportedPatterns();
-            var allPatterns = AutomationElement.Automation.PatternLibrary.AllSupportedPatterns;
+            var allPatterns = AutomationElement.Automation.PatternLibrary.AllForCurrentFramework;
             var patterns = new List<DetailViewModel>();
             foreach (var pattern in allPatterns)
             {

@@ -20,7 +20,7 @@ namespace FlaUI.Core
             ConditionFactory = new ConditionFactory(propertyLibrary);
             OverlayManager = new WinFormsOverlayManager();
             // Make sure all pattern ids are initialized
-            var allPatterns = PatternLibrary.AllSupportedPatterns;
+            var allPatterns = PatternLibrary.AllForCurrentFramework;
         }
 
         public IPropertyLibray PropertyLibrary { get; }
@@ -45,6 +45,9 @@ namespace FlaUI.Core
         /// </summary>
         public abstract object NotSupportedValue { get; }
 
+        /// <summary>
+        /// Gets the desktop (root) element
+        /// </summary>
         public abstract AutomationElement GetDesktop();
 
         /// <summary>
@@ -68,7 +71,7 @@ namespace FlaUI.Core
         /// </summary>
         public abstract void UnregisterAllEvents();
 
-        public abstract ICacheRequest CreateCacheRequest();
+        public abstract IBasicCacheRequest CreateCacheRequest();
 
         public abstract bool Compare(AutomationElement element1, AutomationElement element2);
 

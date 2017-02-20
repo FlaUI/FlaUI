@@ -38,6 +38,6 @@ namespace FlaUI.Core
         PatternId VirtualizedItemPattern { get; }
         PatternId WindowPattern { get; }
 
-        PatternId[] AllSupportedPatterns { get; }
+        PatternId[] AllForCurrentFramework { get; }
     }
 }

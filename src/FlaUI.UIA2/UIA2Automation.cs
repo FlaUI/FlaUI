@@ -27,6 +27,10 @@ namespace FlaUI.UIA2
 
         public override AutomationElement GetDesktop()
         {
+            if (CacheRequest.Current != null)
+            {
+                throw new NotImplementedException("Can this be implemented?");
+            }
             var desktop = UIA.AutomationElement.RootElement;
             return AutomationElementConverter.NativeToManaged(this, desktop);
         }
@@ -69,9 +73,9 @@ namespace FlaUI.UIA2
             UIA.Automation.RemoveAllEventHandlers();
         }
 
-        public override ICacheRequest CreateCacheRequest()
+        public override IBasicCacheRequest CreateCacheRequest()
         {
-            return new UIA2CacheRequest(this);
+            return new UIA2BasicCacheRequest(this);
         }
 
         public override bool Compare(AutomationElement element1, AutomationElement element2)

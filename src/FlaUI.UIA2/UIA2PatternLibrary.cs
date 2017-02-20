@@ -52,7 +52,7 @@ namespace FlaUI.UIA2
 #endif
         public PatternId WindowPattern => Patterns.WindowPattern.Pattern;
 
-        public PatternId[] AllSupportedPatterns => new[] {
+        public PatternId[] AllForCurrentFramework => new[] {
             DockPattern,
             ExpandCollapsePattern,
             GridItemPattern,

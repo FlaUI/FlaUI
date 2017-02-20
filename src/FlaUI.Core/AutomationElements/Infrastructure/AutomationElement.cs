@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using FlaUI.Core.Conditions;
@@ -31,6 +30,8 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         public ConditionFactory ConditionFactory => BasicAutomationElement.Automation.ConditionFactory;
 
         public IAutomationElementProperties Properties => Automation.PropertyLibrary.Element;
+
+        public IAutomationElementPatternAvailabilityProperties PatternAvailability => Automation.PropertyLibrary.PatternAvailability;
 
         public IAutomationElementEvents Events => Automation.EventLibrary.Element;
 
@@ -63,6 +64,16 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// Basic information about this element (realtime)
         /// </summary>
         public IAutomationElementInformation Current => BasicAutomationElement.Current;
+
+        /// <summary>
+        /// Gets the cached children for this element
+        /// </summary>
+        public AutomationElement[] CachedChildren => BasicAutomationElement.GetCachedChildren();
+
+        /// <summary>
+        /// Gets the cached parent for this element
+        /// </summary>
+        public AutomationElement CachedParent => BasicAutomationElement.GetCachedParent();
 
         public void Click(bool moveMouse = false)
         {
@@ -359,6 +370,54 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         public void RemoveStructureChangedEventHandler(IAutomationStructureChangedEventHandler eventHandler)
         {
             BasicAutomationElement.RemoveStructureChangedEventHandler(eventHandler);
+        }
+
+        /// <summary>
+        /// Gets the available patterns for an element via properties
+        /// </summary>
+        public PatternId[] GetAvailablePatterns(bool cached = false)
+        {
+            return Automation.PatternLibrary.AllForCurrentFramework.Where(pattern =>
+                IsPatternAvailable(pattern, cached)).ToArray();
+        }
+
+        /// <summary>
+        /// Checks if the given pattern is available for the element via properties
+        /// </summary>
+        public bool IsPatternAvailable(PatternId pattern, bool cached = false)
+        {
+            if (pattern.AvailabilityProperty == null)
+            {
+                throw new ArgumentException("Pattern doesn't have an AvailabilityProperty");
+            }
+            return BasicAutomationElement.SafeGetPropertyValue<bool>(pattern.AvailabilityProperty, cached);
+        }
+
+        /// <summary>
+        /// Gets the available patterns for an element via UIA method.
+        /// Does not work with cached elements and might be unreliable.
+        /// </summary>
+        public PatternId[] GetAvailablePatternsDirect()
+        {
+            return BasicAutomationElement.GetSupportedPatterns();
+        }
+
+        /// <summary>
+        /// Checks if the given pattern is available for the element via UIA method.
+        /// Does not work with cached elements and might be unreliable.
+        /// </summary>
+        public bool IsPatternAvailableDirect(PatternId pattern)
+        {
+            return GetAvailablePatternsDirect().Contains(pattern);
+        }
+
+        /// <summary>
+        /// Method to check if the element supports the given property via UIA method.
+        /// Does not work with cached elements and might be unreliable.
+        /// </summary>
+        public bool SupportsProperty(PropertyId property)
+        {
+            return BasicAutomationElement.GetSupportedProperties().Contains(property);
         }
 
         public bool Equals(AutomationElement other)

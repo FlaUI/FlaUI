@@ -10,6 +10,7 @@ namespace FlaUI.UIA2
     {
         public UIA2PropertyLibrary()
         {
+            PatternAvailability = new UIA2AutomationElementPatternAvailabilityProperties();
             Element = new UIA2AutomationElementProperties();
             Dock = new DockPatternProperties();
             ExpandCollapse = new ExpandCollapsePatternProperties();
@@ -28,6 +29,7 @@ namespace FlaUI.UIA2
             Window = new WindowPatternProperties();
         }
 
+        public IAutomationElementPatternAvailabilityProperties PatternAvailability { get; }
         public IAutomationElementProperties Element { get; }
         public IAnnotationPatternProperties Annotation { get { throw new NotSupportedByUIA2Exception(); } }
         public IDockPatternProperties Dock { get; }

@@ -37,10 +37,10 @@ namespace FlaUI.Core
 
         public T GetPropertyValue<T>(PropertyId property, bool cached)
         {
-            var value = InternalGetPropertyValue(property.Id, cached, false);
+            var value = InternalGetPropertyValue(property, cached, false);
             if (value == Automation.NotSupportedValue)
             {
-                throw new PropertyNotSupportedException($"Property '{property.Name}' not supported", property);
+                throw new PropertyNotSupportedException($"Property '{property}' not supported", property);
             }
             return property.Convert<T>(value);
         }
@@ -55,12 +55,13 @@ namespace FlaUI.Core
 
         public T SafeGetPropertyValue<T>(PropertyId property, bool cached)
         {
-            var value = InternalGetPropertyValue(property.Id, cached, true);
+            var value = InternalGetPropertyValue(property, cached, true);
             return property.Convert<T>(value);
         }
 
         /// <summary>
-        /// Tries to get the property value. Fails if the property is not supported.
+        /// Tries to get the property value.
+        /// Returns false and sets a default value if the property is not supported.
         /// </summary>
         public bool TryGetPropertyValue(PropertyId property, bool cached, out object value)
         {
@@ -69,7 +70,7 @@ namespace FlaUI.Core
 
         public bool TryGetPropertyValue<T>(PropertyId property, bool cached, out T value)
         {
-            var tmp = InternalGetPropertyValue(property.Id, cached, false);
+            var tmp = InternalGetPropertyValue(property, cached, false);
             if (tmp == Automation.NotSupportedValue)
             {
                 value = default(T);
@@ -77,6 +78,55 @@ namespace FlaUI.Core
             }
             value = property.Convert<T>(tmp);
             return true;
+        }
+
+        private object InternalGetPropertyValue(PropertyId property, bool cached, bool useDefaultIfNotSupported)
+        {
+            try
+            {
+                return InternalGetPropertyValue(property.Id, cached, useDefaultIfNotSupported);
+            }
+            catch (Exception ex)
+            {
+                var msg = $"Property '{property}' not supported";
+                if (cached)
+                {
+                    msg += " or not cached";
+                }
+                throw new InvalidOperationException(msg, ex);
+            }
+        }
+
+        public T GetNativePattern<T>(PatternId pattern, bool cached)
+        {
+            try
+            {
+                var nativePattern = InternalGetPattern(pattern.Id, cached);
+                return (T)nativePattern;
+            }
+            catch (Exception ex)
+            {
+                var msg = $"Pattern '{pattern}' not supported";
+                if (cached)
+                {
+                    msg += " or not cached";
+                }
+                throw new InvalidOperationException(msg, ex);
+            }
+        }
+
+        public bool TryGetNativePattern<T>(PatternId pattern, bool cached, out T nativePattern)
+        {
+            try
+            {
+                nativePattern = (T)InternalGetPattern(pattern.Id, cached);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                nativePattern = default(T);
+                return false;
+            }
         }
 
         public Point GetClickablePoint()
@@ -103,6 +153,14 @@ namespace FlaUI.Core
         /// <returns>The value / default value of the property or <see cref="AutomationBase.NotSupportedValue" /></returns>
         protected abstract object InternalGetPropertyValue(int propertyId, bool cached, bool useDefaultIfNotSupported);
 
+        /// <summary>
+        /// Gets the desired pattern
+        /// </summary>
+        /// <param name="patternId">The id of the pattern to get</param>
+        /// <param name="cached">Flag to indicate if the cached or current pattern should be fetched</param>
+        /// <returns>The pattern or null if it was not found / cached</returns>
+        protected abstract object InternalGetPattern(int patternId, bool cached);
+
         public abstract AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition);
         public abstract AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition);
         public abstract bool TryGetClickablePoint(out Point point);
@@ -114,5 +172,8 @@ namespace FlaUI.Core
         public abstract void RemoveStructureChangedEventHandler(IAutomationStructureChangedEventHandler eventHandler);
         public abstract PatternId[] GetSupportedPatterns();
         public abstract PropertyId[] GetSupportedProperties();
+        public abstract AutomationElement GetUpdatedCache();
+        public abstract AutomationElement[] GetCachedChildren();
+        public abstract AutomationElement GetCachedParent();
     }
 }

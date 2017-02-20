@@ -53,6 +53,7 @@
     <Compile Include="AutomationBase.cs" />
     <Compile Include="AutomationElements\Infrastructure\IAutomationElementEvents.cs" />
     <Compile Include="AutomationElements\Grid.cs" />
+    <Compile Include="AutomationElements\Infrastructure\IAutomationElementPatternAvailabilityProperties.cs" />
     <Compile Include="AutomationElements\Scrolling\HScrollBar.cs" />
     <Compile Include="AutomationElements\Scrolling\ScrollBarBase.cs" />
     <Compile Include="AutomationElements\Scrolling\VScrollBar.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="AutomationElementXPathNavigator.cs" />
     <Compile Include="BasicAutomationElementBase.cs" />
     <Compile Include="AutomationType.cs" />
+    <Compile Include="CacheRequest.cs" />
     <Compile Include="Conditions\AndCondition.cs" />
     <Compile Include="Conditions\BoolCondition.cs" />
     <Compile Include="Conditions\ConditionBase.cs" />
@@ -69,6 +71,7 @@
     <Compile Include="Conditions\NotCondition.cs" />
     <Compile Include="Conditions\OrCondition.cs" />
     <Compile Include="Conditions\PropertyCondition.cs" />
+    <Compile Include="Debug.cs" />
     <Compile Include="Definitions\AnnotationType.cs" />
     <Compile Include="Definitions\AutomationElementMode.cs" />
     <Compile Include="Definitions\ControlType.cs" />
@@ -130,7 +133,7 @@
     <Compile Include="Exceptions\NotSupportedByUIA2Exception.cs" />
     <Compile Include="Exceptions\PropertyNotSupportedException.cs" />
     <Compile Include="FrameworkType.cs" />
-    <Compile Include="ICacheRequest.cs" />
+    <Compile Include="IBasicCacheRequest.cs" />
     <Compile Include="Identifiers\ConvertibleIdentifierBase.cs" />
     <Compile Include="Identifiers\EventId.cs" />
     <Compile Include="Identifiers\IdentifierBase.cs" />
