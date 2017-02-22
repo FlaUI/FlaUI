@@ -27,15 +27,15 @@ namespace FlaUI.UIA2.Patterns
 
         public ITablePatternProperties Properties => Automation.PropertyLibrary.Table;
 
-        protected override TablePatternInformation CreateInformation(bool cached)
+        protected override TablePatternInformation CreateInformation()
         {
-            return new TablePatternInformation(BasicAutomationElement, cached);
+            return new TablePatternInformation(BasicAutomationElement);
         }
     }
 
     public class TablePatternInformation : InformationBase,ITablePatternInformation
     {
-        public TablePatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public TablePatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

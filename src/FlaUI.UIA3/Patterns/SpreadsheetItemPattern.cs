@@ -27,15 +27,15 @@ namespace FlaUI.UIA3.Patterns
 
         public ISpreadsheetItemPatternProperties Properties => Automation.PropertyLibrary.SpreadsheetItem;
 
-        protected override SpreadsheetItemPatternInformation CreateInformation(bool cached)
+        protected override SpreadsheetItemPatternInformation CreateInformation()
         {
-            return new SpreadsheetItemPatternInformation(BasicAutomationElement, cached);
+            return new SpreadsheetItemPatternInformation(BasicAutomationElement);
         }
     }
 
     public class SpreadsheetItemPatternInformation : InformationBase, ISpreadsheetItemPatternInformation
     {
-        public SpreadsheetItemPatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public SpreadsheetItemPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

@@ -25,9 +25,9 @@ namespace FlaUI.UIA2.Patterns
 
         public IGridPatternProperties Properties => Automation.PropertyLibrary.Grid;
 
-        protected override GridPatternInformation CreateInformation(bool cached)
+        protected override GridPatternInformation CreateInformation()
         {
-            return new GridPatternInformation(BasicAutomationElement, cached);
+            return new GridPatternInformation(BasicAutomationElement);
         }
 
         public AutomationElement GetItem(int row, int column)
@@ -39,7 +39,7 @@ namespace FlaUI.UIA2.Patterns
 
     public class GridPatternInformation : InformationBase, IGridPatternInformation
     {
-        public GridPatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public GridPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

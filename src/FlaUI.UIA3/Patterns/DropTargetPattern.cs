@@ -29,15 +29,15 @@ namespace FlaUI.UIA3.Patterns
 
         public IDropTargetPatternEvents Events => Automation.EventLibrary.DropTarget;
 
-        protected override DropTargetPatternInformation CreateInformation(bool cached)
+        protected override DropTargetPatternInformation CreateInformation()
         {
-           return new DropTargetPatternInformation(BasicAutomationElement, cached);
+           return new DropTargetPatternInformation(BasicAutomationElement);
         }
     }
 
     public class DropTargetPatternInformation : InformationBase, IDropTargetPatternInformation
     {
-        public DropTargetPatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public DropTargetPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

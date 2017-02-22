@@ -6,17 +6,14 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
     {
         protected BasicAutomationElementBase BasicAutomationElement { get; }
 
-        protected bool Cached { get; }
-
-        protected InformationBase(BasicAutomationElementBase basicAutomationElement, bool cached)
+        protected InformationBase(BasicAutomationElementBase basicAutomationElement)
         {
             BasicAutomationElement = basicAutomationElement;
-            Cached = cached;
         }
 
         protected T Get<T>(PropertyId property)
         {
-            return BasicAutomationElement.GetPropertyValue<T>(property, Cached);
+            return BasicAutomationElement.GetPropertyValue<T>(property);
         }
     }
 }

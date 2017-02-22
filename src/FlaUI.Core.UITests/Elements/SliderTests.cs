@@ -23,10 +23,10 @@ namespace FlaUI.Core.UITests.Elements
         {
             var slider = GetSlider();
             var thumb = slider.Thumb;
-            var oldPos = thumb.Current.BoundingRectangle.Center;
+            var oldPos = thumb.Information.BoundingRectangle.Center;
             thumb.SlideHorizontally(50);
             Helpers.WaitUntilInputIsProcessed();
-            TestUtilities.AssertPointsAreSame(thumb.Current.BoundingRectangle.Center, new Point(oldPos.X + 50, oldPos.Y), 1);
+            TestUtilities.AssertPointsAreSame(thumb.Information.BoundingRectangle.Center, new Point(oldPos.X + 50, oldPos.Y), 1);
         }
 
         [Test]

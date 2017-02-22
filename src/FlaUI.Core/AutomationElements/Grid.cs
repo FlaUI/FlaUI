@@ -149,7 +149,7 @@ namespace FlaUI.Core.AutomationElements
         {
         }
 
-        public string Text => Current.Name;
+        public string Text => Information.Name;
     }
 
     public class GridRow : SelectionItemAutomationElement

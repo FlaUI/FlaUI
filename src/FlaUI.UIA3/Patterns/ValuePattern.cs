@@ -30,15 +30,15 @@ namespace FlaUI.UIA3.Patterns
             ComCallWrapper.Call(() => NativePattern.SetValue(value));
         }
 
-        protected override ValuePatternInformation CreateInformation(bool cached)
+        protected override ValuePatternInformation CreateInformation()
         {
-            return new ValuePatternInformation(BasicAutomationElement, cached);
+            return new ValuePatternInformation(BasicAutomationElement);
         }
     }
 
     public class ValuePatternInformation : InformationBase, IValuePatternInformation
     {
-        public ValuePatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public ValuePatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

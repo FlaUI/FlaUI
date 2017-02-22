@@ -31,9 +31,9 @@ namespace FlaUI.UIA3.Patterns
 
         public ISelectionItemPatternEvents Events => Automation.EventLibrary.SelectionItem;
 
-        protected override SelectionItemPatternInformation CreateInformation(bool cached)
+        protected override SelectionItemPatternInformation CreateInformation()
         {
-            return new SelectionItemPatternInformation(BasicAutomationElement, cached);
+            return new SelectionItemPatternInformation(BasicAutomationElement);
         }
 
         public void AddToSelection()
@@ -54,7 +54,7 @@ namespace FlaUI.UIA3.Patterns
 
     public class SelectionItemPatternInformation : InformationBase, ISelectionItemPatternInformation
     {
-        public SelectionItemPatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public SelectionItemPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

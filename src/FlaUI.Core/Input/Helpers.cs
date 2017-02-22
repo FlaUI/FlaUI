@@ -26,11 +26,11 @@ namespace FlaUI.Core.Input
         {
             var currentElement = automationElement;
             var treeWalker = automationElement.Automation.TreeWalkerFactory.GetControlViewWalker();
-            while (currentElement.Current.NativeWindowHandle == new IntPtr(0))
+            while (currentElement.Information.NativeWindowHandle == new IntPtr(0))
             {
                 currentElement = treeWalker.GetParent(currentElement);
             }
-            return WaitUntilResponsive(currentElement.Current.NativeWindowHandle, timeout);
+            return WaitUntilResponsive(currentElement.Information.NativeWindowHandle, timeout);
         }
 
         public static bool WaitUntilResponsive(IntPtr hWnd)

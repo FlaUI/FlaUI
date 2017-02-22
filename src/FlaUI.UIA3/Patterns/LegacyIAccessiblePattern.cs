@@ -37,9 +37,9 @@ namespace FlaUI.UIA3.Patterns
 
         public ILegacyIAccessiblePatternProperties Properties => Automation.PropertyLibrary.LegacyIAccessible;
 
-        protected override LegacyIAccessiblePatternInformation CreateInformation(bool cached)
+        protected override LegacyIAccessiblePatternInformation CreateInformation()
         {
-            return new LegacyIAccessiblePatternInformation(BasicAutomationElement, cached);
+            return new LegacyIAccessiblePatternInformation(BasicAutomationElement);
         }
 
         public void DoDefaultAction()
@@ -66,7 +66,7 @@ namespace FlaUI.UIA3.Patterns
 
     public class LegacyIAccessiblePatternInformation : InformationBase, ILegacyIAccessiblePatternInformation
     {
-        public LegacyIAccessiblePatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public LegacyIAccessiblePatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

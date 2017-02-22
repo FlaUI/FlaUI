@@ -82,13 +82,13 @@ namespace FlaUI.Core.AutomationElements
             if (FrameworkType == FrameworkType.Wpf)
             {
                 // For WPF, this is simple
-                return FindFirst(TreeScope.Children, ConditionFactory.ByAutomationId("IncreaseLarge")).AsButton();
+                return FindFirstChild(cf => cf.ByAutomationId("IncreaseLarge")).AsButton();
             }
             // For WinForms, we loop thru the buttons and find the one right of the thumb
-            var buttons = FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Button));
+            var buttons = FindAllChildren(cf => cf.ByControlType(ControlType.Button));
             foreach (var button in buttons)
             {
-                if (button.Current.BoundingRectangle.Left > Thumb.Current.BoundingRectangle.Left)
+                if (button.Information.BoundingRectangle.Left > Thumb.Information.BoundingRectangle.Left)
                 {
                     return button.AsButton();
                 }
@@ -101,13 +101,13 @@ namespace FlaUI.Core.AutomationElements
             if (FrameworkType == FrameworkType.Wpf)
             {
                 // For WPF, this is simple
-                return FindFirst(TreeScope.Children, ConditionFactory.ByAutomationId("DecreaseLarge")).AsButton();
+                return FindFirstChild(cf => cf.ByAutomationId("DecreaseLarge")).AsButton();
             }
             // For WinForms, we loop thru the buttons and find the one left of the thumb
-            var buttons = FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Button));
+            var buttons = FindAllChildren(cf => cf.ByControlType(ControlType.Button));
             foreach (var button in buttons)
             {
-                if (button.Current.BoundingRectangle.Right < Thumb.Current.BoundingRectangle.Right)
+                if (button.Information.BoundingRectangle.Right < Thumb.Information.BoundingRectangle.Right)
                 {
                     return button.AsButton();
                 }

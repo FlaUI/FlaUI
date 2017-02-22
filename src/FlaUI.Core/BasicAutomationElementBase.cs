@@ -18,10 +18,8 @@ namespace FlaUI.Core
 
         public abstract IPatternFactory PatternFactory { get; }
 
-        public abstract IAutomationElementInformation Cached { get; }
-
-        public abstract IAutomationElementInformation Current { get; }
-
+        public abstract IAutomationElementInformation Information { get; }
+        
         /// <summary>
         /// Underlying <see cref="AutomationBase" /> object where this element belongs to
         /// </summary>
@@ -30,14 +28,15 @@ namespace FlaUI.Core
         /// <summary>
         /// Gets the desired property value. Ends in an exception if the property is not supported.
         /// </summary>
-        public object GetPropertyValue(PropertyId property, bool cached)
+        public object GetPropertyValue(PropertyId property)
         {
-            return GetPropertyValue<object>(property, cached);
+            return GetPropertyValue<object>(property);
         }
 
-        public T GetPropertyValue<T>(PropertyId property, bool cached)
+        public T GetPropertyValue<T>(PropertyId property)
         {
-            var value = InternalGetPropertyValue(property, cached, false);
+            var isCachActive = CacheRequest.IsCachingActive;
+            var value = InternalGetPropertyValue(property, isCachActive, false);
             if (value == Automation.NotSupportedValue)
             {
                 throw new PropertyNotSupportedException($"Property '{property}' not supported", property);

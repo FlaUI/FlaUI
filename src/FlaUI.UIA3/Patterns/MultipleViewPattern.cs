@@ -25,9 +25,9 @@ namespace FlaUI.UIA3.Patterns
 
         public IMultipleViewPatternProperties Properties => Automation.PropertyLibrary.MultipleView;
 
-        protected override MultipleViewPatternInformation CreateInformation(bool cached)
+        protected override MultipleViewPatternInformation CreateInformation()
         {
-            return new MultipleViewPatternInformation(BasicAutomationElement, cached);
+            return new MultipleViewPatternInformation(BasicAutomationElement);
         }
 
         public string GetViewName(int view)
@@ -43,7 +43,7 @@ namespace FlaUI.UIA3.Patterns
 
     public class MultipleViewPatternInformation : InformationBase, IMultipleViewPatternInformation
     {
-        public MultipleViewPatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public MultipleViewPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

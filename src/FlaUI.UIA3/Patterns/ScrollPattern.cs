@@ -30,9 +30,9 @@ namespace FlaUI.UIA3.Patterns
 
         public IScrollPatternProperties Properties => Automation.PropertyLibrary.Scroll;
 
-        protected override ScrollPatternInformation CreateInformation(bool cached)
+        protected override ScrollPatternInformation CreateInformation()
         {
-            return new ScrollPatternInformation(BasicAutomationElement, cached);
+            return new ScrollPatternInformation(BasicAutomationElement);
         }
 
         public void Scroll(ScrollAmount horizontalAmount, ScrollAmount verticalAmount)
@@ -48,7 +48,7 @@ namespace FlaUI.UIA3.Patterns
 
     public class ScrollPatternInformation : InformationBase, IScrollPatternInformation
     {
-        public ScrollPatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public ScrollPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

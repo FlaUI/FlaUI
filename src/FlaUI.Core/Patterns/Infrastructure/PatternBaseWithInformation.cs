@@ -6,14 +6,14 @@
             : base(basicAutomationElement, nativePattern)
         {
             // ReSharper disable VirtualMemberCallInConstructor
-            Cached = CreateInformation(true);
-            Current = CreateInformation(false);
+            Cached = CreateInformation();
+            Current = CreateInformation();
             // ReSharper restore VirtualMemberCallInConstructor
         }
 
         public TInfo Cached { get; }
         public TInfo Current { get; }
 
-        protected abstract TInfo CreateInformation(bool cached);
+        protected abstract TInfo CreateInformation();
     }
 }

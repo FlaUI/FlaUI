@@ -29,15 +29,15 @@ namespace FlaUI.UIA3.Patterns
 
         public ISelectionPatternEvents Events => Automation.EventLibrary.Selection;
 
-        protected override SelectionPatternInformation CreateInformation(bool cached)
+        protected override SelectionPatternInformation CreateInformation()
         {
-            return new SelectionPatternInformation(BasicAutomationElement, cached);
+            return new SelectionPatternInformation(BasicAutomationElement);
         }
     }
 
     public class SelectionPatternInformation : InformationBase, ISelectionPatternInformation
     {
-        public SelectionPatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public SelectionPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

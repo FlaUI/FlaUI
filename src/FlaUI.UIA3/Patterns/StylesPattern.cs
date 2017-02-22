@@ -31,9 +31,9 @@ namespace FlaUI.UIA3.Patterns
 
         public IStylesPatternProperties Properties => Automation.PropertyLibrary.Styles;
 
-        protected override StylesPatternInformation CreateInformation(bool cached)
+        protected override StylesPatternInformation CreateInformation()
         {
-            return new StylesPatternInformation(BasicAutomationElement, cached);
+            return new StylesPatternInformation(BasicAutomationElement);
         }
 
         // TODO: Any way to implement that?
@@ -43,7 +43,7 @@ namespace FlaUI.UIA3.Patterns
 
     public class StylesPatternInformation : InformationBase, IStylesPatternInformation
     {
-        public StylesPatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public StylesPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

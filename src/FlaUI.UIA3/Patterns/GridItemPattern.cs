@@ -28,15 +28,15 @@ namespace FlaUI.UIA3.Patterns
 
         IGridItemPatternInformation IPatternWithInformation<IGridItemPatternInformation>.Current => Current;
 
-        protected override GridItemPatternInformation CreateInformation(bool cached)
+        protected override GridItemPatternInformation CreateInformation()
         {
-            return new GridItemPatternInformation(BasicAutomationElement, cached);
+            return new GridItemPatternInformation(BasicAutomationElement);
         }
     }
 
     public class GridItemPatternInformation : InformationBase, IGridItemPatternInformation
     {
-        public GridItemPatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public GridItemPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

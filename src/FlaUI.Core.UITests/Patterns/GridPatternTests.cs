@@ -35,7 +35,7 @@ namespace FlaUI.Core.UITests.Patterns
             Assert.That(gridPattern.Current.ColumnCount, Is.EqualTo(2));
             Assert.That(gridPattern.Current.RowCount, Is.EqualTo(3));
             var item = gridPattern.GetItem(1, 1);
-            Assert.That(item.Current.Name, Is.EqualTo("Patrick"));
+            Assert.That(item.Information.Name, Is.EqualTo("Patrick"));
         }
     }
 }

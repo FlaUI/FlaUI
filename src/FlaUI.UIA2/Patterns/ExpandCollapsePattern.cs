@@ -24,9 +24,9 @@ namespace FlaUI.UIA2.Patterns
 
         public IExpandCollapsePatternProperties Properties => Automation.PropertyLibrary.ExpandCollapse;
 
-        protected override ExpandCollapsePatternInformation CreateInformation(bool cached)
+        protected override ExpandCollapsePatternInformation CreateInformation()
         {
-            return new ExpandCollapsePatternInformation(BasicAutomationElement, cached);
+            return new ExpandCollapsePatternInformation(BasicAutomationElement);
         }
 
         public void Collapse()
@@ -42,7 +42,7 @@ namespace FlaUI.UIA2.Patterns
 
     public class ExpandCollapsePatternInformation : InformationBase, IExpandCollapsePatternInformation
     {
-        public ExpandCollapsePatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public ExpandCollapsePatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

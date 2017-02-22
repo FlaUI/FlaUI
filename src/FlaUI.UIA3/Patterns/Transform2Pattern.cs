@@ -29,9 +29,9 @@ namespace FlaUI.UIA3.Patterns
 
         public override Transform2PatternProperties Properties => (Transform2PatternProperties)Automation.PropertyLibrary.Transform2;
 
-        protected override Transform2PatternInformation CreateInformation(bool cached)
+        protected override Transform2PatternInformation CreateInformation()
         {
-            return new Transform2PatternInformation(BasicAutomationElement, cached);
+            return new Transform2PatternInformation(BasicAutomationElement);
         }
 
         public void Zoom(double zoom)
@@ -47,7 +47,7 @@ namespace FlaUI.UIA3.Patterns
 
     public class Transform2PatternInformation : TransformPatternInformation, ITransform2PatternInformation
     {
-        public Transform2PatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public Transform2PatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

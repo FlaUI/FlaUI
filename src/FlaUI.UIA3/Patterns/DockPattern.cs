@@ -25,9 +25,9 @@ namespace FlaUI.UIA3.Patterns
 
         public IDockPatternProperties Properties => Automation.PropertyLibrary.Dock;
 
-        protected override DockPatternInformation CreateInformation(bool cached)
+        protected override DockPatternInformation CreateInformation()
         {
-            return new DockPatternInformation(BasicAutomationElement, cached);
+            return new DockPatternInformation(BasicAutomationElement);
         }
 
         public void SetDockPosition(DockPosition dockPos)
@@ -38,7 +38,7 @@ namespace FlaUI.UIA3.Patterns
 
     public class DockPatternInformation : InformationBase, IDockPatternInformation
     {
-        public DockPatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public DockPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

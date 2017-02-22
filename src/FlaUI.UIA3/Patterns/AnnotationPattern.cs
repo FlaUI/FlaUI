@@ -29,15 +29,15 @@ namespace FlaUI.UIA3.Patterns
 
         public IAnnotationPatternProperties Properties => Automation.PropertyLibrary.Annotation;
 
-        protected override AnnotationPatternInformation CreateInformation(bool cached)
+        protected override AnnotationPatternInformation CreateInformation()
         {
-            return new AnnotationPatternInformation(BasicAutomationElement, cached);
+            return new AnnotationPatternInformation(BasicAutomationElement);
         }
     }
 
     public class AnnotationPatternInformation : InformationBase, IAnnotationPatternInformation
     {
-        public AnnotationPatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public AnnotationPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

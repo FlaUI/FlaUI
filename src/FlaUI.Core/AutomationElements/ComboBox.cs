@@ -79,7 +79,7 @@ namespace FlaUI.Core.AutomationElements
                     // WinForms
                     var itemsList = FindFirstChild(ConditionFactory.ByControlType(ControlType.List));
                     // UIA3 does not see the list if it is collapsed
-                    return itemsList == null || itemsList.Current.IsOffscreen ? ExpandCollapseState.Collapsed : ExpandCollapseState.Expanded;
+                    return itemsList == null || itemsList.Information.IsOffscreen ? ExpandCollapseState.Collapsed : ExpandCollapseState.Expanded;
                 }
                 // WPF
                 var ecp = PatternFactory.GetExpandCollapsePattern();
@@ -94,7 +94,7 @@ namespace FlaUI.Core.AutomationElements
 
         public void Expand()
         {
-            if (!Current.IsEnabled || ExpandCollapseState != ExpandCollapseState.Collapsed)
+            if (!Information.IsEnabled || ExpandCollapseState != ExpandCollapseState.Collapsed)
             {
                 return;
             }
@@ -118,7 +118,7 @@ namespace FlaUI.Core.AutomationElements
 
         public void Collapse()
         {
-            if (!Current.IsEnabled || ExpandCollapseState != ExpandCollapseState.Expanded)
+            if (!Information.IsEnabled || ExpandCollapseState != ExpandCollapseState.Expanded)
             {
                 return;
             }

@@ -48,15 +48,15 @@ namespace FlaUI.UIA2.Patterns
             return NativePattern.WaitForInputIdle(milliseconds);
         }
 
-        protected override WindowPatternInformation CreateInformation(bool cached)
+        protected override WindowPatternInformation CreateInformation()
         {
-            return new WindowPatternInformation(BasicAutomationElement, cached);
+            return new WindowPatternInformation(BasicAutomationElement);
         }
     }
 
     public class WindowPatternInformation : InformationBase, IWindowPatternInformation
     {
-        public WindowPatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public WindowPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

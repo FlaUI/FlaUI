@@ -28,9 +28,9 @@ namespace FlaUI.UIA2.Patterns
 
         public IRangeValuePatternProperties Properties => Automation.PropertyLibrary.RangeValue;
 
-        protected override RangeValuePatternInformation CreateInformation(bool cached)
+        protected override RangeValuePatternInformation CreateInformation()
         {
-            return new RangeValuePatternInformation(BasicAutomationElement, cached);
+            return new RangeValuePatternInformation(BasicAutomationElement);
         }
 
         public void SetValue(double val)
@@ -41,7 +41,7 @@ namespace FlaUI.UIA2.Patterns
 
     public class RangeValuePatternInformation : InformationBase, IRangeValuePatternInformation
     {
-        public RangeValuePatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public RangeValuePatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

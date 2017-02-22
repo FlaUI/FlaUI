@@ -24,9 +24,9 @@ namespace FlaUI.UIA2.Patterns
 
         public IValuePatternProperties Properties => Automation.PropertyLibrary.Value;
 
-        protected override ValuePatternInformation CreateInformation(bool cached)
+        protected override ValuePatternInformation CreateInformation()
         {
-            return new ValuePatternInformation(BasicAutomationElement, cached);
+            return new ValuePatternInformation(BasicAutomationElement);
         }
 
         public void SetValue(string value)
@@ -37,7 +37,7 @@ namespace FlaUI.UIA2.Patterns
 
     public class ValuePatternInformation : InformationBase, IValuePatternInformation
     {
-        public ValuePatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public ValuePatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

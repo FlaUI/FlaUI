@@ -43,7 +43,7 @@ namespace FlaUInspect.Core
                 var hoveredElement = _automation.FromPoint(screenPos);
                 // Skip items in the current process
                 // Like Inspect itself or the overlay window
-                if (hoveredElement.Current.ProcessId == Process.GetCurrentProcess().Id)
+                if (hoveredElement.Information.ProcessId == Process.GetCurrentProcess().Id)
                 {
                     return;
                 }

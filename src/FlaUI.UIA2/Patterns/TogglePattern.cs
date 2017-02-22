@@ -24,9 +24,9 @@ namespace FlaUI.UIA2.Patterns
 
         public ITogglePatternProperties Properties => Automation.PropertyLibrary.Toggle;
 
-        protected override TogglePatternInformation CreateInformation(bool cached)
+        protected override TogglePatternInformation CreateInformation()
         {
-            return new TogglePatternInformation(BasicAutomationElement, cached);
+            return new TogglePatternInformation(BasicAutomationElement);
         }
 
         public void Toggle()
@@ -37,7 +37,7 @@ namespace FlaUI.UIA2.Patterns
 
     public class TogglePatternInformation : InformationBase, ITogglePatternInformation
     {
-        public TogglePatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public TogglePatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

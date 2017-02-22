@@ -19,7 +19,7 @@ namespace FlaUI.Core.UITests.Converters
         {
             var window = App.GetMainWindow(Automation);
             var checkBox = window.FindFirstDescendant(cf => cf.ByName("Test Checkbox"));
-            Assert.That(ControlType.CheckBox, Is.EqualTo(checkBox.Current.ControlType));
+            Assert.That(ControlType.CheckBox, Is.EqualTo(checkBox.Information.ControlType));
         }
     }
 }

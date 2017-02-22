@@ -25,9 +25,9 @@ namespace FlaUI.UIA2.Patterns
 
         public ITransformPatternProperties Properties => Automation.PropertyLibrary.Transform;
 
-        protected override TransformPatternInformation CreateInformation(bool cached)
+        protected override TransformPatternInformation CreateInformation()
         {
-            return new TransformPatternInformation(BasicAutomationElement, cached);
+            return new TransformPatternInformation(BasicAutomationElement);
         }
 
         public void Move(double x, double y)
@@ -48,7 +48,7 @@ namespace FlaUI.UIA2.Patterns
 
     public class TransformPatternInformation : InformationBase, ITransformPatternInformation
     {
-        public TransformPatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public TransformPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

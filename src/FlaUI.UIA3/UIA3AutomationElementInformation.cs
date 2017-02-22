@@ -10,7 +10,7 @@ namespace FlaUI.UIA3
 {
     public class UIA3AutomationElementInformation : InformationBase, IAutomationElementInformation
     {
-        public UIA3AutomationElementInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public UIA3AutomationElementInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

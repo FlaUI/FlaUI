@@ -32,15 +32,15 @@ namespace FlaUI.UIA3.Patterns
 
         public IDragPatternEvents Events => Automation.EventLibrary.Drag;
 
-        protected override DragPatternInformation CreateInformation(bool cached)
+        protected override DragPatternInformation CreateInformation()
         {
-            return new DragPatternInformation(BasicAutomationElement, cached);
+            return new DragPatternInformation(BasicAutomationElement);
         }
     }
 
     public class DragPatternInformation : InformationBase, IDragPatternInformation
     {
-        public DragPatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public DragPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

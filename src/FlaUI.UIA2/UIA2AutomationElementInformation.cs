@@ -11,7 +11,7 @@ namespace FlaUI.UIA2
 {
     public class UIA2AutomationElementInformation : InformationBase, IAutomationElementInformation
     {
-        public UIA2AutomationElementInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
+        public UIA2AutomationElementInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 

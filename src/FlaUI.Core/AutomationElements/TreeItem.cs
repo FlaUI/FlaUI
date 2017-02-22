@@ -29,11 +29,11 @@ namespace FlaUI.Core.AutomationElements
         {
             get
             {
-                var value = Current.Name;
+                var value = Information.Name;
                 if (String.IsNullOrEmpty(value) || value.Contains("System.Windows.Controls.TreeViewItem"))
                 {
-                    var textElement = FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Text));
-                    return textElement == null ? String.Empty : textElement.Current.Name;
+                    var textElement = FindFirstChild(cf => cf.ByControlType(ControlType.Text));
+                    return textElement == null ? String.Empty : textElement.Information.Name;
                 }
                 return value;
             }
@@ -65,7 +65,7 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         private TreeItem[] GetTreeItems()
         {
-            return FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.TreeItem))
+            return FindAllChildren(cf => cf.ByControlType(ControlType.TreeItem))
                 .Select(e => e.AsTreeItem()).ToArray();
         }
     }

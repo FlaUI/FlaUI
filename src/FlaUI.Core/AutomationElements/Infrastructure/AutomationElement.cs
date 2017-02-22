@@ -40,12 +40,12 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             get
             {
                 var currentElement = this;
-                var currentFrameworkId = currentElement.Current.FrameworkId;
+                var currentFrameworkId = currentElement.Information.FrameworkId;
                 var treeWalker = Automation.TreeWalkerFactory.GetControlViewWalker();
                 while (String.IsNullOrEmpty(currentFrameworkId))
                 {
                     currentElement = treeWalker.GetParent(currentElement);
-                    currentFrameworkId = currentElement.Current.FrameworkId;
+                    currentFrameworkId = currentElement.Information.FrameworkId;
                 }
                 return FrameworkIds.ConvertToFrameworkType(currentFrameworkId);
             }
@@ -56,14 +56,9 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         public IPatternFactory PatternFactory => BasicAutomationElement.PatternFactory;
 
         /// <summary>
-        /// Basic information about this element (cached)
+        /// Basic information about this element
         /// </summary>
-        public IAutomationElementInformation Cached => BasicAutomationElement.Cached;
-
-        /// <summary>
-        /// Basic information about this element (realtime)
-        /// </summary>
-        public IAutomationElementInformation Current => BasicAutomationElement.Current;
+        public IAutomationElementInformation Information => BasicAutomationElement.Information;
 
         /// <summary>
         /// Gets the cached children for this element
@@ -121,7 +116,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
 
         public void FocusNative()
         {
-            var windowHandle = Current.NativeWindowHandle;
+            var windowHandle = Information.NativeWindowHandle;
             if (windowHandle != new IntPtr(0))
             {
                 User32.SetFocus(windowHandle);
@@ -139,7 +134,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public void SetForeground()
         {
-            var windowHandle = Current.NativeWindowHandle;
+            var windowHandle = Information.NativeWindowHandle;
             if (windowHandle != new IntPtr(0))
             {
                 User32.SetForegroundWindow(windowHandle);
@@ -196,7 +191,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <param name="durationInMs">The duration (im ms) how long the highlight is shown</param>
         public AutomationElement DrawHighlight(bool blocking, WpfColor color, int durationInMs)
         {
-            var rectangle = Current.BoundingRectangle;
+            var rectangle = Information.BoundingRectangle;
             if (!rectangle.IsEmpty)
             {
                 if (blocking)
@@ -216,7 +211,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public Bitmap Capture()
         {
-            return ScreenCapture.CaptureArea(Current.BoundingRectangle);
+            return ScreenCapture.CaptureArea(Information.BoundingRectangle);
         }
 
         /// <summary>
@@ -224,12 +219,12 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public BitmapImage CaptureWpf()
         {
-            return ScreenCapture.CaptureAreaWpf(Current.BoundingRectangle);
+            return ScreenCapture.CaptureAreaWpf(Information.BoundingRectangle);
         }
 
         public void CaptureToFile(string filePath)
         {
-            ScreenCapture.CaptureAreaToFile(Current.BoundingRectangle, filePath);
+            ScreenCapture.CaptureAreaToFile(Information.BoundingRectangle, filePath);
         }
 
         /// <summary>
@@ -443,7 +438,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         public override string ToString()
         {
             return String.Format("AutomationId:{0}, Name:{1}, ControlType:{2}, FrameworkId:{3}",
-                Current.AutomationId, Current.Name, Current.LocalizedControlType, Current.FrameworkId);
+                Information.AutomationId, Information.Name, Information.LocalizedControlType, Information.FrameworkId);
         }
 
         protected internal void ExecuteInPattern<TPattern>(TPattern pattern, bool throwIfNotSupported, Action<TPattern> action)
