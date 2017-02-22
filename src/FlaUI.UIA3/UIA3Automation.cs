@@ -8,7 +8,6 @@ using FlaUI.Core.Tools;
 using FlaUI.UIA3.Converters;
 using FlaUI.UIA3.EventHandlers;
 using FlaUI.UIA3.Extensions;
-using FlaUI.UIA3.Tools;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3
@@ -48,7 +47,7 @@ namespace FlaUI.UIA3
         public override AutomationElement GetDesktop()
         {
             var desktop = CacheRequest.Current != null
-                ? NativeAutomation.GetRootElementBuildCache(CacheRequest.Current.ToNative())
+                ? NativeAutomation.GetRootElementBuildCache(CacheRequest.Current.ToNative(this))
                 : NativeAutomation.GetRootElement();
             return WrapNativeElement(desktop);
         }
@@ -98,11 +97,6 @@ namespace FlaUI.UIA3
             catch
             {
             }
-        }
-
-        public override IBasicCacheRequest CreateCacheRequest()
-        {
-            return new UIA3BasicCacheRequest(this);
         }
 
         public override bool Compare(AutomationElement element1, AutomationElement element2)

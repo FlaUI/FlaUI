@@ -390,7 +390,9 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             {
                 throw new ArgumentException("Pattern doesn't have an AvailabilityProperty");
             }
-            return BasicAutomationElement.SafeGetPropertyValue<bool>(pattern.AvailabilityProperty, cached);
+            bool isPatternAvailable;
+            var success = BasicAutomationElement.TryGetPropertyValue(pattern.AvailabilityProperty, cached, out isPatternAvailable);
+            return success && isPatternAvailable;
         }
 
         /// <summary>

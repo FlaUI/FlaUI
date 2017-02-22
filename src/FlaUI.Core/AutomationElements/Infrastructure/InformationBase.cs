@@ -16,7 +16,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
 
         protected T Get<T>(PropertyId property)
         {
-            return BasicAutomationElement.SafeGetPropertyValue<T>(property, Cached);
+            return BasicAutomationElement.GetPropertyValue<T>(property, Cached);
         }
     }
 }

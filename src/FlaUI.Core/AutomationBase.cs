@@ -71,8 +71,6 @@ namespace FlaUI.Core
         /// </summary>
         public abstract void UnregisterAllEvents();
 
-        public abstract IBasicCacheRequest CreateCacheRequest();
-
         public abstract bool Compare(AutomationElement element1, AutomationElement element2);
 
         /// <summary>

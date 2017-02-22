@@ -133,7 +133,6 @@
     <Compile Include="Exceptions\NotSupportedByUIA2Exception.cs" />
     <Compile Include="Exceptions\PropertyNotSupportedException.cs" />
     <Compile Include="FrameworkType.cs" />
-    <Compile Include="IBasicCacheRequest.cs" />
     <Compile Include="Identifiers\ConvertibleIdentifierBase.cs" />
     <Compile Include="Identifiers\EventId.cs" />
     <Compile Include="Identifiers\IdentifierBase.cs" />

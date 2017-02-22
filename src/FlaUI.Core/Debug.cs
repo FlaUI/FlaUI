@@ -51,7 +51,7 @@ namespace FlaUI.Core
             try
             {
                 var stringBuilder = new StringBuilder();
-                var cr = automationElement.Automation.CreateCacheRequest();
+                var cr = new CacheRequest();
                 cr.AutomationElementMode = AutomationElementMode.None;
                 // Add the element properties
                 cr.Add(automationElement.Properties.AutomationIdProperty);
@@ -68,7 +68,7 @@ namespace FlaUI.Core
                 cr.TreeScope = TreeScope.Subtree;
                 cr.TreeFilter = new TrueCondition();
                 // Activate the cache request
-                using (CacheRequest.Activate(cr))
+                using (cr.Activate())
                 {
                     // Re-find the root element with caching activated
                     automationElement = automationElement.FindFirst(TreeScope.Element, new TrueCondition());

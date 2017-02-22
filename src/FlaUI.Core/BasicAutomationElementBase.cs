@@ -46,20 +46,6 @@ namespace FlaUI.Core
         }
 
         /// <summary>
-        /// Gets the desired property value or the default value, if the property is not supported
-        /// </summary>
-        public object SafeGetPropertyValue(PropertyId property, bool cached)
-        {
-            return SafeGetPropertyValue<object>(property, cached);
-        }
-
-        public T SafeGetPropertyValue<T>(PropertyId property, bool cached)
-        {
-            var value = InternalGetPropertyValue(property, cached, true);
-            return property.Convert<T>(value);
-        }
-
-        /// <summary>
         /// Tries to get the property value.
         /// Returns false and sets a default value if the property is not supported.
         /// </summary>

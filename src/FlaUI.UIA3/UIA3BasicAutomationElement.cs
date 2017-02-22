@@ -10,7 +10,7 @@ using FlaUI.Core.Shapes;
 using FlaUI.Core.Tools;
 using FlaUI.UIA3.Converters;
 using FlaUI.UIA3.EventHandlers;
-using FlaUI.UIA3.Tools;
+using FlaUI.UIA3.Extensions;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3
@@ -75,7 +75,7 @@ namespace FlaUI.UIA3
         public override AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition)
         {
             var nativeFoundElements = CacheRequest.Current != null
-                ? NativeElement.FindAllBuildCache((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition), CacheRequest.Current.ToNative())
+                ? NativeElement.FindAllBuildCache((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition), CacheRequest.Current.ToNative(Automation))
                 : NativeElement.FindAll((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition));
             return AutomationElementConverter.NativeArrayToManaged(Automation, nativeFoundElements);
         }
@@ -83,7 +83,7 @@ namespace FlaUI.UIA3
         public override AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
         {
             var nativeFoundElement = CacheRequest.Current != null
-                ? NativeElement.FindFirstBuildCache((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition), CacheRequest.Current.ToNative())
+                ? NativeElement.FindFirstBuildCache((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition), CacheRequest.Current.ToNative(Automation))
                 : NativeElement.FindFirst((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition));
             return AutomationElementConverter.NativeToManaged(Automation, nativeFoundElement);
         }
@@ -154,7 +154,7 @@ namespace FlaUI.UIA3
         {
             if (CacheRequest.Current != null)
             {
-                var updatedElement = NativeElement.BuildUpdatedCache(CacheRequest.Current.ToNative());
+                var updatedElement = NativeElement.BuildUpdatedCache(CacheRequest.Current.ToNative(Automation));
                 return AutomationElementConverter.NativeToManaged(Automation, updatedElement);
             }
             return null;

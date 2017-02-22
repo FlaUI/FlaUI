@@ -1,14 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
+using FlaUI.Core.Conditions;
+using FlaUI.Core.Definitions;
+using FlaUI.Core.Identifiers;
 
 namespace FlaUI.Core
 {
-    public static class CacheRequest
+    public partial class CacheRequest
+    {
+        public AutomationElementMode AutomationElementMode { get; set; }
+
+        public ConditionBase TreeFilter { get; set; }
+
+        public TreeScope TreeScope { get; set; }
+
+        public HashSet<PatternId> Patterns { get; } = new HashSet<PatternId>();
+
+        public HashSet<PropertyId> Properties { get; } = new HashSet<PropertyId>();
+
+        public void Add(PatternId pattern)
+        {
+            Patterns.Add(pattern);
+        }
+
+        public void Add(PropertyId property)
+        {
+            Properties.Add(property);
+        }
+
+        public IDisposable Activate()
+        {
+            Push(this);
+            return new CacheRequestActivation();
+        }
+    }
+
+    public partial class CacheRequest
     {
         [ThreadStatic]
-        private static Stack<IBasicCacheRequest> _cacheStack;
+        private static Stack<CacheRequest> _cacheStack;
+        [ThreadStatic]
+        private static Stack<bool> _forceNoCacheStack;
 
-        public static IBasicCacheRequest Current
+        public static bool IsCachingActive => _forceNoCacheStack != null && _forceNoCacheStack.Count > 0 && Current != null;
+
+        public static CacheRequest Current
         {
             get
             {
@@ -20,11 +56,11 @@ namespace FlaUI.Core
             }
         }
 
-        public static void Push(IBasicCacheRequest cacheRequest)
+        public static void Push(CacheRequest cacheRequest)
         {
             if (_cacheStack == null)
             {
-                _cacheStack = new Stack<IBasicCacheRequest>();
+                _cacheStack = new Stack<CacheRequest>();
             }
             _cacheStack.Push(cacheRequest);
         }
@@ -38,10 +74,9 @@ namespace FlaUI.Core
             _cacheStack.Pop();
         }
 
-        public static IDisposable Activate(IBasicCacheRequest cacheRequest)
+        public static IDisposable ForceNoCache()
         {
-            Push(cacheRequest);
-            return new CacheRequestActivation();
+            return new ForceNoCacheActivation();
         }
 
         private class CacheRequestActivation : IDisposable
@@ -49,6 +84,23 @@ namespace FlaUI.Core
             public void Dispose()
             {
                 Pop();
+            }
+        }
+
+        private class ForceNoCacheActivation : IDisposable
+        {
+            public ForceNoCacheActivation()
+            {
+                if (_forceNoCacheStack == null)
+                {
+                    _forceNoCacheStack = new Stack<bool>();
+                }
+                _forceNoCacheStack.Push(true);
+            }
+
+            public void Dispose()
+            {
+                _forceNoCacheStack.Pop();
             }
         }
     }

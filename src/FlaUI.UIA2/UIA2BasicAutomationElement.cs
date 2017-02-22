@@ -9,7 +9,7 @@ using FlaUI.Core.Identifiers;
 using FlaUI.Core.Shapes;
 using FlaUI.UIA2.Converters;
 using FlaUI.UIA2.EventHandlers;
-using FlaUI.UIA2.Tools;
+using FlaUI.UIA2.Extensions;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2

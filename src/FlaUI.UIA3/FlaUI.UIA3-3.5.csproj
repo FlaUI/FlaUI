@@ -59,6 +59,7 @@
     <Compile Include="EventHandlers\UIA3FocusChangedEventHandler.cs" />
     <Compile Include="EventHandlers\UIA3PropertyChangedEventHandler.cs" />
     <Compile Include="EventHandlers\UIA3StructureChangedEventHandlerBase.cs" />
+    <Compile Include="Extensions\CacheRequestExtensions.cs" />
     <Compile Include="Identifiers\AutomationObjectIds.cs" />
     <Compile Include="Patterns\AnnotationPattern.cs" />
     <Compile Include="Patterns\DockPattern.cs" />
@@ -94,9 +95,7 @@
     <Compile Include="Patterns\VirtualizedItemPattern.cs" />
     <Compile Include="Patterns\WindowPattern.cs" />
     <Compile Include="Converters\ConditionConverter.cs" />
-    <Compile Include="Tools\CacheRequestExtensions.cs" />
     <Compile Include="UIA3AutomationElementPatternAvailabilityProperties.cs" />
-    <Compile Include="UIA3BasicCacheRequest.cs" />
     <Compile Include="UIA3PatternLibrary.cs" />
     <Compile Include="UIA3Automation.cs" />
     <Compile Include="Identifiers\TextAttributes.cs" />
