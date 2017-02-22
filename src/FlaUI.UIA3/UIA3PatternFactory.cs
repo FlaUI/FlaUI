@@ -14,201 +14,201 @@ namespace FlaUI.UIA3
             BasicAutomationElement = basicAutomationElement;
         }
 
-        public IAnnotationPattern GetAnnotationPattern(bool cached = false)
+        public IAnnotationPattern GetAnnotationPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationAnnotationPattern>(AnnotationPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationAnnotationPattern>(AnnotationPattern.Pattern);
             return nativePattern == null ? null : new AnnotationPattern(BasicAutomationElement, nativePattern);
         }
 
-        public IDockPattern GetDockPattern(bool cached = false)
+        public IDockPattern GetDockPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationDockPattern>(DockPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationDockPattern>(DockPattern.Pattern);
             return nativePattern == null ? null : new DockPattern(BasicAutomationElement, nativePattern);
         }
 
-        public IDragPattern GetDragPattern(bool cached = false)
+        public IDragPattern GetDragPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationDragPattern>(DragPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationDragPattern>(DragPattern.Pattern);
             return nativePattern == null ? null : new DragPattern(BasicAutomationElement, nativePattern);
         }
 
-        public IDropTargetPattern GetDropTargetPattern(bool cached = false)
+        public IDropTargetPattern GetDropTargetPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationDropTargetPattern>(DropTargetPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationDropTargetPattern>(DropTargetPattern.Pattern);
             return nativePattern == null ? null : new DropTargetPattern(BasicAutomationElement, nativePattern);
         }
 
-        public IExpandCollapsePattern GetExpandCollapsePattern(bool cached = false)
+        public IExpandCollapsePattern GetExpandCollapsePattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationExpandCollapsePattern>(ExpandCollapsePattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationExpandCollapsePattern>(ExpandCollapsePattern.Pattern);
             return nativePattern == null ? null : new ExpandCollapsePattern(BasicAutomationElement, nativePattern);
         }
 
-        public IGridItemPattern GetGridItemPattern(bool cached = false)
+        public IGridItemPattern GetGridItemPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationGridItemPattern>(GridItemPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationGridItemPattern>(GridItemPattern.Pattern);
             return nativePattern == null ? null : new GridItemPattern(BasicAutomationElement, nativePattern);
         }
 
-        public IGridPattern GetGridPattern(bool cached = false)
+        public IGridPattern GetGridPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationGridPattern>(GridPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationGridPattern>(GridPattern.Pattern);
             return nativePattern == null ? null : new GridPattern(BasicAutomationElement, nativePattern);
         }
 
-        public IInvokePattern GetInvokePattern(bool cached = false)
+        public IInvokePattern GetInvokePattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationInvokePattern>(InvokePattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationInvokePattern>(InvokePattern.Pattern);
             return nativePattern == null ? null : new InvokePattern(BasicAutomationElement, nativePattern);
         }
 
-        public IItemContainerPattern GetItemContainerPattern(bool cached = false)
+        public IItemContainerPattern GetItemContainerPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationItemContainerPattern>(ItemContainerPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationItemContainerPattern>(ItemContainerPattern.Pattern);
             return nativePattern == null ? null : new ItemContainerPattern(BasicAutomationElement, nativePattern);
         }
 
-        public ILegacyIAccessiblePattern GetLegacyIAccessiblePattern(bool cached = false)
+        public ILegacyIAccessiblePattern GetLegacyIAccessiblePattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationLegacyIAccessiblePattern>(LegacyIAccessiblePattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationLegacyIAccessiblePattern>(LegacyIAccessiblePattern.Pattern);
             return nativePattern == null ? null : new LegacyIAccessiblePattern(BasicAutomationElement, nativePattern);
         }
 
-        public IMultipleViewPattern GetMultipleViewPattern(bool cached = false)
+        public IMultipleViewPattern GetMultipleViewPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationMultipleViewPattern>(MultipleViewPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationMultipleViewPattern>(MultipleViewPattern.Pattern);
             return nativePattern == null ? null : new MultipleViewPattern(BasicAutomationElement, nativePattern);
         }
 
-        public IObjectModelPattern GetObjectModelPattern(bool cached = false)
+        public IObjectModelPattern GetObjectModelPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationObjectModelPattern>(ObjectModelPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationObjectModelPattern>(ObjectModelPattern.Pattern);
             return nativePattern == null ? null : new ObjectModelPattern(BasicAutomationElement, nativePattern);
         }
 
-        public IRangeValuePattern GetRangeValuePattern(bool cached = false)
+        public IRangeValuePattern GetRangeValuePattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationRangeValuePattern>(RangeValuePattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationRangeValuePattern>(RangeValuePattern.Pattern);
             return nativePattern == null ? null : new RangeValuePattern(BasicAutomationElement, nativePattern);
         }
 
-        public IScrollItemPattern GetScrollItemPattern(bool cached = false)
+        public IScrollItemPattern GetScrollItemPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationScrollItemPattern>(ScrollItemPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationScrollItemPattern>(ScrollItemPattern.Pattern);
             return nativePattern == null ? null : new ScrollItemPattern(BasicAutomationElement, nativePattern);
         }
 
-        public IScrollPattern GetScrollPattern(bool cached = false)
+        public IScrollPattern GetScrollPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationScrollPattern>(ScrollPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationScrollPattern>(ScrollPattern.Pattern);
             return nativePattern == null ? null : new ScrollPattern(BasicAutomationElement, nativePattern);
         }
 
-        public ISelectionItemPattern GetSelectionItemPattern(bool cached = false)
+        public ISelectionItemPattern GetSelectionItemPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationSelectionItemPattern>(SelectionItemPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationSelectionItemPattern>(SelectionItemPattern.Pattern);
             return nativePattern == null ? null : new SelectionItemPattern(BasicAutomationElement, nativePattern);
         }
 
-        public ISelectionPattern GetSelectionPattern(bool cached = false)
+        public ISelectionPattern GetSelectionPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationSelectionPattern>(SelectionPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationSelectionPattern>(SelectionPattern.Pattern);
             return nativePattern == null ? null : new SelectionPattern(BasicAutomationElement, nativePattern);
         }
 
-        public ISpreadsheetItemPattern GetSpreadsheetItemPattern(bool cached = false)
+        public ISpreadsheetItemPattern GetSpreadsheetItemPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationSpreadsheetItemPattern>(SpreadsheetItemPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationSpreadsheetItemPattern>(SpreadsheetItemPattern.Pattern);
             return nativePattern == null ? null : new SpreadsheetItemPattern(BasicAutomationElement, nativePattern);
         }
 
-        public ISpreadsheetPattern GetSpreadsheetPattern(bool cached = false)
+        public ISpreadsheetPattern GetSpreadsheetPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationSpreadsheetPattern>(SpreadsheetPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationSpreadsheetPattern>(SpreadsheetPattern.Pattern);
             return nativePattern == null ? null : new SpreadsheetPattern(BasicAutomationElement, nativePattern);
         }
 
-        public IStylesPattern GetStylesPattern(bool cached = false)
+        public IStylesPattern GetStylesPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationStylesPattern>(StylesPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationStylesPattern>(StylesPattern.Pattern);
             return nativePattern == null ? null : new StylesPattern(BasicAutomationElement, nativePattern);
         }
 
-        public ISynchronizedInputPattern GetSynchronizedInputPattern(bool cached = false)
+        public ISynchronizedInputPattern GetSynchronizedInputPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationSynchronizedInputPattern>(SynchronizedInputPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationSynchronizedInputPattern>(SynchronizedInputPattern.Pattern);
             return nativePattern == null ? null : new SynchronizedInputPattern(BasicAutomationElement, nativePattern);
         }
 
-        public ITableItemPattern GetTableItemPattern(bool cached = false)
+        public ITableItemPattern GetTableItemPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationTableItemPattern>(TableItemPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationTableItemPattern>(TableItemPattern.Pattern);
             return nativePattern == null ? null : new TableItemPattern(BasicAutomationElement, nativePattern);
         }
 
-        public ITablePattern GetTablePattern(bool cached = false)
+        public ITablePattern GetTablePattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationTablePattern>(TablePattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationTablePattern>(TablePattern.Pattern);
             return nativePattern == null ? null : new TablePattern(BasicAutomationElement, nativePattern);
         }
 
-        public ITextChildPattern GetTextChildPattern(bool cached = false)
+        public ITextChildPattern GetTextChildPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationTextChildPattern>(TextChildPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationTextChildPattern>(TextChildPattern.Pattern);
             return nativePattern == null ? null : new TextChildPattern(BasicAutomationElement, nativePattern);
         }
 
-        public ITextEditPattern GetTextEditPattern(bool cached = false)
+        public ITextEditPattern GetTextEditPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationTextEditPattern>(TextEditPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationTextEditPattern>(TextEditPattern.Pattern);
             return nativePattern == null ? null : new TextEditPattern(BasicAutomationElement, nativePattern);
         }
 
-        public IText2Pattern GetText2Pattern(bool cached = false)
+        public IText2Pattern GetText2Pattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationTextPattern2>(Text2Pattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationTextPattern2>(Text2Pattern.Pattern);
             return nativePattern == null ? null : new Text2Pattern(BasicAutomationElement, nativePattern);
         }
 
-        public ITextPattern GetTextPattern(bool cached = false)
+        public ITextPattern GetTextPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationTextPattern>(TextPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationTextPattern>(TextPattern.Pattern);
             return nativePattern == null ? null : new TextPattern(BasicAutomationElement, nativePattern);
         }
 
-        public ITogglePattern GetTogglePattern(bool cached = false)
+        public ITogglePattern GetTogglePattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationTogglePattern>(TogglePattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationTogglePattern>(TogglePattern.Pattern);
             return nativePattern == null ? null : new TogglePattern(BasicAutomationElement, nativePattern);
         }
 
-        public ITransform2Pattern GetTransform2Pattern(bool cached = false)
+        public ITransform2Pattern GetTransform2Pattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationTransformPattern2>(Transform2Pattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationTransformPattern2>(Transform2Pattern.Pattern);
             return nativePattern == null ? null : new Transform2Pattern(BasicAutomationElement, nativePattern);
         }
 
-        public ITransformPattern GetTransformPattern(bool cached = false)
+        public ITransformPattern GetTransformPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationTransformPattern>(TransformPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationTransformPattern>(TransformPattern.Pattern);
             return nativePattern == null ? null : new TransformPattern(BasicAutomationElement, nativePattern);
         }
 
-        public IValuePattern GetValuePattern(bool cached = false)
+        public IValuePattern GetValuePattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationValuePattern>(ValuePattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationValuePattern>(ValuePattern.Pattern);
             return nativePattern == null ? null : new ValuePattern(BasicAutomationElement, nativePattern);
         }
 
-        public IVirtualizedItemPattern GetVirtualizedItemPattern(bool cached = false)
+        public IVirtualizedItemPattern GetVirtualizedItemPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationVirtualizedItemPattern>(VirtualizedItemPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationVirtualizedItemPattern>(VirtualizedItemPattern.Pattern);
             return nativePattern == null ? null : new VirtualizedItemPattern(BasicAutomationElement, nativePattern);
         }
 
-        public IWindowPattern GetWindowPattern(bool cached = false)
+        public IWindowPattern GetWindowPattern()
         {
-            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationWindowPattern>(WindowPattern.Pattern, cached);
+            var nativePattern = BasicAutomationElement.GetNativePattern<UIA.IUIAutomationWindowPattern>(WindowPattern.Pattern);
             return nativePattern == null ? null : new WindowPattern(BasicAutomationElement, nativePattern);
         }
     }

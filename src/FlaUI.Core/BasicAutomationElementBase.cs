@@ -35,8 +35,7 @@ namespace FlaUI.Core
 
         public T GetPropertyValue<T>(PropertyId property)
         {
-            var isCachActive = CacheRequest.IsCachingActive;
-            var value = InternalGetPropertyValue(property, isCachActive, false);
+            var value = InternalGetPropertyValue(property, false);
             if (value == Automation.NotSupportedValue)
             {
                 throw new PropertyNotSupportedException($"Property '{property}' not supported", property);
@@ -48,14 +47,14 @@ namespace FlaUI.Core
         /// Tries to get the property value.
         /// Returns false and sets a default value if the property is not supported.
         /// </summary>
-        public bool TryGetPropertyValue(PropertyId property, bool cached, out object value)
+        public bool TryGetPropertyValue(PropertyId property, out object value)
         {
-            return TryGetPropertyValue<object>(property, cached, out value);
+            return TryGetPropertyValue<object>(property, out value);
         }
 
-        public bool TryGetPropertyValue<T>(PropertyId property, bool cached, out T value)
+        public bool TryGetPropertyValue<T>(PropertyId property, out T value)
         {
-            var tmp = InternalGetPropertyValue(property, cached, false);
+            var tmp = InternalGetPropertyValue(property, false);
             if (tmp == Automation.NotSupportedValue)
             {
                 value = default(T);
@@ -65,16 +64,17 @@ namespace FlaUI.Core
             return true;
         }
 
-        private object InternalGetPropertyValue(PropertyId property, bool cached, bool useDefaultIfNotSupported)
+        private object InternalGetPropertyValue(PropertyId property, bool useDefaultIfNotSupported)
         {
+            var isCacheActive = CacheRequest.IsCachingActive;
             try
             {
-                return InternalGetPropertyValue(property.Id, cached, useDefaultIfNotSupported);
+                return InternalGetPropertyValue(property.Id, isCacheActive, useDefaultIfNotSupported);
             }
             catch (Exception ex)
             {
                 var msg = $"Property '{property}' not supported";
-                if (cached)
+                if (isCacheActive)
                 {
                     msg += " or not cached";
                 }
@@ -82,17 +82,18 @@ namespace FlaUI.Core
             }
         }
 
-        public T GetNativePattern<T>(PatternId pattern, bool cached)
+        public T GetNativePattern<T>(PatternId pattern)
         {
+            var isCacheActive = CacheRequest.IsCachingActive;
             try
             {
-                var nativePattern = InternalGetPattern(pattern.Id, cached);
+                var nativePattern = InternalGetPattern(pattern.Id, isCacheActive);
                 return (T)nativePattern;
             }
             catch (Exception ex)
             {
                 var msg = $"Pattern '{pattern}' not supported";
-                if (cached)
+                if (isCacheActive)
                 {
                     msg += " or not cached";
                 }
@@ -100,11 +101,12 @@ namespace FlaUI.Core
             }
         }
 
-        public bool TryGetNativePattern<T>(PatternId pattern, bool cached, out T nativePattern)
+        public bool TryGetNativePattern<T>(PatternId pattern, out T nativePattern)
         {
+            var isCacheActive = CacheRequest.IsCachingActive;
             try
             {
-                nativePattern = (T)InternalGetPattern(pattern.Id, cached);
+                nativePattern = (T)InternalGetPattern(pattern.Id, isCacheActive);
                 return true;
             }
             catch (Exception ex)

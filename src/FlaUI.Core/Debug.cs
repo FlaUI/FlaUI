@@ -110,7 +110,7 @@ namespace FlaUI.Core
 
         private static void WritePattern(AutomationElement automationElement, StringBuilder stringBuilder, string displayPadding)
         {
-            var availablePatterns = automationElement.GetAvailablePatterns(true);
+            var availablePatterns = automationElement.GetAvailablePatterns();
             foreach (var automationPattern in availablePatterns)
             {
                 WriteWithPadding(stringBuilder, automationPattern.ToString(), displayPadding);

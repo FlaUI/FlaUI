@@ -370,23 +370,22 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <summary>
         /// Gets the available patterns for an element via properties
         /// </summary>
-        public PatternId[] GetAvailablePatterns(bool cached = false)
+        public PatternId[] GetAvailablePatterns()
         {
-            return Automation.PatternLibrary.AllForCurrentFramework.Where(pattern =>
-                IsPatternAvailable(pattern, cached)).ToArray();
+            return Automation.PatternLibrary.AllForCurrentFramework.Where(IsPatternAvailable).ToArray();
         }
 
         /// <summary>
         /// Checks if the given pattern is available for the element via properties
         /// </summary>
-        public bool IsPatternAvailable(PatternId pattern, bool cached = false)
+        public bool IsPatternAvailable(PatternId pattern)
         {
             if (pattern.AvailabilityProperty == null)
             {
                 throw new ArgumentException("Pattern doesn't have an AvailabilityProperty");
             }
             bool isPatternAvailable;
-            var success = BasicAutomationElement.TryGetPropertyValue(pattern.AvailabilityProperty, cached, out isPatternAvailable);
+            var success = BasicAutomationElement.TryGetPropertyValue(pattern.AvailabilityProperty, out isPatternAvailable);
             return success && isPatternAvailable;
         }
 
