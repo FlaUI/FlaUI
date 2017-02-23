@@ -36,5 +36,24 @@ namespace FlaUI.Core.UITests
             }
             app.Close();
         }
+
+        [Test]
+        public void NotePadFindAllIndexed()
+        {
+            var app = Application.Launch("notepad.exe");
+            using (var automation = new UIA3Automation())
+            {
+                var window = app.GetMainWindow(automation);
+                Assert.That(window, Is.Not.Null);
+                Assert.That(window.Title, Is.Not.Null);
+                var items = window.FindAllByXPath("(//MenuBar)[1]/MenuItem");
+                Assert.That(items, Is.Not.Null);
+                Assert.That(items, Has.Length.EqualTo(1));
+                items = window.FindAllByXPath("(//MenuBar)[2]/MenuItem");
+                Assert.That(items, Is.Not.Null);
+                Assert.That(items, Has.Length.EqualTo(5));
+            }
+            app.Close();
+        }
     }
 }
