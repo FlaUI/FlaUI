@@ -19,7 +19,7 @@ namespace FlaUI.Core
         public abstract IPatternFactory PatternFactory { get; }
 
         public abstract IAutomationElementInformation Information { get; }
-        
+
         /// <summary>
         /// Underlying <see cref="AutomationBase" /> object where this element belongs to
         /// </summary>
@@ -88,28 +88,34 @@ namespace FlaUI.Core
             try
             {
                 var nativePattern = InternalGetPattern(pattern.Id, isCacheActive);
+                if (nativePattern == null)
+                {
+                    throw new InvalidOperationException("Native pattern is null");
+                }
                 return (T)nativePattern;
             }
             catch (Exception ex)
             {
-                var msg = $"Pattern '{pattern}' not supported";
                 if (isCacheActive)
                 {
-                    msg += " or not cached";
+                    var cacheRequest = CacheRequest.Current;
+                    if (!cacheRequest.Patterns.Contains(pattern))
+                    {
+                        throw new PatternNotCachedException(pattern, ex);
+                    }
                 }
-                throw new InvalidOperationException(msg, ex);
+                throw new PatternNotSupportedException(pattern, ex);
             }
         }
 
         public bool TryGetNativePattern<T>(PatternId pattern, out T nativePattern)
         {
-            var isCacheActive = CacheRequest.IsCachingActive;
             try
             {
-                nativePattern = (T)InternalGetPattern(pattern.Id, isCacheActive);
+                nativePattern = GetNativePattern<T>(pattern);
                 return true;
             }
-            catch (Exception ex)
+            catch (PatternNotSupportedException)
             {
                 nativePattern = default(T);
                 return false;

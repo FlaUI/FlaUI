@@ -130,7 +130,12 @@
     <Compile Include="EventHandlers\StructureChangedEventHandlerBase.cs" />
     <Compile Include="Exceptions\MethodNotSupportedException.cs" />
     <Compile Include="Exceptions\NoClickablePointException.cs" />
+    <Compile Include="Exceptions\NotCachedException.cs" />
     <Compile Include="Exceptions\NotSupportedByUIA2Exception.cs" />
+    <Compile Include="Exceptions\NotSupportedException.cs" />
+    <Compile Include="Exceptions\PatternNotCachedException.cs" />
+    <Compile Include="Exceptions\PatternNotSupportedException.cs" />
+    <Compile Include="Exceptions\PropertyNotCachedException.cs" />
     <Compile Include="Exceptions\PropertyNotSupportedException.cs" />
     <Compile Include="FrameworkType.cs" />
     <Compile Include="Identifiers\ConvertibleIdentifierBase.cs" />

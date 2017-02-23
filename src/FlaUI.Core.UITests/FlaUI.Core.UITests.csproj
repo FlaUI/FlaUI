@@ -61,6 +61,7 @@
     <Compile Include="Elements\TreeTests.cs" />
     <Compile Include="Elements\WindowTests.cs" />
     <Compile Include="EventHandlers\FocusChangedTests.cs" />
+    <Compile Include="GetterTests.cs" />
     <Compile Include="KeyboardTests.cs" />
     <Compile Include="MouseTests.cs" />
     <Compile Include="NotepadTests.cs" />

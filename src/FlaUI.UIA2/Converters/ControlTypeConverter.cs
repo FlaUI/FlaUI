@@ -168,7 +168,7 @@ namespace FlaUI.UIA2.Converters
                 return ControlType.Window;
             }
 
-            throw new NotSupportedException();
+            throw new ArgumentOutOfRangeException(nameof(nativeControlType));
         }
 
         public static object ToControlTypeNative(ControlType controlType)
@@ -258,7 +258,7 @@ namespace FlaUI.UIA2.Converters
                 case ControlType.Window:
                     return UIA.ControlType.Window;
                 default:
-                    throw new NotSupportedException();
+                    throw new ArgumentOutOfRangeException(nameof(controlType));
             }
         }
     }
