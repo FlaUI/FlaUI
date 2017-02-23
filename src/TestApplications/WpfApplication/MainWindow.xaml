@@ -2,12 +2,13 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication"
-        mc:Ignorable="d"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="FlaUI WPF Test App"
-        Height="450" Width="600"
-        ResizeMode="CanResize">
+        Width="600"
+        Height="450"
+        ResizeMode="CanResize"
+        mc:Ignorable="d">
     <Window.Resources>
         <ResourceDictionary>
             <Menu x:Key="ViewsMenu">
@@ -34,52 +35,81 @@
         <TabControl>
             <TabItem Header="Simple Controls">
                 <StackPanel Orientation="Vertical">
-                    <Label Content="Test Label"/>
+                    <Label Content="Test Label" />
                     <TextBox AutomationProperties.AutomationId="TextBox" />
-                    <ComboBox Width="120" IsEditable="True" AutomationProperties.AutomationId="EditableCombo">
-                        <TextBlock Text="Item 1" AutomationProperties.AutomationId="EditableComboItem1" />
-                        <TextBlock Text="Item 2" AutomationProperties.AutomationId="EditableComboItem2" />
-                        <TextBlock Text="Item 3" AutomationProperties.AutomationId="EditableComboItem3" />
+                    <ComboBox Width="120"
+                              AutomationProperties.AutomationId="EditableCombo"
+                              IsEditable="True">
+                        <TextBlock AutomationProperties.AutomationId="EditableComboItem1" Text="Item 1" />
+                        <TextBlock AutomationProperties.AutomationId="EditableComboItem2" Text="Item 2" />
+                        <TextBlock AutomationProperties.AutomationId="EditableComboItem3" Text="Item 3" />
                     </ComboBox>
-                    <ComboBox Width="120" IsEditable="False" AutomationProperties.AutomationId="NonEditableCombo">
-                        <TextBlock Text="Item 1" AutomationProperties.AutomationId="EditableComboItem1" />
-                        <TextBlock Text="Item 2" AutomationProperties.AutomationId="EditableComboItem2" />
-                        <TextBlock Text="Item 3" AutomationProperties.AutomationId="EditableComboItem3" />
+                    <ComboBox Width="120"
+                              AutomationProperties.AutomationId="NonEditableCombo"
+                              IsEditable="False"
+                              SelectionChanged="Selector_OnSelectionChanged">
+                        <TextBlock AutomationProperties.AutomationId="EditableComboItem1" Text="Item 1" />
+                        <TextBlock AutomationProperties.AutomationId="EditableComboItem2" Text="Item 2" />
+                        <TextBlock AutomationProperties.AutomationId="EditableComboItem3" Text="Item 3" />
+                        <TextBlock AutomationProperties.AutomationId="EditableComboItem4" Text="Item 4" />
                     </ComboBox>
-                    <CheckBox Content="Test Checkbox" AutomationProperties.AutomationId="SimpleCheckBox" />
-                    <CheckBox Content="3-Way Test Checkbox" IsThreeState="True" AutomationProperties.AutomationId="ThreeStateCheckBox" />
+                    <CheckBox AutomationProperties.AutomationId="SimpleCheckBox" Content="Test Checkbox" />
+                    <CheckBox AutomationProperties.AutomationId="ThreeStateCheckBox"
+                              Content="3-Way Test Checkbox"
+                              IsThreeState="True" />
                     <RadioButton AutomationProperties.AutomationId="RadioButton1" Content="RadioButton1" />
                     <RadioButton AutomationProperties.AutomationId="RadioButton2" Content="RadioButton2" />
-                    <ProgressBar Value="50" AutomationProperties.AutomationId="ProgressBar" />
-                    <Slider AutomationProperties.AutomationId="Slider" LargeChange="4" SmallChange="1" Minimum="0" Maximum="10" Value="5" Width="150"/>
+                    <ProgressBar AutomationProperties.AutomationId="ProgressBar" Value="50" />
+                    <Slider Width="150"
+                            AutomationProperties.AutomationId="Slider"
+                            LargeChange="4"
+                            Maximum="10"
+                            Minimum="0"
+                            SmallChange="1"
+                            Value="5" />
                     <Button AutomationProperties.AutomationId="ContextMenu" Content="ContextMenu">
                         <Button.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Context 1"></MenuItem>
+                                <MenuItem Header="Context 1" />
                                 <MenuItem Header="Context 2">
-                                    <MenuItem Header="Inner Context"></MenuItem>
+                                    <MenuItem Header="Inner Context" />
                                 </MenuItem>
                             </ContextMenu>
                         </Button.ContextMenu>
                     </Button>
-                    <Button AutomationProperties.AutomationId="InvokableButton" Command="{Binding InvokeButtonCommand}" Content="{Binding InvokeButtonText, FallbackValue=InvokableButton}"></Button>
-                    <ScrollViewer Width="80" Height="80" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                        <Button Width="200" Height="200" Content="BigButton"></Button>
+                    <Button AutomationProperties.AutomationId="InvokableButton"
+                            Command="{Binding InvokeButtonCommand}"
+                            Content="{Binding InvokeButtonText,
+                                              FallbackValue=InvokableButton}" />
+                    <ScrollViewer Width="80"
+                                  Height="80"
+                                  HorizontalScrollBarVisibility="Auto"
+                                  VerticalScrollBarVisibility="Auto">
+                        <Button Width="200"
+                                Height="200"
+                                Content="BigButton" />
                     </ScrollViewer>
                     <ToggleButton Name="PopupToggleButton1">Popup Toggle 1</ToggleButton>
-                    <Popup IsOpen="{Binding IsChecked, ElementName=PopupToggleButton1}" StaysOpen="False" Placement="Bottom" PlacementTarget="{Binding ElementName=PopupToggleButton1}">
+                    <Popup IsOpen="{Binding IsChecked,
+                                            ElementName=PopupToggleButton1}"
+                           Placement="Bottom"
+                           PlacementTarget="{Binding ElementName=PopupToggleButton1}"
+                           StaysOpen="False">
                         <Border Background="LightYellow">
-                            <Border BorderBrush="Black" BorderThickness="1" Background="LightYellow">
-                                <CheckBox Content="This is a popup"/>
+                            <Border Background="LightYellow"
+                                    BorderBrush="Black"
+                                    BorderThickness="1">
+                                <CheckBox Content="This is a popup" />
                             </Border>
                         </Border>
                     </Popup>
                     <ToggleButton Name="PopupToggleButton2">Popup Toggle 2</ToggleButton>
-                    <Popup IsOpen="{Binding IsChecked, ElementName=PopupToggleButton2}"
-                        Child="{DynamicResource ViewsMenu}"
-                        Placement="Top"
-                        PlacementTarget="{Binding ElementName=PopupToggleButton2}"
-                        StaysOpen="False" />
+                    <Popup Child="{DynamicResource ViewsMenu}"
+                           IsOpen="{Binding IsChecked,
+                                            ElementName=PopupToggleButton2}"
+                           Placement="Top"
+                           PlacementTarget="{Binding ElementName=PopupToggleButton2}"
+                           StaysOpen="False" />
                 </StackPanel>
             </TabItem>
             <TabItem Header="Complex Controls">
@@ -101,8 +131,8 @@
                             <ListView AutomationProperties.AutomationId="listView1">
                                 <ListView.View>
                                     <GridView>
-                                        <GridViewColumn Header="Key" DisplayMemberBinding="{Binding Key}" />
-                                        <GridViewColumn Header="Value" DisplayMemberBinding="{Binding Value}" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding Key}" Header="Key" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding Value}" Header="Value" />
                                     </GridView>
                                 </ListView.View>
                                 <ListViewItem>
@@ -116,7 +146,7 @@
                                 </ListViewItem>
                             </ListView>
                         </GroupBox>
-                        <Expander Header="More Options" AutomationProperties.AutomationId="Expander">
+                        <Expander AutomationProperties.AutomationId="Expander" Header="More Options">
                             <StackPanel Margin="10,4,0,0">
                                 <CheckBox Margin="4" Content="Option 1" />
                                 <CheckBox Margin="4" Content="Option 2" />
@@ -124,11 +154,17 @@
                             </StackPanel>
                         </Expander>
                         <GroupBox Header="Large List with Scroll">
-                            <ListView AutomationProperties.AutomationId="LargeListView" Height="100" Width="150">
+                            <ListView Width="150"
+                                      Height="100"
+                                      AutomationProperties.AutomationId="LargeListView">
                                 <ListView.View>
                                     <GridView>
-                                        <GridViewColumn Header="Key" Width="80" DisplayMemberBinding="{Binding Key}" />
-                                        <GridViewColumn Header="Value" Width="80"  DisplayMemberBinding="{Binding Value}" />
+                                        <GridViewColumn Width="80"
+                                                        DisplayMemberBinding="{Binding Key}"
+                                                        Header="Key" />
+                                        <GridViewColumn Width="80"
+                                                        DisplayMemberBinding="{Binding Value}"
+                                                        Header="Value" />
                                     </GridView>
                                 </ListView.View>
                                 <ListViewItem>
@@ -155,9 +191,9 @@
                             </ListView>
                         </GroupBox>
                         <GroupBox Header="Grid">
-                            <DataGrid ItemsSource="{Binding DataGridItems}" AutomationProperties.AutomationId="dataGrid1" CanUserAddRows="False">
-
-                            </DataGrid>
+                            <DataGrid AutomationProperties.AutomationId="dataGrid1"
+                                      CanUserAddRows="False"
+                                      ItemsSource="{Binding DataGridItems}" />
                         </GroupBox>
                     </StackPanel>
                 </ScrollViewer>
