@@ -27,8 +27,8 @@ namespace FlaUI.Core
                 return String.Empty;
             }
             // Get the index
-            var allChildren = parent.FindAllChildren(cf => cf.ByControlType(element.Information.ControlType));
-            var currentItemText = $"{element.Information.ControlType}";
+            var allChildren = parent.FindAllChildren(cf => cf.ByControlType(element.Info.ControlType));
+            var currentItemText = $"{element.Info.ControlType}";
             if (allChildren.Length > 1)
             {
                 // There is more than one matching child, find out the index
@@ -97,15 +97,15 @@ namespace FlaUI.Core
 
         private static void WriteDetail(AutomationElement automationElement, StringBuilder stringBuilder, string displayPadding)
         {
-            WriteWithPadding(stringBuilder, "AutomationId: " + automationElement.Information.AutomationId, displayPadding);
-            WriteWithPadding(stringBuilder, "ControlType: " + automationElement.Information.ControlType, displayPadding);
-            WriteWithPadding(stringBuilder, "Name: " + automationElement.Information.Name, displayPadding);
-            WriteWithPadding(stringBuilder, "HelpText: " + automationElement.Information.HelpText, displayPadding);
-            WriteWithPadding(stringBuilder, "Bounding rectangle: " + automationElement.Information.BoundingRectangle, displayPadding);
-            WriteWithPadding(stringBuilder, "ClassName: " + automationElement.Information.ClassName, displayPadding);
-            WriteWithPadding(stringBuilder, "IsOffScreen: " + automationElement.Information.IsOffscreen, displayPadding);
-            WriteWithPadding(stringBuilder, "FrameworkId: " + automationElement.Information.FrameworkId, displayPadding);
-            WriteWithPadding(stringBuilder, "ProcessId: " + automationElement.Information.ProcessId, displayPadding);
+            WriteWithPadding(stringBuilder, "AutomationId: " + automationElement.Info.AutomationId, displayPadding);
+            WriteWithPadding(stringBuilder, "ControlType: " + automationElement.Info.ControlType, displayPadding);
+            WriteWithPadding(stringBuilder, "Name: " + automationElement.Info.Name, displayPadding);
+            WriteWithPadding(stringBuilder, "HelpText: " + automationElement.Info.HelpText, displayPadding);
+            WriteWithPadding(stringBuilder, "Bounding rectangle: " + automationElement.Info.BoundingRectangle, displayPadding);
+            WriteWithPadding(stringBuilder, "ClassName: " + automationElement.Info.ClassName, displayPadding);
+            WriteWithPadding(stringBuilder, "IsOffScreen: " + automationElement.Info.IsOffscreen, displayPadding);
+            WriteWithPadding(stringBuilder, "FrameworkId: " + automationElement.Info.FrameworkId, displayPadding);
+            WriteWithPadding(stringBuilder, "ProcessId: " + automationElement.Info.ProcessId, displayPadding);
         }
 
         private static void WritePattern(AutomationElement automationElement, StringBuilder stringBuilder, string displayPadding)

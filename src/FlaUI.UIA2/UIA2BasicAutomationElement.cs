@@ -21,11 +21,11 @@ namespace FlaUI.UIA2
             Automation = automation;
             NativeElement = nativeElement;
             PatternFactory = new UIA2PatternFactory(this);
-            Information = new UIA2AutomationElementInformation(this);
+            Info = new UIA2AutomationElementInformation(this);
         }
 
         public override IPatternFactory PatternFactory { get; }
-        public override IAutomationElementInformation Information { get; }
+        public override IAutomationElementInformation Info { get; }
 
         /// <summary>
         /// Concrete implementation of the automation object

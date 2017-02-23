@@ -18,7 +18,7 @@ namespace FlaUI.Core
 
         public abstract IPatternFactory PatternFactory { get; }
 
-        public abstract IAutomationElementInformation Information { get; }
+        public abstract IAutomationElementInformation Info { get; }
 
         /// <summary>
         /// Underlying <see cref="AutomationBase" /> object where this element belongs to

@@ -36,7 +36,7 @@ namespace FlaUInspect.Core
         {
             // Skip items in the current process
             // Like Inspect itself or the overlay window
-            if (automationElement.Information.ProcessId == Process.GetCurrentProcess().Id)
+            if (automationElement.Info.ProcessId == Process.GetCurrentProcess().Id)
             {
                 return;
             }

@@ -40,12 +40,12 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             get
             {
                 var currentElement = this;
-                var currentFrameworkId = currentElement.Information.FrameworkId;
+                var currentFrameworkId = currentElement.Info.FrameworkId;
                 var treeWalker = Automation.TreeWalkerFactory.GetControlViewWalker();
                 while (String.IsNullOrEmpty(currentFrameworkId))
                 {
                     currentElement = treeWalker.GetParent(currentElement);
-                    currentFrameworkId = currentElement.Information.FrameworkId;
+                    currentFrameworkId = currentElement.Info.FrameworkId;
                 }
                 return FrameworkIds.ConvertToFrameworkType(currentFrameworkId);
             }
@@ -58,7 +58,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <summary>
         /// Basic information about this element
         /// </summary>
-        public IAutomationElementInformation Information => BasicAutomationElement.Information;
+        public IAutomationElementInformation Info => BasicAutomationElement.Info;
 
         /// <summary>
         /// Gets the cached children for this element
@@ -116,7 +116,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
 
         public void FocusNative()
         {
-            var windowHandle = Information.NativeWindowHandle;
+            var windowHandle = Info.NativeWindowHandle;
             if (windowHandle != new IntPtr(0))
             {
                 User32.SetFocus(windowHandle);
@@ -134,7 +134,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public void SetForeground()
         {
-            var windowHandle = Information.NativeWindowHandle;
+            var windowHandle = Info.NativeWindowHandle;
             if (windowHandle != new IntPtr(0))
             {
                 User32.SetForegroundWindow(windowHandle);
@@ -191,7 +191,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <param name="durationInMs">The duration (im ms) how long the highlight is shown</param>
         public AutomationElement DrawHighlight(bool blocking, WpfColor color, int durationInMs)
         {
-            var rectangle = Information.BoundingRectangle;
+            var rectangle = Info.BoundingRectangle;
             if (!rectangle.IsEmpty)
             {
                 if (blocking)
@@ -211,7 +211,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public Bitmap Capture()
         {
-            return ScreenCapture.CaptureArea(Information.BoundingRectangle);
+            return ScreenCapture.CaptureArea(Info.BoundingRectangle);
         }
 
         /// <summary>
@@ -219,12 +219,12 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public BitmapImage CaptureWpf()
         {
-            return ScreenCapture.CaptureAreaWpf(Information.BoundingRectangle);
+            return ScreenCapture.CaptureAreaWpf(Info.BoundingRectangle);
         }
 
         public void CaptureToFile(string filePath)
         {
-            ScreenCapture.CaptureAreaToFile(Information.BoundingRectangle, filePath);
+            ScreenCapture.CaptureAreaToFile(Info.BoundingRectangle, filePath);
         }
 
         /// <summary>
@@ -437,7 +437,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         public override string ToString()
         {
             return String.Format("AutomationId:{0}, Name:{1}, ControlType:{2}, FrameworkId:{3}",
-                Information.AutomationId, Information.Name, Information.LocalizedControlType, Information.FrameworkId);
+                Info.AutomationId, Info.Name, Info.LocalizedControlType, Info.FrameworkId);
         }
 
         protected internal void ExecuteInPattern<TPattern>(TPattern pattern, bool throwIfNotSupported, Action<TPattern> action)

@@ -45,7 +45,7 @@ namespace FlaUI.Core.AutomationElements
         public TabItem SelectTabItem(string text)
         {
             var tabItems = TabItems;
-            var foundTabItemIndex = Array.FindIndex(tabItems, t => t.Information.Name == text);
+            var foundTabItemIndex = Array.FindIndex(tabItems, t => t.Info.Name == text);
             if (foundTabItemIndex < 0)
             {
                 throw new Exception($"No TabItem found with text '{text}'");

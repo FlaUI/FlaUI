@@ -97,7 +97,7 @@ namespace FlaUI.Core.UITests
             get
             {
                 var resultElement = _mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("158"));
-                var value = resultElement.Information.Name;
+                var value = resultElement.Info.Name;
                 return Regex.Replace(value, "[^0-9]", "");
             }
         }
@@ -134,7 +134,7 @@ namespace FlaUI.Core.UITests
             get
             {
                 var resultElement = FindElement("CalculatorResults");
-                var value = resultElement.Information.Name;
+                var value = resultElement.Info.Name;
                 return Regex.Replace(value, "[^0-9]", "");
             }
         }

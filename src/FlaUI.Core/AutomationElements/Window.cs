@@ -16,7 +16,7 @@ namespace FlaUI.Core.AutomationElements
         {
         }
 
-        public string Title => Information.Name;
+        public string Title => Info.Name;
 
         public bool IsModal => WindowPattern.IsModal;
 
@@ -118,11 +118,11 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public void SetTransparency(byte alpha)
         {
-            if (User32.SetWindowLong(Information.NativeWindowHandle, WindowLongParam.GWL_EXSTYLE, WindowStyles.WS_EX_LAYERED) == 0)
+            if (User32.SetWindowLong(Info.NativeWindowHandle, WindowLongParam.GWL_EXSTYLE, WindowStyles.WS_EX_LAYERED) == 0)
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }
-            if (!User32.SetLayeredWindowAttributes(Information.NativeWindowHandle, 0, alpha, LayeredWindowAttributes.LWA_ALPHA))
+            if (!User32.SetLayeredWindowAttributes(Info.NativeWindowHandle, 0, alpha, LayeredWindowAttributes.LWA_ALPHA))
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }
@@ -137,7 +137,7 @@ namespace FlaUI.Core.AutomationElements
             {
                 return this;
             }
-            var mainWindow = BasicAutomationElement.Automation.GetDesktop().FindFirstChild(cf => cf.ByProcessId(Information.ProcessId)).AsWindow();
+            var mainWindow = BasicAutomationElement.Automation.GetDesktop().FindFirstChild(cf => cf.ByProcessId(Info.ProcessId)).AsWindow();
             return mainWindow ?? this;
         }
     }

@@ -17,7 +17,7 @@ namespace FlaUI.Core.AutomationElements
         {
             get
             {
-                if (Information.IsPassword)
+                if (Info.IsPassword)
                 {
                     throw new MethodNotSupportedException($"Text from element '{ToString()}' cannot be retrieved because it is set as password.");
                 }

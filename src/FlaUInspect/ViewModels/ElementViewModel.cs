@@ -66,7 +66,7 @@ namespace FlaUInspect.ViewModels
         {
             try
             {
-                var property = AutomationElement.Information.Name;
+                var property = AutomationElement.Info.Name;
                 return NormalizeString(property);
             }
             catch (Exception ex)
@@ -75,11 +75,11 @@ namespace FlaUInspect.ViewModels
             }
         }
         
-        public string Name => TryGet(() => AutomationElement.Information.Name);
+        public string Name => TryGet(() => AutomationElement.Info.Name);
 
-        public string AutomationId => TryGet(() => AutomationElement.Information.AutomationId);
+        public string AutomationId => TryGet(() => AutomationElement.Info.AutomationId);
 
-        public ControlType ControlType => AutomationElement.Information.ControlType;
+        public ControlType ControlType => AutomationElement.Info.ControlType;
 
         public ExtendedObservableCollection<ElementViewModel> Children { get; set; }
 
@@ -113,26 +113,26 @@ namespace FlaUInspect.ViewModels
             // Element identification
             var identification = new List<DetailViewModel>
             {
-                new DetailViewModel("AutomationId", AutomationElement.Information.AutomationId),
-                new DetailViewModel("Name", AutomationElement.Information.Name),
-                new DetailViewModel("ClassName", AutomationElement.Information.ClassName),
-                new DetailViewModel("ControlType", AutomationElement.Information.ControlType),
-                new DetailViewModel("LocalizedControlType", AutomationElement.Information.LocalizedControlType),
+                new DetailViewModel("AutomationId", AutomationElement.Info.AutomationId),
+                new DetailViewModel("Name", AutomationElement.Info.Name),
+                new DetailViewModel("ClassName", AutomationElement.Info.ClassName),
+                new DetailViewModel("ControlType", AutomationElement.Info.ControlType),
+                new DetailViewModel("LocalizedControlType", AutomationElement.Info.LocalizedControlType),
                 new DetailViewModel("FrameworkType", AutomationElement.FrameworkType),
-                new DetailViewModel("FrameworkId", AutomationElement.Information.FrameworkId),
-                new DetailViewModel("ProcessId", AutomationElement.Information.ProcessId),
+                new DetailViewModel("FrameworkId", AutomationElement.Info.FrameworkId),
+                new DetailViewModel("ProcessId", AutomationElement.Info.ProcessId),
             };
             detailGroups.Add(new DetailGroupViewModel("Identification", identification));
 
             // Element details
             var details = new List<DetailViewModel>
             {
-                new DetailViewModel("IsEnabled", AutomationElement.Information.IsEnabled),
-                new DetailViewModel("IsOffscreen", AutomationElement.Information.IsOffscreen),
-                new DetailViewModel("BoundingRectangle", AutomationElement.Information.BoundingRectangle),
-                new DetailViewModel("HelpText", AutomationElement.Information.HelpText),
-                new DetailViewModel("IsPassword", AutomationElement.Information.IsPassword),
-                new DetailViewModel("NativeWindowHandle", String.Format("{0} ({0:X8})", AutomationElement.Information.NativeWindowHandle.ToInt32()))
+                new DetailViewModel("IsEnabled", AutomationElement.Info.IsEnabled),
+                new DetailViewModel("IsOffscreen", AutomationElement.Info.IsOffscreen),
+                new DetailViewModel("BoundingRectangle", AutomationElement.Info.BoundingRectangle),
+                new DetailViewModel("HelpText", AutomationElement.Info.HelpText),
+                new DetailViewModel("IsPassword", AutomationElement.Info.IsPassword),
+                new DetailViewModel("NativeWindowHandle", String.Format("{0} ({0:X8})", AutomationElement.Info.NativeWindowHandle.ToInt32()))
             };
             detailGroups.Add(new DetailGroupViewModel("Details", details));
 
