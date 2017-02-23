@@ -9,7 +9,7 @@ using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Patterns
 {
-    public class TableItemPattern : PatternBaseWithInformation<UIA.TableItemPattern, TableItemPatternInformation>, ITableItemPattern
+    public class TableItemPattern : PatternBase<UIA.TableItemPattern>, ITableItemPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.TableItemPattern.Pattern.Id, "TableItem", AutomationObjectIds.IsTableItemPatternAvailableProperty);
         public static readonly PropertyId ColumnHeaderItemsProperty = PropertyId.Register(AutomationType.UIA2, UIA.TableItemPattern.ColumnHeaderItemsProperty.Id, "ColumnHeaderItems");
@@ -19,29 +19,13 @@ namespace FlaUI.UIA2.Patterns
         {
         }
 
-        ITableItemPatternInformation IPatternWithInformation<ITableItemPatternInformation>.Cached => Cached;
-
-        ITableItemPatternInformation IPatternWithInformation<ITableItemPatternInformation>.Current => Current;
-
         public ITableItemPatternProperties Properties => Automation.PropertyLibrary.TableItem;
-
-        protected override TableItemPatternInformation CreateInformation()
-        {
-            return new TableItemPatternInformation(BasicAutomationElement);
-        }
-    }
-
-    public class TableItemPatternInformation : InformationBase, ITableItemPatternInformation
-    {
-        public TableItemPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
-        {
-        }
 
         public AutomationElement[] ColumnHeaderItems
         {
             get
             {
-                var nativeElement = Get<UIA.AutomationElementCollection>(TableItemPattern.ColumnHeaderItemsProperty);
+                var nativeElement = Get<UIA.AutomationElementCollection>(ColumnHeaderItemsProperty);
                 return AutomationElementConverter.NativeArrayToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeElement);
             }
         }
@@ -50,7 +34,7 @@ namespace FlaUI.UIA2.Patterns
         {
             get
             {
-                var nativeElement = Get<UIA.AutomationElementCollection>(TableItemPattern.RowHeaderItemsProperty);
+                var nativeElement = Get<UIA.AutomationElementCollection>(RowHeaderItemsProperty);
                 return AutomationElementConverter.NativeArrayToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeElement);
             }
         }

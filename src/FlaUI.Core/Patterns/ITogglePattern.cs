@@ -4,19 +4,15 @@ using FlaUI.Core.Patterns.Infrastructure;
 
 namespace FlaUI.Core.Patterns
 {
-    public interface ITogglePattern : IPatternWithInformation<ITogglePatternInformation>
+    public interface ITogglePattern : IPattern
     {
         ITogglePatternProperties Properties { get; }
+        ToggleState ToggleState { get; }
         void Toggle();
     }
 
     public interface ITogglePatternProperties
     {
         PropertyId ToggleStateProperty { get; }
-    }
-
-    public interface ITogglePatternInformation : IPatternInformation
-    {
-        ToggleState ToggleState { get; }
     }
 }

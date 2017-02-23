@@ -9,23 +9,19 @@ namespace FlaUI.Core.Patterns
         public const double NoScroll = -1.0;
     }
 
-    public interface IScrollPattern : IPatternWithInformation<IScrollPatternInformation>
+    public interface IScrollPattern : IPattern
     {
         IScrollPatternProperties Properties { get; }
-        void Scroll(ScrollAmount horizontalAmount, ScrollAmount verticalAmount);
-        void SetScrollPercent(double horizontalPercent, double verticalPercent);
-    }
-
-    public interface IScrollPatternInformation : IPatternInformation
-    {
         bool HorizontallyScrollable { get; }
         double HorizontalScrollPercent { get; }
         double HorizontalViewSize { get; }
         bool VerticallyScrollable { get; }
         double VerticalScrollPercent { get; }
         double VerticalViewSize { get; }
+        void Scroll(ScrollAmount horizontalAmount, ScrollAmount verticalAmount);
+        void SetScrollPercent(double horizontalPercent, double verticalPercent);
     }
-
+    
     public interface IScrollPatternProperties
     {
         PropertyId HorizontallyScrollableProperty { get; }

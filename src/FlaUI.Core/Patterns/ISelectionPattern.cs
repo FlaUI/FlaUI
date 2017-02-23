@@ -4,14 +4,10 @@ using FlaUI.Core.Patterns.Infrastructure;
 
 namespace FlaUI.Core.Patterns
 {
-    public interface ISelectionPattern : IPatternWithInformation<ISelectionPatternInformation>
+    public interface ISelectionPattern : IPattern
     {
         ISelectionPatternProperties Properties { get; }
         ISelectionPatternEvents Events { get; }
-    }
-
-    public interface ISelectionPatternInformation : IPatternInformation
-    {
         bool CanSelectMultiple { get; }
         bool IsSelectionRequired { get; }
         AutomationElement[] Selection { get; }

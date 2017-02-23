@@ -4,10 +4,12 @@ using FlaUI.Core.Patterns.Infrastructure;
 
 namespace FlaUI.Core.Patterns
 {
-    public interface ISelectionItemPattern : IPatternWithInformation<ISelectionItemPatternInformation>
+    public interface ISelectionItemPattern : IPattern
     {
         ISelectionItemPatternProperties Properties { get; }
         ISelectionItemPatternEvents Events { get; }
+        bool IsSelected { get; }
+        AutomationElement SelectionContainer { get; }
         void AddToSelection();
         void RemoveFromSelection();
         void Select();
@@ -24,11 +26,5 @@ namespace FlaUI.Core.Patterns
         EventId ElementAddedToSelectionEvent { get; }
         EventId ElementRemovedFromSelectionEvent { get; }
         EventId ElementSelectedEvent { get; }
-    }
-
-    public interface ISelectionItemPatternInformation : IPatternInformation
-    {
-        bool IsSelected { get; }
-        AutomationElement SelectionContainer { get; }
     }
 }

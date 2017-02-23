@@ -9,7 +9,7 @@ using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Patterns
 {
-    public class ScrollPattern : PatternBaseWithInformation<UIA.ScrollPattern, ScrollPatternInformation>, IScrollPattern
+    public class ScrollPattern : PatternBase<UIA.ScrollPattern>, IScrollPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.ScrollPattern.Pattern.Id, "Scroll", AutomationObjectIds.IsScrollPatternAvailableProperty);
         public static readonly PropertyId HorizontallyScrollableProperty = PropertyId.Register(AutomationType.UIA2, UIA.ScrollPattern.HorizontallyScrollableProperty.Id, "HorizontallyScrollable");
@@ -23,16 +23,19 @@ namespace FlaUI.UIA2.Patterns
         {
         }
 
-        IScrollPatternInformation IPatternWithInformation<IScrollPatternInformation>.Cached => Cached;
-
-        IScrollPatternInformation IPatternWithInformation<IScrollPatternInformation>.Current => Current;
-
         public IScrollPatternProperties Properties => Automation.PropertyLibrary.Scroll;
 
-        protected override ScrollPatternInformation CreateInformation()
-        {
-            return new ScrollPatternInformation(BasicAutomationElement);
-        }
+        public bool HorizontallyScrollable => Get<bool>(HorizontallyScrollableProperty);
+
+        public double HorizontalScrollPercent => Get<double>(HorizontalScrollPercentProperty);
+
+        public double HorizontalViewSize => Get<double>(HorizontalViewSizeProperty);
+
+        public bool VerticallyScrollable => Get<bool>(VerticallyScrollableProperty);
+
+        public double VerticalScrollPercent => Get<double>(VerticalScrollPercentProperty);
+
+        public double VerticalViewSize => Get<double>(VerticalViewSizeProperty);
 
         public void Scroll(ScrollAmount horizontalAmount, ScrollAmount verticalAmount)
         {
@@ -43,25 +46,6 @@ namespace FlaUI.UIA2.Patterns
         {
             NativePattern.SetScrollPercent(horizontalPercent, verticalPercent);
         }
-    }
-
-    public class ScrollPatternInformation : InformationBase, IScrollPatternInformation
-    {
-        public ScrollPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
-        {
-        }
-
-        public bool HorizontallyScrollable => Get<bool>(ScrollPattern.HorizontallyScrollableProperty);
-
-        public double HorizontalScrollPercent => Get<double>(ScrollPattern.HorizontalScrollPercentProperty);
-
-        public double HorizontalViewSize => Get<double>(ScrollPattern.HorizontalViewSizeProperty);
-
-        public bool VerticallyScrollable => Get<bool>(ScrollPattern.VerticallyScrollableProperty);
-
-        public double VerticalScrollPercent => Get<double>(ScrollPattern.VerticalScrollPercentProperty);
-
-        public double VerticalViewSize => Get<double>(ScrollPattern.VerticalViewSizeProperty);
     }
 
     public class ScrollPatternProperties : IScrollPatternProperties

@@ -4,14 +4,10 @@ using FlaUI.Core.Patterns.Infrastructure;
 
 namespace FlaUI.Core.Patterns
 {
-    public interface IDragPattern : IPatternWithInformation<IDragPatternInformation>
+    public interface IDragPattern : IPattern
     {
         IDragPatternProperties Properties { get; }
         IDragPatternEvents Events { get; }
-    }
-
-    public interface IDragPatternInformation : IPatternInformation
-    {
         string DropEffect { get; }
         string[] DropEffects { get; }
         bool IsGrabbed { get; }

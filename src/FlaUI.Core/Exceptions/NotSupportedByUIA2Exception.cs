@@ -6,7 +6,9 @@ namespace FlaUI.Core.Exceptions
 {
     public class NotSupportedByUIA2Exception : Exception
     {
-        public NotSupportedByUIA2Exception()
+        private const string DefaultMessage = "The requested pattern or property is not supported by UIA2. Consider using UIA3.";
+
+        public NotSupportedByUIA2Exception() : base(DefaultMessage)
         {
         }
 
@@ -16,7 +18,7 @@ namespace FlaUI.Core.Exceptions
         }
 
         public NotSupportedByUIA2Exception(Exception innerException) :
-            base(String.Empty, innerException)
+            base(DefaultMessage, innerException)
         {
         }
 
@@ -35,7 +37,7 @@ namespace FlaUI.Core.Exceptions
         {
             if (info == null)
             {
-                throw new ArgumentNullException("info");
+                throw new ArgumentNullException(nameof(info));
             }
             base.GetObjectData(info, context);
         }

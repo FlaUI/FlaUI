@@ -16,7 +16,7 @@ namespace FlaUI.Core.AutomationElements.PatternElements
 
         public bool IsSelected
         {
-            get { return SelectionItemPattern.Current.IsSelected; }
+            get { return SelectionItemPattern.IsSelected; }
             set
             {
                 if (IsSelected == value) return;

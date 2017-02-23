@@ -83,7 +83,7 @@ namespace FlaUIRec.Views
         private void TextChangedAction(AutomationElement automationAutomationElement, EventId eventId)
         {
             var valuePattern = automationAutomationElement.PatternFactory.GetValuePattern();
-            AddToList(String.Format("Text changed on {0}: To {1}", ElementToString(automationAutomationElement), valuePattern.Current.Value));
+            AddToList(String.Format("Text changed on {0}: To {1}", ElementToString(automationAutomationElement), valuePattern.Value));
         }
 
         private void SelectionAction(AutomationElement automationAutomationElement, EventId eventId)

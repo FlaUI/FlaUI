@@ -33,11 +33,11 @@ namespace FlaUI.Core.AutomationElements
                 var rangeValuePattern = RangeValuePattern;
                 if (rangeValuePattern != null)
                 {
-                    return RangeValuePattern.Current.Value;
+                    return RangeValuePattern.Value;
                 }
                 // UIA3 for WinForms does not have the RangeValue pattern, only the value pattern
                 // The value in this case is always between 0 and 100
-                return Convert.ToDouble(ValuePattern.Current.Value);
+                return Convert.ToDouble(ValuePattern.Value);
             }
             set
             {

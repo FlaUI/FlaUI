@@ -9,7 +9,7 @@ using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Patterns
 {
-    public class WindowPattern : PatternBaseWithInformation<UIA.WindowPattern, WindowPatternInformation>, IWindowPattern
+    public class WindowPattern : PatternBase<UIA.WindowPattern>, IWindowPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.WindowPattern.Pattern.Id, "Window", AutomationObjectIds.IsWindowPatternAvailableProperty);
         public static readonly PropertyId CanMaximizeProperty = PropertyId.Register(AutomationType.UIA2, UIA.WindowPattern.CanMaximizeProperty.Id, "CanMaximize");
@@ -25,13 +25,16 @@ namespace FlaUI.UIA2.Patterns
         {
         }
 
-        IWindowPatternInformation IPatternWithInformation<IWindowPatternInformation>.Cached => Cached;
-
-        IWindowPatternInformation IPatternWithInformation<IWindowPatternInformation>.Current => Current;
-
         public IWindowPatternProperties Properties => Automation.PropertyLibrary.Window;
 
         public IWindowPatternEvents Events => Automation.EventLibrary.Window;
+
+        public bool CanMaximize => Get<bool>(CanMaximizeProperty);
+        public bool CanMinimize => Get<bool>(CanMinimizeProperty);
+        public bool IsModal => Get<bool>(IsModalProperty);
+        public bool IsTopmost => Get<bool>(IsTopmostProperty);
+        public WindowInteractionState WindowInteractionState => Get<WindowInteractionState>(WindowInteractionStateProperty);
+        public WindowVisualState WindowVisualState => Get<WindowVisualState>(WindowVisualStateProperty);
 
         public void Close()
         {
@@ -47,25 +50,6 @@ namespace FlaUI.UIA2.Patterns
         {
             return NativePattern.WaitForInputIdle(milliseconds);
         }
-
-        protected override WindowPatternInformation CreateInformation()
-        {
-            return new WindowPatternInformation(BasicAutomationElement);
-        }
-    }
-
-    public class WindowPatternInformation : InformationBase, IWindowPatternInformation
-    {
-        public WindowPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
-        {
-        }
-
-        public bool CanMaximize => Get<bool>(WindowPattern.CanMaximizeProperty);
-        public bool CanMinimize => Get<bool>(WindowPattern.CanMinimizeProperty);
-        public bool IsModal => Get<bool>(WindowPattern.IsModalProperty);
-        public bool IsTopmost => Get<bool>(WindowPattern.IsTopmostProperty);
-        public WindowInteractionState WindowInteractionState => Get<WindowInteractionState>(WindowPattern.WindowInteractionStateProperty);
-        public WindowVisualState WindowVisualState => Get<WindowVisualState>(WindowPattern.WindowVisualStateProperty);
     }
 
     public class WindowPatternProperties : IWindowPatternProperties

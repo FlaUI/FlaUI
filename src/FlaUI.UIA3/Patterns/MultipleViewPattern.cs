@@ -1,5 +1,4 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
@@ -9,7 +8,7 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class MultipleViewPattern : PatternBaseWithInformation<UIA.IUIAutomationMultipleViewPattern, MultipleViewPatternInformation>, IMultipleViewPattern
+    public class MultipleViewPattern : PatternBase<UIA.IUIAutomationMultipleViewPattern>, IMultipleViewPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_MultipleViewPatternId, "MultipleView", AutomationObjectIds.IsMultipleViewPatternAvailableProperty);
         public static readonly PropertyId CurrentViewProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_MultipleViewCurrentViewPropertyId, "CurrentView");
@@ -18,17 +17,12 @@ namespace FlaUI.UIA3.Patterns
         public MultipleViewPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationMultipleViewPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
         }
-
-        IMultipleViewPatternInformation IPatternWithInformation<IMultipleViewPatternInformation>.Cached => Cached;
-
-        IMultipleViewPatternInformation IPatternWithInformation<IMultipleViewPatternInformation>.Current => Current;
-
+        
         public IMultipleViewPatternProperties Properties => Automation.PropertyLibrary.MultipleView;
 
-        protected override MultipleViewPatternInformation CreateInformation()
-        {
-            return new MultipleViewPatternInformation(BasicAutomationElement);
-        }
+        public int CurrentView => Get<int>(CurrentViewProperty);
+
+        public int[] SupportedViews => Get<int[]>(MultipleViewPattern.SupportedViewsProperty);
 
         public string GetViewName(int view)
         {
@@ -39,17 +33,6 @@ namespace FlaUI.UIA3.Patterns
         {
             ComCallWrapper.Call(() => NativePattern.SetCurrentView(view));
         }
-    }
-
-    public class MultipleViewPatternInformation : InformationBase, IMultipleViewPatternInformation
-    {
-        public MultipleViewPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
-        {
-        }
-
-        public int CurrentView => Get<int>(MultipleViewPattern.CurrentViewProperty);
-
-        public int[] SupportedViews => Get<int[]>(MultipleViewPattern.SupportedViewsProperty);
     }
 
     public class MultipleViewPatternProperties : IMultipleViewPatternProperties

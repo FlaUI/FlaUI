@@ -4,15 +4,11 @@ using FlaUI.Core.Patterns.Infrastructure;
 
 namespace FlaUI.Core.Patterns
 {
-    public interface IDockPattern : IPatternWithInformation<IDockPatternInformation>
+    public interface IDockPattern : IPattern
     {
         IDockPatternProperties Properties { get; }
-        void SetDockPosition(DockPosition dockPos);
-    }
-
-    public interface IDockPatternInformation : IPatternInformation
-    {
         DockPosition DockPosition { get; }
+        void SetDockPosition(DockPosition dockPos);
     }
 
     public interface IDockPatternProperties

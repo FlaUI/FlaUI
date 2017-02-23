@@ -10,7 +10,7 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class SelectionItemPattern : PatternBaseWithInformation<UIA.IUIAutomationSelectionItemPattern, SelectionItemPatternInformation>, ISelectionItemPattern
+    public class SelectionItemPattern : PatternBase<UIA.IUIAutomationSelectionItemPattern>, ISelectionItemPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_SelectionItemPatternId, "SelectionItem", AutomationObjectIds.IsSelectionItemPatternAvailableProperty);
         public static readonly PropertyId IsSelectedProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_SelectionItemIsSelectedPropertyId, "IsSelected");
@@ -23,17 +23,19 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
-        ISelectionItemPatternInformation IPatternWithInformation<ISelectionItemPatternInformation>.Cached => Cached;
-
-        ISelectionItemPatternInformation IPatternWithInformation<ISelectionItemPatternInformation>.Current => Current;
-
         public ISelectionItemPatternProperties Properties => Automation.PropertyLibrary.SelectionItem;
 
         public ISelectionItemPatternEvents Events => Automation.EventLibrary.SelectionItem;
 
-        protected override SelectionItemPatternInformation CreateInformation()
+        public bool IsSelected => Get<bool>(IsSelectedProperty);
+
+        public AutomationElement SelectionContainer
         {
-            return new SelectionItemPatternInformation(BasicAutomationElement);
+            get
+            {
+                var nativeElement = Get<UIA.IUIAutomationElement>(SelectionContainerProperty);
+                return AutomationElementConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
+            }
         }
 
         public void AddToSelection()
@@ -49,24 +51,6 @@ namespace FlaUI.UIA3.Patterns
         public void Select()
         {
             ComCallWrapper.Call(() => NativePattern.Select());
-        }
-    }
-
-    public class SelectionItemPatternInformation : InformationBase, ISelectionItemPatternInformation
-    {
-        public SelectionItemPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
-        {
-        }
-
-        public bool IsSelected => Get<bool>(SelectionItemPattern.IsSelectedProperty);
-
-        public AutomationElement SelectionContainer
-        {
-            get
-            {
-                var nativeElement = Get<UIA.IUIAutomationElement>(SelectionItemPattern.SelectionContainerProperty);
-                return AutomationElementConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
-            }
         }
     }
 

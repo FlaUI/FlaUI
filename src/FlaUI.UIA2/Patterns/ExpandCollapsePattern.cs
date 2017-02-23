@@ -1,5 +1,4 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
@@ -9,7 +8,7 @@ using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Patterns
 {
-    public class ExpandCollapsePattern : PatternBaseWithInformation<UIA.ExpandCollapsePattern, ExpandCollapsePatternInformation>, IExpandCollapsePattern
+    public class ExpandCollapsePattern : PatternBase<UIA.ExpandCollapsePattern>, IExpandCollapsePattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.ExpandCollapsePattern.Pattern.Id, "ExpandCollapse", AutomationObjectIds.IsExpandCollapsePatternAvailableProperty);
         public static readonly PropertyId ExpandCollapseStateProperty = PropertyId.Register(AutomationType.UIA2, UIA.ExpandCollapsePattern.ExpandCollapseStateProperty.Id, "ExpandCollapseState");
@@ -18,16 +17,9 @@ namespace FlaUI.UIA2.Patterns
         {
         }
 
-        IExpandCollapsePatternInformation IPatternWithInformation<IExpandCollapsePatternInformation>.Cached => Cached;
-
-        IExpandCollapsePatternInformation IPatternWithInformation<IExpandCollapsePatternInformation>.Current => Current;
-
         public IExpandCollapsePatternProperties Properties => Automation.PropertyLibrary.ExpandCollapse;
 
-        protected override ExpandCollapsePatternInformation CreateInformation()
-        {
-            return new ExpandCollapsePatternInformation(BasicAutomationElement);
-        }
+        public ExpandCollapseState ExpandCollapseState => Get<ExpandCollapseState>(ExpandCollapseStateProperty);
 
         public void Collapse()
         {
@@ -38,15 +30,6 @@ namespace FlaUI.UIA2.Patterns
         {
             NativePattern.Expand();
         }
-    }
-
-    public class ExpandCollapsePatternInformation : InformationBase, IExpandCollapsePatternInformation
-    {
-        public ExpandCollapsePatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
-        {
-        }
-
-        public ExpandCollapseState ExpandCollapseState => Get<ExpandCollapseState>(ExpandCollapsePattern.ExpandCollapseStateProperty);
     }
 
     public class ExpandCollapsePatternProperties : IExpandCollapsePatternProperties

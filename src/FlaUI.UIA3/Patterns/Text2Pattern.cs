@@ -13,7 +13,7 @@ namespace FlaUI.UIA3.Patterns
     {
         public new static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_TextPattern2Id, "Text2", AutomationObjectIds.IsTextPattern2AvailableProperty);
 
-        public Text2Pattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTextPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public Text2Pattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTextPattern2 nativePattern) : base(basicAutomationElement, nativePattern)
         {
             ExtendedNativePattern = (UIA.IUIAutomationTextPattern2)NativePattern;
         }
@@ -30,7 +30,7 @@ namespace FlaUI.UIA3.Patterns
 
         public ITextRange RangeFromAnnotation(AutomationElement annotation)
         {
-            var nativeInputElement = AutomationElementConverter.ToNative(annotation);
+            var nativeInputElement = annotation.ToNative();
             var nativeElement = ComCallWrapper.Call(() => ExtendedNativePattern.RangeFromAnnotation(nativeInputElement));
             return TextRangeConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
         }

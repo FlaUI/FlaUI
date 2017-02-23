@@ -4,13 +4,9 @@ using FlaUI.Core.Patterns.Infrastructure;
 
 namespace FlaUI.Core.Patterns
 {
-    public interface IStylesPattern : IPatternWithInformation<IStylesPatternInformation>
+    public interface IStylesPattern : IPattern
     {
         IStylesPatternProperties Properties { get; }
-    }
-
-    public interface IStylesPatternInformation : IPatternInformation
-    {
         string ExtendedProperties { get; }
         int FillColor { get; }
         int FillPatternColor { get; }

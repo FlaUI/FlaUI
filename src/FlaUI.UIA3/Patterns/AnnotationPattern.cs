@@ -10,7 +10,7 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class AnnotationPattern : PatternBaseWithInformation<UIA.IUIAutomationAnnotationPattern, AnnotationPatternInformation>, IAnnotationPattern
+    public class AnnotationPattern : PatternBase<UIA.IUIAutomationAnnotationPattern>, IAnnotationPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_AnnotationPatternId, "Annotation", AutomationObjectIds.IsAnnotationPatternAvailableProperty);
         public static readonly PropertyId AnnotationTypeIdProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_AnnotationAnnotationTypeIdPropertyId, "AnnotationTypeId");
@@ -23,37 +23,21 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
-        IAnnotationPatternInformation IPatternWithInformation<IAnnotationPatternInformation>.Cached => Cached;
-
-        IAnnotationPatternInformation IPatternWithInformation<IAnnotationPatternInformation>.Current => Current;
-
         public IAnnotationPatternProperties Properties => Automation.PropertyLibrary.Annotation;
 
-        protected override AnnotationPatternInformation CreateInformation()
-        {
-            return new AnnotationPatternInformation(BasicAutomationElement);
-        }
-    }
+        public AnnotationType AnnotationType => Get<AnnotationType>(AnnotationTypeIdProperty);
 
-    public class AnnotationPatternInformation : InformationBase, IAnnotationPatternInformation
-    {
-        public AnnotationPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
-        {
-        }
+        public string AnnotationTypeName => Get<string>(AnnotationTypeNameProperty);
 
-        public AnnotationType AnnotationType => Get<AnnotationType>(AnnotationPattern.AnnotationTypeIdProperty);
+        public string Author => Get<string>(AuthorProperty);
 
-        public string AnnotationTypeName => Get<string>(AnnotationPattern.AnnotationTypeNameProperty);
-
-        public string Author => Get<string>(AnnotationPattern.AuthorProperty);
-
-        public string DateTime => Get<string>(AnnotationPattern.DateTimeProperty);
+        public string DateTime => Get<string>(DateTimeProperty);
 
         public AutomationElement Target
         {
             get
             {
-                var nativeElement = Get<UIA.IUIAutomationElement>(AnnotationPattern.TargetProperty);
+                var nativeElement = Get<UIA.IUIAutomationElement>(TargetProperty);
                 return AutomationElementConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
             }
         }

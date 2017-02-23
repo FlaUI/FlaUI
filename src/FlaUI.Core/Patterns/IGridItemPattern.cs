@@ -4,13 +4,9 @@ using FlaUI.Core.Patterns.Infrastructure;
 
 namespace FlaUI.Core.Patterns
 {
-    public interface IGridItemPattern : IPatternWithInformation<IGridItemPatternInformation>
+    public interface IGridItemPattern : IPattern
     {
         IGridItemPatternProperties Properties { get; }
-    }
-
-    public interface IGridItemPatternInformation : IPatternInformation
-    {
         int Column { get; }
         int ColumnSpan { get; }
         AutomationElement ContainingGrid { get; }

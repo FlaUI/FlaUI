@@ -17,8 +17,8 @@ namespace FlaUI.Core.Tools
             double currVScroll = 0;
             if (scrollPattern != null)
             {
-                currHScroll = scrollPattern.Current.HorizontalScrollPercent;
-                currVScroll = scrollPattern.Current.VerticalScrollPercent;
+                currHScroll = scrollPattern.HorizontalScrollPercent;
+                currVScroll = scrollPattern.VerticalScrollPercent;
             }
 
             // First we try with the item container pattern and realize each item
@@ -51,7 +51,7 @@ namespace FlaUI.Core.Tools
                 do
                 {
                     scrollPattern.Scroll(ScrollAmount.NoAmount, ScrollAmount.SmallIncrement);
-                } while (scrollPattern.Current.VerticalScrollPercent < 100);
+                } while (scrollPattern.VerticalScrollPercent < 100);
                 ResetScroll(scrollPattern, currHScroll, currVScroll);
                 return;
             }

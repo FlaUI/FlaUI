@@ -4,10 +4,16 @@ using FlaUI.Core.Patterns.Infrastructure;
 
 namespace FlaUI.Core.Patterns
 {
-    public interface IWindowPattern : IPatternWithInformation<IWindowPatternInformation>
+    public interface IWindowPattern : IPattern
     {
         IWindowPatternProperties Properties { get; }
         IWindowPatternEvents Events { get; }
+        bool CanMaximize { get; }
+        bool CanMinimize { get; }
+        bool IsModal { get; }
+        bool IsTopmost { get; }
+        WindowInteractionState WindowInteractionState { get; }
+        WindowVisualState WindowVisualState { get; }
         void Close();
         void SetWindowVisualState(WindowVisualState state);
         bool WaitForInputIdle(int milliseconds);
@@ -27,15 +33,5 @@ namespace FlaUI.Core.Patterns
     {
         EventId WindowClosedEvent { get; }
         EventId WindowOpenedEvent { get; }
-    }
-
-    public interface IWindowPatternInformation : IPatternInformation
-    {
-        bool CanMaximize { get; }
-        bool CanMinimize { get; }
-        bool IsModal { get; }
-        bool IsTopmost { get; }
-        WindowInteractionState WindowInteractionState { get; }
-        WindowVisualState WindowVisualState { get; }
     }
 }

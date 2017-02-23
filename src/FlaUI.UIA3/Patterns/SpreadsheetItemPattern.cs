@@ -10,7 +10,7 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class SpreadsheetItemPattern : PatternBaseWithInformation<UIA.IUIAutomationSpreadsheetItemPattern, SpreadsheetItemPatternInformation>, ISpreadsheetItemPattern
+    public class SpreadsheetItemPattern : PatternBase<UIA.IUIAutomationSpreadsheetItemPattern>, ISpreadsheetItemPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_SpreadsheetItemPatternId, "SpreadsheetItem", AutomationObjectIds.IsSpreadsheetItemPatternAvailableProperty);
         public static readonly PropertyId FormulaProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_SpreadsheetItemFormulaPropertyId, "Formula");
@@ -20,37 +20,21 @@ namespace FlaUI.UIA3.Patterns
         public SpreadsheetItemPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationSpreadsheetItemPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
         }
-
-        ISpreadsheetItemPatternInformation IPatternWithInformation<ISpreadsheetItemPatternInformation>.Cached => Cached;
-
-        ISpreadsheetItemPatternInformation IPatternWithInformation<ISpreadsheetItemPatternInformation>.Current => Current;
-
+        
         public ISpreadsheetItemPatternProperties Properties => Automation.PropertyLibrary.SpreadsheetItem;
 
-        protected override SpreadsheetItemPatternInformation CreateInformation()
-        {
-            return new SpreadsheetItemPatternInformation(BasicAutomationElement);
-        }
-    }
-
-    public class SpreadsheetItemPatternInformation : InformationBase, ISpreadsheetItemPatternInformation
-    {
-        public SpreadsheetItemPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
-        {
-        }
-
-        public string Formula => Get<string>(SpreadsheetItemPattern.FormulaProperty);
+        public string Formula => Get<string>(FormulaProperty);
 
         public AutomationElement[] AnnotationObjects
         {
             get
             {
-                var nativeElement = Get<UIA.IUIAutomationElementArray>(SpreadsheetItemPattern.AnnotationObjectsProperty);
+                var nativeElement = Get<UIA.IUIAutomationElementArray>(AnnotationObjectsProperty);
                 return AutomationElementConverter.NativeArrayToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
             }
         }
 
-        public AnnotationType[] AnnotationTypes => Get<AnnotationType[]>(SpreadsheetItemPattern.AnnotationTypesProperty);
+        public AnnotationType[] AnnotationTypes => Get<AnnotationType[]>(AnnotationTypesProperty);
     }
 
     public class SpreadsheetItemPatternProperties : ISpreadsheetItemPatternProperties

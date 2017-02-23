@@ -5,13 +5,9 @@ using FlaUI.Core.Patterns.Infrastructure;
 
 namespace FlaUI.Core.Patterns
 {
-    public interface IAnnotationPattern : IPatternWithInformation<IAnnotationPatternInformation>
+    public interface IAnnotationPattern : IPattern
     {
         IAnnotationPatternProperties Properties { get; }
-    }
-
-    public interface IAnnotationPatternInformation : IPatternInformation
-    {
         AnnotationType AnnotationType { get; }
         string AnnotationTypeName { get; }
         string Author { get; }

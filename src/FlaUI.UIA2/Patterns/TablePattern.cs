@@ -10,7 +10,7 @@ using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Patterns
 {
-    public class TablePattern : PatternBaseWithInformation<UIA.TablePattern, TablePatternInformation>, ITablePattern
+    public class TablePattern : PatternBase<UIA.TablePattern>, ITablePattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.TablePattern.Pattern.Id, "Table", AutomationObjectIds.IsTablePatternAvailableProperty);
         public static readonly PropertyId ColumnHeadersProperty = PropertyId.Register(AutomationType.UIA2, UIA.TablePattern.ColumnHeadersProperty.Id, "ColumnHeaders");
@@ -20,30 +20,14 @@ namespace FlaUI.UIA2.Patterns
         public TablePattern(BasicAutomationElementBase basicAutomationElement, UIA.TablePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
         }
-
-        ITablePatternInformation IPatternWithInformation<ITablePatternInformation>.Cached => Cached;
-
-        ITablePatternInformation IPatternWithInformation<ITablePatternInformation>.Current => Current;
-
+        
         public ITablePatternProperties Properties => Automation.PropertyLibrary.Table;
-
-        protected override TablePatternInformation CreateInformation()
-        {
-            return new TablePatternInformation(BasicAutomationElement);
-        }
-    }
-
-    public class TablePatternInformation : InformationBase,ITablePatternInformation
-    {
-        public TablePatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
-        {
-        }
 
         public AutomationElement[] ColumnHeaders
         {
             get
             {
-                var nativeElements = Get<UIA.AutomationElement[]>(TablePattern.ColumnHeadersProperty);
+                var nativeElements = Get<UIA.AutomationElement[]>(ColumnHeadersProperty);
                 return AutomationElementConverter.NativeArrayToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeElements);
             }
         }
@@ -52,12 +36,12 @@ namespace FlaUI.UIA2.Patterns
         {
             get
             {
-                var nativeElements = Get<UIA.AutomationElement[]>(TablePattern.RowHeadersProperty);
+                var nativeElements = Get<UIA.AutomationElement[]>(RowHeadersProperty);
                 return AutomationElementConverter.NativeArrayToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeElements);
             }
         }
 
-        public RowOrColumnMajor RowOrColumnMajor => Get<RowOrColumnMajor>(TablePattern.RowOrColumnMajorProperty);
+        public RowOrColumnMajor RowOrColumnMajor => Get<RowOrColumnMajor>(RowOrColumnMajorProperty);
     }
 
     public class TablePatternProperties : ITablePatternProperties

@@ -1,5 +1,4 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
@@ -8,7 +7,7 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class DropTargetPattern : PatternBaseWithInformation<UIA.IUIAutomationDropTargetPattern, DropTargetPatternInformation>, IDropTargetPattern
+    public class DropTargetPattern : PatternBase<UIA.IUIAutomationDropTargetPattern>, IDropTargetPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_DropTargetPatternId, "DropTarget", AutomationObjectIds.IsDropTargetPatternAvailableProperty);
         public static readonly PropertyId DropTargetEffectProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_DropTargetDropTargetEffectPropertyId, "DropTargetEffect");
@@ -21,29 +20,13 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
-        IDropTargetPatternInformation IPatternWithInformation<IDropTargetPatternInformation>.Cached => Cached;
-
-        IDropTargetPatternInformation IPatternWithInformation<IDropTargetPatternInformation>.Current => Current;
-
         public IDropTargetPatternProperties Properties => Automation.PropertyLibrary.DropTarget;
 
         public IDropTargetPatternEvents Events => Automation.EventLibrary.DropTarget;
 
-        protected override DropTargetPatternInformation CreateInformation()
-        {
-           return new DropTargetPatternInformation(BasicAutomationElement);
-        }
-    }
+        public string DropTargetEffect => Get<string>(DropTargetEffectProperty);
 
-    public class DropTargetPatternInformation : InformationBase, IDropTargetPatternInformation
-    {
-        public DropTargetPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
-        {
-        }
-
-        public string DropTargetEffect => Get<string>(DropTargetPattern.DropTargetEffectProperty);
-
-        public string[] DropTargetEffects => Get<string[]>(DropTargetPattern.DropTargetEffectsProperty);
+        public string[] DropTargetEffects => Get<string[]>(DropTargetEffectsProperty);
     }
 
     public class DropTargetPatternProperties : IDropTargetPatternProperties

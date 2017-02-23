@@ -9,7 +9,7 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class TableItemPattern : PatternBaseWithInformation<UIA.IUIAutomationTableItemPattern, TableItemPatternInformation>, ITableItemPattern
+    public class TableItemPattern : PatternBase<UIA.IUIAutomationTableItemPattern>, ITableItemPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_TableItemPatternId, "TableItem", AutomationObjectIds.IsTableItemPatternAvailableProperty);
         public static readonly PropertyId ColumnHeaderItemsProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_TableItemColumnHeaderItemsPropertyId, "ColumnHeaderItems");
@@ -19,29 +19,13 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
-        ITableItemPatternInformation IPatternWithInformation<ITableItemPatternInformation>.Cached => Cached;
-
-        ITableItemPatternInformation IPatternWithInformation<ITableItemPatternInformation>.Current => Current;
-
         public ITableItemPatternProperties Properties => Automation.PropertyLibrary.TableItem;
-
-        protected override TableItemPatternInformation CreateInformation()
-        {
-            return new TableItemPatternInformation(BasicAutomationElement);
-        }
-    }
-
-    public class TableItemPatternInformation : InformationBase, ITableItemPatternInformation
-    {
-        public TableItemPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
-        {
-        }
 
         public AutomationElement[] ColumnHeaderItems
         {
             get
             {
-                var nativeElement = Get<UIA.IUIAutomationElementArray>(TableItemPattern.ColumnHeaderItemsProperty);
+                var nativeElement = Get<UIA.IUIAutomationElementArray>(ColumnHeaderItemsProperty);
                 return AutomationElementConverter.NativeArrayToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
             }
         }
@@ -50,7 +34,7 @@ namespace FlaUI.UIA3.Patterns
         {
             get
             {
-                var nativeElement = Get<UIA.IUIAutomationElementArray>(TableItemPattern.RowHeaderItemsProperty);
+                var nativeElement = Get<UIA.IUIAutomationElementArray>(RowHeaderItemsProperty);
                 return AutomationElementConverter.NativeArrayToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
             }
         }

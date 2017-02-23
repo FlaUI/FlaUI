@@ -10,7 +10,7 @@ namespace FlaUI.Core
     {
         public AutomationElementMode AutomationElementMode { get; set; }
 
-        public ConditionBase TreeFilter { get; set; }
+        public ConditionBase TreeFilter { get; set; } = new TrueCondition();
 
         public TreeScope TreeScope { get; set; }
 
@@ -42,7 +42,7 @@ namespace FlaUI.Core
         [ThreadStatic]
         private static Stack<bool> _forceNoCacheStack;
 
-        public static bool IsCachingActive => _forceNoCacheStack != null && _forceNoCacheStack.Count > 0 && Current != null;
+        public static bool IsCachingActive => (_forceNoCacheStack == null || _forceNoCacheStack.Count == 0) && Current != null;
 
         public static CacheRequest Current
         {

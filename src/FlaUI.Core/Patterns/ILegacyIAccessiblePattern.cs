@@ -6,17 +6,9 @@ using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.Patterns
 {
-    public interface ILegacyIAccessiblePattern : IPatternWithInformation<ILegacyIAccessiblePatternInformation>
+    public interface ILegacyIAccessiblePattern : IPattern
     {
         ILegacyIAccessiblePatternProperties Properties { get; }
-        void DoDefaultAction();
-        IAccessible GetIAccessible();
-        void Select(int flagsSelect);
-        void SetValue(string value);
-    }
-
-    public interface ILegacyIAccessiblePatternInformation : IPatternInformation
-    {
         int ChildId { get; }
         string DefaultAction { get; }
         string Description { get; }
@@ -26,7 +18,12 @@ namespace FlaUI.Core.Patterns
         AccessibilityRole Role { get; }
         AutomationElement[] Selection { get; }
         AccessibilityState State { get; }
-        string Value { get; }}
+        string Value { get; }
+        void DoDefaultAction();
+        IAccessible GetIAccessible();
+        void Select(int flagsSelect);
+        void SetValue(string value);
+    }
 
     public interface ILegacyIAccessiblePatternProperties
     {

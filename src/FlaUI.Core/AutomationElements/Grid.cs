@@ -18,15 +18,15 @@ namespace FlaUI.Core.AutomationElements
 
         public ITablePattern TablePattern => PatternFactory.GetTablePattern();
 
-        public int RowCount => GridPattern.Current.RowCount;
+        public int RowCount => GridPattern.RowCount;
 
-        public int ColumnCount => GridPattern.Current.ColumnCount;
+        public int ColumnCount => GridPattern.ColumnCount;
 
-        public AutomationElement[] ColumnHeaders => TablePattern.Current.ColumnHeaders;
+        public AutomationElement[] ColumnHeaders => TablePattern.ColumnHeaders;
 
-        public AutomationElement[] RowHeaders => TablePattern.Current.RowHeaders;
+        public AutomationElement[] RowHeaders => TablePattern.RowHeaders;
 
-        public RowOrColumnMajor RowOrColumnMajor => TablePattern.Current.RowOrColumnMajor;
+        public RowOrColumnMajor RowOrColumnMajor => TablePattern.RowOrColumnMajor;
 
         public GridHeader Header
         {
@@ -197,7 +197,7 @@ namespace FlaUI.Core.AutomationElements
 
         public IValuePattern ValuePattern => PatternFactory.GetValuePattern();
 
-        public Grid ContainingGrid => GridItemPattern.Current.ContainingGrid.AsGrid();
+        public Grid ContainingGrid => GridItemPattern.ContainingGrid.AsGrid();
 
         public GridRow ContainingRow
         {
@@ -211,7 +211,7 @@ namespace FlaUI.Core.AutomationElements
 
         public string Value
         {
-            get { return ValuePattern.Current.Value; }
+            get { return ValuePattern.Value; }
             set { ValuePattern.SetValue(value); }
         }
     }

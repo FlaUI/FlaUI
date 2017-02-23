@@ -1,13 +1,14 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
+using FlaUI.Core.Patterns.Infrastructure;
+using FlaUI.Core.Tools;
 using FlaUI.UIA3.Identifiers;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class TransformPattern : TransformPatternBase<UIA.IUIAutomationTransformPattern, TransformPatternInformation, TransformPatternProperties>
+    public class TransformPattern : PatternBase<UIA.IUIAutomationTransformPattern>, ITransformPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_TransformPatternId, "Transform", AutomationObjectIds.IsTransformPatternAvailableProperty);
         public static readonly PropertyId CanMoveProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_TransformCanMovePropertyId, "CanMove");
@@ -18,25 +19,28 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
-        public override TransformPatternProperties Properties => (TransformPatternProperties)Automation.PropertyLibrary.Transform;
+        public ITransformPatternProperties Properties => Automation.PropertyLibrary.Transform;
+        
+        public bool CanMove => Get<bool>(CanMoveProperty);
 
-        protected override TransformPatternInformation CreateInformation()
+        public bool CanResize => Get<bool>(CanResizeProperty);
+
+        public bool CanRotate => Get<bool>(CanRotateProperty);
+
+        public void Move(double x, double y)
         {
-            return new TransformPatternInformation(BasicAutomationElement);
+            ComCallWrapper.Call(() => NativePattern.Move(x, y));
         }
-    }
 
-    public class TransformPatternInformation : InformationBase, ITransformPatternInformation
-    {
-        public TransformPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public void Resize(double width, double height)
         {
+            ComCallWrapper.Call(() => NativePattern.Resize(width, height));
         }
 
-        public bool CanMove => Get<bool>(TransformPattern.CanMoveProperty);
-
-        public bool CanResize => Get<bool>(TransformPattern.CanResizeProperty);
-
-        public bool CanRotate => Get<bool>(TransformPattern.CanRotateProperty);
+        public void Rotate(double degrees)
+        {
+            ComCallWrapper.Call(() => NativePattern.Rotate(degrees));
+        }
     }
 
     public class TransformPatternProperties : ITransformPatternProperties

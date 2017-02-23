@@ -9,7 +9,7 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class DragPattern : PatternBaseWithInformation<UIA.IUIAutomationDragPattern, DragPatternInformation>, IDragPattern
+    public class DragPattern : PatternBase<UIA.IUIAutomationDragPattern>, IDragPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_DragPatternId, "Drag", AutomationObjectIds.IsDragPatternAvailableProperty);
         public static readonly PropertyId DropEffectProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_DragDropEffectPropertyId, "DropEffect");
@@ -23,38 +23,22 @@ namespace FlaUI.UIA3.Patterns
         public DragPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationDragPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
         }
-
-        IDragPatternInformation IPatternWithInformation<IDragPatternInformation>.Cached => Cached;
-
-        IDragPatternInformation IPatternWithInformation<IDragPatternInformation>.Current => Current;
-
+        
         public IDragPatternProperties Properties => Automation.PropertyLibrary.Drag;
 
         public IDragPatternEvents Events => Automation.EventLibrary.Drag;
 
-        protected override DragPatternInformation CreateInformation()
-        {
-            return new DragPatternInformation(BasicAutomationElement);
-        }
-    }
+        public string DropEffect => Get<string>(DropEffectProperty);
 
-    public class DragPatternInformation : InformationBase, IDragPatternInformation
-    {
-        public DragPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
-        {
-        }
+        public string[] DropEffects => Get<string[]>(DropEffectsProperty);
 
-        public string DropEffect => Get<string>(DragPattern.DropEffectProperty);
-
-        public string[] DropEffects => Get<string[]>(DragPattern.DropEffectsProperty);
-
-        public bool IsGrabbed => Get<bool>(DragPattern.IsGrabbedProperty);
+        public bool IsGrabbed => Get<bool>(IsGrabbedProperty);
 
         public AutomationElement[] GrabbedItems
         {
             get
             {
-                var nativeElement = Get<UIA.IUIAutomationElementArray>(DragPattern.GrabbedItemsProperty);
+                var nativeElement = Get<UIA.IUIAutomationElementArray>(GrabbedItemsProperty);
                 return AutomationElementConverter.NativeArrayToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
             }
         }

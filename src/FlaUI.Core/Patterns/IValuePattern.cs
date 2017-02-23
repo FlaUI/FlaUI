@@ -3,9 +3,11 @@ using FlaUI.Core.Patterns.Infrastructure;
 
 namespace FlaUI.Core.Patterns
 {
-    public interface IValuePattern : IPatternWithInformation<IValuePatternInformation>
+    public interface IValuePattern : IPattern
     {
         IValuePatternProperties Properties { get; }
+        bool IsReadOnly { get; }
+        string Value { get; }
         void SetValue(string value);
     }
 
@@ -13,11 +15,5 @@ namespace FlaUI.Core.Patterns
     {
         PropertyId IsReadOnlyProperty { get; }
         PropertyId ValueProperty { get; }
-    }
-
-    public interface IValuePatternInformation : IPatternInformation
-    {
-        bool IsReadOnly { get; }
-        string Value { get; }
     }
 }

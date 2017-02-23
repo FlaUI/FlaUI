@@ -1,5 +1,4 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
@@ -10,7 +9,7 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class DockPattern : PatternBaseWithInformation<UIA.IUIAutomationDockPattern, DockPatternInformation>, IDockPattern
+    public class DockPattern : PatternBase<UIA.IUIAutomationDockPattern>, IDockPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_DockPatternId, "Dock", AutomationObjectIds.IsDockPatternAvailableProperty);
         public static readonly PropertyId DockPositionProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_DockDockPositionPropertyId, "DockPosition");
@@ -19,30 +18,14 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
-        IDockPatternInformation IPatternWithInformation<IDockPatternInformation>.Cached => Cached;
-
-        IDockPatternInformation IPatternWithInformation<IDockPatternInformation>.Current => Current;
-
         public IDockPatternProperties Properties => Automation.PropertyLibrary.Dock;
 
-        protected override DockPatternInformation CreateInformation()
-        {
-            return new DockPatternInformation(BasicAutomationElement);
-        }
+        public DockPosition DockPosition => Get<DockPosition>(DockPositionProperty);
 
         public void SetDockPosition(DockPosition dockPos)
         {
             ComCallWrapper.Call(() => NativePattern.SetDockPosition((UIA.DockPosition)dockPos));
         }
-    }
-
-    public class DockPatternInformation : InformationBase, IDockPatternInformation
-    {
-        public DockPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
-        {
-        }
-
-        public DockPosition DockPosition => Get<DockPosition>(DockPattern.DockPositionProperty);
     }
 
     public class DockPatternProperties : IDockPatternProperties

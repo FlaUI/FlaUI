@@ -1,4 +1,6 @@
-﻿namespace FlaUI.Core.Patterns.Infrastructure
+﻿using FlaUI.Core.Identifiers;
+
+namespace FlaUI.Core.Patterns.Infrastructure
 {
     public abstract class PatternBase<TNativePattern> : IPattern
     {
@@ -12,6 +14,11 @@
         {
             BasicAutomationElement = basicAutomationElement;
             NativePattern = nativePattern;
+        }
+
+        protected T Get<T>(PropertyId property)
+        {
+            return BasicAutomationElement.GetPropertyValue<T>(property);
         }
     }
 }

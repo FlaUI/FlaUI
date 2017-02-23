@@ -10,7 +10,7 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class StylesPattern : PatternBaseWithInformation<UIA.IUIAutomationStylesPattern, StylesPatternInformation>, IStylesPattern
+    public class StylesPattern : PatternBase<UIA.IUIAutomationStylesPattern>, IStylesPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_StylesPatternId, "Styles", AutomationObjectIds.IsStylesPatternAvailableProperty);
         public static readonly PropertyId ExtendedPropertiesProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_StylesExtendedPropertiesPropertyId, "ExtendedProperties");
@@ -25,41 +25,25 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
-        IStylesPatternInformation IPatternWithInformation<IStylesPatternInformation>.Cached => Cached;
-
-        IStylesPatternInformation IPatternWithInformation<IStylesPatternInformation>.Current => Current;
-
         public IStylesPatternProperties Properties => Automation.PropertyLibrary.Styles;
 
-        protected override StylesPatternInformation CreateInformation()
-        {
-            return new StylesPatternInformation(BasicAutomationElement);
-        }
+        public string ExtendedProperties => Get<string>(ExtendedPropertiesProperty);
+
+        public int FillColor => Get<int>(FillColorProperty);
+
+        public int FillPatternColor => Get<int>(FillPatternColorProperty);
+
+        public string FillPatternStyle => Get<string>(FillPatternStyleProperty);
+
+        public string Shape => Get<string>(ShapeProperty);
+
+        public StyleType Style => Get<StyleType>(StyleIdProperty);
+
+        public string StyleName => Get<string>(StyleNameProperty);
 
         // TODO: Any way to implement that?
         //public void GetCachedExtendedPropertiesAsArray(IntPtr propertyArray, out int propertyCount){}
         //public void GetCurrentExtendedPropertiesAsArray(IntPtr propertyArray, out int propertyCount){}
-    }
-
-    public class StylesPatternInformation : InformationBase, IStylesPatternInformation
-    {
-        public StylesPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
-        {
-        }
-
-        public string ExtendedProperties => Get<string>(StylesPattern.ExtendedPropertiesProperty);
-
-        public int FillColor => Get<int>(StylesPattern.FillColorProperty);
-
-        public int FillPatternColor => Get<int>(StylesPattern.FillPatternColorProperty);
-
-        public string FillPatternStyle => Get<string>(StylesPattern.FillPatternStyleProperty);
-
-        public string Shape => Get<string>(StylesPattern.ShapeProperty);
-
-        public StyleType Style => Get<StyleType>(StylesPattern.StyleIdProperty);
-
-        public string StyleName => Get<string>(StylesPattern.StyleNameProperty);
     }
 
     public class StylesPatternProperties : IStylesPatternProperties

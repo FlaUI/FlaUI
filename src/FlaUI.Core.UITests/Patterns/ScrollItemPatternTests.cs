@@ -33,21 +33,21 @@ namespace FlaUI.Core.UITests.Patterns
             Assert.That(grid, Is.Not.Null);
             var gridPattern = _grid.PatternFactory.GetGridPattern();
             Assert.That(gridPattern, Is.Not.Null);
-            Assert.That(gridPattern.Current.ColumnCount, Is.EqualTo(2));
-            Assert.That(gridPattern.Current.RowCount, Is.EqualTo(7));
+            Assert.That(gridPattern.ColumnCount, Is.EqualTo(2));
+            Assert.That(gridPattern.RowCount, Is.EqualTo(7));
             ItemRealizer.RealizeItems(grid);
             var items = grid.AsGrid().Rows;
-            Assert.That(items, Has.Length.EqualTo(gridPattern.Current.RowCount));
+            Assert.That(items, Has.Length.EqualTo(gridPattern.RowCount));
             var scrollPattern = grid.PatternFactory.GetScrollPattern();
             Assert.That(scrollPattern, Is.Not.Null);
-            Assert.That(scrollPattern.Current.VerticalScrollPercent, Is.EqualTo(0));
+            Assert.That(scrollPattern.VerticalScrollPercent, Is.EqualTo(0));
             foreach (var item in items)
             {
                 var scrollItemPattern = item.PatternFactory.GetScrollItemPattern();
                 Assert.That(scrollItemPattern, Is.Not.Null);
                 item.ScrollIntoView();
             }
-            Assert.That(scrollPattern.Current.VerticalScrollPercent, Is.GreaterThan(0));
+            Assert.That(scrollPattern.VerticalScrollPercent, Is.GreaterThan(0));
         }
     }
 }

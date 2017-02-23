@@ -8,9 +8,11 @@ namespace FlaUI.Core.Exceptions
     [Serializable]
     public class PropertyNotSupportedException : Exception
     {
+        private const string DefaultMessage = "The requested property is not supported";
+
         public PropertyId Property { get; }
 
-        public PropertyNotSupportedException()
+        public PropertyNotSupportedException() : base(DefaultMessage)
         {
         }
 
@@ -20,7 +22,7 @@ namespace FlaUI.Core.Exceptions
         }
 
         public PropertyNotSupportedException(Exception innerException)
-            : base(String.Empty, innerException)
+            : base(DefaultMessage, innerException)
         {
         }
 
@@ -52,7 +54,7 @@ namespace FlaUI.Core.Exceptions
         {
             if (info == null)
             {
-                throw new ArgumentNullException("info");
+                throw new ArgumentNullException(nameof(info));
             }
             info.AddValue("Property", Property);
             base.GetObjectData(info, context);

@@ -39,7 +39,7 @@ namespace FlaUI.Core.AutomationElements
 
         public string Value
         {
-            get { return ValuePattern.Current.Value; }
+            get { return ValuePattern.Value; }
             set { ValuePattern.SetValue(value);}
         }
 
@@ -85,7 +85,7 @@ namespace FlaUI.Core.AutomationElements
                 var ecp = PatternFactory.GetExpandCollapsePattern();
                 if (ecp != null)
                 {
-                    var state = ecp.Current.ExpandCollapseState;
+                    var state = ecp.ExpandCollapseState;
                     return state;
                 }
                 return ExpandCollapseState.LeafNode;

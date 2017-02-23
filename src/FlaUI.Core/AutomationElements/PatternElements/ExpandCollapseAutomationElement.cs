@@ -13,7 +13,7 @@ namespace FlaUI.Core.AutomationElements.PatternElements
 
         public IExpandCollapsePattern ExpandCollapsePattern => PatternFactory.GetExpandCollapsePattern();
 
-        public ExpandCollapseState ExpandCollapseState => ExpandCollapsePattern.Current.ExpandCollapseState;
+        public ExpandCollapseState ExpandCollapseState => ExpandCollapsePattern.ExpandCollapseState;
 
         public void Expand()
         {

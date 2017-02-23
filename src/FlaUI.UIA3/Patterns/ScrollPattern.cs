@@ -1,5 +1,4 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
@@ -10,7 +9,7 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class ScrollPattern : PatternBaseWithInformation<UIA.IUIAutomationScrollPattern, ScrollPatternInformation>, IScrollPattern
+    public class ScrollPattern : PatternBase<UIA.IUIAutomationScrollPattern>, IScrollPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_ScrollPatternId, "Scroll", AutomationObjectIds.IsScrollPatternAvailableProperty);
         public static readonly PropertyId HorizontallyScrollableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ScrollHorizontallyScrollablePropertyId, "HorizontallyScrollable");
@@ -24,16 +23,19 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
-        IScrollPatternInformation IPatternWithInformation<IScrollPatternInformation>.Cached => Cached;
-
-        IScrollPatternInformation IPatternWithInformation<IScrollPatternInformation>.Current => Current;
-
         public IScrollPatternProperties Properties => Automation.PropertyLibrary.Scroll;
 
-        protected override ScrollPatternInformation CreateInformation()
-        {
-            return new ScrollPatternInformation(BasicAutomationElement);
-        }
+        public bool HorizontallyScrollable => Get<bool>(HorizontallyScrollableProperty);
+
+        public double HorizontalScrollPercent => Get<double>(HorizontalScrollPercentProperty);
+
+        public double HorizontalViewSize => Get<double>(HorizontalViewSizeProperty);
+
+        public bool VerticallyScrollable => Get<bool>(VerticallyScrollableProperty);
+
+        public double VerticalScrollPercent => Get<double>(VerticalScrollPercentProperty);
+
+        public double VerticalViewSize => Get<double>(VerticalViewSizeProperty);
 
         public void Scroll(ScrollAmount horizontalAmount, ScrollAmount verticalAmount)
         {
@@ -44,25 +46,6 @@ namespace FlaUI.UIA3.Patterns
         {
             ComCallWrapper.Call(() => NativePattern.SetScrollPercent(horizontalPercent, verticalPercent));
         }
-    }
-
-    public class ScrollPatternInformation : InformationBase, IScrollPatternInformation
-    {
-        public ScrollPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
-        {
-        }
-
-        public bool HorizontallyScrollable => Get<bool>(ScrollPattern.HorizontallyScrollableProperty);
-
-        public double HorizontalScrollPercent => Get<double>(ScrollPattern.HorizontalScrollPercentProperty);
-
-        public double HorizontalViewSize => Get<double>(ScrollPattern.HorizontalViewSizeProperty);
-
-        public bool VerticallyScrollable => Get<bool>(ScrollPattern.VerticallyScrollableProperty);
-
-        public double VerticalScrollPercent => Get<double>(ScrollPattern.VerticalScrollPercentProperty);
-
-        public double VerticalViewSize => Get<double>(ScrollPattern.VerticalViewSizeProperty);
     }
 
     public class ScrollPatternProperties : IScrollPatternProperties

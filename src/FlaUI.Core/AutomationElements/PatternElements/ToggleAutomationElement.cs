@@ -15,7 +15,7 @@ namespace FlaUI.Core.AutomationElements.PatternElements
 
         public ToggleState State
         {
-            get { return TogglePattern.Current.ToggleState; }
+            get { return TogglePattern.ToggleState; }
             set
             {
                 // Loop for all states

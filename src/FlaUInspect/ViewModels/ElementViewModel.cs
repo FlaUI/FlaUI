@@ -62,16 +62,29 @@ namespace FlaUInspect.ViewModels
             }
         }
 
-        public string Name => NormalizeString(AutomationElement.Information.Name);
+        public string TryGet(Func<string> func)
+        {
+            try
+            {
+                var property = AutomationElement.Information.Name;
+                return NormalizeString(property);
+            }
+            catch (Exception ex)
+            {
+                return "Not Supported";
+            }
+        }
         
-        public string AutomationId => NormalizeString(AutomationElement.Information.AutomationId);
+        public string Name => TryGet(() => AutomationElement.Information.Name);
+
+        public string AutomationId => TryGet(() => AutomationElement.Information.AutomationId);
 
         public ControlType ControlType => AutomationElement.Information.ControlType;
 
         public ExtendedObservableCollection<ElementViewModel> Children { get; set; }
 
         public ExtendedObservableCollection<DetailGroupViewModel> ItemDetails { get; set; }
-        
+
         public string XPath => Debug.GetXPathToElement(AutomationElement);
 
         public void LoadChildren(bool loadInnerChildren)
@@ -141,11 +154,11 @@ namespace FlaUInspect.ViewModels
                 var pattern = AutomationElement.PatternFactory.GetGridItemPattern();
                 var patternDetails = new List<DetailViewModel>
                 {
-                    new DetailViewModel("Column", pattern.Current.Column),
-                    new DetailViewModel("ColumnSpan", pattern.Current.ColumnSpan),
-                    new DetailViewModel("Row", pattern.Current.Row),
-                    new DetailViewModel("RowSpan", pattern.Current.RowSpan),
-                    new DetailViewModel("ContainingGrid", pattern.Current.ContainingGrid)
+                    new DetailViewModel("Column", pattern.Column),
+                    new DetailViewModel("ColumnSpan", pattern.ColumnSpan),
+                    new DetailViewModel("Row", pattern.Row),
+                    new DetailViewModel("RowSpan", pattern.RowSpan),
+                    new DetailViewModel("ContainingGrid", pattern.ContainingGrid)
                 };
                 detailGroups.Add(new DetailGroupViewModel("GridItem Pattern", patternDetails));
             }
@@ -155,8 +168,8 @@ namespace FlaUInspect.ViewModels
                 var pattern = AutomationElement.PatternFactory.GetGridPattern();
                 var patternDetails = new List<DetailViewModel>
                 {
-                    new DetailViewModel("ColumnCount", pattern.Current.ColumnCount),
-                    new DetailViewModel("RowCount", pattern.Current.RowCount)
+                    new DetailViewModel("ColumnCount", pattern.ColumnCount),
+                    new DetailViewModel("RowCount", pattern.RowCount)
                 };
                 detailGroups.Add(new DetailGroupViewModel("Grid Pattern", patternDetails));
             }
@@ -166,16 +179,16 @@ namespace FlaUInspect.ViewModels
                 var pattern = AutomationElement.PatternFactory.GetLegacyIAccessiblePattern();
                 var patternDetails = new List<DetailViewModel>
                 {
-                    new DetailViewModel("Name", pattern.Current.Name),
-                    new DetailViewModel("State", AccessibilityTextResolver.GetStateText(pattern.Current.State)),
-                    new DetailViewModel("Role", AccessibilityTextResolver.GetRoleText(pattern.Current.Role)),
-                    new DetailViewModel("Value", pattern.Current.Value),
-                    new DetailViewModel("ChildId", pattern.Current.ChildId),
-                    new DetailViewModel("DefaultAction", pattern.Current.DefaultAction),
-                    new DetailViewModel("Description", pattern.Current.Description),
-                    new DetailViewModel("Help", pattern.Current.Help),
-                    new DetailViewModel("KeyboardShortcut", pattern.Current.KeyboardShortcut),
-                    new DetailViewModel("Selection", pattern.Current.Selection)
+                    new DetailViewModel("Name", pattern.Name),
+                    new DetailViewModel("State", AccessibilityTextResolver.GetStateText(pattern.State)),
+                    new DetailViewModel("Role", AccessibilityTextResolver.GetRoleText(pattern.Role)),
+                    new DetailViewModel("Value", pattern.Value),
+                    new DetailViewModel("ChildId", pattern.ChildId),
+                    new DetailViewModel("DefaultAction", pattern.DefaultAction),
+                    new DetailViewModel("Description", pattern.Description),
+                    new DetailViewModel("Help", pattern.Help),
+                    new DetailViewModel("KeyboardShortcut", pattern.KeyboardShortcut),
+                    new DetailViewModel("Selection", pattern.Selection)
                 };
                 detailGroups.Add(new DetailGroupViewModel("LegacyIAccessible Pattern", patternDetails));
             }
@@ -185,12 +198,12 @@ namespace FlaUInspect.ViewModels
                 var pattern = AutomationElement.PatternFactory.GetRangeValuePattern();
                 var patternDetails = new List<DetailViewModel>
                 {
-                    new DetailViewModel("IsReadOnly", pattern.Current.IsReadOnly),
-                    new DetailViewModel("SmallChange", pattern.Current.SmallChange),
-                    new DetailViewModel("LargeChange", pattern.Current.LargeChange),
-                    new DetailViewModel("Minimum", pattern.Current.Minimum),
-                    new DetailViewModel("Maximum", pattern.Current.Maximum),
-                    new DetailViewModel("Value", pattern.Current.Value)
+                    new DetailViewModel("IsReadOnly", pattern.IsReadOnly),
+                    new DetailViewModel("SmallChange", pattern.SmallChange),
+                    new DetailViewModel("LargeChange", pattern.LargeChange),
+                    new DetailViewModel("Minimum", pattern.Minimum),
+                    new DetailViewModel("Maximum", pattern.Maximum),
+                    new DetailViewModel("Value", pattern.Value)
                 };
                 detailGroups.Add(new DetailGroupViewModel("RangeValue Pattern", patternDetails));
             }
@@ -200,12 +213,12 @@ namespace FlaUInspect.ViewModels
                 var pattern = AutomationElement.PatternFactory.GetScrollPattern();
                 var patternDetails = new List<DetailViewModel>
                 {
-                    new DetailViewModel("HorizontalScrollPercent", pattern.Current.HorizontalScrollPercent),
-                    new DetailViewModel("HorizontalViewSize", pattern.Current.HorizontalViewSize),
-                    new DetailViewModel("HorizontallyScrollable", pattern.Current.HorizontallyScrollable),
-                    new DetailViewModel("VerticalScrollPercent", pattern.Current.VerticalScrollPercent),
-                    new DetailViewModel("VerticalViewSize", pattern.Current.VerticalViewSize),
-                    new DetailViewModel("VerticallyScrollable", pattern.Current.VerticallyScrollable)
+                    new DetailViewModel("HorizontalScrollPercent", pattern.HorizontalScrollPercent),
+                    new DetailViewModel("HorizontalViewSize", pattern.HorizontalViewSize),
+                    new DetailViewModel("HorizontallyScrollable", pattern.HorizontallyScrollable),
+                    new DetailViewModel("VerticalScrollPercent", pattern.VerticalScrollPercent),
+                    new DetailViewModel("VerticalViewSize", pattern.VerticalViewSize),
+                    new DetailViewModel("VerticallyScrollable", pattern.VerticallyScrollable)
                 };
                 detailGroups.Add(new DetailGroupViewModel("Scroll Pattern", patternDetails));
             }
@@ -215,8 +228,8 @@ namespace FlaUInspect.ViewModels
                 var pattern = AutomationElement.PatternFactory.GetSelectionItemPattern();
                 var patternDetails = new List<DetailViewModel>
                 {
-                    new DetailViewModel("IsSelected", pattern.Current.IsSelected),
-                    new DetailViewModel("SelectionContainer", pattern.Current.SelectionContainer)
+                    new DetailViewModel("IsSelected", pattern.IsSelected),
+                    new DetailViewModel("SelectionContainer", pattern.SelectionContainer)
                 };
                 detailGroups.Add(new DetailGroupViewModel("SelectionItem Pattern", patternDetails));
             }
@@ -226,9 +239,9 @@ namespace FlaUInspect.ViewModels
                 var pattern = AutomationElement.PatternFactory.GetSelectionPattern();
                 var patternDetails = new List<DetailViewModel>
                 {
-                    new DetailViewModel("Selection", pattern.Current.Selection),
-                    new DetailViewModel("CanSelectMultiple", pattern.Current.CanSelectMultiple),
-                    new DetailViewModel("IsSelectionRequired", pattern.Current.IsSelectionRequired)
+                    new DetailViewModel("Selection", pattern.Selection),
+                    new DetailViewModel("CanSelectMultiple", pattern.CanSelectMultiple),
+                    new DetailViewModel("IsSelectionRequired", pattern.IsSelectionRequired)
                 };
                 detailGroups.Add(new DetailGroupViewModel("Selection Pattern", patternDetails));
             }
@@ -238,8 +251,8 @@ namespace FlaUInspect.ViewModels
                 var pattern = AutomationElement.PatternFactory.GetTableItemPattern();
                 var patternDetails = new List<DetailViewModel>
                 {
-                    new DetailViewModel("ColumnHeaderItems", pattern.Current.ColumnHeaderItems),
-                    new DetailViewModel("RowHeaderItems", pattern.Current.RowHeaderItems)
+                    new DetailViewModel("ColumnHeaderItems", pattern.ColumnHeaderItems),
+                    new DetailViewModel("RowHeaderItems", pattern.RowHeaderItems)
                 };
                 detailGroups.Add(new DetailGroupViewModel("TableItem Pattern", patternDetails));
             }
@@ -249,9 +262,9 @@ namespace FlaUInspect.ViewModels
                 var pattern = AutomationElement.PatternFactory.GetTablePattern();
                 var patternDetails = new List<DetailViewModel>
                 {
-                    new DetailViewModel("ColumnHeaderItems", pattern.Current.ColumnHeaders),
-                    new DetailViewModel("RowHeaderItems", pattern.Current.RowHeaders),
-                    new DetailViewModel("RowOrColumnMajor", pattern.Current.RowOrColumnMajor)
+                    new DetailViewModel("ColumnHeaderItems", pattern.ColumnHeaders),
+                    new DetailViewModel("RowHeaderItems", pattern.RowHeaders),
+                    new DetailViewModel("RowOrColumnMajor", pattern.RowOrColumnMajor)
                 };
                 detailGroups.Add(new DetailGroupViewModel("Table Pattern", patternDetails));
             }
@@ -261,7 +274,7 @@ namespace FlaUInspect.ViewModels
                 var pattern = AutomationElement.PatternFactory.GetTogglePattern();
                 var patternDetails = new List<DetailViewModel>
                 {
-                    new DetailViewModel("ToggleState", pattern.Current.ToggleState)
+                    new DetailViewModel("ToggleState", pattern.ToggleState)
                 };
                 detailGroups.Add(new DetailGroupViewModel("Toggle Pattern", patternDetails));
             }
@@ -271,8 +284,8 @@ namespace FlaUInspect.ViewModels
                 var pattern = AutomationElement.PatternFactory.GetValuePattern();
                 var patternDetails = new List<DetailViewModel>
                 {
-                    new DetailViewModel("IsReadOnly", pattern.Current.IsReadOnly),
-                    new DetailViewModel("Value", pattern.Current.Value)
+                    new DetailViewModel("IsReadOnly", pattern.IsReadOnly),
+                    new DetailViewModel("Value", pattern.Value)
                 };
                 detailGroups.Add(new DetailGroupViewModel("Value Pattern", patternDetails));
             }
@@ -282,12 +295,12 @@ namespace FlaUInspect.ViewModels
                 var pattern = AutomationElement.PatternFactory.GetWindowPattern();
                 var patternDetails = new List<DetailViewModel>
                 {
-                    new DetailViewModel("IsModal", pattern.Current.IsModal),
-                    new DetailViewModel("IsTopmost", pattern.Current.IsTopmost),
-                    new DetailViewModel("CanMinimize", pattern.Current.CanMinimize),
-                    new DetailViewModel("CanMaximize", pattern.Current.CanMaximize),
-                    new DetailViewModel("WindowVisualState", pattern.Current.WindowVisualState),
-                    new DetailViewModel("WindowInteractionState", pattern.Current.WindowInteractionState)
+                    new DetailViewModel("IsModal", pattern.IsModal),
+                    new DetailViewModel("IsTopmost", pattern.IsTopmost),
+                    new DetailViewModel("CanMinimize", pattern.CanMinimize),
+                    new DetailViewModel("CanMaximize", pattern.CanMaximize),
+                    new DetailViewModel("WindowVisualState", pattern.WindowVisualState),
+                    new DetailViewModel("WindowInteractionState", pattern.WindowInteractionState)
                 };
                 detailGroups.Add(new DetailGroupViewModel("Window Pattern", patternDetails));
             }

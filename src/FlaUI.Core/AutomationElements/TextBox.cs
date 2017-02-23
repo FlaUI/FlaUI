@@ -24,7 +24,7 @@ namespace FlaUI.Core.AutomationElements
                 var valuePattern = PatternFactory.GetValuePattern();
                 if (valuePattern != null)
                 {
-                    return valuePattern.Current.Value;
+                    return valuePattern.Value;
                 }
                 var textPattern = PatternFactory.GetTextPattern();
                 if (textPattern != null)

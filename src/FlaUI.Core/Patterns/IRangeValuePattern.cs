@@ -3,20 +3,16 @@ using FlaUI.Core.Patterns.Infrastructure;
 
 namespace FlaUI.Core.Patterns
 {
-    public interface IRangeValuePattern : IPatternWithInformation<IRangeValuePatternInformation>
+    public interface IRangeValuePattern : IPattern
     {
         IRangeValuePatternProperties Properties { get; }
-        void SetValue(double val);
-    }
-
-    public interface IRangeValuePatternInformation : IPatternInformation
-    {
         bool IsReadOnly { get; }
         double LargeChange { get; }
         double Maximum { get; }
         double Minimum { get; }
         double SmallChange { get; }
         double Value { get; }
+        void SetValue(double val);
     }
 
     public interface IRangeValuePatternProperties

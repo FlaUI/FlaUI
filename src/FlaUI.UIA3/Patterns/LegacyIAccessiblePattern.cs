@@ -13,7 +13,7 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class LegacyIAccessiblePattern : PatternBaseWithInformation<UIA.IUIAutomationLegacyIAccessiblePattern, LegacyIAccessiblePatternInformation>, ILegacyIAccessiblePattern
+    public class LegacyIAccessiblePattern : PatternBase<UIA.IUIAutomationLegacyIAccessiblePattern>, ILegacyIAccessiblePattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_LegacyIAccessiblePatternId, "LegacyIAccessible", AutomationObjectIds.IsLegacyIAccessiblePatternAvailableProperty);
         public static readonly PropertyId ChildIdProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleChildIdPropertyId, "ChildId");
@@ -30,17 +30,35 @@ namespace FlaUI.UIA3.Patterns
         public LegacyIAccessiblePattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationLegacyIAccessiblePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
         }
-
-        ILegacyIAccessiblePatternInformation IPatternWithInformation<ILegacyIAccessiblePatternInformation>.Cached => Cached;
-
-        ILegacyIAccessiblePatternInformation IPatternWithInformation<ILegacyIAccessiblePatternInformation>.Current => Current;
-
+        
         public ILegacyIAccessiblePatternProperties Properties => Automation.PropertyLibrary.LegacyIAccessible;
 
-        protected override LegacyIAccessiblePatternInformation CreateInformation()
+        public int ChildId => Get<int>(ChildIdProperty);
+
+        public string DefaultAction => Get<string>(DefaultActionProperty);
+
+        public string Description => Get<string>(DescriptionProperty);
+
+        public string Help => Get<string>(HelpProperty);
+
+        public string KeyboardShortcut => Get<string>(KeyboardShortcutProperty);
+
+        public string Name => Get<string>(NameProperty);
+
+        public AccessibilityRole Role => Get<AccessibilityRole>(RoleProperty);
+
+        public AutomationElement[] Selection
         {
-            return new LegacyIAccessiblePatternInformation(BasicAutomationElement);
+            get
+            {
+                var nativeElement = Get<UIA.IUIAutomationElementArray>(SelectionProperty);
+                return AutomationElementConverter.NativeArrayToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
+            }
         }
+
+        public AccessibilityState State => Get<AccessibilityState>(StateProperty);
+
+        public string Value => Get<string>(ValueProperty);
 
         public void DoDefaultAction()
         {
@@ -62,40 +80,6 @@ namespace FlaUI.UIA3.Patterns
         {
             ComCallWrapper.Call(() => NativePattern.SetValue(value));
         }
-    }
-
-    public class LegacyIAccessiblePatternInformation : InformationBase, ILegacyIAccessiblePatternInformation
-    {
-        public LegacyIAccessiblePatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
-        {
-        }
-
-        public int ChildId => Get<int>(LegacyIAccessiblePattern.ChildIdProperty);
-
-        public string DefaultAction => Get<string>(LegacyIAccessiblePattern.DefaultActionProperty);
-
-        public string Description => Get<string>(LegacyIAccessiblePattern.DescriptionProperty);
-
-        public string Help => Get<string>(LegacyIAccessiblePattern.HelpProperty);
-
-        public string KeyboardShortcut => Get<string>(LegacyIAccessiblePattern.KeyboardShortcutProperty);
-
-        public string Name => Get<string>(LegacyIAccessiblePattern.NameProperty);
-
-        public AccessibilityRole Role => Get<AccessibilityRole>(LegacyIAccessiblePattern.RoleProperty);
-
-        public AutomationElement[] Selection
-        {
-            get
-            {
-                var nativeElement = Get<UIA.IUIAutomationElementArray>(LegacyIAccessiblePattern.SelectionProperty);
-                return AutomationElementConverter.NativeArrayToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
-            }
-        }
-
-        public AccessibilityState State => Get<AccessibilityState>(LegacyIAccessiblePattern.StateProperty);
-
-        public string Value => Get<string>(LegacyIAccessiblePattern.ValueProperty);
     }
 
     public class LegacyIAccessiblePatternProperties : ILegacyIAccessiblePatternProperties

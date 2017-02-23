@@ -91,7 +91,6 @@
     <Compile Include="Patterns\TogglePattern.cs" />
     <Compile Include="Patterns\Transform2Pattern.cs" />
     <Compile Include="Patterns\TransformPattern.cs" />
-    <Compile Include="Patterns\TransformPatternBase.cs" />
     <Compile Include="Patterns\VirtualizedItemPattern.cs" />
     <Compile Include="Patterns\WindowPattern.cs" />
     <Compile Include="Converters\ConditionConverter.cs" />

@@ -9,7 +9,7 @@ using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Patterns
 {
-    public class GridPattern : PatternBaseWithInformation<UIA.GridPattern, GridPatternInformation>, IGridPattern
+    public class GridPattern : PatternBase<UIA.GridPattern>, IGridPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.GridPattern.Pattern.Id, "Grid", AutomationObjectIds.IsGridPatternAvailableProperty);
         public static readonly PropertyId ColumnCountProperty = PropertyId.Register(AutomationType.UIA2, UIA.GridPattern.ColumnCountProperty.Id, "ColumnCount");
@@ -19,33 +19,17 @@ namespace FlaUI.UIA2.Patterns
         {
         }
 
-        IGridPatternInformation IPatternWithInformation<IGridPatternInformation>.Cached => Cached;
-
-        IGridPatternInformation IPatternWithInformation<IGridPatternInformation>.Current => Current;
-
         public IGridPatternProperties Properties => Automation.PropertyLibrary.Grid;
 
-        protected override GridPatternInformation CreateInformation()
-        {
-            return new GridPatternInformation(BasicAutomationElement);
-        }
+        public int ColumnCount => Get<int>(ColumnCountProperty);
+
+        public int RowCount => Get<int>(RowCountProperty);
 
         public AutomationElement GetItem(int row, int column)
         {
             var nativeItem = NativePattern.GetItem(row, column);
             return AutomationElementConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeItem);
         }
-    }
-
-    public class GridPatternInformation : InformationBase, IGridPatternInformation
-    {
-        public GridPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
-        {
-        }
-
-        public int ColumnCount => Get<int>(GridPattern.ColumnCountProperty);
-
-        public int RowCount => Get<int>(GridPattern.RowCountProperty);
     }
 
     public class GridPatternProperties : IGridPatternProperties

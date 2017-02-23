@@ -9,7 +9,7 @@ using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Patterns
 {
-    public class SelectionPattern : PatternBaseWithInformation<UIA.SelectionPattern, SelectionPatternInformation>, ISelectionPattern
+    public class SelectionPattern : PatternBase<UIA.SelectionPattern>, ISelectionPattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.SelectionPattern.Pattern.Id, "Selection", AutomationObjectIds.IsSelectionPatternAvailableProperty);
         public static readonly PropertyId CanSelectMultipleProperty = PropertyId.Register(AutomationType.UIA2, UIA.SelectionPattern.CanSelectMultipleProperty.Id, "CanSelectMultiple");
@@ -21,34 +21,18 @@ namespace FlaUI.UIA2.Patterns
         {
         }
 
-        ISelectionPatternInformation IPatternWithInformation<ISelectionPatternInformation>.Cached => Cached;
-
-        ISelectionPatternInformation IPatternWithInformation<ISelectionPatternInformation>.Current => Current;
-
         public ISelectionPatternProperties Properties => Automation.PropertyLibrary.Selection;
         public ISelectionPatternEvents Events => Automation.EventLibrary.Selection;
 
-        protected override SelectionPatternInformation CreateInformation()
-        {
-            return new SelectionPatternInformation(BasicAutomationElement);
-        }
-    }
+        public bool CanSelectMultiple => Get<bool>(CanSelectMultipleProperty);
 
-    public class SelectionPatternInformation : InformationBase, ISelectionPatternInformation
-    {
-        public SelectionPatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
-        {
-        }
-
-        public bool CanSelectMultiple => Get<bool>(SelectionPattern.CanSelectMultipleProperty);
-
-        public bool IsSelectionRequired => Get<bool>(SelectionPattern.IsSelectionRequiredProperty);
+        public bool IsSelectionRequired => Get<bool>(IsSelectionRequiredProperty);
 
         public AutomationElement[] Selection
         {
             get
             {
-                var nativeElement = Get<UIA.AutomationElementCollection>(SelectionPattern.SelectionProperty);
+                var nativeElement = Get<UIA.AutomationElementCollection>(SelectionProperty);
                 return AutomationElementConverter.NativeArrayToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeElement);
             }
         }

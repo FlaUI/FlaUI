@@ -3,14 +3,12 @@ using FlaUI.Core.Patterns.Infrastructure;
 
 namespace FlaUI.Core.Patterns
 {
-    public interface IDropTargetPattern : IPatternWithInformation<IDropTargetPatternInformation>
+    public interface IDropTargetPattern : IPattern
     {
         IDropTargetPatternProperties Properties { get; }
         IDropTargetPatternEvents Events { get; }
-    }
-
-    public interface IDropTargetPatternInformation : IPatternInformation
-    {
+        string DropTargetEffect { get; }
+        string[] DropTargetEffects { get; }
     }
 
     public interface IDropTargetPatternProperties

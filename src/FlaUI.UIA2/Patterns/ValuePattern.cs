@@ -8,7 +8,7 @@ using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Patterns
 {
-    public class ValuePattern : PatternBaseWithInformation<UIA.ValuePattern, ValuePatternInformation>, IValuePattern
+    public class ValuePattern : PatternBase<UIA.ValuePattern>, IValuePattern
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.ValuePattern.Pattern.Id, "Value", AutomationObjectIds.IsValuePatternAvailableProperty);
         public static readonly PropertyId IsReadOnlyProperty = PropertyId.Register(AutomationType.UIA2, UIA.ValuePattern.IsReadOnlyProperty.Id, "IsReadOnly");
@@ -18,32 +18,14 @@ namespace FlaUI.UIA2.Patterns
         {
         }
 
-        IValuePatternInformation IPatternWithInformation<IValuePatternInformation>.Cached => Cached;
-
-        IValuePatternInformation IPatternWithInformation<IValuePatternInformation>.Current => Current;
-
         public IValuePatternProperties Properties => Automation.PropertyLibrary.Value;
-
-        protected override ValuePatternInformation CreateInformation()
-        {
-            return new ValuePatternInformation(BasicAutomationElement);
-        }
+        public bool IsReadOnly => Get<bool>(IsReadOnlyProperty);
+        public string Value => Get<string>(ValueProperty);
 
         public void SetValue(string value)
         {
             NativePattern.SetValue(value);
         }
-    }
-
-    public class ValuePatternInformation : InformationBase, IValuePatternInformation
-    {
-        public ValuePatternInformation(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
-        {
-        }
-
-        public bool IsReadOnly => Get<bool>(ValuePattern.IsReadOnlyProperty);
-
-        public string Value => Get<string>(ValuePattern.ValueProperty);
     }
 
     public class ValuePatternProperties : IValuePatternProperties

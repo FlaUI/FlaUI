@@ -5,13 +5,9 @@ using FlaUI.Core.Patterns.Infrastructure;
 
 namespace FlaUI.Core.Patterns
 {
-    public interface ISpreadsheetItemPattern : IPatternWithInformation<ISpreadsheetItemPatternInformation>
+    public interface ISpreadsheetItemPattern : IPattern
     {
         ISpreadsheetItemPatternProperties Properties { get; }
-    }
-
-    public interface ISpreadsheetItemPatternInformation : IPatternInformation
-    {
         string Formula { get; }
         AutomationElement[] AnnotationObjects { get; }
         AnnotationType[] AnnotationTypes { get; }

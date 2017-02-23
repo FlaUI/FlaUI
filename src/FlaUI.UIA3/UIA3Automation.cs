@@ -46,7 +46,7 @@ namespace FlaUI.UIA3
 
         public override AutomationElement GetDesktop()
         {
-            var desktop = CacheRequest.Current != null
+            var desktop = CacheRequest.IsCachingActive
                 ? NativeAutomation.GetRootElementBuildCache(CacheRequest.Current.ToNative(this))
                 : NativeAutomation.GetRootElement();
             return WrapNativeElement(desktop);
@@ -57,7 +57,10 @@ namespace FlaUI.UIA3
         /// </summary>
         public override AutomationElement FromPoint(Point point)
         {
-            var nativeElement = NativeAutomation.ElementFromPoint(point.ToTagPoint());
+            var nativePoint = point.ToTagPoint();
+            var nativeElement = CacheRequest.IsCachingActive
+                ? NativeAutomation.ElementFromPointBuildCache(nativePoint, CacheRequest.Current.ToNative(this))
+                : NativeAutomation.ElementFromPoint(nativePoint);
             return WrapNativeElement(nativeElement);
         }
 
@@ -66,14 +69,18 @@ namespace FlaUI.UIA3
         /// </summary>
         public override AutomationElement FromHandle(IntPtr hwnd)
         {
-            var nativeElement = NativeAutomation.ElementFromHandle(hwnd);
+            var nativeElement = CacheRequest.IsCachingActive
+                ? NativeAutomation.ElementFromHandleBuildCache(hwnd, CacheRequest.Current.ToNative(this))
+                : NativeAutomation.ElementFromHandle(hwnd);
             return WrapNativeElement(nativeElement);
         }
 
         public override AutomationElement FocusedElement()
         {
-            var nativeFocusedElement = NativeAutomation.GetFocusedElement();
-            return AutomationElementConverter.NativeToManaged(this, nativeFocusedElement);
+            var nativeElement = CacheRequest.IsCachingActive
+                ? NativeAutomation.GetFocusedElementBuildCache(CacheRequest.Current.ToNative(this))
+                : NativeAutomation.GetFocusedElement();
+            return WrapNativeElement(nativeElement);
         }
 
         public override IAutomationFocusChangedEventHandler RegisterFocusChangedEvent(Action<AutomationElement> action)
@@ -101,7 +108,7 @@ namespace FlaUI.UIA3
 
         public override bool Compare(AutomationElement element1, AutomationElement element2)
         {
-            return NativeAutomation.CompareElements(AutomationElementConverter.ToNative(element1), AutomationElementConverter.ToNative(element2)) != 0;
+            return NativeAutomation.CompareElements(element1.ToNative(), element2.ToNative()) != 0;
         }
 
         /// <summary>
@@ -132,7 +139,7 @@ namespace FlaUI.UIA3
             var element = NativeAutomation as T;
             if (element == null)
             {
-                throw new NotSupportedException(String.Format("OS does not have {0} support.", typeof(T).Name));
+                throw new NotSupportedException($"OS does not have {typeof(T).Name} support.");
             }
             return element;
         }

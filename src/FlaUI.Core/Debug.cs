@@ -32,7 +32,7 @@ namespace FlaUI.Core
             if (allChildren.Length > 1)
             {
                 // There is more than one matching child, find out the index
-                var indexInParent = 0;
+                var indexInParent = 1; // Index starts with 1
                 foreach (var child in allChildren)
                 {
                     if (child.Equals(element))

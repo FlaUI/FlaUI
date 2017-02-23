@@ -5,13 +5,9 @@ using FlaUI.Core.Patterns.Infrastructure;
 
 namespace FlaUI.Core.Patterns
 {
-    public interface ITablePattern : IPatternWithInformation<ITablePatternInformation>
+    public interface ITablePattern : IPattern
     {
         ITablePatternProperties Properties { get; }
-    }
-
-    public interface ITablePatternInformation : IPatternInformation
-    {
         AutomationElement[] ColumnHeaders { get; }
         AutomationElement[] RowHeaders { get; }
         RowOrColumnMajor RowOrColumnMajor { get; }
