@@ -17,7 +17,7 @@ namespace FlaUI.UIA3.Identifiers
         public static readonly PropertyId BoundingRectangleProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_BoundingRectanglePropertyId, "BoundingRectangle").SetConverter((a, o) => ValueConverter.ToRectangle(o));
         public static readonly PropertyId ClassNameProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ClassNamePropertyId, "ClassName");
         public static readonly PropertyId ClickablePointProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ClickablePointPropertyId, "ClickablePoint").SetConverter((a, o) => ValueConverter.ToPoint(o));
-        public static readonly PropertyId ControllerForProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ControllerForPropertyId, "ControllerFor").SetConverter((a, o) => AutomationElementConverter.NativeArrayToManaged(a, o));
+        public static readonly PropertyId ControllerForProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ControllerForPropertyId, "ControllerFor").SetConverter(AutomationElementConverter.NativeArrayToManaged);
         public static readonly PropertyId ControlTypeProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ControlTypePropertyId, "ControlType").SetConverter((a, o) => ControlTypeConverter.ToControlType(o));
         public static readonly PropertyId CultureProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_CulturePropertyId, "Culture").SetConverter((a, o) => ValueConverter.ToCulture(o));
         public static readonly PropertyId DescribedByProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_DescribedByPropertyId, "DescribedBy");
