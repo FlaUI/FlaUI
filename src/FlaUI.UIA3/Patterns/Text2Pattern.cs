@@ -15,7 +15,7 @@ namespace FlaUI.UIA3.Patterns
 
         public Text2Pattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTextPattern2 nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            ExtendedNativePattern = (UIA.IUIAutomationTextPattern2)NativePattern;
+            ExtendedNativePattern = nativePattern;
         }
 
         public UIA.IUIAutomationTextPattern2 ExtendedNativePattern { get; }

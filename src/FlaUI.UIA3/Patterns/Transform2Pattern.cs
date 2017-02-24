@@ -20,7 +20,7 @@ namespace FlaUI.UIA3.Patterns
 
         public Transform2Pattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTransformPattern2 nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            _transformPattern = new TransformPattern(BasicAutomationElement, nativePattern);
+            _transformPattern = new TransformPattern(basicAutomationElement, nativePattern);
         }
         
         public override void Zoom(double zoom)
