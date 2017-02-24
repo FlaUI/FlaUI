@@ -35,5 +35,14 @@ namespace FlaUI.Core
         {
             return BasicAutomationElement.TryGetPropertyValue(PropertyId, out value);
         }
+
+        public static implicit operator TVal(AutomationProperty<TVal> automationProperty)
+        {
+            if (automationProperty == null)
+            {
+                throw new ArgumentNullException(nameof(automationProperty));
+            }
+            return automationProperty.Value;
+        }
     }
 }
