@@ -1,15 +1,13 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
-using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.Tools;
 using FlaUI.UIA3.Identifiers;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class TogglePattern : PatternBase<UIA.IUIAutomationTogglePattern>, ITogglePattern
+    public class TogglePattern : TogglePatternBase<UIA.IUIAutomationTogglePattern>
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_TogglePatternId, "Toggle", AutomationObjectIds.IsTogglePatternAvailableProperty);
         public static readonly PropertyId ToggleStateProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ToggleToggleStatePropertyId, "ToggleState");
@@ -18,11 +16,7 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
-        public ITogglePatternProperties Properties => Automation.PropertyLibrary.Toggle;
-
-        public ToggleState ToggleState => Get<ToggleState>(ToggleStateProperty);
-
-        public void Toggle()
+        public override void Toggle()
         {
             ComCallWrapper.Call(() => NativePattern.Toggle());
         }
