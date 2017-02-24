@@ -19,6 +19,7 @@ namespace FlaUI.Core.UITests
             return Application.Launch("notepad.exe");
         }
 
+        #region Pattern
         [Test]
         public void CorrectPattern()
         {
@@ -100,5 +101,90 @@ namespace FlaUI.Core.UITests
                 Assert.That(testDelegate, Throws.TypeOf<PatternNotCachedException>().With.Message.Contains("ExpandCollapse"));
             }
         }
+        #endregion Pattern
+
+        #region Property
+        [Test]
+        public void CorrectProperty()
+        {
+            var mainWindow = App.GetMainWindow(Automation);
+            Assert.That(mainWindow, Is.Not.Null);
+            var windowProperty = mainWindow.BasicAutomationElement.GetPropertyValue(Automation.PropertyLibrary.Window.CanMaximizeProperty);
+            Assert.That(windowProperty, Is.Not.Null);
+        }
+
+        [Test]
+        public void CorrectPropertyCached()
+        {
+            var cacheRequest = new CacheRequest();
+            cacheRequest.AutomationElementMode = AutomationElementMode.None;
+            cacheRequest.TreeScope = TreeScope.Element;
+            cacheRequest.Properties.Add(Automation.PropertyLibrary.Window.CanMaximizeProperty);
+            using (cacheRequest.Activate())
+            {
+                var mainWindow = App.GetMainWindow(Automation);
+                Assert.That(mainWindow, Is.Not.Null);
+                var windowProperty = mainWindow.BasicAutomationElement.GetPropertyValue(Automation.PropertyLibrary.Window.CanMaximizeProperty);
+                Assert.That(windowProperty, Is.Not.Null);
+            }
+        }
+
+        [Test]
+        public void UnsupportedProperty()
+        {
+            var mainWindow = App.GetMainWindow(Automation);
+            Assert.That(mainWindow, Is.Not.Null);
+            ActualValueDelegate<object> testDelegate = () => mainWindow.BasicAutomationElement.GetPropertyValue(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseStateProperty);
+            Assert.That(testDelegate, Throws.TypeOf<PropertyNotSupportedException>().With.Message.Contains("ExpandCollapseState"));
+        }
+
+        [Test]
+        public void UnsupportedPropertyCached()
+        {
+            var cacheRequest = new CacheRequest();
+            cacheRequest.AutomationElementMode = AutomationElementMode.None;
+            cacheRequest.TreeScope = TreeScope.Element;
+            cacheRequest.Properties.Add(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseStateProperty);
+            using (cacheRequest.Activate())
+            {
+                var mainWindow = App.GetMainWindow(Automation);
+                Assert.That(mainWindow, Is.Not.Null);
+                ActualValueDelegate<object> testDelegate = () => mainWindow.BasicAutomationElement.GetPropertyValue(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseStateProperty);
+                Assert.That(testDelegate, Throws.TypeOf<PropertyNotSupportedException>().With.Message.Contains("ExpandCollapseState"));
+            }
+        }
+
+        [Test]
+        public void CorrectPropertyUncached()
+        {
+            var cacheRequest = new CacheRequest();
+            cacheRequest.AutomationElementMode = AutomationElementMode.None;
+            cacheRequest.TreeScope = TreeScope.Element;
+            cacheRequest.Properties.Add(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseStateProperty);
+            using (cacheRequest.Activate())
+            {
+                var mainWindow = App.GetMainWindow(Automation);
+                Assert.That(mainWindow, Is.Not.Null);
+                ActualValueDelegate<object> testDelegate = () => mainWindow.BasicAutomationElement.GetPropertyValue(Automation.PropertyLibrary.Window.CanMaximizeProperty);
+                Assert.That(testDelegate, Throws.TypeOf<PropertyNotCachedException>().With.Message.Contains("CanMaximize"));
+            }
+        }
+
+        [Test]
+        public void UnsupportedPropertyUnCached()
+        {
+            var cacheRequest = new CacheRequest();
+            cacheRequest.AutomationElementMode = AutomationElementMode.None;
+            cacheRequest.TreeScope = TreeScope.Element;
+            cacheRequest.Properties.Add(Automation.PropertyLibrary.Window.CanMaximizeProperty);
+            using (cacheRequest.Activate())
+            {
+                var mainWindow = App.GetMainWindow(Automation);
+                Assert.That(mainWindow, Is.Not.Null);
+                ActualValueDelegate<object> testDelegate = () => mainWindow.BasicAutomationElement.GetPropertyValue(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseStateProperty);
+                Assert.That(testDelegate, Throws.TypeOf<PropertyNotCachedException>().With.Message.Contains("ExpandCollapseState"));
+            }
+        }
+        #endregion Property
     }
 }

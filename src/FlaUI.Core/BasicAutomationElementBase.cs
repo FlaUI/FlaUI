@@ -26,7 +26,7 @@ namespace FlaUI.Core
         public AutomationBase Automation { get; }
 
         /// <summary>
-        /// Gets the desired property value. Ends in an exception if the property is not supported.
+        /// Gets the desired property value. Ends in an exception if the property is not supported or not cached.
         /// </summary>
         public object GetPropertyValue(PropertyId property)
         {
@@ -35,12 +35,28 @@ namespace FlaUI.Core
 
         public T GetPropertyValue<T>(PropertyId property)
         {
-            var value = InternalGetPropertyValue(property, false);
-            if (value == Automation.NotSupportedValue)
+            var isCacheActive = CacheRequest.IsCachingActive;
+            try
             {
-                throw new PropertyNotSupportedException($"Property '{property}' not supported", property);
+                var value = InternalGetPropertyValue(property.Id, isCacheActive, false);
+                if (value == Automation.NotSupportedValue)
+                {
+                    throw new PropertyNotSupportedException(property);
+                }
+                return property.Convert<T>(value);
             }
-            return property.Convert<T>(value);
+            catch (Exception ex)
+            {
+                if (isCacheActive)
+                {
+                    var cacheRequest = CacheRequest.Current;
+                    if (!cacheRequest.Properties.Contains(property))
+                    {
+                        throw new PropertyNotCachedException(property, ex);
+                    }
+                }
+                throw new PropertyNotSupportedException(property, ex);
+            }
         }
 
         /// <summary>
@@ -54,31 +70,15 @@ namespace FlaUI.Core
 
         public bool TryGetPropertyValue<T>(PropertyId property, out T value)
         {
-            var tmp = InternalGetPropertyValue(property, false);
-            if (tmp == Automation.NotSupportedValue)
+            try
+            {
+                value = GetPropertyValue<T>(property);
+                return true;
+            }
+            catch (PropertyNotSupportedException)
             {
                 value = default(T);
                 return false;
-            }
-            value = property.Convert<T>(tmp);
-            return true;
-        }
-
-        private object InternalGetPropertyValue(PropertyId property, bool useDefaultIfNotSupported)
-        {
-            var isCacheActive = CacheRequest.IsCachingActive;
-            try
-            {
-                return InternalGetPropertyValue(property.Id, isCacheActive, useDefaultIfNotSupported);
-            }
-            catch (Exception ex)
-            {
-                var msg = $"Property '{property}' not supported";
-                if (isCacheActive)
-                {
-                    msg += " or not cached";
-                }
-                throw new InvalidOperationException(msg, ex);
             }
         }
 
