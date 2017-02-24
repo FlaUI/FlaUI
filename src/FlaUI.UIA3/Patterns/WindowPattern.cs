@@ -54,7 +54,7 @@ namespace FlaUI.UIA3.Patterns
 
     public class WindowPatternProperties : IWindowPatternProperties
     {
-        public PropertyId CanMaximizeProperty => WindowPattern.CanMinimizeProperty;
+        public PropertyId CanMaximizeProperty => WindowPattern.CanMaximizeProperty;
 
         public PropertyId CanMinimizeProperty => WindowPattern.CanMinimizeProperty;
 

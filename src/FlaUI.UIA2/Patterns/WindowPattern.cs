@@ -1,5 +1,4 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
@@ -54,7 +53,7 @@ namespace FlaUI.UIA2.Patterns
 
     public class WindowPatternProperties : IWindowPatternProperties
     {
-        public PropertyId CanMaximizeProperty => WindowPattern.CanMinimizeProperty;
+        public PropertyId CanMaximizeProperty => WindowPattern.CanMaximizeProperty;
 
         public PropertyId CanMinimizeProperty => WindowPattern.CanMinimizeProperty;
 
