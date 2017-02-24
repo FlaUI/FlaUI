@@ -13,7 +13,7 @@ namespace FlaUI.Core.Identifiers
         {
         }
 
-        public PropertyId SetConverter(Func<object, object> convertMethod)
+        public PropertyId SetConverter(Func<AutomationBase, object, object> convertMethod)
         {
             return SetConverter<PropertyId>(convertMethod);
         }

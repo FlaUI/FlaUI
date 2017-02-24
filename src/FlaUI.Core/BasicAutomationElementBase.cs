@@ -43,7 +43,7 @@ namespace FlaUI.Core
                 {
                     throw new PropertyNotSupportedException(property);
                 }
-                return property.Convert<T>(value);
+                return property.Convert<T>(Automation, value);
             }
             catch (Exception ex)
             {

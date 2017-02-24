@@ -11,7 +11,7 @@ namespace FlaUI.UIA2.Identifiers
         public static readonly TextAttributeId BackgroundColor = TextAttributeId.Register(AutomationType.UIA2, UIA.TextPatternIdentifiers.BackgroundColorAttribute.Id, "BackgroundColor");
         public static readonly TextAttributeId BulletStyle = TextAttributeId.Register(AutomationType.UIA2, UIA.TextPatternIdentifiers.BulletStyleAttribute.Id, "BulletStyle");
         public static readonly TextAttributeId CapStyle = TextAttributeId.Register(AutomationType.UIA2, UIA.TextPatternIdentifiers.CapStyleAttribute.Id, "CapStyle");
-        public static readonly TextAttributeId Culture = TextAttributeId.Register(AutomationType.UIA2, UIA.TextPatternIdentifiers.CultureAttribute.Id, "Culture").SetConverter(ValueConverter.ToCulture);
+        public static readonly TextAttributeId Culture = TextAttributeId.Register(AutomationType.UIA2, UIA.TextPatternIdentifiers.CultureAttribute.Id, "Culture").SetConverter((a, o) => ValueConverter.ToCulture(o));
         public static readonly TextAttributeId FontName = TextAttributeId.Register(AutomationType.UIA2, UIA.TextPatternIdentifiers.FontNameAttribute.Id, "FontName");
         public static readonly TextAttributeId FontSize = TextAttributeId.Register(AutomationType.UIA2, UIA.TextPatternIdentifiers.FontSizeAttribute.Id, "FontSize");
         public static readonly TextAttributeId FontWeight = TextAttributeId.Register(AutomationType.UIA2, UIA.TextPatternIdentifiers.FontWeightAttribute.Id, "FontWeight");

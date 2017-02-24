@@ -1,4 +1,5 @@
 ﻿using System;
+using FlaUI.Core;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using UIA = interop.UIAutomationCore;
 
@@ -6,17 +7,18 @@ namespace FlaUI.UIA3.Converters
 {
     public static class AutomationElementConverter
     {
-        public static AutomationElement[] NativeArrayToManaged(UIA3Automation automation, UIA.IUIAutomationElementArray nativeElements)
+        public static AutomationElement[] NativeArrayToManaged(AutomationBase automation, object nativeElements)
         {
             if (nativeElements == null)
             {
                 return new AutomationElement[0];
             }
-            var retArray = new AutomationElement[nativeElements.Length];
-            for (var i = 0; i < nativeElements.Length; i++)
+            var nativeElementsCasted = (UIA.IUIAutomationElementArray)nativeElements;
+            var retArray = new AutomationElement[nativeElementsCasted.Length];
+            for (var i = 0; i < nativeElementsCasted.Length; i++)
             {
-                var nativeElement = nativeElements.GetElement(i);
-                var automationElement = automation.WrapNativeElement(nativeElement);
+                var nativeElement = nativeElementsCasted.GetElement(i);
+                var automationElement = ((UIA3Automation)automation).WrapNativeElement(nativeElement);
                 retArray[i] = automationElement;
             }
             return retArray;

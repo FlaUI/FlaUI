@@ -68,17 +68,13 @@ namespace FlaUI.UIA2
         {
             var nativeAttribute = UIA.AutomationTextAttribute.LookupById(attribute.Id);
             var nativeValue = NativeRange.GetAttributeValue(nativeAttribute);
-            return attribute.Convert<object>(nativeValue);
+            return attribute.Convert<object>(Automation, nativeValue);
         }
 
         public Rectangle[] GetBoundingRectangles()
         {
             var unrolledRects = NativeRange.GetBoundingRectangles();
-            if (unrolledRects == null)
-            {
-                return null;
-            }
-            return unrolledRects.Select(r => (Rectangle)ValueConverter.ToRectangle(r)).ToArray();
+            return unrolledRects?.Select(r => (Rectangle)ValueConverter.ToRectangle(r)).ToArray();
         }
 
         public AutomationElement[] GetChildren()
