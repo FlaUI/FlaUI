@@ -2,13 +2,12 @@
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
-using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.UIA2.Identifiers;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Patterns
 {
-    public class WindowPattern : PatternBase<UIA.WindowPattern>, IWindowPattern
+    public class WindowPattern : WindowPatternBase<UIA.WindowPattern>
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.WindowPattern.Pattern.Id, "Window", AutomationObjectIds.IsWindowPatternAvailableProperty);
         public static readonly PropertyId CanMaximizeProperty = PropertyId.Register(AutomationType.UIA2, UIA.WindowPattern.CanMaximizeProperty.Id, "CanMaximize");
@@ -24,28 +23,17 @@ namespace FlaUI.UIA2.Patterns
         {
         }
 
-        public IWindowPatternProperties Properties => Automation.PropertyLibrary.Window;
-
-        public IWindowPatternEvents Events => Automation.EventLibrary.Window;
-
-        public bool CanMaximize => Get<bool>(CanMaximizeProperty);
-        public bool CanMinimize => Get<bool>(CanMinimizeProperty);
-        public bool IsModal => Get<bool>(IsModalProperty);
-        public bool IsTopmost => Get<bool>(IsTopmostProperty);
-        public WindowInteractionState WindowInteractionState => Get<WindowInteractionState>(WindowInteractionStateProperty);
-        public WindowVisualState WindowVisualState => Get<WindowVisualState>(WindowVisualStateProperty);
-
-        public void Close()
+        public override void Close()
         {
             NativePattern.Close();
         }
 
-        public void SetWindowVisualState(WindowVisualState state)
+        public override void SetWindowVisualState(WindowVisualState state)
         {
             NativePattern.SetWindowVisualState((UIA.WindowVisualState)state);
         }
 
-        public bool WaitForInputIdle(int milliseconds)
+        public override bool WaitForInputIdle(int milliseconds)
         {
             return NativePattern.WaitForInputIdle(milliseconds);
         }

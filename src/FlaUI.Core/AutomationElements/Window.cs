@@ -18,7 +18,7 @@ namespace FlaUI.Core.AutomationElements
 
         public string Title => Info.Name;
 
-        public bool IsModal => WindowPattern.IsModal;
+        public bool IsModal => WindowPattern.IsModal.Value;
 
         public TitleBar TitleBar => FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.TitleBar)).AsTitleBar();
 

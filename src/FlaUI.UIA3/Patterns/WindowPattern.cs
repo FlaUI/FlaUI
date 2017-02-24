@@ -2,14 +2,13 @@
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
-using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.Tools;
 using FlaUI.UIA3.Identifiers;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class WindowPattern : PatternBase<UIA.IUIAutomationWindowPattern>, IWindowPattern
+    public class WindowPattern : WindowPatternBase<UIA.IUIAutomationWindowPattern>
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_WindowPatternId, "Window", AutomationObjectIds.IsWindowPatternAvailableProperty);
         public static readonly PropertyId CanMaximizeProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_WindowCanMaximizePropertyId, "CanMaximize");
@@ -25,28 +24,17 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
-        public IWindowPatternProperties Properties => Automation.PropertyLibrary.Window;
-
-        public IWindowPatternEvents Events => Automation.EventLibrary.Window;
-
-        public bool CanMaximize => Get<bool>(WindowPattern.CanMaximizeProperty);
-        public bool CanMinimize => Get<bool>(WindowPattern.CanMinimizeProperty);
-        public bool IsModal => Get<bool>(WindowPattern.IsModalProperty);
-        public bool IsTopmost => Get<bool>(WindowPattern.IsTopmostProperty);
-        public WindowInteractionState WindowInteractionState => Get<WindowInteractionState>(WindowPattern.WindowInteractionStateProperty);
-        public WindowVisualState WindowVisualState => Get<WindowVisualState>(WindowPattern.WindowVisualStateProperty);
-
-        public void Close()
+        public override void Close()
         {
             ComCallWrapper.Call(() => NativePattern.Close());
         }
 
-        public void SetWindowVisualState(WindowVisualState state)
+        public override void SetWindowVisualState(WindowVisualState state)
         {
             ComCallWrapper.Call(() => NativePattern.SetWindowVisualState((UIA.WindowVisualState)state));
         }
 
-        public bool WaitForInputIdle(int milliseconds)
+        public override bool WaitForInputIdle(int milliseconds)
         {
             return ComCallWrapper.Call(() => NativePattern.WaitForInputIdle(milliseconds)) != 0;
         }

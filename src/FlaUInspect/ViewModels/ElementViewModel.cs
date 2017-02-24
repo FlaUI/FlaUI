@@ -298,7 +298,7 @@ namespace FlaUInspect.ViewModels
                     new DetailViewModel("IsModal", pattern.IsModal),
                     new DetailViewModel("IsTopmost", pattern.IsTopmost),
                     new DetailViewModel("CanMinimize", pattern.CanMinimize),
-                    new DetailViewModel("CanMaximize", pattern.CanMaximize),
+                    new DetailViewModel("CanMaximize", pattern.CanMaximize.Value),
                     new DetailViewModel("WindowVisualState", pattern.WindowVisualState),
                     new DetailViewModel("WindowInteractionState", pattern.WindowInteractionState)
                 };
