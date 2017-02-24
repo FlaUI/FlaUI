@@ -1,16 +1,22 @@
-﻿using FlaUI.Core.Identifiers;
+﻿using System;
+using FlaUI.Core.Identifiers;
+#if NET35
+using FlaUI.Core.Tools;
+#endif
 
 namespace FlaUI.Core
 {
     public class AutomationProperty<TVal>
     {
-        public AutomationProperty(PropertyId property, BasicAutomationElementBase basicAutomationElement)
+        private readonly Lazy<PropertyId> _propertyIdLazy;
+
+        public AutomationProperty(Func<PropertyId> propertyFunc, BasicAutomationElementBase basicAutomationElement)
         {
-            PropertyId = property;
+            _propertyIdLazy = new Lazy<PropertyId>(propertyFunc);
             BasicAutomationElement = basicAutomationElement;
         }
 
-        protected PropertyId PropertyId { get; }
+        protected PropertyId PropertyId => _propertyIdLazy.Value;
 
         protected BasicAutomationElementBase BasicAutomationElement { get; }
 
