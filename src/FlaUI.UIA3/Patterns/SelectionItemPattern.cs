@@ -1,8 +1,6 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
-using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.Tools;
 using FlaUI.UIA3.Converters;
 using FlaUI.UIA3.Identifiers;
@@ -10,11 +8,11 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class SelectionItemPattern : PatternBase<UIA.IUIAutomationSelectionItemPattern>, ISelectionItemPattern
+    public class SelectionItemPattern : SelectionItemPatternBase<UIA.IUIAutomationSelectionItemPattern>
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_SelectionItemPatternId, "SelectionItem", AutomationObjectIds.IsSelectionItemPatternAvailableProperty);
         public static readonly PropertyId IsSelectedProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_SelectionItemIsSelectedPropertyId, "IsSelected");
-        public static readonly PropertyId SelectionContainerProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_SelectionItemSelectionContainerPropertyId, "SelectionContainer");
+        public static readonly PropertyId SelectionContainerProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_SelectionItemSelectionContainerPropertyId, "SelectionContainer").SetConverter(AutomationElementConverter.NativeToManaged);
         public static readonly EventId ElementAddedToSelectionEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_SelectionItem_ElementAddedToSelectionEventId, "ElementAddedToSelection");
         public static readonly EventId ElementRemovedFromSelectionEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_SelectionItem_ElementRemovedFromSelectionEventId, "ElementRemovedFromSelection");
         public static readonly EventId ElementSelectedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_SelectionItem_ElementSelectedEventId, "ElementSelected");
@@ -23,32 +21,17 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
-        public ISelectionItemPatternProperties Properties => Automation.PropertyLibrary.SelectionItem;
-
-        public ISelectionItemPatternEvents Events => Automation.EventLibrary.SelectionItem;
-
-        public bool IsSelected => Get<bool>(IsSelectedProperty);
-
-        public AutomationElement SelectionContainer
-        {
-            get
-            {
-                var nativeElement = Get<UIA.IUIAutomationElement>(SelectionContainerProperty);
-                return AutomationElementConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
-            }
-        }
-
-        public void AddToSelection()
+        public override void AddToSelection()
         {
             ComCallWrapper.Call(() => NativePattern.AddToSelection());
         }
 
-        public void RemoveFromSelection()
+        public override void RemoveFromSelection()
         {
             ComCallWrapper.Call(() => NativePattern.RemoveFromSelection());
         }
 
-        public void Select()
+        public override void Select()
         {
             ComCallWrapper.Call(() => NativePattern.Select());
         }

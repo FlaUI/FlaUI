@@ -8,8 +8,10 @@ namespace FlaUI.Core.Patterns
     {
         ISelectionItemPatternProperties Properties { get; }
         ISelectionItemPatternEvents Events { get; }
-        bool IsSelected { get; }
-        AutomationElement SelectionContainer { get; }
+
+        AutomationProperty<bool> IsSelected { get; }
+        AutomationProperty<AutomationElement> SelectionContainer { get; }
+
         void AddToSelection();
         void RemoveFromSelection();
         void Select();
@@ -26,5 +28,24 @@ namespace FlaUI.Core.Patterns
         EventId ElementAddedToSelectionEvent { get; }
         EventId ElementRemovedFromSelectionEvent { get; }
         EventId ElementSelectedEvent { get; }
+    }
+
+    public abstract class SelectionItemPatternBase<TNativePattern> : PatternBase<TNativePattern>, ISelectionItemPattern
+    {
+        protected SelectionItemPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        {
+            IsSelected = new AutomationProperty<bool>(() => Properties.IsSelectedProperty, BasicAutomationElement);
+            SelectionContainer = new AutomationProperty<AutomationElement>(() => Properties.SelectionContainerProperty, BasicAutomationElement);
+        }
+
+        public ISelectionItemPatternProperties Properties => Automation.PropertyLibrary.SelectionItem;
+        public ISelectionItemPatternEvents Events => Automation.EventLibrary.SelectionItem;
+
+        public AutomationProperty<bool> IsSelected { get; }
+        public AutomationProperty<AutomationElement> SelectionContainer { get; }
+
+        public abstract void AddToSelection();
+        public abstract void RemoveFromSelection();
+        public abstract void Select();
     }
 }

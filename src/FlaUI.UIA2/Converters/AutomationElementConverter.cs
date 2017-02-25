@@ -35,9 +35,10 @@ namespace FlaUI.UIA2.Converters
             throw new ArgumentException("Input is neither an AutomationElementCollection nor an AutomationElement[]", nameof(nativeElements));
         }
 
-        public static AutomationElement NativeToManaged(UIA2Automation automation, UIA.AutomationElement nativeElement)
+        public static AutomationElement NativeToManaged(AutomationBase automation, object nativeElement)
         {
-            return automation.WrapNativeElement(nativeElement);
+            var uia2Automation = (UIA2Automation)automation;
+            return uia2Automation.WrapNativeElement((UIA.AutomationElement)nativeElement);
         }
 
         public static UIA.AutomationElement ToNative(this AutomationElement automationElement)

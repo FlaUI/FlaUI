@@ -13,20 +13,22 @@ namespace FlaUI.UIA3.Converters
             {
                 return new AutomationElement[0];
             }
+            var uia3Automation = (UIA3Automation)automation;
             var nativeElementsCasted = (UIA.IUIAutomationElementArray)nativeElements;
             var retArray = new AutomationElement[nativeElementsCasted.Length];
             for (var i = 0; i < nativeElementsCasted.Length; i++)
             {
                 var nativeElement = nativeElementsCasted.GetElement(i);
-                var automationElement = ((UIA3Automation)automation).WrapNativeElement(nativeElement);
+                var automationElement = uia3Automation.WrapNativeElement(nativeElement);
                 retArray[i] = automationElement;
             }
             return retArray;
         }
 
-        public static AutomationElement NativeToManaged(UIA3Automation automation, UIA.IUIAutomationElement nativeElement)
+        public static AutomationElement NativeToManaged(AutomationBase automation, object nativeElement)
         {
-            return automation.WrapNativeElement(nativeElement);
+            var uia3Automation = (UIA3Automation)automation;
+            return uia3Automation.WrapNativeElement((UIA.IUIAutomationElement)nativeElement);
         }
 
         public static UIA.IUIAutomationElement ToNative(this AutomationElement automationElement)
