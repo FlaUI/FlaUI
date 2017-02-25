@@ -19,18 +19,18 @@ namespace FlaUI.Core.UITests.Patterns
             Assert.That(slider, Is.Not.Null);
             var rvPattern = slider.PatternFactory.GetRangeValuePattern();
             Assert.That(rvPattern, Is.Not.Null);
-            Assert.That(rvPattern.IsReadOnly, Is.False);
-            Assert.That(rvPattern.Value, Is.EqualTo(5));
-            Assert.That(rvPattern.LargeChange, Is.EqualTo(4));
-            Assert.That(rvPattern.SmallChange, Is.EqualTo(1));
-            Assert.That(rvPattern.Minimum, Is.EqualTo(0));
-            Assert.That(rvPattern.Maximum, Is.EqualTo(10));
+            Assert.That(rvPattern.IsReadOnly.Value, Is.False);
+            Assert.That(rvPattern.Value.Value, Is.EqualTo(5));
+            Assert.That(rvPattern.LargeChange.Value, Is.EqualTo(4));
+            Assert.That(rvPattern.SmallChange.Value, Is.EqualTo(1));
+            Assert.That(rvPattern.Minimum.Value, Is.EqualTo(0));
+            Assert.That(rvPattern.Maximum.Value, Is.EqualTo(10));
             var number1 = 6;
             rvPattern.SetValue(number1);
-            Assert.That(rvPattern.Value, Is.EqualTo(number1));
+            Assert.That(rvPattern.Value.Value, Is.EqualTo(number1));
             var number2 = 3;
             rvPattern.SetValue(number2);
-            Assert.That(rvPattern.Value, Is.EqualTo(number2));
+            Assert.That(rvPattern.Value.Value, Is.EqualTo(number2));
         }
 
         private AutomationElement GetSlider()

@@ -1,14 +1,13 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
-using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.Tools;
 using FlaUI.UIA3.Identifiers;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class RangeValuePattern : PatternBase<UIA.IUIAutomationRangeValuePattern>, IRangeValuePattern
+    public class RangeValuePattern : RangeValuePatternBase<UIA.IUIAutomationRangeValuePattern>
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_RangeValuePatternId, "RangeValue", AutomationObjectIds.IsRangeValuePatternAvailableProperty);
         public static readonly PropertyId IsReadOnlyProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_RangeValueIsReadOnlyPropertyId, "IsReadOnly");
@@ -22,21 +21,7 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
-        public IRangeValuePatternProperties Properties => Automation.PropertyLibrary.RangeValue;
-
-        public bool IsReadOnly => Get<bool>(IsReadOnlyProperty);
-
-        public double LargeChange => Get<double>(LargeChangeProperty);
-
-        public double Maximum => Get<double>(MaximumProperty);
-
-        public double Minimum => Get<double>(MinimumProperty);
-
-        public double SmallChange => Get<double>(SmallChangeProperty);
-
-        public double Value => Get<double>(ValueProperty);
-
-        public void SetValue(double val)
+        public override void SetValue(double val)
         {
             ComCallWrapper.Call(() => NativePattern.SetValue(val));
         }
