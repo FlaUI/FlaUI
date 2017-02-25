@@ -197,7 +197,7 @@ namespace FlaUI.Core.AutomationElements
 
         public IValuePattern ValuePattern => PatternFactory.GetValuePattern();
 
-        public Grid ContainingGrid => GridItemPattern.ContainingGrid.AsGrid();
+        public Grid ContainingGrid => GridItemPattern.ContainingGrid.Value.AsGrid();
 
         public GridRow ContainingRow
         {
