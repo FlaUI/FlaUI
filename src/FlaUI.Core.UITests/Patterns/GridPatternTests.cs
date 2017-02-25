@@ -26,14 +26,14 @@ namespace FlaUI.Core.UITests.Patterns
         }
 
         [Test]
-        public void ExpanderTest()
+        public void GridTest()
         {
             var dataGrid = _dataGrid;
             Assert.That(dataGrid, Is.Not.Null);
             var gridPattern = dataGrid.PatternFactory.GetGridPattern();
             Assert.That(gridPattern, Is.Not.Null);
-            Assert.That(gridPattern.ColumnCount, Is.EqualTo(2));
-            Assert.That(gridPattern.RowCount, Is.EqualTo(3));
+            Assert.That(gridPattern.ColumnCount.Value, Is.EqualTo(2));
+            Assert.That(gridPattern.RowCount.Value, Is.EqualTo(3));
             var item = gridPattern.GetItem(1, 1);
             Assert.That(item.Info.Name, Is.EqualTo("Patrick"));
         }
