@@ -1,13 +1,12 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
-using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.UIA2.Identifiers;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Patterns
 {
-    public class InvokePattern : PatternBase<UIA.InvokePattern>, IInvokePattern
+    public class InvokePattern : InvokePatternBase<UIA.InvokePattern>
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.InvokePattern.Pattern.Id, "Invoke", AutomationObjectIds.IsInvokePatternAvailableProperty);
         public static readonly EventId InvokedEvent = EventId.Register(AutomationType.UIA2, UIA.InvokePattern.InvokedEvent.Id, "Invoked");
@@ -16,9 +15,7 @@ namespace FlaUI.UIA2.Patterns
         {
         }
 
-        public IInvokePatternEvents Events => Automation.EventLibrary.Invoke;
-
-        public void Invoke()
+        public override void Invoke()
         {
             NativePattern.Invoke();
         }
