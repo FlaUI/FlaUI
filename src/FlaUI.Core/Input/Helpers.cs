@@ -26,7 +26,7 @@ namespace FlaUI.Core.Input
         {
             var currentElement = automationElement;
             var treeWalker = automationElement.Automation.TreeWalkerFactory.GetControlViewWalker();
-            while (currentElement.Info.NativeWindowHandle == new IntPtr(0))
+            while (currentElement.Info.NativeWindowHandle.ValueOrDefault == new IntPtr(0))
             {
                 currentElement = treeWalker.GetParent(currentElement);
             }
