@@ -1,10 +1,8 @@
 ﻿using System;
 using Accessibility;
 using FlaUI.Core;
-using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
-using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.Tools;
 using FlaUI.Core.WindowsAPI;
 using FlaUI.UIA3.Converters;
@@ -13,7 +11,7 @@ using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class LegacyIAccessiblePattern : PatternBase<UIA.IUIAutomationLegacyIAccessiblePattern>, ILegacyIAccessiblePattern
+    public class LegacyIAccessiblePattern : LegacyIAccessiblePatternBase<UIA.IUIAutomationLegacyIAccessiblePattern>
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_LegacyIAccessiblePatternId, "LegacyIAccessible", AutomationObjectIds.IsLegacyIAccessiblePatternAvailableProperty);
         public static readonly PropertyId ChildIdProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleChildIdPropertyId, "ChildId");
@@ -23,7 +21,7 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId KeyboardShortcutProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleKeyboardShortcutPropertyId, "KeyboardShortcut");
         public static readonly PropertyId NameProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleNamePropertyId, "Name");
         public static readonly PropertyId RoleProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleRolePropertyId, "Role").SetConverter((a, o) => (AccessibilityRole)Convert.ToUInt32(o));
-        public static readonly PropertyId SelectionProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleSelectionPropertyId, "Selection");
+        public static readonly PropertyId SelectionProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleSelectionPropertyId, "Selection").SetConverter(AutomationElementConverter.NativeArrayToManaged);
         public static readonly PropertyId StateProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleStatePropertyId, "State").SetConverter((a, o) => (AccessibilityState)Convert.ToUInt32(o));
         public static readonly PropertyId ValueProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleValuePropertyId, "Value");
 
@@ -31,52 +29,23 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
-        public ILegacyIAccessiblePatternProperties Properties => Automation.PropertyLibrary.LegacyIAccessible;
-
-        public int ChildId => Get<int>(ChildIdProperty);
-
-        public string DefaultAction => Get<string>(DefaultActionProperty);
-
-        public string Description => Get<string>(DescriptionProperty);
-
-        public string Help => Get<string>(HelpProperty);
-
-        public string KeyboardShortcut => Get<string>(KeyboardShortcutProperty);
-
-        public string Name => Get<string>(NameProperty);
-
-        public AccessibilityRole Role => Get<AccessibilityRole>(RoleProperty);
-
-        public AutomationElement[] Selection
-        {
-            get
-            {
-                var nativeElement = Get<UIA.IUIAutomationElementArray>(SelectionProperty);
-                return AutomationElementConverter.NativeArrayToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
-            }
-        }
-
-        public AccessibilityState State => Get<AccessibilityState>(StateProperty);
-
-        public string Value => Get<string>(ValueProperty);
-
-        public void DoDefaultAction()
+        public override void DoDefaultAction()
         {
             ComCallWrapper.Call(() => NativePattern.DoDefaultAction());
         }
 
-        public IAccessible GetIAccessible()
+        public override IAccessible GetIAccessible()
         {
             // ReSharper disable once SuspiciousTypeConversion.Global
             return ComCallWrapper.Call(() => (IAccessible)NativePattern.GetIAccessible());
         }
 
-        public void Select(int flagsSelect)
+        public override void Select(int flagsSelect)
         {
             ComCallWrapper.Call(() => NativePattern.Select(flagsSelect));
         }
 
-        public void SetValue(string value)
+        public override void SetValue(string value)
         {
             ComCallWrapper.Call(() => NativePattern.SetValue(value));
         }
