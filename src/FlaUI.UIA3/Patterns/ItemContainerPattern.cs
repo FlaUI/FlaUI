@@ -22,8 +22,8 @@ namespace FlaUI.UIA3.Patterns
         {
             var foundNativeElement = ComCallWrapper.Call(() =>
                 NativePattern.FindItemByProperty(
-                    startAfter == null ? null : AutomationElementConverter.ToNative(startAfter),
-                    property == null ? 0 : property.Id, ValueConverter.ToNative(value)));
+                    startAfter?.ToNative(),
+                    property?.Id ?? 0, ValueConverter.ToNative(value)));
             return AutomationElementConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, foundNativeElement);
         }
     }
