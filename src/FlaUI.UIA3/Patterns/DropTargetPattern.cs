@@ -1,13 +1,12 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
-using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.UIA3.Identifiers;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class DropTargetPattern : PatternBase<UIA.IUIAutomationDropTargetPattern>, IDropTargetPattern
+    public class DropTargetPattern : DropTargetPatternBase<UIA.IUIAutomationDropTargetPattern>
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_DropTargetPatternId, "DropTarget", AutomationObjectIds.IsDropTargetPatternAvailableProperty);
         public static readonly PropertyId DropTargetEffectProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_DropTargetDropTargetEffectPropertyId, "DropTargetEffect");
@@ -19,14 +18,6 @@ namespace FlaUI.UIA3.Patterns
         public DropTargetPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationDropTargetPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
         }
-
-        public IDropTargetPatternProperties Properties => Automation.PropertyLibrary.DropTarget;
-
-        public IDropTargetPatternEvents Events => Automation.EventLibrary.DropTarget;
-
-        public string DropTargetEffect => Get<string>(DropTargetEffectProperty);
-
-        public string[] DropTargetEffects => Get<string[]>(DropTargetEffectsProperty);
     }
 
     public class DropTargetPatternProperties : IDropTargetPatternProperties
