@@ -2,14 +2,13 @@
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
-using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.UIA2.Identifiers;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Patterns
 {
 #if !NET35
-    public class SynchronizedInputPattern : PatternBase<UIA.SynchronizedInputPattern>, ISynchronizedInputPattern
+    public class SynchronizedInputPattern : SynchronizedInputPatternBase<UIA.SynchronizedInputPattern>
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.SynchronizedInputPattern.Pattern.Id, "SynchronizedInput", AutomationObjectIds.IsSynchronizedInputPatternAvailableProperty);
         public static readonly EventId DiscardedEvent = EventId.Register(AutomationType.UIA2, UIA.SynchronizedInputPattern.InputDiscardedEvent.Id, "Discarded");
@@ -19,15 +18,13 @@ namespace FlaUI.UIA2.Patterns
         public SynchronizedInputPattern(BasicAutomationElementBase basicAutomationElement, UIA.SynchronizedInputPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
         }
-
-        public ISynchronizedInputPatternEvents Events => Automation.EventLibrary.SynchronizedInput;
-
-        public void Cancel()
+        
+        public override void Cancel()
         {
             NativePattern.Cancel();
         }
 
-        public void StartListening(SynchronizedInputType inputType)
+        public override void StartListening(SynchronizedInputType inputType)
         {
             NativePattern.StartListening((UIA.SynchronizedInputType)inputType);
         }
