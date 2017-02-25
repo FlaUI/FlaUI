@@ -1,14 +1,12 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
-using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.UIA2.Identifiers;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Patterns
 {
-    public class ExpandCollapsePattern : PatternBase<UIA.ExpandCollapsePattern>, IExpandCollapsePattern
+    public class ExpandCollapsePattern : ExpandCollapsePatternBase<UIA.ExpandCollapsePattern>
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.ExpandCollapsePattern.Pattern.Id, "ExpandCollapse", AutomationObjectIds.IsExpandCollapsePatternAvailableProperty);
         public static readonly PropertyId ExpandCollapseStateProperty = PropertyId.Register(AutomationType.UIA2, UIA.ExpandCollapsePattern.ExpandCollapseStateProperty.Id, "ExpandCollapseState");
@@ -17,16 +15,12 @@ namespace FlaUI.UIA2.Patterns
         {
         }
 
-        public IExpandCollapsePatternProperties Properties => Automation.PropertyLibrary.ExpandCollapse;
-
-        public ExpandCollapseState ExpandCollapseState => Get<ExpandCollapseState>(ExpandCollapseStateProperty);
-
-        public void Collapse()
+        public override void Collapse()
         {
             NativePattern.Collapse();
         }
 
-        public void Expand()
+        public override void Expand()
         {
             NativePattern.Expand();
         }
