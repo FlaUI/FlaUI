@@ -16,9 +16,9 @@ namespace FlaUI.Core.Patterns
 
     public interface ISelectionPatternProperties
     {
-        PropertyId CanSelectMultipleProperty { get; }
-        PropertyId IsSelectionRequiredProperty { get; }
-        PropertyId SelectionProperty { get; }
+        PropertyId CanSelectMultiple { get; }
+        PropertyId IsSelectionRequired { get; }
+        PropertyId Selection { get; }
     }
 
     public interface ISelectionPatternEvents
@@ -30,9 +30,9 @@ namespace FlaUI.Core.Patterns
     {
         protected SelectionPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            CanSelectMultiple = new AutomationProperty<bool>(() => Properties.CanSelectMultipleProperty, BasicAutomationElement);
-            IsSelectionRequired = new AutomationProperty<bool>(() => Properties.IsSelectionRequiredProperty, BasicAutomationElement);
-            Selection = new AutomationProperty<AutomationElement[]>(() => Properties.SelectionProperty, BasicAutomationElement);
+            CanSelectMultiple = new AutomationProperty<bool>(() => Properties.CanSelectMultiple, BasicAutomationElement);
+            IsSelectionRequired = new AutomationProperty<bool>(() => Properties.IsSelectionRequired, BasicAutomationElement);
+            Selection = new AutomationProperty<AutomationElement[]>(() => Properties.Selection, BasicAutomationElement);
         }
 
         public ISelectionPatternProperties Properties => Automation.PropertyLibrary.Selection;

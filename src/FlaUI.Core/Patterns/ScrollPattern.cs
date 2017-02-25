@@ -26,24 +26,24 @@ namespace FlaUI.Core.Patterns
 
     public interface IScrollPatternProperties
     {
-        PropertyId HorizontallyScrollableProperty { get; }
-        PropertyId HorizontalScrollPercentProperty { get; }
-        PropertyId HorizontalViewSizeProperty { get; }
-        PropertyId VerticallyScrollableProperty { get; }
-        PropertyId VerticalScrollPercentProperty { get; }
-        PropertyId VerticalViewSizeProperty { get; }
+        PropertyId HorizontallyScrollable { get; }
+        PropertyId HorizontalScrollPercent { get; }
+        PropertyId HorizontalViewSize { get; }
+        PropertyId VerticallyScrollable { get; }
+        PropertyId VerticalScrollPercent { get; }
+        PropertyId VerticalViewSize { get; }
     }
 
     public abstract class ScrollPatternBase<TNativePattern> : PatternBase<TNativePattern>, IScrollPattern
     {
         protected ScrollPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            HorizontallyScrollable = new AutomationProperty<bool>(() => Properties.HorizontallyScrollableProperty, BasicAutomationElement);
-            HorizontalScrollPercent = new AutomationProperty<double>(() => Properties.HorizontalScrollPercentProperty, BasicAutomationElement);
-            HorizontalViewSize = new AutomationProperty<double>(() => Properties.HorizontalViewSizeProperty, BasicAutomationElement);
-            VerticallyScrollable = new AutomationProperty<bool>(() => Properties.VerticallyScrollableProperty, BasicAutomationElement);
-            VerticalScrollPercent = new AutomationProperty<double>(() => Properties.VerticalScrollPercentProperty, BasicAutomationElement);
-            VerticalViewSize = new AutomationProperty<double>(() => Properties.VerticalViewSizeProperty, BasicAutomationElement);
+            HorizontallyScrollable = new AutomationProperty<bool>(() => Properties.HorizontallyScrollable, BasicAutomationElement);
+            HorizontalScrollPercent = new AutomationProperty<double>(() => Properties.HorizontalScrollPercent, BasicAutomationElement);
+            HorizontalViewSize = new AutomationProperty<double>(() => Properties.HorizontalViewSize, BasicAutomationElement);
+            VerticallyScrollable = new AutomationProperty<bool>(() => Properties.VerticallyScrollable, BasicAutomationElement);
+            VerticalScrollPercent = new AutomationProperty<double>(() => Properties.VerticalScrollPercent, BasicAutomationElement);
+            VerticalViewSize = new AutomationProperty<double>(() => Properties.VerticalViewSize, BasicAutomationElement);
         }
 
         public IScrollPatternProperties Properties => Automation.PropertyLibrary.Scroll;

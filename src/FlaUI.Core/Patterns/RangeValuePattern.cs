@@ -19,24 +19,24 @@ namespace FlaUI.Core.Patterns
 
     public interface IRangeValuePatternProperties
     {
-        PropertyId IsReadOnlyProperty { get; }
-        PropertyId LargeChangeProperty { get; }
-        PropertyId MaximumProperty { get; }
-        PropertyId MinimumProperty { get; }
-        PropertyId SmallChangeProperty { get; }
-        PropertyId ValueProperty { get; }
+        PropertyId IsReadOnly { get; }
+        PropertyId LargeChange { get; }
+        PropertyId Maximum { get; }
+        PropertyId Minimum { get; }
+        PropertyId SmallChange { get; }
+        PropertyId Value { get; }
     }
 
     public abstract class RangeValuePatternBase<TNativePattern> : PatternBase<TNativePattern>, IRangeValuePattern
     {
         protected RangeValuePatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            IsReadOnly = new AutomationProperty<bool>(() => Properties.IsReadOnlyProperty, BasicAutomationElement);
-            LargeChange = new AutomationProperty<double>(() => Properties.LargeChangeProperty, BasicAutomationElement);
-            Maximum = new AutomationProperty<double>(() => Properties.MaximumProperty, BasicAutomationElement);
-            Minimum = new AutomationProperty<double>(() => Properties.MinimumProperty, BasicAutomationElement);
-            SmallChange = new AutomationProperty<double>(() => Properties.SmallChangeProperty, BasicAutomationElement);
-            Value = new AutomationProperty<double>(() => Properties.ValueProperty, BasicAutomationElement);
+            IsReadOnly = new AutomationProperty<bool>(() => Properties.IsReadOnly, BasicAutomationElement);
+            LargeChange = new AutomationProperty<double>(() => Properties.LargeChange, BasicAutomationElement);
+            Maximum = new AutomationProperty<double>(() => Properties.Maximum, BasicAutomationElement);
+            Minimum = new AutomationProperty<double>(() => Properties.Minimum, BasicAutomationElement);
+            SmallChange = new AutomationProperty<double>(() => Properties.SmallChange, BasicAutomationElement);
+            Value = new AutomationProperty<double>(() => Properties.Value, BasicAutomationElement);
         }
 
         public IRangeValuePatternProperties Properties => Automation.PropertyLibrary.RangeValue;

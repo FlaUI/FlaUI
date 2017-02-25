@@ -36,7 +36,7 @@ namespace FlaUI.Core.AutomationElements
         {
             get
             {
-                return FindAllChildren(cf => cf.ByControlType(ControlType.Window).And(new PropertyCondition(Automation.PropertyLibrary.Window.IsModalProperty, true))).
+                return FindAllChildren(cf => cf.ByControlType(ControlType.Window).And(new PropertyCondition(Automation.PropertyLibrary.Window.IsModal, true))).
                     Select(e => e.AsWindow()).ToArray();
             }
         }

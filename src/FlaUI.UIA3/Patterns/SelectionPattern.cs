@@ -22,9 +22,9 @@ namespace FlaUI.UIA3.Patterns
 
     public class SelectionPatternProperties : ISelectionPatternProperties
     {
-        public PropertyId CanSelectMultipleProperty => SelectionPattern.CanSelectMultipleProperty;
-        public PropertyId IsSelectionRequiredProperty => SelectionPattern.IsSelectionRequiredProperty;
-        public PropertyId SelectionProperty => SelectionPattern.SelectionProperty;
+        public PropertyId CanSelectMultiple => SelectionPattern.CanSelectMultipleProperty;
+        public PropertyId IsSelectionRequired => SelectionPattern.IsSelectionRequiredProperty;
+        public PropertyId Selection => SelectionPattern.SelectionProperty;
     }
 
     public class SelectionPatternEvents : ISelectionPatternEvents

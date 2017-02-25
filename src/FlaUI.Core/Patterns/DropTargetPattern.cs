@@ -14,8 +14,8 @@ namespace FlaUI.Core.Patterns
 
     public interface IDropTargetPatternProperties
     {
-        PropertyId DropTargetEffectProperty { get; }
-        PropertyId DropTargetEffectsProperty { get; }
+        PropertyId DropTargetEffect { get; }
+        PropertyId DropTargetEffects { get; }
     }
 
     public interface IDropTargetPatternEvents
@@ -29,8 +29,8 @@ namespace FlaUI.Core.Patterns
     {
         protected DropTargetPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            DropTargetEffect = new AutomationProperty<string>(() => Properties.DropTargetEffectProperty, BasicAutomationElement);
-            DropTargetEffects = new AutomationProperty<string[]>(() => Properties.DropTargetEffectsProperty, BasicAutomationElement);
+            DropTargetEffect = new AutomationProperty<string>(() => Properties.DropTargetEffect, BasicAutomationElement);
+            DropTargetEffects = new AutomationProperty<string[]>(() => Properties.DropTargetEffects, BasicAutomationElement);
         }
 
         public IDropTargetPatternProperties Properties => Automation.PropertyLibrary.DropTarget;

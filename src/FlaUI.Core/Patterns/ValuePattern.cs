@@ -15,16 +15,16 @@ namespace FlaUI.Core.Patterns
 
     public interface IValuePatternProperties
     {
-        PropertyId IsReadOnlyProperty { get; }
-        PropertyId ValueProperty { get; }
+        PropertyId IsReadOnly { get; }
+        PropertyId Value { get; }
     }
 
     public abstract class ValuePatternBase<TNativePattern> : PatternBase<TNativePattern>, IValuePattern
     {
         protected ValuePatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            IsReadOnly = new AutomationProperty<bool>(() => Properties.IsReadOnlyProperty, BasicAutomationElement);
-            Value = new AutomationProperty<string>(() => Properties.ValueProperty, BasicAutomationElement);
+            IsReadOnly = new AutomationProperty<bool>(() => Properties.IsReadOnly, BasicAutomationElement);
+            Value = new AutomationProperty<string>(() => Properties.Value, BasicAutomationElement);
         }
 
         public IValuePatternProperties Properties => Automation.PropertyLibrary.Value;

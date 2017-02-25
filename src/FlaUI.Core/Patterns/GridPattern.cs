@@ -16,16 +16,16 @@ namespace FlaUI.Core.Patterns
 
     public interface IGridPatternProperties
     {
-        PropertyId ColumnCountProperty { get; }
-        PropertyId RowCountProperty { get; }
+        PropertyId ColumnCount { get; }
+        PropertyId RowCount { get; }
     }
 
     public abstract class GridPatternBase<TNativePattern> : PatternBase<TNativePattern>, IGridPattern
     {
         protected GridPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            ColumnCount = new AutomationProperty<int>(() => Properties.ColumnCountProperty, BasicAutomationElement);
-            RowCount = new AutomationProperty<int>(() => Properties.RowCountProperty, BasicAutomationElement);
+            ColumnCount = new AutomationProperty<int>(() => Properties.ColumnCount, BasicAutomationElement);
+            RowCount = new AutomationProperty<int>(() => Properties.RowCount, BasicAutomationElement);
         }
 
         public IGridPatternProperties Properties => Automation.PropertyLibrary.Grid;

@@ -18,22 +18,22 @@ namespace FlaUI.Core.Patterns
 
     public interface IAnnotationPatternProperties
     {
-        PropertyId AnnotationTypeIdProperty { get; }
-        PropertyId AnnotationTypeNameProperty { get; }
-        PropertyId AuthorProperty { get; }
-        PropertyId DateTimeProperty { get; }
-        PropertyId TargetProperty { get; }
+        PropertyId AnnotationTypeId { get; }
+        PropertyId AnnotationTypeName { get; }
+        PropertyId Author { get; }
+        PropertyId DateTime { get; }
+        PropertyId Target { get; }
     }
 
     public abstract class AnnotationPatternBase<TNativePattern> : PatternBase<TNativePattern>, IAnnotationPattern
     {
         protected AnnotationPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            AnnotationType = new AutomationProperty<AnnotationType>(() => Properties.AnnotationTypeIdProperty, BasicAutomationElement);
-            AnnotationTypeName = new AutomationProperty<string>(() => Properties.AnnotationTypeNameProperty, BasicAutomationElement);
-            Author = new AutomationProperty<string>(() => Properties.AuthorProperty, BasicAutomationElement);
-            DateTime = new AutomationProperty<string>(() => Properties.DateTimeProperty, BasicAutomationElement);
-            Target = new AutomationProperty<AutomationElement>(() => Properties.TargetProperty, BasicAutomationElement);
+            AnnotationType = new AutomationProperty<AnnotationType>(() => Properties.AnnotationTypeId, BasicAutomationElement);
+            AnnotationTypeName = new AutomationProperty<string>(() => Properties.AnnotationTypeName, BasicAutomationElement);
+            Author = new AutomationProperty<string>(() => Properties.Author, BasicAutomationElement);
+            DateTime = new AutomationProperty<string>(() => Properties.DateTime, BasicAutomationElement);
+            Target = new AutomationProperty<AutomationElement>(() => Properties.Target, BasicAutomationElement);
         }
 
         public IAnnotationPatternProperties Properties => Automation.PropertyLibrary.Annotation;

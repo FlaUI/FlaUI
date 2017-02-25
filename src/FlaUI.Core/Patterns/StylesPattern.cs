@@ -19,26 +19,26 @@ namespace FlaUI.Core.Patterns
 
     public interface IStylesPatternProperties
     {
-        PropertyId ExtendedPropertiesProperty { get; }
-        PropertyId FillColorProperty { get; }
-        PropertyId FillPatternColorProperty { get; }
-        PropertyId FillPatternStyleProperty { get; }
-        PropertyId ShapeProperty { get; }
-        PropertyId StyleIdProperty { get; }
-        PropertyId StyleNameProperty { get; }
+        PropertyId ExtendedProperties { get; }
+        PropertyId FillColor { get; }
+        PropertyId FillPatternColor { get; }
+        PropertyId FillPatternStyle { get; }
+        PropertyId Shape { get; }
+        PropertyId StyleId { get; }
+        PropertyId StyleName { get; }
     }
 
     public abstract class StylesPatternBase<TNativePattern> : PatternBase<TNativePattern>, IStylesPattern
     {
         protected StylesPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            ExtendedProperties = new AutomationProperty<string>(() => Properties.ExtendedPropertiesProperty, BasicAutomationElement);
-            FillColor = new AutomationProperty<int>(() => Properties.FillColorProperty, BasicAutomationElement);
-            FillPatternColor = new AutomationProperty<int>(() => Properties.FillPatternColorProperty, BasicAutomationElement);
-            FillPatternStyle = new AutomationProperty<string>(() => Properties.FillPatternStyleProperty, BasicAutomationElement);
-            Shape = new AutomationProperty<string>(() => Properties.ShapeProperty, BasicAutomationElement);
-            Style = new AutomationProperty<StyleType>(() => Properties.StyleIdProperty, BasicAutomationElement);
-            StyleName = new AutomationProperty<string>(() => Properties.StyleNameProperty, BasicAutomationElement);
+            ExtendedProperties = new AutomationProperty<string>(() => Properties.ExtendedProperties, BasicAutomationElement);
+            FillColor = new AutomationProperty<int>(() => Properties.FillColor, BasicAutomationElement);
+            FillPatternColor = new AutomationProperty<int>(() => Properties.FillPatternColor, BasicAutomationElement);
+            FillPatternStyle = new AutomationProperty<string>(() => Properties.FillPatternStyle, BasicAutomationElement);
+            Shape = new AutomationProperty<string>(() => Properties.Shape, BasicAutomationElement);
+            Style = new AutomationProperty<StyleType>(() => Properties.StyleId, BasicAutomationElement);
+            StyleName = new AutomationProperty<string>(() => Properties.StyleName, BasicAutomationElement);
         }
 
         public IStylesPatternProperties Properties => Automation.PropertyLibrary.Styles;

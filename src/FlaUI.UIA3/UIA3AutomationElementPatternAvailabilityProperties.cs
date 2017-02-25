@@ -6,74 +6,74 @@ namespace FlaUI.UIA3
 {
     public class UIA3AutomationElementPatternAvailabilityProperties : IAutomationElementPatternAvailabilityProperties
     {
-        public PropertyId IsAnnotationPatternAvailableProperty => AutomationObjectIds.IsAnnotationPatternAvailableProperty;
-        public PropertyId IsDockPatternAvailableProperty => AutomationObjectIds.IsDockPatternAvailableProperty;
-        public PropertyId IsDragPatternAvailableProperty => AutomationObjectIds.IsDragPatternAvailableProperty;
-        public PropertyId IsDropTargetPatternAvailableProperty => AutomationObjectIds.IsDropTargetPatternAvailableProperty;
-        public PropertyId IsExpandCollapsePatternAvailableProperty => AutomationObjectIds.IsExpandCollapsePatternAvailableProperty;
-        public PropertyId IsGridItemPatternAvailableProperty => AutomationObjectIds.IsGridItemPatternAvailableProperty;
-        public PropertyId IsGridPatternAvailableProperty => AutomationObjectIds.IsGridPatternAvailableProperty;
-        public PropertyId IsInvokePatternAvailableProperty => AutomationObjectIds.IsInvokePatternAvailableProperty;
-        public PropertyId IsItemContainerPatternAvailableProperty => AutomationObjectIds.IsItemContainerPatternAvailableProperty;
-        public PropertyId IsLegacyIAccessiblePatternAvailableProperty => AutomationObjectIds.IsLegacyIAccessiblePatternAvailableProperty;
-        public PropertyId IsMultipleViewPatternAvailableProperty => AutomationObjectIds.IsMultipleViewPatternAvailableProperty;
-        public PropertyId IsObjectModelPatternAvailableProperty => AutomationObjectIds.IsObjectModelPatternAvailableProperty;
-        public PropertyId IsRangeValuePatternAvailableProperty => AutomationObjectIds.IsRangeValuePatternAvailableProperty;
-        public PropertyId IsScrollItemPatternAvailableProperty => AutomationObjectIds.IsScrollItemPatternAvailableProperty;
-        public PropertyId IsScrollPatternAvailableProperty => AutomationObjectIds.IsScrollPatternAvailableProperty;
-        public PropertyId IsSelectionItemPatternAvailableProperty => AutomationObjectIds.IsSelectionItemPatternAvailableProperty;
-        public PropertyId IsSelectionPatternAvailableProperty => AutomationObjectIds.IsSelectionPatternAvailableProperty;
-        public PropertyId IsSpreadsheetPatternAvailableProperty => AutomationObjectIds.IsSpreadsheetPatternAvailableProperty;
-        public PropertyId IsSpreadsheetItemPatternAvailableProperty => AutomationObjectIds.IsSpreadsheetItemPatternAvailableProperty;
-        public PropertyId IsStylesPatternAvailableProperty => AutomationObjectIds.IsStylesPatternAvailableProperty;
-        public PropertyId IsSynchronizedInputPatternAvailableProperty => AutomationObjectIds.IsSynchronizedInputPatternAvailableProperty;
-        public PropertyId IsTableItemPatternAvailableProperty => AutomationObjectIds.IsTableItemPatternAvailableProperty;
-        public PropertyId IsTablePatternAvailableProperty => AutomationObjectIds.IsTablePatternAvailableProperty;
-        public PropertyId IsTextChildPatternAvailableProperty => AutomationObjectIds.IsTextChildPatternAvailableProperty;
-        public PropertyId IsTextEditPatternAvailableProperty => AutomationObjectIds.IsTextEditPatternAvailableProperty;
-        public PropertyId IsTextPatternAvailableProperty => AutomationObjectIds.IsTextPatternAvailableProperty;
-        public PropertyId IsTextPattern2AvailableProperty => AutomationObjectIds.IsTextPattern2AvailableProperty;
-        public PropertyId IsTogglePatternAvailableProperty => AutomationObjectIds.IsTogglePatternAvailableProperty;
-        public PropertyId IsTransformPatternAvailableProperty => AutomationObjectIds.IsTransformPatternAvailableProperty;
-        public PropertyId IsTransformPattern2AvailableProperty => AutomationObjectIds.IsTransformPattern2AvailableProperty;
-        public PropertyId IsValuePatternAvailableProperty => AutomationObjectIds.IsValuePatternAvailableProperty;
-        public PropertyId IsVirtualizedItemPatternAvailableProperty => AutomationObjectIds.IsVirtualizedItemPatternAvailableProperty;
-        public PropertyId IsWindowPatternAvailableProperty => AutomationObjectIds.IsWindowPatternAvailableProperty;
+        public PropertyId IsAnnotationPatternAvailable => AutomationObjectIds.IsAnnotationPatternAvailableProperty;
+        public PropertyId IsDockPatternAvailable => AutomationObjectIds.IsDockPatternAvailableProperty;
+        public PropertyId IsDragPatternAvailable => AutomationObjectIds.IsDragPatternAvailableProperty;
+        public PropertyId IsDropTargetPatternAvailable => AutomationObjectIds.IsDropTargetPatternAvailableProperty;
+        public PropertyId IsExpandCollapsePatternAvailable => AutomationObjectIds.IsExpandCollapsePatternAvailableProperty;
+        public PropertyId IsGridItemPatternAvailable => AutomationObjectIds.IsGridItemPatternAvailableProperty;
+        public PropertyId IsGridPatternAvailable => AutomationObjectIds.IsGridPatternAvailableProperty;
+        public PropertyId IsInvokePatternAvailable => AutomationObjectIds.IsInvokePatternAvailableProperty;
+        public PropertyId IsItemContainerPatternAvailable => AutomationObjectIds.IsItemContainerPatternAvailableProperty;
+        public PropertyId IsLegacyIAccessiblePatternAvailable => AutomationObjectIds.IsLegacyIAccessiblePatternAvailableProperty;
+        public PropertyId IsMultipleViewPatternAvailable => AutomationObjectIds.IsMultipleViewPatternAvailableProperty;
+        public PropertyId IsObjectModelPatternAvailable => AutomationObjectIds.IsObjectModelPatternAvailableProperty;
+        public PropertyId IsRangeValuePatternAvailable => AutomationObjectIds.IsRangeValuePatternAvailableProperty;
+        public PropertyId IsScrollItemPatternAvailable => AutomationObjectIds.IsScrollItemPatternAvailableProperty;
+        public PropertyId IsScrollPatternAvailable => AutomationObjectIds.IsScrollPatternAvailableProperty;
+        public PropertyId IsSelectionItemPatternAvailable => AutomationObjectIds.IsSelectionItemPatternAvailableProperty;
+        public PropertyId IsSelectionPatternAvailable => AutomationObjectIds.IsSelectionPatternAvailableProperty;
+        public PropertyId IsSpreadsheetPatternAvailable => AutomationObjectIds.IsSpreadsheetPatternAvailableProperty;
+        public PropertyId IsSpreadsheetItemPatternAvailable => AutomationObjectIds.IsSpreadsheetItemPatternAvailableProperty;
+        public PropertyId IsStylesPatternAvailable => AutomationObjectIds.IsStylesPatternAvailableProperty;
+        public PropertyId IsSynchronizedInputPatternAvailable => AutomationObjectIds.IsSynchronizedInputPatternAvailableProperty;
+        public PropertyId IsTableItemPatternAvailable => AutomationObjectIds.IsTableItemPatternAvailableProperty;
+        public PropertyId IsTablePatternAvailable => AutomationObjectIds.IsTablePatternAvailableProperty;
+        public PropertyId IsTextChildPatternAvailable => AutomationObjectIds.IsTextChildPatternAvailableProperty;
+        public PropertyId IsTextEditPatternAvailable => AutomationObjectIds.IsTextEditPatternAvailableProperty;
+        public PropertyId IsTextPatternAvailable => AutomationObjectIds.IsTextPatternAvailableProperty;
+        public PropertyId IsTextPattern2Available => AutomationObjectIds.IsTextPattern2AvailableProperty;
+        public PropertyId IsTogglePatternAvailable => AutomationObjectIds.IsTogglePatternAvailableProperty;
+        public PropertyId IsTransformPatternAvailable => AutomationObjectIds.IsTransformPatternAvailableProperty;
+        public PropertyId IsTransformPattern2Available => AutomationObjectIds.IsTransformPattern2AvailableProperty;
+        public PropertyId IsValuePatternAvailable => AutomationObjectIds.IsValuePatternAvailableProperty;
+        public PropertyId IsVirtualizedItemPatternAvailable => AutomationObjectIds.IsVirtualizedItemPatternAvailableProperty;
+        public PropertyId IsWindowPatternAvailable => AutomationObjectIds.IsWindowPatternAvailableProperty;
 
         public PropertyId[] AllForCurrentFramework => new[] {
-            IsAnnotationPatternAvailableProperty,
-            IsDockPatternAvailableProperty,
-            IsDragPatternAvailableProperty,
-            IsDropTargetPatternAvailableProperty,
-            IsExpandCollapsePatternAvailableProperty,
-            IsGridItemPatternAvailableProperty,
-            IsGridPatternAvailableProperty,
-            IsInvokePatternAvailableProperty,
-            IsItemContainerPatternAvailableProperty,
-            IsLegacyIAccessiblePatternAvailableProperty,
-            IsMultipleViewPatternAvailableProperty,
-            IsObjectModelPatternAvailableProperty,
-            IsRangeValuePatternAvailableProperty,
-            IsScrollItemPatternAvailableProperty,
-            IsScrollPatternAvailableProperty,
-            IsSelectionItemPatternAvailableProperty,
-            IsSelectionPatternAvailableProperty,
-            IsSpreadsheetPatternAvailableProperty,
-            IsSpreadsheetItemPatternAvailableProperty,
-            IsStylesPatternAvailableProperty,
-            IsSynchronizedInputPatternAvailableProperty,
-            IsTableItemPatternAvailableProperty,
-            IsTablePatternAvailableProperty,
-            IsTextChildPatternAvailableProperty,
-            IsTextEditPatternAvailableProperty,
-            IsTextPatternAvailableProperty,
-            IsTextPattern2AvailableProperty,
-            IsTogglePatternAvailableProperty,
-            IsTransformPatternAvailableProperty,
-            IsTransformPattern2AvailableProperty,
-            IsValuePatternAvailableProperty,
-            IsVirtualizedItemPatternAvailableProperty,
-            IsWindowPatternAvailableProperty
+            IsAnnotationPatternAvailable,
+            IsDockPatternAvailable,
+            IsDragPatternAvailable,
+            IsDropTargetPatternAvailable,
+            IsExpandCollapsePatternAvailable,
+            IsGridItemPatternAvailable,
+            IsGridPatternAvailable,
+            IsInvokePatternAvailable,
+            IsItemContainerPatternAvailable,
+            IsLegacyIAccessiblePatternAvailable,
+            IsMultipleViewPatternAvailable,
+            IsObjectModelPatternAvailable,
+            IsRangeValuePatternAvailable,
+            IsScrollItemPatternAvailable,
+            IsScrollPatternAvailable,
+            IsSelectionItemPatternAvailable,
+            IsSelectionPatternAvailable,
+            IsSpreadsheetPatternAvailable,
+            IsSpreadsheetItemPatternAvailable,
+            IsStylesPatternAvailable,
+            IsSynchronizedInputPatternAvailable,
+            IsTableItemPatternAvailable,
+            IsTablePatternAvailable,
+            IsTextChildPatternAvailable,
+            IsTextEditPatternAvailable,
+            IsTextPatternAvailable,
+            IsTextPattern2Available,
+            IsTogglePatternAvailable,
+            IsTransformPatternAvailable,
+            IsTransformPattern2Available,
+            IsValuePatternAvailable,
+            IsVirtualizedItemPatternAvailable,
+            IsWindowPatternAvailable
         };
     }
 }

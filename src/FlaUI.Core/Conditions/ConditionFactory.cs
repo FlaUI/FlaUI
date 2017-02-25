@@ -17,22 +17,22 @@ namespace FlaUI.Core.Conditions
 
         public PropertyCondition ByAutomationId(string automationId)
         {
-            return new PropertyCondition(_propertyLibrary.Element.AutomationIdProperty, automationId);
+            return new PropertyCondition(_propertyLibrary.Element.AutomationId, automationId);
         }
 
         public PropertyCondition ByControlType(ControlType controlType)
         {
-            return new PropertyCondition(_propertyLibrary.Element.ControlTypeProperty, controlType);
+            return new PropertyCondition(_propertyLibrary.Element.ControlType, controlType);
         }
 
         public PropertyCondition ByClassName(string className)
         {
-            return new PropertyCondition(_propertyLibrary.Element.ClassNameProperty, className);
+            return new PropertyCondition(_propertyLibrary.Element.ClassName, className);
         }
 
         public PropertyCondition ByName(string name)
         {
-            return new PropertyCondition(_propertyLibrary.Element.NameProperty, name);
+            return new PropertyCondition(_propertyLibrary.Element.Name, name);
         }
 
         public PropertyCondition ByText(string text)
@@ -42,17 +42,17 @@ namespace FlaUI.Core.Conditions
 
         public PropertyCondition ByProcessId(int processId)
         {
-            return new PropertyCondition(_propertyLibrary.Element.ProcessIdProperty, processId);
+            return new PropertyCondition(_propertyLibrary.Element.ProcessId, processId);
         }
 
         public PropertyCondition ByLocalizedControlType(string localizedControlType)
         {
-           return new PropertyCondition(_propertyLibrary.Element.LocalizedControlTypeProperty, localizedControlType);
+           return new PropertyCondition(_propertyLibrary.Element.LocalizedControlType, localizedControlType);
         }
 
         public PropertyCondition ByHelpTextProperty(string helpText)
         {
-           return new PropertyCondition(_propertyLibrary.Element.HelpTextProperty, helpText);  
+           return new PropertyCondition(_propertyLibrary.Element.HelpText, helpText);  
         }
 
         /// <summary>

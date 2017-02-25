@@ -14,16 +14,16 @@ namespace FlaUI.Core.Patterns
 
     public interface ITableItemPatternProperties
     {
-        PropertyId ColumnHeaderItemsProperty { get; }
-        PropertyId RowHeaderItemsProperty { get; }
+        PropertyId ColumnHeaderItems { get; }
+        PropertyId RowHeaderItems { get; }
     }
 
     public abstract class TableItemPatternBase<TNativePattern> : PatternBase<TNativePattern>, ITableItemPattern
     {
         protected TableItemPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            ColumnHeaderItems = new AutomationProperty<AutomationElement[]>(() => Properties.ColumnHeaderItemsProperty, BasicAutomationElement);
-            RowHeaderItems = new AutomationProperty<AutomationElement[]>(() => Properties.RowHeaderItemsProperty, BasicAutomationElement);
+            ColumnHeaderItems = new AutomationProperty<AutomationElement[]>(() => Properties.ColumnHeaderItems, BasicAutomationElement);
+            RowHeaderItems = new AutomationProperty<AutomationElement[]>(() => Properties.RowHeaderItems, BasicAutomationElement);
         }
 
         public ITableItemPatternProperties Properties => Automation.PropertyLibrary.TableItem;

@@ -23,10 +23,10 @@ namespace FlaUI.UIA3.Patterns
 
     public class GridItemPatternProperties : IGridItemPatternProperties
     {
-        public PropertyId ColumnProperty => GridItemPattern.ColumnProperty;
-        public PropertyId ColumnSpanProperty => GridItemPattern.ColumnSpanProperty;
-        public PropertyId ContainingGridProperty => GridItemPattern.ContainingGridProperty;
-        public PropertyId RowProperty => GridItemPattern.RowProperty;
-        public PropertyId RowSpanProperty => GridItemPattern.RowSpanProperty;
+        public PropertyId Column => GridItemPattern.ColumnProperty;
+        public PropertyId ColumnSpan => GridItemPattern.ColumnSpanProperty;
+        public PropertyId ContainingGrid => GridItemPattern.ContainingGridProperty;
+        public PropertyId Row => GridItemPattern.RowProperty;
+        public PropertyId RowSpan => GridItemPattern.RowSpanProperty;
     }
 }

@@ -18,20 +18,20 @@ namespace FlaUI.Core.Patterns
 
     public interface ITransform2PatternProperties : ITransformPatternProperties
     {
-        PropertyId CanZoomProperty { get; }
-        PropertyId ZoomLevelProperty { get; }
-        PropertyId ZoomMaximumProperty { get; }
-        PropertyId ZoomMinimumProperty { get; }
+        PropertyId CanZoom { get; }
+        PropertyId ZoomLevel { get; }
+        PropertyId ZoomMaximum { get; }
+        PropertyId ZoomMinimum { get; }
     }
 
     public abstract class Transform2PatternBase<TNativePattern> : TransformPatternBase<TNativePattern>, ITransform2Pattern
     {
         protected Transform2PatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            CanZoom = new AutomationProperty<bool>(() => ((ITransform2Pattern)this).Properties.CanZoomProperty, BasicAutomationElement);
-            ZoomLevel = new AutomationProperty<double>(() => ((ITransform2Pattern)this).Properties.ZoomLevelProperty, BasicAutomationElement);
-            ZoomMaximum = new AutomationProperty<double>(() => ((ITransform2Pattern)this).Properties.ZoomMaximumProperty, BasicAutomationElement);
-            ZoomMinimum = new AutomationProperty<double>(() => ((ITransform2Pattern)this).Properties.ZoomMinimumProperty, BasicAutomationElement);
+            CanZoom = new AutomationProperty<bool>(() => ((ITransform2Pattern)this).Properties.CanZoom, BasicAutomationElement);
+            ZoomLevel = new AutomationProperty<double>(() => ((ITransform2Pattern)this).Properties.ZoomLevel, BasicAutomationElement);
+            ZoomMaximum = new AutomationProperty<double>(() => ((ITransform2Pattern)this).Properties.ZoomMaximum, BasicAutomationElement);
+            ZoomMinimum = new AutomationProperty<double>(() => ((ITransform2Pattern)this).Properties.ZoomMinimum, BasicAutomationElement);
         }
 
         ITransform2PatternProperties ITransform2Pattern.Properties => Automation.PropertyLibrary.Transform2;

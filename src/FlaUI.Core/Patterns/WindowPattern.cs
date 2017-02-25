@@ -23,12 +23,12 @@ namespace FlaUI.Core.Patterns
 
     public interface IWindowPatternProperties
     {
-        PropertyId CanMaximizeProperty { get; }
-        PropertyId CanMinimizeProperty { get; }
-        PropertyId IsModalProperty { get; }
-        PropertyId IsTopmostProperty { get; }
-        PropertyId WindowInteractionStateProperty { get; }
-        PropertyId WindowVisualStateProperty { get; }
+        PropertyId CanMaximize { get; }
+        PropertyId CanMinimize { get; }
+        PropertyId IsModal { get; }
+        PropertyId IsTopmost { get; }
+        PropertyId WindowInteractionState { get; }
+        PropertyId WindowVisualState { get; }
     }
 
     public interface IWindowPatternEvents
@@ -41,12 +41,12 @@ namespace FlaUI.Core.Patterns
     {
         protected WindowPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            CanMaximize = new AutomationProperty<bool>(() => Properties.CanMaximizeProperty, BasicAutomationElement);
-            CanMinimize = new AutomationProperty<bool>(() => Properties.CanMinimizeProperty, BasicAutomationElement);
-            IsModal = new AutomationProperty<bool>(() => Properties.IsModalProperty, BasicAutomationElement);
-            IsTopmost = new AutomationProperty<bool>(() => Properties.IsTopmostProperty, BasicAutomationElement);
-            WindowInteractionState = new AutomationProperty<WindowInteractionState>(() => Properties.WindowInteractionStateProperty, BasicAutomationElement);
-            WindowVisualState = new AutomationProperty<WindowVisualState>(() => Properties.WindowVisualStateProperty, BasicAutomationElement);
+            CanMaximize = new AutomationProperty<bool>(() => Properties.CanMaximize, BasicAutomationElement);
+            CanMinimize = new AutomationProperty<bool>(() => Properties.CanMinimize, BasicAutomationElement);
+            IsModal = new AutomationProperty<bool>(() => Properties.IsModal, BasicAutomationElement);
+            IsTopmost = new AutomationProperty<bool>(() => Properties.IsTopmost, BasicAutomationElement);
+            WindowInteractionState = new AutomationProperty<WindowInteractionState>(() => Properties.WindowInteractionState, BasicAutomationElement);
+            WindowVisualState = new AutomationProperty<WindowVisualState>(() => Properties.WindowVisualState, BasicAutomationElement);
         }
 
         public IWindowPatternProperties Properties => Automation.PropertyLibrary.Window;

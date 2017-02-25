@@ -38,9 +38,9 @@ namespace FlaUI.UIA2.Patterns
 
     public class SelectionItemPatternProperties : ISelectionItemPatternProperties
     {
-        public PropertyId IsSelectedProperty => SelectionItemPattern.IsSelectedProperty;
+        public PropertyId IsSelected => SelectionItemPattern.IsSelectedProperty;
 
-        public PropertyId SelectionContainerProperty => SelectionItemPattern.SelectionContainerProperty;
+        public PropertyId SelectionContainer => SelectionItemPattern.SelectionContainerProperty;
     }
 
     public class SelectionItemPatternEvents : ISelectionItemPatternEvents

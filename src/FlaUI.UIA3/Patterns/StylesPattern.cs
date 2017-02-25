@@ -29,12 +29,12 @@ namespace FlaUI.UIA3.Patterns
 
     public class StylesPatternProperties : IStylesPatternProperties
     {
-        public PropertyId ExtendedPropertiesProperty => StylesPattern.ExtendedPropertiesProperty;
-        public PropertyId FillColorProperty => StylesPattern.FillColorProperty;
-        public PropertyId FillPatternColorProperty => StylesPattern.FillPatternColorProperty;
-        public PropertyId FillPatternStyleProperty => StylesPattern.FillPatternStyleProperty;
-        public PropertyId ShapeProperty => StylesPattern.ShapeProperty;
-        public PropertyId StyleIdProperty => StylesPattern.StyleIdProperty;
-        public PropertyId StyleNameProperty => StylesPattern.StyleNameProperty;
+        public PropertyId ExtendedProperties => StylesPattern.ExtendedPropertiesProperty;
+        public PropertyId FillColor => StylesPattern.FillColorProperty;
+        public PropertyId FillPatternColor => StylesPattern.FillPatternColorProperty;
+        public PropertyId FillPatternStyle => StylesPattern.FillPatternStyleProperty;
+        public PropertyId Shape => StylesPattern.ShapeProperty;
+        public PropertyId StyleId => StylesPattern.StyleIdProperty;
+        public PropertyId StyleName => StylesPattern.StyleNameProperty;
     }
 }

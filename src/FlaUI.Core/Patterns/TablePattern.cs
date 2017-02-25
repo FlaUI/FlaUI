@@ -16,18 +16,18 @@ namespace FlaUI.Core.Patterns
 
     public interface ITablePatternProperties
     {
-        PropertyId ColumnHeadersProperty { get; }
-        PropertyId RowHeadersProperty { get; }
-        PropertyId RowOrColumnMajorProperty { get; }
+        PropertyId ColumnHeaders { get; }
+        PropertyId RowHeaders { get; }
+        PropertyId RowOrColumnMajor { get; }
     }
 
     public abstract class TablePatternBase<TNativePattern> : PatternBase<TNativePattern>, ITablePattern
     {
         protected TablePatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            ColumnHeaders = new AutomationProperty<AutomationElement[]>(() => Properties.ColumnHeadersProperty, BasicAutomationElement);
-            RowHeaders = new AutomationProperty<AutomationElement[]>(() => Properties.RowHeadersProperty, BasicAutomationElement);
-            RowOrColumnMajor = new AutomationProperty<RowOrColumnMajor>(() => Properties.RowOrColumnMajorProperty, BasicAutomationElement);
+            ColumnHeaders = new AutomationProperty<AutomationElement[]>(() => Properties.ColumnHeaders, BasicAutomationElement);
+            RowHeaders = new AutomationProperty<AutomationElement[]>(() => Properties.RowHeaders, BasicAutomationElement);
+            RowOrColumnMajor = new AutomationProperty<RowOrColumnMajor>(() => Properties.RowOrColumnMajor, BasicAutomationElement);
         }
 
         public ITablePatternProperties Properties => Automation.PropertyLibrary.Table;

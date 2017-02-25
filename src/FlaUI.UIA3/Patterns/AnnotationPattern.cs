@@ -23,10 +23,10 @@ namespace FlaUI.UIA3.Patterns
 
     public class AnnotationPatternProperties : IAnnotationPatternProperties
     {
-        public PropertyId AnnotationTypeIdProperty => AnnotationPattern.AnnotationTypeIdProperty;
-        public PropertyId AnnotationTypeNameProperty => AnnotationPattern.AnnotationTypeNameProperty;
-        public PropertyId AuthorProperty => AnnotationPattern.AuthorProperty;
-        public PropertyId DateTimeProperty => AnnotationPattern.DateTimeProperty;
-        public PropertyId TargetProperty => AnnotationPattern.TargetProperty;
+        public PropertyId AnnotationTypeId => AnnotationPattern.AnnotationTypeIdProperty;
+        public PropertyId AnnotationTypeName => AnnotationPattern.AnnotationTypeNameProperty;
+        public PropertyId Author => AnnotationPattern.AuthorProperty;
+        public PropertyId DateTime => AnnotationPattern.DateTimeProperty;
+        public PropertyId Target => AnnotationPattern.TargetProperty;
     }
 }

@@ -29,7 +29,7 @@ namespace FlaUI.UIA2.Patterns
 
     public class MultipleViewPatternProperties : IMultipleViewPatternProperties
     {
-        public PropertyId CurrentViewProperty => MultipleViewPattern.CurrentViewProperty;
-        public PropertyId SupportedViewsProperty => MultipleViewPattern.SupportedViewsProperty;
+        public PropertyId CurrentView => MultipleViewPattern.CurrentViewProperty;
+        public PropertyId SupportedViews => MultipleViewPattern.SupportedViewsProperty;
     }
 }

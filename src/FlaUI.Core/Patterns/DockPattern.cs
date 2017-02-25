@@ -15,14 +15,14 @@ namespace FlaUI.Core.Patterns
 
     public interface IDockPatternProperties
     {
-        PropertyId DockPositionProperty { get; }
+        PropertyId DockPosition { get; }
     }
 
     public abstract class DockPatternBase<TNativePattern> : PatternBase<TNativePattern>, IDockPattern
     {
         protected DockPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            DockPosition = new AutomationProperty<DockPosition>(() => Properties.DockPositionProperty, BasicAutomationElement);
+            DockPosition = new AutomationProperty<DockPosition>(() => Properties.DockPosition, BasicAutomationElement);
         }
 
         public IDockPatternProperties Properties => Automation.PropertyLibrary.Dock;

@@ -17,10 +17,10 @@ namespace FlaUI.Core.Patterns
 
     public interface IDragPatternProperties
     {
-        PropertyId DropEffectProperty { get; }
-        PropertyId DropEffectsProperty { get; }
-        PropertyId IsGrabbedProperty { get; }
-        PropertyId GrabbedItemsProperty { get; }
+        PropertyId DropEffect { get; }
+        PropertyId DropEffects { get; }
+        PropertyId IsGrabbed { get; }
+        PropertyId GrabbedItems { get; }
     }
 
     public interface IDragPatternEvents
@@ -34,10 +34,10 @@ namespace FlaUI.Core.Patterns
     {
         protected DragPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            DropEffect = new AutomationProperty<string>(() => Properties.DropEffectProperty, BasicAutomationElement);
-            DropEffects = new AutomationProperty<string[]>(() => Properties.DropEffectsProperty, BasicAutomationElement);
-            IsGrabbed = new AutomationProperty<bool>(() => Properties.IsGrabbedProperty, BasicAutomationElement);
-            GrabbedItems = new AutomationProperty<AutomationElement[]>(() => Properties.GrabbedItemsProperty, BasicAutomationElement);
+            DropEffect = new AutomationProperty<string>(() => Properties.DropEffect, BasicAutomationElement);
+            DropEffects = new AutomationProperty<string[]>(() => Properties.DropEffects, BasicAutomationElement);
+            IsGrabbed = new AutomationProperty<bool>(() => Properties.IsGrabbed, BasicAutomationElement);
+            GrabbedItems = new AutomationProperty<AutomationElement[]>(() => Properties.GrabbedItems, BasicAutomationElement);
         }
 
         public IDragPatternProperties Properties => Automation.PropertyLibrary.Drag;

@@ -21,8 +21,8 @@ namespace FlaUI.UIA3.Patterns
 
     public class SpreadsheetItemPatternProperties : ISpreadsheetItemPatternProperties
     {
-        public PropertyId FormulaProperty => SpreadsheetItemPattern.FormulaProperty;
-        public PropertyId AnnotationObjectsProperty => SpreadsheetItemPattern.AnnotationObjectsProperty;
-        public PropertyId AnnotationTypesProperty => SpreadsheetItemPattern.AnnotationTypesProperty;
+        public PropertyId Formula => SpreadsheetItemPattern.FormulaProperty;
+        public PropertyId AnnotationObjects => SpreadsheetItemPattern.AnnotationObjectsProperty;
+        public PropertyId AnnotationTypes => SpreadsheetItemPattern.AnnotationTypesProperty;
     }
 }

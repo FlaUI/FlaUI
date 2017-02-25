@@ -35,16 +35,16 @@ namespace FlaUI.UIA3.Patterns
 
     public class ScrollPatternProperties : IScrollPatternProperties
     {
-        public PropertyId HorizontallyScrollableProperty => ScrollPattern.HorizontallyScrollableProperty;
+        public PropertyId HorizontallyScrollable => ScrollPattern.HorizontallyScrollableProperty;
 
-        public PropertyId HorizontalScrollPercentProperty => ScrollPattern.HorizontalScrollPercentProperty;
+        public PropertyId HorizontalScrollPercent => ScrollPattern.HorizontalScrollPercentProperty;
 
-        public PropertyId HorizontalViewSizeProperty => ScrollPattern.HorizontalViewSizeProperty;
+        public PropertyId HorizontalViewSize => ScrollPattern.HorizontalViewSizeProperty;
 
-        public PropertyId VerticallyScrollableProperty => ScrollPattern.VerticallyScrollableProperty;
+        public PropertyId VerticallyScrollable => ScrollPattern.VerticallyScrollableProperty;
 
-        public PropertyId VerticalScrollPercentProperty => ScrollPattern.VerticalScrollPercentProperty;
+        public PropertyId VerticalScrollPercent => ScrollPattern.VerticalScrollPercentProperty;
 
-        public PropertyId VerticalViewSizeProperty => ScrollPattern.VerticalViewSizeProperty;
+        public PropertyId VerticalViewSize => ScrollPattern.VerticalViewSizeProperty;
     }
 }

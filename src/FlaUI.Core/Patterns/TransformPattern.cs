@@ -18,18 +18,18 @@ namespace FlaUI.Core.Patterns
 
     public interface ITransformPatternProperties
     {
-        PropertyId CanMoveProperty { get; }
-        PropertyId CanResizeProperty { get; }
-        PropertyId CanRotateProperty { get; }
+        PropertyId CanMove { get; }
+        PropertyId CanResize { get; }
+        PropertyId CanRotate { get; }
     }
 
     public abstract class TransformPatternBase<TNativePattern> : PatternBase<TNativePattern>, ITransformPattern
     {
         protected TransformPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            CanMove = new AutomationProperty<bool>(() => Properties.CanMoveProperty, BasicAutomationElement);
-            CanResize = new AutomationProperty<bool>(() => Properties.CanResizeProperty, BasicAutomationElement);
-            CanRotate = new AutomationProperty<bool>(() => Properties.CanRotateProperty, BasicAutomationElement);
+            CanMove = new AutomationProperty<bool>(() => Properties.CanMove, BasicAutomationElement);
+            CanResize = new AutomationProperty<bool>(() => Properties.CanResize, BasicAutomationElement);
+            CanRotate = new AutomationProperty<bool>(() => Properties.CanRotate, BasicAutomationElement);
         }
 
         public ITransformPatternProperties Properties => Automation.PropertyLibrary.Transform;

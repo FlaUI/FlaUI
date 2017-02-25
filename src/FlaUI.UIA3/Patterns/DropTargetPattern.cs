@@ -22,8 +22,8 @@ namespace FlaUI.UIA3.Patterns
 
     public class DropTargetPatternProperties : IDropTargetPatternProperties
     {
-        public PropertyId DropTargetEffectProperty => DropTargetPattern.DropTargetEffectProperty;
-        public PropertyId DropTargetEffectsProperty => DropTargetPattern.DropTargetEffectsProperty;
+        public PropertyId DropTargetEffect => DropTargetPattern.DropTargetEffectProperty;
+        public PropertyId DropTargetEffects => DropTargetPattern.DropTargetEffectsProperty;
     }
 
     public class DropTargetPatternEvents : IDropTargetPatternEvents

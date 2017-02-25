@@ -19,8 +19,8 @@ namespace FlaUI.Core.Patterns
 
     public interface ISelectionItemPatternProperties
     {
-        PropertyId IsSelectedProperty { get; }
-        PropertyId SelectionContainerProperty { get; }
+        PropertyId IsSelected { get; }
+        PropertyId SelectionContainer { get; }
     }
 
     public interface ISelectionItemPatternEvents
@@ -34,8 +34,8 @@ namespace FlaUI.Core.Patterns
     {
         protected SelectionItemPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            IsSelected = new AutomationProperty<bool>(() => Properties.IsSelectedProperty, BasicAutomationElement);
-            SelectionContainer = new AutomationProperty<AutomationElement>(() => Properties.SelectionContainerProperty, BasicAutomationElement);
+            IsSelected = new AutomationProperty<bool>(() => Properties.IsSelected, BasicAutomationElement);
+            SelectionContainer = new AutomationProperty<AutomationElement>(() => Properties.SelectionContainer, BasicAutomationElement);
         }
 
         public ISelectionItemPatternProperties Properties => Automation.PropertyLibrary.SelectionItem;

@@ -7,80 +7,80 @@ namespace FlaUI.UIA2
 {
     public class UIA2AutomationElementPatternAvailabilityProperties : IAutomationElementPatternAvailabilityProperties
     {
-        public PropertyId IsAnnotationPatternAvailableProperty { get { throw new NotSupportedByUIA2Exception(); } }
-        public PropertyId IsDockPatternAvailableProperty => AutomationObjectIds.IsDockPatternAvailableProperty;
-        public PropertyId IsDragPatternAvailableProperty { get { throw new NotSupportedByUIA2Exception(); } }
-        public PropertyId IsDropTargetPatternAvailableProperty { get { throw new NotSupportedByUIA2Exception(); } }
-        public PropertyId IsExpandCollapsePatternAvailableProperty => AutomationObjectIds.IsExpandCollapsePatternAvailableProperty;
-        public PropertyId IsGridItemPatternAvailableProperty => AutomationObjectIds.IsGridItemPatternAvailableProperty;
-        public PropertyId IsGridPatternAvailableProperty => AutomationObjectIds.IsGridPatternAvailableProperty;
-        public PropertyId IsInvokePatternAvailableProperty => AutomationObjectIds.IsInvokePatternAvailableProperty;
+        public PropertyId IsAnnotationPatternAvailable { get { throw new NotSupportedByUIA2Exception(); } }
+        public PropertyId IsDockPatternAvailable => AutomationObjectIds.IsDockPatternAvailableProperty;
+        public PropertyId IsDragPatternAvailable { get { throw new NotSupportedByUIA2Exception(); } }
+        public PropertyId IsDropTargetPatternAvailable { get { throw new NotSupportedByUIA2Exception(); } }
+        public PropertyId IsExpandCollapsePatternAvailable => AutomationObjectIds.IsExpandCollapsePatternAvailableProperty;
+        public PropertyId IsGridItemPatternAvailable => AutomationObjectIds.IsGridItemPatternAvailableProperty;
+        public PropertyId IsGridPatternAvailable => AutomationObjectIds.IsGridPatternAvailableProperty;
+        public PropertyId IsInvokePatternAvailable => AutomationObjectIds.IsInvokePatternAvailableProperty;
 #if NET35
-        public PropertyId IsItemContainerPatternAvailableProperty { get { throw new NotSupportedByUIA2Exception(); } }
+        public PropertyId IsItemContainerPatternAvailable { get { throw new NotSupportedByUIA2Exception(); } }
 #else
-        public PropertyId IsItemContainerPatternAvailableProperty => AutomationObjectIds.IsItemContainerPatternAvailableProperty;
+        public PropertyId IsItemContainerPatternAvailable => AutomationObjectIds.IsItemContainerPatternAvailableProperty;
 #endif
-        public PropertyId IsLegacyIAccessiblePatternAvailableProperty { get { throw new NotSupportedByUIA2Exception(); } }
-        public PropertyId IsMultipleViewPatternAvailableProperty => AutomationObjectIds.IsMultipleViewPatternAvailableProperty;
-        public PropertyId IsObjectModelPatternAvailableProperty { get { throw new NotSupportedByUIA2Exception(); } }
-        public PropertyId IsRangeValuePatternAvailableProperty => AutomationObjectIds.IsRangeValuePatternAvailableProperty;
-        public PropertyId IsScrollItemPatternAvailableProperty => AutomationObjectIds.IsScrollItemPatternAvailableProperty;
-        public PropertyId IsScrollPatternAvailableProperty => AutomationObjectIds.IsScrollPatternAvailableProperty;
-        public PropertyId IsSelectionItemPatternAvailableProperty => AutomationObjectIds.IsSelectionItemPatternAvailableProperty;
-        public PropertyId IsSelectionPatternAvailableProperty => AutomationObjectIds.IsSelectionPatternAvailableProperty;
-        public PropertyId IsSpreadsheetPatternAvailableProperty { get { throw new NotSupportedByUIA2Exception(); } }
-        public PropertyId IsSpreadsheetItemPatternAvailableProperty { get { throw new NotSupportedByUIA2Exception(); } }
-        public PropertyId IsStylesPatternAvailableProperty { get { throw new NotSupportedByUIA2Exception(); } }
+        public PropertyId IsLegacyIAccessiblePatternAvailable { get { throw new NotSupportedByUIA2Exception(); } }
+        public PropertyId IsMultipleViewPatternAvailable => AutomationObjectIds.IsMultipleViewPatternAvailableProperty;
+        public PropertyId IsObjectModelPatternAvailable { get { throw new NotSupportedByUIA2Exception(); } }
+        public PropertyId IsRangeValuePatternAvailable => AutomationObjectIds.IsRangeValuePatternAvailableProperty;
+        public PropertyId IsScrollItemPatternAvailable => AutomationObjectIds.IsScrollItemPatternAvailableProperty;
+        public PropertyId IsScrollPatternAvailable => AutomationObjectIds.IsScrollPatternAvailableProperty;
+        public PropertyId IsSelectionItemPatternAvailable => AutomationObjectIds.IsSelectionItemPatternAvailableProperty;
+        public PropertyId IsSelectionPatternAvailable => AutomationObjectIds.IsSelectionPatternAvailableProperty;
+        public PropertyId IsSpreadsheetPatternAvailable { get { throw new NotSupportedByUIA2Exception(); } }
+        public PropertyId IsSpreadsheetItemPatternAvailable { get { throw new NotSupportedByUIA2Exception(); } }
+        public PropertyId IsStylesPatternAvailable { get { throw new NotSupportedByUIA2Exception(); } }
 #if NET35
-        public PropertyId IsSynchronizedInputPatternAvailableProperty { get { throw new NotSupportedByUIA2Exception(); } }
+        public PropertyId IsSynchronizedInputPatternAvailable { get { throw new NotSupportedByUIA2Exception(); } }
 #else
-        public PropertyId IsSynchronizedInputPatternAvailableProperty => AutomationObjectIds.IsSynchronizedInputPatternAvailableProperty;
+        public PropertyId IsSynchronizedInputPatternAvailable => AutomationObjectIds.IsSynchronizedInputPatternAvailableProperty;
 #endif
-        public PropertyId IsTableItemPatternAvailableProperty => AutomationObjectIds.IsTableItemPatternAvailableProperty;
-        public PropertyId IsTablePatternAvailableProperty => AutomationObjectIds.IsTablePatternAvailableProperty;
-        public PropertyId IsTextChildPatternAvailableProperty { get { throw new NotSupportedByUIA2Exception(); } }
-        public PropertyId IsTextEditPatternAvailableProperty { get { throw new NotSupportedByUIA2Exception(); } }
-        public PropertyId IsTextPatternAvailableProperty => AutomationObjectIds.IsTextPatternAvailableProperty;
-        public PropertyId IsTextPattern2AvailableProperty { get { throw new NotSupportedByUIA2Exception(); } }
-        public PropertyId IsTogglePatternAvailableProperty => AutomationObjectIds.IsTogglePatternAvailableProperty;
-        public PropertyId IsTransformPatternAvailableProperty => AutomationObjectIds.IsTransformPatternAvailableProperty;
-        public PropertyId IsTransformPattern2AvailableProperty { get { throw new NotSupportedByUIA2Exception(); } }
-        public PropertyId IsValuePatternAvailableProperty => AutomationObjectIds.IsValuePatternAvailableProperty;
+        public PropertyId IsTableItemPatternAvailable => AutomationObjectIds.IsTableItemPatternAvailableProperty;
+        public PropertyId IsTablePatternAvailable => AutomationObjectIds.IsTablePatternAvailableProperty;
+        public PropertyId IsTextChildPatternAvailable { get { throw new NotSupportedByUIA2Exception(); } }
+        public PropertyId IsTextEditPatternAvailable { get { throw new NotSupportedByUIA2Exception(); } }
+        public PropertyId IsTextPatternAvailable => AutomationObjectIds.IsTextPatternAvailableProperty;
+        public PropertyId IsTextPattern2Available { get { throw new NotSupportedByUIA2Exception(); } }
+        public PropertyId IsTogglePatternAvailable => AutomationObjectIds.IsTogglePatternAvailableProperty;
+        public PropertyId IsTransformPatternAvailable => AutomationObjectIds.IsTransformPatternAvailableProperty;
+        public PropertyId IsTransformPattern2Available { get { throw new NotSupportedByUIA2Exception(); } }
+        public PropertyId IsValuePatternAvailable => AutomationObjectIds.IsValuePatternAvailableProperty;
 #if NET35
-        public PropertyId IsVirtualizedItemPatternAvailableProperty { get { throw new NotSupportedByUIA2Exception(); } }
+        public PropertyId IsVirtualizedItemPatternAvailable { get { throw new NotSupportedByUIA2Exception(); } }
 #else
-        public PropertyId IsVirtualizedItemPatternAvailableProperty => AutomationObjectIds.IsVirtualizedItemPatternAvailableProperty;
+        public PropertyId IsVirtualizedItemPatternAvailable => AutomationObjectIds.IsVirtualizedItemPatternAvailableProperty;
 #endif
-        public PropertyId IsWindowPatternAvailableProperty => AutomationObjectIds.IsWindowPatternAvailableProperty;
+        public PropertyId IsWindowPatternAvailable => AutomationObjectIds.IsWindowPatternAvailableProperty;
 
         public PropertyId[] AllForCurrentFramework => new[] {
-            IsDockPatternAvailableProperty,
-            IsExpandCollapsePatternAvailableProperty,
-            IsGridItemPatternAvailableProperty,
-            IsGridPatternAvailableProperty,
-            IsInvokePatternAvailableProperty,
+            IsDockPatternAvailable,
+            IsExpandCollapsePatternAvailable,
+            IsGridItemPatternAvailable,
+            IsGridPatternAvailable,
+            IsInvokePatternAvailable,
 #if !NET35
-            IsItemContainerPatternAvailableProperty,
+            IsItemContainerPatternAvailable,
 #endif
-            IsMultipleViewPatternAvailableProperty,
-            IsRangeValuePatternAvailableProperty,
-            IsScrollItemPatternAvailableProperty,
-            IsScrollPatternAvailableProperty,
-            IsSelectionItemPatternAvailableProperty,
-            IsSelectionPatternAvailableProperty,
+            IsMultipleViewPatternAvailable,
+            IsRangeValuePatternAvailable,
+            IsScrollItemPatternAvailable,
+            IsScrollPatternAvailable,
+            IsSelectionItemPatternAvailable,
+            IsSelectionPatternAvailable,
 #if !NET35
-            IsSynchronizedInputPatternAvailableProperty,
+            IsSynchronizedInputPatternAvailable,
 #endif
-            IsTableItemPatternAvailableProperty,
-            IsTablePatternAvailableProperty,
-            IsTextPatternAvailableProperty,
-            IsTogglePatternAvailableProperty,
-            IsTransformPatternAvailableProperty,
-            IsValuePatternAvailableProperty,
+            IsTableItemPatternAvailable,
+            IsTablePatternAvailable,
+            IsTextPatternAvailable,
+            IsTogglePatternAvailable,
+            IsTransformPatternAvailable,
+            IsValuePatternAvailable,
 #if !NET35
-            IsVirtualizedItemPatternAvailableProperty,
+            IsVirtualizedItemPatternAvailable,
 #endif
-            IsWindowPatternAvailableProperty
+            IsWindowPatternAvailable
         };
     }
 }

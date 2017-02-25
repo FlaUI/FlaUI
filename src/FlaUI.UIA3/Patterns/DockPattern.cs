@@ -25,6 +25,6 @@ namespace FlaUI.UIA3.Patterns
 
     public class DockPatternProperties : IDockPatternProperties
     {
-        public PropertyId DockPositionProperty => DockPattern.DockPositionProperty;
+        public PropertyId DockPosition => DockPattern.DockPositionProperty;
     }
 }

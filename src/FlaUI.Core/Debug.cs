@@ -54,15 +54,15 @@ namespace FlaUI.Core
                 var cr = new CacheRequest();
                 cr.AutomationElementMode = AutomationElementMode.None;
                 // Add the element properties
-                cr.Add(automationElement.Properties.AutomationIdProperty);
-                cr.Add(automationElement.Properties.ControlTypeProperty);
-                cr.Add(automationElement.Properties.NameProperty);
-                cr.Add(automationElement.Properties.HelpTextProperty);
-                cr.Add(automationElement.Properties.BoundingRectangleProperty);
-                cr.Add(automationElement.Properties.ClassNameProperty);
-                cr.Add(automationElement.Properties.IsOffscreenProperty);
-                cr.Add(automationElement.Properties.FrameworkIdProperty);
-                cr.Add(automationElement.Properties.ProcessIdProperty);
+                cr.Add(automationElement.Properties.AutomationId);
+                cr.Add(automationElement.Properties.ControlType);
+                cr.Add(automationElement.Properties.Name);
+                cr.Add(automationElement.Properties.HelpText);
+                cr.Add(automationElement.Properties.BoundingRectangle);
+                cr.Add(automationElement.Properties.ClassName);
+                cr.Add(automationElement.Properties.IsOffscreen);
+                cr.Add(automationElement.Properties.FrameworkId);
+                cr.Add(automationElement.Properties.ProcessId);
                 // Add the pattern availability properties
                 automationElement.PatternAvailability.AllForCurrentFramework.ToList().ForEach(x=> cr.Add(x));
                 cr.TreeScope = TreeScope.Subtree;

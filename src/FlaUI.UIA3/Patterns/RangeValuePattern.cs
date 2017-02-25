@@ -29,16 +29,16 @@ namespace FlaUI.UIA3.Patterns
 
     public class RangeValuePatternProperties : IRangeValuePatternProperties
     {
-        public PropertyId IsReadOnlyProperty => RangeValuePattern.IsReadOnlyProperty;
+        public PropertyId IsReadOnly => RangeValuePattern.IsReadOnlyProperty;
 
-        public PropertyId LargeChangeProperty => RangeValuePattern.LargeChangeProperty;
+        public PropertyId LargeChange => RangeValuePattern.LargeChangeProperty;
 
-        public PropertyId MaximumProperty => RangeValuePattern.MaximumProperty;
+        public PropertyId Maximum => RangeValuePattern.MaximumProperty;
 
-        public PropertyId MinimumProperty => RangeValuePattern.MinimumProperty;
+        public PropertyId Minimum => RangeValuePattern.MinimumProperty;
 
-        public PropertyId SmallChangeProperty => RangeValuePattern.SmallChangeProperty;
+        public PropertyId SmallChange => RangeValuePattern.SmallChangeProperty;
 
-        public PropertyId ValueProperty => RangeValuePattern.ValueProperty;
+        public PropertyId Value => RangeValuePattern.ValueProperty;
     }
 }

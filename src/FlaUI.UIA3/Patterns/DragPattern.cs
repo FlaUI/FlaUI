@@ -25,10 +25,10 @@ namespace FlaUI.UIA3.Patterns
 
     public class DragPatternProperties : IDragPatternProperties
     {
-        public PropertyId DropEffectProperty => DragPattern.DropEffectProperty;
-        public PropertyId DropEffectsProperty => DragPattern.DropEffectsProperty;
-        public PropertyId IsGrabbedProperty => DragPattern.IsGrabbedProperty;
-        public PropertyId GrabbedItemsProperty => DragPattern.GrabbedItemsProperty;
+        public PropertyId DropEffect => DragPattern.DropEffectProperty;
+        public PropertyId DropEffects => DragPattern.DropEffectsProperty;
+        public PropertyId IsGrabbed => DragPattern.IsGrabbedProperty;
+        public PropertyId GrabbedItems => DragPattern.GrabbedItemsProperty;
     }
 
     public class DragPatternEvents : IDragPatternEvents

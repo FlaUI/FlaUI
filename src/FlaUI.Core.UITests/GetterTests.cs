@@ -109,7 +109,7 @@ namespace FlaUI.Core.UITests
         {
             var mainWindow = App.GetMainWindow(Automation);
             Assert.That(mainWindow, Is.Not.Null);
-            var windowProperty = mainWindow.BasicAutomationElement.GetPropertyValue(Automation.PropertyLibrary.Window.CanMaximizeProperty);
+            var windowProperty = mainWindow.BasicAutomationElement.GetPropertyValue(Automation.PropertyLibrary.Window.CanMaximize);
             Assert.That(windowProperty, Is.Not.Null);
         }
 
@@ -119,12 +119,12 @@ namespace FlaUI.Core.UITests
             var cacheRequest = new CacheRequest();
             cacheRequest.AutomationElementMode = AutomationElementMode.None;
             cacheRequest.TreeScope = TreeScope.Element;
-            cacheRequest.Properties.Add(Automation.PropertyLibrary.Window.CanMaximizeProperty);
+            cacheRequest.Properties.Add(Automation.PropertyLibrary.Window.CanMaximize);
             using (cacheRequest.Activate())
             {
                 var mainWindow = App.GetMainWindow(Automation);
                 Assert.That(mainWindow, Is.Not.Null);
-                var windowProperty = mainWindow.BasicAutomationElement.GetPropertyValue(Automation.PropertyLibrary.Window.CanMaximizeProperty);
+                var windowProperty = mainWindow.BasicAutomationElement.GetPropertyValue(Automation.PropertyLibrary.Window.CanMaximize);
                 Assert.That(windowProperty, Is.Not.Null);
             }
         }
@@ -134,7 +134,7 @@ namespace FlaUI.Core.UITests
         {
             var mainWindow = App.GetMainWindow(Automation);
             Assert.That(mainWindow, Is.Not.Null);
-            ActualValueDelegate<object> testDelegate = () => mainWindow.BasicAutomationElement.GetPropertyValue(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseStateProperty);
+            ActualValueDelegate<object> testDelegate = () => mainWindow.BasicAutomationElement.GetPropertyValue(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
             Assert.That(testDelegate, Throws.TypeOf<PropertyNotSupportedException>().With.Message.Contains("ExpandCollapseState"));
         }
 
@@ -144,12 +144,12 @@ namespace FlaUI.Core.UITests
             var cacheRequest = new CacheRequest();
             cacheRequest.AutomationElementMode = AutomationElementMode.None;
             cacheRequest.TreeScope = TreeScope.Element;
-            cacheRequest.Properties.Add(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseStateProperty);
+            cacheRequest.Properties.Add(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
             using (cacheRequest.Activate())
             {
                 var mainWindow = App.GetMainWindow(Automation);
                 Assert.That(mainWindow, Is.Not.Null);
-                ActualValueDelegate<object> testDelegate = () => mainWindow.BasicAutomationElement.GetPropertyValue(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseStateProperty);
+                ActualValueDelegate<object> testDelegate = () => mainWindow.BasicAutomationElement.GetPropertyValue(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
                 Assert.That(testDelegate, Throws.TypeOf<PropertyNotSupportedException>().With.Message.Contains("ExpandCollapseState"));
             }
         }
@@ -160,12 +160,12 @@ namespace FlaUI.Core.UITests
             var cacheRequest = new CacheRequest();
             cacheRequest.AutomationElementMode = AutomationElementMode.None;
             cacheRequest.TreeScope = TreeScope.Element;
-            cacheRequest.Properties.Add(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseStateProperty);
+            cacheRequest.Properties.Add(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
             using (cacheRequest.Activate())
             {
                 var mainWindow = App.GetMainWindow(Automation);
                 Assert.That(mainWindow, Is.Not.Null);
-                ActualValueDelegate<object> testDelegate = () => mainWindow.BasicAutomationElement.GetPropertyValue(Automation.PropertyLibrary.Window.CanMaximizeProperty);
+                ActualValueDelegate<object> testDelegate = () => mainWindow.BasicAutomationElement.GetPropertyValue(Automation.PropertyLibrary.Window.CanMaximize);
                 Assert.That(testDelegate, Throws.TypeOf<PropertyNotCachedException>().With.Message.Contains("CanMaximize"));
             }
         }
@@ -176,12 +176,12 @@ namespace FlaUI.Core.UITests
             var cacheRequest = new CacheRequest();
             cacheRequest.AutomationElementMode = AutomationElementMode.None;
             cacheRequest.TreeScope = TreeScope.Element;
-            cacheRequest.Properties.Add(Automation.PropertyLibrary.Window.CanMaximizeProperty);
+            cacheRequest.Properties.Add(Automation.PropertyLibrary.Window.CanMaximize);
             using (cacheRequest.Activate())
             {
                 var mainWindow = App.GetMainWindow(Automation);
                 Assert.That(mainWindow, Is.Not.Null);
-                ActualValueDelegate<object> testDelegate = () => mainWindow.BasicAutomationElement.GetPropertyValue(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseStateProperty);
+                ActualValueDelegate<object> testDelegate = () => mainWindow.BasicAutomationElement.GetPropertyValue(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
                 Assert.That(testDelegate, Throws.TypeOf<PropertyNotCachedException>().With.Message.Contains("ExpandCollapseState"));
             }
         }

@@ -7,95 +7,95 @@ namespace FlaUI.UIA2
 {
     public class UIA2AutomationElementProperties : IAutomationElementProperties
     {
-        public PropertyId AcceleratorKeyProperty => AutomationObjectIds.AcceleratorKeyProperty;
-        public PropertyId AccessKeyProperty => AutomationObjectIds.AccessKeyProperty;
+        public PropertyId AcceleratorKey => AutomationObjectIds.AcceleratorKeyProperty;
+        public PropertyId AccessKey => AutomationObjectIds.AccessKeyProperty;
 
-        public PropertyId AriaPropertiesProperty
+        public PropertyId AriaProperties
         {
             get { throw new NotSupportedByUIA2Exception(); }
         }
 
-        public PropertyId AriaRoleProperty
+        public PropertyId AriaRole
         {
             get { throw new NotSupportedByUIA2Exception(); }
         }
 
-        public PropertyId AutomationIdProperty => AutomationObjectIds.AutomationIdProperty;
-        public PropertyId BoundingRectangleProperty => AutomationObjectIds.BoundingRectangleProperty;
-        public PropertyId ClassNameProperty => AutomationObjectIds.ClassNameProperty;
-        public PropertyId ClickablePointProperty => AutomationObjectIds.ClickablePointProperty;
+        public PropertyId AutomationId => AutomationObjectIds.AutomationIdProperty;
+        public PropertyId BoundingRectangle => AutomationObjectIds.BoundingRectangleProperty;
+        public PropertyId ClassName => AutomationObjectIds.ClassNameProperty;
+        public PropertyId ClickablePoint => AutomationObjectIds.ClickablePointProperty;
 
-        public PropertyId ControllerForProperty
+        public PropertyId ControllerFor
         {
             get { throw new NotSupportedByUIA2Exception(); }
         }
 
-        public PropertyId ControlTypeProperty => AutomationObjectIds.ControlTypeProperty;
-        public PropertyId CultureProperty => AutomationObjectIds.CultureProperty;
+        public PropertyId ControlType => AutomationObjectIds.ControlTypeProperty;
+        public PropertyId Culture => AutomationObjectIds.CultureProperty;
 
-        public PropertyId DescribedByProperty
+        public PropertyId DescribedBy
         {
             get { throw new NotSupportedByUIA2Exception(); }
         }
 
-        public PropertyId FlowsFromProperty
+        public PropertyId FlowsFrom
         {
             get { throw new NotSupportedByUIA2Exception(); }
         }
 
-        public PropertyId FlowsToProperty
+        public PropertyId FlowsTo
         {
             get { throw new NotSupportedByUIA2Exception(); }
         }
 
-        public PropertyId FrameworkIdProperty => AutomationObjectIds.FrameworkIdProperty;
-        public PropertyId HasKeyboardFocusProperty => AutomationObjectIds.HasKeyboardFocusProperty;
-        public PropertyId HelpTextProperty => AutomationObjectIds.HelpTextProperty;
-        public PropertyId IsContentElementProperty => AutomationObjectIds.IsContentElementProperty;
-        public PropertyId IsControlElementProperty => AutomationObjectIds.IsControlElementProperty;
+        public PropertyId FrameworkId => AutomationObjectIds.FrameworkIdProperty;
+        public PropertyId HasKeyboardFocus => AutomationObjectIds.HasKeyboardFocusProperty;
+        public PropertyId HelpText => AutomationObjectIds.HelpTextProperty;
+        public PropertyId IsContentElement => AutomationObjectIds.IsContentElementProperty;
+        public PropertyId IsControlElement => AutomationObjectIds.IsControlElementProperty;
 
-        public PropertyId IsDataValidForFormProperty
+        public PropertyId IsDataValidForForm
         {
             get { throw new NotSupportedByUIA2Exception(); }
         }
 
-        public PropertyId IsEnabledProperty => AutomationObjectIds.IsEnabledProperty;
-        public PropertyId IsKeyboardFocusableProperty => AutomationObjectIds.IsKeyboardFocusableProperty;
-        public PropertyId IsOffscreenProperty => AutomationObjectIds.IsOffscreenProperty;
-        public PropertyId IsPasswordProperty => AutomationObjectIds.IsPasswordProperty;
+        public PropertyId IsEnabled => AutomationObjectIds.IsEnabledProperty;
+        public PropertyId IsKeyboardFocusable => AutomationObjectIds.IsKeyboardFocusableProperty;
+        public PropertyId IsOffscreen => AutomationObjectIds.IsOffscreenProperty;
+        public PropertyId IsPassword => AutomationObjectIds.IsPasswordProperty;
 
-        public PropertyId IsPeripheralProperty
+        public PropertyId IsPeripheral
         {
             get { throw new NotSupportedByUIA2Exception(); }
         }
 
-        public PropertyId IsRequiredForFormProperty => AutomationObjectIds.IsRequiredForFormProperty;
-        public PropertyId ItemStatusProperty => AutomationObjectIds.ItemStatusProperty;
-        public PropertyId ItemTypeProperty => AutomationObjectIds.ItemTypeProperty;
-        public PropertyId LabeledByProperty => AutomationObjectIds.AcceleratorKeyProperty;
+        public PropertyId IsRequiredForForm => AutomationObjectIds.IsRequiredForFormProperty;
+        public PropertyId ItemStatus => AutomationObjectIds.ItemStatusProperty;
+        public PropertyId ItemType => AutomationObjectIds.ItemTypeProperty;
+        public PropertyId LabeledBy => AutomationObjectIds.AcceleratorKeyProperty;
 
-        public PropertyId LiveSettingProperty
+        public PropertyId LiveSetting
         {
             get { throw new NotSupportedByUIA2Exception(); }
         }
 
-        public PropertyId LocalizedControlTypeProperty => AutomationObjectIds.LocalizedControlTypeProperty;
-        public PropertyId NameProperty => AutomationObjectIds.NameProperty;
-        public PropertyId NativeWindowHandleProperty => AutomationObjectIds.NativeWindowHandleProperty;
+        public PropertyId LocalizedControlType => AutomationObjectIds.LocalizedControlTypeProperty;
+        public PropertyId Name => AutomationObjectIds.NameProperty;
+        public PropertyId NativeWindowHandle => AutomationObjectIds.NativeWindowHandleProperty;
 
-        public PropertyId OptimizeForVisualContentProperty
+        public PropertyId OptimizeForVisualContent
         {
             get { throw new NotSupportedByUIA2Exception(); }
         }
 
-        public PropertyId OrientationProperty => AutomationObjectIds.OrientationProperty;
-        public PropertyId ProcessIdProperty => AutomationObjectIds.ProcessIdProperty;
+        public PropertyId Orientation => AutomationObjectIds.OrientationProperty;
+        public PropertyId ProcessId => AutomationObjectIds.ProcessIdProperty;
 
-        public PropertyId ProviderDescriptionProperty
+        public PropertyId ProviderDescription
         {
             get { throw new NotSupportedByUIA2Exception(); }
         }
 
-        public PropertyId RuntimeIdProperty => AutomationObjectIds.RuntimeIdProperty;
+        public PropertyId RuntimeId => AutomationObjectIds.RuntimeIdProperty;
     }
 }

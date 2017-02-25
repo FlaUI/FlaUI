@@ -17,22 +17,22 @@ namespace FlaUI.Core.Patterns
 
     public interface IGridItemPatternProperties
     {
-        PropertyId ColumnProperty { get; }
-        PropertyId ColumnSpanProperty { get; }
-        PropertyId ContainingGridProperty { get; }
-        PropertyId RowProperty { get; }
-        PropertyId RowSpanProperty { get; }
+        PropertyId Column { get; }
+        PropertyId ColumnSpan { get; }
+        PropertyId ContainingGrid { get; }
+        PropertyId Row { get; }
+        PropertyId RowSpan { get; }
     }
 
     public abstract class GridItemPatternBase<TNativePattern> : PatternBase<TNativePattern>, IGridItemPattern
     {
         protected GridItemPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Column = new AutomationProperty<int>(() => Properties.ColumnProperty, BasicAutomationElement);
-            ColumnSpan = new AutomationProperty<int>(() => Properties.ColumnSpanProperty, BasicAutomationElement);
-            ContainingGrid = new AutomationProperty<AutomationElement>(() => Properties.ContainingGridProperty, BasicAutomationElement);
-            Row = new AutomationProperty<int>(() => Properties.RowProperty, BasicAutomationElement);
-            RowSpan = new AutomationProperty<int>(() => Properties.RowSpanProperty, BasicAutomationElement);
+            Column = new AutomationProperty<int>(() => Properties.Column, BasicAutomationElement);
+            ColumnSpan = new AutomationProperty<int>(() => Properties.ColumnSpan, BasicAutomationElement);
+            ContainingGrid = new AutomationProperty<AutomationElement>(() => Properties.ContainingGrid, BasicAutomationElement);
+            Row = new AutomationProperty<int>(() => Properties.Row, BasicAutomationElement);
+            RowSpan = new AutomationProperty<int>(() => Properties.RowSpan, BasicAutomationElement);
         }
 
         public IGridItemPatternProperties Properties => Automation.PropertyLibrary.GridItem;

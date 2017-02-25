@@ -41,17 +41,17 @@ namespace FlaUI.UIA2.Patterns
 
     public class WindowPatternProperties : IWindowPatternProperties
     {
-        public PropertyId CanMaximizeProperty => WindowPattern.CanMaximizeProperty;
+        public PropertyId CanMaximize => WindowPattern.CanMaximizeProperty;
 
-        public PropertyId CanMinimizeProperty => WindowPattern.CanMinimizeProperty;
+        public PropertyId CanMinimize => WindowPattern.CanMinimizeProperty;
 
-        public PropertyId IsModalProperty => WindowPattern.IsModalProperty;
+        public PropertyId IsModal => WindowPattern.IsModalProperty;
 
-        public PropertyId IsTopmostProperty => WindowPattern.IsTopmostProperty;
+        public PropertyId IsTopmost => WindowPattern.IsTopmostProperty;
 
-        public PropertyId WindowInteractionStateProperty => WindowPattern.WindowInteractionStateProperty;
+        public PropertyId WindowInteractionState => WindowPattern.WindowInteractionStateProperty;
 
-        public PropertyId WindowVisualStateProperty => WindowPattern.WindowVisualStateProperty;
+        public PropertyId WindowVisualState => WindowPattern.WindowVisualStateProperty;
     }
 
     public class WindowPatternEvents : IWindowPatternEvents
