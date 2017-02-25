@@ -82,7 +82,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UIA2Automation.cs" />
     <Compile Include="UIA2BasicAutomationElement.cs" />
-    <Compile Include="UIA2AutomationElementInformation.cs" />
     <Compile Include="UIA2PatternLibrary.cs" />
     <Compile Include="UIA2PropertyLibrary.cs" />
     <Compile Include="UIA2TreeWalker.cs" />

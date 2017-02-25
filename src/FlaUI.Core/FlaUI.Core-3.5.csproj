@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Application.cs" />
     <Compile Include="AutomationBase.cs" />
+    <Compile Include="AutomationElements\Infrastructure\AutomationElementInformation.cs" />
     <Compile Include="AutomationElements\Infrastructure\IAutomationElementEvents.cs" />
     <Compile Include="AutomationElements\Grid.cs" />
     <Compile Include="AutomationElements\Infrastructure\IAutomationElementPatternAvailabilityProperties.cs" />
@@ -100,8 +101,6 @@
     <Compile Include="AutomationElements\ComboBox.cs" />
     <Compile Include="AutomationElements\Infrastructure\AutomationElement.cs" />
     <Compile Include="AutomationElements\Infrastructure\AutomationElementConversionExtensions.cs" />
-    <Compile Include="AutomationElements\Infrastructure\InformationBase.cs" />
-    <Compile Include="AutomationElements\Infrastructure\IAutomationElementInformation.cs" />
     <Compile Include="AutomationElements\Infrastructure\IAutomationElementProperties.cs" />
     <Compile Include="AutomationElements\Label.cs" />
     <Compile Include="AutomationElements\Menu.cs" />

@@ -58,7 +58,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <summary>
         /// Basic information about this element
         /// </summary>
-        public IAutomationElementInformation Info => BasicAutomationElement.Info;
+        public AutomationElementInformation Info => BasicAutomationElement.Info;
 
         /// <summary>
         /// Gets the cached children for this element
@@ -191,7 +191,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <param name="durationInMs">The duration (im ms) how long the highlight is shown</param>
         public AutomationElement DrawHighlight(bool blocking, WpfColor color, int durationInMs)
         {
-            var rectangle = Info.BoundingRectangle;
+            var rectangle = Info.BoundingRectangle.Value;
             if (!rectangle.IsEmpty)
             {
                 if (blocking)
@@ -437,7 +437,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         public override string ToString()
         {
             return String.Format("AutomationId:{0}, Name:{1}, ControlType:{2}, FrameworkId:{3}",
-                Info.AutomationId, Info.Name, Info.LocalizedControlType, Info.FrameworkId);
+                Info.AutomationId.ValueOrDefault, Info.Name.ValueOrDefault, Info.LocalizedControlType.ValueOrDefault, Info.FrameworkId.ValueOrDefault);
         }
 
         protected internal void ExecuteInPattern<TPattern>(TPattern pattern, bool throwIfNotSupported, Action<TPattern> action)

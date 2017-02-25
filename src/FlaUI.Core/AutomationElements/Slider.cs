@@ -88,7 +88,7 @@ namespace FlaUI.Core.AutomationElements
             var buttons = FindAllChildren(cf => cf.ByControlType(ControlType.Button));
             foreach (var button in buttons)
             {
-                if (button.Info.BoundingRectangle.Left > Thumb.Info.BoundingRectangle.Left)
+                if (button.Info.BoundingRectangle.Value.Left > Thumb.Info.BoundingRectangle.Value.Left)
                 {
                     return button.AsButton();
                 }
@@ -107,7 +107,7 @@ namespace FlaUI.Core.AutomationElements
             var buttons = FindAllChildren(cf => cf.ByControlType(ControlType.Button));
             foreach (var button in buttons)
             {
-                if (button.Info.BoundingRectangle.Right < Thumb.Info.BoundingRectangle.Right)
+                if (button.Info.BoundingRectangle.Value.Right < Thumb.Info.BoundingRectangle.Value.Right)
                 {
                     return button.AsButton();
                 }

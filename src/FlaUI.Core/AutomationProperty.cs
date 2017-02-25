@@ -6,7 +6,7 @@ using FlaUI.Core.Tools;
 
 namespace FlaUI.Core
 {
-    public class AutomationProperty<TVal>
+    public class AutomationProperty<TVal> : IEquatable<TVal>, IEquatable<AutomationProperty<TVal>>
     {
         private readonly Lazy<PropertyId> _propertyIdLazy;
 
@@ -43,6 +43,16 @@ namespace FlaUI.Core
                 throw new ArgumentNullException(nameof(automationProperty));
             }
             return automationProperty.Value;
+        }
+
+        public bool Equals(TVal other)
+        {
+            return Value.Equals(other);
+        }
+
+        public bool Equals(AutomationProperty<TVal> other)
+        {
+            return other != null && Value.Equals(other.Value);
         }
     }
 }

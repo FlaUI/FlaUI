@@ -132,7 +132,7 @@ namespace FlaUInspect.ViewModels
                 new DetailViewModel("BoundingRectangle", AutomationElement.Info.BoundingRectangle),
                 new DetailViewModel("HelpText", AutomationElement.Info.HelpText),
                 new DetailViewModel("IsPassword", AutomationElement.Info.IsPassword),
-                new DetailViewModel("NativeWindowHandle", String.Format("{0} ({0:X8})", AutomationElement.Info.NativeWindowHandle.ToInt32()))
+                new DetailViewModel("NativeWindowHandle", String.Format("{0} ({0:X8})", AutomationElement.Info.NativeWindowHandle.Value.ToInt32()))
             };
             detailGroups.Add(new DetailGroupViewModel("Details", details));
 

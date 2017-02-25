@@ -29,7 +29,7 @@ namespace FlaUI.Core.AutomationElements
         {
             get
             {
-                var value = Info.Name;
+                var value = Info.Name.Value;
                 if (String.IsNullOrEmpty(value) || value.Contains("System.Windows.Controls.TreeViewItem"))
                 {
                     var textElement = FindFirstChild(cf => cf.ByControlType(ControlType.Text));

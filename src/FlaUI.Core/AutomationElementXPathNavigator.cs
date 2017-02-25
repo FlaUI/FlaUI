@@ -43,7 +43,7 @@ namespace FlaUI.Core
                 {
                     return XPathNodeType.Attribute;
                 }
-                if (Equals(_currentElement, _rootElement))
+                if (_currentElement.Equals(_rootElement))
                 {
                     return XPathNodeType.Root;
                 }
@@ -51,7 +51,7 @@ namespace FlaUI.Core
             }
         }
 
-        public override string LocalName => IsInAttribute ? GetAttributeName(_attributeIndex) : _currentElement.Info.ControlType.ToString();
+        public override string LocalName => IsInAttribute ? GetAttributeName(_attributeIndex) : _currentElement.Info.ControlType.Value.ToString();
 
         public override string Name => LocalName;
 
@@ -191,7 +191,7 @@ namespace FlaUI.Core
                 _attributeIndex = NoAttributeValue;
                 return true;
             }
-            if (Equals(_currentElement, _rootElement))
+            if (_currentElement.Equals(_rootElement))
             {
                 return false;
             }
@@ -206,7 +206,7 @@ namespace FlaUI.Core
             {
                 return false;
             }
-            if (!Equals(_rootElement, specificNavigator._rootElement))
+            if (!_rootElement.Equals(specificNavigator._rootElement))
             {
                 return false;
             }
@@ -227,11 +227,11 @@ namespace FlaUI.Core
             {
                 return false;
             }
-            if (!Equals(_rootElement, specificNavigator._rootElement))
+            if (!_rootElement.Equals(specificNavigator._rootElement))
             {
                 return false;
             }
-            return Equals(_currentElement, specificNavigator._currentElement)
+            return _currentElement.Equals(specificNavigator._currentElement)
                 && _attributeIndex == specificNavigator._attributeIndex;
         }
 
@@ -240,13 +240,13 @@ namespace FlaUI.Core
             switch ((ElementAttributes)attributeIndex)
             {
                 case ElementAttributes.AutomationId:
-                    return _currentElement.Info.AutomationId;
+                    return _currentElement.Info.AutomationId.Value;
                 case ElementAttributes.Name:
-                    return _currentElement.Info.Name;
+                    return _currentElement.Info.Name.Value;
                 case ElementAttributes.ClassName:
-                    return _currentElement.Info.ClassName;
+                    return _currentElement.Info.ClassName.Value;
                 case ElementAttributes.HelpText:
-                    return _currentElement.Info.HelpText;
+                    return _currentElement.Info.HelpText.Value;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(attributeIndex));
             }

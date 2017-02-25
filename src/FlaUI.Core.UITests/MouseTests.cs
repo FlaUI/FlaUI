@@ -26,8 +26,8 @@ namespace FlaUI.Core.UITests
             using (var automation = new UIA3Automation())
             {
                 var mainWindow = app.GetMainWindow(automation);
-                var mouseX = mainWindow.Info.BoundingRectangle.Left + 50;
-                var mouseY = mainWindow.Info.BoundingRectangle.Top + 200;
+                var mouseX = mainWindow.Info.BoundingRectangle.Value.Left + 50;
+                var mouseY = mainWindow.Info.BoundingRectangle.Value.Top + 200;
                 Mouse.Position = new Point(mouseX, mouseY);
                 Mouse.Down(MouseButton.Left);
                 Mouse.MoveBy(100, 10);

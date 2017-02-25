@@ -24,7 +24,7 @@ namespace FlaUI.Core.UITests.Patterns
             var tabItem = tab.TabItems[0];
             var button = tabItem.FindFirstDescendant(cf => cf.ByAutomationId("InvokableButton"));
             Assert.That(button, Is.Not.Null);
-            var origButtonText = button.Info.Name;
+            var origButtonText = button.Info.Name.Value;
             var invokePattern = button.PatternFactory.GetInvokePattern();
             Assert.That(invokePattern, Is.Not.Null);
             var invokeFired = false;

@@ -111,7 +111,6 @@
     <Compile Include="Converters\ValueConverter.cs" />
     <Compile Include="UIA3TreeWalker.cs" />
     <Compile Include="UIA3BasicAutomationElement.cs" />
-    <Compile Include="UIA3AutomationElementInformation.cs" />
     <Compile Include="UIA3AutomationElementProperties.cs" />
     <Compile Include="UIA3PatternFactory.cs" />
     <Compile Include="UIA3PropertyLibrary.cs" />
