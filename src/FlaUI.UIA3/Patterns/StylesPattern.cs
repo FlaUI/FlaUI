@@ -1,15 +1,13 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
-using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.UIA3.Converters;
 using FlaUI.UIA3.Identifiers;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class StylesPattern : PatternBase<UIA.IUIAutomationStylesPattern>, IStylesPattern
+    public class StylesPattern : StylesPatternBase<UIA.IUIAutomationStylesPattern>
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_StylesPatternId, "Styles", AutomationObjectIds.IsStylesPatternAvailableProperty);
         public static readonly PropertyId ExtendedPropertiesProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_StylesExtendedPropertiesPropertyId, "ExtendedProperties");
@@ -23,22 +21,6 @@ namespace FlaUI.UIA3.Patterns
         public StylesPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationStylesPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
         }
-
-        public IStylesPatternProperties Properties => Automation.PropertyLibrary.Styles;
-
-        public string ExtendedProperties => Get<string>(ExtendedPropertiesProperty);
-
-        public int FillColor => Get<int>(FillColorProperty);
-
-        public int FillPatternColor => Get<int>(FillPatternColorProperty);
-
-        public string FillPatternStyle => Get<string>(FillPatternStyleProperty);
-
-        public string Shape => Get<string>(ShapeProperty);
-
-        public StyleType Style => Get<StyleType>(StyleIdProperty);
-
-        public string StyleName => Get<string>(StyleNameProperty);
 
         // TODO: Any way to implement that?
         //public void GetCachedExtendedPropertiesAsArray(IntPtr propertyArray, out int propertyCount){}
