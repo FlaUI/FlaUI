@@ -1,15 +1,13 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
-using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.UIA2.Identifiers;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Patterns
 {
-    public class ScrollPattern : PatternBase<UIA.ScrollPattern>, IScrollPattern
+    public class ScrollPattern : ScrollPatternBase<UIA.ScrollPattern>
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.ScrollPattern.Pattern.Id, "Scroll", AutomationObjectIds.IsScrollPatternAvailableProperty);
         public static readonly PropertyId HorizontallyScrollableProperty = PropertyId.Register(AutomationType.UIA2, UIA.ScrollPattern.HorizontallyScrollableProperty.Id, "HorizontallyScrollable");
@@ -23,26 +21,12 @@ namespace FlaUI.UIA2.Patterns
         {
         }
 
-        public IScrollPatternProperties Properties => Automation.PropertyLibrary.Scroll;
-
-        public bool HorizontallyScrollable => Get<bool>(HorizontallyScrollableProperty);
-
-        public double HorizontalScrollPercent => Get<double>(HorizontalScrollPercentProperty);
-
-        public double HorizontalViewSize => Get<double>(HorizontalViewSizeProperty);
-
-        public bool VerticallyScrollable => Get<bool>(VerticallyScrollableProperty);
-
-        public double VerticalScrollPercent => Get<double>(VerticalScrollPercentProperty);
-
-        public double VerticalViewSize => Get<double>(VerticalViewSizeProperty);
-
-        public void Scroll(ScrollAmount horizontalAmount, ScrollAmount verticalAmount)
+        public override void Scroll(ScrollAmount horizontalAmount, ScrollAmount verticalAmount)
         {
             NativePattern.Scroll((UIA.ScrollAmount)horizontalAmount, (UIA.ScrollAmount)verticalAmount);
         }
 
-        public void SetScrollPercent(double horizontalPercent, double verticalPercent)
+        public override void SetScrollPercent(double horizontalPercent, double verticalPercent)
         {
             NativePattern.SetScrollPercent(horizontalPercent, verticalPercent);
         }
