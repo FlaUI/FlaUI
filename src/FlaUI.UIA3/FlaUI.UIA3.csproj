@@ -97,6 +97,7 @@
     <Compile Include="Converters\ConditionConverter.cs" />
     <Compile Include="Extensions\CacheRequestExtensions.cs" />
     <Compile Include="UIA3AutomationElementPatternAvailabilityProperties.cs" />
+    <Compile Include="UIA3AutomationElementPatternValues.cs" />
     <Compile Include="UIA3PatternLibrary.cs" />
     <Compile Include="UIA3Automation.cs" />
     <Compile Include="Identifiers\TextAttributes.cs" />
@@ -112,7 +113,6 @@
     <Compile Include="UIA3TreeWalker.cs" />
     <Compile Include="UIA3BasicAutomationElement.cs" />
     <Compile Include="UIA3AutomationElementProperties.cs" />
-    <Compile Include="UIA3PatternFactory.cs" />
     <Compile Include="UIA3PropertyLibrary.cs" />
     <Compile Include="UIA3TreeWalkerFactory.cs" />
   </ItemGroup>

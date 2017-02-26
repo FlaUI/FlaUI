@@ -20,10 +20,10 @@ namespace FlaUI.UIA2
         {
             Automation = automation;
             NativeElement = nativeElement;
-            PatternFactory = new UIA2PatternFactory(this);
+            Patterns = new UIA2AutomationElementPatternValues(this);
         }
-
-        public override IPatternFactory PatternFactory { get; }
+        
+        public override AutomationElementPatternValuesBase Patterns { get; }
 
         /// <summary>
         /// Concrete implementation of the automation object

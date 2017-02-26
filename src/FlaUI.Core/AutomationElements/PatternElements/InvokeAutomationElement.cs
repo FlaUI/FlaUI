@@ -1,5 +1,4 @@
-﻿using System;
-using FlaUI.Core.AutomationElements.Infrastructure;
+﻿using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Patterns;
 
 namespace FlaUI.Core.AutomationElements.PatternElements
@@ -10,19 +9,11 @@ namespace FlaUI.Core.AutomationElements.PatternElements
         {
         }
 
-        public IInvokePattern InvokePattern => PatternFactory.GetInvokePattern();
+        public IInvokePattern InvokePattern => Patterns.Invoke.Pattern;
 
         public void Invoke()
         {
-            var invokePattern = InvokePattern;
-            if (invokePattern != null)
-            {
-                invokePattern.Invoke();
-            }
-            else
-            {
-                throw new NotSupportedException();
-            }
+            InvokePattern.Invoke();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace FlaUI.Core.AutomationElements.PatternElements
         {
         }
 
-        public ITogglePattern TogglePattern => PatternFactory.GetTogglePattern();
+        public ITogglePattern TogglePattern => Patterns.Toggle.Pattern;
 
         public ToggleState State
         {
@@ -31,15 +31,7 @@ namespace FlaUI.Core.AutomationElements.PatternElements
 
         public void Toggle()
         {
-            var togglePattern = TogglePattern;
-            if (togglePattern != null)
-            {
-                togglePattern.Toggle();
-            }
-            else
-            {
-                throw new NotSupportedException();
-            }
+            TogglePattern.Toggle();
         }
     }
 }

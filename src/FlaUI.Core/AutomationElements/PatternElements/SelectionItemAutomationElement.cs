@@ -12,7 +12,7 @@ namespace FlaUI.Core.AutomationElements.PatternElements
         {
         }
 
-        public ISelectionItemPattern SelectionItemPattern => PatternFactory.GetSelectionItemPattern();
+        public ISelectionItemPattern SelectionItemPattern => Patterns.SelectionItem.Pattern;
 
         public bool IsSelected
         {

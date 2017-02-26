@@ -24,8 +24,8 @@ namespace FlaUI.Core.UITests.Patterns
             var tabItem = tab.TabItems[0];
             var button = tabItem.FindFirstDescendant(cf => cf.ByAutomationId("InvokableButton"));
             Assert.That(button, Is.Not.Null);
-            var origButtonText = button.Info.Name.Value;
-            var invokePattern = button.PatternFactory.GetInvokePattern();
+            var origButtonText = button.Properties.Name.Value;
+            var invokePattern = button.Patterns.Invoke.Pattern;
             Assert.That(invokePattern, Is.Not.Null);
             var invokeFired = false;
             var waitHandle = new ManualResetEventSlim(false);
@@ -37,7 +37,7 @@ namespace FlaUI.Core.UITests.Patterns
             invokePattern.Invoke();
             var waitResult = waitHandle.Wait(TimeSpan.FromSeconds(1));
             Assert.That(waitResult, Is.True);
-            Assert.That(button.Info.Name, Is.Not.EqualTo(origButtonText));
+            Assert.That(button.Properties.Name, Is.Not.EqualTo(origButtonText));
             Assert.That(invokeFired, Is.True);
             button.RemoveAutomationEventHandler(invokePattern.Events.InvokedEvent, registeredEvent);
         }

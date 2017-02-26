@@ -27,7 +27,8 @@ namespace FlaUI.Core
             get
             {
                 TVal value;
-                return TryGetValue(out value) ? value : default(TVal);
+                TryGetValue(out value);
+                return value;
             }
         }
 

@@ -10,7 +10,7 @@ namespace FlaUI.Core.AutomationElements.Scrolling
         {
         }
 
-        protected IRangeValuePattern RangeValuePattern => PatternFactory.GetRangeValuePattern();
+        protected IRangeValuePattern RangeValuePattern => Patterns.RangeValue.Pattern;
 
         protected Button SmallDecrementButton => FindButton(SmallDecrementText);
 

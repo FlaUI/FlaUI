@@ -30,12 +30,12 @@ namespace FlaUI.Core.UITests.Patterns
         {
             var dataGrid = _dataGrid;
             Assert.That(dataGrid, Is.Not.Null);
-            var gridPattern = dataGrid.PatternFactory.GetGridPattern();
+            var gridPattern = dataGrid.Patterns.Grid.Pattern;
             Assert.That(gridPattern, Is.Not.Null);
             Assert.That(gridPattern.ColumnCount.Value, Is.EqualTo(2));
             Assert.That(gridPattern.RowCount.Value, Is.EqualTo(3));
             var item = gridPattern.GetItem(1, 1);
-            Assert.That(item.Info.Name.Value, Is.EqualTo("Patrick"));
+            Assert.That(item.Properties.Name.Value, Is.EqualTo("Patrick"));
         }
     }
 }

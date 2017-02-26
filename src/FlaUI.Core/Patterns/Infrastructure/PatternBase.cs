@@ -1,4 +1,5 @@
-﻿using FlaUI.Core.Identifiers;
+﻿using System;
+using FlaUI.Core.Identifiers;
 
 namespace FlaUI.Core.Patterns.Infrastructure
 {
@@ -12,6 +13,14 @@ namespace FlaUI.Core.Patterns.Infrastructure
 
         protected PatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)
         {
+            if (basicAutomationElement == null)
+            {
+                throw new ArgumentNullException(nameof(basicAutomationElement));
+            }
+            if (nativePattern == null)
+            {
+                throw new ArgumentNullException(nameof(nativePattern));
+            }
             BasicAutomationElement = basicAutomationElement;
             NativePattern = nativePattern;
         }

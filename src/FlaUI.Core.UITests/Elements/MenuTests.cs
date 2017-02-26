@@ -23,19 +23,19 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(menu, Is.Not.Null);
             var items = menu.MenuItems;
             Assert.That(items, Has.Length.EqualTo(2));
-            Assert.That(items[0].Info.Name, Is.EqualTo("File"));
-            Assert.That(items[1].Info.Name, Is.EqualTo("Edit"));
+            Assert.That(items[0].Properties.Name, Is.EqualTo("File"));
+            Assert.That(items[1].Properties.Name, Is.EqualTo("Edit"));
             var subitems1 = items[0].SubMenuItems;
             Assert.That(subitems1, Has.Length.EqualTo(1));
-            Assert.That(subitems1[0].Info.Name, Is.EqualTo("Exit"));
+            Assert.That(subitems1[0].Properties.Name, Is.EqualTo("Exit"));
             var subitems2 = items[1].SubMenuItems;
             Assert.That(subitems2, Has.Length.EqualTo(2));
-            Assert.That(subitems2[0].Info.Name, Is.EqualTo("Copy"));
-            Assert.That(subitems2[1].Info.Name, Is.EqualTo("Paste"));
+            Assert.That(subitems2[0].Properties.Name, Is.EqualTo("Copy"));
+            Assert.That(subitems2[1].Properties.Name, Is.EqualTo("Paste"));
             var subsubitems1 = subitems2[0].SubMenuItems;
             Assert.That(subsubitems1, Has.Length.EqualTo(2));
-            Assert.That(subsubitems1[0].Info.Name, Is.EqualTo("Plain"));
-            Assert.That(subsubitems1[1].Info.Name, Is.EqualTo("Fancy"));
+            Assert.That(subsubitems1[0].Properties.Name, Is.EqualTo("Plain"));
+            Assert.That(subsubitems1[1].Properties.Name, Is.EqualTo("Fancy"));
         }
     }
 }

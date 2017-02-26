@@ -29,36 +29,33 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
 
         public ConditionFactory ConditionFactory => BasicAutomationElement.Automation.ConditionFactory;
 
-        public IAutomationElementProperties Properties => Automation.PropertyLibrary.Element;
-
-        public IAutomationElementPatternAvailabilityProperties PatternAvailability => Automation.PropertyLibrary.PatternAvailability;
-
-        public IAutomationElementEvents Events => Automation.EventLibrary.Element;
-
         public FrameworkType FrameworkType
         {
             get
             {
                 var currentElement = this;
-                var currentFrameworkId = currentElement.Info.FrameworkId;
+                var currentFrameworkId = currentElement.Properties.FrameworkId;
                 var treeWalker = Automation.TreeWalkerFactory.GetControlViewWalker();
                 while (String.IsNullOrEmpty(currentFrameworkId))
                 {
                     currentElement = treeWalker.GetParent(currentElement);
-                    currentFrameworkId = currentElement.Info.FrameworkId;
+                    currentFrameworkId = currentElement.Properties.FrameworkId;
                 }
                 return FrameworkIds.ConvertToFrameworkType(currentFrameworkId);
             }
         }
 
         public AutomationType AutomationType => BasicAutomationElement.Automation.AutomationType;
-
-        public IPatternFactory PatternFactory => BasicAutomationElement.PatternFactory;
+        
+        /// <summary>
+        /// Standard UIA patterns of this element
+        /// </summary>
+        public AutomationElementPatternValuesBase Patterns => BasicAutomationElement.Patterns;
 
         /// <summary>
-        /// Basic information about this element
+        /// Standard UIA properties of this element
         /// </summary>
-        public AutomationElementInformation Info => BasicAutomationElement.Info;
+        public AutomationElementPropertyValues Properties => BasicAutomationElement.Properties;
 
         /// <summary>
         /// Gets the cached children for this element
@@ -116,7 +113,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
 
         public void FocusNative()
         {
-            var windowHandle = Info.NativeWindowHandle;
+            var windowHandle = Properties.NativeWindowHandle;
             if (windowHandle != new IntPtr(0))
             {
                 User32.SetFocus(windowHandle);
@@ -134,7 +131,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public void SetForeground()
         {
-            var windowHandle = Info.NativeWindowHandle;
+            var windowHandle = Properties.NativeWindowHandle;
             if (windowHandle != new IntPtr(0))
             {
                 User32.SetForegroundWindow(windowHandle);
@@ -191,7 +188,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <param name="durationInMs">The duration (im ms) how long the highlight is shown</param>
         public AutomationElement DrawHighlight(bool blocking, WpfColor color, int durationInMs)
         {
-            var rectangle = Info.BoundingRectangle.Value;
+            var rectangle = Properties.BoundingRectangle.Value;
             if (!rectangle.IsEmpty)
             {
                 if (blocking)
@@ -211,7 +208,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public Bitmap Capture()
         {
-            return ScreenCapture.CaptureArea(Info.BoundingRectangle);
+            return ScreenCapture.CaptureArea(Properties.BoundingRectangle);
         }
 
         /// <summary>
@@ -219,12 +216,12 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public BitmapImage CaptureWpf()
         {
-            return ScreenCapture.CaptureAreaWpf(Info.BoundingRectangle);
+            return ScreenCapture.CaptureAreaWpf(Properties.BoundingRectangle);
         }
 
         public void CaptureToFile(string filePath)
         {
-            ScreenCapture.CaptureAreaToFile(Info.BoundingRectangle, filePath);
+            ScreenCapture.CaptureAreaToFile(Properties.BoundingRectangle, filePath);
         }
 
         /// <summary>
@@ -370,15 +367,15 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <summary>
         /// Gets the available patterns for an element via properties
         /// </summary>
-        public PatternId[] GetAvailablePatterns()
+        public PatternId[] GetSupportedPatterns()
         {
-            return Automation.PatternLibrary.AllForCurrentFramework.Where(IsPatternAvailable).ToArray();
+            return Automation.PatternLibrary.AllForCurrentFramework.Where(IsPatternSupported).ToArray();
         }
 
         /// <summary>
         /// Checks if the given pattern is available for the element via properties
         /// </summary>
-        public bool IsPatternAvailable(PatternId pattern)
+        public bool IsPatternSupported(PatternId pattern)
         {
             if (pattern.AvailabilityProperty == null)
             {
@@ -393,7 +390,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// Gets the available patterns for an element via UIA method.
         /// Does not work with cached elements and might be unreliable.
         /// </summary>
-        public PatternId[] GetAvailablePatternsDirect()
+        public PatternId[] GetSupportedPatternsDirect()
         {
             return BasicAutomationElement.GetSupportedPatterns();
         }
@@ -402,20 +399,32 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// Checks if the given pattern is available for the element via UIA method.
         /// Does not work with cached elements and might be unreliable.
         /// </summary>
-        public bool IsPatternAvailableDirect(PatternId pattern)
+        public bool IsPatternSupportedDirect(PatternId pattern)
         {
-            return GetAvailablePatternsDirect().Contains(pattern);
+            return GetSupportedPatternsDirect().Contains(pattern);
+        }
+
+        /// <summary>
+        /// Gets the available properties for an element via UIA method.
+        /// Does not work with cached elements and might be unreliable.
+        /// </summary>
+        public PropertyId[] GetSupportedPropertiesDirect()
+        {
+            return BasicAutomationElement.GetSupportedProperties();
         }
 
         /// <summary>
         /// Method to check if the element supports the given property via UIA method.
         /// Does not work with cached elements and might be unreliable.
         /// </summary>
-        public bool SupportsProperty(PropertyId property)
+        public bool IsPropertySupportedDirect(PropertyId property)
         {
-            return BasicAutomationElement.GetSupportedProperties().Contains(property);
+            return GetSupportedPropertiesDirect().Contains(property);
         }
 
+        /// <summary>
+        /// Compares two UIA elements
+        /// </summary>
         public bool Equals(AutomationElement other)
         {
             return other != null && Automation.Compare(this, other);
@@ -437,7 +446,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         public override string ToString()
         {
             return String.Format("AutomationId:{0}, Name:{1}, ControlType:{2}, FrameworkId:{3}",
-                Info.AutomationId.ValueOrDefault, Info.Name.ValueOrDefault, Info.LocalizedControlType.ValueOrDefault, Info.FrameworkId.ValueOrDefault);
+                Properties.AutomationId.ValueOrDefault, Properties.Name.ValueOrDefault, Properties.LocalizedControlType.ValueOrDefault, Properties.FrameworkId.ValueOrDefault);
         }
 
         protected internal void ExecuteInPattern<TPattern>(TPattern pattern, bool throwIfNotSupported, Action<TPattern> action)

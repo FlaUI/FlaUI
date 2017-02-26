@@ -14,12 +14,12 @@ namespace FlaUI.Core
         protected BasicAutomationElementBase(AutomationBase automation)
         {
             Automation = automation;
-            Info = new AutomationElementInformation(this);
+            Properties = new AutomationElementPropertyValues(this);
         }
+        
+        public abstract AutomationElementPatternValuesBase Patterns { get; }
 
-        public abstract IPatternFactory PatternFactory { get; }
-
-        public AutomationElementInformation Info { get; }
+        public AutomationElementPropertyValues Properties { get; }
 
         /// <summary>
         /// Underlying <see cref="AutomationBase" /> object where this element belongs to

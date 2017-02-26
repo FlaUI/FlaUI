@@ -66,7 +66,7 @@ namespace FlaUInspect.ViewModels
         {
             try
             {
-                var property = AutomationElement.Info.Name;
+                var property = AutomationElement.Properties.Name;
                 return NormalizeString(property);
             }
             catch (Exception ex)
@@ -75,11 +75,11 @@ namespace FlaUInspect.ViewModels
             }
         }
         
-        public string Name => TryGet(() => AutomationElement.Info.Name);
+        public string Name => TryGet(() => AutomationElement.Properties.Name);
 
-        public string AutomationId => TryGet(() => AutomationElement.Info.AutomationId);
+        public string AutomationId => TryGet(() => AutomationElement.Properties.AutomationId);
 
-        public ControlType ControlType => AutomationElement.Info.ControlType;
+        public ControlType ControlType => AutomationElement.Properties.ControlType;
 
         public ExtendedObservableCollection<ElementViewModel> Children { get; set; }
 
@@ -113,26 +113,26 @@ namespace FlaUInspect.ViewModels
             // Element identification
             var identification = new List<DetailViewModel>
             {
-                new DetailViewModel("AutomationId", AutomationElement.Info.AutomationId),
-                new DetailViewModel("Name", AutomationElement.Info.Name),
-                new DetailViewModel("ClassName", AutomationElement.Info.ClassName),
-                new DetailViewModel("ControlType", AutomationElement.Info.ControlType),
-                new DetailViewModel("LocalizedControlType", AutomationElement.Info.LocalizedControlType),
+                new DetailViewModel("AutomationId", AutomationElement.Properties.AutomationId),
+                new DetailViewModel("Name", AutomationElement.Properties.Name),
+                new DetailViewModel("ClassName", AutomationElement.Properties.ClassName),
+                new DetailViewModel("ControlType", AutomationElement.Properties.ControlType),
+                new DetailViewModel("LocalizedControlType", AutomationElement.Properties.LocalizedControlType),
                 new DetailViewModel("FrameworkType", AutomationElement.FrameworkType),
-                new DetailViewModel("FrameworkId", AutomationElement.Info.FrameworkId),
-                new DetailViewModel("ProcessId", AutomationElement.Info.ProcessId),
+                new DetailViewModel("FrameworkId", AutomationElement.Properties.FrameworkId),
+                new DetailViewModel("ProcessId", AutomationElement.Properties.ProcessId),
             };
             detailGroups.Add(new DetailGroupViewModel("Identification", identification));
 
             // Element details
             var details = new List<DetailViewModel>
             {
-                new DetailViewModel("IsEnabled", AutomationElement.Info.IsEnabled),
-                new DetailViewModel("IsOffscreen", AutomationElement.Info.IsOffscreen),
-                new DetailViewModel("BoundingRectangle", AutomationElement.Info.BoundingRectangle),
-                new DetailViewModel("HelpText", AutomationElement.Info.HelpText),
-                new DetailViewModel("IsPassword", AutomationElement.Info.IsPassword),
-                new DetailViewModel("NativeWindowHandle", String.Format("{0} ({0:X8})", AutomationElement.Info.NativeWindowHandle.Value.ToInt32()))
+                new DetailViewModel("IsEnabled", AutomationElement.Properties.IsEnabled),
+                new DetailViewModel("IsOffscreen", AutomationElement.Properties.IsOffscreen),
+                new DetailViewModel("BoundingRectangle", AutomationElement.Properties.BoundingRectangle),
+                new DetailViewModel("HelpText", AutomationElement.Properties.HelpText),
+                new DetailViewModel("IsPassword", AutomationElement.Properties.IsPassword),
+                new DetailViewModel("NativeWindowHandle", String.Format("{0} ({0:X8})", AutomationElement.Properties.NativeWindowHandle.Value.ToInt32()))
             };
             detailGroups.Add(new DetailGroupViewModel("Details", details));
 
@@ -151,7 +151,7 @@ namespace FlaUInspect.ViewModels
             // GridItemPattern
             if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.GridItemPattern))
             {
-                var pattern = AutomationElement.PatternFactory.GetGridItemPattern();
+                var pattern = AutomationElement.Patterns.GridItem.Pattern;
                 var patternDetails = new List<DetailViewModel>
                 {
                     new DetailViewModel("Column", pattern.Column),
@@ -165,7 +165,7 @@ namespace FlaUInspect.ViewModels
             // GridPattern
             if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.GridPattern))
             {
-                var pattern = AutomationElement.PatternFactory.GetGridPattern();
+                var pattern = AutomationElement.Patterns.Grid.Pattern;
                 var patternDetails = new List<DetailViewModel>
                 {
                     new DetailViewModel("ColumnCount", pattern.ColumnCount),
@@ -176,7 +176,7 @@ namespace FlaUInspect.ViewModels
             // LegacyIAccessiblePattern
             if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.LegacyIAccessiblePattern))
             {
-                var pattern = AutomationElement.PatternFactory.GetLegacyIAccessiblePattern();
+                var pattern = AutomationElement.Patterns.LegacyIAccessible.Pattern;
                 var patternDetails = new List<DetailViewModel>
                 {
                     new DetailViewModel("Name", pattern.Name),
@@ -195,7 +195,7 @@ namespace FlaUInspect.ViewModels
             // RangeValuePattern
             if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.RangeValuePattern))
             {
-                var pattern = AutomationElement.PatternFactory.GetRangeValuePattern();
+                var pattern = AutomationElement.Patterns.RangeValue.Pattern;
                 var patternDetails = new List<DetailViewModel>
                 {
                     new DetailViewModel("IsReadOnly", pattern.IsReadOnly),
@@ -210,7 +210,7 @@ namespace FlaUInspect.ViewModels
             // ScrollPattern
             if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.ScrollPattern))
             {
-                var pattern = AutomationElement.PatternFactory.GetScrollPattern();
+                var pattern = AutomationElement.Patterns.Scroll.Pattern;
                 var patternDetails = new List<DetailViewModel>
                 {
                     new DetailViewModel("HorizontalScrollPercent", pattern.HorizontalScrollPercent),
@@ -225,7 +225,7 @@ namespace FlaUInspect.ViewModels
             // SelectionItemPattern
             if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.SelectionItemPattern))
             {
-                var pattern = AutomationElement.PatternFactory.GetSelectionItemPattern();
+                var pattern = AutomationElement.Patterns.SelectionItem.Pattern;
                 var patternDetails = new List<DetailViewModel>
                 {
                     new DetailViewModel("IsSelected", pattern.IsSelected),
@@ -236,7 +236,7 @@ namespace FlaUInspect.ViewModels
             // SelectionPattern
             if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.SelectionPattern))
             {
-                var pattern = AutomationElement.PatternFactory.GetSelectionPattern();
+                var pattern = AutomationElement.Patterns.Selection.Pattern;
                 var patternDetails = new List<DetailViewModel>
                 {
                     new DetailViewModel("Selection", pattern.Selection),
@@ -248,7 +248,7 @@ namespace FlaUInspect.ViewModels
             // TableItemPattern
             if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.TableItemPattern))
             {
-                var pattern = AutomationElement.PatternFactory.GetTableItemPattern();
+                var pattern = AutomationElement.Patterns.TableItem.Pattern;
                 var patternDetails = new List<DetailViewModel>
                 {
                     new DetailViewModel("ColumnHeaderItems", pattern.ColumnHeaderItems),
@@ -259,7 +259,7 @@ namespace FlaUInspect.ViewModels
             // TablePattern
             if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.TablePattern))
             {
-                var pattern = AutomationElement.PatternFactory.GetTablePattern();
+                var pattern = AutomationElement.Patterns.Table.Pattern;
                 var patternDetails = new List<DetailViewModel>
                 {
                     new DetailViewModel("ColumnHeaderItems", pattern.ColumnHeaders),
@@ -271,7 +271,7 @@ namespace FlaUInspect.ViewModels
             // TogglePattern
             if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.TogglePattern))
             {
-                var pattern = AutomationElement.PatternFactory.GetTogglePattern();
+                var pattern = AutomationElement.Patterns.Toggle.Pattern;
                 var patternDetails = new List<DetailViewModel>
                 {
                     new DetailViewModel("ToggleState", pattern.ToggleState)
@@ -281,7 +281,7 @@ namespace FlaUInspect.ViewModels
             // ValuePattern
             if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.ValuePattern))
             {
-                var pattern = AutomationElement.PatternFactory.GetValuePattern();
+                var pattern = AutomationElement.Patterns.Value.Pattern;
                 var patternDetails = new List<DetailViewModel>
                 {
                     new DetailViewModel("IsReadOnly", pattern.IsReadOnly),
@@ -292,7 +292,7 @@ namespace FlaUInspect.ViewModels
             // WindowPattern
             if (allSupportedPatterns.Contains(AutomationElement.Automation.PatternLibrary.WindowPattern))
             {
-                var pattern = AutomationElement.PatternFactory.GetWindowPattern();
+                var pattern = AutomationElement.Patterns.Window.Pattern;
                 var patternDetails = new List<DetailViewModel>
                 {
                     new DetailViewModel("IsModal", pattern.IsModal),

@@ -17,7 +17,7 @@ namespace FlaUI.Core.UITests.Patterns
         {
             var slider = GetSlider();
             Assert.That(slider, Is.Not.Null);
-            var rvPattern = slider.PatternFactory.GetRangeValuePattern();
+            var rvPattern = slider.Patterns.RangeValue.Pattern;
             Assert.That(rvPattern, Is.Not.Null);
             Assert.That(rvPattern.IsReadOnly.Value, Is.False);
             Assert.That(rvPattern.Value.Value, Is.EqualTo(5));

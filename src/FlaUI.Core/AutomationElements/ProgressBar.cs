@@ -9,7 +9,7 @@ namespace FlaUI.Core.AutomationElements
         {
         }
 
-        public IRangeValuePattern RangeValuePattern => PatternFactory.GetRangeValuePattern();
+        public IRangeValuePattern RangeValuePattern => Patterns.RangeValue.Pattern;
 
         public double Minimum => RangeValuePattern.Minimum;
 

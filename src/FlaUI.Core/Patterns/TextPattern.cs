@@ -6,7 +6,7 @@ using FlaUI.Core.Shapes;
 
 namespace FlaUI.Core.Patterns
 {
-    public interface ITextPattern
+    public interface ITextPattern : IPattern
     {
         ITextPatternEvents Events { get; }
 

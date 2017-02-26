@@ -78,8 +78,8 @@
     <Compile Include="Converters\ConditionConverter.cs" />
     <Compile Include="Converters\ValueConverter.cs" />
     <Compile Include="UIA2AutomationElementPatternAvailabilityProperties.cs" />
+    <Compile Include="UIA2AutomationElementPatternValues.cs" />
     <Compile Include="UIA2AutomationElementProperties.cs" />
-    <Compile Include="UIA2PatternFactory.cs" />
     <Compile Include="Patterns\ValuePattern.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UIA2Automation.cs" />

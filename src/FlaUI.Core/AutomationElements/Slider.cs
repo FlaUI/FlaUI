@@ -14,9 +14,9 @@ namespace FlaUI.Core.AutomationElements
         {
         }
 
-        private IRangeValuePattern RangeValuePattern => PatternFactory.GetRangeValuePattern();
+        private IRangeValuePattern RangeValuePattern => Patterns.RangeValue.Pattern;
 
-        private IValuePattern ValuePattern => PatternFactory.GetValuePattern();
+        private IValuePattern ValuePattern => Patterns.Value.Pattern;
 
         private Button LargeIncreaseButton => GetLargeIncreaseButton();
 
@@ -88,7 +88,7 @@ namespace FlaUI.Core.AutomationElements
             var buttons = FindAllChildren(cf => cf.ByControlType(ControlType.Button));
             foreach (var button in buttons)
             {
-                if (button.Info.BoundingRectangle.Value.Left > Thumb.Info.BoundingRectangle.Value.Left)
+                if (button.Properties.BoundingRectangle.Value.Left > Thumb.Properties.BoundingRectangle.Value.Left)
                 {
                     return button.AsButton();
                 }
@@ -107,7 +107,7 @@ namespace FlaUI.Core.AutomationElements
             var buttons = FindAllChildren(cf => cf.ByControlType(ControlType.Button));
             foreach (var button in buttons)
             {
-                if (button.Info.BoundingRectangle.Value.Right < Thumb.Info.BoundingRectangle.Value.Right)
+                if (button.Properties.BoundingRectangle.Value.Right < Thumb.Properties.BoundingRectangle.Value.Right)
                 {
                     return button.AsButton();
                 }

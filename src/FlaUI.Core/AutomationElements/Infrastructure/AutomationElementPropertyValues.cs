@@ -5,9 +5,9 @@ using FlaUI.Core.Shapes;
 
 namespace FlaUI.Core.AutomationElements.Infrastructure
 {
-    public class AutomationElementInformation
+    public class AutomationElementPropertyValues
     {
-        public AutomationElementInformation(BasicAutomationElementBase basicAutomationElement)
+        public AutomationElementPropertyValues(BasicAutomationElementBase basicAutomationElement)
         {
             BasicAutomationElement = basicAutomationElement;
             AcceleratorKey = new AutomationProperty<string>(() => Properties.AcceleratorKey, BasicAutomationElement);
