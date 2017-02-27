@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Core\AutomationPropertyExtensions.cs" />
     <Compile Include="Core\ElementHighlighter.cs" />
     <Compile Include="Core\ExtendedObservableCollection.cs" />
     <Compile Include="Core\FocusTrackingMode.cs" />
