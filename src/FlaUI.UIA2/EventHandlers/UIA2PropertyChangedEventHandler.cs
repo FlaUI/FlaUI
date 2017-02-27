@@ -20,7 +20,7 @@ namespace FlaUI.UIA2.EventHandlers
         {
             var basicAutomationElement = new UIA2BasicAutomationElement((UIA2Automation)Automation, (UIA.AutomationElement)sender);
             var senderElement = new AutomationElement(basicAutomationElement);
-            var propertyId = PropertyId.Find(AutomationType.UIA2, automationPropertyChangedEventArgs.Property.Id);
+            var propertyId = PropertyId.Find(Automation.AutomationType, automationPropertyChangedEventArgs.Property.Id);
             HandlePropertyChangedEvent(senderElement, propertyId, automationPropertyChangedEventArgs.NewValue);
         }
     }
