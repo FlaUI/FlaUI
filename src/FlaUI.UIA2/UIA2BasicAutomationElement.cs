@@ -61,17 +61,19 @@ namespace FlaUI.UIA2
 
         public override AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition)
         {
-            CacheRequest.Current?.ToNative().Push();
+            var cacheRequest = CacheRequest.IsCachingActive ? CacheRequest.Current.ToNative() : null;
+            cacheRequest?.Push();
             var nativeFoundElements = NativeElement.FindAll((UIA.TreeScope)treeScope, ConditionConverter.ToNative(condition));
-            CacheRequest.Current?.ToNative().Pop();
+            cacheRequest?.Pop();
             return AutomationElementConverter.NativeArrayToManaged(Automation, nativeFoundElements);
         }
 
         public override AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
         {
-            CacheRequest.Current?.ToNative().Push();
+            var cacheRequest = CacheRequest.IsCachingActive ? CacheRequest.Current.ToNative() : null;
+            cacheRequest?.Push();
             var nativeFoundElement = NativeElement.FindFirst((UIA.TreeScope)treeScope, ConditionConverter.ToNative(condition));
-            CacheRequest.Current?.ToNative().Pop();
+            cacheRequest?.Pop();
             return AutomationElementConverter.NativeToManaged(Automation, nativeFoundElement);
         }
 
@@ -122,13 +124,13 @@ namespace FlaUI.UIA2
         public override PatternId[] GetSupportedPatterns()
         {
             var raw = NativeElement.GetSupportedPatterns();
-            return raw.Select(r => PatternId.Find(AutomationType.UIA2, r.Id)).ToArray();
+            return raw.Select(r => PatternId.Find(Automation.AutomationType, r.Id)).ToArray();
         }
 
         public override PropertyId[] GetSupportedProperties()
         {
             var raw = NativeElement.GetSupportedProperties();
-            return raw.Select(r => PropertyId.Find(AutomationType.UIA2, r.Id)).ToArray();
+            return raw.Select(r => PropertyId.Find(Automation.AutomationType, r.Id)).ToArray();
         }
 
         public override AutomationElement GetUpdatedCache()

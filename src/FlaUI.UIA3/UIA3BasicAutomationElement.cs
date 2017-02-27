@@ -70,7 +70,7 @@ namespace FlaUI.UIA3
 
         public override AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition)
         {
-            var nativeFoundElements = CacheRequest.Current != null
+            var nativeFoundElements = CacheRequest.IsCachingActive
                 ? NativeElement.FindAllBuildCache((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition), CacheRequest.Current.ToNative(Automation))
                 : NativeElement.FindAll((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition));
             return AutomationElementConverter.NativeArrayToManaged(Automation, nativeFoundElements);
@@ -78,7 +78,7 @@ namespace FlaUI.UIA3
 
         public override AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
         {
-            var nativeFoundElement = CacheRequest.Current != null
+            var nativeFoundElement = CacheRequest.IsCachingActive
                 ? NativeElement.FindFirstBuildCache((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition), CacheRequest.Current.ToNative(Automation))
                 : NativeElement.FindFirst((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition));
             return AutomationElementConverter.NativeToManaged(Automation, nativeFoundElement);
