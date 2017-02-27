@@ -8,102 +8,209 @@ namespace FlaUI.UIA2
 {
     public class UIA2AutomationElementPatternValues : AutomationElementPatternValuesBase
     {
+        protected UIA2BasicAutomationElement BasicAutomationElement { get; }
+
         public UIA2AutomationElementPatternValues(UIA2BasicAutomationElement basicAutomationElement)
         {
-            Dock = new AutomationPattern<IDockPattern, UIA.DockPattern>(
-                () => DockPattern.Pattern, basicAutomationElement, (b, p) => new DockPattern(b, p));
-            ExpandCollapse = new AutomationPattern<IExpandCollapsePattern, UIA.ExpandCollapsePattern>(
-                () => ExpandCollapsePattern.Pattern, basicAutomationElement, (b, p) => new ExpandCollapsePattern(b, p));
-            GridItem = new AutomationPattern<IGridItemPattern, UIA.GridItemPattern>(
-                () => GridItemPattern.Pattern, basicAutomationElement, (b, p) => new GridItemPattern(b, p));
-            Grid = new AutomationPattern<IGridPattern, UIA.GridPattern>(
-                () => GridPattern.Pattern, basicAutomationElement, (b, p) => new GridPattern(b, p));
-            Invoke = new AutomationPattern<IInvokePattern, UIA.InvokePattern>(
-                () => InvokePattern.Pattern, basicAutomationElement, (b, p) => new InvokePattern(b, p));
-#if !NET35
-            ItemContainer = new AutomationPattern<IItemContainerPattern, UIA.ItemContainerPattern>(
-                () => ItemContainerPattern.Pattern, basicAutomationElement, (b, p) => new ItemContainerPattern(b, p));
-#endif
-            MultipleView = new AutomationPattern<IMultipleViewPattern, UIA.MultipleViewPattern>(
-                () => MultipleViewPattern.Pattern, basicAutomationElement, (b, p) => new MultipleViewPattern(b, p));
-            RangeValue = new AutomationPattern<IRangeValuePattern, UIA.RangeValuePattern>(
-                () => RangeValuePattern.Pattern, basicAutomationElement, (b, p) => new RangeValuePattern(b, p));
-            ScrollItem = new AutomationPattern<IScrollItemPattern, UIA.ScrollItemPattern>(
-                () => ScrollItemPattern.Pattern, basicAutomationElement, (b, p) => new ScrollItemPattern(b, p));
-            Scroll = new AutomationPattern<IScrollPattern, UIA.ScrollPattern>(
-                () => ScrollPattern.Pattern, basicAutomationElement, (b, p) => new ScrollPattern(b, p));
-            SelectionItem = new AutomationPattern<ISelectionItemPattern, UIA.SelectionItemPattern>(
-                () => SelectionItemPattern.Pattern, basicAutomationElement, (b, p) => new SelectionItemPattern(b, p));
-            Selection = new AutomationPattern<ISelectionPattern, UIA.SelectionPattern>(
-                () => SelectionPattern.Pattern, basicAutomationElement, (b, p) => new SelectionPattern(b, p));
-#if !NET35
-            SynchronizedInput = new AutomationPattern<ISynchronizedInputPattern, UIA.SynchronizedInputPattern>(
-                () => SynchronizedInputPattern.Pattern, basicAutomationElement, (b, p) => new SynchronizedInputPattern(b, p));
-#endif
-            TableItem = new AutomationPattern<ITableItemPattern, UIA.TableItemPattern>(
-                () => TableItemPattern.Pattern, basicAutomationElement, (b, p) => new TableItemPattern(b, p));
-            Table = new AutomationPattern<ITablePattern, UIA.TablePattern>(
-                () => TablePattern.Pattern, basicAutomationElement, (b, p) => new TablePattern(b, p));
-            Text = new AutomationPattern<ITextPattern, UIA.TextPattern>(
-                () => TextPattern.Pattern, basicAutomationElement, (b, p) => new TextPattern(b, p));
-            Toggle = new AutomationPattern<ITogglePattern, UIA.TogglePattern>(
-                () => TogglePattern.Pattern, basicAutomationElement, (b, p) => new TogglePattern(b, p));
-            Transform = new AutomationPattern<ITransformPattern, UIA.TransformPattern>(
-                () => TransformPattern.Pattern, basicAutomationElement, (b, p) => new TransformPattern(b, p));
-            Value = new AutomationPattern<IValuePattern, UIA.ValuePattern>(
-                () => ValuePattern.Pattern, basicAutomationElement, (b, p) => new ValuePattern(b, p));
-#if !NET35
-            VirtualizedItem = new AutomationPattern<IVirtualizedItemPattern, UIA.VirtualizedItemPattern>(
-                () => VirtualizedItemPattern.Pattern, basicAutomationElement, (b, p) => new VirtualizedItemPattern(b, p));
-#endif
-            Window = new AutomationPattern<IWindowPattern, UIA.WindowPattern>(
-                () => WindowPattern.Pattern, basicAutomationElement, (b, p) => new WindowPattern(b, p));
+            BasicAutomationElement = basicAutomationElement;
         }
 
-        public override IAutomationPattern<IAnnotationPattern> Annotation { get { throw new NotSupportedByUIA2Exception(); } }
-        public override IAutomationPattern<IDockPattern> Dock { get; }
-        public override IAutomationPattern<IDragPattern> Drag { get { throw new NotSupportedByUIA2Exception(); } }
-        public override IAutomationPattern<IDropTargetPattern> DropTarget { get { throw new NotSupportedByUIA2Exception(); } }
-        public override IAutomationPattern<IExpandCollapsePattern> ExpandCollapse { get; }
-        public override IAutomationPattern<IGridItemPattern> GridItem { get; }
-        public override IAutomationPattern<IGridPattern> Grid { get; }
-        public override IAutomationPattern<IInvokePattern> Invoke { get; }
-#if !NET35
-        public override IAutomationPattern<IItemContainerPattern> ItemContainer { get; }
+        protected override IAutomationPattern<IAnnotationPattern> InitializeAnnotationPattern()
+        {
+            throw new NotSupportedByUIA2Exception();
+        }
+
+        protected override IAutomationPattern<IDockPattern> InitializeDockPattern()
+        {
+            return new AutomationPattern<IDockPattern, UIA.DockPattern>(
+                DockPattern.Pattern, BasicAutomationElement, (b, p) => new DockPattern(b, p));
+        }
+
+        protected override IAutomationPattern<IDragPattern> InitializeDragPattern()
+        {
+            throw new NotSupportedByUIA2Exception();
+        }
+
+        protected override IAutomationPattern<IDropTargetPattern> InitializeDropTargetPattern()
+        {
+            throw new NotSupportedByUIA2Exception();
+        }
+
+        protected override IAutomationPattern<IExpandCollapsePattern> InitializeExpandCollapsePattern()
+        {
+            return new AutomationPattern<IExpandCollapsePattern, UIA.ExpandCollapsePattern>(
+                ExpandCollapsePattern.Pattern, BasicAutomationElement, (b, p) => new ExpandCollapsePattern(b, p));
+        }
+
+        protected override IAutomationPattern<IGridItemPattern> InitializeGridItemPattern()
+        {
+            return new AutomationPattern<IGridItemPattern, UIA.GridItemPattern>(
+                GridItemPattern.Pattern, BasicAutomationElement, (b, p) => new GridItemPattern(b, p));
+        }
+
+        protected override IAutomationPattern<IGridPattern> InitializeGridPattern()
+        {
+            return new AutomationPattern<IGridPattern, UIA.GridPattern>(
+                 GridPattern.Pattern, BasicAutomationElement, (b, p) => new GridPattern(b, p));
+        }
+
+        protected override IAutomationPattern<IInvokePattern> InitializeInvokePattern()
+        {
+            return new AutomationPattern<IInvokePattern, UIA.InvokePattern>(
+                InvokePattern.Pattern, BasicAutomationElement, (b, p) => new InvokePattern(b, p));
+        }
+
+        protected override IAutomationPattern<IItemContainerPattern> InitializeItemContainerPattern()
+        {
+#if NET35
+            throw new NotSupportedByUIA2Exception();
 #else
-        public override IAutomationPattern<IItemContainerPattern> ItemContainer { get { throw new NotSupportedByUIA2Exception(); } }
+            return new AutomationPattern<IItemContainerPattern, UIA.ItemContainerPattern>(
+                ItemContainerPattern.Pattern, BasicAutomationElement, (b, p) => new ItemContainerPattern(b, p));
 #endif
-        public override IAutomationPattern<ILegacyIAccessiblePattern> LegacyIAccessible { get { throw new NotSupportedByUIA2Exception(); } }
-        public override IAutomationPattern<IMultipleViewPattern> MultipleView { get; }
-        public override IAutomationPattern<IObjectModelPattern> ObjectModel { get { throw new NotSupportedByUIA2Exception(); } }
-        public override IAutomationPattern<IRangeValuePattern> RangeValue { get; }
-        public override IAutomationPattern<IScrollItemPattern> ScrollItem { get; }
-        public override IAutomationPattern<IScrollPattern> Scroll { get; }
-        public override IAutomationPattern<ISelectionItemPattern> SelectionItem { get; }
-        public override IAutomationPattern<ISelectionPattern> Selection { get; }
-        public override IAutomationPattern<ISpreadsheetItemPattern> SpreadsheetItem { get { throw new NotSupportedByUIA2Exception(); } }
-        public override IAutomationPattern<ISpreadsheetPattern> Spreadsheet { get { throw new NotSupportedByUIA2Exception(); } }
-        public override IAutomationPattern<IStylesPattern> Styles { get { throw new NotSupportedByUIA2Exception(); } }
-#if !NET35
-        public override IAutomationPattern<ISynchronizedInputPattern> SynchronizedInput { get; }
+        }
+
+        protected override IAutomationPattern<ILegacyIAccessiblePattern> InitializeLegacyIAccessiblePattern()
+        {
+            throw new NotSupportedByUIA2Exception();
+        }
+
+        protected override IAutomationPattern<IMultipleViewPattern> InitializeMultipleViewPattern()
+        {
+            return new AutomationPattern<IMultipleViewPattern, UIA.MultipleViewPattern>(
+                MultipleViewPattern.Pattern, BasicAutomationElement, (b, p) => new MultipleViewPattern(b, p));
+        }
+
+        protected override IAutomationPattern<IObjectModelPattern> InitializeObjectModelPattern()
+        {
+            throw new NotSupportedByUIA2Exception();
+        }
+
+        protected override IAutomationPattern<IRangeValuePattern> InitializeRangeValuePattern()
+        {
+            return new AutomationPattern<IRangeValuePattern, UIA.RangeValuePattern>(
+                RangeValuePattern.Pattern, BasicAutomationElement, (b, p) => new RangeValuePattern(b, p));
+        }
+
+        protected override IAutomationPattern<IScrollItemPattern> InitializeScrollItemPattern()
+        {
+            return new AutomationPattern<IScrollItemPattern, UIA.ScrollItemPattern>(
+                ScrollItemPattern.Pattern, BasicAutomationElement, (b, p) => new ScrollItemPattern(b, p));
+        }
+
+        protected override IAutomationPattern<IScrollPattern> InitializeScrollPattern()
+        {
+            return new AutomationPattern<IScrollPattern, UIA.ScrollPattern>(
+                ScrollPattern.Pattern, BasicAutomationElement, (b, p) => new ScrollPattern(b, p));
+        }
+
+        protected override IAutomationPattern<ISelectionItemPattern> InitializeSelectionItemPattern()
+        {
+            return new AutomationPattern<ISelectionItemPattern, UIA.SelectionItemPattern>(
+                SelectionItemPattern.Pattern, BasicAutomationElement, (b, p) => new SelectionItemPattern(b, p));
+        }
+
+        protected override IAutomationPattern<ISelectionPattern> InitializeSelectionPattern()
+        {
+            return new AutomationPattern<ISelectionPattern, UIA.SelectionPattern>(
+                SelectionPattern.Pattern, BasicAutomationElement, (b, p) => new SelectionPattern(b, p));
+        }
+
+        protected override IAutomationPattern<ISpreadsheetItemPattern> InitializeSpreadsheetItemPattern()
+        {
+            throw new NotSupportedByUIA2Exception();
+        }
+
+        protected override IAutomationPattern<ISpreadsheetPattern> InitializeSpreadsheetPattern()
+        {
+            throw new NotSupportedByUIA2Exception();
+        }
+
+        protected override IAutomationPattern<IStylesPattern> InitializeStylesPattern()
+        {
+            throw new NotSupportedByUIA2Exception();
+        }
+
+        protected override IAutomationPattern<ISynchronizedInputPattern> InitializeSynchronizedInputPattern()
+        {
+#if NET35
+            throw new NotSupportedByUIA2Exception();
 #else
-        public override IAutomationPattern<ISynchronizedInputPattern> SynchronizedInput { get { throw new NotSupportedByUIA2Exception(); } }
+            return new AutomationPattern<ISynchronizedInputPattern, UIA.SynchronizedInputPattern>(
+                SynchronizedInputPattern.Pattern, BasicAutomationElement, (b, p) => new SynchronizedInputPattern(b, p));
 #endif
-        public override IAutomationPattern<ITableItemPattern> TableItem { get; }
-        public override IAutomationPattern<ITablePattern> Table { get; }
-        public override IAutomationPattern<ITextChildPattern> TextChild { get { throw new NotSupportedByUIA2Exception(); } }
-        public override IAutomationPattern<ITextEditPattern> TextEdit { get { throw new NotSupportedByUIA2Exception(); } }
-        public override IAutomationPattern<IText2Pattern> Text2 { get { throw new NotSupportedByUIA2Exception(); } }
-        public override IAutomationPattern<ITextPattern> Text { get; }
-        public override IAutomationPattern<ITogglePattern> Toggle { get; }
-        public override IAutomationPattern<ITransform2Pattern> Transform2 { get { throw new NotSupportedByUIA2Exception(); } }
-        public override IAutomationPattern<ITransformPattern> Transform { get; }
-        public override IAutomationPattern<IValuePattern> Value { get; }
-#if !NET35
-        public override IAutomationPattern<IVirtualizedItemPattern> VirtualizedItem { get; }
+        }
+
+        protected override IAutomationPattern<ITableItemPattern> InitializeTableItemPattern()
+        {
+            return new AutomationPattern<ITableItemPattern, UIA.TableItemPattern>(
+                TableItemPattern.Pattern, BasicAutomationElement, (b, p) => new TableItemPattern(b, p));
+        }
+
+        protected override IAutomationPattern<ITablePattern> InitializeTablePattern()
+        {
+            return new AutomationPattern<ITablePattern, UIA.TablePattern>(
+                TablePattern.Pattern, BasicAutomationElement, (b, p) => new TablePattern(b, p));
+        }
+
+        protected override IAutomationPattern<ITextChildPattern> InitializeTextChildPattern()
+        {
+            throw new NotSupportedByUIA2Exception();
+        }
+
+        protected override IAutomationPattern<ITextEditPattern> InitializeTextEditPattern()
+        {
+            throw new NotSupportedByUIA2Exception();
+        }
+
+        protected override IAutomationPattern<IText2Pattern> InitializeText2Pattern()
+        {
+            throw new NotSupportedByUIA2Exception();
+        }
+
+        protected override IAutomationPattern<ITextPattern> InitializeTextPattern()
+        {
+            return new AutomationPattern<ITextPattern, UIA.TextPattern>(
+                TextPattern.Pattern, BasicAutomationElement, (b, p) => new TextPattern(b, p));
+        }
+
+        protected override IAutomationPattern<ITogglePattern> InitializeTogglePattern()
+        {
+            return new AutomationPattern<ITogglePattern, UIA.TogglePattern>(
+                TogglePattern.Pattern, BasicAutomationElement, (b, p) => new TogglePattern(b, p));
+        }
+
+        protected override IAutomationPattern<ITransform2Pattern> InitializeTransform2Pattern()
+        {
+            throw new NotSupportedByUIA2Exception();
+        }
+
+        protected override IAutomationPattern<ITransformPattern> InitializeTransformPattern()
+        {
+            return new AutomationPattern<ITransformPattern, UIA.TransformPattern>(
+                TransformPattern.Pattern, BasicAutomationElement, (b, p) => new TransformPattern(b, p));
+        }
+
+        protected override IAutomationPattern<IValuePattern> InitializeValuePattern()
+        {
+            return new AutomationPattern<IValuePattern, UIA.ValuePattern>(
+                ValuePattern.Pattern, BasicAutomationElement, (b, p) => new ValuePattern(b, p));
+        }
+
+        protected override IAutomationPattern<IVirtualizedItemPattern> InitializeVirtualizedItemPattern()
+        {
+#if NET35
+            throw new NotSupportedByUIA2Exception();
 #else
-        public override IAutomationPattern<IVirtualizedItemPattern> VirtualizedItem { get { throw new NotSupportedByUIA2Exception(); } }
+            return new AutomationPattern<IVirtualizedItemPattern, UIA.VirtualizedItemPattern>(
+                 VirtualizedItemPattern.Pattern, BasicAutomationElement, (b, p) => new VirtualizedItemPattern(b, p));
 #endif
-        public override IAutomationPattern<IWindowPattern> Window { get; }
+        }
+
+        protected override IAutomationPattern<IWindowPattern> InitializeWindowPattern()
+        {
+            return new AutomationPattern<IWindowPattern, UIA.WindowPattern>(
+                WindowPattern.Pattern, BasicAutomationElement, (b, p) => new WindowPattern(b, p));
+        }
     }
 }

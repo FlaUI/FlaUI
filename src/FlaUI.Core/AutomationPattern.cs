@@ -22,16 +22,14 @@ namespace FlaUI.Core
         where T : IPattern
     {
         private readonly Func<BasicAutomationElementBase, TNative, T> _patternCreateFunc;
-        private readonly Lazy<PatternId> _patternIdLazy;
+        private readonly PatternId _patternId;
 
-        public AutomationPattern(Func<PatternId> patternFunc, BasicAutomationElementBase basicAutomationElement, Func<BasicAutomationElementBase, TNative, T> patternCreateFunc)
+        public AutomationPattern(PatternId patternId, BasicAutomationElementBase basicAutomationElement, Func<BasicAutomationElementBase, TNative, T> patternCreateFunc)
         {
-            _patternCreateFunc = patternCreateFunc;
+            _patternId = patternId;
             BasicAutomationElement = basicAutomationElement;
-            _patternIdLazy = new Lazy<PatternId>(patternFunc);
+            _patternCreateFunc = patternCreateFunc;
         }
-
-        protected PatternId PatternId => _patternIdLazy.Value;
 
         protected BasicAutomationElementBase BasicAutomationElement { get; }
 
@@ -39,7 +37,7 @@ namespace FlaUI.Core
         {
             get
             {
-                var nativePattern = BasicAutomationElement.GetNativePattern<TNative>(PatternId);
+                var nativePattern = BasicAutomationElement.GetNativePattern<TNative>(_patternId);
                 return _patternCreateFunc(BasicAutomationElement, nativePattern);
             }
         }
@@ -57,7 +55,7 @@ namespace FlaUI.Core
         public bool TryGetPattern(out T pattern)
         {
             TNative nativePattern;
-            if (BasicAutomationElement.TryGetNativePattern(PatternId, out nativePattern))
+            if (BasicAutomationElement.TryGetNativePattern(_patternId, out nativePattern))
             {
                 pattern = _patternCreateFunc(BasicAutomationElement, nativePattern);
                 return true;
