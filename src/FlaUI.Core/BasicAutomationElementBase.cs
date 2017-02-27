@@ -16,7 +16,7 @@ namespace FlaUI.Core
             Automation = automation;
             Properties = new AutomationElementPropertyValues(this);
         }
-        
+
         public abstract AutomationElementPatternValuesBase Patterns { get; }
 
         public AutomationElementPropertyValues Properties { get; }
@@ -56,7 +56,8 @@ namespace FlaUI.Core
                         throw new PropertyNotCachedException(property, ex);
                     }
                 }
-                throw new PropertyNotSupportedException(property, ex);
+                // Should actually never come here
+                throw;
             }
         }
 
@@ -71,15 +72,30 @@ namespace FlaUI.Core
 
         public bool TryGetPropertyValue<T>(PropertyId property, out T value)
         {
+            var isCacheActive = CacheRequest.IsCachingActive;
             try
             {
-                value = GetPropertyValue<T>(property);
+                var internalValue = InternalGetPropertyValue(property.Id, isCacheActive, false);
+                if (internalValue == Automation.NotSupportedValue)
+                {
+                    value = default(T);
+                    return false;
+                }
+                value = property.Convert<T>(Automation, internalValue);
                 return true;
             }
-            catch (PropertyNotSupportedException)
+            catch (Exception ex)
             {
-                value = default(T);
-                return false;
+                if (isCacheActive)
+                {
+                    var cacheRequest = CacheRequest.Current;
+                    if (!cacheRequest.Properties.Contains(property))
+                    {
+                        throw new PropertyNotCachedException(property, ex);
+                    }
+                }
+                // Should actually never come here
+                throw;
             }
         }
 
@@ -141,8 +157,7 @@ namespace FlaUI.Core
         /// <param name="propertyId">The id of the property to get</param>
         /// <param name="cached">Flag to indicate if the cached or current value should be fetched</param>
         /// <param name="useDefaultIfNotSupported">
-        /// Flag to indicate, if the default value should be used if the property is not
-        /// supported
+        /// Flag to indicate, if the default value should be used if the property is not supported
         /// </param>
         /// <returns>The value / default value of the property or <see cref="AutomationBase.NotSupportedValue" /></returns>
         protected abstract object InternalGetPropertyValue(int propertyId, bool cached, bool useDefaultIfNotSupported);

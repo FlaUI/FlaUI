@@ -6,7 +6,16 @@ using FlaUI.Core.Tools;
 
 namespace FlaUI.Core
 {
-    public class AutomationProperty<TVal> : IEquatable<TVal>, IEquatable<AutomationProperty<TVal>>
+    public interface IAutomationProperty<T>
+    {
+        T Value { get; }
+
+        T ValueOrDefault { get; }
+
+        bool TryGetValue(out T value);
+    }
+
+    public class AutomationProperty<TVal> : IAutomationProperty<TVal>, IEquatable<TVal>, IEquatable<AutomationProperty<TVal>>
     {
         private readonly Lazy<PropertyId> _propertyIdLazy;
 
