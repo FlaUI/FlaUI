@@ -5,7 +5,12 @@
     /// </summary>
     public class EventId : IdentifierBase
     {
-        internal EventId(int id, string name)
+        /// <summary>
+        /// Fixed EventId which is used for patterns that are not supported by the framework.
+        /// </summary>
+        public static readonly EventId NotSupportedByFramework = new EventId(-1, "Not supported");
+
+        public EventId(int id, string name)
             : base(id, name)
         {
         }

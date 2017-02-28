@@ -7,6 +7,7 @@ using System.Windows.Media.Imaging;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.EventHandlers;
+using FlaUI.Core.Exceptions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
@@ -330,6 +331,10 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
 
         public IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
         {
+            if (Equals(@event, EventId.NotSupportedByFramework))
+            {
+                throw new NotSupportedByFrameworkException();
+            }
             return BasicAutomationElement.RegisterEvent(@event, treeScope, action);
         }
 
@@ -451,7 +456,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             }
             else if (throwIfNotSupported)
             {
-                throw new NotSupportedException();
+                throw new System.NotSupportedException();
             }
         }
 
@@ -463,7 +468,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             }
             if (throwIfNotSupported)
             {
-                throw new NotSupportedException();
+                throw new System.NotSupportedException();
             }
             return default(TRet);
         }

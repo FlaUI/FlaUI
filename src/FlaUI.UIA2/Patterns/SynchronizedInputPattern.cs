@@ -36,5 +36,12 @@ namespace FlaUI.UIA2.Patterns
         public EventId ReachedOtherElementEvent => SynchronizedInputPattern.ReachedOtherElementEvent;
         public EventId ReachedTargetEvent => SynchronizedInputPattern.ReachedTargetEvent;
     }
+#else
+    public class SynchronizedInputPatternEvents : ISynchronizedInputPatternEvents
+    {
+        public EventId DiscardedEvent => EventId.NotSupportedByFramework;
+        public EventId ReachedOtherElementEvent => EventId.NotSupportedByFramework;
+        public EventId ReachedTargetEvent => EventId.NotSupportedByFramework;
+    }
 #endif
 }

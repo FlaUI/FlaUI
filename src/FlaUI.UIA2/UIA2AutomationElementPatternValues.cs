@@ -17,7 +17,7 @@ namespace FlaUI.UIA2
 
         protected override IAutomationPattern<IAnnotationPattern> InitializeAnnotationPattern()
         {
-            throw new NotSupportedByUIA2Exception();
+            throw new NotSupportedByFrameworkException();
         }
 
         protected override IAutomationPattern<IDockPattern> InitializeDockPattern()
@@ -28,12 +28,12 @@ namespace FlaUI.UIA2
 
         protected override IAutomationPattern<IDragPattern> InitializeDragPattern()
         {
-            throw new NotSupportedByUIA2Exception();
+            throw new NotSupportedByFrameworkException();
         }
 
         protected override IAutomationPattern<IDropTargetPattern> InitializeDropTargetPattern()
         {
-            throw new NotSupportedByUIA2Exception();
+            throw new NotSupportedByFrameworkException();
         }
 
         protected override IAutomationPattern<IExpandCollapsePattern> InitializeExpandCollapsePattern()
@@ -63,7 +63,7 @@ namespace FlaUI.UIA2
         protected override IAutomationPattern<IItemContainerPattern> InitializeItemContainerPattern()
         {
 #if NET35
-            throw new NotSupportedByUIA2Exception();
+            throw new NotSupportedByFrameworkException();
 #else
             return new AutomationPattern<IItemContainerPattern, UIA.ItemContainerPattern>(
                 ItemContainerPattern.Pattern, BasicAutomationElement, (b, p) => new ItemContainerPattern(b, p));
@@ -72,7 +72,7 @@ namespace FlaUI.UIA2
 
         protected override IAutomationPattern<ILegacyIAccessiblePattern> InitializeLegacyIAccessiblePattern()
         {
-            throw new NotSupportedByUIA2Exception();
+            throw new NotSupportedByFrameworkException();
         }
 
         protected override IAutomationPattern<IMultipleViewPattern> InitializeMultipleViewPattern()
@@ -83,7 +83,7 @@ namespace FlaUI.UIA2
 
         protected override IAutomationPattern<IObjectModelPattern> InitializeObjectModelPattern()
         {
-            throw new NotSupportedByUIA2Exception();
+            throw new NotSupportedByFrameworkException();
         }
 
         protected override IAutomationPattern<IRangeValuePattern> InitializeRangeValuePattern()
@@ -118,23 +118,23 @@ namespace FlaUI.UIA2
 
         protected override IAutomationPattern<ISpreadsheetItemPattern> InitializeSpreadsheetItemPattern()
         {
-            throw new NotSupportedByUIA2Exception();
+            throw new NotSupportedByFrameworkException();
         }
 
         protected override IAutomationPattern<ISpreadsheetPattern> InitializeSpreadsheetPattern()
         {
-            throw new NotSupportedByUIA2Exception();
+            throw new NotSupportedByFrameworkException();
         }
 
         protected override IAutomationPattern<IStylesPattern> InitializeStylesPattern()
         {
-            throw new NotSupportedByUIA2Exception();
+            throw new NotSupportedByFrameworkException();
         }
 
         protected override IAutomationPattern<ISynchronizedInputPattern> InitializeSynchronizedInputPattern()
         {
 #if NET35
-            throw new NotSupportedByUIA2Exception();
+            throw new NotSupportedByFrameworkException();
 #else
             return new AutomationPattern<ISynchronizedInputPattern, UIA.SynchronizedInputPattern>(
                 SynchronizedInputPattern.Pattern, BasicAutomationElement, (b, p) => new SynchronizedInputPattern(b, p));
@@ -155,17 +155,17 @@ namespace FlaUI.UIA2
 
         protected override IAutomationPattern<ITextChildPattern> InitializeTextChildPattern()
         {
-            throw new NotSupportedByUIA2Exception();
+            throw new NotSupportedByFrameworkException();
         }
 
         protected override IAutomationPattern<ITextEditPattern> InitializeTextEditPattern()
         {
-            throw new NotSupportedByUIA2Exception();
+            throw new NotSupportedByFrameworkException();
         }
 
         protected override IAutomationPattern<IText2Pattern> InitializeText2Pattern()
         {
-            throw new NotSupportedByUIA2Exception();
+            throw new NotSupportedByFrameworkException();
         }
 
         protected override IAutomationPattern<ITextPattern> InitializeTextPattern()
@@ -182,7 +182,7 @@ namespace FlaUI.UIA2
 
         protected override IAutomationPattern<ITransform2Pattern> InitializeTransform2Pattern()
         {
-            throw new NotSupportedByUIA2Exception();
+            throw new NotSupportedByFrameworkException();
         }
 
         protected override IAutomationPattern<ITransformPattern> InitializeTransformPattern()
@@ -200,7 +200,7 @@ namespace FlaUI.UIA2
         protected override IAutomationPattern<IVirtualizedItemPattern> InitializeVirtualizedItemPattern()
         {
 #if NET35
-            throw new NotSupportedByUIA2Exception();
+            throw new NotSupportedByFrameworkException();
 #else
             return new AutomationPattern<IVirtualizedItemPattern, UIA.VirtualizedItemPattern>(
                  VirtualizedItemPattern.Pattern, BasicAutomationElement, (b, p) => new VirtualizedItemPattern(b, p));

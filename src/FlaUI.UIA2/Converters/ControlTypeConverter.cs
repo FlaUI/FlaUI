@@ -176,7 +176,7 @@ namespace FlaUI.UIA2.Converters
             switch (controlType)
             {
                 case ControlType.AppBar:
-                    throw new NotSupportedByUIA2Exception();
+                    throw new NotSupportedByFrameworkException();
                 case ControlType.Button:
                     return UIA.ControlType.Button;
                 case ControlType.Calendar:
@@ -224,7 +224,7 @@ namespace FlaUI.UIA2.Converters
                 case ControlType.ScrollBar:
                     return UIA.ControlType.ScrollBar;
                 case ControlType.SemanticZoom:
-                    throw new NotSupportedByUIA2Exception();
+                    throw new NotSupportedByFrameworkException();
                 case ControlType.Separator:
                     return UIA.ControlType.Separator;
                 case ControlType.Slider:

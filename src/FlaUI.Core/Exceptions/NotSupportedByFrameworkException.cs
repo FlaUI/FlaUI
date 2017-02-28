@@ -4,31 +4,31 @@ using System.Security.Permissions;
 
 namespace FlaUI.Core.Exceptions
 {
-    public class NotSupportedByUIA2Exception : Exception
+    public class NotSupportedByFrameworkException : Exception
     {
-        private const string DefaultMessage = "The requested pattern or property is not supported by UIA2. Consider using UIA3.";
+        private const string DefaultMessage = "The requested pattern or property is not supported by the choosen framework. Consider using a newer framework.";
 
-        public NotSupportedByUIA2Exception() : base(DefaultMessage)
+        public NotSupportedByFrameworkException() : base(DefaultMessage)
         {
         }
 
-        public NotSupportedByUIA2Exception(string message)
+        public NotSupportedByFrameworkException(string message)
             : base(message)
         {
         }
 
-        public NotSupportedByUIA2Exception(Exception innerException) :
+        public NotSupportedByFrameworkException(Exception innerException) :
             base(DefaultMessage, innerException)
         {
         }
 
-        public NotSupportedByUIA2Exception(string message, Exception innerException)
+        public NotSupportedByFrameworkException(string message, Exception innerException)
             : base(message, innerException)
         {
         }
 
         [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        protected NotSupportedByUIA2Exception(SerializationInfo info, StreamingContext context)
+        protected NotSupportedByFrameworkException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }

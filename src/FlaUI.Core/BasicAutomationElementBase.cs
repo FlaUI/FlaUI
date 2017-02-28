@@ -36,6 +36,10 @@ namespace FlaUI.Core
 
         public T GetPropertyValue<T>(PropertyId property)
         {
+            if (Equals(property, PropertyId.NotSupportedByFramework))
+            {
+                throw new NotSupportedByFrameworkException();
+            }
             var isCacheActive = CacheRequest.IsCachingActive;
             try
             {
@@ -72,6 +76,10 @@ namespace FlaUI.Core
 
         public bool TryGetPropertyValue<T>(PropertyId property, out T value)
         {
+            if (Equals(property, PropertyId.NotSupportedByFramework))
+            {
+                throw new NotSupportedByFrameworkException();
+            }
             var isCacheActive = CacheRequest.IsCachingActive;
             try
             {
@@ -101,6 +109,10 @@ namespace FlaUI.Core
 
         public T GetNativePattern<T>(PatternId pattern)
         {
+            if (Equals(pattern, PatternId.NotSupportedByFramework))
+            {
+                throw new NotSupportedByFrameworkException();
+            }
             var isCacheActive = CacheRequest.IsCachingActive;
             try
             {

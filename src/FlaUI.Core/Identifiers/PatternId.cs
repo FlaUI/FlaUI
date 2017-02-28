@@ -5,6 +5,11 @@
     /// </summary>
     public class PatternId : IdentifierBase
     {
+        /// <summary>
+        /// Fixed PatternId which is used for patterns that are not supported by the framework.
+        /// </summary>
+        public static readonly PatternId NotSupportedByFramework = new PatternId(-1, "Not supported", null);
+
         public PatternId(int id, string name, PropertyId availabilityProperty)
             : base(id, name)
         {

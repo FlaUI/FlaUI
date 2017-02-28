@@ -135,7 +135,7 @@
     <Compile Include="Exceptions\MethodNotSupportedException.cs" />
     <Compile Include="Exceptions\NoClickablePointException.cs" />
     <Compile Include="Exceptions\NotCachedException.cs" />
-    <Compile Include="Exceptions\NotSupportedByUIA2Exception.cs" />
+    <Compile Include="Exceptions\NotSupportedByFrameworkException.cs" />
     <Compile Include="Exceptions\NotSupportedException.cs" />
     <Compile Include="Exceptions\PatternNotCachedException.cs" />
     <Compile Include="Exceptions\PatternNotSupportedException.cs" />

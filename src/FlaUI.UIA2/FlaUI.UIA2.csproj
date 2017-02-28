@@ -71,6 +71,7 @@
     <Compile Include="Patterns\TextPattern.cs" />
     <Compile Include="Patterns\TogglePattern.cs" />
     <Compile Include="Patterns\TransformPattern.cs" />
+    <Compile Include="Patterns\UnsupportedPatterns.cs" />
     <Compile Include="Patterns\VirtualizedItemPattern.cs" />
     <Compile Include="Patterns\WindowPattern.cs" />
     <Compile Include="Converters\ConditionConverter.cs" />
