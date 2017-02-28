@@ -1,7 +1,5 @@
 ﻿using System;
 using System.IO;
-using FlaUI.UIA2;
-using FlaUI.UIA3;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 
@@ -39,7 +37,7 @@ namespace FlaUI.Core.UITests.TestFramework
             ApplicationType = appType;
             ScreenshotDir = @"c:\FailedTestsScreenshots";
             _wasTestRun = false;
-            Automation = AutomationType == AutomationType.UIA2 ? (AutomationBase)new UIA2Automation() : new UIA3Automation();
+            Automation = TestUtilities.GetAutomation(automationType);
         }
 
         /// <summary>

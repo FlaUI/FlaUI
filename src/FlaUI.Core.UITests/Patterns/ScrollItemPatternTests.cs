@@ -22,8 +22,8 @@ namespace FlaUI.Core.UITests.Patterns
         {
             var mainWindow = App.GetMainWindow(Automation);
             var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
-            var tabItem = tab.SelectTabItem(1);
-            _grid = tabItem.FindFirstDescendant(cf => cf.ByAutomationId("LargeListView"));
+            tab.SelectTabItem(1);
+            _grid = tab.FindFirstDescendant(cf => cf.ByAutomationId("LargeListView"));
         }
 
         [Test]

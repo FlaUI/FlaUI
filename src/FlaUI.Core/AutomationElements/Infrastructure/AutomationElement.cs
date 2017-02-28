@@ -41,7 +41,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         public AutomationType AutomationType => BasicAutomationElement.Automation.AutomationType;
-        
+
         /// <summary>
         /// Standard UIA patterns of this element
         /// </summary>
@@ -376,6 +376,10 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public bool IsPatternSupported(PatternId pattern)
         {
+            if (Equals(pattern, PatternId.NotSupportedByFramework))
+            {
+                return false;
+            }
             if (pattern.AvailabilityProperty == null)
             {
                 throw new ArgumentException("Pattern doesn't have an AvailabilityProperty");

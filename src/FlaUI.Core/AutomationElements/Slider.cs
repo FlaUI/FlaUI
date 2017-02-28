@@ -14,7 +14,7 @@ namespace FlaUI.Core.AutomationElements
         {
         }
 
-        private IRangeValuePattern RangeValuePattern => Patterns.RangeValue.Pattern;
+        private IRangeValuePattern RangeValuePattern => Patterns.RangeValue.PatternOrDefault;
 
         private IValuePattern ValuePattern => Patterns.Value.Pattern;
 
@@ -24,7 +24,7 @@ namespace FlaUI.Core.AutomationElements
 
         public Thumb Thumb => FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Thumb)).AsThumb();
 
-        public bool IsOnlyValue => RangeValuePattern == null;
+        public bool IsOnlyValue => !IsPatternSupported(Automation.PatternLibrary.RangeValuePattern);
 
         public double Value
         {
