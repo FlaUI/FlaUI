@@ -15,9 +15,6 @@
   * [Core] Added search by XPath
   * [All] Implemented caching
 
-### Bug fixes
-  * None yet
-
 ## 0.6.2 (2017-02-10)
 
 ### Enhancements
