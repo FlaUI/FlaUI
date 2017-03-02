@@ -21,14 +21,15 @@ namespace FlaUI.Core.Patterns
 
     public abstract class ExpandCollapsePatternBase<TNativePattern> : PatternBase<TNativePattern>, IExpandCollapsePattern
     {
+        private AutomationProperty<ExpandCollapseState> _expandCollapseState;
+
         protected ExpandCollapsePatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            ExpandCollapseState = new AutomationProperty<ExpandCollapseState>(() => Properties.ExpandCollapseState, BasicAutomationElement);
         }
 
         public IExpandCollapsePatternProperties Properties => Automation.PropertyLibrary.ExpandCollapse;
 
-        public AutomationProperty<ExpandCollapseState> ExpandCollapseState { get; }
+        public AutomationProperty<ExpandCollapseState> ExpandCollapseState => GetOrCreate(ref _expandCollapseState, Properties.ExpandCollapseState);
 
         public abstract void Collapse();
         public abstract void Expand();

@@ -43,32 +43,33 @@ namespace FlaUI.Core.Patterns
 
     public abstract class LegacyIAccessiblePatternBase<TNativePattern> : PatternBase<TNativePattern>, ILegacyIAccessiblePattern
     {
+        private AutomationProperty<int> _childId;
+        private AutomationProperty<string> _defaultAction;
+        private AutomationProperty<string> _description;
+        private AutomationProperty<string> _help;
+        private AutomationProperty<string> _keyboardShortcut;
+        private AutomationProperty<string> _name;
+        private AutomationProperty<AccessibilityRole> _role;
+        private AutomationProperty<AutomationElement[]> _selection;
+        private AutomationProperty<AccessibilityState> _state;
+        private AutomationProperty<string> _value;
+
         protected LegacyIAccessiblePatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            ChildId = new AutomationProperty<int>(() => Properties.ChildId, BasicAutomationElement);
-            DefaultAction = new AutomationProperty<string>(() => Properties.DefaultAction, BasicAutomationElement);
-            Description = new AutomationProperty<string>(() => Properties.Description, BasicAutomationElement);
-            Help = new AutomationProperty<string>(() => Properties.Help, BasicAutomationElement);
-            KeyboardShortcut = new AutomationProperty<string>(() => Properties.KeyboardShortcut, BasicAutomationElement);
-            Name = new AutomationProperty<string>(() => Properties.Name, BasicAutomationElement);
-            Role = new AutomationProperty<AccessibilityRole>(() => Properties.Role, BasicAutomationElement);
-            Selection = new AutomationProperty<AutomationElement[]>(() => Properties.Selection, BasicAutomationElement);
-            State = new AutomationProperty<AccessibilityState>(() => Properties.State, BasicAutomationElement);
-            Value = new AutomationProperty<string>(() => Properties.Value, BasicAutomationElement);
         }
 
         public ILegacyIAccessiblePatternProperties Properties => Automation.PropertyLibrary.LegacyIAccessible;
 
-        public AutomationProperty<int> ChildId { get; }
-        public AutomationProperty<string> DefaultAction { get; }
-        public AutomationProperty<string> Description { get; }
-        public AutomationProperty<string> Help { get; }
-        public AutomationProperty<string> KeyboardShortcut { get; }
-        public AutomationProperty<string> Name { get; }
-        public AutomationProperty<AccessibilityRole> Role { get; }
-        public AutomationProperty<AutomationElement[]> Selection { get; }
-        public AutomationProperty<AccessibilityState> State { get; }
-        public AutomationProperty<string> Value { get; }
+        public AutomationProperty<int> ChildId => GetOrCreate(ref _childId, Properties.ChildId);
+        public AutomationProperty<string> DefaultAction => GetOrCreate(ref _defaultAction, Properties.DefaultAction);
+        public AutomationProperty<string> Description => GetOrCreate(ref _description, Properties.Description);
+        public AutomationProperty<string> Help => GetOrCreate(ref _help, Properties.Help);
+        public AutomationProperty<string> KeyboardShortcut => GetOrCreate(ref _keyboardShortcut, Properties.KeyboardShortcut);
+        public AutomationProperty<string> Name => GetOrCreate(ref _name, Properties.Name);
+        public AutomationProperty<AccessibilityRole> Role => GetOrCreate(ref _role, Properties.Role);
+        public AutomationProperty<AutomationElement[]> Selection => GetOrCreate(ref _selection, Properties.Selection);
+        public AutomationProperty<AccessibilityState> State => GetOrCreate(ref _state, Properties.State);
+        public AutomationProperty<string> Value => GetOrCreate(ref _value, Properties.Value);
 
         public abstract void DoDefaultAction();
         public abstract IAccessible GetIAccessible();

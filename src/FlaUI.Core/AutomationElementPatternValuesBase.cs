@@ -1,4 +1,6 @@
-﻿using FlaUI.Core.Patterns;
+﻿using System;
+using FlaUI.Core.Patterns;
+using FlaUI.Core.Patterns.Infrastructure;
 
 namespace FlaUI.Core
 {
@@ -45,39 +47,39 @@ namespace FlaUI.Core
 
         protected BasicAutomationElementBase BasicAutomationElement { get; }
 
-        public IAutomationPattern<IAnnotationPattern> Annotation => _annotationPattern ?? (_annotationPattern = InitializeAnnotationPattern());
-        public IAutomationPattern<IDockPattern> Dock => _dockPattern ?? (_dockPattern = InitializeDockPattern());
-        public IAutomationPattern<IDragPattern> Drag => _dragPattern ?? (_dragPattern = InitializeDragPattern());
-        public IAutomationPattern<IDropTargetPattern> DropTarget => _dropTargetPattern ?? (_dropTargetPattern = InitializeDropTargetPattern());
-        public IAutomationPattern<IExpandCollapsePattern> ExpandCollapse => _expandCollapsePattern ?? (_expandCollapsePattern = InitializeExpandCollapsePattern());
-        public IAutomationPattern<IGridItemPattern> GridItem => _gridItemPattern ?? (_gridItemPattern = InitializeGridItemPattern());
-        public IAutomationPattern<IGridPattern> Grid => _gridPattern ?? (_gridPattern = InitializeGridPattern());
-        public IAutomationPattern<IInvokePattern> Invoke => _invokePattern ?? (_invokePattern = InitializeInvokePattern());
-        public IAutomationPattern<IItemContainerPattern> ItemContainer => _itemContainerPattern ?? (_itemContainerPattern = InitializeItemContainerPattern());
-        public IAutomationPattern<ILegacyIAccessiblePattern> LegacyIAccessible => _legacyIAccessiblePattern ?? (_legacyIAccessiblePattern = InitializeLegacyIAccessiblePattern());
-        public IAutomationPattern<IMultipleViewPattern> MultipleView => _multipleViewPattern ?? (_multipleViewPattern = InitializeMultipleViewPattern());
-        public IAutomationPattern<IObjectModelPattern> ObjectModel => _objectModelPattern ?? (_objectModelPattern = InitializeObjectModelPattern());
-        public IAutomationPattern<IRangeValuePattern> RangeValue => _rangeValuePattern ?? (_rangeValuePattern = InitializeRangeValuePattern());
-        public IAutomationPattern<IScrollItemPattern> ScrollItem => _scrollItemPattern ?? (_scrollItemPattern = InitializeScrollItemPattern());
-        public IAutomationPattern<IScrollPattern> Scroll => _scrollPattern ?? (_scrollPattern = InitializeScrollPattern());
-        public IAutomationPattern<ISelectionItemPattern> SelectionItem => _selectionItemPattern ?? (_selectionItemPattern = InitializeSelectionItemPattern());
-        public IAutomationPattern<ISelectionPattern> Selection => _selectionPattern ?? (_selectionPattern = InitializeSelectionPattern());
-        public IAutomationPattern<ISpreadsheetItemPattern> SpreadsheetItem => _spreadsheetItemPattern ?? (_spreadsheetItemPattern = InitializeSpreadsheetItemPattern());
-        public IAutomationPattern<ISpreadsheetPattern> Spreadsheet => _spreadsheetPattern ?? (_spreadsheetPattern = InitializeSpreadsheetPattern());
-        public IAutomationPattern<IStylesPattern> Styles => _stylesPattern ?? (_stylesPattern = InitializeStylesPattern());
-        public IAutomationPattern<ISynchronizedInputPattern> SynchronizedInput => _synchronizedInputPattern ?? (_synchronizedInputPattern = InitializeSynchronizedInputPattern());
-        public IAutomationPattern<ITableItemPattern> TableItem => _tableItemPattern ?? (_tableItemPattern = InitializeTableItemPattern());
-        public IAutomationPattern<ITablePattern> Table => _tablePattern ?? (_tablePattern = InitializeTablePattern());
-        public IAutomationPattern<ITextChildPattern> TextChild => _textChildPattern ?? (_textChildPattern = InitializeTextChildPattern());
-        public IAutomationPattern<ITextEditPattern> TextEdit => _textEditPattern ?? (_textEditPattern = InitializeTextEditPattern());
-        public IAutomationPattern<IText2Pattern> Text2 => _text2Pattern ?? (_text2Pattern = InitializeText2Pattern());
-        public IAutomationPattern<ITextPattern> Text => _textPattern ?? (_textPattern = InitializeTextPattern());
-        public IAutomationPattern<ITogglePattern> Toggle => _togglePattern ?? (_togglePattern = InitializeTogglePattern());
-        public IAutomationPattern<ITransform2Pattern> Transform2 => _transform2Pattern ?? (_transform2Pattern = InitializeTransform2Pattern());
-        public IAutomationPattern<ITransformPattern> Transform => _transformPattern ?? (_transformPattern = InitializeTransformPattern());
-        public IAutomationPattern<IValuePattern> Value => _valuePattern ?? (_valuePattern = InitializeValuePattern());
-        public IAutomationPattern<IVirtualizedItemPattern> VirtualizedItem => _virtualizedItemPattern ?? (_virtualizedItemPattern = InitializeVirtualizedItemPattern());
-        public IAutomationPattern<IWindowPattern> Window => _windowPattern ?? (_windowPattern = InitializeWindowPattern());
+        public IAutomationPattern<IAnnotationPattern> Annotation => GetOrCreate(ref _annotationPattern, InitializeAnnotationPattern);
+        public IAutomationPattern<IDockPattern> Dock => GetOrCreate(ref _dockPattern, InitializeDockPattern);
+        public IAutomationPattern<IDragPattern> Drag => GetOrCreate(ref _dragPattern, InitializeDragPattern);
+        public IAutomationPattern<IDropTargetPattern> DropTarget => GetOrCreate(ref _dropTargetPattern, InitializeDropTargetPattern);
+        public IAutomationPattern<IExpandCollapsePattern> ExpandCollapse => GetOrCreate(ref _expandCollapsePattern, InitializeExpandCollapsePattern);
+        public IAutomationPattern<IGridItemPattern> GridItem => GetOrCreate(ref _gridItemPattern, InitializeGridItemPattern);
+        public IAutomationPattern<IGridPattern> Grid => GetOrCreate(ref _gridPattern, InitializeGridPattern);
+        public IAutomationPattern<IInvokePattern> Invoke => GetOrCreate(ref _invokePattern, InitializeInvokePattern);
+        public IAutomationPattern<IItemContainerPattern> ItemContainer => GetOrCreate(ref _itemContainerPattern, InitializeItemContainerPattern);
+        public IAutomationPattern<ILegacyIAccessiblePattern> LegacyIAccessible => GetOrCreate(ref _legacyIAccessiblePattern, InitializeLegacyIAccessiblePattern);
+        public IAutomationPattern<IMultipleViewPattern> MultipleView => GetOrCreate(ref _multipleViewPattern, InitializeMultipleViewPattern);
+        public IAutomationPattern<IObjectModelPattern> ObjectModel => GetOrCreate(ref _objectModelPattern, InitializeObjectModelPattern);
+        public IAutomationPattern<IRangeValuePattern> RangeValue => GetOrCreate(ref _rangeValuePattern, InitializeRangeValuePattern);
+        public IAutomationPattern<IScrollItemPattern> ScrollItem => GetOrCreate(ref _scrollItemPattern, InitializeScrollItemPattern);
+        public IAutomationPattern<IScrollPattern> Scroll => GetOrCreate(ref _scrollPattern, InitializeScrollPattern);
+        public IAutomationPattern<ISelectionItemPattern> SelectionItem => GetOrCreate(ref _selectionItemPattern, InitializeSelectionItemPattern);
+        public IAutomationPattern<ISelectionPattern> Selection => GetOrCreate(ref _selectionPattern, InitializeSelectionPattern);
+        public IAutomationPattern<ISpreadsheetItemPattern> SpreadsheetItem => GetOrCreate(ref _spreadsheetItemPattern, InitializeSpreadsheetItemPattern);
+        public IAutomationPattern<ISpreadsheetPattern> Spreadsheet => GetOrCreate(ref _spreadsheetPattern, InitializeSpreadsheetPattern);
+        public IAutomationPattern<IStylesPattern> Styles => GetOrCreate(ref _stylesPattern, InitializeStylesPattern);
+        public IAutomationPattern<ISynchronizedInputPattern> SynchronizedInput => GetOrCreate(ref _synchronizedInputPattern, InitializeSynchronizedInputPattern);
+        public IAutomationPattern<ITableItemPattern> TableItem => GetOrCreate(ref _tableItemPattern, InitializeTableItemPattern);
+        public IAutomationPattern<ITablePattern> Table => GetOrCreate(ref _tablePattern, InitializeTablePattern);
+        public IAutomationPattern<ITextChildPattern> TextChild => GetOrCreate(ref _textChildPattern, InitializeTextChildPattern);
+        public IAutomationPattern<ITextEditPattern> TextEdit => GetOrCreate(ref _textEditPattern, InitializeTextEditPattern);
+        public IAutomationPattern<IText2Pattern> Text2 => GetOrCreate(ref _text2Pattern, InitializeText2Pattern);
+        public IAutomationPattern<ITextPattern> Text => GetOrCreate(ref _textPattern, InitializeTextPattern);
+        public IAutomationPattern<ITogglePattern> Toggle => GetOrCreate(ref _togglePattern, InitializeTogglePattern);
+        public IAutomationPattern<ITransform2Pattern> Transform2 => GetOrCreate(ref _transform2Pattern, InitializeTransform2Pattern);
+        public IAutomationPattern<ITransformPattern> Transform => GetOrCreate(ref _transformPattern, InitializeTransformPattern);
+        public IAutomationPattern<IValuePattern> Value => GetOrCreate(ref _valuePattern, InitializeValuePattern);
+        public IAutomationPattern<IVirtualizedItemPattern> VirtualizedItem => GetOrCreate(ref _virtualizedItemPattern, InitializeVirtualizedItemPattern);
+        public IAutomationPattern<IWindowPattern> Window => GetOrCreate(ref _windowPattern, InitializeWindowPattern);
 
         protected abstract IAutomationPattern<IAnnotationPattern> InitializeAnnotationPattern();
         protected abstract IAutomationPattern<IDockPattern> InitializeDockPattern();
@@ -112,5 +114,10 @@ namespace FlaUI.Core
         protected abstract IAutomationPattern<IValuePattern> InitializeValuePattern();
         protected abstract IAutomationPattern<IVirtualizedItemPattern> InitializeVirtualizedItemPattern();
         protected abstract IAutomationPattern<IWindowPattern> InitializeWindowPattern();
+
+        private IAutomationPattern<T> GetOrCreate<T>(ref IAutomationPattern<T> val, Func<IAutomationPattern<T>> initFunc) where T : IPattern
+        {
+            return val ?? (val = initFunc());
+        }
     }
 }

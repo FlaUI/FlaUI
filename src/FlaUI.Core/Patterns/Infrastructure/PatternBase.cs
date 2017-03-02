@@ -1,4 +1,5 @@
 ﻿using System;
+using FlaUI.Core.Identifiers;
 
 namespace FlaUI.Core.Patterns.Infrastructure
 {
@@ -22,6 +23,11 @@ namespace FlaUI.Core.Patterns.Infrastructure
             }
             BasicAutomationElement = basicAutomationElement;
             NativePattern = nativePattern;
+        }
+
+        protected AutomationProperty<T> GetOrCreate<T>(ref AutomationProperty<T> val, PropertyId propertyId)
+        {
+            return val ?? (val = new AutomationProperty<T>(propertyId, BasicAutomationElement));
         }
     }
 }

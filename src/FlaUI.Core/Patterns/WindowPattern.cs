@@ -39,25 +39,26 @@ namespace FlaUI.Core.Patterns
 
     public abstract class WindowPatternBase<TNativePattern> : PatternBase<TNativePattern>, IWindowPattern
     {
+        private AutomationProperty<bool> _canMaximize;
+        private AutomationProperty<bool> _canMinimize;
+        private AutomationProperty<bool> _isModal;
+        private AutomationProperty<bool> _isTopmost;
+        private AutomationProperty<WindowInteractionState> _windowInteractionState;
+        private AutomationProperty<WindowVisualState> _windowVisualState;
+
         protected WindowPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            CanMaximize = new AutomationProperty<bool>(() => Properties.CanMaximize, BasicAutomationElement);
-            CanMinimize = new AutomationProperty<bool>(() => Properties.CanMinimize, BasicAutomationElement);
-            IsModal = new AutomationProperty<bool>(() => Properties.IsModal, BasicAutomationElement);
-            IsTopmost = new AutomationProperty<bool>(() => Properties.IsTopmost, BasicAutomationElement);
-            WindowInteractionState = new AutomationProperty<WindowInteractionState>(() => Properties.WindowInteractionState, BasicAutomationElement);
-            WindowVisualState = new AutomationProperty<WindowVisualState>(() => Properties.WindowVisualState, BasicAutomationElement);
         }
 
         public IWindowPatternProperties Properties => Automation.PropertyLibrary.Window;
         public IWindowPatternEvents Events => Automation.EventLibrary.Window;
 
-        public AutomationProperty<bool> CanMaximize { get; }
-        public AutomationProperty<bool> CanMinimize { get; }
-        public AutomationProperty<bool> IsModal { get; }
-        public AutomationProperty<bool> IsTopmost { get; }
-        public AutomationProperty<WindowInteractionState> WindowInteractionState { get; }
-        public AutomationProperty<WindowVisualState> WindowVisualState { get; }
+        public AutomationProperty<bool> CanMaximize => GetOrCreate(ref _canMaximize, Properties.CanMaximize);
+        public AutomationProperty<bool> CanMinimize => GetOrCreate(ref _canMinimize, Properties.CanMinimize);
+        public AutomationProperty<bool> IsModal => GetOrCreate(ref _isModal, Properties.IsModal);
+        public AutomationProperty<bool> IsTopmost => GetOrCreate(ref _isTopmost, Properties.IsTopmost);
+        public AutomationProperty<WindowInteractionState> WindowInteractionState => GetOrCreate(ref _windowInteractionState, Properties.WindowInteractionState);
+        public AutomationProperty<WindowVisualState> WindowVisualState => GetOrCreate(ref _windowVisualState, Properties.WindowVisualState);
 
         public abstract void Close();
         public abstract void SetWindowVisualState(WindowVisualState state);

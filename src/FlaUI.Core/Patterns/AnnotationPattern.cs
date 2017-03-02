@@ -27,21 +27,22 @@ namespace FlaUI.Core.Patterns
 
     public abstract class AnnotationPatternBase<TNativePattern> : PatternBase<TNativePattern>, IAnnotationPattern
     {
+        private AutomationProperty<AnnotationType> _annotationType;
+        private AutomationProperty<string> _annotationTypeName;
+        private AutomationProperty<string> _author;
+        private AutomationProperty<string> _dateTime;
+        private AutomationProperty<AutomationElement> _target;
+
         protected AnnotationPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            AnnotationType = new AutomationProperty<AnnotationType>(() => Properties.AnnotationTypeId, BasicAutomationElement);
-            AnnotationTypeName = new AutomationProperty<string>(() => Properties.AnnotationTypeName, BasicAutomationElement);
-            Author = new AutomationProperty<string>(() => Properties.Author, BasicAutomationElement);
-            DateTime = new AutomationProperty<string>(() => Properties.DateTime, BasicAutomationElement);
-            Target = new AutomationProperty<AutomationElement>(() => Properties.Target, BasicAutomationElement);
         }
 
         public IAnnotationPatternProperties Properties => Automation.PropertyLibrary.Annotation;
 
-        public AutomationProperty<AnnotationType> AnnotationType { get; }
-        public AutomationProperty<string> AnnotationTypeName { get; }
-        public AutomationProperty<string> Author { get; }
-        public AutomationProperty<string> DateTime { get; }
-        public AutomationProperty<AutomationElement> Target { get; }
+        public AutomationProperty<AnnotationType> AnnotationType => GetOrCreate(ref _annotationType, Properties.AnnotationTypeId);
+        public AutomationProperty<string> AnnotationTypeName => GetOrCreate(ref _annotationTypeName, Properties.AnnotationTypeName);
+        public AutomationProperty<string> Author => GetOrCreate(ref _author, Properties.Author);
+        public AutomationProperty<string> DateTime => GetOrCreate(ref _dateTime, Properties.DateTime);
+        public AutomationProperty<AutomationElement> Target => GetOrCreate(ref _target, Properties.Target);
     }
 }

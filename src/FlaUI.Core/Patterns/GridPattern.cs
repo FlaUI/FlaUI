@@ -22,16 +22,17 @@ namespace FlaUI.Core.Patterns
 
     public abstract class GridPatternBase<TNativePattern> : PatternBase<TNativePattern>, IGridPattern
     {
+        private AutomationProperty<int> _columnCount;
+        private AutomationProperty<int> _rowCount;
+
         protected GridPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            ColumnCount = new AutomationProperty<int>(() => Properties.ColumnCount, BasicAutomationElement);
-            RowCount = new AutomationProperty<int>(() => Properties.RowCount, BasicAutomationElement);
         }
 
         public IGridPatternProperties Properties => Automation.PropertyLibrary.Grid;
 
-        public AutomationProperty<int> ColumnCount { get; }
-        public AutomationProperty<int> RowCount { get; }
+        public AutomationProperty<int> ColumnCount => GetOrCreate(ref _columnCount, Properties.ColumnCount);
+        public AutomationProperty<int> RowCount => GetOrCreate(ref _rowCount, Properties.RowCount);
 
         public abstract AutomationElement GetItem(int row, int column);
     }

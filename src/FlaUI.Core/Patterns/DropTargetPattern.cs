@@ -27,16 +27,17 @@ namespace FlaUI.Core.Patterns
 
     public abstract class DropTargetPatternBase<TNativePattern> : PatternBase<TNativePattern>, IDropTargetPattern
     {
+        private AutomationProperty<string> _dropTargetEffect;
+        private AutomationProperty<string[]> _dropTargetEffects;
+
         protected DropTargetPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            DropTargetEffect = new AutomationProperty<string>(() => Properties.DropTargetEffect, BasicAutomationElement);
-            DropTargetEffects = new AutomationProperty<string[]>(() => Properties.DropTargetEffects, BasicAutomationElement);
         }
 
         public IDropTargetPatternProperties Properties => Automation.PropertyLibrary.DropTarget;
         public IDropTargetPatternEvents Events => Automation.EventLibrary.DropTarget;
 
-        public AutomationProperty<string> DropTargetEffect { get; }
-        public AutomationProperty<string[]> DropTargetEffects { get; }
+        public AutomationProperty<string> DropTargetEffect => GetOrCreate(ref _dropTargetEffect, Properties.DropTargetEffect);
+        public AutomationProperty<string[]> DropTargetEffects => GetOrCreate(ref _dropTargetEffects, Properties.DropTargetEffects);
     }
 }

@@ -28,18 +28,19 @@ namespace FlaUI.Core.Patterns
 
     public abstract class SelectionPatternBase<TNativePattern> : PatternBase<TNativePattern>, ISelectionPattern
     {
+        private AutomationProperty<bool> _canSelectMultiple;
+        private AutomationProperty<bool> _isSelectionRequired;
+        private AutomationProperty<AutomationElement[]> _selection;
+
         protected SelectionPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            CanSelectMultiple = new AutomationProperty<bool>(() => Properties.CanSelectMultiple, BasicAutomationElement);
-            IsSelectionRequired = new AutomationProperty<bool>(() => Properties.IsSelectionRequired, BasicAutomationElement);
-            Selection = new AutomationProperty<AutomationElement[]>(() => Properties.Selection, BasicAutomationElement);
         }
 
         public ISelectionPatternProperties Properties => Automation.PropertyLibrary.Selection;
         public ISelectionPatternEvents Events => Automation.EventLibrary.Selection;
 
-        public AutomationProperty<bool> CanSelectMultiple { get; }
-        public AutomationProperty<bool> IsSelectionRequired { get; }
-        public AutomationProperty<AutomationElement[]> Selection { get; }
+        public AutomationProperty<bool> CanSelectMultiple => GetOrCreate(ref _canSelectMultiple, Properties.CanSelectMultiple);
+        public AutomationProperty<bool> IsSelectionRequired => GetOrCreate(ref _isSelectionRequired, Properties.IsSelectionRequired);
+        public AutomationProperty<AutomationElement[]> Selection => GetOrCreate(ref _selection, Properties.Selection);
     }
 }

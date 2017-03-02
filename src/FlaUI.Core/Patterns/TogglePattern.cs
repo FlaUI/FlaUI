@@ -20,14 +20,15 @@ namespace FlaUI.Core.Patterns
 
     public abstract class TogglePatternBase<TNativePattern> : PatternBase<TNativePattern>, ITogglePattern
     {
+        private AutomationProperty<ToggleState> _toggleState;
+
         protected TogglePatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            ToggleState = new AutomationProperty<ToggleState>(() => Properties.ToggleState, BasicAutomationElement);
         }
 
         public ITogglePatternProperties Properties => Automation.PropertyLibrary.Toggle;
 
-        public AutomationProperty<ToggleState> ToggleState { get; }
+        public AutomationProperty<ToggleState> ToggleState => GetOrCreate(ref _toggleState, Properties.ToggleState);
 
         public abstract void Toggle();
     }

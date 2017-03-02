@@ -29,24 +29,25 @@ namespace FlaUI.Core.Patterns
 
     public abstract class RangeValuePatternBase<TNativePattern> : PatternBase<TNativePattern>, IRangeValuePattern
     {
+        private AutomationProperty<bool> _isReadOnly;
+        private AutomationProperty<double> _largeChange;
+        private AutomationProperty<double> _maximum;
+        private AutomationProperty<double> _minimum;
+        private AutomationProperty<double> _smallChange;
+        private AutomationProperty<double> _value;
+
         protected RangeValuePatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            IsReadOnly = new AutomationProperty<bool>(() => Properties.IsReadOnly, BasicAutomationElement);
-            LargeChange = new AutomationProperty<double>(() => Properties.LargeChange, BasicAutomationElement);
-            Maximum = new AutomationProperty<double>(() => Properties.Maximum, BasicAutomationElement);
-            Minimum = new AutomationProperty<double>(() => Properties.Minimum, BasicAutomationElement);
-            SmallChange = new AutomationProperty<double>(() => Properties.SmallChange, BasicAutomationElement);
-            Value = new AutomationProperty<double>(() => Properties.Value, BasicAutomationElement);
         }
 
         public IRangeValuePatternProperties Properties => Automation.PropertyLibrary.RangeValue;
 
-       public AutomationProperty<bool> IsReadOnly { get; }
-       public AutomationProperty<double> LargeChange { get; }
-       public AutomationProperty<double> Maximum { get; }
-       public AutomationProperty<double> Minimum { get; }
-       public AutomationProperty<double> SmallChange { get; }
-       public AutomationProperty<double> Value { get; }
+        public AutomationProperty<bool> IsReadOnly => GetOrCreate(ref _isReadOnly, Properties.IsReadOnly);
+        public AutomationProperty<double> LargeChange => GetOrCreate(ref _largeChange, Properties.LargeChange);
+        public AutomationProperty<double> Maximum => GetOrCreate(ref _maximum, Properties.Maximum);
+        public AutomationProperty<double> Minimum => GetOrCreate(ref _minimum, Properties.Minimum);
+        public AutomationProperty<double> SmallChange => GetOrCreate(ref _smallChange, Properties.SmallChange);
+        public AutomationProperty<double> Value => GetOrCreate(ref _value, Properties.Value);
 
         public abstract void SetValue(double val);
     }

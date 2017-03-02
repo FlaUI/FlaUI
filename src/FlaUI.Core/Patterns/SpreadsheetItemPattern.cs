@@ -23,17 +23,18 @@ namespace FlaUI.Core.Patterns
 
     public abstract class SpreadsheetItemPatternBase<TNativePattern> : PatternBase<TNativePattern>, ISpreadsheetItemPattern
     {
+        private AutomationProperty<string> _formula;
+        private AutomationProperty<AutomationElement[]> _annotationObjects;
+        private AutomationProperty<AnnotationType[]> _annotationTypes;
+
         protected SpreadsheetItemPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Formula = new AutomationProperty<string>(() => Properties.Formula, BasicAutomationElement);
-            AnnotationObjects = new AutomationProperty<AutomationElement[]>(() => Properties.AnnotationObjects, BasicAutomationElement);
-            AnnotationTypes = new AutomationProperty<AnnotationType[]>(() => Properties.AnnotationTypes, BasicAutomationElement);
         }
 
         public ISpreadsheetItemPatternProperties Properties => Automation.PropertyLibrary.SpreadsheetItem;
 
-        public AutomationProperty<string> Formula { get; }
-        public AutomationProperty<AutomationElement[]> AnnotationObjects { get; }
-        public AutomationProperty<AnnotationType[]> AnnotationTypes { get; }
+        public AutomationProperty<string> Formula => GetOrCreate(ref _formula, Properties.Formula);
+        public AutomationProperty<AutomationElement[]> AnnotationObjects => GetOrCreate(ref _annotationObjects, Properties.AnnotationObjects);
+        public AutomationProperty<AnnotationType[]> AnnotationTypes => GetOrCreate(ref _annotationTypes, Properties.AnnotationTypes);
     }
 }

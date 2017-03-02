@@ -26,21 +26,22 @@ namespace FlaUI.Core.Patterns
 
     public abstract class GridItemPatternBase<TNativePattern> : PatternBase<TNativePattern>, IGridItemPattern
     {
+        private AutomationProperty<int> _column;
+        private AutomationProperty<int> _columnSpan;
+        private AutomationProperty<AutomationElement> _containingGrid;
+        private AutomationProperty<int> _row;
+        private AutomationProperty<int> _rowSpan;
+
         protected GridItemPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            Column = new AutomationProperty<int>(() => Properties.Column, BasicAutomationElement);
-            ColumnSpan = new AutomationProperty<int>(() => Properties.ColumnSpan, BasicAutomationElement);
-            ContainingGrid = new AutomationProperty<AutomationElement>(() => Properties.ContainingGrid, BasicAutomationElement);
-            Row = new AutomationProperty<int>(() => Properties.Row, BasicAutomationElement);
-            RowSpan = new AutomationProperty<int>(() => Properties.RowSpan, BasicAutomationElement);
         }
 
         public IGridItemPatternProperties Properties => Automation.PropertyLibrary.GridItem;
 
-        public AutomationProperty<int> Column { get; }
-        public AutomationProperty<int> ColumnSpan { get; }
-        public AutomationProperty<AutomationElement> ContainingGrid { get; }
-        public AutomationProperty<int> Row { get; }
-        public AutomationProperty<int> RowSpan { get; }
+        public AutomationProperty<int> Column => GetOrCreate(ref _column, Properties.Column);
+        public AutomationProperty<int> ColumnSpan => GetOrCreate(ref _columnSpan, Properties.ColumnSpan);
+        public AutomationProperty<AutomationElement> ContainingGrid => GetOrCreate(ref _containingGrid, Properties.ContainingGrid);
+        public AutomationProperty<int> Row => GetOrCreate(ref _row, Properties.Row);
+        public AutomationProperty<int> RowSpan => GetOrCreate(ref _rowSpan, Properties.RowSpan);
     }
 }

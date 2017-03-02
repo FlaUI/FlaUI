@@ -17,15 +17,13 @@ namespace FlaUI.Core
 
     public class AutomationProperty<TVal> : IAutomationProperty<TVal>, IEquatable<TVal>, IEquatable<AutomationProperty<TVal>>
     {
-        private readonly Lazy<PropertyId> _propertyIdLazy;
-
-        public AutomationProperty(Func<PropertyId> propertyFunc, BasicAutomationElementBase basicAutomationElement)
+        public AutomationProperty(PropertyId propertyId, BasicAutomationElementBase basicAutomationElement)
         {
-            _propertyIdLazy = new Lazy<PropertyId>(propertyFunc);
+            PropertyId = propertyId;
             BasicAutomationElement = basicAutomationElement;
         }
 
-        protected PropertyId PropertyId => _propertyIdLazy.Value;
+        protected PropertyId PropertyId { get; }
 
         protected BasicAutomationElementBase BasicAutomationElement { get; }
 

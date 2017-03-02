@@ -32,20 +32,21 @@ namespace FlaUI.Core.Patterns
 
     public abstract class DragPatternBase<TNativePattern> : PatternBase<TNativePattern>, IDragPattern
     {
+        private AutomationProperty<string> _dropEffect;
+        private AutomationProperty<string[]> _dropEffects;
+        private AutomationProperty<bool> _isGrabbed;
+        private AutomationProperty<AutomationElement[]> _grabbedItems;
+
         protected DragPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            DropEffect = new AutomationProperty<string>(() => Properties.DropEffect, BasicAutomationElement);
-            DropEffects = new AutomationProperty<string[]>(() => Properties.DropEffects, BasicAutomationElement);
-            IsGrabbed = new AutomationProperty<bool>(() => Properties.IsGrabbed, BasicAutomationElement);
-            GrabbedItems = new AutomationProperty<AutomationElement[]>(() => Properties.GrabbedItems, BasicAutomationElement);
         }
 
         public IDragPatternProperties Properties => Automation.PropertyLibrary.Drag;
         public IDragPatternEvents Events => Automation.EventLibrary.Drag;
 
-        public AutomationProperty<string> DropEffect { get; }
-        public AutomationProperty<string[]> DropEffects { get; }
-        public AutomationProperty<bool> IsGrabbed { get; }
-        public AutomationProperty<AutomationElement[]> GrabbedItems { get; }
+        public AutomationProperty<string> DropEffect => GetOrCreate(ref _dropEffect, Properties.DropEffect);
+        public AutomationProperty<string[]> DropEffects => GetOrCreate(ref _dropEffects, Properties.DropEffects);
+        public AutomationProperty<bool> IsGrabbed => GetOrCreate(ref _isGrabbed, Properties.IsGrabbed);
+        public AutomationProperty<AutomationElement[]> GrabbedItems => GetOrCreate(ref _grabbedItems, Properties.GrabbedItems);
     }
 }

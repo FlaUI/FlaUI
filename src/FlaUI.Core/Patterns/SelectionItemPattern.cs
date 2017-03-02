@@ -32,17 +32,18 @@ namespace FlaUI.Core.Patterns
 
     public abstract class SelectionItemPatternBase<TNativePattern> : PatternBase<TNativePattern>, ISelectionItemPattern
     {
+        private AutomationProperty<bool> _isSelected;
+        private AutomationProperty<AutomationElement> _selectionContainer;
+
         protected SelectionItemPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            IsSelected = new AutomationProperty<bool>(() => Properties.IsSelected, BasicAutomationElement);
-            SelectionContainer = new AutomationProperty<AutomationElement>(() => Properties.SelectionContainer, BasicAutomationElement);
         }
 
         public ISelectionItemPatternProperties Properties => Automation.PropertyLibrary.SelectionItem;
         public ISelectionItemPatternEvents Events => Automation.EventLibrary.SelectionItem;
 
-        public AutomationProperty<bool> IsSelected { get; }
-        public AutomationProperty<AutomationElement> SelectionContainer { get; }
+        public AutomationProperty<bool> IsSelected => GetOrCreate(ref _isSelected, Properties.IsSelected);
+        public AutomationProperty<AutomationElement> SelectionContainer => GetOrCreate(ref _selectionContainer, Properties.SelectionContainer);
 
         public abstract void AddToSelection();
         public abstract void RemoveFromSelection();

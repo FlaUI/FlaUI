@@ -23,17 +23,18 @@ namespace FlaUI.Core.Patterns
 
     public abstract class TablePatternBase<TNativePattern> : PatternBase<TNativePattern>, ITablePattern
     {
+        private AutomationProperty<AutomationElement[]> _columnHeaders;
+        private AutomationProperty<AutomationElement[]> _rowHeaders;
+        private AutomationProperty<RowOrColumnMajor> _rowOrColumnMajor;
+
         protected TablePatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            ColumnHeaders = new AutomationProperty<AutomationElement[]>(() => Properties.ColumnHeaders, BasicAutomationElement);
-            RowHeaders = new AutomationProperty<AutomationElement[]>(() => Properties.RowHeaders, BasicAutomationElement);
-            RowOrColumnMajor = new AutomationProperty<RowOrColumnMajor>(() => Properties.RowOrColumnMajor, BasicAutomationElement);
         }
 
         public ITablePatternProperties Properties => Automation.PropertyLibrary.Table;
 
-        public AutomationProperty<AutomationElement[]> ColumnHeaders { get; }
-        public AutomationProperty<AutomationElement[]> RowHeaders { get; }
-        public AutomationProperty<RowOrColumnMajor> RowOrColumnMajor { get; }
+        public AutomationProperty<AutomationElement[]> ColumnHeaders => GetOrCreate(ref _columnHeaders, Properties.ColumnHeaders);
+        public AutomationProperty<AutomationElement[]> RowHeaders => GetOrCreate(ref _rowHeaders, Properties.RowHeaders);
+        public AutomationProperty<RowOrColumnMajor> RowOrColumnMajor => GetOrCreate(ref _rowOrColumnMajor, Properties.RowOrColumnMajor);
     }
 }

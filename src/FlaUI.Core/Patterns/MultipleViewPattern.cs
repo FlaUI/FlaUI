@@ -22,16 +22,17 @@ namespace FlaUI.Core.Patterns
 
     public abstract class MultipleViewPatternBase<TNativePattern> : PatternBase<TNativePattern>, IMultipleViewPattern
     {
+        private AutomationProperty<int> _currentView;
+        private AutomationProperty<int[]> _supportedViews;
+
         protected MultipleViewPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            CurrentView = new AutomationProperty<int>(() => Properties.CurrentView, BasicAutomationElement);
-            SupportedViews = new AutomationProperty<int[]>(() => Properties.SupportedViews, BasicAutomationElement);
         }
 
         public IMultipleViewPatternProperties Properties => Automation.PropertyLibrary.MultipleView;
 
-        public AutomationProperty<int> CurrentView { get; }
-        public AutomationProperty<int[]> SupportedViews { get; }
+        public AutomationProperty<int> CurrentView => GetOrCreate(ref _currentView, Properties.CurrentView);
+        public AutomationProperty<int[]> SupportedViews => GetOrCreate(ref _supportedViews, Properties.SupportedViews);
 
         public abstract string GetViewName(int view);
         public abstract void SetCurrentView(int view);

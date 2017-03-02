@@ -25,18 +25,19 @@ namespace FlaUI.Core.Patterns
 
     public abstract class TransformPatternBase<TNativePattern> : PatternBase<TNativePattern>, ITransformPattern
     {
+        private AutomationProperty<bool> _canMove;
+        private AutomationProperty<bool> _canResize;
+        private AutomationProperty<bool> _canRotate;
+
         protected TransformPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            CanMove = new AutomationProperty<bool>(() => Properties.CanMove, BasicAutomationElement);
-            CanResize = new AutomationProperty<bool>(() => Properties.CanResize, BasicAutomationElement);
-            CanRotate = new AutomationProperty<bool>(() => Properties.CanRotate, BasicAutomationElement);
         }
 
         public ITransformPatternProperties Properties => Automation.PropertyLibrary.Transform;
 
-        public AutomationProperty<bool> CanMove { get; }
-        public AutomationProperty<bool> CanResize { get; }
-        public AutomationProperty<bool> CanRotate { get; }
+        public AutomationProperty<bool> CanMove => GetOrCreate(ref _canMove, Properties.CanMove);
+        public AutomationProperty<bool> CanResize => GetOrCreate(ref _canResize, Properties.CanResize);
+        public AutomationProperty<bool> CanRotate => GetOrCreate(ref _canRotate, Properties.CanRotate);
 
         public abstract void Move(double x, double y);
         public abstract void Resize(double width, double height);
