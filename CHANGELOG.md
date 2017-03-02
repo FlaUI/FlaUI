@@ -1,13 +1,19 @@
 # Changelog
 
-## vNext (xxxx-xx-xx)
+## 1.0.0-beta1 (2017-03-02)
 
 ### Breaking changes
   * [Core] Merged Table into Grid
+  * [All] Properties are now wrapped in an AutomationProperty object which provides Value, ValorOrDefault and TryGetValue
+  * [Al] Patterns are now wrapped in an IAutomationPattern object which provides Pattern, PatternOrDefault, TryGetPattern and IsSupported
+  * [Core] Properties in the PropertyLibrary now do not contain the name "Property" anymore
+  * [Core] Renamed .Information to .Properties
 
 ### Enhancements
   * [Inspect] Added Table Patterns support
   * [Code] Various code cleanups
+  * [Core] Added search by XPath
+  * [All] Implemented caching
 
 ### Bug fixes
   * None yet
