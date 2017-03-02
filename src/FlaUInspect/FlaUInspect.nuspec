@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>flauinspect</id>
-    <version>0.6.1</version>
+    <version>1.0.0-beta1</version>
     <title>FlaUInspect</title>
     <authors>Roemer</authors>
     <owners>Roemer</owners>
