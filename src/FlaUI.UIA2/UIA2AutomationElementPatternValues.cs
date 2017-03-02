@@ -8,11 +8,8 @@ namespace FlaUI.UIA2
 {
     public class UIA2AutomationElementPatternValues : AutomationElementPatternValuesBase
     {
-        protected UIA2BasicAutomationElement BasicAutomationElement { get; }
-
-        public UIA2AutomationElementPatternValues(UIA2BasicAutomationElement basicAutomationElement)
+        public UIA2AutomationElementPatternValues(UIA2BasicAutomationElement basicAutomationElement) : base(basicAutomationElement)
         {
-            BasicAutomationElement = basicAutomationElement;
         }
 
         protected override IAutomationPattern<IAnnotationPattern> InitializeAnnotationPattern()

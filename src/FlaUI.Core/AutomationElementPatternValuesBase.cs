@@ -38,6 +38,13 @@ namespace FlaUI.Core
         private IAutomationPattern<IVirtualizedItemPattern> _virtualizedItemPattern;
         private IAutomationPattern<IWindowPattern> _windowPattern;
 
+        protected AutomationElementPatternValuesBase(BasicAutomationElementBase basicAutomationElement)
+        {
+            BasicAutomationElement = basicAutomationElement;
+        }
+
+        protected BasicAutomationElementBase BasicAutomationElement { get; }
+
         public IAutomationPattern<IAnnotationPattern> Annotation => _annotationPattern ?? (_annotationPattern = InitializeAnnotationPattern());
         public IAutomationPattern<IDockPattern> Dock => _dockPattern ?? (_dockPattern = InitializeDockPattern());
         public IAutomationPattern<IDragPattern> Drag => _dragPattern ?? (_dragPattern = InitializeDragPattern());

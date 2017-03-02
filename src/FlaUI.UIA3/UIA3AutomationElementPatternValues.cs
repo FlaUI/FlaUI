@@ -7,11 +7,8 @@ namespace FlaUI.UIA3
 {
     public class UIA3AutomationElementPatternValues : AutomationElementPatternValuesBase
     {
-        protected UIA3BasicAutomationElement BasicAutomationElement { get; }
-
-        public UIA3AutomationElementPatternValues(UIA3BasicAutomationElement basicAutomationElement)
+        public UIA3AutomationElementPatternValues(UIA3BasicAutomationElement basicAutomationElement) : base(basicAutomationElement)
         {
-            BasicAutomationElement = basicAutomationElement;
         }
 
         protected override IAutomationPattern<IAnnotationPattern> InitializeAnnotationPattern()
