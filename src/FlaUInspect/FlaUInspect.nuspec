@@ -14,7 +14,7 @@
 	<requireLicenseAcceptance>false</requireLicenseAcceptance>
 	<summary>Tool to inspect Windows applications how UIA sees them.</summary>
     <description>This application allows to inspect Windows applications with Microsoft UIA (UI Automation) and shows how UIA sees the application.</description>
-    <copyright>Copyright 2016</copyright>
+    <copyright>Copyright 2016-2017</copyright>
     <tags>UI Automation UIA2 UIA3 UIA System.Windows.Automation Inspect</tags>
   </metadata>
   <files>
