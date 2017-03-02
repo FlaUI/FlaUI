@@ -1,16 +1,15 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
-using FlaUI.Core.Patterns.Infrastructure;
+using FlaUI.UIA2.Identifiers;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Patterns
 {
-    public class ScrollPattern : PatternBaseWithInformation<UIA.ScrollPattern, ScrollPatternInformation>, IScrollPattern
+    public class ScrollPattern : ScrollPatternBase<UIA.ScrollPattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.ScrollPattern.Pattern.Id, "Scroll");
+        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.ScrollPattern.Pattern.Id, "Scroll", AutomationObjectIds.IsScrollPatternAvailableProperty);
         public static readonly PropertyId HorizontallyScrollableProperty = PropertyId.Register(AutomationType.UIA2, UIA.ScrollPattern.HorizontallyScrollableProperty.Id, "HorizontallyScrollable");
         public static readonly PropertyId HorizontalScrollPercentProperty = PropertyId.Register(AutomationType.UIA2, UIA.ScrollPattern.HorizontalScrollPercentProperty.Id, "HorizontalScrollPercent");
         public static readonly PropertyId HorizontalViewSizeProperty = PropertyId.Register(AutomationType.UIA2, UIA.ScrollPattern.HorizontalViewSizeProperty.Id, "HorizontalViewSize");
@@ -22,59 +21,29 @@ namespace FlaUI.UIA2.Patterns
         {
         }
 
-        IScrollPatternInformation IPatternWithInformation<IScrollPatternInformation>.Cached => Cached;
-
-        IScrollPatternInformation IPatternWithInformation<IScrollPatternInformation>.Current => Current;
-
-        public IScrollPatternProperties Properties => Automation.PropertyLibrary.Scroll;
-
-        protected override ScrollPatternInformation CreateInformation(bool cached)
-        {
-            return new ScrollPatternInformation(BasicAutomationElement, cached);
-        }
-
-        public void Scroll(ScrollAmount horizontalAmount, ScrollAmount verticalAmount)
+        public override void Scroll(ScrollAmount horizontalAmount, ScrollAmount verticalAmount)
         {
             NativePattern.Scroll((UIA.ScrollAmount)horizontalAmount, (UIA.ScrollAmount)verticalAmount);
         }
 
-        public void SetScrollPercent(double horizontalPercent, double verticalPercent)
+        public override void SetScrollPercent(double horizontalPercent, double verticalPercent)
         {
             NativePattern.SetScrollPercent(horizontalPercent, verticalPercent);
         }
     }
 
-    public class ScrollPatternInformation : InformationBase, IScrollPatternInformation
-    {
-        public ScrollPatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
-        {
-        }
-
-        public bool HorizontallyScrollable => Get<bool>(ScrollPattern.HorizontallyScrollableProperty);
-
-        public double HorizontalScrollPercent => Get<double>(ScrollPattern.HorizontalScrollPercentProperty);
-
-        public double HorizontalViewSize => Get<double>(ScrollPattern.HorizontalViewSizeProperty);
-
-        public bool VerticallyScrollable => Get<bool>(ScrollPattern.VerticallyScrollableProperty);
-
-        public double VerticalScrollPercent => Get<double>(ScrollPattern.VerticalScrollPercentProperty);
-
-        public double VerticalViewSize => Get<double>(ScrollPattern.VerticalViewSizeProperty);
-    }
-
     public class ScrollPatternProperties : IScrollPatternProperties
     {
-        public PropertyId HorizontallyScrollableProperty => ScrollPattern.HorizontallyScrollableProperty;
+        public PropertyId HorizontallyScrollable => ScrollPattern.HorizontallyScrollableProperty;
 
-        public PropertyId HorizontalScrollPercentProperty => ScrollPattern.HorizontalScrollPercentProperty;
+        public PropertyId HorizontalScrollPercent => ScrollPattern.HorizontalScrollPercentProperty;
 
-        public PropertyId HorizontalViewSizeProperty => ScrollPattern.HorizontalViewSizeProperty;
+        public PropertyId HorizontalViewSize => ScrollPattern.HorizontalViewSizeProperty;
 
-        public PropertyId VerticallyScrollableProperty => ScrollPattern.VerticallyScrollableProperty;
+        public PropertyId VerticallyScrollable => ScrollPattern.VerticallyScrollableProperty;
 
-        public PropertyId VerticalScrollPercentProperty => ScrollPattern.VerticalScrollPercentProperty;
+        public PropertyId VerticalScrollPercent => ScrollPattern.VerticalScrollPercentProperty;
 
-        public PropertyId VerticalViewSizeProperty => ScrollPattern.VerticalViewSizeProperty;
+        public PropertyId VerticalViewSize => ScrollPattern.VerticalViewSizeProperty;
     }
 }

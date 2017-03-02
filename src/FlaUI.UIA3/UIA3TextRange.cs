@@ -66,7 +66,7 @@ namespace FlaUI.UIA3
         public object GetAttributeValue(TextAttributeId attribute)
         {
             var nativeValue = ComCallWrapper.Call(() => NativeRange.GetAttributeValue(attribute.Id));
-            return attribute.Convert<object>(nativeValue);
+            return attribute.Convert<object>(Automation, nativeValue);
         }
 
         public Rectangle[] GetBoundingRectangles()

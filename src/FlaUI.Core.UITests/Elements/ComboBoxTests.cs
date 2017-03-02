@@ -26,7 +26,7 @@ namespace FlaUI.Core.UITests.Elements
             combo.Items[1].Select();
             var selectedItem = combo.SelectedItem;
             Assert.That(selectedItem, Is.Not.Null);
-            Assert.That(selectedItem.Current.Name, Is.EqualTo("Item 2"));
+            Assert.That(selectedItem.Properties.Name.Value, Is.EqualTo("Item 2"));
         }
 
         [Test]
@@ -48,7 +48,7 @@ namespace FlaUI.Core.UITests.Elements
             var mainWindow = App.GetMainWindow(Automation);
             var combo = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("EditableCombo")).AsComboBox();
             combo.EditableText = "Item 3";
-            Assert.That(combo.SelectedItem.Current.Name, Is.EqualTo("Item 3"));
+            Assert.That(combo.SelectedItem.Properties.Name.Value, Is.EqualTo("Item 3"));
         }
     }
 }

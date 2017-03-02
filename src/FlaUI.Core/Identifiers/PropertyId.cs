@@ -8,12 +8,17 @@ namespace FlaUI.Core.Identifiers
     /// </summary>
     public class PropertyId : ConvertibleIdentifierBase
     {
-        internal PropertyId(int id, string name)
+        /// <summary>
+        /// Fixed PropertyId which is used for patterns that are not supported by the framework.
+        /// </summary>
+        public static readonly PropertyId NotSupportedByFramework = new PropertyId(-1, "Not supported");
+
+        public PropertyId(int id, string name)
             : base(id, name)
         {
         }
 
-        public PropertyId SetConverter(Func<object, object> convertMethod)
+        public PropertyId SetConverter(Func<AutomationBase, object, object> convertMethod)
         {
             return SetConverter<PropertyId>(convertMethod);
         }

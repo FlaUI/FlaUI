@@ -39,7 +39,7 @@ namespace FlaUI.Core.AutomationElements
 
         public string Value
         {
-            get { return ValuePattern.Current.Value; }
+            get { return ValuePattern.Value; }
             set { ValuePattern.SetValue(value);}
         }
 
@@ -68,7 +68,7 @@ namespace FlaUI.Core.AutomationElements
             }
         }
 
-        public IValuePattern ValuePattern => PatternFactory.GetValuePattern();
+        public IValuePattern ValuePattern => Patterns.Value.Pattern;
 
         public ExpandCollapseState ExpandCollapseState
         {
@@ -79,13 +79,13 @@ namespace FlaUI.Core.AutomationElements
                     // WinForms
                     var itemsList = FindFirstChild(ConditionFactory.ByControlType(ControlType.List));
                     // UIA3 does not see the list if it is collapsed
-                    return itemsList == null || itemsList.Current.IsOffscreen ? ExpandCollapseState.Collapsed : ExpandCollapseState.Expanded;
+                    return itemsList == null || itemsList.Properties.IsOffscreen ? ExpandCollapseState.Collapsed : ExpandCollapseState.Expanded;
                 }
                 // WPF
-                var ecp = PatternFactory.GetExpandCollapsePattern();
+                var ecp = Patterns.ExpandCollapse.PatternOrDefault;
                 if (ecp != null)
                 {
-                    var state = ecp.Current.ExpandCollapseState;
+                    var state = ecp.ExpandCollapseState;
                     return state;
                 }
                 return ExpandCollapseState.LeafNode;
@@ -94,7 +94,7 @@ namespace FlaUI.Core.AutomationElements
 
         public void Expand()
         {
-            if (!Current.IsEnabled || ExpandCollapseState != ExpandCollapseState.Collapsed)
+            if (!Properties.IsEnabled || ExpandCollapseState != ExpandCollapseState.Collapsed)
             {
                 return;
             }
@@ -107,7 +107,7 @@ namespace FlaUI.Core.AutomationElements
             else
             {
                 // WPF
-                var ecp = PatternFactory.GetExpandCollapsePattern();
+                var ecp = Patterns.ExpandCollapse.PatternOrDefault;
                 if (ecp != null)
                 {
                     ecp.Expand();
@@ -118,7 +118,7 @@ namespace FlaUI.Core.AutomationElements
 
         public void Collapse()
         {
-            if (!Current.IsEnabled || ExpandCollapseState != ExpandCollapseState.Expanded)
+            if (!Properties.IsEnabled || ExpandCollapseState != ExpandCollapseState.Expanded)
             {
                 return;
             }
@@ -139,7 +139,7 @@ namespace FlaUI.Core.AutomationElements
             else
             {
                 // WPF
-                var ecp = PatternFactory.GetExpandCollapsePattern();
+                var ecp = Patterns.ExpandCollapse.PatternOrDefault;
                 ecp?.Collapse();
             }
             Helpers.WaitUntilResponsive(this);

@@ -14,19 +14,19 @@ namespace FlaUI.Core.AutomationElements
         {
         }
 
-        public IGridPattern GridPattern => PatternFactory.GetGridPattern();
+        public IGridPattern GridPattern => Patterns.Grid.Pattern;
 
-        public ITablePattern TablePattern => PatternFactory.GetTablePattern();
+        public ITablePattern TablePattern => Patterns.Table.Pattern;
 
-        public int RowCount => GridPattern.Current.RowCount;
+        public int RowCount => GridPattern.RowCount;
 
-        public int ColumnCount => GridPattern.Current.ColumnCount;
+        public int ColumnCount => GridPattern.ColumnCount;
 
-        public AutomationElement[] ColumnHeaders => TablePattern.Current.ColumnHeaders;
+        public AutomationElement[] ColumnHeaders => TablePattern.ColumnHeaders;
 
-        public AutomationElement[] RowHeaders => TablePattern.Current.RowHeaders;
+        public AutomationElement[] RowHeaders => TablePattern.RowHeaders;
 
-        public RowOrColumnMajor RowOrColumnMajor => TablePattern.Current.RowOrColumnMajor;
+        public RowOrColumnMajor RowOrColumnMajor => TablePattern.RowOrColumnMajor;
 
         public GridHeader Header
         {
@@ -149,7 +149,7 @@ namespace FlaUI.Core.AutomationElements
         {
         }
 
-        public string Text => Current.Name;
+        public string Text => Properties.Name;
     }
 
     public class GridRow : SelectionItemAutomationElement
@@ -158,7 +158,7 @@ namespace FlaUI.Core.AutomationElements
         {
         }
 
-        public IScrollItemPattern ScrollItemPattern => PatternFactory.GetScrollItemPattern();
+        public IScrollItemPattern ScrollItemPattern => Patterns.ScrollItem.Pattern;
 
         public GridCell[] Cells
         {
@@ -191,13 +191,13 @@ namespace FlaUI.Core.AutomationElements
         {
         }
 
-        public IGridItemPattern GridItemPattern => PatternFactory.GetGridItemPattern();
+        public IGridItemPattern GridItemPattern => Patterns.GridItem.Pattern;
 
-        public ITableItemPattern TableItemPattern => PatternFactory.GetTableItemPattern();
+        public ITableItemPattern TableItemPattern => Patterns.TableItem.Pattern;
 
-        public IValuePattern ValuePattern => PatternFactory.GetValuePattern();
+        public IValuePattern ValuePattern => Patterns.Value.Pattern;
 
-        public Grid ContainingGrid => GridItemPattern.Current.ContainingGrid.AsGrid();
+        public Grid ContainingGrid => GridItemPattern.ContainingGrid.Value.AsGrid();
 
         public GridRow ContainingRow
         {
@@ -211,7 +211,7 @@ namespace FlaUI.Core.AutomationElements
 
         public string Value
         {
-            get { return ValuePattern.Current.Value; }
+            get { return ValuePattern.Value; }
             set { ValuePattern.SetValue(value); }
         }
     }

@@ -1,5 +1,4 @@
-﻿using System;
-using FlaUI.Core.AutomationElements.Infrastructure;
+﻿using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Patterns;
 
@@ -11,34 +10,18 @@ namespace FlaUI.Core.AutomationElements.PatternElements
         {
         }
 
-        public IExpandCollapsePattern ExpandCollapsePattern => PatternFactory.GetExpandCollapsePattern();
+        public IExpandCollapsePattern ExpandCollapsePattern => Patterns.ExpandCollapse.Pattern;
 
-        public ExpandCollapseState ExpandCollapseState => ExpandCollapsePattern.Current.ExpandCollapseState;
+        public ExpandCollapseState ExpandCollapseState => ExpandCollapsePattern.ExpandCollapseState;
 
         public void Expand()
         {
-            var expandCollapsePattern = ExpandCollapsePattern;
-            if (expandCollapsePattern != null)
-            {
-                expandCollapsePattern.Expand();
-            }
-            else
-            {
-                throw new NotSupportedException();
-            }
+            ExpandCollapsePattern.Expand();
         }
 
         public void Collapse()
         {
-            var expandCollapsePattern = ExpandCollapsePattern;
-            if (expandCollapsePattern != null)
-            {
-                expandCollapsePattern.Expand();
-            }
-            else
-            {
-                throw new NotSupportedException();
-            }
+            ExpandCollapsePattern.Expand();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace FlaUI.Core.Identifiers
         {
         }
 
-        public TextAttributeId SetConverter(Func<object, object> convertMethod)
+        public TextAttributeId SetConverter(Func<AutomationBase, object, object> convertMethod)
         {
             return SetConverter<TextAttributeId>(convertMethod);
         }

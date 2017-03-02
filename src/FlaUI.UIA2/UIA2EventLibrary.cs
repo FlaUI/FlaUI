@@ -1,6 +1,5 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.AutomationElements.Infrastructure;
-using FlaUI.Core.Exceptions;
 using FlaUI.Core.Patterns;
 using FlaUI.UIA2.Patterns;
 
@@ -11,29 +10,25 @@ namespace FlaUI.UIA2
         public UIA2EventLibrary()
         {
             Element = new UIA2AutomationElementEvents();
+            Drag = new DragPatternEvents();
+            DropTarget = new DropTargetPatternEvents();
             Invoke = new InvokePatternEvents();
             SelectionItem = new SelectionItemPatternEvents();
             Selection = new SelectionPatternEvents();
-#if !NET35
             SynchronizedInput = new SynchronizedInputPatternEvents();
-#endif
+            TextEdit = new TextEditPatternEvents();
             Text = new TextPatternEvents();
             Window = new WindowPatternEvents();
         }
 
         public IAutomationElementEvents Element { get; }
-        public IDragPatternEvents Drag { get {throw new NotSupportedByUIA2Exception();} }
-        public IDropTargetPatternEvents DropTarget { get { throw new NotSupportedByUIA2Exception(); } }
+        public IDragPatternEvents Drag { get; }
+        public IDropTargetPatternEvents DropTarget { get; }
         public IInvokePatternEvents Invoke { get; }
         public ISelectionItemPatternEvents SelectionItem { get; }
         public ISelectionPatternEvents Selection { get; }
-#if NET35
-        public ISynchronizedInputPatternEvents SynchronizedInput { get { throw new NotSupportedByUIA2Exception(); } }
-#else
         public ISynchronizedInputPatternEvents SynchronizedInput { get; }
-#endif
-
-        public ITextEditPatternEvents TextEdit { get { throw new NotSupportedByUIA2Exception(); } }
+        public ITextEditPatternEvents TextEdit { get; }
         public ITextPatternEvents Text { get; }
         public IWindowPatternEvents Window { get; }
     }

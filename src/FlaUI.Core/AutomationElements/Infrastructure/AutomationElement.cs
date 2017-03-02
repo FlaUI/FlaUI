@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.EventHandlers;
+using FlaUI.Core.Exceptions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
@@ -30,39 +30,37 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
 
         public ConditionFactory ConditionFactory => BasicAutomationElement.Automation.ConditionFactory;
 
-        public IAutomationElementProperties Properties => Automation.PropertyLibrary.Element;
-
-        public IAutomationElementEvents Events => Automation.EventLibrary.Element;
-
         public FrameworkType FrameworkType
         {
             get
             {
-                var currentElement = this;
-                var currentFrameworkId = currentElement.Current.FrameworkId;
-                var treeWalker = Automation.TreeWalkerFactory.GetControlViewWalker();
-                while (String.IsNullOrEmpty(currentFrameworkId))
-                {
-                    currentElement = treeWalker.GetParent(currentElement);
-                    currentFrameworkId = currentElement.Current.FrameworkId;
-                }
-                return FrameworkIds.ConvertToFrameworkType(currentFrameworkId);
+                string currentFrameworkId;
+                var hasProperty = Properties.FrameworkId.TryGetValue(out currentFrameworkId);
+                return hasProperty ? FrameworkIds.ConvertToFrameworkType(currentFrameworkId) : FrameworkType.Unknown;
             }
         }
 
         public AutomationType AutomationType => BasicAutomationElement.Automation.AutomationType;
 
-        public IPatternFactory PatternFactory => BasicAutomationElement.PatternFactory;
+        /// <summary>
+        /// Standard UIA patterns of this element
+        /// </summary>
+        public AutomationElementPatternValuesBase Patterns => BasicAutomationElement.Patterns;
 
         /// <summary>
-        /// Basic information about this element (cached)
+        /// Standard UIA properties of this element
         /// </summary>
-        public IAutomationElementInformation Cached => BasicAutomationElement.Cached;
+        public AutomationElementPropertyValues Properties => BasicAutomationElement.Properties;
 
         /// <summary>
-        /// Basic information about this element (realtime)
+        /// Gets the cached children for this element
         /// </summary>
-        public IAutomationElementInformation Current => BasicAutomationElement.Current;
+        public AutomationElement[] CachedChildren => BasicAutomationElement.GetCachedChildren();
+
+        /// <summary>
+        /// Gets the cached parent for this element
+        /// </summary>
+        public AutomationElement CachedParent => BasicAutomationElement.GetCachedParent();
 
         public void Click(bool moveMouse = false)
         {
@@ -110,7 +108,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
 
         public void FocusNative()
         {
-            var windowHandle = Current.NativeWindowHandle;
+            var windowHandle = Properties.NativeWindowHandle;
             if (windowHandle != new IntPtr(0))
             {
                 User32.SetFocus(windowHandle);
@@ -128,7 +126,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public void SetForeground()
         {
-            var windowHandle = Current.NativeWindowHandle;
+            var windowHandle = Properties.NativeWindowHandle;
             if (windowHandle != new IntPtr(0))
             {
                 User32.SetForegroundWindow(windowHandle);
@@ -185,7 +183,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <param name="durationInMs">The duration (im ms) how long the highlight is shown</param>
         public AutomationElement DrawHighlight(bool blocking, WpfColor color, int durationInMs)
         {
-            var rectangle = Current.BoundingRectangle;
+            var rectangle = Properties.BoundingRectangle.Value;
             if (!rectangle.IsEmpty)
             {
                 if (blocking)
@@ -205,7 +203,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public Bitmap Capture()
         {
-            return ScreenCapture.CaptureArea(Current.BoundingRectangle);
+            return ScreenCapture.CaptureArea(Properties.BoundingRectangle);
         }
 
         /// <summary>
@@ -213,12 +211,12 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public BitmapImage CaptureWpf()
         {
-            return ScreenCapture.CaptureAreaWpf(Current.BoundingRectangle);
+            return ScreenCapture.CaptureAreaWpf(Properties.BoundingRectangle);
         }
 
         public void CaptureToFile(string filePath)
         {
-            ScreenCapture.CaptureAreaToFile(Current.BoundingRectangle, filePath);
+            ScreenCapture.CaptureAreaToFile(Properties.BoundingRectangle, filePath);
         }
 
         /// <summary>
@@ -333,6 +331,10 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
 
         public IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
         {
+            if (Equals(@event, EventId.NotSupportedByFramework))
+            {
+                throw new NotSupportedByFrameworkException();
+            }
             return BasicAutomationElement.RegisterEvent(@event, treeScope, action);
         }
 
@@ -361,6 +363,71 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             BasicAutomationElement.RemoveStructureChangedEventHandler(eventHandler);
         }
 
+        /// <summary>
+        /// Gets the available patterns for an element via properties
+        /// </summary>
+        public PatternId[] GetSupportedPatterns()
+        {
+            return Automation.PatternLibrary.AllForCurrentFramework.Where(IsPatternSupported).ToArray();
+        }
+
+        /// <summary>
+        /// Checks if the given pattern is available for the element via properties
+        /// </summary>
+        public bool IsPatternSupported(PatternId pattern)
+        {
+            if (Equals(pattern, PatternId.NotSupportedByFramework))
+            {
+                return false;
+            }
+            if (pattern.AvailabilityProperty == null)
+            {
+                throw new ArgumentException("Pattern doesn't have an AvailabilityProperty");
+            }
+            bool isPatternAvailable;
+            var success = BasicAutomationElement.TryGetPropertyValue(pattern.AvailabilityProperty, out isPatternAvailable);
+            return success && isPatternAvailable;
+        }
+
+        /// <summary>
+        /// Gets the available patterns for an element via UIA method.
+        /// Does not work with cached elements and might be unreliable.
+        /// </summary>
+        public PatternId[] GetSupportedPatternsDirect()
+        {
+            return BasicAutomationElement.GetSupportedPatterns();
+        }
+
+        /// <summary>
+        /// Checks if the given pattern is available for the element via UIA method.
+        /// Does not work with cached elements and might be unreliable.
+        /// </summary>
+        public bool IsPatternSupportedDirect(PatternId pattern)
+        {
+            return GetSupportedPatternsDirect().Contains(pattern);
+        }
+
+        /// <summary>
+        /// Gets the available properties for an element via UIA method.
+        /// Does not work with cached elements and might be unreliable.
+        /// </summary>
+        public PropertyId[] GetSupportedPropertiesDirect()
+        {
+            return BasicAutomationElement.GetSupportedProperties();
+        }
+
+        /// <summary>
+        /// Method to check if the element supports the given property via UIA method.
+        /// Does not work with cached elements and might be unreliable.
+        /// </summary>
+        public bool IsPropertySupportedDirect(PropertyId property)
+        {
+            return GetSupportedPropertiesDirect().Contains(property);
+        }
+
+        /// <summary>
+        /// Compares two UIA elements
+        /// </summary>
         public bool Equals(AutomationElement other)
         {
             return other != null && Automation.Compare(this, other);
@@ -382,7 +449,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         public override string ToString()
         {
             return String.Format("AutomationId:{0}, Name:{1}, ControlType:{2}, FrameworkId:{3}",
-                Current.AutomationId, Current.Name, Current.LocalizedControlType, Current.FrameworkId);
+                Properties.AutomationId.ValueOrDefault, Properties.Name.ValueOrDefault, Properties.LocalizedControlType.ValueOrDefault, Properties.FrameworkId.ValueOrDefault);
         }
 
         protected internal void ExecuteInPattern<TPattern>(TPattern pattern, bool throwIfNotSupported, Action<TPattern> action)
@@ -393,7 +460,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             }
             else if (throwIfNotSupported)
             {
-                throw new NotSupportedException();
+                throw new System.NotSupportedException();
             }
         }
 
@@ -405,7 +472,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             }
             if (throwIfNotSupported)
             {
-                throw new NotSupportedException();
+                throw new System.NotSupportedException();
             }
             return default(TRet);
         }

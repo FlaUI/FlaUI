@@ -59,6 +59,7 @@
     <Compile Include="EventHandlers\UIA3FocusChangedEventHandler.cs" />
     <Compile Include="EventHandlers\UIA3PropertyChangedEventHandler.cs" />
     <Compile Include="EventHandlers\UIA3StructureChangedEventHandlerBase.cs" />
+    <Compile Include="Extensions\CacheRequestExtensions.cs" />
     <Compile Include="Identifiers\AutomationObjectIds.cs" />
     <Compile Include="Patterns\AnnotationPattern.cs" />
     <Compile Include="Patterns\DockPattern.cs" />
@@ -90,12 +91,11 @@
     <Compile Include="Patterns\TogglePattern.cs" />
     <Compile Include="Patterns\Transform2Pattern.cs" />
     <Compile Include="Patterns\TransformPattern.cs" />
-    <Compile Include="Patterns\TransformPatternBase.cs" />
     <Compile Include="Patterns\VirtualizedItemPattern.cs" />
     <Compile Include="Patterns\WindowPattern.cs" />
     <Compile Include="Converters\ConditionConverter.cs" />
-    <Compile Include="Tools\CacheRequestExtensions.cs" />
-    <Compile Include="UIA3CacheRequest.cs" />
+    <Compile Include="UIA3AutomationElementPatternAvailabilityProperties.cs" />
+    <Compile Include="UIA3AutomationElementPatternValues.cs" />
     <Compile Include="UIA3PatternLibrary.cs" />
     <Compile Include="UIA3Automation.cs" />
     <Compile Include="Identifiers\TextAttributes.cs" />
@@ -110,9 +110,7 @@
     <Compile Include="Converters\ValueConverter.cs" />
     <Compile Include="UIA3TreeWalker.cs" />
     <Compile Include="UIA3BasicAutomationElement.cs" />
-    <Compile Include="UIA3AutomationElementInformation.cs" />
     <Compile Include="UIA3AutomationElementProperties.cs" />
-    <Compile Include="UIA3PatternFactory.cs" />
     <Compile Include="UIA3PropertyLibrary.cs" />
     <Compile Include="UIA3TreeWalkerFactory.cs" />
   </ItemGroup>

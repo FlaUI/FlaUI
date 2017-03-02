@@ -39,7 +39,7 @@ namespace FlaUI.UIA3
         public PatternId VirtualizedItemPattern => Patterns.VirtualizedItemPattern.Pattern;
         public PatternId WindowPattern => Patterns.WindowPattern.Pattern;
 
-        public PatternId[] AllSupportedPatterns => new[] {
+        public PatternId[] AllForCurrentFramework => new[] {
             AnnotationPattern,
             DockPattern,
             DragPattern,

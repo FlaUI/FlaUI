@@ -10,7 +10,7 @@ namespace FlaUI.Core.AutomationElements.Scrolling
         {
         }
 
-        protected IRangeValuePattern RangeValuePattern => PatternFactory.GetRangeValuePattern();
+        protected IRangeValuePattern RangeValuePattern => Patterns.RangeValue.Pattern;
 
         protected Button SmallDecrementButton => FindButton(SmallDecrementText);
 
@@ -22,17 +22,17 @@ namespace FlaUI.Core.AutomationElements.Scrolling
 
         protected Thumb Thumb => FindThumb();
 
-        public double Value => RangeValuePattern.Current.Value;
+        public double Value => RangeValuePattern.Value;
 
-        public double MinimumValue => RangeValuePattern.Current.Minimum;
+        public double MinimumValue => RangeValuePattern.Minimum;
 
-        public double MaximumValue => RangeValuePattern.Current.Maximum;
+        public double MaximumValue => RangeValuePattern.Maximum;
 
-        public double SmallChange => RangeValuePattern.Current.SmallChange;
+        public double SmallChange => RangeValuePattern.SmallChange;
 
-        public double LargeChange => RangeValuePattern.Current.LargeChange;
+        public double LargeChange => RangeValuePattern.LargeChange;
 
-        public bool IsReadOnly => RangeValuePattern.Current.IsReadOnly;
+        public bool IsReadOnly => RangeValuePattern.IsReadOnly;
 
         protected abstract string SmallDecrementText { get; }
 

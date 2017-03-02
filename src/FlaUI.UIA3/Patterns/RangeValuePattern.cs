@@ -1,16 +1,15 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
-using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.Tools;
+using FlaUI.UIA3.Identifiers;
 using UIA = interop.UIAutomationCore;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class RangeValuePattern : PatternBaseWithInformation<UIA.IUIAutomationRangeValuePattern, RangeValuePatternInformation>, IRangeValuePattern
+    public class RangeValuePattern : RangeValuePatternBase<UIA.IUIAutomationRangeValuePattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_RangeValuePatternId, "RangeValue");
+        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_RangeValuePatternId, "RangeValue", AutomationObjectIds.IsRangeValuePatternAvailableProperty);
         public static readonly PropertyId IsReadOnlyProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_RangeValueIsReadOnlyPropertyId, "IsReadOnly");
         public static readonly PropertyId LargeChangeProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_RangeValueLargeChangePropertyId, "LargeChange");
         public static readonly PropertyId MaximumProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_RangeValueMaximumPropertyId, "Maximum");
@@ -22,54 +21,24 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
-        IRangeValuePatternInformation IPatternWithInformation<IRangeValuePatternInformation>.Cached => Cached;
-
-        IRangeValuePatternInformation IPatternWithInformation<IRangeValuePatternInformation>.Current => Current;
-
-        public IRangeValuePatternProperties Properties => Automation.PropertyLibrary.RangeValue;
-
-        protected override RangeValuePatternInformation CreateInformation(bool cached)
-        {
-            return new RangeValuePatternInformation(BasicAutomationElement, cached);
-        }
-
-        public void SetValue(double val)
+        public override void SetValue(double val)
         {
             ComCallWrapper.Call(() => NativePattern.SetValue(val));
         }
     }
 
-    public class RangeValuePatternInformation : InformationBase, IRangeValuePatternInformation
-    {
-        public RangeValuePatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
-        {
-        }
-
-        public bool IsReadOnly => Get<bool>(RangeValuePattern.IsReadOnlyProperty);
-
-        public double LargeChange => Get<double>(RangeValuePattern.LargeChangeProperty);
-
-        public double Maximum => Get<double>(RangeValuePattern.MaximumProperty);
-
-        public double Minimum => Get<double>(RangeValuePattern.MinimumProperty);
-
-        public double SmallChange => Get<double>(RangeValuePattern.SmallChangeProperty);
-
-        public double Value => Get<double>(RangeValuePattern.ValueProperty);
-    }
-
     public class RangeValuePatternProperties : IRangeValuePatternProperties
     {
-        public PropertyId IsReadOnlyProperty => RangeValuePattern.IsReadOnlyProperty;
+        public PropertyId IsReadOnly => RangeValuePattern.IsReadOnlyProperty;
 
-        public PropertyId LargeChangeProperty => RangeValuePattern.LargeChangeProperty;
+        public PropertyId LargeChange => RangeValuePattern.LargeChangeProperty;
 
-        public PropertyId MaximumProperty => RangeValuePattern.MaximumProperty;
+        public PropertyId Maximum => RangeValuePattern.MaximumProperty;
 
-        public PropertyId MinimumProperty => RangeValuePattern.MinimumProperty;
+        public PropertyId Minimum => RangeValuePattern.MinimumProperty;
 
-        public PropertyId SmallChangeProperty => RangeValuePattern.SmallChangeProperty;
+        public PropertyId SmallChange => RangeValuePattern.SmallChangeProperty;
 
-        public PropertyId ValueProperty => RangeValuePattern.ValueProperty;
+        public PropertyId Value => RangeValuePattern.ValueProperty;
     }
 }

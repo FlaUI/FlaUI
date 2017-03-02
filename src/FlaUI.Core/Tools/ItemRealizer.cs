@@ -12,17 +12,17 @@ namespace FlaUI.Core.Tools
         public static void RealizeItems(AutomationElement itemContainerElement)
         {
             // We save the scroll value to restore it afterwards
-            var scrollPattern = itemContainerElement.PatternFactory.GetScrollPattern();
+            var scrollPattern = itemContainerElement.Patterns.Scroll.PatternOrDefault;
             double currHScroll = 0;
             double currVScroll = 0;
             if (scrollPattern != null)
             {
-                currHScroll = scrollPattern.Current.HorizontalScrollPercent;
-                currVScroll = scrollPattern.Current.VerticalScrollPercent;
+                currHScroll = scrollPattern.HorizontalScrollPercent;
+                currVScroll = scrollPattern.VerticalScrollPercent;
             }
 
             // First we try with the item container pattern and realize each item
-            var itemContainerPattern = itemContainerElement.PatternFactory.GetItemContainerPattern();
+            var itemContainerPattern = itemContainerElement.Patterns.ItemContainer.PatternOrDefault;
             if (itemContainerPattern != null)
             {
                 // There's the item container pattern so we can go thru all elements and just realize them
@@ -34,11 +34,8 @@ namespace FlaUI.Core.Tools
                     {
                         break;
                     }
-                    var vp = currElement.PatternFactory.GetVirtualizedItemPattern();
-                    if (vp != null)
-                    {
-                        vp.Realize();
-                    }
+                    var vp = currElement.Patterns.VirtualizedItem.PatternOrDefault;
+                    vp?.Realize();
                 }
                 ResetScroll(scrollPattern, currHScroll, currVScroll);
                 return;
@@ -51,7 +48,7 @@ namespace FlaUI.Core.Tools
                 do
                 {
                     scrollPattern.Scroll(ScrollAmount.NoAmount, ScrollAmount.SmallIncrement);
-                } while (scrollPattern.Current.VerticalScrollPercent < 100);
+                } while (scrollPattern.VerticalScrollPercent < 100);
                 ResetScroll(scrollPattern, currHScroll, currVScroll);
                 return;
             }

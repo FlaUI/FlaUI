@@ -30,13 +30,13 @@ namespace FlaUI.Core.UITests.Patterns
         {
             var expander = _expander;
             Assert.That(expander, Is.Not.Null);
-            var ecp = expander.PatternFactory.GetExpandCollapsePattern();
+            var ecp = expander.Patterns.ExpandCollapse.Pattern;
             Assert.That(ecp, Is.Not.Null);
-            Assert.That(ecp.Current.ExpandCollapseState, Is.EqualTo(ExpandCollapseState.Collapsed));
+            Assert.That(ecp.ExpandCollapseState.Value, Is.EqualTo(ExpandCollapseState.Collapsed));
             ecp.Expand();
-            Assert.That(ecp.Current.ExpandCollapseState, Is.EqualTo(ExpandCollapseState.Expanded));
+            Assert.That(ecp.ExpandCollapseState.Value, Is.EqualTo(ExpandCollapseState.Expanded));
             ecp.Collapse();
-            Assert.That(ecp.Current.ExpandCollapseState, Is.EqualTo(ExpandCollapseState.Collapsed));
+            Assert.That(ecp.ExpandCollapseState.Value, Is.EqualTo(ExpandCollapseState.Collapsed));
         }
     }
 }

@@ -11,7 +11,7 @@
     <iconUrl>https://github.com/Roemer/FlaUI/blob/master/FlaUI.png?raw=true</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <copyright>Copyright 2016</copyright>
+    <copyright>Copyright 2016-2017</copyright>
     <tags>UI Automation UIA2 UIA3 UIA System.Windows.Automation</tags>
   </metadata>
   <files>

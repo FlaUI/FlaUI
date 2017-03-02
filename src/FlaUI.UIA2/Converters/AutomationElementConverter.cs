@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using FlaUI.Core;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using UIA = System.Windows.Automation;
 
@@ -7,34 +8,37 @@ namespace FlaUI.UIA2.Converters
 {
     public static class AutomationElementConverter
     {
-        public static AutomationElement[] NativeArrayToManaged(UIA2Automation automation, UIA.AutomationElementCollection nativeElements)
+        public static AutomationElement[] NativeArrayToManaged(AutomationBase automation, object nativeElements)
         {
             if (nativeElements == null)
             {
                 return new AutomationElement[0];
             }
-            var retArray = new AutomationElement[nativeElements.Count];
-            for (var i = 0; i < nativeElements.Count; i++)
+            var uia2Automation = (UIA2Automation)automation;
+            var nativeElementsCollection = nativeElements as UIA.AutomationElementCollection;
+            if (nativeElementsCollection != null)
             {
-                var nativeElement = nativeElements[i];
-                var automationElement = automation.WrapNativeElement(nativeElement);
-                retArray[i] = automationElement;
+                var retArray = new AutomationElement[nativeElementsCollection.Count];
+                for (var i = 0; i < nativeElementsCollection.Count; i++)
+                {
+                    var nativeElement = nativeElementsCollection[i];
+                    var automationElement = uia2Automation.WrapNativeElement(nativeElement);
+                    retArray[i] = automationElement;
+                }
+                return retArray;
             }
-            return retArray;
+            var nativeElementsArray = nativeElements as UIA.AutomationElement[];
+            if (nativeElementsArray != null)
+            {
+                return nativeElementsArray.Select(uia2Automation.WrapNativeElement).ToArray();
+            }
+            throw new ArgumentException("Input is neither an AutomationElementCollection nor an AutomationElement[]", nameof(nativeElements));
         }
 
-        public static AutomationElement[] NativeArrayToManaged(UIA2Automation automation, UIA.AutomationElement[] nativeElements)
+        public static AutomationElement NativeToManaged(AutomationBase automation, object nativeElement)
         {
-            if (nativeElements == null)
-            {
-                return new AutomationElement[0];
-            }
-            return nativeElements.Select(automation.WrapNativeElement).ToArray();
-        }
-
-        public static AutomationElement NativeToManaged(UIA2Automation automation, UIA.AutomationElement nativeElement)
-        {
-            return automation.WrapNativeElement(nativeElement);
+            var uia2Automation = (UIA2Automation)automation;
+            return uia2Automation.WrapNativeElement((UIA.AutomationElement)nativeElement);
         }
 
         public static UIA.AutomationElement ToNative(this AutomationElement automationElement)

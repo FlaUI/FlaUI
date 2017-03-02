@@ -9,6 +9,7 @@ using FlaUI.Core.Identifiers;
 using FlaUI.Core.Shapes;
 using FlaUI.UIA2.Converters;
 using FlaUI.UIA2.EventHandlers;
+using FlaUI.UIA2.Extensions;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2
@@ -19,14 +20,10 @@ namespace FlaUI.UIA2
         {
             Automation = automation;
             NativeElement = nativeElement;
-            PatternFactory = new UIA2PatternFactory(this);
-            Cached = new UIA2AutomationElementInformation(this, true);
-            Current = new UIA2AutomationElementInformation(this, false);
+            Patterns = new UIA2AutomationElementPatternValues(this);
         }
-
-        public override IPatternFactory PatternFactory { get; }
-        public override IAutomationElementInformation Cached { get; }
-        public override IAutomationElementInformation Current { get; }
+        
+        public override AutomationElementPatternValuesBase Patterns { get; }
 
         /// <summary>
         /// Concrete implementation of the automation object
@@ -45,23 +42,38 @@ namespace FlaUI.UIA2
 
         protected override object InternalGetPropertyValue(int propertyId, bool cached, bool useDefaultIfNotSupported)
         {
-            var ignoreDefaultValue = !useDefaultIfNotSupported;
             var property = UIA.AutomationProperty.LookupById(propertyId);
+            var ignoreDefaultValue = !useDefaultIfNotSupported;
             var returnValue = cached ?
                 NativeElement.GetCachedPropertyValue(property, ignoreDefaultValue) :
                 NativeElement.GetCurrentPropertyValue(property, ignoreDefaultValue);
             return returnValue;
         }
 
+        protected override object InternalGetPattern(int patternId, bool cached)
+        {
+            var pattern = UIA.AutomationPattern.LookupById(patternId);
+            var returnedValue = cached
+                ? NativeElement.GetCachedPattern(pattern)
+                : NativeElement.GetCurrentPattern(pattern);
+            return returnedValue;
+        }
+
         public override AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition)
         {
+            var cacheRequest = CacheRequest.IsCachingActive ? CacheRequest.Current.ToNative() : null;
+            cacheRequest?.Push();
             var nativeFoundElements = NativeElement.FindAll((UIA.TreeScope)treeScope, ConditionConverter.ToNative(condition));
+            cacheRequest?.Pop();
             return AutomationElementConverter.NativeArrayToManaged(Automation, nativeFoundElements);
         }
 
         public override AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
         {
+            var cacheRequest = CacheRequest.IsCachingActive ? CacheRequest.Current.ToNative() : null;
+            cacheRequest?.Push();
             var nativeFoundElement = NativeElement.FindFirst((UIA.TreeScope)treeScope, ConditionConverter.ToNative(condition));
+            cacheRequest?.Pop();
             return AutomationElementConverter.NativeToManaged(Automation, nativeFoundElement);
         }
 
@@ -112,13 +124,35 @@ namespace FlaUI.UIA2
         public override PatternId[] GetSupportedPatterns()
         {
             var raw = NativeElement.GetSupportedPatterns();
-            return raw.Select(r => PatternId.Find(AutomationType.UIA2, r.Id)).ToArray();
+            return raw.Select(r => PatternId.Find(Automation.AutomationType, r.Id)).ToArray();
         }
 
         public override PropertyId[] GetSupportedProperties()
         {
             var raw = NativeElement.GetSupportedProperties();
-            return raw.Select(r => PropertyId.Find(AutomationType.UIA2, r.Id)).ToArray();
+            return raw.Select(r => PropertyId.Find(Automation.AutomationType, r.Id)).ToArray();
+        }
+
+        public override AutomationElement GetUpdatedCache()
+        {
+            if (CacheRequest.Current != null)
+            {
+                var updatedElement = NativeElement.GetUpdatedCache(CacheRequest.Current.ToNative());
+                return AutomationElementConverter.NativeToManaged(Automation, updatedElement);
+            }
+            return null;
+        }
+
+        public override AutomationElement[] GetCachedChildren()
+        {
+            var cachedChildren = NativeElement.CachedChildren;
+            return AutomationElementConverter.NativeArrayToManaged(Automation, cachedChildren);
+        }
+
+        public override AutomationElement GetCachedParent()
+        {
+            var cachedParent = NativeElement.CachedParent;
+            return AutomationElementConverter.NativeToManaged(Automation, cachedParent);
         }
 
         public override int GetHashCode()

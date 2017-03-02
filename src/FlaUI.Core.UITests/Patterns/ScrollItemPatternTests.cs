@@ -22,8 +22,8 @@ namespace FlaUI.Core.UITests.Patterns
         {
             var mainWindow = App.GetMainWindow(Automation);
             var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
-            var tabItem = tab.SelectTabItem(1);
-            _grid = tabItem.FindFirstDescendant(cf => cf.ByAutomationId("LargeListView"));
+            tab.SelectTabItem(1);
+            _grid = tab.FindFirstDescendant(cf => cf.ByAutomationId("LargeListView"));
         }
 
         [Test]
@@ -31,23 +31,23 @@ namespace FlaUI.Core.UITests.Patterns
         {
             var grid = _grid;
             Assert.That(grid, Is.Not.Null);
-            var gridPattern = _grid.PatternFactory.GetGridPattern();
+            var gridPattern = _grid.Patterns.Grid.Pattern;
             Assert.That(gridPattern, Is.Not.Null);
-            Assert.That(gridPattern.Current.ColumnCount, Is.EqualTo(2));
-            Assert.That(gridPattern.Current.RowCount, Is.EqualTo(7));
+            Assert.That(gridPattern.ColumnCount.Value, Is.EqualTo(2));
+            Assert.That(gridPattern.RowCount.Value, Is.EqualTo(7));
             ItemRealizer.RealizeItems(grid);
             var items = grid.AsGrid().Rows;
-            Assert.That(items, Has.Length.EqualTo(gridPattern.Current.RowCount));
-            var scrollPattern = grid.PatternFactory.GetScrollPattern();
+            Assert.That(items, Has.Length.EqualTo(gridPattern.RowCount.Value));
+            var scrollPattern = grid.Patterns.Scroll.Pattern;
             Assert.That(scrollPattern, Is.Not.Null);
-            Assert.That(scrollPattern.Current.VerticalScrollPercent, Is.EqualTo(0));
+            Assert.That(scrollPattern.VerticalScrollPercent.Value, Is.EqualTo(0));
             foreach (var item in items)
             {
-                var scrollItemPattern = item.PatternFactory.GetScrollItemPattern();
+                var scrollItemPattern = item.Patterns.ScrollItem.Pattern;
                 Assert.That(scrollItemPattern, Is.Not.Null);
                 item.ScrollIntoView();
             }
-            Assert.That(scrollPattern.Current.VerticalScrollPercent, Is.GreaterThan(0));
+            Assert.That(scrollPattern.VerticalScrollPercent.Value, Is.GreaterThan(0));
         }
     }
 }

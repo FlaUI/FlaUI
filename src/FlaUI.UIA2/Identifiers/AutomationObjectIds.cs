@@ -12,11 +12,11 @@ namespace FlaUI.UIA2.Identifiers
         public static readonly PropertyId AcceleratorKeyProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.AcceleratorKeyProperty.Id, "AcceleratorKey");
         public static readonly PropertyId AccessKeyProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.AccessKeyProperty.Id, "AccessKey");
         public static readonly PropertyId AutomationIdProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.AutomationIdProperty.Id, "AutomationId");
-        public static readonly PropertyId BoundingRectangleProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.BoundingRectangleProperty.Id, "BoundingRectangle").SetConverter(ValueConverter.ToRectangle);
+        public static readonly PropertyId BoundingRectangleProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.BoundingRectangleProperty.Id, "BoundingRectangle").SetConverter((a, o) => ValueConverter.ToRectangle(o));
         public static readonly PropertyId ClassNameProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.ClassNameProperty.Id, "ClassName");
-        public static readonly PropertyId ClickablePointProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.ClickablePointProperty.Id, "ClickablePoint").SetConverter(ValueConverter.ToPoint);
-        public static readonly PropertyId ControlTypeProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.ControlTypeProperty.Id, "ControlType").SetConverter(ControlTypeConverter.ToControlType);
-        public static readonly PropertyId CultureProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.CultureProperty.Id, "Culture").SetConverter(ValueConverter.ToCulture);
+        public static readonly PropertyId ClickablePointProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.ClickablePointProperty.Id, "ClickablePoint").SetConverter((a, o) => ValueConverter.ToPoint(o));
+        public static readonly PropertyId ControlTypeProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.ControlTypeProperty.Id, "ControlType").SetConverter((a, o) => ControlTypeConverter.ToControlType(o));
+        public static readonly PropertyId CultureProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.CultureProperty.Id, "Culture").SetConverter((a, o) => ValueConverter.ToCulture(o));
         public static readonly PropertyId FrameworkIdProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.FrameworkIdProperty.Id, "FrameworkId");
         public static readonly PropertyId HasKeyboardFocusProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.HasKeyboardFocusProperty.Id, "HasKeyboardFocus");
         public static readonly PropertyId HelpTextProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.HelpTextProperty.Id, "HelpText");
@@ -32,7 +32,7 @@ namespace FlaUI.UIA2.Identifiers
         public static readonly PropertyId LabeledByProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.LabeledByProperty.Id, "LabeledBy");
         public static readonly PropertyId LocalizedControlTypeProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.LocalizedControlTypeProperty.Id, "LocalizedControlType");
         public static readonly PropertyId NameProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.NameProperty.Id, "Name");
-        public static readonly PropertyId NativeWindowHandleProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.NativeWindowHandleProperty.Id, "NativeWindowHandle").SetConverter(ValueConverter.IntToIntPtr);
+        public static readonly PropertyId NativeWindowHandleProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.NativeWindowHandleProperty.Id, "NativeWindowHandle").SetConverter((a, o) => ValueConverter.IntToIntPtr(o));
         public static readonly PropertyId OrientationProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.OrientationProperty.Id, "Orientation");
         public static readonly PropertyId ProcessIdProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.ProcessIdProperty.Id, "ProcessId");
         public static readonly PropertyId RuntimeIdProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.RuntimeIdProperty.Id, "RuntimeId");

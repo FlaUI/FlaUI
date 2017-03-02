@@ -71,18 +71,18 @@
     <Compile Include="Patterns\TextPattern.cs" />
     <Compile Include="Patterns\TogglePattern.cs" />
     <Compile Include="Patterns\TransformPattern.cs" />
+    <Compile Include="Patterns\UnsupportedPatterns.cs" />
     <Compile Include="Patterns\VirtualizedItemPattern.cs" />
     <Compile Include="Patterns\WindowPattern.cs" />
     <Compile Include="Converters\ConditionConverter.cs" />
     <Compile Include="Converters\ValueConverter.cs" />
-    <Compile Include="Tools\CacheRequestExtensions.cs" />
+    <Compile Include="Extensions\CacheRequestExtensions.cs" />
+    <Compile Include="UIA2AutomationElementPatternValues.cs" />
     <Compile Include="UIA2AutomationElementProperties.cs" />
-    <Compile Include="UIA2PatternFactory.cs" />
     <Compile Include="Patterns\ValuePattern.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UIA2Automation.cs" />
     <Compile Include="UIA2BasicAutomationElement.cs" />
-    <Compile Include="UIA2AutomationElementInformation.cs" />
     <Compile Include="UIA2PatternLibrary.cs" />
     <Compile Include="UIA2PropertyLibrary.cs" />
     <Compile Include="UIA2TreeWalker.cs" />
@@ -90,7 +90,7 @@
     <Compile Include="UIA2TextRange.cs" />
     <Compile Include="UIA2AutomationElementEvents.cs" />
     <Compile Include="UIA2EventLibrary.cs" />
-    <Compile Include="UIA2CacheRequest.cs" />
+    <Compile Include="UIA2AutomationElementPatternAvailabilityProperties.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlaUI.Core\FlaUI.Core.csproj">

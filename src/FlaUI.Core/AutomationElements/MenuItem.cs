@@ -25,7 +25,7 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         internal bool IsWin32ContextMenu { get; set; }
 
-        public string Text => Current.Name;
+        public string Text => Properties.Name;
 
         public MenuItem[] SubMenuItems
         {
@@ -38,15 +38,15 @@ namespace FlaUI.Core.AutomationElements
                     Click();
                     // In Win32, the nested menu items are below a menu control which is below the application window
                     // So search the app window first
-                    var appWindow = BasicAutomationElement.Automation.GetDesktop().FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Window).And(ConditionFactory.ByProcessId(Current.ProcessId)));
+                    var appWindow = BasicAutomationElement.Automation.GetDesktop().FindFirstChild(cf => cf.ByControlType(ControlType.Window).And(cf.ByProcessId(Properties.ProcessId)));
                     // Then search the menu below the window
-                    var menu = appWindow.FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Menu).And(ConditionFactory.ByName(Text))).AsMenu();
+                    var menu = appWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Menu).And(cf.ByName(Text))).AsMenu();
                     menu.IsWin32ContextMenu = true;
                     // Now return the menu items
                     return menu.MenuItems;
                 }
-                // WinForms does not have the expand pattern but all children are already visible so it works as well
-                if (_expandCollapseAutomationElement.ExpandCollapsePattern != null)
+                // Expand if needed, WinForms does not have the expand pattern but all children are already visible so it works as well
+                if (Patterns.ExpandCollapse.IsSupported)
                 {
                     ExpandCollapseState state;
                     do
@@ -59,7 +59,7 @@ namespace FlaUI.Core.AutomationElements
                         Thread.Sleep(50);
                     } while (state != ExpandCollapseState.Expanded);
                 }
-                return FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.MenuItem)).Select(e => e.AsMenuItem()).ToArray();
+                return FindAllChildren(cf => cf.ByControlType(ControlType.MenuItem)).Select(e => e.AsMenuItem()).ToArray();
             }
         }
 

@@ -1,18 +1,17 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
-using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.UIA2.Converters;
+using FlaUI.UIA2.Identifiers;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Patterns
 {
-    public class SelectionItemPattern : PatternBaseWithInformation<UIA.SelectionItemPattern, SelectionItemPatternInformation>, ISelectionItemPattern
+    public class SelectionItemPattern : SelectionItemPatternBase<UIA.SelectionItemPattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.SelectionItemPattern.Pattern.Id, "SelectionItem");
+        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.SelectionItemPattern.Pattern.Id, "SelectionItem", AutomationObjectIds.IsSelectionItemPatternAvailableProperty);
         public static readonly PropertyId IsSelectedProperty = PropertyId.Register(AutomationType.UIA2, UIA.SelectionItemPattern.IsSelectedProperty.Id, "IsSelected");
-        public static readonly PropertyId SelectionContainerProperty = PropertyId.Register(AutomationType.UIA2, UIA.SelectionItemPattern.SelectionContainerProperty.Id, "SelectionContainer");
+        public static readonly PropertyId SelectionContainerProperty = PropertyId.Register(AutomationType.UIA2, UIA.SelectionItemPattern.SelectionContainerProperty.Id, "SelectionContainer").SetConverter(AutomationElementConverter.NativeToManaged);
         public static readonly EventId ElementAddedToSelectionEvent = EventId.Register(AutomationType.UIA2, UIA.SelectionItemPattern.ElementAddedToSelectionEvent.Id, "ElementAddedToSelection");
         public static readonly EventId ElementRemovedFromSelectionEvent = EventId.Register(AutomationType.UIA2, UIA.SelectionItemPattern.ElementRemovedFromSelectionEvent.Id, "ElementRemovedFromSelection");
         public static readonly EventId ElementSelectedEvent = EventId.Register(AutomationType.UIA2, UIA.SelectionItemPattern.ElementSelectedEvent.Id, "ElementSelected");
@@ -21,58 +20,27 @@ namespace FlaUI.UIA2.Patterns
         {
         }
 
-        ISelectionItemPatternInformation IPatternWithInformation<ISelectionItemPatternInformation>.Cached => Cached;
-
-        ISelectionItemPatternInformation IPatternWithInformation<ISelectionItemPatternInformation>.Current => Current;
-
-        public ISelectionItemPatternProperties Properties => Automation.PropertyLibrary.SelectionItem;
-
-        public ISelectionItemPatternEvents Events => Automation.EventLibrary.SelectionItem;
-
-        protected override SelectionItemPatternInformation CreateInformation(bool cached)
-        {
-            return new SelectionItemPatternInformation(BasicAutomationElement, cached);
-        }
-
-        public void AddToSelection()
+        public override void AddToSelection()
         {
             NativePattern.AddToSelection();
         }
 
-        public void RemoveFromSelection()
+        public override void RemoveFromSelection()
         {
             NativePattern.RemoveFromSelection();
         }
 
-        public void Select()
+        public override void Select()
         {
             NativePattern.Select();
         }
     }
 
-    public class SelectionItemPatternInformation : InformationBase, ISelectionItemPatternInformation
-    {
-        public SelectionItemPatternInformation(BasicAutomationElementBase basicAutomationElement, bool cached) : base(basicAutomationElement, cached)
-        {
-        }
-
-        public bool IsSelected => Get<bool>(SelectionItemPattern.IsSelectedProperty);
-
-        public AutomationElement SelectionContainer
-        {
-            get
-            {
-                var nativeElement = Get<UIA.AutomationElement>(SelectionItemPattern.SelectionContainerProperty);
-                return AutomationElementConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeElement);
-            }
-        }
-    }
-
     public class SelectionItemPatternProperties : ISelectionItemPatternProperties
     {
-        public PropertyId IsSelectedProperty => SelectionItemPattern.IsSelectedProperty;
+        public PropertyId IsSelected => SelectionItemPattern.IsSelectedProperty;
 
-        public PropertyId SelectionContainerProperty => SelectionItemPattern.SelectionContainerProperty;
+        public PropertyId SelectionContainer => SelectionItemPattern.SelectionContainerProperty;
     }
 
     public class SelectionItemPatternEvents : ISelectionItemPatternEvents

@@ -5,6 +5,7 @@ using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Shapes;
 using FlaUI.UIA2.Converters;
 using FlaUI.UIA2.EventHandlers;
+using FlaUI.UIA2.Extensions;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2
@@ -27,13 +28,13 @@ namespace FlaUI.UIA2
 
         public override AutomationElement GetDesktop()
         {
-            var desktop = UIA.AutomationElement.RootElement;
-            return AutomationElementConverter.NativeToManaged(this, desktop);
+            var nativeElement = InternalGetNativeElement(() => UIA.AutomationElement.RootElement);
+            return AutomationElementConverter.NativeToManaged(this, nativeElement);
         }
 
         public override AutomationElement FromPoint(Point point)
         {
-            var nativeElement = UIA.AutomationElement.FromPoint(point);
+            var nativeElement = InternalGetNativeElement(() => UIA.AutomationElement.FromPoint(point));
             return AutomationElementConverter.NativeToManaged(this, nativeElement);
         }
 
@@ -42,14 +43,14 @@ namespace FlaUI.UIA2
         /// </summary>
         public override AutomationElement FromHandle(IntPtr hwnd)
         {
-            var nativeElement = UIA.AutomationElement.FromHandle(hwnd);
+            var nativeElement = InternalGetNativeElement(() => UIA.AutomationElement.FromHandle(hwnd));
             return AutomationElementConverter.NativeToManaged(this, nativeElement);
         }
 
         public override AutomationElement FocusedElement()
         {
-            var nativeFocusedElement = UIA.AutomationElement.FocusedElement;
-            return AutomationElementConverter.NativeToManaged(this, nativeFocusedElement);
+            var nativeElement = InternalGetNativeElement(() => UIA.AutomationElement.FocusedElement);
+            return AutomationElementConverter.NativeToManaged(this, nativeElement);
         }
 
         public override IAutomationFocusChangedEventHandler RegisterFocusChangedEvent(Action<AutomationElement> action)
@@ -69,19 +70,30 @@ namespace FlaUI.UIA2
             UIA.Automation.RemoveAllEventHandlers();
         }
 
-        public override ICacheRequest CreateCacheRequest()
-        {
-            return new UIA2CacheRequest(this);
-        }
-
         public override bool Compare(AutomationElement element1, AutomationElement element2)
         {
-            return UIA.Automation.Compare(AutomationElementConverter.ToNative(element1), AutomationElementConverter.ToNative(element2));
+            return UIA.Automation.Compare(element1.ToNative(), element2.ToNative());
         }
 
         public AutomationElement WrapNativeElement(UIA.AutomationElement nativeElement)
         {
             return nativeElement == null ? null : new AutomationElement(new UIA2BasicAutomationElement(this, nativeElement));
+        }
+
+        /// <summary>
+        /// Gets the native element according to the passed action. Uses caching if it is active.
+        /// </summary>
+        private UIA.AutomationElement InternalGetNativeElement(Func<UIA.AutomationElement> getAction)
+        {
+            if (!CacheRequest.IsCachingActive)
+            {
+                return getAction();
+            }
+            var cacheRequest = CacheRequest.Current.ToNative();
+            using (cacheRequest.Activate())
+            {
+                return getAction();
+            }
         }
     }
 }

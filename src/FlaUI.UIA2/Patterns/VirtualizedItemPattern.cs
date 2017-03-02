@@ -2,6 +2,7 @@
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
+using FlaUI.UIA2.Identifiers;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Patterns
@@ -9,7 +10,7 @@ namespace FlaUI.UIA2.Patterns
 #if !NET35
     public class VirtualizedItemPattern : PatternBase<UIA.VirtualizedItemPattern>, IVirtualizedItemPattern
     {
-        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.VirtualizedItemPattern.Pattern.Id, "VirtualizedItem");
+        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.VirtualizedItemPattern.Pattern.Id, "VirtualizedItem", AutomationObjectIds.IsVirtualizedItemPatternAvailableProperty);
 
         public VirtualizedItemPattern(BasicAutomationElementBase basicAutomationElement, UIA.VirtualizedItemPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {

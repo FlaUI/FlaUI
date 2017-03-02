@@ -14,9 +14,9 @@ namespace FlaUI.Core.AutomationElements
         {
         }
 
-        private IRangeValuePattern RangeValuePattern => PatternFactory.GetRangeValuePattern();
+        private IRangeValuePattern RangeValuePattern => Patterns.RangeValue.PatternOrDefault;
 
-        private IValuePattern ValuePattern => PatternFactory.GetValuePattern();
+        private IValuePattern ValuePattern => Patterns.Value.Pattern;
 
         private Button LargeIncreaseButton => GetLargeIncreaseButton();
 
@@ -24,7 +24,7 @@ namespace FlaUI.Core.AutomationElements
 
         public Thumb Thumb => FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Thumb)).AsThumb();
 
-        public bool IsOnlyValue => RangeValuePattern == null;
+        public bool IsOnlyValue => !IsPatternSupported(Automation.PatternLibrary.RangeValuePattern);
 
         public double Value
         {
@@ -33,11 +33,11 @@ namespace FlaUI.Core.AutomationElements
                 var rangeValuePattern = RangeValuePattern;
                 if (rangeValuePattern != null)
                 {
-                    return RangeValuePattern.Current.Value;
+                    return RangeValuePattern.Value;
                 }
                 // UIA3 for WinForms does not have the RangeValue pattern, only the value pattern
                 // The value in this case is always between 0 and 100
-                return Convert.ToDouble(ValuePattern.Current.Value);
+                return Convert.ToDouble(ValuePattern.Value);
             }
             set
             {
@@ -82,13 +82,13 @@ namespace FlaUI.Core.AutomationElements
             if (FrameworkType == FrameworkType.Wpf)
             {
                 // For WPF, this is simple
-                return FindFirst(TreeScope.Children, ConditionFactory.ByAutomationId("IncreaseLarge")).AsButton();
+                return FindFirstChild(cf => cf.ByAutomationId("IncreaseLarge")).AsButton();
             }
             // For WinForms, we loop thru the buttons and find the one right of the thumb
-            var buttons = FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Button));
+            var buttons = FindAllChildren(cf => cf.ByControlType(ControlType.Button));
             foreach (var button in buttons)
             {
-                if (button.Current.BoundingRectangle.Left > Thumb.Current.BoundingRectangle.Left)
+                if (button.Properties.BoundingRectangle.Value.Left > Thumb.Properties.BoundingRectangle.Value.Left)
                 {
                     return button.AsButton();
                 }
@@ -101,13 +101,13 @@ namespace FlaUI.Core.AutomationElements
             if (FrameworkType == FrameworkType.Wpf)
             {
                 // For WPF, this is simple
-                return FindFirst(TreeScope.Children, ConditionFactory.ByAutomationId("DecreaseLarge")).AsButton();
+                return FindFirstChild(cf => cf.ByAutomationId("DecreaseLarge")).AsButton();
             }
             // For WinForms, we loop thru the buttons and find the one left of the thumb
-            var buttons = FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Button));
+            var buttons = FindAllChildren(cf => cf.ByControlType(ControlType.Button));
             foreach (var button in buttons)
             {
-                if (button.Current.BoundingRectangle.Right < Thumb.Current.BoundingRectangle.Right)
+                if (button.Properties.BoundingRectangle.Value.Right < Thumb.Properties.BoundingRectangle.Value.Right)
                 {
                     return button.AsButton();
                 }

@@ -88,10 +88,10 @@ namespace FlaUI.Core.Identifiers
             return Register(id, idsHolder.EventDict, () => new EventId(id, name));
         }
 
-        protected static PatternId RegisterPattern(AutomationType automationType, int id, string name)
+        protected static PatternId RegisterPattern(AutomationType automationType, int id, string name, PropertyId availabilityProperty)
         {
             var idsHolder = GetIdHolder(automationType);
-            return Register(id, idsHolder.PatternDict, () => new PatternId(id, name));
+            return Register(id, idsHolder.PatternDict, () => new PatternId(id, name, availabilityProperty));
         }
 
         protected static TextAttributeId RegisterTextAttribute(AutomationType automationType, int id, string name)
@@ -115,7 +115,7 @@ namespace FlaUI.Core.Identifiers
         protected static PatternId FindPattern(AutomationType automationType, int id)
         {
             var idsHolder = GetIdHolder(automationType);
-            return idsHolder.PatternDict.ContainsKey(id) ? idsHolder.PatternDict[id] : new PatternId(id, String.Format("Pattern#{0}", id));
+            return idsHolder.PatternDict.ContainsKey(id) ? idsHolder.PatternDict[id] : new PatternId(id, String.Format("Pattern#{0}", id), null);
         }
 
         protected static TextAttributeId FindTextAttribute(AutomationType automationType, int id)

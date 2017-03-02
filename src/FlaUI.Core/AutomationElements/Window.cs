@@ -16,15 +16,15 @@ namespace FlaUI.Core.AutomationElements
         {
         }
 
-        public string Title => Current.Name;
+        public string Title => Properties.Name;
 
-        public bool IsModal => WindowPattern.Current.IsModal;
+        public bool IsModal => WindowPattern.IsModal.Value;
 
         public TitleBar TitleBar => FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.TitleBar)).AsTitleBar();
 
-        public IWindowPattern WindowPattern => PatternFactory.GetWindowPattern();
+        public IWindowPattern WindowPattern => Patterns.Window.Pattern;
 
-        public ITransformPattern TransformPattern => PatternFactory.GetTransformPattern();
+        public ITransformPattern TransformPattern => Patterns.Transform.Pattern;
 
         /// <summary>
         /// Flag to indicate, if the window is the application's main window.
@@ -36,7 +36,7 @@ namespace FlaUI.Core.AutomationElements
         {
             get
             {
-                return FindAllChildren(cf => cf.ByControlType(ControlType.Window).And(new PropertyCondition(Automation.PropertyLibrary.Window.IsModalProperty, true))).
+                return FindAllChildren(cf => cf.ByControlType(ControlType.Window).And(new PropertyCondition(Automation.PropertyLibrary.Window.IsModal, true))).
                     Select(e => e.AsWindow()).ToArray();
             }
         }
@@ -118,11 +118,11 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public void SetTransparency(byte alpha)
         {
-            if (User32.SetWindowLong(Current.NativeWindowHandle, WindowLongParam.GWL_EXSTYLE, WindowStyles.WS_EX_LAYERED) == 0)
+            if (User32.SetWindowLong(Properties.NativeWindowHandle, WindowLongParam.GWL_EXSTYLE, WindowStyles.WS_EX_LAYERED) == 0)
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }
-            if (!User32.SetLayeredWindowAttributes(Current.NativeWindowHandle, 0, alpha, LayeredWindowAttributes.LWA_ALPHA))
+            if (!User32.SetLayeredWindowAttributes(Properties.NativeWindowHandle, 0, alpha, LayeredWindowAttributes.LWA_ALPHA))
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }
@@ -137,7 +137,7 @@ namespace FlaUI.Core.AutomationElements
             {
                 return this;
             }
-            var mainWindow = BasicAutomationElement.Automation.GetDesktop().FindFirstChild(ConditionFactory.ByProcessId(Current.ProcessId)).AsWindow();
+            var mainWindow = BasicAutomationElement.Automation.GetDesktop().FindFirstChild(cf => cf.ByProcessId(Properties.ProcessId)).AsWindow();
             return mainWindow ?? this;
         }
     }

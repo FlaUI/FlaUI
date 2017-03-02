@@ -9,24 +9,12 @@ namespace FlaUI.Core.AutomationElements
         {
         }
 
-        public IRangeValuePattern RangeValuePattern
-        {
-            get { return PatternFactory.GetRangeValuePattern(); }
-        }
+        public IRangeValuePattern RangeValuePattern => Patterns.RangeValue.Pattern;
 
-        public double Minimum
-        {
-            get { return RangeValuePattern.Current.Minimum; }
-        }
+        public double Minimum => RangeValuePattern.Minimum;
 
-        public double Maximum
-        {
-            get { return RangeValuePattern.Current.Maximum; }
-        }
+        public double Maximum => RangeValuePattern.Maximum;
 
-        public double Value
-        {
-            get { return RangeValuePattern.Current.Value; }
-        }
+        public double Value => RangeValuePattern.Value;
     }
 }

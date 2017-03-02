@@ -14,13 +14,12 @@ namespace FlaUI.Core
         protected BasicAutomationElementBase(AutomationBase automation)
         {
             Automation = automation;
+            Properties = new AutomationElementPropertyValues(this);
         }
 
-        public abstract IPatternFactory PatternFactory { get; }
+        public abstract AutomationElementPatternValuesBase Patterns { get; }
 
-        public abstract IAutomationElementInformation Cached { get; }
-
-        public abstract IAutomationElementInformation Current { get; }
+        public AutomationElementPropertyValues Properties { get; }
 
         /// <summary>
         /// Underlying <see cref="AutomationBase" /> object where this element belongs to
@@ -28,55 +27,128 @@ namespace FlaUI.Core
         public AutomationBase Automation { get; }
 
         /// <summary>
-        /// Gets the desired property value. Ends in an exception if the property is not supported.
+        /// Gets the desired property value. Ends in an exception if the property is not supported or not cached.
         /// </summary>
-        public object GetPropertyValue(PropertyId property, bool cached)
+        public object GetPropertyValue(PropertyId property)
         {
-            return GetPropertyValue<object>(property, cached);
+            return GetPropertyValue<object>(property);
         }
 
-        public T GetPropertyValue<T>(PropertyId property, bool cached)
+        public T GetPropertyValue<T>(PropertyId property)
         {
-            var value = InternalGetPropertyValue(property.Id, cached, false);
-            if (value == Automation.NotSupportedValue)
+            if (Equals(property, PropertyId.NotSupportedByFramework))
             {
-                throw new PropertyNotSupportedException($"Property '{property.Name}' not supported", property);
+                throw new NotSupportedByFrameworkException();
             }
-            return property.Convert<T>(value);
-        }
-
-        /// <summary>
-        /// Gets the desired property value or the default value, if the property is not supported
-        /// </summary>
-        public object SafeGetPropertyValue(PropertyId property, bool cached)
-        {
-            return SafeGetPropertyValue<object>(property, cached);
-        }
-
-        public T SafeGetPropertyValue<T>(PropertyId property, bool cached)
-        {
-            var value = InternalGetPropertyValue(property.Id, cached, true);
-            return property.Convert<T>(value);
-        }
-
-        /// <summary>
-        /// Tries to get the property value. Fails if the property is not supported.
-        /// </summary>
-        public bool TryGetPropertyValue(PropertyId property, bool cached, out object value)
-        {
-            return TryGetPropertyValue<object>(property, cached, out value);
-        }
-
-        public bool TryGetPropertyValue<T>(PropertyId property, bool cached, out T value)
-        {
-            var tmp = InternalGetPropertyValue(property.Id, cached, false);
-            if (tmp == Automation.NotSupportedValue)
+            var isCacheActive = CacheRequest.IsCachingActive;
+            try
             {
-                value = default(T);
+                var value = InternalGetPropertyValue(property.Id, isCacheActive, false);
+                if (value == Automation.NotSupportedValue)
+                {
+                    throw new PropertyNotSupportedException(property);
+                }
+                return property.Convert<T>(Automation, value);
+            }
+            catch (Exception ex)
+            {
+                if (isCacheActive)
+                {
+                    var cacheRequest = CacheRequest.Current;
+                    if (!cacheRequest.Properties.Contains(property))
+                    {
+                        throw new PropertyNotCachedException(property, ex);
+                    }
+                }
+                // Should actually never come here
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get the property value.
+        /// Returns false and sets a default value if the property is not supported.
+        /// </summary>
+        public bool TryGetPropertyValue(PropertyId property, out object value)
+        {
+            return TryGetPropertyValue<object>(property, out value);
+        }
+
+        public bool TryGetPropertyValue<T>(PropertyId property, out T value)
+        {
+            if (Equals(property, PropertyId.NotSupportedByFramework))
+            {
+                throw new NotSupportedByFrameworkException();
+            }
+            var isCacheActive = CacheRequest.IsCachingActive;
+            try
+            {
+                var internalValue = InternalGetPropertyValue(property.Id, isCacheActive, false);
+                if (internalValue == Automation.NotSupportedValue)
+                {
+                    value = default(T);
+                    return false;
+                }
+                value = property.Convert<T>(Automation, internalValue);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                if (isCacheActive)
+                {
+                    var cacheRequest = CacheRequest.Current;
+                    if (!cacheRequest.Properties.Contains(property))
+                    {
+                        throw new PropertyNotCachedException(property, ex);
+                    }
+                }
+                // Should actually never come here
+                throw;
+            }
+        }
+
+        public T GetNativePattern<T>(PatternId pattern)
+        {
+            if (Equals(pattern, PatternId.NotSupportedByFramework))
+            {
+                throw new NotSupportedByFrameworkException();
+            }
+            var isCacheActive = CacheRequest.IsCachingActive;
+            try
+            {
+                var nativePattern = InternalGetPattern(pattern.Id, isCacheActive);
+                if (nativePattern == null)
+                {
+                    throw new InvalidOperationException("Native pattern is null");
+                }
+                return (T)nativePattern;
+            }
+            catch (Exception ex)
+            {
+                if (isCacheActive)
+                {
+                    var cacheRequest = CacheRequest.Current;
+                    if (!cacheRequest.Patterns.Contains(pattern))
+                    {
+                        throw new PatternNotCachedException(pattern, ex);
+                    }
+                }
+                throw new PatternNotSupportedException(pattern, ex);
+            }
+        }
+
+        public bool TryGetNativePattern<T>(PatternId pattern, out T nativePattern)
+        {
+            try
+            {
+                nativePattern = GetNativePattern<T>(pattern);
+                return true;
+            }
+            catch (PatternNotSupportedException)
+            {
+                nativePattern = default(T);
                 return false;
             }
-            value = property.Convert<T>(tmp);
-            return true;
         }
 
         public Point GetClickablePoint()
@@ -97,11 +169,18 @@ namespace FlaUI.Core
         /// <param name="propertyId">The id of the property to get</param>
         /// <param name="cached">Flag to indicate if the cached or current value should be fetched</param>
         /// <param name="useDefaultIfNotSupported">
-        /// Flag to indicate, if the default value should be used if the property is not
-        /// supported
+        /// Flag to indicate, if the default value should be used if the property is not supported
         /// </param>
         /// <returns>The value / default value of the property or <see cref="AutomationBase.NotSupportedValue" /></returns>
         protected abstract object InternalGetPropertyValue(int propertyId, bool cached, bool useDefaultIfNotSupported);
+
+        /// <summary>
+        /// Gets the desired pattern
+        /// </summary>
+        /// <param name="patternId">The id of the pattern to get</param>
+        /// <param name="cached">Flag to indicate if the cached or current pattern should be fetched</param>
+        /// <returns>The pattern or null if it was not found / cached</returns>
+        protected abstract object InternalGetPattern(int patternId, bool cached);
 
         public abstract AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition);
         public abstract AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition);
@@ -114,5 +193,8 @@ namespace FlaUI.Core
         public abstract void RemoveStructureChangedEventHandler(IAutomationStructureChangedEventHandler eventHandler);
         public abstract PatternId[] GetSupportedPatterns();
         public abstract PropertyId[] GetSupportedProperties();
+        public abstract AutomationElement GetUpdatedCache();
+        public abstract AutomationElement[] GetCachedChildren();
+        public abstract AutomationElement GetCachedParent();
     }
 }
