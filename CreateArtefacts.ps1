@@ -48,7 +48,7 @@ function Main {
     Get-ChildItem $rootPath\src\FlaUI.UIA2\bin\$configuration | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $uia2n45Dir
     Get-ChildItem $rootPath\src\FlaUI.UIA2\bin\$configuration\net-4.0 | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $uia2n40Dir
     Get-ChildItem $rootPath\src\FlaUI.UIA2\bin\$configuration\net-3.5 | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $uia2n35Dir
-    Get-ChildItem $ui23Dir -Include *.pdb,*.xml,*.vshost.*,*RANDOM_SEED* -Recurse | Remove-Item
+    Get-ChildItem $uia2Dir -Include *.pdb,*.xml,*.vshost.*,*RANDOM_SEED* -Recurse | Remove-Item
     Deploy-License $uia2Dir
 
     # FlaUI.UIA3
@@ -87,10 +87,10 @@ function Deploy-License($dest) {
 }
 
 function Create-Packages() {
-    nuget pack "$rootPath\src\FlaUI.Core\FlaUI.Core.csproj" -Properties "Configuration=$configuration;Platform=AnyCPU" -IncludeReferencedProjects -OutputDirectory $artefactDir
-    nuget pack "$rootPath\src\FlaUI.UIA2\FlaUI.UIA2.csproj" -Properties "Configuration=$configuration;Platform=AnyCPU" -IncludeReferencedProjects -OutputDirectory $artefactDir
-    nuget pack "$rootPath\src\FlaUI.UIA3\FlaUI.UIA3.csproj" -Properties "Configuration=$configuration;Platform=AnyCPU" -IncludeReferencedProjects -OutputDirectory $artefactDir
-    choco pack "$rootPath\src\FlaUInspect\FlaUInspect.nuspec" -OutputDirectory $artefactDir
+    nuget pack "$rootPath\src\FlaUI.Core\FlaUI.Core.csproj" -Symbols -Properties "Configuration=$configuration;Platform=AnyCPU" -IncludeReferencedProjects -OutputDirectory $artefactDir
+    nuget pack "$rootPath\src\FlaUI.UIA2\FlaUI.UIA2.csproj" -Symbols -Properties "Configuration=$configuration;Platform=AnyCPU" -IncludeReferencedProjects -OutputDirectory $artefactDir
+    nuget pack "$rootPath\src\FlaUI.UIA3\FlaUI.UIA3.csproj" -Symbols -Properties "Configuration=$configuration;Platform=AnyCPU" -IncludeReferencedProjects -OutputDirectory $artefactDir
+    choco pack "$rootPath\src\FlaUInspect\FlaUInspect.nuspec" -Symbols -OutputDirectory $artefactDir
 }
 
 Main
