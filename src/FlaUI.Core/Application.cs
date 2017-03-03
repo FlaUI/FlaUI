@@ -54,8 +54,6 @@ namespace FlaUI.Core
             }
             _process = process;
             IsStoreApp = isStoreApp;
-            WaitWhileBusy();
-            WaitWhileMainHandleIsMissing();
         }
 
         public void Close()
@@ -188,7 +186,7 @@ namespace FlaUI.Core
         /// <summary>
         /// Waits until the main handle is set
         /// </summary>
-        private void WaitWhileMainHandleIsMissing()
+        public void WaitWhileMainHandleIsMissing()
         {
             while (_process.MainWindowHandle == IntPtr.Zero)
             {
