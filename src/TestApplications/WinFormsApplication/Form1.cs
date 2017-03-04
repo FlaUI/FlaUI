@@ -8,5 +8,14 @@ namespace WinFormsApplication
         {
             InitializeComponent();
         }
+
+        private void NonEditableCombo_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            if (comboBox.SelectedItem.ToString() == "Item 4")
+            {
+                MessageBox.Show("Do you really want to do it?");
+            }
+        }
     }
 }

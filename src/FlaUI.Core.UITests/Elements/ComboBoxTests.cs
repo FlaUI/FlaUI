@@ -16,6 +16,14 @@ namespace FlaUI.Core.UITests.Elements
         {
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            var mainWindow = App.GetMainWindow(Automation);
+            var window = mainWindow.FindFirstDescendant(cf => cf.ByClassName("#32770")).AsWindow();
+            window?.FindFirstDescendant(cf => cf.ByAutomationId("Close")).AsButton().Invoke();
+        }
+
         [Test]
         [TestCase("EditableCombo")]
         [TestCase("NonEditableCombo")]
@@ -36,6 +44,7 @@ namespace FlaUI.Core.UITests.Elements
         {
             var mainWindow = App.GetMainWindow(Automation);
             var combo = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId(comboBoxId)).AsComboBox();
+            combo.Items[0].Select();
             combo.Expand();
             Assert.That(combo.ExpandCollapseState, Is.EqualTo(ExpandCollapseState.Expanded));
             combo.Collapse();
@@ -49,6 +58,16 @@ namespace FlaUI.Core.UITests.Elements
             var combo = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("EditableCombo")).AsComboBox();
             combo.EditableText = "Item 3";
             Assert.That(combo.SelectedItem.Properties.Name.Value, Is.EqualTo("Item 3"));
+        }
+
+        [Test]
+        public void AssertMessageBoxCanBeRetrievedInSelection()
+        {
+            var mainWindow = App.GetMainWindow(Automation);
+            var combo = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("NonEditableCombo")).AsComboBox();
+            combo.Items[3].Select();
+            var window = mainWindow.FindFirstDescendant(cf => cf.ByClassName("#32770")).AsWindow();
+            Assert.That(window, Is.Not.Null, "Expected a window that was shown when combobox item was selected");
         }
     }
 }
