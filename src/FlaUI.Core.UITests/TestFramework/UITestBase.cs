@@ -50,16 +50,17 @@ namespace FlaUI.Core.UITests.TestFramework
             {
                 case TestApplicationType.Custom:
                     App = StartApplication();
-                    return;
+                    break;
                 case TestApplicationType.WinForms:
                     App = Application.Launch(Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\..\TestApplications\WinFormsApplication\bin\WinFormsApplication.exe"));
-                    return;
+                    break;
                 case TestApplicationType.Wpf:
                     App = Application.Launch(Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\..\TestApplications\WpfApplication\bin\WpfApplication.exe"));
-                    return;
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            App.WaitWhileMainHandleIsMissing();
         }
 
         /// <summary>

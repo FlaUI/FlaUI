@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
@@ -186,13 +185,14 @@ namespace FlaUI.Core
         /// <summary>
         /// Waits until the main handle is set
         /// </summary>
-        public void WaitWhileMainHandleIsMissing()
+        public void WaitWhileMainHandleIsMissing(TimeSpan? waitTimeout = null)
         {
-            while (_process.MainWindowHandle == IntPtr.Zero)
+            var waitTime = waitTimeout ?? TimeSpan.FromMilliseconds(500);
+            Retry.While(() =>
             {
-                Thread.Sleep(50);
                 _process.Refresh();
-            }
+                return _process.MainWindowHandle == IntPtr.Zero;
+            }, waitTime, TimeSpan.FromMilliseconds(50));
         }
 
         /// <summary>
