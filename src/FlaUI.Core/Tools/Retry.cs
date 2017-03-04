@@ -61,7 +61,7 @@ namespace FlaUI.Core.Tools
                 }
                 if (DateTime.Now.Subtract(startTime) >= timeout)
                 {
-                    throw new Exception("Timeout occurred in retry");
+                    return obj;
                 }
                 Thread.Sleep(retryInterval ?? DefaultRetryInterval);
             }
@@ -78,7 +78,7 @@ namespace FlaUI.Core.Tools
                 }
                 if (DateTime.Now.Subtract(startTime) >= timeout)
                 {
-                    throw new Exception("Timeout occurred in retry");
+                    return;
                 }
                 Thread.Sleep(retryInterval ?? DefaultRetryInterval);
             }
