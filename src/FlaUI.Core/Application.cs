@@ -38,7 +38,14 @@ namespace FlaUI.Core
         /// <summary>
         /// The handle (Win32) of the application's main window
         /// </summary>
-        public IntPtr MainWindowHandle => _process.MainWindowHandle;
+        public IntPtr MainWindowHandle
+        {
+            get
+            {
+                WaitWhileMainHandleIsMissing();
+                return _process.MainWindowHandle;
+            }
+        }
 
         public Application(int processId, bool isStoreApp = false)
             : this(FindProcess(processId), isStoreApp)
