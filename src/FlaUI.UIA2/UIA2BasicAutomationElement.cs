@@ -81,7 +81,14 @@ namespace FlaUI.UIA2
         {
             System.Windows.Point outPoint;
             var success = NativeElement.TryGetClickablePoint(out outPoint);
-            point = success ? new Point(outPoint.X, outPoint.Y) : null;
+            if (success)
+            {
+                point = new Point(outPoint.X, outPoint.Y);
+            }
+            else
+            {
+                success = Properties.ClickablePoint.TryGetValue(out point);
+            } 
             return success;
         }
 

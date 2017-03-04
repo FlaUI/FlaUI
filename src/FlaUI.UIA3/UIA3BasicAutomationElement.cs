@@ -23,7 +23,7 @@ namespace FlaUI.UIA3
             NativeElement = nativeElement;
             Patterns = new UIA3AutomationElementPatternValues(this);
         }
-        
+
         public override AutomationElementPatternValuesBase Patterns { get; }
 
         /// <summary>
@@ -88,7 +88,14 @@ namespace FlaUI.UIA3
         {
             var tagPoint = new UIA.tagPOINT { x = 0, y = 0 };
             var success = ComCallWrapper.Call(() => NativeElement.GetClickablePoint(out tagPoint)) != 0;
-            point = success ? new Point(tagPoint.x, tagPoint.y) : null;
+            if (success)
+            {
+                point = new Point(tagPoint.x, tagPoint.y);
+            }
+            else
+            {
+                success = Properties.ClickablePoint.TryGetValue(out point);
+            }
             return success;
         }
 
