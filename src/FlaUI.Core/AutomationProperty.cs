@@ -62,5 +62,10 @@ namespace FlaUI.Core
         {
             return other != null && Value.Equals(other.Value);
         }
+
+        public override string ToString()
+        {
+            return Convert.ToString(ValueOrDefault);
+        }
     }
 }
