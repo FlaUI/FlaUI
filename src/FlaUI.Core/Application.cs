@@ -113,7 +113,7 @@ namespace FlaUI.Core
 
         public static Application Attach(Process process)
         {
-            Logger.Default.DebugFormat("[Attaching to process:{0}] [Process name:{1}] [Process full path:{2}]", process.Id, process.ProcessName, process.MainModule.FileName);
+            Logger.Default.Debug("[Attaching to process:{0}] [Process name:{1}] [Process full path:{2}]", process.Id, process.ProcessName, process.MainModule.FileName);
             return new Application(process);
         }
 
@@ -146,7 +146,7 @@ namespace FlaUI.Core
                 processStartInfo.WorkingDirectory = ".";
             }
 
-            Logger.Default.DebugFormat("[Launching process:{0}] [Working directory:{1}] [Process full path:{2}] [Current Directory:{3}]",
+            Logger.Default.Debug("[Launching process:{0}] [Working directory:{1}] [Process full path:{2}] [Current Directory:{3}]",
                 processStartInfo.FileName,
                 new DirectoryInfo(processStartInfo.WorkingDirectory).FullName,
                 new FileInfo(processStartInfo.FileName).FullName,

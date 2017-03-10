@@ -1,33 +1,33 @@
 ﻿namespace FlaUI.Core.Logging
 {
-    public class DebugLogger : AbstractBaseLogger
+    public class DebugLogger : LoggerBase
     {
-        public override void GatedDebug(string message)
+        protected internal override void GatedDebug(string message)
         {
             System.Diagnostics.Debug.WriteLine(message);
         }
 
-        public override void GatedError(string message)
+        protected internal override void GatedError(string message)
         {
             System.Diagnostics.Debug.Fail(message);
         }
 
-        public override void GatedFatal(string message)
+        protected internal override void GatedFatal(string message)
         {
             System.Diagnostics.Debug.Fail(message);
         }
 
-        public override void GatedInfo(string message)
+        protected internal override void GatedInfo(string message)
         {
             System.Diagnostics.Debug.WriteLine(message);
         }
 
-        public override void GatedTrace(string message)
+        protected internal override void GatedTrace(string message)
         {
             System.Diagnostics.Debug.WriteLine(message);
         }
 
-        public override void GatedWarn(string message)
+        protected internal override void GatedWarn(string message)
         {
             System.Diagnostics.Debug.WriteLine(message);
         }

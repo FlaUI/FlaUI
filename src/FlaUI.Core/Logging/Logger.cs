@@ -14,9 +14,9 @@ namespace FlaUI.Core.Logging
             }
             set
             {
-                if(value == null)
+                if (value == null)
                 {
-                    throw new ArgumentNullException("Default logger can not be null");
+                    throw new ArgumentNullException(nameof(value));
                 }
                 _default = value;
             }

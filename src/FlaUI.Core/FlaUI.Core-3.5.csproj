@@ -157,11 +157,13 @@
     <Compile Include="ITextRange2.cs" />
     <Compile Include="ITreeWalker.cs" />
     <Compile Include="ITreeWalkerFactory.cs" />
-    <Compile Include="Logging\AbstractBaseLogger.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\DebugLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Logging\LoggerBase.cs" />
+    <Compile Include="Logging\LogLevel.cs" />
+    <Compile Include="Logging\NullLogger.cs" />
     <Compile Include="Logging\TraceLogger.cs" />
     <Compile Include="Overlay\IOverlayManager.cs" />
     <Compile Include="Overlay\OverlayRectangleForm.cs">

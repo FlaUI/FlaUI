@@ -2,36 +2,46 @@
 
 namespace FlaUI.Core.Logging
 {
-    public class ConsoleLogger : AbstractBaseLogger
+    public class ConsoleLogger : LoggerBase
     {
-        public override void GatedDebug(string message)
+        protected internal override void GatedDebug(string message)
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine(message);
+            Console.ResetColor();
         }
 
-        public override void GatedError(string message)
+        protected internal override void GatedError(string message)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.Error.WriteLine(message);
+            Console.ResetColor();
         }
 
-        public override void GatedFatal(string message)
+        protected internal override void GatedFatal(string message)
         {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.Error.WriteLine(message);
+            Console.ResetColor();
         }
 
-        public override void GatedInfo(string message)
+        protected internal override void GatedInfo(string message)
         {
             Console.WriteLine(message);
         }
 
-        public override void GatedTrace(string message)
+        protected internal override void GatedTrace(string message)
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine(message);
+            Console.ResetColor();
         }
 
-        public override void GatedWarn(string message)
+        protected internal override void GatedWarn(string message)
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(message);
+            Console.ResetColor();
         }
     }
 }
