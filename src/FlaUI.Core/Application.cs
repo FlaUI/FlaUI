@@ -13,8 +13,6 @@ namespace FlaUI.Core
 {
     public class Application : IDisposable
     {
-        private static readonly ILogger Log = new ConsoleLogger();
-
         /// <summary>
         /// The process of this application
         /// </summary>
@@ -56,7 +54,7 @@ namespace FlaUI.Core
         {
             if (process == null)
             {
-                throw new Exception("Process cannot be null");
+                throw new ArgumentNullException(nameof(process));
             }
             _process = process;
             IsStoreApp = isStoreApp;
@@ -64,7 +62,7 @@ namespace FlaUI.Core
 
         public void Close()
         {
-            Log.Info("Closing application");
+            Logger.Default.Info("Closing application");
             if (_process.HasExited)
             {
                 _process.Dispose();
@@ -78,7 +76,7 @@ namespace FlaUI.Core
             _process.WaitForExit(5000);
             if (!_process.HasExited)
             {
-                Log.Info("Application failed to exit, killing process");
+                Logger.Default.Info("Application failed to exit, killing process");
                 _process.Kill();
                 _process.WaitForExit(5000);
             }
@@ -115,7 +113,7 @@ namespace FlaUI.Core
 
         public static Application Attach(Process process)
         {
-            Log.DebugFormat("[Attaching to process:{0}] [Process name:{1}] [Process full path:{2}]", process.Id, process.ProcessName, process.MainModule.FileName);
+            Logger.Default.DebugFormat("[Attaching to process:{0}] [Process name:{1}] [Process full path:{2}]", process.Id, process.ProcessName, process.MainModule.FileName);
             return new Application(process);
         }
 
@@ -148,7 +146,7 @@ namespace FlaUI.Core
                 processStartInfo.WorkingDirectory = ".";
             }
 
-            Log.DebugFormat("[Launching process:{0}] [Working directory:{1}] [Process full path:{2}] [Current Directory:{3}]",
+            Logger.Default.DebugFormat("[Launching process:{0}] [Working directory:{1}] [Process full path:{2}] [Current Directory:{3}]",
                 processStartInfo.FileName,
                 new DirectoryInfo(processStartInfo.WorkingDirectory).FullName,
                 new FileInfo(processStartInfo.FileName).FullName,
@@ -167,7 +165,7 @@ namespace FlaUI.Core
                     new DirectoryInfo(processStartInfo.WorkingDirectory).FullName,
                     new FileInfo(processStartInfo.FileName).FullName,
                     Environment.CurrentDirectory);
-                Log.Error(error, ex);
+                Logger.Default.Error(error, ex);
                 throw;
             }
 
