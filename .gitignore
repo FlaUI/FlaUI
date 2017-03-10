@@ -234,3 +234,7 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+UIA2TestResult.xml
+UnitTestResult.xml
+UIA3TestResult.xml
