@@ -1,5 +1,16 @@
 # Changelog
 
+## UPCOMING: 1.0.0-beta2 (2017-xx-xx)
+
+### Breaking changes
+  * [Core] WaitWhileBusy and WaitWhileMainHandleIsMissing are now public and to not block endlessly
+
+### Enhancements
+  * [Core] Cleaned the Retry a bit
+
+### Bug fixes
+  * [Core] Fallback to property for clickable point if GetClickablePoint fails
+
 ## 1.0.0-beta1 (2017-03-02)
 
 ### Breaking changes
