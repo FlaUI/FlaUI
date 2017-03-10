@@ -13,8 +13,6 @@ namespace FlaUI.Core
 {
     public class Application : IDisposable
     {
-        public ILogger Log { get; }
-
         /// <summary>
         /// The process of this application
         /// </summary>
@@ -47,25 +45,24 @@ namespace FlaUI.Core
             }
         }
 
-        public Application(int processId, bool isStoreApp = false, ILogger logger = null)
+        public Application(int processId, bool isStoreApp = false)
             : this(FindProcess(processId), isStoreApp)
         {
         }
 
-        public Application(Process process, bool isStoreApp = false, ILogger logger = null)
+        public Application(Process process, bool isStoreApp = false)
         {
             if (process == null)
             {
                 throw new ArgumentNullException(nameof(process));
             }
-            Log = logger ?? Logger.Default;
             _process = process;
             IsStoreApp = isStoreApp;
         }
 
         public void Close()
         {
-            Log.Info("Closing application");
+            Logger.Default.Info("Closing application");
             if (_process.HasExited)
             {
                 _process.Dispose();
@@ -79,7 +76,7 @@ namespace FlaUI.Core
             _process.WaitForExit(5000);
             if (!_process.HasExited)
             {
-                Log.Info("Application failed to exit, killing process");
+                Logger.Default.Info("Application failed to exit, killing process");
                 _process.Kill();
                 _process.WaitForExit(5000);
             }
