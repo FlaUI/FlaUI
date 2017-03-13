@@ -11,6 +11,9 @@ using FlaUI.Core.Tools;
 
 namespace FlaUI.Core
 {
+    /// <summary>
+    /// Wrapper for an application which should be automated.
+    /// </summary>
     public class Application : IDisposable
     {
         /// <summary>
@@ -34,16 +37,10 @@ namespace FlaUI.Core
         public string Name => _process.ProcessName;
 
         /// <summary>
-        /// The handle (Win32) of the application's main window
+        /// The current handle (Win32) of the application's main window.
+        /// Can be IntPtr.Zero if no main window is currently available.
         /// </summary>
-        public IntPtr MainWindowHandle
-        {
-            get
-            {
-                WaitWhileMainHandleIsMissing();
-                return _process.MainWindowHandle;
-            }
-        }
+        public IntPtr MainWindowHandle => _process.MainWindowHandle;
 
         public Application(int processId, bool isStoreApp = false)
             : this(FindProcess(processId), isStoreApp)
@@ -188,18 +185,20 @@ namespace FlaUI.Core
         /// <summary>
         /// Waits as long as the application is busy
         /// </summary>
+        /// <param name="waitTimeout">An optional timeout. If null is passed, the timeout is infinite.</param>
         public void WaitWhileBusy(TimeSpan? waitTimeout = null)
         {
-            var waitTime = (waitTimeout ?? TimeSpan.FromMilliseconds(500)).TotalMilliseconds;
+            var waitTime = (waitTimeout ?? TimeSpan.FromMilliseconds(-1)).TotalMilliseconds;
             _process.WaitForInputIdle((int)waitTime);
         }
 
         /// <summary>
         /// Waits until the main handle is set
         /// </summary>
+        /// <param name="waitTimeout">An optional timeout. If null is passed, the timeout is infinite.</param>
         public void WaitWhileMainHandleIsMissing(TimeSpan? waitTimeout = null)
         {
-            var waitTime = waitTimeout ?? TimeSpan.FromMilliseconds(500);
+            var waitTime = waitTimeout ?? TimeSpan.FromMilliseconds(-1);
             Retry.While(() =>
             {
                 _process.Refresh();
@@ -210,9 +209,18 @@ namespace FlaUI.Core
         /// <summary>
         /// Gets the main window of the application's process
         /// </summary>
-        public Window GetMainWindow(AutomationBase automation)
+        /// <param name="automation">The automation object to use.</param>
+        /// <param name="waitTimeout">An optional timeout. If null is passed, the timeout is infinite.</param>
+        /// <returns>The main window object as <see cref="Window" /> or null if no main window was found within the timeout.</returns>
+        public Window GetMainWindow(AutomationBase automation, TimeSpan? waitTimeout = null)
         {
-            var mainWindow = automation.FromHandle(MainWindowHandle).AsWindow();
+            WaitWhileMainHandleIsMissing(waitTimeout);
+            var mainWindowHandle = MainWindowHandle;
+            if (mainWindowHandle == IntPtr.Zero)
+            {
+                return null;
+            }
+            var mainWindow = automation.FromHandle(mainWindowHandle).AsWindow();
             if (mainWindow != null)
             {
                 mainWindow.IsMainWindow = true;
