@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>FlaUI.UIA3</id>
+    <version>$version$</version>
+    <title>FlaUI.UIA3</title>
+    <authors>Roemer</authors>
+    <owners>Roemer</owners>
+    <licenseUrl>https://github.com/Roemer/FlaUI/blob/master/LICENSE.txt</licenseUrl>
+    <projectUrl>https://github.com/Roemer/FlaUI</projectUrl>
+    <iconUrl>https://github.com/Roemer/FlaUI/blob/master/FlaUI.png?raw=true</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Library to use FlaUI with UIA3.</description>
+    <copyright>Copyright 2016-2017</copyright>
+    <tags>UI Automation UIA2 UIA3 UIA System.Windows.Automation</tags>
+    <dependencies>
+        <dependency id="FlaUI.Core" version="$version$" />
+	</dependencies>
+  </metadata>
+  <files>
+    <file src="install.ps1" target="tools" />
+	<file src="..\src\FlaUI.UIA3\bin\net-3.5\FlaUI.UIA3.dll" target="lib/net35" />
+	<file src="..\src\FlaUI.UIA3\bin\net-3.5\interop.UIAutomationCore.dll" target="lib/net35/" />
+	<file src="..\src\FlaUI.UIA3\bin\net-4.0\FlaUI.UIA3.dll" target="lib/net40" />
+	<file src="..\src\FlaUI.UIA3\bin\net-4.0\interop.UIAutomationCore.dll" target="lib/net40/" />
+	<file src="..\src\FlaUI.UIA3\bin\net-4.5\FlaUI.UIA3.dll" target="lib/net45" />
+    <file src="..\src\FlaUI.UIA3\bin\net-4.5\interop.UIAutomationCore.dll" target="lib/net45/" />
+	<file src="..\LICENSE.txt" target="" />
+	<file src="..\CHANGELOG.md" target="" />
+  </files>
+</package>

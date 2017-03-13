@@ -1,23 +1,22 @@
 $artefactDir = "Artefacts"
 $tempDir = "Temp"
-$configuration = "Release"
 $version = "1.0.0-beta2"
 $rootPath = "."
 
 function Main {
     if (Test-Path $artefactDir) {
-        rd $artefactDir -Recurse
+        rd $artefactDir -Recurse | Out-Null
     }
-    md -Name $artefactDir
+    md -Name $artefactDir | Out-Null
 
     if (Test-Path $tempDir) {
-        rd $tempDir -Recurse
+        rd $tempDir -Recurse | Out-Null
     }
-    md -Name $tempDir
+    md -Name $tempDir | Out-Null
 
     # FlaUInspect
     $inspectDir = Join-Path $tempDir "FlaUInspect-$version"
-    Copy-Item -Path $rootPath\src\FlaUInspect\bin\$configuration -Destination $inspectDir -Recurse
+    Copy-Item -Path $rootPath\src\FlaUInspect\bin -Destination $inspectDir -Recurse
     Get-ChildItem $inspectDir -Include *.pdb,*.xml,*.vshost.*,*RANDOM_SEED* -Recurse | Remove-Item
     Deploy-License $inspectDir
 
@@ -26,13 +25,13 @@ function Main {
     $coren45Dir = Join-Path $coreDir net45
     $coren40Dir = Join-Path $coreDir net40
     $coren35Dir = Join-Path $coreDir net35
-    md -Name $coreDir
-    md -Name $coren45Dir
-    md -Name $coren40Dir
-    md -Name $coren35Dir
-    Get-ChildItem $rootPath\src\FlaUI.Core\bin\$configuration | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $coren45Dir
-    Get-ChildItem $rootPath\src\FlaUI.Core\bin\$configuration\net-4.0 | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $coren40Dir
-    Get-ChildItem $rootPath\src\FlaUI.Core\bin\$configuration\net-3.5 | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $coren35Dir
+    md -Name $coreDir | Out-Null
+    md -Name $coren45Dir | Out-Null
+    md -Name $coren40Dir | Out-Null
+    md -Name $coren35Dir | Out-Null
+    Get-ChildItem $rootPath\src\FlaUI.Core\bin | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $coren45Dir
+    Get-ChildItem $rootPath\src\FlaUI.Core\bin\net-4.0 | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $coren40Dir
+    Get-ChildItem $rootPath\src\FlaUI.Core\bin\net-3.5 | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $coren35Dir
     Get-ChildItem $coreDir -Include *.pdb,*.xml,*.vshost.*,*RANDOM_SEED* -Recurse | Remove-Item
     Deploy-License $coreDir
 
@@ -41,13 +40,13 @@ function Main {
     $uia2n45Dir = Join-Path $uia2Dir net45
     $uia2n40Dir = Join-Path $uia2Dir net40
     $uia2n35Dir = Join-Path $uia2Dir net35
-    md -Name $uia2Dir
-    md -Name $uia2n45Dir
-    md -Name $uia2n40Dir
-    md -Name $uia2n35Dir
-    Get-ChildItem $rootPath\src\FlaUI.UIA2\bin\$configuration | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $uia2n45Dir
-    Get-ChildItem $rootPath\src\FlaUI.UIA2\bin\$configuration\net-4.0 | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $uia2n40Dir
-    Get-ChildItem $rootPath\src\FlaUI.UIA2\bin\$configuration\net-3.5 | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $uia2n35Dir
+    md -Name $uia2Dir | Out-Null
+    md -Name $uia2n45Dir | Out-Null
+    md -Name $uia2n40Dir | Out-Null
+    md -Name $uia2n35Dir | Out-Null
+    Get-ChildItem $rootPath\src\FlaUI.UIA2\bin | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $uia2n45Dir
+    Get-ChildItem $rootPath\src\FlaUI.UIA2\bin\net-4.0 | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $uia2n40Dir
+    Get-ChildItem $rootPath\src\FlaUI.UIA2\bin\net-3.5 | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $uia2n35Dir
     Get-ChildItem $uia2Dir -Include *.pdb,*.xml,*.vshost.*,*RANDOM_SEED* -Recurse | Remove-Item
     Deploy-License $uia2Dir
 
@@ -56,18 +55,18 @@ function Main {
     $uia3n45Dir = Join-Path $uia3Dir net45
     $uia3n40Dir = Join-Path $uia3Dir net40
     $uia3n35Dir = Join-Path $uia3Dir net35
-    md -Name $uia3Dir
-    md -Name $uia3n45Dir
-    md -Name $uia3n40Dir
-    md -Name $uia3n35Dir
-    Get-ChildItem $rootPath\src\FlaUI.UIA3\bin\$configuration | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $uia3n45Dir
-    Get-ChildItem $rootPath\src\FlaUI.UIA3\bin\$configuration\net-4.0 | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $uia3n40Dir
-    Get-ChildItem $rootPath\src\FlaUI.UIA3\bin\$configuration\net-3.5 | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $uia3n35Dir
+    md -Name $uia3Dir | Out-Null
+    md -Name $uia3n45Dir | Out-Null
+    md -Name $uia3n40Dir | Out-Null
+    md -Name $uia3n35Dir | Out-Null
+    Get-ChildItem $rootPath\src\FlaUI.UIA3\bin | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $uia3n45Dir
+    Get-ChildItem $rootPath\src\FlaUI.UIA3\bin\net-4.0 | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $uia3n40Dir
+    Get-ChildItem $rootPath\src\FlaUI.UIA3\bin\net-3.5 | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $uia3n35Dir
     Get-ChildItem $uia3Dir -Include *.pdb,*.xml,*.vshost.*,*RANDOM_SEED* -Recurse | Remove-Item
     Deploy-License $uia3Dir
 
     # Create Zips
-    [Reflection.Assembly]::LoadWithPartialName("System.IO.Compression.FileSystem")
+    [Reflection.Assembly]::LoadWithPartialName("System.IO.Compression.FileSystem") | Out-Null
     $compression = [System.IO.Compression.CompressionLevel]::Optimal
     $includeBaseDirectory = $false
     [System.IO.Compression.ZipFile]::CreateFromDirectory($inspectDir, (Join-Path $artefactDir "FlaUInspect-$version.zip"), $compression, $includeBaseDirectory)
@@ -87,10 +86,10 @@ function Deploy-License($dest) {
 }
 
 function Create-Packages() {
-    nuget pack "$rootPath\src\FlaUI.Core\FlaUI.Core.csproj" -Symbols -Properties "Configuration=$configuration;Platform=AnyCPU" -IncludeReferencedProjects -OutputDirectory $artefactDir
-    nuget pack "$rootPath\src\FlaUI.UIA2\FlaUI.UIA2.csproj" -Symbols -Properties "Configuration=$configuration;Platform=AnyCPU" -IncludeReferencedProjects -OutputDirectory $artefactDir
-    nuget pack "$rootPath\src\FlaUI.UIA3\FlaUI.UIA3.csproj" -Symbols -Properties "Configuration=$configuration;Platform=AnyCPU" -IncludeReferencedProjects -OutputDirectory $artefactDir
-    choco pack "$rootPath\src\FlaUInspect\FlaUInspect.nuspec" -Symbols -OutputDirectory $artefactDir
+    nuget pack "$rootPath\nuspec\FlaUI.Core.nuspec" -OutputDirectory $artefactDir -properties version=$version
+    nuget pack "$rootPath\nuspec\FlaUI.UIA2.nuspec" -OutputDirectory $artefactDir -properties version=$version
+    nuget pack "$rootPath\nuspec\FlaUI.UIA3.nuspec" -OutputDirectory $artefactDir -properties version=$version
+    choco pack "$rootPath\nuspec\FlaUInspect.nuspec" -OutputDirectory $artefactDir --version $version
 }
 
 Main
