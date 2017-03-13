@@ -2,8 +2,6 @@
 using System.Linq;
 using System.Threading;
 using FlaUI.Core.AutomationElements.Infrastructure;
-using FlaUI.Core.AutomationElements.PatternElements;
-using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
 using FlaUI.Core.Patterns;
@@ -40,14 +38,14 @@ namespace FlaUI.Core.AutomationElements
         public string Value
         {
             get { return ValuePattern.Value; }
-            set { ValuePattern.SetValue(value);}
+            set { ValuePattern.SetValue(value); }
         }
 
-        public SelectionItemAutomationElement SelectedItem => Items.FirstOrDefault(x => x.IsSelected);
+        public ComboBoxItem SelectedItem => Items.FirstOrDefault(x => x.IsSelected);
 
-        public SelectionItemAutomationElement[] SelectedItems => Items.Where(x => x.IsSelected).ToArray();
+        public ComboBoxItem[] SelectedItems => Items.Where(x => x.IsSelected).ToArray();
 
-        public SelectionItemAutomationElement[] Items
+        public ComboBoxItem[] Items
         {
             get
             {
@@ -56,15 +54,15 @@ namespace FlaUI.Core.AutomationElements
                 if (FrameworkType == FrameworkType.WinForms || FrameworkType == FrameworkType.Win32)
                 {
                     // WinForms and Win32
-                    var listElement = FindFirstChild(ConditionFactory.ByControlType(ControlType.List));
-                    items = listElement.FindAllChildren(new TrueCondition());
+                    var listElement = FindFirstChild(cf => cf.ByControlType(ControlType.List));
+                    items = listElement.FindAllChildren();
                 }
                 else
                 {
                     // WPF
-                    items = FindAllChildren(ConditionFactory.ByControlType(ControlType.ListItem));
+                    items = FindAllChildren(cf => cf.ByControlType(ControlType.ListItem));
                 }
-                return items.Select(x => new SelectionItemAutomationElement(x.BasicAutomationElement)).ToArray();
+                return items.Select(x => new ComboBoxItem(x.BasicAutomationElement)).ToArray();
             }
         }
 
@@ -77,7 +75,7 @@ namespace FlaUI.Core.AutomationElements
                 if (FrameworkType == FrameworkType.WinForms)
                 {
                     // WinForms
-                    var itemsList = FindFirstChild(ConditionFactory.ByControlType(ControlType.List));
+                    var itemsList = FindFirstChild(cf => cf.ByControlType(ControlType.List));
                     // UIA3 does not see the list if it is collapsed
                     return itemsList == null || itemsList.Properties.IsOffscreen ? ExpandCollapseState.Collapsed : ExpandCollapseState.Expanded;
                 }
@@ -101,7 +99,7 @@ namespace FlaUI.Core.AutomationElements
             if (FrameworkType == FrameworkType.WinForms)
             {
                 // WinForms
-                var openButton = FindFirstChild(ConditionFactory.ByControlType(ControlType.Button)).AsButton();
+                var openButton = FindFirstChild(cf => cf.ByControlType(ControlType.Button)).AsButton();
                 openButton.Invoke();
             }
             else
@@ -125,7 +123,7 @@ namespace FlaUI.Core.AutomationElements
             if (FrameworkType == FrameworkType.WinForms)
             {
                 // WinForms
-                var openButton = FindFirstChild(ConditionFactory.ByControlType(ControlType.Button)).AsButton();
+                var openButton = FindFirstChild(cf => cf.ByControlType(ControlType.Button)).AsButton();
                 if (IsEditable)
                 {
                     // WinForms editable combo box only closes on click and not on invoke
@@ -147,7 +145,7 @@ namespace FlaUI.Core.AutomationElements
 
         private AutomationElement GetEditableElement()
         {
-            return FindFirstChild(ConditionFactory.ByControlType(ControlType.Edit));
+            return FindFirstChild(cf => cf.ByControlType(ControlType.Edit));
         }
     }
 }
