@@ -1,4 +1,5 @@
-﻿using FlaUI.Core.Definitions;
+﻿using System;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.Exceptions;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
@@ -23,6 +24,8 @@ namespace FlaUI.Core.UITests
         [Test]
         public void CorrectPattern()
         {
+            Automation.FromHandle(new IntPtr(1));
+
             var mainWindow = App.GetMainWindow(Automation);
             Assert.That(mainWindow, Is.Not.Null);
             var windowPattern = mainWindow.BasicAutomationElement.GetNativePattern<object>(Automation.PatternLibrary.WindowPattern);

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>flauinspect</id>
-    <version>1.0.0-beta1</version>
+    <version>1.0.0-beta2</version>
     <title>FlaUInspect</title>
     <authors>Roemer</authors>
     <owners>Roemer</owners>
@@ -18,7 +18,7 @@
     <tags>UI Automation UIA2 UIA3 UIA System.Windows.Automation Inspect</tags>
   </metadata>
   <files>
-	<file src="bin\Debug\**\*.*" exclude="bin\**\*.pdb;bin\**\*.xml;bin\*.vshost.*;**\*RANDOM_SEED*" target="tools" />
+	<file src="bin\Release\**\*.*" exclude="bin\**\*.pdb;bin\**\*.xml;bin\*.vshost.*;**\*RANDOM_SEED*" target="tools" />
 	<file src="..\..\LICENSE.txt" target="tools" />
 	<file src="..\..\CHANGELOG.md" target="tools" />
 	<file src="..\..\VERIFICATION.txt" target="tools" />

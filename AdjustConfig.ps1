@@ -1,5 +1,5 @@
 $newVersion = "1.0.0"
-$suffix = "-beta1"
+$suffix = "-beta2"
 $newConfiguration = "Release"
 
 function Main() {

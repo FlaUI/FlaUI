@@ -1,7 +1,7 @@
 $artefactDir = "Artefacts"
 $tempDir = "Temp"
-$configuration = "Debug"
-$version = "1.0.0-beta1"
+$configuration = "Release"
+$version = "1.0.0-beta2"
 $rootPath = "."
 
 function Main {
