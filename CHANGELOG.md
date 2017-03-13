@@ -1,15 +1,17 @@
 # Changelog
 
-## UPCOMING: 1.0.0-beta2 (2017-xx-xx)
+## UPCOMING: 1.0.0-beta2 (2017-03-13)
 
 ### Breaking changes
   * [Core] WaitWhileBusy and WaitWhileMainHandleIsMissing are now public and to not block endlessly
 
 ### Enhancements
   * [Core] Cleaned the Retry a bit
+  * [Core] Refactored logging (thanks to [jmaxxz](https://github.com/jmaxxz))
 
 ### Bug fixes
   * [Core] Fallback to property for clickable point if GetClickablePoint fails
+  * [Core] Fixed XPath when getting it for an element (eg. in FlaUInspect)
 
 ## 1.0.0-beta1 (2017-03-02)
 
