@@ -1,4 +1,6 @@
-﻿namespace FlaUI.Core.AutomationElements.Infrastructure
+﻿using FlaUI.Core.AutomationElements.Scrolling;
+
+namespace FlaUI.Core.AutomationElements.Infrastructure
 {
     public static class AutomationElementConversionExtensions
     {
@@ -81,6 +83,15 @@
                 return null;
             }
             return new GridHeaderItem(automationElement.BasicAutomationElement);
+        }
+
+        public static HScrollBar AsHScrollBar(this AutomationElement automationElement)
+        {
+            if (automationElement == null)
+            {
+                return null;
+            }
+            return new HScrollBar(automationElement.BasicAutomationElement);
         }
 
         public static Menu AsMenu(this AutomationElement automationElement)
@@ -189,6 +200,15 @@
                 return null;
             }
             return new TreeItem(automationElement.BasicAutomationElement);
+        }
+
+        public static VScrollBar AsVScrollBar(this AutomationElement automationElement)
+        {
+            if (automationElement == null)
+            {
+                return null;
+            }
+            return new VScrollBar(automationElement.BasicAutomationElement);
         }
 
         public static Window AsWindow(this AutomationElement automationElement)
