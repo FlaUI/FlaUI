@@ -60,28 +60,35 @@ namespace FlaUI.Core
             IsStoreApp = isStoreApp;
         }
 
-        public void Close()
+        /// <summary>
+        /// Closes the application. Force-closes it after a small timeout.
+        /// </summary>
+        /// <returns>Returns true if the application was closed normally and false if it was force-closed.</returns>
+        public bool Close()
         {
             Logger.Default.Info("Closing application");
             if (_process.HasExited)
             {
                 _process.Dispose();
-                return;
+                return true;
             }
             _process.CloseMainWindow();
             if (IsStoreApp)
             {
-                return;
+                return true;
             }
             _process.WaitForExit(5000);
+            var closedNormally = true;
             if (!_process.HasExited)
             {
                 Logger.Default.Info("Application failed to exit, killing process");
                 _process.Kill();
                 _process.WaitForExit(5000);
+                closedNormally = false;
             }
             _process.Close();
             _process.Dispose();
+            return closedNormally;
         }
 
         /// <summary>
