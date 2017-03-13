@@ -19,8 +19,11 @@
   </metadata>
   <files>
     <file src="..\src\FlaUI.UIA2\bin\net-3.5\FlaUI.UIA2.dll" target="lib/net35" />
+    <file src="..\src\FlaUI.UIA2\bin\net-3.5\FlaUI.UIA2.XML" target="lib/net35" />
 	<file src="..\src\FlaUI.UIA2\bin\net-4.0\FlaUI.UIA2.dll" target="lib/net40" />
+	<file src="..\src\FlaUI.UIA2\bin\net-4.0\FlaUI.UIA2.XML" target="lib/net40" />
 	<file src="..\src\FlaUI.UIA2\bin\net-4.5\FlaUI.UIA2.dll" target="lib/net45" />
+	<file src="..\src\FlaUI.UIA2\bin\net-4.5\FlaUI.UIA2.XML" target="lib/net45" />
 	<file src="..\LICENSE.txt" target="" />
 	<file src="..\CHANGELOG.md" target="" />
   </files>
