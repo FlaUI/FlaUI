@@ -3,7 +3,6 @@ $suffix = "-beta2"
 
 function Main() {
 	ReplaceVersion
-	ReplaceConfiguration
 }
 
 function ReplaceVersion {
