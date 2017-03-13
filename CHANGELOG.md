@@ -1,6 +1,6 @@
 # Changelog
 
-## UPCOMING: 1.0.0-beta2 (2017-03-13)
+## 1.0.0-beta2 (2017-03-13)
 
 ### Breaking changes
   * [Core] WaitWhileBusy and WaitWhileMainHandleIsMissing are now public and to not block endlessly
