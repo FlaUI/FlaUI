@@ -20,7 +20,7 @@ namespace FlaUI.Core.Tools
                 }
                 catch (Exception ex)
                 {
-                    if (DateTime.Now.Subtract(startTime) >= timeout)
+                    if (IsTimeouted(startTime, timeout))
                     {
                         throw new Exception("Timeout occurred in retry", ex);
                     }
@@ -40,7 +40,7 @@ namespace FlaUI.Core.Tools
                 }
                 catch (Exception ex)
                 {
-                    if (DateTime.Now.Subtract(startTime) >= timeout)
+                    if (IsTimeouted(startTime, timeout))
                     {
                         throw new Exception("Timeout occurred in retry", ex);
                     }
@@ -59,7 +59,7 @@ namespace FlaUI.Core.Tools
                 {
                     return obj;
                 }
-                if (DateTime.Now.Subtract(startTime) >= timeout)
+                if (IsTimeouted(startTime, timeout))
                 {
                     return obj;
                 }
@@ -76,12 +76,22 @@ namespace FlaUI.Core.Tools
                 {
                     return;
                 }
-                if (DateTime.Now.Subtract(startTime) >= timeout)
+                if (IsTimeouted(startTime, timeout))
                 {
                     return;
                 }
                 Thread.Sleep(retryInterval ?? DefaultRetryInterval);
             }
+        }
+
+        private static bool IsTimeouted(DateTime startTime, TimeSpan timeout)
+        {
+            // Check for infinite timeout
+            if (timeout.TotalMilliseconds < 0)
+            {
+                return false;
+            }
+            return DateTime.Now.Subtract(startTime) >= timeout;
         }
     }
 }
