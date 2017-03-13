@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using FlaUI.Core.AutomationElements.Scrolling;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.EventHandlers;
@@ -476,6 +477,128 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             }
             return default(TRet);
         }
+
+        #region Conversion Methods
+        public Button AsButton()
+        {
+            return new Button(BasicAutomationElement);
+        }
+
+        public CheckBox AsCheckBox()
+        {
+           return new CheckBox(BasicAutomationElement);
+        }
+
+        public ComboBox AsComboBox()
+        {
+           return new ComboBox(BasicAutomationElement);
+        }
+
+        public Label AsLabel()
+        {
+           return new Label(BasicAutomationElement);
+        }
+
+        public Grid AsGrid()
+        {
+           return new Grid(BasicAutomationElement);
+        }
+
+        public GridRow AsGridRow()
+        {
+           return new GridRow(BasicAutomationElement);
+        }
+
+        public GridCell AsGridCell()
+        {
+           return new GridCell(BasicAutomationElement);
+        }
+
+        public GridHeader AsGridHeader()
+        {
+           return new GridHeader(BasicAutomationElement);
+        }
+
+        public GridHeaderItem AsGridHeaderItem()
+        {
+           return new GridHeaderItem(BasicAutomationElement);
+        }
+
+        public HScrollBar AsHScrollBar()
+        {
+           return new HScrollBar(BasicAutomationElement);
+        }
+
+        public Menu AsMenu()
+        {
+           return new Menu(BasicAutomationElement);
+        }
+
+        public MenuItem AsMenuItem()
+        {
+           return new MenuItem(BasicAutomationElement);
+        }
+
+        public ProgressBar AsProgressBar()
+        {
+           return new ProgressBar(BasicAutomationElement);
+        }
+
+        public RadioButton AsRadioButton()
+        {
+           return new RadioButton(BasicAutomationElement);
+        }
+
+        public Slider AsSlider()
+        {
+           return new Slider(BasicAutomationElement);
+        }
+
+        public Tab AsTab()
+        {
+           return new Tab(BasicAutomationElement);
+        }
+
+        public TabItem AsTabItem()
+        {
+           return new TabItem(BasicAutomationElement);
+        }
+
+        public TextBox AsTextBox()
+        {
+           return new TextBox(BasicAutomationElement);
+        }
+
+        public Thumb AsThumb()
+        {
+           return new Thumb(BasicAutomationElement);
+        }
+
+        public TitleBar AsTitleBar()
+        {
+           return new TitleBar(BasicAutomationElement);
+        }
+
+        public Tree AsTree()
+        {
+           return new Tree(BasicAutomationElement);
+        }
+
+        public TreeItem AsTreeItem()
+        {
+           return new TreeItem(BasicAutomationElement);
+        }
+
+        public VScrollBar AsVScrollBar()
+        {
+           return new VScrollBar(BasicAutomationElement);
+        }
+
+        public Window AsWindow()
+        {
+           return new Window(BasicAutomationElement);
+        }
+        #endregion Conversion Methods
 
         #region Convenience methods
         public AutomationElement FindFirstChild()

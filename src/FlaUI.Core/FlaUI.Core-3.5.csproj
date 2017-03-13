@@ -107,7 +107,6 @@
     <Compile Include="AutomationElements\CheckBox.cs" />
     <Compile Include="AutomationElements\ComboBox.cs" />
     <Compile Include="AutomationElements\Infrastructure\AutomationElement.cs" />
-    <Compile Include="AutomationElements\Infrastructure\AutomationElementConversionExtensions.cs" />
     <Compile Include="AutomationElements\Infrastructure\IAutomationElementProperties.cs" />
     <Compile Include="AutomationElements\Label.cs" />
     <Compile Include="AutomationElements\Menu.cs" />
