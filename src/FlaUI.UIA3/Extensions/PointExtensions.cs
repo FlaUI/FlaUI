@@ -1,6 +1,6 @@
 ﻿using FlaUI.Core.Shapes;
 using FlaUI.Core.Tools;
-using UIA = interop.UIAutomationCore;
+using UIA = Interop.UIAutomationClient;
 
 namespace FlaUI.UIA3.Extensions
 {

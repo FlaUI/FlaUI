@@ -1,6 +1,6 @@
 ﻿using System;
 using FlaUI.Core.Definitions;
-using UIA = interop.UIAutomationCore;
+using UIA = Interop.UIAutomationClient;
 
 namespace FlaUI.UIA3.Converters
 {

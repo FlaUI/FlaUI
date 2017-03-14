@@ -1,7 +1,7 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.Patterns;
 using FlaUI.UIA3.Patterns;
-using UIA = interop.UIAutomationCore;
+using UIA = Interop.UIAutomationClient;
 
 namespace FlaUI.UIA3
 {

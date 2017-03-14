@@ -2,7 +2,7 @@
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.UIA3.Converters;
 using FlaUI.UIA3.Extensions;
-using UIA = interop.UIAutomationCore;
+using UIA = Interop.UIAutomationClient;
 
 namespace FlaUI.UIA3
 {

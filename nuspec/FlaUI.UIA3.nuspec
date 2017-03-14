@@ -21,13 +21,13 @@
     <file src="install.ps1" target="tools" />
 	<file src="..\src\FlaUI.UIA3\bin\net-3.5\FlaUI.UIA3.dll" target="lib/net35" />
 	<file src="..\src\FlaUI.UIA3\bin\net-3.5\FlaUI.UIA3.XML" target="lib/net35" />
-	<file src="..\src\FlaUI.UIA3\bin\net-3.5\interop.UIAutomationCore.dll" target="lib/net35/" />
+	<file src="..\src\FlaUI.UIA3\bin\net-3.5\Interop.UIAutomationClient.dll" target="lib/net35/" />
 	<file src="..\src\FlaUI.UIA3\bin\net-4.0\FlaUI.UIA3.dll" target="lib/net40" />
 	<file src="..\src\FlaUI.UIA3\bin\net-4.0\FlaUI.UIA3.XML" target="lib/net40" />
-	<file src="..\src\FlaUI.UIA3\bin\net-4.0\interop.UIAutomationCore.dll" target="lib/net40/" />
+	<file src="..\src\FlaUI.UIA3\bin\net-4.0\Interop.UIAutomationClient.dll" target="lib/net40/" />
 	<file src="..\src\FlaUI.UIA3\bin\net-4.5\FlaUI.UIA3.dll" target="lib/net45" />
 	<file src="..\src\FlaUI.UIA3\bin\net-4.5\FlaUI.UIA3.XML" target="lib/net45" />
-    <file src="..\src\FlaUI.UIA3\bin\net-4.5\interop.UIAutomationCore.dll" target="lib/net45/" />
+    <file src="..\src\FlaUI.UIA3\bin\net-4.5\Interop.UIAutomationClient.dll" target="lib/net45/" />
 	<file src="..\LICENSE.txt" target="" />
 	<file src="..\CHANGELOG.md" target="" />
   </files>

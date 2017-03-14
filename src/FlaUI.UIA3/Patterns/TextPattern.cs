@@ -8,7 +8,7 @@ using FlaUI.Core.Tools;
 using FlaUI.UIA3.Converters;
 using FlaUI.UIA3.Extensions;
 using FlaUI.UIA3.Identifiers;
-using UIA = interop.UIAutomationCore;
+using UIA = Interop.UIAutomationClient;
 
 namespace FlaUI.UIA3.Patterns
 {

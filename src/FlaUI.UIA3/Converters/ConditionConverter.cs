@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using FlaUI.Core.Conditions;
-using UIA = interop.UIAutomationCore;
+using UIA = Interop.UIAutomationClient;
 
 namespace FlaUI.UIA3.Converters
 {

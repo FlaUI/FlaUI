@@ -1,7 +1,7 @@
 ﻿using FlaUI.Core;
 using FlaUI.Core.Identifiers;
 using FlaUI.UIA3.Converters;
-using UIA = interop.UIAutomationCore;
+using UIA = Interop.UIAutomationClient;
 
 namespace FlaUI.UIA3.Identifiers
 {
