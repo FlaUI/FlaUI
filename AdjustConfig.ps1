@@ -1,5 +1,5 @@
 $newVersion = "1.0.0"
-$suffix = "-beta2"
+$suffix = "-beta3"
 
 function Main() {
 	ReplaceVersion
