@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.0-beta3 (2017-03-14)
+
+### Breaking changes
+  * [Core] Moved As... methods into the AutomationElement
+
+### Enhancements
+  * [Core] Added XMLDoc (also to nuget packages)
+  * [Core] Return true/false if the application closed normally / forcefully
+  * [Core] Reworked timeouts on Application.Wait methods (default to infinite)
+  * [Core] Implemented ComboBoxItem (to correctly get the text for default WPF comboboxes)
+  * [Core] Added AsHScrollBar and AsVScrollBar
+
 ## 1.0.0-beta2 (2017-03-13)
 
 ### Breaking changes
