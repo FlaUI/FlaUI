@@ -9,17 +9,18 @@ mkdir %TEMP%
 @REM Create Type Libraries
 midl.exe /nologo /out %TEMP% /char signed /tlb UIAutomationClient.tlb /h UIAutomationClient_h.h "%WINSDK%UIAutomationClient.idl"
 midl.exe /nologo /out %TEMP% /char signed /tlb UIAutomationCore.tlb /h UIAutomationCore_h.h "%WINSDK%UIAutomationCore.idl"
-
-set VERSION=3.5
-%VERSION%\tlbimp.exe /machine:Agnostic /silent /asmversion:%VERSION% /out:%VERSION%\Interop.UIAutomationClient.dll %TEMP%\UIAutomationClient.tlb
-%VERSION%\tlbimp.exe /machine:Agnostic /silent /asmversion:%VERSION% /out:%VERSION%\Interop.UIAutomationCore.dll %TEMP%\UIAutomationCore.tlb
-REM %VERSION%\tlbimp.exe /machine:Agnostic /silent /asmversion:%VERSION% /out:%VERSION%\Interop.UIAutomationClient.dll %TEMP%\UIAutomationClient.tlb /keyfile:..\..\FlaUI.snk"
-REM %VERSION%\tlbimp.exe /machine:Agnostic /silent /asmversion:%VERSION% /out:%VERSION%\Interop.UIAutomationCore.dll %TEMP%\UIAutomationCore.tlb /keyfile:..\..\FlaUI.snk"
-set VERSION=4.5
-%VERSION%\tlbimp.exe /machine:Agnostic /silent /asmversion:%VERSION% /out:%VERSION%\Interop.UIAutomationClient.dll %TEMP%\UIAutomationClient.tlb
-%VERSION%\tlbimp.exe /machine:Agnostic /silent /asmversion:%VERSION% /out:%VERSION%\Interop.UIAutomationCore.dll %TEMP%\UIAutomationCore.tlb
-REM %VERSION%\tlbimp.exe /machine:Agnostic /silent /asmversion:%VERSION% /out:%VERSION%\Interop.UIAutomationClient.dll %TEMP%\UIAutomationClient.tlb /keyfile:..\..\FlaUI.snk"
-REM %VERSION%\tlbimp.exe /machine:Agnostic /silent /asmversion:%VERSION% /out:%VERSION%\Interop.UIAutomationCore.dll %TEMP%\UIAutomationCore.tlb /keyfile:..\..\FlaUI.snk"
-
+http://stackoverflow.com/questions/5615206/windows-batch-files-setting-variable-in-for-loop
+FOR %%A IN (3.5 4.5) DO (
+	mkdir %TEMP%\%%A
+	@REM Create the original dlls from the tlbs
+	%%A\tlbimp.exe /machine:Agnostic /silent /asmversion:%%A /out:%%A\Interop.UIAutomationClient.dll %TEMP%\UIAutomationClient.tlb
+	%%A\tlbimp.exe /machine:Agnostic /silent /asmversion:%%A /out:%TEMP%\%%A\Interop.UIAutomationCore.dll %TEMP%\UIAutomationCore.tlb
+	REM %%A\tlbimp.exe /machine:Agnostic /silent /asmversion:%%A /out:%TEMP%\%%A\Interop.UIAutomationClient.dll %TEMP%\UIAutomationClient.tlb /keyfile:..\..\FlaUI.snk"
+	REM %%A\tlbimp.exe /machine:Agnostic /silent /asmversion:%%A /out:%TEMP%\%%A\Interop.UIAutomationCore.dll %TEMP%\UIAutomationCore.tlb /keyfile:..\..\FlaUI.snk"
+	@REM Fix Core by IL Code
+	ildasm.exe %TEMP%\%%A\Interop.UIAutomationCore.dll /out=%TEMP%\%%A\UIAutomationCore.il /nobar
+	powershell -File "FixAutomationCore.ps1" "%TEMP%\%%A\UIAutomationCore.il"
+	ilasm /dll /output=%%A\Interop.UIAutomationCore.dll %TEMP%\%%A\UIAutomationCore.il /res:%TEMP%\%%A\UIAutomationCore.res
+)
 RMDIR /S /Q %TEMP%
 pause
