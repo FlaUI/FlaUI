@@ -162,7 +162,7 @@ namespace ManagedUiaCustomizationCore
         private static void GuardUiaServerInvocation(Action invocation, Dispatcher dispatcher)
         {
             if (dispatcher == null)
-                throw new ElementNotAvailableException();
+                throw new InvalidOperationException("Dispatcher is not available. Maybe it is not a UI thread?");
             Exception remoteException = null;
             bool completed = false;
             dispatcher.Invoke(DispatcherPriority.Send, TimeSpan.FromMinutes(3.0), (Action)(() =>

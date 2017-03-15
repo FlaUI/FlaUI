@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
+using Interop.UIAutomationClient;
 using Interop.UIAutomationCore;
-using UIAutomationClient;
 using IRawElementProviderSimple = Interop.UIAutomationCore.IRawElementProviderSimple;
 
 namespace ManagedUiaCustomizationCore
