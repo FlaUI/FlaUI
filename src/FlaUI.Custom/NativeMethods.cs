@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using System.Windows.Automation;
 using Interop.UIAutomationCore;
 
 namespace ManagedUiaCustomizationCore
@@ -55,29 +54,10 @@ namespace ManagedUiaCustomizationCore
         private static bool ConvertException(COMException e, out Exception uiaException)
         {
             bool handled = true;
-            switch (e.ErrorCode)
-            {
-                case UIA_E_ELEMENTNOTAVAILABLE:
-                    uiaException = new ElementNotAvailableException(e);
-                    break;
 
-                case UIA_E_ELEMENTNOTENABLED:
-                    uiaException = new ElementNotEnabledException(e);
-                    break;
-
-                case UIA_E_NOCLICKABLEPOINT:
-                    uiaException = new NoClickablePointException(e);
-                    break;
-
-                case UIA_E_PROXYASSEMBLYNOTLOADED:
-                    uiaException = new ProxyAssemblyNotLoadedException(e);
-                    break;
-
-                default:
-                    uiaException = null;
-                    handled = false;
-                    break;
-            }
+            // there's no counterparts of these exceptions in FlaUI at the moment, so just return
+            // exception back
+            uiaException = e; 
             return handled;
         }
 
