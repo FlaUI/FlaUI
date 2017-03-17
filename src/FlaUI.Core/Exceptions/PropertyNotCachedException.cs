@@ -14,27 +14,32 @@ namespace FlaUI.Core.Exceptions
         {
         }
 
-        public PropertyNotCachedException(PropertyId property) : base(String.Format(DefaultMessageWithData, property))
+        public PropertyNotCachedException(PropertyId property)
+            : base(String.Format(DefaultMessageWithData, property))
         {
             Property = property;
         }
 
-        public PropertyNotCachedException(string message, PropertyId property) : base(message)
+        public PropertyNotCachedException(string message, PropertyId property)
+            : base(message)
         {
             Property = property;
         }
 
-        public PropertyNotCachedException(PropertyId property, Exception innerException) : base(String.Format(DefaultMessageWithData, property), innerException)
+        public PropertyNotCachedException(PropertyId property, Exception innerException)
+            : base(String.Format(DefaultMessageWithData, property), innerException)
         {
             Property = property;
         }
 
-        public PropertyNotCachedException(string message, PropertyId property, Exception innerException) : base(message, innerException)
+        public PropertyNotCachedException(string message, PropertyId property, Exception innerException)
+            : base(message, innerException)
         {
             Property = property;
         }
 
-        protected PropertyNotCachedException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected PropertyNotCachedException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             Property = (PropertyId)info.GetValue("Property", typeof(PropertyId));
         }

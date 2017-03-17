@@ -5,29 +5,29 @@ using System.Security.Permissions;
 namespace FlaUI.Core.Exceptions
 {
     [Serializable]
-    public class NoClickablePointException : FlaUIException
+    public class ElementNotEnabledException : FlaUIException
     {
-        public NoClickablePointException()
+        public ElementNotEnabledException()
         {
         }
 
-        public NoClickablePointException(string message)
+        public ElementNotEnabledException(string message)
             : base(message)
         {
         }
 
-        public NoClickablePointException(Exception innerException)
+        public ElementNotEnabledException(Exception innerException)
             : base(String.Empty, innerException)
         {
         }
 
-        public NoClickablePointException(string message, Exception innerException)
+        public ElementNotEnabledException(string message, Exception innerException)
             : base(message, innerException)
         {
         }
 
         [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        protected NoClickablePointException(SerializationInfo info, StreamingContext context)
+        protected ElementNotEnabledException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }

@@ -136,6 +136,9 @@
     <Compile Include="EventHandlers\IAutomationStructureChangedEventHandler.cs" />
     <Compile Include="EventHandlers\PropertyChangedEventHandlerBase.cs" />
     <Compile Include="EventHandlers\StructureChangedEventHandlerBase.cs" />
+    <Compile Include="Exceptions\ElementNotAvailableException.cs" />
+    <Compile Include="Exceptions\ElementNotEnabledException.cs" />
+    <Compile Include="Exceptions\FlaUIException.cs" />
     <Compile Include="Exceptions\MethodNotSupportedException.cs" />
     <Compile Include="Exceptions\NoClickablePointException.cs" />
     <Compile Include="Exceptions\NotCachedException.cs" />
@@ -145,6 +148,7 @@
     <Compile Include="Exceptions\PatternNotSupportedException.cs" />
     <Compile Include="Exceptions\PropertyNotCachedException.cs" />
     <Compile Include="Exceptions\PropertyNotSupportedException.cs" />
+    <Compile Include="Exceptions\ProxyAssemblyNotLoadedException.cs" />
     <Compile Include="FrameworkType.cs" />
     <Compile Include="Identifiers\ConvertibleIdentifierBase.cs" />
     <Compile Include="Identifiers\EventId.cs" />

@@ -5,29 +5,29 @@ using System.Security.Permissions;
 namespace FlaUI.Core.Exceptions
 {
     [Serializable]
-    public class NotCachedException : FlaUIException
+    public class FlaUIException : Exception
     {
-        public NotCachedException()
+        public FlaUIException()
         {
         }
 
-        public NotCachedException(string message)
+        public FlaUIException(string message)
             : base(message)
         {
         }
 
-        public NotCachedException(Exception innerException) :
-            base(String.Empty, innerException)
+        public FlaUIException(Exception innerException)
+            : base(String.Empty, innerException)
         {
         }
 
-        public NotCachedException(string message, Exception innerException)
+        public FlaUIException(string message, Exception innerException)
             : base(message, innerException)
         {
         }
 
         [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        protected NotCachedException(SerializationInfo info, StreamingContext context)
+        protected FlaUIException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }

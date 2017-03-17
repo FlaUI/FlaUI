@@ -14,27 +14,32 @@ namespace FlaUI.Core.Exceptions
         {
         }
 
-        public PropertyNotSupportedException(PropertyId property) : base(String.Format(DefaultMessageWithData, property))
+        public PropertyNotSupportedException(PropertyId property)
+            : base(String.Format(DefaultMessageWithData, property))
         {
             Property = property;
         }
 
-        public PropertyNotSupportedException(string message, PropertyId property) : base(message)
+        public PropertyNotSupportedException(string message, PropertyId property)
+            : base(message)
         {
             Property = property;
         }
 
-        public PropertyNotSupportedException(PropertyId property, Exception innerException) : base(String.Format(DefaultMessageWithData, property), innerException)
+        public PropertyNotSupportedException(PropertyId property, Exception innerException)
+            : base(String.Format(DefaultMessageWithData, property), innerException)
         {
             Property = property;
         }
 
-        public PropertyNotSupportedException(string message, PropertyId property, Exception innerException) : base(message, innerException)
+        public PropertyNotSupportedException(string message, PropertyId property, Exception innerException)
+            : base(message, innerException)
         {
             Property = property;
         }
 
-        protected PropertyNotSupportedException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected PropertyNotSupportedException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             Property = (PropertyId)info.GetValue("Property", typeof(PropertyId));
         }

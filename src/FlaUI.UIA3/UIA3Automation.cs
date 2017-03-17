@@ -46,10 +46,13 @@ namespace FlaUI.UIA3
 
         public override AutomationElement GetDesktop()
         {
-            var desktop = CacheRequest.IsCachingActive
-                ? NativeAutomation.GetRootElementBuildCache(CacheRequest.Current.ToNative(this))
-                : NativeAutomation.GetRootElement();
-            return WrapNativeElement(desktop);
+            return ComCallWrapper.Call(() =>
+            {
+                var desktop = CacheRequest.IsCachingActive
+                    ? NativeAutomation.GetRootElementBuildCache(CacheRequest.Current.ToNative(this))
+                    : NativeAutomation.GetRootElement();
+                return WrapNativeElement(desktop);
+            });
         }
 
         /// <summary>
@@ -57,11 +60,14 @@ namespace FlaUI.UIA3
         /// </summary>
         public override AutomationElement FromPoint(Point point)
         {
-            var nativePoint = point.ToTagPoint();
-            var nativeElement = CacheRequest.IsCachingActive
-                ? NativeAutomation.ElementFromPointBuildCache(nativePoint, CacheRequest.Current.ToNative(this))
-                : NativeAutomation.ElementFromPoint(nativePoint);
-            return WrapNativeElement(nativeElement);
+            return ComCallWrapper.Call(() =>
+            {
+                var nativePoint = point.ToTagPoint();
+                var nativeElement = CacheRequest.IsCachingActive
+                    ? NativeAutomation.ElementFromPointBuildCache(nativePoint, CacheRequest.Current.ToNative(this))
+                    : NativeAutomation.ElementFromPoint(nativePoint);
+                return WrapNativeElement(nativeElement);
+            });
         }
 
         /// <summary>
@@ -69,18 +75,24 @@ namespace FlaUI.UIA3
         /// </summary>
         public override AutomationElement FromHandle(IntPtr hwnd)
         {
-            var nativeElement = CacheRequest.IsCachingActive
-                ? NativeAutomation.ElementFromHandleBuildCache(hwnd, CacheRequest.Current.ToNative(this))
-                : NativeAutomation.ElementFromHandle(hwnd);
-            return WrapNativeElement(nativeElement);
+            return ComCallWrapper.Call(() =>
+            {
+                var nativeElement = CacheRequest.IsCachingActive
+                    ? NativeAutomation.ElementFromHandleBuildCache(hwnd, CacheRequest.Current.ToNative(this))
+                    : NativeAutomation.ElementFromHandle(hwnd);
+                return WrapNativeElement(nativeElement);
+            });
         }
 
         public override AutomationElement FocusedElement()
         {
-            var nativeElement = CacheRequest.IsCachingActive
-                ? NativeAutomation.GetFocusedElementBuildCache(CacheRequest.Current.ToNative(this))
-                : NativeAutomation.GetFocusedElement();
-            return WrapNativeElement(nativeElement);
+            return ComCallWrapper.Call(() =>
+            {
+                var nativeElement = CacheRequest.IsCachingActive
+                    ? NativeAutomation.GetFocusedElementBuildCache(CacheRequest.Current.ToNative(this))
+                    : NativeAutomation.GetFocusedElement();
+                return WrapNativeElement(nativeElement);
+            });
         }
 
         public override IAutomationFocusChangedEventHandler RegisterFocusChangedEvent(Action<AutomationElement> action)

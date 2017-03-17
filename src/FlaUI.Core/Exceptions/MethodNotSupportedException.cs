@@ -5,7 +5,7 @@ using System.Security.Permissions;
 namespace FlaUI.Core.Exceptions
 {
     [Serializable]
-    public class MethodNotSupportedException : Exception
+    public class MethodNotSupportedException : FlaUIException
     {
         public MethodNotSupportedException()
         {
@@ -16,8 +16,8 @@ namespace FlaUI.Core.Exceptions
         {
         }
 
-        public MethodNotSupportedException(Exception innerException) :
-            base(String.Empty, innerException)
+        public MethodNotSupportedException(Exception innerException)
+            : base(String.Empty, innerException)
         {
         }
 
@@ -30,15 +30,6 @@ namespace FlaUI.Core.Exceptions
         protected MethodNotSupportedException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
-        }
-
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            if (info == null)
-            {
-                throw new ArgumentNullException(nameof(info));
-            }
-            base.GetObjectData(info, context);
         }
     }
 }

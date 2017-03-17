@@ -14,27 +14,32 @@ namespace FlaUI.Core.Exceptions
         {
         }
 
-        public PatternNotSupportedException(PatternId pattern) : base(String.Format(DefaultMessageWithData, pattern))
+        public PatternNotSupportedException(PatternId pattern)
+            : base(String.Format(DefaultMessageWithData, pattern))
         {
             Pattern = pattern;
         }
 
-        public PatternNotSupportedException(string message, PatternId pattern) : base(message)
+        public PatternNotSupportedException(string message, PatternId pattern)
+            : base(message)
         {
             Pattern = pattern;
         }
 
-        public PatternNotSupportedException(PatternId pattern, Exception innerException) : base(String.Format(DefaultMessageWithData, pattern), innerException)
+        public PatternNotSupportedException(PatternId pattern, Exception innerException)
+            : base(String.Format(DefaultMessageWithData, pattern), innerException)
         {
             Pattern = pattern;
         }
 
-        public PatternNotSupportedException(string message, PatternId pattern, Exception innerException) : base(message, innerException)
+        public PatternNotSupportedException(string message, PatternId pattern, Exception innerException)
+            : base(message, innerException)
         {
             Pattern = pattern;
         }
 
-        protected PatternNotSupportedException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected PatternNotSupportedException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             Pattern = (PatternId)info.GetValue("Pattern", typeof(PatternId));
         }

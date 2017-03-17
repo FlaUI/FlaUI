@@ -5,29 +5,29 @@ using System.Security.Permissions;
 namespace FlaUI.Core.Exceptions
 {
     [Serializable]
-    public class NoClickablePointException : FlaUIException
+    public class ProxyAssemblyNotLoadedException : FlaUIException
     {
-        public NoClickablePointException()
+        public ProxyAssemblyNotLoadedException()
         {
         }
 
-        public NoClickablePointException(string message)
+        public ProxyAssemblyNotLoadedException(string message)
             : base(message)
         {
         }
 
-        public NoClickablePointException(Exception innerException)
+        public ProxyAssemblyNotLoadedException(Exception innerException)
             : base(String.Empty, innerException)
         {
         }
 
-        public NoClickablePointException(string message, Exception innerException)
+        public ProxyAssemblyNotLoadedException(string message, Exception innerException)
             : base(message, innerException)
         {
         }
 
         [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        protected NoClickablePointException(SerializationInfo info, StreamingContext context)
+        protected ProxyAssemblyNotLoadedException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
