@@ -62,6 +62,28 @@ namespace FlaUI.Core.Tools
             }
         }
 
+        public static void CallWithHResult(Func<int> nativeAction)
+        {
+            try
+            {
+                var hr = nativeAction();
+                if (hr != 0)
+                {
+                    throw Marshal.GetExceptionForHR(hr);
+                }
+            }
+            catch (COMException ex)
+            {
+                Exception newEx;
+                if (ConvertException(ex, out newEx))
+                {
+                    throw newEx;
+                }
+                var errorCode = Marshal.GetLastWin32Error();
+                throw new Win32Exception(errorCode, ex.Message);
+            }
+        }
+
         public static T Call<T>(Func<T> nativeAction)
         {
             try
@@ -80,7 +102,7 @@ namespace FlaUI.Core.Tools
             }
         }
 
-        internal static bool ConvertException(COMException ex, out Exception uiaException)
+        public static bool ConvertException(COMException ex, out Exception uiaException)
         {
             var handled = true;
             switch ((uint)ex.ErrorCode)
