@@ -43,7 +43,7 @@ var app =  Application.Launch("notepad.exe");
 using (var automation = new UIA3Automation())
 {
 	var window = app.GetMainWindow(automation);
-	Console.WriteLine(window.Title);
+	Console.WriteLine(window.Title.Value);
 	...
 }
 ```
@@ -52,8 +52,8 @@ var app = Application.Launch("calc.exe");
 using (var automation = new UIA3Automation())
 {
 	var window = app.GetMainWindow(automation);
-	var button1 = window.FindFirst(TreeScope.Descendants, ConditionFactory.ByText("1")).AsButton();
-	button1.Invoke();
+	var button1 = window.FindFirstDescentant(cf => cf.ByText("1"))?.AsButton();
+	button1?.Invoke();
 	...
 }
 ```
