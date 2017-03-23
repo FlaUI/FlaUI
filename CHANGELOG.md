@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.0.0-rc1 (2017-03-23)
+
+### Breaking changes
+  * [UIA3] Used Client interop instead of Core for UIA3
+
+### Enhancements
+  * [Core] Various code cleanups
+  * [UIA3] Wrapped some more calls in ComCallWrapper
+
+### Bug fixes
+  * [Core] Fixed null exception on Window.Close without TitleBar.CloseButton
+  * [All] Fixed .net 4.5 libraries in the packages
+
 ## 1.0.0-beta3 (2017-03-14)
 
 ### Breaking changes
