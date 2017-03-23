@@ -5,7 +5,6 @@ using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Exceptions;
-using FlaUI.Core.Patterns;
 using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.AutomationElements
@@ -16,15 +15,11 @@ namespace FlaUI.Core.AutomationElements
         {
         }
 
-        public string Title => Properties.Name;
+        public string Title => Properties.Name.Value;
 
-        public bool IsModal => WindowPattern.IsModal.Value;
+        public bool IsModal => Patterns.Window.Pattern.IsModal.Value;
 
-        public TitleBar TitleBar => FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.TitleBar)).AsTitleBar();
-
-        public IWindowPattern WindowPattern => Patterns.Window.Pattern;
-
-        public ITransformPattern TransformPattern => Patterns.Transform.Pattern;
+        public TitleBar TitleBar => FindFirstChild(cf => cf.ByControlType(ControlType.TitleBar))?.AsTitleBar();
 
         /// <summary>
         /// Flag to indicate, if the window is the application's main window.
@@ -36,8 +31,10 @@ namespace FlaUI.Core.AutomationElements
         {
             get
             {
-                return FindAllChildren(cf => cf.ByControlType(ControlType.Window).And(new PropertyCondition(Automation.PropertyLibrary.Window.IsModal, true))).
-                    Select(e => e.AsWindow()).ToArray();
+                return FindAllChildren(cf =>
+                    cf.ByControlType(ControlType.Window).
+                    And(new PropertyCondition(Automation.PropertyLibrary.Window.IsModal, true))
+                ).Select(e => e.AsWindow()).ToArray();
             }
         }
 
@@ -50,7 +47,7 @@ namespace FlaUI.Core.AutomationElements
             {
                 var mainWindow = GetMainWindow();
                 var popup = mainWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Window).And(cf.ByText("").And(cf.ByClassName("Popup"))));
-                return popup.AsWindow();
+                return popup?.AsWindow();
             }
         }
 
@@ -99,7 +96,7 @@ namespace FlaUI.Core.AutomationElements
                 titleBar.CloseButton.Invoke();
                 return;
             }
-            var windowPattern = WindowPattern;
+            var windowPattern = Patterns.Window.PatternOrDefault;
             if (windowPattern != null)
             {
                 windowPattern.Close();
@@ -110,7 +107,7 @@ namespace FlaUI.Core.AutomationElements
 
         public void Move(int x, int y)
         {
-            TransformPattern?.Move(x, y);
+            Patterns.Transform.PatternOrDefault?.Move(x, y);
         }
 
         /// <summary>
@@ -137,7 +134,7 @@ namespace FlaUI.Core.AutomationElements
             {
                 return this;
             }
-            var mainWindow = BasicAutomationElement.Automation.GetDesktop().FindFirstChild(cf => cf.ByProcessId(Properties.ProcessId)).AsWindow();
+            var mainWindow = Automation.GetDesktop().FindFirstChild(cf => cf.ByProcessId(Properties.ProcessId.Value)).AsWindow();
             return mainWindow ?? this;
         }
     }

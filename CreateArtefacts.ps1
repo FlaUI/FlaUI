@@ -1,6 +1,6 @@
 $artefactDir = "Artefacts"
 $tempDir = "Temp"
-$version = "1.0.0-beta3"
+$version = "1.0.0-rc1"
 $rootPath = "."
 
 function Main {
@@ -29,10 +29,10 @@ function Main {
     md -Name $coren45Dir | Out-Null
     md -Name $coren40Dir | Out-Null
     md -Name $coren35Dir | Out-Null
-    Get-ChildItem $rootPath\src\FlaUI.Core\bin | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $coren45Dir
+    Get-ChildItem $rootPath\src\FlaUI.Core\bin\net-4.5 | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $coren45Dir
     Get-ChildItem $rootPath\src\FlaUI.Core\bin\net-4.0 | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $coren40Dir
     Get-ChildItem $rootPath\src\FlaUI.Core\bin\net-3.5 | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $coren35Dir
-    Get-ChildItem $coreDir -Include *.pdb,*.xml,*.vshost.*,*RANDOM_SEED* -Recurse | Remove-Item
+    Get-ChildItem $coreDir -Include *.pdb,*.vshost.*,*RANDOM_SEED* -Recurse | Remove-Item
     Deploy-License $coreDir
 
     # FlaUI.UIA2
@@ -44,10 +44,10 @@ function Main {
     md -Name $uia2n45Dir | Out-Null
     md -Name $uia2n40Dir | Out-Null
     md -Name $uia2n35Dir | Out-Null
-    Get-ChildItem $rootPath\src\FlaUI.UIA2\bin | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $uia2n45Dir
+    Get-ChildItem $rootPath\src\FlaUI.UIA2\bin\net-4.5 | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $uia2n45Dir
     Get-ChildItem $rootPath\src\FlaUI.UIA2\bin\net-4.0 | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $uia2n40Dir
     Get-ChildItem $rootPath\src\FlaUI.UIA2\bin\net-3.5 | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $uia2n35Dir
-    Get-ChildItem $uia2Dir -Include *.pdb,*.xml,*.vshost.*,*RANDOM_SEED* -Recurse | Remove-Item
+    Get-ChildItem $uia2Dir -Include *.pdb,*.vshost.*,*RANDOM_SEED* -Recurse | Remove-Item
     Deploy-License $uia2Dir
 
     # FlaUI.UIA3
@@ -59,10 +59,10 @@ function Main {
     md -Name $uia3n45Dir | Out-Null
     md -Name $uia3n40Dir | Out-Null
     md -Name $uia3n35Dir | Out-Null
-    Get-ChildItem $rootPath\src\FlaUI.UIA3\bin | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $uia3n45Dir
+    Get-ChildItem $rootPath\src\FlaUI.UIA3\bin\net-4.5 | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $uia3n45Dir
     Get-ChildItem $rootPath\src\FlaUI.UIA3\bin\net-4.0 | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $uia3n40Dir
     Get-ChildItem $rootPath\src\FlaUI.UIA3\bin\net-3.5 | Where-Object { !$_.PSIsContainer } | Copy-Item -Destination $uia3n35Dir
-    Get-ChildItem $uia3Dir -Include *.pdb,*.xml,*.vshost.*,*RANDOM_SEED* -Recurse | Remove-Item
+    Get-ChildItem $uia3Dir -Include *.pdb,*.vshost.*,*RANDOM_SEED* -Recurse | Remove-Item
     Deploy-License $uia3Dir
 
     # Create Zips

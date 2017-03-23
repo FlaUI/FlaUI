@@ -22,17 +22,17 @@ namespace FlaUI.Core.AutomationElements.Scrolling
 
         protected Thumb Thumb => FindThumb();
 
-        public double Value => RangeValuePattern.Value;
+        public double Value => RangeValuePattern.Value.Value;
 
-        public double MinimumValue => RangeValuePattern.Minimum;
+        public double MinimumValue => RangeValuePattern.Minimum.Value;
 
-        public double MaximumValue => RangeValuePattern.Maximum;
+        public double MaximumValue => RangeValuePattern.Maximum.Value;
 
-        public double SmallChange => RangeValuePattern.SmallChange;
+        public double SmallChange => RangeValuePattern.SmallChange.Value;
 
-        public double LargeChange => RangeValuePattern.LargeChange;
+        public double LargeChange => RangeValuePattern.LargeChange.Value;
 
-        public bool IsReadOnly => RangeValuePattern.IsReadOnly;
+        public bool IsReadOnly => RangeValuePattern.IsReadOnly.Value;
 
         protected abstract string SmallDecrementText { get; }
 
@@ -44,14 +44,14 @@ namespace FlaUI.Core.AutomationElements.Scrolling
 
         private Button FindButton(string automationId)
         {
-            var button = FindFirstChild(ConditionFactory.ByControlType(ControlType.Button).And(ConditionFactory.ByAutomationId(automationId)));
-            return button.AsButton();
+            var button = FindFirstChild(cf => cf.ByControlType(ControlType.Button).And(cf.ByAutomationId(automationId)));
+            return button?.AsButton();
         }
 
         private Thumb FindThumb()
         {
-            var thumb = FindFirstChild(ConditionFactory.ByControlType(ControlType.Thumb));
-            return thumb.AsThumb();
+            var thumb = FindFirstChild(cf => cf.ByControlType(ControlType.Thumb));
+            return thumb?.AsThumb();
         }
     }
 }

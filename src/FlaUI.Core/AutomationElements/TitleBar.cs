@@ -19,8 +19,8 @@ namespace FlaUI.Core.AutomationElements
 
         private Button FindButton(string automationId)
         {
-            var buttonElement = FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Button).And(ConditionFactory.ByAutomationId(automationId)));
-            return buttonElement.AsButton();
+            var buttonElement = FindFirstChild(cf => cf.ByControlType(ControlType.Button).And(cf.ByAutomationId(automationId)));
+            return buttonElement?.AsButton();
         }
     }
 }
