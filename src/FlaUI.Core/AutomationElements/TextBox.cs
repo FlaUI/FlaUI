@@ -51,10 +51,7 @@ namespace FlaUI.Core.AutomationElements
         {
             Focus();
             var valuePattern = Patterns.Value.PatternOrDefault;
-            if (valuePattern != null)
-            {
-                valuePattern.SetValue(String.Empty);
-            }
+            valuePattern?.SetValue(String.Empty);
             if (String.IsNullOrEmpty(value)) return;
 
             var lines = value.Replace("\r\n", "\n").Split('\n');

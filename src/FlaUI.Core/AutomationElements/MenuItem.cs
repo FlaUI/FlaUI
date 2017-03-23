@@ -25,7 +25,7 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         internal bool IsWin32ContextMenu { get; set; }
 
-        public string Text => Properties.Name;
+        public string Text => Properties.Name.Value;
 
         public MenuItem[] SubMenuItems
         {

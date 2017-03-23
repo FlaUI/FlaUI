@@ -8,6 +8,6 @@ namespace FlaUI.Core.AutomationElements
         {
         }
 
-        public string Text => Properties.Name;
+        public string Text => Properties.Name.Value;
     }
 }

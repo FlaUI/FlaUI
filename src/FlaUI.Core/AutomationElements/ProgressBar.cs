@@ -11,10 +11,10 @@ namespace FlaUI.Core.AutomationElements
 
         public IRangeValuePattern RangeValuePattern => Patterns.RangeValue.Pattern;
 
-        public double Minimum => RangeValuePattern.Minimum;
+        public double Minimum => RangeValuePattern.Minimum.Value;
 
-        public double Maximum => RangeValuePattern.Maximum;
+        public double Maximum => RangeValuePattern.Maximum.Value;
 
-        public double Value => RangeValuePattern.Value;
+        public double Value => RangeValuePattern.Value.Value;
     }
 }

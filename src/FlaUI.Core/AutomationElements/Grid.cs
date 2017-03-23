@@ -18,22 +18,22 @@ namespace FlaUI.Core.AutomationElements
 
         public ITablePattern TablePattern => Patterns.Table.Pattern;
 
-        public int RowCount => GridPattern.RowCount;
+        public int RowCount => GridPattern.RowCount.Value;
 
-        public int ColumnCount => GridPattern.ColumnCount;
+        public int ColumnCount => GridPattern.ColumnCount.Value;
 
-        public AutomationElement[] ColumnHeaders => TablePattern.ColumnHeaders;
+        public AutomationElement[] ColumnHeaders => TablePattern.ColumnHeaders.Value;
 
-        public AutomationElement[] RowHeaders => TablePattern.RowHeaders;
+        public AutomationElement[] RowHeaders => TablePattern.RowHeaders.Value;
 
-        public RowOrColumnMajor RowOrColumnMajor => TablePattern.RowOrColumnMajor;
+        public RowOrColumnMajor RowOrColumnMajor => TablePattern.RowOrColumnMajor.Value;
 
         public GridHeader Header
         {
             get
             {
                 var header = FindFirstChild(cf => cf.ByControlType(ControlType.Header));
-                return header.AsGridHeader();
+                return header?.AsGridHeader();
             }
         }
 
@@ -149,7 +149,7 @@ namespace FlaUI.Core.AutomationElements
         {
         }
 
-        public string Text => Properties.Name;
+        public string Text => Properties.Name.Value;
     }
 
     public class GridRow : SelectionItemAutomationElement
@@ -174,7 +174,7 @@ namespace FlaUI.Core.AutomationElements
             get
             {
                 var headerItem = FindFirstChild(ConditionFactory.ByControlType(ControlType.HeaderItem));
-                return headerItem.AsGridHeaderItem();
+                return headerItem?.AsGridHeaderItem();
             }
         }
 
@@ -197,7 +197,7 @@ namespace FlaUI.Core.AutomationElements
 
         public IValuePattern ValuePattern => Patterns.Value.Pattern;
 
-        public Grid ContainingGrid => GridItemPattern.ContainingGrid.Value.AsGrid();
+        public Grid ContainingGrid => GridItemPattern.ContainingGrid.Value?.AsGrid();
 
         public GridRow ContainingRow
         {
@@ -205,13 +205,13 @@ namespace FlaUI.Core.AutomationElements
             {
                 // Get the parent of the cell (which should be the row)
                 var rowElement = Automation.TreeWalkerFactory.GetControlViewWalker().GetParent(this);
-                return rowElement.AsGridRow();
+                return rowElement?.AsGridRow();
             }
         }
 
         public string Value
         {
-            get { return ValuePattern.Value; }
+            get { return ValuePattern.Value.Value; }
             set { ValuePattern.SetValue(value); }
         }
     }

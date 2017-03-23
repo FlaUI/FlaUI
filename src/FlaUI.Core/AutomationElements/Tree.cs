@@ -45,7 +45,7 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         private TreeItem[] GetTreeItems()
         {
-            return FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.TreeItem))
+            return FindAllChildren(cf => cf.ByControlType(ControlType.TreeItem))
                 .Select(e => e.AsTreeItem()).ToArray();
         }
     }

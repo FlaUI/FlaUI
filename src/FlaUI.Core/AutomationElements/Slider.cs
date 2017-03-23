@@ -16,13 +16,13 @@ namespace FlaUI.Core.AutomationElements
 
         private IRangeValuePattern RangeValuePattern => Patterns.RangeValue.PatternOrDefault;
 
-        private IValuePattern ValuePattern => Patterns.Value.Pattern;
+        private IValuePattern ValuePattern => Patterns.Value.PatternOrDefault;
 
         private Button LargeIncreaseButton => GetLargeIncreaseButton();
 
         private Button LargeDecreaseButton => GetLargeDecreaseButton();
 
-        public Thumb Thumb => FindFirst(TreeScope.Children, ConditionFactory.ByControlType(ControlType.Thumb)).AsThumb();
+        public Thumb Thumb => FindFirstChild(cf => cf.ByControlType(ControlType.Thumb))?.AsThumb();
 
         public bool IsOnlyValue => !IsPatternSupported(Automation.PatternLibrary.RangeValuePattern);
 
@@ -33,11 +33,11 @@ namespace FlaUI.Core.AutomationElements
                 var rangeValuePattern = RangeValuePattern;
                 if (rangeValuePattern != null)
                 {
-                    return RangeValuePattern.Value;
+                    return RangeValuePattern.Value.Value;
                 }
                 // UIA3 for WinForms does not have the RangeValue pattern, only the value pattern
                 // The value in this case is always between 0 and 100
-                return Convert.ToDouble(ValuePattern.Value);
+                return Convert.ToDouble(ValuePattern.Value.Value);
             }
             set
             {

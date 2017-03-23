@@ -17,12 +17,12 @@ namespace FlaUI.Core.AutomationElements
         {
             get
             {
-                return FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.MenuItem)).Select(e =>
-                {
-                    var mi = e.AsMenuItem();
-                    mi.IsWin32ContextMenu = IsWin32ContextMenu;
-                    return mi;
-                }).ToArray();
+                return FindAllChildren(cf => cf.ByControlType(ControlType.MenuItem)).Select(e =>
+                  {
+                      var mi = e.AsMenuItem();
+                      mi.IsWin32ContextMenu = IsWin32ContextMenu;
+                      return mi;
+                  }).ToArray();
             }
         }
 
