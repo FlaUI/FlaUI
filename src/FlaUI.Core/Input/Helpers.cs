@@ -5,10 +5,17 @@ using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.Input
 {
+    /// <summary>
+    /// Class with various helper tools used in various places
+    /// </summary>
     public static class Helpers
     {
         private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(1);
 
+        /// <summary>
+        /// Waits for a generic time which was found to be sufficient to allow
+        /// input (mouse, keyboard, ...) do be processed
+        /// </summary>
         public static void WaitUntilInputIsProcessed()
         {
             // Let the thread some time to process the system's hardware input queue.

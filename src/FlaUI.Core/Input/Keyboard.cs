@@ -7,12 +7,12 @@ using FlaUI.Core.WindowsAPI;
 namespace FlaUI.Core.Input
 {
     /// <summary>
-    /// Implementation for the keyboard
+    /// Keyboard class to simulate key input.
     /// </summary>
     public static class Keyboard
     {
         /// <summary>
-        /// Types the given text, one char after another
+        /// Types the given text, one char after another.
         /// </summary>
         public static void Type(string text)
         {
@@ -23,7 +23,7 @@ namespace FlaUI.Core.Input
         }
 
         /// <summary>
-        /// Types the given character
+        /// Types the given character.
         /// </summary>
         public static void Type(char character)
         {
@@ -106,55 +106,82 @@ namespace FlaUI.Core.Input
             }
         }
 
+        /// <summary>
+        /// Types the given scan-code.
+        /// </summary>
         public static void TypeScanCode(ushort scanCode, bool isExtendedKey)
         {
             PressScanCode(scanCode, isExtendedKey);
             ReleaseScanCode(scanCode, isExtendedKey);
         }
 
+        /// <summary>
+        /// Types the given virtual key-code.
+        /// </summary>
         public static void TypeVirtualKeyCode(ushort virtualKeyCode)
         {
             PressVirtualKeyCode(virtualKeyCode);
             ReleaseVirtualKeyCode(virtualKeyCode);
         }
 
+        /// <summary>
+        /// Presses the given key.
+        /// </summary>
         public static void Press(VirtualKeyShort virtualKey)
         {
             PressVirtualKeyCode((ushort)virtualKey);
         }
 
+        /// <summary>
+        /// Presses the given scan-code.
+        /// </summary>
         public static void PressScanCode(ushort scanCode, bool isExtendedKey)
         {
             SendInput(scanCode, true, true, isExtendedKey, false);
         }
 
+        /// <summary>
+        /// Presses the given virtual key-code.
+        /// </summary>
         public static void PressVirtualKeyCode(ushort virtualKeyCode)
         {
             SendInput(virtualKeyCode, true, false, false, false);
         }
 
+        /// <summary>
+        /// Releases the given key.
+        /// </summary>
         public static void Release(VirtualKeyShort virtualKey)
         {
             ReleaseVirtualKeyCode((ushort)virtualKey);
         }
 
+        /// <summary>
+        /// Releases the given scan-code.
+        /// </summary>
         public static void ReleaseScanCode(ushort scanCode, bool isExtendedKey)
         {
             SendInput(scanCode, false, true, isExtendedKey, false);
         }
 
+        /// <summary>
+        /// Releases the given virtual key-code.
+        /// </summary>
         public static void ReleaseVirtualKeyCode(ushort virtualKeyCode)
         {
             SendInput(virtualKeyCode, false, false, false, false);
         }
 
+        /// <summary>
+        /// Presses the given key and releases it when the returned object is disposed.
+        /// </summary>
         public static IDisposable Pressing(VirtualKeyShort virtualKey)
         {
             return new KeyPressingActivation(virtualKey);
         }
 
         /// <summary>
-        /// Checks if a given byte has a specific VkKeyScan-modifier set
+        /// Checks if a given byte has a specific VkKeyScan-modifier set.
         /// </summary>
         private static bool HasScanModifier(byte b, VkKeyScanModifiers modifierToTest)
         {
@@ -162,13 +189,13 @@ namespace FlaUI.Core.Input
         }
 
         /// <summary>
-        /// Effectively sends the keyboard input command
+        /// Effectively sends the keyboard input command.
         /// </summary>
-        /// <param name="keyCode">The key code to send. Can be the scan code or the virtual key code</param>
-        /// <param name="isKeyDown">Flag if the key should be pressed or released</param>
-        /// <param name="isScanCode">Flag if the code is the scan code or the virtual key code</param>
-        /// <param name="isExtended">Flag if the key is an extended key</param>
-        /// <param name="isUnicode">Flag if the key is unicode</param>
+        /// <param name="keyCode">The key code to send. Can be the scan code or the virtual key code.</param>
+        /// <param name="isKeyDown">Flag if the key should be pressed or released.</param>
+        /// <param name="isScanCode">Flag if the code is the scan code or the virtual key code.</param>
+        /// <param name="isExtended">Flag if the key is an extended key.</param>
+        /// <param name="isUnicode">Flag if the key is unicode.</param>
         private static void SendInput(ushort keyCode, bool isKeyDown, bool isScanCode, bool isExtended, bool isUnicode)
         {
             // Prepare the basic object
@@ -215,6 +242,10 @@ namespace FlaUI.Core.Input
             }
         }
 
+        /// <summary>
+        /// Disposable class which presses the key on creation
+        /// and disposes it on destruction.
+        /// </summary>
         private class KeyPressingActivation : IDisposable
         {
             private readonly VirtualKeyShort _virtualKey;

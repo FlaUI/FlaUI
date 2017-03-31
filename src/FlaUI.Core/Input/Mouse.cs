@@ -12,7 +12,7 @@ using FlaUI.Core.WindowsAPI;
 namespace FlaUI.Core.Input
 {
     /// <summary>
-    /// Implementation for the mouse
+    /// Mouse class to simulate mouse input
     /// </summary>
     public static class Mouse
     {
