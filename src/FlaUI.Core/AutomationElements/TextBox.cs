@@ -55,11 +55,11 @@ namespace FlaUI.Core.AutomationElements
             if (String.IsNullOrEmpty(value)) return;
 
             var lines = value.Replace("\r\n", "\n").Split('\n');
-            Keyboard.Write(lines[0]);
+            Keyboard.Type(lines[0]);
             foreach (var line in lines.Skip(1))
             {
-                Keyboard.TypeVirtualKeyCode(VirtualKeyShort.RETURN);
-                Keyboard.Write(line);
+                Keyboard.Type(VirtualKeyShort.RETURN);
+                Keyboard.Type(line);
             }
             Helpers.WaitUntilInputIsProcessed();
         }

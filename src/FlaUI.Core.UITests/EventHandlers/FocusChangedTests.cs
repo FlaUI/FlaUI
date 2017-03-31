@@ -29,7 +29,7 @@ namespace FlaUI.Core.UITests.EventHandlers
                 var radio2 = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.RadioButton).And(cf.ByText(GetPixelsText())));
                 Mouse.Click(MouseButton.Left, radio2.GetClickablePoint());
                 Thread.Sleep(100);
-                Keyboard.PressVirtualKeyCode(VirtualKeyShort.ESCAPE);
+                Keyboard.Press(VirtualKeyShort.ESCAPE);
                 Thread.Sleep(100);
                 automation.UnRegisterFocusChangedEvent(x);
                 mainWindow.Close();

@@ -57,13 +57,13 @@ namespace FlaUI.Core.AutomationElements
 
         public void SmallIncrement()
         {
-            Keyboard.PressVirtualKeyCode(VirtualKeyShort.RIGHT);
+            Keyboard.Press(VirtualKeyShort.RIGHT);
             Helpers.WaitUntilInputIsProcessed();
         }
 
         public void SmallDecrement()
         {
-            Keyboard.PressVirtualKeyCode(VirtualKeyShort.LEFT);
+            Keyboard.Press(VirtualKeyShort.LEFT);
             Helpers.WaitUntilInputIsProcessed();
         }
 

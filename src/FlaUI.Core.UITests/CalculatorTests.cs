@@ -26,11 +26,11 @@ namespace FlaUI.Core.UITests
             var calc = SystemProductNameFetcher.IsWindows10() ? (ICalculator)new Win10Calc(window) : new LegacyCalc(window);
 
             // Switch to default mode
-            Keyboard.PressVirtualKeyCode(VirtualKeyShort.ALT);
-            Keyboard.TypeVirtualKeyCode(VirtualKeyShort.KEY_1);
-            Keyboard.ReleaseVirtualKeyCode(VirtualKeyShort.ALT);
+            System.Threading.Thread.Sleep(1000);
+            Keyboard.TypeSimultaneously(VirtualKeyShort.ALT, VirtualKeyShort.KEY_1);
             Helpers.WaitUntilInputIsProcessed();
             App.WaitWhileBusy();
+            System.Threading.Thread.Sleep(1000);
 
             // Simple addition
             calc.Button1.Click();
@@ -48,9 +48,10 @@ namespace FlaUI.Core.UITests
             Assert.That(result, Is.EqualTo("6912"));
 
             // Date comparison
-            Keyboard.PressVirtualKeyCode(VirtualKeyShort.CONTROL);
-            Keyboard.TypeVirtualKeyCode(VirtualKeyShort.KEY_E);
-            Keyboard.ReleaseVirtualKeyCode(VirtualKeyShort.CONTROL);
+            using (Keyboard.Pressing(VirtualKeyShort.CONTROL))
+            {
+                Keyboard.Type(VirtualKeyShort.KEY_E);
+            }
         }
 
         protected override Application StartApplication()

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using FlaUI.Core.WindowsAPI;
@@ -10,6 +11,20 @@ namespace FlaUI.Core.Input
     /// </summary>
     public static class Keyboard
     {
+        /// <summary>
+        /// Types the given text, one char after another
+        /// </summary>
+        public static void Type(string text)
+        {
+            foreach (var c in text)
+            {
+                Type(c);
+            }
+        }
+
+        /// <summary>
+        /// Types the given character
+        /// </summary>
         public static void Type(char character)
         {
             var code = User32.VkKeyScan(character);
@@ -43,7 +58,7 @@ namespace FlaUI.Core.Input
                 // Press the modifiers
                 foreach (var mod in modifiers)
                 {
-                    PressVirtualKeyCode(mod);
+                    Press(mod);
                 }
                 // Type the effective key
                 SendInput(low, true, false, false, false);
@@ -51,8 +66,43 @@ namespace FlaUI.Core.Input
                 // Release the modifiers
                 foreach (var mod in Enumerable.Reverse(modifiers))
                 {
-                    ReleaseVirtualKeyCode(mod);
+                    Release(mod);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Types the given keys, one by one.
+        /// </summary>
+        public static void Type(params VirtualKeyShort[] virtualKeys)
+        {
+            if (virtualKeys == null)
+            {
+                return;
+            }
+            foreach (var key in virtualKeys)
+            {
+                Press(key);
+                Release(key);
+            }
+        }
+
+        /// <summary>
+        /// Types the given keys simultaneously (starting with the first).
+        /// </summary>
+        public static void TypeSimultaneously(params VirtualKeyShort[] virtualKeys)
+        {
+            if (virtualKeys == null)
+            {
+                return;
+            }
+            foreach (var key in virtualKeys)
+            {
+                Press(key);
+            }
+            foreach (var key in virtualKeys.Reverse())
+            {
+                Release(key);
             }
         }
 
@@ -68,9 +118,9 @@ namespace FlaUI.Core.Input
             ReleaseVirtualKeyCode(virtualKeyCode);
         }
 
-        public static void TypeVirtualKeyCode(VirtualKeyShort virtualKey)
+        public static void Press(VirtualKeyShort virtualKey)
         {
-            TypeVirtualKeyCode((ushort)virtualKey);
+            PressVirtualKeyCode((ushort)virtualKey);
         }
 
         public static void PressScanCode(ushort scanCode, bool isExtendedKey)
@@ -83,9 +133,9 @@ namespace FlaUI.Core.Input
             SendInput(virtualKeyCode, true, false, false, false);
         }
 
-        public static void PressVirtualKeyCode(VirtualKeyShort virtualKey)
+        public static void Release(VirtualKeyShort virtualKey)
         {
-            PressVirtualKeyCode((ushort)virtualKey);
+            ReleaseVirtualKeyCode((ushort)virtualKey);
         }
 
         public static void ReleaseScanCode(ushort scanCode, bool isExtendedKey)
@@ -98,17 +148,9 @@ namespace FlaUI.Core.Input
             SendInput(virtualKeyCode, false, false, false, false);
         }
 
-        public static void ReleaseVirtualKeyCode(VirtualKeyShort virtualKey)
+        public static IDisposable Pressing(VirtualKeyShort virtualKey)
         {
-            ReleaseVirtualKeyCode((ushort)virtualKey);
-        }
-
-        public static void Write(string textToWrite)
-        {
-            foreach (var c in textToWrite)
-            {
-                Type(c);
-            }
+            return new KeyPressingActivation(virtualKey);
         }
 
         /// <summary>
@@ -170,6 +212,22 @@ namespace FlaUI.Core.Input
             {
                 // An error occured
                 var errorCode = Marshal.GetLastWin32Error();
+            }
+        }
+
+        private class KeyPressingActivation : IDisposable
+        {
+            private readonly VirtualKeyShort _virtualKey;
+
+            public KeyPressingActivation(VirtualKeyShort virtualKey)
+            {
+                _virtualKey = virtualKey;
+                Press(_virtualKey);
+            }
+
+            public void Dispose()
+            {
+                Release(_virtualKey);
             }
         }
     }
