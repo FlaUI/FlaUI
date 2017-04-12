@@ -18,6 +18,9 @@ using WpfColor = System.Windows.Media.Color;
 
 namespace FlaUI.Core.AutomationElements.Infrastructure
 {
+    /// <summary>
+    /// Wrapper object for each ui element which is automatable.
+    /// </summary>
     public class AutomationElement : IEquatable<AutomationElement>
     {
         public AutomationElement(BasicAutomationElementBase basicAutomationElement)
@@ -25,12 +28,25 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             BasicAutomationElement = basicAutomationElement;
         }
 
+        /// <summary>
+        /// Object which contains the native wrapper element (UIA2 or UIA3) for this element.
+        /// </summary>
         public BasicAutomationElementBase BasicAutomationElement { get; }
 
+        /// <summary>
+        /// The current used automationn object.
+        /// </summary>
         public AutomationBase Automation => BasicAutomationElement.Automation;
 
+        /// <summary>
+        /// Shortcut to the condition factory for the current automation.
+        /// </summary>
         public ConditionFactory ConditionFactory => BasicAutomationElement.Automation.ConditionFactory;
 
+        /// <summary>
+        /// The direct framework type of the element.
+        /// Results in "FrameworkType.Unknown" if it couldn't be resolved.
+        /// </summary>
         public FrameworkType FrameworkType
         {
             get
@@ -41,43 +57,62 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             }
         }
 
+        /// <summary>
+        /// The current <see cref="AutomationType" /> for this element.
+        /// </summary>
         public AutomationType AutomationType => BasicAutomationElement.Automation.AutomationType;
 
         /// <summary>
-        /// Standard UIA patterns of this element
+        /// Standard UIA patterns of this element.
         /// </summary>
         public AutomationElementPatternValuesBase Patterns => BasicAutomationElement.Patterns;
 
         /// <summary>
-        /// Standard UIA properties of this element
+        /// Standard UIA properties of this element.
         /// </summary>
         public AutomationElementPropertyValues Properties => BasicAutomationElement.Properties;
 
         /// <summary>
-        /// Gets the cached children for this element
+        /// Gets the cached children for this element.
         /// </summary>
         public AutomationElement[] CachedChildren => BasicAutomationElement.GetCachedChildren();
 
         /// <summary>
-        /// Gets the cached parent for this element
+        /// Gets the cached parent for this element.
         /// </summary>
         public AutomationElement CachedParent => BasicAutomationElement.GetCachedParent();
 
+        /// <summary>
+        /// Performs a left click on the element.
+        /// </summary>
+        /// <param name="moveMouse">Flag to indicate, if the mouse should move slowly (true) or instantly (false).</param>
         public void Click(bool moveMouse = false)
         {
             PerformMouseAction(moveMouse, Mouse.LeftClick);
         }
 
+        /// <summary>
+        /// Performs a double left click on the element.
+        /// </summary>
+        /// <param name="moveMouse">Flag to indicate, if the mouse should move slowly (true) or instantly (false).</param>
         public void DoubleClick(bool moveMouse = false)
         {
             PerformMouseAction(moveMouse, Mouse.LeftDoubleClick);
         }
 
+        /// <summary>
+        /// Performs a right click on the element.
+        /// </summary>
+        /// <param name="moveMouse">Flag to indicate, if the mouse should move slowly (true) or instantly (false).</param>
         public void RightClick(bool moveMouse = false)
         {
             PerformMouseAction(moveMouse, Mouse.RightClick);
         }
 
+        /// <summary>
+        /// Performs a double right click on the element.
+        /// </summary>
+        /// <param name="moveMouse">Flag to indicate, if the mouse should move slowly (true) or instantly (false).</param>
         public void RightDoubleClick(bool moveMouse = false)
         {
             PerformMouseAction(moveMouse, Mouse.RightDoubleClick);
@@ -99,14 +134,17 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Sets the focus to this element
-        /// Warning: This can be unreliable! <see cref="SetForeground" /> should be more reliable
+        /// Sets the focus to this element.
+        /// Warning: This can be unreliable! <see cref="SetForeground" /> should be more reliable.
         /// </summary>
         public virtual void Focus()
         {
             BasicAutomationElement.SetFocus();
         }
 
+        /// <summary>
+        /// Sets the focus by using the Win32 SetFocus() method.
+        /// </summary>
         public void FocusNative()
         {
             var windowHandle = Properties.NativeWindowHandle;
@@ -123,7 +161,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Brings the element to the foreground
+        /// Brings the element to the foreground.
         /// </summary>
         public void SetForeground()
         {
@@ -141,7 +179,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Draws a red highlight around the element
+        /// Draws a red highlight around the element.
         /// </summary>
         public AutomationElement DrawHighlight()
         {
@@ -149,7 +187,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Draws a manually colored highlight around the element
+        /// Draws a manually colored highlight around the element.
         /// </summary>
         public AutomationElement DrawHighlight(WpfColor color)
         {
@@ -157,7 +195,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Draws a manually colored highlight around the element
+        /// Draws a manually colored highlight around the element.
         /// </summary>
         public AutomationElement DrawHighlight(GdiColor color)
         {
@@ -165,23 +203,23 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Draw a highlight around the element with the given settings
+        /// Draw a highlight around the element with the given settings.
         /// </summary>
-        /// <param name="blocking">Flag to indicate if further execution waits until the highlight is removed</param>
-        /// <param name="color">The color to draw the highlight</param>
-        /// <param name="durationInMs">The duration (im ms) how long the highlight is shown</param>
-        /// <remarks>Override for winforms color</remarks>
+        /// <param name="blocking">Flag to indicate if further execution waits until the highlight is removed.</param>
+        /// <param name="color">The color to draw the highlight.</param>
+        /// <param name="durationInMs">The duration (im ms) how long the highlight is shown.</param>
+        /// <remarks>Override for winforms color.</remarks>
         public AutomationElement DrawHighlight(bool blocking, GdiColor color, int durationInMs)
         {
             return DrawHighlight(blocking, WpfColor.FromArgb(color.A, color.R, color.G, color.B), durationInMs);
         }
 
         /// <summary>
-        /// Draw a highlight around the element with the given settings
+        /// Draw a highlight around the element with the given settings.
         /// </summary>
-        /// <param name="blocking">Flag to indicate if further execution waits until the highlight is removed</param>
-        /// <param name="color">The color to draw the highlight</param>
-        /// <param name="durationInMs">The duration (im ms) how long the highlight is shown</param>
+        /// <param name="blocking">Flag to indicate if further execution waits until the highlight is removed.</param>
+        /// <param name="color">The color to draw the highlight.</param>
+        /// <param name="durationInMs">The duration (im ms) how long the highlight is shown.</param>
         public AutomationElement DrawHighlight(bool blocking, WpfColor color, int durationInMs)
         {
             var rectangle = Properties.BoundingRectangle.Value;
@@ -200,7 +238,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Captures the object as screenshot in WinForms format
+        /// Captures the object as screenshot in WinForms Bitmap format.
         /// </summary>
         public Bitmap Capture()
         {
@@ -208,20 +246,24 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Captures the object as screenshot in WPF format
+        /// Captures the object as screenshot in WPF BitmapImage format.
         /// </summary>
         public BitmapImage CaptureWpf()
         {
             return ScreenCapture.CaptureAreaWpf(Properties.BoundingRectangle);
         }
 
+        /// <summary>
+        /// Captures the object as screenshot directly into the given file.
+        /// </summary>
+        /// <param name="filePath">The filepath where the screenshot should be saved.</param>
         public void CaptureToFile(string filePath)
         {
             ScreenCapture.CaptureAreaToFile(Properties.BoundingRectangle, filePath);
         }
 
         /// <summary>
-        /// Finds all elements in the given treescope and condition
+        /// Finds all elements in the given treescope and with the given condition.
         /// </summary>
         public AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition)
         {
@@ -229,7 +271,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Finds all elements in the given treescope and condition within the given timeout.
+        /// Finds all elements in the given treescope and with the given condition within the given timeout.
         /// </summary>
         public AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
         {
@@ -239,7 +281,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Finds the first element which is in the given treescope and matches the condition
+        /// Finds the first element which is in the given treescope with the given condition.
         /// </summary>
         public AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
         {
@@ -247,7 +289,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Finds the first element which is in the given treescope and matches the condition within the given timeout period.
+        /// Finds the first element which is in the given treescope with the given condition within the given timeout period.
         /// </summary>
         public AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
         {
@@ -256,6 +298,9 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             return Retry.While(retryMethod, whilePredicate, timeOut);
         }
 
+        /// <summary>
+        /// Finds the first element by looping thru all conditions.
+        /// </summary>
         public AutomationElement FindFirstNested(params ConditionBase[] nestedConditions)
         {
             var currentElement = this;
@@ -270,6 +315,9 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             return currentElement;
         }
 
+        /// <summary>
+        /// Finds all elements by looping thru all conditions.
+        /// </summary>
         public AutomationElement[] FindAllNested(params ConditionBase[] nestedConditions)
         {
             var currentElement = this;
@@ -286,7 +334,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Finds for the first item which matches the given xpath
+        /// Finds for the first item which matches the given xpath.
         /// </summary>
         public AutomationElement FindFirstByXPath(string xPath)
         {
@@ -296,7 +344,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Finds all items which match the given xpath
+        /// Finds all items which match the given xpath.
         /// </summary>
         public AutomationElement[] FindAllByXPath(string xPath)
         {
@@ -312,7 +360,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Gets a clickable point of the element
+        /// Gets a clickable point of the element.
         /// </summary>
         /// <exception cref="Exceptions.NoClickablePointException">Thrown when no clickable point was found</exception>
         public Shapes.Point GetClickablePoint()
@@ -321,7 +369,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Tries to get a clickable point of the element
+        /// Tries to get a clickable point of the element.
         /// </summary>
         /// <param name="point">The clickable point or null, if no point was found</param>
         /// <returns>True if a point was found, false otherwise</returns>
@@ -330,6 +378,9 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             return BasicAutomationElement.TryGetClickablePoint(out point);
         }
 
+        /// <summary>
+        /// Registers the given event
+        /// </summary>
         public IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
         {
             if (Equals(@event, EventId.NotSupportedByFramework))
@@ -339,26 +390,41 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             return BasicAutomationElement.RegisterEvent(@event, treeScope, action);
         }
 
+        /// <summary>
+        /// Registers a property changed event with the given property
+        /// </summary>
         public IAutomationPropertyChangedEventHandler RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, params PropertyId[] properties)
         {
             return BasicAutomationElement.RegisterPropertyChangedEvent(treeScope, action, properties);
         }
 
+        /// <summary>
+        /// Registers a structure changed event
+        /// </summary>
         public IAutomationStructureChangedEventHandler RegisterStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action)
         {
             return BasicAutomationElement.RegisterStructureChangedEvent(treeScope, action);
         }
 
+        /// <summary>
+        /// Removes the given event handler for the event
+        /// </summary>
         public void RemoveAutomationEventHandler(EventId @event, IAutomationEventHandler eventHandler)
         {
             BasicAutomationElement.RemoveAutomationEventHandler(@event, eventHandler);
         }
 
+        /// <summary>
+        /// Removes the given property changed event handler
+        /// </summary>
         public void RemovePropertyChangedEventHandler(IAutomationPropertyChangedEventHandler eventHandler)
         {
             BasicAutomationElement.RemovePropertyChangedEventHandler(eventHandler);
         }
 
+        /// <summary>
+        /// Removes the given structure changed event handler
+        /// </summary>
         public void RemoveStructureChangedEventHandler(IAutomationStructureChangedEventHandler eventHandler)
         {
             BasicAutomationElement.RemoveStructureChangedEventHandler(eventHandler);
@@ -427,7 +493,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Compares two UIA elements
+        /// Compares two elements.
         /// </summary>
         public bool Equals(AutomationElement other)
         {
@@ -486,117 +552,117 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
 
         public CheckBox AsCheckBox()
         {
-           return new CheckBox(BasicAutomationElement);
+            return new CheckBox(BasicAutomationElement);
         }
 
         public ComboBox AsComboBox()
         {
-           return new ComboBox(BasicAutomationElement);
+            return new ComboBox(BasicAutomationElement);
         }
 
         public Label AsLabel()
         {
-           return new Label(BasicAutomationElement);
+            return new Label(BasicAutomationElement);
         }
 
         public Grid AsGrid()
         {
-           return new Grid(BasicAutomationElement);
+            return new Grid(BasicAutomationElement);
         }
 
         public GridRow AsGridRow()
         {
-           return new GridRow(BasicAutomationElement);
+            return new GridRow(BasicAutomationElement);
         }
 
         public GridCell AsGridCell()
         {
-           return new GridCell(BasicAutomationElement);
+            return new GridCell(BasicAutomationElement);
         }
 
         public GridHeader AsGridHeader()
         {
-           return new GridHeader(BasicAutomationElement);
+            return new GridHeader(BasicAutomationElement);
         }
 
         public GridHeaderItem AsGridHeaderItem()
         {
-           return new GridHeaderItem(BasicAutomationElement);
+            return new GridHeaderItem(BasicAutomationElement);
         }
 
         public HScrollBar AsHScrollBar()
         {
-           return new HScrollBar(BasicAutomationElement);
+            return new HScrollBar(BasicAutomationElement);
         }
 
         public Menu AsMenu()
         {
-           return new Menu(BasicAutomationElement);
+            return new Menu(BasicAutomationElement);
         }
 
         public MenuItem AsMenuItem()
         {
-           return new MenuItem(BasicAutomationElement);
+            return new MenuItem(BasicAutomationElement);
         }
 
         public ProgressBar AsProgressBar()
         {
-           return new ProgressBar(BasicAutomationElement);
+            return new ProgressBar(BasicAutomationElement);
         }
 
         public RadioButton AsRadioButton()
         {
-           return new RadioButton(BasicAutomationElement);
+            return new RadioButton(BasicAutomationElement);
         }
 
         public Slider AsSlider()
         {
-           return new Slider(BasicAutomationElement);
+            return new Slider(BasicAutomationElement);
         }
 
         public Tab AsTab()
         {
-           return new Tab(BasicAutomationElement);
+            return new Tab(BasicAutomationElement);
         }
 
         public TabItem AsTabItem()
         {
-           return new TabItem(BasicAutomationElement);
+            return new TabItem(BasicAutomationElement);
         }
 
         public TextBox AsTextBox()
         {
-           return new TextBox(BasicAutomationElement);
+            return new TextBox(BasicAutomationElement);
         }
 
         public Thumb AsThumb()
         {
-           return new Thumb(BasicAutomationElement);
+            return new Thumb(BasicAutomationElement);
         }
 
         public TitleBar AsTitleBar()
         {
-           return new TitleBar(BasicAutomationElement);
+            return new TitleBar(BasicAutomationElement);
         }
 
         public Tree AsTree()
         {
-           return new Tree(BasicAutomationElement);
+            return new Tree(BasicAutomationElement);
         }
 
         public TreeItem AsTreeItem()
         {
-           return new TreeItem(BasicAutomationElement);
+            return new TreeItem(BasicAutomationElement);
         }
 
         public VScrollBar AsVScrollBar()
         {
-           return new VScrollBar(BasicAutomationElement);
+            return new VScrollBar(BasicAutomationElement);
         }
 
         public Window AsWindow()
         {
-           return new Window(BasicAutomationElement);
+            return new Window(BasicAutomationElement);
         }
         #endregion Conversion Methods
 

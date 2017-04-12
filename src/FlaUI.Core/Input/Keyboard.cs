@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using FlaUI.Core.Logging;
 using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.Input
@@ -239,6 +240,7 @@ namespace FlaUI.Core.Input
             {
                 // An error occured
                 var errorCode = Marshal.GetLastWin32Error();
+                Logger.Default.Warn("Could not send keyboard input. ErrorCode: {0}", errorCode);
             }
         }
 

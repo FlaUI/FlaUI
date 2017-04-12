@@ -20,7 +20,7 @@ namespace FlaUI.Core
             ConditionFactory = new ConditionFactory(propertyLibrary);
             OverlayManager = new WinFormsOverlayManager();
             // Make sure all pattern ids are initialized
-            var allPatterns = PatternLibrary.AllForCurrentFramework;
+            var unused = PatternLibrary.AllForCurrentFramework;
         }
 
         public IPropertyLibray PropertyLibrary { get; }

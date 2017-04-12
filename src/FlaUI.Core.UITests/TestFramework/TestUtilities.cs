@@ -1,6 +1,5 @@
 ﻿using System;
 using FlaUI.Core.AutomationElements;
-using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Input;
 using FlaUI.Core.Shapes;
 using FlaUI.UIA2;

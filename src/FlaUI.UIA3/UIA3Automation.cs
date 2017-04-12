@@ -115,6 +115,7 @@ namespace FlaUI.UIA3
             }
             catch
             {
+                // Noop
             }
         }
 

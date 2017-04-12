@@ -22,7 +22,7 @@ namespace FlaUI.Core.Shapes
         /// <summary>
         /// Gets a value indicating whether this point is empty (all coordinates are 0)
         /// </summary>
-        public bool IsEmpty => X.Equals(0) && Y.Equals(0);
+        public bool IsEmpty => Equals(EmptyPoint);
 
         public Point(double x, double y)
         {
@@ -47,7 +47,9 @@ namespace FlaUI.Core.Shapes
         {
             unchecked
             {
-                return (X.GetHashCode() * 397) ^ Y.GetHashCode();
+                // ReSharper disable NonReadonlyMemberInGetHashCode
+                return X.GetHashCode() * 397 ^ Y.GetHashCode();
+                // ReSharper restore NonReadonlyMemberInGetHashCode
             }
         }
 
@@ -59,7 +61,7 @@ namespace FlaUI.Core.Shapes
             return Equals((Point)other);
         }
 
-        protected bool Equals(Point other)
+        public bool Equals(Point other)
         {
             return X.Equals(other.X) && Y.Equals(other.Y);
         }
@@ -114,7 +116,7 @@ namespace FlaUI.Core.Shapes
 
         public override string ToString()
         {
-            return String.Format("X={0},Y={1}", X, Y);
+            return $"X={X},Y={Y}";
         }
 
         /// <summary>

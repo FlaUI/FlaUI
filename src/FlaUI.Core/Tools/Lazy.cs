@@ -60,7 +60,7 @@ namespace FlaUI.Core.Tools
         public Lazy(Func<T> createValue)
         {
             if (createValue == null) throw new ArgumentNullException(nameof(createValue));
-            this._createValue = createValue;
+            _createValue = createValue;
         }
 
 

@@ -6,7 +6,7 @@ namespace FlaUInspect.Views
     /// <summary>
     /// Interaction logic for ChooseVersionWindow.xaml
     /// </summary>
-    public partial class ChooseVersionWindow : Window
+    public partial class ChooseVersionWindow
     {
         public ChooseVersionWindow()
         {

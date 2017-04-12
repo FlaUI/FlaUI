@@ -54,7 +54,9 @@ namespace FlaUI.Core.Tools
             }
 
             // Third we try by using the scrollbar controls itself
-            // TODO
+            {
+                // TODO
+            }
         }
 
         private static void ResetScroll(IScrollPattern scrollPattern, double hScrollPercentage, double vScrollPercentage)

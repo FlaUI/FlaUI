@@ -103,7 +103,7 @@ namespace FlaUI.Core
             return true;
         }
 
-        public override string GetAttribute(string localName, string namespaceURI)
+        public override string GetAttribute(string localName, string namespaceUri)
         {
             if (IsInAttribute)
             {
@@ -117,7 +117,7 @@ namespace FlaUI.Core
             return String.Empty;
         }
 
-        public override bool MoveToAttribute(string localName, string namespaceURI)
+        public override bool MoveToAttribute(string localName, string namespaceUri)
         {
             if (IsInAttribute)
             {

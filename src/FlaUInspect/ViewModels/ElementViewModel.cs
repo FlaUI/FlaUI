@@ -35,7 +35,7 @@ namespace FlaUInspect.ViewModels
                 {
                     ElementHighlighter.HighlightElement(AutomationElement);
                     // Async load details
-                    var task = Task.Run(() =>
+                    var unused = Task.Run(() =>
                     {
                         var details = LoadDetails();
                         return details;
@@ -43,7 +43,10 @@ namespace FlaUInspect.ViewModels
                     {
                         if (items.IsFaulted)
                         {
-                            MessageBox.Show(items.Exception.ToString());
+                            if (items.Exception != null)
+                            {
+                                MessageBox.Show(items.Exception.ToString());
+                            }
                         }
                         ItemDetails.Reset(items.Result);
                     }, TaskScheduler.FromCurrentSynchronizationContext());
@@ -67,9 +70,9 @@ namespace FlaUInspect.ViewModels
             }
         }
 
-        public string Name => AutomationElement.Properties.Name.ValueOrDefault;
+        public string Name => NormalizeString(AutomationElement.Properties.Name.ValueOrDefault);
 
-        public string AutomationId => AutomationElement.Properties.AutomationId.ValueOrDefault;
+        public string AutomationId => NormalizeString(AutomationElement.Properties.AutomationId.ValueOrDefault);
 
         public ControlType ControlType => AutomationElement.Properties.ControlType.Value;
 

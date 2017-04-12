@@ -6,6 +6,7 @@
         mc:Ignorable="d"
         xmlns:models="clr-namespace:FlaUInspect.Models"
         xmlns:flauidef="clr-namespace:FlaUI.Core.Definitions;assembly=FlaUI.Core"
+        xmlns:viewModels="clr-namespace:FlaUInspect.ViewModels"
         Title="FlaUI Inspect Tool" d:DesignHeight="350" d:DesignWidth="500" d:LayoutOverrides="Width, Height" ResizeMode="CanResizeWithGrip">
     <Window.Resources>
         <Style x:Key="SelectableLabel" TargetType="{x:Type TextBox}">
@@ -212,7 +213,7 @@
                     <GroupBox Header="Details">
                         <ItemsControl ItemsSource="{Binding SelectedItemDetails}">
                             <ItemsControl.ItemTemplate>
-                                <DataTemplate>
+                                <DataTemplate DataType="viewModels:DetailGroupViewModel">
                                     <Expander Header="{Binding Name}" IsExpanded="True">
                                         <ItemsControl ItemsSource="{Binding Details}" Grid.IsSharedSizeScope="True">
                                             <ItemsControl.ItemTemplate>

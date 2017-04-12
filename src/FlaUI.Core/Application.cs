@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using FlaUI.Core.AutomationElements;
-using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Logging;
 using FlaUI.Core.Tools;
@@ -102,6 +101,7 @@ namespace FlaUI.Core
             }
             catch
             {
+                // NOOP
             }
         }
 

@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
 namespace FlaUInspect.Core
 {
-    /// <summary>
-    /// Object which automatically handles INotifyPropertyChanged events
-    /// Last updated: 13.01.2015
-    /// </summary>
+    [SuppressMessage("ReSharper", "ExplicitCallerInfoArgument")]
     public abstract class ObservableObject : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -21,9 +19,15 @@ namespace FlaUInspect.Core
         /// </summary>
         protected T GetProperty<T>([CallerMemberName] string propertyName = null)
         {
+            if (propertyName == null)
+            {
+                throw new ArgumentNullException(nameof(propertyName));
+            }
             object value;
             if (_backingFieldValues.TryGetValue(propertyName, out value))
-                return value == null ? default(T) : (T)value;
+            {
+                return (T)value;
+            }
             return default(T);
         }
 
@@ -32,6 +36,10 @@ namespace FlaUInspect.Core
         /// </summary>
         protected bool SetProperty<T>(T newValue, [CallerMemberName] string propertyName = null)
         {
+            if (propertyName == null)
+            {
+                throw new ArgumentNullException(nameof(propertyName));
+            }
             if (IsEqual(GetProperty<T>(propertyName), newValue)) return false;
             _backingFieldValues[propertyName] = newValue;
             OnPropertyChanged(propertyName);

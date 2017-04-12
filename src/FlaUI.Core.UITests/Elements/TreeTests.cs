@@ -1,5 +1,4 @@
 ﻿using FlaUI.Core.AutomationElements;
-using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
@@ -38,6 +37,7 @@ namespace FlaUI.Core.UITests.Elements
             tree.TreeItems[0].Expand();
             tree.TreeItems[0].TreeItems[1].Expand();
             tree.TreeItems[0].TreeItems[1].TreeItems[0].Select();
+            Assert.That(tree.SelectedTreeItem, Is.Not.Null);
             Assert.That(tree.SelectedTreeItem.Text, Is.EqualTo("Lvl3 a"));
         }
     }

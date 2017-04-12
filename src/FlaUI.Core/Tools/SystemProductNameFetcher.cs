@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using System;
+using Microsoft.Win32;
 
 namespace FlaUI.Core.Tools
 {
@@ -7,7 +8,15 @@ namespace FlaUI.Core.Tools
         public static bool CurrentOsContains(string name)
         {
             var reg = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
+            if (reg == null)
+            {
+                throw new Exception("Could not find the registry path needed for determining the OS version.");
+            }
             var productName = (string)reg.GetValue("ProductName");
+            if (productName == null)
+            {
+                throw new Exception("Could not find the registry key needed for determining the OS version.");
+            }
             return productName.Contains(name);
         }
 

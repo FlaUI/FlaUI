@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
 namespace WpfApplication.Infrastructure
 {
+    [SuppressMessage("ReSharper", "ExplicitCallerInfoArgument")]
     public abstract class ObservableObject : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -17,9 +19,15 @@ namespace WpfApplication.Infrastructure
         /// </summary>
         protected T GetProperty<T>([CallerMemberName] string propertyName = null)
         {
+            if (propertyName == null)
+            {
+                throw new ArgumentNullException(nameof(propertyName));
+            }
             object value;
             if (_backingFieldValues.TryGetValue(propertyName, out value))
-                return value == null ? default(T) : (T)value;
+            {
+                return (T)value;
+            }
             return default(T);
         }
 
@@ -28,6 +36,10 @@ namespace WpfApplication.Infrastructure
         /// </summary>
         protected bool SetProperty<T>(T newValue, [CallerMemberName] string propertyName = null)
         {
+            if (propertyName == null)
+            {
+                throw new ArgumentNullException(nameof(propertyName));
+            }
             if (IsEqual(GetProperty<T>(propertyName), newValue)) return false;
             _backingFieldValues[propertyName] = newValue;
             OnPropertyChanged(propertyName);
@@ -47,14 +59,12 @@ namespace WpfApplication.Infrastructure
 
         protected virtual void OnPropertyChanged<T>(Expression<Func<T>> selectorExpression)
         {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(GetNameFromExpression(selectorExpression)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(GetNameFromExpression(selectorExpression)));
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private bool IsEqual<T>(T field, T newValue)

@@ -1,5 +1,4 @@
-﻿using System;
-using FlaUI.Core.Definitions;
+﻿using FlaUI.Core.Definitions;
 using FlaUI.Core.Exceptions;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;

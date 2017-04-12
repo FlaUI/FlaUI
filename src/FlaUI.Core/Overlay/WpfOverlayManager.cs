@@ -53,6 +53,7 @@ namespace FlaUI.Core.Overlay
         {
             if (rectangle.IsValid)
             {
+                // ReSharper disable once RedundantDelegateCreation Used for older .Net versions
                 _dispatcher.Invoke(new Action(() =>
                 {
                     _currWin?.Close();
@@ -67,6 +68,7 @@ namespace FlaUI.Core.Overlay
         {
             if (rectangle.IsValid)
             {
+                // ReSharper disable once RedundantDelegateCreation Used for older .Net versions
                 _dispatcher.Invoke(new Action(() =>
                 {
                     _currWin?.Close();

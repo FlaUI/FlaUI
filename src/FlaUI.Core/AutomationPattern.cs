@@ -1,9 +1,6 @@
 ﻿using System;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns.Infrastructure;
-#if NET35
-using FlaUI.Core.Tools;
-#endif
 
 namespace FlaUI.Core
 {

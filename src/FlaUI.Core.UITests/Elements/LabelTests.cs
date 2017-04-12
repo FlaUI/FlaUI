@@ -1,5 +1,4 @@
-﻿using FlaUI.Core.AutomationElements.Infrastructure;
-using FlaUI.Core.UITests.TestFramework;
+﻿using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements

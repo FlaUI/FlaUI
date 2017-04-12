@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using FlaUI.Core.Exceptions;
 
@@ -8,6 +9,7 @@ namespace FlaUI.Core.Tools
     /// <summary>
     /// Wrapper for com calls
     /// </summary>
+    [SuppressMessage("ReSharper", "InconsistentNaming", Justification = "To keep the original Win32 names")]
     public static class ComCallWrapper
     {
         #region Error Ids

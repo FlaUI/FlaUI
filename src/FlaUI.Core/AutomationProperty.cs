@@ -1,8 +1,5 @@
 ﻿using System;
 using FlaUI.Core.Identifiers;
-#if NET35
-using FlaUI.Core.Tools;
-#endif
 
 namespace FlaUI.Core
 {

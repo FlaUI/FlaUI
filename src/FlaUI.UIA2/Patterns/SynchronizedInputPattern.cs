@@ -1,9 +1,11 @@
-﻿using FlaUI.Core;
+﻿#if !NET35
+using FlaUI.Core;
 using FlaUI.Core.Definitions;
-using FlaUI.Core.Identifiers;
-using FlaUI.Core.Patterns;
 using FlaUI.UIA2.Identifiers;
 using UIA = System.Windows.Automation;
+#endif
+using FlaUI.Core.Identifiers;
+using FlaUI.Core.Patterns;
 
 namespace FlaUI.UIA2.Patterns
 {

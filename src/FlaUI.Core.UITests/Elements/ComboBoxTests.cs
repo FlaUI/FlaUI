@@ -1,6 +1,5 @@
 ﻿using System;
 using FlaUI.Core.AutomationElements;
-using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
@@ -70,7 +69,7 @@ namespace FlaUI.Core.UITests.Elements
             combo.Items[3].Click();
             var window = Retry.While(() => mainWindow.FindFirstDescendant(cf => cf.ByClassName("#32770")).AsWindow(), w => w == null, TimeSpan.FromMilliseconds(1000));
             Assert.That(window, Is.Not.Null, "Expected a window that was shown when combobox item was selected");
-            window?.FindFirstDescendant(cf => cf.ByAutomationId("Close")).AsButton().Invoke();
+            window.FindFirstDescendant(cf => cf.ByAutomationId("Close")).AsButton().Invoke();
         }
     }
 }

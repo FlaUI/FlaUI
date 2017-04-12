@@ -13,11 +13,11 @@ namespace FlaUIRec.Views
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         private FlaUI.Core.Application _app;
         private readonly UIA3Automation _automation;
-        private readonly IKeyboardMouseEvents m_GlobalHook;
+        private readonly IKeyboardMouseEvents _globalHook;
 
         public MainWindow()
         {
@@ -25,7 +25,7 @@ namespace FlaUIRec.Views
             ProcessIdText.Text = "12844";
             _automation = new UIA3Automation();
 
-            m_GlobalHook = Hook.GlobalEvents();
+            _globalHook = Hook.GlobalEvents();
             //m_GlobalHook.MouseDownExt += m_GlobalHook_MouseDownExt;
             //m_GlobalHook.MouseMoveExt += m_GlobalHook_MouseMoveExt;
             //m_GlobalHook.KeyPress += GlobalHookKeyPress;
@@ -33,10 +33,10 @@ namespace FlaUIRec.Views
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            m_GlobalHook.MouseDownExt -= m_GlobalHook_MouseDownExt;
-            m_GlobalHook.MouseMoveExt -= m_GlobalHook_MouseMoveExt;
-            m_GlobalHook.KeyPress -= GlobalHookKeyPress;
-            m_GlobalHook.Dispose();
+            _globalHook.MouseDownExt -= m_GlobalHook_MouseDownExt;
+            _globalHook.MouseMoveExt -= m_GlobalHook_MouseMoveExt;
+            _globalHook.KeyPress -= GlobalHookKeyPress;
+            _globalHook.Dispose();
             _automation.Dispose();
             base.OnClosing(e);
         }
@@ -44,18 +44,18 @@ namespace FlaUIRec.Views
         private void m_GlobalHook_MouseDownExt(object sender, MouseEventExtArgs e)
         {
             var element = _automation.FromPoint(new FlaUI.Core.Shapes.Point(e.Location.X, e.Location.Y));
-            AddToList(String.Format("MouseDown ({0}) on {1} ({2})", e.Button, element, e.Location));
+            AddToList($"MouseDown ({e.Button}) on {element} ({e.Location})");
         }
 
         private void m_GlobalHook_MouseMoveExt(object sender, MouseEventExtArgs e)
         {
             //System.Threading.Thread.Sleep(500);
-            AddToList(String.Format("MouseMove to {0}", e.Location));
+            AddToList($"MouseMove to {e.Location}");
         }
 
         private void GlobalHookKeyPress(object sender, KeyPressEventArgs e)
         {
-            AddToList(String.Format("KeyPress: \t{0}", e.KeyChar));
+            AddToList($"KeyPress: \t{e.KeyChar}");
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -83,27 +83,27 @@ namespace FlaUIRec.Views
         private void TextChangedAction(AutomationElement automationAutomationElement, EventId eventId)
         {
             var valuePattern = automationAutomationElement.Patterns.Value.Pattern;
-            AddToList(String.Format("Text changed on {0}: To {1}", ElementToString(automationAutomationElement), valuePattern.Value));
+            AddToList($"Text changed on {ElementToString(automationAutomationElement)}: To {valuePattern.Value}");
         }
 
         private void SelectionAction(AutomationElement automationAutomationElement, EventId eventId)
         {
-            AddToList(String.Format("Selected: {0}", ElementToString(automationAutomationElement)));
+            AddToList($"Selected: {ElementToString(automationAutomationElement)}");
         }
 
         private void StructureAction(AutomationElement automationAutomationElement, StructureChangeType arg2, int[] arg3)
         {
-            AddToList(String.Format("Structure change on {0}: {1}", ElementToString(automationAutomationElement), arg2));
+            AddToList($"Structure change on {ElementToString(automationAutomationElement)}: {arg2}");
         }
 
         private void PropertyAction(AutomationElement automationAutomationElement, PropertyId propertyId, object arg3)
         {
-            AddToList(String.Format("Property change on {0}: {1} to {2}", ElementToString(automationAutomationElement), propertyId.Name, arg3));
+            AddToList($"Property change on {ElementToString(automationAutomationElement)}: {propertyId.Name} to {arg3}");
         }
 
         private void InvokeAction(AutomationElement automationAutomationElement, EventId eventId)
         {
-            AddToList(String.Format("Invoked: {0}", ElementToString(automationAutomationElement)));
+            AddToList($"Invoked: {ElementToString(automationAutomationElement)}");
         }
 
         private void AddToList(string msg)
