@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.0 (2017-04-13)
+
+### Enhancements
+  * [Core] Reworked the keyboard class a bit (e.g. allow simultaneous presses)
+  * [All] More code documentation
+
+### Bug fixes
+  * [All] Fixed almost all ReSharper warnings
+
 ## 1.0.0-rc1 (2017-03-23)
 
 ### Breaking changes
