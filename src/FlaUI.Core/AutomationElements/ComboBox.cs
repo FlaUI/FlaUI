@@ -64,7 +64,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Gets all selected items.
         /// </summary>
-        public ComboBoxItem[] SelectedItems => SelectionPattern.Selection.Value.Select(CreateItem).ToArray();
+        public ComboBoxItem[] SelectedItems => SelectionPattern.Selection.Value.Select(x => new ComboBoxItem(x.BasicAutomationElement)).ToArray();
 
         /// <summary>
         /// Gets the first selected item or null otherwise.
@@ -196,11 +196,6 @@ namespace FlaUI.Core.AutomationElements
         private AutomationElement GetEditableElement()
         {
             return FindFirstChild(cf => cf.ByControlType(ControlType.Edit));
-        }
-
-        private ComboBoxItem CreateItem(AutomationElement itemElement)
-        {
-            return new ComboBoxItem(itemElement.BasicAutomationElement);
         }
     }
 }
