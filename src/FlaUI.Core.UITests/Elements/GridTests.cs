@@ -60,6 +60,30 @@ namespace FlaUI.Core.UITests.Elements
             CheckRow(rows[2], "3", "30");
         }
 
+        [Test]
+        public void SelectByIndexTest()
+        {
+            var grid = _grid;
+            grid.Select(1);
+            var selectedRow = grid.SelectedItem;
+            CheckRow(selectedRow, "2", "20");
+            grid.Select(2);
+            selectedRow = grid.SelectedItem;
+            CheckRow(selectedRow, "3", "30");
+        }
+
+        [Test]
+        public void SelectByTextTest()
+        {
+            var grid = _grid;
+            grid.Select(1, "20");
+            var selectedRow = grid.SelectedItem;
+            CheckRow(selectedRow, "2", "20");
+            grid.Select(1, "30");
+            selectedRow = grid.SelectedItem;
+            CheckRow(selectedRow, "3", "30");
+        }
+
         private void CheckRow(GridRow gridRow, string cell1Value, string cell2Value)
         {
             var cells = gridRow.Cells;

@@ -8,27 +8,50 @@ using FlaUI.Core.Patterns;
 
 namespace FlaUI.Core.AutomationElements
 {
+    /// <summary>
+    /// Element for grids and tables.
+    /// </summary>
     public class Grid : AutomationElement
     {
         public Grid(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 
-        public IGridPattern GridPattern => Patterns.Grid.Pattern;
+        protected IGridPattern GridPattern => Patterns.Grid.Pattern;
 
-        public ITablePattern TablePattern => Patterns.Table.Pattern;
+        protected ITablePattern TablePattern => Patterns.Table.Pattern;
 
+        protected ISelectionPattern SelectionPattern => Patterns.Selection.Pattern;
+
+        /// <summary>
+        /// Gets the total row count.
+        /// </summary>
         public int RowCount => GridPattern.RowCount.Value;
 
+        /// <summary>
+        /// Gets the total column count.
+        /// </summary>
         public int ColumnCount => GridPattern.ColumnCount.Value;
 
+        /// <summary>
+        /// Gets all column header elements.
+        /// </summary>
         public AutomationElement[] ColumnHeaders => TablePattern.ColumnHeaders.Value;
 
+        /// <summary>
+        /// Gets all row header elements.
+        /// </summary>
         public AutomationElement[] RowHeaders => TablePattern.RowHeaders.Value;
 
+        /// <summary>
+        /// Gets whether the data should be read primarily by row or by column.
+        /// </summary>
         public RowOrColumnMajor RowOrColumnMajor => TablePattern.RowOrColumnMajor.Value;
 
-        public GridHeader Header
+        /// <summary>
+        /// Gets the header item.
+        /// </summary>
+        public virtual GridHeader Header
         {
             get
             {
@@ -38,10 +61,10 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <summary>
-        /// Returns the rows which are currently visible to UIA. Might not be the full list!
+        /// Returns the rows which are currently visible to UIA. Might not be the full list (eg. in virtualized lists)!
         /// Use <see cref="GetRowByIndex" /> to make sure to get the correct row.
         /// </summary>
-        public GridRow[] Rows
+        public virtual GridRow[] Rows
         {
             get
             {
@@ -50,6 +73,19 @@ namespace FlaUI.Core.AutomationElements
             }
         }
 
+        /// <summary>
+        /// Gets all selected items.
+        /// </summary>
+        public GridRow[] SelectedItems => SelectionPattern.Selection.Value.Select(x => new GridRow(x.BasicAutomationElement)).ToArray();
+
+        /// <summary>
+        /// Gets the first selected item or null otherwise.
+        /// </summary>
+        public GridRow SelectedItem => SelectedItems?.FirstOrDefault();
+
+        /// <summary>
+        /// Select a row by index.
+        /// </summary>
         public GridRow Select(int rowIndex)
         {
             var gridRow = GetRowByIndex(rowIndex);
@@ -57,6 +93,19 @@ namespace FlaUI.Core.AutomationElements
             return gridRow;
         }
 
+        /// <summary>
+        /// Select the first row by text in the given column.
+        /// </summary>
+        public GridRow Select(int columnIndex, string textToFind)
+        {
+            var gridRow = GetRowByValue(columnIndex, textToFind);
+            gridRow.Select();
+            return gridRow;
+        }
+
+        /// <summary>
+        /// Add a row to the selection by index.
+        /// </summary>
         public GridRow AddToSelection(int rowIndex)
         {
             var gridRow = GetRowByIndex(rowIndex);
@@ -64,6 +113,19 @@ namespace FlaUI.Core.AutomationElements
             return gridRow;
         }
 
+        /// <summary>
+        /// Add a row to the selection by text in the given column.
+        /// </summary>
+        public GridRow AddToSelection(int columnIndex, string textToFind)
+        {
+            var gridRow = GetRowByValue(columnIndex, textToFind);
+            gridRow.AddToSelection();
+            return gridRow;
+        }
+
+        /// <summary>
+        /// Remove a row from the selection by index.
+        /// </summary>
         public GridRow RemoveFromSelection(int rowIndex)
         {
             var gridRow = GetRowByIndex(rowIndex);
@@ -71,6 +133,19 @@ namespace FlaUI.Core.AutomationElements
             return gridRow;
         }
 
+        /// <summary>
+        /// Remove a row from the selection by text in the given column.
+        /// </summary>
+        public GridRow RemoveFromSelection(int columnIndex, string textToFind)
+        {
+            var gridRow = GetRowByValue(columnIndex, textToFind);
+            gridRow.RemoveFromSelection();
+            return gridRow;
+        }
+
+        /// <summary>
+        /// Get a row by index.
+        /// </summary>
         public GridRow GetRowByIndex(int rowIndex)
         {
             PreCheckRow(rowIndex);
@@ -78,18 +153,21 @@ namespace FlaUI.Core.AutomationElements
             return gridCell.ContainingRow;
         }
 
+        /// <summary>
+        /// Get a row by text in the given column.
+        /// </summary>
         public GridRow GetRowByValue(int columnIndex, string value)
         {
             return GetRowsByValue(columnIndex, value, 1).FirstOrDefault();
         }
 
         /// <summary>
-        /// Get all rows where the value of the given column matches the given value
+        /// Get all rows where the value of the given column matches the given value.
         /// </summary>
-        /// <param name="columnIndex">The column index to check</param>
-        /// <param name="value">The value to check</param>
-        /// <param name="maxItems">Maximum numbers of items to return, 0 for all</param>
-        /// <returns>List of found rows</returns>
+        /// <param name="columnIndex">The column index to check.</param>
+        /// <param name="value">The value to check.</param>
+        /// <param name="maxItems">Maximum numbers of items to return, 0 for all.</param>
+        /// <returns>List of found rows.</returns>
         public GridRow[] GetRowsByValue(int columnIndex, string value, int maxItems = 0)
         {
             PreCheckColumn(columnIndex);
@@ -127,6 +205,9 @@ namespace FlaUI.Core.AutomationElements
         }
     }
 
+    /// <summary>
+    /// Header element for grids and tables.
+    /// </summary>
     public class GridHeader : AutomationElement
     {
         public GridHeader(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
@@ -143,6 +224,9 @@ namespace FlaUI.Core.AutomationElements
         }
     }
 
+    /// <summary>
+    /// Header item for grids and tables.
+    /// </summary>
     public class GridHeaderItem : AutomationElement
     {
         public GridHeaderItem(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
@@ -152,13 +236,16 @@ namespace FlaUI.Core.AutomationElements
         public string Text => Properties.Name.Value;
     }
 
+    /// <summary>
+    /// Row element for grids and tables.
+    /// </summary>
     public class GridRow : SelectionItemAutomationElement
     {
         public GridRow(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 
-        public IScrollItemPattern ScrollItemPattern => Patterns.ScrollItem.Pattern;
+        protected IScrollItemPattern ScrollItemPattern => Patterns.ScrollItem.Pattern;
 
         public GridCell[] Cells
         {
@@ -185,17 +272,18 @@ namespace FlaUI.Core.AutomationElements
         }
     }
 
+    /// <summary>
+    /// Cell element for grids and tables.
+    /// </summary>
     public class GridCell : AutomationElement
     {
         public GridCell(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 
-        public IGridItemPattern GridItemPattern => Patterns.GridItem.Pattern;
+        protected IGridItemPattern GridItemPattern => Patterns.GridItem.Pattern;
 
-        public ITableItemPattern TableItemPattern => Patterns.TableItem.Pattern;
-
-        public IValuePattern ValuePattern => Patterns.Value.Pattern;
+        protected ITableItemPattern TableItemPattern => Patterns.TableItem.Pattern;
 
         public Grid ContainingGrid => GridItemPattern.ContainingGrid.Value?.AsGrid();
 
@@ -209,10 +297,6 @@ namespace FlaUI.Core.AutomationElements
             }
         }
 
-        public string Value
-        {
-            get { return ValuePattern.Value.Value; }
-            set { ValuePattern.SetValue(value); }
-        }
+        public string Value => Properties.Name.Value;
     }
 }
