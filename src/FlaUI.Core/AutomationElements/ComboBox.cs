@@ -8,21 +8,38 @@ using FlaUI.Core.Patterns;
 
 namespace FlaUI.Core.AutomationElements
 {
+    /// <summary>
+    /// Element which can be used for combobox elements.
+    /// </summary>
     public class ComboBox : AutomationElement
     {
         public ComboBox(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 
+        protected IValuePattern ValuePattern => Patterns.Value.Pattern;
+
+        protected ISelectionPattern SelectionPattern => Patterns.Selection.Pattern;
+
+        /// <summary>
+        /// The text of the editable element inside the combobox.
+        /// Only works if the combobox is editable.
+        /// </summary>
         public string EditableText
         {
             get { return EditableItem.Text; }
             set { EditableItem.Text = value; }
         }
 
+        /// <summary>
+        /// Flag which indicates, if the combobox is editable or not.
+        /// </summary>
         public virtual bool IsEditable => GetEditableElement() != null;
 
-        protected TextBox EditableItem
+        /// <summary>
+        /// Gets the editable element
+        /// </summary>
+        protected virtual TextBox EditableItem
         {
             get
             {
@@ -35,16 +52,28 @@ namespace FlaUI.Core.AutomationElements
             }
         }
 
+        /// <summary>
+        /// Getter / setter for the selected value.
+        /// </summary>
         public string Value
         {
             get { return ValuePattern.Value.Value; }
             set { ValuePattern.SetValue(value); }
         }
 
-        public ComboBoxItem SelectedItem => Items.FirstOrDefault(x => x.IsSelected);
+        /// <summary>
+        /// Gets all selected items.
+        /// </summary>
+        public ComboBoxItem[] SelectedItems => SelectionPattern.Selection.Value.Select(CreateItem).ToArray();
 
-        public ComboBoxItem[] SelectedItems => Items.Where(x => x.IsSelected).ToArray();
+        /// <summary>
+        /// Gets the first selected item or null otherwise.
+        /// </summary>
+        public ComboBoxItem SelectedItem => SelectedItems?.FirstOrDefault();
 
+        /// <summary>
+        /// Gets all items.
+        /// </summary>
         public ComboBoxItem[] Items
         {
             get
@@ -65,8 +94,6 @@ namespace FlaUI.Core.AutomationElements
                 return items.Select(x => new ComboBoxItem(x.BasicAutomationElement)).ToArray();
             }
         }
-
-        public IValuePattern ValuePattern => Patterns.Value.Pattern;
 
         public ExpandCollapseState ExpandCollapseState
         {
@@ -109,6 +136,7 @@ namespace FlaUI.Core.AutomationElements
                 if (ecp != null)
                 {
                     ecp.Expand();
+                    // Wait a bit in case there is an open animation
                     Thread.Sleep(50);
                 }
             }
@@ -143,9 +171,36 @@ namespace FlaUI.Core.AutomationElements
             Helpers.WaitUntilResponsive(this);
         }
 
+        /// <summary>
+        /// Select an item by index.
+        /// </summary>
+        public ComboBoxItem Select(int index)
+        {
+            var foundItem = Items[index];
+            foundItem.Select();
+            return foundItem;
+        }
+
+        /// <summary>
+        /// Select the first item which matches the given text.
+        /// </summary>
+        /// <param name="textToFind">The text to search for.</param>
+        /// <returns>The first found item or null if no item matches.</returns>
+        public ComboBoxItem Select(string textToFind)
+        {
+            var foundItem = Items.FirstOrDefault(item => item.Text.Equals(textToFind));
+            foundItem?.Select();
+            return foundItem;
+        }
+
         private AutomationElement GetEditableElement()
         {
             return FindFirstChild(cf => cf.ByControlType(ControlType.Edit));
+        }
+
+        private ComboBoxItem CreateItem(AutomationElement itemElement)
+        {
+            return new ComboBoxItem(itemElement.BasicAutomationElement);
         }
     }
 }

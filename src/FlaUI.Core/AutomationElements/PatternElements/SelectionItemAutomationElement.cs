@@ -4,7 +4,7 @@ using FlaUI.Core.Patterns;
 namespace FlaUI.Core.AutomationElements.PatternElements
 {
     /// <summary>
-    /// An UI-item which supports the <see cref="SelectionItemPattern" />
+    /// An UI-item which supports the <see cref="ISelectionItemPattern" />
     /// </summary>
     public class SelectionItemAutomationElement : AutomationElement
     {
@@ -12,8 +12,11 @@ namespace FlaUI.Core.AutomationElements.PatternElements
         {
         }
 
-        public ISelectionItemPattern SelectionItemPattern => Patterns.SelectionItem.Pattern;
+        protected ISelectionItemPattern SelectionItemPattern => Patterns.SelectionItem.Pattern;
 
+        /// <summary>
+        /// Flag to get/set the selection of this element.
+        /// </summary>
         public bool IsSelected
         {
             get { return SelectionItemPattern.IsSelected; }
@@ -27,18 +30,27 @@ namespace FlaUI.Core.AutomationElements.PatternElements
             }
         }
 
+        /// <summary>
+        /// Select this element.
+        /// </summary>
         public SelectionItemAutomationElement Select()
         {
             ExecuteInPattern(SelectionItemPattern, true, pattern => pattern.Select());
             return this;
         }
 
+        /// <summary>
+        /// Add this element to the selection.
+        /// </summary>
         public SelectionItemAutomationElement AddToSelection()
         {
             ExecuteInPattern(SelectionItemPattern, true, pattern => pattern.AddToSelection());
             return this;
         }
 
+        /// <summary>
+        /// Remove this element from the selection.
+        /// </summary>
         public SelectionItemAutomationElement RemoveFromSelection()
         {
             ExecuteInPattern(SelectionItemPattern, true, pattern => pattern.RemoveFromSelection());
