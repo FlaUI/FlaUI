@@ -1,5 +1,7 @@
-﻿using FlaUI.Core;
+﻿using System;
+using FlaUI.Core;
 using FlaUI.Core.Exceptions;
+using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.UIA2.Patterns;
 using UIA = System.Windows.Automation;
@@ -208,6 +210,11 @@ namespace FlaUI.UIA2
         {
             return new AutomationPattern<IWindowPattern, UIA.WindowPattern>(
                 WindowPattern.Pattern, BasicAutomationElement, (b, p) => new WindowPattern(b, p));
+        }
+
+        public override IAutomationPattern<T> GetCustomPattern<T, TNative>(PatternId pattern, Func<BasicAutomationElementBase, TNative, T> patternCreateFunc)
+        {
+            return new AutomationPattern<T, TNative>(pattern, BasicAutomationElement, patternCreateFunc);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Patterns.Infrastructure;
 
@@ -119,5 +120,7 @@ namespace FlaUI.Core
         {
             return val ?? (val = initFunc());
         }
+
+        public abstract IAutomationPattern<T> GetCustomPattern<T, TNative>(PatternId pattern, Func<BasicAutomationElementBase, TNative, T> patternCreateFunc) where T : IPattern;
     }
 }

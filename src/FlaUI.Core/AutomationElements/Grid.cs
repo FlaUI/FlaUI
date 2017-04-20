@@ -265,6 +265,14 @@ namespace FlaUI.Core.AutomationElements
             }
         }
 
+        /// <summary>
+        /// Find a cell by a given text.
+        /// </summary>
+        public GridCell FindCellByText(string textToFind)
+        {
+            return Cells.FirstOrDefault(cell => cell.Value.Equals(textToFind));
+        }
+
         public GridRow ScrollIntoView()
         {
             ScrollItemPattern?.ScrollIntoView();
