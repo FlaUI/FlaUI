@@ -19,7 +19,7 @@ namespace FlaUI.Core.AutomationElements
 
         protected IValuePattern ValuePattern => Patterns.Value.Pattern;
 
-        protected ISelectionPattern SelectionPattern => Patterns.Selection.Pattern;
+        protected ISelectionPattern SelectionPattern => Patterns.Selection.PatternOrDefault;
 
         /// <summary>
         /// The text of the editable element inside the combobox.
@@ -64,7 +64,18 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Gets all selected items.
         /// </summary>
-        public ComboBoxItem[] SelectedItems => SelectionPattern.Selection.Value.Select(x => new ComboBoxItem(x.BasicAutomationElement)).ToArray();
+        public ComboBoxItem[] SelectedItems
+        {
+            get
+            {
+                // In WinForms, there is no selection pattern, so search the items which are selected.
+                if (SelectionPattern == null)
+                {
+                    return Items.Where(x => x.IsSelected).ToArray();
+                }
+                return SelectionPattern.Selection.Value.Select(x => new ComboBoxItem(x.BasicAutomationElement)).ToArray();
+            }
+        }
 
         /// <summary>
         /// Gets the first selected item or null otherwise.
