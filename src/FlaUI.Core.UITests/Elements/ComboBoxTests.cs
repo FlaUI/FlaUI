@@ -84,6 +84,7 @@ namespace FlaUI.Core.UITests.Elements
             var mainWindow = _mainWindow;
             var combo = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("EditableCombo")).AsComboBox();
             combo.EditableText = "Item 3";
+            Assert.That(combo.SelectedItem, Is.Not.Null);
             Assert.That(combo.SelectedItem.Text, Is.EqualTo("Item 3"));
         }
 

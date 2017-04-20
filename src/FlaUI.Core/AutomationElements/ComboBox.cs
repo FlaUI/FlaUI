@@ -5,6 +5,7 @@ using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
 using FlaUI.Core.Patterns;
+using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.AutomationElements
 {
@@ -28,7 +29,16 @@ namespace FlaUI.Core.AutomationElements
         public string EditableText
         {
             get { return EditableItem.Text; }
-            set { EditableItem.Text = value; }
+            set
+            {
+                EditableItem.Text = value;
+                // UIA2/WinForms does not set the selected item until it is expanded
+                if (AutomationType == AutomationType.UIA2 && FrameworkType == FrameworkType.WinForms)
+                {
+                    Expand();
+                    Collapse();
+                }
+            }
         }
 
         /// <summary>
