@@ -293,7 +293,7 @@ namespace FlaUI.Core.AutomationElements
 
         protected ITableItemPattern TableItemPattern => Patterns.TableItem.Pattern;
 
-        public Grid ContainingGrid => GridItemPattern.ContainingGrid.Value?.AsGrid();
+        public Grid ContainingGrid => GridItemPattern.ContainingGrid.Value.AsGrid();
 
         public GridRow ContainingRow
         {
