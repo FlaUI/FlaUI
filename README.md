@@ -44,7 +44,7 @@ var app =  Application.Launch("notepad.exe");
 using (var automation = new UIA3Automation())
 {
 	var window = app.GetMainWindow(automation);
-	Console.WriteLine(window.Title.Value);
+	Console.WriteLine(window.Title);
 	...
 }
 ```
