@@ -110,7 +110,6 @@
     <Compile Include="AutomationElements\Infrastructure\IAutomationElementProperties.cs" />
     <Compile Include="AutomationElements\Label.cs" />
     <Compile Include="AutomationElements\Menu.cs" />
-    <Compile Include="AutomationElements\MenuItem.cs" />
     <Compile Include="AutomationElements\PatternElements\ExpandCollapseAutomationElement.cs" />
     <Compile Include="AutomationElements\PatternElements\InvokeAutomationElement.cs" />
     <Compile Include="AutomationElements\PatternElements\SelectionItemAutomationElement.cs" />

@@ -36,5 +36,21 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(subsubitems1[0].Properties.Name, Is.EqualTo("Plain"));
             Assert.That(subsubitems1[1].Properties.Name, Is.EqualTo("Fancy"));
         }
+
+        [Test]
+        public void TestMenuWithSubMenusByName()
+        {
+            var window = App.GetMainWindow(Automation);
+            var menu = window.FindFirstChild(cf => cf.Menu()).AsMenu();
+            var edit = menu.MenuItems["Edit"];
+            Assert.That(edit, Is.Not.Null);
+            Assert.That(edit.Properties.Name.Value, Is.EqualTo("Edit"));
+            var copy = edit.SubMenuItems["Copy"];
+            Assert.That(copy, Is.Not.Null);
+            Assert.That(copy.Properties.Name.Value, Is.EqualTo("Copy"));
+            var fancy = copy.SubMenuItems["Fancy"];
+            Assert.That(fancy, Is.Not.Null);
+            Assert.That(fancy.Properties.Name.Value, Is.EqualTo("Fancy"));
+        }
     }
 }
