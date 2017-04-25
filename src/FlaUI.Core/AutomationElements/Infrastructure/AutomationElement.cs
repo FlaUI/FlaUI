@@ -25,7 +25,16 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
     {
         public AutomationElement(BasicAutomationElementBase basicAutomationElement)
         {
+            if (basicAutomationElement == null)
+            {
+                throw new ArgumentNullException(nameof(basicAutomationElement));
+            }
             BasicAutomationElement = basicAutomationElement;
+        }
+
+        public AutomationElement(AutomationElement automationElement)
+            : this(automationElement?.BasicAutomationElement)
+        {
         }
 
         /// <summary>
