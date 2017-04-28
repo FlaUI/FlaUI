@@ -485,6 +485,7 @@ namespace FlaUI.Core.WindowsAPI
         /// ENTER key
         /// </summary>
         RETURN = 0x0D,
+        ENTER = RETURN,
 
         /// <summary>
         /// SHIFT key
@@ -545,6 +546,7 @@ namespace FlaUI.Core.WindowsAPI
         /// ESC key
         /// </summary>
         ESCAPE = 0x1B,
+        ESC = ESCAPE,
 
         /// <summary>
         /// IME convert
@@ -1306,6 +1308,7 @@ namespace FlaUI.Core.WindowsAPI
     public enum ScanCodeShort : ushort
     {
         ESCAPE = 0x01,
+        ESC = ESCAPE,
         KEY_1 = 0x02,
         KEY_2 = 0x03,
         KEY_3 = 0x04,
@@ -1333,6 +1336,7 @@ namespace FlaUI.Core.WindowsAPI
         OPENBRACKET = 0x1A,
         CLOSEBRACKET = 0x1B,
         RETURN = 0x1C,
+        ENTER = RETURN,
         CONTROL = 0x1D,
         KEY_A = 0x1E,
         KEY_S = 0x1F,
