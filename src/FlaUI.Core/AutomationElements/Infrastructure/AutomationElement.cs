@@ -681,6 +681,11 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             return FindFirst(TreeScope.Children, new TrueCondition());
         }
 
+        public AutomationElement FindFirstChild(string automationId)
+        {
+            return FindFirst(TreeScope.Children, ConditionFactory.ByAutomationId(automationId));
+        }
+
         public AutomationElement FindFirstChild(ConditionBase condition)
         {
             return FindFirst(TreeScope.Children, condition);
@@ -711,6 +716,11 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         public AutomationElement FindFirstDescendant()
         {
             return FindFirst(TreeScope.Descendants, new TrueCondition());
+        }
+
+        public AutomationElement FindFirstDescendant(string automationId)
+        {
+            return FindFirst(TreeScope.Descendants, ConditionFactory.ByAutomationId(automationId));
         }
 
         public AutomationElement FindFirstDescendant(ConditionBase condition)
