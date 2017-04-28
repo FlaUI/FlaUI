@@ -1,4 +1,4 @@
-$newVersion = "1.0.0"
+$newVersion = "1.1.0"
 $suffix = ""
 
 function Main() {
