@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.1.0 (2017-04-28)
+
+### Enhancements
+  * [Core] Added Select (index and string) for ComboBox
+  * [Core] Added SelectedItem(s) and Select by cell value to Grid
+  * [Core] Added a FindCellByText to GridRow
+  * [Core] Implemented MenuItems with a string indexer
+  * [Core] Added AutomationElement constructor which is based on another AutomationElement
+  * [Core] Changed loglevel of "Closing application" to debug
+  * [Core] Added overload for FindFirstChild and FindFirstDescendant with a string (AutomationId) parameter
+
+### Bug fixes
+  * [Core] Fix for WinForms where ComboBox does not support the SelectionPattern
+  * [Core]Fix when directly setting the text in the combobox in uia2/winforms
+
 ## 1.0.0 (2017-04-13)
 
 ### Enhancements
