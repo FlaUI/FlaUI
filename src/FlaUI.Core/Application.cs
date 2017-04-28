@@ -62,7 +62,7 @@ namespace FlaUI.Core
         /// <returns>Returns true if the application was closed normally and false if it was force-closed.</returns>
         public bool Close()
         {
-            Logger.Default.Info("Closing application");
+            Logger.Default.Debug("Closing application");
             if (_process.HasExited)
             {
                 _process.Dispose();
