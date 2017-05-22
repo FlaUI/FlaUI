@@ -67,7 +67,7 @@ namespace FlaUI.Core.AutomationElements
                 var ctxMenu = desktop.FindFirstChild(cf => cf.ByControlType(ControlType.Menu).And(nameCondition)).AsMenu();
                 if (ctxMenu != null)
                 {
-                    ctxMenu.IsWin32ContextMenu = true;
+                    ctxMenu.IsWin32Menu = true;
                     return ctxMenu;
                 }
             }

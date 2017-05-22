@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using FlaUI.Core.AutomationElements.Infrastructure;
@@ -24,7 +25,7 @@ namespace FlaUI.Core.AutomationElements
                     .Select(e =>
                     {
                         var mi = e.AsMenuItem();
-                        mi.IsWin32ContextMenu = IsWin32ContextMenu;
+                        mi.IsWin32Menu = IsWin32Menu;
                         return mi;
                     });
                 return new MenuItems(childItems);
@@ -32,9 +33,9 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <summary>
-        /// Flag to indicate, if the menu is a Win32 context menu because that one needs special handling
+        /// Flag to indicate if the menu is a Win32 menu because that one needs special handling
         /// </summary>
-        internal bool IsWin32ContextMenu { get; set; }
+        public bool IsWin32Menu { get; set; }
     }
 
     /// <summary>
@@ -52,9 +53,9 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <summary>
-        /// Flag to indicate, if the containing menu is a Win32 context menu because that one needs special handling
+        /// Flag to indicate if the containing menu is a Win32 menu because that one needs special handling
         /// </summary>
-        internal bool IsWin32ContextMenu { get; set; }
+        internal bool IsWin32Menu { get; set; }
 
         public string Text => Properties.Name.Value;
 
@@ -62,8 +63,9 @@ namespace FlaUI.Core.AutomationElements
         {
             get
             {
+                Console.WriteLine(FrameworkType);
                 // Special handling for Win32 context menus
-                if (IsWin32ContextMenu)
+                if (IsWin32Menu)
                 {
                     // Click the item to load the child items
                     Click();
@@ -72,7 +74,7 @@ namespace FlaUI.Core.AutomationElements
                     var appWindow = BasicAutomationElement.Automation.GetDesktop().FindFirstChild(cf => cf.ByControlType(ControlType.Window).And(cf.ByProcessId(Properties.ProcessId)));
                     // Then search the menu below the window
                     var menu = appWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Menu).And(cf.ByName(Text))).AsMenu();
-                    menu.IsWin32ContextMenu = true;
+                    menu.IsWin32Menu = true;
                     // Now return the menu items
                     return menu.MenuItems;
                 }
