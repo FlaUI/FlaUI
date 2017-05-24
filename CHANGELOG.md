@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.0 (2017-05-24)
+
+### Breaking changes
+  * Moved FlaUInspect to its own repository (see https://github.com/FlauTech/FlaUInspect)
+
+### Enhancements
+  * [Core] Added ENTER synonym for RETURN and ESC for ESCAPE
+  * [Core] Made IsWin32Menu property on menu public
+
 ## 1.1.0 (2017-04-28)
 
 ### Enhancements

@@ -1,6 +1,6 @@
 $artefactDir = "Artefacts"
 $tempDir = "Temp"
-$version = "1.1.0"
+$version = "1.2.0"
 $rootPath = "."
 
 function Main {
@@ -13,12 +13,6 @@ function Main {
         rd $tempDir -Recurse | Out-Null
     }
     md -Name $tempDir | Out-Null
-
-    # FlaUInspect
-    $inspectDir = Join-Path $tempDir "FlaUInspect-$version"
-    Copy-Item -Path $rootPath\src\FlaUInspect\bin -Destination $inspectDir -Recurse
-    Get-ChildItem $inspectDir -Include *.pdb,*.xml,*.vshost.*,*RANDOM_SEED* -Recurse | Remove-Item
-    Deploy-License $inspectDir
 
     # FlaUI.Core
     $coreDir = Join-Path $tempDir "FlaUI.Core"
@@ -69,7 +63,6 @@ function Main {
     [Reflection.Assembly]::LoadWithPartialName("System.IO.Compression.FileSystem") | Out-Null
     $compression = [System.IO.Compression.CompressionLevel]::Optimal
     $includeBaseDirectory = $false
-    [System.IO.Compression.ZipFile]::CreateFromDirectory($inspectDir, (Join-Path $artefactDir "FlaUInspect-$version.zip"), $compression, $includeBaseDirectory)
     [System.IO.Compression.ZipFile]::CreateFromDirectory($coreDir, (Join-Path $artefactDir "FlaUI.Core-$version.zip"), $compression, $includeBaseDirectory)
     [System.IO.Compression.ZipFile]::CreateFromDirectory($uia2Dir, (Join-Path $artefactDir "FlaUI.UIA2-$version.zip"), $compression, $includeBaseDirectory)
     [System.IO.Compression.ZipFile]::CreateFromDirectory($uia3Dir, (Join-Path $artefactDir "FlaUI.UIA3-$version.zip"), $compression, $includeBaseDirectory)
@@ -89,7 +82,6 @@ function Create-Packages() {
     nuget pack "$rootPath\nuspec\FlaUI.Core.nuspec" -OutputDirectory $artefactDir -properties version=$version
     nuget pack "$rootPath\nuspec\FlaUI.UIA2.nuspec" -OutputDirectory $artefactDir -properties version=$version
     nuget pack "$rootPath\nuspec\FlaUI.UIA3.nuspec" -OutputDirectory $artefactDir -properties version=$version
-    choco pack "$rootPath\nuspec\FlaUInspect.nuspec" -OutputDirectory $artefactDir --version $version
 }
 
 Main

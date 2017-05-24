@@ -1,4 +1,4 @@
-$newVersion = "1.1.0"
+$newVersion = "1.2.0"
 $suffix = ""
 
 function Main() {
@@ -11,7 +11,6 @@ function ReplaceVersion {
     ReplaceAssemblyVersion "src\FlaUI.Core\Properties\AssemblyInfo.cs"
     ReplaceAssemblyVersion "src\FlaUI.UIA2\Properties\AssemblyInfo.cs"
     ReplaceAssemblyVersion "src\FlaUI.UIA3\Properties\AssemblyInfo.cs"
-    ReplaceAssemblyVersion "src\FlaUInspect\Properties\AssemblyInfo.cs"
 }
 
 function ReplaceAssemblyVersion($assemblyFile) {

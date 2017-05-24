@@ -8,7 +8,6 @@
 | *Build* | [![Build status](https://ci.appveyor.com/api/projects/status/mwd2o329cma50sxe?svg=true)](https://ci.appveyor.com/project/RomanBaeriswyl/flaui) |
 | *Tests* | [![Test status](http://flauschig.ch/batch.php?type=tests&account=RomanBaeriswyl&slug=flaui&branch=master)](https://ci.appveyor.com/project/RomanBaeriswyl/flaui/branch/master) |
 | *Libraries (NuGet)* | [![NuGet FlaUI.Core](http://flauschig.ch/nubadge.php?id=FlaUI.Core)](https://www.nuget.org/packages/FlaUI.Core) [![NuGet FlaUI.UIA2](http://flauschig.ch/nubadge.php?id=FlaUI.UIA2)](https://www.nuget.org/packages/FlaUI.UIA2) [![NuGet FlaUI.UIA3](http://flauschig.ch/nubadge.php?id=FlaUI.UIA3)](https://www.nuget.org/packages/FlaUI.UIA3) |
-| *FlaUInspect* | [![FlaUInspect](https://img.shields.io/badge/FlaUInspect-choco-brightgreen.svg)](https://chocolatey.org/packages/flauinspect)<br />`choco install flauinspect` |
 | *CI Artefacts* | [FlaUI CI](https://ci.appveyor.com/project/RomanBaeriswyl/flaui/build/artifacts) |
 
 ### Introduction
