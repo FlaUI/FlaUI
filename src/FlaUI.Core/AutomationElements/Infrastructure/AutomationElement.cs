@@ -53,20 +53,6 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         public ConditionFactory ConditionFactory => BasicAutomationElement.Automation.ConditionFactory;
 
         /// <summary>
-        /// The direct framework type of the element.
-        /// Results in "FrameworkType.Unknown" if it couldn't be resolved.
-        /// </summary>
-        public FrameworkType FrameworkType
-        {
-            get
-            {
-                string currentFrameworkId;
-                var hasProperty = Properties.FrameworkId.TryGetValue(out currentFrameworkId);
-                return hasProperty ? FrameworkIds.ConvertToFrameworkType(currentFrameworkId) : FrameworkType.Unknown;
-            }
-        }
-
-        /// <summary>
         /// The current <see cref="AutomationType" /> for this element.
         /// </summary>
         public AutomationType AutomationType => BasicAutomationElement.Automation.AutomationType;
@@ -90,6 +76,52 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// Gets the cached parent for this element.
         /// </summary>
         public AutomationElement CachedParent => BasicAutomationElement.GetCachedParent();
+
+        #region Convenience properties
+        /// <summary>
+        /// The direct framework type of the element.
+        /// Results in "FrameworkType.Unknown" if it couldn't be resolved.
+        /// </summary>
+        public FrameworkType FrameworkType
+        {
+            get
+            {
+                string currentFrameworkId;
+                var hasProperty = Properties.FrameworkId.TryGetValue(out currentFrameworkId);
+                return hasProperty ? FrameworkIds.ConvertToFrameworkType(currentFrameworkId) : FrameworkType.Unknown;
+            }
+        }
+
+        /// <summary>
+        /// The automation id of the element.
+        /// </summary>
+        public string AutomationId => Properties.AutomationId.Value;
+
+        /// <summary>
+        /// The name of the element.
+        /// </summary>
+        public string Name => Properties.Name.Value;
+
+        /// <summary>
+        /// The class name of the element.
+        /// </summary>
+        public string ClassName => Properties.ClassName.Value;
+
+        /// <summary>
+        /// The control type of the element.
+        /// </summary>
+        public ControlType ControlType => Properties.ControlType.Value;
+
+        /// <summary>
+        /// Flag if the element is enabled or not.
+        /// </summary>
+        public bool IsEnabled => Properties.IsEnabled.Value;
+
+        /// <summary>
+        /// Flag if the element off-screen or on-screen(visible).
+        /// </summary>
+        public bool IsOffscreen => Properties.IsOffscreen.Value;
+        #endregion Convenience properties
 
         /// <summary>
         /// Performs a left click on the element.
