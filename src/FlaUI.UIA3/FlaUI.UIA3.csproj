@@ -51,8 +51,17 @@
   <ItemGroup Label="Additional nuget files">
     <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="" />
     <None Include="..\..\CHANGELOG.md" Pack="true" PackagePath="" />
-    <None Include="..\libs\Interop\3.5\Interop.UIAutomationClient.dll" Pack="true" PackagePath="lib\net35" />
-    <None Include="..\libs\Interop\4.5\Interop.UIAutomationClient.dll" Pack="true" PackagePath="lib\net40;lib\net45" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);GetInteropFile</TargetsForTfmSpecificBuildOutput>
+  </PropertyGroup>
+
+  <Target Name="GetInteropFile">
+    <ItemGroup>
+      <BuildOutputInPackage Include="$(OutDir)\Interop.UIAutomationClient.dll">
+        <FinalOutputPath>$([System.IO.Path]::GetFullPath('$(OutDir)\Interop.UIAutomationClient.dll'))</FinalOutputPath>
+      </BuildOutputInPackage>
+    </ItemGroup>
+  </Target>
 </Project>
