@@ -63,7 +63,6 @@ namespace FlaUI.Core.AutomationElements
         {
             get
             {
-                Console.WriteLine(FrameworkType);
                 // Special handling for Win32 context menus
                 if (IsWin32Menu)
                 {
