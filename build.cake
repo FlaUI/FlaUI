@@ -81,6 +81,21 @@ Task("Run-Tests")
 {
 });
 
+Task("Package")
+    .IsDependentOn("Run-Tests")
+    .Does(() =>
+{
+    // Upload the artifacts to appveyor
+    if (AppVeyor.IsRunningOnAppVeyor) {
+        // Upload the nuget packages
+        var files = GetFiles("./nuget/*.nupkg");
+        foreach(var file in files)
+        {
+            AppVeyor.UploadArtifact(file);
+        }
+    }
+});
+
 //////////////////////////////////////////////////////////////////////
 // TASK TARGETS
 //////////////////////////////////////////////////////////////////////
