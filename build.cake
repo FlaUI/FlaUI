@@ -26,7 +26,7 @@ Task("Build")
     .IsDependentOn("Restore-NuGet-Packages")
     .Does(() =>
 {
-    MSBuild(slnFile, new MSBuildSettings {
+    var buildSettings = new MSBuildSettings {
         Verbosity = Verbosity.Minimal,
         ToolVersion = MSBuildToolVersion.VS2017,
         Configuration = configuration,
@@ -34,7 +34,11 @@ Task("Build")
     }.AddFileLogger(new MSBuildFileLogger {
         LogFile = "./BuildLog.txt",
         MSBuildFileLoggerOutput = MSBuildFileLoggerOutput.All
-    }));
+    });
+    // Hide informational warnings for now
+    buildSettings.Properties.Add("WarningLevel", new[] { "3" });
+
+    MSBuild(slnFile, buildSettings);
 });
 
 Task("Run-Unit-Tests")
@@ -44,6 +48,9 @@ Task("Run-Unit-Tests")
     NUnit3(@"src\FlaUI.Core.UnitTests\bin\FlaUI.Core.UnitTests.dll", new NUnit3Settings {
         Results = "UnitTestResult.xml"
     });
+    if (AppVeyor.IsRunningOnAppVeyor) {
+        AppVeyor.UploadTestResults("UnitTestResult.xml", AppVeyorTestResultsType.NUnit3);
+    }
 });
 
 Task("Run-UI-Tests")
@@ -54,11 +61,17 @@ Task("Run-UI-Tests")
         Results = "UIA2TestResult.xml",
         ArgumentCustomization = args => args.Append("--params=uia=2")
     });
+    if (AppVeyor.IsRunningOnAppVeyor) {
+        AppVeyor.UploadTestResults("UIA2TestResult.xml", AppVeyorTestResultsType.NUnit3);
+    }
 
     NUnit3(@"src\FlaUI.Core.UITests\bin\FlaUI.Core.UITests.dll", new NUnit3Settings {
         Results = "UIA3TestResult.xml",
         ArgumentCustomization = args => args.Append("--params=uia=3")
     });
+    if (AppVeyor.IsRunningOnAppVeyor) {
+        AppVeyor.UploadTestResults("UIA3TestResult.xml", AppVeyorTestResultsType.NUnit3);
+    }
 });
 
 Task("Run-Tests")
