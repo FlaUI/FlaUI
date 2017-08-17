@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Input;
@@ -22,7 +21,6 @@ namespace FlaUI.Core.UITests
         public void CalculatorTest()
         {
             var window = App.GetMainWindow(Automation);
-            Console.WriteLine(window.Title);
             var calc = SystemProductNameFetcher.IsWindows10() ? (ICalculator)new Win10Calc(window) : new LegacyCalc(window);
 
             // Switch to default mode
