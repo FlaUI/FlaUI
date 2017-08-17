@@ -11,7 +11,11 @@ namespace FlaUI.Core.Tools
         {
             var launcher = new ApplicationActivationManager();
             uint processId;
-            launcher.ActivateApplication(appUserModelId, arguments, ActivateOptions.None, out processId);
+            var hr = launcher.ActivateApplication(appUserModelId, arguments, ActivateOptions.None, out processId).ToInt32();
+            if (hr < 0)
+            {
+                Marshal.ThrowExceptionForHR(hr);
+            }
             if (processId > 0)
             {
                 return Process.GetProcessById((int)processId);
@@ -21,6 +25,7 @@ namespace FlaUI.Core.Tools
 
         #region Win32
         // ReSharper disable InconsistentNaming
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         [Flags]
         public enum ActivateOptions
         {
@@ -51,6 +56,7 @@ namespace FlaUI.Core.Tools
             public extern IntPtr ActivateForProtocol([In] string appUserModelId, [In] IntPtr /*IShellItemArray*/ itemArray, [Out] out uint processId);
         }
 
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
         // ReSharper restore InconsistentNaming
         #endregion Win32
     }
