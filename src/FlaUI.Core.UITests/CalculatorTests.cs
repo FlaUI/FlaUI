@@ -56,10 +56,17 @@ namespace FlaUI.Core.UITests
 
         protected override Application StartApplication()
         {
-            var app = SystemProductNameFetcher.IsWindows10()
-                ? Application.LaunchStoreApp("Microsoft.WindowsCalculator_8wekyb3d8bbwe!App")
-                : Application.Launch("calc.exe");
-            return app;
+            if (SystemProductNameFetcher.IsWindows10())
+            {
+                // Use the store application on those systems
+                return Application.LaunchStoreApp("Microsoft.WindowsCalculator_8wekyb3d8bbwe!App");
+            }
+            if (SystemProductNameFetcher.IsWindowsServer2016())
+            {
+                // The calc.exe on this system is just a stub which launches win32calc.exe
+                return Application.Launch("win32calc.exe");
+            }
+            return Application.Launch("calc.exe");
         }
     }
 
