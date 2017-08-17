@@ -16,22 +16,22 @@ namespace FlaUI.Core
     public class Application : IDisposable
     {
         /// <summary>
-        /// The process of this application
+        /// The process of this application.
         /// </summary>
         private readonly Process _process;
 
         /// <summary>
-        /// Flag to indicate, if the application is a windows store app
+        /// Flag to indicate, if the application is a windows store app.
         /// </summary>
         public bool IsStoreApp { get; }
 
         /// <summary>
-        /// The proces Id of the application
+        /// The proces Id of the application.
         /// </summary>
         public int ProcessId => _process.Id;
 
         /// <summary>
-        /// The name of the application's process
+        /// The name of the application's process.
         /// </summary>
         public string Name => _process.ProcessName;
 
@@ -41,18 +41,34 @@ namespace FlaUI.Core
         /// </summary>
         public IntPtr MainWindowHandle => _process.MainWindowHandle;
 
+        /// <summary>
+        /// Gets a value indicating whether the associated process has been terminated.
+        /// </summary>
+        public bool HasExited => _process.HasExited;
+
+        /// <summary>
+        /// Gets the value that the associated process specified when it terminated.
+        /// </summary>
+        public int ExitCode => _process.ExitCode;
+
+        /// <summary>
+        /// Creates an application object with the given process id.
+        /// </summary>
+        /// <param name="processId">The process id.</param>
+        /// <param name="isStoreApp">Flag to define if it's a store app or not.</param>
         public Application(int processId, bool isStoreApp = false)
             : this(FindProcess(processId), isStoreApp)
         {
         }
 
+        /// <summary>
+        /// Creates an application object with the given process.
+        /// </summary>
+        /// <param name="process">The process.</param>
+        /// <param name="isStoreApp">Flag to define if it's a store app or not.</param>
         public Application(Process process, bool isStoreApp = false)
         {
-            if (process == null)
-            {
-                throw new ArgumentNullException(nameof(process));
-            }
-            _process = process;
+            _process = process ?? throw new ArgumentNullException(nameof(process));
             IsStoreApp = isStoreApp;
         }
 
@@ -88,7 +104,7 @@ namespace FlaUI.Core
         }
 
         /// <summary>
-        /// Kills the applications and waits until it is closed
+        /// Kills the applications and waits until it is closed.
         /// </summary>
         public void Kill()
         {
@@ -105,6 +121,9 @@ namespace FlaUI.Core
             }
         }
 
+        /// <summary>
+        /// Closes the associated process.
+        /// </summary>
         public void Dispose()
         {
             Close();
@@ -117,7 +136,7 @@ namespace FlaUI.Core
 
         public static Application Attach(Process process)
         {
-            Logger.Default.Debug("[Attaching to process:{0}] [Process name:{1}] [Process full path:{2}]", process.Id, process.ProcessName, process.MainModule.FileName);
+            Logger.Default.Debug($"[Attaching to process:{process.Id}] [Process name:{process.ProcessName}] [Process full path:{process.MainModule.FileName}]");
             return new Application(process);
         }
 
@@ -183,7 +202,7 @@ namespace FlaUI.Core
         }
 
         /// <summary>
-        /// Waits as long as the application is busy
+        /// Waits as long as the application is busy.
         /// </summary>
         /// <param name="waitTimeout">An optional timeout. If null is passed, the timeout is infinite.</param>
         public void WaitWhileBusy(TimeSpan? waitTimeout = null)
@@ -193,7 +212,7 @@ namespace FlaUI.Core
         }
 
         /// <summary>
-        /// Waits until the main handle is set
+        /// Waits until the main handle is set.
         /// </summary>
         /// <param name="waitTimeout">An optional timeout. If null is passed, the timeout is infinite.</param>
         public void WaitWhileMainHandleIsMissing(TimeSpan? waitTimeout = null)
@@ -207,7 +226,7 @@ namespace FlaUI.Core
         }
 
         /// <summary>
-        /// Gets the main window of the application's process
+        /// Gets the main window of the application's process.
         /// </summary>
         /// <param name="automation">The automation object to use.</param>
         /// <param name="waitTimeout">An optional timeout. If null is passed, the timeout is infinite.</param>
@@ -229,7 +248,7 @@ namespace FlaUI.Core
         }
 
         /// <summary>
-        /// Gets all top level windows from the application
+        /// Gets all top level windows from the application.
         /// </summary>
         public Window[] GetAllTopLevelWindows(AutomationBase automation)
         {
