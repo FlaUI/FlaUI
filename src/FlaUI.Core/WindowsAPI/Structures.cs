@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 
 // ReSharper disable InconsistentNaming
-
+#pragma warning disable
 namespace FlaUI.Core.WindowsAPI
 {
     [StructLayout(LayoutKind.Sequential)]
@@ -116,3 +116,4 @@ namespace FlaUI.Core.WindowsAPI
         public ushort wParamH;
     }
 }
+#pragma warning restore

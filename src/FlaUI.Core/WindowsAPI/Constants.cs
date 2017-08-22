@@ -1,7 +1,7 @@
 ﻿using System;
 
 // ReSharper disable InconsistentNaming
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+#pragma warning disable
 namespace FlaUI.Core.WindowsAPI
 {
     public static class CommonHresultValues
@@ -1537,4 +1537,4 @@ namespace FlaUI.Core.WindowsAPI
         ROLE_SYSTEM_CLOCK = 0x0000003D
     }
 }
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+#pragma warning restore
