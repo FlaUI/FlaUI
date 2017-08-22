@@ -52,7 +52,7 @@ var app = Application.Launch("calc.exe");
 using (var automation = new UIA3Automation())
 {
 	var window = app.GetMainWindow(automation);
-	var button1 = window.FindFirstDescentant(cf => cf.ByText("1"))?.AsButton();
+	var button1 = window.FindFirstDescendant(cf => cf.ByText("1"))?.AsButton();
 	button1?.Invoke();
 	...
 }
