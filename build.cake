@@ -1,4 +1,5 @@
 #tool nuget:?package=NUnit.ConsoleRunner&version=3.7.0
+#addin Cake.FileHelpers
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 //////////////////////////////////////////////////////////////////////
@@ -37,6 +38,39 @@ Task("Build")
     });
     // Hide informational warnings for now
     buildSettings.Properties.Add("WarningLevel", new[] { "3" });
+
+    MSBuild(slnFile, buildSettings);
+});
+
+Task("Build-Signed")
+    //.IsDependentOn("Build")
+    .Does(() =>
+{
+    XmlPoke(@"./src/FlaUI.Core/FlaUI.Core.csproj", "/Project/PropertyGroup/AssemblyName", "FlaUI.Core.Signed");
+    XmlPoke(@"./src/FlaUI.Core/FlaUI.Core.csproj", "/Project/PropertyGroup/SignAssembly", "true");
+
+    XmlPoke(@"./src/FlaUI.UIA2/FlaUI.UIA2.csproj", "/Project/PropertyGroup/AssemblyName", "FlaUI.UIA2.Signed");
+    XmlPoke(@"./src/FlaUI.UIA2/FlaUI.UIA2.csproj", "/Project/PropertyGroup/SignAssembly", "true");
+
+    XmlPoke(@"./src/FlaUI.UIA3/FlaUI.UIA3.csproj", "/Project/PropertyGroup/AssemblyName", "FlaUI.UIA3.Signed");
+    XmlPoke(@"./src/FlaUI.UIA3/FlaUI.UIA3.csproj", "/Project/PropertyGroup/SignAssembly", "true");
+
+    ReplaceTextInFiles(@"./src/FlaUI.UIA3/FlaUI.UIA3.csproj", @"libs\Interop\3.5\Interop", @"libs\Interop\3.5\Signed\Interop");
+    ReplaceTextInFiles(@"./src/FlaUI.UIA3/FlaUI.UIA3.csproj", @"libs\Interop\4.5\Interop", @"libs\Interop\4.5\Signed\Interop");
+
+    var buildSettings = new MSBuildSettings {
+        Verbosity = Verbosity.Minimal,
+        ToolVersion = MSBuildToolVersion.VS2017,
+        Configuration = configuration,
+        PlatformTarget = PlatformTarget.MSIL,
+    }.AddFileLogger(new MSBuildFileLogger {
+        LogFile = "./BuildLog.txt",
+        MSBuildFileLoggerOutput = MSBuildFileLoggerOutput.All
+    });
+    // Hide informational warnings for now
+    buildSettings.Properties.Add("WarningLevel", new[] { "3" });
+
+    buildSettings.WithTarget("Clean").WithTarget("Build");
 
     MSBuild(slnFile, buildSettings);
 });
