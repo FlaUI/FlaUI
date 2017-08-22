@@ -19,8 +19,15 @@
     <IncludeSymbols>True</IncludeSymbols>
   </PropertyGroup>
 
+  <PropertyGroup Label="Signing">
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>../../FlaUI.snk</AssemblyOriginatorKeyFile>
+    <PublicSign Condition="'$(OS)'!='Windows_NT'">true</PublicSign>
+  </PropertyGroup>
+
   <PropertyGroup>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+    <AssemblyName>FlaUI.Core</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='net45'">

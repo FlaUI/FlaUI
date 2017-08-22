@@ -55,6 +55,7 @@
 
   <PropertyGroup>
     <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);GetInteropFile</TargetsForTfmSpecificBuildOutput>
+    <AssemblyName>FlaUI.UIA3</AssemblyName>
   </PropertyGroup>
 
   <Target Name="GetInteropFile">
