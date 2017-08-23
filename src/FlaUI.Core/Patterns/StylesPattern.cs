@@ -29,6 +29,7 @@ namespace FlaUI.Core.Patterns
     }
 
     public abstract class StylesPatternBase<TNativePattern> : PatternBase<TNativePattern>, IStylesPattern
+        where TNativePattern : class
     {
         private AutomationProperty<string> _extendedProperties;
         private AutomationProperty<int> _fillColor;

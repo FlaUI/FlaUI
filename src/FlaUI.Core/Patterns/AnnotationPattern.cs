@@ -26,6 +26,7 @@ namespace FlaUI.Core.Patterns
     }
 
     public abstract class AnnotationPatternBase<TNativePattern> : PatternBase<TNativePattern>, IAnnotationPattern
+        where TNativePattern : class
     {
         private AutomationProperty<AnnotationType> _annotationType;
         private AutomationProperty<string> _annotationTypeName;

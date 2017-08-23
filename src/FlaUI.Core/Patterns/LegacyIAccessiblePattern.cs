@@ -42,6 +42,7 @@ namespace FlaUI.Core.Patterns
     }
 
     public abstract class LegacyIAccessiblePatternBase<TNativePattern> : PatternBase<TNativePattern>, ILegacyIAccessiblePattern
+        where TNativePattern : class
     {
         private AutomationProperty<int> _childId;
         private AutomationProperty<string> _defaultAction;

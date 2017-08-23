@@ -31,6 +31,7 @@ namespace FlaUI.Core.Patterns
     }
 
     public abstract class DragPatternBase<TNativePattern> : PatternBase<TNativePattern>, IDragPattern
+        where TNativePattern : class
     {
         private AutomationProperty<string> _dropEffect;
         private AutomationProperty<string[]> _dropEffects;

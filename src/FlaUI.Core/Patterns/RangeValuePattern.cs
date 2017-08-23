@@ -28,6 +28,7 @@ namespace FlaUI.Core.Patterns
     }
 
     public abstract class RangeValuePatternBase<TNativePattern> : PatternBase<TNativePattern>, IRangeValuePattern
+        where TNativePattern : class
     {
         private AutomationProperty<bool> _isReadOnly;
         private AutomationProperty<double> _largeChange;

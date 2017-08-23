@@ -35,6 +35,7 @@ namespace FlaUI.Core.Patterns
     }
 
     public abstract class ScrollPatternBase<TNativePattern> : PatternBase<TNativePattern>, IScrollPattern
+        where TNativePattern : class
     {
         private AutomationProperty<bool> _horizontallyScrollable;
         private AutomationProperty<double> _horizontalScrollPercent;

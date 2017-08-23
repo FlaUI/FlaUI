@@ -20,6 +20,7 @@ namespace FlaUI.Core.Patterns
     }
 
     public abstract class ExpandCollapsePatternBase<TNativePattern> : PatternBase<TNativePattern>, IExpandCollapsePattern
+        where TNativePattern : class
     {
         private AutomationProperty<ExpandCollapseState> _expandCollapseState;
 

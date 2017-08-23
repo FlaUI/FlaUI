@@ -25,6 +25,7 @@ namespace FlaUI.Core.Patterns
     }
 
     public abstract class Transform2PatternBase<TNativePattern> : TransformPatternBase<TNativePattern>, ITransform2Pattern
+        where TNativePattern : class
     {
         private AutomationProperty<bool> _canZoom;
         private AutomationProperty<double> _zoomLevel;

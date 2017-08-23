@@ -19,6 +19,7 @@ namespace FlaUI.Core.Patterns
     }
 
     public abstract class DockPatternBase<TNativePattern> : PatternBase<TNativePattern>, IDockPattern
+        where TNativePattern : class
     {
         private AutomationProperty<DockPosition> _dockPosition;
 

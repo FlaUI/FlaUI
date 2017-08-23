@@ -25,6 +25,7 @@ namespace FlaUI.Core.Patterns
     }
 
     public abstract class GridItemPatternBase<TNativePattern> : PatternBase<TNativePattern>, IGridItemPattern
+        where TNativePattern : class
     {
         private AutomationProperty<int> _column;
         private AutomationProperty<int> _columnSpan;

@@ -22,6 +22,7 @@ namespace FlaUI.Core.Patterns
     }
 
     public abstract class TablePatternBase<TNativePattern> : PatternBase<TNativePattern>, ITablePattern
+        where TNativePattern : class
     {
         private AutomationProperty<AutomationElement[]> _columnHeaders;
         private AutomationProperty<AutomationElement[]> _rowHeaders;

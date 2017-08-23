@@ -16,6 +16,7 @@ namespace FlaUI.Core.Patterns
     }
 
     public abstract class InvokePatternBase<TNativePattern> : PatternBase<TNativePattern>, IInvokePattern
+        where TNativePattern : class
     {
         protected InvokePatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {

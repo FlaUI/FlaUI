@@ -26,6 +26,7 @@ namespace FlaUI.Core.Patterns
     }
 
     public abstract class TextPatternBase<TNativePattern> : PatternBase<TNativePattern>, ITextPattern
+        where TNativePattern : class
     {
         protected TextPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {

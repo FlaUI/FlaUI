@@ -26,6 +26,7 @@ namespace FlaUI.Core.Patterns
     }
 
     public abstract class DropTargetPatternBase<TNativePattern> : PatternBase<TNativePattern>, IDropTargetPattern
+        where TNativePattern : class
     {
         private AutomationProperty<string> _dropTargetEffect;
         private AutomationProperty<string[]> _dropTargetEffects;

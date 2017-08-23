@@ -31,6 +31,7 @@ namespace FlaUI.Core.Patterns
     }
 
     public abstract class SelectionItemPatternBase<TNativePattern> : PatternBase<TNativePattern>, ISelectionItemPattern
+        where TNativePattern : class
     {
         private AutomationProperty<bool> _isSelected;
         private AutomationProperty<AutomationElement> _selectionContainer;

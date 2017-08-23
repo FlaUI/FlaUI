@@ -38,6 +38,7 @@ namespace FlaUI.Core.Patterns
     }
 
     public abstract class WindowPatternBase<TNativePattern> : PatternBase<TNativePattern>, IWindowPattern
+        where TNativePattern : class
     {
         private AutomationProperty<bool> _canMaximize;
         private AutomationProperty<bool> _canMinimize;
