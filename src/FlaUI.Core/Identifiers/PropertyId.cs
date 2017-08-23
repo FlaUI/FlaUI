@@ -24,7 +24,7 @@ namespace FlaUI.Core.Identifiers
         }
 
         /// <summary>
-        /// Returs a condition for this property with the given value
+        /// Returns a condition for this property with the given value.
         /// </summary>
         public PropertyCondition GetCondition(object value)
         {

@@ -1,4 +1,5 @@
-﻿using FlaUI.Core.UITests.TestFramework;
+﻿using System;
+using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
@@ -24,7 +25,7 @@ namespace FlaUI.Core.UITests.Elements
             textBox.Text = textToSet;
             text = textBox.Text;
             Assert.That(text, Is.EqualTo(textToSet));
-            textBox.Text = "";
+            textBox.Text = String.Empty;
         }
 
         [Test]
@@ -38,7 +39,7 @@ namespace FlaUI.Core.UITests.Elements
             textBox.Enter(textToSet);
             text = textBox.Text;
             Assert.That(text, Is.EqualTo(textToSet));
-            textBox.Text = "";
+            textBox.Text = String.Empty;
         }
     }
 }

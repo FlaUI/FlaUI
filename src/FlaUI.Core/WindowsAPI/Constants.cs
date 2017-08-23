@@ -322,7 +322,7 @@ namespace FlaUI.Core.WindowsAPI
         //#endif /* _WIN32_WINNT >= 0x0500 */
 
         //#if(WINVER >= 0x0500)
-        public const uint WS_EX_NOINHERITLAYOUT = 0x00100000; // Disable inheritence of mirroring by children
+        public const uint WS_EX_NOINHERITLAYOUT = 0x00100000; // Disable inheritance of mirroring by children
         public const uint WS_EX_LAYOUTRTL = 0x00400000; // Right to left mirroring
         //#endif /* WINVER >= 0x0500 */
 

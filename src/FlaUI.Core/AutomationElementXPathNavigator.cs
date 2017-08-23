@@ -29,12 +29,16 @@ namespace FlaUI.Core
 
         private bool IsInAttribute => _attributeIndex != NoAttributeValue;
 
+        /// <inheritdoc />
         public override bool HasAttributes => !IsInAttribute;
 
+        /// <inheritdoc />
         public override string Value => IsInAttribute ? GetAttributeValue(_attributeIndex) : _currentElement.ToString();
 
+        /// <inheritdoc />
         public override object UnderlyingObject => _currentElement;
 
+        /// <inheritdoc />
         public override XPathNodeType NodeType
         {
             get
@@ -51,23 +55,28 @@ namespace FlaUI.Core
             }
         }
 
+        /// <inheritdoc />
         public override string LocalName => IsInAttribute ? GetAttributeName(_attributeIndex) : _currentElement.Properties.ControlType.Value.ToString();
 
+        /// <inheritdoc />
         public override string Name => LocalName;
 
-        public override XmlNameTable NameTable
-        {
-            get { throw new NotImplementedException(); }
-        }
+        /// <inheritdoc />
+        public override XmlNameTable NameTable => throw new NotImplementedException();
 
+        /// <inheritdoc />
         public override string NamespaceURI => String.Empty;
 
+        /// <inheritdoc />
         public override string Prefix => String.Empty;
 
+        /// <inheritdoc />
         public override string BaseURI => String.Empty;
 
+        /// <inheritdoc />
         public override bool IsEmptyElement => false;
 
+        /// <inheritdoc />
         public override XPathNavigator Clone()
         {
             var clonedObject = new AutomationElementXPathNavigator(_rootElement)
@@ -78,6 +87,7 @@ namespace FlaUI.Core
             return clonedObject;
         }
 
+        /// <inheritdoc />
         public override bool MoveToFirstAttribute()
         {
             if (IsInAttribute)
@@ -88,6 +98,7 @@ namespace FlaUI.Core
             return true;
         }
 
+        /// <inheritdoc />
         public override bool MoveToNextAttribute()
         {
             if (_attributeIndex >= Enum.GetNames(typeof(ElementAttributes)).Length - 1)
@@ -103,6 +114,7 @@ namespace FlaUI.Core
             return true;
         }
 
+        /// <inheritdoc />
         public override string GetAttribute(string localName, string namespaceUri)
         {
             if (IsInAttribute)
@@ -117,6 +129,7 @@ namespace FlaUI.Core
             return String.Empty;
         }
 
+        /// <inheritdoc />
         public override bool MoveToAttribute(string localName, string namespaceUri)
         {
             if (IsInAttribute)
@@ -132,22 +145,20 @@ namespace FlaUI.Core
             return false;
         }
 
-        public override bool MoveToFirstNamespace(XPathNamespaceScope namespaceScope)
-        {
-            throw new NotImplementedException();
-        }
+        /// <inheritdoc />
+        public override bool MoveToFirstNamespace(XPathNamespaceScope namespaceScope) => throw new NotImplementedException();
 
-        public override bool MoveToNextNamespace(XPathNamespaceScope namespaceScope)
-        {
-            throw new NotImplementedException();
-        }
+        /// <inheritdoc />
+        public override bool MoveToNextNamespace(XPathNamespaceScope namespaceScope) => throw new NotImplementedException();
 
+        /// <inheritdoc />
         public override void MoveToRoot()
         {
             _attributeIndex = NoAttributeValue;
             _currentElement = _rootElement;
         }
 
+        /// <inheritdoc />
         public override bool MoveToNext()
         {
             if (IsInAttribute) { return false; }
@@ -160,6 +171,7 @@ namespace FlaUI.Core
             return true;
         }
 
+        /// <inheritdoc />
         public override bool MoveToPrevious()
         {
             if (IsInAttribute) { return false; }
@@ -172,6 +184,7 @@ namespace FlaUI.Core
             return true;
         }
 
+        /// <inheritdoc />
         public override bool MoveToFirstChild()
         {
             if (IsInAttribute) { return false; }
@@ -184,6 +197,7 @@ namespace FlaUI.Core
             return true;
         }
 
+        /// <inheritdoc />
         public override bool MoveToParent()
         {
             if (IsInAttribute)
@@ -199,6 +213,7 @@ namespace FlaUI.Core
             return true;
         }
 
+        /// <inheritdoc />
         public override bool MoveTo(XPathNavigator other)
         {
             var specificNavigator = other as AutomationElementXPathNavigator;
@@ -215,11 +230,13 @@ namespace FlaUI.Core
             return true;
         }
 
+        /// <inheritdoc />
         public override bool MoveToId(string id)
         {
             return false;
         }
 
+        /// <inheritdoc />
         public override bool IsSamePosition(XPathNavigator other)
         {
             var specificNavigator = other as AutomationElementXPathNavigator;

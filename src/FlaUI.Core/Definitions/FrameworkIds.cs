@@ -1,4 +1,6 @@
-﻿namespace FlaUI.Core.Definitions
+﻿using System;
+
+namespace FlaUI.Core.Definitions
 {
     public static class FrameworkIds
     {

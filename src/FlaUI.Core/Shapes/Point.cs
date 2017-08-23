@@ -122,6 +122,6 @@ namespace FlaUI.Core.Shapes
         /// <summary>
         /// Instance of an empty point
         /// </summary>
-        public static Point EmptyPoint = new Point(0, 0);
+        public static readonly Point EmptyPoint = new Point(0, 0);
     }
 }

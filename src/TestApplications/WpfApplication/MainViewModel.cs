@@ -10,14 +10,20 @@ namespace WpfApplication
 
         public ICommand InvokeButtonCommand { get; }
 
-        public string InvokeButtonText { get { return GetProperty<string>(); } set { SetProperty(value); } }
+        public string InvokeButtonText
+        {
+            get => GetProperty<string>();
+            set => SetProperty(value);
+        }
 
         public MainViewModel()
         {
-            DataGridItems = new ObservableCollection<DataGridItem>();
-            DataGridItems.Add(new DataGridItem { Id = 1, Name = "Spongebob" });
-            DataGridItems.Add(new DataGridItem { Id = 2, Name = "Patrick" });
-            DataGridItems.Add(new DataGridItem { Id = 3, Name = "Tadeus" });
+            DataGridItems = new ObservableCollection<DataGridItem>
+            {
+                new DataGridItem { Id = 1, Name = "Spongebob" },
+                new DataGridItem { Id = 2, Name = "Patrick" },
+                new DataGridItem { Id = 3, Name = "Tadeus" }
+            };
 
             InvokeButtonText = "Invoke me!";
             InvokeButtonCommand = new RelayCommand(o => InvokeButtonText = "Invoked!");

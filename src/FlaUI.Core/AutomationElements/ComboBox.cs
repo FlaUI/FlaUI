@@ -5,7 +5,6 @@ using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
 using FlaUI.Core.Patterns;
-using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.AutomationElements
 {

@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Input;
@@ -104,7 +105,7 @@ namespace FlaUI.Core.UITests
             {
                 var resultElement = _mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("158"));
                 var value = resultElement.Properties.Name;
-                return Regex.Replace(value, "[^0-9]", "");
+                return Regex.Replace(value, "[^0-9]", String.Empty);
             }
         }
 
@@ -141,7 +142,7 @@ namespace FlaUI.Core.UITests
             {
                 var resultElement = FindElement("CalculatorResults");
                 var value = resultElement.Properties.Name;
-                return Regex.Replace(value, "[^0-9]", "");
+                return Regex.Replace(value, "[^0-9]", String.Empty);
             }
         }
 

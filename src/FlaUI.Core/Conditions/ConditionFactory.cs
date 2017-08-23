@@ -47,12 +47,12 @@ namespace FlaUI.Core.Conditions
 
         public PropertyCondition ByLocalizedControlType(string localizedControlType)
         {
-           return new PropertyCondition(_propertyLibrary.Element.LocalizedControlType, localizedControlType);
+            return new PropertyCondition(_propertyLibrary.Element.LocalizedControlType, localizedControlType);
         }
 
         public PropertyCondition ByHelpTextProperty(string helpText)
         {
-           return new PropertyCondition(_propertyLibrary.Element.HelpText, helpText);  
+            return new PropertyCondition(_propertyLibrary.Element.HelpText, helpText);
         }
 
         /// <summary>

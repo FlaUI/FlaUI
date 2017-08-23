@@ -38,9 +38,11 @@ namespace FlaUI.Core
             var width = rectangle.Width.ToInt();
             var height = rectangle.Height.ToInt();
             var bmp = new Bitmap(width, height, PixelFormat.Format32bppArgb);
-            var graphics = Graphics.FromImage(bmp);
-            graphics.CopyFromScreen(rectangle.Left.ToInt(), rectangle.Top.ToInt(), 0, 0, new System.Drawing.Size(width, height), CopyPixelOperation.SourceCopy);
-            return bmp;
+            using (var graphics = Graphics.FromImage(bmp))
+            {
+                graphics.CopyFromScreen(rectangle.Left.ToInt(), rectangle.Top.ToInt(), 0, 0, new System.Drawing.Size(width, height), CopyPixelOperation.SourceCopy);
+                return bmp;
+            }
         }
 
         public static BitmapImage CaptureAreaWpf(Shapes.Rectangle rectangle)

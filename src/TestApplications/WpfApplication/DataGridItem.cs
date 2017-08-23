@@ -1,8 +1,19 @@
-﻿namespace WpfApplication
+﻿using WpfApplication.Infrastructure;
+
+namespace WpfApplication
 {
-    public class DataGridItem
+    public class DataGridItem : ObservableObject
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public int Id
+        {
+            get => GetProperty<int>();
+            set => SetProperty(value);
+        }
+
+        public string Name
+        {
+            get => GetProperty<string>();
+            set => SetProperty(value);
+        }
     }
 }
