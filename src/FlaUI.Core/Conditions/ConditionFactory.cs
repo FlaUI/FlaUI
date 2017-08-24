@@ -4,7 +4,7 @@ using FlaUI.Core.Tools;
 namespace FlaUI.Core.Conditions
 {
     /// <summary>
-    /// Helper class with some commonly used conditions
+    /// Helper class with some commonly used conditions.
     /// </summary>
     public class ConditionFactory
     {

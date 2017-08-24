@@ -9,7 +9,7 @@ namespace FlaUI.Core.UITests
         [Test]
         public void DisposeWhenClosed()
         {
-            using (var automation = new UIA3Automation())
+            using (new UIA3Automation())
             {
                 using (var app = Application.Launch("notepad.exe"))
                 {

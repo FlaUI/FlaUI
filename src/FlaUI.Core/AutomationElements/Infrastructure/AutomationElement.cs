@@ -39,7 +39,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         public BasicAutomationElementBase BasicAutomationElement { get; }
 
         /// <summary>
-        /// The current used automationn object.
+        /// The current used automation object.
         /// </summary>
         public AutomationBase Automation => BasicAutomationElement.Automation;
 

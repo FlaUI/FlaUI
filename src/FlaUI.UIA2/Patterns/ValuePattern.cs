@@ -16,6 +16,7 @@ namespace FlaUI.UIA2.Patterns
         {
         }
 
+        /// <inheritdoc />
         public override void SetValue(string value)
         {
             NativePattern.SetValue(value);

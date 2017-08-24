@@ -17,6 +17,7 @@ namespace FlaUI.UIA3.Patterns
         {
         }
 
+        /// <inheritdoc />
         public override void SetValue(string value)
         {
             ComCallWrapper.Call(() => NativePattern.SetValue(value));

@@ -3,12 +3,12 @@
 namespace FlaUI.Core.Conditions
 {
     /// <summary>
-    /// Base class for the conditions
+    /// Base class for the conditions.
     /// </summary>
     public abstract class ConditionBase
     {
         /// <summary>
-        /// Adds the given condition with an "and"
+        /// Adds the given condition with an "and".
         /// </summary>
         public AndCondition And(ConditionBase newCondition)
         {
@@ -27,7 +27,7 @@ namespace FlaUI.Core.Conditions
         }
 
         /// <summary>
-        /// Adds the given condition with an "or"
+        /// Adds the given condition with an "or".
         /// </summary>
         public OrCondition Or(ConditionBase newCondition)
         {
@@ -46,7 +46,7 @@ namespace FlaUI.Core.Conditions
         }
 
         /// <summary>
-        /// Packs this condition into a not condition
+        /// Packs this condition into a not condition.
         /// </summary>
         public NotCondition Not()
         {

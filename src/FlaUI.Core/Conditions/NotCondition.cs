@@ -13,7 +13,7 @@ namespace FlaUI.Core.Conditions
 
         public override string ToString()
         {
-            return String.Format("NOT ({0})", Condition);
+            return $"NOT ({Condition})";
         }
     }
 }

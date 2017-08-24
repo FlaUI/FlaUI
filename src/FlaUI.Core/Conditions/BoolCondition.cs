@@ -13,7 +13,7 @@ namespace FlaUI.Core.Conditions
 
         public override string ToString()
         {
-            return String.Format("BOOL: {0}", BooleanValue);
+            return $"BOOL: {BooleanValue}";
         }
     }
 
