@@ -2,7 +2,7 @@
 
   <PropertyGroup Label="Build">
     <TargetFrameworks>net35;net40;net45</TargetFrameworks>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
@@ -23,29 +23,40 @@
     <IncludeSymbols>True</IncludeSymbols>
   </PropertyGroup>
 
-  <PropertyGroup Label="Signing">
-    <SignAssembly>false</SignAssembly>
+  <PropertyGroup Label="Signing" Condition="'$(EnableSigning)'=='true'">
+    <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>../../FlaUI.snk</AssemblyOriginatorKeyFile>
     <PublicSign Condition="'$(OS)'!='Windows_NT'">true</PublicSign>
+    <AssemblyName>FlaUI.UIA3.Signed</AssemblyName>
+    <OutputPath>bin\$(Configuration)\Signed</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\Signed</IntermediateOutputPath>
   </PropertyGroup>
 
   <ItemGroup Label="Project References">
     <ProjectReference Include="..\FlaUI.Core\FlaUI.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup Label="References">
-    <Reference Include="Accessibility" />
-    <Reference Include="WindowsBase" />
+  <PropertyGroup>
+    <InteropHintPath>..\libs\Interop</InteropHintPath>
+    <InteropHintPath Condition="'$(EnableSigning)'=='true'">$(InteropHintPath)\Signed</InteropHintPath>
+  </PropertyGroup>
+
+  <ItemGroup Label="Interop References">
     <Reference Include="Interop.UIAutomationClient" Condition="'$(TargetFramework)'=='net35'">
-      <HintPath>..\libs\Interop\3.5\Interop.UIAutomationClient.dll</HintPath>
+      <HintPath>$(InteropHintPath)\3.5\Interop.UIAutomationClient.dll</HintPath>
       <EmbedInteropTypes>false</EmbedInteropTypes>
       <SpecificVersion>false</SpecificVersion>
     </Reference>
     <Reference Include="Interop.UIAutomationClient" Condition="'$(TargetFramework)'=='net40' Or '$(TargetFramework)'=='net45'">
-      <HintPath>..\libs\Interop\4.5\Interop.UIAutomationClient.dll</HintPath>
+      <HintPath>$(InteropHintPath)\4.5\Interop.UIAutomationClient.dll</HintPath>
       <EmbedInteropTypes>false</EmbedInteropTypes>
       <SpecificVersion>false</SpecificVersion>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup Label="References">
+    <Reference Include="Accessibility" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
 
   <ItemGroup Label="Additional nuget files">
@@ -55,7 +66,6 @@
 
   <PropertyGroup>
     <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);GetInteropFile</TargetsForTfmSpecificBuildOutput>
-    <AssemblyName>FlaUI.UIA3</AssemblyName>
   </PropertyGroup>
 
   <Target Name="GetInteropFile">

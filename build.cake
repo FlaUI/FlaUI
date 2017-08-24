@@ -43,21 +43,9 @@ Task("Build")
 });
 
 Task("Build-Signed")
-    //.IsDependentOn("Build")
+    .IsDependentOn("Restore-NuGet-Packages")
     .Does(() =>
 {
-    XmlPoke(@"./src/FlaUI.Core/FlaUI.Core.csproj", "/Project/PropertyGroup/AssemblyName", "FlaUI.Core.Signed");
-    XmlPoke(@"./src/FlaUI.Core/FlaUI.Core.csproj", "/Project/PropertyGroup/SignAssembly", "true");
-
-    XmlPoke(@"./src/FlaUI.UIA2/FlaUI.UIA2.csproj", "/Project/PropertyGroup/AssemblyName", "FlaUI.UIA2.Signed");
-    XmlPoke(@"./src/FlaUI.UIA2/FlaUI.UIA2.csproj", "/Project/PropertyGroup/SignAssembly", "true");
-
-    XmlPoke(@"./src/FlaUI.UIA3/FlaUI.UIA3.csproj", "/Project/PropertyGroup/AssemblyName", "FlaUI.UIA3.Signed");
-    XmlPoke(@"./src/FlaUI.UIA3/FlaUI.UIA3.csproj", "/Project/PropertyGroup/SignAssembly", "true");
-
-    ReplaceTextInFiles(@"./src/FlaUI.UIA3/FlaUI.UIA3.csproj", @"libs\Interop\3.5\Interop", @"libs\Interop\3.5\Signed\Interop");
-    ReplaceTextInFiles(@"./src/FlaUI.UIA3/FlaUI.UIA3.csproj", @"libs\Interop\4.5\Interop", @"libs\Interop\4.5\Signed\Interop");
-
     var buildSettings = new MSBuildSettings {
         Verbosity = Verbosity.Minimal,
         ToolVersion = MSBuildToolVersion.VS2017,
@@ -69,8 +57,9 @@ Task("Build-Signed")
     });
     // Hide informational warnings for now
     buildSettings.Properties.Add("WarningLevel", new[] { "3" });
+    buildSettings.Properties.Add("EnableSigning", new[] { "true" });
 
-    buildSettings.WithTarget("Clean").WithTarget("Build");
+    buildSettings.WithTarget("Clean").WithTarget("Rebuild");
 
     MSBuild(slnFile, buildSettings);
 });

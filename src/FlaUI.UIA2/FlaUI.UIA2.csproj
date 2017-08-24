@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net35;net40;net45</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageOutputPath>..\..\nuget</PackageOutputPath>
     <Version>1.3.0</Version>
@@ -19,15 +20,13 @@
     <IncludeSymbols>True</IncludeSymbols>
   </PropertyGroup>
 
-  <PropertyGroup Label="Signing">
-    <SignAssembly>false</SignAssembly>
+  <PropertyGroup Label="Signing" Condition="'$(EnableSigning)'=='true'">
+    <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>../../FlaUI.snk</AssemblyOriginatorKeyFile>
     <PublicSign Condition="'$(OS)'!='Windows_NT'">true</PublicSign>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
-    <AssemblyName>FlaUI.UIA2</AssemblyName>
+    <AssemblyName>FlaUI.UIA2.Signed</AssemblyName>
+    <OutputPath>bin\$(Configuration)\Signed</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\Signed</IntermediateOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
