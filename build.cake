@@ -36,19 +36,27 @@ Task("Build")
         LogFile = "./BuildLog.txt",
         MSBuildFileLoggerOutput = MSBuildFileLoggerOutput.All
     });
-    // Restore and build
-    buildSettings.WithTarget("Restore").WithTarget("Build");
     // Hide informational warnings for now
     buildSettings.Properties.Add("WarningLevel", new[] { "3" });
     // Force restoring
     buildSettings.Properties.Add("RestoreForce", new[] { "true" });
 
     // First build with default settings
+    buildSettings.Targets.Clear();
+    buildSettings.WithTarget("Restore");
+    MSBuild(slnFile, buildSettings);
+    buildSettings.Targets.Clear();
+    buildSettings.WithTarget("Build");
     MSBuild(slnFile, buildSettings);
 
     // Second build with signing enabled
     buildSettings.FileLoggers.First().LogFile = "./BuildLogSigned.txt";
     buildSettings.Properties.Add("EnableSigning", new[] { "true" });
+    buildSettings.Targets.Clear();
+    buildSettings.WithTarget("Restore");
+    MSBuild(slnFile, buildSettings);
+    buildSettings.Targets.Clear();
+    buildSettings.WithTarget("Build");
     MSBuild(slnFile, buildSettings);
 });
 
