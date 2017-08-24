@@ -22,8 +22,6 @@ namespace FlaUI.UIA2
             NativeElement = nativeElement;
             Patterns = new UIA2AutomationElementPatternValues(this);
         }
-        
-        public override AutomationElementPatternValuesBase Patterns { get; }
 
         /// <summary>
         /// Concrete implementation of the automation object
@@ -59,6 +57,7 @@ namespace FlaUI.UIA2
             return returnedValue;
         }
 
+        /// <inheritdoc />
         public override AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition)
         {
             var cacheRequest = CacheRequest.IsCachingActive ? CacheRequest.Current.ToNative() : null;
@@ -68,6 +67,7 @@ namespace FlaUI.UIA2
             return AutomationElementConverter.NativeArrayToManaged(Automation, nativeFoundElements);
         }
 
+        /// <inheritdoc />
         public override AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
         {
             var cacheRequest = CacheRequest.IsCachingActive ? CacheRequest.Current.ToNative() : null;
@@ -79,8 +79,7 @@ namespace FlaUI.UIA2
 
         public override bool TryGetClickablePoint(out Point point)
         {
-            System.Windows.Point outPoint;
-            var success = NativeElement.TryGetClickablePoint(out outPoint);
+            var success = NativeElement.TryGetClickablePoint(out System.Windows.Point outPoint);
             if (success)
             {
                 point = new Point(outPoint.X, outPoint.Y);

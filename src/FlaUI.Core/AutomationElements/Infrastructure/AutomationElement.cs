@@ -25,11 +25,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
     {
         public AutomationElement(BasicAutomationElementBase basicAutomationElement)
         {
-            if (basicAutomationElement == null)
-            {
-                throw new ArgumentNullException(nameof(basicAutomationElement));
-            }
-            BasicAutomationElement = basicAutomationElement;
+            BasicAutomationElement = basicAutomationElement ?? throw new ArgumentNullException(nameof(basicAutomationElement));
         }
 
         public AutomationElement(AutomationElement automationElement)
@@ -86,8 +82,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         {
             get
             {
-                string currentFrameworkId;
-                var hasProperty = Properties.FrameworkId.TryGetValue(out currentFrameworkId);
+                var hasProperty = Properties.FrameworkId.TryGetValue(out string currentFrameworkId);
                 return hasProperty ? FrameworkIds.ConvertToFrameworkType(currentFrameworkId) : FrameworkType.Unknown;
             }
         }
@@ -340,7 +335,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Finds the first element by looping thru all conditions.
+        /// Finds the first element by iterating thru all conditions.
         /// </summary>
         public AutomationElement FindFirstNested(params ConditionBase[] nestedConditions)
         {
@@ -357,7 +352,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Finds all elements by looping thru all conditions.
+        /// Finds all elements by iterating thru all conditions.
         /// </summary>
         public AutomationElement[] FindAllNested(params ConditionBase[] nestedConditions)
         {
@@ -492,8 +487,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             {
                 throw new ArgumentException("Pattern doesn't have an AvailabilityProperty");
             }
-            bool isPatternAvailable;
-            var success = BasicAutomationElement.TryGetPropertyValue(pattern.AvailabilityProperty, out isPatternAvailable);
+            var success = BasicAutomationElement.TryGetPropertyValue(pattern.AvailabilityProperty, out bool isPatternAvailable);
             return success && isPatternAvailable;
         }
 
@@ -541,11 +535,13 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             return other != null && Automation.Compare(this, other);
         }
 
+        /// <inheritdoc />
         public override bool Equals(object obj)
         {
             return Equals(obj as AutomationElement);
         }
 
+        /// <inheritdoc />
         public override int GetHashCode()
         {
             return BasicAutomationElement?.GetHashCode() ?? 0;
@@ -560,6 +556,13 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
                 Properties.AutomationId.ValueOrDefault, Properties.Name.ValueOrDefault, Properties.LocalizedControlType.ValueOrDefault, Properties.FrameworkId.ValueOrDefault);
         }
 
+        /// <summary>
+        /// Executes the given action on the given pattern.
+        /// </summary>
+        /// <typeparam name="TPattern">The type of the pattern.</typeparam>
+        /// <param name="pattern">The pattern.</param>
+        /// <param name="throwIfNotSupported">Flag to indicate if an exception should be thrown if the pattern is not supported.</param>
+        /// <param name="action">The action to execute on the pattern</param>
         protected internal void ExecuteInPattern<TPattern>(TPattern pattern, bool throwIfNotSupported, Action<TPattern> action)
         {
             if (pattern != null)
@@ -572,6 +575,15 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             }
         }
 
+        /// <summary>
+        /// Executes the given func on the given pattern returning the received value.
+        /// </summary>
+        /// <typeparam name="TPattern">The type of the pattern.</typeparam>
+        /// <typeparam name="TRet">The type of the return value.</typeparam>
+        /// <param name="pattern">Zhe pattern.</param>
+        /// <param name="throwIfNotSupported">Flag to indicate if an exception should be thrown if the pattern is not supported.</param>
+        /// <param name="func">The function to execute on the pattern.</param>
+        /// <returns>The value received from the pattern or the default if the pattern is not supported.</returns>
         protected internal TRet ExecuteInPattern<TPattern, TRet>(TPattern pattern, bool throwIfNotSupported, Func<TPattern, TRet> func)
         {
             if (pattern != null)
@@ -586,121 +598,193 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         #region Conversion Methods
+        /// <summary>
+        /// Converts the element to a <see cref="Button"/>.
+        /// </summary>
         public Button AsButton()
         {
             return new Button(BasicAutomationElement);
         }
 
+        /// <summary>
+        /// Converts the element to a <see cref="CheckBox"/>.
+        /// </summary>
         public CheckBox AsCheckBox()
         {
             return new CheckBox(BasicAutomationElement);
         }
 
+        /// <summary>
+        /// Converts the element to a <see cref="ComboBox"/>.
+        /// </summary>
         public ComboBox AsComboBox()
         {
             return new ComboBox(BasicAutomationElement);
         }
 
+        /// <summary>
+        /// Converts the element to a <see cref="Label"/>.
+        /// </summary>
         public Label AsLabel()
         {
             return new Label(BasicAutomationElement);
         }
 
+        /// <summary>
+        /// Converts the element to a <see cref="Grid"/>.
+        /// </summary>
         public Grid AsGrid()
         {
             return new Grid(BasicAutomationElement);
         }
 
+        /// <summary>
+        /// Converts the element to a <see cref="GridRow"/>.
+        /// </summary>
         public GridRow AsGridRow()
         {
             return new GridRow(BasicAutomationElement);
         }
 
+        /// <summary>
+        /// Converts the element to a <see cref="GridCell"/>.
+        /// </summary>
         public GridCell AsGridCell()
         {
             return new GridCell(BasicAutomationElement);
         }
 
+        /// <summary>
+        /// Converts the element to a <see cref="GridHeader"/>.
+        /// </summary>
         public GridHeader AsGridHeader()
         {
             return new GridHeader(BasicAutomationElement);
         }
 
+        /// <summary>
+        /// Converts the element to a <see cref="GridHeaderItem"/>.
+        /// </summary>
         public GridHeaderItem AsGridHeaderItem()
         {
             return new GridHeaderItem(BasicAutomationElement);
         }
 
+        /// <summary>
+        /// Converts the element to a <see cref="HScrollBar"/>.
+        /// </summary>
         public HScrollBar AsHScrollBar()
         {
             return new HScrollBar(BasicAutomationElement);
         }
 
+        /// <summary>
+        /// Converts the element to a <see cref="Menu"/>.
+        /// </summary>
         public Menu AsMenu()
         {
             return new Menu(BasicAutomationElement);
         }
 
+        /// <summary>
+        /// Converts the element to a <see cref="MenuItem"/>.
+        /// </summary>
         public MenuItem AsMenuItem()
         {
             return new MenuItem(BasicAutomationElement);
         }
 
+        /// <summary>
+        /// Converts the element to a <see cref="ProgressBar"/>.
+        /// </summary>
         public ProgressBar AsProgressBar()
         {
             return new ProgressBar(BasicAutomationElement);
         }
 
+        /// <summary>
+        /// Converts the element to a <see cref="RadioButton"/>.
+        /// </summary>
         public RadioButton AsRadioButton()
         {
             return new RadioButton(BasicAutomationElement);
         }
 
+        /// <summary>
+        /// Converts the element to a <see cref="Slider"/>.
+        /// </summary>
         public Slider AsSlider()
         {
             return new Slider(BasicAutomationElement);
         }
 
+        /// <summary>
+        /// Converts the element to a <see cref="Tab"/>.
+        /// </summary>
         public Tab AsTab()
         {
             return new Tab(BasicAutomationElement);
         }
 
+        /// <summary>
+        /// Converts the element to a <see cref="TabItem"/>.
+        /// </summary>
         public TabItem AsTabItem()
         {
             return new TabItem(BasicAutomationElement);
         }
 
+        /// <summary>
+        /// Converts the element to a <see cref="TextBox"/>.
+        /// </summary>
         public TextBox AsTextBox()
         {
             return new TextBox(BasicAutomationElement);
         }
 
+        /// <summary>
+        /// Converts the element to a <see cref="Thumb"/>.
+        /// </summary>
         public Thumb AsThumb()
         {
             return new Thumb(BasicAutomationElement);
         }
 
+        /// <summary>
+        /// Converts the element to a <see cref="TitleBar"/>.
+        /// </summary>
         public TitleBar AsTitleBar()
         {
             return new TitleBar(BasicAutomationElement);
         }
 
+        /// <summary>
+        /// Converts the element to a <see cref="Tree"/>.
+        /// </summary>
         public Tree AsTree()
         {
             return new Tree(BasicAutomationElement);
         }
 
+        /// <summary>
+        /// Converts the element to a <see cref="TreeItem"/>.
+        /// </summary>
         public TreeItem AsTreeItem()
         {
             return new TreeItem(BasicAutomationElement);
         }
 
+        /// <summary>
+        /// Converts the element to a <see cref="VScrollBar"/>.
+        /// </summary>
         public VScrollBar AsVScrollBar()
         {
             return new VScrollBar(BasicAutomationElement);
         }
 
+        /// <summary>
+        /// Converts the element to a <see cref="Window"/>.
+        /// </summary>
         public Window AsWindow()
         {
             return new Window(BasicAutomationElement);
@@ -708,89 +792,165 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         #endregion Conversion Methods
 
         #region Convenience methods
+        /// <summary>
+        /// Finds the first child.
+        /// </summary>
+        /// <returns>The found element or null if no element was found.</returns>
         public AutomationElement FindFirstChild()
         {
             return FindFirst(TreeScope.Children, new TrueCondition());
         }
 
+        /// <summary>
+        /// Finds the first child with the given automation id.
+        /// </summary>
+        /// <param name="automationId">The automation id.</param>
+        /// <returns>The found element or null if no element was found.</returns>
         public AutomationElement FindFirstChild(string automationId)
         {
             return FindFirst(TreeScope.Children, ConditionFactory.ByAutomationId(automationId));
         }
 
+        /// <summary>
+        /// Finds the first child with the condition.
+        /// </summary>
+        /// <param name="condition">The condition.</param>
+        /// <returns>The found element or null if no element was found.</returns>
         public AutomationElement FindFirstChild(ConditionBase condition)
         {
             return FindFirst(TreeScope.Children, condition);
         }
 
-        public AutomationElement FindFirstChild(Func<ConditionFactory, ConditionBase> newConditionFunc)
+        /// <summary>
+        /// Finds the first child with the condition.
+        /// </summary>
+        /// <param name="conditionFunc">The condition method.</param>
+        /// <returns>The found element or null if no element was found.</returns>
+        public AutomationElement FindFirstChild(Func<ConditionFactory, ConditionBase> conditionFunc)
         {
-            var condition = newConditionFunc(ConditionFactory);
+            var condition = conditionFunc(ConditionFactory);
             return FindFirstChild(condition);
         }
 
+        /// <summary>
+        /// Finds all children.
+        /// </summary>
+        /// <returns>The found elements or an empty list if no elements were found.</returns>
         public AutomationElement[] FindAllChildren()
         {
             return FindAll(TreeScope.Children, new TrueCondition());
         }
 
+        /// <summary>
+        /// Finds all children with the condition.
+        /// </summary>
+        /// <param name="condition">The condition.</param>
+        /// <returns>The found elements or an empty list if no elements were found.</returns>
         public AutomationElement[] FindAllChildren(ConditionBase condition)
         {
             return FindAll(TreeScope.Children, condition);
         }
 
-        public AutomationElement[] FindAllChildren(Func<ConditionFactory, ConditionBase> newConditionFunc)
+        /// <summary>
+        /// Finds all children with the condition.
+        /// </summary>
+        /// <param name="conditionFunc">The condition mehtod.</param>
+        /// <returns>The found elements or an empty list if no elements were found.</returns>
+        public AutomationElement[] FindAllChildren(Func<ConditionFactory, ConditionBase> conditionFunc)
         {
-            var condition = newConditionFunc(ConditionFactory);
+            var condition = conditionFunc(ConditionFactory);
             return FindAllChildren(condition);
         }
 
+        /// <summary>
+        /// Finds the first descendant.
+        /// </summary>
+        /// <returns>The found element or null if no element was found.</returns>
         public AutomationElement FindFirstDescendant()
         {
             return FindFirst(TreeScope.Descendants, new TrueCondition());
         }
 
+        /// <summary>
+        /// Finds the first descendant with the given automation id.
+        /// </summary>
+        /// <param name="automationId">The automation id.</param>
+        /// <returns>The found element or null if no element was found.</returns>
         public AutomationElement FindFirstDescendant(string automationId)
         {
             return FindFirst(TreeScope.Descendants, ConditionFactory.ByAutomationId(automationId));
         }
 
+        /// <summary>
+        /// Finds the first descendant with the condition.
+        /// </summary>
+        /// <param name="condition">The condition.</param>
+        /// <returns>The found element or null if no element was found.</returns>
         public AutomationElement FindFirstDescendant(ConditionBase condition)
         {
             return FindFirst(TreeScope.Descendants, condition);
         }
 
-        public AutomationElement FindFirstDescendant(Func<ConditionFactory, ConditionBase> newConditionFunc)
+        /// <summary>
+        /// Finds the first descendant with the condition.
+        /// </summary>
+        /// <param name="conditionFunc">The condition method.</param>
+        /// <returns>The found element or null if no element was found.</returns>
+        public AutomationElement FindFirstDescendant(Func<ConditionFactory, ConditionBase> conditionFunc)
         {
-            var condition = newConditionFunc(ConditionFactory);
+            var condition = conditionFunc(ConditionFactory);
             return FindFirstDescendant(condition);
         }
 
+        /// <summary>
+        /// Finds all descendants.
+        /// </summary>
+        /// <returns>The found elements or an empty list if no elements were found.</returns>
         public AutomationElement[] FindAllDescendants()
         {
             return FindAll(TreeScope.Descendants, new TrueCondition());
         }
 
+        /// <summary>
+        /// Finds all descendants with the condition.
+        /// </summary>
+        /// <param name="condition">The condition.</param>
+        /// <returns>The found elements or an empty list if no elements were found.</returns>
         public AutomationElement[] FindAllDescendants(ConditionBase condition)
         {
             return FindAll(TreeScope.Descendants, condition);
         }
 
-        public AutomationElement[] FindAllDescendants(Func<ConditionFactory, ConditionBase> newConditionFunc)
+        /// <summary>
+        /// Finds all descendants with the condition.
+        /// </summary>
+        /// <param name="conditionFunc">The condition mehtod.</param>
+        /// <returns>The found elements or an empty list if no elements were found.</returns>
+        public AutomationElement[] FindAllDescendants(Func<ConditionFactory, ConditionBase> conditionFunc)
         {
-            var condition = newConditionFunc(ConditionFactory);
+            var condition = conditionFunc(ConditionFactory);
             return FindAllDescendants(condition);
         }
 
-        public AutomationElement FindFirstNested(Func<ConditionFactory, IList<ConditionBase>> nestedConditionsFunc)
+        /// <summary>
+        /// Finds the first element by iterating thru all conditions.
+        /// </summary>
+        /// <param name="conditionFunc">The condition method.</param>
+        /// <returns>The found element or null if no element was found.</returns>
+        public AutomationElement FindFirstNested(Func<ConditionFactory, IList<ConditionBase>> conditionFunc)
         {
-            var conditions = nestedConditionsFunc(ConditionFactory);
+            var conditions = conditionFunc(ConditionFactory);
             return FindFirstNested(conditions.ToArray());
         }
 
-        public AutomationElement[] FindAllNested(Func<ConditionFactory, IList<ConditionBase>> nestedConditionsFunc)
+        /// <summary>
+        /// Finds all elements by iterating thru all conditions.
+        /// </summary>
+        /// <param name="conditionFunc">The condition method.</param>
+        /// <returns>The found elements or an empty list if no elements were found.</returns>
+        public AutomationElement[] FindAllNested(Func<ConditionFactory, IList<ConditionBase>> conditionFunc)
         {
-            var conditions = nestedConditionsFunc(ConditionFactory);
+            var conditions = conditionFunc(ConditionFactory);
             return FindAllNested(conditions.ToArray());
         }
         #endregion Convenience methods

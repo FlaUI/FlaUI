@@ -21,6 +21,11 @@ namespace FlaUI.Core
         private readonly Process _process;
 
         /// <summary>
+        /// Flag to indicate if Dispose has already been called.
+        /// </summary>
+        private bool _disposed;
+
+        /// <summary>
         /// Flag to indicate, if the application is a windows store app.
         /// </summary>
         public bool IsStoreApp { get; }
@@ -79,9 +84,8 @@ namespace FlaUI.Core
         public bool Close()
         {
             Logger.Default.Debug("Closing application");
-            if (_process.HasExited)
+            if (_disposed || _process.HasExited)
             {
-                _process.Dispose();
                 return true;
             }
             _process.CloseMainWindow();
@@ -90,17 +94,14 @@ namespace FlaUI.Core
                 return true;
             }
             _process.WaitForExit(5000);
-            var closedNormally = true;
             if (!_process.HasExited)
             {
                 Logger.Default.Info("Application failed to exit, killing process");
                 _process.Kill();
                 _process.WaitForExit(5000);
-                closedNormally = false;
+                return false;
             }
-            _process.Close();
-            _process.Dispose();
-            return closedNormally;
+            return true;
         }
 
         /// <summary>
@@ -110,10 +111,12 @@ namespace FlaUI.Core
         {
             try
             {
-                if (_process.HasExited) return;
+                if (_process.HasExited)
+                {
+                    return;
+                }
                 _process.Kill();
                 _process.WaitForExit();
-                _process.Dispose();
             }
             catch
             {
@@ -121,12 +124,23 @@ namespace FlaUI.Core
             }
         }
 
-        /// <summary>
-        /// Closes the associated process.
-        /// </summary>
         public void Dispose()
         {
-            Close();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed)
+            {
+                return;
+            }
+            if (disposing)
+            {
+                _process?.Dispose();
+            }
+            _disposed = true;
         }
 
         public static Application Attach(int processId)

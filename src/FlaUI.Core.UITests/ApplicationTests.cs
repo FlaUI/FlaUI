@@ -13,6 +13,7 @@ namespace FlaUI.Core.UITests
             {
                 using (var app = Application.Launch("notepad.exe"))
                 {
+                    app.WaitWhileMainHandleIsMissing();
                     app.Close();
                 }
             }

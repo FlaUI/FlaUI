@@ -24,8 +24,6 @@ namespace FlaUI.UIA3
             Patterns = new UIA3AutomationElementPatternValues(this);
         }
 
-        public override AutomationElementPatternValuesBase Patterns { get; }
-
         /// <summary>
         /// Concrete implementation of the automation object
         /// </summary>
@@ -68,6 +66,7 @@ namespace FlaUI.UIA3
             return returnedValue;
         }
 
+        /// <inheritdoc />
         public override AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition)
         {
             var nativeFoundElements = CacheRequest.IsCachingActive
@@ -76,6 +75,7 @@ namespace FlaUI.UIA3
             return AutomationElementConverter.NativeArrayToManaged(Automation, nativeFoundElements);
         }
 
+        /// <inheritdoc />
         public override AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
         {
             var nativeFoundElement = CacheRequest.IsCachingActive
@@ -139,17 +139,13 @@ namespace FlaUI.UIA3
 
         public override PatternId[] GetSupportedPatterns()
         {
-            int[] rawIds;
-            string[] rawPatternNames;
-            Automation.NativeAutomation.PollForPotentialSupportedPatterns(NativeElement, out rawIds, out rawPatternNames);
+            Automation.NativeAutomation.PollForPotentialSupportedPatterns(NativeElement, out int[] rawIds, out string[] _);
             return rawIds.Select(id => PatternId.Find(Automation.AutomationType, id)).ToArray();
         }
 
         public override PropertyId[] GetSupportedProperties()
         {
-            int[] rawIds;
-            string[] rawPatternNames;
-            Automation.NativeAutomation.PollForPotentialSupportedProperties(NativeElement, out rawIds, out rawPatternNames);
+            Automation.NativeAutomation.PollForPotentialSupportedProperties(NativeElement, out int[] rawIds, out string[] _);
             return rawIds.Select(id => PropertyId.Find(Automation.AutomationType, id)).ToArray();
         }
 

@@ -9,16 +9,29 @@ using FlaUI.Core.Shapes;
 
 namespace FlaUI.Core
 {
+    /// <summary>
+    /// Base class for driver specific automation elements.
+    /// </summary>
     public abstract class BasicAutomationElementBase
     {
+        /// <summary>
+        /// Create a basic automation element with the given <see cref="AutomationBase"/>.
+        /// </summary>
+        /// <param name="automation">The <see cref="AutomationBase"/>.</param>
         protected BasicAutomationElementBase(AutomationBase automation)
         {
             Automation = automation;
             Properties = new AutomationElementPropertyValues(this);
         }
 
-        public abstract AutomationElementPatternValuesBase Patterns { get; }
+        /// <summary>
+        /// Gets the object which provides access to all patterns.
+        /// </summary>
+        public AutomationElementPatternValuesBase Patterns { get; protected internal set; }
 
+        /// <summary>
+        /// Gets the object which provides access to all properties.
+        /// </summary>
         public AutomationElementPropertyValues Properties { get; }
 
         /// <summary>
@@ -153,8 +166,7 @@ namespace FlaUI.Core
 
         public Point GetClickablePoint()
         {
-            Point point;
-            if (!TryGetClickablePoint(out point))
+            if (!TryGetClickablePoint(out Point point))
             {
                 throw new NoClickablePointException();
             }
@@ -182,8 +194,22 @@ namespace FlaUI.Core
         /// <returns>The pattern or null if it was not found / cached</returns>
         protected abstract object InternalGetPattern(int patternId, bool cached);
 
+        /// <summary>
+        /// Finds all elements in the given scope with the given condition.
+        /// </summary>
+        /// <param name="treeScope">The scope to search.</param>
+        /// <param name="condition">The condition to use.</param>
+        /// <returns>The found elements or an empty list if no elements were found.</returns>
         public abstract AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition);
+
+        /// <summary>
+        /// Finds the first element in the given scope with the given condition.
+        /// </summary>
+        /// <param name="treeScope">The scope to search.</param>
+        /// <param name="condition">The condition to use.</param>
+        /// <returns>The found element or null if no element was found.</returns>
         public abstract AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition);
+
         public abstract bool TryGetClickablePoint(out Point point);
         public abstract IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action);
         public abstract IAutomationPropertyChangedEventHandler RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, PropertyId[] properties);
