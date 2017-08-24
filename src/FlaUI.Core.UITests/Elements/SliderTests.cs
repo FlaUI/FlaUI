@@ -24,7 +24,7 @@ namespace FlaUI.Core.UITests.Elements
             var thumb = slider.Thumb;
             var oldPos = thumb.Properties.BoundingRectangle.Value.Center;
             thumb.SlideHorizontally(50);
-            Helpers.WaitUntilInputIsProcessed();
+            Wait.UntilInputIsProcessed();
             TestUtilities.AssertPointsAreSame(thumb.Properties.BoundingRectangle.Value.Center, new Point(oldPos.X + 50, oldPos.Y), 1);
         }
 

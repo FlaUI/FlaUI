@@ -25,10 +25,10 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(tab.TabItems, Has.Length.EqualTo(2));
             Assert.That(tab.SelectedTabItemIndex, Is.EqualTo(0));
             tab.SelectTabItem(1);
-            Helpers.WaitUntilInputIsProcessed();
+            Wait.UntilInputIsProcessed();
             Assert.That(tab.SelectedTabItemIndex, Is.EqualTo(1));
             tab.SelectTabItem(0);
-            Helpers.WaitUntilInputIsProcessed();
+            Wait.UntilInputIsProcessed();
             Assert.That(tab.SelectedTabItemIndex, Is.EqualTo(0));
         }
     }

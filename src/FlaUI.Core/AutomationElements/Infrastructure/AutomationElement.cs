@@ -166,7 +166,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
                 Mouse.Position = clickablePoint;
             }
             action();
-            Helpers.WaitUntilInputIsProcessed();
+            Wait.UntilInputIsProcessed();
         }
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             if (windowHandle != new IntPtr(0))
             {
                 User32.SetFocus(windowHandle);
-                Helpers.WaitUntilResponsive(this);
+                Wait.UntilResponsive(this);
             }
             else
             {
@@ -205,7 +205,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             if (windowHandle != new IntPtr(0))
             {
                 User32.SetForegroundWindow(windowHandle);
-                Helpers.WaitUntilResponsive(this);
+                Wait.UntilResponsive(this);
             }
             else
             {

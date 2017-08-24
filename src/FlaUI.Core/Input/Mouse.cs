@@ -145,7 +145,7 @@ namespace FlaUI.Core.Input
                 Position = point;
                 Thread.Sleep(interval);
             }
-            Helpers.WaitUntilInputIsProcessed();
+            Wait.UntilInputIsProcessed();
         }
 
         /// <summary>
