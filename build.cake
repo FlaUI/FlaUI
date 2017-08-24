@@ -36,31 +36,19 @@ Task("Build")
         LogFile = "./BuildLog.txt",
         MSBuildFileLoggerOutput = MSBuildFileLoggerOutput.All
     });
+    // Restore and build
+    buildSettings.WithTarget("Restore").WithTarget("Build");
     // Hide informational warnings for now
     buildSettings.Properties.Add("WarningLevel", new[] { "3" });
+    // Force restoring
+    buildSettings.Properties.Add("RestoreForce", new[] { "true" });
 
+    // First build with default settings
     MSBuild(slnFile, buildSettings);
-});
 
-Task("Build-Signed")
-    .IsDependentOn("Restore-NuGet-Packages")
-    .Does(() =>
-{
-    var buildSettings = new MSBuildSettings {
-        Verbosity = Verbosity.Minimal,
-        ToolVersion = MSBuildToolVersion.VS2017,
-        Configuration = configuration,
-        PlatformTarget = PlatformTarget.MSIL,
-    }.AddFileLogger(new MSBuildFileLogger {
-        LogFile = "./BuildLog.txt",
-        MSBuildFileLoggerOutput = MSBuildFileLoggerOutput.All
-    });
-    // Hide informational warnings for now
-    buildSettings.Properties.Add("WarningLevel", new[] { "3" });
+    // Second build with signing enabled
+    buildSettings.FileLoggers.First().LogFile = "./BuildLogSigned.txt";
     buildSettings.Properties.Add("EnableSigning", new[] { "true" });
-
-    buildSettings.WithTarget("Clean").WithTarget("Rebuild");
-
     MSBuild(slnFile, buildSettings);
 });
 

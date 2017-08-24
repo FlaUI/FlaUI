@@ -1,5 +1,6 @@
 # Logs
 BuildLog.txt
+BuildLogSigned.txt
 
 # User-specific files
 *.suo
