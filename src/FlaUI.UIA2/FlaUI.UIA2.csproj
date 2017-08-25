@@ -24,7 +24,7 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>../../FlaUI.snk</AssemblyOriginatorKeyFile>
     <PublicSign Condition="'$(OS)'!='Windows_NT'">true</PublicSign>
-    <AssemblyName>FlaUI.UIA2.Signed</AssemblyName>
+    <PackageId>FlaUI.UIA2.Signed</PackageId>
     <OutputPath>bin\$(Configuration)\Signed</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\Signed</IntermediateOutputPath>
   </PropertyGroup>
