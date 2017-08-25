@@ -9,12 +9,12 @@ using FlaUI.Core.Tools;
 namespace FlaUI.Core
 {
     /// <summary>
-    /// Provides methods to capture screenshots or partially screenshots
+    /// Provides methods to capture screenshots or partially screenshots.
     /// </summary>
     public static class ScreenCapture
     {
         /// <summary>
-        /// Captures the whole screen (all monitors)
+        /// Captures the whole screen (all monitors).
         /// </summary>
         public static Bitmap CaptureScreen()
         {
@@ -25,13 +25,16 @@ namespace FlaUI.Core
             return CaptureArea(new Shapes.Rectangle(screenLeft, screenTop, screenWidth, screenHeight));
         }
 
+        /// <summary>
+        /// Captures the whole screen (all monitors) in a WPF friendly format.
+        /// </summary>
         public static BitmapImage CaptureScreenWpf()
         {
             return CaptureScreen().ToWpf();
         }
 
         /// <summary>
-        /// Captures a specific area from the screen
+        /// Captures a specific area from the screen.
         /// </summary>
         public static Bitmap CaptureArea(Shapes.Rectangle rectangle)
         {
@@ -45,13 +48,16 @@ namespace FlaUI.Core
             }
         }
 
+        /// <summary>
+        /// Captures a specific area from the screen in a WPF friendly format.
+        /// </summary>
         public static BitmapImage CaptureAreaWpf(Shapes.Rectangle rectangle)
         {
             return CaptureArea(rectangle).ToWpf();
         }
 
         /// <summary>
-        /// Captures the screen and saves it to a file
+        /// Captures the screen and saves it to a file.
         /// </summary>
         public static void CaptureScreenToFile(string filePath)
         {
@@ -60,7 +66,7 @@ namespace FlaUI.Core
         }
 
         /// <summary>
-        /// Captures a specific area and saves it to a file
+        /// Captures a specific area and saves it to a file.
         /// </summary>
         public static void CaptureAreaToFile(Shapes.Rectangle rectangle, string filePath)
         {
@@ -69,7 +75,7 @@ namespace FlaUI.Core
         }
 
         /// <summary>
-        /// Converts a WinForms bitmap to a WPF bitmap
+        /// Converts a WinForms <see cref="Bitmap"/> to a WPF <see cref="BitmapImage"/>.
         /// </summary>
         public static BitmapImage ToWpf(this Bitmap bitmap)
         {

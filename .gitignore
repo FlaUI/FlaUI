@@ -100,7 +100,7 @@ _ReSharper*/
 # NuGet v3's project.json files produces more ignoreable files
 *.nuget.props
 *.nuget.targets
-tools/
+/tools/
 
 # Windows Store app package directory
 AppPackages/

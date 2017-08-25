@@ -1,4 +1,5 @@
-﻿using FlaUI.Core.Tools;
+﻿using System.Globalization;
+using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
 
@@ -59,7 +60,7 @@ namespace FlaUI.Core.UITests
 
         private string GetFileMenuText()
         {
-            switch (SystemLanguageRetreiver.GetCurrentOsCulture().TwoLetterISOLanguageName)
+            switch (OperatingSystem.CurrentCulture.TwoLetterISOLanguageName)
             {
                 case "de":
                     return "Datei";

@@ -1,10 +1,13 @@
 ﻿namespace FlaUI.Core.Tools
 {
-    public static class TranslatableStrings
+    /// <summary>
+    /// Static class which provides localized texts of some control texts.
+    /// </summary>
+    public static class LocalizedStrings
     {
-        static TranslatableStrings()
+        static LocalizedStrings()
         {
-            switch (SystemLanguageRetreiver.GetCurrentOsCulture().TwoLetterISOLanguageName)
+            switch (OperatingSystem.CurrentCulture.TwoLetterISOLanguageName)
             {
                 case "de":
                     HorizontalScrollBar = "Horizontale Schiebeleiste";

@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace FlaUI.Core.Tools
 {
+    /// <summary>
+    /// Provides various extension methods.
+    /// </summary>
     public static class ExtensionMethods
     {
         /// <summary>
@@ -51,7 +54,18 @@ namespace FlaUI.Core.Tools
             return !Double.IsNaN(value) && !Double.IsInfinity(value);
         }
 
+        /// <summary>
+        /// Gets a list of flags which are set in an <see cref="Enum"/>.
+        /// </summary>
+        public static IEnumerable<Enum> GetFlags(this Enum variable)
+        {
+            return Enum.GetValues(variable.GetType()).Cast<Enum>().Where(variable.HasFlag);
+        }
+
 #if NET35
+        /// <summary>
+        /// Exension method for the missing HasFlag on an <see cref="Enum"/>.
+        /// </summary>
         public static bool HasFlag(this Enum variable, Enum flag)
         {
             if (flag == null)
@@ -67,6 +81,9 @@ namespace FlaUI.Core.Tools
             return (num2 & num) == num;
         }
 
+        /// <summary>
+        /// Extension method for the missing TryParse on an  <see cref="Enum"/>.
+        /// </summary>
         public static bool TryParse<TEnum>(string value, out TEnum result) where TEnum : struct
         {
             try
@@ -81,10 +98,5 @@ namespace FlaUI.Core.Tools
             return true;
         }
 #endif
-
-        public static IEnumerable<Enum> GetFlags(this Enum variable)
-        {
-            return Enum.GetValues(variable.GetType()).Cast<Enum>().Where(variable.HasFlag);
-        }
     }
 }

@@ -7,6 +7,9 @@ using FlaUI.Core.Definitions;
 
 namespace FlaUI.Core
 {
+    /// <summary>
+    /// Provides methods which can help in debugging.
+    /// </summary>
     public static class Debug
     {
         /// <summary>
@@ -46,13 +49,18 @@ namespace FlaUI.Core
             return $"{GetXPathToElement(parent, treeWalker, rootElement)}/{currentItemText}";
         }
 
+        /// <summary>
+        /// Prints out various details about the given element (including children).
+        /// </summary>
         public static string Details(AutomationElement automationElement)
         {
             try
             {
                 var stringBuilder = new StringBuilder();
-                var cr = new CacheRequest();
-                cr.AutomationElementMode = AutomationElementMode.None;
+                var cr = new CacheRequest
+                {
+                    AutomationElementMode = AutomationElementMode.None
+                };
                 // Add the element properties
                 cr.Add(automationElement.Automation.PropertyLibrary.Element.AutomationId);
                 cr.Add(automationElement.Automation.PropertyLibrary.Element.ControlType);
@@ -64,7 +72,7 @@ namespace FlaUI.Core
                 cr.Add(automationElement.Automation.PropertyLibrary.Element.FrameworkId);
                 cr.Add(automationElement.Automation.PropertyLibrary.Element.ProcessId);
                 // Add the pattern availability properties
-                automationElement.Automation.PropertyLibrary.PatternAvailability.AllForCurrentFramework.ToList().ForEach(x=> cr.Add(x));
+                automationElement.Automation.PropertyLibrary.PatternAvailability.AllForCurrentFramework.ToList().ForEach(x => cr.Add(x));
                 cr.TreeScope = TreeScope.Subtree;
                 cr.TreeFilter = new TrueCondition();
                 // Activate the cache request
@@ -79,7 +87,7 @@ namespace FlaUI.Core
             catch (Exception ex)
             {
                 Console.WriteLine("Failed to dump info: " + ex);
-                return string.Empty;
+                return String.Empty;
             }
         }
 

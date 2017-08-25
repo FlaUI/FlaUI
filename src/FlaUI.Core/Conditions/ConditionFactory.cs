@@ -73,12 +73,12 @@ namespace FlaUI.Core.Conditions
 
         public OrCondition HScrollBar()
         {
-            return new OrCondition(ByControlType(ControlType.ScrollBar), ByName(TranslatableStrings.HorizontalScrollBar));
+            return new OrCondition(ByControlType(ControlType.ScrollBar), ByName(LocalizedStrings.HorizontalScrollBar));
         }
 
         public OrCondition VScrollBar()
         {
-            return new OrCondition(ByControlType(ControlType.ScrollBar), ByName(TranslatableStrings.VerticalScrollBar));
+            return new OrCondition(ByControlType(ControlType.ScrollBar), ByName(LocalizedStrings.VerticalScrollBar));
         }
     }
 }

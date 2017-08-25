@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Threading;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
@@ -39,7 +40,7 @@ namespace FlaUI.Core.UITests.EventHandlers
 
         private string GetResizeText()
         {
-            switch (SystemLanguageRetreiver.GetCurrentOsCulture().TwoLetterISOLanguageName)
+            switch (OperatingSystem.CurrentCulture.TwoLetterISOLanguageName)
             {
                 case "de":
                     return "Größe ändern";
@@ -50,7 +51,7 @@ namespace FlaUI.Core.UITests.EventHandlers
 
         private string GetPixelsText()
         {
-            switch (SystemLanguageRetreiver.GetCurrentOsCulture().TwoLetterISOLanguageName)
+            switch (OperatingSystem.CurrentCulture.TwoLetterISOLanguageName)
             {
                 case "de":
                     return "Pixel";

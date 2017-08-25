@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace FlaUI.Core.WindowsAPI
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public static class User32
     {
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
@@ -51,4 +52,5 @@ namespace FlaUI.Core.WindowsAPI
         [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         public static extern short VkKeyScan(char ch);
     }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }
