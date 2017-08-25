@@ -188,7 +188,7 @@ namespace FlaUI.Core.AutomationElements
                 var ecp = Patterns.ExpandCollapse.PatternOrDefault;
                 ecp?.Collapse();
             }
-            Helpers.WaitUntilResponsive(this);
+            Wait.UntilResponsive(this);
         }
 
         /// <summary>

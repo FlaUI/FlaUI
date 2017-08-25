@@ -61,7 +61,7 @@ namespace FlaUI.Core.AutomationElements
                 Keyboard.Type(VirtualKeyShort.RETURN);
                 Keyboard.Type(line);
             }
-            Helpers.WaitUntilInputIsProcessed();
+            Wait.UntilInputIsProcessed();
         }
     }
 }

@@ -27,7 +27,7 @@ namespace FlaUI.Core.UITests
             // Switch to default mode
             System.Threading.Thread.Sleep(1000);
             Keyboard.TypeSimultaneously(VirtualKeyShort.ALT, VirtualKeyShort.KEY_1);
-            Helpers.WaitUntilInputIsProcessed();
+            Wait.UntilInputIsProcessed();
             App.WaitWhileBusy();
             System.Threading.Thread.Sleep(1000);
 
