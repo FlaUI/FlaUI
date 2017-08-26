@@ -17,17 +17,21 @@ namespace FlaUI.Core.Conditions
         }
     }
 
-    public class TrueCondition : BoolCondition
+    public sealed class TrueCondition : BoolCondition
     {
-        public TrueCondition() : base(true)
+        private TrueCondition() : base(true)
         {
         }
+
+        public static TrueCondition Default { get; } = new TrueCondition();
     }
 
-    public class FalseCondition : BoolCondition
+    public sealed class FalseCondition : BoolCondition
     {
-        public FalseCondition() : base(false)
+        private FalseCondition() : base(false)
         {
         }
+
+        public static FalseCondition Default { get; } = new FalseCondition();
     }
 }

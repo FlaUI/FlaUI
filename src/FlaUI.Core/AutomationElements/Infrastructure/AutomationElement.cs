@@ -798,7 +798,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <returns>The found element or null if no element was found.</returns>
         public AutomationElement FindFirstChild()
         {
-            return FindFirst(TreeScope.Children, new TrueCondition());
+            return FindFirst(TreeScope.Children, TrueCondition.Default);
         }
 
         /// <summary>
@@ -838,7 +838,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <returns>The found elements or an empty list if no elements were found.</returns>
         public AutomationElement[] FindAllChildren()
         {
-            return FindAll(TreeScope.Children, new TrueCondition());
+            return FindAll(TreeScope.Children, TrueCondition.Default);
         }
 
         /// <summary>
@@ -868,7 +868,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <returns>The found element or null if no element was found.</returns>
         public AutomationElement FindFirstDescendant()
         {
-            return FindFirst(TreeScope.Descendants, new TrueCondition());
+            return FindFirst(TreeScope.Descendants, TrueCondition.Default);
         }
 
         /// <summary>
@@ -908,7 +908,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <returns>The found elements or an empty list if no elements were found.</returns>
         public AutomationElement[] FindAllDescendants()
         {
-            return FindAll(TreeScope.Descendants, new TrueCondition());
+            return FindAll(TreeScope.Descendants, TrueCondition.Default);
         }
 
         /// <summary>
