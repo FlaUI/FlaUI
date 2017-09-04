@@ -2,12 +2,16 @@
 
 namespace FlaUI.Core.AutomationElements.Scrolling
 {
-    public class HScrollBar : ScrollBarBase
+    /// <summary>
+    /// A horizontal scrollbar element.
+    /// </summary>
+    public class HorizontalScrollBar : ScrollBarBase
     {
-        public HScrollBar(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public HorizontalScrollBar(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 
+        /// <inheritdoc />
         protected override string SmallDecrementText
         {
             get
@@ -25,14 +29,15 @@ namespace FlaUI.Core.AutomationElements.Scrolling
                             case AutomationType.UIA3:
                                 return "UpButton";
                             default:
-                                throw new ArgumentOutOfRangeException();
+                                throw new NotImplementedException();
                         }
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new NotImplementedException();
                 }
             }
         }
 
+        /// <inheritdoc />
         protected override string SmallIncrementText
         {
             get
@@ -50,14 +55,15 @@ namespace FlaUI.Core.AutomationElements.Scrolling
                             case AutomationType.UIA3:
                                 return "DownButton";
                             default:
-                                throw new ArgumentOutOfRangeException();
+                                throw new NotImplementedException();
                         }
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new NotImplementedException();
                 }
             }
         }
 
+        /// <inheritdoc />
         protected override string LargeDecrementText
         {
             get
@@ -75,14 +81,15 @@ namespace FlaUI.Core.AutomationElements.Scrolling
                             case AutomationType.UIA3:
                                 return "DownPageButton";
                             default:
-                                throw new ArgumentOutOfRangeException();
+                                throw new NotImplementedException();
                         }
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new NotImplementedException();
                 }
             }
         }
 
+        /// <inheritdoc />
         protected override string LargeIncrementText
         {
             get
@@ -100,29 +107,41 @@ namespace FlaUI.Core.AutomationElements.Scrolling
                             case AutomationType.UIA3:
                                 return "UpPageButton";
                             default:
-                                throw new ArgumentOutOfRangeException();
+                                throw new NotImplementedException();
                         }
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new NotImplementedException();
                 }
             }
         }
 
+        /// <summary>
+        /// Scrolls left by a small amount.
+        /// </summary>
         public virtual void ScrollLeft()
         {
             SmallDecrementButton.Click();
         }
 
+        /// <summary>
+        /// Scrolls right by a small amount.
+        /// </summary>
         public virtual void ScrollRight()
         {
             SmallIncrementButton.Click();
         }
 
+        /// <summary>
+        /// Scrolls left by a large amount.
+        /// </summary>
         public virtual void ScrollLeftLarge()
         {
             LargeDecrementButton.Click();
         }
 
+        /// <summary>
+        /// Scrolls right by a large amount.
+        /// </summary>
         public virtual void ScrollRightLarge()
         {
             LargeIncrementButton.Click();

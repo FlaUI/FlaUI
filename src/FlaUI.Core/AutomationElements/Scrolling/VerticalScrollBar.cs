@@ -2,12 +2,16 @@
 
 namespace FlaUI.Core.AutomationElements.Scrolling
 {
-    public class VScrollBar : ScrollBarBase
+    /// <summary>
+    /// A vertical scrollbar element.
+    /// </summary>
+    public class VerticalScrollBar : ScrollBarBase
     {
-        public VScrollBar(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public VerticalScrollBar(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 
+        /// <inheritdoc />
         protected override string SmallDecrementText
         {
             get
@@ -25,14 +29,15 @@ namespace FlaUI.Core.AutomationElements.Scrolling
                             case AutomationType.UIA3:
                                 return "UpButton";
                             default:
-                                throw new ArgumentOutOfRangeException();
+                                throw new NotImplementedException();
                         }
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new NotImplementedException();
                 }
             }
         }
 
+        /// <inheritdoc />
         protected override string SmallIncrementText
         {
             get
@@ -50,14 +55,15 @@ namespace FlaUI.Core.AutomationElements.Scrolling
                             case AutomationType.UIA3:
                                 return "DownButton";
                             default:
-                                throw new ArgumentOutOfRangeException();
+                                throw new NotImplementedException();
                         }
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new NotImplementedException();
                 }
             }
         }
 
+        /// <inheritdoc />
         protected override string LargeDecrementText
         {
             get
@@ -75,14 +81,15 @@ namespace FlaUI.Core.AutomationElements.Scrolling
                             case AutomationType.UIA3:
                                 return "DownPageButton";
                             default:
-                                throw new ArgumentOutOfRangeException();
+                                throw new NotImplementedException();
                         }
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new NotImplementedException();
                 }
             }
         }
 
+        /// <inheritdoc />
         protected override string LargeIncrementText
         {
             get
@@ -100,29 +107,41 @@ namespace FlaUI.Core.AutomationElements.Scrolling
                             case AutomationType.UIA3:
                                 return "UpPageButton";
                             default:
-                                throw new ArgumentOutOfRangeException();
+                                throw new NotImplementedException();
                         }
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new NotImplementedException();
                 }
             }
         }
 
+        /// <summary>
+        /// Scrolls up by a small amount.
+        /// </summary>
         public void ScrollUp()
         {
             SmallDecrementButton.Invoke();
         }
 
+        /// <summary>
+        /// Scrolls down by a small amount.
+        /// </summary>
         public void ScrollDown()
         {
             SmallIncrementButton.Invoke();
         }
 
+        /// <summary>
+        /// Scrolls up by a large amount.
+        /// </summary>
         public void ScrollUpLarge()
         {
             LargeDecrementButton.Invoke();
         }
 
+        /// <summary>
+        /// Scrolls down by a large amount.
+        /// </summary>
         public void ScrollDownLarge()
         {
             LargeIncrementButton.Invoke();

@@ -23,11 +23,19 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
     /// </summary>
     public class AutomationElement : IEquatable<AutomationElement>
     {
+        /// <summary>
+        /// Creates a new instance which wraps around the given <see cref="BasicAutomationElement"/>.
+        /// </summary>
+        /// <param name="basicAutomationElement">The <see cref="BasicAutomationElement"/> to wrap.</param>
         public AutomationElement(BasicAutomationElementBase basicAutomationElement)
         {
             BasicAutomationElement = basicAutomationElement ?? throw new ArgumentNullException(nameof(basicAutomationElement));
         }
 
+        /// <summary>
+        /// Creates a new instance which wraps the <see cref="BasicAutomationElement"/> of the given <see cref="AutomationElement"/>.
+        /// </summary>
+        /// <param name="automationElement">The <see cref="AutomationElement"/> which <see cref="BasicAutomationElement"/> should be wrapped.</param>
         public AutomationElement(AutomationElement automationElement)
             : this(automationElement?.BasicAutomationElement)
         {
@@ -671,11 +679,11 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Converts the element to a <see cref="HScrollBar"/>.
+        /// Converts the element to a <see cref="HorizontalScrollBar"/>.
         /// </summary>
-        public HScrollBar AsHScrollBar()
+        public HorizontalScrollBar AsHScrollBar()
         {
-            return new HScrollBar(BasicAutomationElement);
+            return new HorizontalScrollBar(BasicAutomationElement);
         }
 
         /// <summary>
@@ -775,11 +783,11 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Converts the element to a <see cref="VScrollBar"/>.
+        /// Converts the element to a <see cref="VerticalScrollBar"/>.
         /// </summary>
-        public VScrollBar AsVScrollBar()
+        public VerticalScrollBar AsVScrollBar()
         {
-            return new VScrollBar(BasicAutomationElement);
+            return new VerticalScrollBar(BasicAutomationElement);
         }
 
         /// <summary>
