@@ -14,6 +14,7 @@ using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
 using FlaUI.Core.WindowsAPI;
 using GdiColor = System.Drawing.Color;
+using Rectangle = FlaUI.Core.Shapes.Rectangle;
 using WpfColor = System.Windows.Media.Color;
 
 namespace FlaUI.Core.AutomationElements.Infrastructure
@@ -129,6 +130,31 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// Flag if the element off-screen or on-screen(visible).
         /// </summary>
         public bool IsOffscreen => Properties.IsOffscreen.Value;
+
+        /// <summary>
+        /// The bounding rectangle of this element.
+        /// </summary>
+        public Rectangle BoundingRectangle => Properties.BoundingRectangle.ValueOrDefault ?? Rectangle.Empty;
+
+        /// <summary>
+        /// The width of this element.
+        /// </summary>
+        public double ActualWidth => BoundingRectangle.Width;
+
+        /// <summary>
+        /// The height of this element.
+        /// </summary>
+        public double ActualHeight => BoundingRectangle.Height;
+
+        /// <summary>
+        /// The item status of this element.
+        /// </summary>
+        public string ItemStatus => Properties.ItemStatus.Value;
+
+        /// <summary>
+        /// The help text of this element.
+        /// </summary>
+        public string HelpText => Properties.HelpText.Value;
         #endregion Convenience properties
 
         /// <summary>
