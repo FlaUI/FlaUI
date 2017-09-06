@@ -70,6 +70,7 @@ namespace FlaUI.Core.UITests.TestFramework
         public void BaseTeardown()
         {
             Automation.Dispose();
+            App.Close();
             App.Dispose();
             App = null;
         }
