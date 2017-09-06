@@ -40,7 +40,7 @@ namespace FlaUI.Core.AutomationElements.PatternElements
         }
 
         /// <summary>
-        /// Add this element to the selection.
+        /// Adds the element to the selection.
         /// </summary>
         public SelectionItemAutomationElement AddToSelection()
         {
@@ -49,7 +49,7 @@ namespace FlaUI.Core.AutomationElements.PatternElements
         }
 
         /// <summary>
-        /// Remove this element from the selection.
+        /// Removes the element from the selection.
         /// </summary>
         public SelectionItemAutomationElement RemoveFromSelection()
         {
