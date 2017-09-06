@@ -4,7 +4,7 @@ using FlaUI.Core.Patterns;
 namespace FlaUI.Core.AutomationElements.PatternElements
 {
     /// <summary>
-    /// An UI-item which supports the <see cref="ISelectionItemPattern" />
+    /// An element which supports the <see cref="ISelectionItemPattern" />.
     /// </summary>
     public class SelectionItemAutomationElement : AutomationElement
     {
@@ -15,11 +15,11 @@ namespace FlaUI.Core.AutomationElements.PatternElements
         protected ISelectionItemPattern SelectionItemPattern => Patterns.SelectionItem.Pattern;
 
         /// <summary>
-        /// Flag to get/set the selection of this element.
+        /// Value to get/set if this element is selected.
         /// </summary>
         public bool IsSelected
         {
-            get { return SelectionItemPattern.IsSelected; }
+            get => SelectionItemPattern.IsSelected;
             set
             {
                 if (IsSelected == value) return;
@@ -31,7 +31,7 @@ namespace FlaUI.Core.AutomationElements.PatternElements
         }
 
         /// <summary>
-        /// Select this element.
+        /// Selects the element.
         /// </summary>
         public SelectionItemAutomationElement Select()
         {

@@ -6,6 +6,9 @@ using FlaUI.Core.Definitions;
 
 namespace FlaUI.Core.AutomationElements
 {
+    /// <summary>
+    /// A node element inside a <see cref="Tree"/>.
+    /// </summary>
     public class TreeItem : AutomationElement
     {
         private readonly SelectionItemAutomationElement _selectionItemAutomationElement;
@@ -18,46 +21,81 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <summary>
-        /// All child <see cref="TreeItem" /> objects from this <see cref="TreeItem" />
+        /// All child <see cref="TreeItem" /> objects from this <see cref="TreeItem" />.
         /// </summary>
         public TreeItem[] TreeItems => GetTreeItems();
 
         /// <summary>
-        /// The text of the <see cref="TreeItem" />
+        /// The text of the <see cref="TreeItem" />.
         /// </summary>
         public string Text
         {
             get
             {
-                var value = Properties.Name.Value;
+                var value = Properties.Name.ValueOrDefault;
                 if (String.IsNullOrEmpty(value) || value.Contains("System.Windows.Controls.TreeViewItem"))
                 {
                     var textElement = FindFirstChild(cf => cf.ByControlType(ControlType.Text));
-                    return textElement == null ? String.Empty : textElement.Properties.Name;
+                    return textElement == null ? String.Empty : textElement.Properties.Name.ValueOrDefault;
                 }
                 return value;
             }
         }
 
+        /// <summary>
+        /// Value to get/set if this element is selected.
+        /// </summary>
         public bool IsSelected
         {
-            get { return _selectionItemAutomationElement.IsSelected; }
-            set { _selectionItemAutomationElement.IsSelected = value; }
+            get => _selectionItemAutomationElement.IsSelected;
+            set => _selectionItemAutomationElement.IsSelected = value;
         }
 
+        /// <summary>
+        /// Gets the current expand / collapse state.
+        /// </summary>
+        public ExpandCollapseState ExpandCollapseState => _expandCollapseAutomationElement.ExpandCollapseState;
+
+        /// <summary>
+        /// Expands the element.
+        /// </summary>
         public void Expand()
         {
             _expandCollapseAutomationElement.Expand();
         }
 
+        /// <summary>
+        /// Collapses the element.
+        /// </summary>
         public void Collapse()
         {
             _expandCollapseAutomationElement.Collapse();
         }
 
+        /// <summary>
+        /// Selects the element.
+        /// </summary>
         public void Select()
         {
             _selectionItemAutomationElement.Select();
+        }
+
+        /// <summary>
+        /// Add the element to the selection.
+        /// </summary>
+        public TreeItem AddToSelection()
+        {
+            _selectionItemAutomationElement.AddToSelection();
+            return this;
+        }
+
+        /// <summary>
+        /// Remove the element from the selection.
+        /// </summary>
+        public TreeItem RemoveFromSelection()
+        {
+            _selectionItemAutomationElement.RemoveFromSelection();
+            return this;
         }
 
         /// <summary>

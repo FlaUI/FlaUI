@@ -47,12 +47,9 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         public BasicAutomationElementBase BasicAutomationElement { get; }
 
         /// <summary>
-        /// Get the parent <see cref="AutomationElement"/>
+        /// Get the parent <see cref="AutomationElement"/>.
         /// </summary>
-        public AutomationElement Parent => this.Automation
-                                               .TreeWalkerFactory
-                                               .GetRawViewWalker()
-                                               .GetParent(this);
+        public AutomationElement Parent => Automation.TreeWalkerFactory.GetRawViewWalker().GetParent(this);
 
         /// <summary>
         /// The current used automation object.

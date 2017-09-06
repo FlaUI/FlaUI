@@ -105,7 +105,7 @@ namespace FlaUI.Core
 
         public override string ToString()
         {
-            return Convert.ToString(ValueOrDefault);
+            return this.ValueOrDefault?.ToString() ?? "null";
         }
     }
 }
