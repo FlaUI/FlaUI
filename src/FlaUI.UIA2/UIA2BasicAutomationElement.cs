@@ -77,6 +77,17 @@ namespace FlaUI.UIA2
             return AutomationElementConverter.NativeToManaged(Automation, nativeFoundElement);
         }
 
+        /// <inheritdoc />
+        public override AutomationElement FindIndexed(TreeScope treeScope, ConditionBase condition, int index)
+        {
+            var cacheRequest = CacheRequest.IsCachingActive ? CacheRequest.Current.ToNative() : null;
+            cacheRequest?.Push();
+            var nativeFoundElements = NativeElement.FindAll((UIA.TreeScope)treeScope, ConditionConverter.ToNative(condition));
+            cacheRequest?.Pop();
+            var nativeElement = nativeFoundElements.Count > index ? nativeFoundElements[index] : null;
+            return nativeElement == null ? null : AutomationElementConverter.NativeToManaged(Automation, nativeElement);
+        }
+
         public override bool TryGetClickablePoint(out Point point)
         {
             var success = NativeElement.TryGetClickablePoint(out System.Windows.Point outPoint);
@@ -87,7 +98,7 @@ namespace FlaUI.UIA2
             else
             {
                 success = Properties.ClickablePoint.TryGetValue(out point);
-            } 
+            }
             return success;
         }
 

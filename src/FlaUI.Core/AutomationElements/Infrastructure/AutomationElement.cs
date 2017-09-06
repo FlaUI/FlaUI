@@ -436,6 +436,26 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
+        /// Finds the element which is in the given treescope with the given condition and the given index.
+        /// </summary>
+        public AutomationElement FindAt(TreeScope treeScope, ConditionBase condition, int index)
+        {
+            Predicate<AutomationElement> whilePredicate = element => element == null;
+            Func<AutomationElement> retryMethod = () => BasicAutomationElement.FindIndexed(treeScope, condition, index);
+            return Retry.While(retryMethod, whilePredicate, Retry.DefaultRetryFor);
+        }
+
+        /// <summary>
+        /// Finds the element which is in the given treescope with the given condition and the given index within the given timeout period.
+        /// </summary>
+        public AutomationElement FindAt(TreeScope treeScope, ConditionBase condition, int index, TimeSpan timeOut)
+        {
+            Predicate<AutomationElement> whilePredicate = element => element == null;
+            Func<AutomationElement> retryMethod = () => BasicAutomationElement.FindIndexed(treeScope, condition, index);
+            return Retry.While(retryMethod, whilePredicate, timeOut);
+        }
+
+        /// <summary>
         /// Gets a clickable point of the element.
         /// </summary>
         /// <exception cref="Exceptions.NoClickablePointException">Thrown when no clickable point was found</exception>
@@ -992,6 +1012,16 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         {
             var conditions = conditionFunc(ConditionFactory);
             return FindAllNested(conditions.ToArray());
+        }
+
+        /// <summary>
+        /// Finds the child at the given position.
+        /// </summary>
+        /// <param name="index">The index of the child to find.</param>
+        /// <returns>The found element or null if no element was found.</returns>
+        public AutomationElement FindChildAt(int index)
+        {
+            return FindAt(TreeScope.Children, TrueCondition.Default, index);
         }
         #endregion Convenience methods
     }

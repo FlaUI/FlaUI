@@ -84,6 +84,16 @@ namespace FlaUI.UIA3
             return AutomationElementConverter.NativeToManaged(Automation, nativeFoundElement);
         }
 
+        /// <inheritdoc />
+        public override AutomationElement FindIndexed(TreeScope treeScope, ConditionBase condition, int index)
+        {
+            var nativeFoundElements = CacheRequest.IsCachingActive
+                ? NativeElement.FindAllBuildCache((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition), CacheRequest.Current.ToNative(Automation))
+                : NativeElement.FindAll((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition));
+            var nativeElement = nativeFoundElements.GetElement(index);
+            return nativeElement == null ? null : AutomationElementConverter.NativeToManaged(Automation, nativeElement);
+        }
+
         public override bool TryGetClickablePoint(out Point point)
         {
             var tagPoint = new UIA.tagPOINT { x = 0, y = 0 };
