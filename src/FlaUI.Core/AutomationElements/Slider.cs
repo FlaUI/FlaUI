@@ -8,6 +8,9 @@ using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.AutomationElements
 {
+    /// <summary>
+    /// Represents a slider element.
+    /// </summary>
     public class Slider : AutomationElement
     {
         public Slider(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
@@ -18,60 +21,95 @@ namespace FlaUI.Core.AutomationElements
 
         private IValuePattern ValuePattern => Patterns.Value.PatternOrDefault;
 
-        private Button LargeIncreaseButton => GetLargeIncreaseButton();
+        /// <summary>
+        /// The minimum value.
+        /// </summary>
+        public double Minimum => IsOnlyValue ? 0 : Patterns.RangeValue.Pattern.Minimum.Value;
 
-        private Button LargeDecreaseButton => GetLargeDecreaseButton();
+        /// <summary>
+        /// The maximum value.
+        /// </summary>
+        public double Maximum => IsOnlyValue ? 100 : Patterns.RangeValue.Pattern.Maximum.Value;
 
+        /// <summary>
+        /// The value of a small change.
+        /// </summary>
+        public double SmallChange => IsOnlyValue ? 1 : Patterns.RangeValue.Pattern.SmallChange.Value;
+
+        /// <summary>
+        /// The value of a large change.
+        /// </summary>
+        public double LargeChange => IsOnlyValue ? 10 : Patterns.RangeValue.Pattern.LargeChange.Value;
+
+        /// <summary>
+        /// The button element used to perform a large increment.
+        /// </summary>
+        public Button LargeIncreaseButton => GetLargeIncreaseButton();
+
+        /// <summary>
+        /// The button element used to perform a large decrement.
+        /// </summary>
+        public Button LargeDecreaseButton => GetLargeDecreaseButton();
+
+        /// <summary>
+        /// The element used to drag.
+        /// </summary>
         public Thumb Thumb => FindFirstChild(cf => cf.ByControlType(ControlType.Thumb))?.AsThumb();
 
+        /// <summary>
+        /// Flag which indicates if the <see cref="Slider"/> supports range values (min->max) or only values (0-100).
+        /// Only values are for example used when combining UIA3 and WinForms applications.
+        /// </summary>
         public bool IsOnlyValue => !IsPatternSupported(Automation.PatternLibrary.RangeValuePattern);
 
+        /// <summary>
+        /// Gets or sets the current value.
+        /// </summary>
         public double Value
         {
-            get
-            {
-                var rangeValuePattern = RangeValuePattern;
-                if (rangeValuePattern != null)
-                {
-                    return RangeValuePattern.Value.Value;
-                }
-                // UIA3 for WinForms does not have the RangeValue pattern, only the value pattern
-                // The value in this case is always between 0 and 100
-                return Convert.ToDouble(ValuePattern.Value.Value);
-            }
+            get => IsOnlyValue ? Convert.ToDouble(ValuePattern.Value.Value) : RangeValuePattern.Value.Value;
             set
             {
-                var rangeValuePattern = RangeValuePattern;
-                if (rangeValuePattern != null)
+                if (IsOnlyValue)
                 {
-                    RangeValuePattern.SetValue(value);
+                    ValuePattern.SetValue(value.ToString(CultureInfo.InvariantCulture));
                 }
                 else
                 {
-                    // UIA3 for WinForms does not have the RangeValue pattern, only the value pattern
-                    // The value in this case is always between 0 and 100
-                    ValuePattern.SetValue(value.ToString(CultureInfo.InvariantCulture));
+                    RangeValuePattern.SetValue(value);
                 }
             }
         }
 
+        /// <summary>
+        /// Performs a small increment.
+        /// </summary>
         public void SmallIncrement()
         {
             Keyboard.Press(VirtualKeyShort.RIGHT);
             Wait.UntilInputIsProcessed();
         }
 
+        /// <summary>
+        /// Performs a small decrement.
+        /// </summary>
         public void SmallDecrement()
         {
             Keyboard.Press(VirtualKeyShort.LEFT);
             Wait.UntilInputIsProcessed();
         }
 
+        /// <summary>
+        /// Performs a large increment.
+        /// </summary>
         public void LargeIncrement()
         {
             LargeIncreaseButton.Invoke();
         }
 
+        /// <summary>
+        /// Performs a large decrement.
+        /// </summary>
         public void LargeDecrement()
         {
             LargeDecreaseButton.Invoke();
@@ -84,7 +122,7 @@ namespace FlaUI.Core.AutomationElements
                 // For WPF, this is simple
                 return FindFirstChild(cf => cf.ByAutomationId("IncreaseLarge")).AsButton();
             }
-            // For WinForms, we loop thru the buttons and find the one right of the thumb
+            // For WinForms, we loop thru the buttons and find the one on the right of the thumb
             var buttons = FindAllChildren(cf => cf.ByControlType(ControlType.Button));
             foreach (var button in buttons)
             {
