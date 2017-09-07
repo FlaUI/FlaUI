@@ -318,7 +318,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public Bitmap Capture()
         {
-            return ScreenCapture.CaptureArea(Properties.BoundingRectangle);
+            return Core.Capture.Element(this);
         }
 
         /// <summary>
@@ -326,7 +326,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public BitmapImage CaptureWpf()
         {
-            return ScreenCapture.CaptureAreaWpf(Properties.BoundingRectangle);
+            return Core.Capture.ElementeWpf(this);
         }
 
         /// <summary>
@@ -335,7 +335,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <param name="filePath">The filepath where the screenshot should be saved.</param>
         public void CaptureToFile(string filePath)
         {
-            ScreenCapture.CaptureAreaToFile(Properties.BoundingRectangle, filePath);
+            Core.Capture.ElementToFile(this, filePath);
         }
 
         /// <summary>

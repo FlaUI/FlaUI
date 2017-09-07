@@ -119,8 +119,7 @@ namespace FlaUI.Core.UITests.TestFramework
             try
             {
                 Directory.CreateDirectory(ScreenshotDir);
-                ScreenCapture.CaptureScreenToFile(imagePath);
-                Console.WriteLine("Screenshot taken: {0}", imagePath);
+                Capture.ScreenToFile(imagePath);
             }
             catch (Exception ex)
             {
