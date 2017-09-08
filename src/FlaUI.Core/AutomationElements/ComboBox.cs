@@ -27,7 +27,7 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public string EditableText
         {
-            get { return EditableItem.Text; }
+            get => EditableItem.Text;
             set
             {
                 EditableItem.Text = value;
@@ -46,7 +46,31 @@ namespace FlaUI.Core.AutomationElements
         public virtual bool IsEditable => GetEditableElement() != null;
 
         /// <summary>
-        /// Gets the editable element
+        /// Flag which indicates, if the combobox is read-only or not.
+        /// </summary>
+        public bool IsReadOnly
+        {
+            get
+            {
+                // Try with the value pattern
+                if (Patterns.Value.TryGetPattern(out var valuePattern) &&
+                    valuePattern.IsReadOnly.TryGetValue(out var value))
+                {
+                    return value;
+                }
+                // try with the selection pattern
+                if (Patterns.Selection.TryGetPattern(out var selectPattern) &&
+                    selectPattern.Selection.IsSupported)
+                {
+                    return false;
+                }
+                // Assume that it is editable
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Gets the editable element.
         /// </summary>
         protected virtual TextBox EditableItem
         {
@@ -66,8 +90,8 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public string Value
         {
-            get { return ValuePattern.Value.Value; }
-            set { ValuePattern.SetValue(value); }
+            get => ValuePattern.Value.Value;
+            set => ValuePattern.SetValue(value);
         }
 
         /// <summary>
