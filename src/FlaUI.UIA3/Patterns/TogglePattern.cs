@@ -18,7 +18,7 @@ namespace FlaUI.UIA3.Patterns
 
         public override void Toggle()
         {
-            ComCallWrapper.Call(() => NativePattern.Toggle());
+            Com.Call(() => NativePattern.Toggle());
         }
     }
 

@@ -26,17 +26,17 @@ namespace FlaUI.UIA3.Patterns
 
         public override void Close()
         {
-            ComCallWrapper.Call(() => NativePattern.Close());
+            Com.Call(() => NativePattern.Close());
         }
 
         public override void SetWindowVisualState(WindowVisualState state)
         {
-            ComCallWrapper.Call(() => NativePattern.SetWindowVisualState((UIA.WindowVisualState)state));
+            Com.Call(() => NativePattern.SetWindowVisualState((UIA.WindowVisualState)state));
         }
 
         public override bool WaitForInputIdle(int milliseconds)
         {
-            return ComCallWrapper.Call(() => NativePattern.WaitForInputIdle(milliseconds)) != 0;
+            return Com.Call(() => NativePattern.WaitForInputIdle(milliseconds)) != 0;
         }
     }
 

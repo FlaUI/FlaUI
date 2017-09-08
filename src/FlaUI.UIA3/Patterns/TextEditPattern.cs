@@ -25,13 +25,13 @@ namespace FlaUI.UIA3.Patterns
 
         public ITextRange GetActiveComposition()
         {
-            var nativeRange = ComCallWrapper.Call(() => ExtendedNativePattern.GetActiveComposition());
+            var nativeRange = Com.Call(() => ExtendedNativePattern.GetActiveComposition());
             return TextRangeConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRange);
         }
 
         public ITextRange GetConversionTarget()
         {
-            var nativeRange = ComCallWrapper.Call(() => ExtendedNativePattern.GetConversionTarget());
+            var nativeRange = Com.Call(() => ExtendedNativePattern.GetConversionTarget());
             return TextRangeConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRange);
         }
     }

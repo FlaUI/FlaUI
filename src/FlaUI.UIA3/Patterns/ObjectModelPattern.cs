@@ -18,7 +18,7 @@ namespace FlaUI.UIA3.Patterns
 
         public object GetUnderlyingObjectModel()
         {
-            return ComCallWrapper.Call(() => NativePattern.GetUnderlyingObjectModel());
+            return Com.Call(() => NativePattern.GetUnderlyingObjectModel());
         }
     }
 }

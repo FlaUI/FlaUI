@@ -46,7 +46,7 @@ namespace FlaUI.UIA3
 
         public override AutomationElement GetDesktop()
         {
-            return ComCallWrapper.Call(() =>
+            return Com.Call(() =>
             {
                 var desktop = CacheRequest.IsCachingActive
                     ? NativeAutomation.GetRootElementBuildCache(CacheRequest.Current.ToNative(this))
@@ -60,7 +60,7 @@ namespace FlaUI.UIA3
         /// </summary>
         public override AutomationElement FromPoint(Point point)
         {
-            return ComCallWrapper.Call(() =>
+            return Com.Call(() =>
             {
                 var nativePoint = point.ToTagPoint();
                 var nativeElement = CacheRequest.IsCachingActive
@@ -75,7 +75,7 @@ namespace FlaUI.UIA3
         /// </summary>
         public override AutomationElement FromHandle(IntPtr hwnd)
         {
-            return ComCallWrapper.Call(() =>
+            return Com.Call(() =>
             {
                 var nativeElement = CacheRequest.IsCachingActive
                     ? NativeAutomation.ElementFromHandleBuildCache(hwnd, CacheRequest.Current.ToNative(this))
@@ -86,7 +86,7 @@ namespace FlaUI.UIA3
 
         public override AutomationElement FocusedElement()
         {
-            return ComCallWrapper.Call(() =>
+            return Com.Call(() =>
             {
                 var nativeElement = CacheRequest.IsCachingActive
                     ? NativeAutomation.GetFocusedElementBuildCache(CacheRequest.Current.ToNative(this))
@@ -98,7 +98,7 @@ namespace FlaUI.UIA3
         public override IAutomationFocusChangedEventHandler RegisterFocusChangedEvent(Action<AutomationElement> action)
         {
             var eventHandler = new UIA3FocusChangedEventHandler(this, action);
-            ComCallWrapper.Call(() => NativeAutomation.AddFocusChangedEventHandler(null, eventHandler));
+            Com.Call(() => NativeAutomation.AddFocusChangedEventHandler(null, eventHandler));
             return eventHandler;
         }
 

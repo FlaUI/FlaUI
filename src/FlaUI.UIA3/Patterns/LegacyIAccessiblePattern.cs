@@ -31,23 +31,23 @@ namespace FlaUI.UIA3.Patterns
 
         public override void DoDefaultAction()
         {
-            ComCallWrapper.Call(() => NativePattern.DoDefaultAction());
+            Com.Call(() => NativePattern.DoDefaultAction());
         }
 
         public override IAccessible GetIAccessible()
         {
             // ReSharper disable once SuspiciousTypeConversion.Global
-            return ComCallWrapper.Call(() => (IAccessible)NativePattern.GetIAccessible());
+            return Com.Call(() => (IAccessible)NativePattern.GetIAccessible());
         }
 
         public override void Select(int flagsSelect)
         {
-            ComCallWrapper.Call(() => NativePattern.Select(flagsSelect));
+            Com.Call(() => NativePattern.Select(flagsSelect));
         }
 
         public override void SetValue(string value)
         {
-            ComCallWrapper.Call(() => NativePattern.SetValue(value));
+            Com.Call(() => NativePattern.SetValue(value));
         }
     }
 

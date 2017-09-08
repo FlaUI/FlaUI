@@ -18,7 +18,7 @@ namespace FlaUI.UIA3.Patterns
 
         public void ScrollIntoView()
         {
-            ComCallWrapper.Call(() => NativePattern.ScrollIntoView());
+            Com.Call(() => NativePattern.ScrollIntoView());
         }
     }
 }

@@ -26,7 +26,7 @@ namespace FlaUI.UIA3.Patterns
         {
             get
             {
-                var nativeRange = ComCallWrapper.Call(() => NativePattern.DocumentRange);
+                var nativeRange = Com.Call(() => NativePattern.DocumentRange);
                 return TextRangeConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRange);
             }
         }
@@ -35,33 +35,33 @@ namespace FlaUI.UIA3.Patterns
         {
             get
             {
-                var nativeObject = ComCallWrapper.Call(() => NativePattern.SupportedTextSelection);
+                var nativeObject = Com.Call(() => NativePattern.SupportedTextSelection);
                 return (SupportedTextSelection)nativeObject;
             }
         }
 
         public override ITextRange[] GetSelection()
         {
-            var nativeRanges = ComCallWrapper.Call(() => NativePattern.GetSelection());
+            var nativeRanges = Com.Call(() => NativePattern.GetSelection());
             return TextRangeConverter.NativeArrayToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRanges);
         }
 
         public override ITextRange[] GetVisibleRanges()
         {
-            var nativeRanges = ComCallWrapper.Call(() => NativePattern.GetVisibleRanges());
+            var nativeRanges = Com.Call(() => NativePattern.GetVisibleRanges());
             return TextRangeConverter.NativeArrayToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRanges);
         }
 
         public override ITextRange RangeFromChild(AutomationElement child)
         {
             var nativeChild = child.ToNative();
-            var nativeRange = ComCallWrapper.Call(() => NativePattern.RangeFromChild(nativeChild));
+            var nativeRange = Com.Call(() => NativePattern.RangeFromChild(nativeChild));
             return TextRangeConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRange);
         }
 
         public override ITextRange RangeFromPoint(Point point)
         {
-            var nativeRange = ComCallWrapper.Call(() => NativePattern.RangeFromPoint(point.ToTagPoint()));
+            var nativeRange = Com.Call(() => NativePattern.RangeFromPoint(point.ToTagPoint()));
             return TextRangeConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRange);
         }
     }

@@ -18,7 +18,7 @@ namespace FlaUI.UIA3.Patterns
 
         public void Realize()
         {
-            ComCallWrapper.Call(() => NativePattern.Realize());
+            Com.Call(() => NativePattern.Realize());
         }
     }
 }

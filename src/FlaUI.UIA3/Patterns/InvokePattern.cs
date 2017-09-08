@@ -18,7 +18,7 @@ namespace FlaUI.UIA3.Patterns
 
         public override void Invoke()
         {
-            ComCallWrapper.Call(() => NativePattern.Invoke());
+            Com.Call(() => NativePattern.Invoke());
         }
     }
 

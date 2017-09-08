@@ -97,7 +97,7 @@ namespace FlaUI.UIA3
         public override bool TryGetClickablePoint(out Point point)
         {
             var tagPoint = new UIA.tagPOINT { x = 0, y = 0 };
-            var success = ComCallWrapper.Call(() => NativeElement.GetClickablePoint(out tagPoint)) != 0;
+            var success = Com.Call(() => NativeElement.GetClickablePoint(out tagPoint)) != 0;
             if (success)
             {
                 point = new Point(tagPoint.x, tagPoint.y);

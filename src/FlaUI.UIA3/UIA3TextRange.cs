@@ -24,54 +24,54 @@ namespace FlaUI.UIA3
 
         public void AddToSelection()
         {
-            ComCallWrapper.Call(() => NativeRange.AddToSelection());
+            Com.Call(() => NativeRange.AddToSelection());
         }
 
         public ITextRange Clone()
         {
-            var clonedTextRangeNative = ComCallWrapper.Call(() => NativeRange.Clone());
+            var clonedTextRangeNative = Com.Call(() => NativeRange.Clone());
             return TextRangeConverter.NativeToManaged(Automation, clonedTextRangeNative);
         }
 
         public bool Compare(ITextRange range)
         {
             var nativeRange = ToNativeRange(range);
-            return ComCallWrapper.Call(() => NativeRange.Compare(nativeRange)) != 0;
+            return Com.Call(() => NativeRange.Compare(nativeRange)) != 0;
         }
 
         public int CompareEndpoints(TextPatternRangeEndpoint srcEndPoint, ITextRange targetRange, TextPatternRangeEndpoint targetEndPoint)
         {
             var nativeRange = ToNativeRange(targetRange);
-            return ComCallWrapper.Call(() => NativeRange.CompareEndpoints((UIA.TextPatternRangeEndpoint)srcEndPoint, nativeRange, (UIA.TextPatternRangeEndpoint)targetEndPoint));
+            return Com.Call(() => NativeRange.CompareEndpoints((UIA.TextPatternRangeEndpoint)srcEndPoint, nativeRange, (UIA.TextPatternRangeEndpoint)targetEndPoint));
         }
 
         public void ExpandToEnclosingUnit(TextUnit textUnit)
         {
-            ComCallWrapper.Call(() => NativeRange.ExpandToEnclosingUnit((UIA.TextUnit)textUnit));
+            Com.Call(() => NativeRange.ExpandToEnclosingUnit((UIA.TextUnit)textUnit));
         }
 
         public ITextRange FindAttribute(TextAttributeId attribute, object value, bool backward)
         {
             var nativeValue = ValueConverter.ToNative(value);
-            var nativeTextRange = ComCallWrapper.Call(() => NativeRange.FindAttribute(attribute.Id, nativeValue, backward.ToInt()));
+            var nativeTextRange = Com.Call(() => NativeRange.FindAttribute(attribute.Id, nativeValue, backward.ToInt()));
             return TextRangeConverter.NativeToManaged(Automation, nativeTextRange);
         }
 
         public ITextRange FindText(string text, bool backward, bool ignoreCase)
         {
-            var nativeTextRange = ComCallWrapper.Call(() => NativeRange.FindText(text, backward.ToInt(), ignoreCase.ToInt()));
+            var nativeTextRange = Com.Call(() => NativeRange.FindText(text, backward.ToInt(), ignoreCase.ToInt()));
             return TextRangeConverter.NativeToManaged(Automation, nativeTextRange);
         }
 
         public object GetAttributeValue(TextAttributeId attribute)
         {
-            var nativeValue = ComCallWrapper.Call(() => NativeRange.GetAttributeValue(attribute.Id));
+            var nativeValue = Com.Call(() => NativeRange.GetAttributeValue(attribute.Id));
             return attribute.Convert<object>(Automation, nativeValue);
         }
 
         public Rectangle[] GetBoundingRectangles()
         {
-            var unrolledRects = ComCallWrapper.Call(() => NativeRange.GetBoundingRectangles());
+            var unrolledRects = Com.Call(() => NativeRange.GetBoundingRectangles());
             if (unrolledRects == null)
             {
                 return null;
@@ -89,50 +89,50 @@ namespace FlaUI.UIA3
 
         public AutomationElement[] GetChildren()
         {
-            var nativeChildren = ComCallWrapper.Call(() => NativeRange.GetChildren());
+            var nativeChildren = Com.Call(() => NativeRange.GetChildren());
             return AutomationElementConverter.NativeArrayToManaged(Automation, nativeChildren);
         }
 
         public AutomationElement GetEnclosingElement()
         {
-            var nativeElement = ComCallWrapper.Call(() => NativeRange.GetEnclosingElement());
+            var nativeElement = Com.Call(() => NativeRange.GetEnclosingElement());
             return AutomationElementConverter.NativeToManaged(Automation, nativeElement);
         }
 
         public string GetText(int maxLength)
         {
-            return ComCallWrapper.Call(() => NativeRange.GetText(maxLength));
+            return Com.Call(() => NativeRange.GetText(maxLength));
         }
 
         public int Move(TextUnit unit, int count)
         {
-            return ComCallWrapper.Call(() => NativeRange.Move((UIA.TextUnit)unit, count));
+            return Com.Call(() => NativeRange.Move((UIA.TextUnit)unit, count));
         }
 
         public void MoveEndpointByRange(TextPatternRangeEndpoint srcEndPoint, ITextRange targetRange, TextPatternRangeEndpoint targetEndPoint)
         {
             var nativeRange = ToNativeRange(targetRange);
-            ComCallWrapper.Call(() => NativeRange.MoveEndpointByRange((UIA.TextPatternRangeEndpoint)srcEndPoint, nativeRange, (UIA.TextPatternRangeEndpoint)targetEndPoint));
+            Com.Call(() => NativeRange.MoveEndpointByRange((UIA.TextPatternRangeEndpoint)srcEndPoint, nativeRange, (UIA.TextPatternRangeEndpoint)targetEndPoint));
         }
 
         public int MoveEndpointByUnit(TextPatternRangeEndpoint endpoint, TextUnit unit, int count)
         {
-            return ComCallWrapper.Call(() => NativeRange.MoveEndpointByUnit((UIA.TextPatternRangeEndpoint)endpoint, (UIA.TextUnit)unit, count));
+            return Com.Call(() => NativeRange.MoveEndpointByUnit((UIA.TextPatternRangeEndpoint)endpoint, (UIA.TextUnit)unit, count));
         }
 
         public void RemoveFromSelection()
         {
-            ComCallWrapper.Call(() => NativeRange.RemoveFromSelection());
+            Com.Call(() => NativeRange.RemoveFromSelection());
         }
 
         public void ScrollIntoView(bool alignToTop)
         {
-            ComCallWrapper.Call(() => NativeRange.ScrollIntoView(alignToTop.ToInt()));
+            Com.Call(() => NativeRange.ScrollIntoView(alignToTop.ToInt()));
         }
 
         public void Select()
         {
-            ComCallWrapper.Call(() => NativeRange.Select());
+            Com.Call(() => NativeRange.Select());
         }
 
         public UIA3TextRange2 AsTextRange2()

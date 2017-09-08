@@ -24,12 +24,12 @@ namespace FlaUI.UIA3.Patterns
 
         public override void Scroll(ScrollAmount horizontalAmount, ScrollAmount verticalAmount)
         {
-            ComCallWrapper.Call(() => NativePattern.Scroll((UIA.ScrollAmount)horizontalAmount, (UIA.ScrollAmount)verticalAmount));
+            Com.Call(() => NativePattern.Scroll((UIA.ScrollAmount)horizontalAmount, (UIA.ScrollAmount)verticalAmount));
         }
 
         public override void SetScrollPercent(double horizontalPercent, double verticalPercent)
         {
-            ComCallWrapper.Call(() => NativePattern.SetScrollPercent(horizontalPercent, verticalPercent));
+            Com.Call(() => NativePattern.SetScrollPercent(horizontalPercent, verticalPercent));
         }
     }
 

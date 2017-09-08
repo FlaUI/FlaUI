@@ -25,12 +25,12 @@ namespace FlaUI.UIA3.Patterns
         
         public override void Zoom(double zoom)
         {
-            ComCallWrapper.Call(() => NativePattern.Zoom(zoom));
+            Com.Call(() => NativePattern.Zoom(zoom));
         }
 
         public override void ZoomByUnit(ZoomUnit zoomUnit)
         {
-            ComCallWrapper.Call(() => NativePattern.ZoomByUnit((UIA.ZoomUnit)zoomUnit));
+            Com.Call(() => NativePattern.ZoomByUnit((UIA.ZoomUnit)zoomUnit));
         }
 
         public override void Move(double x, double y)

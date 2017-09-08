@@ -16,7 +16,7 @@ namespace FlaUI.UIA3
 
         public void ShowContextMenu()
         {
-            ComCallWrapper.Call(() => NativeRange2.ShowContextMenu());
+            Com.Call(() => NativeRange2.ShowContextMenu());
         }
     }
 }

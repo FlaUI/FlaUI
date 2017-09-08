@@ -23,17 +23,17 @@ namespace FlaUI.UIA3.Patterns
 
         public override void AddToSelection()
         {
-            ComCallWrapper.Call(() => NativePattern.AddToSelection());
+            Com.Call(() => NativePattern.AddToSelection());
         }
 
         public override void RemoveFromSelection()
         {
-            ComCallWrapper.Call(() => NativePattern.RemoveFromSelection());
+            Com.Call(() => NativePattern.RemoveFromSelection());
         }
 
         public override void Select()
         {
-            ComCallWrapper.Call(() => NativePattern.Select());
+            Com.Call(() => NativePattern.Select());
         }
     }
 
