@@ -15,48 +15,80 @@ namespace FlaUI.Core.Conditions
             _propertyLibrary = propertyLibrary;
         }
 
+        /// <summary>
+        /// Creates a condition to search by an automation id.
+        /// </summary>
         public PropertyCondition ByAutomationId(string automationId)
         {
             return new PropertyCondition(_propertyLibrary.Element.AutomationId, automationId);
         }
 
+        /// <summary>
+        /// Creates a condition to search by a <see cref="ControlType"/>.
+        /// </summary>
         public PropertyCondition ByControlType(ControlType controlType)
         {
             return new PropertyCondition(_propertyLibrary.Element.ControlType, controlType);
         }
 
+        /// <summary>
+        /// Creates a condition to search by a class name.
+        /// </summary>
         public PropertyCondition ByClassName(string className)
         {
             return new PropertyCondition(_propertyLibrary.Element.ClassName, className);
         }
 
+        /// <summary>
+        /// Creates a condition to search by a name.
+        /// </summary>
         public PropertyCondition ByName(string name)
         {
             return new PropertyCondition(_propertyLibrary.Element.Name, name);
         }
 
+        /// <summary>
+        /// Creates a condition to search by a text (same as <see cref="ByName"/>).
+        /// </summary>
         public PropertyCondition ByText(string text)
         {
             return ByName(text);
         }
 
+        /// <summary>
+        /// Creates a condition to search by a process id.
+        /// </summary>
         public PropertyCondition ByProcessId(int processId)
         {
             return new PropertyCondition(_propertyLibrary.Element.ProcessId, processId);
         }
 
+        /// <summary>
+        /// Creates a condition to search by a localized control type.
+        /// </summary>
         public PropertyCondition ByLocalizedControlType(string localizedControlType)
         {
             return new PropertyCondition(_propertyLibrary.Element.LocalizedControlType, localizedControlType);
         }
 
-        public PropertyCondition ByHelpTextProperty(string helpText)
+        /// <summary>
+        /// Creates a condition to search by a help text.
+        /// </summary>
+        public PropertyCondition ByHelpText(string helpText)
         {
             return new PropertyCondition(_propertyLibrary.Element.HelpText, helpText);
         }
 
         /// <summary>
-        /// Searches for a Menu/MenuBar
+        /// Creates a condition to search by a value.
+        /// </summary>
+        public PropertyCondition ByValue(string value)
+        {
+            return new PropertyCondition(_propertyLibrary.Value.Value, value);
+        }
+
+        /// <summary>
+        /// Searches for a Menu/MenuBar.
         /// </summary>
         public OrCondition Menu()
         {
@@ -64,19 +96,25 @@ namespace FlaUI.Core.Conditions
         }
 
         /// <summary>
-        /// Searches for a DataGrid/List
+        /// Searches for a DataGrid/List.
         /// </summary>
         public OrCondition Grid()
         {
             return new OrCondition(ByControlType(ControlType.DataGrid), ByControlType(ControlType.List));
         }
 
-        public OrCondition HScrollBar()
+        /// <summary>
+        /// Searches for a horizontal scrollbar.
+        /// </summary>
+        public OrCondition HorizontalScrollBar()
         {
             return new OrCondition(ByControlType(ControlType.ScrollBar), ByName(LocalizedStrings.HorizontalScrollBar));
         }
 
-        public OrCondition VScrollBar()
+        /// <summary>
+        /// Searches for a vertical scrollbar.
+        /// </summary>
+        public OrCondition VerticalScrollBar()
         {
             return new OrCondition(ByControlType(ControlType.ScrollBar), ByName(LocalizedStrings.VerticalScrollBar));
         }
