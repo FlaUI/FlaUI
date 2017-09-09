@@ -733,7 +733,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <summary>
         /// Converts the element to a <see cref="HorizontalScrollBar"/>.
         /// </summary>
-        public HorizontalScrollBar AsHScrollBar()
+        public HorizontalScrollBar AsHorizontalScrollBar()
         {
             return new HorizontalScrollBar(BasicAutomationElement);
         }
@@ -819,6 +819,14 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
+        /// Converts the element to a <see cref="ToggleButton"/>.
+        /// </summary>
+        public ToggleButton AsToggleButton()
+        {
+            return new ToggleButton(BasicAutomationElement);
+        }
+
+        /// <summary>
         /// Converts the element to a <see cref="Tree"/>.
         /// </summary>
         public Tree AsTree()
@@ -837,7 +845,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <summary>
         /// Converts the element to a <see cref="VerticalScrollBar"/>.
         /// </summary>
-        public VerticalScrollBar AsVScrollBar()
+        public VerticalScrollBar AsVerticalScrollBar()
         {
             return new VerticalScrollBar(BasicAutomationElement);
         }
