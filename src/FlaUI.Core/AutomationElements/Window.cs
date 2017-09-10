@@ -10,16 +10,31 @@ using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.AutomationElements
 {
+    /// <summary>
+    /// Class to interact with a window element.
+    /// </summary>
     public class Window : AutomationElement
     {
+        /// <summary>
+        /// Creates a <see cref="Window"/> element.
+        /// </summary>
         public Window(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 
+        /// <summary>
+        /// Gets the title of the window.
+        /// </summary>
         public string Title => Properties.Name.Value;
 
+        /// <summary>
+        /// Gets if the window is modal.
+        /// </summary>
         public bool IsModal => Patterns.Window.Pattern.IsModal.Value;
 
+        /// <summary>
+        /// Gets the <see cref="TitleBar"/> of the window.
+        /// </summary>
         public TitleBar TitleBar => FindFirstChild(cf => cf.ByControlType(ControlType.TitleBar))?.AsTitleBar();
 
         /// <summary>
@@ -28,6 +43,9 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         internal bool IsMainWindow { get; set; }
 
+        /// <summary>
+        /// Gets a list of all modal child windows.
+        /// </summary>
         public Window[] ModalWindows
         {
             get
@@ -40,7 +58,7 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <summary>
-        /// Gets the current WPF popup window
+        /// Gets the current WPF popup window.
         /// </summary>
         public Window Popup
         {
@@ -53,11 +71,14 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <summary>
-        /// Gets the contest menu for the window.
+        /// Gets the context menu for the window.
         /// Note: It uses the FrameworkType of the window as lookup logic. Use <see cref="GetContextMenuByFrameworkType" /> if you want to control this.
         /// </summary>
         public Menu ContextMenu => GetContextMenuByFrameworkType(FrameworkType);
 
+        /// <summary>
+        /// Gets the context menu by a given <see cref="FrameworkType"/>.
+        /// </summary>
         public Menu GetContextMenuByFrameworkType(FrameworkType frameworkType)
         {
             if (frameworkType == FrameworkType.Win32)
@@ -89,6 +110,9 @@ namespace FlaUI.Core.AutomationElements
             return null;
         }
 
+        /// <summary>
+        /// Closes the window.
+        /// </summary>
         public void Close()
         {
             var titleBar = TitleBar;
@@ -97,8 +121,7 @@ namespace FlaUI.Core.AutomationElements
                 titleBar.CloseButton.Invoke();
                 return;
             }
-            var windowPattern = Patterns.Window.PatternOrDefault;
-            if (windowPattern != null)
+            if (Patterns.Window.TryGetPattern(out var windowPattern))
             {
                 windowPattern.Close();
                 return;
@@ -106,13 +129,16 @@ namespace FlaUI.Core.AutomationElements
             throw new MethodNotSupportedException("Close is not supported");
         }
 
+        /// <summary>
+        /// Moves the window to the given coordinates.
+        /// </summary>
         public void Move(int x, int y)
         {
             Patterns.Transform.PatternOrDefault?.Move(x, y);
         }
 
         /// <summary>
-        /// Brings the element to the foreground
+        /// Brings the element to the foreground.
         /// </summary>
         public void SetTransparency(byte alpha)
         {
@@ -127,7 +153,7 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <summary>
-        /// Gets the main window (first window on desktop with the same process as this window)
+        /// Gets the main window (first window on desktop with the same process as this window).
         /// </summary>
         private Window GetMainWindow()
         {

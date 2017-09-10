@@ -25,9 +25,9 @@ namespace FlaUI.Core.UITests.Elements
             Wait.UntilInputIsProcessed();
             var ctxMenu = window.ContextMenu;
             Assert.That(ctxMenu, Is.Not.Null);
-            var subMenuLevel1 = ctxMenu.MenuItems;
+            var subMenuLevel1 = ctxMenu.Items;
             Assert.That(subMenuLevel1, Has.Length.EqualTo(2));
-            var subMenuLevel2 = subMenuLevel1[1].SubMenuItems;
+            var subMenuLevel2 = subMenuLevel1[1].Items;
             Assert.That(subMenuLevel2, Has.Length.EqualTo(1));
             var innerItem = subMenuLevel2[0];
             Assert.That(innerItem.Text, Is.EqualTo("Inner Context"));

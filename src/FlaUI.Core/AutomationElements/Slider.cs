@@ -9,10 +9,13 @@ using FlaUI.Core.WindowsAPI;
 namespace FlaUI.Core.AutomationElements
 {
     /// <summary>
-    /// Represents a slider element.
+    /// Class to interact with a slider element.
     /// </summary>
     public class Slider : AutomationElement
     {
+        /// <summary>
+        /// Creates a <see cref="Slider"/> element.
+        /// </summary>
         public Slider(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }

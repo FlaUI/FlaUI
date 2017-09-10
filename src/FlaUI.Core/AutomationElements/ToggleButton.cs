@@ -10,7 +10,7 @@ namespace FlaUI.Core.AutomationElements
     public class ToggleButton : ToggleAutomationElement
     {
         /// <summary>
-        /// Creates a toggle button element.
+        /// Creates a <see cref="ToggleButton"/> element.
         /// </summary>
         public ToggleButton(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {

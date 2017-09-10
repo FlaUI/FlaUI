@@ -7,27 +7,35 @@ using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.AutomationElements
 {
+    /// <summary>
+    /// Class to interact with a textbox element.
+    /// </summary>
     public class TextBox : AutomationElement
     {
+        /// <summary>
+        /// Creates a <see cref="TextBox"/> element.
+        /// </summary>
         public TextBox(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 
+        /// <summary>
+        /// Gets or sets the text of the element.
+        /// </summary>
         public string Text
         {
             get
             {
-                if (Properties.IsPassword)
+                if (Properties.IsPassword.TryGetValue(out var isPassword) && isPassword)
                 {
                     throw new MethodNotSupportedException($"Text from element '{ToString()}' cannot be retrieved because it is set as password.");
                 }
-                var valuePattern = Patterns.Value.PatternOrDefault;
-                if (valuePattern != null)
+                if (Patterns.Value.TryGetPattern(out var valuePattern) &&
+                    valuePattern.Value.TryGetValue(out var value))
                 {
-                    return valuePattern.Value;
+                    return value;
                 }
-                var textPattern = Patterns.Text.PatternOrDefault;
-                if (textPattern != null)
+                if (Patterns.Text.TryGetPattern(out var textPattern))
                 {
                     return textPattern.DocumentRange.GetText(Int32.MaxValue);
                 }
@@ -35,8 +43,7 @@ namespace FlaUI.Core.AutomationElements
             }
             set
             {
-                var valuePattern = Patterns.Value.PatternOrDefault;
-                if (valuePattern != null)
+                if (Patterns.Value.TryGetPattern(out var valuePattern))
                 {
                     valuePattern.SetValue(value);
                 }
@@ -47,6 +54,25 @@ namespace FlaUI.Core.AutomationElements
             }
         }
 
+        /// <summary>
+        /// Gets if the element is read only or not.
+        /// </summary>
+        public bool IsReadOnly
+        {
+            get
+            {
+                if (Patterns.Value.TryGetPattern(out var valuePattern) &&
+                    valuePattern.IsReadOnly.TryGetValue(out var value))
+                {
+                    return value;
+                }
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Simulate typing in text. This is slower than setting <see cref="Text"/> but raises more events.
+        /// </summary>
         public void Enter(string value)
         {
             Focus();

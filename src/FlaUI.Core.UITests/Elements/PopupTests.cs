@@ -40,8 +40,8 @@ namespace FlaUI.Core.UITests.Elements
             var popupChildren = popup.FindAllChildren();
             Assert.That(popupChildren, Has.Length.EqualTo(1));
             var menu = popupChildren[0].AsMenu();
-            Assert.That(menu.MenuItems, Has.Length.EqualTo(1));
-            var menuItem = menu.MenuItems[0];
+            Assert.That(menu.Items, Has.Length.EqualTo(1));
+            var menuItem = menu.Items[0];
             Assert.That(menuItem.Text, Is.EqualTo("Some MenuItem"));
         }
     }

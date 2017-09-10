@@ -8,6 +8,9 @@ namespace FlaUI.Core.AutomationElements.PatternElements
     /// </summary>
     public class SelectionItemAutomationElement : AutomationElement
     {
+        /// <summary>
+        /// Creates a <see cref="SelectionItemAutomationElement"/> element.
+        /// </summary>
         public SelectionItemAutomationElement(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }

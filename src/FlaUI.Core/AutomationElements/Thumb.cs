@@ -3,8 +3,14 @@ using FlaUI.Core.Input;
 
 namespace FlaUI.Core.AutomationElements
 {
+    /// <summary>
+    /// Class to interact with a thumb element.
+    /// </summary>
     public class Thumb : AutomationElement
     {
+        /// <summary>
+        /// Creates a <see cref="Thumb"/> element.
+        /// </summary>
         public Thumb(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }

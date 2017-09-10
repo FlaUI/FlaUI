@@ -5,8 +5,14 @@ using FlaUI.Core.Definitions;
 
 namespace FlaUI.Core.AutomationElements
 {
+    /// <summary>
+    /// Class to interact with a tab element.
+    /// </summary>
     public class Tab : AutomationElement
     {
+        /// <summary>
+        /// Creates a <see cref="Tab"/> element.
+        /// </summary>
         public Tab(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
@@ -64,7 +70,7 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         private TabItem[] GetTabItems()
         {
-            return FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.TabItem))
+            return FindAllChildren(cf => cf.ByControlType(ControlType.TabItem))
                 .Select(e => e.AsTabItem()).ToArray();
         }
 

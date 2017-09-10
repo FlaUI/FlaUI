@@ -33,10 +33,10 @@ namespace FlaUI.Core.UITests.Elements
         {
             var tree = _tree;
             Assert.That(tree.SelectedTreeItem, Is.Null);
-            Assert.That(tree.TreeItems, Has.Length.EqualTo(2));
-            tree.TreeItems[0].Expand();
-            tree.TreeItems[0].TreeItems[1].Expand();
-            tree.TreeItems[0].TreeItems[1].TreeItems[0].Select();
+            Assert.That(tree.Items, Has.Length.EqualTo(2));
+            tree.Items[0].Expand();
+            tree.Items[0].Items[1].Expand();
+            tree.Items[0].Items[1].Items[0].Select();
             Assert.That(tree.SelectedTreeItem, Is.Not.Null);
             Assert.That(tree.SelectedTreeItem.Text, Is.EqualTo("Lvl3 a"));
         }

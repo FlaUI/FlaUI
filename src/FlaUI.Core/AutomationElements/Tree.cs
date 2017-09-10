@@ -4,8 +4,14 @@ using FlaUI.Core.Definitions;
 
 namespace FlaUI.Core.AutomationElements
 {
+    /// <summary>
+    /// Class to interact with a tree element.
+    /// </summary>
     public class Tree : AutomationElement
     {
+        /// <summary>
+        /// Creates a <see cref="Tree"/> element.
+        /// </summary>
         public Tree(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
@@ -13,7 +19,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// The currently selected <see cref="TreeItem" />
         /// </summary>
-        public TreeItem SelectedTreeItem => SearchSelectedItem(TreeItems);
+        public TreeItem SelectedTreeItem => SearchSelectedItem(Items);
 
         private TreeItem SearchSelectedItem(TreeItem[] treeItems)
         {
@@ -26,7 +32,7 @@ namespace FlaUI.Core.AutomationElements
             // Loop thru the children and search in their children
             foreach (var treeItem in treeItems)
             {
-                var selectedInChildItem = SearchSelectedItem(treeItem.TreeItems);
+                var selectedInChildItem = SearchSelectedItem(treeItem.Items);
                 if (selectedInChildItem != null)
                 {
                     return selectedInChildItem;
@@ -38,7 +44,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// All child <see cref="TreeItem" /> objects from this <see cref="Tree" />
         /// </summary>
-        public TreeItem[] TreeItems => GetTreeItems();
+        public TreeItem[] Items => GetTreeItems();
 
         /// <summary>
         /// Gets all the <see cref="TreeItem" /> objects for this <see cref="Tree" />

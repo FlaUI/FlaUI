@@ -9,16 +9,25 @@ using FlaUI.Core.Patterns;
 namespace FlaUI.Core.AutomationElements
 {
     /// <summary>
-    /// Element which can be used for combobox elements.
+    /// Class to interact with a combobox element.
     /// </summary>
     public class ComboBox : AutomationElement
     {
+        /// <summary>
+        /// Creates a <see cref="ComboBox"/> element.
+        /// </summary>
         public ComboBox(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 
+        /// <summary>
+        /// Pattern object for the <see cref="IValuePattern"/>.
+        /// </summary>
         protected IValuePattern ValuePattern => Patterns.Value.Pattern;
 
+        /// <summary>
+        /// Pattern object for the <see cref="ISelectionPattern"/>.
+        /// </summary>
         protected ISelectionPattern SelectionPattern => Patterns.Selection.PatternOrDefault;
 
         /// <summary>
@@ -139,6 +148,9 @@ namespace FlaUI.Core.AutomationElements
             }
         }
 
+        /// <summary>
+        /// Gets the <see cref="ExpandCollapseState"/> of the element.
+        /// </summary>
         public ExpandCollapseState ExpandCollapseState
         {
             get
@@ -161,6 +173,9 @@ namespace FlaUI.Core.AutomationElements
             }
         }
 
+        /// <summary>
+        /// Expands the element.
+        /// </summary>
         public void Expand()
         {
             if (!Properties.IsEnabled.Value || ExpandCollapseState != ExpandCollapseState.Collapsed)
@@ -186,6 +201,9 @@ namespace FlaUI.Core.AutomationElements
             }
         }
 
+        /// <summary>
+        /// Collapses the element.
+        /// </summary>
         public void Collapse()
         {
             if (!Properties.IsEnabled || ExpandCollapseState != ExpandCollapseState.Expanded)

@@ -18,9 +18,9 @@ namespace FlaUI.Core.UITests.Elements
         {
             RestartApp();
             var radioButton = App.GetMainWindow(Automation).FindFirstDescendant(cf => cf.ByAutomationId("RadioButton1")).AsRadioButton();
-            Assert.That(radioButton.IsSelected, Is.False);
-            radioButton.Select();
-            Assert.That(radioButton.IsSelected, Is.True);
+            Assert.That(radioButton.IsChecked, Is.False);
+            radioButton.IsChecked = true;
+            Assert.That(radioButton.IsChecked, Is.True);
         }
 
         [Test]
@@ -30,15 +30,15 @@ namespace FlaUI.Core.UITests.Elements
             var radioButton1 = App.GetMainWindow(Automation).FindFirstDescendant(cf => cf.ByAutomationId("RadioButton1")).AsRadioButton();
             var radioButton2 = App.GetMainWindow(Automation).FindFirstDescendant(cf => cf.ByAutomationId("RadioButton2")).AsRadioButton();
 
-            Assert.That(radioButton1.IsSelected && radioButton2.IsSelected, Is.False);
+            Assert.That(radioButton1.IsChecked && radioButton2.IsChecked, Is.False);
 
-            radioButton1.Select();
-            Assert.That(radioButton1.IsSelected, Is.True);
-            Assert.That(radioButton2.IsSelected, Is.False);
+            radioButton1.IsChecked = true;
+            Assert.That(radioButton1.IsChecked, Is.True);
+            Assert.That(radioButton2.IsChecked, Is.False);
 
-            radioButton2.Select();
-            Assert.That(radioButton1.IsSelected, Is.False);
-            Assert.That(radioButton2.IsSelected, Is.True);
+            radioButton2.IsChecked = true;
+            Assert.That(radioButton1.IsChecked, Is.False);
+            Assert.That(radioButton2.IsChecked, Is.True);
         }
     }
 }

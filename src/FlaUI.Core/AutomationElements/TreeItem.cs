@@ -7,13 +7,16 @@ using FlaUI.Core.Definitions;
 namespace FlaUI.Core.AutomationElements
 {
     /// <summary>
-    /// A node element inside a <see cref="Tree"/>.
+    /// Class to interact with a treeitem element.
     /// </summary>
     public class TreeItem : AutomationElement
     {
         private readonly SelectionItemAutomationElement _selectionItemAutomationElement;
         private readonly ExpandCollapseAutomationElement _expandCollapseAutomationElement;
 
+        /// <summary>
+        /// Creates a <see cref="TreeItem"/> element.
+        /// </summary>
         public TreeItem(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
             _selectionItemAutomationElement = new SelectionItemAutomationElement(basicAutomationElement);
@@ -23,7 +26,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// All child <see cref="TreeItem" /> objects from this <see cref="TreeItem" />.
         /// </summary>
-        public TreeItem[] TreeItems => GetTreeItems();
+        public TreeItem[] Items => GetTreeItems();
 
         /// <summary>
         /// The text of the <see cref="TreeItem" />.

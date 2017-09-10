@@ -3,14 +3,20 @@
 namespace FlaUI.Core.AutomationElements
 {
     /// <summary>
-    /// Represents an item in a combobox
+    /// Class to interact with a combobox item element.
     /// </summary>
     public class ComboBoxItem : SelectionItemAutomationElement
     {
+        /// <summary>
+        /// Creates a <see cref="ComboBoxItem"/> element.
+        /// </summary>
         public ComboBoxItem(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
 
+        /// <summary>
+        /// Gets the text of the element.
+        /// </summary>
         public virtual string Text
         {
             get
