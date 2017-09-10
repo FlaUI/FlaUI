@@ -85,7 +85,7 @@ namespace FlaUI.UIA3
         }
 
         /// <inheritdoc />
-        public override AutomationElement FindIndexed(TreeScope treeScope, ConditionBase condition, int index)
+        public override AutomationElement FindIndexed(TreeScope treeScope, int index, ConditionBase condition)
         {
             var nativeFoundElements = CacheRequest.IsCachingActive
                 ? NativeElement.FindAllBuildCache((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition), CacheRequest.Current.ToNative(Automation))

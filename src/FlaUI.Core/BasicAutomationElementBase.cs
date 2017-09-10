@@ -214,10 +214,10 @@ namespace FlaUI.Core
         /// Finds the element with the given index with the given condition.
         /// </summary>
         /// <param name="treeScope">The scope to search.</param>
-        /// <param name="condition">The condition to use.</param>
         /// <param name="index">The index of the element to return (0-based).</param>
+        /// <param name="condition">The condition to use.</param>
         /// <returns>The found element or null if no element was found.</returns>
-        public abstract AutomationElement FindIndexed(TreeScope treeScope, ConditionBase condition, int index);
+        public abstract AutomationElement FindIndexed(TreeScope treeScope, int index, ConditionBase condition);
 
         public abstract bool TryGetClickablePoint(out Point point);
         public abstract IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action);

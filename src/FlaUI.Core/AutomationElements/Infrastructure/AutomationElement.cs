@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -438,10 +438,10 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <summary>
         /// Finds the element which is in the given treescope with the given condition and the given index.
         /// </summary>
-        public AutomationElement FindAt(TreeScope treeScope, ConditionBase condition, int index)
+        public AutomationElement FindAt(TreeScope treeScope, int index, ConditionBase condition)
         {
             Predicate<AutomationElement> whilePredicate = element => element == null;
-            Func<AutomationElement> retryMethod = () => BasicAutomationElement.FindIndexed(treeScope, condition, index);
+            Func<AutomationElement> retryMethod = () => BasicAutomationElement.FindIndexed(treeScope, index, condition);
             return Retry.While(retryMethod, whilePredicate, Retry.DefaultRetryFor);
         }
 
@@ -451,7 +451,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         public AutomationElement FindAt(TreeScope treeScope, ConditionBase condition, int index, TimeSpan timeOut)
         {
             Predicate<AutomationElement> whilePredicate = element => element == null;
-            Func<AutomationElement> retryMethod = () => BasicAutomationElement.FindIndexed(treeScope, condition, index);
+            Func<AutomationElement> retryMethod = () => BasicAutomationElement.FindIndexed(treeScope, index, condition);
             return Retry.While(retryMethod, whilePredicate, timeOut);
         }
 
@@ -1029,7 +1029,30 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <returns>The found element or null if no element was found.</returns>
         public AutomationElement FindChildAt(int index)
         {
-            return FindAt(TreeScope.Children, TrueCondition.Default, index);
+            return FindChildAt(index, TrueCondition.Default);
+        }
+
+        /// <summary>
+        /// Finds the child at the given position with the condition.
+        /// </summary>
+        /// <param name="index">The index of the child to find.</param>
+        /// <param name="condition">The condition.</param>
+        /// <returns>The found element or null if no element was found.</returns>
+        public AutomationElement FindChildAt(int index, ConditionBase condition)
+        {
+            return FindAt(TreeScope.Children, index, condition);
+        }
+
+        /// <summary>
+        /// Finds the child at the given position with the condition.
+        /// </summary>
+        /// <param name="index">The index of the child to find.</param>
+        /// <param name="conditionFunc">The condition mehtod.</param>
+        /// <returns>The found element or null if no element was found.</returns>
+        public AutomationElement FindChildAt(int index, Func<ConditionFactory, ConditionBase> conditionFunc)
+        {
+            var condition = conditionFunc(ConditionFactory);
+            return FindChildAt(index, condition);
         }
         #endregion Convenience methods
     }
