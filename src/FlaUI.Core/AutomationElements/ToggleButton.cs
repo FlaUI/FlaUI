@@ -1,6 +1,5 @@
 ﻿using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.AutomationElements.PatternElements;
-using FlaUI.Core.Patterns;
 
 namespace FlaUI.Core.AutomationElements
 {
@@ -17,11 +16,12 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <summary>
-        /// Toggles the toggle button. Uses <see cref="AutomationElement.Click"/> as <see cref="ITogglePattern.Toggle"/> does not fire commands.
+        /// Toggles the toggle button.
+        /// Note: In some WPF scenarios, the bounded command might not be fired. Use <see cref="AutomationElement.Click"/> instead in that case.
         /// </summary>
         public override void Toggle()
         {
-            Click();
+            base.Toggle();
         }
     }
 }
