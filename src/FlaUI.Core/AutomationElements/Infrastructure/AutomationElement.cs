@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -736,6 +736,22 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         public HorizontalScrollBar AsHorizontalScrollBar()
         {
             return new HorizontalScrollBar(BasicAutomationElement);
+        }
+
+        /// <summary>
+        /// Converts the element to a <see cref="ListBox"/>.
+        /// </summary>
+        public ListBox AsListBox()
+        {
+            return new ListBox(BasicAutomationElement);
+        }
+
+        /// <summary>
+        /// Converts the element to a <see cref="ListBoxItem"/>.
+        /// </summary>
+        public ListBoxItem AsListBoxItem()
+        {
+            return new ListBoxItem(BasicAutomationElement);
         }
 
         /// <summary>

@@ -51,6 +51,7 @@
     <Compile Include="Elements\ComboBoxTests.cs" />
     <Compile Include="Elements\LabelTests.cs" />
     <Compile Include="Elements\GridTests.cs" />
+    <Compile Include="Elements\ListBoxTests.cs" />
     <Compile Include="Elements\MenuTests.cs" />
     <Compile Include="Elements\PopupTests.cs" />
     <Compile Include="Elements\ProgressBarTests.cs" />

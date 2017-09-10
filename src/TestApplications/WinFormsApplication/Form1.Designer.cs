@@ -110,6 +110,7 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.ListBox = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Slider)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -278,6 +279,7 @@
             // tabPage1
             // 
             this.tabPage1.AutoScroll = true;
+            this.tabPage1.Controls.Add(this.ListBox);
             this.tabPage1.Controls.Add(this.panel1);
             this.tabPage1.Controls.Add(this.NonEditableCombo);
             this.tabPage1.Controls.Add(this.button1);
@@ -397,7 +399,7 @@
             this.groupBox3.Controls.Add(this.LargeListView);
             this.groupBox3.Location = new System.Drawing.Point(8, 194);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(105, 100);
+            this.groupBox3.Size = new System.Drawing.Size(88, 100);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Large List with Scroll";
@@ -418,7 +420,7 @@
             listViewItem7});
             this.LargeListView.Location = new System.Drawing.Point(3, 16);
             this.LargeListView.Name = "LargeListView";
-            this.LargeListView.Size = new System.Drawing.Size(99, 81);
+            this.LargeListView.Size = new System.Drawing.Size(82, 81);
             this.LargeListView.TabIndex = 1;
             this.LargeListView.UseCompatibleStateImageBehavior = false;
             this.LargeListView.View = System.Windows.Forms.View.Details;
@@ -440,7 +442,7 @@
             this.groupBox1.Controls.Add(this.treeView1);
             this.groupBox1.Location = new System.Drawing.Point(8, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(405, 76);
+            this.groupBox1.Size = new System.Drawing.Size(388, 76);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tree";
@@ -465,7 +467,7 @@
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode5,
             treeNode6});
-            this.treeView1.Size = new System.Drawing.Size(399, 57);
+            this.treeView1.Size = new System.Drawing.Size(382, 57);
             this.treeView1.TabIndex = 0;
             // 
             // groupBox2
@@ -475,7 +477,7 @@
             this.groupBox2.Controls.Add(this.listView1);
             this.groupBox2.Location = new System.Drawing.Point(8, 88);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(405, 100);
+            this.groupBox2.Size = new System.Drawing.Size(388, 100);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "ListView";
@@ -492,7 +494,7 @@
             listViewItem10});
             this.listView1.Location = new System.Drawing.Point(3, 16);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(399, 81);
+            this.listView1.Size = new System.Drawing.Size(382, 81);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -512,6 +514,17 @@
             this.statusStrip1.Size = new System.Drawing.Size(497, 22);
             this.statusStrip1.TabIndex = 18;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // ListBox
+            // 
+            this.ListBox.FormattingEnabled = true;
+            this.ListBox.Items.AddRange(new object[] {
+            "ListBox Item #1",
+            "ListBox Item #2"});
+            this.ListBox.Location = new System.Drawing.Point(304, 40);
+            this.ListBox.Name = "ListBox";
+            this.ListBox.Size = new System.Drawing.Size(120, 56);
+            this.ListBox.TabIndex = 22;
             // 
             // Form1
             // 
@@ -582,6 +595,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ListBox ListBox;
     }
 }
 

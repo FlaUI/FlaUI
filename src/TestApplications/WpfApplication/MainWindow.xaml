@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfApplication"
         mc:Ignorable="d"
         Title="FlaUI WPF Test App"
-        Height="450" Width="600"
+        Height="515.931" Width="629.303"
         ResizeMode="CanResize">
     <Window.Resources>
         <ResourceDictionary>
@@ -48,6 +48,10 @@
                         <TextBlock Text="Item 3" AutomationProperties.AutomationId="EditableComboItem3" />
                         <TextBlock Text="Item 4" AutomationProperties.AutomationId="EditableComboItem4" />
                     </ComboBox>
+                    <ListBox AutomationProperties.AutomationId="ListBox">
+                        <ListBoxItem>ListBox Item #1</ListBoxItem>
+                        <ListBoxItem>ListBox Item #2</ListBoxItem>
+                    </ListBox>
                     <CheckBox Content="Test Checkbox" AutomationProperties.AutomationId="SimpleCheckBox" />
                     <CheckBox Content="3-Way Test Checkbox" IsThreeState="True" AutomationProperties.AutomationId="ThreeStateCheckBox" />
                     <RadioButton Content="RadioButton1" AutomationProperties.AutomationId="RadioButton1" />

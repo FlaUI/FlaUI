@@ -12,12 +12,15 @@ namespace FlaUI.Core.AutomationElements.PatternElements
         {
         }
 
+        /// <summary>
+        /// Pattern object for the <see cref="ISelectionItemPattern"/>.
+        /// </summary>
         protected ISelectionItemPattern SelectionItemPattern => Patterns.SelectionItem.Pattern;
 
         /// <summary>
         /// Value to get/set if this element is selected.
         /// </summary>
-        public bool IsSelected
+        public virtual bool IsSelected
         {
             get => SelectionItemPattern.IsSelected;
             set
@@ -33,7 +36,7 @@ namespace FlaUI.Core.AutomationElements.PatternElements
         /// <summary>
         /// Selects the element.
         /// </summary>
-        public SelectionItemAutomationElement Select()
+        public virtual SelectionItemAutomationElement Select()
         {
             ExecuteInPattern(SelectionItemPattern, true, pattern => pattern.Select());
             return this;
@@ -42,7 +45,7 @@ namespace FlaUI.Core.AutomationElements.PatternElements
         /// <summary>
         /// Adds the element to the selection.
         /// </summary>
-        public SelectionItemAutomationElement AddToSelection()
+        public virtual SelectionItemAutomationElement AddToSelection()
         {
             ExecuteInPattern(SelectionItemPattern, true, pattern => pattern.AddToSelection());
             return this;
@@ -51,7 +54,7 @@ namespace FlaUI.Core.AutomationElements.PatternElements
         /// <summary>
         /// Removes the element from the selection.
         /// </summary>
-        public SelectionItemAutomationElement RemoveFromSelection()
+        public virtual SelectionItemAutomationElement RemoveFromSelection()
         {
             ExecuteInPattern(SelectionItemPattern, true, pattern => pattern.RemoveFromSelection());
             return this;
