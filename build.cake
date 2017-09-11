@@ -123,20 +123,17 @@ Task("Package")
     // Upload the artifacts to appveyor
     if (AppVeyor.IsRunningOnAppVeyor) {
         // Add the nuget packages
-        var files = GetFiles(artifactDir.ToString() + "/*.nupkg");
-        foreach(var file in files)
+        foreach(var file in GetFiles(artifactDir.ToString() + "/*.nupkg"))
         {
             AppVeyor.UploadArtifact(file);
         }
         // Add the test xml files
-        var files = GetFiles(artifactDir.ToString() + "/*.xml");
-        foreach(var file in files)
+        foreach(var file in GetFiles(artifactDir.ToString() + "/*.xml"))
         {
             AppVeyor.UploadArtifact(file);
         }
         // Add zip files
-        var files = GetFiles(artifactDir.ToString() + "/*.zip");
-        foreach(var file in files)
+        foreach(var file in GetFiles(artifactDir.ToString() + "/*.zip"))
         {
             AppVeyor.UploadArtifact(file);
         }
