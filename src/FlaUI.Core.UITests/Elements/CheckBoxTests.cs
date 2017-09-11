@@ -21,9 +21,9 @@ namespace FlaUI.Core.UITests.Elements
             RestartApp();
             var window = App.GetMainWindow(Automation);
             var checkBox = window.FindFirstDescendant(cf => cf.ByName("Test Checkbox")).AsCheckBox();
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.Off));
+            Assert.That(checkBox.ToggleState, Is.EqualTo(ToggleState.Off));
             checkBox.Toggle();
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.On));
+            Assert.That(checkBox.ToggleState, Is.EqualTo(ToggleState.On));
         }
 
         [Test]
@@ -31,12 +31,12 @@ namespace FlaUI.Core.UITests.Elements
         {
             var window = App.GetMainWindow(Automation);
             var checkBox = window.FindFirstDescendant(cf => cf.ByText("Test Checkbox")).AsCheckBox();
-            checkBox.State = ToggleState.On;
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.On));
-            checkBox.State = ToggleState.Off;
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.Off));
-            checkBox.State = ToggleState.On;
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.On));
+            checkBox.ToggleState = ToggleState.On;
+            Assert.That(checkBox.ToggleState, Is.EqualTo(ToggleState.On));
+            checkBox.ToggleState = ToggleState.Off;
+            Assert.That(checkBox.ToggleState, Is.EqualTo(ToggleState.Off));
+            checkBox.ToggleState = ToggleState.On;
+            Assert.That(checkBox.ToggleState, Is.EqualTo(ToggleState.On));
         }
 
         [Test]
@@ -45,11 +45,11 @@ namespace FlaUI.Core.UITests.Elements
             RestartApp();
             var window = App.GetMainWindow(Automation);
             var checkBox = window.FindFirstDescendant(cf => cf.ByText("3-Way Test Checkbox")).AsCheckBox();
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.Off));
+            Assert.That(checkBox.ToggleState, Is.EqualTo(ToggleState.Off));
             checkBox.Toggle();
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.On));
+            Assert.That(checkBox.ToggleState, Is.EqualTo(ToggleState.On));
             checkBox.Toggle();
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.Indeterminate));
+            Assert.That(checkBox.ToggleState, Is.EqualTo(ToggleState.Indeterminate));
         }
 
         [Test]
@@ -57,14 +57,14 @@ namespace FlaUI.Core.UITests.Elements
         {
             var window = App.GetMainWindow(Automation);
             var checkBox = window.FindFirstDescendant(cf => cf.ByText("3-Way Test Checkbox")).AsCheckBox();
-            checkBox.State = ToggleState.On;
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.On));
-            checkBox.State = ToggleState.Off;
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.Off));
-            checkBox.State = ToggleState.Indeterminate;
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.Indeterminate));
-            checkBox.State = ToggleState.On;
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.On));
+            checkBox.ToggleState = ToggleState.On;
+            Assert.That(checkBox.ToggleState, Is.EqualTo(ToggleState.On));
+            checkBox.ToggleState = ToggleState.Off;
+            Assert.That(checkBox.ToggleState, Is.EqualTo(ToggleState.Off));
+            checkBox.ToggleState = ToggleState.Indeterminate;
+            Assert.That(checkBox.ToggleState, Is.EqualTo(ToggleState.Indeterminate));
+            checkBox.ToggleState = ToggleState.On;
+            Assert.That(checkBox.ToggleState, Is.EqualTo(ToggleState.On));
         }
     }
 }

@@ -15,6 +15,15 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <summary>
+        /// Gets or sets if the checkbox is checked.
+        /// </summary>
+        public bool? IsChecked
+        {
+            get => IsToggled;
+            set => IsToggled = value;
+        }
+
+        /// <summary>
         /// Gets the text of the element.
         /// </summary>
         public string Text => Properties.Name.Value;

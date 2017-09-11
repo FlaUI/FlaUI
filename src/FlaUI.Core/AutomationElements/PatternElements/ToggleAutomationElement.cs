@@ -25,7 +25,7 @@ namespace FlaUI.Core.AutomationElements.PatternElements
         /// <summary>
         /// Gets or sets the current toggle state.
         /// </summary>
-        public ToggleState State
+        public ToggleState ToggleState
         {
             get => TogglePattern.ToggleState.Value;
             set
@@ -34,10 +34,26 @@ namespace FlaUI.Core.AutomationElements.PatternElements
                 for (var i = 0; i < Enum.GetNames(typeof(ToggleState)).Length; i++)
                 {
                     // Break if we're in the correct state
-                    if (State == value) return;
+                    if (ToggleState == value) return;
                     // Toggle to the next state
                     Toggle();
                 }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets if the element is toggled.
+        /// </summary>
+        public bool? IsToggled
+        {
+            get => ToggleStateToBool(ToggleState);
+            set
+            {
+                if (IsToggled == value)
+                {
+                    return;
+                }
+                ToggleState = BoolToToggleState(value);
             }
         }
 
@@ -47,6 +63,36 @@ namespace FlaUI.Core.AutomationElements.PatternElements
         public virtual void Toggle()
         {
             TogglePattern.Toggle();
+        }
+
+        private bool? ToggleStateToBool(ToggleState toggleState)
+        {
+            switch (toggleState)
+            {
+                case ToggleState.Off:
+                    return false;
+                case ToggleState.On:
+                    return true;
+                case ToggleState.Indeterminate:
+                    return null;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(toggleState));
+            }
+        }
+
+        private ToggleState BoolToToggleState(bool? toggled)
+        {
+            switch (toggled)
+            {
+                case false:
+                    return ToggleState.Off;
+                case true:
+                    return ToggleState.On;
+                case null:
+                    return ToggleState.Indeterminate;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(toggled));
+            }
         }
     }
 }
