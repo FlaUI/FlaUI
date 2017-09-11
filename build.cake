@@ -12,12 +12,20 @@ var configuration = Argument("configuration", "Release");
 //////////////////////////////////////////////////////////////////////
 
 var slnFile = @"src\FlaUI.sln";
+var artifactDir = new DirectoryPath("artifacts");
 
 //////////////////////////////////////////////////////////////////////
 // TASKS
 //////////////////////////////////////////////////////////////////////
 
+Task("Clean")
+    .Does(() =>
+{
+    CleanDirectory(artifactDir);
+});
+
 Task("Restore-NuGet-Packages")
+    .IsDependentOn("Clean")
     .Does(() =>
 {
     NuGetRestore(slnFile);
@@ -33,7 +41,7 @@ Task("Build")
         Configuration = configuration,
         PlatformTarget = PlatformTarget.MSIL,
     }.AddFileLogger(new MSBuildFileLogger {
-        LogFile = "./BuildLog.txt",
+        LogFile = artifactDir.CombineWithFilePath("BuildLog.txt").ToString(),
         MSBuildFileLoggerOutput = MSBuildFileLoggerOutput.All
     });
     // Hide informational warnings for now
@@ -50,7 +58,7 @@ Task("Build")
     MSBuild(slnFile, buildSettings);
 
     // Second build with signing enabled
-    buildSettings.FileLoggers.First().LogFile = "./BuildLogSigned.txt";
+    buildSettings.FileLoggers.First().LogFile = artifactDir.CombineWithFilePath("BuildLogSigned.txt").ToString();
     buildSettings.Properties.Add("EnableSigning", new[] { "true" });
     buildSettings.Targets.Clear();
     buildSettings.WithTarget("Restore");
@@ -64,11 +72,12 @@ Task("Run-Unit-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
+    var resultFile = artifactDir.CombineWithFilePath("UnitTestResult.xml");
     NUnit3(@"src\FlaUI.Core.UnitTests\bin\FlaUI.Core.UnitTests.dll", new NUnit3Settings {
-        Results = "UnitTestResult.xml"
+        Results = resultFile
     });
     if (AppVeyor.IsRunningOnAppVeyor) {
-        AppVeyor.UploadTestResults("UnitTestResult.xml", AppVeyorTestResultsType.NUnit3);
+        AppVeyor.UploadTestResults(resultFile, AppVeyorTestResultsType.NUnit3);
     }
 });
 
@@ -76,20 +85,22 @@ Task("Run-UI-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
+    var resultFile = artifactDir.CombineWithFilePath("UIA2TestResult.xml");
     NUnit3(@"src\FlaUI.Core.UITests\bin\FlaUI.Core.UITests.dll", new NUnit3Settings {
-        Results = "UIA2TestResult.xml",
+        Results = resultFile,
         ArgumentCustomization = args => args.Append("--params=uia=2")
     });
     if (AppVeyor.IsRunningOnAppVeyor) {
-        AppVeyor.UploadTestResults("UIA2TestResult.xml", AppVeyorTestResultsType.NUnit3);
+        AppVeyor.UploadTestResults(resultFile, AppVeyorTestResultsType.NUnit3);
     }
 
+    resultFile = artifactDir.CombineWithFilePath("UIA3TestResult.xml");
     NUnit3(@"src\FlaUI.Core.UITests\bin\FlaUI.Core.UITests.dll", new NUnit3Settings {
-        Results = "UIA3TestResult.xml",
+        Results = resultFile,
         ArgumentCustomization = args => args.Append("--params=uia=3")
     });
     if (AppVeyor.IsRunningOnAppVeyor) {
-        AppVeyor.UploadTestResults("UIA3TestResult.xml", AppVeyorTestResultsType.NUnit3);
+        AppVeyor.UploadTestResults(resultFile, AppVeyorTestResultsType.NUnit3);
     }
 });
 
@@ -107,7 +118,7 @@ Task("Package")
     // Upload the artifacts to appveyor
     if (AppVeyor.IsRunningOnAppVeyor) {
         // Upload the nuget packages
-        var files = GetFiles("./nuget/*.nupkg");
+        var files = GetFiles(artifactDir);
         foreach(var file in files)
         {
             AppVeyor.UploadArtifact(file);

@@ -32,51 +32,8 @@ UIA2TestResult.xml
 UnitTestResult.xml
 UIA3TestResult.xml
 
-# Build Results of an ATL Project
-[Dd]ebugPS/
-[Rr]eleasePS/
-dlldata.c
-
-# DNX
-project.lock.json
+# Artifacts
 artifacts/
-
-*_i.c
-*_p.c
-*_i.h
-*.ilk
-*.meta
-*.obj
-*.pch
-*.pdb
-*.pgc
-*.pgd
-*.rsp
-*.sbr
-*.tlb
-*.tli
-*.tlh
-*.tmp
-*.tmp_proj
-*.log
-*.vspscc
-*.vssscc
-.builds
-*.pidb
-*.svclog
-*.scc
-
-# Chutzpah Test files
-_Chutzpah*
-
-# Visual C++ cache files
-ipch/
-*.aps
-*.ncb
-*.opendb
-*.opensdf
-*.sdf
-*.cachefile
 
 # Visual Studio profiler
 *.psess
@@ -111,14 +68,3 @@ BundleArtifacts/
 *.[Cc]ache
 # but keep track of directories ending in .cache
 !*.[Cc]ache/
-
-# Others
-ClientBin/
-~$*
-*~
-*.dbmdl
-*.dbproj.schemaview
-*.pfx
-*.publishsettings
-node_modules/
-orleans.codegen.cs

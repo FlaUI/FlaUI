@@ -7,7 +7,7 @@
 
   <PropertyGroup Label="Package">
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <PackageOutputPath>..\..\nuget</PackageOutputPath>
+    <PackageOutputPath>..\..\artifacts</PackageOutputPath>
     <Version>1.3.0</Version>
     <Company>FlauTech</Company>
     <Product>FlaUI</Product>

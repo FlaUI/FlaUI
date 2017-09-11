@@ -4,7 +4,7 @@
     <TargetFrameworks>net35;net40;net45</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <PackageOutputPath>..\..\nuget</PackageOutputPath>
+    <PackageOutputPath>..\..\artifacts</PackageOutputPath>
     <Version>1.3.0</Version>
     <Company>FlauTech</Company>
     <Product>FlaUI</Product>
