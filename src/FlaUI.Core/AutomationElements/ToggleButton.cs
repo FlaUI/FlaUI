@@ -1,5 +1,6 @@
 ﻿using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.AutomationElements.PatternElements;
+using FlaUI.Core.Definitions;
 
 namespace FlaUI.Core.AutomationElements
 {
@@ -14,6 +15,11 @@ namespace FlaUI.Core.AutomationElements
         public ToggleButton(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
         }
+
+        /// <summary>
+        /// Gets the current ToggleState 
+        /// </summary>
+        public ToggleState ToggleState => base.State;
 
         /// <summary>
         /// Toggles the toggle button.
