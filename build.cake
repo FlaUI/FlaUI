@@ -118,7 +118,7 @@ Task("Package")
     // Upload the artifacts to appveyor
     if (AppVeyor.IsRunningOnAppVeyor) {
         // Upload the nuget packages
-        var files = GetFiles(artifactDir);
+        var files = GetFiles(artifactDir.ToString());
         foreach(var file in files)
         {
             AppVeyor.UploadArtifact(file);
