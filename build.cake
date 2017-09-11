@@ -35,13 +35,14 @@ Task("Build")
     .IsDependentOn("Restore-NuGet-Packages")
     .Does(() =>
 {
+    var buildLogFile = artifactDir.CombineWithFilePath("BuildLog.txt");
     var buildSettings = new MSBuildSettings {
         Verbosity = Verbosity.Minimal,
         ToolVersion = MSBuildToolVersion.VS2017,
         Configuration = configuration,
         PlatformTarget = PlatformTarget.MSIL,
     }.AddFileLogger(new MSBuildFileLogger {
-        LogFile = artifactDir.CombineWithFilePath("BuildLog.txt").ToString(),
+        LogFile = buildLogFile.ToString(),
         MSBuildFileLoggerOutput = MSBuildFileLoggerOutput.All
     });
     // Hide informational warnings for now
@@ -58,7 +59,8 @@ Task("Build")
     MSBuild(slnFile, buildSettings);
 
     // Second build with signing enabled
-    buildSettings.FileLoggers.First().LogFile = artifactDir.CombineWithFilePath("BuildLogSigned.txt").ToString();
+    var buildLogSignedFile = artifactDir.CombineWithFilePath("BuildLogSigned.txt");
+    buildSettings.FileLoggers.First().LogFile = buildLogSignedFile.ToString();
     buildSettings.Properties.Add("EnableSigning", new[] { "true" });
     buildSettings.Targets.Clear();
     buildSettings.WithTarget("Restore");
@@ -66,6 +68,9 @@ Task("Build")
     buildSettings.Targets.Clear();
     buildSettings.WithTarget("Build");
     MSBuild(slnFile, buildSettings);
+
+    // Zip the logs
+    Zip(artifactDir, artifactDir.CombineWithFilePath("BuildLog.zip"), new [] { buildLogFile, buildLogSignedFile });
 });
 
 Task("Run-Unit-Tests")
@@ -117,7 +122,20 @@ Task("Package")
 {
     // Upload the artifacts to appveyor
     if (AppVeyor.IsRunningOnAppVeyor) {
-        var files = GetFiles(artifactDir.ToString() + "/*.*");
+        // Add the nuget packages
+        var files = GetFiles(artifactDir.ToString() + "/*.nupkg");
+        foreach(var file in files)
+        {
+            AppVeyor.UploadArtifact(file);
+        }
+        // Add the test xml files
+        var files = GetFiles(artifactDir.ToString() + "/*.xml");
+        foreach(var file in files)
+        {
+            AppVeyor.UploadArtifact(file);
+        }
+        // Add zip files
+        var files = GetFiles(artifactDir.ToString() + "/*.zip");
         foreach(var file in files)
         {
             AppVeyor.UploadArtifact(file);
