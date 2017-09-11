@@ -12,7 +12,7 @@ namespace FlaUI.UIA3
         private readonly UIA3Automation _automation;
 
         /// <summary>
-        /// Creates UIA3 tree walker factory.
+        /// Creates a UIA3 tree walker factory.
         /// </summary>
         public UIA3TreeWalkerFactory(UIA3Automation automation)
         {

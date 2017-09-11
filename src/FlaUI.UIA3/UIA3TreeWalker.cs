@@ -6,17 +6,31 @@ using UIA = Interop.UIAutomationClient;
 
 namespace FlaUI.UIA3
 {
+    /// <summary>
+    /// Class for a UIA3 tree walker.
+    /// </summary>
     public class UIA3TreeWalker : ITreeWalker
     {
-        public UIA3Automation Automation { get; }
-        public UIA.IUIAutomationTreeWalker NativeTreeWalker { get; }
-
+        /// <summary>
+        /// Creates a UIA3 tree walker.
+        /// </summary>
         public UIA3TreeWalker(UIA3Automation automation, UIA.IUIAutomationTreeWalker nativeTreeWalker)
         {
             Automation = automation;
             NativeTreeWalker = nativeTreeWalker;
         }
 
+        /// <summary>
+        /// The current <see cref="AutomationBase"/> object.
+        /// </summary>
+        public UIA3Automation Automation { get; }
+
+        /// <summary>
+        /// The native tree walker object.
+        /// </summary>
+        public UIA.IUIAutomationTreeWalker NativeTreeWalker { get; }
+
+        /// <inheritdoc />
         public AutomationElement GetParent(AutomationElement element)
         {
             var parent = CacheRequest.Current == null ?
@@ -25,6 +39,7 @@ namespace FlaUI.UIA3
             return Automation.WrapNativeElement(parent);
         }
 
+        /// <inheritdoc />
         public AutomationElement GetFirstChild(AutomationElement element)
         {
             var child = CacheRequest.Current == null ?
@@ -33,6 +48,7 @@ namespace FlaUI.UIA3
             return Automation.WrapNativeElement(child);
         }
 
+        /// <inheritdoc />
         public AutomationElement GetLastChild(AutomationElement element)
         {
             var child = CacheRequest.Current == null ?
@@ -41,6 +57,7 @@ namespace FlaUI.UIA3
             return Automation.WrapNativeElement(child);
         }
 
+        /// <inheritdoc />
         public AutomationElement GetNextSibling(AutomationElement element)
         {
             var child = CacheRequest.Current == null ?
@@ -49,6 +66,7 @@ namespace FlaUI.UIA3
             return Automation.WrapNativeElement(child);
         }
 
+        /// <inheritdoc />
         public AutomationElement GetPreviousSibling(AutomationElement element)
         {
             var child = CacheRequest.Current == null ?
