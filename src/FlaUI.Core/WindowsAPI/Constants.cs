@@ -511,6 +511,7 @@ namespace FlaUI.Core.WindowsAPI
         /// CAPS LOCK key
         /// </summary>
         CAPITAL = 0x14,
+        CAPSLOCK = CAPITAL,
 
         /// <summary>
         /// Input Method Editor (IME) Kana mode

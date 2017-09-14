@@ -42,6 +42,14 @@ namespace FlaUI.Core.Input
                 var high = (byte)(code >> 8);
                 var low = (byte)(code & 0xff);
 
+                // Check for caps lock and unset it
+                var isCapsLockToggled = false;
+                if ((User32.GetKeyState((int)VirtualKeyShort.CAPITAL) & 0x0001) != 0)
+                {
+                    isCapsLockToggled = true;
+                    Type(VirtualKeyShort.CAPITAL);
+                }
+
                 // Check if there are any modifiers
                 var modifiers = new List<VirtualKeyShort>();
                 if (HasScanModifier(high, VkKeyScanModifiers.SHIFT))
@@ -68,6 +76,12 @@ namespace FlaUI.Core.Input
                 foreach (var mod in Enumerable.Reverse(modifiers))
                 {
                     Release(mod);
+                }
+
+                // Re-toggle the caps lock if it was set before
+                if (isCapsLockToggled)
+                {
+                    Type(VirtualKeyShort.CAPITAL);
                 }
             }
         }
