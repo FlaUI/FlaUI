@@ -44,7 +44,7 @@ namespace FlaUI.Core.Tools
         #endregion Error Ids
 
         /// <summary>
-        /// Wraps an action with a com call and throws the correct win32 exception in case of an error
+        /// Wraps an action with a com call and throws the correct win32 exception in case of an error.
         /// </summary>
         public static void Call(Action nativeAction)
         {
@@ -54,8 +54,7 @@ namespace FlaUI.Core.Tools
             }
             catch (COMException ex)
             {
-                Exception newEx;
-                if (ConvertException(ex, out newEx))
+                if (ConvertException(ex, out Exception newEx))
                 {
                     throw newEx;
                 }
@@ -64,6 +63,10 @@ namespace FlaUI.Core.Tools
             }
         }
 
+        /// <summary>
+        /// Wraps an action which returns a HRESULT with a com call and throws the correct win32 exception in case of an error.
+        /// or when the HRESULT is not 0.
+        /// </summary>
         public static void CallWithHResult(Func<int> nativeAction)
         {
             try
@@ -76,8 +79,7 @@ namespace FlaUI.Core.Tools
             }
             catch (COMException ex)
             {
-                Exception newEx;
-                if (ConvertException(ex, out newEx))
+                if (ConvertException(ex, out Exception newEx))
                 {
                     throw newEx;
                 }
@@ -86,6 +88,9 @@ namespace FlaUI.Core.Tools
             }
         }
 
+        /// <summary>
+        /// Wraps an function with a com call and throws the correct win32 exception in case of an error.
+        /// </summary>
         public static T Call<T>(Func<T> nativeAction)
         {
             try
@@ -94,8 +99,7 @@ namespace FlaUI.Core.Tools
             }
             catch (COMException ex)
             {
-                Exception newEx;
-                if (ConvertException(ex, out newEx))
+                if (ConvertException(ex, out Exception newEx))
                 {
                     throw newEx;
                 }
@@ -104,6 +108,9 @@ namespace FlaUI.Core.Tools
             }
         }
 
+        /// <summary>
+        /// Tries to convert a com exception to a more usable exception.
+        /// </summary>
         public static bool ConvertException(COMException ex, out Exception uiaException)
         {
             var handled = true;
@@ -130,7 +137,6 @@ namespace FlaUI.Core.Tools
                 case UIA_E_INVALIDOPERATION:
                     uiaException = new InvalidOperationException("UIA Invalid Operation", ex);
                     break;
-
                 default:
                     uiaException = null;
                     handled = false;
