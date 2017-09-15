@@ -683,6 +683,14 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
+        /// Converts the element to a <see cref="DataGridView"/>.
+        /// </summary>
+        public DataGridView AsDataGridView()
+        {
+            return new DataGridView(BasicAutomationElement);
+        }
+
+        /// <summary>
         /// Converts the element to a <see cref="Label"/>.
         /// </summary>
         public Label AsLabel()

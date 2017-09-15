@@ -1,4 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using WinFormsApplication.Core;
 
 namespace WinFormsApplication
 {
@@ -7,6 +10,16 @@ namespace WinFormsApplication
         public Form1()
         {
             InitializeComponent();
+
+            var list = new List<DataGridViewItem>()
+            {
+                new DataGridViewItem { Name = "John", Number = 12, IsChecked = false },
+                new DataGridViewItem { Name = "Doe",  Number = 24, IsChecked = true }
+            };
+            var bindingList = new BindingList<DataGridViewItem>(list);
+            var source = new BindingSource(bindingList, null);
+            dataGridView.AutoGenerateColumns = true;
+            dataGridView.DataSource = source;
         }
 
         private void NonEditableCombo_SelectedIndexChanged(object sender, System.EventArgs e)

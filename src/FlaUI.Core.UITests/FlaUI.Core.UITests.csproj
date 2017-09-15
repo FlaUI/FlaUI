@@ -49,6 +49,7 @@
     <Compile Include="Elements\AutomationElementTests.cs" />
     <Compile Include="Elements\CheckBoxTests.cs" />
     <Compile Include="Elements\ComboBoxTests.cs" />
+    <Compile Include="Elements\DataGridViewTests.cs" />
     <Compile Include="Elements\LabelTests.cs" />
     <Compile Include="Elements\GridTests.cs" />
     <Compile Include="Elements\ListBoxTests.cs" />
