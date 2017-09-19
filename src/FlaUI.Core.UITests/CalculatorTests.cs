@@ -11,7 +11,7 @@ using OperatingSystem = FlaUI.Core.Tools.OperatingSystem;
 
 namespace FlaUI.Core.UITests
 {
-    [TestFixture,Ignore("")]
+    [TestFixture]
     public class CalculatorTests : UITestBase
     {
         public CalculatorTests()
