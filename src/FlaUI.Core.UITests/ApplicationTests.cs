@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace FlaUI.Core.UITests
 {
-    [TestFixture]
+    [TestFixture, Ignore("")]
     public class ApplicationTests
     {
         [Test]

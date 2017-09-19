@@ -6,7 +6,7 @@ using NUnit.Framework.Constraints;
 
 namespace FlaUI.Core.UITests
 {
-    [TestFixture(AutomationType.UIA2, TestApplicationType.Custom)]
+    [TestFixture(AutomationType.UIA2, TestApplicationType.Custom), Ignore("")]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Custom)]
     public class GetterTests : UITestBase
     {
