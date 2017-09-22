@@ -112,7 +112,7 @@ namespace FlaUI.UIA2
         public override IAutomationPropertyChangedEventHandler RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, PropertyId[] properties)
         {
             var eventHandler = new UIA2PropertyChangedEventHandler(Automation, action);
-            UIA.Automation.AddAutomationPropertyChangedEventHandler(NativeElement, (UIA.TreeScope)treeScope, eventHandler.EventHandler);
+            UIA.Automation.AddAutomationPropertyChangedEventHandler(NativeElement, (UIA.TreeScope)treeScope, eventHandler.EventHandler, properties.Select(p => UIA.AutomationProperty.LookupById(p.Id)).ToArray());
             return eventHandler;
         }
 
