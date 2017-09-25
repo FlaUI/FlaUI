@@ -5,10 +5,15 @@ using NUnit.Framework.Interfaces;
 
 namespace FlaUI.Core.UITests.TestFramework
 {
+    [Ignore("")]
+    public abstract class UITestBase : UITestBase1 {
+        protected UITestBase(AutomationType automationType, TestApplicationType appType) : base(automationType, appType) { }
+
+    }
     /// <summary>
     /// Base class for ui test with some helper methods
     /// </summary>
-    public abstract class UITestBase
+    public abstract class UITestBase1
     {
         /// <summary>
         /// Flag which indicates if any test was run on a new instance of the app
@@ -31,7 +36,7 @@ namespace FlaUI.Core.UITests.TestFramework
 
         protected AutomationBase Automation { get; }
 
-        protected UITestBase(AutomationType automationType, TestApplicationType appType)
+        protected UITestBase1(AutomationType automationType, TestApplicationType appType)
         {
             AutomationType = automationType;
             ApplicationType = appType;
