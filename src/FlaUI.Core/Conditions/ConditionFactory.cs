@@ -106,17 +106,17 @@ namespace FlaUI.Core.Conditions
         /// <summary>
         /// Searches for a horizontal scrollbar.
         /// </summary>
-        public OrCondition HorizontalScrollBar()
+        public AndCondition HorizontalScrollBar()
         {
-            return new OrCondition(ByControlType(ControlType.ScrollBar), ByName(LocalizedStrings.HorizontalScrollBar));
+            return new AndCondition(ByControlType(ControlType.ScrollBar), ByName(LocalizedStrings.HorizontalScrollBar));
         }
 
         /// <summary>
         /// Searches for a vertical scrollbar.
         /// </summary>
-        public OrCondition VerticalScrollBar()
+        public AndCondition VerticalScrollBar()
         {
-            return new OrCondition(ByControlType(ControlType.ScrollBar), ByName(LocalizedStrings.VerticalScrollBar));
+            return new AndCondition(ByControlType(ControlType.ScrollBar), ByName(LocalizedStrings.VerticalScrollBar));
         }
     }
 }
