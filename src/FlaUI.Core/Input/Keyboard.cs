@@ -259,8 +259,8 @@ namespace FlaUI.Core.Input
         }
 
         /// <summary>
-        /// Disposable class which presses the key on creation
-        /// and disposes it on destruction.
+        /// Disposable class which presses the keys on creation
+        /// and disposes them on destruction.
         /// </summary>
         private class KeyPressingActivation : IDisposable
         {
