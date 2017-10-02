@@ -188,11 +188,11 @@ namespace FlaUI.Core.Input
         }
 
         /// <summary>
-        /// Presses the given key and releases it when the returned object is disposed.
+        /// Presses the given keys and releases them when the returned object is disposed.
         /// </summary>
-        public static IDisposable Pressing(VirtualKeyShort virtualKey)
+        public static IDisposable Pressing(params VirtualKeyShort[] virtualKeys)
         {
-            return new KeyPressingActivation(virtualKey);
+            return new KeyPressingActivation(virtualKeys);
         }
 
         /// <summary>
@@ -264,17 +264,23 @@ namespace FlaUI.Core.Input
         /// </summary>
         private class KeyPressingActivation : IDisposable
         {
-            private readonly VirtualKeyShort _virtualKey;
+            private readonly VirtualKeyShort[] _virtualKeys;
 
-            public KeyPressingActivation(VirtualKeyShort virtualKey)
+            public KeyPressingActivation(VirtualKeyShort[] virtualKeys)
             {
-                _virtualKey = virtualKey;
-                Press(_virtualKey);
+                _virtualKeys = virtualKeys;
+                foreach (var key in _virtualKeys)
+                {
+                    Press(key);
+                }
             }
 
             public void Dispose()
             {
-                Release(_virtualKey);
+                foreach (var key in _virtualKeys.Reverse())
+                {
+                    Release(key);
+                }
             }
         }
     }
