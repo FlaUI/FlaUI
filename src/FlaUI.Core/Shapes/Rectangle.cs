@@ -76,6 +76,19 @@ namespace FlaUI.Core.Shapes
         }
 
         /// <summary>
+        /// Checks if the current rectangle contains the given rectangle.
+        /// </summary>
+        /// <param name="rectangle">The rectangle to check if it is contained.</param>
+        /// <returns>True if the rectangle is contained, false otherwise.</returns>
+        public bool Contains(Rectangle rectangle)
+        {
+            return !IsEmpty && !rectangle.IsEmpty &&
+                (X <= rectangle.X && Y <= rectangle.Y && X + Width >= rectangle.X + rectangle.Width)
+                && Y + Height >= rectangle.Y + rectangle.Height;
+        }
+
+
+        /// <summary>
         /// Implicit conversion to GDI rectangle
         /// </summary>
         public static implicit operator System.Drawing.Rectangle(Rectangle r)

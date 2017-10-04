@@ -314,19 +314,19 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Captures the object as screenshot in WinForms Bitmap format.
+        /// Captures the object as screenshot in <see cref="Bitmap"/> format.
         /// </summary>
         public Bitmap Capture()
         {
-            return Core.Capture.Element(this);
+            return Core.Capture.Element(this).Bitmap;
         }
 
         /// <summary>
-        /// Captures the object as screenshot in WPF BitmapImage format.
+        /// Captures the object as screenshot in a WPF friendly <see cref="BitmapImage"/> format.
         /// </summary>
         public BitmapImage CaptureWpf()
         {
-            return Core.Capture.ElementeWpf(this);
+            return Core.Capture.Element(this).BitmapImage;
         }
 
         /// <summary>
@@ -335,7 +335,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <param name="filePath">The filepath where the screenshot should be saved.</param>
         public void CaptureToFile(string filePath)
         {
-            Core.Capture.ElementToFile(this, filePath);
+            Core.Capture.Element(this).ToFile(filePath);
         }
 
         /// <summary>

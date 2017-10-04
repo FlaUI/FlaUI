@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="ApplicationTests.cs" />
     <Compile Include="CalculatorTests.cs" />
+    <Compile Include="CaptureTests.cs" />
     <Compile Include="Converters\ValueConverterTests.cs" />
     <Compile Include="Elements\AutomationElementTests.cs" />
     <Compile Include="Elements\CheckBoxTests.cs" />

@@ -52,17 +52,14 @@ namespace FlaUI.Core.Tools
             }
         }
 
-
         /// <summary>
         /// Initializes a new instance of the Lazy{T} class.
         /// </summary>
         /// <param name="createValue">The delegate that produces the value when it is needed.</param>
         public Lazy(Func<T> createValue)
         {
-            if (createValue == null) throw new ArgumentNullException(nameof(createValue));
-            _createValue = createValue;
+            _createValue = createValue ?? throw new ArgumentNullException(nameof(createValue));
         }
-
 
         /// <summary>
         /// Creates and returns a string representation of the Lazy{T}.Value.
