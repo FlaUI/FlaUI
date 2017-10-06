@@ -1,5 +1,4 @@
 ﻿using FlaUI.Core.Definitions;
-using FlaUI.Core.Tools;
 
 namespace FlaUI.Core.Conditions
 {
@@ -10,6 +9,9 @@ namespace FlaUI.Core.Conditions
     {
         private readonly IPropertyLibray _propertyLibrary;
 
+        /// <summary>
+        /// Creates a <see cref="ConditionFactory"/> with the given <see cref="IPropertyLibray"/>.
+        /// </summary>
         public ConditionFactory(IPropertyLibray propertyLibrary)
         {
             _propertyLibrary = propertyLibrary;
@@ -108,7 +110,17 @@ namespace FlaUI.Core.Conditions
         /// </summary>
         public AndCondition HorizontalScrollBar()
         {
-            return new AndCondition(ByControlType(ControlType.ScrollBar), ByName(LocalizedStrings.HorizontalScrollBar));
+            return new AndCondition(
+                ByControlType(ControlType.ScrollBar),
+                new OrCondition(
+                    // WPF
+                    ByAutomationId("HorizontalScrollBar"),
+                    // WinForms UIA2
+                    ByAutomationId("Horizontal ScrollBar"),
+                    // WinForms UIA3
+                    ByAutomationId("NonClientHorizontalScrollBar")
+                )
+            );
         }
 
         /// <summary>
@@ -116,7 +128,17 @@ namespace FlaUI.Core.Conditions
         /// </summary>
         public AndCondition VerticalScrollBar()
         {
-            return new AndCondition(ByControlType(ControlType.ScrollBar), ByName(LocalizedStrings.VerticalScrollBar));
+            return new AndCondition(
+                ByControlType(ControlType.ScrollBar),
+                new OrCondition(
+                    // WPF
+                    ByAutomationId("VerticalScrollBar"),
+                    // WinForms UIA2
+                    ByAutomationId("Vertical ScrollBar"),
+                    // WinForms UIA3
+                    ByAutomationId("NonClientVerticalScrollBar")
+                )
+            );
         }
     }
 }
