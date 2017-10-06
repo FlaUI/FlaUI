@@ -16,6 +16,11 @@ namespace FlaUI.Core.Conditions
             Conditions.AddRange(conditions);
         }
 
+        public OrCondition(params ConditionBase[] conditions)
+        {
+            Conditions.AddRange(conditions);
+        }
+
         public override string ToString()
         {
 #if NET35
