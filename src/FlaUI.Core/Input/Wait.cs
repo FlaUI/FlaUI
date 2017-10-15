@@ -16,12 +16,12 @@ namespace FlaUI.Core.Input
         /// Waits for a generic time which was found to be sufficient to allow
         /// input (mouse, keyboard, ...) do be processed
         /// </summary>
-        public static void UntilInputIsProcessed()
+        public static void UntilInputIsProcessed(int millisecondsToWait = 100)
         {
             // Let the thread some time to process the system's hardware input queue.
             // For details see this post: http://blogs.msdn.com/b/oldnewthing/archive/2014/02/13/10499047.aspx
             // TODO: Should this be configurable?
-            Thread.Sleep(100);
+            Thread.Sleep(millisecondsToWait);
         }
 
         public static bool UntilResponsive(AutomationElement automationElement)
