@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace FlaUI.Core.UITests
 {
     [TestFixture]
-    //[Ignore("Only for local testing")]
+    [Ignore("Only for local testing")]
     public class CaptureTests
     {
         [Test]
