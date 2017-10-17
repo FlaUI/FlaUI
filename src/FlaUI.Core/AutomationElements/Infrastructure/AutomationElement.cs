@@ -209,8 +209,8 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Sets the focus to this element.
-        /// Warning: This can be unreliable! <see cref="SetForeground" /> should be more reliable.
+        /// Sets the focus to a control
+        /// Warning: For windows use <see cref="SetForeground" /> instead.
         /// </summary>
         public virtual void Focus()
         {
@@ -236,7 +236,8 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Brings the element to the foreground.
+        /// Brings a window to the foreground.
+        /// Warning: For controls other than windows use <see cref="Focus" /> instead.
         /// </summary>
         public void SetForeground()
         {
