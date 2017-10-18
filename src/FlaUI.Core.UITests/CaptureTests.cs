@@ -19,7 +19,7 @@ namespace FlaUI.Core.UITests
                     Assert.That(window, Is.Not.Null);
                     Assert.That(window.Title, Is.Not.Null);
                     Capture.Screen().ToFile(@"c:\temp\screen.png");
-                    Capture.Window(window).ToFile(@"c:\temp\window.png");
+                    Capture.Element(window).ToFile(@"c:\temp\window.png");
                     Capture.Rectangle(new Rectangle(0, 0, 500, 300)).ToFile(@"c:\temp\rect.png");
                     Capture.ElementRectangle(window, new Rectangle(0, 0, 50, 150)).ToFile(@"c:\temp\elemrect.png");
                 }

@@ -26,15 +26,6 @@ namespace FlaUI.Core
         /// <summary>
         /// Captures an element and returns the image.
         /// </summary>
-        public static CaptureImage Window(AutomationElements.Window window)
-        {
-            window.SetForeground();
-            return Rectangle(window.Properties.BoundingRectangle.Value);
-        }
-
-        /// <summary>
-        /// Captures an element and returns the image.
-        /// </summary>
         public static CaptureImage Element(AutomationElement element)
         {
             element.Focus();
