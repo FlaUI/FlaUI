@@ -1,5 +1,41 @@
 # Changelog
 
+## 1.3.0 (2017-10-19)
+
+### Breaking changes
+  * Renamed Helpers.WaitXXX to Wait.XXX
+  * Project now only compiles on VS2017.3 or higher
+  * Renamed scrollbars (VScrollBar -> VerticalScrollBar, HScrollBar -> HorizontalScrollBar)
+  * Renamed ScreenCapture to Capture
+  * Renamed ComCallWrapper to Com
+  * Changed child collections from various namings to ".Items" (eg. in Menus)
+  * Renamed State to ToggleState
+
+### Enhancements
+  * Switched build system to cake build
+  * Various code cleanups and documentation improvements
+  * Added signed versions (as separate nuget packages)
+  * Added some convenience properties to the AutomationElement (IsEnabled, IsOffscreen, ...)
+  * Added HasExited and ExitCode to Application.
+  * Cleaned SystemProductNameFetcher and added support for Server 2016
+  * Added IsSupported to AutomationProperty
+  * Added Parent property
+  * Added BoundingRectangle,ActualWidth,ActualHeight,ItemStatus and HelpText to AutomationElement
+  * Implemented FindAt / FindIndexed
+  * Added ByValue condition
+  * Added IsReadOnly to ComboBox
+  * Implemented ToggleButton
+  * Implemented ListBox and ListBoxItem
+  *  Added IsToggled to ToggleAutomationElement, added IsChecked to ChechBox
+  * Added DataGridView
+  * Reworked the Capture class
+
+### Bug fixes
+  * Correctly handle manually pressed modifiers when using Keyboard.Type
+  * Added missing property in RegisterPropertyChangedEvent
+  * Fixed finding the ScrollBars
+  * Fixed typo in IPropertyLibrary
+
 ## 1.2.0 (2017-05-24)
 
 ### Breaking changes
