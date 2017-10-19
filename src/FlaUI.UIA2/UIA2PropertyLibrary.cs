@@ -5,7 +5,7 @@ using FlaUI.UIA2.Patterns;
 
 namespace FlaUI.UIA2
 {
-    public class UIA2PropertyLibrary : IPropertyLibray
+    public class UIA2PropertyLibrary : IPropertyLibrary
     {
         public UIA2PropertyLibrary()
         {

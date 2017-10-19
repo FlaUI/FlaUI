@@ -7,12 +7,12 @@ namespace FlaUI.Core.Conditions
     /// </summary>
     public class ConditionFactory
     {
-        private readonly IPropertyLibray _propertyLibrary;
+        private readonly IPropertyLibrary _propertyLibrary;
 
         /// <summary>
-        /// Creates a <see cref="ConditionFactory"/> with the given <see cref="IPropertyLibray"/>.
+        /// Creates a <see cref="ConditionFactory"/> with the given <see cref="IPropertyLibrary"/>.
         /// </summary>
-        public ConditionFactory(IPropertyLibray propertyLibrary)
+        public ConditionFactory(IPropertyLibrary propertyLibrary)
         {
             _propertyLibrary = propertyLibrary;
         }

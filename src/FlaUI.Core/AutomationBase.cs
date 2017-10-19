@@ -12,7 +12,7 @@ namespace FlaUI.Core
     /// </summary>
     public abstract class AutomationBase : IDisposable
     {
-        protected AutomationBase(IPropertyLibray propertyLibrary, IEventLibrary eventLibrary, IPatternLibrary patternLibrary)
+        protected AutomationBase(IPropertyLibrary propertyLibrary, IEventLibrary eventLibrary, IPatternLibrary patternLibrary)
         {
             PropertyLibrary = propertyLibrary;
             EventLibrary = eventLibrary;
@@ -23,7 +23,7 @@ namespace FlaUI.Core
             var unused = PatternLibrary.AllForCurrentFramework;
         }
 
-        public IPropertyLibray PropertyLibrary { get; }
+        public IPropertyLibrary PropertyLibrary { get; }
 
         public IEventLibrary EventLibrary { get; }
 

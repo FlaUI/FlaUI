@@ -3,7 +3,7 @@ using FlaUI.Core.Patterns;
 
 namespace FlaUI.Core
 {
-    public interface IPropertyLibray
+    public interface IPropertyLibrary
     {
         IAutomationElementPatternAvailabilityProperties PatternAvailability { get; }
         IAutomationElementProperties Element { get; }
