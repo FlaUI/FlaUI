@@ -28,7 +28,7 @@ namespace FlaUI.Core
         /// </summary>
         public static CaptureImage Element(AutomationElement element)
         {
-            element.SetForeground();
+            element.Focus();
             return Rectangle(element.Properties.BoundingRectangle.Value);
         }
 
@@ -37,7 +37,7 @@ namespace FlaUI.Core
         /// </summary>
         public static CaptureImage ElementRectangle(AutomationElement element, Shapes.Rectangle rectangle)
         {
-            element.SetForeground();
+            element.Focus();
             var elementBounds = element.BoundingRectangle;
             // Calculate the rectangle that should be captured
             var capturingRectangle = new Shapes.Rectangle(elementBounds.Left + rectangle.Left, elementBounds.Top + rectangle.Top, rectangle.Width, rectangle.Height);

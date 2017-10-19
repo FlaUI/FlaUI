@@ -209,12 +209,18 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Sets the focus to this element.
-        /// Warning: This can be unreliable! <see cref="SetForeground" /> should be more reliable.
+        /// Sets the focus to a control. If the control is a window, brings it to the foreground.
         /// </summary>
-        public virtual void Focus()
+        public void Focus()
         {
-            BasicAutomationElement.SetFocus();
+            if (ControlType == ControlType.Window)
+            {
+                SetForeground();
+            }
+            else
+            {
+                FocusNative();
+            }
         }
 
         /// <summary>
@@ -222,35 +228,37 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public void FocusNative()
         {
-            var windowHandle = Properties.NativeWindowHandle;
-            if (windowHandle != new IntPtr(0))
+            if (Properties.NativeWindowHandle.IsSupported)
             {
-                User32.SetFocus(windowHandle);
-                Wait.UntilResponsive(this);
+                var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
+                if (windowHandle != new IntPtr(0))
+                {
+                    User32.SetFocus(windowHandle);
+                    Wait.UntilResponsive(this);
+                    return;
+                }
             }
-            else
-            {
-                // Fallback to the UIA Version
-                Focus();
-            }
+            // Fallback to the UIA Version
+            SetFocus();
         }
 
         /// <summary>
-        /// Brings the element to the foreground.
+        /// Brings a window to the foreground.
         /// </summary>
         public void SetForeground()
         {
-            var windowHandle = Properties.NativeWindowHandle;
-            if (windowHandle != new IntPtr(0))
+            if (Properties.NativeWindowHandle.IsSupported)
             {
-                User32.SetForegroundWindow(windowHandle);
-                Wait.UntilResponsive(this);
+                var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
+                if (windowHandle != new IntPtr(0))
+                {
+                    User32.SetForegroundWindow(windowHandle);
+                    Wait.UntilResponsive(this);
+                    return;
+                }
             }
-            else
-            {
-                // Fallback to the UIA Version
-                Focus();
-            }
+            // Fallback to the UIA Version
+            SetFocus();
         }
 
         /// <summary>
@@ -656,6 +664,14 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             }
             return default(TRet);
         }
+
+        /// <summary>
+        /// Sets focus onto control using UIA native element
+        /// </summary>
+        protected virtual void SetFocus()
+        {
+            BasicAutomationElement.SetFocus();
+        } 
 
         #region Conversion Methods
         /// <summary>
