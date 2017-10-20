@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.1 (2017-10-19)
+
+### Bug fixes
+  * Re-added install.ps1 to UIA3 NuGet package
+
 ## 1.3.0 (2017-10-19)
 
 ### Breaking changes
