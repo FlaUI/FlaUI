@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Exceptions;
-
+,
 namespace FlaUI.Core
 {
     /// <summary>
@@ -26,9 +26,11 @@ namespace FlaUI.Core
         /// <summary>
         /// Captures an element and returns the image.
         /// </summary>
-        public static CaptureImage Element(AutomationElement element)
+        public static CaptureImage Element(AutomationElement element, bool focus = true)
         {
-            element.Focus();
+            if (focus) {
+                element.Focus();
+            }
             return Rectangle(element.Properties.BoundingRectangle.Value);
         }
 
