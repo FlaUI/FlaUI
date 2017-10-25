@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Exceptions;
-,
+
 namespace FlaUI.Core
 {
     /// <summary>

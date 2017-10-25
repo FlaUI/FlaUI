@@ -324,26 +324,29 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <summary>
         /// Captures the object as screenshot in <see cref="Bitmap"/> format.
         /// </summary>
-        public Bitmap Capture()
+        /// <param name="focus">Set focus on element before taking capture, default is true</param>
+        public Bitmap Capture(bool focus = true)
         {
-            return Core.Capture.Element(this).Bitmap;
+            return Core.Capture.Element(this, focus).Bitmap;
         }
 
         /// <summary>
         /// Captures the object as screenshot in a WPF friendly <see cref="BitmapImage"/> format.
         /// </summary>
-        public BitmapImage CaptureWpf()
+        /// <param name="focus">Set focus on element before taking capture, default is true</param>
+        public BitmapImage CaptureWpf(bool focus = true)
         {
-            return Core.Capture.Element(this).BitmapImage;
+            return Core.Capture.Element(this, focus).BitmapImage;
         }
 
         /// <summary>
         /// Captures the object as screenshot directly into the given file.
         /// </summary>
         /// <param name="filePath">The filepath where the screenshot should be saved.</param>
-        public void CaptureToFile(string filePath)
+        /// <param name="focus">Set focus on element before taking capture, default is true</param>
+        public void CaptureToFile(string filePath, bool focus = true)
         {
-            Core.Capture.Element(this).ToFile(filePath);
+            Core.Capture.Element(this, focus).ToFile(filePath);
         }
 
         /// <summary>
