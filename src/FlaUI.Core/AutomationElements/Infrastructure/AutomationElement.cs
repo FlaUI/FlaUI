@@ -14,6 +14,7 @@ using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
 using FlaUI.Core.WindowsAPI;
 using GdiColor = System.Drawing.Color;
+using Point = FlaUI.Core.Shapes.Point;
 using Rectangle = FlaUI.Core.Shapes.Rectangle;
 using WpfColor = System.Windows.Media.Color;
 
@@ -195,7 +196,11 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
 
         private void PerformMouseAction(bool moveMouse, Action action)
         {
-            var clickablePoint = GetClickablePoint();
+            if (!TryGetClickablePoint(out var clickablePoint))
+            {
+                ScrollIntoView();
+                clickablePoint = GetClickablePoint();
+            }
             if (moveMouse)
             {
                 Mouse.MoveTo(clickablePoint);
@@ -619,11 +624,126 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
+        /// Tries scrolling element into view if it is scrolled away.
+        /// </summary>
+        public void ScrollIntoView()
+        {
+            if (Patterns.ScrollItem.IsSupported)
+            {
+                Patterns.ScrollItem.Pattern.ScrollIntoView();
+                return;
+            }
+
+            var ancestor = this;
+
+            while (true)
+            {
+                var controlRectangle = BoundingRectangle;
+                var current = ancestor;
+                ancestor = current.Parent;
+                if (ancestor == null)
+                {
+                    break;
+                }
+
+                var scrollPattern = ancestor.Patterns.Scroll;
+
+                if (scrollPattern.IsSupported)
+                {
+                    var parentVerticalScrollPercent = scrollPattern.Pattern.VerticalScrollPercent.ValueOrDefault;
+                    var parentHorizontalScrollPercent = scrollPattern.Pattern.HorizontalScrollPercent.ValueOrDefault;
+                    var parentRectangle = ancestor.BoundingRectangle;
+
+                    if (scrollPattern.Pattern.VerticallyScrollable)
+                    {
+                        var elementViewTop = controlRectangle.Top;
+                        var elementViewBottom = controlRectangle.Bottom;
+                        var elementCenter = controlRectangle.Center.Y;
+
+                        var parentViewTop = parentRectangle.Top;
+                        var parentViewBottom = parentRectangle.Bottom;
+                        var parentViewHeight = parentRectangle.Height - 30;    // minus scrollbar
+                        var parentVerticalViewSize = scrollPattern.Pattern.VerticalViewSize;
+                        var parentControlSize = 100 * parentViewHeight / parentVerticalViewSize;
+                        var parentViewCenter = parentRectangle.Center.Y;
+                        var parentHalfSize = parentViewCenter - parentViewTop;
+
+                        var verticalPercent = parentVerticalScrollPercent;
+                        if (elementViewBottom > parentViewBottom || elementViewTop < parentViewTop)
+                        {
+                            verticalPercent = 100 * (elementCenter - parentHalfSize) / (parentControlSize - 2 * parentHalfSize);
+                            if (verticalPercent > 100)
+                            {
+                                verticalPercent = 100;
+                            }
+                            if (verticalPercent < 0)
+                            {
+                                verticalPercent = 0;
+                            }
+                        }
+                        if (Math.Abs(verticalPercent - parentVerticalScrollPercent) > 1)
+                        {
+                            try
+                            {
+                                scrollPattern.Pattern.SetScrollPercent(parentHorizontalScrollPercent, verticalPercent);
+                                parentVerticalScrollPercent = verticalPercent;
+                            }
+                            catch (Exception)
+                            {
+                                // DO NOTHING
+                            }
+                        }
+                    }
+
+                    if (scrollPattern.Pattern.HorizontallyScrollable)
+                    {
+                        var elementViewLeft = controlRectangle.Left;
+                        var elementViewRight = controlRectangle.Right;
+                        var elementCenter = controlRectangle.Center.X;
+
+                        var parentViewLeft = parentRectangle.Left;
+                        var parentViewRight = parentRectangle.Right;
+                        var parentViewWidth = parentRectangle.Width - 30;    // minus scrollbar
+                        var parentHorizontalViewSize = scrollPattern.Pattern.HorizontalViewSize;
+                        var parentControlSize = 100 * parentViewWidth / parentHorizontalViewSize;
+                        var parentViewCenter = parentRectangle.Center.X;
+                        var parentHalfSize = parentViewCenter - parentViewLeft;
+
+                        var horizontalPercent = parentHorizontalScrollPercent;
+                        if (elementViewRight > parentViewRight || elementViewLeft < parentViewLeft)
+                        {
+                            horizontalPercent = 100 * (elementCenter - parentHalfSize) / (parentControlSize - 2 * parentHalfSize);
+                            if (horizontalPercent > 100)
+                            {
+                                horizontalPercent = 100;
+                            }
+                            if (horizontalPercent < 0)
+                            {
+                                horizontalPercent = 0;
+                            }
+                        }
+                        if (Math.Abs(horizontalPercent - parentHorizontalScrollPercent) > 1)
+                        {
+                            try
+                            {
+                                scrollPattern.Pattern.SetScrollPercent(horizontalPercent, parentVerticalScrollPercent);
+                            }
+                            catch (Exception)
+                            {
+                                // DO NOTHING
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Overrides the string representation of the element with something usefull
         /// </summary>
         public override string ToString()
         {
-            return String.Format("AutomationId:{0}, Name:{1}, ControlType:{2}, FrameworkId:{3}",
+            return string.Format("AutomationId:{0}, Name:{1}, ControlType:{2}, FrameworkId:{3}",
                 Properties.AutomationId.ValueOrDefault, Properties.Name.ValueOrDefault, Properties.LocalizedControlType.ValueOrDefault, Properties.FrameworkId.ValueOrDefault);
         }
 
