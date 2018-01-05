@@ -4,7 +4,7 @@ using FlaUI.UIA2.Identifiers;
 
 namespace FlaUI.UIA2
 {
-    public class UIA2AutomationElementProperties : IAutomationElementProperties
+    public partial class UIA2AutomationElementProperties : IAutomationElementProperties
     {
         public PropertyId AcceleratorKey => AutomationObjectIds.AcceleratorKeyProperty;
         public PropertyId AccessKey => AutomationObjectIds.AccessKeyProperty;
@@ -35,7 +35,6 @@ namespace FlaUI.UIA2
         public PropertyId ItemStatus => AutomationObjectIds.ItemStatusProperty;
         public PropertyId ItemType => AutomationObjectIds.ItemTypeProperty;
         public PropertyId LabeledBy => AutomationObjectIds.AcceleratorKeyProperty;
-        public PropertyId LiveSetting => PropertyId.NotSupportedByFramework;
         public PropertyId LocalizedControlType => AutomationObjectIds.LocalizedControlTypeProperty;
         public PropertyId Name => AutomationObjectIds.NameProperty;
         public PropertyId NativeWindowHandle => AutomationObjectIds.NativeWindowHandleProperty;
@@ -44,5 +43,17 @@ namespace FlaUI.UIA2
         public PropertyId ProcessId => AutomationObjectIds.ProcessIdProperty;
         public PropertyId ProviderDescription => PropertyId.NotSupportedByFramework;
         public PropertyId RuntimeId => AutomationObjectIds.RuntimeIdProperty;
+    }
+
+    /// <summary>
+    /// Partial class with additions from .NET 4.7.1
+    /// </summary>
+    public partial class UIA2AutomationElementProperties
+    {
+#if NET471
+        public PropertyId LiveSetting => AutomationObjectIds.LiveSettingProperty;
+#else
+        public PropertyId LiveSetting => PropertyId.NotSupportedByFramework;
+#endif
     }
 }
