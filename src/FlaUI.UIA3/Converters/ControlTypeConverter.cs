@@ -4,8 +4,14 @@ using UIA = Interop.UIAutomationClient;
 
 namespace FlaUI.UIA3.Converters
 {
+    /// <summary>
+    /// Converter with converts between <see cref="UIA.UIA_ControlTypeIds"/> and FlaUIs <see cref="ControlType"/>.
+    /// </summary>
     public static class ControlTypeConverter
     {
+        /// <summary>
+        /// Converts a <see cref="UIA.UIA_ControlTypeIds"/> to a FlaUI <see cref="ControlType"/>.
+        /// </summary>
         public static object ToControlType(object nativeControlType)
         {
             switch ((int)nativeControlType)
@@ -97,6 +103,9 @@ namespace FlaUI.UIA3.Converters
             }
         }
 
+        /// <summary>
+        /// Converts a FlaUI <see cref="ControlType"/> to a <see cref="UIA.UIA_ControlTypeIds"/>.
+        /// </summary>
         public static object ToControlTypeNative(ControlType controlType)
         {
             switch (controlType)

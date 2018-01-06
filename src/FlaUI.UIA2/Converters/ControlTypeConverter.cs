@@ -5,8 +5,14 @@ using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Converters
 {
+    /// <summary>
+    /// Converter with converts between <see cref="UIA.ControlType"/> and FlaUIs <see cref="ControlType"/>.
+    /// </summary>
     public static class ControlTypeConverter
     {
+        /// <summary>
+        /// Converts a <see cref="UIA.ControlType"/> to a FlaUI <see cref="ControlType"/>.
+        /// </summary>
         public static object ToControlType(object nativeControlType)
         {
             var uia2ControlType = (UIA.ControlType)nativeControlType;
@@ -171,6 +177,9 @@ namespace FlaUI.UIA2.Converters
             throw new ArgumentOutOfRangeException(nameof(nativeControlType));
         }
 
+        /// <summary>
+        /// Converts a FlaUI <see cref="ControlType"/> to a <see cref="UIA.ControlType"/>.
+        /// </summary>
         public static object ToControlTypeNative(ControlType controlType)
         {
             switch (controlType)
