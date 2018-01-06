@@ -1,8 +1,8 @@
-set VS=%VS140COMNTOOLS%
-set WINSDK=C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0\um\
-set ASMVERSION=4.5
+call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
+set VS=%VS150COMNTOOLS%
+set WINSDK=C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\um\
+set ASMVERSION=4.7.1
 SET TEMP=tmp
-call "%VS%vsvars32.bat"
 
 mkdir %TEMP%
 
