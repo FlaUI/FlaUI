@@ -44,6 +44,26 @@ namespace FlaUI.UIA3
         /// </summary>
         public UIA.IUIAutomationElement NativeElement3 => GetAutomationElementAs<UIA.IUIAutomationElement3>();
 
+        /// <summary>
+        /// Native object for Windows 10 ui element
+        /// </summary>
+        public UIA.IUIAutomationElement NativeElement4 => GetAutomationElementAs<UIA.IUIAutomationElement4>();
+
+        /// <summary>
+        /// Native object for second Windows 10 ui element
+        /// </summary>
+        public UIA.IUIAutomationElement NativeElement5 => GetAutomationElementAs<UIA.IUIAutomationElement5>();
+
+        /// <summary>
+        /// Native object for third Windows 10 ui element
+        /// </summary>
+        public UIA.IUIAutomationElement NativeElement6 => GetAutomationElementAs<UIA.IUIAutomationElement6>();
+
+        /// <summary>
+        /// Native object fourth for Windows 10 ui element
+        /// </summary>
+        public UIA.IUIAutomationElement NativeElement7 => GetAutomationElementAs<UIA.IUIAutomationElement7>();
+
         public override void SetFocus()
         {
             NativeElement.SetFocus();

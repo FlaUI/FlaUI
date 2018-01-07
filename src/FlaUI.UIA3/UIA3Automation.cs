@@ -44,6 +44,16 @@ namespace FlaUI.UIA3
         /// </summary>
         public UIA.IUIAutomation3 NativeAutomation3 => GetAutomationAs<UIA.IUIAutomation3>();
 
+        /// <summary>
+        /// Native object for Windows 10 automation
+        /// </summary>
+        public UIA.IUIAutomation4 NativeAutomation4 => GetAutomationAs<UIA.IUIAutomation4>();
+
+        /// <summary>
+        /// Native object for second Windows 10 automation
+        /// </summary>
+        public UIA.IUIAutomation5 NativeAutomation5 => GetAutomationAs<UIA.IUIAutomation5>();
+
         public override AutomationElement GetDesktop()
         {
             return Com.Call(() =>
@@ -130,7 +140,7 @@ namespace FlaUI.UIA3
         private UIA.IUIAutomation InitializeAutomation()
         {
             UIA.IUIAutomation nativeAutomation;
-            // Try CUIAutomation8 (Windows 8)
+            // Try CUIAutomation8 (Windows 8 or higher)
             try
             {
                 nativeAutomation = new UIA.CUIAutomation8();
