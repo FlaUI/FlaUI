@@ -23,11 +23,21 @@ namespace FlaUI.UIA3
             TreeWalkerFactory = new UIA3TreeWalkerFactory(this);
         }
 
+        /// <inheritdoc />
         public override ITreeWalkerFactory TreeWalkerFactory { get; }
 
+        /// <inheritdoc />
         public override AutomationType AutomationType => AutomationType.UIA3;
 
+        /// <inheritdoc />
         public override object NotSupportedValue => NativeAutomation.ReservedNotSupportedValue;
+
+        /// <inheritdoc />
+        public override TimeSpan TransactionTimeout
+        {
+            get => TimeSpan.FromMilliseconds(NativeAutomation2.TransactionTimeout);
+            set => NativeAutomation2.TransactionTimeout = (uint)value.TotalMilliseconds;
+        }
 
         /// <summary>
         /// Native object for the ui automation

@@ -29,24 +29,32 @@ namespace FlaUI.Core
 
         public IPatternLibrary PatternLibrary { get; }
 
-        public abstract ITreeWalkerFactory TreeWalkerFactory { get; }
-
         public ConditionFactory ConditionFactory { get; }
 
         public IOverlayManager OverlayManager { get; }
 
         /// <summary>
-        /// The automation type of the automation implementation
+        /// Factory to create <see cref="ITreeWalker"/>s.
+        /// </summary>
+        public abstract ITreeWalkerFactory TreeWalkerFactory { get; }
+
+        /// <summary>
+        /// The <see cref="AutomationType"/> of the automation implementation.
         /// </summary>
         public abstract AutomationType AutomationType { get; }
 
         /// <summary>
-        /// Object which represents the "Not Supported" value
+        /// Object which represents the "Not Supported" value.
         /// </summary>
         public abstract object NotSupportedValue { get; }
 
         /// <summary>
-        /// Gets the desktop (root) element
+        /// Object to set the operation timeout for UIA methods.
+        /// </summary>
+        public abstract TimeSpan TransactionTimeout { get; set; }
+
+        /// <summary>
+        /// Gets the desktop (root) element.
         /// </summary>
         public abstract AutomationElement GetDesktop();
 

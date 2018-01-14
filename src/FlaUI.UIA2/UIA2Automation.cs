@@ -2,6 +2,7 @@
 using FlaUI.Core;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.EventHandlers;
+using FlaUI.Core.Exceptions;
 using FlaUI.Core.Shapes;
 using FlaUI.UIA2.Converters;
 using FlaUI.UIA2.EventHandlers;
@@ -20,11 +21,21 @@ namespace FlaUI.UIA2
             TreeWalkerFactory = new UIA2TreeWalkerFactory(this);
         }
 
+        /// <inheritdoc />
         public override ITreeWalkerFactory TreeWalkerFactory { get; }
 
+        /// <inheritdoc />
         public override AutomationType AutomationType => AutomationType.UIA2;
 
+        /// <inheritdoc />
         public override object NotSupportedValue => UIA.AutomationElement.NotSupported;
+
+        /// <inheritdoc />
+        public override TimeSpan TransactionTimeout
+        {
+            get => throw new NotSupportedByFrameworkException();
+            set => throw new NotSupportedByFrameworkException();
+        }
 
         public override AutomationElement GetDesktop()
         {
