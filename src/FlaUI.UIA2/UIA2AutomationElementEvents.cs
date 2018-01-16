@@ -7,6 +7,7 @@ namespace FlaUI.UIA2
     public partial class UIA2AutomationElementEvents : IAutomationElementEvents
     {
         public EventId AsyncContentLoadedEvent => AutomationObjectIds.AsyncContentLoadedEvent;
+        public EventId ChangesEvent => EventId.NotSupportedByFramework;
         public EventId FocusChangedEvent => AutomationObjectIds.FocusChangedEvent;
         public EventId PropertyChangedEvent => AutomationObjectIds.PropertyChangedEvent;
         public EventId HostedFragmentRootsInvalidatedEvent => EventId.NotSupportedByFramework;
@@ -15,6 +16,7 @@ namespace FlaUI.UIA2
         public EventId MenuModeEndEvent => EventId.NotSupportedByFramework;
         public EventId MenuModeStartEvent => EventId.NotSupportedByFramework;
         public EventId MenuOpenedEvent => AutomationObjectIds.MenuOpenedEvent;
+        public EventId NotificationEvent => EventId.NotSupportedByFramework;
         public EventId StructureChangedEvent => AutomationObjectIds.StructureChangedEvent;
         public EventId SystemAlertEvent => EventId.NotSupportedByFramework;
         public EventId ToolTipClosedEvent => AutomationObjectIds.ToolTipClosedEvent;

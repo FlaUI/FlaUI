@@ -5,6 +5,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
     public interface IAutomationElementEvents
     {
         EventId AsyncContentLoadedEvent { get; }
+        EventId ChangesEvent { get; }
         EventId FocusChangedEvent { get; }
         EventId PropertyChangedEvent { get; }
         EventId HostedFragmentRootsInvalidatedEvent { get; }
@@ -14,6 +15,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         EventId MenuModeEndEvent { get; }
         EventId MenuModeStartEvent { get; }
         EventId MenuOpenedEvent { get; }
+        EventId NotificationEvent { get; }
         EventId StructureChangedEvent { get; }
         EventId SystemAlertEvent { get; }
         EventId ToolTipClosedEvent { get; }

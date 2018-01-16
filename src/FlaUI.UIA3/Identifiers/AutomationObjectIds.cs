@@ -102,6 +102,7 @@ namespace FlaUI.UIA3.Identifiers
 
         #region Event identifiers
         public static readonly EventId AsyncContentLoadedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_AsyncContentLoadedEventId, "AsyncContentLoaded");
+        public static readonly EventId ChangesEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_ChangesEventId, "Changes");
         public static readonly EventId FocusChangedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_AutomationFocusChangedEventId, "AutomationFocusChanged");
         public static readonly EventId PropertyChangedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_AutomationPropertyChangedEventId, "AutomationPropertyChanged");
         public static readonly EventId HostedFragmentRootsInvalidatedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_HostedFragmentRootsInvalidatedEventId, "HostedFragmentRootsInvalidated");
@@ -111,6 +112,7 @@ namespace FlaUI.UIA3.Identifiers
         public static readonly EventId MenuModeEndEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_MenuModeEndEventId, "MenuModeEnd");
         public static readonly EventId MenuModeStartEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_MenuModeStartEventId, "MenuModeStart");
         public static readonly EventId MenuOpenedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_MenuOpenedEventId, "MenuOpened");
+        public static readonly EventId NotificationEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_NotificationEventId, "Notification");
         public static readonly EventId StructureChangedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_StructureChangedEventId, "StructureChanged");
         public static readonly EventId SystemAlertEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_SystemAlertEventId, "SystemAlert");
         public static readonly EventId ToolTipClosedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_ToolTipClosedEventId, "ToolTipClosed");
