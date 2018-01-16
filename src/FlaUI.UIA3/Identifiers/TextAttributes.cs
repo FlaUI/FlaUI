@@ -7,10 +7,12 @@ namespace FlaUI.UIA3.Identifiers
 {
     public static class TextAttributes
     {
+        public static readonly TextAttributeId AfterParagraphSpacing = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_AfterParagraphSpacingAttributeId, "AfterParagraphSpacing");
         public static readonly TextAttributeId AnimationStyle = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_AnimationStyleAttributeId, "AnimationStyle");
         public static readonly TextAttributeId AnnotationObjects = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_AnnotationObjectsAttributeId, "AnnotationObjects");
         public static readonly TextAttributeId AnnotationTypes = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_AnnotationTypesAttributeId, "AnnotationTypes");
         public static readonly TextAttributeId BackgroundColor = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_BackgroundColorAttributeId, "BackgroundColor");
+        public static readonly TextAttributeId BeforeParagraphSpacing = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_BeforeParagraphSpacingAttributeId, "BeforeParagraphSpacing");
         public static readonly TextAttributeId BulletStyle = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_BulletStyleAttributeId, "BulletStyle");
         public static readonly TextAttributeId CapStyle = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_CapStyleAttributeId, "CapStyle");
         public static readonly TextAttributeId CaretBidiMode = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_CaretBidiModeAttributeId, "CaretBidiMode");
@@ -30,6 +32,7 @@ namespace FlaUI.UIA3.Identifiers
         public static readonly TextAttributeId IsReadOnly = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_IsReadOnlyAttributeId, "IsReadOnly");
         public static readonly TextAttributeId IsSubscript = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_IsSubscriptAttributeId, "IsSubscript");
         public static readonly TextAttributeId IsSuperscript = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_IsSuperscriptAttributeId, "IsSuperscript");
+        public static readonly TextAttributeId LineSpacing = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_LineSpacingAttributeId, "LineSpacing");
         public static readonly TextAttributeId Link = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_LinkAttributeId, "Link");
         public static readonly TextAttributeId MarginBottom = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_MarginBottomAttributeId, "MarginBottom");
         public static readonly TextAttributeId MarginLeading = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_MarginLeadingAttributeId, "MarginLeading");
@@ -38,6 +41,7 @@ namespace FlaUI.UIA3.Identifiers
         public static readonly TextAttributeId OutlineStyles = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_OutlineStylesAttributeId, "OutlineStyles");
         public static readonly TextAttributeId OverlineColor = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_OverlineColorAttributeId, "OverlineColor");
         public static readonly TextAttributeId OverlineStyle = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_OverlineStyleAttributeId, "OverlineStyle");
+        public static readonly TextAttributeId SayAsInterpretAs = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_SayAsInterpretAsAttributeId, "SayAsInterpretAs");
         public static readonly TextAttributeId SelectionActiveEnd = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_SelectionActiveEndAttributeId, "SelectionActiveEnd");
         public static readonly TextAttributeId StrikethroughColor = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_StrikethroughColorAttributeId, "StrikethroughColor");
         public static readonly TextAttributeId StrikethroughStyle = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_StrikethroughStyleAttributeId, "StrikethroughStyle");
