@@ -243,6 +243,7 @@ namespace FlaUI.Core
         public abstract IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action);
         public abstract IAutomationPropertyChangedEventHandler RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, PropertyId[] properties);
         public abstract IAutomationStructureChangedEventHandler RegisterStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action);
+        public abstract INotificationEventHandler RegisterNotificationEvent();
         public abstract void RemoveAutomationEventHandler(EventId @event, IAutomationEventHandler eventHandler);
         public abstract void RemovePropertyChangedEventHandler(IAutomationPropertyChangedEventHandler eventHandler);
         public abstract void RemoveStructureChangedEventHandler(IAutomationStructureChangedEventHandler eventHandler);

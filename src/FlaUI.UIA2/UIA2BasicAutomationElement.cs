@@ -138,6 +138,11 @@ namespace FlaUI.UIA2
             return eventHandler;
         }
 
+        public override INotificationEventHandler RegisterNotificationEvent()
+        {
+            throw new NotSupportedByFrameworkException();
+        }
+
         public override void RemoveAutomationEventHandler(EventId @event, IAutomationEventHandler eventHandler)
         {
             UIA.Automation.RemoveAutomationEventHandler(UIA.AutomationEvent.LookupById(@event.Id), NativeElement, ((UIA2BasicEventHandler)eventHandler).EventHandler);

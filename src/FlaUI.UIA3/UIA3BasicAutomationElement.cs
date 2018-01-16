@@ -172,6 +172,11 @@ namespace FlaUI.UIA3
             return eventHandler;
         }
 
+        public override INotificationEventHandler RegisterNotificationEvent()
+        {
+            throw new NotImplementedException();
+        }
+
         public override void RemoveAutomationEventHandler(EventId @event, IAutomationEventHandler eventHandler)
         {
             Automation.NativeAutomation.RemoveAutomationEventHandler(@event.Id, NativeElement, (UIA3BasicEventHandler)eventHandler);
