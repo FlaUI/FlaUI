@@ -24,6 +24,7 @@ namespace FlaUI.UIA2
             Scroll = new ScrollPatternProperties();
             SelectionItem = new SelectionItemPatternProperties();
             Selection = new SelectionPatternProperties();
+            Selection2 = new Selection2PatternProperties();
             SpreadsheetItem = new SpreadsheetItemPatternProperties();
             Styles = new StylesPatternProperties();
             TableItem = new TableItemPatternProperties();
@@ -50,6 +51,7 @@ namespace FlaUI.UIA2
         public IScrollPatternProperties Scroll { get; }
         public ISelectionItemPatternProperties SelectionItem { get; }
         public ISelectionPatternProperties Selection { get; }
+        public ISelection2PatternProperties Selection2 { get; }
         public ISpreadsheetItemPatternProperties SpreadsheetItem { get; }
         public IStylesPatternProperties Styles { get; }
         public ITableItemPatternProperties TableItem { get; }

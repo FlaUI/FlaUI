@@ -54,6 +54,14 @@ namespace FlaUI.UIA2.Patterns
         public PropertyId Value => PropertyId.NotSupportedByFramework;
     }
 
+    public class Selection2PatternProperties : SelectionPatternProperties, ISelection2PatternProperties
+    {
+        public PropertyId CurrentSelectedItem => PropertyId.NotSupportedByFramework;
+        public PropertyId FirstSelectedItem => PropertyId.NotSupportedByFramework;
+        public PropertyId ItemCount => PropertyId.NotSupportedByFramework;
+        public PropertyId LastSelectedItem => PropertyId.NotSupportedByFramework;
+    }
+
     public class SpreadsheetItemPatternProperties : ISpreadsheetItemPatternProperties
     {
         public PropertyId Formula => PropertyId.NotSupportedByFramework;

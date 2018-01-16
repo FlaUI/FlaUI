@@ -18,6 +18,7 @@ namespace FlaUI.Core
         IMultipleViewPatternProperties MultipleView { get; }
         IRangeValuePatternProperties RangeValue { get; }
         IScrollPatternProperties Scroll { get; }
+        ISelection2PatternProperties Selection2 { get; }
         ISelectionItemPatternProperties SelectionItem { get; }
         ISelectionPatternProperties Selection { get; }
         ISpreadsheetItemPatternProperties SpreadsheetItem { get; }
