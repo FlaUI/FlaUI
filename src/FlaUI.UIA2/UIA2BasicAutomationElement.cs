@@ -187,6 +187,11 @@ namespace FlaUI.UIA2
             return AutomationElementConverter.NativeToManaged(Automation, cachedParent);
         }
 
+        public override object GetCurrentMetadataValue(PropertyId targetId, int metadataId)
+        {
+            throw new NotSupportedByFrameworkException();
+        }
+
         public override int GetHashCode()
         {
             return NativeElement.GetHashCode();

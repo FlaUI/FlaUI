@@ -251,5 +251,6 @@ namespace FlaUI.Core
         public abstract AutomationElement GetUpdatedCache();
         public abstract AutomationElement[] GetCachedChildren();
         public abstract AutomationElement GetCachedParent();
+        public abstract object GetCurrentMetadataValue(PropertyId targetId, int metadataId);
     }
 }

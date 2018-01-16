@@ -476,6 +476,17 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
+        /// Gets metadata from the UI Automation element that indicates how the information should be interpreted. 
+        /// </summary>
+        /// <param name="targetId">The property to retrieve.</param>
+        /// <param name="metadataId">Specifies the type of metadata to retrieve.</param>
+        /// <returns>The metadata.</returns>
+        public object GetCurrentMetadataValue(PropertyId targetId, int metadataId)
+        {
+            return BasicAutomationElement.GetCurrentMetadataValue(targetId, metadataId);
+        }
+
+        /// <summary>
         /// Compares two elements.
         /// </summary>
         public bool Equals(AutomationElement other)

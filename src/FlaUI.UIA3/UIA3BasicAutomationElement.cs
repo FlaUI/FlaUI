@@ -221,6 +221,11 @@ namespace FlaUI.UIA3
             return AutomationElementConverter.NativeToManaged(Automation, cachedParent);
         }
 
+        public override object GetCurrentMetadataValue(PropertyId targetId, int metadataId)
+        {
+            return NativeElement7.GetCurrentMetadataValue(targetId.Id, metadataId);
+        }
+
         public override int GetHashCode()
         {
             return NativeElement.GetHashCode();
