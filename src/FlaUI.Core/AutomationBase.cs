@@ -49,9 +49,14 @@ namespace FlaUI.Core
         public abstract object NotSupportedValue { get; }
 
         /// <summary>
-        /// Object to set the operation timeout for UIA methods.
+        /// Specifies the length of time that UI Automation will wait for a provider to respond to a client request for information about an automation element.
         /// </summary>
         public abstract TimeSpan TransactionTimeout { get; set; }
+
+        /// <summary>
+        /// Specifies the length of time that UI Automation will wait for a provider to respond to a client request for an automation element.
+        /// </summary>
+        public abstract TimeSpan ConnectionTimeout { get; set; }
 
         /// <summary>
         /// Gets the desktop (root) element.

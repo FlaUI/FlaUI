@@ -39,6 +39,13 @@ namespace FlaUI.UIA3
             set => NativeAutomation2.TransactionTimeout = (uint)value.TotalMilliseconds;
         }
 
+        /// <inheritdoc />
+        public override TimeSpan ConnectionTimeout
+        {
+            get => TimeSpan.FromMilliseconds(NativeAutomation2.ConnectionTimeout);
+            set => NativeAutomation2.ConnectionTimeout = (uint)value.TotalMilliseconds;
+        }
+
         /// <summary>
         /// Native object for the ui automation
         /// </summary>

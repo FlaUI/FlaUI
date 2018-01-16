@@ -37,6 +37,13 @@ namespace FlaUI.UIA2
             set => throw new NotSupportedByFrameworkException();
         }
 
+        /// <inheritdoc />
+        public override TimeSpan ConnectionTimeout
+        {
+            get => throw new NotSupportedByFrameworkException();
+            set => throw new NotSupportedByFrameworkException();
+        }
+
         public override AutomationElement GetDesktop()
         {
             var nativeElement = InternalGetNativeElement(() => UIA.AutomationElement.RootElement);
