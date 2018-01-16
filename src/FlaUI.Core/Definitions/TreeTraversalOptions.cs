@@ -3,7 +3,7 @@
     /// <summary>
     /// Defines values that can be used to customize tree navigation order.
     /// </summary>
-    public enum TreeTravesalOptions
+    public enum TreeTraversalOptions
     {
         /// <summary>
         /// Pre-order, visit children from first to last.
