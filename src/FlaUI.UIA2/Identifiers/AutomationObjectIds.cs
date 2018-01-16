@@ -5,7 +5,7 @@ using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Identifiers
 {
-    public static class AutomationObjectIds
+    public static partial class AutomationObjectIds
     {
         #region Property Identifiers
         // Base element properties
@@ -55,16 +55,6 @@ namespace FlaUI.UIA2.Identifiers
         public static readonly PropertyId IsTransformPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsTransformPatternAvailableProperty.Id, "IsTransformPatternAvailable");
         public static readonly PropertyId IsValuePatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsValuePatternAvailableProperty.Id, "IsValuePatternAvailable");
         public static readonly PropertyId IsWindowPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsWindowPatternAvailableProperty.Id, "IsWindowPatternAvailable");
-        // Additions from .NET 4.0
-#if !NET35
-        public static readonly PropertyId IsItemContainerPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsItemContainerPatternAvailableProperty.Id, "IsItemContainerPatternAvailable");
-        public static readonly PropertyId IsVirtualizedItemPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsVirtualizedItemPatternAvailableProperty.Id, "IsVirtualizedItemPatternAvailable");
-        public static readonly PropertyId IsSynchronizedInputPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsSynchronizedInputPatternAvailableProperty.Id, "IsSynchronizedInputPatternAvailable");
-#endif
-        // Additions from .NET 4.7.1
-#if NET471
-        public static readonly PropertyId LiveSettingProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.LiveSettingProperty.Id, "LiveSetting");
-#endif
         #endregion Property Identifiers
 
         #region Event identifiers
@@ -77,10 +67,30 @@ namespace FlaUI.UIA2.Identifiers
         public static readonly EventId StructureChangedEvent = EventId.Register(AutomationType.UIA2, UIA.AutomationElement.StructureChangedEvent.Id, "StructureChanged");
         public static readonly EventId ToolTipClosedEvent = EventId.Register(AutomationType.UIA2, UIA.AutomationElement.ToolTipClosedEvent.Id, "ToolTipClosed");
         public static readonly EventId ToolTipOpenedEvent = EventId.Register(AutomationType.UIA2, UIA.AutomationElement.ToolTipOpenedEvent.Id, "ToolTipOpened");
-        // Additions from .NET 4.7.1
-#if NET471
-        public static readonly EventId LiveRegionChangedEvent = EventId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.LiveRegionChangedEvent.Id, "LiveRegionChanged");
-#endif
         #endregion Event identifiers
     }
+
+#if !NET35
+    /// <summary>
+    /// Additions from .NET 4.0.
+    /// </summary>
+    public static partial class AutomationObjectIds
+    {
+        // Additions from .NET 4.0
+        public static readonly PropertyId IsItemContainerPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsItemContainerPatternAvailableProperty.Id, "IsItemContainerPatternAvailable");
+        public static readonly PropertyId IsVirtualizedItemPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsVirtualizedItemPatternAvailableProperty.Id, "IsVirtualizedItemPatternAvailable");
+        public static readonly PropertyId IsSynchronizedInputPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsSynchronizedInputPatternAvailableProperty.Id, "IsSynchronizedInputPatternAvailable");
+    }
+#endif
+
+#if NET471
+    /// <summary>
+    /// Additions from .NET 4.7.1.
+    /// </summary>
+    public static partial class AutomationObjectIds
+    {
+        public static readonly PropertyId LiveSettingProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.LiveSettingProperty.Id, "LiveSetting");
+        public static readonly EventId LiveRegionChangedEvent = EventId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.LiveRegionChangedEvent.Id, "LiveRegionChanged");
+    }
+#endif
 }

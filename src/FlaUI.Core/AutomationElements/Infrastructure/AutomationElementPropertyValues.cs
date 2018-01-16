@@ -10,19 +10,25 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
     {
         private AutomationProperty<string> _acceleratorKey;
         private AutomationProperty<string> _accessKey;
+        private AutomationProperty<int[]> _annotationObjects;
+        private AutomationProperty<int[]> _annotationTypes;
         private AutomationProperty<string> _ariaProperties;
         private AutomationProperty<string> _ariaRole;
         private AutomationProperty<string> _automationId;
         private AutomationProperty<Rectangle> _boundingRectangle;
+        private AutomationProperty<Point> _centerPoint;
         private AutomationProperty<string> _className;
         private AutomationProperty<Point> _clickablePoint;
         private AutomationProperty<AutomationElement[]> _controllerFor;
         private AutomationProperty<ControlType> _controlType;
         private AutomationProperty<CultureInfo> _culture;
         private AutomationProperty<AutomationElement[]> _describedBy;
+        private AutomationProperty<int> _fillColor;
+        private AutomationProperty<int> _fillType;
         private AutomationProperty<AutomationElement[]> _flowsFrom;
         private AutomationProperty<AutomationElement[]> _flowsTo;
         private AutomationProperty<string> _frameworkId;
+        private AutomationProperty<string> _fullDescription;
         private AutomationProperty<bool> _hasKeyboardFocus;
         private AutomationProperty<string> _helpText;
         private AutomationProperty<bool> _isContentElement;
@@ -37,15 +43,25 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         private AutomationProperty<string> _itemStatus;
         private AutomationProperty<string> _itemType;
         private AutomationProperty<AutomationElement> _labeledBy;
+        private AutomationProperty<int> _landmarkType;
+        private AutomationProperty<int> _level;
         private AutomationProperty<LiveSetting> _liveSetting;
         private AutomationProperty<string> _localizedControlType;
+        private AutomationProperty<string> _localizedLandmarkType;
         private AutomationProperty<string> _name;
         private AutomationProperty<IntPtr> _nativeWindowHandle;
         private AutomationProperty<bool> _optimizeForVisualContent;
         private AutomationProperty<OrientationType> _orientation;
+        private AutomationProperty<int[]> _outlineColor;
+        private AutomationProperty<int[]> _outlineThickness;
+        private AutomationProperty<int> _positionInSet;
         private AutomationProperty<int> _processId;
         private AutomationProperty<string> _providerDescription;
+        private AutomationProperty<int> _rotation;
         private AutomationProperty<int[]> _runtimeId;
+        private AutomationProperty<int[]> _size;
+        private AutomationProperty<int> _sizeOfSet;
+        private AutomationProperty<VisualEffects> _visualEffects;
 
         public AutomationElementPropertyValues(BasicAutomationElementBase basicAutomationElement)
         {
@@ -68,6 +84,10 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public AutomationProperty<string> AccessKey => GetOrCreate(ref _accessKey, Properties.AccessKey);
 
+        public AutomationProperty<int[]> AnnotationObjects => GetOrCreate(ref _annotationObjects, Properties.AnnotationObjects);
+
+        public AutomationProperty<int[]> AnnotationTypes => GetOrCreate(ref _annotationTypes, Properties.AnnotationObjects);
+
         /// <summary>
         /// Gets a formatted string containing the Accessible Rich Internet Application (ARIA) property information for the element.
         /// </summary>
@@ -87,6 +107,8 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// Gets the coordinates of the rectangle that completely encloses the element.
         /// </summary>
         public AutomationProperty<Rectangle> BoundingRectangle => GetOrCreate(ref _boundingRectangle, Properties.BoundingRectangle);
+
+        public AutomationProperty<Point> CenterPoint => GetOrCreate(ref _centerPoint, Properties.AnnotationObjects);
 
         /// <summary>
         /// Gets a string containing the class name of the element as assigned by the control developer.
@@ -118,6 +140,10 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public AutomationProperty<AutomationElement[]> DescribedBy => GetOrCreate(ref _describedBy, Properties.DescribedBy);
 
+        public AutomationProperty<int> FillColor => GetOrCreate(ref _fillColor, Properties.AnnotationObjects);
+
+        public AutomationProperty<int> FillType => GetOrCreate(ref _fillType, Properties.AnnotationObjects);
+
         /// <summary>
         /// Gets an array of elements that suggests the reading order before the current element.
         /// </summary>
@@ -132,6 +158,8 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// Gets the name of the underlying UI framework.
         /// </summary>
         public AutomationProperty<string> FrameworkId => GetOrCreate(ref _frameworkId, Properties.FrameworkId);
+
+        public AutomationProperty<string> FullDescription => GetOrCreate(ref _fullDescription, Properties.AnnotationObjects);
 
         /// <summary>
         /// Gets a value that indicates whether the element has keyboard focus.
@@ -205,6 +233,10 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public AutomationProperty<AutomationElement> LabeledBy => GetOrCreate(ref _labeledBy, Properties.LabeledBy);
 
+        public AutomationProperty<int> LandmarkType => GetOrCreate(ref _landmarkType, Properties.AnnotationObjects);
+
+        public AutomationProperty<int> Level => GetOrCreate(ref _level, Properties.AnnotationObjects);
+
         /// <summary>
         /// Gets a value which indicates the "politeness" level that a client should use to notify the user of changes to the live region.
         /// </summary>
@@ -214,6 +246,8 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// Gets a description of the control type.
         /// </summary>
         public AutomationProperty<string> LocalizedControlType => GetOrCreate(ref _localizedControlType, Properties.LocalizedControlType);
+
+        public AutomationProperty<string> LocalizedLandmarkType => GetOrCreate(ref _localizedLandmarkType, Properties.AnnotationObjects);
 
         /// <summary>
         /// Gets the name of the element.
@@ -237,6 +271,12 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public AutomationProperty<OrientationType> Orientation => GetOrCreate(ref _orientation, Properties.Orientation);
 
+        public AutomationProperty<int[]> OutlineColor => GetOrCreate(ref _outlineColor, Properties.AnnotationObjects);
+
+        public AutomationProperty<int[]> OutlineThickness => GetOrCreate(ref _outlineThickness, Properties.AnnotationObjects);
+
+        public AutomationProperty<int> PositionInSet => GetOrCreate(ref _positionInSet, Properties.AnnotationObjects);
+
         /// <summary>
         /// Gets the process identifier (ID) of this element.
         /// </summary>
@@ -247,10 +287,19 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public AutomationProperty<string> ProviderDescription => GetOrCreate(ref _providerDescription, Properties.ProviderDescription);
 
+        public AutomationProperty<int> Rotation => GetOrCreate(ref _rotation, Properties.AnnotationObjects);
+
         /// <summary>
         /// Gets the unique identifier assigned to the user interface (UI) item.
         /// </summary>
         public AutomationProperty<int[]> RuntimeId => GetOrCreate(ref _runtimeId, Properties.RuntimeId);
+
+        public AutomationProperty<int[]> Size => GetOrCreate(ref _size, Properties.AnnotationObjects);
+
+        public AutomationProperty<int> SizeOfSet => GetOrCreate(ref _sizeOfSet, Properties.AnnotationObjects);
+
+        public AutomationProperty<VisualEffects> VisualEffects => GetOrCreate(ref _visualEffects, Properties.AnnotationObjects);
+
 
         private AutomationProperty<T> GetOrCreate<T>(ref AutomationProperty<T> val, PropertyId propertyId)
         {
