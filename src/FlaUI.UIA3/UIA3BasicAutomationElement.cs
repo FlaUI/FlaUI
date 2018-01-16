@@ -37,32 +37,32 @@ namespace FlaUI.UIA3
         /// <summary>
         /// Native object for Windows 8 ui element
         /// </summary>
-        public UIA.IUIAutomationElement NativeElement2 => GetAutomationElementAs<UIA.IUIAutomationElement2>();
+        public UIA.IUIAutomationElement2 NativeElement2 => GetAutomationElementAs<UIA.IUIAutomationElement2>();
 
         /// <summary>
         /// Native object for Windows 8.1 ui element
         /// </summary>
-        public UIA.IUIAutomationElement NativeElement3 => GetAutomationElementAs<UIA.IUIAutomationElement3>();
+        public UIA.IUIAutomationElement3 NativeElement3 => GetAutomationElementAs<UIA.IUIAutomationElement3>();
 
         /// <summary>
         /// Native object for Windows 10 ui element
         /// </summary>
-        public UIA.IUIAutomationElement NativeElement4 => GetAutomationElementAs<UIA.IUIAutomationElement4>();
+        public UIA.IUIAutomationElement4 NativeElement4 => GetAutomationElementAs<UIA.IUIAutomationElement4>();
 
         /// <summary>
         /// Native object for second Windows 10 ui element
         /// </summary>
-        public UIA.IUIAutomationElement NativeElement5 => GetAutomationElementAs<UIA.IUIAutomationElement5>();
+        public UIA.IUIAutomationElement5 NativeElement5 => GetAutomationElementAs<UIA.IUIAutomationElement5>();
 
         /// <summary>
         /// Native object for third Windows 10 ui element
         /// </summary>
-        public UIA.IUIAutomationElement NativeElement6 => GetAutomationElementAs<UIA.IUIAutomationElement6>();
+        public UIA.IUIAutomationElement6 NativeElement6 => GetAutomationElementAs<UIA.IUIAutomationElement6>();
 
         /// <summary>
         /// Native object fourth for Windows 10 ui element
         /// </summary>
-        public UIA.IUIAutomationElement NativeElement7 => GetAutomationElementAs<UIA.IUIAutomationElement7>();
+        public UIA.IUIAutomationElement7 NativeElement7 => GetAutomationElementAs<UIA.IUIAutomationElement7>();
 
         public override void SetFocus()
         {
@@ -101,6 +101,26 @@ namespace FlaUI.UIA3
             var nativeFoundElement = CacheRequest.IsCachingActive
                 ? NativeElement.FindFirstBuildCache((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition), CacheRequest.Current.ToNative(Automation))
                 : NativeElement.FindFirst((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition));
+            return AutomationElementConverter.NativeToManaged(Automation, nativeFoundElement);
+        }
+
+        /// <inheritdoc />
+        public override AutomationElement[] FindAllWithOptions(TreeScope treeScope, ConditionBase condition,
+            TreeTraversalOptions traversalOptions, AutomationElement root)
+        {
+            var nativeFoundElements = CacheRequest.IsCachingActive
+                ? NativeElement7.FindAllWithOptionsBuildCache((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition), CacheRequest.Current.ToNative(Automation), (UIA.TreeTraversalOptions)traversalOptions, root.ToNative())
+                : NativeElement7.FindAllWithOptions((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition), (UIA.TreeTraversalOptions)traversalOptions, root.ToNative());
+            return AutomationElementConverter.NativeArrayToManaged(Automation, nativeFoundElements);
+        }
+
+        /// <inheritdoc />
+        public override AutomationElement FindFirstWithOptions(TreeScope treeScope, ConditionBase condition,
+            TreeTraversalOptions traversalOptions, AutomationElement root)
+        {
+            var nativeFoundElement = CacheRequest.IsCachingActive
+                ? NativeElement7.FindFirstWithOptionsBuildCache((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition), CacheRequest.Current.ToNative(Automation), (UIA.TreeTraversalOptions)traversalOptions, root.ToNative())
+                : NativeElement7.FindFirstWithOptions((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition), (UIA.TreeTraversalOptions)traversalOptions, root.ToNative());
             return AutomationElementConverter.NativeToManaged(Automation, nativeFoundElement);
         }
 

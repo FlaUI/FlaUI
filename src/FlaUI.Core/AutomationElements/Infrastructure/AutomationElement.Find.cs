@@ -46,6 +46,24 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
+        /// Find all matching elements in the specified order.
+        /// </summary>
+        public AutomationElement[] FindAllWithOptions(TreeScope treeScope, ConditionBase condition,
+            TreeTraversalOptions traversalOptions, AutomationElement root)
+        {
+            return BasicAutomationElement.FindAllWithOptions(treeScope, condition, traversalOptions, root);
+        }
+
+        /// <summary>
+        /// Finds the first matching element in the specified order.
+        /// </summary>
+        public AutomationElement FindFirstWithOptions(TreeScope treeScope, ConditionBase condition,
+            TreeTraversalOptions traversalOptions, AutomationElement root)
+        {
+            return BasicAutomationElement.FindFirstWithOptions(treeScope, condition, traversalOptions, root);
+        }
+
+        /// <summary>
         /// Finds the first element by iterating thru all conditions.
         /// </summary>
         public AutomationElement FindFirstNested(params ConditionBase[] nestedConditions)

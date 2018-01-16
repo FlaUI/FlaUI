@@ -5,6 +5,7 @@ using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.EventHandlers;
+using FlaUI.Core.Exceptions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Shapes;
 using FlaUI.UIA2.Converters;
@@ -75,6 +76,20 @@ namespace FlaUI.UIA2
             var nativeFoundElement = NativeElement.FindFirst((UIA.TreeScope)treeScope, ConditionConverter.ToNative(condition));
             cacheRequest?.Pop();
             return AutomationElementConverter.NativeToManaged(Automation, nativeFoundElement);
+        }
+
+        /// <inheritdoc />
+        public override AutomationElement[] FindAllWithOptions(TreeScope treeScope, ConditionBase condition,
+            TreeTraversalOptions traversalOptions, AutomationElement root)
+        {
+            throw new NotSupportedByFrameworkException();
+        }
+
+        /// <inheritdoc />
+        public override AutomationElement FindFirstWithOptions(TreeScope treeScope, ConditionBase condition,
+            TreeTraversalOptions traversalOptions, AutomationElement root)
+        {
+            throw new NotSupportedByFrameworkException();
         }
 
         /// <inheritdoc />
