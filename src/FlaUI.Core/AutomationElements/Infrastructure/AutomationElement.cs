@@ -72,7 +72,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <summary>
         /// Standard UIA properties of this element.
         /// </summary>
-        public AutomationElementPropertyValues Properties => FrameworkAutomationElement.Properties;
+        public FrameworkAutomationElementBase.IProperties Properties => FrameworkAutomationElement.Properties;
 
         /// <summary>
         /// Gets the cached children for this element.

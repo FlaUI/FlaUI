@@ -21,13 +21,12 @@ namespace FlaUI.Core
         protected FrameworkAutomationElementBase(AutomationBase automation)
         {
             Automation = automation;
-            Properties = new AutomationElementPropertyValues(this);
         }
 
         /// <summary>
-        /// Gets the object which provides access to all properties.
+        /// Provides access to all <see cref="PropertyId"/>s.
         /// </summary>
-        public AutomationElementPropertyValues Properties { get; }
+        public IAutomationElementProperties PropertyLibrary => Automation.PropertyLibrary.Element;
 
         /// <summary>
         /// Underlying <see cref="AutomationBase" /> object where this element belongs to
