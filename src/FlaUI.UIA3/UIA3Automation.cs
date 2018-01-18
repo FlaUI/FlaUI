@@ -186,7 +186,7 @@ namespace FlaUI.UIA3
 
         public AutomationElement WrapNativeElement(UIA.IUIAutomationElement nativeElement)
         {
-            return nativeElement == null ? null : new AutomationElement(new UIA3BasicAutomationElement(this, nativeElement));
+            return nativeElement == null ? null : new AutomationElement(new UIA3FrameworkAutomationElement(this, nativeElement));
         }
     }
 }

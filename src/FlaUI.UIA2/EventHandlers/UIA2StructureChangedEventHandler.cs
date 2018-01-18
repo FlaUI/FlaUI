@@ -18,8 +18,8 @@ namespace FlaUI.UIA2.EventHandlers
 
         private void HandleStructureChangedEvent(object sender, UIA.StructureChangedEventArgs structureChangedEventArgs)
         {
-            var basicAutomationElement = new UIA2BasicAutomationElement((UIA2Automation)Automation, (UIA.AutomationElement)sender);
-            var senderElement = new AutomationElement(basicAutomationElement);
+            var frameworkElement = new UIA2FrameworkAutomationElement((UIA2Automation)Automation, (UIA.AutomationElement)sender);
+            var senderElement = new AutomationElement(frameworkElement);
             HandleStructureChangedEvent(senderElement, (StructureChangeType)structureChangedEventArgs.StructureChangeType, structureChangedEventArgs.GetRuntimeId());
         }
     }

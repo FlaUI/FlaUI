@@ -11,7 +11,7 @@ namespace FlaUI.UIA2.Patterns
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.TogglePattern.Pattern.Id, "Toggle", AutomationObjectIds.IsTogglePatternAvailableProperty);
         public static readonly PropertyId ToggleStateProperty = PropertyId.Register(AutomationType.UIA2, UIA.TogglePattern.ToggleStateProperty.Id, "ToggleState");
 
-        public TogglePattern(BasicAutomationElementBase basicAutomationElement, UIA.TogglePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public TogglePattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.TogglePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

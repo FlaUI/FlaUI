@@ -16,7 +16,7 @@ namespace FlaUI.UIA2.Patterns
         public static readonly EventId TextChangedEvent = EventId.Register(AutomationType.UIA2, UIA.TextPattern.TextChangedEvent.Id, "TextChanged");
         public static readonly EventId TextSelectionChangedEvent = EventId.Register(AutomationType.UIA2, UIA.TextPattern.TextSelectionChangedEvent.Id, "TextSelectionChanged");
 
-        public TextPattern(BasicAutomationElementBase basicAutomationElement, UIA.TextPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public TextPattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.TextPattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 
@@ -25,7 +25,7 @@ namespace FlaUI.UIA2.Patterns
             get
             {
                 var nativeRange = NativePattern.DocumentRange;
-                return TextRangeConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeRange);
+                return TextRangeConverter.NativeToManaged((UIA2Automation)FrameworkAutomationElement.Automation, nativeRange);
             }
         }
 
@@ -41,26 +41,26 @@ namespace FlaUI.UIA2.Patterns
         public override ITextRange[] GetSelection()
         {
             var nativeRanges = NativePattern.GetSelection();
-            return TextRangeConverter.NativeArrayToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeRanges);
+            return TextRangeConverter.NativeArrayToManaged((UIA2Automation)FrameworkAutomationElement.Automation, nativeRanges);
         }
 
         public override ITextRange[] GetVisibleRanges()
         {
             var nativeRanges = NativePattern.GetVisibleRanges();
-            return TextRangeConverter.NativeArrayToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeRanges);
+            return TextRangeConverter.NativeArrayToManaged((UIA2Automation)FrameworkAutomationElement.Automation, nativeRanges);
         }
 
         public override ITextRange RangeFromChild(AutomationElement child)
         {
             var nativeChild = child.ToNative();
             var nativeRange = NativePattern.RangeFromChild(nativeChild);
-            return TextRangeConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeRange);
+            return TextRangeConverter.NativeToManaged((UIA2Automation)FrameworkAutomationElement.Automation, nativeRange);
         }
 
         public override ITextRange RangeFromPoint(Point point)
         {
             var nativeRange = NativePattern.RangeFromPoint(ValueConverter.ToNative(point));
-            return TextRangeConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeRange);
+            return TextRangeConverter.NativeToManaged((UIA2Automation)FrameworkAutomationElement.Automation, nativeRange);
         }
     }
 

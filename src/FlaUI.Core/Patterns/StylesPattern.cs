@@ -39,7 +39,7 @@ namespace FlaUI.Core.Patterns
         private AutomationProperty<StyleType> _style;
         private AutomationProperty<string> _styleName;
 
-        protected StylesPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected StylesPatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

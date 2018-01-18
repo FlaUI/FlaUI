@@ -14,7 +14,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Creates a <see cref="DataGridView"/> element.
         /// </summary>
-        public DataGridView(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public DataGridView(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 
@@ -32,7 +32,7 @@ namespace FlaUI.Core.AutomationElements
             get
             {
                 var header = FindFirstChild(cf => cf.ByName(LocalizedStrings.DataGridViewHeader));
-                return header == null ? null : new DataGridViewHeader(header.BasicAutomationElement);
+                return header == null ? null : new DataGridViewHeader(header.FrameworkAutomationElement);
             }
         }
 
@@ -49,7 +49,7 @@ namespace FlaUI.Core.AutomationElements
                 {
                     rows = rows.Take(rows.Length - 1).ToArray();
                 }
-                return rows.Select(x => new DataGridViewRow(x.BasicAutomationElement)).ToArray();
+                return rows.Select(x => new DataGridViewRow(x.FrameworkAutomationElement)).ToArray();
             }
         }
     }
@@ -62,7 +62,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Creates a <see cref="DataGridViewHeader"/> element.
         /// </summary>
-        public DataGridViewHeader(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public DataGridViewHeader(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 
@@ -74,7 +74,7 @@ namespace FlaUI.Core.AutomationElements
             get
             {
                 var headerItems = FindAllChildren(cf => cf.ByControlType(ControlType.Header));
-                var convertedHeaderItems = headerItems.Select(x => new DataGridViewHeaderItem(x.BasicAutomationElement))
+                var convertedHeaderItems = headerItems.Select(x => new DataGridViewHeaderItem(x.FrameworkAutomationElement))
                     .ToList();
                 // Remove the top-left header item if it exists (can be the first or last item)
                 if (convertedHeaderItems.Last().Text == LocalizedStrings.DataGridViewHeaderItemTopLeft)
@@ -98,7 +98,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Creates a <see cref="DataGridViewHeaderItem"/> element.
         /// </summary>
-        public DataGridViewHeaderItem(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public DataGridViewHeaderItem(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 
@@ -116,7 +116,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Creates a <see cref="DataGridViewRow"/> element.
         /// </summary>
-        public DataGridViewRow(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public DataGridViewRow(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 
@@ -128,7 +128,7 @@ namespace FlaUI.Core.AutomationElements
             get
             {
                 var cells = FindAllChildren(cf => cf.ByControlType(ControlType.Header).Not());
-                return cells.Select(x => new DataGridViewCell(x.BasicAutomationElement)).ToArray();
+                return cells.Select(x => new DataGridViewCell(x.FrameworkAutomationElement)).ToArray();
             }
         }
     }
@@ -141,7 +141,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Creates a <see cref="DataGridViewCell"/> element.
         /// </summary>
-        public DataGridViewCell(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public DataGridViewCell(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 

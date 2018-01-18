@@ -18,8 +18,8 @@ namespace FlaUI.UIA2.EventHandlers
 
         private void HandleAutomationEvent(object sender, UIA.AutomationEventArgs automationEventArgs)
         {
-            var basicAutomationElement = new UIA2BasicAutomationElement((UIA2Automation)Automation, (UIA.AutomationElement)sender);
-            var senderElement = new AutomationElement(basicAutomationElement);
+            var frameworkElement = new UIA2FrameworkAutomationElement((UIA2Automation)Automation, (UIA.AutomationElement)sender);
+            var senderElement = new AutomationElement(frameworkElement);
             var @event = EventId.Find(AutomationType.UIA2, automationEventArgs.EventId.Id);
             HandleAutomationEvent(senderElement, @event);
         }

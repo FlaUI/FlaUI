@@ -41,25 +41,25 @@ namespace FlaUI.Core
     public class AutomationPattern<T, TNative> : IAutomationPattern<T>
         where T : IPattern
     {
-        private readonly Func<BasicAutomationElementBase, TNative, T> _patternCreateFunc;
+        private readonly Func<FrameworkAutomationElementBase, TNative, T> _patternCreateFunc;
         private readonly PatternId _patternId;
 
-        public AutomationPattern(PatternId patternId, BasicAutomationElementBase basicAutomationElement, Func<BasicAutomationElementBase, TNative, T> patternCreateFunc)
+        public AutomationPattern(PatternId patternId, FrameworkAutomationElementBase frameworkAutomationElement, Func<FrameworkAutomationElementBase, TNative, T> patternCreateFunc)
         {
             _patternId = patternId;
-            BasicAutomationElement = basicAutomationElement;
+            FrameworkAutomationElement = frameworkAutomationElement;
             _patternCreateFunc = patternCreateFunc;
         }
 
-        protected BasicAutomationElementBase BasicAutomationElement { get; }
+        protected FrameworkAutomationElementBase FrameworkAutomationElement { get; }
 
         /// <inheritdoc />
         public T Pattern
         {
             get
             {
-                var nativePattern = BasicAutomationElement.GetNativePattern<TNative>(_patternId);
-                return _patternCreateFunc(BasicAutomationElement, nativePattern);
+                var nativePattern = FrameworkAutomationElement.GetNativePattern<TNative>(_patternId);
+                return _patternCreateFunc(FrameworkAutomationElement, nativePattern);
             }
         }
 
@@ -76,9 +76,9 @@ namespace FlaUI.Core
         /// <inheritdoc />
         public bool TryGetPattern(out T pattern)
         {
-            if (BasicAutomationElement.TryGetNativePattern(_patternId, out TNative nativePattern))
+            if (FrameworkAutomationElement.TryGetNativePattern(_patternId, out TNative nativePattern))
             {
-                pattern = _patternCreateFunc(BasicAutomationElement, nativePattern);
+                pattern = _patternCreateFunc(FrameworkAutomationElement, nativePattern);
                 return true;
             }
             pattern = default(T);

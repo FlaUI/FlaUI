@@ -11,8 +11,8 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Creates a <see cref="ListBoxItem"/> element.
         /// </summary>
-        public ListBoxItem(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public ListBoxItem(FrameworkAutomationElementBase frameworkAutomationElement)
+            : base(frameworkAutomationElement)
         {
         }
 

@@ -10,7 +10,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public Button AsButton()
         {
-            return new Button(BasicAutomationElement);
+            return new Button(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -18,7 +18,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public CheckBox AsCheckBox()
         {
-            return new CheckBox(BasicAutomationElement);
+            return new CheckBox(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public ComboBox AsComboBox()
         {
-            return new ComboBox(BasicAutomationElement);
+            return new ComboBox(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public DataGridView AsDataGridView()
         {
-            return new DataGridView(BasicAutomationElement);
+            return new DataGridView(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public Label AsLabel()
         {
-            return new Label(BasicAutomationElement);
+            return new Label(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public Grid AsGrid()
         {
-            return new Grid(BasicAutomationElement);
+            return new Grid(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public GridRow AsGridRow()
         {
-            return new GridRow(BasicAutomationElement);
+            return new GridRow(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public GridCell AsGridCell()
         {
-            return new GridCell(BasicAutomationElement);
+            return new GridCell(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public GridHeader AsGridHeader()
         {
-            return new GridHeader(BasicAutomationElement);
+            return new GridHeader(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public GridHeaderItem AsGridHeaderItem()
         {
-            return new GridHeaderItem(BasicAutomationElement);
+            return new GridHeaderItem(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public HorizontalScrollBar AsHorizontalScrollBar()
         {
-            return new HorizontalScrollBar(BasicAutomationElement);
+            return new HorizontalScrollBar(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public ListBox AsListBox()
         {
-            return new ListBox(BasicAutomationElement);
+            return new ListBox(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public ListBoxItem AsListBoxItem()
         {
-            return new ListBoxItem(BasicAutomationElement);
+            return new ListBoxItem(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public Menu AsMenu()
         {
-            return new Menu(BasicAutomationElement);
+            return new Menu(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public MenuItem AsMenuItem()
         {
-            return new MenuItem(BasicAutomationElement);
+            return new MenuItem(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public ProgressBar AsProgressBar()
         {
-            return new ProgressBar(BasicAutomationElement);
+            return new ProgressBar(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public RadioButton AsRadioButton()
         {
-            return new RadioButton(BasicAutomationElement);
+            return new RadioButton(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public Slider AsSlider()
         {
-            return new Slider(BasicAutomationElement);
+            return new Slider(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public Tab AsTab()
         {
-            return new Tab(BasicAutomationElement);
+            return new Tab(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -162,7 +162,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public TabItem AsTabItem()
         {
-            return new TabItem(BasicAutomationElement);
+            return new TabItem(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public TextBox AsTextBox()
         {
-            return new TextBox(BasicAutomationElement);
+            return new TextBox(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public Thumb AsThumb()
         {
-            return new Thumb(BasicAutomationElement);
+            return new Thumb(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -186,7 +186,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public TitleBar AsTitleBar()
         {
-            return new TitleBar(BasicAutomationElement);
+            return new TitleBar(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -194,7 +194,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public ToggleButton AsToggleButton()
         {
-            return new ToggleButton(BasicAutomationElement);
+            return new ToggleButton(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public Tree AsTree()
         {
-            return new Tree(BasicAutomationElement);
+            return new Tree(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public TreeItem AsTreeItem()
         {
-            return new TreeItem(BasicAutomationElement);
+            return new TreeItem(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -218,7 +218,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public VerticalScrollBar AsVerticalScrollBar()
         {
-            return new VerticalScrollBar(BasicAutomationElement);
+            return new VerticalScrollBar(FrameworkAutomationElement);
         }
 
         /// <summary>
@@ -226,7 +226,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public Window AsWindow()
         {
-            return new Window(BasicAutomationElement);
+            return new Window(FrameworkAutomationElement);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Creates a <see cref="Thumb"/> element.
         /// </summary>
-        public Thumb(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public Thumb(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 

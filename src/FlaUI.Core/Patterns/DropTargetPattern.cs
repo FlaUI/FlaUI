@@ -31,7 +31,7 @@ namespace FlaUI.Core.Patterns
         private AutomationProperty<string> _dropTargetEffect;
         private AutomationProperty<string[]> _dropTargetEffects;
 
-        protected DropTargetPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected DropTargetPatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

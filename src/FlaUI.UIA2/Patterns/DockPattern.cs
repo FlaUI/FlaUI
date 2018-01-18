@@ -12,7 +12,7 @@ namespace FlaUI.UIA2.Patterns
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.DockPattern.Pattern.Id, "Dock", AutomationObjectIds.IsDockPatternAvailableProperty);
         public static readonly PropertyId DockPositionProperty = PropertyId.Register(AutomationType.UIA2, UIA.DockPattern.DockPositionProperty.Id, "DockPosition");
 
-        public DockPattern(BasicAutomationElementBase basicAutomationElement, UIA.DockPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public DockPattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.DockPattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

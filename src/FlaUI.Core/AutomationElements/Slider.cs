@@ -16,7 +16,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Creates a <see cref="Slider"/> element.
         /// </summary>
-        public Slider(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public Slider(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 

@@ -11,7 +11,7 @@ namespace FlaUI.UIA2.Patterns
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.ScrollItemPattern.Pattern.Id, "ScrollItem", AutomationObjectIds.IsScrollItemPatternAvailableProperty);
 
-        public ScrollItemPattern(BasicAutomationElementBase basicAutomationElement, UIA.ScrollItemPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public ScrollItemPattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.ScrollItemPattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

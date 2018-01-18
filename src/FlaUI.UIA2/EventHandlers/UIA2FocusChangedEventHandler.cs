@@ -17,8 +17,8 @@ namespace FlaUI.UIA2.EventHandlers
 
         private void HandleFocusChangedEvent(object sender, UIA.AutomationFocusChangedEventArgs automationFocusChangedEventArgs)
         {
-            var basicAutomationElement = new UIA2BasicAutomationElement((UIA2Automation)Automation, (UIA.AutomationElement)sender);
-            var senderElement = new AutomationElement(basicAutomationElement);
+            var frameworkElement = new UIA2FrameworkAutomationElement((UIA2Automation)Automation, (UIA.AutomationElement)sender);
+            var senderElement = new AutomationElement(frameworkElement);
             HandleFocusChangedEvent(senderElement);
         }
     }

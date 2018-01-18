@@ -13,7 +13,7 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId CurrentViewProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_MultipleViewCurrentViewPropertyId, "CurrentView");
         public static readonly PropertyId SupportedViewsProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_MultipleViewSupportedViewsPropertyId, "SupportedViews");
 
-        public MultipleViewPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationMultipleViewPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public MultipleViewPattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.IUIAutomationMultipleViewPattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

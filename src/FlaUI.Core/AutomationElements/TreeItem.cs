@@ -17,10 +17,10 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Creates a <see cref="TreeItem"/> element.
         /// </summary>
-        public TreeItem(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public TreeItem(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
-            _selectionItemAutomationElement = new SelectionItemAutomationElement(basicAutomationElement);
-            _expandCollapseAutomationElement = new ExpandCollapseAutomationElement(basicAutomationElement);
+            _selectionItemAutomationElement = new SelectionItemAutomationElement(frameworkAutomationElement);
+            _expandCollapseAutomationElement = new ExpandCollapseAutomationElement(frameworkAutomationElement);
         }
 
         /// <summary>

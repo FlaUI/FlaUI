@@ -24,7 +24,7 @@ namespace FlaUI.Core.Patterns
     {
         private AutomationProperty<ExpandCollapseState> _expandCollapseState;
 
-        protected ExpandCollapsePatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected ExpandCollapsePatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

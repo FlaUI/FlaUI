@@ -9,7 +9,7 @@ namespace FlaUI.Core.AutomationElements.Scrolling
     /// </summary>
     public abstract class ScrollBarBase : AutomationElement
     {
-        protected ScrollBarBase(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        protected ScrollBarBase(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 

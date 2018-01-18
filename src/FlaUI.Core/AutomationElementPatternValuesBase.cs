@@ -41,12 +41,12 @@ namespace FlaUI.Core
         private IAutomationPattern<IVirtualizedItemPattern> _virtualizedItemPattern;
         private IAutomationPattern<IWindowPattern> _windowPattern;
 
-        protected AutomationElementPatternValuesBase(BasicAutomationElementBase basicAutomationElement)
+        protected AutomationElementPatternValuesBase(FrameworkAutomationElementBase frameworkAutomationElement)
         {
-            BasicAutomationElement = basicAutomationElement;
+            FrameworkAutomationElement = frameworkAutomationElement;
         }
 
-        protected BasicAutomationElementBase BasicAutomationElement { get; }
+        protected FrameworkAutomationElementBase FrameworkAutomationElement { get; }
 
         public IAutomationPattern<IAnnotationPattern> Annotation => GetOrCreate(ref _annotationPattern, InitializeAnnotationPattern);
         public IAutomationPattern<IDockPattern> Dock => GetOrCreate(ref _dockPattern, InitializeDockPattern);
@@ -121,6 +121,6 @@ namespace FlaUI.Core
             return val ?? (val = initFunc());
         }
 
-        public abstract IAutomationPattern<T> GetCustomPattern<T, TNative>(PatternId pattern, Func<BasicAutomationElementBase, TNative, T> patternCreateFunc) where T : IPattern;
+        public abstract IAutomationPattern<T> GetCustomPattern<T, TNative>(PatternId pattern, Func<FrameworkAutomationElementBase, TNative, T> patternCreateFunc) where T : IPattern;
     }
 }

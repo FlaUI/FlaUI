@@ -15,8 +15,8 @@ namespace FlaUI.UIA3.EventHandlers
         public void HandleNotificationEvent(UIA.IUIAutomationElement sender, UIA.NotificationKind notificationKind,
             UIA.NotificationProcessing notificationProcessing, string displayString, string activityId)
         {
-            var basicAutomationElement = new UIA3BasicAutomationElement((UIA3Automation)Automation, sender);
-            var senderElement = new AutomationElement(basicAutomationElement);
+            var frameworkElement = new UIA3FrameworkAutomationElement((UIA3Automation)Automation, sender);
+            var senderElement = new AutomationElement(frameworkElement);
             HandleNotificationEvent(senderElement, (NotificationKind)notificationKind, (NotificationProcessing)notificationProcessing, displayString, activityId);
         }
     }

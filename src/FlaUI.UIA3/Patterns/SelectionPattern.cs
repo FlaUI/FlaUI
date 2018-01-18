@@ -15,7 +15,7 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId SelectionProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_SelectionSelectionPropertyId, "Selection").SetConverter(AutomationElementConverter.NativeArrayToManaged);
         public static readonly EventId InvalidatedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_Selection_InvalidatedEventId, "Invalidated");
 
-        public SelectionPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationSelectionPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public SelectionPattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.IUIAutomationSelectionPattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
     }

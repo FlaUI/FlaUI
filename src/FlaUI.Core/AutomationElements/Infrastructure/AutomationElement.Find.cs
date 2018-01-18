@@ -23,7 +23,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         public AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
         {
             Predicate<AutomationElement[]> whilePredicate = elements => elements.Length == 0;
-            Func<AutomationElement[]> retryMethod = () => BasicAutomationElement.FindAll(treeScope, condition);
+            Func<AutomationElement[]> retryMethod = () => FrameworkAutomationElement.FindAll(treeScope, condition);
             return Retry.While(retryMethod, whilePredicate, timeOut);
         }
 
@@ -41,7 +41,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         public AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
         {
             Predicate<AutomationElement> whilePredicate = element => element == null;
-            Func<AutomationElement> retryMethod = () => BasicAutomationElement.FindFirst(treeScope, condition);
+            Func<AutomationElement> retryMethod = () => FrameworkAutomationElement.FindFirst(treeScope, condition);
             return Retry.While(retryMethod, whilePredicate, timeOut);
         }
 
@@ -51,7 +51,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         public AutomationElement[] FindAllWithOptions(TreeScope treeScope, ConditionBase condition,
             TreeTraversalOptions traversalOptions, AutomationElement root)
         {
-            return BasicAutomationElement.FindAllWithOptions(treeScope, condition, traversalOptions, root);
+            return FrameworkAutomationElement.FindAllWithOptions(treeScope, condition, traversalOptions, root);
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         public AutomationElement FindFirstWithOptions(TreeScope treeScope, ConditionBase condition,
             TreeTraversalOptions traversalOptions, AutomationElement root)
         {
-            return BasicAutomationElement.FindFirstWithOptions(treeScope, condition, traversalOptions, root);
+            return FrameworkAutomationElement.FindFirstWithOptions(treeScope, condition, traversalOptions, root);
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         public AutomationElement FindAt(TreeScope treeScope, int index, ConditionBase condition)
         {
             Predicate<AutomationElement> whilePredicate = element => element == null;
-            Func<AutomationElement> retryMethod = () => BasicAutomationElement.FindIndexed(treeScope, index, condition);
+            Func<AutomationElement> retryMethod = () => FrameworkAutomationElement.FindIndexed(treeScope, index, condition);
             return Retry.While(retryMethod, whilePredicate, Retry.DefaultRetryFor);
         }
 
@@ -140,7 +140,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         public AutomationElement FindAt(TreeScope treeScope, ConditionBase condition, int index, TimeSpan timeOut)
         {
             Predicate<AutomationElement> whilePredicate = element => element == null;
-            Func<AutomationElement> retryMethod = () => BasicAutomationElement.FindIndexed(treeScope, index, condition);
+            Func<AutomationElement> retryMethod = () => FrameworkAutomationElement.FindIndexed(treeScope, index, condition);
             return Retry.While(retryMethod, whilePredicate, timeOut);
         }
 

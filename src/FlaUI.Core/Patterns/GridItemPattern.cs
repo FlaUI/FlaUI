@@ -33,7 +33,7 @@ namespace FlaUI.Core.Patterns
         private AutomationProperty<int> _row;
         private AutomationProperty<int> _rowSpan;
 
-        protected GridItemPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected GridItemPatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

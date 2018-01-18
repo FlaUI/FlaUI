@@ -15,8 +15,8 @@ namespace FlaUI.UIA3.EventHandlers
 
         public void HandlePropertyChangedEvent(UIA.IUIAutomationElement sender, int propertyId, object newValue)
         {
-            var basicAutomationElement = new UIA3BasicAutomationElement((UIA3Automation)Automation, sender);
-            var senderElement = new AutomationElement(basicAutomationElement);
+            var frameworkElement = new UIA3FrameworkAutomationElement((UIA3Automation)Automation, sender);
+            var senderElement = new AutomationElement(frameworkElement);
             var property = PropertyId.Find(Automation.AutomationType, propertyId);
             HandlePropertyChangedEvent(senderElement, property, newValue);
         }

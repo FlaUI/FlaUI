@@ -12,7 +12,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Creates a <see cref="Tree"/> element.
         /// </summary>
-        public Tree(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public Tree(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 

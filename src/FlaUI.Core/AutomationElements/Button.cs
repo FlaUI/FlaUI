@@ -10,7 +10,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Creates a <see cref="Button"/> element.
         /// </summary>
-        public Button(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public Button(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
     }

@@ -23,7 +23,7 @@ namespace FlaUI.Core.Patterns
     {
         private AutomationProperty<DockPosition> _dockPosition;
 
-        protected DockPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected DockPatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

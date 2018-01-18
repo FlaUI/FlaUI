@@ -15,9 +15,9 @@ using UIA = Interop.UIAutomationClient;
 
 namespace FlaUI.UIA3
 {
-    public class UIA3BasicAutomationElement : BasicAutomationElementBase
+    public class UIA3FrameworkAutomationElement : FrameworkAutomationElementBase
     {
-        public UIA3BasicAutomationElement(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation)
+        public UIA3FrameworkAutomationElement(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation)
         {
             Automation = automation;
             NativeElement = nativeElement;

@@ -13,7 +13,7 @@ namespace FlaUI.Core.AutomationElements
     /// </summary>
     public class Grid : AutomationElement
     {
-        public Grid(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public Grid(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 
@@ -76,7 +76,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Gets all selected items.
         /// </summary>
-        public GridRow[] SelectedItems => SelectionPattern.Selection.Value.Select(x => new GridRow(x.BasicAutomationElement)).ToArray();
+        public GridRow[] SelectedItems => SelectionPattern.Selection.Value.Select(x => new GridRow(x.FrameworkAutomationElement)).ToArray();
 
         /// <summary>
         /// Gets the first selected item or null otherwise.
@@ -210,7 +210,7 @@ namespace FlaUI.Core.AutomationElements
     /// </summary>
     public class GridHeader : AutomationElement
     {
-        public GridHeader(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public GridHeader(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 
@@ -229,7 +229,7 @@ namespace FlaUI.Core.AutomationElements
     /// </summary>
     public class GridHeaderItem : AutomationElement
     {
-        public GridHeaderItem(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public GridHeaderItem(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 
@@ -241,7 +241,7 @@ namespace FlaUI.Core.AutomationElements
     /// </summary>
     public class GridRow : SelectionItemAutomationElement
     {
-        public GridRow(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public GridRow(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 
@@ -285,7 +285,7 @@ namespace FlaUI.Core.AutomationElements
     /// </summary>
     public class GridCell : AutomationElement
     {
-        public GridCell(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public GridCell(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 

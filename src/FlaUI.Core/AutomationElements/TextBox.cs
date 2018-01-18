@@ -15,7 +15,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Creates a <see cref="TextBox"/> element.
         /// </summary>
-        public TextBox(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public TextBox(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 

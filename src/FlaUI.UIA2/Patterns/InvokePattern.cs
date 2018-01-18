@@ -24,7 +24,7 @@ namespace FlaUI.UIA2.Patterns
         /// <summary>
         /// Creates an UIA2 <see cref="IInvokePattern"/>.
         /// </summary>
-        public InvokePattern(BasicAutomationElementBase basicAutomationElement, UIA.InvokePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public InvokePattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.InvokePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

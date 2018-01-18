@@ -9,7 +9,7 @@ namespace FlaUI.Core.AutomationElements.PatternElements
     /// </summary>
     public class ExpandCollapseAutomationElement : AutomationElement
     {
-        public ExpandCollapseAutomationElement(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public ExpandCollapseAutomationElement(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 

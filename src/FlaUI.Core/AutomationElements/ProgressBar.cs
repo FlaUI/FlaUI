@@ -11,7 +11,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Creates a <see cref="ProgressBar"/> element.
         /// </summary>
-        public ProgressBar(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public ProgressBar(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 

@@ -19,7 +19,7 @@ namespace FlaUI.UIA2.Patterns
         public static readonly EventId WindowClosedEvent = EventId.Register(AutomationType.UIA2, UIA.WindowPattern.WindowClosedEvent.Id, "WindowClosed");
         public static readonly EventId WindowOpenedEvent = EventId.Register(AutomationType.UIA2, UIA.WindowPattern.WindowOpenedEvent.Id, "WindowOpened");
 
-        public WindowPattern(BasicAutomationElementBase basicAutomationElement, UIA.WindowPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public WindowPattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.WindowPattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

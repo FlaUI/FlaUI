@@ -25,7 +25,7 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId StateProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleStatePropertyId, "State").SetConverter((a, o) => (AccessibilityState)Convert.ToUInt32(o));
         public static readonly PropertyId ValueProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleValuePropertyId, "Value");
 
-        public LegacyIAccessiblePattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationLegacyIAccessiblePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public LegacyIAccessiblePattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.IUIAutomationLegacyIAccessiblePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

@@ -37,12 +37,12 @@ namespace FlaUI.UIA3.Converters
             {
                 return null;
             }
-            var basicElement = automationElement.BasicAutomationElement as UIA3BasicAutomationElement;
-            if (basicElement == null)
+            var frameworkElement = automationElement.FrameworkAutomationElement as UIA3FrameworkAutomationElement;
+            if (frameworkElement == null)
             {
                 throw new Exception("Element is not an UIA3 element");
             }
-            return basicElement.NativeElement;
+            return frameworkElement.NativeElement;
         }
     }
 }

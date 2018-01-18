@@ -44,7 +44,7 @@ namespace FlaUI.Core.Patterns
         private AutomationProperty<double> _verticalScrollPercent;
         private AutomationProperty<double> _verticalViewSize;
 
-        protected ScrollPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected ScrollPatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

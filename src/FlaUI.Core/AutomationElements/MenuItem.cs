@@ -17,10 +17,10 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Creates a <see cref="MenuItem"/> element.
         /// </summary>
-        public MenuItem(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public MenuItem(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
-            _invokeAutomationElement = new InvokeAutomationElement(basicAutomationElement);
-            _expandCollapseAutomationElement = new ExpandCollapseAutomationElement(basicAutomationElement);
+            _invokeAutomationElement = new InvokeAutomationElement(frameworkAutomationElement);
+            _expandCollapseAutomationElement = new ExpandCollapseAutomationElement(frameworkAutomationElement);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace FlaUI.Core.AutomationElements
                     Click();
                     // In Win32, the nested menu items are below a menu control which is below the application window
                     // So search the app window first
-                    var appWindow = BasicAutomationElement.Automation.GetDesktop().FindFirstChild(cf => cf.ByControlType(ControlType.Window).And(cf.ByProcessId(Properties.ProcessId)));
+                    var appWindow = FrameworkAutomationElement.Automation.GetDesktop().FindFirstChild(cf => cf.ByControlType(ControlType.Window).And(cf.ByProcessId(Properties.ProcessId)));
                     // Then search the menu below the window
                     var menu = appWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Menu).And(cf.ByName(Text))).AsMenu();
                     menu.IsWin32Menu = true;

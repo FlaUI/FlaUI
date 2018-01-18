@@ -30,7 +30,7 @@ namespace FlaUI.Core.Patterns
         private AutomationProperty<bool> _canResize;
         private AutomationProperty<bool> _canRotate;
 
-        protected TransformPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected TransformPatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

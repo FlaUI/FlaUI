@@ -16,7 +16,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Creates a <see cref="ComboBox"/> element.
         /// </summary>
-        public ComboBox(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public ComboBox(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 
@@ -115,7 +115,7 @@ namespace FlaUI.Core.AutomationElements
                 {
                     return Items.Where(x => x.IsSelected).ToArray();
                 }
-                return SelectionPattern.Selection.Value.Select(x => new ComboBoxItem(x.BasicAutomationElement)).ToArray();
+                return SelectionPattern.Selection.Value.Select(x => new ComboBoxItem(x.FrameworkAutomationElement)).ToArray();
             }
         }
 
@@ -144,7 +144,7 @@ namespace FlaUI.Core.AutomationElements
                     // WPF
                     items = FindAllChildren(cf => cf.ByControlType(ControlType.ListItem));
                 }
-                return items.Select(x => new ComboBoxItem(x.BasicAutomationElement)).ToArray();
+                return items.Select(x => new ComboBoxItem(x.FrameworkAutomationElement)).ToArray();
             }
         }
 

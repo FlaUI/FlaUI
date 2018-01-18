@@ -55,7 +55,7 @@ namespace FlaUI.Core.Patterns
         private AutomationProperty<AccessibilityState> _state;
         private AutomationProperty<string> _value;
 
-        protected LegacyIAccessiblePatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected LegacyIAccessiblePatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

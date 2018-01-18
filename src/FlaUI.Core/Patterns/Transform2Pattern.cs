@@ -32,7 +32,7 @@ namespace FlaUI.Core.Patterns
         private AutomationProperty<double> _zoomMaximum;
         private AutomationProperty<double> _zoomMinimum;
 
-        protected Transform2PatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected Transform2PatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

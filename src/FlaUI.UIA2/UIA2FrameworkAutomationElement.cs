@@ -15,9 +15,9 @@ using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2
 {
-    public class UIA2BasicAutomationElement : BasicAutomationElementBase
+    public class UIA2FrameworkAutomationElement : FrameworkAutomationElementBase
     {
-        public UIA2BasicAutomationElement(UIA2Automation automation, UIA.AutomationElement nativeElement) : base(automation)
+        public UIA2FrameworkAutomationElement(UIA2Automation automation, UIA.AutomationElement nativeElement) : base(automation)
         {
             Automation = automation;
             NativeElement = nativeElement;

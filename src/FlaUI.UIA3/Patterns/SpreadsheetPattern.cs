@@ -14,14 +14,14 @@ namespace FlaUI.UIA3.Patterns
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_SpreadsheetPatternId, "Spreadsheet", AutomationObjectIds.IsSpreadsheetPatternAvailableProperty);
 
-        public SpreadsheetPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationSpreadsheetPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public SpreadsheetPattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.IUIAutomationSpreadsheetPattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 
         public AutomationElement GetItemByName(string name)
         {
             var nativeElement = Com.Call(() => NativePattern.GetItemByName(name));
-            return AutomationElementConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
+            return AutomationElementConverter.NativeToManaged((UIA3Automation)FrameworkAutomationElement.Automation, nativeElement);
         }
     }
 }

@@ -10,15 +10,15 @@ using FlaUI.Core.Shapes;
 namespace FlaUI.Core
 {
     /// <summary>
-    /// Base class for driver specific automation elements.
+    /// Base class for a framework specific automation element.
     /// </summary>
-    public abstract class BasicAutomationElementBase
+    public abstract class FrameworkAutomationElementBase
     {
         /// <summary>
-        /// Create a basic automation element with the given <see cref="AutomationBase"/>.
+        /// Create a framework automation element with the given <see cref="AutomationBase"/>.
         /// </summary>
         /// <param name="automation">The <see cref="AutomationBase"/>.</param>
-        protected BasicAutomationElementBase(AutomationBase automation)
+        protected FrameworkAutomationElementBase(AutomationBase automation)
         {
             Automation = automation;
             Properties = new AutomationElementPropertyValues(this);

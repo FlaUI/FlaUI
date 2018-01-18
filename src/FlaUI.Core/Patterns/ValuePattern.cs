@@ -39,7 +39,7 @@ namespace FlaUI.Core.Patterns
         private AutomationProperty<bool> _isReadOnly;
         private AutomationProperty<string> _value;
 
-        protected ValuePatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected ValuePatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

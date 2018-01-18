@@ -11,7 +11,7 @@ namespace FlaUI.UIA2.Patterns
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.ExpandCollapsePattern.Pattern.Id, "ExpandCollapse", AutomationObjectIds.IsExpandCollapsePatternAvailableProperty);
         public static readonly PropertyId ExpandCollapseStateProperty = PropertyId.Register(AutomationType.UIA2, UIA.ExpandCollapsePattern.ExpandCollapseStateProperty.Id, "ExpandCollapseState");
 
-        public ExpandCollapsePattern(BasicAutomationElementBase basicAutomationElement, UIA.ExpandCollapsePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public ExpandCollapsePattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.ExpandCollapsePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

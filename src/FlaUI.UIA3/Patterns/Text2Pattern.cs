@@ -13,7 +13,7 @@ namespace FlaUI.UIA3.Patterns
     {
         public new static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_TextPattern2Id, "Text2", AutomationObjectIds.IsTextPattern2AvailableProperty);
 
-        public Text2Pattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTextPattern2 nativePattern) : base(basicAutomationElement, nativePattern)
+        public Text2Pattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.IUIAutomationTextPattern2 nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
             ExtendedNativePattern = nativePattern;
         }
@@ -25,14 +25,14 @@ namespace FlaUI.UIA3.Patterns
             var rawIsActive = 0;
             var nativeTextRange = Com.Call(() => ExtendedNativePattern.GetCaretRange(out rawIsActive));
             isActive = rawIsActive != 0;
-            return TextRangeConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeTextRange);
+            return TextRangeConverter.NativeToManaged((UIA3Automation)FrameworkAutomationElement.Automation, nativeTextRange);
         }
 
         public ITextRange RangeFromAnnotation(AutomationElement annotation)
         {
             var nativeInputElement = annotation.ToNative();
             var nativeElement = Com.Call(() => ExtendedNativePattern.RangeFromAnnotation(nativeInputElement));
-            return TextRangeConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
+            return TextRangeConverter.NativeToManaged((UIA3Automation)FrameworkAutomationElement.Automation, nativeElement);
         }
     }
 }

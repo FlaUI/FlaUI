@@ -16,7 +16,7 @@ namespace FlaUI.UIA2.Patterns
         public static readonly EventId ElementRemovedFromSelectionEvent = EventId.Register(AutomationType.UIA2, UIA.SelectionItemPattern.ElementRemovedFromSelectionEvent.Id, "ElementRemovedFromSelection");
         public static readonly EventId ElementSelectedEvent = EventId.Register(AutomationType.UIA2, UIA.SelectionItemPattern.ElementSelectedEvent.Id, "ElementSelected");
 
-        public SelectionItemPattern(BasicAutomationElementBase basicAutomationElement, UIA.SelectionItemPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public SelectionItemPattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.SelectionItemPattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

@@ -95,7 +95,7 @@ namespace FlaUI.UIA2
 
         public AutomationElement WrapNativeElement(UIA.AutomationElement nativeElement)
         {
-            return nativeElement == null ? null : new AutomationElement(new UIA2BasicAutomationElement(this, nativeElement));
+            return nativeElement == null ? null : new AutomationElement(new UIA2FrameworkAutomationElement(this, nativeElement));
         }
 
         /// <summary>

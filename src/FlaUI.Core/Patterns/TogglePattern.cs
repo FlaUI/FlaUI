@@ -23,7 +23,7 @@ namespace FlaUI.Core.Patterns
     {
         private AutomationProperty<ToggleState> _toggleState;
 
-        protected TogglePatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected TogglePatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

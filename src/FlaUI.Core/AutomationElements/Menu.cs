@@ -15,7 +15,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Creates a <see cref="Menu"/> element.
         /// </summary>
-        public Menu(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public Menu(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 

@@ -14,7 +14,7 @@ namespace FlaUI.UIA2.Patterns
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.ItemContainerPattern.Pattern.Id, "ItemContainer", AutomationObjectIds.IsItemContainerPatternAvailableProperty);
 
-        public ItemContainerPattern(BasicAutomationElementBase basicAutomationElement, UIA.ItemContainerPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public ItemContainerPattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.ItemContainerPattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 
@@ -23,7 +23,7 @@ namespace FlaUI.UIA2.Patterns
             var foundNativeElement = NativePattern.FindItemByProperty(
                     startAfter?.ToNative(),
                     property == null ? null : UIA.AutomationProperty.LookupById(property.Id), ValueConverter.ToNative(value));
-            return AutomationElementConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, foundNativeElement);
+            return AutomationElementConverter.NativeToManaged((UIA2Automation)FrameworkAutomationElement.Automation, foundNativeElement);
         }
     }
 }

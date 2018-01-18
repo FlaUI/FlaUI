@@ -37,7 +37,7 @@ namespace FlaUI.Core.Patterns
         private AutomationProperty<double> _smallChange;
         private AutomationProperty<double> _value;
 
-        protected RangeValuePatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected RangeValuePatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

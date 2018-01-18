@@ -12,7 +12,7 @@ namespace FlaUI.UIA2.Patterns
         public static readonly PropertyId IsReadOnlyProperty = PropertyId.Register(AutomationType.UIA2, UIA.ValuePattern.IsReadOnlyProperty.Id, "IsReadOnly");
         public static readonly PropertyId ValueProperty = PropertyId.Register(AutomationType.UIA2, UIA.ValuePattern.ValueProperty.Id, "Value");
 
-        public ValuePattern(BasicAutomationElementBase basicAutomationElement, UIA.ValuePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public ValuePattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.ValuePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

@@ -16,7 +16,7 @@ namespace FlaUI.UIA2.Patterns
         public static readonly PropertyId SmallChangeProperty = PropertyId.Register(AutomationType.UIA2, UIA.RangeValuePattern.SmallChangeProperty.Id, "SmallChange");
         public static readonly PropertyId ValueProperty = PropertyId.Register(AutomationType.UIA2, UIA.RangeValuePattern.ValueProperty.Id, "Value");
 
-        public RangeValuePattern(BasicAutomationElementBase basicAutomationElement, UIA.RangeValuePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public RangeValuePattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.RangeValuePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

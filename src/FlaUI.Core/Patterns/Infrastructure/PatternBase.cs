@@ -10,21 +10,21 @@ namespace FlaUI.Core.Patterns.Infrastructure
     public abstract class PatternBase<TNativePattern> : IPattern
         where TNativePattern : class
     {
-        protected PatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)
+        protected PatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern)
         {
-            BasicAutomationElement = basicAutomationElement ?? throw new ArgumentNullException(nameof(basicAutomationElement));
+            FrameworkAutomationElement = frameworkAutomationElement ?? throw new ArgumentNullException(nameof(frameworkAutomationElement));
             NativePattern = nativePattern ?? throw new ArgumentNullException(nameof(nativePattern));
         }
 
-        public BasicAutomationElementBase BasicAutomationElement { get; }
+        public FrameworkAutomationElementBase FrameworkAutomationElement { get; }
 
         public TNativePattern NativePattern { get; }
 
-        public AutomationBase Automation => BasicAutomationElement.Automation;
+        public AutomationBase Automation => FrameworkAutomationElement.Automation;
 
         protected AutomationProperty<T> GetOrCreate<T>(ref AutomationProperty<T> val, PropertyId propertyId)
         {
-            return val ?? (val = new AutomationProperty<T>(propertyId, BasicAutomationElement));
+            return val ?? (val = new AutomationProperty<T>(propertyId, FrameworkAutomationElement));
         }
     }
 }

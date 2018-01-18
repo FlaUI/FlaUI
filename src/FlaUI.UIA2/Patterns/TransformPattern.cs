@@ -13,7 +13,7 @@ namespace FlaUI.UIA2.Patterns
         public static readonly PropertyId CanResizeProperty = PropertyId.Register(AutomationType.UIA2, UIA.TransformPattern.CanResizeProperty.Id, "CanResize");
         public static readonly PropertyId CanRotateProperty = PropertyId.Register(AutomationType.UIA2, UIA.TransformPattern.CanRotateProperty.Id, "CanRotate");
 
-        public TransformPattern(BasicAutomationElementBase basicAutomationElement, UIA.TransformPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public TransformPattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.TransformPattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
         

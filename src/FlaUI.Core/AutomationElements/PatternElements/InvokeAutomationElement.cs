@@ -5,7 +5,7 @@ namespace FlaUI.Core.AutomationElements.PatternElements
 {
     public class InvokeAutomationElement : AutomationElement
     {
-        public InvokeAutomationElement(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public InvokeAutomationElement(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 

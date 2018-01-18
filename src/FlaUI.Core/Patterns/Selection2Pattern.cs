@@ -29,7 +29,7 @@ namespace FlaUI.Core.Patterns
         private AutomationProperty<int> _itemCount;
         private AutomationProperty<AutomationElement> _lastSelectedItem;
 
-        protected Selection2PatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected Selection2PatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

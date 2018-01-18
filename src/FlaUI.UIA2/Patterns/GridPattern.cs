@@ -14,14 +14,14 @@ namespace FlaUI.UIA2.Patterns
         public static readonly PropertyId ColumnCountProperty = PropertyId.Register(AutomationType.UIA2, UIA.GridPattern.ColumnCountProperty.Id, "ColumnCount");
         public static readonly PropertyId RowCountProperty = PropertyId.Register(AutomationType.UIA2, UIA.GridPattern.RowCountProperty.Id, "RowCount");
 
-        public GridPattern(BasicAutomationElementBase basicAutomationElement, UIA.GridPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public GridPattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.GridPattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 
         public override AutomationElement GetItem(int row, int column)
         {
             var nativeItem = NativePattern.GetItem(row, column);
-            return AutomationElementConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeItem);
+            return AutomationElementConverter.NativeToManaged((UIA2Automation)FrameworkAutomationElement.Automation, nativeItem);
         }
     }
 

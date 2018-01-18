@@ -14,7 +14,7 @@ namespace FlaUI.UIA2.Patterns
         public static readonly PropertyId RowHeadersProperty = PropertyId.Register(AutomationType.UIA2, UIA.TablePattern.RowHeadersProperty.Id, "RowHeaders").SetConverter(AutomationElementConverter.NativeArrayToManaged);
         public static readonly PropertyId RowOrColumnMajorProperty = PropertyId.Register(AutomationType.UIA2, UIA.TablePattern.RowOrColumnMajorProperty.Id, "RowOrColumnMajor");
 
-        public TablePattern(BasicAutomationElementBase basicAutomationElement, UIA.TablePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public TablePattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.TablePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
     }

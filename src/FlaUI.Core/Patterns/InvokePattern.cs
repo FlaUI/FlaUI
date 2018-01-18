@@ -40,7 +40,7 @@ namespace FlaUI.Core.Patterns
         /// <summary>
         /// Creates the <see cref="IInvokePattern"/>.
         /// </summary>
-        protected InvokePatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected InvokePatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

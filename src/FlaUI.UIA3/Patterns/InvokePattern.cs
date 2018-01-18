@@ -25,7 +25,7 @@ namespace FlaUI.UIA3.Patterns
         /// <summary>
         /// Creates an UIA3 <see cref="IInvokePattern"/>.
         /// </summary>
-        public InvokePattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationInvokePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public InvokePattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.IUIAutomationInvokePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

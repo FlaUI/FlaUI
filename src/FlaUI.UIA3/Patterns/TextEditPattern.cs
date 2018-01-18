@@ -14,7 +14,7 @@ namespace FlaUI.UIA3.Patterns
         public static readonly EventId ConversionTargetChangedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_TextEdit_ConversionTargetChangedEventId, "ConversionTargetChanged");
         public static readonly EventId TextChangedEvent2 = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_TextEdit_TextChangedEventId, "TextChanged");
 
-        public TextEditPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTextEditPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public TextEditPattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.IUIAutomationTextEditPattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
             ExtendedNativePattern = nativePattern;
         }
@@ -26,13 +26,13 @@ namespace FlaUI.UIA3.Patterns
         public ITextRange GetActiveComposition()
         {
             var nativeRange = Com.Call(() => ExtendedNativePattern.GetActiveComposition());
-            return TextRangeConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRange);
+            return TextRangeConverter.NativeToManaged((UIA3Automation)FrameworkAutomationElement.Automation, nativeRange);
         }
 
         public ITextRange GetConversionTarget()
         {
             var nativeRange = Com.Call(() => ExtendedNativePattern.GetConversionTarget());
-            return TextRangeConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRange);
+            return TextRangeConverter.NativeToManaged((UIA3Automation)FrameworkAutomationElement.Automation, nativeRange);
         }
     }
 

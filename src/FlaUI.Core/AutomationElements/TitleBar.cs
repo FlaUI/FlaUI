@@ -11,7 +11,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Creates a <see cref="TitleBar"/> element.
         /// </summary>
-        public TitleBar(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public TitleBar(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 

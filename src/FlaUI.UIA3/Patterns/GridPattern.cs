@@ -15,14 +15,14 @@ namespace FlaUI.UIA3.Patterns
         public static readonly PropertyId ColumnCountProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_GridColumnCountPropertyId, "ColumnCount");
         public static readonly PropertyId RowCountProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_GridRowCountPropertyId, "RowCount");
 
-        public GridPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationGridPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public GridPattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.IUIAutomationGridPattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 
         public override AutomationElement GetItem(int row, int column)
         {
             var nativeItem = Com.Call(() => NativePattern.GetItem(row, column));
-            return AutomationElementConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeItem);
+            return AutomationElementConverter.NativeToManaged((UIA3Automation)FrameworkAutomationElement.Automation, nativeItem);
         }
     }
 

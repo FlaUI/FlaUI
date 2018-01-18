@@ -18,7 +18,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Creates a <see cref="Window"/> element.
         /// </summary>
-        public Window(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public Window(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 
@@ -84,7 +84,7 @@ namespace FlaUI.Core.AutomationElements
             if (frameworkType == FrameworkType.Win32)
             {
                 // The main menu is directly under the desktop with the name "Context" or in a few cases "System"
-                var desktop = BasicAutomationElement.Automation.GetDesktop();
+                var desktop = FrameworkAutomationElement.Automation.GetDesktop();
                 var nameCondition = ConditionFactory.ByName("Context").Or(ConditionFactory.ByName("System"));
                 var ctxMenu = desktop.FindFirstChild(cf => cf.ByControlType(ControlType.Menu).And(nameCondition)).AsMenu();
                 if (ctxMenu != null)

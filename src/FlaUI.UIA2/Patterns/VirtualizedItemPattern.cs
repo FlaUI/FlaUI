@@ -12,7 +12,7 @@ namespace FlaUI.UIA2.Patterns
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.VirtualizedItemPattern.Pattern.Id, "VirtualizedItem", AutomationObjectIds.IsVirtualizedItemPatternAvailableProperty);
 
-        public VirtualizedItemPattern(BasicAutomationElementBase basicAutomationElement, UIA.VirtualizedItemPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public VirtualizedItemPattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.VirtualizedItemPattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

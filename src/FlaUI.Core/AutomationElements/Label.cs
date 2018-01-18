@@ -10,7 +10,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Creates a <see cref="Label"/> element.
         /// </summary>
-        public Label(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public Label(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 

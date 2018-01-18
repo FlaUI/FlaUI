@@ -17,7 +17,7 @@ namespace FlaUI.UIA3.Patterns
         public static readonly EventId ElementRemovedFromSelectionEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_SelectionItem_ElementRemovedFromSelectionEventId, "ElementRemovedFromSelection");
         public static readonly EventId ElementSelectedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_SelectionItem_ElementSelectedEventId, "ElementSelected");
 
-        public SelectionItemPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationSelectionItemPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public SelectionItemPattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.IUIAutomationSelectionItemPattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

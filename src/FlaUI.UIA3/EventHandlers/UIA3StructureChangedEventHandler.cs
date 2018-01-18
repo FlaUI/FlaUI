@@ -15,8 +15,8 @@ namespace FlaUI.UIA3.EventHandlers
 
         public void HandleStructureChangedEvent(UIA.IUIAutomationElement sender, UIA.StructureChangeType changeType, int[] runtimeId)
         {
-            var basicAutomationElement = new UIA3BasicAutomationElement((UIA3Automation)Automation, sender);
-            var senderElement = new AutomationElement(basicAutomationElement);
+            var frameworkElement = new UIA3FrameworkAutomationElement((UIA3Automation)Automation, sender);
+            var senderElement = new AutomationElement(frameworkElement);
             HandleStructureChangedEvent(senderElement, (StructureChangeType)changeType, runtimeId);
         }
     }

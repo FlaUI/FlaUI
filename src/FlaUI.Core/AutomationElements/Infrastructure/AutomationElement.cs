@@ -22,27 +22,27 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
     public partial class AutomationElement : IEquatable<AutomationElement>
     {
         /// <summary>
-        /// Creates a new instance which wraps around the given <see cref="BasicAutomationElement"/>.
+        /// Creates a new instance which wraps around the given <see cref="FrameworkAutomationElement"/>.
         /// </summary>
-        /// <param name="basicAutomationElement">The <see cref="BasicAutomationElement"/> to wrap.</param>
-        public AutomationElement(BasicAutomationElementBase basicAutomationElement)
+        /// <param name="frameworkAutomationElement">The <see cref="FrameworkAutomationElement"/> to wrap.</param>
+        public AutomationElement(FrameworkAutomationElementBase frameworkAutomationElement)
         {
-            BasicAutomationElement = basicAutomationElement ?? throw new ArgumentNullException(nameof(basicAutomationElement));
+            FrameworkAutomationElement = frameworkAutomationElement ?? throw new ArgumentNullException(nameof(frameworkAutomationElement));
         }
 
         /// <summary>
-        /// Creates a new instance which wraps the <see cref="BasicAutomationElement"/> of the given <see cref="AutomationElement"/>.
+        /// Creates a new instance which wraps the <see cref="FrameworkAutomationElement"/> of the given <see cref="AutomationElement"/>.
         /// </summary>
-        /// <param name="automationElement">The <see cref="AutomationElement"/> which <see cref="BasicAutomationElement"/> should be wrapped.</param>
+        /// <param name="automationElement">The <see cref="AutomationElement"/> which <see cref="FrameworkAutomationElement"/> should be wrapped.</param>
         public AutomationElement(AutomationElement automationElement)
-            : this(automationElement?.BasicAutomationElement)
+            : this(automationElement?.FrameworkAutomationElement)
         {
         }
 
         /// <summary>
         /// Object which contains the native wrapper element (UIA2 or UIA3) for this element.
         /// </summary>
-        public BasicAutomationElementBase BasicAutomationElement { get; }
+        public FrameworkAutomationElementBase FrameworkAutomationElement { get; }
 
         /// <summary>
         /// Get the parent <see cref="AutomationElement"/>.
@@ -52,37 +52,37 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <summary>
         /// The current used automation object.
         /// </summary>
-        public AutomationBase Automation => BasicAutomationElement.Automation;
+        public AutomationBase Automation => FrameworkAutomationElement.Automation;
 
         /// <summary>
         /// Shortcut to the condition factory for the current automation.
         /// </summary>
-        public ConditionFactory ConditionFactory => BasicAutomationElement.Automation.ConditionFactory;
+        public ConditionFactory ConditionFactory => FrameworkAutomationElement.Automation.ConditionFactory;
 
         /// <summary>
         /// The current <see cref="AutomationType" /> for this element.
         /// </summary>
-        public AutomationType AutomationType => BasicAutomationElement.Automation.AutomationType;
+        public AutomationType AutomationType => FrameworkAutomationElement.Automation.AutomationType;
 
         /// <summary>
         /// Standard UIA patterns of this element.
         /// </summary>
-        public AutomationElementPatternValuesBase Patterns => BasicAutomationElement.Patterns;
+        public AutomationElementPatternValuesBase Patterns => FrameworkAutomationElement.Patterns;
 
         /// <summary>
         /// Standard UIA properties of this element.
         /// </summary>
-        public AutomationElementPropertyValues Properties => BasicAutomationElement.Properties;
+        public AutomationElementPropertyValues Properties => FrameworkAutomationElement.Properties;
 
         /// <summary>
         /// Gets the cached children for this element.
         /// </summary>
-        public AutomationElement[] CachedChildren => BasicAutomationElement.GetCachedChildren();
+        public AutomationElement[] CachedChildren => FrameworkAutomationElement.GetCachedChildren();
 
         /// <summary>
         /// Gets the cached parent for this element.
         /// </summary>
-        public AutomationElement CachedParent => BasicAutomationElement.GetCachedParent();
+        public AutomationElement CachedParent => FrameworkAutomationElement.GetCachedParent();
 
         #region Convenience properties
         /// <summary>
@@ -308,11 +308,11 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
                 var durationInMs = (int)(duration ?? TimeSpan.FromSeconds(2)).TotalMilliseconds;
                 if (blocking)
                 {
-                    BasicAutomationElement.Automation.OverlayManager.ShowBlocking(rectangle, color, durationInMs);
+                    FrameworkAutomationElement.Automation.OverlayManager.ShowBlocking(rectangle, color, durationInMs);
                 }
                 else
                 {
-                    BasicAutomationElement.Automation.OverlayManager.Show(rectangle, color, durationInMs);
+                    FrameworkAutomationElement.Automation.OverlayManager.Show(rectangle, color, durationInMs);
                 }
             }
             return this;
@@ -349,7 +349,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <exception cref="Exceptions.NoClickablePointException">Thrown when no clickable point was found</exception>
         public Shapes.Point GetClickablePoint()
         {
-            return BasicAutomationElement.GetClickablePoint();
+            return FrameworkAutomationElement.GetClickablePoint();
         }
 
         /// <summary>
@@ -359,7 +359,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <returns>True if a point was found, false otherwise</returns>
         public bool TryGetClickablePoint(out Shapes.Point point)
         {
-            return BasicAutomationElement.TryGetClickablePoint(out point);
+            return FrameworkAutomationElement.TryGetClickablePoint(out point);
         }
 
         /// <summary>
@@ -371,7 +371,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             {
                 throw new NotSupportedByFrameworkException();
             }
-            return BasicAutomationElement.RegisterEvent(@event, treeScope, action);
+            return FrameworkAutomationElement.RegisterEvent(@event, treeScope, action);
         }
 
         /// <summary>
@@ -379,7 +379,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public IAutomationPropertyChangedEventHandler RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, params PropertyId[] properties)
         {
-            return BasicAutomationElement.RegisterPropertyChangedEvent(treeScope, action, properties);
+            return FrameworkAutomationElement.RegisterPropertyChangedEvent(treeScope, action, properties);
         }
 
         /// <summary>
@@ -387,7 +387,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public IAutomationStructureChangedEventHandler RegisterStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action)
         {
-            return BasicAutomationElement.RegisterStructureChangedEvent(treeScope, action);
+            return FrameworkAutomationElement.RegisterStructureChangedEvent(treeScope, action);
         }
 
         /// <summary>
@@ -395,7 +395,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public void RemoveAutomationEventHandler(EventId @event, IAutomationEventHandler eventHandler)
         {
-            BasicAutomationElement.RemoveAutomationEventHandler(@event, eventHandler);
+            FrameworkAutomationElement.RemoveAutomationEventHandler(@event, eventHandler);
         }
 
         /// <summary>
@@ -403,7 +403,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public void RemovePropertyChangedEventHandler(IAutomationPropertyChangedEventHandler eventHandler)
         {
-            BasicAutomationElement.RemovePropertyChangedEventHandler(eventHandler);
+            FrameworkAutomationElement.RemovePropertyChangedEventHandler(eventHandler);
         }
 
         /// <summary>
@@ -411,7 +411,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public void RemoveStructureChangedEventHandler(IAutomationStructureChangedEventHandler eventHandler)
         {
-            BasicAutomationElement.RemoveStructureChangedEventHandler(eventHandler);
+            FrameworkAutomationElement.RemoveStructureChangedEventHandler(eventHandler);
         }
 
         /// <summary>
@@ -435,7 +435,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
             {
                 throw new ArgumentException("Pattern doesn't have an AvailabilityProperty");
             }
-            var success = BasicAutomationElement.TryGetPropertyValue(pattern.AvailabilityProperty, out bool isPatternAvailable);
+            var success = FrameworkAutomationElement.TryGetPropertyValue(pattern.AvailabilityProperty, out bool isPatternAvailable);
             return success && isPatternAvailable;
         }
 
@@ -445,7 +445,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public PatternId[] GetSupportedPatternsDirect()
         {
-            return BasicAutomationElement.GetSupportedPatterns();
+            return FrameworkAutomationElement.GetSupportedPatterns();
         }
 
         /// <summary>
@@ -463,7 +463,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         public PropertyId[] GetSupportedPropertiesDirect()
         {
-            return BasicAutomationElement.GetSupportedProperties();
+            return FrameworkAutomationElement.GetSupportedProperties();
         }
 
         /// <summary>
@@ -483,7 +483,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <returns>The metadata.</returns>
         public object GetCurrentMetadataValue(PropertyId targetId, int metadataId)
         {
-            return BasicAutomationElement.GetCurrentMetadataValue(targetId, metadataId);
+            return FrameworkAutomationElement.GetCurrentMetadataValue(targetId, metadataId);
         }
 
         /// <summary>
@@ -503,7 +503,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <inheritdoc />
         public override int GetHashCode()
         {
-            return BasicAutomationElement?.GetHashCode() ?? 0;
+            return FrameworkAutomationElement?.GetHashCode() ?? 0;
         }
 
         /// <summary>
@@ -561,7 +561,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// </summary>
         protected virtual void SetFocus()
         {
-            BasicAutomationElement.SetFocus();
+            FrameworkAutomationElement.SetFocus();
         }
     }
 }

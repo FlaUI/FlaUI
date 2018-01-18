@@ -13,7 +13,7 @@ namespace FlaUI.Core.AutomationElements.PatternElements
         /// <summary>
         /// Creates an element with a <see cref="ITogglePattern"/>.
         /// </summary>
-        public ToggleAutomationElement(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public ToggleAutomationElement(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 

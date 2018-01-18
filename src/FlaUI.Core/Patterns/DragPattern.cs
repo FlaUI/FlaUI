@@ -38,7 +38,7 @@ namespace FlaUI.Core.Patterns
         private AutomationProperty<bool> _isGrabbed;
         private AutomationProperty<AutomationElement[]> _grabbedItems;
 
-        protected DragPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected DragPatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

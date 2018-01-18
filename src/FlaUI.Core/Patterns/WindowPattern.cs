@@ -47,7 +47,7 @@ namespace FlaUI.Core.Patterns
         private AutomationProperty<WindowInteractionState> _windowInteractionState;
         private AutomationProperty<WindowVisualState> _windowVisualState;
 
-        protected WindowPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected WindowPatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

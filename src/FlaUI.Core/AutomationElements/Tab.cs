@@ -13,7 +13,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Creates a <see cref="Tab"/> element.
         /// </summary>
-        public Tab(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public Tab(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 

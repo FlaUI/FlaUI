@@ -47,12 +47,12 @@ namespace FlaUI.UIA2.Converters
             {
                 return null;
             }
-            var basicElement = automationElement.BasicAutomationElement as UIA2BasicAutomationElement;
-            if (basicElement == null)
+            var frameworkElement = automationElement.FrameworkAutomationElement as UIA2FrameworkAutomationElement;
+            if (frameworkElement == null)
             {
                 throw new Exception("Element is not an UI2 element");
             }
-            return basicElement.NativeElement;
+            return frameworkElement.NativeElement;
         }
     }
 }

@@ -63,14 +63,14 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         private AutomationProperty<int> _sizeOfSet;
         private AutomationProperty<VisualEffects> _visualEffects;
 
-        public AutomationElementPropertyValues(BasicAutomationElementBase basicAutomationElement)
+        public AutomationElementPropertyValues(FrameworkAutomationElementBase frameworkAutomationElement)
         {
-            BasicAutomationElement = basicAutomationElement;
+            FrameworkAutomationElement = frameworkAutomationElement;
         }
 
-        private BasicAutomationElementBase BasicAutomationElement { get; }
+        private FrameworkAutomationElementBase FrameworkAutomationElement { get; }
 
-        private AutomationBase Automation => BasicAutomationElement.Automation;
+        private AutomationBase Automation => FrameworkAutomationElement.Automation;
 
         private IAutomationElementProperties Properties => Automation.PropertyLibrary.Element;
 
@@ -303,7 +303,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
 
         private AutomationProperty<T> GetOrCreate<T>(ref AutomationProperty<T> val, PropertyId propertyId)
         {
-            return val ?? (val = new AutomationProperty<T>(propertyId, BasicAutomationElement));
+            return val ?? (val = new AutomationProperty<T>(propertyId, FrameworkAutomationElement));
         }
     }
 }

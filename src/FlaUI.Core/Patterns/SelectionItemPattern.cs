@@ -36,7 +36,7 @@ namespace FlaUI.Core.Patterns
         private AutomationProperty<bool> _isSelected;
         private AutomationProperty<AutomationElement> _selectionContainer;
 
-        protected SelectionItemPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected SelectionItemPatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

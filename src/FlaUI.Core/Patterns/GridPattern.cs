@@ -26,7 +26,7 @@ namespace FlaUI.Core.Patterns
         private AutomationProperty<int> _columnCount;
         private AutomationProperty<int> _rowCount;
 
-        protected GridPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected GridPatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

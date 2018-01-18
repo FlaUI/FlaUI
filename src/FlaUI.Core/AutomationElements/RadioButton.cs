@@ -12,7 +12,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Creates a <see cref="RadioButton"/> element.
         /// </summary>
-        public RadioButton(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public RadioButton(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 

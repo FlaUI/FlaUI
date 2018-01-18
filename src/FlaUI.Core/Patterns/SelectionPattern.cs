@@ -33,7 +33,7 @@ namespace FlaUI.Core.Patterns
         private AutomationProperty<bool> _isSelectionRequired;
         private AutomationProperty<AutomationElement[]> _selection;
 
-        protected SelectionPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected SelectionPatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

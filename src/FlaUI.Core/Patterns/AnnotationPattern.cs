@@ -34,7 +34,7 @@ namespace FlaUI.Core.Patterns
         private AutomationProperty<string> _dateTime;
         private AutomationProperty<AutomationElement> _target;
 
-        protected AnnotationPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected AnnotationPatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
 

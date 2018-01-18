@@ -45,11 +45,11 @@ namespace FlaUI.Core
         /// Create the property object.
         /// </summary>
         /// <param name="propertyId">The <see cref="PropertyId"/> for this property object.</param>
-        /// <param name="basicAutomationElement">The <see cref="BasicAutomationElement"/> for this property object.</param>
-        public AutomationProperty(PropertyId propertyId, BasicAutomationElementBase basicAutomationElement)
+        /// <param name="frameworkAutomationElement">The <see cref="FrameworkAutomationElement"/> for this property object.</param>
+        public AutomationProperty(PropertyId propertyId, FrameworkAutomationElementBase frameworkAutomationElement)
         {
             PropertyId = propertyId;
-            BasicAutomationElement = basicAutomationElement;
+            FrameworkAutomationElement = frameworkAutomationElement;
         }
 
         /// <summary>
@@ -58,12 +58,12 @@ namespace FlaUI.Core
         protected PropertyId PropertyId { get; }
 
         /// <summary>
-        /// The <see cref="BasicAutomationElement"/> where this property object belongs to.
+        /// The <see cref="FrameworkAutomationElement"/> where this property object belongs to.
         /// </summary>
-        protected BasicAutomationElementBase BasicAutomationElement { get; }
+        protected FrameworkAutomationElementBase FrameworkAutomationElement { get; }
 
         /// <inheritdoc />
-        public TVal Value => BasicAutomationElement.GetPropertyValue<TVal>(PropertyId);
+        public TVal Value => FrameworkAutomationElement.GetPropertyValue<TVal>(PropertyId);
 
         /// <inheritdoc />
         public TVal ValueOrDefault
@@ -78,7 +78,7 @@ namespace FlaUI.Core
         /// <inheritdoc />
         public bool TryGetValue(out TVal value)
         {
-            return BasicAutomationElement.TryGetPropertyValue(PropertyId, out value);
+            return FrameworkAutomationElement.TryGetPropertyValue(PropertyId, out value);
         }
 
         /// <inheritdoc />

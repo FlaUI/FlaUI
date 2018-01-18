@@ -16,9 +16,9 @@ namespace FlaUI.UIA3.Patterns
 
         private readonly SelectionPattern _selectionPattern;
 
-        public Selection2Pattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationSelectionPattern2 nativePattern) : base(basicAutomationElement, nativePattern)
+        public Selection2Pattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.IUIAutomationSelectionPattern2 nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
-            _selectionPattern = new SelectionPattern(basicAutomationElement, nativePattern);
+            _selectionPattern = new SelectionPattern(frameworkAutomationElement, nativePattern);
         }
     }
 

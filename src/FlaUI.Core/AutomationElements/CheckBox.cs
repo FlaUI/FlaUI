@@ -10,7 +10,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Creates a <see cref="CheckBox"/> element.
         /// </summary>
-        public CheckBox(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public CheckBox(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 

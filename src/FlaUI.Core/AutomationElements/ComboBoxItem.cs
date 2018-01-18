@@ -10,7 +10,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Creates a <see cref="ComboBoxItem"/> element.
         /// </summary>
-        public ComboBoxItem(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public ComboBoxItem(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 
@@ -32,7 +32,7 @@ namespace FlaUI.Core.AutomationElements
                         return rawElement.Properties.Name.Value;
                     }
                 }
-                return BasicAutomationElement.Properties.Name.Value;
+                return FrameworkAutomationElement.Properties.Name.Value;
             }
         }
     }
