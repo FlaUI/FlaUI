@@ -39,7 +39,7 @@ namespace FlaUI.UIA2.Patterns
         }
     }
 
-    public class WindowPatternProperties : IWindowPatternProperties
+    public class WindowPatternPropertyIds : IWindowPatternPropertyIds
     {
         public PropertyId CanMaximize => WindowPattern.CanMaximizeProperty;
 
@@ -54,7 +54,7 @@ namespace FlaUI.UIA2.Patterns
         public PropertyId WindowVisualState => WindowPattern.WindowVisualStateProperty;
     }
 
-    public class WindowPatternEvents : IWindowPatternEvents
+    public class WindowPatternEventIds : IWindowPatternEventIds
     {
         public EventId WindowClosedEvent => WindowPattern.WindowClosedEvent;
 

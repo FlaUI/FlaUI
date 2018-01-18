@@ -30,7 +30,7 @@ namespace FlaUI.UIA3.Patterns
         }
     }
 
-    public class SynchronizedInputPatternEvents : ISynchronizedInputPatternEvents
+    public class SynchronizedInputPatternEventIds : ISynchronizedInputPatternEventIds
     {
         public EventId DiscardedEvent => SynchronizedInputPattern.DiscardedEvent;
         public EventId ReachedOtherElementEvent => SynchronizedInputPattern.ReachedOtherElementEvent;

@@ -12,7 +12,7 @@ namespace FlaUI.UIA2.Patterns
         public PropertyId Target => PropertyId.NotSupportedByFramework;
     }
 
-    public class DragPatternProperties : IDragPatternProperties
+    public class DragPatternPropertyIds : IDragPatternPropertyIds
     {
         public PropertyId DropEffect => PropertyId.NotSupportedByFramework;
         public PropertyId DropEffects => PropertyId.NotSupportedByFramework;
@@ -20,20 +20,20 @@ namespace FlaUI.UIA2.Patterns
         public PropertyId GrabbedItems => PropertyId.NotSupportedByFramework;
     }
 
-    public class DragPatternEvents : IDragPatternEvents
+    public class DragPatternEventIds : IDragPatternEventIds
     {
         public EventId DragCancelEvent => EventId.NotSupportedByFramework;
         public EventId DragCompleteEvent => EventId.NotSupportedByFramework;
         public EventId DragStartEvent => EventId.NotSupportedByFramework;
     }
 
-    public class DropTargetPatternProperties : IDropTargetPatternProperties
+    public class DropTargetPatternPropertyIds : IDropTargetPatternPropertyIds
     {
         public PropertyId DropTargetEffect => PropertyId.NotSupportedByFramework;
         public PropertyId DropTargetEffects => PropertyId.NotSupportedByFramework;
     }
 
-    public class DropTargetPatternEvents : IDropTargetPatternEvents
+    public class DropTargetPatternEventIds : IDropTargetPatternEventIds
     {
         public EventId DragEnterEvent => EventId.NotSupportedByFramework;
         public EventId DragLeaveEvent => EventId.NotSupportedByFramework;
@@ -54,7 +54,7 @@ namespace FlaUI.UIA2.Patterns
         public PropertyId Value => PropertyId.NotSupportedByFramework;
     }
 
-    public class Selection2PatternProperties : SelectionPatternProperties, ISelection2PatternProperties
+    public class Selection2PatternPropertyIdIds : SelectionPatternPropertyIds, ISelection2PatternPropertyIdIds
     {
         public PropertyId CurrentSelectedItem => PropertyId.NotSupportedByFramework;
         public PropertyId FirstSelectedItem => PropertyId.NotSupportedByFramework;
@@ -80,7 +80,7 @@ namespace FlaUI.UIA2.Patterns
         public PropertyId StyleName => PropertyId.NotSupportedByFramework;
     }
 
-    public class TextEditPatternEvents : TextPatternEvents, ITextEditPatternEvents
+    public class TextEditPatternEventIdIds : TextPatternEventIds, ITextEditPatternEventIds
     {
         public EventId ConversionTargetChangedEvent => EventId.NotSupportedByFramework;
         public EventId TextChangedEvent2 => EventId.NotSupportedByFramework;

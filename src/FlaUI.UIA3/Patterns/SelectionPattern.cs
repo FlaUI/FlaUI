@@ -20,14 +20,14 @@ namespace FlaUI.UIA3.Patterns
         }
     }
 
-    public class SelectionPatternProperties : ISelectionPatternProperties
+    public class SelectionPatternPropertyIds : ISelectionPatternPropertyIds
     {
         public PropertyId CanSelectMultiple => SelectionPattern.CanSelectMultipleProperty;
         public PropertyId IsSelectionRequired => SelectionPattern.IsSelectionRequiredProperty;
         public PropertyId Selection => SelectionPattern.SelectionProperty;
     }
 
-    public class SelectionPatternEvents : ISelectionPatternEvents
+    public class SelectionPatternEventIds : ISelectionPatternEventIds
     {
         public EventId InvalidatedEvent => SelectionPattern.InvalidatedEvent;
     }

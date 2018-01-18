@@ -32,14 +32,14 @@ namespace FlaUI.UIA2.Patterns
         }
     }
 
-    public class SynchronizedInputPatternEvents : ISynchronizedInputPatternEvents
+    public class SynchronizedInputPatternEventIds : ISynchronizedInputPatternEventIds
     {
         public EventId DiscardedEvent => SynchronizedInputPattern.DiscardedEvent;
         public EventId ReachedOtherElementEvent => SynchronizedInputPattern.ReachedOtherElementEvent;
         public EventId ReachedTargetEvent => SynchronizedInputPattern.ReachedTargetEvent;
     }
 #else
-    public class SynchronizedInputPatternEvents : ISynchronizedInputPatternEvents
+    public class SynchronizedInputPatternEventIds : ISynchronizedInputPatternEventIds
     {
         public EventId DiscardedEvent => EventId.NotSupportedByFramework;
         public EventId ReachedOtherElementEvent => EventId.NotSupportedByFramework;

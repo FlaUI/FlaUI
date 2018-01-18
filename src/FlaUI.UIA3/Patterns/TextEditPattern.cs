@@ -21,7 +21,7 @@ namespace FlaUI.UIA3.Patterns
 
         public UIA.IUIAutomationTextEditPattern ExtendedNativePattern { get; }
 
-        ITextEditPatternEvents ITextEditPattern.Events => Automation.EventLibrary.TextEdit;
+        ITextEditPatternEventIds ITextEditPattern.EventIds => Automation.EventLibrary.TextEdit;
 
         public ITextRange GetActiveComposition()
         {
@@ -36,7 +36,7 @@ namespace FlaUI.UIA3.Patterns
         }
     }
 
-    public class TextEditPatternEvents : TextPatternEvents, ITextEditPatternEvents
+    public class TextEditPatternEventIdIds : TextPatternEventIds, ITextEditPatternEventIds
     {
         public EventId ConversionTargetChangedEvent => TextEditPattern.ConversionTargetChangedEvent;
         public EventId TextChangedEvent2 => TextEditPattern.TextChangedEvent2;

@@ -11,7 +11,7 @@ namespace FlaUI.Core.Patterns
         /// <summary>
         /// Gets the supported events by this pattern.
         /// </summary>
-        IInvokePatternEvents Events { get; }
+        IInvokePatternEventIds EventIds { get; }
 
         /// <summary>
         /// Invokes the element.
@@ -22,7 +22,7 @@ namespace FlaUI.Core.Patterns
     /// <summary>
     /// Interface for invoke pattern events.
     /// </summary>
-    public interface IInvokePatternEvents
+    public interface IInvokePatternEventIds
     {
         /// <summary>
         /// Gets the invoked event.
@@ -45,7 +45,7 @@ namespace FlaUI.Core.Patterns
         }
 
         /// <inheritdoc />
-        public IInvokePatternEvents Events => Automation.EventLibrary.Invoke;
+        public IInvokePatternEventIds EventIds => Automation.EventLibrary.Invoke;
 
         /// <inheritdoc />
         public abstract void Invoke();

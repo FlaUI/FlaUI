@@ -6,13 +6,13 @@ namespace FlaUI.Core.Patterns
 {
     public interface ISynchronizedInputPattern : IPattern
     {
-        ISynchronizedInputPatternEvents Events { get; }
+        ISynchronizedInputPatternEventIds EventIds { get; }
 
         void Cancel();
         void StartListening(SynchronizedInputType inputType);
     }
 
-    public interface ISynchronizedInputPatternEvents
+    public interface ISynchronizedInputPatternEventIds
     {
         EventId DiscardedEvent { get; }
         EventId ReachedOtherElementEvent { get; }
@@ -26,7 +26,7 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public ISynchronizedInputPatternEvents Events => Automation.EventLibrary.SynchronizedInput;
+        public ISynchronizedInputPatternEventIds EventIds => Automation.EventLibrary.SynchronizedInput;
 
         public abstract void Cancel();
         public abstract void StartListening(SynchronizedInputType inputType);

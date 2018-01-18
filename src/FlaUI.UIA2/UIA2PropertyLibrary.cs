@@ -9,12 +9,12 @@ namespace FlaUI.UIA2
     {
         public UIA2PropertyLibrary()
         {
-            PatternAvailability = new UIA2AutomationElementPatternAvailabilityProperties();
-            Element = new UIA2AutomationElementProperties();
+            PatternAvailability = new UIA2AutomationElementPatternAvailabilityPropertyIds();
+            Element = new UIA2AutomationElementPropertyIds();
             Annotation = new AnnotationPatternProperties();
             Dock = new DockPatternProperties();
-            Drag = new DragPatternProperties();
-            DropTarget = new DropTargetPatternProperties();
+            Drag = new DragPatternPropertyIds();
+            DropTarget = new DropTargetPatternPropertyIds();
             ExpandCollapse = new ExpandCollapsePatternProperties();
             GridItem = new GridItemPatternProperties();
             Grid = new GridPatternProperties();
@@ -22,9 +22,9 @@ namespace FlaUI.UIA2
             MultipleView = new MultipleViewPatternProperties();
             RangeValue = new RangeValuePatternProperties();
             Scroll = new ScrollPatternProperties();
-            SelectionItem = new SelectionItemPatternProperties();
-            Selection = new SelectionPatternProperties();
-            Selection2 = new Selection2PatternProperties();
+            SelectionItem = new SelectionItemPatternPropertyIds();
+            Selection = new SelectionPatternPropertyIds();
+            Selection2 = new Selection2PatternPropertyIdIds();
             SpreadsheetItem = new SpreadsheetItemPatternProperties();
             Styles = new StylesPatternProperties();
             TableItem = new TableItemPatternProperties();
@@ -33,15 +33,15 @@ namespace FlaUI.UIA2
             Transform2 = new Transform2PatternProperties();
             Transform = new TransformPatternProperties();
             Value = new ValuePatternProperties();
-            Window = new WindowPatternProperties();
+            Window = new WindowPatternPropertyIds();
         }
 
-        public IAutomationElementPatternAvailabilityProperties PatternAvailability { get; }
-        public IAutomationElementProperties Element { get; }
+        public IAutomationElementPatternAvailabilityPropertyIds PatternAvailability { get; }
+        public IAutomationElementPropertyIds Element { get; }
         public IAnnotationPatternProperties Annotation { get; }
         public IDockPatternProperties Dock { get; }
-        public IDragPatternProperties Drag { get; }
-        public IDropTargetPatternProperties DropTarget { get; }
+        public IDragPatternPropertyIds Drag { get; }
+        public IDropTargetPatternPropertyIds DropTarget { get; }
         public IExpandCollapsePatternProperties ExpandCollapse { get; }
         public IGridItemPatternProperties GridItem { get; }
         public IGridPatternProperties Grid { get; }
@@ -49,9 +49,9 @@ namespace FlaUI.UIA2
         public IMultipleViewPatternProperties MultipleView { get; }
         public IRangeValuePatternProperties RangeValue { get; }
         public IScrollPatternProperties Scroll { get; }
-        public ISelectionItemPatternProperties SelectionItem { get; }
-        public ISelectionPatternProperties Selection { get; }
-        public ISelection2PatternProperties Selection2 { get; }
+        public ISelectionItemPatternPropertyIds SelectionItem { get; }
+        public ISelectionPatternPropertyIds Selection { get; }
+        public ISelection2PatternPropertyIdIds Selection2 { get; }
         public ISpreadsheetItemPatternProperties SpreadsheetItem { get; }
         public IStylesPatternProperties Styles { get; }
         public ITableItemPatternProperties TableItem { get; }
@@ -60,6 +60,6 @@ namespace FlaUI.UIA2
         public ITransform2PatternProperties Transform2 { get; }
         public ITransformPatternProperties Transform { get; }
         public IValuePatternProperties Value { get; }
-        public IWindowPatternProperties Window { get; }
+        public IWindowPatternPropertyIds Window { get; }
     }
 }

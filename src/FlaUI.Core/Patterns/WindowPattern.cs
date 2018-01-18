@@ -6,8 +6,8 @@ namespace FlaUI.Core.Patterns
 {
     public interface IWindowPattern : IPattern
     {
-        IWindowPatternProperties Properties { get; }
-        IWindowPatternEvents Events { get; }
+        IWindowPatternPropertyIds PropertyIds { get; }
+        IWindowPatternEventIds EventIds { get; }
 
         AutomationProperty<bool> CanMaximize { get; }
         AutomationProperty<bool> CanMinimize { get; }
@@ -21,7 +21,7 @@ namespace FlaUI.Core.Patterns
         bool WaitForInputIdle(int milliseconds);
     }
 
-    public interface IWindowPatternProperties
+    public interface IWindowPatternPropertyIds
     {
         PropertyId CanMaximize { get; }
         PropertyId CanMinimize { get; }
@@ -31,7 +31,7 @@ namespace FlaUI.Core.Patterns
         PropertyId WindowVisualState { get; }
     }
 
-    public interface IWindowPatternEvents
+    public interface IWindowPatternEventIds
     {
         EventId WindowClosedEvent { get; }
         EventId WindowOpenedEvent { get; }
@@ -51,15 +51,15 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public IWindowPatternProperties Properties => Automation.PropertyLibrary.Window;
-        public IWindowPatternEvents Events => Automation.EventLibrary.Window;
+        public IWindowPatternPropertyIds PropertyIds => Automation.PropertyLibrary.Window;
+        public IWindowPatternEventIds EventIds => Automation.EventLibrary.Window;
 
-        public AutomationProperty<bool> CanMaximize => GetOrCreate(ref _canMaximize, Properties.CanMaximize);
-        public AutomationProperty<bool> CanMinimize => GetOrCreate(ref _canMinimize, Properties.CanMinimize);
-        public AutomationProperty<bool> IsModal => GetOrCreate(ref _isModal, Properties.IsModal);
-        public AutomationProperty<bool> IsTopmost => GetOrCreate(ref _isTopmost, Properties.IsTopmost);
-        public AutomationProperty<WindowInteractionState> WindowInteractionState => GetOrCreate(ref _windowInteractionState, Properties.WindowInteractionState);
-        public AutomationProperty<WindowVisualState> WindowVisualState => GetOrCreate(ref _windowVisualState, Properties.WindowVisualState);
+        public AutomationProperty<bool> CanMaximize => GetOrCreate(ref _canMaximize, PropertyIds.CanMaximize);
+        public AutomationProperty<bool> CanMinimize => GetOrCreate(ref _canMinimize, PropertyIds.CanMinimize);
+        public AutomationProperty<bool> IsModal => GetOrCreate(ref _isModal, PropertyIds.IsModal);
+        public AutomationProperty<bool> IsTopmost => GetOrCreate(ref _isTopmost, PropertyIds.IsTopmost);
+        public AutomationProperty<WindowInteractionState> WindowInteractionState => GetOrCreate(ref _windowInteractionState, PropertyIds.WindowInteractionState);
+        public AutomationProperty<WindowVisualState> WindowVisualState => GetOrCreate(ref _windowVisualState, PropertyIds.WindowVisualState);
 
         public abstract void Close();
         public abstract void SetWindowVisualState(WindowVisualState state);

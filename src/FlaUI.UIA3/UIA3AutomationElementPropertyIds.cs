@@ -4,7 +4,7 @@ using FlaUI.UIA3.Identifiers;
 
 namespace FlaUI.UIA3
 {
-    public class UIA3AutomationElementProperties : IAutomationElementProperties
+    public class UIA3AutomationElementPropertyIds : IAutomationElementPropertyIds
     {
         public PropertyId AcceleratorKey => AutomationObjectIds.AcceleratorKeyProperty;
         public PropertyId AccessKey => AutomationObjectIds.AccessKeyProperty;

@@ -26,7 +26,7 @@ namespace FlaUI.Core
         /// <summary>
         /// Provides access to all <see cref="PropertyId"/>s.
         /// </summary>
-        public IAutomationElementProperties PropertyLibrary => Automation.PropertyLibrary.Element;
+        public IAutomationElementPropertyIds PropertyIdLibrary => Automation.PropertyLibrary.Element;
 
         /// <summary>
         /// Underlying <see cref="AutomationBase" /> object where this element belongs to

@@ -37,9 +37,9 @@ namespace FlaUI.UIA3.Patterns
     }
 
     /// <summary>
-    /// Class for UIA3 <see cref="IInvokePatternEvents"/>.
+    /// Class for UIA3 <see cref="IInvokePatternEventIds"/>.
     /// </summary>
-    public class InvokePatternEvents : IInvokePatternEvents
+    public class InvokePatternEventIds : IInvokePatternEventIds
     {
         /// <inheritdoc />
         public EventId InvokedEvent => InvokePattern.InvokedEvent;

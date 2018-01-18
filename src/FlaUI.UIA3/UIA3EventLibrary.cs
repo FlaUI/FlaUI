@@ -9,27 +9,27 @@ namespace FlaUI.UIA3
     {
         public UIA3EventLibrary()
         {
-            Element = new UIA3AutomationElementEvents();
-            Drag = new DragPatternEvents();
-            DropTarget = new DropTargetPatternEvents();
-            Invoke = new InvokePatternEvents();
-            SelectionItem = new SelectionItemPatternEvents();
-            Selection = new SelectionPatternEvents();
-            SynchronizedInput = new SynchronizedInputPatternEvents();
-            TextEdit = new TextEditPatternEvents();
-            Text = new TextPatternEvents();
-            Window = new WindowPatternEvents();
+            Element = new UIA3AutomationElementEventIds();
+            Drag = new DragPatternEventIds();
+            DropTarget = new DropTargetPatternEventIds();
+            Invoke = new InvokePatternEventIds();
+            SelectionItem = new SelectionItemPatternEventIds();
+            Selection = new SelectionPatternEventIds();
+            SynchronizedInput = new SynchronizedInputPatternEventIds();
+            TextEdit = new TextEditPatternEventIdIds();
+            Text = new TextPatternEventIds();
+            Window = new WindowPatternEventIds();
         }
 
-        public IAutomationElementEvents Element { get; }
-        public IDragPatternEvents Drag { get; }
-        public IDropTargetPatternEvents DropTarget { get; }
-        public IInvokePatternEvents Invoke { get; }
-        public ISelectionItemPatternEvents SelectionItem { get; }
-        public ISelectionPatternEvents Selection { get; }
-        public ISynchronizedInputPatternEvents SynchronizedInput { get; }
-        public ITextEditPatternEvents TextEdit { get; }
-        public ITextPatternEvents Text { get; }
-        public IWindowPatternEvents Window { get; }
+        public IAutomationElementEventIds Element { get; }
+        public IDragPatternEventIds Drag { get; }
+        public IDropTargetPatternEventIds DropTarget { get; }
+        public IInvokePatternEventIds Invoke { get; }
+        public ISelectionItemPatternEventIds SelectionItem { get; }
+        public ISelectionPatternEventIds Selection { get; }
+        public ISynchronizedInputPatternEventIds SynchronizedInput { get; }
+        public ITextEditPatternEventIds TextEdit { get; }
+        public ITextPatternEventIds Text { get; }
+        public IWindowPatternEventIds Window { get; }
     }
 }

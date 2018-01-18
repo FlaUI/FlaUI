@@ -37,14 +37,14 @@ namespace FlaUI.UIA3.Patterns
         }
     }
 
-    public class SelectionItemPatternProperties : ISelectionItemPatternProperties
+    public class SelectionItemPatternPropertyIds : ISelectionItemPatternPropertyIds
     {
         public PropertyId IsSelected => SelectionItemPattern.IsSelectedProperty;
 
         public PropertyId SelectionContainer => SelectionItemPattern.SelectionContainerProperty;
     }
 
-    public class SelectionItemPatternEvents : ISelectionItemPatternEvents
+    public class SelectionItemPatternEventIds : ISelectionItemPatternEventIds
     {
         public EventId ElementAddedToSelectionEvent => SelectionItemPattern.ElementAddedToSelectionEvent;
 

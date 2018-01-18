@@ -6,22 +6,22 @@ namespace FlaUI.Core.Patterns
 {
     public interface ISelectionPattern : IPattern
     {
-        ISelectionPatternProperties Properties { get; }
-        ISelectionPatternEvents Events { get; }
+        ISelectionPatternPropertyIds PropertyIds { get; }
+        ISelectionPatternEventIds EventIds { get; }
 
         AutomationProperty<bool> CanSelectMultiple { get; }
         AutomationProperty<bool> IsSelectionRequired { get; }
         AutomationProperty<AutomationElement[]> Selection { get; }
     }
 
-    public interface ISelectionPatternProperties
+    public interface ISelectionPatternPropertyIds
     {
         PropertyId CanSelectMultiple { get; }
         PropertyId IsSelectionRequired { get; }
         PropertyId Selection { get; }
     }
 
-    public interface ISelectionPatternEvents
+    public interface ISelectionPatternEventIds
     {
         EventId InvalidatedEvent { get; }
     }
@@ -37,11 +37,11 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public ISelectionPatternProperties Properties => Automation.PropertyLibrary.Selection;
-        public ISelectionPatternEvents Events => Automation.EventLibrary.Selection;
+        public ISelectionPatternPropertyIds PropertyIds => Automation.PropertyLibrary.Selection;
+        public ISelectionPatternEventIds EventIds => Automation.EventLibrary.Selection;
 
-        public AutomationProperty<bool> CanSelectMultiple => GetOrCreate(ref _canSelectMultiple, Properties.CanSelectMultiple);
-        public AutomationProperty<bool> IsSelectionRequired => GetOrCreate(ref _isSelectionRequired, Properties.IsSelectionRequired);
-        public AutomationProperty<AutomationElement[]> Selection => GetOrCreate(ref _selection, Properties.Selection);
+        public AutomationProperty<bool> CanSelectMultiple => GetOrCreate(ref _canSelectMultiple, PropertyIds.CanSelectMultiple);
+        public AutomationProperty<bool> IsSelectionRequired => GetOrCreate(ref _isSelectionRequired, PropertyIds.IsSelectionRequired);
+        public AutomationProperty<AutomationElement[]> Selection => GetOrCreate(ref _selection, PropertyIds.Selection);
     }
 }

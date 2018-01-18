@@ -64,7 +64,7 @@ namespace FlaUI.UIA2.Patterns
         }
     }
 
-    public class TextPatternEvents : ITextPatternEvents
+    public class TextPatternEventIds : ITextPatternEventIds
     {
         public EventId TextChangedEvent => TextPattern.TextChangedEvent;
         public EventId TextSelectionChangedEvent => TextPattern.TextSelectionChangedEvent;

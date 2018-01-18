@@ -4,7 +4,7 @@ using FlaUI.UIA2.Identifiers;
 
 namespace FlaUI.UIA2
 {
-    public partial class UIA2AutomationElementEvents : IAutomationElementEvents
+    public partial class UIA2AutomationElementEventIds : IAutomationElementEventIds
     {
         public EventId AsyncContentLoadedEvent => AutomationObjectIds.AsyncContentLoadedEvent;
         public EventId ChangesEvent => EventId.NotSupportedByFramework;
@@ -26,7 +26,7 @@ namespace FlaUI.UIA2
     /// <summary>
     /// Partial class with additions from .NET 4.7.1
     /// </summary>
-    public partial class UIA2AutomationElementEvents
+    public partial class UIA2AutomationElementEventIds
     {
 #if NET471
         public EventId LiveRegionChangedEvent => AutomationObjectIds.LiveRegionChangedEvent;

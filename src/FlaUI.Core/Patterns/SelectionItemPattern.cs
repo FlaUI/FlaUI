@@ -6,8 +6,8 @@ namespace FlaUI.Core.Patterns
 {
     public interface ISelectionItemPattern : IPattern
     {
-        ISelectionItemPatternProperties Properties { get; }
-        ISelectionItemPatternEvents Events { get; }
+        ISelectionItemPatternPropertyIds PropertyIds { get; }
+        ISelectionItemPatternEventIds EventIds { get; }
 
         AutomationProperty<bool> IsSelected { get; }
         AutomationProperty<AutomationElement> SelectionContainer { get; }
@@ -17,13 +17,13 @@ namespace FlaUI.Core.Patterns
         void Select();
     }
 
-    public interface ISelectionItemPatternProperties
+    public interface ISelectionItemPatternPropertyIds
     {
         PropertyId IsSelected { get; }
         PropertyId SelectionContainer { get; }
     }
 
-    public interface ISelectionItemPatternEvents
+    public interface ISelectionItemPatternEventIds
     {
         EventId ElementAddedToSelectionEvent { get; }
         EventId ElementRemovedFromSelectionEvent { get; }
@@ -40,11 +40,11 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public ISelectionItemPatternProperties Properties => Automation.PropertyLibrary.SelectionItem;
-        public ISelectionItemPatternEvents Events => Automation.EventLibrary.SelectionItem;
+        public ISelectionItemPatternPropertyIds PropertyIds => Automation.PropertyLibrary.SelectionItem;
+        public ISelectionItemPatternEventIds EventIds => Automation.EventLibrary.SelectionItem;
 
-        public AutomationProperty<bool> IsSelected => GetOrCreate(ref _isSelected, Properties.IsSelected);
-        public AutomationProperty<AutomationElement> SelectionContainer => GetOrCreate(ref _selectionContainer, Properties.SelectionContainer);
+        public AutomationProperty<bool> IsSelected => GetOrCreate(ref _isSelected, PropertyIds.IsSelected);
+        public AutomationProperty<AutomationElement> SelectionContainer => GetOrCreate(ref _selectionContainer, PropertyIds.SelectionContainer);
 
         public abstract void AddToSelection();
         public abstract void RemoveFromSelection();

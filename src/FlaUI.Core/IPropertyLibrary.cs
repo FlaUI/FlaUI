@@ -5,12 +5,12 @@ namespace FlaUI.Core
 {
     public interface IPropertyLibrary
     {
-        IAutomationElementPatternAvailabilityProperties PatternAvailability { get; }
-        IAutomationElementProperties Element { get; }
+        IAutomationElementPatternAvailabilityPropertyIds PatternAvailability { get; }
+        IAutomationElementPropertyIds Element { get; }
         IAnnotationPatternProperties Annotation { get; }
         IDockPatternProperties Dock { get; }
-        IDragPatternProperties Drag { get; }
-        IDropTargetPatternProperties DropTarget { get; }
+        IDragPatternPropertyIds Drag { get; }
+        IDropTargetPatternPropertyIds DropTarget { get; }
         IExpandCollapsePatternProperties ExpandCollapse { get; }
         IGridItemPatternProperties GridItem { get; }
         IGridPatternProperties Grid { get; }
@@ -18,9 +18,9 @@ namespace FlaUI.Core
         IMultipleViewPatternProperties MultipleView { get; }
         IRangeValuePatternProperties RangeValue { get; }
         IScrollPatternProperties Scroll { get; }
-        ISelection2PatternProperties Selection2 { get; }
-        ISelectionItemPatternProperties SelectionItem { get; }
-        ISelectionPatternProperties Selection { get; }
+        ISelection2PatternPropertyIdIds Selection2 { get; }
+        ISelectionItemPatternPropertyIds SelectionItem { get; }
+        ISelectionPatternPropertyIds Selection { get; }
         ISpreadsheetItemPatternProperties SpreadsheetItem { get; }
         IStylesPatternProperties Styles { get; }
         ITableItemPatternProperties TableItem { get; }
@@ -29,6 +29,6 @@ namespace FlaUI.Core
         ITransform2PatternProperties Transform2 { get; }
         ITransformPatternProperties Transform { get; }
         IValuePatternProperties Value { get; }
-        IWindowPatternProperties Window { get; }
+        IWindowPatternPropertyIds Window { get; }
     }
 }

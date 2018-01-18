@@ -2,7 +2,7 @@
 
 namespace FlaUI.Core.AutomationElements.Infrastructure
 {
-    public interface IAutomationElementPatternAvailabilityProperties
+    public interface IAutomationElementPatternAvailabilityPropertyIds
     {
         PropertyId IsAnnotationPatternAvailable{ get; }
         PropertyId IsDockPatternAvailable{ get; }
