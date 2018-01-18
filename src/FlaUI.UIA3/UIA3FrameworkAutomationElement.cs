@@ -15,13 +15,12 @@ using UIA = Interop.UIAutomationClient;
 
 namespace FlaUI.UIA3
 {
-    public class UIA3FrameworkAutomationElement : FrameworkAutomationElementBase
+    public partial class UIA3FrameworkAutomationElement : FrameworkAutomationElementBase
     {
         public UIA3FrameworkAutomationElement(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation)
         {
             Automation = automation;
             NativeElement = nativeElement;
-            Patterns = new UIA3AutomationElementPatternValues(this);
         }
 
         /// <summary>

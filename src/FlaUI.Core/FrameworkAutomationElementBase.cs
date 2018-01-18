@@ -12,7 +12,7 @@ namespace FlaUI.Core
     /// <summary>
     /// Base class for a framework specific automation element.
     /// </summary>
-    public abstract class FrameworkAutomationElementBase
+    public abstract partial class FrameworkAutomationElementBase
     {
         /// <summary>
         /// Create a framework automation element with the given <see cref="AutomationBase"/>.
@@ -23,11 +23,6 @@ namespace FlaUI.Core
             Automation = automation;
             Properties = new AutomationElementPropertyValues(this);
         }
-
-        /// <summary>
-        /// Gets the object which provides access to all patterns.
-        /// </summary>
-        public AutomationElementPatternValuesBase Patterns { get; protected internal set; }
 
         /// <summary>
         /// Gets the object which provides access to all properties.

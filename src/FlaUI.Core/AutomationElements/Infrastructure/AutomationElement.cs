@@ -67,7 +67,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <summary>
         /// Standard UIA patterns of this element.
         /// </summary>
-        public AutomationElementPatternValuesBase Patterns => FrameworkAutomationElement.Patterns;
+        public FrameworkAutomationElementBase.IFrameworkPatterns Patterns => FrameworkAutomationElement.Patterns;
 
         /// <summary>
         /// Standard UIA properties of this element.

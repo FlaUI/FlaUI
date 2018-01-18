@@ -1,19 +1,13 @@
-﻿using System;
-using FlaUI.Core;
+﻿using FlaUI.Core;
 using FlaUI.Core.Exceptions;
-using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
 using FlaUI.UIA2.Patterns;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2
 {
-    public class UIA2AutomationElementPatternValues : AutomationElementPatternValuesBase
+    public partial class UIA2FrameworkAutomationElement
     {
-        public UIA2AutomationElementPatternValues(UIA2FrameworkAutomationElement frameworkAutomationElement) : base(frameworkAutomationElement)
-        {
-        }
-
         protected override IAutomationPattern<IAnnotationPattern> InitializeAnnotationPattern()
         {
             throw new NotSupportedByFrameworkException();
@@ -21,8 +15,8 @@ namespace FlaUI.UIA2
 
         protected override IAutomationPattern<IDockPattern> InitializeDockPattern()
         {
-            return new AutomationPattern<IDockPattern, UIA.DockPattern>(
-                DockPattern.Pattern, FrameworkAutomationElement, (b, p) => new DockPattern(b, p));
+            return new AutomationPattern<IDockPattern, System.Windows.Automation.DockPattern>(
+                DockPattern.Pattern, this, (b, p) => new DockPattern(b, p));
         }
 
         protected override IAutomationPattern<IDragPattern> InitializeDragPattern()
@@ -37,26 +31,26 @@ namespace FlaUI.UIA2
 
         protected override IAutomationPattern<IExpandCollapsePattern> InitializeExpandCollapsePattern()
         {
-            return new AutomationPattern<IExpandCollapsePattern, UIA.ExpandCollapsePattern>(
-                ExpandCollapsePattern.Pattern, FrameworkAutomationElement, (b, p) => new ExpandCollapsePattern(b, p));
+            return new AutomationPattern<IExpandCollapsePattern, System.Windows.Automation.ExpandCollapsePattern>(
+                ExpandCollapsePattern.Pattern, this, (b, p) => new ExpandCollapsePattern(b, p));
         }
 
         protected override IAutomationPattern<IGridItemPattern> InitializeGridItemPattern()
         {
-            return new AutomationPattern<IGridItemPattern, UIA.GridItemPattern>(
-                GridItemPattern.Pattern, FrameworkAutomationElement, (b, p) => new GridItemPattern(b, p));
+            return new AutomationPattern<IGridItemPattern, System.Windows.Automation.GridItemPattern>(
+                GridItemPattern.Pattern, this, (b, p) => new GridItemPattern(b, p));
         }
 
         protected override IAutomationPattern<IGridPattern> InitializeGridPattern()
         {
-            return new AutomationPattern<IGridPattern, UIA.GridPattern>(
-                 GridPattern.Pattern, FrameworkAutomationElement, (b, p) => new GridPattern(b, p));
+            return new AutomationPattern<IGridPattern, System.Windows.Automation.GridPattern>(
+                 GridPattern.Pattern, this, (b, p) => new GridPattern(b, p));
         }
 
         protected override IAutomationPattern<IInvokePattern> InitializeInvokePattern()
         {
-            return new AutomationPattern<IInvokePattern, UIA.InvokePattern>(
-                InvokePattern.Pattern, FrameworkAutomationElement, (b, p) => new InvokePattern(b, p));
+            return new AutomationPattern<IInvokePattern, System.Windows.Automation.InvokePattern>(
+                InvokePattern.Pattern, this, (b, p) => new InvokePattern(b, p));
         }
 
         protected override IAutomationPattern<IItemContainerPattern> InitializeItemContainerPattern()
@@ -65,7 +59,7 @@ namespace FlaUI.UIA2
             throw new NotSupportedByFrameworkException();
 #else
             return new AutomationPattern<IItemContainerPattern, UIA.ItemContainerPattern>(
-                ItemContainerPattern.Pattern, FrameworkAutomationElement, (b, p) => new ItemContainerPattern(b, p));
+                ItemContainerPattern.Pattern, this, (b, p) => new ItemContainerPattern(b, p));
 #endif
         }
 
@@ -76,8 +70,8 @@ namespace FlaUI.UIA2
 
         protected override IAutomationPattern<IMultipleViewPattern> InitializeMultipleViewPattern()
         {
-            return new AutomationPattern<IMultipleViewPattern, UIA.MultipleViewPattern>(
-                MultipleViewPattern.Pattern, FrameworkAutomationElement, (b, p) => new MultipleViewPattern(b, p));
+            return new AutomationPattern<IMultipleViewPattern, System.Windows.Automation.MultipleViewPattern>(
+                MultipleViewPattern.Pattern, this, (b, p) => new MultipleViewPattern(b, p));
         }
 
         protected override IAutomationPattern<IObjectModelPattern> InitializeObjectModelPattern()
@@ -87,32 +81,37 @@ namespace FlaUI.UIA2
 
         protected override IAutomationPattern<IRangeValuePattern> InitializeRangeValuePattern()
         {
-            return new AutomationPattern<IRangeValuePattern, UIA.RangeValuePattern>(
-                RangeValuePattern.Pattern, FrameworkAutomationElement, (b, p) => new RangeValuePattern(b, p));
+            return new AutomationPattern<IRangeValuePattern, System.Windows.Automation.RangeValuePattern>(
+                RangeValuePattern.Pattern, this, (b, p) => new RangeValuePattern(b, p));
         }
 
         protected override IAutomationPattern<IScrollItemPattern> InitializeScrollItemPattern()
         {
-            return new AutomationPattern<IScrollItemPattern, UIA.ScrollItemPattern>(
-                ScrollItemPattern.Pattern, FrameworkAutomationElement, (b, p) => new ScrollItemPattern(b, p));
+            return new AutomationPattern<IScrollItemPattern, System.Windows.Automation.ScrollItemPattern>(
+                ScrollItemPattern.Pattern, this, (b, p) => new ScrollItemPattern(b, p));
         }
 
         protected override IAutomationPattern<IScrollPattern> InitializeScrollPattern()
         {
-            return new AutomationPattern<IScrollPattern, UIA.ScrollPattern>(
-                ScrollPattern.Pattern, FrameworkAutomationElement, (b, p) => new ScrollPattern(b, p));
+            return new AutomationPattern<IScrollPattern, System.Windows.Automation.ScrollPattern>(
+                ScrollPattern.Pattern, this, (b, p) => new ScrollPattern(b, p));
         }
 
         protected override IAutomationPattern<ISelectionItemPattern> InitializeSelectionItemPattern()
         {
-            return new AutomationPattern<ISelectionItemPattern, UIA.SelectionItemPattern>(
-                SelectionItemPattern.Pattern, FrameworkAutomationElement, (b, p) => new SelectionItemPattern(b, p));
+            return new AutomationPattern<ISelectionItemPattern, System.Windows.Automation.SelectionItemPattern>(
+                SelectionItemPattern.Pattern, this, (b, p) => new SelectionItemPattern(b, p));
+        }
+
+        protected override IAutomationPattern<ISelection2Pattern> InitializeSelection2Pattern()
+        {
+            throw new NotSupportedByFrameworkException();
         }
 
         protected override IAutomationPattern<ISelectionPattern> InitializeSelectionPattern()
         {
-            return new AutomationPattern<ISelectionPattern, UIA.SelectionPattern>(
-                SelectionPattern.Pattern, FrameworkAutomationElement, (b, p) => new SelectionPattern(b, p));
+            return new AutomationPattern<ISelectionPattern, System.Windows.Automation.SelectionPattern>(
+                SelectionPattern.Pattern, this, (b, p) => new SelectionPattern(b, p));
         }
 
         protected override IAutomationPattern<ISpreadsheetItemPattern> InitializeSpreadsheetItemPattern()
@@ -136,20 +135,20 @@ namespace FlaUI.UIA2
             throw new NotSupportedByFrameworkException();
 #else
             return new AutomationPattern<ISynchronizedInputPattern, UIA.SynchronizedInputPattern>(
-                SynchronizedInputPattern.Pattern, FrameworkAutomationElement, (b, p) => new SynchronizedInputPattern(b, p));
+                SynchronizedInputPattern.Pattern, this, (b, p) => new SynchronizedInputPattern(b, p));
 #endif
         }
 
         protected override IAutomationPattern<ITableItemPattern> InitializeTableItemPattern()
         {
-            return new AutomationPattern<ITableItemPattern, UIA.TableItemPattern>(
-                TableItemPattern.Pattern, FrameworkAutomationElement, (b, p) => new TableItemPattern(b, p));
+            return new AutomationPattern<ITableItemPattern, System.Windows.Automation.TableItemPattern>(
+                TableItemPattern.Pattern, this, (b, p) => new TableItemPattern(b, p));
         }
 
         protected override IAutomationPattern<ITablePattern> InitializeTablePattern()
         {
-            return new AutomationPattern<ITablePattern, UIA.TablePattern>(
-                TablePattern.Pattern, FrameworkAutomationElement, (b, p) => new TablePattern(b, p));
+            return new AutomationPattern<ITablePattern, System.Windows.Automation.TablePattern>(
+                TablePattern.Pattern, this, (b, p) => new TablePattern(b, p));
         }
 
         protected override IAutomationPattern<ITextChildPattern> InitializeTextChildPattern()
@@ -169,14 +168,14 @@ namespace FlaUI.UIA2
 
         protected override IAutomationPattern<ITextPattern> InitializeTextPattern()
         {
-            return new AutomationPattern<ITextPattern, UIA.TextPattern>(
-                TextPattern.Pattern, FrameworkAutomationElement, (b, p) => new TextPattern(b, p));
+            return new AutomationPattern<ITextPattern, System.Windows.Automation.TextPattern>(
+                TextPattern.Pattern, this, (b, p) => new TextPattern(b, p));
         }
 
         protected override IAutomationPattern<ITogglePattern> InitializeTogglePattern()
         {
-            return new AutomationPattern<ITogglePattern, UIA.TogglePattern>(
-                TogglePattern.Pattern, FrameworkAutomationElement, (b, p) => new TogglePattern(b, p));
+            return new AutomationPattern<ITogglePattern, System.Windows.Automation.TogglePattern>(
+                TogglePattern.Pattern, this, (b, p) => new TogglePattern(b, p));
         }
 
         protected override IAutomationPattern<ITransform2Pattern> InitializeTransform2Pattern()
@@ -186,14 +185,14 @@ namespace FlaUI.UIA2
 
         protected override IAutomationPattern<ITransformPattern> InitializeTransformPattern()
         {
-            return new AutomationPattern<ITransformPattern, UIA.TransformPattern>(
-                TransformPattern.Pattern, FrameworkAutomationElement, (b, p) => new TransformPattern(b, p));
+            return new AutomationPattern<ITransformPattern, System.Windows.Automation.TransformPattern>(
+                TransformPattern.Pattern, this, (b, p) => new TransformPattern(b, p));
         }
 
         protected override IAutomationPattern<IValuePattern> InitializeValuePattern()
         {
-            return new AutomationPattern<IValuePattern, UIA.ValuePattern>(
-                ValuePattern.Pattern, FrameworkAutomationElement, (b, p) => new ValuePattern(b, p));
+            return new AutomationPattern<IValuePattern, System.Windows.Automation.ValuePattern>(
+                ValuePattern.Pattern, this, (b, p) => new ValuePattern(b, p));
         }
 
         protected override IAutomationPattern<IVirtualizedItemPattern> InitializeVirtualizedItemPattern()
@@ -202,19 +201,14 @@ namespace FlaUI.UIA2
             throw new NotSupportedByFrameworkException();
 #else
             return new AutomationPattern<IVirtualizedItemPattern, UIA.VirtualizedItemPattern>(
-                 VirtualizedItemPattern.Pattern, FrameworkAutomationElement, (b, p) => new VirtualizedItemPattern(b, p));
+                 VirtualizedItemPattern.Pattern, this, (b, p) => new VirtualizedItemPattern(b, p));
 #endif
         }
 
         protected override IAutomationPattern<IWindowPattern> InitializeWindowPattern()
         {
-            return new AutomationPattern<IWindowPattern, UIA.WindowPattern>(
-                WindowPattern.Pattern, FrameworkAutomationElement, (b, p) => new WindowPattern(b, p));
-        }
-
-        public override IAutomationPattern<T> GetCustomPattern<T, TNative>(PatternId pattern, Func<FrameworkAutomationElementBase, TNative, T> patternCreateFunc)
-        {
-            return new AutomationPattern<T, TNative>(pattern, FrameworkAutomationElement, patternCreateFunc);
+            return new AutomationPattern<IWindowPattern, System.Windows.Automation.WindowPattern>(
+                WindowPattern.Pattern, this, (b, p) => new WindowPattern(b, p));
         }
     }
 }

@@ -15,13 +15,12 @@ using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2
 {
-    public class UIA2FrameworkAutomationElement : FrameworkAutomationElementBase
+    public partial class UIA2FrameworkAutomationElement : FrameworkAutomationElementBase
     {
         public UIA2FrameworkAutomationElement(UIA2Automation automation, UIA.AutomationElement nativeElement) : base(automation)
         {
             Automation = automation;
             NativeElement = nativeElement;
-            Patterns = new UIA2AutomationElementPatternValues(this);
         }
 
         /// <summary>
