@@ -22,7 +22,7 @@ namespace FlaUI.UIA3.Patterns
         }
     }
 
-    public class Selection2PatternPropertyIdIds : SelectionPatternPropertyIds, ISelection2PatternPropertyIdIds
+    public class Selection2PatternPropertyIds : SelectionPatternPropertyIds, ISelection2PatternPropertyIds
     {
         public PropertyId CurrentSelectedItem => Selection2Pattern.CurrentSelectedItemProperty;
         public PropertyId FirstSelectedItem => Selection2Pattern.FirstSelectedItemProperty;

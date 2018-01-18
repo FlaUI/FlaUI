@@ -27,7 +27,7 @@ namespace FlaUI.UIA3.Patterns
         //public void GetCurrentExtendedPropertiesAsArray(IntPtr propertyArray, out int propertyCount){}
     }
 
-    public class StylesPatternProperties : IStylesPatternProperties
+    public class StylesPatternPropertyIds : IStylesPatternPropertyIds
     {
         public PropertyId ExtendedProperties => StylesPattern.ExtendedPropertiesProperty;
         public PropertyId FillColor => StylesPattern.FillColorProperty;

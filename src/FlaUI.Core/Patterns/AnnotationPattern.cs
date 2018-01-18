@@ -7,7 +7,7 @@ namespace FlaUI.Core.Patterns
 {
     public interface IAnnotationPattern : IPattern
     {
-        IAnnotationPatternProperties Properties { get; }
+        IAnnotationPatternPropertyIds PropertyIds { get; }
 
         AutomationProperty<AnnotationType> AnnotationType { get; }
         AutomationProperty<string> AnnotationTypeName { get; }
@@ -16,7 +16,7 @@ namespace FlaUI.Core.Patterns
         AutomationProperty<AutomationElement> Target { get; }
     }
 
-    public interface IAnnotationPatternProperties
+    public interface IAnnotationPatternPropertyIds
     {
         PropertyId AnnotationTypeId { get; }
         PropertyId AnnotationTypeName { get; }
@@ -38,12 +38,12 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public IAnnotationPatternProperties Properties => Automation.PropertyLibrary.Annotation;
+        public IAnnotationPatternPropertyIds PropertyIds => Automation.PropertyLibrary.Annotation;
 
-        public AutomationProperty<AnnotationType> AnnotationType => GetOrCreate(ref _annotationType, Properties.AnnotationTypeId);
-        public AutomationProperty<string> AnnotationTypeName => GetOrCreate(ref _annotationTypeName, Properties.AnnotationTypeName);
-        public AutomationProperty<string> Author => GetOrCreate(ref _author, Properties.Author);
-        public AutomationProperty<string> DateTime => GetOrCreate(ref _dateTime, Properties.DateTime);
-        public AutomationProperty<AutomationElement> Target => GetOrCreate(ref _target, Properties.Target);
+        public AutomationProperty<AnnotationType> AnnotationType => GetOrCreate(ref _annotationType, PropertyIds.AnnotationTypeId);
+        public AutomationProperty<string> AnnotationTypeName => GetOrCreate(ref _annotationTypeName, PropertyIds.AnnotationTypeName);
+        public AutomationProperty<string> Author => GetOrCreate(ref _author, PropertyIds.Author);
+        public AutomationProperty<string> DateTime => GetOrCreate(ref _dateTime, PropertyIds.DateTime);
+        public AutomationProperty<AutomationElement> Target => GetOrCreate(ref _target, PropertyIds.Target);
     }
 }

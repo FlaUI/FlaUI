@@ -26,7 +26,7 @@ namespace FlaUI.UIA3.Patterns
         }
     }
 
-    public class GridPatternProperties : IGridPatternProperties
+    public class GridPatternPropertyIds : IGridPatternPropertyIds
     {
         public PropertyId ColumnCount => GridPattern.ColumnCountProperty;
 

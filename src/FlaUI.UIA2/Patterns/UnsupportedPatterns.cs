@@ -3,7 +3,7 @@ using FlaUI.Core.Patterns;
 
 namespace FlaUI.UIA2.Patterns
 {
-    public class AnnotationPatternProperties : IAnnotationPatternProperties
+    public class AnnotationPatternPropertyIds : IAnnotationPatternPropertyIds
     {
         public PropertyId AnnotationTypeId => PropertyId.NotSupportedByFramework;
         public PropertyId AnnotationTypeName => PropertyId.NotSupportedByFramework;
@@ -40,7 +40,7 @@ namespace FlaUI.UIA2.Patterns
         public EventId DragCompleteEvent => EventId.NotSupportedByFramework;
     }
 
-    public class LegacyIAccessiblePatternProperties : ILegacyIAccessiblePatternProperties
+    public class LegacyIAccessiblePatternPropertyIds : ILegacyIAccessiblePatternPropertyIds
     {
         public PropertyId ChildId => PropertyId.NotSupportedByFramework;
         public PropertyId DefaultAction => PropertyId.NotSupportedByFramework;
@@ -54,7 +54,7 @@ namespace FlaUI.UIA2.Patterns
         public PropertyId Value => PropertyId.NotSupportedByFramework;
     }
 
-    public class Selection2PatternPropertyIdIds : SelectionPatternPropertyIds, ISelection2PatternPropertyIdIds
+    public class Selection2PatternPropertyIds : SelectionPatternPropertyIds, ISelection2PatternPropertyIds
     {
         public PropertyId CurrentSelectedItem => PropertyId.NotSupportedByFramework;
         public PropertyId FirstSelectedItem => PropertyId.NotSupportedByFramework;
@@ -62,14 +62,14 @@ namespace FlaUI.UIA2.Patterns
         public PropertyId LastSelectedItem => PropertyId.NotSupportedByFramework;
     }
 
-    public class SpreadsheetItemPatternProperties : ISpreadsheetItemPatternProperties
+    public class SpreadsheetItemPatternPropertyIds : ISpreadsheetItemPatternPropertyIds
     {
         public PropertyId Formula => PropertyId.NotSupportedByFramework;
         public PropertyId AnnotationObjects => PropertyId.NotSupportedByFramework;
         public PropertyId AnnotationTypes => PropertyId.NotSupportedByFramework;
     }
 
-    public class StylesPatternProperties : IStylesPatternProperties
+    public class StylesPatternPropertyIds : IStylesPatternPropertyIds
     {
         public PropertyId ExtendedProperties => PropertyId.NotSupportedByFramework;
         public PropertyId FillColor => PropertyId.NotSupportedByFramework;
@@ -86,7 +86,7 @@ namespace FlaUI.UIA2.Patterns
         public EventId TextChangedEvent2 => EventId.NotSupportedByFramework;
     }
 
-    public class Transform2PatternProperties : TransformPatternProperties, ITransform2PatternProperties
+    public class Transform2PatternPropertyIds : TransformPatternPropertyIds, ITransform2PatternPropertyIds
     {
         public PropertyId CanZoom => PropertyId.NotSupportedByFramework;
         public PropertyId ZoomLevel => PropertyId.NotSupportedByFramework;

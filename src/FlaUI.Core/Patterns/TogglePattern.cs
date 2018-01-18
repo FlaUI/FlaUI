@@ -6,14 +6,14 @@ namespace FlaUI.Core.Patterns
 {
     public interface ITogglePattern : IPattern
     {
-        ITogglePatternProperties Properties { get; }
+        ITogglePatternPropertyIds PropertyIds { get; }
 
         AutomationProperty<ToggleState> ToggleState { get; }
 
         void Toggle();
     }
 
-    public interface ITogglePatternProperties
+    public interface ITogglePatternPropertyIds
     {
         PropertyId ToggleState { get; }
     }
@@ -27,9 +27,9 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public ITogglePatternProperties Properties => Automation.PropertyLibrary.Toggle;
+        public ITogglePatternPropertyIds PropertyIds => Automation.PropertyLibrary.Toggle;
 
-        public AutomationProperty<ToggleState> ToggleState => GetOrCreate(ref _toggleState, Properties.ToggleState);
+        public AutomationProperty<ToggleState> ToggleState => GetOrCreate(ref _toggleState, PropertyIds.ToggleState);
 
         public abstract void Toggle();
     }

@@ -7,28 +7,28 @@ namespace FlaUI.Core
     {
         IAutomationElementPatternAvailabilityPropertyIds PatternAvailability { get; }
         IAutomationElementPropertyIds Element { get; }
-        IAnnotationPatternProperties Annotation { get; }
-        IDockPatternProperties Dock { get; }
+        IAnnotationPatternPropertyIds Annotation { get; }
+        IDockPatternPropertyIds Dock { get; }
         IDragPatternPropertyIds Drag { get; }
         IDropTargetPatternPropertyIds DropTarget { get; }
-        IExpandCollapsePatternProperties ExpandCollapse { get; }
-        IGridItemPatternProperties GridItem { get; }
-        IGridPatternProperties Grid { get; }
-        ILegacyIAccessiblePatternProperties LegacyIAccessible { get; }
-        IMultipleViewPatternProperties MultipleView { get; }
-        IRangeValuePatternProperties RangeValue { get; }
-        IScrollPatternProperties Scroll { get; }
-        ISelection2PatternPropertyIdIds Selection2 { get; }
+        IExpandCollapsePatternPropertyIds ExpandCollapse { get; }
+        IGridItemPatternPropertyIds GridItem { get; }
+        IGridPatternPropertyIds Grid { get; }
+        ILegacyIAccessiblePatternPropertyIds LegacyIAccessible { get; }
+        IMultipleViewPatternPropertyIds MultipleView { get; }
+        IRangeValuePatternPropertyIds RangeValue { get; }
+        IScrollPatternPropertyIds Scroll { get; }
+        ISelection2PatternPropertyIds Selection2 { get; }
         ISelectionItemPatternPropertyIds SelectionItem { get; }
         ISelectionPatternPropertyIds Selection { get; }
-        ISpreadsheetItemPatternProperties SpreadsheetItem { get; }
-        IStylesPatternProperties Styles { get; }
-        ITableItemPatternProperties TableItem { get; }
-        ITablePatternProperties Table { get; }
-        ITogglePatternProperties Toggle { get; }
-        ITransform2PatternProperties Transform2 { get; }
-        ITransformPatternProperties Transform { get; }
-        IValuePatternProperties Value { get; }
+        ISpreadsheetItemPatternPropertyIds SpreadsheetItem { get; }
+        IStylesPatternPropertyIds Styles { get; }
+        ITableItemPatternPropertyIds TableItem { get; }
+        ITablePatternPropertyIds Table { get; }
+        ITogglePatternPropertyIds Toggle { get; }
+        ITransform2PatternPropertyIds Transform2 { get; }
+        ITransformPatternPropertyIds Transform { get; }
+        IValuePatternPropertyIds Value { get; }
         IWindowPatternPropertyIds Window { get; }
     }
 }

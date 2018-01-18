@@ -6,14 +6,14 @@ namespace FlaUI.Core.Patterns
 {
     public interface IDockPattern : IPattern
     {
-        IDockPatternProperties Properties { get; }
+        IDockPatternPropertyIds PropertyIds { get; }
 
         AutomationProperty<DockPosition> DockPosition { get; }
 
         void SetDockPosition(DockPosition dockPos);
     }
 
-    public interface IDockPatternProperties
+    public interface IDockPatternPropertyIds
     {
         PropertyId DockPosition { get; }
     }
@@ -27,9 +27,9 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public IDockPatternProperties Properties => Automation.PropertyLibrary.Dock;
+        public IDockPatternPropertyIds PropertyIds => Automation.PropertyLibrary.Dock;
 
-        public AutomationProperty<DockPosition> DockPosition => GetOrCreate(ref _dockPosition, Properties.DockPosition);
+        public AutomationProperty<DockPosition> DockPosition => GetOrCreate(ref _dockPosition, PropertyIds.DockPosition);
 
         public abstract void SetDockPosition(DockPosition dockPos);
     }

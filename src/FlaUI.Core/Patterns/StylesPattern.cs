@@ -6,7 +6,7 @@ namespace FlaUI.Core.Patterns
 {
     public interface IStylesPattern : IPattern
     {
-        IStylesPatternProperties Properties { get; }
+        IStylesPatternPropertyIds PropertyIds { get; }
 
          AutomationProperty<string> ExtendedProperties { get; }
          AutomationProperty<int> FillColor { get; }
@@ -17,7 +17,7 @@ namespace FlaUI.Core.Patterns
          AutomationProperty<string> StyleName { get; }
     }
 
-    public interface IStylesPatternProperties
+    public interface IStylesPatternPropertyIds
     {
         PropertyId ExtendedProperties { get; }
         PropertyId FillColor { get; }
@@ -43,14 +43,14 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public IStylesPatternProperties Properties => Automation.PropertyLibrary.Styles;
+        public IStylesPatternPropertyIds PropertyIds => Automation.PropertyLibrary.Styles;
 
-        public AutomationProperty<string> ExtendedProperties => GetOrCreate(ref _extendedProperties, Properties.ExtendedProperties);
-        public AutomationProperty<int> FillColor => GetOrCreate(ref _fillColor, Properties.FillColor);
-        public AutomationProperty<int> FillPatternColor => GetOrCreate(ref _fillPatternColor, Properties.FillPatternColor);
-        public AutomationProperty<string> FillPatternStyle => GetOrCreate(ref _fillPatternStyle, Properties.FillPatternStyle);
-        public AutomationProperty<string> Shape => GetOrCreate(ref _shape, Properties.Shape);
-        public AutomationProperty<StyleType> Style => GetOrCreate(ref _style, Properties.StyleId);
-        public AutomationProperty<string> StyleName => GetOrCreate(ref _styleName, Properties.StyleName);
+        public AutomationProperty<string> ExtendedProperties => GetOrCreate(ref _extendedProperties, PropertyIds.ExtendedProperties);
+        public AutomationProperty<int> FillColor => GetOrCreate(ref _fillColor, PropertyIds.FillColor);
+        public AutomationProperty<int> FillPatternColor => GetOrCreate(ref _fillPatternColor, PropertyIds.FillPatternColor);
+        public AutomationProperty<string> FillPatternStyle => GetOrCreate(ref _fillPatternStyle, PropertyIds.FillPatternStyle);
+        public AutomationProperty<string> Shape => GetOrCreate(ref _shape, PropertyIds.Shape);
+        public AutomationProperty<StyleType> Style => GetOrCreate(ref _style, PropertyIds.StyleId);
+        public AutomationProperty<string> StyleName => GetOrCreate(ref _styleName, PropertyIds.StyleName);
     }
 }

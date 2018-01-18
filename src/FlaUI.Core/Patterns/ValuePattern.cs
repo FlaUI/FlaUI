@@ -8,7 +8,7 @@ namespace FlaUI.Core.Patterns
         /// <summary>
         /// Gets the object which provides access to all properties of this pattern.
         /// </summary>
-        IValuePatternProperties Properties { get; }
+        IValuePatternPropertyIds PropertyIds { get; }
 
         /// <summary>
         /// Gets a value that specifies whether the value of the element is read-only.
@@ -27,7 +27,7 @@ namespace FlaUI.Core.Patterns
         void SetValue(string value);
     }
 
-    public interface IValuePatternProperties
+    public interface IValuePatternPropertyIds
     {
         PropertyId IsReadOnly { get; }
         PropertyId Value { get; }
@@ -44,13 +44,13 @@ namespace FlaUI.Core.Patterns
         }
 
         /// <inheritdoc />
-        public IValuePatternProperties Properties => Automation.PropertyLibrary.Value;
+        public IValuePatternPropertyIds PropertyIds => Automation.PropertyLibrary.Value;
 
         /// <inheritdoc />
-        public AutomationProperty<bool> IsReadOnly => GetOrCreate(ref _isReadOnly, Properties.IsReadOnly);
+        public AutomationProperty<bool> IsReadOnly => GetOrCreate(ref _isReadOnly, PropertyIds.IsReadOnly);
 
         /// <inheritdoc />
-        public AutomationProperty<string> Value => GetOrCreate(ref _value, Properties.Value);
+        public AutomationProperty<string> Value => GetOrCreate(ref _value, PropertyIds.Value);
 
         /// <inheritdoc />
         public abstract void SetValue(string value);

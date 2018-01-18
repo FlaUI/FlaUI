@@ -33,7 +33,7 @@ namespace FlaUI.UIA3.Patterns
         }
     }
 
-    public class ScrollPatternProperties : IScrollPatternProperties
+    public class ScrollPatternPropertyIds : IScrollPatternPropertyIds
     {
         public PropertyId HorizontallyScrollable => ScrollPattern.HorizontallyScrollableProperty;
 

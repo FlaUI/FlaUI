@@ -6,13 +6,13 @@ namespace FlaUI.Core.Patterns
 {
     public interface ITableItemPattern : IPattern
     {
-        ITableItemPatternProperties Properties { get; }
+        ITableItemPatternPropertyIds PropertyIds { get; }
 
         AutomationProperty<AutomationElement[]> ColumnHeaderItems { get; }
         AutomationProperty<AutomationElement[]> RowHeaderItems { get; }
     }
 
-    public interface ITableItemPatternProperties
+    public interface ITableItemPatternPropertyIds
     {
         PropertyId ColumnHeaderItems { get; }
         PropertyId RowHeaderItems { get; }
@@ -28,9 +28,9 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public ITableItemPatternProperties Properties => Automation.PropertyLibrary.TableItem;
+        public ITableItemPatternPropertyIds PropertyIds => Automation.PropertyLibrary.TableItem;
 
-        public AutomationProperty<AutomationElement[]> ColumnHeaderItems => GetOrCreate(ref _columnHeaderItems, Properties.ColumnHeaderItems);
-        public AutomationProperty<AutomationElement[]> RowHeaderItems => GetOrCreate(ref _rowHeaderItems, Properties.RowHeaderItems);
+        public AutomationProperty<AutomationElement[]> ColumnHeaderItems => GetOrCreate(ref _columnHeaderItems, PropertyIds.ColumnHeaderItems);
+        public AutomationProperty<AutomationElement[]> RowHeaderItems => GetOrCreate(ref _rowHeaderItems, PropertyIds.RowHeaderItems);
     }
 }

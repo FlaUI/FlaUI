@@ -8,7 +8,7 @@ namespace FlaUI.Core.Patterns
 {
     public interface ILegacyIAccessiblePattern : IPattern
     {
-        ILegacyIAccessiblePatternProperties Properties { get; }
+        ILegacyIAccessiblePatternPropertyIds PropertyIds { get; }
 
         AutomationProperty<int> ChildId { get; }
         AutomationProperty<string> DefaultAction { get; }
@@ -27,7 +27,7 @@ namespace FlaUI.Core.Patterns
         void SetValue(string value);
     }
 
-    public interface ILegacyIAccessiblePatternProperties
+    public interface ILegacyIAccessiblePatternPropertyIds
     {
         PropertyId ChildId { get; }
         PropertyId DefaultAction { get; }
@@ -59,18 +59,18 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public ILegacyIAccessiblePatternProperties Properties => Automation.PropertyLibrary.LegacyIAccessible;
+        public ILegacyIAccessiblePatternPropertyIds PropertyIds => Automation.PropertyLibrary.LegacyIAccessible;
 
-        public AutomationProperty<int> ChildId => GetOrCreate(ref _childId, Properties.ChildId);
-        public AutomationProperty<string> DefaultAction => GetOrCreate(ref _defaultAction, Properties.DefaultAction);
-        public AutomationProperty<string> Description => GetOrCreate(ref _description, Properties.Description);
-        public AutomationProperty<string> Help => GetOrCreate(ref _help, Properties.Help);
-        public AutomationProperty<string> KeyboardShortcut => GetOrCreate(ref _keyboardShortcut, Properties.KeyboardShortcut);
-        public AutomationProperty<string> Name => GetOrCreate(ref _name, Properties.Name);
-        public AutomationProperty<AccessibilityRole> Role => GetOrCreate(ref _role, Properties.Role);
-        public AutomationProperty<AutomationElement[]> Selection => GetOrCreate(ref _selection, Properties.Selection);
-        public AutomationProperty<AccessibilityState> State => GetOrCreate(ref _state, Properties.State);
-        public AutomationProperty<string> Value => GetOrCreate(ref _value, Properties.Value);
+        public AutomationProperty<int> ChildId => GetOrCreate(ref _childId, PropertyIds.ChildId);
+        public AutomationProperty<string> DefaultAction => GetOrCreate(ref _defaultAction, PropertyIds.DefaultAction);
+        public AutomationProperty<string> Description => GetOrCreate(ref _description, PropertyIds.Description);
+        public AutomationProperty<string> Help => GetOrCreate(ref _help, PropertyIds.Help);
+        public AutomationProperty<string> KeyboardShortcut => GetOrCreate(ref _keyboardShortcut, PropertyIds.KeyboardShortcut);
+        public AutomationProperty<string> Name => GetOrCreate(ref _name, PropertyIds.Name);
+        public AutomationProperty<AccessibilityRole> Role => GetOrCreate(ref _role, PropertyIds.Role);
+        public AutomationProperty<AutomationElement[]> Selection => GetOrCreate(ref _selection, PropertyIds.Selection);
+        public AutomationProperty<AccessibilityState> State => GetOrCreate(ref _state, PropertyIds.State);
+        public AutomationProperty<string> Value => GetOrCreate(ref _value, PropertyIds.Value);
 
         public abstract void DoDefaultAction();
         public abstract IAccessible GetIAccessible();

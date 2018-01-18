@@ -8,7 +8,7 @@ namespace FlaUI.Core.Patterns
 {
     public interface ITextPattern : IPattern
     {
-        ITextPatternEventIds Events { get; }
+        ITextPatternEventIds EventIds { get; }
 
         ITextRange DocumentRange { get; }
         SupportedTextSelection SupportedTextSelection { get; }
@@ -32,7 +32,7 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public ITextPatternEventIds Events => Automation.EventLibrary.Text;
+        public ITextPatternEventIds EventIds => Automation.EventLibrary.Text;
 
         public abstract ITextRange DocumentRange { get; }
         public abstract SupportedTextSelection SupportedTextSelection { get; }

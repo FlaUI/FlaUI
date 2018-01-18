@@ -19,7 +19,7 @@ namespace FlaUI.UIA3.Patterns
         }
     }
 
-    public class TablePatternProperties : ITablePatternProperties
+    public class TablePatternPropertyIds : ITablePatternPropertyIds
     {
         public PropertyId ColumnHeaders => TablePattern.ColumnHeadersProperty;
         public PropertyId RowHeaders => TablePattern.RowHeadersProperty;
