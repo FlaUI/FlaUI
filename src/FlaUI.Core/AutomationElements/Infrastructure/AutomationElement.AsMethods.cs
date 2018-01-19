@@ -228,5 +228,25 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         {
             return new Window(FrameworkAutomationElement);
         }
+
+        /// <summary>
+        /// Generic method to convert the element to the given type.
+        /// </summary>
+        public T AsType<T>() where T : AutomationElement
+        {
+            return (T)Activator.CreateInstance(typeof(T), FrameworkAutomationElement);
+        }
+
+        /// <summary>
+        /// Method to convert the element to the given type.
+        /// </summary>
+        public AutomationElement AsType(Type type)
+        {
+            if (!type.IsAssignableFrom(typeof(AutomationElement)))
+            {
+                throw new ArgumentException("The given type is not an AutomationElement", nameof(type));
+            }
+            return (AutomationElement)Activator.CreateInstance(type, FrameworkAutomationElement);
+        }
     }
 }
