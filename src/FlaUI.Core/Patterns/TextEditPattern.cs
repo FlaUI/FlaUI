@@ -4,13 +4,13 @@ namespace FlaUI.Core.Patterns
 {
     public interface ITextEditPattern : ITextPattern
     {
-        new ITextEditPatternEvents Events { get; }
+        new ITextEditPatternEventIds EventIds { get; }
 
         ITextRange GetActiveComposition();
         ITextRange GetConversionTarget();
     }
 
-    public interface ITextEditPatternEvents : ITextPatternEvents
+    public interface ITextEditPatternEventIds : ITextPatternEventIds
     {
         EventId ConversionTargetChangedEvent { get; }
         EventId TextChangedEvent2 { get; }

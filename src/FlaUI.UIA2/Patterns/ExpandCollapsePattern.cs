@@ -26,7 +26,7 @@ namespace FlaUI.UIA2.Patterns
         }
     }
 
-    public class ExpandCollapsePatternProperties : IExpandCollapsePatternProperties
+    public class ExpandCollapsePatternPropertyIds : IExpandCollapsePatternPropertyIds
     {
         public PropertyId ExpandCollapseState => ExpandCollapsePattern.ExpandCollapseStateProperty;
     }

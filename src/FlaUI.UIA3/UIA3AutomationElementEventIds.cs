@@ -4,7 +4,7 @@ using FlaUI.UIA3.Identifiers;
 
 namespace FlaUI.UIA3
 {
-    public class UIA3AutomationElementEvents : IAutomationElementEvents
+    public class UIA3AutomationElementEventIds : IAutomationElementEventIds
     {
         public EventId AsyncContentLoadedEvent => AutomationObjectIds.AsyncContentLoadedEvent;
         public EventId ChangesEvent => AutomationObjectIds.ChangesEvent;

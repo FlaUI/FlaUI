@@ -4,7 +4,7 @@ using FlaUI.UIA2.Identifiers;
 
 namespace FlaUI.UIA2
 {
-    public partial class UIA2AutomationElementProperties : IAutomationElementProperties
+    public partial class UIA2AutomationElementPropertyIds : IAutomationElementPropertyIds
     {
         public PropertyId AcceleratorKey => AutomationObjectIds.AcceleratorKeyProperty;
         public PropertyId AccessKey => AutomationObjectIds.AccessKeyProperty;
@@ -64,7 +64,7 @@ namespace FlaUI.UIA2
     /// <summary>
     /// Partial class with additions from .NET 4.7.1
     /// </summary>
-    public partial class UIA2AutomationElementProperties
+    public partial class UIA2AutomationElementPropertyIds
     {
 #if NET471
         public PropertyId LiveSetting => AutomationObjectIds.LiveSettingProperty;

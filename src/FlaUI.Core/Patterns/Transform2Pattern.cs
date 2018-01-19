@@ -5,7 +5,7 @@ namespace FlaUI.Core.Patterns
 {
     public interface ITransform2Pattern : ITransformPattern
     {
-        new ITransform2PatternProperties Properties { get; }
+        new ITransform2PatternPropertyIds PropertyIds { get; }
 
         AutomationProperty<bool> CanZoom { get; }
         AutomationProperty<double> ZoomLevel { get; }
@@ -16,7 +16,7 @@ namespace FlaUI.Core.Patterns
         void ZoomByUnit(ZoomUnit zoomUnit);
     }
 
-    public interface ITransform2PatternProperties : ITransformPatternProperties
+    public interface ITransform2PatternPropertyIds : ITransformPatternPropertyIds
     {
         PropertyId CanZoom { get; }
         PropertyId ZoomLevel { get; }
@@ -36,12 +36,12 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        ITransform2PatternProperties ITransform2Pattern.Properties => Automation.PropertyLibrary.Transform2;
+        ITransform2PatternPropertyIds ITransform2Pattern.PropertyIds => Automation.PropertyLibrary.Transform2;
 
-        public AutomationProperty<bool> CanZoom => GetOrCreate(ref _canZoom, ((ITransform2Pattern)this).Properties.CanZoom);
-        public AutomationProperty<double> ZoomLevel => GetOrCreate(ref _zoomLevel, ((ITransform2Pattern)this).Properties.ZoomLevel);
-        public AutomationProperty<double> ZoomMaximum => GetOrCreate(ref _zoomMaximum, ((ITransform2Pattern)this).Properties.ZoomMaximum);
-        public AutomationProperty<double> ZoomMinimum => GetOrCreate(ref _zoomMinimum, ((ITransform2Pattern)this).Properties.ZoomMinimum);
+        public AutomationProperty<bool> CanZoom => GetOrCreate(ref _canZoom, ((ITransform2Pattern)this).PropertyIds.CanZoom);
+        public AutomationProperty<double> ZoomLevel => GetOrCreate(ref _zoomLevel, ((ITransform2Pattern)this).PropertyIds.ZoomLevel);
+        public AutomationProperty<double> ZoomMaximum => GetOrCreate(ref _zoomMaximum, ((ITransform2Pattern)this).PropertyIds.ZoomMaximum);
+        public AutomationProperty<double> ZoomMinimum => GetOrCreate(ref _zoomMinimum, ((ITransform2Pattern)this).PropertyIds.ZoomMinimum);
 
         public abstract void Zoom(double zoom);
         public abstract void ZoomByUnit(ZoomUnit zoomUnit);

@@ -51,7 +51,7 @@ namespace FlaUI.UIA3.Patterns
         }
     }
 
-    public class LegacyIAccessiblePatternProperties : ILegacyIAccessiblePatternProperties
+    public class LegacyIAccessiblePatternPropertyIds : ILegacyIAccessiblePatternPropertyIds
     {
         public PropertyId ChildId => LegacyIAccessiblePattern.ChildIdProperty;
         public PropertyId DefaultAction => LegacyIAccessiblePattern.DefaultActionProperty;

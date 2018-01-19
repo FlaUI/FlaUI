@@ -33,7 +33,7 @@ namespace FlaUI.UIA2.Patterns
         }
     }
 
-    public class TransformPatternProperties : ITransformPatternProperties
+    public class TransformPatternPropertyIds : ITransformPatternPropertyIds
     {
         public PropertyId CanMove => TransformPattern.CanMoveProperty;
 

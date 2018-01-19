@@ -27,7 +27,7 @@ namespace FlaUI.UIA3.Patterns
         }
     }
 
-    public class RangeValuePatternProperties : IRangeValuePatternProperties
+    public class RangeValuePatternPropertyIds : IRangeValuePatternPropertyIds
     {
         public PropertyId IsReadOnly => RangeValuePattern.IsReadOnlyProperty;
 

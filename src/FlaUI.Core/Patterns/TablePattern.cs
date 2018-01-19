@@ -7,14 +7,14 @@ namespace FlaUI.Core.Patterns
 {
     public interface ITablePattern : IPattern
     {
-        ITablePatternProperties Properties { get; }
+        ITablePatternPropertyIds PropertyIds { get; }
 
         AutomationProperty<AutomationElement[]> ColumnHeaders { get; }
         AutomationProperty<AutomationElement[]> RowHeaders { get; }
         AutomationProperty<RowOrColumnMajor> RowOrColumnMajor { get; }
     }
 
-    public interface ITablePatternProperties
+    public interface ITablePatternPropertyIds
     {
         PropertyId ColumnHeaders { get; }
         PropertyId RowHeaders { get; }
@@ -32,10 +32,10 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public ITablePatternProperties Properties => Automation.PropertyLibrary.Table;
+        public ITablePatternPropertyIds PropertyIds => Automation.PropertyLibrary.Table;
 
-        public AutomationProperty<AutomationElement[]> ColumnHeaders => GetOrCreate(ref _columnHeaders, Properties.ColumnHeaders);
-        public AutomationProperty<AutomationElement[]> RowHeaders => GetOrCreate(ref _rowHeaders, Properties.RowHeaders);
-        public AutomationProperty<RowOrColumnMajor> RowOrColumnMajor => GetOrCreate(ref _rowOrColumnMajor, Properties.RowOrColumnMajor);
+        public AutomationProperty<AutomationElement[]> ColumnHeaders => GetOrCreate(ref _columnHeaders, PropertyIds.ColumnHeaders);
+        public AutomationProperty<AutomationElement[]> RowHeaders => GetOrCreate(ref _rowHeaders, PropertyIds.RowHeaders);
+        public AutomationProperty<RowOrColumnMajor> RowOrColumnMajor => GetOrCreate(ref _rowOrColumnMajor, PropertyIds.RowOrColumnMajor);
     }
 }

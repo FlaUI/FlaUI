@@ -5,7 +5,7 @@ namespace FlaUI.Core.Patterns
 {
     public interface IRangeValuePattern : IPattern
     {
-        IRangeValuePatternProperties Properties { get; }
+        IRangeValuePatternPropertyIds PropertyIds { get; }
 
         AutomationProperty<bool> IsReadOnly { get; }
         AutomationProperty<double> LargeChange { get; }
@@ -17,7 +17,7 @@ namespace FlaUI.Core.Patterns
         void SetValue(double val);
     }
 
-    public interface IRangeValuePatternProperties
+    public interface IRangeValuePatternPropertyIds
     {
         PropertyId IsReadOnly { get; }
         PropertyId LargeChange { get; }
@@ -41,14 +41,14 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public IRangeValuePatternProperties Properties => Automation.PropertyLibrary.RangeValue;
+        public IRangeValuePatternPropertyIds PropertyIds => Automation.PropertyLibrary.RangeValue;
 
-        public AutomationProperty<bool> IsReadOnly => GetOrCreate(ref _isReadOnly, Properties.IsReadOnly);
-        public AutomationProperty<double> LargeChange => GetOrCreate(ref _largeChange, Properties.LargeChange);
-        public AutomationProperty<double> Maximum => GetOrCreate(ref _maximum, Properties.Maximum);
-        public AutomationProperty<double> Minimum => GetOrCreate(ref _minimum, Properties.Minimum);
-        public AutomationProperty<double> SmallChange => GetOrCreate(ref _smallChange, Properties.SmallChange);
-        public AutomationProperty<double> Value => GetOrCreate(ref _value, Properties.Value);
+        public AutomationProperty<bool> IsReadOnly => GetOrCreate(ref _isReadOnly, PropertyIds.IsReadOnly);
+        public AutomationProperty<double> LargeChange => GetOrCreate(ref _largeChange, PropertyIds.LargeChange);
+        public AutomationProperty<double> Maximum => GetOrCreate(ref _maximum, PropertyIds.Maximum);
+        public AutomationProperty<double> Minimum => GetOrCreate(ref _minimum, PropertyIds.Minimum);
+        public AutomationProperty<double> SmallChange => GetOrCreate(ref _smallChange, PropertyIds.SmallChange);
+        public AutomationProperty<double> Value => GetOrCreate(ref _value, PropertyIds.Value);
 
         public abstract void SetValue(double val);
     }

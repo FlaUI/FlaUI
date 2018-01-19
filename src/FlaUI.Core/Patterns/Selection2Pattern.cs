@@ -5,7 +5,7 @@ namespace FlaUI.Core.Patterns
 {
     public interface ISelection2Pattern : ISelectionPattern
     {
-        new ISelection2PatternProperties Properties { get; }
+        new ISelection2PatternPropertyIds PropertyIds { get; }
 
         AutomationProperty<AutomationElement> CurrentSelectedItem { get; }
         AutomationProperty<AutomationElement> FirstSelectedItem { get; }
@@ -13,7 +13,7 @@ namespace FlaUI.Core.Patterns
         AutomationProperty<AutomationElement> LastSelectedItem { get; }
     }
 
-    public interface ISelection2PatternProperties : ISelectionPatternProperties
+    public interface ISelection2PatternPropertyIds : ISelectionPatternPropertyIds
     {
         PropertyId CurrentSelectedItem { get; }
         PropertyId FirstSelectedItem { get; }
@@ -33,11 +33,11 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        ISelection2PatternProperties ISelection2Pattern.Properties => Automation.PropertyLibrary.Selection2;
+        ISelection2PatternPropertyIds ISelection2Pattern.PropertyIds => Automation.PropertyLibrary.Selection2;
 
-        public AutomationProperty<AutomationElement> CurrentSelectedItem => GetOrCreate(ref _currentSelectedItem, ((ISelection2Pattern)this).Properties.CurrentSelectedItem);
-        public AutomationProperty<AutomationElement> FirstSelectedItem => GetOrCreate(ref _firstSelectedItem, ((ISelection2Pattern)this).Properties.FirstSelectedItem);
-        public AutomationProperty<int> ItemCount => GetOrCreate(ref _itemCount, ((ISelection2Pattern)this).Properties.ItemCount);
-        public AutomationProperty<AutomationElement> LastSelectedItem => GetOrCreate(ref _lastSelectedItem, ((ISelection2Pattern)this).Properties.LastSelectedItem);
+        public AutomationProperty<AutomationElement> CurrentSelectedItem => GetOrCreate(ref _currentSelectedItem, ((ISelection2Pattern)this).PropertyIds.CurrentSelectedItem);
+        public AutomationProperty<AutomationElement> FirstSelectedItem => GetOrCreate(ref _firstSelectedItem, ((ISelection2Pattern)this).PropertyIds.FirstSelectedItem);
+        public AutomationProperty<int> ItemCount => GetOrCreate(ref _itemCount, ((ISelection2Pattern)this).PropertyIds.ItemCount);
+        public AutomationProperty<AutomationElement> LastSelectedItem => GetOrCreate(ref _lastSelectedItem, ((ISelection2Pattern)this).PropertyIds.LastSelectedItem);
     }
 }

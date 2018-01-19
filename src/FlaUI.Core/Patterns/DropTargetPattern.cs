@@ -5,20 +5,20 @@ namespace FlaUI.Core.Patterns
 {
     public interface IDropTargetPattern : IPattern
     {
-        IDropTargetPatternProperties Properties { get; }
-        IDropTargetPatternEvents Events { get; }
+        IDropTargetPatternPropertyIds PropertyIds { get; }
+        IDropTargetPatternEventIds EventIds { get; }
 
         AutomationProperty<string> DropTargetEffect { get; }
         AutomationProperty<string[]> DropTargetEffects { get; }
     }
 
-    public interface IDropTargetPatternProperties
+    public interface IDropTargetPatternPropertyIds
     {
         PropertyId DropTargetEffect { get; }
         PropertyId DropTargetEffects { get; }
     }
 
-    public interface IDropTargetPatternEvents
+    public interface IDropTargetPatternEventIds
     {
         EventId DragEnterEvent { get; }
         EventId DragLeaveEvent { get; }
@@ -35,10 +35,10 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public IDropTargetPatternProperties Properties => Automation.PropertyLibrary.DropTarget;
-        public IDropTargetPatternEvents Events => Automation.EventLibrary.DropTarget;
+        public IDropTargetPatternPropertyIds PropertyIds => Automation.PropertyLibrary.DropTarget;
+        public IDropTargetPatternEventIds EventIds => Automation.EventLibrary.DropTarget;
 
-        public AutomationProperty<string> DropTargetEffect => GetOrCreate(ref _dropTargetEffect, Properties.DropTargetEffect);
-        public AutomationProperty<string[]> DropTargetEffects => GetOrCreate(ref _dropTargetEffects, Properties.DropTargetEffects);
+        public AutomationProperty<string> DropTargetEffect => GetOrCreate(ref _dropTargetEffect, PropertyIds.DropTargetEffect);
+        public AutomationProperty<string[]> DropTargetEffects => GetOrCreate(ref _dropTargetEffects, PropertyIds.DropTargetEffects);
     }
 }

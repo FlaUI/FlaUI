@@ -21,7 +21,7 @@ namespace FlaUI.UIA2.Patterns
         }
     }
 
-    public class GridItemPatternProperties : IGridItemPatternProperties
+    public class GridItemPatternPropertyIds : IGridItemPatternPropertyIds
     {
         public PropertyId Column => GridItemPattern.ColumnProperty;
         public PropertyId ColumnSpan => GridItemPattern.ColumnSpanProperty;

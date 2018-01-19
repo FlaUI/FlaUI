@@ -6,7 +6,7 @@ namespace FlaUI.Core.Patterns
 {
     public interface IGridPattern : IPattern
     {
-        IGridPatternProperties Properties { get; }
+        IGridPatternPropertyIds PropertyIds { get; }
 
         AutomationProperty<int> ColumnCount { get; }
         AutomationProperty<int> RowCount { get; }
@@ -14,7 +14,7 @@ namespace FlaUI.Core.Patterns
         AutomationElement GetItem(int row, int column);
     }
 
-    public interface IGridPatternProperties
+    public interface IGridPatternPropertyIds
     {
         PropertyId ColumnCount { get; }
         PropertyId RowCount { get; }
@@ -30,10 +30,10 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public IGridPatternProperties Properties => Automation.PropertyLibrary.Grid;
+        public IGridPatternPropertyIds PropertyIds => Automation.PropertyLibrary.Grid;
 
-        public AutomationProperty<int> ColumnCount => GetOrCreate(ref _columnCount, Properties.ColumnCount);
-        public AutomationProperty<int> RowCount => GetOrCreate(ref _rowCount, Properties.RowCount);
+        public AutomationProperty<int> ColumnCount => GetOrCreate(ref _columnCount, PropertyIds.ColumnCount);
+        public AutomationProperty<int> RowCount => GetOrCreate(ref _rowCount, PropertyIds.RowCount);
 
         public abstract AutomationElement GetItem(int row, int column);
     }

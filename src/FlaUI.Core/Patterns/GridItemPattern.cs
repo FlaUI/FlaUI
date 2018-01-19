@@ -6,7 +6,7 @@ namespace FlaUI.Core.Patterns
 {
     public interface IGridItemPattern : IPattern
     {
-        IGridItemPatternProperties Properties { get; }
+        IGridItemPatternPropertyIds PropertyIds { get; }
 
         AutomationProperty<int> Column { get; }
         AutomationProperty<int> ColumnSpan { get; }
@@ -15,7 +15,7 @@ namespace FlaUI.Core.Patterns
         AutomationProperty<int> RowSpan { get; }
     }
 
-    public interface IGridItemPatternProperties
+    public interface IGridItemPatternPropertyIds
     {
         PropertyId Column { get; }
         PropertyId ColumnSpan { get; }
@@ -37,12 +37,12 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public IGridItemPatternProperties Properties => Automation.PropertyLibrary.GridItem;
+        public IGridItemPatternPropertyIds PropertyIds => Automation.PropertyLibrary.GridItem;
 
-        public AutomationProperty<int> Column => GetOrCreate(ref _column, Properties.Column);
-        public AutomationProperty<int> ColumnSpan => GetOrCreate(ref _columnSpan, Properties.ColumnSpan);
-        public AutomationProperty<AutomationElement> ContainingGrid => GetOrCreate(ref _containingGrid, Properties.ContainingGrid);
-        public AutomationProperty<int> Row => GetOrCreate(ref _row, Properties.Row);
-        public AutomationProperty<int> RowSpan => GetOrCreate(ref _rowSpan, Properties.RowSpan);
+        public AutomationProperty<int> Column => GetOrCreate(ref _column, PropertyIds.Column);
+        public AutomationProperty<int> ColumnSpan => GetOrCreate(ref _columnSpan, PropertyIds.ColumnSpan);
+        public AutomationProperty<AutomationElement> ContainingGrid => GetOrCreate(ref _containingGrid, PropertyIds.ContainingGrid);
+        public AutomationProperty<int> Row => GetOrCreate(ref _row, PropertyIds.Row);
+        public AutomationProperty<int> RowSpan => GetOrCreate(ref _rowSpan, PropertyIds.RowSpan);
     }
 }

@@ -6,7 +6,7 @@ namespace FlaUI.Core.Patterns
 {
     public interface IExpandCollapsePattern : IPattern
     {
-        IExpandCollapsePatternProperties Properties { get; }
+        IExpandCollapsePatternPropertyIds PropertyIds { get; }
 
         AutomationProperty<ExpandCollapseState> ExpandCollapseState { get; }
 
@@ -14,7 +14,7 @@ namespace FlaUI.Core.Patterns
         void Expand();
     }
 
-    public interface IExpandCollapsePatternProperties
+    public interface IExpandCollapsePatternPropertyIds
     {
         PropertyId ExpandCollapseState { get; }
     }
@@ -28,9 +28,9 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public IExpandCollapsePatternProperties Properties => Automation.PropertyLibrary.ExpandCollapse;
+        public IExpandCollapsePatternPropertyIds PropertyIds => Automation.PropertyLibrary.ExpandCollapse;
 
-        public AutomationProperty<ExpandCollapseState> ExpandCollapseState => GetOrCreate(ref _expandCollapseState, Properties.ExpandCollapseState);
+        public AutomationProperty<ExpandCollapseState> ExpandCollapseState => GetOrCreate(ref _expandCollapseState, PropertyIds.ExpandCollapseState);
 
         public abstract void Collapse();
         public abstract void Expand();

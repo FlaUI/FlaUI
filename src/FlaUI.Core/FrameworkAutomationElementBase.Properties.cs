@@ -72,228 +72,228 @@ namespace FlaUI.Core
         /// <summary>
         /// Gets a string containing the accelerator key combinations for the element.
         /// </summary>
-        public AutomationProperty<string> AcceleratorKey => GetOrCreate(ref _acceleratorKey, PropertyLibrary.AcceleratorKey);
+        public AutomationProperty<string> AcceleratorKey => GetOrCreate(ref _acceleratorKey, PropertyIdLibrary.AcceleratorKey);
 
         /// <summary>
         /// Gets a string containing the access key character for the element.
         /// </summary>
-        public AutomationProperty<string> AccessKey => GetOrCreate(ref _accessKey, PropertyLibrary.AccessKey);
+        public AutomationProperty<string> AccessKey => GetOrCreate(ref _accessKey, PropertyIdLibrary.AccessKey);
 
-        public AutomationProperty<int[]> AnnotationObjects => GetOrCreate(ref _annotationObjects, PropertyLibrary.AnnotationObjects);
+        public AutomationProperty<int[]> AnnotationObjects => GetOrCreate(ref _annotationObjects, PropertyIdLibrary.AnnotationObjects);
 
-        public AutomationProperty<int[]> AnnotationTypes => GetOrCreate(ref _annotationTypes, PropertyLibrary.AnnotationTypes);
+        public AutomationProperty<int[]> AnnotationTypes => GetOrCreate(ref _annotationTypes, PropertyIdLibrary.AnnotationTypes);
 
         /// <summary>
         /// Gets a formatted string containing the Accessible Rich Internet Application (ARIA) property information for the element.
         /// </summary>
-        public AutomationProperty<string> AriaProperties => GetOrCreate(ref _ariaProperties, PropertyLibrary.AriaProperties);
+        public AutomationProperty<string> AriaProperties => GetOrCreate(ref _ariaProperties, PropertyIdLibrary.AriaProperties);
 
         /// <summary>
         /// Gets a string containing the Accessible Rich Internet Application (ARIA) role information for the element.
         /// </summary>
-        public AutomationProperty<string> AriaRole => GetOrCreate(ref _ariaRole, PropertyLibrary.AriaRole);
+        public AutomationProperty<string> AriaRole => GetOrCreate(ref _ariaRole, PropertyIdLibrary.AriaRole);
 
         /// <summary>
         /// Gets a string containing the UI Automation identifier (ID) for the element.
         /// </summary>
-        public AutomationProperty<string> AutomationId => GetOrCreate(ref _automationId, PropertyLibrary.AutomationId);
+        public AutomationProperty<string> AutomationId => GetOrCreate(ref _automationId, PropertyIdLibrary.AutomationId);
 
         /// <summary>
         /// Gets the coordinates of the rectangle that completely encloses the element.
         /// </summary>
-        public AutomationProperty<Rectangle> BoundingRectangle => GetOrCreate(ref _boundingRectangle, PropertyLibrary.BoundingRectangle);
+        public AutomationProperty<Rectangle> BoundingRectangle => GetOrCreate(ref _boundingRectangle, PropertyIdLibrary.BoundingRectangle);
 
-        public AutomationProperty<Point> CenterPoint => GetOrCreate(ref _centerPoint, PropertyLibrary.CenterPoint);
+        public AutomationProperty<Point> CenterPoint => GetOrCreate(ref _centerPoint, PropertyIdLibrary.CenterPoint);
 
         /// <summary>
         /// Gets a string containing the class name of the element as assigned by the control developer.
         /// </summary>
-        public AutomationProperty<string> ClassName => GetOrCreate(ref _className, PropertyLibrary.ClassName);
+        public AutomationProperty<string> ClassName => GetOrCreate(ref _className, PropertyIdLibrary.ClassName);
 
         /// <summary>
         /// Gets a point on the element that can be clicked. An element cannot be clicked if it is completely or partially obscured by another window.
         /// </summary>
-        public AutomationProperty<Point> ClickablePoint => GetOrCreate(ref _clickablePoint, PropertyLibrary.ClickablePoint);
+        public AutomationProperty<Point> ClickablePoint => GetOrCreate(ref _clickablePoint, PropertyIdLibrary.ClickablePoint);
 
         /// <summary>
         /// Gets an array of elements that are manipulated by the current element.
         /// </summary>
-        public AutomationProperty<AutomationElement[]> ControllerFor => GetOrCreate(ref _controllerFor, PropertyLibrary.ControllerFor);
+        public AutomationProperty<AutomationElement[]> ControllerFor => GetOrCreate(ref _controllerFor, PropertyIdLibrary.ControllerFor);
 
         /// <summary>
         /// Gets the <see cref="ControlType"/> of the element.
         /// </summary>
-        public AutomationProperty<ControlType> ControlType => GetOrCreate(ref _controlType, PropertyLibrary.ControlType);
+        public AutomationProperty<ControlType> ControlType => GetOrCreate(ref _controlType, PropertyIdLibrary.ControlType);
 
         /// <summary>
         /// Gets the locale identifier of the element.
         /// </summary>
-        public AutomationProperty<CultureInfo> Culture => GetOrCreate(ref _culture, PropertyLibrary.Culture);
+        public AutomationProperty<CultureInfo> Culture => GetOrCreate(ref _culture, PropertyIdLibrary.Culture);
 
         /// <summary>
         /// Gets an array of elements that provide more information about the current element.
         /// </summary>
-        public AutomationProperty<AutomationElement[]> DescribedBy => GetOrCreate(ref _describedBy, PropertyLibrary.DescribedBy);
+        public AutomationProperty<AutomationElement[]> DescribedBy => GetOrCreate(ref _describedBy, PropertyIdLibrary.DescribedBy);
 
-        public AutomationProperty<int> FillColor => GetOrCreate(ref _fillColor, PropertyLibrary.FillColor);
+        public AutomationProperty<int> FillColor => GetOrCreate(ref _fillColor, PropertyIdLibrary.FillColor);
 
-        public AutomationProperty<int> FillType => GetOrCreate(ref _fillType, PropertyLibrary.FillType);
+        public AutomationProperty<int> FillType => GetOrCreate(ref _fillType, PropertyIdLibrary.FillType);
 
         /// <summary>
         /// Gets an array of elements that suggests the reading order before the current element.
         /// </summary>
-        public AutomationProperty<AutomationElement[]> FlowsFrom => GetOrCreate(ref _flowsFrom, PropertyLibrary.FlowsFrom);
+        public AutomationProperty<AutomationElement[]> FlowsFrom => GetOrCreate(ref _flowsFrom, PropertyIdLibrary.FlowsFrom);
 
         /// <summary>
         /// Gets an array of elements that suggests the reading order after the current element.
         /// </summary>
-        public AutomationProperty<AutomationElement[]> FlowsTo => GetOrCreate(ref _flowsTo, PropertyLibrary.FlowsTo);
+        public AutomationProperty<AutomationElement[]> FlowsTo => GetOrCreate(ref _flowsTo, PropertyIdLibrary.FlowsTo);
 
         /// <summary>
         /// Gets the name of the underlying UI framework.
         /// </summary>
-        public AutomationProperty<string> FrameworkId => GetOrCreate(ref _frameworkId, PropertyLibrary.FrameworkId);
+        public AutomationProperty<string> FrameworkId => GetOrCreate(ref _frameworkId, PropertyIdLibrary.FrameworkId);
 
-        public AutomationProperty<string> FullDescription => GetOrCreate(ref _fullDescription, PropertyLibrary.FullDescription);
+        public AutomationProperty<string> FullDescription => GetOrCreate(ref _fullDescription, PropertyIdLibrary.FullDescription);
 
         /// <summary>
         /// Gets a value that indicates whether the element has keyboard focus.
         /// </summary>
-        public AutomationProperty<bool> HasKeyboardFocus => GetOrCreate(ref _hasKeyboardFocus, PropertyLibrary.HasKeyboardFocus);
+        public AutomationProperty<bool> HasKeyboardFocus => GetOrCreate(ref _hasKeyboardFocus, PropertyIdLibrary.HasKeyboardFocus);
 
         /// <summary>
         /// Gets the help text associated with the element.
         /// </summary>
-        public AutomationProperty<string> HelpText => GetOrCreate(ref _helpText, PropertyLibrary.HelpText);
+        public AutomationProperty<string> HelpText => GetOrCreate(ref _helpText, PropertyIdLibrary.HelpText);
 
         /// <summary>
         /// Gets a value that specifies whether the element is a content element.
         /// </summary>
-        public AutomationProperty<bool> IsContentElement => GetOrCreate(ref _isContentElement, PropertyLibrary.IsContentElement);
+        public AutomationProperty<bool> IsContentElement => GetOrCreate(ref _isContentElement, PropertyIdLibrary.IsContentElement);
 
         /// <summary>
         /// Gets a value that indicates whether the element is viewed as a control.
         /// </summary>
-        public AutomationProperty<bool> IsControlElement => GetOrCreate(ref _isControlElement, PropertyLibrary.IsControlElement);
+        public AutomationProperty<bool> IsControlElement => GetOrCreate(ref _isControlElement, PropertyIdLibrary.IsControlElement);
 
         /// <summary>
         /// Gets a value that indicates whether the entered or selected value is valid for the form rule associated with the element.
         /// </summary>
-        public AutomationProperty<bool> IsDataValidForForm => GetOrCreate(ref _isDataValidForForm, PropertyLibrary.IsDataValidForForm);
+        public AutomationProperty<bool> IsDataValidForForm => GetOrCreate(ref _isDataValidForForm, PropertyIdLibrary.IsDataValidForForm);
 
         /// <summary>
         /// Gets a value that indicates whether the user interface (UI) item referenced by the element is enabled.
         /// </summary>
-        public AutomationProperty<bool> IsEnabled => GetOrCreate(ref _isEnabled, PropertyLibrary.IsEnabled);
+        public AutomationProperty<bool> IsEnabled => GetOrCreate(ref _isEnabled, PropertyIdLibrary.IsEnabled);
 
         /// <summary>
         /// Gets a value that indicates whether the element can accept keyboard focus.
         /// </summary>
-        public AutomationProperty<bool> IsKeyboardFocusable => GetOrCreate(ref _isKeyboardFocusable, PropertyLibrary.IsKeyboardFocusable);
+        public AutomationProperty<bool> IsKeyboardFocusable => GetOrCreate(ref _isKeyboardFocusable, PropertyIdLibrary.IsKeyboardFocusable);
 
         /// <summary>
         /// Gets a value that indicates whether the element is visible on the screen.
         /// </summary>
-        public AutomationProperty<bool> IsOffscreen => GetOrCreate(ref _isOffscreen, PropertyLibrary.IsOffscreen);
+        public AutomationProperty<bool> IsOffscreen => GetOrCreate(ref _isOffscreen, PropertyIdLibrary.IsOffscreen);
 
         /// <summary>
         /// Gets a value that indicates whether the element contains protected content.
         /// </summary>
-        public AutomationProperty<bool> IsPassword => GetOrCreate(ref _isPassword, PropertyLibrary.IsPassword);
+        public AutomationProperty<bool> IsPassword => GetOrCreate(ref _isPassword, PropertyIdLibrary.IsPassword);
 
         /// <summary>
         /// Gets a value that indicates whether the element represents peripheral UI.
         /// Peripheral UI appears and supports user interaction, but does not take keyboard focus when it appears.
         /// Examples of peripheral UI includes popups, flyouts, context menus, or floating notifications.
         /// </summary>
-        public AutomationProperty<bool> IsPeripheral => GetOrCreate(ref _isPeripheral, PropertyLibrary.IsPeripheral);
+        public AutomationProperty<bool> IsPeripheral => GetOrCreate(ref _isPeripheral, PropertyIdLibrary.IsPeripheral);
 
         /// <summary>
         /// Gets a value that indicates whether the element is required to be filled out on a form.
         /// </summary>
-        public AutomationProperty<bool> IsRequiredForForm => GetOrCreate(ref _isRequiredForForm, PropertyLibrary.IsRequiredForForm);
+        public AutomationProperty<bool> IsRequiredForForm => GetOrCreate(ref _isRequiredForForm, PropertyIdLibrary.IsRequiredForForm);
 
         /// <summary>
         /// Gets a description of the status of an item within an element.
         /// </summary>
-        public AutomationProperty<string> ItemStatus => GetOrCreate(ref _itemStatus, PropertyLibrary.ItemStatus);
+        public AutomationProperty<string> ItemStatus => GetOrCreate(ref _itemStatus, PropertyIdLibrary.ItemStatus);
 
         /// <summary>
         /// Gets a description of the type of an item.
         /// </summary>
-        public AutomationProperty<string> ItemType => GetOrCreate(ref _itemType, PropertyLibrary.ItemType);
+        public AutomationProperty<string> ItemType => GetOrCreate(ref _itemType, PropertyIdLibrary.ItemType);
 
         /// <summary>
         /// Gets the element that contains the text label for this element.
         /// </summary>
-        public AutomationProperty<AutomationElement> LabeledBy => GetOrCreate(ref _labeledBy, PropertyLibrary.LabeledBy);
+        public AutomationProperty<AutomationElement> LabeledBy => GetOrCreate(ref _labeledBy, PropertyIdLibrary.LabeledBy);
 
-        public AutomationProperty<int> LandmarkType => GetOrCreate(ref _landmarkType, PropertyLibrary.LandmarkType);
+        public AutomationProperty<int> LandmarkType => GetOrCreate(ref _landmarkType, PropertyIdLibrary.LandmarkType);
 
-        public AutomationProperty<int> Level => GetOrCreate(ref _level, PropertyLibrary.Level);
+        public AutomationProperty<int> Level => GetOrCreate(ref _level, PropertyIdLibrary.Level);
 
         /// <summary>
         /// Gets a value which indicates the "politeness" level that a client should use to notify the user of changes to the live region.
         /// </summary>
-        public AutomationProperty<LiveSetting> LiveSetting => GetOrCreate(ref _liveSetting, PropertyLibrary.LiveSetting);
+        public AutomationProperty<LiveSetting> LiveSetting => GetOrCreate(ref _liveSetting, PropertyIdLibrary.LiveSetting);
 
         /// <summary>
         /// Gets a description of the control type.
         /// </summary>
-        public AutomationProperty<string> LocalizedControlType => GetOrCreate(ref _localizedControlType, PropertyLibrary.LocalizedControlType);
+        public AutomationProperty<string> LocalizedControlType => GetOrCreate(ref _localizedControlType, PropertyIdLibrary.LocalizedControlType);
 
-        public AutomationProperty<string> LocalizedLandmarkType => GetOrCreate(ref _localizedLandmarkType, PropertyLibrary.LocalizedLandmarkType);
+        public AutomationProperty<string> LocalizedLandmarkType => GetOrCreate(ref _localizedLandmarkType, PropertyIdLibrary.LocalizedLandmarkType);
 
         /// <summary>
         /// Gets the name of the element.
         /// </summary>
-        public AutomationProperty<string> Name => GetOrCreate(ref _name, PropertyLibrary.Name);
+        public AutomationProperty<string> Name => GetOrCreate(ref _name, PropertyIdLibrary.Name);
 
         /// <summary>
         /// Gets the handle of the element's window.
         /// </summary>
-        public AutomationProperty<IntPtr> NativeWindowHandle => GetOrCreate(ref _nativeWindowHandle, PropertyLibrary.NativeWindowHandle);
+        public AutomationProperty<IntPtr> NativeWindowHandle => GetOrCreate(ref _nativeWindowHandle, PropertyIdLibrary.NativeWindowHandle);
 
         /// <summary>
         /// Gets a value that indicates whether the provider exposes only elements that are visible.
         /// A provider can use this property to optimize performance when working with very large pieces of content.
         /// For example, as the user pages through a large piece of content, the provider can destroy content elements that are no longer visible.
         /// </summary>
-        public AutomationProperty<bool> OptimizeForVisualContent => GetOrCreate(ref _optimizeForVisualContent, PropertyLibrary.OptimizeForVisualContent);
+        public AutomationProperty<bool> OptimizeForVisualContent => GetOrCreate(ref _optimizeForVisualContent, PropertyIdLibrary.OptimizeForVisualContent);
 
         /// <summary>
         /// Gets the orientation of the control.
         /// </summary>
-        public AutomationProperty<OrientationType> Orientation => GetOrCreate(ref _orientation, PropertyLibrary.Orientation);
+        public AutomationProperty<OrientationType> Orientation => GetOrCreate(ref _orientation, PropertyIdLibrary.Orientation);
 
-        public AutomationProperty<int[]> OutlineColor => GetOrCreate(ref _outlineColor, PropertyLibrary.OutlineColor);
+        public AutomationProperty<int[]> OutlineColor => GetOrCreate(ref _outlineColor, PropertyIdLibrary.OutlineColor);
 
-        public AutomationProperty<int[]> OutlineThickness => GetOrCreate(ref _outlineThickness, PropertyLibrary.OutlineThickness);
+        public AutomationProperty<int[]> OutlineThickness => GetOrCreate(ref _outlineThickness, PropertyIdLibrary.OutlineThickness);
 
-        public AutomationProperty<int> PositionInSet => GetOrCreate(ref _positionInSet, PropertyLibrary.PositionInSet);
+        public AutomationProperty<int> PositionInSet => GetOrCreate(ref _positionInSet, PropertyIdLibrary.PositionInSet);
 
         /// <summary>
         /// Gets the process identifier (ID) of this element.
         /// </summary>
-        public AutomationProperty<int> ProcessId => GetOrCreate(ref _processId, PropertyLibrary.ProcessId);
+        public AutomationProperty<int> ProcessId => GetOrCreate(ref _processId, PropertyIdLibrary.ProcessId);
 
         /// <summary>
         /// Gets a formatted string containing the source information of the UI Automation provider for the element, including proxy information.
         /// </summary>
-        public AutomationProperty<string> ProviderDescription => GetOrCreate(ref _providerDescription, PropertyLibrary.ProviderDescription);
+        public AutomationProperty<string> ProviderDescription => GetOrCreate(ref _providerDescription, PropertyIdLibrary.ProviderDescription);
 
-        public AutomationProperty<int> Rotation => GetOrCreate(ref _rotation, PropertyLibrary.Rotation);
+        public AutomationProperty<int> Rotation => GetOrCreate(ref _rotation, PropertyIdLibrary.Rotation);
 
         /// <summary>
         /// Gets the unique identifier assigned to the user interface (UI) item.
         /// </summary>
-        public AutomationProperty<int[]> RuntimeId => GetOrCreate(ref _runtimeId, PropertyLibrary.RuntimeId);
+        public AutomationProperty<int[]> RuntimeId => GetOrCreate(ref _runtimeId, PropertyIdLibrary.RuntimeId);
 
-        public AutomationProperty<int[]> Size => GetOrCreate(ref _size, PropertyLibrary.Size);
+        public AutomationProperty<int[]> Size => GetOrCreate(ref _size, PropertyIdLibrary.Size);
 
-        public AutomationProperty<int> SizeOfSet => GetOrCreate(ref _sizeOfSet, PropertyLibrary.SizeOfSet);
+        public AutomationProperty<int> SizeOfSet => GetOrCreate(ref _sizeOfSet, PropertyIdLibrary.SizeOfSet);
 
-        public AutomationProperty<VisualEffects> VisualEffects => GetOrCreate(ref _visualEffects, PropertyLibrary.VisualEffects);
+        public AutomationProperty<VisualEffects> VisualEffects => GetOrCreate(ref _visualEffects, PropertyIdLibrary.VisualEffects);
 
         private AutomationProperty<T> GetOrCreate<T>(ref AutomationProperty<T> val, PropertyId propertyId)
         {

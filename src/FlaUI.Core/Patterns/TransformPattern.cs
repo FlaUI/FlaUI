@@ -5,7 +5,7 @@ namespace FlaUI.Core.Patterns
 {
     public interface ITransformPattern : IPattern
     {
-        ITransformPatternProperties Properties { get; }
+        ITransformPatternPropertyIds PropertyIds { get; }
 
         AutomationProperty<bool> CanMove { get; }
         AutomationProperty<bool> CanResize { get; }
@@ -16,7 +16,7 @@ namespace FlaUI.Core.Patterns
         void Rotate(double degrees);
     }
 
-    public interface ITransformPatternProperties
+    public interface ITransformPatternPropertyIds
     {
         PropertyId CanMove { get; }
         PropertyId CanResize { get; }
@@ -34,11 +34,11 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public ITransformPatternProperties Properties => Automation.PropertyLibrary.Transform;
+        public ITransformPatternPropertyIds PropertyIds => Automation.PropertyLibrary.Transform;
 
-        public AutomationProperty<bool> CanMove => GetOrCreate(ref _canMove, Properties.CanMove);
-        public AutomationProperty<bool> CanResize => GetOrCreate(ref _canResize, Properties.CanResize);
-        public AutomationProperty<bool> CanRotate => GetOrCreate(ref _canRotate, Properties.CanRotate);
+        public AutomationProperty<bool> CanMove => GetOrCreate(ref _canMove, PropertyIds.CanMove);
+        public AutomationProperty<bool> CanResize => GetOrCreate(ref _canResize, PropertyIds.CanResize);
+        public AutomationProperty<bool> CanRotate => GetOrCreate(ref _canRotate, PropertyIds.CanRotate);
 
         public abstract void Move(double x, double y);
         public abstract void Resize(double width, double height);

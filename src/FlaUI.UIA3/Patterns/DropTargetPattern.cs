@@ -20,13 +20,13 @@ namespace FlaUI.UIA3.Patterns
         }
     }
 
-    public class DropTargetPatternProperties : IDropTargetPatternProperties
+    public class DropTargetPatternPropertyIds : IDropTargetPatternPropertyIds
     {
         public PropertyId DropTargetEffect => DropTargetPattern.DropTargetEffectProperty;
         public PropertyId DropTargetEffects => DropTargetPattern.DropTargetEffectsProperty;
     }
 
-    public class DropTargetPatternEvents : IDropTargetPatternEvents
+    public class DropTargetPatternEventIds : IDropTargetPatternEventIds
     {
         public EventId DragEnterEvent => DropTargetPattern.DragEnterEvent;
         public EventId DragLeaveEvent => DropTargetPattern.DragLeaveEvent;

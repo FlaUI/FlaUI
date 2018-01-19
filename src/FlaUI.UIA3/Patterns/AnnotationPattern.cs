@@ -21,7 +21,7 @@ namespace FlaUI.UIA3.Patterns
         }
     }
 
-    public class AnnotationPatternProperties : IAnnotationPatternProperties
+    public class AnnotationPatternPropertyIds : IAnnotationPatternPropertyIds
     {
         public PropertyId AnnotationTypeId => AnnotationPattern.AnnotationTypeIdProperty;
         public PropertyId AnnotationTypeName => AnnotationPattern.AnnotationTypeNameProperty;

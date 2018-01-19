@@ -23,7 +23,7 @@ namespace FlaUI.UIA3.Patterns
         }
     }
 
-    public class DragPatternProperties : IDragPatternProperties
+    public class DragPatternPropertyIds : IDragPatternPropertyIds
     {
         public PropertyId DropEffect => DragPattern.DropEffectProperty;
         public PropertyId DropEffects => DragPattern.DropEffectsProperty;
@@ -31,7 +31,7 @@ namespace FlaUI.UIA3.Patterns
         public PropertyId GrabbedItems => DragPattern.GrabbedItemsProperty;
     }
 
-    public class DragPatternEvents : IDragPatternEvents
+    public class DragPatternEventIds : IDragPatternEventIds
     {
         public EventId DragCancelEvent => DragPattern.DragCancelEvent;
         public EventId DragCompleteEvent => DragPattern.DragCompleteEvent;

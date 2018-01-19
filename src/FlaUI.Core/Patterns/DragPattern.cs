@@ -6,8 +6,8 @@ namespace FlaUI.Core.Patterns
 {
     public interface IDragPattern : IPattern
     {
-        IDragPatternProperties Properties { get; }
-        IDragPatternEvents Events { get; }
+        IDragPatternPropertyIds PropertyIds { get; }
+        IDragPatternEventIds EventIds { get; }
 
         AutomationProperty<string> DropEffect { get; }
         AutomationProperty<string[]> DropEffects { get; }
@@ -15,7 +15,7 @@ namespace FlaUI.Core.Patterns
         AutomationProperty<AutomationElement[]> GrabbedItems { get; }
     }
 
-    public interface IDragPatternProperties
+    public interface IDragPatternPropertyIds
     {
         PropertyId DropEffect { get; }
         PropertyId DropEffects { get; }
@@ -23,7 +23,7 @@ namespace FlaUI.Core.Patterns
         PropertyId GrabbedItems { get; }
     }
 
-    public interface IDragPatternEvents
+    public interface IDragPatternEventIds
     {
         EventId DragCancelEvent { get; }
         EventId DragCompleteEvent { get; }
@@ -42,12 +42,12 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public IDragPatternProperties Properties => Automation.PropertyLibrary.Drag;
-        public IDragPatternEvents Events => Automation.EventLibrary.Drag;
+        public IDragPatternPropertyIds PropertyIds => Automation.PropertyLibrary.Drag;
+        public IDragPatternEventIds EventIds => Automation.EventLibrary.Drag;
 
-        public AutomationProperty<string> DropEffect => GetOrCreate(ref _dropEffect, Properties.DropEffect);
-        public AutomationProperty<string[]> DropEffects => GetOrCreate(ref _dropEffects, Properties.DropEffects);
-        public AutomationProperty<bool> IsGrabbed => GetOrCreate(ref _isGrabbed, Properties.IsGrabbed);
-        public AutomationProperty<AutomationElement[]> GrabbedItems => GetOrCreate(ref _grabbedItems, Properties.GrabbedItems);
+        public AutomationProperty<string> DropEffect => GetOrCreate(ref _dropEffect, PropertyIds.DropEffect);
+        public AutomationProperty<string[]> DropEffects => GetOrCreate(ref _dropEffects, PropertyIds.DropEffects);
+        public AutomationProperty<bool> IsGrabbed => GetOrCreate(ref _isGrabbed, PropertyIds.IsGrabbed);
+        public AutomationProperty<AutomationElement[]> GrabbedItems => GetOrCreate(ref _grabbedItems, PropertyIds.GrabbedItems);
     }
 }

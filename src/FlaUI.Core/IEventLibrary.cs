@@ -5,15 +5,15 @@ namespace FlaUI.Core
 {
     public interface IEventLibrary
     {
-        IAutomationElementEvents Element { get; }
-        IDragPatternEvents Drag { get; }
-        IDropTargetPatternEvents DropTarget { get; }
-        IInvokePatternEvents Invoke { get; }
-        ISelectionItemPatternEvents SelectionItem { get; }
-        ISelectionPatternEvents Selection { get; }
-        ISynchronizedInputPatternEvents SynchronizedInput { get; }
-        ITextEditPatternEvents TextEdit { get; }
-        ITextPatternEvents Text { get; }
-        IWindowPatternEvents Window { get; }
+        IAutomationElementEventIds Element { get; }
+        IDragPatternEventIds Drag { get; }
+        IDropTargetPatternEventIds DropTarget { get; }
+        IInvokePatternEventIds Invoke { get; }
+        ISelectionItemPatternEventIds SelectionItem { get; }
+        ISelectionPatternEventIds Selection { get; }
+        ISynchronizedInputPatternEventIds SynchronizedInput { get; }
+        ITextEditPatternEventIds TextEdit { get; }
+        ITextPatternEventIds Text { get; }
+        IWindowPatternEventIds Window { get; }
     }
 }

@@ -9,57 +9,57 @@ namespace FlaUI.UIA3
     {
         public UIA3PropertyLibrary()
         {
-            PatternAvailability = new UIA3AutomationElementPatternAvailabilityProperties();
-            Element = new UIA3AutomationElementProperties();
-            Annotation = new AnnotationPatternProperties();
-            Dock = new DockPatternProperties();
-            Drag = new DragPatternProperties();
-            DropTarget = new DropTargetPatternProperties();
-            ExpandCollapse = new ExpandCollapsePatternProperties();
-            GridItem = new GridItemPatternProperties();
-            Grid = new GridPatternProperties();
-            LegacyIAccessible = new LegacyIAccessiblePatternProperties();
-            MultipleView = new MultipleViewPatternProperties();
-            RangeValue = new RangeValuePatternProperties();
-            Scroll = new ScrollPatternProperties();
-            SelectionItem = new SelectionItemPatternProperties();
-            Selection = new SelectionPatternProperties();
-            Selection2 = new Selection2PatternProperties();
-            SpreadsheetItem = new SpreadsheetItemPatternProperties();
-            Styles = new StylesPatternProperties();
-            TableItem = new TableItemPatternProperties();
-            Table = new TablePatternProperties();
-            Toggle = new TogglePatternProperties();
-            Transform2 = new Transform2PatternProperties();
-            Transform = new TransformPatternProperties();
-            Value = new ValuePatternProperties();
-            Window = new WindowPatternProperties();
+            PatternAvailability = new UIA3AutomationElementPatternAvailabilityPropertyIds();
+            Element = new UIA3AutomationElementPropertyIds();
+            Annotation = new AnnotationPatternPropertyIds();
+            Dock = new DockPatternPropertyIds();
+            Drag = new DragPatternPropertyIds();
+            DropTarget = new DropTargetPatternPropertyIds();
+            ExpandCollapse = new ExpandCollapsePatternPropertyIds();
+            GridItem = new GridItemPatternPropertyIds();
+            Grid = new GridPatternPropertyIds();
+            LegacyIAccessible = new LegacyIAccessiblePatternPropertyIds();
+            MultipleView = new MultipleViewPatternPropertyIds();
+            RangeValue = new RangeValuePatternPropertyIds();
+            Scroll = new ScrollPatternPropertyIds();
+            SelectionItem = new SelectionItemPatternPropertyIds();
+            Selection = new SelectionPatternPropertyIds();
+            Selection2 = new Selection2PatternPropertyIds();
+            SpreadsheetItem = new SpreadsheetItemPatternPropertyIds();
+            Styles = new StylesPatternPropertyIds();
+            TableItem = new TableItemPatternPropertyIds();
+            Table = new TablePatternPropertyIds();
+            Toggle = new TogglePatternPropertyIds();
+            Transform2 = new Transform2PatternPropertyIds();
+            Transform = new TransformPatternPropertyIds();
+            Value = new ValuePatternPropertyIds();
+            Window = new WindowPatternPropertyIds();
         }
 
-        public IAutomationElementPatternAvailabilityProperties PatternAvailability { get; }
-        public IAutomationElementProperties Element { get; }
-        public IAnnotationPatternProperties Annotation { get; }
-        public IDockPatternProperties Dock { get; }
-        public IDragPatternProperties Drag { get; }
-        public IDropTargetPatternProperties DropTarget { get; }
-        public IExpandCollapsePatternProperties ExpandCollapse { get; }
-        public IGridItemPatternProperties GridItem { get; }
-        public IGridPatternProperties Grid { get; }
-        public ILegacyIAccessiblePatternProperties LegacyIAccessible { get; }
-        public IMultipleViewPatternProperties MultipleView { get; }
-        public IRangeValuePatternProperties RangeValue { get; }
-        public IScrollPatternProperties Scroll { get; }
-        public ISelectionItemPatternProperties SelectionItem { get; }
-        public ISelectionPatternProperties Selection { get; }
-        public ISelection2PatternProperties Selection2 { get; }
-        public ISpreadsheetItemPatternProperties SpreadsheetItem { get; }
-        public IStylesPatternProperties Styles { get; }
-        public ITableItemPatternProperties TableItem { get; }
-        public ITablePatternProperties Table { get; }
-        public ITogglePatternProperties Toggle { get; }
-        public ITransform2PatternProperties Transform2 { get; }
-        public ITransformPatternProperties Transform { get; }
-        public IValuePatternProperties Value { get; }
-        public IWindowPatternProperties Window { get; }
+        public IAutomationElementPatternAvailabilityPropertyIds PatternAvailability { get; }
+        public IAutomationElementPropertyIds Element { get; }
+        public IAnnotationPatternPropertyIds Annotation { get; }
+        public IDockPatternPropertyIds Dock { get; }
+        public IDragPatternPropertyIds Drag { get; }
+        public IDropTargetPatternPropertyIds DropTarget { get; }
+        public IExpandCollapsePatternPropertyIds ExpandCollapse { get; }
+        public IGridItemPatternPropertyIds GridItem { get; }
+        public IGridPatternPropertyIds Grid { get; }
+        public ILegacyIAccessiblePatternPropertyIds LegacyIAccessible { get; }
+        public IMultipleViewPatternPropertyIds MultipleView { get; }
+        public IRangeValuePatternPropertyIds RangeValue { get; }
+        public IScrollPatternPropertyIds Scroll { get; }
+        public ISelectionItemPatternPropertyIds SelectionItem { get; }
+        public ISelectionPatternPropertyIds Selection { get; }
+        public ISelection2PatternPropertyIds Selection2 { get; }
+        public ISpreadsheetItemPatternPropertyIds SpreadsheetItem { get; }
+        public IStylesPatternPropertyIds Styles { get; }
+        public ITableItemPatternPropertyIds TableItem { get; }
+        public ITablePatternPropertyIds Table { get; }
+        public ITogglePatternPropertyIds Toggle { get; }
+        public ITransform2PatternPropertyIds Transform2 { get; }
+        public ITransformPatternPropertyIds Transform { get; }
+        public IValuePatternPropertyIds Value { get; }
+        public IWindowPatternPropertyIds Window { get; }
     }
 }

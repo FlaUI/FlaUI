@@ -5,7 +5,7 @@ namespace FlaUI.Core.Patterns
 {
     public interface IMultipleViewPattern : IPattern
     {
-        IMultipleViewPatternProperties Properties { get; }
+        IMultipleViewPatternPropertyIds PropertyIds { get; }
 
         AutomationProperty<int> CurrentView { get; }
         AutomationProperty<int[]> SupportedViews { get; }
@@ -14,7 +14,7 @@ namespace FlaUI.Core.Patterns
         void SetCurrentView(int view);
     }
 
-    public interface IMultipleViewPatternProperties
+    public interface IMultipleViewPatternPropertyIds
     {
         PropertyId CurrentView { get; }
         PropertyId SupportedViews { get; }
@@ -30,10 +30,10 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public IMultipleViewPatternProperties Properties => Automation.PropertyLibrary.MultipleView;
+        public IMultipleViewPatternPropertyIds PropertyIds => Automation.PropertyLibrary.MultipleView;
 
-        public AutomationProperty<int> CurrentView => GetOrCreate(ref _currentView, Properties.CurrentView);
-        public AutomationProperty<int[]> SupportedViews => GetOrCreate(ref _supportedViews, Properties.SupportedViews);
+        public AutomationProperty<int> CurrentView => GetOrCreate(ref _currentView, PropertyIds.CurrentView);
+        public AutomationProperty<int[]> SupportedViews => GetOrCreate(ref _supportedViews, PropertyIds.SupportedViews);
 
         public abstract string GetViewName(int view);
         public abstract void SetCurrentView(int view);

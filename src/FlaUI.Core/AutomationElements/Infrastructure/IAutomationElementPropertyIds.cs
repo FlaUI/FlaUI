@@ -2,7 +2,7 @@
 
 namespace FlaUI.Core.AutomationElements.Infrastructure
 {
-    public interface IAutomationElementProperties
+    public interface IAutomationElementPropertyIds
     {
         PropertyId AcceleratorKey { get; }
         PropertyId AccessKey { get; }

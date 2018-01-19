@@ -22,7 +22,7 @@ namespace FlaUI.UIA3.Patterns
         }
     }
 
-    public class TogglePatternProperties : ITogglePatternProperties
+    public class TogglePatternPropertyIds : ITogglePatternPropertyIds
     {
         public PropertyId ToggleState => TogglePattern.ToggleStateProperty;
     }

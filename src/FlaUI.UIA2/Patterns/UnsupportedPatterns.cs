@@ -3,7 +3,7 @@ using FlaUI.Core.Patterns;
 
 namespace FlaUI.UIA2.Patterns
 {
-    public class AnnotationPatternProperties : IAnnotationPatternProperties
+    public class AnnotationPatternPropertyIds : IAnnotationPatternPropertyIds
     {
         public PropertyId AnnotationTypeId => PropertyId.NotSupportedByFramework;
         public PropertyId AnnotationTypeName => PropertyId.NotSupportedByFramework;
@@ -12,7 +12,7 @@ namespace FlaUI.UIA2.Patterns
         public PropertyId Target => PropertyId.NotSupportedByFramework;
     }
 
-    public class DragPatternProperties : IDragPatternProperties
+    public class DragPatternPropertyIds : IDragPatternPropertyIds
     {
         public PropertyId DropEffect => PropertyId.NotSupportedByFramework;
         public PropertyId DropEffects => PropertyId.NotSupportedByFramework;
@@ -20,27 +20,27 @@ namespace FlaUI.UIA2.Patterns
         public PropertyId GrabbedItems => PropertyId.NotSupportedByFramework;
     }
 
-    public class DragPatternEvents : IDragPatternEvents
+    public class DragPatternEventIds : IDragPatternEventIds
     {
         public EventId DragCancelEvent => EventId.NotSupportedByFramework;
         public EventId DragCompleteEvent => EventId.NotSupportedByFramework;
         public EventId DragStartEvent => EventId.NotSupportedByFramework;
     }
 
-    public class DropTargetPatternProperties : IDropTargetPatternProperties
+    public class DropTargetPatternPropertyIds : IDropTargetPatternPropertyIds
     {
         public PropertyId DropTargetEffect => PropertyId.NotSupportedByFramework;
         public PropertyId DropTargetEffects => PropertyId.NotSupportedByFramework;
     }
 
-    public class DropTargetPatternEvents : IDropTargetPatternEvents
+    public class DropTargetPatternEventIds : IDropTargetPatternEventIds
     {
         public EventId DragEnterEvent => EventId.NotSupportedByFramework;
         public EventId DragLeaveEvent => EventId.NotSupportedByFramework;
         public EventId DragCompleteEvent => EventId.NotSupportedByFramework;
     }
 
-    public class LegacyIAccessiblePatternProperties : ILegacyIAccessiblePatternProperties
+    public class LegacyIAccessiblePatternPropertyIds : ILegacyIAccessiblePatternPropertyIds
     {
         public PropertyId ChildId => PropertyId.NotSupportedByFramework;
         public PropertyId DefaultAction => PropertyId.NotSupportedByFramework;
@@ -54,7 +54,7 @@ namespace FlaUI.UIA2.Patterns
         public PropertyId Value => PropertyId.NotSupportedByFramework;
     }
 
-    public class Selection2PatternProperties : SelectionPatternProperties, ISelection2PatternProperties
+    public class Selection2PatternPropertyIds : SelectionPatternPropertyIds, ISelection2PatternPropertyIds
     {
         public PropertyId CurrentSelectedItem => PropertyId.NotSupportedByFramework;
         public PropertyId FirstSelectedItem => PropertyId.NotSupportedByFramework;
@@ -62,14 +62,14 @@ namespace FlaUI.UIA2.Patterns
         public PropertyId LastSelectedItem => PropertyId.NotSupportedByFramework;
     }
 
-    public class SpreadsheetItemPatternProperties : ISpreadsheetItemPatternProperties
+    public class SpreadsheetItemPatternPropertyIds : ISpreadsheetItemPatternPropertyIds
     {
         public PropertyId Formula => PropertyId.NotSupportedByFramework;
         public PropertyId AnnotationObjects => PropertyId.NotSupportedByFramework;
         public PropertyId AnnotationTypes => PropertyId.NotSupportedByFramework;
     }
 
-    public class StylesPatternProperties : IStylesPatternProperties
+    public class StylesPatternPropertyIds : IStylesPatternPropertyIds
     {
         public PropertyId ExtendedProperties => PropertyId.NotSupportedByFramework;
         public PropertyId FillColor => PropertyId.NotSupportedByFramework;
@@ -80,13 +80,13 @@ namespace FlaUI.UIA2.Patterns
         public PropertyId StyleName => PropertyId.NotSupportedByFramework;
     }
 
-    public class TextEditPatternEvents : TextPatternEvents, ITextEditPatternEvents
+    public class TextEditPatternEventIdIds : TextPatternEventIds, ITextEditPatternEventIds
     {
         public EventId ConversionTargetChangedEvent => EventId.NotSupportedByFramework;
         public EventId TextChangedEvent2 => EventId.NotSupportedByFramework;
     }
 
-    public class Transform2PatternProperties : TransformPatternProperties, ITransform2PatternProperties
+    public class Transform2PatternPropertyIds : TransformPatternPropertyIds, ITransform2PatternPropertyIds
     {
         public PropertyId CanZoom => PropertyId.NotSupportedByFramework;
         public PropertyId ZoomLevel => PropertyId.NotSupportedByFramework;

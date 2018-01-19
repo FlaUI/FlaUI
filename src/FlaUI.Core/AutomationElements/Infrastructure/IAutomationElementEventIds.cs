@@ -2,7 +2,7 @@
 
 namespace FlaUI.Core.AutomationElements.Infrastructure
 {
-    public interface IAutomationElementEvents
+    public interface IAutomationElementEventIds
     {
         EventId AsyncContentLoadedEvent { get; }
         EventId ChangesEvent { get; }

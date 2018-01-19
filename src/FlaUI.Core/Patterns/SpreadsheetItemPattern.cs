@@ -7,14 +7,14 @@ namespace FlaUI.Core.Patterns
 {
     public interface ISpreadsheetItemPattern : IPattern
     {
-        ISpreadsheetItemPatternProperties Properties { get; }
+        ISpreadsheetItemPatternPropertyIds PropertyIds { get; }
 
         AutomationProperty<string> Formula { get; }
         AutomationProperty<AutomationElement[]> AnnotationObjects { get; }
         AutomationProperty<AnnotationType[]> AnnotationTypes { get; }
     }
 
-    public interface ISpreadsheetItemPatternProperties
+    public interface ISpreadsheetItemPatternPropertyIds
     {
         PropertyId Formula { get; }
         PropertyId AnnotationObjects { get; }
@@ -32,10 +32,10 @@ namespace FlaUI.Core.Patterns
         {
         }
 
-        public ISpreadsheetItemPatternProperties Properties => Automation.PropertyLibrary.SpreadsheetItem;
+        public ISpreadsheetItemPatternPropertyIds PropertyIds => Automation.PropertyLibrary.SpreadsheetItem;
 
-        public AutomationProperty<string> Formula => GetOrCreate(ref _formula, Properties.Formula);
-        public AutomationProperty<AutomationElement[]> AnnotationObjects => GetOrCreate(ref _annotationObjects, Properties.AnnotationObjects);
-        public AutomationProperty<AnnotationType[]> AnnotationTypes => GetOrCreate(ref _annotationTypes, Properties.AnnotationTypes);
+        public AutomationProperty<string> Formula => GetOrCreate(ref _formula, PropertyIds.Formula);
+        public AutomationProperty<AutomationElement[]> AnnotationObjects => GetOrCreate(ref _annotationObjects, PropertyIds.AnnotationObjects);
+        public AutomationProperty<AnnotationType[]> AnnotationTypes => GetOrCreate(ref _annotationTypes, PropertyIds.AnnotationTypes);
     }
 }

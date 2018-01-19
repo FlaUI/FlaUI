@@ -28,7 +28,7 @@ namespace FlaUI.Core.UITests.Patterns
             Assert.That(invokePattern, Is.Not.Null);
             var invokeFired = false;
             var waitHandle = new ManualResetEventSlim(false);
-            var registeredEvent = button.RegisterEvent(invokePattern.Events.InvokedEvent, TreeScope.Element, (element, id) =>
+            var registeredEvent = button.RegisterEvent(invokePattern.EventIds.InvokedEvent, TreeScope.Element, (element, id) =>
             {
                 invokeFired = true;
                 waitHandle.Set();
@@ -38,7 +38,7 @@ namespace FlaUI.Core.UITests.Patterns
             Assert.That(waitResult, Is.True);
             Assert.That(button.Properties.Name, Is.Not.EqualTo(origButtonText));
             Assert.That(invokeFired, Is.True);
-            button.RemoveAutomationEventHandler(invokePattern.Events.InvokedEvent, registeredEvent);
+            button.RemoveAutomationEventHandler(invokePattern.EventIds.InvokedEvent, registeredEvent);
         }
     }
 }
