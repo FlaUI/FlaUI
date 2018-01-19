@@ -22,6 +22,7 @@ namespace FlaUI.UIA3
         public PropertyId IsScrollItemPatternAvailable => AutomationObjectIds.IsScrollItemPatternAvailableProperty;
         public PropertyId IsScrollPatternAvailable => AutomationObjectIds.IsScrollPatternAvailableProperty;
         public PropertyId IsSelectionItemPatternAvailable => AutomationObjectIds.IsSelectionItemPatternAvailableProperty;
+        public PropertyId IsSelection2PatternAvailable => AutomationObjectIds.IsSelectionPattern2AvailableProperty;
         public PropertyId IsSelectionPatternAvailable => AutomationObjectIds.IsSelectionPatternAvailableProperty;
         public PropertyId IsSpreadsheetPatternAvailable => AutomationObjectIds.IsSpreadsheetPatternAvailableProperty;
         public PropertyId IsSpreadsheetItemPatternAvailable => AutomationObjectIds.IsSpreadsheetItemPatternAvailableProperty;
