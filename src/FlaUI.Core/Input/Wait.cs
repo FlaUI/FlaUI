@@ -13,15 +13,15 @@ namespace FlaUI.Core.Input
         private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(1);
 
         /// <summary>
-        /// Waits for a generic time which was found to be sufficient to allow
-        /// input (mouse, keyboard, ...) do be processed
+        /// Waits a little to allow inputs (mouse, keyboard, ...) to be processed.
         /// </summary>
-        public static void UntilInputIsProcessed()
+        /// <param name="waitTimeout">An optional timeout. If no value or null is passed, the timeout is 100ms.</param>
+        public static void UntilInputIsProcessed(TimeSpan? waitTimeout = null)
         {
             // Let the thread some time to process the system's hardware input queue.
             // For details see this post: http://blogs.msdn.com/b/oldnewthing/archive/2014/02/13/10499047.aspx
-            // TODO: Should this be configurable?
-            Thread.Sleep(100);
+            var waitTime = (waitTimeout ?? TimeSpan.FromMilliseconds(100)).TotalMilliseconds;
+            Thread.Sleep((int)waitTime);
         }
 
         public static bool UntilResponsive(AutomationElement automationElement)
