@@ -10,7 +10,7 @@ namespace FlaUI.Core.Tools
 
         public static void WhileException(Action retryAction, TimeSpan timeout, TimeSpan? retryInterval = null)
         {
-            var startTime = DateTime.Now;
+            var startTime = DateTime.UtcNow;
             while (true)
             {
                 try
@@ -31,7 +31,7 @@ namespace FlaUI.Core.Tools
 
         public static T WhileException<T>(Func<T> retryMethod, TimeSpan timeout, TimeSpan? retryInterval = null)
         {
-            var startTime = DateTime.Now;
+            var startTime = DateTime.UtcNow;
             while (true)
             {
                 try
@@ -51,7 +51,7 @@ namespace FlaUI.Core.Tools
 
         public static T While<T>(Func<T> retryMethod, Predicate<T> whilePredicate, TimeSpan timeout, TimeSpan? retryInterval = null)
         {
-            var startTime = DateTime.Now;
+            var startTime = DateTime.UtcNow;
             while (true)
             {
                 var obj = retryMethod();
@@ -69,7 +69,7 @@ namespace FlaUI.Core.Tools
 
         public static void While(Func<bool> whilePredicate, TimeSpan timeout, TimeSpan? retryInterval = null)
         {
-            var startTime = DateTime.Now;
+            var startTime = DateTime.UtcNow;
             while (true)
             {
                 if (!whilePredicate())
@@ -91,7 +91,7 @@ namespace FlaUI.Core.Tools
             {
                 return false;
             }
-            return DateTime.Now.Subtract(startTime) >= timeout;
+            return DateTime.UtcNow.Subtract(startTime) >= timeout;
         }
     }
 }
