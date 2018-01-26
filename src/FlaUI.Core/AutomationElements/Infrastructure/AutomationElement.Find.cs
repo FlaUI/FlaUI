@@ -16,7 +16,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         {
             bool WhilePredicate(AutomationElement[] elements) => elements.Length == 0;
             AutomationElement[] RetryMethod() => FrameworkAutomationElement.FindAll(treeScope, condition);
-            return Retry.While(RetryMethod, WhilePredicate, timeout);
+            return Retry.While(RetryMethod, WhilePredicate, timeout) ?? new AutomationElement[0];
         }
 
         /// <summary>
