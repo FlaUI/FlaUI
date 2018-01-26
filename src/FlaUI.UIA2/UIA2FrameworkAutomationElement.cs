@@ -33,11 +33,13 @@ namespace FlaUI.UIA2
         /// </summary>
         public UIA.AutomationElement NativeElement { get; }
 
+        /// <inheritdoc />
         public override void SetFocus()
         {
             NativeElement.SetFocus();
         }
 
+        /// <inheritdoc />
         protected override object InternalGetPropertyValue(int propertyId, bool cached, bool useDefaultIfNotSupported)
         {
             var property = UIA.AutomationProperty.LookupById(propertyId);
@@ -48,6 +50,7 @@ namespace FlaUI.UIA2
             return returnValue;
         }
 
+        /// <inheritdoc />
         protected override object InternalGetPattern(int patternId, bool cached)
         {
             var pattern = UIA.AutomationPattern.LookupById(patternId);
