@@ -308,11 +308,11 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
                 var durationInMs = (int)(duration ?? TimeSpan.FromSeconds(2)).TotalMilliseconds;
                 if (blocking)
                 {
-                    FrameworkAutomationElement.Automation.OverlayManager.ShowBlocking(rectangle, color, durationInMs);
+                    Automation.OverlayManager.ShowBlocking(rectangle, color, durationInMs);
                 }
                 else
                 {
-                    FrameworkAutomationElement.Automation.OverlayManager.Show(rectangle, color, durationInMs);
+                    Automation.OverlayManager.Show(rectangle, color, durationInMs);
                 }
             }
             return this;

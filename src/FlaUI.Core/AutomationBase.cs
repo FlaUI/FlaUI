@@ -2,13 +2,14 @@
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.EventHandlers;
+using FlaUI.Core.Identifiers;
 using FlaUI.Core.Overlay;
 using FlaUI.Core.Shapes;
 
 namespace FlaUI.Core
 {
     /// <summary>
-    /// Base class for the native automation object
+    /// Base class for the native automation object.
     /// </summary>
     public abstract class AutomationBase : IDisposable
     {
@@ -23,18 +24,33 @@ namespace FlaUI.Core
             var unused = PatternLibrary.AllForCurrentFramework;
         }
 
+        /// <summary>
+        /// Provides a library with the existing <see cref="PropertyId"/>s.
+        /// </summary>
         public IPropertyLibrary PropertyLibrary { get; }
 
+        /// <summary>
+        /// Provides a library with the existing <see cref="EventId"/>s.
+        /// </summary>
         public IEventLibrary EventLibrary { get; }
 
+        /// <summary>
+        /// Provides a library with the existing <see cref="PatternId"/>s.
+        /// </summary>
         public IPatternLibrary PatternLibrary { get; }
 
+        /// <summary>
+        /// Provides a factory to create conditions for searching.
+        /// </summary>
         public ConditionFactory ConditionFactory { get; }
 
+        /// <summary>
+        /// Provides a manager for displaying overlays.
+        /// </summary>
         public IOverlayManager OverlayManager { get; }
 
         /// <summary>
-        /// Factory to create <see cref="ITreeWalker"/>s.
+        /// Provides a factory to create <see cref="ITreeWalker"/>s.
         /// </summary>
         public abstract ITreeWalkerFactory TreeWalkerFactory { get; }
 
@@ -64,15 +80,19 @@ namespace FlaUI.Core
         public abstract AutomationElement GetDesktop();
 
         /// <summary>
-        /// Creates an <see cref="AutomationElement" /> from a given point
+        /// Creates an <see cref="AutomationElement" /> from a given point.
         /// </summary>
         public abstract AutomationElement FromPoint(Point point);
 
         /// <summary>
-        /// Creates an <see cref="AutomationElement" /> from a given windows handle (HWND)
+        /// Creates an <see cref="AutomationElement" /> from a given windows handle (HWND).
         /// </summary>
         public abstract AutomationElement FromHandle(IntPtr hwnd);
 
+        /// <summary>
+        /// Gets the currently focused element as an <see cref="AutomationElement"/>.
+        /// </summary>
+        /// <returns></returns>
         public abstract AutomationElement FocusedElement();
 
         public abstract IAutomationFocusChangedEventHandler RegisterFocusChangedEvent(Action<AutomationElement> action);
@@ -80,14 +100,17 @@ namespace FlaUI.Core
         public abstract void UnRegisterFocusChangedEvent(IAutomationFocusChangedEventHandler eventHandler);
 
         /// <summary>
-        /// Removes all registered event handlers
+        /// Removes all registered event handlers.
         /// </summary>
         public abstract void UnregisterAllEvents();
 
+        /// <summary>
+        /// Compares two automation elements for equality.
+        /// </summary>
         public abstract bool Compare(AutomationElement element1, AutomationElement element2);
 
         /// <summary>
-        /// Cleans up the resources
+        /// Cleans up the resources.
         /// </summary>
         public void Dispose()
         {
