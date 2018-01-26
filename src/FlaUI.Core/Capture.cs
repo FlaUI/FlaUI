@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows;
@@ -26,18 +26,22 @@ namespace FlaUI.Core
         /// <summary>
         /// Captures an element and returns the image.
         /// </summary>
-        public static CaptureImage Element(AutomationElement element)
+        public static CaptureImage Element(AutomationElement element, bool focus = true)
         {
-            element.Focus();
+            if (focus) {
+                element.Focus();
+            }
             return Rectangle(element.Properties.BoundingRectangle.Value);
         }
 
         /// <summary>
         /// Captures a rectangle inside an element and returns the image.
         /// </summary>
-        public static CaptureImage ElementRectangle(AutomationElement element, Shapes.Rectangle rectangle)
+        public static CaptureImage ElementRectangle(AutomationElement element, Shapes.Rectangle rectangle, bool focus = true)
         {
-            element.Focus();
+            if (focus) {
+                element.Focus();
+            }
             var elementBounds = element.BoundingRectangle;
             // Calculate the rectangle that should be captured
             var capturingRectangle = new Shapes.Rectangle(elementBounds.Left + rectangle.Left, elementBounds.Top + rectangle.Top, rectangle.Width, rectangle.Height);
