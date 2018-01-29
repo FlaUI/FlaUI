@@ -21,7 +21,8 @@ namespace FlaUI.Core.Tools
         /// <summary>
         /// Retries while the given method evaluates to true.
         /// </summary>
-        public static void While(Func<bool> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false)
+        /// <returns>True if the condition met, false otherwise.</returns>
+        public static bool While(Func<bool> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false)
         {
             timeout = timeout ?? Timeout;
             interval = interval ?? Interval;
@@ -33,7 +34,7 @@ namespace FlaUI.Core.Tools
                 {
                     if (!checkMethod())
                     {
-                        return;
+                        return true;
                     }
                 }
                 catch (Exception ex)
@@ -50,6 +51,7 @@ namespace FlaUI.Core.Tools
             {
                 throw new TimeoutException("Timeout occurred in retry", lastException);
             }
+            return false;
         }
 
         /// <summary>
@@ -91,7 +93,8 @@ namespace FlaUI.Core.Tools
         /// <summary>
         /// Retries while the given method has an exception.
         /// </summary>
-        public static void WhileException(Action retryMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false)
+        /// <returns>True if the method completed successfully, false otherwise.</returns>
+        public static bool WhileException(Action retryMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false)
         {
             timeout = timeout ?? Timeout;
             interval = interval ?? Interval;
@@ -102,7 +105,7 @@ namespace FlaUI.Core.Tools
                 try
                 {
                     retryMethod();
-                    return;
+                    return true;
                 }
                 catch (Exception ex)
                 {
@@ -114,6 +117,7 @@ namespace FlaUI.Core.Tools
             {
                 throw new TimeoutException("Timeout occurred in retry", lastException);
             }
+            return false;
         }
 
         /// <summary>

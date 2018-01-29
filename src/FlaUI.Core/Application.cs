@@ -219,20 +219,22 @@ namespace FlaUI.Core
         /// Waits as long as the application is busy.
         /// </summary>
         /// <param name="waitTimeout">An optional timeout. If null is passed, the timeout is infinite.</param>
-        public void WaitWhileBusy(TimeSpan? waitTimeout = null)
+        /// <returns>True if the application is idle, false otherwise.</returns>
+        public bool WaitWhileBusy(TimeSpan? waitTimeout = null)
         {
             var waitTime = (waitTimeout ?? TimeSpan.FromMilliseconds(-1)).TotalMilliseconds;
-            _process.WaitForInputIdle((int)waitTime);
+            return _process.WaitForInputIdle((int)waitTime);
         }
 
         /// <summary>
         /// Waits until the main handle is set.
         /// </summary>
         /// <param name="waitTimeout">An optional timeout. If null is passed, the timeout is infinite.</param>
-        public void WaitWhileMainHandleIsMissing(TimeSpan? waitTimeout = null)
+        /// <returns>True a main window handle was found, false otherwise.</returns>
+        public bool WaitWhileMainHandleIsMissing(TimeSpan? waitTimeout = null)
         {
             var waitTime = waitTimeout ?? TimeSpan.FromMilliseconds(-1);
-            Retry.While(() =>
+            return Retry.While(() =>
             {
                 _process.Refresh();
                 return _process.MainWindowHandle == IntPtr.Zero;
