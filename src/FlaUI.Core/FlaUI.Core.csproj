@@ -29,8 +29,8 @@
     <IntermediateOutputPath>obj\$(Configuration)\Signed</IntermediateOutputPath>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='net45'">
-    <Reference Include="System.Windows" />
+  <ItemGroup Condition="'$(TargetFramework)'!='net35'">
+    <Reference Include="System.Xaml" />
   </ItemGroup>
 
   <ItemGroup>
