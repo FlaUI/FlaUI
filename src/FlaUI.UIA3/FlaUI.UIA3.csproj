@@ -8,7 +8,7 @@
   <PropertyGroup Label="Package">
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageOutputPath>..\..\artifacts</PackageOutputPath>
-    <Version>2.0.0-alpha2</Version>
+    <Version>2.0.0-alpha3</Version>
     <Company>FlauTech</Company>
     <Product>FlaUI</Product>
     <Authors>Roemer</Authors>
