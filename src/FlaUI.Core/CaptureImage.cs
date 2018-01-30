@@ -67,7 +67,6 @@ namespace FlaUI.Core
             Bitmap.Save(filePath, imageFormat);
         }
 
-
         /// <summary>
         /// Converts a WinForms <see cref="Bitmap"/> to a WPF friendly <see cref="BitmapImage"/>.
         /// </summary>
