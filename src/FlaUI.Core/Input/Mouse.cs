@@ -64,8 +64,7 @@ namespace FlaUI.Core.Input
         {
             get
             {
-                POINT point;
-                User32.GetCursorPos(out point);
+                User32.GetCursorPos(out POINT point);
                 return point;
             }
             set
@@ -262,12 +261,7 @@ namespace FlaUI.Core.Input
         /// <param name="distance">The distance to drag, + for right, - for left</param>
         public static void DragHorizontally(MouseButton mouseButton, Point startingPoint, double distance)
         {
-            Position = startingPoint;
-            var currentX = Position.X;
-            var currentY = Position.Y;
-            Down(mouseButton);
-            Position = new Point(currentX + distance, currentY);
-            Up(mouseButton);
+            Drag(mouseButton, startingPoint, distance, 0);
         }
 
         /// <summary>
@@ -278,11 +272,26 @@ namespace FlaUI.Core.Input
         /// <param name="distance">The distance to drag, + for down, - for up</param>
         public static void DragVertically(MouseButton mouseButton, Point startingPoint, double distance)
         {
+            Drag(mouseButton, startingPoint, 0, distance);
+        }
+
+        /// <summary>
+        /// Drags the mouse from the starting point with the given distance.
+        /// </summary>
+        /// <param name="mouseButton">The mouse button to use for dragging.</param>
+        /// <param name="startingPoint">Starting point of the drag.</param>
+        /// <param name="distanceX">The x distance to drag, + for down, - for up.</param>
+        /// <param name="distanceY">The y distance to drag, + for right, - for left.</param>
+        public static void Drag(MouseButton mouseButton, Point startingPoint, double distanceX, double distanceY)
+        {
             Position = startingPoint;
+            Wait.UntilInputIsProcessed();
             var currentX = Position.X;
             var currentY = Position.Y;
             Down(mouseButton);
-            Position = new Point(currentX, currentY + distance);
+            Wait.UntilInputIsProcessed();
+            Position = new Point(currentX + distanceX, currentY + distanceY);
+            Wait.UntilInputIsProcessed();
             Up(mouseButton);
         }
 

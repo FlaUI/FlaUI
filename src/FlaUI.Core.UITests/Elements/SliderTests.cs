@@ -1,5 +1,4 @@
 ﻿using FlaUI.Core.AutomationElements;
-using FlaUI.Core.Input;
 using FlaUI.Core.Shapes;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
@@ -24,7 +23,6 @@ namespace FlaUI.Core.UITests.Elements
             var thumb = slider.Thumb;
             var oldPos = thumb.Properties.BoundingRectangle.Value.Center;
             thumb.SlideHorizontally(50);
-            Wait.UntilInputIsProcessed();
             TestUtilities.AssertPointsAreSame(thumb.Properties.BoundingRectangle.Value.Center, new Point(oldPos.X + 50, oldPos.Y), 1);
         }
 
