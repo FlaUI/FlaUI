@@ -7,9 +7,12 @@ using UIA = Interop.UIAutomationClient;
 
 namespace FlaUI.UIA3.EventHandlers
 {
+    /// <summary>
+    /// UIA3 implementation of a property changed event handler.
+    /// </summary>
     public class UIA3PropertyChangedEventHandler : PropertyChangedEventHandlerBase, UIA.IUIAutomationPropertyChangedEventHandler
     {
-        public UIA3PropertyChangedEventHandler(AutomationBase automation, Action<AutomationElement, PropertyId, object> callAction) : base(automation, callAction)
+        public UIA3PropertyChangedEventHandler(FrameworkAutomationElementBase frameworkElement, Action<AutomationElement, PropertyId, object> callAction) : base(frameworkElement, callAction)
         {
         }
 

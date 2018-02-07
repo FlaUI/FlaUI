@@ -7,11 +7,14 @@ using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.EventHandlers
 {
+    /// <summary>
+    /// UIA2 implementation of a property changed event handler.
+    /// </summary>
     public class UIA2PropertyChangedEventHandler : PropertyChangedEventHandlerBase
     {
-        public UIA.AutomationPropertyChangedEventHandler EventHandler { get; private set; }
+        public UIA.AutomationPropertyChangedEventHandler EventHandler { get; }
 
-        public UIA2PropertyChangedEventHandler(AutomationBase automation, Action<AutomationElement, PropertyId, object> callAction) : base(automation, callAction)
+        public UIA2PropertyChangedEventHandler(FrameworkAutomationElementBase frameworkElement, Action<AutomationElement, PropertyId, object> callAction) : base(frameworkElement, callAction)
         {
             EventHandler = HandlePropertyChangedEvent;
         }

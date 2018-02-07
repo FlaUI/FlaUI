@@ -28,5 +28,10 @@ namespace FlaUI.UIA3.Converters
         {
             return nativeTextRange2 == null ? null : new UIA3TextRange2(automation, nativeTextRange2);
         }
+
+        public static UIA3TextRange3 NativeToManaged(UIA3Automation automation, UIA.IUIAutomationTextRange3 nativeTextRange3)
+        {
+            return nativeTextRange3 == null ? null : new UIA3TextRange3(automation, nativeTextRange3);
+        }
     }
 }

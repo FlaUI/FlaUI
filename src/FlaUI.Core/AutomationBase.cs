@@ -95,9 +95,15 @@ namespace FlaUI.Core
         /// <returns></returns>
         public abstract AutomationElement FocusedElement();
 
-        public abstract IAutomationFocusChangedEventHandler RegisterFocusChangedEvent(Action<AutomationElement> action);
+        /// <summary>
+        /// Registers for a focus changed event.
+        /// </summary>
+        public abstract FocusChangedEventHandlerBase RegisterFocusChangedEvent(Action<AutomationElement> action);
 
-        public abstract void UnRegisterFocusChangedEvent(IAutomationFocusChangedEventHandler eventHandler);
+        /// <summary>
+        /// Unregisters the given focus changed event handler.
+        /// </summary>
+        public abstract void UnregisterFocusChangedEvent(FocusChangedEventHandlerBase eventHandler);
 
         /// <summary>
         /// Removes all registered event handlers.

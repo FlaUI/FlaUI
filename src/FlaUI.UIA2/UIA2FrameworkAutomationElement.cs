@@ -105,6 +105,7 @@ namespace FlaUI.UIA2
             return nativeElement == null ? null : AutomationElementConverter.NativeToManaged(Automation, nativeElement);
         }
 
+        /// <inheritdoc />
         public override bool TryGetClickablePoint(out Point point)
         {
             var success = NativeElement.TryGetClickablePoint(out System.Windows.Point outPoint);
@@ -119,45 +120,71 @@ namespace FlaUI.UIA2
             return success;
         }
 
-        public override IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
+        /// <inheritdoc />
+        public override AutomationEventHandlerBase RegisterAutomationEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
         {
-            var eventHandler = new UIA2BasicEventHandler(Automation, action);
+            var eventHandler = new UIA2AutomationEventHandler(this, @event, action);
             UIA.Automation.AddAutomationEventHandler(UIA.AutomationEvent.LookupById(@event.Id), NativeElement, (UIA.TreeScope)treeScope, eventHandler.EventHandler);
             return eventHandler;
         }
 
-        public override IAutomationPropertyChangedEventHandler RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, PropertyId[] properties)
+        /// <inheritdoc />
+        public override PropertyChangedEventHandlerBase RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, PropertyId[] properties)
         {
-            var eventHandler = new UIA2PropertyChangedEventHandler(Automation, action);
+            var eventHandler = new UIA2PropertyChangedEventHandler(this, action);
             UIA.Automation.AddAutomationPropertyChangedEventHandler(NativeElement, (UIA.TreeScope)treeScope, eventHandler.EventHandler, properties.Select(p => UIA.AutomationProperty.LookupById(p.Id)).ToArray());
             return eventHandler;
         }
 
-        public override IAutomationStructureChangedEventHandler RegisterStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action)
+        /// <inheritdoc />
+        public override StructureChangedEventHandlerBase RegisterStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action)
         {
-            var eventHandler = new UIA2StructureChangedEventHandler(Automation, action);
+            var eventHandler = new UIA2StructureChangedEventHandler(this, action);
             UIA.Automation.AddStructureChangedEventHandler(NativeElement, (UIA.TreeScope)treeScope, eventHandler.EventHandler);
             return eventHandler;
         }
 
-        public override INotificationEventHandler RegisterNotificationEvent()
+        /// <inheritdoc />
+        public override NotificationEventHandlerBase RegisterNotificationEvent(TreeScope treeScope, Action<AutomationElement, NotificationKind, NotificationProcessing, string, string> action)
         {
             throw new NotSupportedByFrameworkException();
         }
 
-        public override void RemoveAutomationEventHandler(EventId @event, IAutomationEventHandler eventHandler)
+        /// <inheritdoc />
+        public override TextEditTextChangedEventHandlerBase RegisterTextEditTextChangedEventHandler(TreeScope treeScope, TextEditChangeType textEditChangeType, Action<AutomationElement, TextEditChangeType, string[]> action)
         {
-            UIA.Automation.RemoveAutomationEventHandler(UIA.AutomationEvent.LookupById(@event.Id), NativeElement, ((UIA2BasicEventHandler)eventHandler).EventHandler);
+            throw new NotSupportedByFrameworkException();
         }
 
-        public override void RemovePropertyChangedEventHandler(IAutomationPropertyChangedEventHandler eventHandler)
+        /// <inheritdoc />
+        public override void UnregisterAutomationEventHandler(AutomationEventHandlerBase eventHandler)
+        {
+            var frameworkEventHandler = (UIA2AutomationEventHandler)eventHandler;
+            UIA.Automation.RemoveAutomationEventHandler(UIA.AutomationEvent.LookupById(frameworkEventHandler.Event.Id), NativeElement, frameworkEventHandler.EventHandler);
+        }
+
+        /// <inheritdoc />
+        public override void UnregisterPropertyChangedEventHandler(PropertyChangedEventHandlerBase eventHandler)
         {
             UIA.Automation.RemoveAutomationPropertyChangedEventHandler(NativeElement, ((UIA2PropertyChangedEventHandler)eventHandler).EventHandler);
         }
 
-        public override void RemoveStructureChangedEventHandler(IAutomationStructureChangedEventHandler eventHandler)
+        /// <inheritdoc />
+        public override void UnregisterStructureChangedEventHandler(StructureChangedEventHandlerBase eventHandler)
         {
             UIA.Automation.RemoveStructureChangedEventHandler(NativeElement, ((UIA2StructureChangedEventHandler)eventHandler).EventHandler);
+        }
+
+        /// <inheritdoc />
+        public override void UnregisterNotificationEventHandler(NotificationEventHandlerBase eventHandler)
+        {
+            throw new NotSupportedByFrameworkException();
+        }
+
+        /// <inheritdoc />
+        public override void UnregisterTextEditTextChangedEventHandler(TextEditTextChangedEventHandlerBase eventHandler)
+        {
+            throw new NotSupportedByFrameworkException();
         }
 
         public override PatternId[] GetSupportedPatterns()

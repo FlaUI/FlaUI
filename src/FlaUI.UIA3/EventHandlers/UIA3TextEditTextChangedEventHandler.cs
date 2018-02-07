@@ -1,4 +1,5 @@
-﻿using FlaUI.Core;
+﻿using System;
+using FlaUI.Core;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.EventHandlers;
@@ -6,9 +7,12 @@ using UIA = Interop.UIAutomationClient;
 
 namespace FlaUI.UIA3.EventHandlers
 {
+    /// <summary>
+    /// UIA3 implementation of a text edit text changed event handler.
+    /// </summary>
     public class UIA3TextEditTextChangedEventHandler : TextEditTextChangedEventHandlerBase, UIA.IUIAutomationTextEditTextChangedEventHandler
     {
-        public UIA3TextEditTextChangedEventHandler(AutomationBase automation) : base(automation)
+        public UIA3TextEditTextChangedEventHandler(FrameworkAutomationElementBase frameworkElement, Action<AutomationElement, TextEditChangeType, string[]> callAction) : base(frameworkElement, callAction)
         {
         }
 

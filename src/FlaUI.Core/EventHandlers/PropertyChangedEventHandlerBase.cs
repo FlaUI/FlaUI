@@ -4,19 +4,28 @@ using FlaUI.Core.Identifiers;
 
 namespace FlaUI.Core.EventHandlers
 {
-    public abstract class PropertyChangedEventHandlerBase : EventHandlerBase, IAutomationPropertyChangedEventHandler
+    /// <summary>
+    /// Base event handler for property changed event handlers.
+    /// </summary>
+    public abstract class PropertyChangedEventHandlerBase : ElementEventHandlerBase
     {
         private readonly Action<AutomationElement, PropertyId, object> _callAction;
 
-        protected PropertyChangedEventHandlerBase(AutomationBase automation, Action<AutomationElement, PropertyId, object> callAction)
-            : base(automation)
+        protected PropertyChangedEventHandlerBase(FrameworkAutomationElementBase frameworkElement, Action<AutomationElement, PropertyId, object> callAction)
+            : base(frameworkElement)
         {
             _callAction = callAction;
         }
 
-        public void HandlePropertyChangedEvent(AutomationElement sender, PropertyId propertyId, object newValue)
+        protected void HandlePropertyChangedEvent(AutomationElement sender, PropertyId propertyId, object newValue)
         {
             _callAction(sender, propertyId, newValue);
+        }
+
+        /// <inheritdoc />
+        protected override void UnregisterEventHandler()
+        {
+            FrameworkElement.UnregisterPropertyChangedEventHandler(this);
         }
     }
 }

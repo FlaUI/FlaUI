@@ -268,14 +268,61 @@ namespace FlaUI.Core
         /// <returns>The found element or null if no element was found.</returns>
         public abstract AutomationElement FindIndexed(TreeScope treeScope, int index, ConditionBase condition);
 
+        /// <summary>
+        /// Tries to get a clickable point.
+        /// </summary>
         public abstract bool TryGetClickablePoint(out Point point);
-        public abstract IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action);
-        public abstract IAutomationPropertyChangedEventHandler RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, PropertyId[] properties);
-        public abstract IAutomationStructureChangedEventHandler RegisterStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action);
-        public abstract INotificationEventHandler RegisterNotificationEvent();
-        public abstract void RemoveAutomationEventHandler(EventId @event, IAutomationEventHandler eventHandler);
-        public abstract void RemovePropertyChangedEventHandler(IAutomationPropertyChangedEventHandler eventHandler);
-        public abstract void RemoveStructureChangedEventHandler(IAutomationStructureChangedEventHandler eventHandler);
+
+        /// <summary>
+        /// Registers a method that handles the given automation event.
+        /// </summary>
+        public abstract AutomationEventHandlerBase RegisterAutomationEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action);
+
+        /// <summary>
+        /// Registers a method that handles a property changed event.
+        /// </summary>
+        public abstract PropertyChangedEventHandlerBase RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, PropertyId[] properties);
+
+        /// <summary>
+        /// Registers a method that handles a structure changed event.
+        /// </summary>
+        public abstract StructureChangedEventHandlerBase RegisterStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action);
+
+        /// <summary>
+        /// Registers a method that handles a notification event.
+        /// </summary>
+        public abstract NotificationEventHandlerBase RegisterNotificationEvent(TreeScope treeScope, Action<AutomationElement, NotificationKind, NotificationProcessing, string, string> action);
+
+        /// <summary>
+        /// Registers a method that handles a text edit text changed event.
+        /// </summary>
+        public abstract TextEditTextChangedEventHandlerBase RegisterTextEditTextChangedEventHandler(TreeScope treeScope, TextEditChangeType textEditChangeType, Action<AutomationElement, TextEditChangeType, string[]> action);
+
+        /// <summary>
+        /// Unregisters the given automation event handler.
+        /// </summary>
+        public abstract void UnregisterAutomationEventHandler(AutomationEventHandlerBase eventHandler);
+
+        /// <summary>
+        /// Unregisters the given property changed event handler.
+        /// </summary>
+        public abstract void UnregisterPropertyChangedEventHandler(PropertyChangedEventHandlerBase eventHandler);
+
+        /// <summary>
+        /// Unregisters the given structure changed event handler.
+        /// </summary>
+        public abstract void UnregisterStructureChangedEventHandler(StructureChangedEventHandlerBase eventHandler);
+
+        /// <summary>
+        /// Unregisters the given notification event handler.
+        /// </summary>
+        public abstract void UnregisterNotificationEventHandler(NotificationEventHandlerBase eventHandler);
+
+        /// <summary>
+        /// Unregisters the given text edit text changed event handler.
+        /// </summary>
+        public abstract void UnregisterTextEditTextChangedEventHandler(TextEditTextChangedEventHandlerBase eventHandler);
+
         public abstract PatternId[] GetSupportedPatterns();
         public abstract PropertyId[] GetSupportedProperties();
         public abstract AutomationElement GetUpdatedCache();

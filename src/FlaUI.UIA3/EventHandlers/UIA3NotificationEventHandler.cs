@@ -1,4 +1,5 @@
-﻿using FlaUI.Core;
+﻿using System;
+using FlaUI.Core;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.EventHandlers;
@@ -8,7 +9,7 @@ namespace FlaUI.UIA3.EventHandlers
 {
     public class UIA3NotificationEventHandler : NotificationEventHandlerBase, UIA.IUIAutomationNotificationEventHandler
     {
-        public UIA3NotificationEventHandler(AutomationBase automation) : base(automation)
+        public UIA3NotificationEventHandler(FrameworkAutomationElementBase frameworkElement, Action<AutomationElement, NotificationKind, NotificationProcessing, string, string> callAction) : base(frameworkElement, callAction)
         {
         }
 

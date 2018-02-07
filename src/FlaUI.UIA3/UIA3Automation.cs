@@ -13,7 +13,7 @@ using UIA = Interop.UIAutomationClient;
 namespace FlaUI.UIA3
 {
     /// <summary>
-    /// Automation implementation for UIA3
+    /// Automation implementation for UIA3.
     /// </summary>
     public class UIA3Automation : AutomationBase
     {
@@ -47,30 +47,31 @@ namespace FlaUI.UIA3
         }
 
         /// <summary>
-        /// Native object for the ui automation
+        /// Native object for the ui automation.
         /// </summary>
         public UIA.IUIAutomation NativeAutomation { get; }
 
         /// <summary>
-        /// Native object for Windows 8 automation
+        /// Native object for Windows 8 automation.
         /// </summary>
         public UIA.IUIAutomation2 NativeAutomation2 => GetAutomationAs<UIA.IUIAutomation2>();
 
         /// <summary>
-        /// Native object for Windows 8.1 automation
+        /// Native object for Windows 8.1 automation.
         /// </summary>
         public UIA.IUIAutomation3 NativeAutomation3 => GetAutomationAs<UIA.IUIAutomation3>();
 
         /// <summary>
-        /// Native object for Windows 10 automation
+        /// Native object for Windows 10 automation.
         /// </summary>
         public UIA.IUIAutomation4 NativeAutomation4 => GetAutomationAs<UIA.IUIAutomation4>();
 
         /// <summary>
-        /// Native object for second Windows 10 automation
+        /// Native object for second Windows 10 automation.
         /// </summary>
         public UIA.IUIAutomation5 NativeAutomation5 => GetAutomationAs<UIA.IUIAutomation5>();
 
+        /// <inheritdoc />
         public override AutomationElement GetDesktop()
         {
             return Com.Call(() =>
@@ -82,9 +83,7 @@ namespace FlaUI.UIA3
             });
         }
 
-        /// <summary>
-        /// Creates an <see cref="AutomationElement" /> from a given point
-        /// </summary>
+        /// <inheritdoc />
         public override AutomationElement FromPoint(Point point)
         {
             return Com.Call(() =>
@@ -97,9 +96,7 @@ namespace FlaUI.UIA3
             });
         }
 
-        /// <summary>
-        /// Creates an <see cref="AutomationElement" /> from a given windows handle (HWND)
-        /// </summary>
+        /// <inheritdoc />
         public override AutomationElement FromHandle(IntPtr hwnd)
         {
             return Com.Call(() =>
@@ -111,6 +108,7 @@ namespace FlaUI.UIA3
             });
         }
 
+        /// <inheritdoc />
         public override AutomationElement FocusedElement()
         {
             return Com.Call(() =>
@@ -122,18 +120,21 @@ namespace FlaUI.UIA3
             });
         }
 
-        public override IAutomationFocusChangedEventHandler RegisterFocusChangedEvent(Action<AutomationElement> action)
+        /// <inheritdoc />
+        public override FocusChangedEventHandlerBase RegisterFocusChangedEvent(Action<AutomationElement> action)
         {
             var eventHandler = new UIA3FocusChangedEventHandler(this, action);
             Com.Call(() => NativeAutomation.AddFocusChangedEventHandler(null, eventHandler));
             return eventHandler;
         }
 
-        public override void UnRegisterFocusChangedEvent(IAutomationFocusChangedEventHandler eventHandler)
+        /// <inheritdoc />
+        public override void UnregisterFocusChangedEvent(FocusChangedEventHandlerBase eventHandler)
         {
             NativeAutomation.RemoveFocusChangedEventHandler((UIA3FocusChangedEventHandler)eventHandler);
         }
 
+        /// <inheritdoc />
         public override void UnregisterAllEvents()
         {
             try
@@ -146,13 +147,14 @@ namespace FlaUI.UIA3
             }
         }
 
+        /// <inheritdoc />
         public override bool Compare(AutomationElement element1, AutomationElement element2)
         {
             return NativeAutomation.CompareElements(element1.ToNative(), element2.ToNative()) != 0;
         }
 
         /// <summary>
-        /// Initializes the automation object with the correct instance
+        /// Initializes the automation object with the correct instance.
         /// </summary>
         private UIA.IUIAutomation InitializeAutomation()
         {

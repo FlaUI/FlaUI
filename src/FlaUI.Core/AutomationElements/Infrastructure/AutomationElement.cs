@@ -303,59 +303,51 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Registers the given event
+        /// Registers the given automation event.
         /// </summary>
-        public IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
+        public EventHandlerBase RegisterAutomationEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
         {
             if (Equals(@event, EventId.NotSupportedByFramework))
             {
                 throw new NotSupportedByFrameworkException();
             }
-            return FrameworkAutomationElement.RegisterEvent(@event, treeScope, action);
+            return FrameworkAutomationElement.RegisterAutomationEvent(@event, treeScope, action);
         }
 
         /// <summary>
-        /// Registers a property changed event with the given property
+        /// Registers a property changed event with the given property.
         /// </summary>
-        public IAutomationPropertyChangedEventHandler RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, params PropertyId[] properties)
+        public PropertyChangedEventHandlerBase RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, params PropertyId[] properties)
         {
             return FrameworkAutomationElement.RegisterPropertyChangedEvent(treeScope, action, properties);
         }
 
         /// <summary>
-        /// Registers a structure changed event
+        /// Registers a structure changed event.
         /// </summary>
-        public IAutomationStructureChangedEventHandler RegisterStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action)
+        public StructureChangedEventHandlerBase RegisterStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action)
         {
             return FrameworkAutomationElement.RegisterStructureChangedEvent(treeScope, action);
         }
 
         /// <summary>
-        /// Removes the given event handler for the event
+        /// Registers a notification event.
         /// </summary>
-        public void RemoveAutomationEventHandler(EventId @event, IAutomationEventHandler eventHandler)
+        public NotificationEventHandlerBase RegisterNotificationEvent(TreeScope treeScope, Action<AutomationElement, NotificationKind, NotificationProcessing, string, string> action)
         {
-            FrameworkAutomationElement.RemoveAutomationEventHandler(@event, eventHandler);
+            return FrameworkAutomationElement.RegisterNotificationEvent(treeScope, action);
         }
 
         /// <summary>
-        /// Removes the given property changed event handler
+        /// Registers a text edit text changed event.
         /// </summary>
-        public void RemovePropertyChangedEventHandler(IAutomationPropertyChangedEventHandler eventHandler)
+        public TextEditTextChangedEventHandlerBase RegisterTextEditTextChangedEventHandler(TreeScope treeScope, TextEditChangeType textEditChangeType, Action<AutomationElement, TextEditChangeType, string[]> action)
         {
-            FrameworkAutomationElement.RemovePropertyChangedEventHandler(eventHandler);
+            return FrameworkAutomationElement.RegisterTextEditTextChangedEventHandler(treeScope, textEditChangeType, action);
         }
 
         /// <summary>
-        /// Removes the given structure changed event handler
-        /// </summary>
-        public void RemoveStructureChangedEventHandler(IAutomationStructureChangedEventHandler eventHandler)
-        {
-            FrameworkAutomationElement.RemoveStructureChangedEventHandler(eventHandler);
-        }
-
-        /// <summary>
-        /// Gets the available patterns for an element via properties
+        /// Gets the available patterns for an element via properties.
         /// </summary>
         public PatternId[] GetSupportedPatterns()
         {
@@ -363,7 +355,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Checks if the given pattern is available for the element via properties
+        /// Checks if the given pattern is available for the element via properties.
         /// </summary>
         public bool IsPatternSupported(PatternId pattern)
         {

@@ -4,15 +4,27 @@ using FlaUI.Core.Definitions;
 
 namespace FlaUI.Core.EventHandlers
 {
-    public abstract class TextEditTextChangedEventHandlerBase : EventHandlerBase, ITextEditTextChangedEventHandler
+    /// <summary>
+    /// ase event handler for text edit text changed event handlers.
+    /// </summary>
+    public abstract class TextEditTextChangedEventHandlerBase : ElementEventHandlerBase
     {
-        public TextEditTextChangedEventHandlerBase(AutomationBase automation) : base(automation)
+        private readonly Action<AutomationElement, TextEditChangeType, string[]> _callAction;
+
+        protected TextEditTextChangedEventHandlerBase(FrameworkAutomationElementBase frameworkElement, Action<AutomationElement, TextEditChangeType, string[]> callAction) : base(frameworkElement)
         {
+            _callAction = callAction;
         }
 
-        public void HandleTextEditTextChangedEvent(AutomationElement sender, TextEditChangeType textEditChangeType, string[] eventStrings)
+        protected void HandleTextEditTextChangedEvent(AutomationElement sender, TextEditChangeType textEditChangeType, string[] eventStrings)
         {
-            throw new NotImplementedException();
+            _callAction(sender, textEditChangeType, eventStrings);
+        }
+
+        /// <inheritdoc />
+        protected override void UnregisterEventHandler()
+        {
+            FrameworkElement.UnregisterTextEditTextChangedEventHandler(this);
         }
     }
 }

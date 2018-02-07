@@ -4,16 +4,25 @@ using FlaUI.Core.Definitions;
 
 namespace FlaUI.Core.EventHandlers
 {
-    public abstract class NotificationEventHandlerBase : EventHandlerBase, INotificationEventHandler
+    public abstract class NotificationEventHandlerBase : ElementEventHandlerBase
     {
-        public NotificationEventHandlerBase(AutomationBase automation) : base(automation)
+        private readonly Action<AutomationElement, NotificationKind, NotificationProcessing, string, string> _callAction;
+
+        protected NotificationEventHandlerBase(FrameworkAutomationElementBase frameworkElement, Action<AutomationElement, NotificationKind, NotificationProcessing, string, string> callAction) : base(frameworkElement)
         {
+            _callAction = callAction;
         }
 
-        public void HandleNotificationEvent(AutomationElement sender, NotificationKind notificationKind,
+        protected void HandleNotificationEvent(AutomationElement sender, NotificationKind notificationKind,
             NotificationProcessing notificationProcessing, string displayString, string activityId)
         {
-            throw new NotImplementedException();
+            _callAction(sender, notificationKind, notificationProcessing, displayString, activityId);
+        }
+
+        /// <inheritdoc />
+        protected override void UnregisterEventHandler()
+        {
+            FrameworkElement.UnregisterNotificationEventHandler(this);
         }
     }
 }

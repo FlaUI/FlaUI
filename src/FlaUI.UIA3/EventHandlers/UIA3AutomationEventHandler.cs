@@ -7,9 +7,9 @@ using UIA = Interop.UIAutomationClient;
 
 namespace FlaUI.UIA3.EventHandlers
 {
-    public class UIA3BasicEventHandler : BasicEventHandlerBase, UIA.IUIAutomationEventHandler
+    public class UIA3AutomationEventHandler : AutomationEventHandlerBase, UIA.IUIAutomationEventHandler
     {
-        public UIA3BasicEventHandler(AutomationBase automation, Action<AutomationElement, EventId> callAction) : base(automation, callAction)
+        public UIA3AutomationEventHandler(FrameworkAutomationElementBase frameworkElement, EventId @event, Action<AutomationElement, EventId> callAction) : base(frameworkElement, @event, callAction)
         {
         }
 

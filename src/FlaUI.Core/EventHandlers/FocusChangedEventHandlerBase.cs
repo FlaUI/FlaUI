@@ -3,7 +3,10 @@ using FlaUI.Core.AutomationElements.Infrastructure;
 
 namespace FlaUI.Core.EventHandlers
 {
-    public abstract class FocusChangedEventHandlerBase : EventHandlerBase, IAutomationFocusChangedEventHandler
+    /// <summary>
+    /// Base event handler for focus changed event handlers.
+    /// </summary>
+    public abstract class FocusChangedEventHandlerBase : EventHandlerBase
     {
         private readonly Action<AutomationElement> _callAction;
 
@@ -13,9 +16,15 @@ namespace FlaUI.Core.EventHandlers
             _callAction = callAction;
         }
 
-        public void HandleFocusChangedEvent(AutomationElement sender)
+        protected void HandleFocusChangedEvent(AutomationElement sender)
         {
             _callAction(sender);
+        }
+
+        /// <inheritdoc />
+        protected override void UnregisterEventHandler()
+        {
+            Automation.UnregisterFocusChangedEvent(this);
         }
     }
 }

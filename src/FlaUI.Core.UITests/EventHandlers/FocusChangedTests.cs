@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using System.Threading;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
@@ -31,7 +30,7 @@ namespace FlaUI.Core.UITests.EventHandlers
                 Thread.Sleep(100);
                 Keyboard.Press(VirtualKeyShort.ESCAPE);
                 Thread.Sleep(100);
-                automation.UnRegisterFocusChangedEvent(x);
+                x.Dispose();
                 mainWindow.Close();
             }
             app.Dispose();

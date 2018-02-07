@@ -7,11 +7,11 @@ using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.EventHandlers
 {
-    public class UIA2BasicEventHandler : BasicEventHandlerBase
+    public class UIA2AutomationEventHandler : AutomationEventHandlerBase
     {
-        public UIA.AutomationEventHandler EventHandler { get; private set; }
+        public UIA.AutomationEventHandler EventHandler { get; }
 
-        public UIA2BasicEventHandler(AutomationBase automation, Action<AutomationElement, EventId> callAction) : base(automation, callAction)
+        public UIA2AutomationEventHandler(FrameworkAutomationElementBase frameworkElement, EventId @event, Action<AutomationElement, EventId> callAction) : base(frameworkElement, @event, callAction)
         {
             EventHandler = HandleAutomationEvent;
         }

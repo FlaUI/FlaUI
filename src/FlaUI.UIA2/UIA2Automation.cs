@@ -12,7 +12,7 @@ using UIA = System.Windows.Automation;
 namespace FlaUI.UIA2
 {
     /// <summary>
-    /// Automation implementation for UIA2
+    /// Automation implementation for UIA2.
     /// </summary>
     public class UIA2Automation : AutomationBase
     {
@@ -44,50 +44,55 @@ namespace FlaUI.UIA2
             set => throw new NotSupportedByFrameworkException();
         }
 
+        /// <inheritdoc />
         public override AutomationElement GetDesktop()
         {
             var nativeElement = InternalGetNativeElement(() => UIA.AutomationElement.RootElement);
             return AutomationElementConverter.NativeToManaged(this, nativeElement);
         }
 
+        /// <inheritdoc />
         public override AutomationElement FromPoint(Point point)
         {
             var nativeElement = InternalGetNativeElement(() => UIA.AutomationElement.FromPoint(point));
             return AutomationElementConverter.NativeToManaged(this, nativeElement);
         }
 
-        /// <summary>
-        /// Creates an <see cref="UIA.AutomationElement" /> from a given windows handle (HWND)
-        /// </summary>
+        /// <inheritdoc />
         public override AutomationElement FromHandle(IntPtr hwnd)
         {
             var nativeElement = InternalGetNativeElement(() => UIA.AutomationElement.FromHandle(hwnd));
             return AutomationElementConverter.NativeToManaged(this, nativeElement);
         }
 
+        /// <inheritdoc />
         public override AutomationElement FocusedElement()
         {
             var nativeElement = InternalGetNativeElement(() => UIA.AutomationElement.FocusedElement);
             return AutomationElementConverter.NativeToManaged(this, nativeElement);
         }
 
-        public override IAutomationFocusChangedEventHandler RegisterFocusChangedEvent(Action<AutomationElement> action)
+        /// <inheritdoc />
+        public override FocusChangedEventHandlerBase RegisterFocusChangedEvent(Action<AutomationElement> action)
         {
             var eventHandler = new UIA2FocusChangedEventHandler(this, action);
             UIA.Automation.AddAutomationFocusChangedEventHandler(eventHandler.EventHandler);
             return eventHandler;
         }
 
-        public override void UnRegisterFocusChangedEvent(IAutomationFocusChangedEventHandler eventHandler)
+        /// <inheritdoc />
+        public override void UnregisterFocusChangedEvent(FocusChangedEventHandlerBase eventHandler)
         {
             UIA.Automation.RemoveAutomationFocusChangedEventHandler(((UIA2FocusChangedEventHandler)eventHandler).EventHandler);
         }
 
+        /// <inheritdoc />
         public override void UnregisterAllEvents()
         {
             UIA.Automation.RemoveAllEventHandlers();
         }
 
+        /// <inheritdoc />
         public override bool Compare(AutomationElement element1, AutomationElement element2)
         {
             return UIA.Automation.Compare(element1.ToNative(), element2.ToNative());

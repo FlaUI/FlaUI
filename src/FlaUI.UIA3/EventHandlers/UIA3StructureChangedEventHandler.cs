@@ -7,9 +7,12 @@ using UIA = Interop.UIAutomationClient;
 
 namespace FlaUI.UIA3.EventHandlers
 {
+    /// <summary>
+    /// UIA3 implementation of a structure changed event handler.
+    /// </summary>
     public class UIA3StructureChangedEventHandler : StructureChangedEventHandlerBase, UIA.IUIAutomationStructureChangedEventHandler
     {
-        public UIA3StructureChangedEventHandler(AutomationBase automation, Action<AutomationElement, StructureChangeType, int[]> callAction) : base(automation, callAction)
+        public UIA3StructureChangedEventHandler(FrameworkAutomationElementBase frameworkElement, Action<AutomationElement, StructureChangeType, int[]> callAction) : base(frameworkElement, callAction)
         {
         }
 

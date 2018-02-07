@@ -141,6 +141,12 @@ namespace FlaUI.UIA3
             return TextRangeConverter.NativeToManaged(Automation, nativeRange2);
         }
 
+        public UIA3TextRange3 AsTextRange3()
+        {
+            var nativeRange3 = (UIA.IUIAutomationTextRange3)NativeRange;
+            return TextRangeConverter.NativeToManaged(Automation, nativeRange3);
+        }
+
         protected UIA.IUIAutomationTextRange ToNativeRange(ITextRange range)
         {
             var concreteTextRange = range as UIA3TextRange;

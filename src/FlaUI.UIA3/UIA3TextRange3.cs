@@ -2,6 +2,9 @@
 using FlaUI.Core;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Identifiers;
+using FlaUI.Core.Tools;
+using FlaUI.UIA3.Converters;
+using FlaUI.UIA3.Extensions;
 using UIA = Interop.UIAutomationClient;
 
 namespace FlaUI.UIA3
@@ -16,19 +19,23 @@ namespace FlaUI.UIA3
             NativeRange3 = nativeRange;
         }
 
-        public AutomationElement GetEnclosingElementBuildCache()
+        public AutomationElement GetEnclosingElementBuildCache(CacheRequest cacheRequest)
         {
-            throw new NotImplementedException();
+            var nativeCacheRequest = cacheRequest.ToNative(Automation);
+            var nativeElement = Com.Call(() => NativeRange3.GetEnclosingElementBuildCache(nativeCacheRequest));
+            return AutomationElementConverter.NativeToManaged(Automation, nativeElement);
         }
 
-        public AutomationElement[] GetChildrenBuildCache()
+        public AutomationElement[] GetChildrenBuildCache(CacheRequest cacheRequest)
         {
-            throw new NotImplementedException();
+            var nativeCacheRequest = cacheRequest.ToNative(Automation);
+            var nativeElements = Com.Call(() => NativeRange3.GetChildrenBuildCache(nativeCacheRequest));
+            return AutomationElementConverter.NativeArrayToManaged(Automation, nativeElements);
         }
 
         public object[] GetAttributeValues(TextAttributeId[] attributeIds)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Currently not done as the parameter of the interop is wrong.");
         }
     }
 }
