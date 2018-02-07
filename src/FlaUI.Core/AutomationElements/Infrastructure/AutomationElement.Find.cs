@@ -3,30 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
-using FlaUI.Core.Tools;
 
 namespace FlaUI.Core.AutomationElements.Infrastructure
 {
     public partial class AutomationElement
     {
         /// <summary>
-        /// Finds all elements in the given treescope and with the given condition within the given timeout.
+        /// Finds all elements in the given treescope and with the given condition.
         /// </summary>
-        public AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition, TimeSpan? timeout = null)
+        public AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition)
         {
-            bool WhilePredicate(AutomationElement[] elements) => elements.Length == 0;
-            AutomationElement[] RetryMethod() => FrameworkAutomationElement.FindAll(treeScope, condition);
-            return Retry.While(RetryMethod, WhilePredicate, timeout) ?? new AutomationElement[0];
+            return FrameworkAutomationElement.FindAll(treeScope, condition);
         }
 
         /// <summary>
-        /// Finds the first element which is in the given treescope with the given condition within the given timeout period.
+        /// Finds the first element which is in the given treescope with the given condition.
         /// </summary>
-        public AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition, TimeSpan? timeout = null)
+        public AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
         {
-            bool WhilePredicate(AutomationElement element) => element == null;
-            AutomationElement RetryMethod() => FrameworkAutomationElement.FindFirst(treeScope, condition);
-            return Retry.While(RetryMethod, WhilePredicate, timeout);
+            return FrameworkAutomationElement.FindFirst(treeScope, condition);
         }
 
         /// <summary>
@@ -109,13 +104,11 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Finds the element which is in the given treescope with the given condition and the given index within the given timeout period.
+        /// Finds the element which is in the given treescope with the given condition and the given index.
         /// </summary>
-        public AutomationElement FindAt(TreeScope treeScope, int index, ConditionBase condition, TimeSpan? timeout = null)
+        public AutomationElement FindAt(TreeScope treeScope, int index, ConditionBase condition)
         {
-            bool WhilePredicate(AutomationElement element) => element == null;
-            AutomationElement RetryMethod() => FrameworkAutomationElement.FindIndexed(treeScope, index, condition);
-            return Retry.While(RetryMethod, WhilePredicate, timeout);
+            return FrameworkAutomationElement.FindIndexed(treeScope, index, condition);
         }
 
         /// <summary>
