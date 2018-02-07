@@ -259,66 +259,6 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         }
 
         /// <summary>
-        /// Draws a red highlight around the element.
-        /// </summary>
-        public AutomationElement DrawHighlight()
-        {
-            return DrawHighlight(Colors.Red);
-        }
-
-        /// <summary>
-        /// Draws a manually colored highlight around the element.
-        /// </summary>
-        public AutomationElement DrawHighlight(WpfColor color)
-        {
-            return DrawHighlight(true, color);
-        }
-
-        /// <summary>
-        /// Draws a manually colored highlight around the element.
-        /// </summary>
-        public AutomationElement DrawHighlight(GdiColor color)
-        {
-            return DrawHighlight(true, color);
-        }
-
-        /// <summary>
-        /// Draw a highlight around the element with the given settings.
-        /// </summary>
-        /// <param name="blocking">Flag to indicate if further execution waits until the highlight is removed.</param>
-        /// <param name="color">The color to draw the highlight.</param>
-        /// <param name="duration">The duration how long the highlight is shown.</param>
-        /// <remarks>Override for winforms color.</remarks>
-        public AutomationElement DrawHighlight(bool blocking, GdiColor color, TimeSpan? duration = null)
-        {
-            return DrawHighlight(blocking, WpfColor.FromArgb(color.A, color.R, color.G, color.B), duration);
-        }
-
-        /// <summary>
-        /// Draw a highlight around the element with the given settings.
-        /// </summary>
-        /// <param name="blocking">Flag to indicate if further execution waits until the highlight is removed.</param>
-        /// <param name="color">The color to draw the highlight.</param>
-        /// <param name="duration">The duration how long the highlight is shown.</param>
-        public AutomationElement DrawHighlight(bool blocking, WpfColor color, TimeSpan? duration = null)
-        {
-            var rectangle = Properties.BoundingRectangle.Value;
-            if (!rectangle.IsEmpty)
-            {
-                var durationInMs = (int)(duration ?? TimeSpan.FromSeconds(2)).TotalMilliseconds;
-                if (blocking)
-                {
-                    Automation.OverlayManager.ShowBlocking(rectangle, color, durationInMs);
-                }
-                else
-                {
-                    Automation.OverlayManager.Show(rectangle, color, durationInMs);
-                }
-            }
-            return this;
-        }
-
-        /// <summary>
         /// Captures the object as screenshot in <see cref="Bitmap"/> format.
         /// </summary>
         public Bitmap Capture()

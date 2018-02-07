@@ -1,5 +1,6 @@
 ﻿using System;
 using FlaUI.Core.AutomationElements;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
@@ -87,6 +88,9 @@ namespace FlaUI.Core.UITests.Elements
         public void AssertMessageBoxCanBeRetrievedInSelection()
         {
             var combo = _mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("NonEditableCombo")).AsComboBox();
+            combo.Expand();
+            // Wait for the windows animation
+            System.Threading.Thread.Sleep(1000);
             combo.Items[3].Click();
             var window = Retry.While(() => _mainWindow.FindFirstDescendant(cf => cf.ByClassName("#32770"))?.AsWindow(), w => w == null, TimeSpan.FromMilliseconds(1000));
             Assert.That(window, Is.Not.Null, "Expected a window that was shown when combobox item was selected");
