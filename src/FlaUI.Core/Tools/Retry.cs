@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Threading;
 
 namespace FlaUI.Core.Tools
@@ -19,44 +20,17 @@ namespace FlaUI.Core.Tools
         public static TimeSpan Interval { get; set; } = TimeSpan.FromMilliseconds(100);
 
         /// <summary>
-        /// Retries while the given method evaluates to true.
-        /// </summary>
-        /// <returns>True if the condition met, false otherwise.</returns>
-        public static bool While(Func<bool> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false)
-        {
-            timeout = timeout ?? Timeout;
-            interval = interval ?? Interval;
-            var startTime = DateTime.UtcNow;
-            Exception lastException = null;
-            do
-            {
-                try
-                {
-                    if (!checkMethod())
-                    {
-                        return true;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    if (!ignoreException)
-                    {
-                        throw;
-                    }
-                    lastException = ex;
-                }
-                Thread.Sleep(interval.Value);
-            } while (!IsTimeoutReached(startTime, timeout.Value));
-            if (throwOnTimeout)
-            {
-                throw new TimeoutException("Timeout occurred in retry", lastException);
-            }
-            return false;
-        }
-
-        /// <summary>
         /// Retries while the given method evaluates to true and returns the value from the method.
+        /// If it fails, it returns the default of <typeparamref name="T"/>.
         /// </summary>
+        /// <typeparam name="T">The type of the return value.</typeparam>
+        /// <param name="retryMethod">The method which is retried.</param>
+        /// <param name="checkMethod">The method which is used to decide if a retry is needed or if the value is correct.</param>
+        /// <param name="timeout">The timeout when the retry aborts.</param>
+        /// <param name="interval">The interval of retries.</param>
+        /// <param name="throwOnTimeout">A flag indicating if it should throw on timeout.</param>
+        /// <param name="ignoreException">A flag indicating if it should retry on an exception.</param>
+        /// <returns>The value from <paramref name="checkMethod"/> or the default of <typeparamref name="T"/>.</returns>
         public static T While<T>(Func<T> retryMethod, Func<T, bool> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false)
         {
             timeout = timeout ?? Timeout;
@@ -91,33 +65,42 @@ namespace FlaUI.Core.Tools
         }
 
         /// <summary>
+        /// Retries while the given method evaluates to true.
+        /// </summary>
+        /// <returns>True if the method evaluated to false within the time and false otherwise.</returns>
+        public static bool While(Func<bool> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false)
+        {
+            // Use the generic retry. To have the correct return value on success, we need to inverse the result of the check method.
+            return While(() => !checkMethod(), r => !r, timeout: timeout, interval: interval, throwOnTimeout: throwOnTimeout, ignoreException: ignoreException);
+        }
+
+        /// <summary>
+        /// Retries while the given method evaluates to null.
+        /// </summary>
+        /// <returns>The value from <paramref name="checkMethod"/> or the default of <typeparamref name="T"/> in case of a timeout.</returns>
+        public static T WhileNull<T>(Func<T> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false)
+        {
+            return While(() => checkMethod(), r => r == null, timeout: timeout, interval: interval, throwOnTimeout: throwOnTimeout, ignoreException: ignoreException);
+        }
+
+        /// <summary>
+        /// Retries while return value from the given method evaluates to null or has no elements
+        /// </summary>
+        public static T WhileEmpty<T>(Func<T> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false) where T : IList
+        {
+            var list = new System.Collections.Generic.List<string>();
+            return While(() => checkMethod(), r => r == null || r.Count == 0, timeout: timeout, interval: interval, throwOnTimeout: throwOnTimeout, ignoreException: ignoreException);
+        }
+
+        /// <summary>
         /// Retries while the given method has an exception.
         /// </summary>
-        /// <returns>True if the method completed successfully, false otherwise.</returns>
+        /// <returns>True if the method completed without exception, false otherwise.</returns>
         public static bool WhileException(Action retryMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false)
         {
-            timeout = timeout ?? Timeout;
-            interval = interval ?? Interval;
-            var startTime = DateTime.UtcNow;
-            Exception lastException;
-            do
-            {
-                try
-                {
-                    retryMethod();
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    lastException = ex;
-                }
-                Thread.Sleep(interval.Value);
-            } while (!IsTimeoutReached(startTime, timeout.Value));
-            if (throwOnTimeout)
-            {
-                throw new TimeoutException("Timeout occurred in retry", lastException);
-            }
-            return false;
+            var success = false;
+            While(() => { retryMethod(); success = true; return false; }, timeout: timeout, interval: interval, ignoreException: true, throwOnTimeout: throwOnTimeout);
+            return success;
         }
 
         /// <summary>
@@ -125,27 +108,9 @@ namespace FlaUI.Core.Tools
         /// </summary>
         public static T WhileException<T>(Func<T> retryMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false)
         {
-            timeout = timeout ?? Timeout;
-            interval = interval ?? Interval;
-            var startTime = DateTime.UtcNow;
-            Exception lastException;
-            do
-            {
-                try
-                {
-                    return retryMethod();
-                }
-                catch (Exception ex)
-                {
-                    lastException = ex;
-                }
-                Thread.Sleep(interval.Value);
-            } while (!IsTimeoutReached(startTime, timeout.Value));
-            if (throwOnTimeout)
-            {
-                throw new TimeoutException("Timeout occurred in retry", lastException);
-            }
-            return default(T);
+            T returnValue = default(T);
+            While(() => { returnValue = retryMethod(); return false; }, timeout: timeout, interval: interval, ignoreException: true, throwOnTimeout: throwOnTimeout);
+            return returnValue;
         }
 
         /// <summary>
