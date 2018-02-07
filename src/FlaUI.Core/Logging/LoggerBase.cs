@@ -29,6 +29,16 @@ namespace FlaUI.Core.Logging
             IsFatalEnabled = true;
         }
 
+        public void SetMinLevel(LogLevel minLevel)
+        {
+            IsTraceEnabled = minLevel >= LogLevel.Trace;
+            IsDebugEnabled = minLevel >= LogLevel.Debug;
+            IsInfoEnabled = minLevel >= LogLevel.Info;
+            IsWarnEnabled = minLevel >= LogLevel.Warn;
+            IsErrorEnabled = minLevel >= LogLevel.Error;
+            IsFatalEnabled = minLevel >= LogLevel.Fatal;
+        }
+
         public void Log(LogLevel logLevel, string message, params object[] args)
         {
             Log(logLevel, message, null, args);

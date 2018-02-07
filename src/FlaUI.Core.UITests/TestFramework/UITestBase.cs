@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using FlaUI.Core.Logging;
+using FlaUI.Core.UITests.TestTools;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 
@@ -38,6 +40,7 @@ namespace FlaUI.Core.UITests.TestFramework
             ScreenshotDir = @"c:\FailedTestsScreenshots";
             _wasTestRun = false;
             Automation = TestUtilities.GetAutomation(automationType);
+            Logger.Default = new NUnitProgressLogger();
         }
 
         /// <summary>

@@ -8,18 +8,8 @@ namespace FlaUI.Core.Logging
 
         public static ILogger Default
         {
-            get
-            {
-                return _default;
-            }
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException(nameof(value));
-                }
-                _default = value;
-            }
+            get => _default;
+            set => _default = value ?? throw new ArgumentNullException(nameof(value));
         }
     }
 }
