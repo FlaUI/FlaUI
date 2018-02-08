@@ -1,5 +1,5 @@
 ﻿using Accessibility;
-using FlaUI.Core.AutomationElements.Infrastructure;
+using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.WindowsAPI;

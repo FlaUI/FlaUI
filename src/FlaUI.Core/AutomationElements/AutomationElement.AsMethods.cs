@@ -1,7 +1,7 @@
 ﻿using System;
 using FlaUI.Core.AutomationElements.Scrolling;
 
-namespace FlaUI.Core.AutomationElements.Infrastructure
+namespace FlaUI.Core.AutomationElements
 {
     public partial class AutomationElement
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-using FlaUI.Core.AutomationElements.Infrastructure;
+using FlaUI.Core.AutomationElements;
 using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.Input

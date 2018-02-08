@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using FlaUI.Core;
-using FlaUI.Core.AutomationElements.Infrastructure;
+using FlaUI.Core.AutomationElements;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Converters

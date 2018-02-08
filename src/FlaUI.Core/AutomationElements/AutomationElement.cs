@@ -14,7 +14,7 @@ using GdiColor = System.Drawing.Color;
 using Rectangle = FlaUI.Core.Shapes.Rectangle;
 using WpfColor = System.Windows.Media.Color;
 
-namespace FlaUI.Core.AutomationElements.Infrastructure
+namespace FlaUI.Core.AutomationElements
 {
     /// <summary>
     /// Wrapper object for each ui element which is automatable.

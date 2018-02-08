@@ -1,5 +1,5 @@
 ﻿using FlaUI.Core;
-using FlaUI.Core.AutomationElements.Infrastructure;
+using FlaUI.Core.AutomationElements;
 using FlaUI.UIA2.Converters;
 using FlaUI.UIA2.Extensions;
 using UIA = System.Windows.Automation;

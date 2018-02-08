@@ -1,4 +1,5 @@
 ﻿using System;
+using FlaUI.Core.AutomationElements;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;

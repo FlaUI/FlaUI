@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using FlaUI.Core.AutomationElements.Infrastructure;
+using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Exceptions;
 using FlaUI.Core.Input;
 using FlaUI.Core.WindowsAPI;

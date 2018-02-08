@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
-using FlaUI.Core.AutomationElements.Infrastructure;
+using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Exceptions;

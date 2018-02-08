@@ -4,8 +4,11 @@ using FlaUI.Core.Tools;
 using GdiColor = System.Drawing.Color;
 using WpfColor = System.Windows.Media.Color;
 
-namespace FlaUI.Core.AutomationElements.Infrastructure
+namespace FlaUI.Core.AutomationElements
 {
+    /// <summary>
+    /// Contains extension methods for <see cref="AutomationElement"/>s.
+    /// </summary>
     public static partial class AutomationElementExtensions
     {
         /// <summary>

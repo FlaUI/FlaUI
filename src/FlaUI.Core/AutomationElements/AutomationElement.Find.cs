@@ -4,7 +4,7 @@ using System.Linq;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 
-namespace FlaUI.Core.AutomationElements.Infrastructure
+namespace FlaUI.Core.AutomationElements
 {
     public partial class AutomationElement
     {
