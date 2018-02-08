@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using System.Threading;
 
 namespace FlaUI.Core.Tools
@@ -80,16 +81,15 @@ namespace FlaUI.Core.Tools
         /// <returns>The value from <paramref name="checkMethod"/> or the default of <typeparamref name="T"/> in case of a timeout.</returns>
         public static T WhileNull<T>(Func<T> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false)
         {
-            return While(() => checkMethod(), r => r == null, timeout: timeout, interval: interval, throwOnTimeout: throwOnTimeout, ignoreException: ignoreException);
+            return While(checkMethod, r => r == null, timeout: timeout, interval: interval, throwOnTimeout: throwOnTimeout, ignoreException: ignoreException);
         }
 
         /// <summary>
         /// Retries while return value from the given method evaluates to null or has no elements
         /// </summary>
-        public static T WhileEmpty<T>(Func<T> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false) where T : IList
+        public static T WhileEmpty<T>(Func<T> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false) where T : IEnumerable
         {
-            var list = new System.Collections.Generic.List<string>();
-            return While(() => checkMethod(), r => r == null || r.Count == 0, timeout: timeout, interval: interval, throwOnTimeout: throwOnTimeout, ignoreException: ignoreException);
+            return While(checkMethod, r => r == null || !r.GetEnumerator().MoveNext(), timeout: timeout, interval: interval, throwOnTimeout: throwOnTimeout, ignoreException: ignoreException);
         }
 
         /// <summary>
