@@ -241,6 +241,40 @@ namespace FlaUI.Core.UnitTests
         }
 
         [Test]
+        public void RetryWhileNotNull()
+        {
+            var start = DateTime.UtcNow;
+            var retValue = Retry.WhileNotNull(() =>
+            {
+                var runtime = DateTime.UtcNow - start;
+                if (runtime < TimeSpan.FromSeconds(1))
+                {
+                    return new object();
+                }
+                return null;
+            }, timeout: TimeSpan.FromSeconds(2), throwOnTimeout: true);
+            Assert.That(DateTime.UtcNow - start, Is.GreaterThanOrEqualTo(TimeSpan.FromSeconds(1)));
+            Assert.That(retValue, Is.True);
+        }
+
+        [Test]
+        public void RetryWhileNotNullFails()
+        {
+            var start = DateTime.UtcNow;
+            var retValue = Retry.WhileNotNull(() =>
+            {
+                var runtime = DateTime.UtcNow - start;
+                if (runtime < TimeSpan.FromSeconds(4))
+                {
+                    return new object();
+                }
+                return null;
+            }, timeout: TimeSpan.FromSeconds(1), throwOnTimeout: false);
+            Assert.That(DateTime.UtcNow - start, Is.GreaterThanOrEqualTo(TimeSpan.FromSeconds(1)));
+            Assert.That(retValue, Is.False);
+        }
+
+        [Test]
         public void RetryWhileEmpty()
         {
             var start = DateTime.UtcNow;
@@ -269,6 +303,40 @@ namespace FlaUI.Core.UnitTests
                     return null;
                 }
                 return new List<int>() { 1, 2 };
+            }, timeout: TimeSpan.FromSeconds(1), throwOnTimeout: false);
+            Assert.That(DateTime.UtcNow - start, Is.GreaterThanOrEqualTo(TimeSpan.FromSeconds(1)));
+            Assert.That(retValue, Is.Null);
+        }
+
+        [Test]
+        public void RetryWhileEmptyString()
+        {
+            var start = DateTime.UtcNow;
+            var retValue = Retry.WhileEmpty(() =>
+            {
+                var runtime = DateTime.UtcNow - start;
+                if (runtime < TimeSpan.FromSeconds(1))
+                {
+                    return null;
+                }
+                return "Test";
+            }, timeout: TimeSpan.FromSeconds(2), throwOnTimeout: true);
+            Assert.That(DateTime.UtcNow - start, Is.GreaterThanOrEqualTo(TimeSpan.FromSeconds(1)));
+            Assert.That(retValue, Is.EqualTo("Test"));
+        }
+
+        [Test]
+        public void RetryWhileEmptyStringFails()
+        {
+            var start = DateTime.UtcNow;
+            var retValue = Retry.WhileEmpty(() =>
+            {
+                var runtime = DateTime.UtcNow - start;
+                if (runtime < TimeSpan.FromSeconds(4))
+                {
+                    return null;
+                }
+                return "Test";
             }, timeout: TimeSpan.FromSeconds(1), throwOnTimeout: false);
             Assert.That(DateTime.UtcNow - start, Is.GreaterThanOrEqualTo(TimeSpan.FromSeconds(1)));
             Assert.That(retValue, Is.Null);

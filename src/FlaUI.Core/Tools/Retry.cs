@@ -31,8 +31,9 @@ namespace FlaUI.Core.Tools
         /// <param name="interval">The interval of retries.</param>
         /// <param name="throwOnTimeout">A flag indicating if it should throw on timeout.</param>
         /// <param name="ignoreException">A flag indicating if it should retry on an exception.</param>
+        /// <param name="defaultOnTimeout">Allows to define a default value in case of a timeout.</param>
         /// <returns>The value from <paramref name="checkMethod"/> or the default of <typeparamref name="T"/>.</returns>
-        public static T While<T>(Func<T> retryMethod, Func<T, bool> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false)
+        public static T While<T>(Func<T> retryMethod, Func<T, bool> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false, T defaultOnTimeout = default(T))
         {
             timeout = timeout ?? Timeout;
             interval = interval ?? Interval;
@@ -62,7 +63,7 @@ namespace FlaUI.Core.Tools
             {
                 throw new TimeoutException("Timeout occurred in retry", lastException);
             }
-            return default(T);
+            return defaultOnTimeout;
         }
 
         /// <summary>
@@ -92,6 +93,18 @@ namespace FlaUI.Core.Tools
         public static T WhileNull<T>(Func<T> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false)
         {
             return While(checkMethod, r => r == null, timeout: timeout, interval: interval, throwOnTimeout: throwOnTimeout, ignoreException: ignoreException);
+        }
+
+        /// <summary>
+        /// Retries while the given method evaluates to not null.
+        /// </summary>
+        /// <returns>True if it evaluated to null in time or false in case of a timeout.</returns>
+        public static bool WhileNotNull<T>(Func<T> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false) where T: new()
+        {
+            return WhileTrue(() => {
+                var result = checkMethod();
+                return result != null;
+            }, timeout: timeout, interval: interval, throwOnTimeout: throwOnTimeout, ignoreException: ignoreException);
         }
 
         /// <summary>
