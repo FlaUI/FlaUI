@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
 using FlaUI.Core.Patterns;

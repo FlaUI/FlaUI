@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;

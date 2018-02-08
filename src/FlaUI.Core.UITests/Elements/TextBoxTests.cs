@@ -1,4 +1,5 @@
 ﻿using System;
+using FlaUI.Core.AutomationElements;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
 

@@ -1,5 +1,4 @@
-﻿using FlaUI.Core.AutomationElements;
-using FlaUI.Core.Definitions;
+﻿using FlaUI.Core.Definitions;
 using FlaUI.Core.Patterns;
 
 namespace FlaUI.Core.AutomationElements.Scrolling

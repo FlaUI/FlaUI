@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using FlaUI.Core.Tools;
+﻿using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
 

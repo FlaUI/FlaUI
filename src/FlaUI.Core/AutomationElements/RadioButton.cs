@@ -1,5 +1,4 @@
-﻿using FlaUI.Core.AutomationElements;
-using FlaUI.Core.Exceptions;
+﻿using FlaUI.Core.Exceptions;
 using FlaUI.Core.Patterns;
 
 namespace FlaUI.Core.AutomationElements

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FlaUI.Core.Conditions
+﻿namespace FlaUI.Core.Conditions
 {
     public class BoolCondition : ConditionBase
     {

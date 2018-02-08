@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using FlaUI.Core.AutomationElements;
-using FlaUI.Core.AutomationElements.PatternElements;
+﻿using System.Linq;
 using FlaUI.Core.Definitions;
 
 namespace FlaUI.Core.AutomationElements

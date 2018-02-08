@@ -3,250 +3,250 @@ using FlaUI.Core.AutomationElements.Scrolling;
 
 namespace FlaUI.Core.AutomationElements
 {
-    public partial class AutomationElement
+    public static partial class AutomationElementExtensions
     {
         /// <summary>
         /// Converts the element to a <see cref="Button"/>.
         /// </summary>
-        public Button AsButton()
+        public static Button AsButton(this AutomationElement self)
         {
-            return new Button(FrameworkAutomationElement);
+            return self == null ? null : new Button(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="CheckBox"/>.
         /// </summary>
-        public CheckBox AsCheckBox()
+        public static CheckBox AsCheckBox(this AutomationElement self)
         {
-            return new CheckBox(FrameworkAutomationElement);
+            return self == null ? null : new CheckBox(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="ComboBox"/>.
         /// </summary>
-        public ComboBox AsComboBox()
+        public static ComboBox AsComboBox(this AutomationElement self)
         {
-            return new ComboBox(FrameworkAutomationElement);
+            return self == null ? null : new ComboBox(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="DataGridView"/>.
         /// </summary>
-        public DataGridView AsDataGridView()
+        public static DataGridView AsDataGridView(this AutomationElement self)
         {
-            return new DataGridView(FrameworkAutomationElement);
+            return self == null ? null : new DataGridView(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="Label"/>.
         /// </summary>
-        public Label AsLabel()
+        public static Label AsLabel(this AutomationElement self)
         {
-            return new Label(FrameworkAutomationElement);
+            return self == null ? null : new Label(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="Grid"/>.
         /// </summary>
-        public Grid AsGrid()
+        public static Grid AsGrid(this AutomationElement self)
         {
-            return new Grid(FrameworkAutomationElement);
+            return self == null ? null : new Grid(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="GridRow"/>.
         /// </summary>
-        public GridRow AsGridRow()
+        public static GridRow AsGridRow(this AutomationElement self)
         {
-            return new GridRow(FrameworkAutomationElement);
+            return self == null ? null : new GridRow(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="GridCell"/>.
         /// </summary>
-        public GridCell AsGridCell()
+        public static GridCell AsGridCell(this AutomationElement self)
         {
-            return new GridCell(FrameworkAutomationElement);
+            return self == null ? null : new GridCell(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="GridHeader"/>.
         /// </summary>
-        public GridHeader AsGridHeader()
+        public static GridHeader AsGridHeader(this AutomationElement self)
         {
-            return new GridHeader(FrameworkAutomationElement);
+            return self == null ? null : new GridHeader(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="GridHeaderItem"/>.
         /// </summary>
-        public GridHeaderItem AsGridHeaderItem()
+        public static GridHeaderItem AsGridHeaderItem(this AutomationElement self)
         {
-            return new GridHeaderItem(FrameworkAutomationElement);
+            return self == null ? null : new GridHeaderItem(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="HorizontalScrollBar"/>.
         /// </summary>
-        public HorizontalScrollBar AsHorizontalScrollBar()
+        public static HorizontalScrollBar AsHorizontalScrollBar(this AutomationElement self)
         {
-            return new HorizontalScrollBar(FrameworkAutomationElement);
+            return self == null ? null : new HorizontalScrollBar(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="ListBox"/>.
         /// </summary>
-        public ListBox AsListBox()
+        public static ListBox AsListBox(this AutomationElement self)
         {
-            return new ListBox(FrameworkAutomationElement);
+            return self == null ? null : new ListBox(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="ListBoxItem"/>.
         /// </summary>
-        public ListBoxItem AsListBoxItem()
+        public static ListBoxItem AsListBoxItem(this AutomationElement self)
         {
-            return new ListBoxItem(FrameworkAutomationElement);
+            return self == null ? null : new ListBoxItem(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="Menu"/>.
         /// </summary>
-        public Menu AsMenu()
+        public static Menu AsMenu(this AutomationElement self)
         {
-            return new Menu(FrameworkAutomationElement);
+            return self == null ? null : new Menu(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="MenuItem"/>.
         /// </summary>
-        public MenuItem AsMenuItem()
+        public static MenuItem AsMenuItem(this AutomationElement self)
         {
-            return new MenuItem(FrameworkAutomationElement);
+            return self == null ? null : new MenuItem(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="ProgressBar"/>.
         /// </summary>
-        public ProgressBar AsProgressBar()
+        public static ProgressBar AsProgressBar(this AutomationElement self)
         {
-            return new ProgressBar(FrameworkAutomationElement);
+            return self == null ? null : new ProgressBar(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="RadioButton"/>.
         /// </summary>
-        public RadioButton AsRadioButton()
+        public static RadioButton AsRadioButton(this AutomationElement self)
         {
-            return new RadioButton(FrameworkAutomationElement);
+            return self == null ? null : new RadioButton(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="Slider"/>.
         /// </summary>
-        public Slider AsSlider()
+        public static Slider AsSlider(this AutomationElement self)
         {
-            return new Slider(FrameworkAutomationElement);
+            return self == null ? null : new Slider(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="Tab"/>.
         /// </summary>
-        public Tab AsTab()
+        public static Tab AsTab(this AutomationElement self)
         {
-            return new Tab(FrameworkAutomationElement);
+            return self == null ? null : new Tab(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="TabItem"/>.
         /// </summary>
-        public TabItem AsTabItem()
+        public static TabItem AsTabItem(this AutomationElement self)
         {
-            return new TabItem(FrameworkAutomationElement);
+            return self == null ? null : new TabItem(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="TextBox"/>.
         /// </summary>
-        public TextBox AsTextBox()
+        public static TextBox AsTextBox(this AutomationElement self)
         {
-            return new TextBox(FrameworkAutomationElement);
+            return self == null ? null : new TextBox(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="Thumb"/>.
         /// </summary>
-        public Thumb AsThumb()
+        public static Thumb AsThumb(this AutomationElement self)
         {
-            return new Thumb(FrameworkAutomationElement);
+            return self == null ? null : new Thumb(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="TitleBar"/>.
         /// </summary>
-        public TitleBar AsTitleBar()
+        public static TitleBar AsTitleBar(this AutomationElement self)
         {
-            return new TitleBar(FrameworkAutomationElement);
+            return self == null ? null : new TitleBar(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="ToggleButton"/>.
         /// </summary>
-        public ToggleButton AsToggleButton()
+        public static ToggleButton AsToggleButton(this AutomationElement self)
         {
-            return new ToggleButton(FrameworkAutomationElement);
+            return self == null ? null : new ToggleButton(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="Tree"/>.
         /// </summary>
-        public Tree AsTree()
+        public static Tree AsTree(this AutomationElement self)
         {
-            return new Tree(FrameworkAutomationElement);
+            return self == null ? null : new Tree(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="TreeItem"/>.
         /// </summary>
-        public TreeItem AsTreeItem()
+        public static TreeItem AsTreeItem(this AutomationElement self)
         {
-            return new TreeItem(FrameworkAutomationElement);
+            return self == null ? null : new TreeItem(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="VerticalScrollBar"/>.
         /// </summary>
-        public VerticalScrollBar AsVerticalScrollBar()
+        public static VerticalScrollBar AsVerticalScrollBar(this AutomationElement self)
         {
-            return new VerticalScrollBar(FrameworkAutomationElement);
+            return self == null ? null : new VerticalScrollBar(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Converts the element to a <see cref="Window"/>.
         /// </summary>
-        public Window AsWindow()
+        public static Window AsWindow(this AutomationElement self)
         {
-            return new Window(FrameworkAutomationElement);
+            return self == null ? null : new Window(self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Generic method to convert the element to the given type.
         /// </summary>
-        public T AsType<T>() where T : AutomationElement
+        public static T AsType<T>(this AutomationElement self) where T : AutomationElement
         {
-            return (T)Activator.CreateInstance(typeof(T), FrameworkAutomationElement);
+            return (T)Activator.CreateInstance(typeof(T), self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Method to convert the element to the given type.
         /// </summary>
-        public AutomationElement AsType(Type type)
+        public static AutomationElement AsType(this AutomationElement self, Type type)
         {
             if (!type.IsAssignableFrom(typeof(AutomationElement)))
             {
                 throw new ArgumentException("The given type is not an AutomationElement", nameof(type));
             }
-            return (AutomationElement)Activator.CreateInstance(type, FrameworkAutomationElement);
+            return (AutomationElement)Activator.CreateInstance(type, self.FrameworkAutomationElement);
         }
     }
 }

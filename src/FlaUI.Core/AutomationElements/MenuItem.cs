@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Threading;
-using FlaUI.Core.AutomationElements;
 using FlaUI.Core.AutomationElements.PatternElements;
 using FlaUI.Core.Definitions;
 

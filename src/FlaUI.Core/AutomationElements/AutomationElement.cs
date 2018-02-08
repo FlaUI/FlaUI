@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;

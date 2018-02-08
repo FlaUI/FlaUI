@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Linq;
 using System.Threading;
 
 namespace FlaUI.Core.Tools
