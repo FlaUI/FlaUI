@@ -24,6 +24,7 @@ namespace FlaUI.Core.UITests.Elements
         public void TestOneTimeSetup()
         {
             _mainWindow = App.GetMainWindow(Automation);
+            Assert.That(_mainWindow, Is.Not.Null);
         }
 
         [Test]
