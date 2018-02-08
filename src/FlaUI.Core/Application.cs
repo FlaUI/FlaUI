@@ -234,7 +234,7 @@ namespace FlaUI.Core
         public bool WaitWhileMainHandleIsMissing(TimeSpan? waitTimeout = null)
         {
             var waitTime = waitTimeout ?? TimeSpan.FromMilliseconds(-1);
-            return Retry.While(() =>
+            return Retry.WhileTrue(() =>
             {
                 _process.Refresh();
                 return _process.MainWindowHandle == IntPtr.Zero;

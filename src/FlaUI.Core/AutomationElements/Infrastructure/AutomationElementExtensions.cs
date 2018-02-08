@@ -75,7 +75,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         {
             if (self != null)
             {
-                Retry.While(() => self.TryGetClickablePoint(out var _) == false);
+                Retry.WhileTrue(() => self.TryGetClickablePoint(out var _) == false);
             }
             return self;
         }

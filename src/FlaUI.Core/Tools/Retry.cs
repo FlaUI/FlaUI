@@ -68,11 +68,21 @@ namespace FlaUI.Core.Tools
         /// <summary>
         /// Retries while the given method evaluates to true.
         /// </summary>
-        /// <returns>True if the method evaluated to false within the time and false otherwise.</returns>
-        public static bool While(Func<bool> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false)
+        /// <returns>True if the retry completed successfully within the time and false otherwise.</returns>
+        public static bool WhileTrue(Func<bool> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false)
         {
             // Use the generic retry. To have the correct return value on success, we need to inverse the result of the check method.
             return While(() => !checkMethod(), r => !r, timeout: timeout, interval: interval, throwOnTimeout: throwOnTimeout, ignoreException: ignoreException);
+        }
+
+        /// <summary>
+        /// Retries while the given method evaluates to false.
+        /// </summary>
+        /// <returns>True if the retry completed successfully within the time and false otherwise.</returns>
+        public static bool WhileFalse(Func<bool> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false)
+        {
+            // Use the generic retry. To have the correct return value on success, we need to inverse the result of the check method.
+            return While(() => checkMethod(), r => !r, timeout: timeout, interval: interval, throwOnTimeout: throwOnTimeout, ignoreException: ignoreException);
         }
 
         /// <summary>
@@ -99,7 +109,7 @@ namespace FlaUI.Core.Tools
         public static bool WhileException(Action retryMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false)
         {
             var success = false;
-            While(() => { retryMethod(); success = true; return false; }, timeout: timeout, interval: interval, ignoreException: true, throwOnTimeout: throwOnTimeout);
+            WhileTrue(() => { retryMethod(); success = true; return false; }, timeout: timeout, interval: interval, ignoreException: true, throwOnTimeout: throwOnTimeout);
             return success;
         }
 
@@ -109,7 +119,7 @@ namespace FlaUI.Core.Tools
         public static T WhileException<T>(Func<T> retryMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false)
         {
             T returnValue = default(T);
-            While(() => { returnValue = retryMethod(); return false; }, timeout: timeout, interval: interval, ignoreException: true, throwOnTimeout: throwOnTimeout);
+            WhileTrue(() => { returnValue = retryMethod(); return false; }, timeout: timeout, interval: interval, ignoreException: true, throwOnTimeout: throwOnTimeout);
             return returnValue;
         }
 
