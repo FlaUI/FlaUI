@@ -71,11 +71,23 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <summary>
         /// Waits until the element has a clickable point.
         /// </summary>
-        public static T WaitForClickablePoint<T>(this T self) where T : AutomationElement
+        public static T WaitUntilClickable<T>(this T self, TimeSpan? timeout = null) where T : AutomationElement
         {
             if (self != null)
             {
-                Retry.WhileTrue(() => self.TryGetClickablePoint(out var _) == false);
+                Retry.WhileFalse(() => self.TryGetClickablePoint(out var _), timeout: timeout, throwOnTimeout: true, ignoreException: true);
+            }
+            return self;
+        }
+
+        /// <summary>
+        /// Waits until the element is enabled.
+        /// </summary>
+        public static T WaitUntilEnabled<T>(this T self, TimeSpan? timeout = null) where T : AutomationElement
+        {
+            if (self != null)
+            {
+                Retry.WhileFalse(() => self.IsEnabled, timeout: timeout, throwOnTimeout: true, ignoreException: true);
             }
             return self;
         }
