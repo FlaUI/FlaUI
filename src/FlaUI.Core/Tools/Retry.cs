@@ -31,22 +31,24 @@ namespace FlaUI.Core.Tools
         /// <param name="interval">The interval of retries.</param>
         /// <param name="throwOnTimeout">A flag indicating if it should throw on timeout.</param>
         /// <param name="ignoreException">A flag indicating if it should retry on an exception.</param>
+        /// <param name="lastValueOnTimeout">A flag indicating if the last value should be returned on timeout. Returns the default if the value could never be fetched.</param>
         /// <param name="defaultOnTimeout">Allows to define a default value in case of a timeout.</param>
         /// <returns>The value from <paramref name="checkMethod"/> or the default of <typeparamref name="T"/>.</returns>
-        public static T While<T>(Func<T> retryMethod, Func<T, bool> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false, T defaultOnTimeout = default(T))
+        public static T While<T>(Func<T> retryMethod, Func<T, bool> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false, bool lastValueOnTimeout = false, T defaultOnTimeout = default(T))
         {
             timeout = timeout ?? Timeout;
             interval = interval ?? Interval;
             var startTime = DateTime.UtcNow;
             Exception lastException = null;
+            T lastValue = defaultOnTimeout;
             do
             {
                 try
                 {
-                    var obj = retryMethod();
-                    if (!checkMethod(obj))
+                    lastValue = retryMethod();
+                    if (!checkMethod(lastValue))
                     {
-                        return obj;
+                        return lastValue;
                     }
                 }
                 catch (Exception ex)
@@ -63,7 +65,7 @@ namespace FlaUI.Core.Tools
             {
                 throw new TimeoutException("Timeout occurred in retry", lastException);
             }
-            return defaultOnTimeout;
+            return lastValueOnTimeout ? lastValue : defaultOnTimeout;
         }
 
         /// <summary>
@@ -98,13 +100,10 @@ namespace FlaUI.Core.Tools
         /// <summary>
         /// Retries while the given method evaluates to not null.
         /// </summary>
-        /// <returns>True if it evaluated to null in time or false in case of a timeout.</returns>
-        public static bool WhileNotNull<T>(Func<T> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false) where T: new()
+        /// <returns>True if it evaluated to null within the time or false in case of a timeout.</returns>
+        public static bool WhileNotNull<T>(Func<T> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false)
         {
-            return WhileTrue(() => {
-                var result = checkMethod();
-                return result != null;
-            }, timeout: timeout, interval: interval, throwOnTimeout: throwOnTimeout, ignoreException: ignoreException);
+            return WhileTrue(() => checkMethod() != null, timeout: timeout, interval: interval, throwOnTimeout: throwOnTimeout, ignoreException: ignoreException);
         }
 
         /// <summary>

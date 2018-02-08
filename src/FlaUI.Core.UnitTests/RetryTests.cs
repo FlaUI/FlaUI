@@ -275,6 +275,23 @@ namespace FlaUI.Core.UnitTests
         }
 
         [Test]
+        public void RetryWhileNotNullException()
+        {
+            var start = DateTime.UtcNow;
+            var retValue = Retry.WhileNotNull<object>(() =>
+            {
+                var runtime = DateTime.UtcNow - start;
+                if (runtime < TimeSpan.FromSeconds(4))
+                {
+                    throw new Exception();
+                }
+                return null;
+            }, timeout: TimeSpan.FromSeconds(1), throwOnTimeout: false, ignoreException: true);
+            Assert.That(DateTime.UtcNow - start, Is.GreaterThanOrEqualTo(TimeSpan.FromSeconds(1)));
+            Assert.That(retValue, Is.False);
+        }
+
+        [Test]
         public void RetryWhileEmpty()
         {
             var start = DateTime.UtcNow;
