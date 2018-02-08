@@ -95,11 +95,19 @@ namespace FlaUI.Core.Tools
         }
 
         /// <summary>
-        /// Retries while return value from the given method evaluates to null or has no elements
+        /// Retries while return value from the given method evaluates to null or has no elements.
         /// </summary>
         public static T WhileEmpty<T>(Func<T> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false) where T : IEnumerable
         {
             return While(checkMethod, r => r == null || !r.GetEnumerator().MoveNext(), timeout: timeout, interval: interval, throwOnTimeout: throwOnTimeout, ignoreException: ignoreException);
+        }
+
+        /// <summary>
+        /// Retries while return value from the given method is null or an empty string.
+        /// </summary>
+        public static string WhileEmpty(Func<string> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false)
+        {
+            return While(checkMethod, r => String.IsNullOrEmpty(r), timeout: timeout, interval: interval, throwOnTimeout: throwOnTimeout, ignoreException: ignoreException);
         }
 
         /// <summary>
