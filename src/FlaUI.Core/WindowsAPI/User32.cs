@@ -54,6 +54,12 @@ namespace FlaUI.Core.WindowsAPI
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true, CallingConvention = CallingConvention.Winapi)]
         public static extern short GetKeyState(int keyCode);
+
+        [DllImport("user32.dll")]
+        public static extern bool GetCursorInfo(out CURSORINFO pci);
+
+        [DllImport("user32.dll")]
+       public  static extern bool DrawIcon(IntPtr hDC, int x, int y, IntPtr hIcon);
     }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

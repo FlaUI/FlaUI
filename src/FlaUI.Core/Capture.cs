@@ -15,12 +15,23 @@ namespace FlaUI.Core
         /// <summary>
         /// Captures the whole screen (all monitors).
         /// </summary>
-        public static CaptureImage Screen()
+        public static CaptureImage Screen(int screenIndex = -1)
         {
-            var screen = new Shapes.Rectangle(
-                SystemParameters.VirtualScreenLeft, SystemParameters.VirtualScreenTop,
-                SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
-            return Rectangle(screen);
+            Shapes.Rectangle capturingRectangle;
+            // Take the appropriate screen if requested
+            if (screenIndex >= 0 && screenIndex < System.Windows.Forms.Screen.AllScreens.Length)
+            {
+                var rectangle = System.Windows.Forms.Screen.AllScreens[screenIndex].Bounds;
+                capturingRectangle = rectangle;
+            }
+            else
+            {
+                // Use the entire desktop
+                capturingRectangle = new Shapes.Rectangle(
+                    SystemParameters.VirtualScreenLeft, SystemParameters.VirtualScreenTop,
+                    SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
+            }
+            return Rectangle(capturingRectangle);
         }
 
         /// <summary>
@@ -65,7 +76,7 @@ namespace FlaUI.Core
             DeleteObject(hBmp);
             DeleteDC(hDest);
             ReleaseDC(hDesk, hSrce);
-            return new CaptureImage(bmp);
+            return new CaptureImage(bmp, bounds);
         }
 
         #region P/Invoke
