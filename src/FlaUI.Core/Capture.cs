@@ -90,10 +90,12 @@ namespace FlaUI.Core
                     if (captureOptions.AddOverlayString)
                     {
                         var overlayString = FormatOverlayString(captureOptions.OverlayStringFormat);
-                        var font = new Font("Arial", 12f);
+                        var font = new Font("Consolas", 10f);
+                        var bgBrush = new SolidBrush(captureOptions.OverlayBackgroundColor);
+                        var fontBrush = new SolidBrush(captureOptions.OverlayTextColor);
                         var size = g.MeasureString(overlayString, font);
-                        g.FillRectangle(Brushes.Black, 0, 0, bmp.Width, size.Height + 4);
-                        g.DrawString(overlayString, font, Brushes.White, 2, 2);
+                        g.FillRectangle(bgBrush, 0, 0, bmp.Width, size.Height + 4);
+                        g.DrawString(overlayString, font, fontBrush, 2, 2);
                     }
 
                     // Draw the cursor if wanted
@@ -141,17 +143,17 @@ namespace FlaUI.Core
             // Replace the simple values
             overlayString = overlayString
                 .Replace("{name}", $"{Environment.MachineName}")
-                .Replace("{cpu}", $"{SystemInfo.CpuUsage}%")
-                .Replace("{mem.p.tot}", $"{StringFormatter.SizeSuffix(SystemInfo.PhysicalMemoryTotal, 2)}")
-                .Replace("{mem.p.free}", $"{StringFormatter.SizeSuffix(SystemInfo.PhysicalMemoryFree, 2)}")
-                .Replace("{mem.p.used}", $"{StringFormatter.SizeSuffix(SystemInfo.PhysicalMemoryUsed, 2)}")
-                .Replace("{mem.p.free.perc}", $"{SystemInfo.PhysicalMemoryFreePercent}%")
-                .Replace("{mem.p.used.perc}", $"{SystemInfo.PhysicalMemoryUsedPercent}%")
-                .Replace("{mem.v.tot}", $"{StringFormatter.SizeSuffix(SystemInfo.VirtualMemoryTotal, 2)}")
-                .Replace("{mem.v.free}", $"{StringFormatter.SizeSuffix(SystemInfo.VirtualMemoryFree, 2)}")
-                .Replace("{mem.v.used}", $"{StringFormatter.SizeSuffix(SystemInfo.VirtualMemoryUsed, 2)}")
-                .Replace("{mem.v.free.perc}", $"{SystemInfo.VirtualMemoryFreePercent}%")
-                .Replace("{mem.v.used.perc}", $"{SystemInfo.VirtualMemoryUsedPercent}%");
+                .Replace("{cpu}", $"{SystemInfo.CpuUsage,5:##.00}%")
+                .Replace("{mem.p.tot}", $"{StringFormatter.SizeSuffix(SystemInfo.PhysicalMemoryTotal, 2),7:##.00}")
+                .Replace("{mem.p.free}", $"{StringFormatter.SizeSuffix(SystemInfo.PhysicalMemoryFree, 2),7:##.00}")
+                .Replace("{mem.p.used}", $"{StringFormatter.SizeSuffix(SystemInfo.PhysicalMemoryUsed, 2),7:##.00}")
+                .Replace("{mem.p.free.perc}", $"{SystemInfo.PhysicalMemoryFreePercent,5:##.00}%")
+                .Replace("{mem.p.used.perc}", $"{SystemInfo.PhysicalMemoryUsedPercent,5:##.00}%")
+                .Replace("{mem.v.tot}", $"{StringFormatter.SizeSuffix(SystemInfo.VirtualMemoryTotal, 2),7:##.00}")
+                .Replace("{mem.v.free}", $"{StringFormatter.SizeSuffix(SystemInfo.VirtualMemoryFree, 2),7:##.00}")
+                .Replace("{mem.v.used}", $"{StringFormatter.SizeSuffix(SystemInfo.VirtualMemoryUsed, 2),7:##.00}")
+                .Replace("{mem.v.free.perc}", $"{SystemInfo.VirtualMemoryFreePercent,5:##.00}%")
+                .Replace("{mem.v.used.perc}", $"{SystemInfo.VirtualMemoryUsedPercent,5:##.00}%");
 
             // Replace the date and times
             var now = DateTime.Now;
