@@ -5,8 +5,6 @@ using System.IO;
 using System.Windows.Media.Imaging;
 using FlaUI.Core.Logging;
 using FlaUI.Core.Tools;
-using FlaUI.Core.WindowsAPI;
-using Rectangle = FlaUI.Core.Shapes.Rectangle;
 
 namespace FlaUI.Core
 {
@@ -20,25 +18,11 @@ namespace FlaUI.Core
         /// <summary>
         /// Creates a <see cref="CaptureImage"/> object with the given <see cref="Bitmap"/>.
         /// </summary>
-        public CaptureImage(Bitmap bitmap, Rectangle originalBounds)
+        public CaptureImage(Bitmap bitmap)
         {
             Bitmap = bitmap;
-            OriginalBounds = originalBounds;
-            CaptureTime = DateTime.Now;
             _bitmapImageLazy = new Lazy<BitmapImage>(ToWpf);
-            // Get the cursor info
-            CURSORINFO pci;
-            pci.cbSize = System.Runtime.InteropServices.Marshal.SizeOf(typeof(CURSORINFO));
-            if (User32.GetCursorInfo(out pci))
-            {
-                CursorInfo = pci;
-            }
         }
-
-        /// <summary>
-        /// The date and time when this image was capture.
-        /// </summary>
-        public DateTime CaptureTime { get; }
 
         /// <summary>
         /// The original <see cref="Bitmap"/>.
@@ -46,19 +30,9 @@ namespace FlaUI.Core
         public Bitmap Bitmap { get; }
 
         /// <summary>
-        /// The original bounds of the rectangle when this image was captured.
-        /// </summary>
-        public Rectangle OriginalBounds { get; }
-
-        /// <summary>
         /// A WPF friendly <see cref="BitmapImage"/> of the <see cref="Bitmap"/>.
         /// </summary>
         public BitmapImage BitmapImage => _bitmapImageLazy.Value;
-
-        /// <summary>
-        /// The state of the cursor when this image was captured.
-        /// </summary>
-        private CURSORINFO? CursorInfo { get; }
 
         /// <summary>
         /// Saves the image to the file with the given path.
@@ -107,38 +81,6 @@ namespace FlaUI.Core
                 bitmapImage.Freeze();
                 return bitmapImage;
             }
-        }
-
-        public CaptureImage AddTimestamp(string format = "yyyy-MM-dd HH:mm:ss.fff")
-        {
-            var stampString = string.IsNullOrEmpty(format) ? CaptureTime.ToString() : CaptureTime.ToString(format);
-            using (var g = Graphics.FromImage(Bitmap))
-            {
-                var font = new Font("Arial", 12f);
-                var size = g.MeasureString(stampString, font);
-                g.FillRectangle(Brushes.Black, 0, 0, size.Width, 20);
-                g.DrawString(stampString, font, Brushes.White, 2, 2);
-            }
-            return this;
-        }
-
-        public CaptureImage AddCursor()
-        {
-            using (var g = Graphics.FromImage(Bitmap))
-            {
-                if (CursorInfo.HasValue)
-                {
-                    var cinfo = CursorInfo.Value;
-                    if (cinfo.flags == CursorState.CURSOR_SHOWING)
-                    {
-                        var x = cinfo.ptScreenPos.X + Math.Abs(OriginalBounds.Left.ToInt());
-                        var y = cinfo.ptScreenPos.Y + Math.Abs(OriginalBounds.Top.ToInt());
-                        User32.DrawIcon(g.GetHdc(), x, y, cinfo.hCursor);
-                        g.ReleaseHdc();
-                    }
-                }
-            }
-            return this;
         }
 
         public void Dispose()

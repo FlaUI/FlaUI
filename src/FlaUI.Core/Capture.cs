@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Windows;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Exceptions;
+using FlaUI.Core.Input;
+using FlaUI.Core.Tools;
+using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core
 {
@@ -76,7 +80,83 @@ namespace FlaUI.Core
             DeleteObject(hBmp);
             DeleteDC(hDest);
             ReleaseDC(hDesk, hSrce);
-            return new CaptureImage(bmp, bounds);
+
+            var captureOptions = new CaptureOptions();
+            if (captureOptions.AddCursor || captureOptions.AddOverlayString)
+            {
+                using (var g = Graphics.FromImage(bmp))
+                {
+                    // Draw the overlay if wanted
+                    if (captureOptions.AddOverlayString)
+                    {
+                        var overlayString = FormatOverlayString(captureOptions.OverlayStringFormat);
+                        var font = new Font("Arial", 12f);
+                        var size = g.MeasureString(overlayString, font);
+                        g.FillRectangle(Brushes.Black, 0, 0, bmp.Width, size.Height + 4);
+                        g.DrawString(overlayString, font, Brushes.White, 2, 2);
+                    }
+
+                    // Draw the cursor if wanted
+                    if (captureOptions.AddCursor)
+                    {
+                        CURSORINFO cursorInfo;
+                        cursorInfo.cbSize = Marshal.SizeOf(typeof(CURSORINFO));
+                        if (User32.GetCursorInfo(out cursorInfo))
+                        {
+                            if (cursorInfo.flags == CursorState.CURSOR_SHOWING)
+                            {
+                                // We need to get the icon to get the "Hotspot" (aka offset)
+                                var hicon = User32.CopyIcon(cursorInfo.hCursor);
+                                if (hicon != IntPtr.Zero)
+                                {
+                                    if (User32.GetIconInfo(hicon, out var iconInfo))
+                                    {
+                                        var x = cursorInfo.ptScreenPos.X - bounds.Left.ToInt();
+                                        var y = cursorInfo.ptScreenPos.Y - bounds.Top.ToInt();
+                                        User32.DrawIconEx(g.GetHdc(), x - iconInfo.xHotspot, y - iconInfo.yHotspot, cursorInfo.hCursor, 0, 0, 0, IntPtr.Zero, 0x0003);
+                                        g.ReleaseHdc();
+                                        Console.WriteLine(bounds);
+                                        Console.WriteLine(Mouse.Position);
+                                        Console.WriteLine($"{cursorInfo.ptScreenPos.X}:{cursorInfo.ptScreenPos.Y}");
+                                        Console.WriteLine($"{x}:{y}");
+                                        Console.WriteLine("---");
+                                    }
+                                    DeleteObject(iconInfo.hbmColor);
+                                    DeleteObject(iconInfo.hbmMask);
+                                }
+                                User32.DestroyIcon(hicon);
+                            }
+                            DeleteObject(cursorInfo.hCursor);
+                        }
+                    }
+                }
+            }
+
+            return new CaptureImage(bmp);
+        }
+
+        private static string FormatOverlayString(string overlayString)
+        {
+            SystemInfo.Refresh();
+            // Replace the simple values
+            overlayString = overlayString
+                .Replace("{name}", $"{Environment.MachineName}")
+                .Replace("{cpu}", $"{SystemInfo.CpuUsage}%")
+                .Replace("{mem.p.tot}", $"{StringFormatter.SizeSuffix(SystemInfo.PhysicalMemoryTotal, 2)}")
+                .Replace("{mem.p.free}", $"{StringFormatter.SizeSuffix(SystemInfo.PhysicalMemoryFree, 2)}")
+                .Replace("{mem.p.used}", $"{StringFormatter.SizeSuffix(SystemInfo.PhysicalMemoryUsed, 2)}")
+                .Replace("{mem.p.free.perc}", $"{SystemInfo.PhysicalMemoryFreePercent}%")
+                .Replace("{mem.p.used.perc}", $"{SystemInfo.PhysicalMemoryUsedPercent}%")
+                .Replace("{mem.v.tot}", $"{StringFormatter.SizeSuffix(SystemInfo.VirtualMemoryTotal, 2)}")
+                .Replace("{mem.v.free}", $"{StringFormatter.SizeSuffix(SystemInfo.VirtualMemoryFree, 2)}")
+                .Replace("{mem.v.used}", $"{StringFormatter.SizeSuffix(SystemInfo.VirtualMemoryUsed, 2)}")
+                .Replace("{mem.v.free.perc}", $"{SystemInfo.VirtualMemoryFreePercent}%")
+                .Replace("{mem.v.used.perc}", $"{SystemInfo.VirtualMemoryUsedPercent}%");
+
+            // Replace the date and times
+            var now = DateTime.Now;
+            overlayString = Regex.Replace(overlayString, @"\{dt:?(.*?)\}", m => now.ToString(m.Groups[1].Value));
+            return overlayString;
         }
 
         #region P/Invoke

@@ -59,7 +59,19 @@ namespace FlaUI.Core.WindowsAPI
         public static extern bool GetCursorInfo(out CURSORINFO pci);
 
         [DllImport("user32.dll")]
-       public  static extern bool DrawIcon(IntPtr hDC, int x, int y, IntPtr hIcon);
+        public static extern bool DrawIcon(IntPtr hDC, int x, int y, IntPtr hIcon);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern bool DrawIconEx(IntPtr hdc, int xLeft, int yTop, IntPtr hIcon, int cxWidth, int cyHeight, int istepIfAniCur, IntPtr hbrFlickerFreeDraw, int diFlags);
+
+        [DllImport("user32.dll", EntryPoint = "CopyIcon")]
+        internal static extern IntPtr CopyIcon(IntPtr hIcon);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern bool DestroyIcon(IntPtr hIcon);
+
+        [DllImport("user32.dll", EntryPoint = "GetIconInfo")]
+        internal static extern bool GetIconInfo(IntPtr hIcon, out ICONINFO piconinfo);
     }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }
