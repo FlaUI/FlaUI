@@ -23,7 +23,7 @@ namespace FlaUI.Core.UITests.Elements
         [OneTimeSetUp]
         public void TestOneTimeSetup()
         {
-            _mainWindow = App.GetMainWindow(Automation);
+            _mainWindow = Retry.WhileNull(() => App.GetMainWindow(Automation), TimeSpan.FromSeconds(1));
             Assert.That(_mainWindow, Is.Not.Null);
         }
 
