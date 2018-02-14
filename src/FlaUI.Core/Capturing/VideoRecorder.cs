@@ -4,7 +4,11 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
+using System.IO.Compression;
 using System.IO.Pipes;
+using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -114,7 +118,7 @@ namespace FlaUI.Core.Capturing
                 {
                     isFirstFrame = false;
                     var videoInArgs = $"-framerate {_frameRate} -f rawvideo -pix_fmt rgb32 -video_size {img.Width}x{img.Height} -i {pipePrefix}{videoPipeName}";
-                    var videoOutArgs = $"-vcodec libx264 -crf {_quality} -pix_fmt yuv420p -preset ultrafast -r {_frameRate}";
+                    var videoOutArgs = $"-vcodec libx264 -crf {_quality} -pix_fmt yuv420p -preset ultrafast -r {_frameRate} -vf \"scale={img.Width}:-2\"";
                     ffmpegProcess = StartFFMpeg(_ffmpegExePath, $"-y {videoInArgs} {videoOutArgs} \"{_targetVideoPath}\"");
                     ffmpegIn.WaitForConnection();
                 }
@@ -182,6 +186,33 @@ namespace FlaUI.Core.Capturing
                 if (bmpdata != null)
                     bitmap.UnlockBits(bmpdata);
             }
+        }
+
+        public static async Task<string> DownloadFFMpeg(string targetFolder)
+        {
+            var bits = Environment.Is64BitOperatingSystem ? 64 : 32;
+            var uri = new Uri($"http://ffmpeg.zeranoe.com/builds/win{bits}/static/ffmpeg-latest-win{bits}-static.zip");
+            var archivePath = Path.Combine(Path.GetTempPath(), "ffmpeg.zip");
+            var destPath = Path.Combine(targetFolder, "ffmpeg.exe");
+            if (!File.Exists(destPath))
+            {
+                // Download
+                using (var webClient = new WebClient())
+                {
+                    await webClient.DownloadFileTaskAsync(uri, archivePath);
+                }
+                // Extract
+                await Task.Run(() =>
+                {
+                    using (var archive = ZipFile.OpenRead(archivePath))
+                    {
+                        var exeEntry = archive.Entries.First(x => x.Name == "ffmpeg.exe");
+                        exeEntry.ExtractToFile(destPath, true);
+                    }
+                });
+                File.Delete(archivePath);
+            }
+            return destPath;
         }
 
         private class ImageData

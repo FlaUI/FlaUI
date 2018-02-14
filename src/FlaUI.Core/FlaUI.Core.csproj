@@ -33,6 +33,10 @@
     <Reference Include="System.Xaml" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)'=='net45'">
+    <Reference Include="System.IO.Compression" />
+  </ItemGroup>
+
   <ItemGroup>
     <Reference Include="Accessibility" />
     <Reference Include="PresentationCore" />
