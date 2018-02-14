@@ -1,6 +1,6 @@
-﻿using System.Threading;
+﻿using System.Drawing;
+using System.Threading;
 using FlaUI.Core.Input;
-using FlaUI.Core.Shapes;
 using FlaUI.Core.UITests.TestFramework;
 using FlaUI.UIA3;
 using NUnit.Framework;

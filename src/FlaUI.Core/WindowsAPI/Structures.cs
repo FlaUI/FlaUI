@@ -115,5 +115,24 @@ namespace FlaUI.Core.WindowsAPI
         public ushort wParamL;
         public ushort wParamH;
     }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct CURSORINFO
+    {
+        public Int32 cbSize;
+        public CursorState flags;
+        public IntPtr hCursor;
+        public POINT ptScreenPos;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct ICONINFO
+    {
+        public bool fIcon;
+        public int xHotspot;
+        public int yHotspot;
+        public IntPtr hbmMask;
+        public IntPtr hbmColor;
+    }
 }
 #pragma warning restore

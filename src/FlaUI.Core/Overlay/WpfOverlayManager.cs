@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Drawing;
 using System.Threading;
-using System.Windows.Media;
 using System.Windows.Threading;
-using FlaUI.Core.Shapes;
+using Color = System.Drawing.Color;
 
 namespace FlaUI.Core.Overlay
 {
@@ -51,7 +51,7 @@ namespace FlaUI.Core.Overlay
 
         public void Show(Rectangle rectangle, Color color, int durationInMs)
         {
-            if (rectangle.IsValid)
+            if (!rectangle.IsEmpty)
             {
                 // ReSharper disable once RedundantDelegateCreation Used for older .Net versions
                 _dispatcher.Invoke(new Action(() =>
@@ -66,7 +66,7 @@ namespace FlaUI.Core.Overlay
 
         public void ShowBlocking(Rectangle rectangle, Color color, int durationInMs)
         {
-            if (rectangle.IsValid)
+            if (!rectangle.IsEmpty)
             {
                 // ReSharper disable once RedundantDelegateCreation Used for older .Net versions
                 _dispatcher.Invoke(new Action(() =>

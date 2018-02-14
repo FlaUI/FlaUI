@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Drawing;
 using FlaUI.Core;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Exceptions;
-using FlaUI.Core.Shapes;
 using FlaUI.UIA2.Converters;
 using FlaUI.UIA2.EventHandlers;
 using FlaUI.UIA2.Extensions;
@@ -54,7 +54,7 @@ namespace FlaUI.UIA2
         /// <inheritdoc />
         public override AutomationElement FromPoint(Point point)
         {
-            var nativeElement = InternalGetNativeElement(() => UIA.AutomationElement.FromPoint(point));
+            var nativeElement = InternalGetNativeElement(() => UIA.AutomationElement.FromPoint(new System.Windows.Point(point.X, point.Y)));
             return AutomationElementConverter.NativeToManaged(this, nativeElement);
         }
 

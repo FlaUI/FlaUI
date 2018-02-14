@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Windows.Media;
-using FlaUI.Core.Shapes;
+using System.Drawing;
 
 namespace FlaUI.Core.Overlay
 {

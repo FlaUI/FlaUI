@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 using FlaUI.Core;
 using FlaUI.Core.AutomationElements;
@@ -7,7 +8,7 @@ using FlaUI.Core.Definitions;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Exceptions;
 using FlaUI.Core.Identifiers;
-using FlaUI.Core.Shapes;
+using FlaUI.Core.Tools;
 using FlaUI.UIA2.Converters;
 using FlaUI.UIA2.EventHandlers;
 using FlaUI.UIA2.Extensions;
@@ -111,7 +112,7 @@ namespace FlaUI.UIA2
             var success = NativeElement.TryGetClickablePoint(out System.Windows.Point outPoint);
             if (success)
             {
-                point = new Point(outPoint.X, outPoint.Y);
+                point = new Point(outPoint.X.ToInt(), outPoint.Y.ToInt());
             }
             else
             {

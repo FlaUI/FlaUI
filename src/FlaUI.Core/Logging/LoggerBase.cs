@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FlaUI.Core.Logging
 {
@@ -29,14 +30,15 @@ namespace FlaUI.Core.Logging
             IsFatalEnabled = true;
         }
 
-        public void SetMinLevel(LogLevel minLevel)
+        /// <inheritdoc />
+        public void SetLevel(LogLevel level)
         {
-            IsTraceEnabled = minLevel >= LogLevel.Trace;
-            IsDebugEnabled = minLevel >= LogLevel.Debug;
-            IsInfoEnabled = minLevel >= LogLevel.Info;
-            IsWarnEnabled = minLevel >= LogLevel.Warn;
-            IsErrorEnabled = minLevel >= LogLevel.Error;
-            IsFatalEnabled = minLevel >= LogLevel.Fatal;
+            IsTraceEnabled = level <= LogLevel.Trace;
+            IsDebugEnabled = level <= LogLevel.Debug;
+            IsInfoEnabled = level <= LogLevel.Info;
+            IsWarnEnabled = level <= LogLevel.Warn;
+            IsErrorEnabled = level <= LogLevel.Error;
+            IsFatalEnabled = level <= LogLevel.Fatal;
         }
 
         public void Log(LogLevel logLevel, string message, params object[] args)
@@ -133,8 +135,17 @@ namespace FlaUI.Core.Logging
 
         private string GetFormattedMessage(string message, Exception exception, params object[] args)
         {
-            var formattedMsg = args == null ? message : String.Format(message, args);
-            return exception == null ? formattedMsg : String.Concat(formattedMsg, Environment.NewLine, exception);
+            var messageParts = new List<string>();
+            if (message != null)
+            {
+                var formattedMessage = args == null || args.Length == 0 ? message : String.Format(message, args);
+                messageParts.Add(formattedMessage);
+            }
+            if (exception != null)
+            {
+                messageParts.Add(exception.ToString());
+            }
+            return String.Join(Environment.NewLine, messageParts.ToArray());
         }
     }
 }

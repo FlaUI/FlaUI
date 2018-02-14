@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading;
-using FlaUI.Core.Shapes;
-using FlaUI.Core.Tools;
 using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.Overlay
@@ -18,9 +17,9 @@ namespace FlaUI.Core.Overlay
             Margin = 0;
         }
 
-        public void Show(Rectangle rectangle, System.Windows.Media.Color color, int durationInMs)
+        public void Show(Rectangle rectangle, Color color, int durationInMs)
         {
-            if (rectangle.IsValid)
+            if (!rectangle.IsEmpty)
             {
 #if NET35
                 new Thread(() =>
@@ -37,12 +36,12 @@ namespace FlaUI.Core.Overlay
             }
         }
 
-        public void ShowBlocking(Rectangle rectangle, System.Windows.Media.Color color, int durationInMs)
+        public void ShowBlocking(Rectangle rectangle, Color color, int durationInMs)
         {
             CreateAndShowForms(rectangle, color, durationInMs);
         }
 
-        private void CreateAndShowForms(Rectangle rectangle, System.Windows.Media.Color color, int durationInMs)
+        private void CreateAndShowForms(Rectangle rectangle, Color color, int durationInMs)
         {
             var leftBorder = new Rectangle(rectangle.X - Margin, rectangle.Y - Margin, Size, rectangle.Height + 2 * Margin);
             var topBorder = new Rectangle(rectangle.X - Margin, rectangle.Y - Margin, rectangle.Width + 2 * Margin, Size);
@@ -57,8 +56,8 @@ namespace FlaUI.Core.Overlay
                 var form = new OverlayRectangleForm { BackColor = gdiColor };
                 forms.Add(form);
                 // Position the window
-                User32.SetWindowPos(form.Handle, new IntPtr(-1), border.X.ToInt(), border.Y.ToInt(),
-                    border.Width.ToInt(), border.Height.ToInt(), SetWindowPosFlags.SWP_NOACTIVATE);
+                User32.SetWindowPos(form.Handle, new IntPtr(-1), border.X, border.Y,
+                    border.Width, border.Height, SetWindowPosFlags.SWP_NOACTIVATE);
                 // Show the window
                 User32.ShowWindow(form.Handle, ShowWindowTypes.SW_SHOWNA);
             }

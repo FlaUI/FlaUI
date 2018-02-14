@@ -1,4 +1,5 @@
 ﻿using FlaUI.Core.Input;
+using FlaUI.Core.Tools;
 
 namespace FlaUI.Core.AutomationElements
 {
@@ -20,7 +21,7 @@ namespace FlaUI.Core.AutomationElements
         /// <param name="distance">+ for right, - for left</param>
         public void SlideHorizontally(int distance)
         {
-            Mouse.DragHorizontally(MouseButton.Left, Properties.BoundingRectangle.Value.Center, distance);
+            Mouse.DragHorizontally(MouseButton.Left, Properties.BoundingRectangle.Value.Center(), distance);
         }
 
         /// <summary>
@@ -29,7 +30,7 @@ namespace FlaUI.Core.AutomationElements
         /// <param name="distance">+ for down, - for up</param>
         public void SlideVertically(int distance)
         {
-            Mouse.DragVertically(MouseButton.Left, Properties.BoundingRectangle.Value.Center, distance);
+            Mouse.DragVertically(MouseButton.Left, Properties.BoundingRectangle.Value.Center(), distance);
         }
     }
 }

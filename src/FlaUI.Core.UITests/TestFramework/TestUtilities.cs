@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Drawing;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Input;
-using FlaUI.Core.Shapes;
+using FlaUI.Core.Tools;
 using FlaUI.UIA2;
 using FlaUI.UIA3;
 using NUnit.Framework;
@@ -42,8 +43,8 @@ namespace FlaUI.Core.UITests.TestFramework
         {
             window.Close();
             Wait.UntilInputIsProcessed();
-            var modal = window.ModalWindows;
-            var dontSaveButton = modal[0].FindFirstDescendant(cf => cf.ByAutomationId("CommandButton_7")).AsButton();
+            var modalWindows = Retry.WhileEmpty(() => window.ModalWindows, TimeSpan.FromSeconds(1));
+            var dontSaveButton = modalWindows[0].FindFirstDescendant(cf => cf.ByAutomationId("CommandButton_7")).AsButton();
             dontSaveButton.Invoke();
         }
 

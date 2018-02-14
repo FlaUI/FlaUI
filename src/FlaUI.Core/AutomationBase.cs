@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Drawing;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Overlay;
-using FlaUI.Core.Shapes;
 
 namespace FlaUI.Core
 {

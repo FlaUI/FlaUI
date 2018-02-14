@@ -11,7 +11,10 @@ namespace FlaUI.Core.Logging
         bool IsErrorEnabled { get; set; }
         bool IsFatalEnabled { get; set; }
 
-        void SetMinLevel(LogLevel minLevel);
+        /// <summary>
+        /// Sets up to which level the logger should log messages.
+        /// </summary>
+        void SetLevel(LogLevel level);
 
         void Log(LogLevel logLevel, string message, params object[] args);
         void Log(LogLevel logLevel, string message, Exception exception, params object[] args);

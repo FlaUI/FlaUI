@@ -1,5 +1,4 @@
-﻿using FlaUI.Core.Shapes;
-using FlaUI.Core.Tools;
+﻿using System.Drawing;
 using UIA = Interop.UIAutomationClient;
 
 namespace FlaUI.UIA3.Extensions
@@ -10,10 +9,10 @@ namespace FlaUI.UIA3.Extensions
         {
             return new UIA.tagRECT
             {
-                left = r.Left.ToInt(),
-                top = r.Top.ToInt(),
-                right = r.Right.ToInt(),
-                bottom = r.Bottom.ToInt()
+                left = r.Left,
+                top = r.Top,
+                right = r.Right,
+                bottom = r.Bottom
             };
         }
 

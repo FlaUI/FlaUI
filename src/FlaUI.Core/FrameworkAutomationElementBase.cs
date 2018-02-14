@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Conditions;
@@ -6,7 +7,6 @@ using FlaUI.Core.Definitions;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Exceptions;
 using FlaUI.Core.Identifiers;
-using FlaUI.Core.Shapes;
 
 namespace FlaUI.Core
 {

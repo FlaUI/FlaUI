@@ -1537,5 +1537,24 @@ namespace FlaUI.Core.WindowsAPI
         ROLE_SYSTEM_PAGETABLIST = 0x0000003C,
         ROLE_SYSTEM_CLOCK = 0x0000003D
     }
+
+    public enum CursorState
+    {
+        /// <summary>
+        /// The cursor is hidden.
+        /// </summary>
+        CURSOR_HIDING = 0x00000000,
+
+        /// <summary>
+        /// The cursor is showing.
+        /// </summary>
+        CURSOR_SHOWING = 0x00000001,
+
+        /// <summary>
+        /// Windows 8: The cursor is suppressed. This flag indicates that the system is not drawing
+        /// the cursor because the user is providing input through touch or pen instead of the mouse.
+        /// </summary>
+        CURSOR_SUPPRESSED = 0x00000002
+    }
 }
 #pragma warning restore
