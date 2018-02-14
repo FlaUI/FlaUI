@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
 using System.Threading;
 using FlaUI.Core.Logging;
-using FlaUI.Core.Shapes;
 using FlaUI.Core.Tools;
 using FlaUI.Core.WindowsAPI;
 
@@ -64,14 +64,10 @@ namespace FlaUI.Core.Input
         {
             get
             {
-                User32.GetCursorPos(out POINT point);
-                return point;
+                User32.GetCursorPos(out var point);
+                return new Point(point.X, point.Y);
             }
-            set
-            {
-                POINT point = value;
-                User32.SetCursorPos(point.X, point.Y);
-            }
+            set => User32.SetCursorPos(value.X, value.Y);
         }
 
         /// <summary>
@@ -87,7 +83,7 @@ namespace FlaUI.Core.Input
         public static void MoveBy(int deltaX, int deltaY)
         {
             var currPos = Position;
-            MoveTo((int)currPos.X + deltaX, (int)currPos.Y + deltaY);
+            MoveTo(currPos.X + deltaX, currPos.Y + deltaY);
         }
 
         /// <summary>
@@ -99,8 +95,8 @@ namespace FlaUI.Core.Input
         {
             // Get starting position
             var startPos = Position;
-            var startX = (int)startPos.X;
-            var startY = (int)startPos.Y;
+            var startX = startPos.X;
+            var startY = startPos.Y;
 
             // Prepare variables
             var totalDistance = startPos.Distance(newX, newY);
@@ -128,12 +124,12 @@ namespace FlaUI.Core.Input
             {
                 var tempX = startX + i * stepX;
                 var tempY = startY + i * stepY;
-                movements.Add(new Point(tempX, tempY));
+                movements.Add(new Point(tempX.ToInt(), tempY.ToInt()));
             }
 
             // Add an exact point for the last one, if it does not fit exactly
             var lastPoint = movements.Last();
-            if ((int)lastPoint.X != newX || (int)lastPoint.Y != newY)
+            if (lastPoint.X != newX || lastPoint.Y != newY)
             {
                 movements.Add(new Point(newX, newY));
             }
@@ -153,7 +149,7 @@ namespace FlaUI.Core.Input
         /// <param name="newPosition">The new position for the mouse</param>
         public static void MoveTo(Point newPosition)
         {
-            MoveTo(newPosition.X.ToInt(), newPosition.Y.ToInt());
+            MoveTo(newPosition.X, newPosition.Y);
         }
 
         /// <summary>
@@ -259,7 +255,7 @@ namespace FlaUI.Core.Input
         /// <param name="mouseButton">The mouse button to use for dragging</param>
         /// <param name="startingPoint">Starting point of the drag</param>
         /// <param name="distance">The distance to drag, + for right, - for left</param>
-        public static void DragHorizontally(MouseButton mouseButton, Point startingPoint, double distance)
+        public static void DragHorizontally(MouseButton mouseButton, Point startingPoint, int distance)
         {
             Drag(mouseButton, startingPoint, distance, 0);
         }
@@ -270,7 +266,7 @@ namespace FlaUI.Core.Input
         /// <param name="mouseButton">The mouse button to use for dragging</param>
         /// <param name="startingPoint">Starting point of the drag</param>
         /// <param name="distance">The distance to drag, + for down, - for up</param>
-        public static void DragVertically(MouseButton mouseButton, Point startingPoint, double distance)
+        public static void DragVertically(MouseButton mouseButton, Point startingPoint, int distance)
         {
             Drag(mouseButton, startingPoint, 0, distance);
         }
@@ -282,7 +278,7 @@ namespace FlaUI.Core.Input
         /// <param name="startingPoint">Starting point of the drag.</param>
         /// <param name="distanceX">The x distance to drag, + for down, - for up.</param>
         /// <param name="distanceY">The y distance to drag, + for right, - for left.</param>
-        public static void Drag(MouseButton mouseButton, Point startingPoint, double distanceX, double distanceY)
+        public static void Drag(MouseButton mouseButton, Point startingPoint, int distanceX, int distanceY)
         {
             Position = startingPoint;
             Wait.UntilInputIsProcessed();

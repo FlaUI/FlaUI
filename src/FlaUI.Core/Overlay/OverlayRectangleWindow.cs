@@ -5,14 +5,13 @@ using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
-using FlaUI.Core.Shapes;
 using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.Overlay
 {
     public class OverlayRectangleWindow : Window
     {
-        public OverlayRectangleWindow(Rectangle rectangle, Color color, int durationInMs)
+        public OverlayRectangleWindow(System.Drawing.Rectangle rectangle, System.Drawing.Color color, int durationInMs)
         {
             AutomationProperties.SetAutomationId(this, "FlaUIOverlayWindow");
             AutomationProperties.SetName(this, "FlaUIOverlayWindow");
@@ -26,7 +25,7 @@ namespace FlaUI.Core.Overlay
             Left = rectangle.Left;
             Width = rectangle.Width;
             Height = rectangle.Height;
-            var borderBrush = new SolidColorBrush(color);
+            var borderBrush = new SolidColorBrush(System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B));
             borderBrush.Freeze();
             Content = new Border { BorderThickness = new Thickness(2), BorderBrush = borderBrush };
             StartCloseTimer(TimeSpan.FromMilliseconds(durationInMs));

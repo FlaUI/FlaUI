@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Drawing;
 using System.Globalization;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
-using FlaUI.Core.Shapes;
+using FlaUI.Core.Tools;
 
 namespace FlaUI.UIA3.Converters
 {
@@ -53,7 +54,7 @@ namespace FlaUI.UIA3.Converters
             {
                 return null;
             }
-            return new Rectangle(origValue[0], origValue[1], origValue[2], origValue[3]);
+            return new Rectangle(origValue[0].ToInt(), origValue[1].ToInt(), origValue[2].ToInt(), origValue[3].ToInt());
         }
 
         public static object ToPoint(object point)
@@ -63,7 +64,7 @@ namespace FlaUI.UIA3.Converters
             {
                 return null;
             }
-            return new Point(origValue[0], origValue[1]);
+            return new Point(origValue[0].ToInt(), origValue[1].ToInt());
         }
 
         public static object ToCulture(object cultureId)

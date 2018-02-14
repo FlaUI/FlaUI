@@ -1,4 +1,5 @@
-﻿using FlaUI.Core.Shapes;
+﻿using System.Drawing;
+using FlaUI.Core.Capturing;
 using FlaUI.UIA3;
 using NUnit.Framework;
 

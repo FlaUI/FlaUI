@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using FlaUI.Core.Capturing;
 using FlaUI.Core.Logging;
 using FlaUI.Core.UITests.TestTools;
 using NUnit.Framework;

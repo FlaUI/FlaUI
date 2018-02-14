@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Drawing;
 using FlaUI.Core;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
-using FlaUI.Core.Shapes;
 using FlaUI.Core.Tools;
 using FlaUI.UIA3.Converters;
 using UIA = Interop.UIAutomationClient;
@@ -82,7 +82,7 @@ namespace FlaUI.UIA3
             for (var i = 0; i < result.Length; i++)
             {
                 var j = i * 4;
-                result[i] = new Rectangle(unrolledRects[j], unrolledRects[j + 1], unrolledRects[j + 2], unrolledRects[j + 3]);
+                result[i] = new Rectangle(unrolledRects[j].ToInt(), unrolledRects[j + 1].ToInt(), unrolledRects[j + 2].ToInt(), unrolledRects[j + 3].ToInt());
             }
             return result;
         }

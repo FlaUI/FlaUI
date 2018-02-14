@@ -9,9 +9,6 @@ using FlaUI.Core.Exceptions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Input;
 using FlaUI.Core.WindowsAPI;
-using GdiColor = System.Drawing.Color;
-using Rectangle = FlaUI.Core.Shapes.Rectangle;
-using WpfColor = System.Windows.Media.Color;
 
 namespace FlaUI.Core.AutomationElements
 {
@@ -130,7 +127,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// The bounding rectangle of this element.
         /// </summary>
-        public Rectangle BoundingRectangle => Properties.BoundingRectangle.ValueOrDefault ?? Rectangle.Empty;
+        public Rectangle BoundingRectangle => Properties.BoundingRectangle.ValueOrDefault;
 
         /// <summary>
         /// The width of this element.
@@ -262,7 +259,7 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public Bitmap Capture()
         {
-            return Core.Capture.Element(this).Bitmap;
+            return Capturing.Capture.Element(this).Bitmap;
         }
 
         /// <summary>
@@ -270,7 +267,7 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public BitmapImage CaptureWpf()
         {
-            return Core.Capture.Element(this).BitmapImage;
+            return Capturing.Capture.Element(this).BitmapImage;
         }
 
         /// <summary>
@@ -279,14 +276,14 @@ namespace FlaUI.Core.AutomationElements
         /// <param name="filePath">The filepath where the screenshot should be saved.</param>
         public void CaptureToFile(string filePath)
         {
-            Core.Capture.Element(this).ToFile(filePath);
+            Capturing.Capture.Element(this).ToFile(filePath);
         }
 
         /// <summary>
         /// Gets a clickable point of the element.
         /// </summary>
         /// <exception cref="Exceptions.NoClickablePointException">Thrown when no clickable point was found</exception>
-        public Shapes.Point GetClickablePoint()
+        public Point GetClickablePoint()
         {
             return FrameworkAutomationElement.GetClickablePoint();
         }
@@ -296,7 +293,7 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         /// <param name="point">The clickable point or null, if no point was found</param>
         /// <returns>True if a point was found, false otherwise</returns>
-        public bool TryGetClickablePoint(out Shapes.Point point)
+        public bool TryGetClickablePoint(out Point point)
         {
             return FrameworkAutomationElement.TryGetClickablePoint(out point);
         }

@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Drawing;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Input;
-using FlaUI.Core.Shapes;
 using FlaUI.UIA2;
 using FlaUI.UIA3;
 using NUnit.Framework;

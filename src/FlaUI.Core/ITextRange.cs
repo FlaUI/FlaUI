@@ -1,7 +1,7 @@
-﻿using FlaUI.Core.AutomationElements;
+﻿using System.Drawing;
+using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
-using FlaUI.Core.Shapes;
 
 namespace FlaUI.Core
 {

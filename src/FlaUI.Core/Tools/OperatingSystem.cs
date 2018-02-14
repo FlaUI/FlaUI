@@ -140,10 +140,10 @@ namespace FlaUI.Core.Tools
             var reg = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
             if (reg != null)
             {
-                var value = (T)reg.GetValue(keyName);
-                if (value != null)
+                var value = reg.GetValue(keyName);
+                if (value is T variable)
                 {
-                    return value;
+                    return variable;
                 }
             }
             return default(T);

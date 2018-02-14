@@ -1,5 +1,4 @@
-﻿using FlaUI.Core.Shapes;
-using FlaUI.Core.Tools;
+﻿using System.Drawing;
 using UIA = Interop.UIAutomationClient;
 
 namespace FlaUI.UIA3.Extensions
@@ -8,7 +7,7 @@ namespace FlaUI.UIA3.Extensions
     {
         public static UIA.tagPOINT ToTagPoint(this Point p)
         {
-            return new UIA.tagPOINT { x = p.X.ToInt(), y = p.Y.ToInt() };
+            return new UIA.tagPOINT { x = p.X, y = p.Y };
         }
 
         public static Point ToPoint(this UIA.tagPOINT p)
