@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using FlaUI.Core.Capturing;
 using FlaUI.Core.Logging;
+using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestTools;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
@@ -17,6 +19,8 @@ namespace FlaUI.Core.UITests.TestFramework
         /// Flag which indicates if any test was run on a new instance of the app
         /// </summary>
         private bool _wasTestRun;
+
+        private VideoRecorder _recorder;
 
         protected AutomationType AutomationType { get; }
 
@@ -48,8 +52,19 @@ namespace FlaUI.Core.UITests.TestFramework
         /// Setup which starts the application (once per test-class)
         /// </summary>
         [OneTimeSetUp]
-        public void BaseSetup()
+        public async Task BaseSetup()
         {
+            SystemInfo.Refresh();
+            var ffmpegPath = await VideoRecorder.DownloadFFMpeg(@"C:\temp");
+            var recordingStartTime = DateTime.UtcNow;
+            _recorder = new VideoRecorder(10, 26, ffmpegPath, @"C:\temp\out.mp4", () =>
+            {
+                TestContext.Progress.WriteLine(TestContext.CurrentContext.Test.FullName);
+                var img = Capture.Screen();
+                img.ApplyOverlays(new InfoOverlay(img.DesktopBounds) { CustomTimeSpan = DateTime.UtcNow - recordingStartTime, OverlayStringFormat = @"{ct:hh\:mm\:ss\.fff} / {name} / CPU: {cpu} / RAM: {mem.p.used}/{mem.p.tot} ({mem.p.used.perc}) / " + TestContext.CurrentContext.Test.ClassName + "." + TestContext.CurrentContext.Test.FullName }, new MouseOverlay(img.DesktopBounds));
+                return img;
+            });
+
             switch (ApplicationType)
             {
                 case TestApplicationType.Custom:
@@ -77,6 +92,8 @@ namespace FlaUI.Core.UITests.TestFramework
             App.Close();
             App.Dispose();
             App = null;
+            TestContext.Progress.WriteLine("Disosing recorder");
+            _recorder.Dispose();
         }
 
         /// <summary>
