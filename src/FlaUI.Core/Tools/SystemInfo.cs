@@ -15,12 +15,17 @@ namespace FlaUI.Core.Tools
             CpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
             _lastCpuRead = DateTime.MinValue;
             CpuUsage = CpuCounter.NextValue();
-            Refresh();
+            RefreshAll();
         }
 
-        public static void Refresh()
+        public static void RefreshAll()
         {
-            // Get the RAM usage
+            RefreshMemory();
+            RefreshCpu();
+        }
+
+        public static void RefreshMemory()
+        {
             var osQuery = new WqlObjectQuery("SELECT * FROM Win32_OperatingSystem");
             var osSearcher = new ManagementObjectSearcher(osQuery);
             foreach (var os in osSearcher.Get())
@@ -30,7 +35,10 @@ namespace FlaUI.Core.Tools
                 VirtualMemoryTotal = Convert.ToUInt64(os["TotalVirtualMemorySize"]) * 1024;
                 VirtualMemoryFree = Convert.ToUInt64(os["FreeVirtualMemory"]) * 1024;
             }
+        }
 
+        public static void RefreshCpu()
+        {
             if (DateTime.UtcNow - _lastCpuRead > CpuReadInterval)
             {
                 _lastCpuRead = DateTime.UtcNow;

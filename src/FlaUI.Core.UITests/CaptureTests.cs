@@ -37,7 +37,7 @@ namespace FlaUI.Core.UITests
         {
             Logger.Default = new NUnitProgressLogger();
             Logger.Default.SetLevel(LogLevel.Debug);
-            SystemInfo.Refresh();
+            SystemInfo.RefreshAll();
             var recordingStartTime = DateTime.UtcNow;
             var recorder = new VideoRecorder(10, 26, @"C:\Users\rbl\Documents\ffmpeg.exe", @"C:\temp\out.mp4", () =>
             {

@@ -67,7 +67,7 @@ namespace FlaUI.Core.Capturing
                     var diff = requiredFrames - frameCount;
                     if (diff > 0)
                     {
-                        Logger.Default.Debug($"Adding {diff} missing frames");
+                        Logger.Default.Warn($"Adding {diff} missing frames");
                     }
                     for (var i = 0; i < diff; ++i)
                     {
@@ -163,7 +163,7 @@ namespace FlaUI.Core.Capturing
             };
 
             process.OutputDataReceived += (s, e) => Logger.Default.Debug(e.Data);
-            process.ErrorDataReceived += (s, e) => Logger.Default.Warn(e.Data);
+            process.ErrorDataReceived += (s, e) => Logger.Default.Info(e.Data);
             process.Start();
             process.BeginErrorReadLine();
             return process;

@@ -21,6 +21,7 @@ namespace FlaUI.Core.UITests.TestFramework
         private bool _wasTestRun;
 
         private VideoRecorder _recorder;
+        private string _testMethodName;
 
         protected AutomationType AutomationType { get; }
 
@@ -54,46 +55,37 @@ namespace FlaUI.Core.UITests.TestFramework
         [OneTimeSetUp]
         public async Task BaseSetup()
         {
-            SystemInfo.Refresh();
+            // Start the recorder
+            SystemInfo.RefreshAll();
             var ffmpegPath = await VideoRecorder.DownloadFFMpeg(@"C:\temp");
             var recordingStartTime = DateTime.UtcNow;
-            _recorder = new VideoRecorder(10, 26, ffmpegPath, @"C:\temp\out.mp4", () =>
+            _recorder = new VideoRecorder(15, 26, ffmpegPath, @"C:\temp\out.mp4", () =>
             {
-                TestContext.Progress.WriteLine(TestContext.CurrentContext.Test.FullName);
-                var img = Capture.Screen();
-                img.ApplyOverlays(new InfoOverlay(img.DesktopBounds) { CustomTimeSpan = DateTime.UtcNow - recordingStartTime, OverlayStringFormat = @"{ct:hh\:mm\:ss\.fff} / {name} / CPU: {cpu} / RAM: {mem.p.used}/{mem.p.tot} ({mem.p.used.perc}) / " + TestContext.CurrentContext.Test.ClassName + "." + TestContext.CurrentContext.Test.FullName }, new MouseOverlay(img.DesktopBounds));
+                var testName = TestContext.CurrentContext.Test.ClassName + "." + (_testMethodName ?? "[Setup]");
+                var img = Capture.Screen(0);
+                img.ApplyOverlays(new InfoOverlay(img.DesktopBounds) { CustomTimeSpan = DateTime.UtcNow - recordingStartTime, OverlayStringFormat = @"{ct:hh\:mm\:ss\.fff} / {name} / CPU: {cpu} / RAM: {mem.p.used}/{mem.p.tot} ({mem.p.used.perc}) / " + testName }, new MouseOverlay(img.DesktopBounds));
                 return img;
             });
-
-            switch (ApplicationType)
-            {
-                case TestApplicationType.Custom:
-                    App = StartApplication();
-                    break;
-                case TestApplicationType.WinForms:
-                    App = Application.Launch(Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WinFormsApplication\bin\WinFormsApplication.exe"));
-                    break;
-                case TestApplicationType.Wpf:
-                    App = Application.Launch(Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe"));
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-            App.WaitWhileMainHandleIsMissing();
+            await Task.Delay(1000);
+            StartTestApplication();
         }
 
         /// <summary>
         /// Closes the application after all tests were run
         /// </summary>
         [OneTimeTearDown]
-        public void BaseTeardown()
+        public async Task BaseTeardown()
         {
             Automation.Dispose();
-            App.Close();
-            App.Dispose();
-            App = null;
-            TestContext.Progress.WriteLine("Disosing recorder");
+            StopTestApplication();
+            await Task.Delay(1000);
             _recorder.Dispose();
+        }
+
+        [SetUp]
+        public void BaseTestSetup()
+        {
+            _testMethodName = TestContext.CurrentContext.Test.MethodName;
         }
 
         /// <summary>
@@ -127,9 +119,35 @@ namespace FlaUI.Core.UITests.TestFramework
             // Don't restart if no test was already run on it
             if (!_wasTestRun) return;
             // Restart the application
-            BaseTeardown();
-            BaseSetup();
+            StopTestApplication();
+            StartTestApplication();
             _wasTestRun = false;
+        }
+
+        private void StartTestApplication()
+        {
+            switch (ApplicationType)
+            {
+                case TestApplicationType.Custom:
+                    App = StartApplication();
+                    break;
+                case TestApplicationType.WinForms:
+                    App = Application.Launch(Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WinFormsApplication\bin\WinFormsApplication.exe"));
+                    break;
+                case TestApplicationType.Wpf:
+                    App = Application.Launch(Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe"));
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            App.WaitWhileMainHandleIsMissing();
+        }
+
+        private void StopTestApplication()
+        {
+            App.Close();
+            App.Dispose();
+            App = null;
         }
 
         private void TakeScreenshot(string screenshotName)
