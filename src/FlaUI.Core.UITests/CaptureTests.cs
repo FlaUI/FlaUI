@@ -3,7 +3,7 @@ using System.Drawing;
 using FlaUI.Core.Capturing;
 using FlaUI.Core.Logging;
 using FlaUI.Core.Tools;
-using FlaUI.Core.UITests.TestTools;
+using FlaUI.Core.UITests.TestFramework;
 using FlaUI.UIA3;
 using NUnit.Framework;
 
@@ -37,7 +37,7 @@ namespace FlaUI.Core.UITests
         {
             Logger.Default = new NUnitProgressLogger();
             Logger.Default.SetLevel(LogLevel.Debug);
-            SystemInfo.Refresh();
+            SystemInfo.RefreshAll();
             var recordingStartTime = DateTime.UtcNow;
             var recorder = new VideoRecorder(10, 26, @"C:\Users\rbl\Documents\ffmpeg.exe", @"C:\temp\out.mp4", () =>
             {

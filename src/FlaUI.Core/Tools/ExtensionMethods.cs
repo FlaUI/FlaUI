@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 namespace FlaUI.Core.Tools
@@ -25,78 +26,81 @@ namespace FlaUI.Core.Tools
         /// <summary>
         /// Converts a boolean to an int
         /// </summary>
-        public static int ToInt(this bool value)
-        {
-            return value ? 1 : 0;
-        }
+        public static int ToInt(this bool value) => value ? 1 : 0;
 
         /// <summary>
         /// Converts an int to a boolean
         /// </summary>
-        public static bool ToBool(this int value)
-        {
-            return value == 1;
-        }
+        public static bool ToBool(this int value) => value == 1;
 
         /// <summary>
         /// Converts a double to the nearest int32
         /// </summary>
-        public static int ToInt(this double value)
-        {
-            return Convert.ToInt32(value);
-        }
+        public static int ToInt(this double value) => Convert.ToInt32(value);
+
+        /// <summary>
+        /// Rounds the number down the the next even number.
+        /// </summary>
+        public static int Even(this int self) => self % 2 == 1 ? self - 1 : self;
 
         /// <summary>
         /// Checks if a double is not NaN and not Infinity
         /// </summary>
-        public static bool HasValue(this double value)
-        {
-            return !Double.IsNaN(value) && !Double.IsInfinity(value);
-        }
+        public static bool HasValue(this double value) => !Double.IsNaN(value) && !Double.IsInfinity(value);
 
         /// <summary>
         /// Gets a list of flags which are set in an <see cref="Enum"/>.
         /// </summary>
-        public static IEnumerable<Enum> GetFlags(this Enum variable)
-        {
-            return Enum.GetValues(variable.GetType()).Cast<Enum>().Where(variable.HasFlag);
-        }
+        public static IEnumerable<Enum> GetFlags(this Enum variable) => Enum.GetValues(variable.GetType()).Cast<Enum>().Where(variable.HasFlag);
 
-#if NET35
-        /// <summary>
-        /// Exension method for the missing HasFlag on an <see cref="Enum"/>.
-        /// </summary>
-        public static bool HasFlag(this Enum variable, Enum flag)
-        {
-            if (flag == null)
-            {
-                throw new ArgumentNullException(nameof(flag));
-            }
-            if (variable.GetType() != flag.GetType())
-            {
-                throw new ArgumentException("The checked flag is not from the same type as the checked variable.");
-            }
-            var num = Convert.ToUInt64(flag);
-            var num2 = Convert.ToUInt64(variable);
-            return (num2 & num) == num;
-        }
+        #region Point extensions
+        public static double Distance(this Point self, Point other) => self.Distance(other.X, other.Y);
+
+        public static double Distance(this Point self, double otherX, double otherY) => Math.Sqrt(Math.Pow(self.X - otherX, 2) + Math.Pow(self.Y - otherY, 2));
+        #endregion Point extensions
+
+        #region Rectangle extensions
+        public static Point Center(this Rectangle self) => new Point(self.Width / 2 + self.Left, self.Height / 2 + self.Top);
+
+        public static Point North(this Rectangle self, int by = 0) => new Point(self.Center().X, self.Top + by);
+
+        public static Point East(this Rectangle self, int by = 0) => new Point(self.Right + by, self.Center().Y);
+
+        public static Point South(this Rectangle self, int by = 0) => new Point(self.Center().X, self.Bottom + by);
+
+        public static Point West(this Rectangle self, int by = 0) => new Point(self.Left + by, self.Center().Y);
+
+        public static Point ImmediateExteriorNorth(this Rectangle self) => self.North(-1);
+
+        public static Point ImmediateInteriorNorth(this Rectangle self) => self.North(1);
+
+        public static Point ImmediateExteriorEast(this Rectangle self) => self.East(1);
+
+        public static Point ImmediateInteriorEast(this Rectangle self) => self.East(-1);
+
+        public static Point ImmediateExteriorSouth(this Rectangle self) => self.South(1);
+
+        public static Point ImmediateInteriorSouth(this Rectangle self) => self.South(-1);
+
+        public static Point ImmediateExteriorWest(this Rectangle self) => self.West(-1);
+
+        public static Point ImmediateInteriorWest(this Rectangle self) => self.West(1);
 
         /// <summary>
-        /// Extension method for the missing TryParse on an  <see cref="Enum"/>.
+        /// Makes the rectangles dimensions a multiple of 2.
         /// </summary>
-        public static bool TryParse<TEnum>(string value, out TEnum result) where TEnum : struct
+        public static Rectangle Even(this Rectangle self)
         {
-            try
+            if (self.Width % 2 == 1)
             {
-                result = (TEnum)Enum.Parse(typeof(TEnum), value);
+                --self.Width;
             }
-            catch
+            if (self.Height % 2 == 1)
             {
-                result = default(TEnum);
-                return false;
+                --self.Height;
             }
-            return true;
+            return self;
         }
-#endif
+        #endregion Rectangle extensions
     }
 }

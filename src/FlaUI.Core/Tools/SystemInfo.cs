@@ -7,34 +7,52 @@ namespace FlaUI.Core.Tools
     public static class SystemInfo
     {
         private static readonly PerformanceCounter CpuCounter;
-        private static readonly TimeSpan CpuReadInterval = TimeSpan.FromMilliseconds(500);
         private static DateTime _lastCpuRead;
+        private static DateTime _lastMemoryRead;
 
         static SystemInfo()
         {
             CpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
-            _lastCpuRead = DateTime.MinValue;
             CpuUsage = CpuCounter.NextValue();
-            Refresh();
+            _lastCpuRead = DateTime.MinValue;
+            _lastMemoryRead = DateTime.MinValue;
+            RefreshAll();
         }
 
-        public static void Refresh()
-        {
-            // Get the RAM usage
-            var osQuery = new WqlObjectQuery("SELECT * FROM Win32_OperatingSystem");
-            var osSearcher = new ManagementObjectSearcher(osQuery);
-            foreach (var os in osSearcher.Get())
-            {
-                PhysicalMemoryTotal = Convert.ToUInt64(os["TotalVisibleMemorySize"]) * 1024;
-                PhysicalMemoryFree = Convert.ToUInt64(os["FreePhysicalMemory"]) * 1024;
-                VirtualMemoryTotal = Convert.ToUInt64(os["TotalVirtualMemorySize"]) * 1024;
-                VirtualMemoryFree = Convert.ToUInt64(os["FreeVirtualMemory"]) * 1024;
-            }
+        /// <summary>
+        /// As the operations to get the memory/cpu values are quite slow, this interval is used to not refresh too often.
+        /// </summary>
+        public static TimeSpan MinimumRefreshInterval { get; set; } = TimeSpan.FromSeconds(1);
 
-            if (DateTime.UtcNow - _lastCpuRead > CpuReadInterval)
+        public static void RefreshAll()
+        {
+            RefreshMemory();
+            RefreshCpu();
+        }
+
+        public static void RefreshMemory()
+        {
+            if (DateTime.UtcNow - _lastMemoryRead > MinimumRefreshInterval)
             {
-                _lastCpuRead = DateTime.UtcNow;
+                var osQuery = new WqlObjectQuery("SELECT * FROM Win32_OperatingSystem");
+                var osSearcher = new ManagementObjectSearcher(osQuery);
+                foreach (var os in osSearcher.Get())
+                {
+                    PhysicalMemoryTotal = Convert.ToUInt64(os["TotalVisibleMemorySize"]) * 1024;
+                    PhysicalMemoryFree = Convert.ToUInt64(os["FreePhysicalMemory"]) * 1024;
+                    VirtualMemoryTotal = Convert.ToUInt64(os["TotalVirtualMemorySize"]) * 1024;
+                    VirtualMemoryFree = Convert.ToUInt64(os["FreeVirtualMemory"]) * 1024;
+                }
+                _lastMemoryRead = DateTime.UtcNow;
+            }
+        }
+
+        public static void RefreshCpu()
+        {
+            if (DateTime.UtcNow - _lastCpuRead > MinimumRefreshInterval)
+            {
                 CpuUsage = Math.Round(CpuCounter.NextValue(), 2);
+                _lastCpuRead = DateTime.UtcNow;
             }
         }
 

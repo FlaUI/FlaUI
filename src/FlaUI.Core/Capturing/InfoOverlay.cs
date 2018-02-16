@@ -86,7 +86,7 @@ namespace FlaUI.Core.Capturing
 
         private string FormatOverlayString(string overlayString)
         {
-            SystemInfo.Refresh();
+            SystemInfo.RefreshAll();
             // Replace the simple values
             overlayString = overlayString
                 .Replace("{name}", $"{Environment.MachineName}")

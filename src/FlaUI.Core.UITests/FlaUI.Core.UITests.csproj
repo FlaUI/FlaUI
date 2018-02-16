@@ -88,7 +88,7 @@
     <Compile Include="TestFramework\TestApplicationType.cs" />
     <Compile Include="TestFramework\TestUtilities.cs" />
     <Compile Include="TestFramework\UITestBase.cs" />
-    <Compile Include="TestTools\NUnitProgressLogger.cs" />
+    <Compile Include="TestFramework\NUnitProgressLogger.cs" />
     <Compile Include="XPathTests.cs" />
   </ItemGroup>
   <ItemGroup>
