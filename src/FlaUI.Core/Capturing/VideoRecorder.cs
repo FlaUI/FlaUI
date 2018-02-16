@@ -10,7 +10,6 @@ using System.IO.Pipes;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
-using System.Threading;
 using System.Threading.Tasks;
 using FlaUI.Core.Logging;
 using FlaUI.Core.Tools;
@@ -26,10 +25,11 @@ namespace FlaUI.Core.Capturing
         private readonly uint _quality;
         private readonly string _ffmpegExePath;
         private readonly Func<CaptureImage> _captureMethod;
-        private readonly CancellationTokenSource _recordTaskCancellation = new CancellationTokenSource();
         private readonly BlockingCollection<ImageData> _frames;
         private Task _recordTask;
+        private bool _shouldRecord;
         private Task _writeTask;
+        private bool _rawVideo = false;
 
         /// <summary>
         /// Creates the video recorder and starts recording.
@@ -55,50 +55,53 @@ namespace FlaUI.Core.Capturing
         /// </summary>
         public string TargetVideoPath { get; }
 
-        private async Task RecordLoop(CancellationToken ct)
+        private async Task RecordLoop()
         {
             var frameInterval = TimeSpan.FromSeconds(1.0 / _frameRate);
             var sw = Stopwatch.StartNew();
             var frameCount = 0;
-            ImageData lastImage = null;
-            while (!ct.IsCancellationRequested)
+            var totalMissedFrames = 0;
+            while (_shouldRecord)
             {
                 var timestamp = DateTime.UtcNow;
 
-                if (lastImage != null)
+                if (frameCount > 0)
                 {
                     var requiredFrames = (int)Math.Floor(sw.Elapsed.TotalSeconds * _frameRate);
                     var diff = requiredFrames - frameCount;
-                    if (diff > 0)
+                    if (diff >= 5)
                     {
-                        Logger.Default.Warn($"Adding {diff} missing frame(s) to \"{Path.GetFileName(TargetVideoPath)}\"");
+                        Logger.Default.Warn($"Adding many ({diff}) missing frame(s) to \"{Path.GetFileName(TargetVideoPath)}\".");
                     }
                     for (var i = 0; i < diff; ++i)
                     {
-                        _frames.Add(lastImage, ct);
+                        _frames.Add(ImageData.RepeatImage);
                         ++frameCount;
+                        ++totalMissedFrames;
                     }
                 }
 
                 using (var img = _captureMethod())
                 {
-                    var imgData = BitmapToByteArray(img.Bitmap);
                     var image = new ImageData
                     {
-                        Data = imgData,
+                        Data = BitmapToByteArray(img.Bitmap),
                         Width = img.Bitmap.Width,
                         Height = img.Bitmap.Height
                     };
-                    _frames.Add(image, ct);
+                    _frames.Add(image);
                     ++frameCount;
-                    lastImage = image;
                 }
 
                 var timeTillNextFrame = timestamp + frameInterval - DateTime.UtcNow;
                 if (timeTillNextFrame > TimeSpan.Zero)
                 {
-                    await Task.Delay(timeTillNextFrame, ct);
+                    await Task.Delay(timeTillNextFrame);
                 }
+            }
+            if (totalMissedFrames > 0)
+            {
+                Logger.Default.Warn($"Totally added {totalMissedFrames} missing frame(s) to \"{Path.GetFileName(TargetVideoPath)}\".");
             }
         }
 
@@ -110,6 +113,7 @@ namespace FlaUI.Core.Capturing
             Process ffmpegProcess = null;
 
             var isFirstFrame = true;
+            ImageData lastImage = null;
             while (!_frames.IsCompleted)
             {
                 _frames.TryTake(out var img, -1);
@@ -122,12 +126,29 @@ namespace FlaUI.Core.Capturing
                 {
                     isFirstFrame = false;
                     Directory.CreateDirectory(new FileInfo(TargetVideoPath).Directory.FullName);
-                    var videoInArgs = $"-framerate {_frameRate} -f rawvideo -pix_fmt rgb32 -video_size {img.Width}x{img.Height} -i {pipePrefix}{videoPipeName}";
+                    var videoInFormat = _rawVideo ? "-f rawvideo" : ""; // Used when sending raw bitmaps to the pipe
+                    var videoInArgs = $"-framerate {_frameRate} {videoInFormat} -pix_fmt rgb32 -video_size {img.Width}x{img.Height} -i {pipePrefix}{videoPipeName}";
                     var videoOutArgs = $"-vcodec libx264 -crf {_quality} -pix_fmt yuv420p -preset ultrafast -r {_frameRate} -vf \"scale={img.Width.Even()}:{img.Height.Even()}\"";
                     ffmpegProcess = StartFFMpeg(_ffmpegExePath, $"-y -hide_banner -loglevel warning {videoInArgs} {videoOutArgs} \"{TargetVideoPath}\"");
                     ffmpegIn.WaitForConnection();
                 }
-                ffmpegIn.WriteAsync(img.Data, 0, img.Data.Length);
+                if (img.IsRepeatFrame)
+                {
+                    // Repeat the last frame
+                    ffmpegIn.WriteAsync(lastImage.Data, 0, lastImage.Data.Length);
+                }
+                else
+                {
+                    // Write the received frame and save it as last image
+                    ffmpegIn.WriteAsync(img.Data, 0, img.Data.Length);
+                    if (lastImage != null)
+                    {
+                        lastImage.Dispose();
+                        lastImage = null;
+                        GC.Collect();
+                    }
+                    lastImage = img;
+                }
             }
 
             ffmpegIn.Flush();
@@ -141,7 +162,8 @@ namespace FlaUI.Core.Capturing
         /// </summary>
         private void Start()
         {
-            _recordTask = Task.Factory.StartNew(async () => await RecordLoop(_recordTaskCancellation.Token), _recordTaskCancellation.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+            _shouldRecord = true;
+            _recordTask = Task.Factory.StartNew(async () => await RecordLoop(), TaskCreationOptions.LongRunning);
             _writeTask = Task.Factory.StartNew(WriteLoop, TaskCreationOptions.LongRunning);
         }
 
@@ -152,7 +174,7 @@ namespace FlaUI.Core.Capturing
         {
             if (_recordTask != null)
             {
-                _recordTaskCancellation.Cancel();
+                _shouldRecord = false;
                 _recordTask.Wait();
                 _recordTask = null;
             }
@@ -210,6 +232,13 @@ namespace FlaUI.Core.Capturing
 
         private byte[] BitmapToByteArray(Bitmap bitmap)
         {
+            using (var stream = new MemoryStream())
+            {
+                bitmap.Save(stream, _rawVideo ? ImageFormat.Bmp : ImageFormat.Png);
+                return stream.ToArray();
+            }
+
+            // Previous way
             BitmapData bmpdata = null;
             try
             {
@@ -255,11 +284,19 @@ namespace FlaUI.Core.Capturing
             return destPath;
         }
 
-        private class ImageData
+        private class ImageData : IDisposable
         {
             public int Width { get; set; }
             public int Height { get; set; }
+            public bool IsRepeatFrame { get; private set; }
             public byte[] Data { get; set; }
+
+            public static ImageData RepeatImage = new ImageData { IsRepeatFrame = true };
+
+            public void Dispose()
+            {
+                Data = null;
+            }
         }
     }
 }
