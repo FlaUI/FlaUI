@@ -13,6 +13,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using FlaUI.Core.Logging;
+using FlaUI.Core.Tools;
 
 namespace FlaUI.Core.Capturing
 {
@@ -24,12 +25,11 @@ namespace FlaUI.Core.Capturing
         private readonly uint _frameRate;
         private readonly uint _quality;
         private readonly string _ffmpegExePath;
-        private readonly string _targetVideoPath;
         private readonly Func<CaptureImage> _captureMethod;
-        private readonly Task _recordTask;
-        private readonly Task _writeTask;
         private readonly CancellationTokenSource _recordTaskCancellation = new CancellationTokenSource();
         private readonly BlockingCollection<ImageData> _frames;
+        private Task _recordTask;
+        private Task _writeTask;
 
         /// <summary>
         /// Creates the video recorder and starts recording.
@@ -44,12 +44,16 @@ namespace FlaUI.Core.Capturing
             _frameRate = frameRate;
             _quality = quality;
             _ffmpegExePath = ffmpegExePath;
-            _targetVideoPath = targetVideoPath;
+            TargetVideoPath = targetVideoPath;
             _captureMethod = captureMethod;
             _frames = new BlockingCollection<ImageData>();
-            _recordTask = Task.Factory.StartNew(async () => await RecordLoop(_recordTaskCancellation.Token), _recordTaskCancellation.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
-            _writeTask = Task.Factory.StartNew(WriteLoop, TaskCreationOptions.LongRunning);
+            Start();
         }
+
+        /// <summary>
+        /// The path of the video file.
+        /// </summary>
+        public string TargetVideoPath { get; }
 
         private async Task RecordLoop(CancellationToken ct)
         {
@@ -117,9 +121,10 @@ namespace FlaUI.Core.Capturing
                 if (isFirstFrame)
                 {
                     isFirstFrame = false;
+                    Directory.CreateDirectory(new FileInfo(TargetVideoPath).Directory.FullName);
                     var videoInArgs = $"-framerate {_frameRate} -f rawvideo -pix_fmt rgb32 -video_size {img.Width}x{img.Height} -i {pipePrefix}{videoPipeName}";
-                    var videoOutArgs = $"-vcodec libx264 -crf {_quality} -pix_fmt yuv420p -preset ultrafast -r {_frameRate} -vf \"scale={img.Width}:-2\"";
-                    ffmpegProcess = StartFFMpeg(_ffmpegExePath, $"-y {videoInArgs} {videoOutArgs} \"{_targetVideoPath}\"");
+                    var videoOutArgs = $"-vcodec libx264 -crf {_quality} -pix_fmt yuv420p -preset ultrafast -r {_frameRate} -vf \"scale={img.Width.Even()}:{img.Height.Even()}\"";
+                    ffmpegProcess = StartFFMpeg(_ffmpegExePath, $"-y {videoInArgs} {videoOutArgs} \"{TargetVideoPath}\"");
                     ffmpegIn.WaitForConnection();
                 }
                 ffmpegIn.WriteAsync(img.Data, 0, img.Data.Length);
@@ -131,19 +136,44 @@ namespace FlaUI.Core.Capturing
             ffmpegProcess?.WaitForExit();
         }
 
+        /// <summary>
+        /// Starts recording.
+        /// </summary>
+        private void Start()
+        {
+            _recordTask = Task.Factory.StartNew(async () => await RecordLoop(_recordTaskCancellation.Token), _recordTaskCancellation.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+            _writeTask = Task.Factory.StartNew(WriteLoop, TaskCreationOptions.LongRunning);
+        }
+
+        /// <summary>
+        /// Stops recording and finishes the video file.
+        /// </summary>
+        public void Stop()
+        {
+            if (_recordTask != null)
+            {
+                _recordTaskCancellation.Cancel();
+                _recordTask.Wait();
+                _recordTask = null;
+            }
+            _frames.CompleteAdding();
+            if (_writeTask != null)
+            {
+                try
+                {
+                    _writeTask.Wait();
+                    _writeTask = null;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Default.Warn(ex.Message, ex);
+                }
+            }
+        }
+
         public void Dispose()
         {
-            _recordTaskCancellation.Cancel();
-            _recordTask.Wait();
-            _frames.CompleteAdding();
-            try
-            {
-                _writeTask.Wait();
-            }
-            catch (Exception ex)
-            {
-                Logger.Default.Warn(ex.Message, ex);
-            }
+            Stop();
         }
 
         private Process StartFFMpeg(string exePath, string arguments)
@@ -157,7 +187,8 @@ namespace FlaUI.Core.Capturing
                         UseShellExecute = false,
                         CreateNoWindow = true,
                         RedirectStandardError = true,
-                        RedirectStandardInput = true
+                        RedirectStandardInput = true,
+                        RedirectStandardOutput = true,
                     },
                 EnableRaisingEvents = true
             };
@@ -202,6 +233,7 @@ namespace FlaUI.Core.Capturing
                     await webClient.DownloadFileTaskAsync(uri, archivePath);
                 }
                 // Extract
+                Directory.CreateDirectory(targetFolder);
                 await Task.Run(() =>
                 {
                     using (var archive = ZipFile.OpenRead(archivePath))
