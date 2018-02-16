@@ -51,7 +51,6 @@ namespace FlaUI.Core.UITests.TestFramework
             _wasTestRun = false;
             Automation = TestUtilities.GetAutomation(automationType);
             Logger.Default = new NUnitProgressLogger();
-            Logger.Default.SetLevel(LogLevel.Debug);
         }
 
         /// <summary>

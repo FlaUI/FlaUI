@@ -71,7 +71,7 @@ namespace FlaUI.Core.Capturing
                     var diff = requiredFrames - frameCount;
                     if (diff > 0)
                     {
-                        Logger.Default.Warn($"Adding {diff} missing frames");
+                        Logger.Default.Warn($"Adding {diff} missing frame(s) to \"{Path.GetFileName(TargetVideoPath)}\"");
                     }
                     for (var i = 0; i < diff; ++i)
                     {
@@ -124,7 +124,7 @@ namespace FlaUI.Core.Capturing
                     Directory.CreateDirectory(new FileInfo(TargetVideoPath).Directory.FullName);
                     var videoInArgs = $"-framerate {_frameRate} -f rawvideo -pix_fmt rgb32 -video_size {img.Width}x{img.Height} -i {pipePrefix}{videoPipeName}";
                     var videoOutArgs = $"-vcodec libx264 -crf {_quality} -pix_fmt yuv420p -preset ultrafast -r {_frameRate} -vf \"scale={img.Width.Even()}:{img.Height.Even()}\"";
-                    ffmpegProcess = StartFFMpeg(_ffmpegExePath, $"-y {videoInArgs} {videoOutArgs} \"{TargetVideoPath}\"");
+                    ffmpegProcess = StartFFMpeg(_ffmpegExePath, $"-y -hide_banner -loglevel warning {videoInArgs} {videoOutArgs} \"{TargetVideoPath}\"");
                     ffmpegIn.WaitForConnection();
                 }
                 ffmpegIn.WriteAsync(img.Data, 0, img.Data.Length);
@@ -193,11 +193,19 @@ namespace FlaUI.Core.Capturing
                 EnableRaisingEvents = true
             };
 
-            process.OutputDataReceived += (s, e) => Logger.Default.Debug(e.Data);
-            process.ErrorDataReceived += (s, e) => Logger.Default.Info(e.Data);
+            process.OutputDataReceived += OnProcessDataReceived;
+            process.ErrorDataReceived += OnProcessDataReceived;
             process.Start();
             process.BeginErrorReadLine();
             return process;
+        }
+
+        private void OnProcessDataReceived(object s, DataReceivedEventArgs e)
+        {
+            if (!String.IsNullOrWhiteSpace(e.Data))
+            {
+                Logger.Default.Info(e.Data);
+            }
         }
 
         private byte[] BitmapToByteArray(Bitmap bitmap)
