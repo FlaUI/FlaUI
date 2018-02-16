@@ -1,7 +1,7 @@
 ﻿using FlaUI.Core.Logging;
 using NUnit.Framework;
 
-namespace FlaUI.Core.UITests.TestTools
+namespace FlaUI.Core.UITests.TestFramework
 {
     public class NUnitProgressLogger : LoggerBase
     {

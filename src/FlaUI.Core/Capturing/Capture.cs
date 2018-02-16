@@ -70,7 +70,7 @@ namespace FlaUI.Core.Capturing
             var hDest = Gdi32.CreateCompatibleDC(hSrce);
             var hBmp = Gdi32.CreateCompatibleBitmap(hSrce, sz.Width, sz.Height);
             var hOldBmp = Gdi32.SelectObject(hDest, hBmp);
-            Gdi32.BitBlt(hDest, 0, 0, sz.Width, sz.Height, hSrce, (int)bounds.X, (int)bounds.Y, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
+            Gdi32.BitBlt(hDest, 0, 0, sz.Width, sz.Height, hSrce, bounds.X, bounds.Y, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
             var bmp = Image.FromHbitmap(hBmp);
             Gdi32.SelectObject(hDest, hOldBmp);
             Gdi32.DeleteObject(hBmp);

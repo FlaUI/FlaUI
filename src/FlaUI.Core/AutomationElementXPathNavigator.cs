@@ -281,11 +281,10 @@ namespace FlaUI.Core
 
         private int GetAttributeIndexFromName(string attributeName)
         {
-            ElementAttributes parsedValue;
 #if NET35
-            if (ExtensionMethods.TryParse(attributeName, out parsedValue))
+            if (EnumExtensions.TryParse(attributeName, out ElementAttributes parsedValue))
 #else
-            if (Enum.TryParse(attributeName, out parsedValue))
+            if (Enum.TryParse(attributeName, out ElementAttributes parsedValue))
 #endif
             {
                 return (int)parsedValue;
