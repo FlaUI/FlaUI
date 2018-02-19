@@ -62,7 +62,7 @@ namespace FlaUI.Core.UITests.TestFramework
             // Start the recorder
             SystemInfo.RefreshAll();
             var ffmpegPath = await VideoRecorder.DownloadFFMpeg(@"C:\temp");
-            _recorder = new VideoRecorder(5, 26, ffmpegPath, $@"C:\temp\{TestContext.CurrentContext.Test.ClassName}.mp4", r =>
+            _recorder = new VideoRecorder(new VideoRecorderSettings { VideoQuality = 26, ffmpegPath = ffmpegPath, TargetVideoPath = $@"C:\temp\{TestContext.CurrentContext.Test.ClassName}.mp4" }, r =>
             {
                 var testName = TestContext.CurrentContext.Test.ClassName + "." + (_testMethodName ?? "[Setup]");
                 var img = Capture.Screen();
