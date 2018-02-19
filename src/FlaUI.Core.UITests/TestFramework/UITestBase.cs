@@ -62,12 +62,11 @@ namespace FlaUI.Core.UITests.TestFramework
             // Start the recorder
             SystemInfo.RefreshAll();
             var ffmpegPath = await VideoRecorder.DownloadFFMpeg(@"C:\temp");
-            var recordingStartTime = DateTime.UtcNow;
-            _recorder = new VideoRecorder(15, 26, ffmpegPath, $@"C:\temp\{TestContext.CurrentContext.Test.ClassName}.mp4", () =>
+            _recorder = new VideoRecorder(5, 26, ffmpegPath, $@"C:\temp\{TestContext.CurrentContext.Test.ClassName}.mp4", r =>
             {
                 var testName = TestContext.CurrentContext.Test.ClassName + "." + (_testMethodName ?? "[Setup]");
                 var img = Capture.Screen();
-                img.ApplyOverlays(new InfoOverlay(img.DesktopBounds) { CustomTimeSpan = DateTime.UtcNow - recordingStartTime, OverlayStringFormat = @"{ct:hh\:mm\:ss\.fff} / {name} / CPU: {cpu} / RAM: {mem.p.used}/{mem.p.tot} ({mem.p.used.perc}) / " + testName }, new MouseOverlay(img.DesktopBounds));
+                img.ApplyOverlays(new InfoOverlay(img.DesktopBounds) { RecordTimeSpan = r.RecordTimeSpan, OverlayStringFormat = @"{rt:hh\:mm\:ss\.fff} / {name} / CPU: {cpu} / RAM: {mem.p.used}/{mem.p.tot} ({mem.p.used.perc}) / " + testName }, new MouseOverlay(img.DesktopBounds));
                 return img;
             });
             await Task.Delay(500);

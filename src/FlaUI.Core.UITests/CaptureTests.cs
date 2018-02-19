@@ -23,7 +23,9 @@ namespace FlaUI.Core.UITests
                     var window = app.GetMainWindow(automation);
                     Assert.That(window, Is.Not.Null);
                     Assert.That(window.Title, Is.Not.Null);
-                    Capture.Screen().ToFile(@"c:\temp\screen.png");
+                    var image = Capture.Screen();
+                    image.ApplyOverlays(new MouseOverlay(image.DesktopBounds));
+                    image.ToFile(@"c:\temp\screen.png");
                     Capture.Element(window).ToFile(@"c:\temp\window.png");
                     Capture.Rectangle(new Rectangle(0, 0, 500, 300)).ToFile(@"c:\temp\rect.png");
                     Capture.ElementRectangle(window, new Rectangle(0, 0, 50, 150)).ToFile(@"c:\temp\elemrect.png");
@@ -38,11 +40,10 @@ namespace FlaUI.Core.UITests
             Logger.Default = new NUnitProgressLogger();
             Logger.Default.SetLevel(LogLevel.Debug);
             SystemInfo.RefreshAll();
-            var recordingStartTime = DateTime.UtcNow;
-            var recorder = new VideoRecorder(10, 26, @"C:\Users\rbl\Documents\ffmpeg.exe", @"C:\temp\out.mp4", () =>
+            var recorder = new VideoRecorder(5, 26, @"C:\Users\rbl\Documents\ffmpeg.exe", @"C:\temp\out.mp4", r =>
             {
                 var img = Capture.Screen(1);
-                img.ApplyOverlays(new InfoOverlay(img.DesktopBounds) { CustomTimeSpan = DateTime.UtcNow - recordingStartTime, OverlayStringFormat = @"{ct:hh\:mm\:ss\.fff} / {name} / CPU: {cpu} / RAM: {mem.p.used}/{mem.p.tot} ({mem.p.used.perc})" }, new MouseOverlay(img.DesktopBounds));
+                img.ApplyOverlays(new InfoOverlay(img.DesktopBounds) { RecordTimeSpan = r.RecordTimeSpan, OverlayStringFormat = @"{rt:hh\:mm\:ss\.fff} / {name} / CPU: {cpu} / RAM: {mem.p.used}/{mem.p.tot} ({mem.p.used.perc})" }, new MouseOverlay(img.DesktopBounds));
                 return img;
             });
             System.Threading.Thread.Sleep(5000);

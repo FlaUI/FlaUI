@@ -24,12 +24,12 @@ namespace FlaUI.Core.Capturing
         private readonly uint _frameRate;
         private readonly uint _quality;
         private readonly string _ffmpegExePath;
-        private readonly Func<CaptureImage> _captureMethod;
+        private readonly Func<VideoRecorder, CaptureImage> _captureMethod;
         private readonly BlockingCollection<ImageData> _frames;
         private Task _recordTask;
         private bool _shouldRecord;
         private Task _writeTask;
-        private bool _rawVideo = false;
+        private DateTime _recordStartTime;
 
         /// <summary>
         /// Creates the video recorder and starts recording.
@@ -39,7 +39,7 @@ namespace FlaUI.Core.Capturing
         /// <param name="ffmpegExePath">The full path to the executable of ffmpeg.</param>
         /// <param name="targetVideoPath">The path to the target video file.</param>
         /// <param name="captureMethod">The method used for capturing the image which is recorder.</param>
-        public VideoRecorder(uint frameRate, uint quality, string ffmpegExePath, string targetVideoPath, Func<CaptureImage> captureMethod)
+        public VideoRecorder(uint frameRate, uint quality, string ffmpegExePath, string targetVideoPath, Func<VideoRecorder, CaptureImage> captureMethod)
         {
             _frameRate = frameRate;
             _quality = quality;
@@ -54,6 +54,17 @@ namespace FlaUI.Core.Capturing
         /// The path of the video file.
         /// </summary>
         public string TargetVideoPath { get; }
+
+        /// <summary>
+        /// Flag to indicate if the images captured should be in raw format or compressed.
+        /// The decision here is what you have to spare: Use raw when you have a lot of memory, use compressed if you have cpu power.
+        /// </summary>
+        public bool UseRawImages { get; set; }
+
+        /// <summary>
+        /// The time since the recording started.
+        /// </summary>
+        public TimeSpan RecordTimeSpan => DateTime.UtcNow - _recordStartTime;
 
         private async Task RecordLoop()
         {
@@ -81,7 +92,7 @@ namespace FlaUI.Core.Capturing
                     }
                 }
 
-                using (var img = _captureMethod())
+                using (var img = _captureMethod(this))
                 {
                     var image = new ImageData
                     {
@@ -126,7 +137,7 @@ namespace FlaUI.Core.Capturing
                 {
                     isFirstFrame = false;
                     Directory.CreateDirectory(new FileInfo(TargetVideoPath).Directory.FullName);
-                    var videoInFormat = _rawVideo ? "-f rawvideo" : ""; // Used when sending raw bitmaps to the pipe
+                    var videoInFormat = UseRawImages ? "-f rawvideo" : ""; // Used when sending raw bitmaps to the pipe
                     var videoInArgs = $"-framerate {_frameRate} {videoInFormat} -pix_fmt rgb32 -video_size {img.Width}x{img.Height} -i {pipePrefix}{videoPipeName}";
                     var videoOutArgs = $"-vcodec libx264 -crf {_quality} -pix_fmt yuv420p -preset ultrafast -r {_frameRate} -vf \"scale={img.Width.Even()}:{img.Height.Even()}\"";
                     ffmpegProcess = StartFFMpeg(_ffmpegExePath, $"-y -hide_banner -loglevel warning {videoInArgs} {videoOutArgs} \"{TargetVideoPath}\"");
@@ -163,6 +174,7 @@ namespace FlaUI.Core.Capturing
         private void Start()
         {
             _shouldRecord = true;
+            _recordStartTime = DateTime.UtcNow;
             _recordTask = Task.Factory.StartNew(async () => await RecordLoop(), TaskCreationOptions.LongRunning);
             _writeTask = Task.Factory.StartNew(WriteLoop, TaskCreationOptions.LongRunning);
         }
@@ -234,7 +246,7 @@ namespace FlaUI.Core.Capturing
         {
             using (var stream = new MemoryStream())
             {
-                bitmap.Save(stream, _rawVideo ? ImageFormat.Bmp : ImageFormat.Png);
+                bitmap.Save(stream, UseRawImages ? ImageFormat.Bmp : ImageFormat.Png);
                 return stream.ToArray();
             }
 

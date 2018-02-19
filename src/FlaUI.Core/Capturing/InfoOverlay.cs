@@ -18,7 +18,7 @@ namespace FlaUI.Core.Capturing
         /// The string to use for the overlay. Has some variables which are automatically replaced.
         /// The variables are:
         /// - dt: The current systems datetime, can additionally be followed with a .net format string.
-        /// - ct: The custom timespan set on this overlay (<see cref="CustomTimeSpan"/>).
+        /// - rt: The timespan since the recording started See also <see cref="RecordTimeSpan"/>.
         /// - name: The machine name of the current system.
         /// - cpu: The cpu usage.
         /// - mem.p.tot: The physical total memory.
@@ -50,9 +50,9 @@ namespace FlaUI.Core.Capturing
         public Color OverlayTextColor { get; set; } = Color.White;
 
         /// <summary>
-        /// A custom timespan (for example for the recording duration).
+        /// The timespan for the recorded time.
         /// </summary>
-        public TimeSpan CustomTimeSpan { get; set; } = TimeSpan.Zero;
+        public TimeSpan RecordTimeSpan { get; set; } = TimeSpan.Zero;
 
         public override void Draw(Graphics g)
         {
@@ -107,7 +107,7 @@ namespace FlaUI.Core.Capturing
             overlayString = Regex.Replace(overlayString, @"\{dt:?(.*?)\}", m => now.ToString(m.Groups[1].Value));
 
             // Replace the custom timespan
-            overlayString = Regex.Replace(overlayString, @"\{ct:?(.*?)\}", m => CustomTimeSpan.ToString(m.Groups[1].Value));
+            overlayString = Regex.Replace(overlayString, @"\{rt:?(.*?)\}", m => RecordTimeSpan.ToString(m.Groups[1].Value));
 
             return overlayString;
         }
