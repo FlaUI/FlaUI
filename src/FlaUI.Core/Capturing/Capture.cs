@@ -13,6 +13,14 @@ namespace FlaUI.Core.Capturing
     public static class Capture
     {
         /// <summary>
+        /// Captures the main (primary) screen.
+        /// </summary>
+        public static CaptureImage MainScreen()
+        {
+            return Rectangle(System.Windows.Forms.Screen.PrimaryScreen.Bounds);
+        }
+
+        /// <summary>
         /// Captures the whole screen (all monitors).
         /// </summary>
         public static CaptureImage Screen(int screenIndex = -1)
