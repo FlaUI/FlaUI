@@ -63,4 +63,4 @@ Feel free to fork FlaUI and send pull requests of your modifications.<br />
 You can also create issues if you find problems or have ideas on how to further improve FlaUI.
 
 ### Acknowledgements
-<img src="https://user-images.githubusercontent.com/393641/36379975-e4eda8c8-1580-11e8-8fa2-c20aeeaa607a.png" alt="resharper" width="40" /> Thanks to JetBrains for providing a free license of ReSharper.
+<a href="https://www.jetbrains.com/resharper/" target="_blank"><img src="https://user-images.githubusercontent.com/393641/36379975-e4eda8c8-1580-11e8-8fa2-c20aeeaa607a.png" alt="resharper" width="40" /></a> Thanks to JetBrains for providing a free license of ReSharper.
