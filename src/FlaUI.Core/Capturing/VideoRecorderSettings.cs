@@ -41,5 +41,10 @@
         /// <see cref="Capturing.VideoFormat.xvid"/>: From 1 (lossless) to 31 (worst). Sane values are around 5.
         /// </summary>
         public int VideoQuality { get; set; }
+
+        /// <summary>
+        /// Run the encoding with low processor priority.
+        /// </summary>
+        public bool EncodeWithLowPriority { get; set; }
     }
 }
