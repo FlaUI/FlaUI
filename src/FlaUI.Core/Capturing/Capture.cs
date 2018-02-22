@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Exceptions;
@@ -15,15 +16,15 @@ namespace FlaUI.Core.Capturing
         /// <summary>
         /// Captures the main (primary) screen.
         /// </summary>
-        public static CaptureImage MainScreen()
+        public static CaptureImage MainScreen(CaptureSettings settings = null)
         {
-            return Rectangle(System.Windows.Forms.Screen.PrimaryScreen.Bounds);
+            return Rectangle(System.Windows.Forms.Screen.PrimaryScreen.Bounds, settings);
         }
 
         /// <summary>
         /// Captures the whole screen (all monitors).
         /// </summary>
-        public static CaptureImage Screen(int screenIndex = -1)
+        public static CaptureImage Screen(int screenIndex = -1, CaptureSettings settings = null)
         {
             Rectangle capturingRectangle;
             // Take the appropriate screen if requested
@@ -39,21 +40,21 @@ namespace FlaUI.Core.Capturing
                     SystemParameters.VirtualScreenLeft.ToInt(), SystemParameters.VirtualScreenTop.ToInt(),
                     SystemParameters.VirtualScreenWidth.ToInt(), SystemParameters.VirtualScreenHeight.ToInt());
             }
-            return Rectangle(capturingRectangle);
+            return Rectangle(capturingRectangle, settings);
         }
 
         /// <summary>
         /// Captures an element and returns the image.
         /// </summary>
-        public static CaptureImage Element(AutomationElement element)
+        public static CaptureImage Element(AutomationElement element, CaptureSettings settings = null)
         {
-            return Rectangle(element.Properties.BoundingRectangle.Value);
+            return Rectangle(element.Properties.BoundingRectangle.Value, settings);
         }
 
         /// <summary>
         /// Captures a rectangle inside an element and returns the image.
         /// </summary>
-        public static CaptureImage ElementRectangle(AutomationElement element, Rectangle rectangle)
+        public static CaptureImage ElementRectangle(AutomationElement element, Rectangle rectangle, CaptureSettings settings = null)
         {
             var elementBounds = element.BoundingRectangle;
             // Calculate the rectangle that should be captured
@@ -63,28 +64,78 @@ namespace FlaUI.Core.Capturing
             {
                 throw new FlaUIException($"The given rectangle ({capturingRectangle}) is out of bounds of the element ({elementBounds}).");
             }
-            return Rectangle(capturingRectangle);
+            return Rectangle(capturingRectangle, settings);
         }
 
         /// <summary>
         /// Captures a specific area from the screen.
         /// </summary>
-        public static CaptureImage Rectangle(Rectangle bounds)
+        public static CaptureImage Rectangle(Rectangle bounds, CaptureSettings settings = null)
+        {
+            // Default is the original size
+            var outputWidth = bounds.Width;
+            var outputHeight = bounds.Height;
+
+            if (settings != null)
+            {
+                if (settings.OutputScale != 1)
+                {
+                    // Calculate with the scale
+                    outputWidth = (bounds.Width * settings.OutputScale).ToInt();
+                    outputHeight = (bounds.Height * settings.OutputScale).ToInt();
+                }
+                else if (settings.OutputHeight == -1 && settings.OutputWidth != -1)
+                {
+                    // Adjust the height
+                    outputWidth = settings.OutputWidth;
+                    var percent = outputWidth / (double)bounds.Width;
+                    outputHeight = (bounds.Height * percent).ToInt();
+                }
+                else if (settings.OutputHeight != -1 && settings.OutputWidth == -1)
+                {
+                    // Adjust the width
+                    outputHeight = settings.OutputHeight;
+                    var percent = outputHeight / (double)bounds.Height;
+                    outputWidth = (bounds.Width * percent).ToInt();
+                }
+            }
+
+            Bitmap bmp;
+            if (outputWidth == bounds.Width || outputHeight == bounds.Height)
+            {
+                // Capture directly without any resizing
+                bmp = CaptureDesktopToBitmap(bounds.Width, bounds.Height, (dest, src) =>
+                {
+                    Gdi32.BitBlt(dest, 0, 0, outputWidth, outputHeight, src, bounds.X, bounds.Y, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
+                });
+            }
+            else
+            {
+                //  Capture with scaling
+                bmp = CaptureDesktopToBitmap(outputWidth, outputHeight, (dest, src) =>
+                {
+                    Gdi32.SetStretchBltMode(dest, StretchMode.STRETCH_HALFTONE);
+                    Gdi32.StretchBlt(dest, 0, 0, outputWidth, outputHeight, src, bounds.X, bounds.Y, bounds.Width, bounds.Height, TernaryRasterOperations.SRCCOPY | TernaryRasterOperations.CAPTUREBLT);
+                });
+            }
+            return new CaptureImage(bmp, bounds);
+        }
+
+        private static Bitmap CaptureDesktopToBitmap(int width, int height, Action<IntPtr, IntPtr> action)
         {
             // Use P/Invoke because of: https://stackoverflow.com/a/3072580/1069200
-            var sz = new System.Drawing.Size(bounds.Width, bounds.Height);
             var hDesk = User32.GetDesktopWindow();
-            var hSrce = User32.GetWindowDC(hDesk);
-            var hDest = Gdi32.CreateCompatibleDC(hSrce);
-            var hBmp = Gdi32.CreateCompatibleBitmap(hSrce, sz.Width, sz.Height);
-            var hOldBmp = Gdi32.SelectObject(hDest, hBmp);
-            Gdi32.BitBlt(hDest, 0, 0, sz.Width, sz.Height, hSrce, bounds.X, bounds.Y, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
+            var hSrc = User32.GetWindowDC(hDesk);
+            var hDest = Gdi32.CreateCompatibleDC(hSrc);
+            var hBmp = Gdi32.CreateCompatibleBitmap(hSrc, width, height);
+            var hPrevBmp = Gdi32.SelectObject(hDest, hBmp);
+            action(hDest, hSrc);
             var bmp = Image.FromHbitmap(hBmp);
-            Gdi32.SelectObject(hDest, hOldBmp);
+            Gdi32.SelectObject(hDest, hPrevBmp);
             Gdi32.DeleteObject(hBmp);
             Gdi32.DeleteDC(hDest);
-            User32.ReleaseDC(hDesk, hSrce);
-            return new CaptureImage(bmp, bounds);
+            User32.ReleaseDC(hDesk, hSrc);
+            return bmp;
         }
     }
 }

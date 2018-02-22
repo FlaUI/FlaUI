@@ -20,6 +20,15 @@ namespace FlaUI.Core.WindowsAPI
         public static extern bool BitBlt(IntPtr hdcDest, int xDest, int yDest, int wDest, int hDest, IntPtr hdcSource, int xSrc, int ySrc, CopyPixelOperation rop);
 
         [DllImport("gdi32.dll")]
+        public static extern bool SetStretchBltMode(IntPtr hdc, StretchMode iStretchMode);
+
+        [DllImport("gdi32.dll")]
+        public static extern bool StretchBlt(
+            IntPtr hdcDest, int nXOriginDest, int nYOriginDest, int nWidthDest, int nHeightDest,
+            IntPtr hdcSrc, int nXOriginSrc, int nYOriginSrc, int nWidthSrc, int nHeightSrc,
+            TernaryRasterOperations dwRop);
+
+        [DllImport("gdi32.dll")]
         public static extern IntPtr DeleteDC(IntPtr hDc);
 
         [DllImport("gdi32.dll")]
