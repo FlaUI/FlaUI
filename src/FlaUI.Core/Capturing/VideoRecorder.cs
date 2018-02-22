@@ -219,6 +219,10 @@ namespace FlaUI.Core.Capturing
             process.OutputDataReceived += OnProcessDataReceived;
             process.ErrorDataReceived += OnProcessDataReceived;
             process.Start();
+            if (_settings.EncodeWithLowPriority)
+            {
+                process.PriorityClass = ProcessPriorityClass.BelowNormal;
+            }
             process.BeginErrorReadLine();
             return process;
         }
