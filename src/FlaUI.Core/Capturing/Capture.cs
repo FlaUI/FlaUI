@@ -72,53 +72,28 @@ namespace FlaUI.Core.Capturing
         /// </summary>
         public static CaptureImage Rectangle(Rectangle bounds, CaptureSettings settings = null)
         {
-            // Default is the original size
-            var outputWidth = bounds.Width;
-            var outputHeight = bounds.Height;
-
-            if (settings != null)
-            {
-                if (settings.OutputScale != 1)
-                {
-                    // Calculate with the scale
-                    outputWidth = (bounds.Width * settings.OutputScale).ToInt();
-                    outputHeight = (bounds.Height * settings.OutputScale).ToInt();
-                }
-                else if (settings.OutputHeight == -1 && settings.OutputWidth != -1)
-                {
-                    // Adjust the height
-                    outputWidth = settings.OutputWidth;
-                    var percent = outputWidth / (double)bounds.Width;
-                    outputHeight = (bounds.Height * percent).ToInt();
-                }
-                else if (settings.OutputHeight != -1 && settings.OutputWidth == -1)
-                {
-                    // Adjust the width
-                    outputHeight = settings.OutputHeight;
-                    var percent = outputHeight / (double)bounds.Height;
-                    outputWidth = (bounds.Width * percent).ToInt();
-                }
-            }
+            // Calculate the size of the output rectangle
+            var outputRectangle = CaptureUtilities.ScaleAccordingToSettings(bounds, settings);
 
             Bitmap bmp;
-            if (outputWidth == bounds.Width || outputHeight == bounds.Height)
+            if (outputRectangle.Width == bounds.Width || outputRectangle.Height == bounds.Height)
             {
                 // Capture directly without any resizing
                 bmp = CaptureDesktopToBitmap(bounds.Width, bounds.Height, (dest, src) =>
                 {
-                    Gdi32.BitBlt(dest, 0, 0, outputWidth, outputHeight, src, bounds.X, bounds.Y, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
+                    Gdi32.BitBlt(dest, outputRectangle.X, outputRectangle.Y, outputRectangle.Width, outputRectangle.Height, src, bounds.X, bounds.Y, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
                 });
             }
             else
             {
                 //  Capture with scaling
-                bmp = CaptureDesktopToBitmap(outputWidth, outputHeight, (dest, src) =>
+                bmp = CaptureDesktopToBitmap(outputRectangle.Width, outputRectangle.Height, (dest, src) =>
                 {
                     Gdi32.SetStretchBltMode(dest, StretchMode.STRETCH_HALFTONE);
-                    Gdi32.StretchBlt(dest, 0, 0, outputWidth, outputHeight, src, bounds.X, bounds.Y, bounds.Width, bounds.Height, TernaryRasterOperations.SRCCOPY | TernaryRasterOperations.CAPTUREBLT);
+                    Gdi32.StretchBlt(dest, outputRectangle.X, outputRectangle.Y, outputRectangle.Width, outputRectangle.Height, src, bounds.X, bounds.Y, bounds.Width, bounds.Height, TernaryRasterOperations.SRCCOPY | TernaryRasterOperations.CAPTUREBLT);
                 });
             }
-            return new CaptureImage(bmp, bounds);
+            return new CaptureImage(bmp, bounds, settings);
         }
 
         private static Bitmap CaptureDesktopToBitmap(int width, int height, Action<IntPtr, IntPtr> action)

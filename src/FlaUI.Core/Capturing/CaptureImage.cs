@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -20,22 +19,28 @@ namespace FlaUI.Core.Capturing
         /// <summary>
         /// Creates a <see cref="CaptureImage"/> object with the given <see cref="Bitmap"/>.
         /// </summary>
-        public CaptureImage(Bitmap bitmap, Rectangle desktopBounds)
+        public CaptureImage(Bitmap bitmap, Rectangle originalBounds, CaptureSettings settings)
         {
             Bitmap = bitmap;
-            DesktopBounds = desktopBounds;
+            OriginalBounds = originalBounds;
+            Settings = settings;
             _bitmapImageLazy = new Lazy<BitmapImage>(ToWpf);
         }
 
         /// <summary>
         /// The original <see cref="Bitmap"/>.
         /// </summary>
-        public Bitmap Bitmap { get; private set; }
+        public Bitmap Bitmap { get; }
 
         /// <summary>
-        /// The bounding rectangle on the desktop that this image is based on.
+        /// The original bounding rectangle (relative to the whole desktop) that this image is based on.
         /// </summary>
-        public Rectangle DesktopBounds { get; }
+        public Rectangle OriginalBounds { get; }
+
+        /// <summary>
+        /// The <see cref="CaptureSettings"/> used to capture the image.
+        /// </summary>
+        public CaptureSettings Settings { get; }
 
         /// <summary>
         /// A WPF friendly <see cref="BitmapImage"/> of the <see cref="Bitmap"/>.
@@ -93,60 +98,6 @@ namespace FlaUI.Core.Capturing
                     }
                 }
             }
-            return this;
-        }
-
-        /// <summary>
-        /// Resizes the image by a given percent.
-        /// </summary>
-        /// <param name="percent">The percent of the new size (1 = 100%).</param>
-        public CaptureImage ResizeByPercent(double percent)
-        {
-            var newWidth = (Bitmap.Width * percent).ToInt();
-            var newHeight = (Bitmap.Height * percent).ToInt();
-            return ResizeBySize(newWidth, newHeight);
-        }
-
-        /// <summary>
-        /// Resize the image to the given size.
-        /// </summary>
-        /// <param name="newWidth">The new width, can be -1 if it should be adjusted automatically to a given height.</param>
-        /// <param name="newHeight">The new height, can be -1 if it should be adjusted automatically to a given width.</param>
-        public CaptureImage ResizeBySize(int newWidth, int newHeight)
-        {
-            // Fix width/height in case only one size is given
-            if (newHeight == -1)
-            {
-                var percent = newWidth / (double)Bitmap.Width;
-                newHeight = (Bitmap.Height * percent).ToInt();
-            }
-            else if (newWidth == -1)
-            {
-                var percent = newHeight / (double)Bitmap.Height;
-                newWidth = (Bitmap.Width * percent).ToInt();
-            }
-
-            // Code taken from https://stackoverflow.com/questions/1922040/resize-an-image-c-sharp
-            var destImage = new Bitmap(newWidth, newHeight);
-            // Maintain the original DPI
-            destImage.SetResolution(Bitmap.HorizontalResolution, Bitmap.VerticalResolution);
-            using (var g = Graphics.FromImage(destImage))
-            {
-                g.CompositingMode = CompositingMode.SourceCopy;
-                g.CompositingQuality = CompositingQuality.HighQuality;
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                g.SmoothingMode = SmoothingMode.HighQuality;
-                g.PixelOffsetMode = PixelOffsetMode.HighQuality;
-
-                // Used to prevent ghosting around image borders with transparent pixels
-                using (var wrapMode = new ImageAttributes())
-                {
-                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
-                    g.DrawImage(Bitmap, new Rectangle(0, 0, newWidth, newHeight), 0, 0, Bitmap.Width, Bitmap.Height, GraphicsUnit.Pixel, wrapMode);
-                }
-            }
-            Bitmap = null;
-            Bitmap = destImage;
             return this;
         }
 

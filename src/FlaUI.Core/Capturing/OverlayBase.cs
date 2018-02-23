@@ -2,14 +2,20 @@
 
 namespace FlaUI.Core.Capturing
 {
+    /// <summary>
+    /// Base class for overlays.
+    /// </summary>
     public abstract class OverlayBase : ICaptureOverlay
     {
-        protected OverlayBase(Rectangle desktopBounds)
+        protected OverlayBase(CaptureImage captureImage)
         {
-            DesktopBounds = desktopBounds;
+            CaptureImage = captureImage;
         }
 
-        public Rectangle DesktopBounds { get; }
+        /// <summary>
+        /// The captured image where this overlay should be painted.
+        /// </summary>
+        public CaptureImage CaptureImage { get; }
 
         /// <inheritdoc />
         public abstract void Draw(Graphics g);

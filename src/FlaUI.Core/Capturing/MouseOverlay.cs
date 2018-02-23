@@ -1,7 +1,6 @@
-﻿using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
-using FlaUI.Core.WindowsAPI;
+﻿using System.Drawing;
+using System.Drawing.Drawing2D;
+using FlaUI.Core.Tools;
 
 namespace FlaUI.Core.Capturing
 {
@@ -10,37 +9,35 @@ namespace FlaUI.Core.Capturing
     /// </summary>
     public class MouseOverlay : OverlayBase
     {
-        public MouseOverlay(Rectangle desktopBounds) : base(desktopBounds)
+        public MouseOverlay(CaptureImage captureImage) : base(captureImage)
         {
         }
 
         /// <inheritdoc />
         public override void Draw(Graphics g)
         {
-            CURSORINFO cursorInfo;
-            cursorInfo.cbSize = Marshal.SizeOf(typeof(CURSORINFO));
-            if (User32.GetCursorInfo(out cursorInfo))
+            var outputPoint = new Point();
+            var cursorBitmap = CaptureUtilities.CaptureCursor(ref outputPoint);
+            // Fix the coordinates for multi-screen scenarios
+            outputPoint.X -= CaptureImage.OriginalBounds.Left;
+            outputPoint.Y -= CaptureImage.OriginalBounds.Top;
+            // Check for scaling and handle that
+            var scale = CaptureUtilities.GetScale(CaptureImage.OriginalBounds, CaptureImage.Settings);
+            if (scale != 1)
             {
-                if (cursorInfo.flags == CursorState.CURSOR_SHOWING)
-                {
-                    // We need to get the icon to get the "Hotspot" (aka offset)
-                    var hicon = User32.CopyIcon(cursorInfo.hCursor);
-                    if (hicon != IntPtr.Zero)
-                    {
-                        if (User32.GetIconInfo(hicon, out var iconInfo))
-                        {
-                            // Calculate the positions, relative to the bounds of the image relative to the desktop.
-                            var x = cursorInfo.ptScreenPos.X - DesktopBounds.Left;
-                            var y = cursorInfo.ptScreenPos.Y - DesktopBounds.Top;
-                            User32.DrawIconEx(g.GetHdc(), x - iconInfo.xHotspot, y - iconInfo.yHotspot, cursorInfo.hCursor, 0, 0, 0, IntPtr.Zero, 0x0003);
-                            g.ReleaseHdc();
-                        }
-                        Gdi32.DeleteObject(iconInfo.hbmColor);
-                        Gdi32.DeleteObject(iconInfo.hbmMask);
-                    }
-                    User32.DestroyIcon(hicon);
-                }
-                Gdi32.DeleteObject(cursorInfo.hCursor);
+                outputPoint.X = (outputPoint.X * scale).ToInt();
+                outputPoint.Y = (outputPoint.Y * scale).ToInt();
+                var outputWidth = (cursorBitmap.Width * scale).ToInt();
+                var outputHeight = (cursorBitmap.Height * scale).ToInt();
+                var origInterpolationMode = g.InterpolationMode;
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                g.DrawImage(cursorBitmap, outputPoint.X, outputPoint.Y, outputWidth, outputHeight);
+                g.InterpolationMode = origInterpolationMode;
+                cursorBitmap.Dispose();
+            }
+            else
+            {
+                g.DrawImage(cursorBitmap, outputPoint.X, outputPoint.Y);
             }
         }
     }

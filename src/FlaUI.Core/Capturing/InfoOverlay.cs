@@ -10,7 +10,7 @@ namespace FlaUI.Core.Capturing
     /// </summary>
     public class InfoOverlay : OverlayBase
     {
-        public InfoOverlay(Rectangle desktopBounds) : base(desktopBounds)
+        public InfoOverlay(CaptureImage captureImage) : base(captureImage)
         {
         }
 
@@ -64,9 +64,9 @@ namespace FlaUI.Core.Capturing
             var textSize = g.MeasureString(overlayString, font);
             // Calculate background size and position
             var bgHeight = textSize.Height + 2 * textOffsetToBg;
-            var bgWidth = DesktopBounds.Width;
+            var bgWidth = CaptureImage.OriginalBounds.Width;
             var bgPosX = 0;
-            var bgPosY = IsPositionTop() ? 0 : DesktopBounds.Height - bgHeight;
+            var bgPosY = IsPositionTop() ? 0 : CaptureImage.OriginalBounds.Height - bgHeight;
             // Calculate text position
             var textPosY = bgPosY + textOffsetToBg;
             float textPosX = textOffsetToBg;
