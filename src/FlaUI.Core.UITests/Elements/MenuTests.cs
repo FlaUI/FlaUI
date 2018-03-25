@@ -53,5 +53,14 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(fancy, Is.Not.Null);
             Assert.That(fancy.Properties.Name.Value, Is.EqualTo("Fancy"));
         }
+
+        [Test]
+        public void TestMenuItemClick()
+        {
+            var window = App.GetMainWindow(Automation);
+            var menu = window.FindFirstChild(cf => cf.Menu()).AsMenu();
+            var exitMenuItem = menu.Items["File"].Items["Exit"];
+            exitMenuItem.Click();
+        }
     }
 }
