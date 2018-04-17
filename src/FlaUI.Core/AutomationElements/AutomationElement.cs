@@ -8,6 +8,7 @@ using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Exceptions;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Input;
+using FlaUI.Core.Patterns;
 using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.AutomationElements
@@ -154,40 +155,49 @@ namespace FlaUI.Core.AutomationElements
         /// Performs a left click on the element.
         /// </summary>
         /// <param name="moveMouse">Flag to indicate, if the mouse should move slowly (true) or instantly (false).</param>
-        public void Click(bool moveMouse = false)
+        /// <param name="skipScrollIntoView">Skip scrolling the element into view before mouse action</param>
+        public void Click(bool moveMouse = false, bool skipScrollIntoView = false)
         {
-            PerformMouseAction(moveMouse, Mouse.LeftClick);
+            PerformMouseAction(moveMouse, Mouse.LeftClick, skipScrollIntoView);
         }
 
         /// <summary>
         /// Performs a double left click on the element.
         /// </summary>
         /// <param name="moveMouse">Flag to indicate, if the mouse should move slowly (true) or instantly (false).</param>
-        public void DoubleClick(bool moveMouse = false)
+        /// <param name="skipScrollIntoView">Skip scrolling the element into view before mouse action</param>
+        public void DoubleClick(bool moveMouse = false, bool skipScrollIntoView = false)
         {
-            PerformMouseAction(moveMouse, Mouse.LeftDoubleClick);
+            PerformMouseAction(moveMouse, Mouse.LeftDoubleClick, skipScrollIntoView);
         }
 
         /// <summary>
         /// Performs a right click on the element.
         /// </summary>
         /// <param name="moveMouse">Flag to indicate, if the mouse should move slowly (true) or instantly (false).</param>
-        public void RightClick(bool moveMouse = false)
+        /// <param name="skipScrollIntoView">Skip scrolling the element into view before mouse action</param>
+        public void RightClick(bool moveMouse = false, bool skipScrollIntoView = false)
         {
-            PerformMouseAction(moveMouse, Mouse.RightClick);
+            PerformMouseAction(moveMouse, Mouse.RightClick, skipScrollIntoView);
         }
 
         /// <summary>
         /// Performs a double right click on the element.
         /// </summary>
         /// <param name="moveMouse">Flag to indicate, if the mouse should move slowly (true) or instantly (false).</param>
-        public void RightDoubleClick(bool moveMouse = false)
+        /// <param name="skipScrollIntoView">Skip scrolling the element into view before mouse action</param>
+        public void RightDoubleClick(bool moveMouse = false, bool skipScrollIntoView = false)
         {
-            PerformMouseAction(moveMouse, Mouse.RightDoubleClick);
+            PerformMouseAction(moveMouse, Mouse.RightDoubleClick, skipScrollIntoView);
         }
 
-        private void PerformMouseAction(bool moveMouse, Action action)
+        private void PerformMouseAction(bool moveMouse, Action action, bool skipScrollIntoView = false)
         {
+            if (skipScrollIntoView)
+            {
+                ScrollIntoView();
+            }
+
             var clickablePoint = GetClickablePoint();
             if (moveMouse)
             {
@@ -444,6 +454,21 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <summary>
+        /// Tries scrolling element into view if it is not currently in view
+        /// </summary>
+        public void ScrollIntoView()
+        {
+            if (Patterns.ScrollItem.IsSupported)
+            {
+                Patterns.ScrollItem.Pattern.ScrollIntoView();
+            }
+            else
+            {
+                ScrollUsingScrollPattern();
+            }
+        }
+
+        /// <summary>
         /// Executes the given action on the given pattern.
         /// </summary>
         /// <typeparam name="TPattern">The type of the pattern.</typeparam>
@@ -490,6 +515,120 @@ namespace FlaUI.Core.AutomationElements
         protected virtual void SetFocus()
         {
             FrameworkAutomationElement.SetFocus();
+        }
+
+        /// <summary>
+        /// Checks if ScrollPattern is supported on every ancestor element and if BoundingRectangle of this element is currently in view
+        /// </summary>
+        private void ScrollUsingScrollPattern()
+        {
+            var ancestor = this;
+
+            while (true)
+            {
+                var elementRectangle = BoundingRectangle;
+                var current = ancestor;
+                ancestor = current.Parent;
+                if (ancestor == null)
+                {
+                    break;
+                }
+
+                var ancestorScroll = ancestor.Patterns.Scroll;
+
+                if (ancestorScroll.IsSupported)
+                {
+                    var verticalCurrentPercent = ancestorScroll.Pattern.VerticalScrollPercent.ValueOrDefault;
+                    var horizontalCurrentPercent = ancestorScroll.Pattern.HorizontalScrollPercent.ValueOrDefault;
+
+                    if (ancestorScroll.Pattern.VerticallyScrollable)
+                    {
+                        var verticalTargetPercent =
+                            GetTargetScrollPercent(OrientationType.Vertical, ancestor, elementRectangle, verticalCurrentPercent);
+                        if (Math.Abs(verticalTargetPercent - verticalCurrentPercent) > 1)
+                        {
+                            try
+                            {
+                                ancestorScroll.Pattern.SetScrollPercent(horizontalCurrentPercent, verticalTargetPercent);
+                                verticalCurrentPercent = verticalTargetPercent;
+                            }
+                            catch (Exception)
+                            {
+                                // skip it if scrolling causes an exception
+                            }
+                        }
+                    }
+
+                    if (ancestorScroll.Pattern.HorizontallyScrollable)
+                    {
+                        var horizontalTargetPercent =
+                            GetTargetScrollPercent(OrientationType.Horizontal, ancestor, elementRectangle, horizontalCurrentPercent);
+                        if (Math.Abs(horizontalTargetPercent - horizontalCurrentPercent) > 1)
+                        {
+                            try
+                            {
+                                ancestorScroll.Pattern.SetScrollPercent(horizontalTargetPercent, verticalCurrentPercent);
+                            }
+                            catch (Exception)
+                            {
+                                // skip it if scrolling causes an exception
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Calculates scroll percent to scroll an element into view
+        /// </summary>
+        /// <param name="orientation">Horizontal or vertical, default is vertical</param>
+        /// <param name="ancestor">Ancestor element</param>
+        /// <param name="controlRectangle">BoundingRectangle of element to be scrolled into view</param>
+        /// <param name="ancestorCurrentPercent">Current scroll percentage of ancestor element</param>
+        /// <returns>Target scroll percent of ancestor element to scroll control into view</returns>
+        private double GetTargetScrollPercent(OrientationType orientation,
+            AutomationElement ancestor,
+            Rectangle controlRectangle,
+            double ancestorCurrentPercent)
+        {
+            var result = ancestorCurrentPercent;
+
+            var ancestorRectangle = ancestor.BoundingRectangle;
+            var ancestorScrollPattern = ancestor.Patterns.Scroll;
+
+            var elementStart = orientation == OrientationType.Horizontal 
+                    ? controlRectangle.Left : controlRectangle.Top;
+            var elementEnd = orientation == OrientationType.Horizontal 
+                    ? controlRectangle.Right : controlRectangle.Bottom;
+            var elementCenter = elementEnd - elementStart / 2;
+
+            var ancestorStart = orientation == OrientationType.Horizontal 
+                    ? ancestorRectangle.Left : ancestorRectangle.Top;
+            var ancestorEnd = orientation == OrientationType.Horizontal
+                    ? ancestorRectangle.Right : ancestorRectangle.Bottom;
+            var ancestorSize = ancestorEnd - ancestorStart - 30; // subtract something for scrollbar
+            var ancestorViewSize = orientation == OrientationType.Horizontal 
+                    ? ancestorScrollPattern.Pattern.HorizontalViewSize : ancestorScrollPattern.Pattern.VerticalViewSize;
+            var ancestorControlSize = 100 * ancestorSize / ancestorViewSize;
+            var ancestorCenter = ancestorEnd - ancestorStart / 2;
+            var ancestorHalfSize = ancestorCenter - ancestorStart;
+
+            if (elementEnd > ancestorEnd || elementStart < ancestorStart)
+            {
+                result = 100 * (elementCenter - ancestorHalfSize) / (ancestorControlSize - 2 * ancestorHalfSize);
+                if (result > 100)
+                {
+                    result = 100;
+                }
+
+                if (result < 0)
+                {
+                    result = 0;
+                }
+            }
+
+            return result;
         }
     }
 }

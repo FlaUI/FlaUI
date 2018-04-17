@@ -170,6 +170,11 @@
                         <GroupBox Header="Grid">
                             <DataGrid AutomationProperties.AutomationId="dataGrid1" CanUserAddRows="False" ItemsSource="{Binding DataGridItems}" />
                         </GroupBox>
+                        <GroupBox Header="To be scrolled">
+                            <Button AutomationProperties.AutomationId="button3" Height="20" Width="150" Margin="0,100,0,0"
+                                    Command="{Binding HiddenButtonCommand}"
+                                    Content="{Binding HiddenButtonText, FallbackValue=button3}"/>
+                        </GroupBox>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>

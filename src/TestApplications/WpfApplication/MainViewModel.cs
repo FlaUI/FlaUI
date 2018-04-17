@@ -10,7 +10,15 @@ namespace WpfApplication
 
         public ICommand InvokeButtonCommand { get; }
 
+        public ICommand HiddenButtonCommand { get; }
+
         public string InvokeButtonText
+        {
+            get => GetProperty<string>();
+            set => SetProperty(value);
+        }
+
+        public string HiddenButtonText
         {
             get => GetProperty<string>();
             set => SetProperty(value);
@@ -27,6 +35,9 @@ namespace WpfApplication
 
             InvokeButtonText = "Invoke me!";
             InvokeButtonCommand = new RelayCommand(o => InvokeButtonText = "Invoked!");
+
+            HiddenButtonText = "Find and click on me";
+            HiddenButtonCommand = new RelayCommand(o => HiddenButtonText = "Invoked!");
         }
     }
 }
