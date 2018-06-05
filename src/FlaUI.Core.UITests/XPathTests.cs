@@ -57,6 +57,35 @@ namespace FlaUI.Core.UITests
             }
         }
 
+        [Test]
+        public void PaintFindElementBelowUnknown()
+        {
+            using (var automation = TestUtilities.GetAutomation(AutomationType.UIA3))
+            {
+                var app = Application.Launch("mspaint.exe");
+                var window = app.GetMainWindow(automation);
+                var button = window.FindFirstByXPath($"//Button[@Name='{GetPaintBrushName()}']");
+
+                Assert.That(button, Is.Not.Null);
+                app.Close();
+            }
+        }
+
+        [Test]
+        public void PaintReferenceElementWithUnknownType()
+        {
+            using (var automation = TestUtilities.GetAutomation(AutomationType.UIA3))
+            {
+                var app = Application.Launch("mspaint.exe");
+                var window = app.GetMainWindow(automation);
+                var unknown = window.FindFirstByXPath("//Unknown");
+                Assert.That(unknown, Is.Not.Null);
+                app.Close();
+            }
+        }
+
+
+
         private string GetFileMenuText()
         {
             switch (OperatingSystem.CurrentCulture.TwoLetterISOLanguageName)
@@ -67,5 +96,17 @@ namespace FlaUI.Core.UITests
                     return "File";
             }
         }
+
+        private string GetPaintBrushName()
+        {
+            switch (OperatingSystem.CurrentCulture.TwoLetterISOLanguageName)
+            {
+                case "de":
+                    return "Pinsel";
+                default:
+                    return "Brushes";
+            }
+        }
+
     }
 }
