@@ -104,7 +104,7 @@ namespace FlaUI.Core.UITests
                 case "de":
                     return "Pinsel";
                 default:
-                    return "Brush";
+                    return "Brushes";
             }
         }
 
