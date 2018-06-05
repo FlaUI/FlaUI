@@ -39,6 +39,19 @@ namespace FlaUI.Core.UITests
         }
 
         [Test]
+        public void NotepadFindByAutomationId()
+        {
+            using (var automation = TestUtilities.GetAutomation(AutomationType.UIA3))
+            {
+                var app = Application.Launch("notepad.exe");
+                var window = app.GetMainWindow(automation);
+                var elem = window.FindAllByXPath("//*[@AutomationId=15]");
+                Assert.That(elem.Length, Is.EqualTo(1));
+                app.Close();
+            }
+        }
+
+        [Test]
         public void NotePadFindAllIndexed()
         {
             using (var automation = TestUtilities.GetAutomation(AutomationType.UIA3))
