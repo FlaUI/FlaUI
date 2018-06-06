@@ -5,6 +5,12 @@
     /// </summary>
     public enum ControlType
     {
+
+        /// <summary>
+        /// Identifies an unknown control type.
+        /// </summary>
+        Unknown,
+
         /// <summary>
         /// Identifies the AppBar control type. Supported starting with Windows 8.1.
         /// </summary>

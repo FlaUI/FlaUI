@@ -56,7 +56,7 @@ namespace FlaUI.Core
         }
 
         /// <inheritdoc />
-        public override string LocalName => IsInAttribute ? GetAttributeName(_attributeIndex) : _currentElement.Properties.ControlType.Value.ToString();
+        public override string LocalName => IsInAttribute ? GetAttributeName(_attributeIndex) : _currentElement.Properties.ControlType.ValueOrDefault.ToString();
 
         /// <inheritdoc />
         public override string Name => LocalName;
