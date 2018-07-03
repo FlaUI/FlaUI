@@ -1,5 +1,5 @@
 #tool nuget:?package=NUnit.ConsoleRunner&version=3.7.0
-#addin Cake.FileHelpers&version=1.0.4
+
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 //////////////////////////////////////////////////////////////////////
@@ -79,7 +79,9 @@ Task("Run-Unit-Tests")
 {
     var resultFile = artifactDir.CombineWithFilePath("UnitTestResult.xml");
     NUnit3(@"src\FlaUI.Core.UnitTests\bin\FlaUI.Core.UnitTests.dll", new NUnit3Settings {
-        Results = resultFile
+        Results = new[] {
+            new NUnit3Result { FileName = resultFile, Format = "nunit3" }
+        }
     });
     if (AppVeyor.IsRunningOnAppVeyor) {
         AppVeyor.UploadTestResults(resultFile, AppVeyorTestResultsType.NUnit3);
@@ -92,7 +94,9 @@ Task("Run-UI-Tests")
 {
     var resultFile = artifactDir.CombineWithFilePath("UIA2TestResult.xml");
     NUnit3(@"src\FlaUI.Core.UITests\bin\FlaUI.Core.UITests.dll", new NUnit3Settings {
-        Results = resultFile,
+        Results = new[] {
+            new NUnit3Result { FileName = resultFile, Format = "nunit3" }
+        },
         ArgumentCustomization = args => args.Append("--params=uia=2")
     });
     if (AppVeyor.IsRunningOnAppVeyor) {
@@ -101,7 +105,9 @@ Task("Run-UI-Tests")
 
     resultFile = artifactDir.CombineWithFilePath("UIA3TestResult.xml");
     NUnit3(@"src\FlaUI.Core.UITests\bin\FlaUI.Core.UITests.dll", new NUnit3Settings {
-        Results = resultFile,
+        Results = new[] {
+            new NUnit3Result { FileName = resultFile, Format = "nunit3" }
+        },
         ArgumentCustomization = args => args.Append("--params=uia=3")
     });
     if (AppVeyor.IsRunningOnAppVeyor) {
