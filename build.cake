@@ -155,7 +155,20 @@ Task("Push-To-Nuget")
     // Push the package.
     NuGetPush(packages, new NuGetPushSettings {
         Source = "https://www.nuget.org/api/v2/package",
-        ApiKey = "<private>"
+        ApiKey = "private"
+    });
+ });
+
+ Task("Push-To-SymbolSource")
+    .Does(() =>
+{
+    // Get the paths to the packages.
+    var packages = GetFiles($"{artifactDir}/symbols/*.nupkg");
+
+    // Push the package.
+    NuGetPush(packages, new NuGetPushSettings {
+        Source = "https://nuget.smbsrc.net",
+        ApiKey = "private"
     });
  });
 
