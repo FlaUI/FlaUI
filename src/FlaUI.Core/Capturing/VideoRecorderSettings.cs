@@ -1,4 +1,5 @@
-﻿namespace FlaUI.Core.Capturing
+﻿#if (!NET35 && !NET40)
+namespace FlaUI.Core.Capturing
 {
     /// <summary>
     /// Settings class for the <see cref="VideoRecorder"/>.
@@ -48,3 +49,4 @@
         public bool EncodeWithLowPriority { get; set; }
     }
 }
+#endif

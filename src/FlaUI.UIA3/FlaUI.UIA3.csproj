@@ -8,12 +8,12 @@
   <PropertyGroup Label="Package">
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageOutputPath>..\..\artifacts</PackageOutputPath>
-    <Version>2.0.0-alpha6</Version>
+    <Version>2.0.0-rc1</Version>
     <Company>FlauTech</Company>
     <Product>FlaUI</Product>
     <Authors>Roemer</Authors>
     <Description>Library to use FlaUI with UIA3.</Description>
-    <Copyright>Copyright (c) 2016-2017</Copyright>
+    <Copyright>Copyright (c) 2016-2018</Copyright>
     <PackageLicenseUrl>https://github.com/Roemer/FlaUI/blob/master/LICENSE.txt</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Roemer/FlaUI</PackageProjectUrl>
     <PackageIconUrl>https://github.com/Roemer/FlaUI/blob/master/FlaUI.png?raw=true</PackageIconUrl>
