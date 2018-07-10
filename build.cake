@@ -146,6 +146,19 @@ Task("Package")
     }
 });
 
+Task("Push-To-Nuget")
+    .Does(() =>
+{
+    // Get the paths to the packages.
+    var packages = GetFiles($"{artifactDir}/*.nupkg");
+
+    // Push the package.
+    NuGetPush(packages, new NuGetPushSettings {
+        Source = "https://www.nuget.org/api/v2/package",
+        ApiKey = "<private>"
+    });
+ });
+
 //////////////////////////////////////////////////////////////////////
 // TASK TARGETS
 //////////////////////////////////////////////////////////////////////
