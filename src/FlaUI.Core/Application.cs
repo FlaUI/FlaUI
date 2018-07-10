@@ -238,7 +238,7 @@ namespace FlaUI.Core
             {
                 _process.Refresh();
                 return _process.MainWindowHandle == IntPtr.Zero;
-            }, waitTime, TimeSpan.FromMilliseconds(50));
+            }, waitTime, TimeSpan.FromMilliseconds(50)).Result;
         }
 
         /// <summary>

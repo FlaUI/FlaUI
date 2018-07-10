@@ -23,7 +23,7 @@ namespace FlaUI.Core.UITests.Elements
         [OneTimeSetUp]
         public void TestOneTimeSetup()
         {
-            _mainWindow = Retry.WhileNull(() => App.GetMainWindow(Automation), TimeSpan.FromSeconds(1));
+            _mainWindow = Retry.WhileNull(() => App.GetMainWindow(Automation), TimeSpan.FromSeconds(1)).Result;
             Assert.That(_mainWindow, Is.Not.Null);
         }
 
@@ -92,7 +92,7 @@ namespace FlaUI.Core.UITests.Elements
             // Wait for the windows animation
             System.Threading.Thread.Sleep(1000);
             combo.Items[3].Click();
-            var window = Retry.While(() => _mainWindow.FindFirstDescendant(cf => cf.ByClassName("#32770"))?.AsWindow(), w => w == null, TimeSpan.FromMilliseconds(1000));
+            var window = Retry.While(() => _mainWindow.FindFirstDescendant(cf => cf.ByClassName("#32770"))?.AsWindow(), w => w == null, TimeSpan.FromMilliseconds(1000)).Result;
             Assert.That(window, Is.Not.Null, "Expected a window that was shown when combobox item was selected");
             window.FindFirstDescendant(cf => cf.ByAutomationId("Close")).AsButton().Invoke();
         }

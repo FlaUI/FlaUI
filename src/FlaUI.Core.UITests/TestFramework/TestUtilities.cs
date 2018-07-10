@@ -43,7 +43,7 @@ namespace FlaUI.Core.UITests.TestFramework
         {
             window.Close();
             Wait.UntilInputIsProcessed();
-            var modalWindows = Retry.WhileEmpty(() => window.ModalWindows, TimeSpan.FromSeconds(1));
+            var modalWindows = Retry.WhileEmpty(() => window.ModalWindows, TimeSpan.FromSeconds(1)).Result;
             var dontSaveButton = modalWindows[0].FindFirstDescendant(cf => cf.ByAutomationId("CommandButton_7")).AsButton();
             dontSaveButton.Invoke();
         }
