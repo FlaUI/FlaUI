@@ -30,5 +30,14 @@ namespace WinFormsApplication
                 MessageBox.Show("Do you really want to do it?");
             }
         }
+
+        private void button3_Click(object sender, System.EventArgs e)
+        {
+            Button button = (Button)sender;
+            if (button != null)
+            {
+                button.Text = "Invoked!";
+            }
+        }
     }
 }
