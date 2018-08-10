@@ -280,15 +280,26 @@ namespace FlaUI.Core.Input
         /// <param name="distanceY">The y distance to drag, + for right, - for left.</param>
         public static void Drag(MouseButton mouseButton, Point startingPoint, int distanceX, int distanceY)
         {
+            var endingPoint = new Point(startingPoint.X + distanceX, startingPoint.Y + distanceY);
+            Drag(mouseButton, startingPoint, endingPoint);
+        }
+
+        /// <summary>
+        /// Drags the mouse from the starting point to another point.
+        /// </summary>
+        /// <param name="mouseButton">The mouse button to use for dragging.</param>
+        /// <param name="startingPoint">Starting point of the drag.</param>
+        /// <param name="endingPoint">Ending point of the drag.</param>
+        public static void Drag(MouseButton mouseButton, Point startingPoint, Point endingPoint)
+        {
             Position = startingPoint;
             Wait.UntilInputIsProcessed();
-            var currentX = Position.X;
-            var currentY = Position.Y;
             Down(mouseButton);
             Wait.UntilInputIsProcessed();
-            Position = new Point(currentX + distanceX, currentY + distanceY);
+            Position = endingPoint;
             Wait.UntilInputIsProcessed();
             Up(mouseButton);
+            Wait.UntilInputIsProcessed();
         }
 
         /// <summary>
