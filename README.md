@@ -39,7 +39,9 @@ On this, you can then search sub-elements and interact with them.
 There is a helper class to launch, attach or close applications.
 Since the application is not related to any UIA library, you need to create the automation you want and use it to get your first element, which then is your entry point.
 ```csharp
-var app =  Application.Launch("notepad.exe");
+using FlaUI.UIA3;
+
+var app =  FlaUI.Core.Application.Launch("notepad.exe");
 using (var automation = new UIA3Automation())
 {
 	var window = app.GetMainWindow(automation);
@@ -48,7 +50,9 @@ using (var automation = new UIA3Automation())
 }
 ```
 ```csharp
-var app = Application.Launch("calc.exe");
+using FlaUI.UIA3;
+
+var app = FlaUI.Core.Application.Launch("calc.exe");
 using (var automation = new UIA3Automation())
 {
 	var window = app.GetMainWindow(automation);
