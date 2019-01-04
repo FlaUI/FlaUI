@@ -4,15 +4,21 @@ namespace WpfApplication
 {
     public class DataGridItem : ObservableObject
     {
-        public int Id
+        public string Name
+        {
+            get => GetProperty<string>();
+            set => SetProperty(value);
+        }
+
+        public int Number
         {
             get => GetProperty<int>();
             set => SetProperty(value);
         }
 
-        public string Name
+        public bool IsChecked
         {
-            get => GetProperty<string>();
+            get => GetProperty<bool>();
             set => SetProperty(value);
         }
     }

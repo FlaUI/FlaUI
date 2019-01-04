@@ -20,9 +20,8 @@ namespace WpfApplication
         {
             DataGridItems = new ObservableCollection<DataGridItem>
             {
-                new DataGridItem { Id = 1, Name = "Spongebob" },
-                new DataGridItem { Id = 2, Name = "Patrick" },
-                new DataGridItem { Id = 3, Name = "Tadeus" }
+                new DataGridItem { Name = "John", Number = 12, IsChecked = false },
+                new DataGridItem { Name = "Doe", Number = 24, IsChecked = true },
             };
 
             InvokeButtonText = "Invoke me!";

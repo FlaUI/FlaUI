@@ -168,7 +168,7 @@
                             </ListView>
                         </GroupBox>
                         <GroupBox Header="Grid">
-                            <DataGrid AutomationProperties.AutomationId="dataGrid1" CanUserAddRows="False" ItemsSource="{Binding DataGridItems}" />
+                            <DataGrid AutomationProperties.AutomationId="dataGridView" CanUserAddRows="True" ItemsSource="{Binding DataGridItems}" />
                         </GroupBox>
                     </StackPanel>
                 </ScrollViewer>

@@ -22,7 +22,7 @@ namespace FlaUI.Core.UITests.Patterns
             var mainWindow = App.GetMainWindow(Automation);
             var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
             var tabItem = tab.SelectTabItem(1);
-            _dataGrid = tabItem.FindFirstDescendant(cf => cf.ByAutomationId("dataGrid1"));
+            _dataGrid = tabItem.FindFirstDescendant(cf => cf.ByAutomationId("dataGridView"));
         }
 
         [Test]
@@ -32,10 +32,10 @@ namespace FlaUI.Core.UITests.Patterns
             Assert.That(dataGrid, Is.Not.Null);
             var gridPattern = dataGrid.Patterns.Grid.Pattern;
             Assert.That(gridPattern, Is.Not.Null);
-            Assert.That(gridPattern.ColumnCount.Value, Is.EqualTo(2));
+            Assert.That(gridPattern.ColumnCount.Value, Is.EqualTo(3));
             Assert.That(gridPattern.RowCount.Value, Is.EqualTo(3));
             var item = gridPattern.GetItem(1, 1);
-            Assert.That(item.Properties.Name.Value, Is.EqualTo("Patrick"));
+            Assert.That(item.Properties.Name.Value, Is.EqualTo("24"));
         }
     }
 }

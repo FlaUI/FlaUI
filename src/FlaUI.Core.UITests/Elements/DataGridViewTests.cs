@@ -7,6 +7,7 @@ namespace FlaUI.Core.UITests.Elements
 {
     [TestFixture(AutomationType.UIA2, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
+    [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class DataGridViewTests : UITestBase
     {
         private DataGridView _dataGridView;
