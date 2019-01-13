@@ -23,11 +23,11 @@ namespace FlaUI.UIA3.Identifiers
         public static readonly PropertyId ControllerForProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ControllerForPropertyId, "ControllerFor").SetConverter(AutomationElementConverter.NativeArrayToManaged);
         public static readonly PropertyId ControlTypeProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ControlTypePropertyId, "ControlType").SetConverter((a, o) => ControlTypeConverter.ToControlType(o));
         public static readonly PropertyId CultureProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_CulturePropertyId, "Culture").SetConverter((a, o) => ValueConverter.ToCulture(o));
-        public static readonly PropertyId DescribedByProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_DescribedByPropertyId, "DescribedBy");
+        public static readonly PropertyId DescribedByProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_DescribedByPropertyId, "DescribedBy").SetConverter(AutomationElementConverter.NativeArrayToManaged);
         public static readonly PropertyId FillColorProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_FillColorPropertyId, "FillColor");
         public static readonly PropertyId FillTypeProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_FillTypePropertyId, "FillType");
-        public static readonly PropertyId FlowsFromProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_FlowsFromPropertyId, "FlowsFrom");
-        public static readonly PropertyId FlowsToProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_FlowsToPropertyId, "FlowsTo");
+        public static readonly PropertyId FlowsFromProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_FlowsFromPropertyId, "FlowsFrom").SetConverter(AutomationElementConverter.NativeArrayToManaged);
+        public static readonly PropertyId FlowsToProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_FlowsToPropertyId, "FlowsTo").SetConverter(AutomationElementConverter.NativeArrayToManaged);
         public static readonly PropertyId FrameworkIdProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_FrameworkIdPropertyId, "FrameworkId");
         public static readonly PropertyId FullDescriptionProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_FullDescriptionPropertyId, "FullDescription");
         public static readonly PropertyId HasKeyboardFocusProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_HasKeyboardFocusPropertyId, "HasKeyboardFocus");
@@ -43,7 +43,7 @@ namespace FlaUI.UIA3.Identifiers
         public static readonly PropertyId IsRequiredForFormProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsRequiredForFormPropertyId, "IsRequiredForForm");
         public static readonly PropertyId ItemStatusProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ItemStatusPropertyId, "ItemStatus");
         public static readonly PropertyId ItemTypeProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ItemTypePropertyId, "ItemType");
-        public static readonly PropertyId LabeledByProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LabeledByPropertyId, "LabeledBy");
+        public static readonly PropertyId LabeledByProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LabeledByPropertyId, "LabeledBy").SetConverter(AutomationElementConverter.NativeToManaged);
         public static readonly PropertyId LandmarkTypeProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LandmarkTypePropertyId, "LandmarkType");
         public static readonly PropertyId LevelProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LevelPropertyId, "Level");
         public static readonly PropertyId LiveSettingProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LiveSettingPropertyId, "LiveSetting");

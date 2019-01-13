@@ -29,7 +29,7 @@ namespace FlaUI.UIA2.Identifiers
         public static readonly PropertyId IsRequiredForFormProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.IsRequiredForFormProperty.Id, "IsRequiredForForm");
         public static readonly PropertyId ItemStatusProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.ItemStatusProperty.Id, "ItemStatus");
         public static readonly PropertyId ItemTypeProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.ItemTypeProperty.Id, "ItemType");
-        public static readonly PropertyId LabeledByProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.LabeledByProperty.Id, "LabeledBy");
+        public static readonly PropertyId LabeledByProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.LabeledByProperty.Id, "LabeledBy").SetConverter(AutomationElementConverter.NativeToManaged);
         public static readonly PropertyId LocalizedControlTypeProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.LocalizedControlTypeProperty.Id, "LocalizedControlType");
         public static readonly PropertyId NameProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.NameProperty.Id, "Name");
         public static readonly PropertyId NativeWindowHandleProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.NativeWindowHandleProperty.Id, "NativeWindowHandle").SetConverter((a, o) => ValueConverter.IntToIntPtr(o));
