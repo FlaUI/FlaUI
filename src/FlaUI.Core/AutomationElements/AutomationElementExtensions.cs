@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
 
 namespace FlaUI.Core.AutomationElements
@@ -72,6 +73,33 @@ namespace FlaUI.Core.AutomationElements
                 Retry.WhileFalse(() => self.IsEnabled, timeout: timeout, throwOnTimeout: true, ignoreException: true);
             }
             return self;
+        }
+
+        /// <summary>
+        /// Clicks in chosen element, creates instance of target object and returns it.
+        /// </summary>
+        /// <typeparam name="T">Type of target object to create.</typeparam>
+        public static T Click<T>(this AutomationElement element, TimeSpan? timeout = null, TimeSpan? interval = null) where T : AutomationElement
+        {
+            Retry.WhileException(() =>
+                {
+                    element.Click();
+                    Wait.UntilInputIsProcessed();
+                },
+                timeout,
+                interval,
+                true);
+
+            var type = typeof(T);
+            var ctorAutomationElement = type.GetConstructor(new[] { typeof(AutomationElement) });
+
+            return Retry.WhileNull(
+                    () => (T)ctorAutomationElement?.Invoke(new object[] { element }),
+                    timeout,
+                    interval,
+                    true,
+                    true)
+                .Result;
         }
     }
 }
