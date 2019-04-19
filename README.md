@@ -21,9 +21,9 @@ There are quite some automation solutions out there. Commercial ones like TestCo
 All of them are based on what Microsoft provides. These are the UI Automation libraries. There are three versions of it:
 - MSAA
   - MSAA is very obsolete and we'll skip this here (some like CodedUI still use it)
-- UIA2:
-  - UIA2 is version of native UIAutomation library on which System.Windows.Automation namespace is based on. However it does not support newer features (like touch) and it also does not work well with WPF or even worse with Windows Store Apps.
-- UIA3:
+- UIA2
+  - UIA2 is a version of native UIAutomation library on which System.Windows.Automation namespace is based on. However it does not support newer features (like touch) and it also does not work well with WPF or even worse with Windows Store Apps.
+- UIA3
   - UIA3 is the newest version of native UIAutomation library that comes with COM interface. This one works great for WPF / Windows Store Apps but unfortunately, it can have some bugs with WinForm applications (see [FAQ](https://github.com/Roemer/FlaUI/wiki/FAQ)) which are not existent in UIA2.
 
 So, the commercial solutions are mostly based on multiple of those and/or implement a lot of workaround code to fix those issues.
