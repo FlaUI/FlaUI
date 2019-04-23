@@ -84,7 +84,6 @@ namespace FlaUI.Core.AutomationElements
             Retry.WhileException(() =>
                 {
                     element.Click();
-                    Wait.UntilInputIsProcessed();
                 },
                 timeout,
                 interval,
