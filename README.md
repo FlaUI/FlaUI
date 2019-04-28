@@ -22,7 +22,7 @@ All of them are based on what Microsoft provides. These are the UI Automation li
 - MSAA
   - MSAA is very obsolete and we'll skip this here (some like CodedUI still use it)
 - UIA2: Managed Library for native UI Automation API
-  - UIA2 is managed only, which would be good for C# but it does not support newer features (like touch) and it also does not work well with WPF or even worse with Windows Store Apps. It resides in System.Windows.Automation namespace.
+  - UIA2 is managed only, which would be good for C# but it does not support newer features (like touch) and it also does not work well with WPF or even worse with Windows Store Apps.
 - UIA3: Com Library for native UI Automation API
   - UIA3 is the newest of them all and works great for WPF / Windows Store Apps but unfortunately, it can have some bugs with WinForms applications (see [FAQ](https://github.com/Roemer/FlaUI/wiki/FAQ)) which are not existent in UIA2.
 
