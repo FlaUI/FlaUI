@@ -43,7 +43,9 @@ namespace FlaUIRec.Views
 
         private void m_GlobalHook_MouseDownExt(object sender, MouseEventExtArgs e)
         {
-            var element = _automation.FromPoint(new FlaUI.Core.Shapes.Point(e.Location.X, e.Location.Y));
+            //var point = new FlaUI.Core.Shapes.Point(e.Location.X, e.Location.Y);
+            var point = new System.Drawing.Point(e.Location.X, e.Location.Y);
+            var element = _automation.FromPoint(point);
             AddToList($"MouseDown ({e.Button}) on {element} ({e.Location})");
         }
 
@@ -118,7 +120,8 @@ namespace FlaUIRec.Views
 
         private string ElementToString(AutomationElement automationElement)
         {
-            throw new NotImplementedException();
+            return String.Format("{0} (#{1}) [{2}]", automationElement.Name, automationElement.AutomationId, automationElement.ControlType);
+            //throw new NotImplementedException();
             //return String.Format("{0} (#{1}) [{2}]", automationElement.Current.Name, automationElement.Current.AutomationId, automationElement.Current.ControlType);
         }
     }
