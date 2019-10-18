@@ -1,10 +1,10 @@
-﻿using System;
-using System.Drawing;
-using System.Windows;
-using FlaUI.Core.AutomationElements;
+﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Exceptions;
-using FlaUI.Core.Tools;
 using FlaUI.Core.WindowsAPI;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace FlaUI.Core.Capturing
 {
@@ -18,7 +18,10 @@ namespace FlaUI.Core.Capturing
         /// </summary>
         public static CaptureImage MainScreen(CaptureSettings settings = null)
         {
-            return Rectangle(System.Windows.Forms.Screen.PrimaryScreen.Bounds, settings);
+            var primaryScreenBounds = new Rectangle(
+                0, 0,
+                User32.GetSystemMetrics(SystemMetric.SM_CXSCREEN), User32.GetSystemMetrics(SystemMetric.SM_CYSCREEN));
+            return Rectangle(primaryScreenBounds, settings);
         }
 
         /// <summary>
@@ -28,17 +31,17 @@ namespace FlaUI.Core.Capturing
         {
             Rectangle capturingRectangle;
             // Take the appropriate screen if requested
-            if (screenIndex >= 0 && screenIndex < System.Windows.Forms.Screen.AllScreens.Length)
+            if (screenIndex >= 0 && screenIndex < User32.GetSystemMetrics(SystemMetric.SM_CMONITORS))
             {
-                var rectangle = System.Windows.Forms.Screen.AllScreens[screenIndex].Bounds;
+                var rectangle = GetBoundsByScreenIndex(screenIndex);
                 capturingRectangle = rectangle;
             }
             else
             {
                 // Use the entire desktop
                 capturingRectangle = new Rectangle(
-                    SystemParameters.VirtualScreenLeft.ToInt(), SystemParameters.VirtualScreenTop.ToInt(),
-                    SystemParameters.VirtualScreenWidth.ToInt(), SystemParameters.VirtualScreenHeight.ToInt());
+                    User32.GetSystemMetrics(SystemMetric.SM_XVIRTUALSCREEN), User32.GetSystemMetrics(SystemMetric.SM_YVIRTUALSCREEN),
+                    User32.GetSystemMetrics(SystemMetric.SM_CXVIRTUALSCREEN), User32.GetSystemMetrics(SystemMetric.SM_CYVIRTUALSCREEN));
             }
             return Rectangle(capturingRectangle, settings);
         }
@@ -48,7 +51,7 @@ namespace FlaUI.Core.Capturing
         /// </summary>
         public static CaptureImage Element(AutomationElement element, CaptureSettings settings = null)
         {
-            return Rectangle(element.Properties.BoundingRectangle.Value, settings);
+            return Rectangle(element.BoundingRectangle, settings);
         }
 
         /// <summary>
@@ -94,6 +97,23 @@ namespace FlaUI.Core.Capturing
                 });
             }
             return new CaptureImage(bmp, bounds, settings);
+        }
+
+        private static Rectangle GetBoundsByScreenIndex(int screenIndex)
+        {
+            var monitors = new List<MonitorInfo>();
+            User32.EnumDisplayMonitors(IntPtr.Zero, IntPtr.Zero, MonitorDelegate , IntPtr.Zero);
+            var monitorRect = monitors[screenIndex].monitor;
+            return new Rectangle(monitorRect.left, monitorRect.top, monitorRect.right - monitorRect.left, monitorRect.bottom - monitorRect.top);
+            
+            bool MonitorDelegate(IntPtr hMonitor, IntPtr hdcMonitor, ref Rect lprcMonitor, IntPtr dwData)
+            {
+                var mi = new MonitorInfo();
+                mi.size = (uint)Marshal.SizeOf(mi);
+                var success = User32.GetMonitorInfo(hMonitor, ref mi);
+                monitors.Add(mi);
+                return true;
+            }
         }
 
         private static Bitmap CaptureDesktopToBitmap(int width, int height, Action<IntPtr, IntPtr> action)

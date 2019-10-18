@@ -1,19 +1,22 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
-  <PropertyGroup>
-    <TargetFrameworks>net35;net40;net45</TargetFrameworks>
+  <PropertyGroup Label="Build">
+    <TargetFrameworks>net35;net40;net45;netstandard2.0;netcoreapp3.0</TargetFrameworks>
+    <UseWindowsForms>true</UseWindowsForms>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package">
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageOutputPath>..\..\artifacts</PackageOutputPath>
-    <Version>2.0.0-rc1</Version>
-    <Company>FlauTech</Company>
+    <Version>3.0.0</Version>
     <Product>FlaUI</Product>
     <Authors>Roemer</Authors>
     <Description>Library with base elements used in the concrete implementations of FlaUI.</Description>
-    <Copyright>Copyright (c) 2016-2018</Copyright>
-    <PackageLicenseUrl>https://github.com/Roemer/FlaUI/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <Copyright>Copyright (c) 2016-2019</Copyright>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/Roemer/FlaUI</PackageProjectUrl>
-    <PackageIconUrl>https://github.com/Roemer/FlaUI/blob/master/FlaUI.png?raw=true</PackageIconUrl>
+    <PackageIcon>FlaUI.png</PackageIcon>
     <RepositoryUrl>https://github.com/Roemer/FlaUI</RepositoryUrl>
     <PackageTags>UI Automation UIA2 UIA3 UIA System.Windows.Automation</PackageTags>
     <IncludeSource>True</IncludeSource>
@@ -29,27 +32,50 @@
     <IntermediateOutputPath>obj\$(Configuration)\Signed</IntermediateOutputPath>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'!='net35'">
-    <Reference Include="System.Xaml" />
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' Or '$(TargetFramework)' == 'netcoreapp3.0'">
+    <PackageReference Include="System.Diagnostics.PerformanceCounter">
+      <Version>4.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Drawing.Common">
+      <Version>4.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Management">
+      <Version>4.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Security.Permissions">
+      <Version>4.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Win32.Registry">
+      <Version>4.6.0</Version>
+    </PackageReference>
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='net45'">
-    <Reference Include="System.IO.Compression" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Accessibility" />
-    <Reference Include="PresentationCore" />
+  <ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.0' And '$(TargetFramework)' != 'netcoreapp3.0'">
     <Reference Include="PresentationFramework" />
-    <Reference Include="System.Management" />
-    <Reference Include="System.Windows.Forms" />
+    <Reference Include="PresentationCore" />
     <Reference Include="WindowsBase" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Management" />
+    <Reference Include="Accessibility" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Overlay\OverlayRectangleForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+    <Reference Include="System.IO.Compression" />
+    <PackageReference Include="System.Management">
+      <Version>4.6.0</Version>
+    </PackageReference>
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="Microsoft.Win32.Registry">
+      <Version>4.6.0</Version>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup Label="Additional nuget files">
+    <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="" />
+    <None Include="..\..\CHANGELOG.md" Pack="true" PackagePath="" />
+    <None Include="..\..\FlaUI.png" Pack="true" PackagePath="" />
+  </ItemGroup>
+  
 </Project>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
-using System.Windows.Media.Imaging;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.EventHandlers;
@@ -262,13 +261,15 @@ namespace FlaUI.Core.AutomationElements
             return Capturing.Capture.Element(this).Bitmap;
         }
 
+#if NETFRAMEWORK
         /// <summary>
-        /// Captures the object as screenshot in a WPF friendly <see cref="BitmapImage"/> format.
+        /// Captures the object as screenshot in a WPF friendly <see cref="System.Windows.Media.Imaging.BitmapImage"/> format.
         /// </summary>
-        public BitmapImage CaptureWpf()
+        System.Windows.Media.Imaging.BitmapImage CaptureWpf()
         {
             return Capturing.Capture.Element(this).BitmapImage;
         }
+#endif
 
         /// <summary>
         /// Captures the object as screenshot directly into the given file.

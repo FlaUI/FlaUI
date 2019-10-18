@@ -16,12 +16,12 @@ namespace FlaUI.Core.Overlay
         int Margin { get; set; }
 
         /// <summary>
-        /// Shows the overlay for a small duration asynchronously.
+        /// Shows the overlay for a given duration asynchronously.
         /// </summary>
         void Show(Rectangle rectangle, Color color, int durationInMs);
 
         /// <summary>
-        /// Shows the overlay for a small duration and blocks the execution until it is hidden again.
+        /// Shows the overlay for a given duration and blocks further execution until it is hidden again.
         /// </summary>
         void ShowBlocking(Rectangle rectangle, Color color, int durationInMs);
     }

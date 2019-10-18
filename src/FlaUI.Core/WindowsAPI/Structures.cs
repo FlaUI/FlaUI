@@ -37,6 +37,7 @@ namespace FlaUI.Core.WindowsAPI
             return new COLORREF(c.R, c.G, c.B);
         }
 
+#if NETFRAMEWORK
         public static implicit operator System.Windows.Media.Color(COLORREF c)
         {
             return System.Windows.Media.Color.FromRgb(c.R, c.G, c.B);
@@ -46,6 +47,7 @@ namespace FlaUI.Core.WindowsAPI
         {
             return new COLORREF(c.R, c.G, c.B);
         }
+#endif
 
         public override string ToString()
         {
@@ -134,5 +136,29 @@ namespace FlaUI.Core.WindowsAPI
         public IntPtr hbmMask;
         public IntPtr hbmColor;
     }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Rect
+    {
+        public int left;
+        public int top;
+        public int right;
+        public int bottom;
+
+        public override string ToString()
+        {
+            return $"{{X={left},Y={top},Width={right - left},Height={bottom - top}}}";
+        }
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct MonitorInfo
+    {
+        public uint size;
+        public Rect monitor;
+        public Rect work;
+        public uint flags;
+    }
+
 }
 #pragma warning restore

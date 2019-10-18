@@ -1,7 +1,7 @@
 ﻿#if NET35
 using System;
 
-namespace FlaUI.Core.Tools
+namespace System
 {
     /// <summary>
     /// Provides support for lazy initialization.

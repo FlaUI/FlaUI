@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿#if NETFRAMEWORK || NETCOREAPP
+using System.Windows.Forms;
 using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.Overlay
@@ -29,3 +30,4 @@ namespace FlaUI.Core.Overlay
         }
     }
 }
+#endif

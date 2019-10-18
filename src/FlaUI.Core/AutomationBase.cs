@@ -19,7 +19,11 @@ namespace FlaUI.Core
             EventLibrary = eventLibrary;
             PatternLibrary = patternLibrary;
             ConditionFactory = new ConditionFactory(propertyLibrary);
+#if NETSTANDARD
+            OverlayManager = new NullOverlayManager();
+#else
             OverlayManager = new WinFormsOverlayManager();
+#endif
             // Make sure all pattern ids are initialized
             var unused = PatternLibrary.AllForCurrentFramework;
         }

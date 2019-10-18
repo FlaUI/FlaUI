@@ -23,7 +23,7 @@ namespace FlaUI.Core.Input
         private const int ExtraMillisecondsBecauseOfBugInWindows = 13;
 
         /// <summary>
-        /// Numer which defines one wheel "click" of the mouse wheel
+        /// Number which defines one wheel "click" of the mouse wheel
         /// </summary>
         private const int WheelDelta = 120;
 

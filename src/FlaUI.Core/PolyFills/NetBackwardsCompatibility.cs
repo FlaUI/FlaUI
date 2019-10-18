@@ -19,7 +19,7 @@ namespace System
 public static class EnumExtensions
 {
     /// <summary>
-    /// Exension method for the missing HasFlag on an <see cref="Enum"/>.
+    /// Extension method for the missing HasFlag on an <see cref="Enum"/>.
     /// </summary>
     public static bool HasFlag(this Enum variable, Enum flag)
     {
@@ -37,7 +37,7 @@ public static class EnumExtensions
     }
 
     /// <summary>
-    /// Extension method for the missing TryParse on an  <see cref="Enum"/>.
+    /// Extension method for the missing TryParse on an <see cref="Enum"/>.
     /// </summary>
     public static bool TryParse<TEnum>(string value, out TEnum result) where TEnum : struct
     {
@@ -47,7 +47,7 @@ public static class EnumExtensions
         }
         catch
         {
-            result = default(TEnum);
+            result = default;
             return false;
         }
         return true;
