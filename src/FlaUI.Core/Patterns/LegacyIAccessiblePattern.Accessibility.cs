@@ -1,6 +1,5 @@
 ﻿#if NETFRAMEWORK
 using Accessibility;
-using FlaUI.Core.Patterns.Infrastructure;
 
 namespace FlaUI.Core.Patterns
 {
@@ -9,8 +8,7 @@ namespace FlaUI.Core.Patterns
         IAccessible GetIAccessible();
     }
 
-    public abstract partial class LegacyIAccessiblePatternBase<TNativePattern> : PatternBase<TNativePattern>,
-        ILegacyIAccessiblePattern
+    public abstract partial class LegacyIAccessiblePatternBase<TNativePattern> : ILegacyIAccessiblePattern
         where TNativePattern : class
     {
         public abstract IAccessible GetIAccessible();
