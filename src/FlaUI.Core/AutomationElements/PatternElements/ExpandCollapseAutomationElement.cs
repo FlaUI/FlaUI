@@ -32,7 +32,7 @@ namespace FlaUI.Core.AutomationElements.PatternElements
         /// </summary>
         public void Collapse()
         {
-            ExpandCollapsePattern.Expand();
+            ExpandCollapsePattern.Collapse();
         }
     }
 }
