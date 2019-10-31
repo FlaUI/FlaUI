@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.3
-MinimumVisualStudioVersion = 15.0.26730.3
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlaUI.Core", "FlaUI.Core\FlaUI.Core.csproj", "{DF81078D-0932-47BA-B5A7-176CFF202375}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29403.142
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlaUI.Core", "FlaUI.Core\FlaUI.Core.csproj", "{DF81078D-0932-47BA-B5A7-176CFF202375}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlaUI.UIA2", "FlaUI.UIA2\FlaUI.UIA2.csproj", "{5CA9827E-E1AD-4741-B4DA-42984903230C}"
 EndProject
@@ -64,5 +64,8 @@ Global
 		{93D2F76D-8C08-407B-AE64-0F6475CDB348} = {3DFE78D4-89EB-4CEE-A5D1-F5FDDED10959}
 		{FAEBBDD3-8230-4FC9-A316-05F5243C94DA} = {00BCF82A-388A-4DC9-A1E2-6D6D983BAEE3}
 		{C8276299-FA43-409B-A969-EF030AB56224} = {00BCF82A-388A-4DC9-A1E2-6D6D983BAEE3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F2B64231-45B2-4129-960A-9F26AFFD16AE}
 	EndGlobalSection
 EndGlobal

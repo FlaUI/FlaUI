@@ -82,8 +82,8 @@ namespace FlaUI.Core.Input
         /// <param name="deltaY">The delta for the y-axis</param>
         public static void MoveBy(int deltaX, int deltaY)
         {
-            var currPos = Position;
-            MoveTo(currPos.X + deltaX, currPos.Y + deltaY);
+            var currentPosition = Position;
+            MoveTo(currentPosition.X + deltaX, currentPosition.Y + deltaY);
         }
 
         /// <summary>
@@ -158,9 +158,9 @@ namespace FlaUI.Core.Input
         /// <param name="mouseButton">The mouse button to click</param>
         public static void Click(MouseButton mouseButton)
         {
-            var currClickPosition = Position;
+            var currentClickPosition = Position;
             // Check if the position is the same as with last click
-            if (LastClickPositions[mouseButton].Equals(currClickPosition))
+            if (LastClickPositions[mouseButton].Equals(currentClickPosition))
             {
                 // Get the timeout needed to not fire a double click
                 var timeout = CurrentDoubleClickTime - DateTime.Now.Subtract(LastClickTimes[mouseButton]).Milliseconds;
@@ -215,8 +215,7 @@ namespace FlaUI.Core.Input
         /// <param name="mouseButton">The mouse button to press</param>
         public static void Down(MouseButton mouseButton)
         {
-            uint data;
-            var flags = GetFlagsAndDataForButton(mouseButton, true, out data);
+            var flags = GetFlagsAndDataForButton(mouseButton, true, out var data);
             SendInput(0, 0, data, flags);
         }
 
@@ -226,8 +225,7 @@ namespace FlaUI.Core.Input
         /// <param name="mouseButton">The mouse button to release</param>
         public static void Up(MouseButton mouseButton)
         {
-            uint data;
-            var flags = GetFlagsAndDataForButton(mouseButton, false, out data);
+            var flags = GetFlagsAndDataForButton(mouseButton, false, out var data);
             SendInput(0, 0, data, flags);
         }
 
@@ -330,7 +328,7 @@ namespace FlaUI.Core.Input
                     mouseData = MouseEventDataXButtons.XBUTTON2;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException("mouseButton");
+                    throw new ArgumentOutOfRangeException(nameof(mouseButton));
             }
             data = (uint)mouseData;
             return mouseEventFlags;

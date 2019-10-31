@@ -146,7 +146,7 @@ namespace FlaUI.Core.Tools
                     return variable;
                 }
             }
-            return default(T);
+            return default;
         }
     }
 }

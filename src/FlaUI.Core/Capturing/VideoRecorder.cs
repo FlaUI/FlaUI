@@ -154,6 +154,7 @@ namespace FlaUI.Core.Capturing
             ffmpegIn.Close();
             ffmpegIn.Dispose();
             ffmpegProcess?.WaitForExit();
+            ffmpegProcess?.Dispose();
         }
 
         /// <summary>
