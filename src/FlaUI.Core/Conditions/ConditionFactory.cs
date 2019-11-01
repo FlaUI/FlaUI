@@ -58,6 +58,14 @@ namespace FlaUI.Core.Conditions
         }
 
         /// <summary>
+        /// Creates a condition to search by a Framework Id.
+        /// </summary>
+        public PropertyCondition ByFrameworkId(string frameworkId)
+        {
+            return new PropertyCondition(_propertyLibrary.Element.FrameworkId, frameworkId);
+        }
+
+        /// <summary>
         /// Creates a condition to search by a process id.
         /// </summary>
         public PropertyCondition ByProcessId(int processId)

@@ -40,7 +40,7 @@ namespace FlaUI.UIA2
         public PropertyId IsRequiredForForm => AutomationObjectIds.IsRequiredForFormProperty;
         public PropertyId ItemStatus => AutomationObjectIds.ItemStatusProperty;
         public PropertyId ItemType => AutomationObjectIds.ItemTypeProperty;
-        public PropertyId LabeledBy => AutomationObjectIds.AcceleratorKeyProperty;
+        public PropertyId LabeledBy => AutomationObjectIds.LabeledByProperty;
         public PropertyId LandmarkType => PropertyId.NotSupportedByFramework;
         public PropertyId Level => PropertyId.NotSupportedByFramework;
         public PropertyId LocalizedControlType => AutomationObjectIds.LocalizedControlTypeProperty;
