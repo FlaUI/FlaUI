@@ -26,10 +26,12 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         PropertyId FrameworkId { get; }
         PropertyId FullDescription { get; }
         PropertyId HasKeyboardFocus { get; }
+        PropertyId HeadingLevel { get; }
         PropertyId HelpText { get; }
         PropertyId IsContentElement { get; }
         PropertyId IsControlElement { get; }
         PropertyId IsDataValidForForm { get; }
+        PropertyId IsDialog { get; }
         PropertyId IsEnabled { get; }
         PropertyId IsKeyboardFocusable { get; }
         PropertyId IsOffscreen { get; }

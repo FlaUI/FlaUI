@@ -31,10 +31,12 @@ namespace FlaUI.UIA3.Identifiers
         public static readonly PropertyId FrameworkIdProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_FrameworkIdPropertyId, "FrameworkId");
         public static readonly PropertyId FullDescriptionProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_FullDescriptionPropertyId, "FullDescription");
         public static readonly PropertyId HasKeyboardFocusProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_HasKeyboardFocusPropertyId, "HasKeyboardFocus");
+        public static readonly PropertyId HeadingLevelProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_HeadingLevelPropertyId, "HeadingLevel");
         public static readonly PropertyId HelpTextProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_HelpTextPropertyId, "HelpText");
         public static readonly PropertyId IsContentElementProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsContentElementPropertyId, "IsContentElement");
         public static readonly PropertyId IsControlElementProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsControlElementPropertyId, "IsControlElement");
         public static readonly PropertyId IsDataValidForFormProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsDataValidForFormPropertyId, "IsDataValidForForm");
+        public static readonly PropertyId IsDialogProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsDialogPropertyId, "IsDialog");
         public static readonly PropertyId IsEnabledProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsEnabledPropertyId, "IsEnabled");
         public static readonly PropertyId IsKeyboardFocusableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsKeyboardFocusablePropertyId, "IsKeyboardFocusable");
         public static readonly PropertyId IsOffscreenProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsOffscreenPropertyId, "IsOffscreen");
@@ -44,7 +46,7 @@ namespace FlaUI.UIA3.Identifiers
         public static readonly PropertyId ItemStatusProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ItemStatusPropertyId, "ItemStatus");
         public static readonly PropertyId ItemTypeProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ItemTypePropertyId, "ItemType");
         public static readonly PropertyId LabeledByProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LabeledByPropertyId, "LabeledBy").SetConverter(AutomationElementConverter.NativeToManaged);
-        public static readonly PropertyId LandmarkTypeProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LandmarkTypePropertyId, "LandmarkType");
+        public static readonly PropertyId LandmarkTypeProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LandmarkTypePropertyId, "LandmarkType").SetConverter((a, o) => LandmarkTypeConverter.ToLandmarkType(o));
         public static readonly PropertyId LevelProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LevelPropertyId, "Level");
         public static readonly PropertyId LiveSettingProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LiveSettingPropertyId, "LiveSetting");
         public static readonly PropertyId LocalizedControlTypeProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LocalizedControlTypePropertyId, "LocalizedControlType");
@@ -101,6 +103,7 @@ namespace FlaUI.UIA3.Identifiers
         #endregion Property Identifiers
 
         #region Event identifiers
+        public static readonly EventId ActiveTextPositionChangedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_ActiveTextPositionChangedEventId, "ActiveTextPositionChanged");
         public static readonly EventId AsyncContentLoadedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_AsyncContentLoadedEventId, "AsyncContentLoaded");
         public static readonly EventId ChangesEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_ChangesEventId, "Changes");
         public static readonly EventId FocusChangedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_AutomationFocusChangedEventId, "AutomationFocusChanged");

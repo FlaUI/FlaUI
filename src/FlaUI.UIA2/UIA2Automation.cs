@@ -2,6 +2,7 @@
 using System.Drawing;
 using FlaUI.Core;
 using FlaUI.Core.AutomationElements;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Exceptions;
 using FlaUI.UIA2.Converters;
@@ -39,6 +40,20 @@ namespace FlaUI.UIA2
 
         /// <inheritdoc />
         public override TimeSpan ConnectionTimeout
+        {
+            get => throw new NotSupportedByFrameworkException();
+            set => throw new NotSupportedByFrameworkException();
+        }
+
+        /// <inheritdoc />
+        public override ConnectionRecoveryBehaviorOptions ConnectionRecoveryBehavior
+        {
+            get => throw new NotSupportedByFrameworkException();
+            set => throw new NotSupportedByFrameworkException();
+        }
+
+        /// <inheritdoc />
+        public override CoalesceEventsOptions CoalesceEvents
         {
             get => throw new NotSupportedByFrameworkException();
             set => throw new NotSupportedByFrameworkException();

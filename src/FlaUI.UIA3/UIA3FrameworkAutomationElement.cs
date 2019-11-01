@@ -24,44 +24,54 @@ namespace FlaUI.UIA3
         }
 
         /// <summary>
-        /// Concrete implementation of the automation object
+        /// Concrete implementation of the automation object.
         /// </summary>
         public new UIA3Automation Automation { get; }
 
         /// <summary>
-        /// Native object for the ui element
+        /// Native object for the ui element.
         /// </summary>
         public UIA.IUIAutomationElement NativeElement { get; }
 
         /// <summary>
-        /// Native object for Windows 8 ui element
+        /// Native object for Windows 8 ui element.
         /// </summary>
         public UIA.IUIAutomationElement2 NativeElement2 => GetAutomationElementAs<UIA.IUIAutomationElement2>();
 
         /// <summary>
-        /// Native object for Windows 8.1 ui element
+        /// Native object for Windows 8.1 ui element.
         /// </summary>
         public UIA.IUIAutomationElement3 NativeElement3 => GetAutomationElementAs<UIA.IUIAutomationElement3>();
 
         /// <summary>
-        /// Native object for Windows 10 ui element
+        /// Native object for Windows 10 ui element.
         /// </summary>
         public UIA.IUIAutomationElement4 NativeElement4 => GetAutomationElementAs<UIA.IUIAutomationElement4>();
 
         /// <summary>
-        /// Native object for second Windows 10 ui element
+        /// Native object for the second Windows 10 ui element.
         /// </summary>
         public UIA.IUIAutomationElement5 NativeElement5 => GetAutomationElementAs<UIA.IUIAutomationElement5>();
 
         /// <summary>
-        /// Native object for third Windows 10 ui element
+        /// Native object for the third Windows 10 ui element.
         /// </summary>
         public UIA.IUIAutomationElement6 NativeElement6 => GetAutomationElementAs<UIA.IUIAutomationElement6>();
 
         /// <summary>
-        /// Native object fourth for Windows 10 ui element
+        /// Native object for the fourth for Windows 10 ui element.
         /// </summary>
         public UIA.IUIAutomationElement7 NativeElement7 => GetAutomationElementAs<UIA.IUIAutomationElement7>();
+
+        /// <summary>
+        /// Native object for the fifth for Windows 10 ui element.
+        /// </summary>
+        public UIA.IUIAutomationElement8 NativeElement8 => GetAutomationElementAs<UIA.IUIAutomationElement8>();
+
+        /// <summary>
+        /// Native object for the sixth for Windows 10 ui element.
+        /// </summary>
+        public UIA.IUIAutomationElement9 NativeElement9 => GetAutomationElementAs<UIA.IUIAutomationElement9>();
 
         public override void SetFocus()
         {
@@ -150,6 +160,13 @@ namespace FlaUI.UIA3
         }
 
         /// <inheritdoc />
+        public override ActiveTextPositionChangedEventHandlerBase RegisterActiveTextPositionChangedEventHandler(TreeScope treeScope, Action<AutomationElement, ITextRange> action)
+        {
+            var eventHandler = new UIA3ActiveTextPositionChangedEventHandler(this, action);
+            Automation.NativeAutomation6.AddActiveTextPositionChangedEventHandler(NativeElement, (UIA.TreeScope)treeScope, null, eventHandler);
+            return eventHandler;
+        }
+
         public override AutomationEventHandlerBase RegisterAutomationEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
         {
             var eventHandler = new UIA3AutomationEventHandler(this, @event, action);
@@ -189,6 +206,12 @@ namespace FlaUI.UIA3
             var eventHandler = new UIA3TextEditTextChangedEventHandler(this, action);
             Automation.NativeAutomation3.AddTextEditTextChangedEventHandler(NativeElement, (UIA.TreeScope)treeScope, (UIA.TextEditChangeType)textEditChangeType, null, eventHandler);
             return eventHandler;
+        }
+
+        /// <inheritdoc />
+        public override void UnregisterActiveTextPositionChangedEventHandler(ActiveTextPositionChangedEventHandlerBase eventHandler)
+        {
+            Automation.NativeAutomation6.RemoveActiveTextPositionChangedEventHandler(NativeElement, (UIA3ActiveTextPositionChangedEventHandler)eventHandler);
         }
 
         /// <inheritdoc />

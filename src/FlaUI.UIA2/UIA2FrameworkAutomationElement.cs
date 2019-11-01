@@ -122,6 +122,12 @@ namespace FlaUI.UIA2
         }
 
         /// <inheritdoc />
+        public override ActiveTextPositionChangedEventHandlerBase RegisterActiveTextPositionChangedEventHandler(TreeScope treeScope, Action<AutomationElement, ITextRange> action)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public override AutomationEventHandlerBase RegisterAutomationEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
         {
             var eventHandler = new UIA2AutomationEventHandler(this, @event, action);
@@ -153,6 +159,12 @@ namespace FlaUI.UIA2
 
         /// <inheritdoc />
         public override TextEditTextChangedEventHandlerBase RegisterTextEditTextChangedEventHandler(TreeScope treeScope, TextEditChangeType textEditChangeType, Action<AutomationElement, TextEditChangeType, string[]> action)
+        {
+            throw new NotSupportedByFrameworkException();
+        }
+
+        /// <inheritdoc />
+        public override void UnregisterActiveTextPositionChangedEventHandler(ActiveTextPositionChangedEventHandlerBase eventHandler)
         {
             throw new NotSupportedByFrameworkException();
         }

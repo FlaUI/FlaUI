@@ -2,6 +2,7 @@
 using System.Drawing;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Conditions;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Overlay;
@@ -77,6 +78,16 @@ namespace FlaUI.Core
         /// Specifies the length of time that UI Automation will wait for a provider to respond to a client request for an automation element.
         /// </summary>
         public abstract TimeSpan ConnectionTimeout { get; set; }
+
+        /// <summary>
+        /// Indicates whether an accessible technology client adjusts provider request timeouts when the provider is non-responsive.
+        /// </summary>
+        public abstract ConnectionRecoveryBehaviorOptions ConnectionRecoveryBehavior { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether an accessible technology client receives all events, or a subset where duplicate events are detected and filtered.
+        /// </summary>
+        public abstract CoalesceEventsOptions CoalesceEvents { get; set; }
 
         /// <summary>
         /// Gets the desktop (root) element.

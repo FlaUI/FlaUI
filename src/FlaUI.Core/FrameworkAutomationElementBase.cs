@@ -275,6 +275,11 @@ namespace FlaUI.Core
         public abstract bool TryGetClickablePoint(out Point point);
 
         /// <summary>
+        /// Registers the given active text position changed event handler.
+        /// </summary>
+        public abstract ActiveTextPositionChangedEventHandlerBase RegisterActiveTextPositionChangedEventHandler(TreeScope treeScope, Action<AutomationElement, ITextRange> action);
+
+        /// <summary>
         /// Registers a method that handles the given automation event.
         /// </summary>
         public abstract AutomationEventHandlerBase RegisterAutomationEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action);
@@ -298,6 +303,11 @@ namespace FlaUI.Core
         /// Registers a method that handles a text edit text changed event.
         /// </summary>
         public abstract TextEditTextChangedEventHandlerBase RegisterTextEditTextChangedEventHandler(TreeScope treeScope, TextEditChangeType textEditChangeType, Action<AutomationElement, TextEditChangeType, string[]> action);
+
+        /// <summary>
+        /// Unregisters the given active text position changed event handler.
+        /// </summary>
+        public abstract void UnregisterActiveTextPositionChangedEventHandler(ActiveTextPositionChangedEventHandlerBase eventHandler);
 
         /// <summary>
         /// Unregisters the given automation event handler.

@@ -6,6 +6,7 @@ namespace FlaUI.UIA3
 {
     public class UIA3AutomationElementEventIds : IAutomationElementEventIds
     {
+        public EventId ActiveTextPositionChangedEvent => AutomationObjectIds.ActiveTextPositionChangedEvent;
         public EventId AsyncContentLoadedEvent => AutomationObjectIds.AsyncContentLoadedEvent;
         public EventId ChangesEvent => AutomationObjectIds.ChangesEvent;
         public EventId FocusChangedEvent => AutomationObjectIds.FocusChangedEvent;
