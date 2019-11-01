@@ -18,6 +18,10 @@ namespace FlaUI.Core.Capturing
         {
             var outputPoint = new Point();
             var cursorBitmap = CaptureUtilities.CaptureCursor(ref outputPoint);
+            // Early exit
+            if (cursorBitmap == null) {
+                return;
+            }
             // Fix the coordinates for multi-screen scenarios
             outputPoint.X -= CaptureImage.OriginalBounds.Left;
             outputPoint.Y -= CaptureImage.OriginalBounds.Top;
@@ -33,12 +37,13 @@ namespace FlaUI.Core.Capturing
                 g.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 g.DrawImage(cursorBitmap, outputPoint.X, outputPoint.Y, outputWidth, outputHeight);
                 g.InterpolationMode = origInterpolationMode;
-                cursorBitmap.Dispose();
             }
             else
             {
                 g.DrawImage(cursorBitmap, outputPoint.X, outputPoint.Y);
             }
+            // Cleanup
+            cursorBitmap.Dispose();
         }
     }
 }
