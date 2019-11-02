@@ -87,6 +87,14 @@ namespace FlaUI.Core.Tools
         }
 
         /// <summary>
+        /// Checks if the current operating system is Windows Server 2019.
+        /// </summary>
+        public static bool IsWindowsServer2019()
+        {
+            return CurrentProductContains("Windows Server 2019");
+        }
+
+        /// <summary>
         /// Gets the product name in plain text.
         /// </summary>
         private static string GetProductName()
