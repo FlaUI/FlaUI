@@ -1,5 +1,8 @@
 ﻿namespace FlaUI.Core.Input
 {
+    /// <summary>
+    /// An enum for the different mouse buttons.
+    /// </summary>
     public enum MouseButton
     {
         /// <summary>

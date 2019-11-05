@@ -3,8 +3,12 @@ using FlaUI.Core.Patterns;
 
 namespace FlaUI.Core
 {
+    /// <summary>
+    /// Interface for an event library.
+    /// </summary>
     public interface IEventLibrary
     {
+#pragma warning disable 1591
         IAutomationElementEventIds Element { get; }
         IDragPatternEventIds Drag { get; }
         IDropTargetPatternEventIds DropTarget { get; }
@@ -15,5 +19,6 @@ namespace FlaUI.Core
         ITextEditPatternEventIds TextEdit { get; }
         ITextPatternEventIds Text { get; }
         IWindowPatternEventIds Window { get; }
+#pragma warning restore 1591
     }
 }

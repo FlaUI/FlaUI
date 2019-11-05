@@ -184,7 +184,7 @@ namespace FlaUI.Core
             }
             catch (PatternNotSupportedException)
             {
-                nativePattern = default(T);
+                nativePattern = default;
                 return false;
             }
         }
@@ -277,7 +277,7 @@ namespace FlaUI.Core
         /// <summary>
         /// Registers the given active text position changed event handler.
         /// </summary>
-        public abstract ActiveTextPositionChangedEventHandlerBase RegisterActiveTextPositionChangedEventHandler(TreeScope treeScope, Action<AutomationElement, ITextRange> action);
+        public abstract ActiveTextPositionChangedEventHandlerBase RegisterActiveTextPositionChangedEvent(TreeScope treeScope, Action<AutomationElement, ITextRange> action);
 
         /// <summary>
         /// Registers a method that handles the given automation event.
@@ -331,7 +331,7 @@ namespace FlaUI.Core
 
         /// <summary>
         /// Unregisters the given text edit text changed event handler.
-        /// </summary>
+        /// </summary> 
         public abstract void UnregisterTextEditTextChangedEventHandler(TextEditTextChangedEventHandlerBase eventHandler);
 
         public abstract PatternId[] GetSupportedPatterns();

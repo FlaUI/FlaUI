@@ -3,8 +3,12 @@ using FlaUI.Core.Identifiers;
 
 namespace FlaUI.UIA2
 {
+    /// <summary>
+    /// Implements a pattern library for the UIA2 patterns.
+    /// </summary>
     public class UIA2PatternLibrary : IPatternLibrary
     {
+#pragma warning disable 1591
         public PatternId AnnotationPattern => PatternId.NotSupportedByFramework;
         public PatternId DockPattern => Patterns.DockPattern.Pattern;
         public PatternId DragPattern => PatternId.NotSupportedByFramework;
@@ -50,7 +54,9 @@ namespace FlaUI.UIA2
         public PatternId VirtualizedItemPattern => Patterns.VirtualizedItemPattern.Pattern;
 #endif
         public PatternId WindowPattern => Patterns.WindowPattern.Pattern;
+#pragma warning restore 1591
 
+        /// <inheritdoc />
         public PatternId[] AllForCurrentFramework => new[] {
             DockPattern,
             ExpandCollapsePattern,

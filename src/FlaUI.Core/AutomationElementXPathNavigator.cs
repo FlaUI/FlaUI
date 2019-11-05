@@ -2,9 +2,6 @@
 using System.Xml;
 using System.Xml.XPath;
 using FlaUI.Core.AutomationElements;
-#if NET35
-using FlaUI.Core.Tools;
-#endif
 
 namespace FlaUI.Core
 {

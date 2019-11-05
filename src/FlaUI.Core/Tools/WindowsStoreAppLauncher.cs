@@ -5,13 +5,21 @@ using System.Runtime.InteropServices;
 
 namespace FlaUI.Core.Tools
 {
+    /// <summary>
+    /// Class with methods to launch windows store apps.
+    /// </summary>
     public static class WindowsStoreAppLauncher
     {
+        /// <summary>
+        /// Launch the store app with the given id and arguments.
+        /// </summary>
+        /// <param name="appUserModelId">The app id of the application to launch.</param>
+        /// <param name="arguments">The arguments to pass to the application.</param>
+        /// <returns>The process of the launched application.</returns>
         public static Process Launch(string appUserModelId, string arguments)
         {
             var launcher = new ApplicationActivationManager();
-            uint processId;
-            var hr = launcher.ActivateApplication(appUserModelId, arguments, ActivateOptions.None, out processId).ToInt32();
+            var hr = launcher.ActivateApplication(appUserModelId, arguments, ActivateOptions.None, out var processId).ToInt32();
             if (hr < 0)
             {
                 Marshal.ThrowExceptionForHR(hr);

@@ -2,8 +2,12 @@
 
 namespace FlaUI.Core.AutomationElements.Infrastructure
 {
+    /// <summary>
+    /// Interface for a class that contains all automation element event ids.
+    /// </summary>
     public interface IAutomationElementEventIds
     {
+#pragma warning disable 1591
         EventId AsyncContentLoadedEvent { get; }
         EventId ChangesEvent { get; }
         EventId FocusChangedEvent { get; }
@@ -20,5 +24,6 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         EventId SystemAlertEvent { get; }
         EventId ToolTipClosedEvent { get; }
         EventId ToolTipOpenedEvent { get; }
+#pragma warning restore 1591
     }
 }

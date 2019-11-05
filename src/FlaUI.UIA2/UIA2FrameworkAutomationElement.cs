@@ -122,7 +122,7 @@ namespace FlaUI.UIA2
         }
 
         /// <inheritdoc />
-        public override ActiveTextPositionChangedEventHandlerBase RegisterActiveTextPositionChangedEventHandler(TreeScope treeScope, Action<AutomationElement, ITextRange> action)
+        public override ActiveTextPositionChangedEventHandlerBase RegisterActiveTextPositionChangedEvent(TreeScope treeScope, Action<AutomationElement, ITextRange> action)
         {
             throw new NotImplementedException();
         }

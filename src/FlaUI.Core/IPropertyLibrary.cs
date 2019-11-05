@@ -3,8 +3,12 @@ using FlaUI.Core.Patterns;
 
 namespace FlaUI.Core
 {
+    /// <summary>
+    /// Interface for a property library.
+    /// </summary>
     public interface IPropertyLibrary
     {
+#pragma warning disable 1591
         IAutomationElementPatternAvailabilityPropertyIds PatternAvailability { get; }
         IAutomationElementPropertyIds Element { get; }
         IAnnotationPatternPropertyIds Annotation { get; }
@@ -30,5 +34,6 @@ namespace FlaUI.Core
         ITransformPatternPropertyIds Transform { get; }
         IValuePatternPropertyIds Value { get; }
         IWindowPatternPropertyIds Window { get; }
+#pragma warning restore 1591
     }
 }

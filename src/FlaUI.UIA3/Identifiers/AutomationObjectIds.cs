@@ -5,8 +5,12 @@ using UIA = Interop.UIAutomationClient;
 
 namespace FlaUI.UIA3.Identifiers
 {
+    /// <summary>
+    /// Class that holds all automation object ids available.
+    /// </summary>
     public static class AutomationObjectIds
     {
+#pragma warning disable 1591
         #region Property Identifiers
         // Base element properties
         public static readonly PropertyId AcceleratorKeyProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_AcceleratorKeyPropertyId, "AcceleratorKey");
@@ -121,5 +125,6 @@ namespace FlaUI.UIA3.Identifiers
         public static readonly EventId ToolTipClosedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_ToolTipClosedEventId, "ToolTipClosed");
         public static readonly EventId ToolTipOpenedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_ToolTipOpenedEventId, "ToolTipOpened");
         #endregion Event identifiers
+#pragma warning restore 1591
     }
 }

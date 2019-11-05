@@ -312,6 +312,14 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <summary>
+        /// Registers a active text position changed event.
+        /// </summary>
+        public ActiveTextPositionChangedEventHandlerBase RegisterActiveTextPositionChangedEvent(TreeScope treeScope, Action<AutomationElement, ITextRange> action)
+        {
+            return FrameworkAutomationElement.RegisterActiveTextPositionChangedEvent(treeScope, action);
+        }
+
+        /// <summary>
         /// Registers a property changed event with the given property.
         /// </summary>
         public PropertyChangedEventHandlerBase RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, params PropertyId[] properties)

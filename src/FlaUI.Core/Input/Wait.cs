@@ -24,11 +24,22 @@ namespace FlaUI.Core.Input
             Thread.Sleep((int)waitTime);
         }
 
+        /// <summary>
+        /// Waits until the given element is responsive.
+        /// </summary>
+        /// <param name="automationElement">The element that should be waited for.</param>
+        /// <returns>True if the element was responsive, false otherwise.</returns>
         public static bool UntilResponsive(AutomationElement automationElement)
         {
             return UntilResponsive(automationElement, DefaultTimeout);
         }
 
+        /// <summary>
+        /// Waits until the given element is responsive.
+        /// </summary>
+        /// <param name="automationElement">The element that should be waited for.</param>
+        /// <param name="timeout">The timeout of the waiting.</param>
+        /// <returns>True if the element was responsive, false otherwise.</returns>
         public static bool UntilResponsive(AutomationElement automationElement, TimeSpan timeout)
         {
             var currentElement = automationElement;
@@ -40,19 +51,28 @@ namespace FlaUI.Core.Input
             return UntilResponsive(currentElement.Properties.NativeWindowHandle, timeout);
         }
 
+        /// <summary>
+        /// Waits until the given hwnd is responsive.
+        /// See: https://blogs.msdn.microsoft.com/oldnewthing/20161118-00/?p=94745
+        /// </summary>
+        /// <param name="hWnd">The hwnd that should be waited for.</param>
+        /// <returns>True if the hwnd was responsive, false otherwise.</returns>
         public static bool UntilResponsive(IntPtr hWnd)
         {
             return UntilResponsive(hWnd, DefaultTimeout);
         }
 
         /// <summary>
-        /// Waits until a window is responsive by sending a WM_NULL message.
+        /// Waits until the given hwnd is responsive.
         /// See: https://blogs.msdn.microsoft.com/oldnewthing/20161118-00/?p=94745
         /// </summary>
+        /// <param name="hWnd">The hwnd that should be waited for.</param>
+        /// <param name="timeout">The timeout of the waiting.</param>
+        /// <returns>True if the hwnd was responsive, false otherwise.</returns>
         public static bool UntilResponsive(IntPtr hWnd, TimeSpan timeout)
         {
             var ret = User32.SendMessageTimeout(hWnd, WindowsMessages.WM_NULL,
-                UIntPtr.Zero, IntPtr.Zero, SendMessageTimeoutFlags.SMTO_NORMAL, (uint)timeout.TotalMilliseconds, out var result);
+                UIntPtr.Zero, IntPtr.Zero, SendMessageTimeoutFlags.SMTO_NORMAL, (uint)timeout.TotalMilliseconds, out _);
             // There might be other things going on so do a small sleep anyway...
             // Other sources: http://blogs.msdn.com/b/oldnewthing/archive/2014/02/13/10499047.aspx
             Thread.Sleep(20);

@@ -2,8 +2,12 @@
 
 namespace FlaUI.Core.AutomationElements.Infrastructure
 {
+    /// <summary>
+    /// Interface for a class that contains all automation element pattern availability property ids.
+    /// </summary>
     public interface IAutomationElementPatternAvailabilityPropertyIds
     {
+#pragma warning disable 1591
         PropertyId IsAnnotationPatternAvailable { get; }
         PropertyId IsDockPatternAvailable { get; }
         PropertyId IsDragPatternAvailable { get; }
@@ -40,5 +44,6 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         PropertyId IsWindowPatternAvailable { get; }
 
         PropertyId[] AllForCurrentFramework { get; }
+#pragma warning restore 1591
     }
 }

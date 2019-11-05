@@ -9,6 +9,11 @@ namespace FlaUI.Core.Capturing
     /// </summary>
     public class MouseOverlay : OverlayBase
     {
+        /// <summary>
+        /// Creates a <see cref="MouseOverlay"/> object for the current captured image.
+        /// </summary>
+        /// <param name="captureImage">The captured image.</param>
+        /// <returns>The created object.</returns>
         public MouseOverlay(CaptureImage captureImage) : base(captureImage)
         {
         }

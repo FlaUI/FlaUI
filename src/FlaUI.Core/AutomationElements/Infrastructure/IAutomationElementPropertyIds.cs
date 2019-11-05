@@ -2,8 +2,12 @@
 
 namespace FlaUI.Core.AutomationElements.Infrastructure
 {
+    /// <summary>
+    /// Interface for a class that contains all automation element property ids.
+    /// </summary>
     public interface IAutomationElementPropertyIds
     {
+#pragma warning disable 1591
         PropertyId AcceleratorKey { get; }
         PropertyId AccessKey { get; }
         PropertyId AnnotationObjects { get; }
@@ -60,5 +64,6 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         PropertyId Size { get; }
         PropertyId SizeOfSet { get; }
         PropertyId VisualEffects { get; }
+#pragma warning restore 1591
     }
 }

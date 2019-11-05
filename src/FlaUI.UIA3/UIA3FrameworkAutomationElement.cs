@@ -160,7 +160,7 @@ namespace FlaUI.UIA3
         }
 
         /// <inheritdoc />
-        public override ActiveTextPositionChangedEventHandlerBase RegisterActiveTextPositionChangedEventHandler(TreeScope treeScope, Action<AutomationElement, ITextRange> action)
+        public override ActiveTextPositionChangedEventHandlerBase RegisterActiveTextPositionChangedEvent(TreeScope treeScope, Action<AutomationElement, ITextRange> action)
         {
             var eventHandler = new UIA3ActiveTextPositionChangedEventHandler(this, action);
             Automation.NativeAutomation6.AddActiveTextPositionChangedEventHandler(NativeElement, (UIA.TreeScope)treeScope, null, eventHandler);

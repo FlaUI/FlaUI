@@ -14,6 +14,12 @@ namespace FlaUI.Core
     /// </summary>
     public abstract class AutomationBase : IDisposable
     {
+        /// <summary>
+        /// Creates a new <see cref="AutomationBase"/> instance.
+        /// </summary>
+        /// <param name="propertyLibrary">The property library to use.</param>
+        /// <param name="eventLibrary">The event library to use.</param>
+        /// <param name="patternLibrary">The pattern library to use.</param>
         protected AutomationBase(IPropertyLibrary propertyLibrary, IEventLibrary eventLibrary, IPatternLibrary patternLibrary)
         {
             PropertyLibrary = propertyLibrary;

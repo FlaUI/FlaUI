@@ -11,7 +11,7 @@ namespace FlaUI.Core.Tools
     public static class ExtensionMethods
     {
         /// <summary>
-        /// Makes sure a comparable object is between a given range
+        /// Makes sure a comparable object is between a given range.
         /// </summary>
         public static T Clamp<T>(this T source, T min, T max) where T : IComparable
         {
@@ -29,12 +29,12 @@ namespace FlaUI.Core.Tools
         public static int ToInt(this bool value) => value ? 1 : 0;
 
         /// <summary>
-        /// Converts an int to a boolean
+        /// Converts an int to a boolean.
         /// </summary>
         public static bool ToBool(this int value) => value == 1;
 
         /// <summary>
-        /// Converts a double to the nearest int32
+        /// Converts a double to the nearest int32.
         /// </summary>
         public static int ToInt(this double value) => Convert.ToInt32(value);
 
@@ -54,8 +54,21 @@ namespace FlaUI.Core.Tools
         public static IEnumerable<Enum> GetFlags(this Enum variable) => Enum.GetValues(variable.GetType()).Cast<Enum>().Where(variable.HasFlag);
 
         #region Point extensions
+        /// <summary>
+        /// Calculates the distance between two points.
+        /// </summary>
+        /// <param name="self">The first point.</param>
+        /// <param name="other">The second point.</param>
+        /// <returns>The distance of the points.</returns>
         public static double Distance(this Point self, Point other) => self.Distance(other.X, other.Y);
 
+        /// <summary>
+        /// Calculates the distance between a point and an x/y coordinate pair.
+        /// </summary>
+        /// <param name="self">The first point.</param>
+        /// <param name="otherX">The x-coordinate of the second point.</param>
+        /// <param name="otherY">The x-coordinate of the second point.</param>
+        /// <returns>The distance of the points.</returns>
         public static double Distance(this Point self, double otherX, double otherY) => Math.Sqrt(Math.Pow(self.X - otherX, 2) + Math.Pow(self.Y - otherY, 2));
         #endregion Point extensions
 

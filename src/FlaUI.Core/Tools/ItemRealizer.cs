@@ -5,20 +5,24 @@ using FlaUI.Core.Patterns;
 namespace FlaUI.Core.Tools
 {
     /// <summary>
-    /// Helper class which tries to load all items for an item container
+    /// Helper class which tries to load all items for an item container.
     /// </summary>
     public static class ItemRealizer
     {
+        /// <summary>
+        /// Tries to realize all items in the given item container.
+        /// </summary>
+        /// <param name="itemContainerElement">The item container whose items should be realized.</param>
         public static void RealizeItems(AutomationElement itemContainerElement)
         {
             // We save the scroll value to restore it afterwards
             var scrollPattern = itemContainerElement.Patterns.Scroll.PatternOrDefault;
-            double currHScroll = 0;
-            double currVScroll = 0;
+            double currentHorizontalScrollPercent = 0;
+            double currentVerticalScrollPercent = 0;
             if (scrollPattern != null)
             {
-                currHScroll = scrollPattern.HorizontalScrollPercent;
-                currVScroll = scrollPattern.VerticalScrollPercent;
+                currentHorizontalScrollPercent = scrollPattern.HorizontalScrollPercent;
+                currentVerticalScrollPercent = scrollPattern.VerticalScrollPercent;
             }
 
             // First we try with the item container pattern and realize each item
@@ -26,18 +30,18 @@ namespace FlaUI.Core.Tools
             if (itemContainerPattern != null)
             {
                 // There's the item container pattern so we can go thru all elements and just realize them
-                AutomationElement currElement = null;
+                AutomationElement currentElement = null;
                 while (true)
                 {
-                    currElement = itemContainerPattern.FindItemByProperty(currElement, null, null);
-                    if (currElement == null)
+                    currentElement = itemContainerPattern.FindItemByProperty(currentElement, null, null);
+                    if (currentElement == null)
                     {
                         break;
                     }
-                    var vp = currElement.Patterns.VirtualizedItem.PatternOrDefault;
+                    var vp = currentElement.Patterns.VirtualizedItem.PatternOrDefault;
                     vp?.Realize();
                 }
-                ResetScroll(scrollPattern, currHScroll, currVScroll);
+                ResetScroll(scrollPattern, currentHorizontalScrollPercent, currentVerticalScrollPercent);
                 return;
             }
 
@@ -49,7 +53,7 @@ namespace FlaUI.Core.Tools
                 {
                     scrollPattern.Scroll(ScrollAmount.NoAmount, ScrollAmount.SmallIncrement);
                 } while (scrollPattern.VerticalScrollPercent < 100);
-                ResetScroll(scrollPattern, currHScroll, currVScroll);
+                ResetScroll(scrollPattern, currentHorizontalScrollPercent, currentVerticalScrollPercent);
                 return;
             }
 

@@ -10,6 +10,8 @@ namespace FlaUI.Core.Tools
     public static class OperatingSystem
     {
         // Numbers taken from: https://www.gaijin.at/en/lstwinver.php
+#pragma warning disable 1591
+        // ReSharper disable InconsistentNaming
         public static readonly Version Windows2000 = new Version(5, 0, 2195);
         public static readonly Version WindowsXP = new Version(5, 1, 2600);
         public static readonly Version WindowsVista = new Version(6, 0, 6000);
@@ -20,18 +22,25 @@ namespace FlaUI.Core.Tools
         public static readonly Version Windows8 = new Version(6, 2, 9200);
         public static readonly Version Windows81 = new Version(6, 3, 9200);
         public static readonly Version Windows81U1 = new Version(6, 3, 9600);
-        public static readonly Version Windows10 = new Version(10, 0, 10240); // 1507
-        public static readonly Version Windows10NovemberUpdate = new Version(10, 0, 10586); // 1511
-        public static readonly Version Windows10AnniversaryUpdate = new Version(10, 0, 14393); // 1607
-        public static readonly Version Windows10CreatorsUpdate = new Version(10, 0, 15063); // 1703
-        public static readonly Version Windows10FallCreatorsUpdate = new Version(10, 0, 16299); // 1709
+        public static readonly Version Windows10_1507 = new Version(10, 0, 10240);
+        public static readonly Version Windows10_1511 = new Version(10, 0, 10586);
+        public static readonly Version Windows10_1607 = new Version(10, 0, 14393);
+        public static readonly Version Windows10_1703 = new Version(10, 0, 15063);
+        public static readonly Version Windows10_1709 = new Version(10, 0, 16299);
+        public static readonly Version Windows10_1803 = new Version(10, 0, 17134);
+        public static readonly Version Windows10_1809 = new Version(10, 0, 17763);
+        public static readonly Version Windows10_1903 = new Version(10, 0, 18362);
         public static readonly Version WindowsServer2003 = new Version(5, 2, 3790);
         public static readonly Version WindowsServer2008 = WindowsVistaSP1;
         public static readonly Version WindowsServer2008R2 = Windows7;
         public static readonly Version WindowsServer2008R2SP1 = Windows7SP1;
         public static readonly Version WindowsServer2012 = Windows8;
         public static readonly Version WindowsServer2012R2 = Windows81;
-        public static readonly Version WindowsServer2016 = Windows10AnniversaryUpdate;
+        public static readonly Version WindowsServer2016_1607 = Windows10_1607;
+        public static readonly Version WindowsServer2016_1709 = Windows10_1709;
+        public static readonly Version WindowsServer2019_1809 = Windows10_1809;
+        // ReSharper restore InconsistentNaming
+#pragma warning restore 1591
 
         static OperatingSystem()
         {
@@ -119,7 +128,7 @@ namespace FlaUI.Core.Tools
         }
 
         /// <summary>
-        /// Gets the version numnber.
+        /// Gets the version number.
         /// </summary>
         private static string GetVersion()
         {

@@ -4,8 +4,16 @@ using UIA = Interop.UIAutomationClient;
 
 namespace FlaUI.UIA3.Converters
 {
+    /// <summary>
+    /// A converter to convert to <see cref="StyleType"/>.
+    /// </summary>
     public static class StyleTypeConverter
     {
+        /// <summary>
+        /// Converts a native style type to FlaUIs <see cref="StyleType"/>.
+        /// </summary>
+        /// <param name="nativeStyleType">The native style type.</param>
+        /// <returns>The converted <see cref="StyleType"/>.</returns>
         public static object ToStyleType(object nativeStyleType)
         {
             switch ((int)nativeStyleType)
@@ -49,6 +57,11 @@ namespace FlaUI.UIA3.Converters
             }
         }
 
+        /// <summary>
+        /// Converts a FlaUI <see cref="StyleType"/> to a native style type.
+        /// </summary>
+        /// <param name="styleType">The <see cref="StyleType"/> to convert.</param>
+        /// <returns>A native style type.</returns>
         public static object ToStyleTypeNative(StyleType styleType)
         {
             switch (styleType)

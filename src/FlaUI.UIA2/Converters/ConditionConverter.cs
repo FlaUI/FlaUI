@@ -5,45 +5,49 @@ using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Converters
 {
+    /// <summary>
+    /// Class which helps converting conditions between native and FlaUIs conditions.
+    /// </summary>
     public static class ConditionConverter
     {
+        /// <summary>
+        /// Converts a FlaUI <see cref="ConditionBase"/> to a native condition.
+        /// </summary>
+        /// <param name="condition">The condition to convert.</param>
+        /// <returns>The native condition.</returns>
         public static UIA.Condition ToNative(ConditionBase condition)
         {
-            var propCond = condition as PropertyCondition;
-            if (propCond != null)
+            if (condition is PropertyCondition propCond)
             {
                 return new UIA.PropertyCondition(UIA.AutomationProperty.LookupById(propCond.Property.Id), ValueConverter.ToNative(propCond.Value), (UIA.PropertyConditionFlags)propCond.PropertyConditionFlags);
             }
-            var boolCond = condition as BoolCondition;
-            if (boolCond != null)
+            if (condition is BoolCondition boolCond)
             {
                 return boolCond.BooleanValue ? UIA.Condition.TrueCondition : UIA.Condition.FalseCondition;
             }
-            var notCond = condition as NotCondition;
-            if (notCond != null)
+            if (condition is NotCondition notCond)
             {
                 return new UIA.NotCondition(ToNative(notCond.Condition));
             }
-            var junctCond = condition as JunctionConditionBase;
-            if (junctCond != null)
+            if (condition is JunctionConditionBase junctionCondition)
             {
-                if (junctCond.ChildCount == 0)
+                if (junctionCondition.ChildCount == 0)
                 {
                     // No condition in the list, so just create a true condition
                     return UIA.Condition.TrueCondition;
                 }
-                if (junctCond.ChildCount == 1)
+                if (junctionCondition.ChildCount == 1)
                 {
                     // Only one condition in the list, so just return that one
-                    return ToNative(junctCond.Conditions[0]);
+                    return ToNative(junctionCondition.Conditions[0]);
                 }
-                if (junctCond is AndCondition)
+                if (junctionCondition is AndCondition)
                 {
                     // Create the and condition
-                    return new UIA.AndCondition(junctCond.Conditions.Select(ToNative).ToArray());
+                    return new UIA.AndCondition(junctionCondition.Conditions.Select(ToNative).ToArray());
                 }
                 // Create the or condition
-                return new UIA.OrCondition(junctCond.Conditions.Select(ToNative).ToArray());
+                return new UIA.OrCondition(junctionCondition.Conditions.Select(ToNative).ToArray());
             }
             throw new ArgumentException("Unknown condition type");
         }
