@@ -1,4 +1,5 @@
 ![Alt text](/FlaUI.png?raw=true "FlaUI")
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FRoemer%2FFlaUI.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FRoemer%2FFlaUI?ref=badge_shield)
 
 
 ### Badges
@@ -68,3 +69,7 @@ You can also create issues if you find problems or have ideas on how to further 
 
 ### Acknowledgements
 <a href="https://www.jetbrains.com/resharper/" target="_blank"><img src="https://user-images.githubusercontent.com/393641/36379975-e4eda8c8-1580-11e8-8fa2-c20aeeaa607a.png" alt="resharper" width="40" /></a> Thanks to JetBrains for providing a free license of ReSharper.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FRoemer%2FFlaUI.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FRoemer%2FFlaUI?ref=badge_large)
