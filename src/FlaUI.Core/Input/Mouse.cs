@@ -67,7 +67,20 @@ namespace FlaUI.Core.Input
                 User32.GetCursorPos(out var point);
                 return new Point(point.X, point.Y);
             }
-            set => User32.SetCursorPos(value.X, value.Y);
+            set
+            {
+                User32.SetCursorPos(value.X, value.Y);
+                // There is a bug that in a multi-monitor scenario with different sizes,
+                // the mouse is only moved to x=0 on the target monitor.
+                // In that case, just redo the move a 2nd time and it works
+                // as the mouse is on the correct monitor alreay.
+                // See https://stackoverflow.com/questions/58753372/winapi-setcursorpos-seems-like-not-working-properly-on-multiple-monitors-with-di
+                User32.GetCursorPos(out var point);
+                if (point.X != value.X || point.Y != value.Y)
+                {
+                    User32.SetCursorPos(value.X, value.Y);
+                }
+            }
         }
 
         /// <summary>
