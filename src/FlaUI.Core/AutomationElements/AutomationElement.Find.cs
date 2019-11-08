@@ -1,45 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 
 namespace FlaUI.Core.AutomationElements
 {
-    public partial class AutomationElement
+    public partial class AutomationElement : IAutomationElementFinder
     {
-        /// <summary>
-        /// Finds all elements in the given treescope and with the given condition.
-        /// </summary>
+        /// <inheritdoc />
         public AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition)
         {
             return FrameworkAutomationElement.FindAll(treeScope, condition);
         }
 
-        /// <summary>
-        /// Finds the first element which is in the given treescope with the given condition.
-        /// </summary>
+        /// <inheritdoc />
         public AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
         {
             return FrameworkAutomationElement.FindFirst(treeScope, condition);
         }
 
-        /// <summary>
-        /// Find all matching elements in the specified order.
-        /// </summary>
+        /// <inheritdoc />
         public AutomationElement[] FindAllWithOptions(TreeScope treeScope, ConditionBase condition,
             TreeTraversalOptions traversalOptions, AutomationElement root)
         {
             return FrameworkAutomationElement.FindAllWithOptions(treeScope, condition, traversalOptions, root);
         }
 
-        /// <summary>
-        /// Finds the first matching element in the specified order.
-        /// </summary>
+        /// <inheritdoc />
         public AutomationElement FindFirstWithOptions(TreeScope treeScope, ConditionBase condition,
             TreeTraversalOptions traversalOptions, AutomationElement root)
         {
             return FrameworkAutomationElement.FindFirstWithOptions(treeScope, condition, traversalOptions, root);
+        }
+
+        /// <inheritdoc />
+        public AutomationElement FindAt(TreeScope treeScope, int index, ConditionBase condition)
+        {
+            return FrameworkAutomationElement.FindAt(treeScope, index, condition);
         }
 
         /// <summary>
@@ -101,14 +100,6 @@ namespace FlaUI.Core.AutomationElements
                 itemList.Add(automationItem);
             }
             return itemList.ToArray();
-        }
-
-        /// <summary>
-        /// Finds the element which is in the given treescope with the given condition and the given index.
-        /// </summary>
-        public AutomationElement FindAt(TreeScope treeScope, int index, ConditionBase condition)
-        {
-            return FrameworkAutomationElement.FindIndexed(treeScope, index, condition);
         }
 
         /// <summary>
@@ -243,7 +234,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Finds all descendants with the condition.
         /// </summary>
-        /// <param name="conditionFunc">The condition mehtod.</param>
+        /// <param name="conditionFunc">The condition method.</param>
         /// <returns>The found elements or an empty list if no elements were found.</returns>
         public AutomationElement[] FindAllDescendants(Func<ConditionFactory, ConditionBase> conditionFunc)
         {

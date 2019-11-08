@@ -96,7 +96,7 @@ namespace FlaUI.UIA2
         }
 
         /// <inheritdoc />
-        public override AutomationElement FindIndexed(TreeScope treeScope, int index, ConditionBase condition)
+        public override AutomationElement FindAt(TreeScope treeScope, int index, ConditionBase condition)
         {
             var cacheRequest = CacheRequest.IsCachingActive ? CacheRequest.Current.ToNative() : null;
             cacheRequest?.Push();

@@ -134,7 +134,7 @@ namespace FlaUI.UIA3
         }
 
         /// <inheritdoc />
-        public override AutomationElement FindIndexed(TreeScope treeScope, int index, ConditionBase condition)
+        public override AutomationElement FindAt(TreeScope treeScope, int index, ConditionBase condition)
         {
             var nativeFoundElements = CacheRequest.IsCachingActive
                 ? NativeElement.FindAllBuildCache((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition), CacheRequest.Current.ToNative(Automation))
@@ -167,6 +167,7 @@ namespace FlaUI.UIA3
             return eventHandler;
         }
 
+        /// <inheritdoc />
         public override AutomationEventHandlerBase RegisterAutomationEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
         {
             var eventHandler = new UIA3AutomationEventHandler(this, @event, action);

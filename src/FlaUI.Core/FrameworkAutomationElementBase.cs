@@ -13,7 +13,7 @@ namespace FlaUI.Core
     /// <summary>
     /// Base class for a framework specific automation element.
     /// </summary>
-    public abstract partial class FrameworkAutomationElementBase
+    public abstract partial class FrameworkAutomationElementBase : IAutomationElementEventSubscriber, IAutomationElementEventUnsubscriber, IAutomationElementFinder
     {
         /// <summary>
         /// Create a framework automation element with the given <see cref="AutomationBase"/>.
@@ -224,114 +224,60 @@ namespace FlaUI.Core
         /// <returns>The pattern or null if it was not found / cached.</returns>
         protected abstract object InternalGetPattern(int patternId, bool cached);
 
-        /// <summary>
-        /// Finds all elements in the given scope with the given condition.
-        /// </summary>
-        /// <param name="treeScope">The scope to search.</param>
-        /// <param name="condition">The condition to use.</param>
-        /// <returns>The found elements or an empty list if no elements were found.</returns>
+        /// <inheritdoc />
         public abstract AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition);
 
-        /// <summary>
-        /// Finds the first element in the given scope with the given condition.
-        /// </summary>
-        /// <param name="treeScope">The scope to search.</param>
-        /// <param name="condition">The condition to use.</param>
-        /// <returns>The found element or null if no element was found.</returns>
+        /// <inheritdoc />
         public abstract AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition);
 
-        /// <summary>
-        /// Find all matching elements in the specified order.
-        /// </summary>
-        /// <param name="treeScope">A combination of values specifying the scope of the search.</param>
-        /// <param name="condition">A condition that represents the criteria to match.</param>
-        /// <param name="traversalOptions">Value specifying the tree navigation order.</param>
-        /// <param name="root">An element with which to begin the search.</param>
-        /// <returns>The found elements or an empty list if no elements were found.</returns>
+        /// <inheritdoc />
         public abstract AutomationElement[] FindAllWithOptions(TreeScope treeScope, ConditionBase condition, TreeTraversalOptions traversalOptions, AutomationElement root);
 
-        /// <summary>
-        /// Finds the first matching element in the specified order.
-        /// </summary>
-        /// <param name="treeScope">A combination of values specifying the scope of the search.</param>
-        /// <param name="condition">A condition that represents the criteria to match.</param>
-        /// <param name="traversalOptions">Value specifying the tree navigation order.</param>
-        /// <param name="root">An element with which to begin the search.</param>
-        /// <returns>The found element or null if no element was found.</returns>
+        /// <inheritdoc />
         public abstract AutomationElement FindFirstWithOptions(TreeScope treeScope, ConditionBase condition, TreeTraversalOptions traversalOptions, AutomationElement root);
 
-        /// <summary>
-        /// Finds the element with the given index with the given condition.
-        /// </summary>
-        /// <param name="treeScope">The scope to search.</param>
-        /// <param name="index">The index of the element to return (0-based).</param>
-        /// <param name="condition">The condition to use.</param>
-        /// <returns>The found element or null if no element was found.</returns>
-        public abstract AutomationElement FindIndexed(TreeScope treeScope, int index, ConditionBase condition);
+        /// <inheritdoc />
+        public abstract AutomationElement FindAt(TreeScope treeScope, int index, ConditionBase condition);
 
         /// <summary>
         /// Tries to get a clickable point.
         /// </summary>
         public abstract bool TryGetClickablePoint(out Point point);
 
-        /// <summary>
-        /// Registers the given active text position changed event handler.
-        /// </summary>
+        /// <inheritdoc />
         public abstract ActiveTextPositionChangedEventHandlerBase RegisterActiveTextPositionChangedEvent(TreeScope treeScope, Action<AutomationElement, ITextRange> action);
 
-        /// <summary>
-        /// Registers a method that handles the given automation event.
-        /// </summary>
+        /// <inheritdoc />
         public abstract AutomationEventHandlerBase RegisterAutomationEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action);
 
-        /// <summary>
-        /// Registers a method that handles a property changed event.
-        /// </summary>
+        /// <inheritdoc />
         public abstract PropertyChangedEventHandlerBase RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, PropertyId[] properties);
 
-        /// <summary>
-        /// Registers a method that handles a structure changed event.
-        /// </summary>
+        /// <inheritdoc />
         public abstract StructureChangedEventHandlerBase RegisterStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action);
 
-        /// <summary>
-        /// Registers a method that handles a notification event.
-        /// </summary>
+        /// <inheritdoc />
         public abstract NotificationEventHandlerBase RegisterNotificationEvent(TreeScope treeScope, Action<AutomationElement, NotificationKind, NotificationProcessing, string, string> action);
 
-        /// <summary>
-        /// Registers a method that handles a text edit text changed event.
-        /// </summary>
+        /// <inheritdoc />
         public abstract TextEditTextChangedEventHandlerBase RegisterTextEditTextChangedEventHandler(TreeScope treeScope, TextEditChangeType textEditChangeType, Action<AutomationElement, TextEditChangeType, string[]> action);
 
-        /// <summary>
-        /// Unregisters the given active text position changed event handler.
-        /// </summary>
+        /// <inheritdoc />
         public abstract void UnregisterActiveTextPositionChangedEventHandler(ActiveTextPositionChangedEventHandlerBase eventHandler);
 
-        /// <summary>
-        /// Unregisters the given automation event handler.
-        /// </summary>
+        /// <inheritdoc />
         public abstract void UnregisterAutomationEventHandler(AutomationEventHandlerBase eventHandler);
 
-        /// <summary>
-        /// Unregisters the given property changed event handler.
-        /// </summary>
+        /// <inheritdoc />
         public abstract void UnregisterPropertyChangedEventHandler(PropertyChangedEventHandlerBase eventHandler);
 
-        /// <summary>
-        /// Unregisters the given structure changed event handler.
-        /// </summary>
+        /// <inheritdoc />
         public abstract void UnregisterStructureChangedEventHandler(StructureChangedEventHandlerBase eventHandler);
 
-        /// <summary>
-        /// Unregisters the given notification event handler.
-        /// </summary>
+        /// <inheritdoc />
         public abstract void UnregisterNotificationEventHandler(NotificationEventHandlerBase eventHandler);
 
-        /// <summary>
-        /// Unregisters the given text edit text changed event handler.
-        /// </summary> 
+        /// <inheritdoc />
         public abstract void UnregisterTextEditTextChangedEventHandler(TextEditTextChangedEventHandlerBase eventHandler);
 
         public abstract PatternId[] GetSupportedPatterns();
