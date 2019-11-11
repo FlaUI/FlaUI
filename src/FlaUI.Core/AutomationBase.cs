@@ -20,11 +20,13 @@ namespace FlaUI.Core
         /// <param name="propertyLibrary">The property library to use.</param>
         /// <param name="eventLibrary">The event library to use.</param>
         /// <param name="patternLibrary">The pattern library to use.</param>
-        protected AutomationBase(IPropertyLibrary propertyLibrary, IEventLibrary eventLibrary, IPatternLibrary patternLibrary)
+        /// <param name="textAttributeLibrary">The text attribute library to use.</param>
+        protected AutomationBase(IPropertyLibrary propertyLibrary, IEventLibrary eventLibrary, IPatternLibrary patternLibrary, ITextAttributeLibrary textAttributeLibrary)
         {
             PropertyLibrary = propertyLibrary;
             EventLibrary = eventLibrary;
             PatternLibrary = patternLibrary;
+            TextAttributeLibrary = textAttributeLibrary;
             ConditionFactory = new ConditionFactory(propertyLibrary);
 #if NETSTANDARD
             OverlayManager = new NullOverlayManager();
@@ -49,6 +51,11 @@ namespace FlaUI.Core
         /// Provides a library with the existing <see cref="PatternId"/>s.
         /// </summary>
         public IPatternLibrary PatternLibrary { get; }
+
+        /// <summary>
+        /// Provides a library with the existing <see cref="TextAttributeId"/>s.
+        /// </summary>
+        public ITextAttributeLibrary TextAttributeLibrary { get; }
 
         /// <summary>
         /// Provides a factory to create conditions for searching.

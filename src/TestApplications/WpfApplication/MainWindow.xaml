@@ -34,8 +34,8 @@
         <TabControl>
             <TabItem Header="Simple Controls">
                 <StackPanel Orientation="Vertical">
-                    <Label Content="Test Label" />
-                    <TextBox AutomationProperties.AutomationId="TextBox" />
+                    <Label Content="Test Label" Foreground="Blue" />
+                    <TextBox AutomationProperties.AutomationId="TextBox" Text="Test TextBox" Foreground="Green"/>
                     <ComboBox Width="120" IsEditable="True" AutomationProperties.AutomationId="EditableCombo">
                         <TextBlock Text="Item 1" AutomationProperties.AutomationId="EditableComboItem1" />
                         <TextBlock Text="Item 2" AutomationProperties.AutomationId="EditableComboItem2" />

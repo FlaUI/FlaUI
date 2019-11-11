@@ -7,6 +7,11 @@ namespace FlaUI.Core.Identifiers
     /// </summary>
     public class TextAttributeId : ConvertibleIdentifierBase
     {
+        /// <summary>
+        /// Fixed TextAttributeId which is used for text attributes that are not supported by the framework.
+        /// </summary>
+        public static readonly TextAttributeId NotSupportedByFramework = new TextAttributeId(-1, "Not supported");
+
         public TextAttributeId(int id, string name)
             : base(id, name)
         {
