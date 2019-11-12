@@ -10,6 +10,11 @@ namespace FlaUI.Core.Capturing
     /// </summary>
     public class InfoOverlay : OverlayBase
     {
+        /// <summary>
+        /// Creates a <see cref="InfoOverlay"/> object for the current captured image.
+        /// </summary>
+        /// <param name="captureImage">The captured image.</param>
+        /// <returns>The created object.</returns>
         public InfoOverlay(CaptureImage captureImage) : base(captureImage)
         {
         }
@@ -54,6 +59,7 @@ namespace FlaUI.Core.Capturing
         /// </summary>
         public TimeSpan RecordTimeSpan { get; set; } = TimeSpan.Zero;
 
+        /// <inheritdoc />
         public override void Draw(Graphics g)
         {
             const int textOffsetToBg = 2;

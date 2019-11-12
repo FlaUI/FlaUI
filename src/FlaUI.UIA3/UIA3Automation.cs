@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using FlaUI.Core;
 using FlaUI.Core.AutomationElements;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Tools;
 using FlaUI.UIA3.Converters;
@@ -17,7 +18,7 @@ namespace FlaUI.UIA3
     /// </summary>
     public class UIA3Automation : AutomationBase
     {
-        public UIA3Automation() : base(new UIA3PropertyLibrary(), new UIA3EventLibrary(), new UIA3PatternLibrary())
+        public UIA3Automation() : base(new UIA3PropertyLibrary(), new UIA3EventLibrary(), new UIA3PatternLibrary(), new UIA3TextAttributeLibrary())
         {
             NativeAutomation = InitializeAutomation();
             TreeWalkerFactory = new UIA3TreeWalkerFactory(this);
@@ -46,6 +47,20 @@ namespace FlaUI.UIA3
             set => NativeAutomation2.ConnectionTimeout = (uint)value.TotalMilliseconds;
         }
 
+        /// <inheritdoc />
+        public override ConnectionRecoveryBehaviorOptions ConnectionRecoveryBehavior
+        {
+            get => (ConnectionRecoveryBehaviorOptions)NativeAutomation6.ConnectionRecoveryBehavior;
+            set => NativeAutomation6.ConnectionRecoveryBehavior = (UIA.ConnectionRecoveryBehaviorOptions)value;
+        }
+
+        /// <inheritdoc />
+        public override CoalesceEventsOptions CoalesceEvents
+        {
+            get => (CoalesceEventsOptions)NativeAutomation6.CoalesceEvents;
+            set => NativeAutomation6.CoalesceEvents = (UIA.CoalesceEventsOptions)value;
+        }
+
         /// <summary>
         /// Native object for the ui automation.
         /// </summary>
@@ -70,6 +85,11 @@ namespace FlaUI.UIA3
         /// Native object for second Windows 10 automation.
         /// </summary>
         public UIA.IUIAutomation5 NativeAutomation5 => GetAutomationAs<UIA.IUIAutomation5>();
+
+        /// <summary>
+        /// Native object for third Windows 10 automation.
+        /// </summary>
+        public UIA.IUIAutomation6 NativeAutomation6 => GetAutomationAs<UIA.IUIAutomation6>();
 
         /// <inheritdoc />
         public override AutomationElement GetDesktop()

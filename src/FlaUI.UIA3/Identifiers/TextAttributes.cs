@@ -5,8 +5,12 @@ using UIA = Interop.UIAutomationClient;
 
 namespace FlaUI.UIA3.Identifiers
 {
+    /// <summary>
+    /// Class that holds all text attribute ids available.
+    /// </summary>
     public static class TextAttributes
     {
+#pragma warning disable 1591
         public static readonly TextAttributeId AfterParagraphSpacing = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_AfterParagraphSpacingAttributeId, "AfterParagraphSpacing");
         public static readonly TextAttributeId AnimationStyle = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_AnimationStyleAttributeId, "AnimationStyle");
         public static readonly TextAttributeId AnnotationObjects = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_AnnotationObjectsAttributeId, "AnnotationObjects");
@@ -51,5 +55,6 @@ namespace FlaUI.UIA3.Identifiers
         public static readonly TextAttributeId TextFlowDirections = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_TextFlowDirectionsAttributeId, "TextFlowDirections");
         public static readonly TextAttributeId UnderlineColor = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_UnderlineColorAttributeId, "UnderlineColor");
         public static readonly TextAttributeId UnderlineStyle = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_UnderlineStyleAttributeId, "UnderlineStyle");
+#pragma warning restore 1591
     }
 }

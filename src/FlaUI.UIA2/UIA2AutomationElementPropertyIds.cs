@@ -6,6 +6,7 @@ namespace FlaUI.UIA2
 {
     public partial class UIA2AutomationElementPropertyIds : IAutomationElementPropertyIds
     {
+#pragma warning disable 1591
         public PropertyId AcceleratorKey => AutomationObjectIds.AcceleratorKeyProperty;
         public PropertyId AccessKey => AutomationObjectIds.AccessKeyProperty;
         public PropertyId AnnotationObjects => PropertyId.NotSupportedByFramework;
@@ -28,10 +29,12 @@ namespace FlaUI.UIA2
         public PropertyId FrameworkId => AutomationObjectIds.FrameworkIdProperty;
         public PropertyId FullDescription => PropertyId.NotSupportedByFramework;
         public PropertyId HasKeyboardFocus => AutomationObjectIds.HasKeyboardFocusProperty;
+        public PropertyId HeadingLevel => PropertyId.NotSupportedByFramework;
         public PropertyId HelpText => AutomationObjectIds.HelpTextProperty;
         public PropertyId IsContentElement => AutomationObjectIds.IsContentElementProperty;
         public PropertyId IsControlElement => AutomationObjectIds.IsControlElementProperty;
         public PropertyId IsDataValidForForm => PropertyId.NotSupportedByFramework;
+        public PropertyId IsDialog => PropertyId.NotSupportedByFramework;
         public PropertyId IsEnabled => AutomationObjectIds.IsEnabledProperty;
         public PropertyId IsKeyboardFocusable => AutomationObjectIds.IsKeyboardFocusableProperty;
         public PropertyId IsOffscreen => AutomationObjectIds.IsOffscreenProperty;
@@ -59,6 +62,7 @@ namespace FlaUI.UIA2
         public PropertyId Size => PropertyId.NotSupportedByFramework;
         public PropertyId SizeOfSet => PropertyId.NotSupportedByFramework;
         public PropertyId VisualEffects => PropertyId.NotSupportedByFramework;
+#pragma warning restore 1591
     }
 
     /// <summary>
@@ -66,10 +70,12 @@ namespace FlaUI.UIA2
     /// </summary>
     public partial class UIA2AutomationElementPropertyIds
     {
-#if NET471
+#pragma warning disable 1591
+#if NET471 || NET48
         public PropertyId LiveSetting => AutomationObjectIds.LiveSettingProperty;
 #else
         public PropertyId LiveSetting => PropertyId.NotSupportedByFramework;
 #endif
+#pragma warning restore 1591
     }
 }

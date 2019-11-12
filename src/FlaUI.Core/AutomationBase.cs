@@ -2,6 +2,7 @@
 using System.Drawing;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Conditions;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Overlay;
@@ -13,13 +14,25 @@ namespace FlaUI.Core
     /// </summary>
     public abstract class AutomationBase : IDisposable
     {
-        protected AutomationBase(IPropertyLibrary propertyLibrary, IEventLibrary eventLibrary, IPatternLibrary patternLibrary)
+        /// <summary>
+        /// Creates a new <see cref="AutomationBase"/> instance.
+        /// </summary>
+        /// <param name="propertyLibrary">The property library to use.</param>
+        /// <param name="eventLibrary">The event library to use.</param>
+        /// <param name="patternLibrary">The pattern library to use.</param>
+        /// <param name="textAttributeLibrary">The text attribute library to use.</param>
+        protected AutomationBase(IPropertyLibrary propertyLibrary, IEventLibrary eventLibrary, IPatternLibrary patternLibrary, ITextAttributeLibrary textAttributeLibrary)
         {
             PropertyLibrary = propertyLibrary;
             EventLibrary = eventLibrary;
             PatternLibrary = patternLibrary;
+            TextAttributeLibrary = textAttributeLibrary;
             ConditionFactory = new ConditionFactory(propertyLibrary);
+#if NETSTANDARD
+            OverlayManager = new NullOverlayManager();
+#else
             OverlayManager = new WinFormsOverlayManager();
+#endif
             // Make sure all pattern ids are initialized
             var unused = PatternLibrary.AllForCurrentFramework;
         }
@@ -38,6 +51,11 @@ namespace FlaUI.Core
         /// Provides a library with the existing <see cref="PatternId"/>s.
         /// </summary>
         public IPatternLibrary PatternLibrary { get; }
+
+        /// <summary>
+        /// Provides a library with the existing <see cref="TextAttributeId"/>s.
+        /// </summary>
+        public ITextAttributeLibrary TextAttributeLibrary { get; }
 
         /// <summary>
         /// Provides a factory to create conditions for searching.
@@ -73,6 +91,16 @@ namespace FlaUI.Core
         /// Specifies the length of time that UI Automation will wait for a provider to respond to a client request for an automation element.
         /// </summary>
         public abstract TimeSpan ConnectionTimeout { get; set; }
+
+        /// <summary>
+        /// Indicates whether an accessible technology client adjusts provider request timeouts when the provider is non-responsive.
+        /// </summary>
+        public abstract ConnectionRecoveryBehaviorOptions ConnectionRecoveryBehavior { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether an accessible technology client receives all events, or a subset where duplicate events are detected and filtered.
+        /// </summary>
+        public abstract CoalesceEventsOptions CoalesceEvents { get; set; }
 
         /// <summary>
         /// Gets the desktop (root) element.

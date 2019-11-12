@@ -90,12 +90,24 @@ namespace FlaUI.Core.UITests.Elements
         {
             var combo = _mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("NonEditableCombo")).AsComboBox();
             combo.Expand();
-            // Wait for the windows animation
-            System.Threading.Thread.Sleep(1000);
             combo.Items[3].Click();
-            var window = Retry.While(() => _mainWindow.FindFirstDescendant(cf => cf.ByClassName("#32770"))?.AsWindow(), w => w == null, TimeSpan.FromMilliseconds(1000)).Result;
+            var retryResult = Retry.While(() => _mainWindow.FindFirstDescendant(cf => cf.ByClassName("#32770"))?.AsWindow(), w => w == null, TimeSpan.FromMilliseconds(1000));
+            var window = retryResult.Result;
             Assert.That(window, Is.Not.Null, "Expected a window that was shown when combobox item was selected");
             window.FindFirstDescendant(cf => cf.ByAutomationId("Close")).AsButton().Invoke();
+        }
+
+        [Test]
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        public void ComboBoxItemIsNotOffscreen(int comboBoxItem)
+        {
+            var combo = _mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("NonEditableCombo")).AsComboBox();
+            var isOffscreen = combo.Items[comboBoxItem].IsOffscreen;
+            Assert.IsFalse(isOffscreen);
+            combo.Collapse();
         }
     }
 }

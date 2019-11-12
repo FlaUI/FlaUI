@@ -5,8 +5,12 @@ using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Identifiers
 {
+    /// <summary>
+    /// Class that holds all automation object ids available.
+    /// </summary>
     public static partial class AutomationObjectIds
     {
+#pragma warning disable 1591
         #region Property Identifiers
         // Base element properties
         public static readonly PropertyId AcceleratorKeyProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.AcceleratorKeyProperty.Id, "AcceleratorKey");
@@ -68,6 +72,7 @@ namespace FlaUI.UIA2.Identifiers
         public static readonly EventId ToolTipClosedEvent = EventId.Register(AutomationType.UIA2, UIA.AutomationElement.ToolTipClosedEvent.Id, "ToolTipClosed");
         public static readonly EventId ToolTipOpenedEvent = EventId.Register(AutomationType.UIA2, UIA.AutomationElement.ToolTipOpenedEvent.Id, "ToolTipOpened");
         #endregion Event identifiers
+#pragma warning restore 1591
     }
 
 #if !NET35
@@ -76,21 +81,25 @@ namespace FlaUI.UIA2.Identifiers
     /// </summary>
     public static partial class AutomationObjectIds
     {
+#pragma warning disable 1591
         // Additions from .NET 4.0
         public static readonly PropertyId IsItemContainerPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsItemContainerPatternAvailableProperty.Id, "IsItemContainerPatternAvailable");
         public static readonly PropertyId IsVirtualizedItemPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsVirtualizedItemPatternAvailableProperty.Id, "IsVirtualizedItemPatternAvailable");
         public static readonly PropertyId IsSynchronizedInputPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsSynchronizedInputPatternAvailableProperty.Id, "IsSynchronizedInputPatternAvailable");
+#pragma warning restore 1591
     }
 #endif
 
-#if NET471
+#if NET471 || NET48
     /// <summary>
     /// Additions from .NET 4.7.1.
     /// </summary>
     public static partial class AutomationObjectIds
     {
+#pragma warning disable 1591
         public static readonly PropertyId LiveSettingProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.LiveSettingProperty.Id, "LiveSetting");
         public static readonly EventId LiveRegionChangedEvent = EventId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.LiveRegionChangedEvent.Id, "LiveRegionChanged");
+#pragma warning restore 1591
     }
 #endif
 }

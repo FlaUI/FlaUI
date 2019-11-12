@@ -36,12 +36,24 @@
             }
         }
 
+        /// <summary>
+        /// Name of a horizontal scrollbar.
+        /// </summary>
         public static string HorizontalScrollBar { get; }
 
+        /// <summary>
+        /// Name of a vertical scrollbar.
+        /// </summary>
         public static string VerticalScrollBar { get; }
 
+        /// <summary>
+        /// Name of a horizontal scrollbar in a table.
+        /// </summary>
         public static string TableHorizontalScrollBar { get; }
 
+        /// <summary>
+        /// Name of a vertical scrollbar in a table.
+        /// </summary>
         public static string TableVerticalScrollBar { get; }
 
         /// <summary>

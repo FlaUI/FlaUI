@@ -7,6 +7,9 @@ namespace FlaUI.Core.AutomationElements.Scrolling
     /// </summary>
     public class HorizontalScrollBar : ScrollBarBase
     {
+        /// <summary>
+        /// Creates a horizontal scroll bar element from the given element.
+        /// </summary>
         public HorizontalScrollBar(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }

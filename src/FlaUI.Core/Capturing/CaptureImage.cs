@@ -1,21 +1,17 @@
-﻿using System;
+﻿using FlaUI.Core.Logging;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Windows.Media.Imaging;
-using FlaUI.Core.Logging;
-using FlaUI.Core.Tools;
 
 namespace FlaUI.Core.Capturing
 {
     /// <summary>
     /// Object which is returned when the screen or parts of the screen are captured with <see cref="Capture"/>.
     /// </summary>
-    public class CaptureImage : IDisposable
+    public partial class CaptureImage : IDisposable
     {
-        private readonly Lazy<BitmapImage> _bitmapImageLazy;
-
         /// <summary>
         /// Creates a <see cref="CaptureImage"/> object with the given <see cref="Bitmap"/>.
         /// </summary>
@@ -24,8 +20,10 @@ namespace FlaUI.Core.Capturing
             Bitmap = bitmap;
             OriginalBounds = originalBounds;
             Settings = settings;
-            _bitmapImageLazy = new Lazy<BitmapImage>(ToWpf);
+            OnInitialized();
         }
+
+        partial void OnInitialized();
 
         /// <summary>
         /// The original <see cref="Bitmap"/>.
@@ -41,11 +39,6 @@ namespace FlaUI.Core.Capturing
         /// The <see cref="CaptureSettings"/> used to capture the image.
         /// </summary>
         public CaptureSettings Settings { get; }
-
-        /// <summary>
-        /// A WPF friendly <see cref="BitmapImage"/> of the <see cref="Bitmap"/>.
-        /// </summary>
-        public BitmapImage BitmapImage => _bitmapImageLazy.Value;
 
         /// <summary>
         /// Saves the image to the file with the given path.
@@ -99,26 +92,6 @@ namespace FlaUI.Core.Capturing
                 }
             }
             return this;
-        }
-
-        /// <summary>
-        /// Converts a WinForms <see cref="Bitmap"/> to a WPF friendly <see cref="BitmapImage"/>.
-        /// </summary>
-        private BitmapImage ToWpf()
-        {
-            using (var memory = new MemoryStream())
-            {
-                Bitmap.Save(memory, ImageFormat.Png);
-                memory.Position = 0;
-                var bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                memory.Seek(0, SeekOrigin.Begin);
-                bitmapImage.StreamSource = memory;
-                bitmapImage.EndInit();
-                bitmapImage.Freeze();
-                return bitmapImage;
-            }
         }
 
         /// <inheritdoc />

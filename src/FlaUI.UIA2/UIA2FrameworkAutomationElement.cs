@@ -96,7 +96,7 @@ namespace FlaUI.UIA2
         }
 
         /// <inheritdoc />
-        public override AutomationElement FindIndexed(TreeScope treeScope, int index, ConditionBase condition)
+        public override AutomationElement FindAt(TreeScope treeScope, int index, ConditionBase condition)
         {
             var cacheRequest = CacheRequest.IsCachingActive ? CacheRequest.Current.ToNative() : null;
             cacheRequest?.Push();
@@ -119,6 +119,12 @@ namespace FlaUI.UIA2
                 success = Properties.ClickablePoint.TryGetValue(out point);
             }
             return success;
+        }
+
+        /// <inheritdoc />
+        public override ActiveTextPositionChangedEventHandlerBase RegisterActiveTextPositionChangedEvent(TreeScope treeScope, Action<AutomationElement, ITextRange> action)
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc />
@@ -153,6 +159,12 @@ namespace FlaUI.UIA2
 
         /// <inheritdoc />
         public override TextEditTextChangedEventHandlerBase RegisterTextEditTextChangedEventHandler(TreeScope treeScope, TextEditChangeType textEditChangeType, Action<AutomationElement, TextEditChangeType, string[]> action)
+        {
+            throw new NotSupportedByFrameworkException();
+        }
+
+        /// <inheritdoc />
+        public override void UnregisterActiveTextPositionChangedEventHandler(ActiveTextPositionChangedEventHandlerBase eventHandler)
         {
             throw new NotSupportedByFrameworkException();
         }

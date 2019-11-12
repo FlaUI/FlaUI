@@ -12,6 +12,12 @@ namespace FlaUI.Core.Capturing
     /// </summary>
     public static class CaptureUtilities
     {
+        /// <summary>
+        /// Calculates a scale factor according to the bounds and capture settings.
+        /// </summary>
+        /// <param name="originalBounds">The original bounds of the captured image.</param>
+        /// <param name="captureSettings">The settings to use for the capture.</param>
+        /// <returns>A scale factor, defaults to 1 which means original size.</returns>
         public static double GetScale(Rectangle originalBounds, CaptureSettings captureSettings)
         {
             double scale = 1;
@@ -35,17 +41,38 @@ namespace FlaUI.Core.Capturing
             return scale;
         }
 
+        /// <summary>
+        /// Scales a point according to the given settings.
+        /// </summary>
+        /// <param name="x">The x-position of the point to scale.</param>
+        /// <param name="y">The y-position of the pint to scale.</param>
+        /// <param name="originalBounds">The original bounds of the captured image.</param>
+        /// <param name="captureSettings">The settings to use for the capture.</param>
+        /// <returns>The transformed point.</returns>
         public static Point ScaleAccordingToSettings(int x, int y, Rectangle originalBounds, CaptureSettings captureSettings)
         {
             return ScaleAccordingToSettings(new Point(x, y), originalBounds, captureSettings);
         }
 
+        /// <summary>
+        /// Scales a point according to the given settings.
+        /// </summary>
+        /// <param name="point">The point to scale.</param>
+        /// <param name="originalBounds">The original bounds of the captured image.</param>
+        /// <param name="captureSettings">The settings to use for the capture.</param>
+        /// <returns>The transformed point.</returns>
         public static Point ScaleAccordingToSettings(Point point, Rectangle originalBounds, CaptureSettings captureSettings)
         {
             var scale = GetScale(originalBounds, captureSettings);
             return scale != 1 ? new Point((point.X * scale).ToInt(), (point.Y * scale).ToInt()) : point;
         }
 
+        /// <summary>
+        /// Scales a rectangle according to the given settings.
+        /// </summary>
+        /// <param name="originalBounds">The original bounds of the captured image.</param>
+        /// <param name="captureSettings">The settings to use for the capture.</param>
+        /// <returns>The transformed rectangle.</returns>
         public static Rectangle ScaleAccordingToSettings(Rectangle originalBounds, CaptureSettings captureSettings)
         {
             // Default is the original size

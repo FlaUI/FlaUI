@@ -12,6 +12,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Draws a red highlight around the element.
         /// </summary>
+        /// <param name="self">The element to highlight.</param>
         public static T DrawHighlight<T>(this T self) where T : AutomationElement
         {
             return DrawHighlight(self, Color.Red);
@@ -20,6 +21,8 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Draws a manually colored highlight around the element.
         /// </summary>
+        /// <param name="self">The element to highlight.</param>
+        /// <param name="color">The color to draw the highlight.</param>
         public static T DrawHighlight<T>(this T self, Color color) where T : AutomationElement
         {
             return DrawHighlight(self, true, color);
@@ -28,10 +31,10 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Draw a highlight around the element with the given settings.
         /// </summary>
+        /// <param name="self">The element to highlight.</param>
         /// <param name="blocking">Flag to indicate if further execution waits until the highlight is removed.</param>
         /// <param name="color">The color to draw the highlight.</param>
         /// <param name="duration">The duration how long the highlight is shown.</param>
-        /// <remarks>Override for winforms color.</remarks>
         public static T DrawHighlight<T>(this T self, bool blocking, Color color, TimeSpan? duration = null) where T : AutomationElement
         {
             var rectangle = self.Properties.BoundingRectangle.Value;

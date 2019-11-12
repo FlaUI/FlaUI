@@ -12,14 +12,26 @@ namespace FlaUI.Core.AutomationElements
     /// </summary>
     public class Grid : AutomationElement
     {
+        /// <summary>
+        /// Creates a grid object from a given element.
+        /// </summary>
         public Grid(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 
+        /// <summary>
+        /// Provides direct access to the grid pattern.
+        /// </summary>
         protected IGridPattern GridPattern => Patterns.Grid.Pattern;
 
+        /// <summary>
+        /// Provides direct access to the table pattern.
+        /// </summary>
         protected ITablePattern TablePattern => Patterns.Table.Pattern;
 
+        /// <summary>
+        /// Provides direct access to the selection pattern.
+        /// </summary>
         protected ISelectionPattern SelectionPattern => Patterns.Selection.Pattern;
 
         /// <summary>
@@ -209,10 +221,16 @@ namespace FlaUI.Core.AutomationElements
     /// </summary>
     public class GridHeader : AutomationElement
     {
+        /// <summary>
+        /// Creates a grid header object out of a given element.
+        /// </summary>
         public GridHeader(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 
+        /// <summary>
+        /// Gets all header items from the grid header.
+        /// </summary>
         public GridHeaderItem[] Columns
         {
             get
@@ -228,10 +246,16 @@ namespace FlaUI.Core.AutomationElements
     /// </summary>
     public class GridHeaderItem : AutomationElement
     {
+        /// <summary>
+        /// Creates a grid header item object out of a given element.
+        /// </summary>
         public GridHeaderItem(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 
+        /// <summary>
+        /// Gets the text of the grid header item.
+        /// </summary>
         public string Text => Properties.Name.Value;
     }
 
@@ -240,12 +264,21 @@ namespace FlaUI.Core.AutomationElements
     /// </summary>
     public class GridRow : SelectionItemAutomationElement
     {
+        /// <summary>
+        /// Creates a grid row object out of a given element.
+        /// </summary>
         public GridRow(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 
+        /// <summary>
+        /// Provides direct access to the scroll item pattern.
+        /// </summary>
         protected IScrollItemPattern ScrollItemPattern => Patterns.ScrollItem.Pattern;
 
+        /// <summary>
+        /// Gets all the cells from the row.
+        /// </summary>
         public GridCell[] Cells
         {
             get
@@ -255,6 +288,9 @@ namespace FlaUI.Core.AutomationElements
             }
         }
 
+        /// <summary>
+        /// Gets the header item of the row.
+        /// </summary>
         public GridHeaderItem Header
         {
             get
@@ -272,6 +308,9 @@ namespace FlaUI.Core.AutomationElements
             return Cells.FirstOrDefault(cell => cell.Value.Equals(textToFind));
         }
 
+        /// <summary>
+        /// Scrolls the row into view.
+        /// </summary>
         public GridRow ScrollIntoView()
         {
             ScrollItemPattern?.ScrollIntoView();
@@ -284,16 +323,31 @@ namespace FlaUI.Core.AutomationElements
     /// </summary>
     public class GridCell : AutomationElement
     {
+        /// <summary>
+        /// Creates a grid cell object out of a given element.
+        /// </summary>
         public GridCell(FrameworkAutomationElementBase frameworkAutomationElement) : base(frameworkAutomationElement)
         {
         }
 
+        /// <summary>
+        /// Provides direct access to the grid item pattern.
+        /// </summary>
         protected IGridItemPattern GridItemPattern => Patterns.GridItem.Pattern;
 
+        /// <summary>
+        /// Provides direct access to the table item pattern.
+        /// </summary>
         protected ITableItemPattern TableItemPattern => Patterns.TableItem.Pattern;
 
+        /// <summary>
+        /// Gets the grid that contains this cell.
+        /// </summary>
         public Grid ContainingGrid => GridItemPattern.ContainingGrid.Value.AsGrid();
 
+        /// <summary>
+        /// Gets the row that contains this cell.
+        /// </summary>
         public GridRow ContainingRow
         {
             get
@@ -304,6 +358,9 @@ namespace FlaUI.Core.AutomationElements
             }
         }
 
+        /// <summary>
+        /// Gets the value of this cell.
+        /// </summary>
         public string Value => Properties.Name.Value;
     }
 }

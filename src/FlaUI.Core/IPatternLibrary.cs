@@ -2,8 +2,12 @@
 
 namespace FlaUI.Core
 {
+    /// <summary>
+    /// Interface for a pattern library.
+    /// </summary>
     public interface IPatternLibrary
     {
+#pragma warning disable 1591
         PatternId AnnotationPattern { get; }
         PatternId DockPattern { get; }
         PatternId DragPattern { get; }
@@ -37,7 +41,11 @@ namespace FlaUI.Core
         PatternId ValuePattern { get; }
         PatternId VirtualizedItemPattern { get; }
         PatternId WindowPattern { get; }
+#pragma warning restore 1591
 
+        /// <summary>
+        /// Returns all supported patterns for the current framework.
+        /// </summary>
         PatternId[] AllForCurrentFramework { get; }
     }
 }

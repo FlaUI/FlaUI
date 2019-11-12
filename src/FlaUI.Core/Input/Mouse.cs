@@ -13,37 +13,37 @@ using FlaUI.Core.WindowsAPI;
 namespace FlaUI.Core.Input
 {
     /// <summary>
-    /// Mouse class to simulate mouse input
+    /// Mouse class to simulate mouse input.
     /// </summary>
     public static class Mouse
     {
         /// <summary>
-        /// Time to add to the double click time to prevent false double clicks
+        /// Time to add to the double click time to prevent false double clicks.
         /// </summary>
         private const int ExtraMillisecondsBecauseOfBugInWindows = 13;
 
         /// <summary>
-        /// Numer which defines one wheel "click" of the mouse wheel
+        /// Number which defines one wheel "click" of the mouse wheel.
         /// </summary>
         private const int WheelDelta = 120;
 
         /// <summary>
-        /// The current max timespan (in milliseconds) for double clicks
+        /// The current max timespan (in milliseconds) for double clicks.
         /// </summary>
         private static readonly int CurrentDoubleClickTime;
 
         /// <summary>
-        /// Dictionary which holds the last click time for each button
+        /// Dictionary which holds the last click time for each button.
         /// </summary>
         private static readonly Dictionary<MouseButton, DateTime> LastClickTimes;
 
         /// <summary>
-        /// Dictionary which holds the last click position for each button
+        /// Dictionary which holds the last click position for each button.
         /// </summary>
         private static readonly Dictionary<MouseButton, Point> LastClickPositions;
 
         /// <summary>
-        /// Static constructor
+        /// Static constructor.
         /// </summary>
         static Mouse()
         {
@@ -52,13 +52,13 @@ namespace FlaUI.Core.Input
             LastClickPositions = new Dictionary<MouseButton, Point>();
             foreach (MouseButton mouseButton in Enum.GetValues(typeof(MouseButton)))
             {
-                LastClickTimes.Add(mouseButton, DateTime.Now);
+                LastClickTimes.Add(mouseButton, DateTime.UtcNow);
                 LastClickPositions.Add(mouseButton, new Point(0, 0));
             }
         }
 
         /// <summary>
-        /// Current position of the mouse cursor
+        /// The current position of the mouse cursor.
         /// </summary>
         public static Point Position
         {
@@ -67,30 +67,43 @@ namespace FlaUI.Core.Input
                 User32.GetCursorPos(out var point);
                 return new Point(point.X, point.Y);
             }
-            set => User32.SetCursorPos(value.X, value.Y);
+            set
+            {
+                User32.SetCursorPos(value.X, value.Y);
+                // There is a bug that in a multi-monitor scenario with different sizes,
+                // the mouse is only moved to x=0 on the target monitor.
+                // In that case, just redo the move a 2nd time and it works
+                // as the mouse is on the correct monitor alreay.
+                // See https://stackoverflow.com/questions/58753372/winapi-setcursorpos-seems-like-not-working-properly-on-multiple-monitors-with-di
+                User32.GetCursorPos(out var point);
+                if (point.X != value.X || point.Y != value.Y)
+                {
+                    User32.SetCursorPos(value.X, value.Y);
+                }
+            }
         }
 
         /// <summary>
-        /// Flag to indicate if the buttons are swapped (left-handed)
+        /// Flag to indicate if the buttons are swapped (left-handed).
         /// </summary>
         public static bool AreButtonsSwapped => User32.GetSystemMetrics(SystemMetric.SM_SWAPBUTTON) != 0;
 
         /// <summary>
-        /// Moves the mouse by a given delta from the current position
+        /// Moves the mouse by a given delta from the current position.
         /// </summary>
-        /// <param name="deltaX">The delta for the x-axis</param>
-        /// <param name="deltaY">The delta for the y-axis</param>
+        /// <param name="deltaX">The delta for the x-axis.</param>
+        /// <param name="deltaY">The delta for the y-axis.</param>
         public static void MoveBy(int deltaX, int deltaY)
         {
-            var currPos = Position;
-            MoveTo(currPos.X + deltaX, currPos.Y + deltaY);
+            var currentPosition = Position;
+            MoveTo(currentPosition.X + deltaX, currentPosition.Y + deltaY);
         }
 
         /// <summary>
-        /// Moves the mouse to a new position
+        /// Moves the mouse to a new position.
         /// </summary>
-        /// <param name="newX">The new position on the x-axis</param>
-        /// <param name="newY">The new position on the y-axis</param>
+        /// <param name="newX">The new position on the x-axis.</param>
+        /// <param name="newY">The new position on the y-axis.</param>
         public static void MoveTo(int newX, int newY)
         {
             // Get starting position
@@ -144,26 +157,26 @@ namespace FlaUI.Core.Input
         }
 
         /// <summary>
-        /// Moves the mouse to a new position
+        /// Moves the mouse to a new position.
         /// </summary>
-        /// <param name="newPosition">The new position for the mouse</param>
+        /// <param name="newPosition">The new position for the mouse.</param>
         public static void MoveTo(Point newPosition)
         {
             MoveTo(newPosition.X, newPosition.Y);
         }
 
         /// <summary>
-        /// Clicks the specified mouse button at the current location
+        /// Clicks the specified mouse button at the current location.
         /// </summary>
-        /// <param name="mouseButton">The mouse button to click</param>
-        public static void Click(MouseButton mouseButton)
+        /// <param name="mouseButton">The mouse button to click. Defaults to the left button.</param>
+        public static void Click(MouseButton mouseButton = MouseButton.Left)
         {
-            var currClickPosition = Position;
+            var currentClickPosition = Position;
             // Check if the position is the same as with last click
-            if (LastClickPositions[mouseButton].Equals(currClickPosition))
+            if (LastClickPositions[mouseButton].Equals(currentClickPosition))
             {
                 // Get the timeout needed to not fire a double click
-                var timeout = CurrentDoubleClickTime - DateTime.Now.Subtract(LastClickTimes[mouseButton]).Milliseconds;
+                var timeout = CurrentDoubleClickTime - DateTime.UtcNow.Subtract(LastClickTimes[mouseButton]).Milliseconds;
                 // Wait the needed time to prevent the double click
                 if (timeout > 0) Thread.Sleep(timeout + ExtraMillisecondsBecauseOfBugInWindows);
             }
@@ -171,26 +184,26 @@ namespace FlaUI.Core.Input
             Down(mouseButton);
             Up(mouseButton);
             // Update the time and location
-            LastClickTimes[mouseButton] = DateTime.Now;
+            LastClickTimes[mouseButton] = DateTime.UtcNow;
             LastClickPositions[mouseButton] = Position;
         }
 
         /// <summary>
-        /// Moves to a specific position and clicks the specified mouse button
+        /// Moves to a specific position and clicks the specified mouse button.
         /// </summary>
-        /// <param name="mouseButton">The mouse button to click</param>
-        /// <param name="point">The position to move to before clicking</param>
-        public static void Click(MouseButton mouseButton, Point point)
+        /// <param name="point">The position to move to before clicking.</param>
+        /// <param name="mouseButton">The mouse button to click. Defaults to the left button.</param>
+        public static void Click(Point point, MouseButton mouseButton = MouseButton.Left)
         {
             Position = point;
             Click(mouseButton);
         }
 
         /// <summary>
-        /// Double-clicks the specified mouse button at the current location
+        /// Double-clicks the specified mouse button at the current location.
         /// </summary>
-        /// <param name="mouseButton">The mouse button to double-click</param>
-        public static void DoubleClick(MouseButton mouseButton)
+        /// <param name="mouseButton">The mouse button to double-click. Defaults to the left button.</param>
+        public static void DoubleClick(MouseButton mouseButton = MouseButton.Left)
         {
             Down(mouseButton);
             Up(mouseButton);
@@ -199,40 +212,38 @@ namespace FlaUI.Core.Input
         }
 
         /// <summary>
-        /// Moves to a specific position and double-clicks the specified mouse button
+        /// Moves to a specific position and double-clicks the specified mouse button.
         /// </summary>
-        /// <param name="mouseButton">The mouse button to double-click</param>
-        /// <param name="point">The position to move to before double-clicking</param>
-        public static void DoubleClick(MouseButton mouseButton, Point point)
+        /// <param name="point">The position to move to before double-clicking.</param>
+        /// <param name="mouseButton">The mouse button to double-click. Defaults to the left button.</param>
+        public static void DoubleClick(Point point, MouseButton mouseButton = MouseButton.Left)
         {
             Position = point;
             DoubleClick(mouseButton);
         }
 
         /// <summary>
-        /// Sends a mouse down command for the specified mouse button
+        /// Sends a mouse down command for the specified mouse button.
         /// </summary>
-        /// <param name="mouseButton">The mouse button to press</param>
-        public static void Down(MouseButton mouseButton)
+        /// <param name="mouseButton">The mouse button to press. Defaults to the left button.</param>
+        public static void Down(MouseButton mouseButton = MouseButton.Left)
         {
-            uint data;
-            var flags = GetFlagsAndDataForButton(mouseButton, true, out data);
+            var flags = GetFlagsAndDataForButton(mouseButton, true, out var data);
             SendInput(0, 0, data, flags);
         }
 
         /// <summary>
-        /// Sends a mouse up command for the specified mouse button
+        /// Sends a mouse up command for the specified mouse button.
         /// </summary>
-        /// <param name="mouseButton">The mouse button to release</param>
-        public static void Up(MouseButton mouseButton)
+        /// <param name="mouseButton">The mouse button to release. Defaults to the left button.</param>
+        public static void Up(MouseButton mouseButton = MouseButton.Left)
         {
-            uint data;
-            var flags = GetFlagsAndDataForButton(mouseButton, false, out data);
+            var flags = GetFlagsAndDataForButton(mouseButton, false, out var data);
             SendInput(0, 0, data, flags);
         }
 
         /// <summary>
-        /// Simulates scrolling of the mouse wheel up or down
+        /// Simulates scrolling of the mouse wheel up or down.
         /// </summary>
         public static void Scroll(double lines)
         {
@@ -241,7 +252,7 @@ namespace FlaUI.Core.Input
         }
 
         /// <summary>
-        /// Simulates scrolling of the horizontal mouse wheel left or right
+        /// Simulates scrolling of the horizontal mouse wheel left or right.
         /// </summary>
         public static void HorizontalScroll(double lines)
         {
@@ -250,47 +261,47 @@ namespace FlaUI.Core.Input
         }
 
         /// <summary>
-        /// Drags the mouse horizontally
+        /// Drags the mouse horizontally.
         /// </summary>
-        /// <param name="mouseButton">The mouse button to use for dragging</param>
-        /// <param name="startingPoint">Starting point of the drag</param>
-        /// <param name="distance">The distance to drag, + for right, - for left</param>
-        public static void DragHorizontally(MouseButton mouseButton, Point startingPoint, int distance)
+        /// <param name="startingPoint">Starting point of the drag.</param>
+        /// <param name="distance">The distance to drag, + for right, - for left.</param>
+        /// <param name="mouseButton">The mouse button to use for dragging. Defaults to the left button.</param>
+        public static void DragHorizontally(Point startingPoint, int distance, MouseButton mouseButton = MouseButton.Left)
         {
-            Drag(mouseButton, startingPoint, distance, 0);
+            Drag(startingPoint, distance, 0, mouseButton);
         }
 
         /// <summary>
-        /// Drags the mouse vertically
+        /// Drags the mouse vertically.
         /// </summary>
-        /// <param name="mouseButton">The mouse button to use for dragging</param>
         /// <param name="startingPoint">Starting point of the drag</param>
         /// <param name="distance">The distance to drag, + for down, - for up</param>
-        public static void DragVertically(MouseButton mouseButton, Point startingPoint, int distance)
+        /// <param name="mouseButton">The mouse button to use for dragging. Defaults to the left button.</param>
+        public static void DragVertically(Point startingPoint, int distance, MouseButton mouseButton = MouseButton.Left)
         {
-            Drag(mouseButton, startingPoint, 0, distance);
+            Drag(startingPoint, 0, distance, mouseButton);
         }
 
         /// <summary>
         /// Drags the mouse from the starting point with the given distance.
         /// </summary>
-        /// <param name="mouseButton">The mouse button to use for dragging.</param>
         /// <param name="startingPoint">Starting point of the drag.</param>
         /// <param name="distanceX">The x distance to drag, + for down, - for up.</param>
         /// <param name="distanceY">The y distance to drag, + for right, - for left.</param>
-        public static void Drag(MouseButton mouseButton, Point startingPoint, int distanceX, int distanceY)
+        /// <param name="mouseButton">The mouse button to use for dragging. Defaults to the left button.</param>
+        public static void Drag(Point startingPoint, int distanceX, int distanceY, MouseButton mouseButton = MouseButton.Left)
         {
             var endingPoint = new Point(startingPoint.X + distanceX, startingPoint.Y + distanceY);
-            Drag(mouseButton, startingPoint, endingPoint);
+            Drag(startingPoint, endingPoint, mouseButton);
         }
 
         /// <summary>
         /// Drags the mouse from the starting point to another point.
         /// </summary>
-        /// <param name="mouseButton">The mouse button to use for dragging.</param>
         /// <param name="startingPoint">Starting point of the drag.</param>
         /// <param name="endingPoint">Ending point of the drag.</param>
-        public static void Drag(MouseButton mouseButton, Point startingPoint, Point endingPoint)
+        /// <param name="mouseButton">The mouse button to use for dragging. Defaults to the left button.</param>
+        public static void Drag(Point startingPoint, Point endingPoint, MouseButton mouseButton = MouseButton.Left)
         {
             Position = startingPoint;
             Wait.UntilInputIsProcessed();
@@ -304,7 +315,7 @@ namespace FlaUI.Core.Input
 
         /// <summary>
         /// Converts the button to the correct <see cref="MouseEventFlags" /> object
-        /// and fills the additional data if needed
+        /// and fills the additional data if needed.
         /// </summary>
         private static MouseEventFlags GetFlagsAndDataForButton(MouseButton mouseButton, bool isDown, out uint data)
         {
@@ -330,14 +341,14 @@ namespace FlaUI.Core.Input
                     mouseData = MouseEventDataXButtons.XBUTTON2;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException("mouseButton");
+                    throw new ArgumentOutOfRangeException(nameof(mouseButton));
             }
             data = (uint)mouseData;
             return mouseEventFlags;
         }
 
         /// <summary>
-        /// Swaps the left/right button if <see cref="AreButtonsSwapped" /> is set
+        /// Swaps the left/right button if <see cref="AreButtonsSwapped" /> is set.
         /// </summary>
         private static MouseButton SwapButtonIfNeeded(MouseButton mouseButton)
         {
@@ -354,7 +365,7 @@ namespace FlaUI.Core.Input
         }
 
         /// <summary>
-        /// Effectively sends the mouse input command
+        /// Effectively sends the mouse input command.
         /// </summary>
         [PermissionSet(SecurityAction.Assert, Name = "FullTrust")]
         private static void SendInput(int x, int y, uint data, MouseEventFlags flags)
@@ -394,7 +405,7 @@ namespace FlaUI.Core.Input
         }
 
         /// <summary>
-        /// Normalizes the coordinates to get the absolute values from 0 to 65536
+        /// Normalizes the coordinates to get the absolute values from 0 to 65536.
         /// </summary>
         private static void NormalizeCoordinates(ref int x, ref int y)
         {
@@ -408,45 +419,76 @@ namespace FlaUI.Core.Input
         }
 
         #region Convenience methods
+
+        /// <summary>
+        /// Performs a left click.
+        /// </summary>
         public static void LeftClick()
         {
             Click(MouseButton.Left);
         }
 
+        /// <summary>
+        /// Performs a left click on a given point.
+        /// </summary>
+        /// <param name="point">The position to move to before clicking.</param>
         public static void LeftClick(Point point)
         {
-            Click(MouseButton.Left, point);
+            Click(point, MouseButton.Left);
         }
 
+        /// <summary>
+        /// Performs a left double-click.
+        /// </summary>
         public static void LeftDoubleClick()
         {
             DoubleClick(MouseButton.Left);
         }
 
+        /// <summary>
+        /// Performs a left double-click on a given point.
+        /// </summary>
+        /// <param name="point">The position to move to before clicking.</param>
         public static void LeftDoubleClick(Point point)
         {
-            DoubleClick(MouseButton.Left, point);
+            DoubleClick(point, MouseButton.Left);
         }
 
+        /// <summary>
+        /// Performs a right click.
+        /// </summary>
         public static void RightClick()
         {
             Click(MouseButton.Right);
         }
 
+        /// <summary>
+        /// Performs a right click on a given point.
+        /// </summary>
+        /// <param name="point">The position to move to before clicking.</param>
         public static void RightClick(Point point)
         {
-            Click(MouseButton.Right, point);
+            Click(point, MouseButton.Right);
         }
 
+        /// <summary>
+        /// Performs a right double-click.
+        /// </summary>
         public static void RightDoubleClick()
         {
             DoubleClick(MouseButton.Right);
         }
 
+        /// <summary>
+        /// Performs a right double-click on a given point.
+        /// </summary>
+        /// <param name="point">The position to move to before clicking.</param>
+
         public static void RightDoubleClick(Point point)
         {
-            DoubleClick(MouseButton.Right, point);
+            DoubleClick(point, MouseButton.Left);
         }
+
         #endregion Convenience methods
     }
 }

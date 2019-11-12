@@ -81,7 +81,7 @@ namespace FlaUI.Core
                 pattern = _patternCreateFunc(FrameworkAutomationElement, nativePattern);
                 return true;
             }
-            pattern = default(T);
+            pattern = default;
             return false;
         }
 

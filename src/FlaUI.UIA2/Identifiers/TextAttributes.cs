@@ -5,8 +5,12 @@ using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2.Identifiers
 {
+    /// <summary>
+    /// Class that holds all text attribute ids available.
+    /// </summary>
     public static class TextAttributes
     {
+#pragma warning disable 1591
         public static readonly TextAttributeId AnimationStyle = TextAttributeId.Register(AutomationType.UIA2, UIA.TextPatternIdentifiers.AnimationStyleAttribute.Id, "AnimationStyle");
         public static readonly TextAttributeId BackgroundColor = TextAttributeId.Register(AutomationType.UIA2, UIA.TextPatternIdentifiers.BackgroundColorAttribute.Id, "BackgroundColor");
         public static readonly TextAttributeId BulletStyle = TextAttributeId.Register(AutomationType.UIA2, UIA.TextPatternIdentifiers.BulletStyleAttribute.Id, "BulletStyle");
@@ -38,5 +42,6 @@ namespace FlaUI.UIA2.Identifiers
         public static readonly TextAttributeId TextFlowDirections = TextAttributeId.Register(AutomationType.UIA2, UIA.TextPatternIdentifiers.TextFlowDirectionsAttribute.Id, "TextFlowDirections");
         public static readonly TextAttributeId UnderlineColor = TextAttributeId.Register(AutomationType.UIA2, UIA.TextPatternIdentifiers.UnderlineColorAttribute.Id, "UnderlineColor");
         public static readonly TextAttributeId UnderlineStyle = TextAttributeId.Register(AutomationType.UIA2, UIA.TextPatternIdentifiers.UnderlineStyleAttribute.Id, "UnderlineStyle");
+#pragma warning restore 1591
     }
 }

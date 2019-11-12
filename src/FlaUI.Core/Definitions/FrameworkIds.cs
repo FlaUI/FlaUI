@@ -1,7 +1,15 @@
 ﻿namespace FlaUI.Core.Definitions
 {
+    /// <summary>
+    /// Converts a string to a <see cref="FrameworkType"/>.
+    /// </summary>
     public static class FrameworkIds
     {
+        /// <summary>
+        /// Converts a string to a <see cref="FrameworkType"/>
+        /// </summary>
+        /// <param name="frameworkId">The string to convert.</param>
+        /// <returns>The matched <see cref="FrameworkType"/>. Defaults to <see cref="FrameworkType.Unknown"/>.</returns>
         public static FrameworkType ConvertToFrameworkType(string frameworkId)
         {
             switch (frameworkId)

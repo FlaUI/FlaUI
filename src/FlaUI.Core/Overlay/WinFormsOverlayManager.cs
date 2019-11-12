@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETFRAMEWORK || NETCOREAPP
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
@@ -49,7 +50,7 @@ namespace FlaUI.Core.Overlay
             var bottomBorder = new Rectangle(rectangle.X - Margin, rectangle.Y + rectangle.Height - Size + Margin, rectangle.Width + 2 * Margin, Size);
             var allBorders = new[] { leftBorder, topBorder, rightBorder, bottomBorder };
 
-            var gdiColor = System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
+            var gdiColor = Color.FromArgb(color.A, color.R, color.G, color.B);
             var forms = new List<OverlayRectangleForm>();
             foreach (var border in allBorders)
             {
@@ -77,3 +78,4 @@ namespace FlaUI.Core.Overlay
         }
     }
 }
+#endif

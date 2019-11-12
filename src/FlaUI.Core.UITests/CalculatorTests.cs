@@ -59,7 +59,7 @@ namespace FlaUI.Core.UITests
                 // Use the store application on those systems
                 return Application.LaunchStoreApp("Microsoft.WindowsCalculator_8wekyb3d8bbwe!App");
             }
-            if (OperatingSystem.IsWindowsServer2016())
+            if (OperatingSystem.IsWindowsServer2016() || OperatingSystem.IsWindowsServer2019())
             {
                 // The calc.exe on this system is just a stub which launches win32calc.exe
                 return Application.Launch("win32calc.exe");

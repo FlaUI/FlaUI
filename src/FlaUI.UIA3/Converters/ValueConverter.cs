@@ -7,6 +7,9 @@ using FlaUI.Core.Tools;
 
 namespace FlaUI.UIA3.Converters
 {
+    /// <summary>
+    /// Class that helps converting various values between native and FlaUIs format.
+    /// </summary>
     public static class ValueConverter
     {
         /// <summary>
@@ -18,35 +21,38 @@ namespace FlaUI.UIA3.Converters
             {
                 return null;
             }
-            if (val is ControlType)
+            if (val is ControlType controlType)
             {
-                val = (int)ControlTypeConverter.ToControlTypeNative((ControlType)val);
+                val = (int)ControlTypeConverter.ToControlTypeNative(controlType);
             }
-            else if (val is AnnotationType)
+            else if (val is AnnotationType annotationType)
             {
-                val = (int)AnnotationTypeConverter.ToAnnotationTypeNative((AnnotationType)val);
+                val = (int)AnnotationTypeConverter.ToAnnotationTypeNative(annotationType);
             }
-            else if (val is Rectangle)
+            else if (val is Rectangle rect)
             {
-                var rect = (Rectangle)val;
                 val = new[] { rect.Left, rect.Top, rect.Width, rect.Height };
             }
-            else if (val is Point)
+            else if (val is Point point)
             {
-                var point = (Point)val;
                 val = new[] { point.X, point.Y };
             }
-            else if (val is CultureInfo)
+            else if (val is CultureInfo cultureInfo)
             {
-                val = ((CultureInfo)val).LCID;
+                val = cultureInfo.LCID;
             }
-            else if (val is AutomationElement)
+            else if (val is AutomationElement automationElement)
             {
-                val = AutomationElementConverter.ToNative((AutomationElement)val);
+                val = automationElement.ToNative();
             }
             return val;
         }
 
+        /// <summary>
+        /// Converts a native rectangle to a <see cref="Rectangle"/>.
+        /// </summary>
+        /// <param name="rectangle">The native rectangle to convert.</param>
+        /// <returns>The converted managed rectangle.</returns>
         public static object ToRectangle(object rectangle)
         {
             var origValue = (double[])rectangle;
@@ -57,6 +63,11 @@ namespace FlaUI.UIA3.Converters
             return new Rectangle(origValue[0].ToInt(), origValue[1].ToInt(), origValue[2].ToInt(), origValue[3].ToInt());
         }
 
+        /// <summary>
+        /// Converts a native point to a <see cref="Point"/>.
+        /// </summary>
+        /// <param name="point">The native point to convert.</param>
+        /// <returns>The converted managed point.</returns>
         public static object ToPoint(object point)
         {
             var origValue = (double[])point;
@@ -67,12 +78,22 @@ namespace FlaUI.UIA3.Converters
             return new Point(origValue[0].ToInt(), origValue[1].ToInt());
         }
 
+        /// <summary>
+        /// Converts a native culture to a <see cref="CultureInfo"/>.
+        /// </summary>
+        /// <param name="cultureId">The native culture to convert.</param>
+        /// <returns>The converted managed culture.</returns>
         public static object ToCulture(object cultureId)
         {
             var origValue = (int)cultureId;
             return origValue == 0 ? CultureInfo.InvariantCulture : new CultureInfo(origValue);
         }
 
+        /// <summary>
+        /// Converts an integer to an <see cref="IntPtr"/>.
+        /// </summary>
+        /// <param name="intPtrAsInt">The integer to convert.</param>
+        /// <returns>The converted IntPtr.</returns>
         public static object IntToIntPtr(object intPtrAsInt)
         {
             var origValue = (int)intPtrAsInt;

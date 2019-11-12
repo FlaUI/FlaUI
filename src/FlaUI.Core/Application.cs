@@ -31,7 +31,7 @@ namespace FlaUI.Core
         public bool IsStoreApp { get; }
 
         /// <summary>
-        /// The proces Id of the application.
+        /// The process id of the application.
         /// </summary>
         public int ProcessId => _process.Id;
 
@@ -124,12 +124,18 @@ namespace FlaUI.Core
             }
         }
 
+        /// <summary>
+        /// Disposes the application.
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        /// Disposes the application.
+        /// </summary>
         protected virtual void Dispose(bool disposing)
         {
             if (_disposed)
@@ -143,17 +149,33 @@ namespace FlaUI.Core
             _disposed = true;
         }
 
+        /// <summary>
+        /// Attaches to a given process id.
+        /// </summary>
+        /// <param name="processId">The id of the process to attach to.</param>
+        /// <returns>An application instance which is attached to the process.</returns>
         public static Application Attach(int processId)
         {
             return Attach(FindProcess(processId));
         }
 
+        /// <summary>
+        /// Attaches to a given process.
+        /// </summary>
+        /// <param name="process">The process to attach to.</param>
+        /// <returns>An application instance which is attached to the process.</returns>
         public static Application Attach(Process process)
         {
             Logger.Default.Debug($"[Attaching to process:{process.Id}] [Process name:{process.ProcessName}] [Process full path:{process.MainModule.FileName}]");
             return new Application(process);
         }
 
+        /// <summary>
+        /// Attaches to a running process which has the given executable.
+        /// </summary>
+        /// <param name="executable">The executable of the process to attach to.</param>
+        /// <param name="index">Defines the index of the process to use in case multiple are found.</param>
+        /// <returns>An application instance which is attached to the process.</returns>
         public static Application Attach(string executable, int index = 0)
         {
             var processes = FindProcess(executable);
@@ -164,18 +186,29 @@ namespace FlaUI.Core
             throw new Exception("Unable to find process with name: " + executable);
         }
 
+        /// <summary>
+        /// Attaches or launches the given process.
+        /// </summary>
         public static Application AttachOrLaunch(ProcessStartInfo processStartInfo)
         {
             var processes = FindProcess(processStartInfo.FileName);
             return processes.Length == 0 ? Launch(processStartInfo) : Attach(processes[0]);
         }
 
+        /// <summary>
+        /// Launches the given executable.
+        /// </summary>
+        /// <param name="executable">The executable to launch.</param>
         public static Application Launch(string executable)
         {
             var processStartInfo = new ProcessStartInfo(executable);
             return Launch(processStartInfo);
         }
 
+        /// <summary>
+        /// Launches an application with the given process information.
+        /// </summary>
+        /// <param name="processStartInfo">The process information used to launch the application.</param>
         public static Application Launch(ProcessStartInfo processStartInfo)
         {
             if (String.IsNullOrEmpty(processStartInfo.WorkingDirectory))
@@ -209,6 +242,11 @@ namespace FlaUI.Core
             return new Application(process);
         }
 
+        /// <summary>
+        /// Launches a store application.
+        /// </summary>
+        /// <param name="appUserModelId">The app id of the application to launch.</param>
+        /// <param name="arguments">The arguments to pass to the application.</param>
         public static Application LaunchStoreApp(string appUserModelId, string arguments = null)
         {
             var process = WindowsStoreAppLauncher.Launch(appUserModelId, arguments);
@@ -242,7 +280,7 @@ namespace FlaUI.Core
         }
 
         /// <summary>
-        /// Gets the main window of the application's process.
+        /// Gets the main window of the applications process.
         /// </summary>
         /// <param name="automation">The automation object to use.</param>
         /// <param name="waitTimeout">An optional timeout. If null is passed, the timeout is infinite.</param>

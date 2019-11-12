@@ -28,10 +28,12 @@ namespace FlaUI.UIA3
         public PropertyId FrameworkId => AutomationObjectIds.FrameworkIdProperty;
         public PropertyId FullDescription => AutomationObjectIds.FullDescriptionProperty;
         public PropertyId HasKeyboardFocus => AutomationObjectIds.HasKeyboardFocusProperty;
+        public PropertyId HeadingLevel => AutomationObjectIds.HeadingLevelProperty;
         public PropertyId HelpText => AutomationObjectIds.HelpTextProperty;
         public PropertyId IsContentElement => AutomationObjectIds.IsContentElementProperty;
         public PropertyId IsControlElement => AutomationObjectIds.IsControlElementProperty;
         public PropertyId IsDataValidForForm => AutomationObjectIds.IsDataValidForFormProperty;
+        public PropertyId IsDialog => AutomationObjectIds.IsDialogProperty;
         public PropertyId IsEnabled => AutomationObjectIds.IsEnabledProperty;
         public PropertyId IsKeyboardFocusable => AutomationObjectIds.IsKeyboardFocusableProperty;
         public PropertyId IsOffscreen => AutomationObjectIds.IsOffscreenProperty;

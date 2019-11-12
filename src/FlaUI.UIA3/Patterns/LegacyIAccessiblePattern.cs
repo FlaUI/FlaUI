@@ -1,5 +1,4 @@
 ﻿using System;
-using Accessibility;
 using FlaUI.Core;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns;
@@ -11,7 +10,7 @@ using UIA = Interop.UIAutomationClient;
 
 namespace FlaUI.UIA3.Patterns
 {
-    public class LegacyIAccessiblePattern : LegacyIAccessiblePatternBase<UIA.IUIAutomationLegacyIAccessiblePattern>
+    public partial class LegacyIAccessiblePattern : LegacyIAccessiblePatternBase<UIA.IUIAutomationLegacyIAccessiblePattern>
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_LegacyIAccessiblePatternId, "LegacyIAccessible", AutomationObjectIds.IsLegacyIAccessiblePatternAvailableProperty);
         public static readonly PropertyId ChildIdProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_LegacyIAccessibleChildIdPropertyId, "ChildId");
@@ -32,12 +31,6 @@ namespace FlaUI.UIA3.Patterns
         public override void DoDefaultAction()
         {
             Com.Call(() => NativePattern.DoDefaultAction());
-        }
-
-        public override IAccessible GetIAccessible()
-        {
-            // ReSharper disable once SuspiciousTypeConversion.Global
-            return Com.Call(() => (IAccessible)NativePattern.GetIAccessible());
         }
 
         public override void Select(int flagsSelect)

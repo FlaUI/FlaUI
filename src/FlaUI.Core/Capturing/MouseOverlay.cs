@@ -9,6 +9,11 @@ namespace FlaUI.Core.Capturing
     /// </summary>
     public class MouseOverlay : OverlayBase
     {
+        /// <summary>
+        /// Creates a <see cref="MouseOverlay"/> object for the current captured image.
+        /// </summary>
+        /// <param name="captureImage">The captured image.</param>
+        /// <returns>The created object.</returns>
         public MouseOverlay(CaptureImage captureImage) : base(captureImage)
         {
         }
@@ -18,6 +23,10 @@ namespace FlaUI.Core.Capturing
         {
             var outputPoint = new Point();
             var cursorBitmap = CaptureUtilities.CaptureCursor(ref outputPoint);
+            // Early exit
+            if (cursorBitmap == null) {
+                return;
+            }
             // Fix the coordinates for multi-screen scenarios
             outputPoint.X -= CaptureImage.OriginalBounds.Left;
             outputPoint.Y -= CaptureImage.OriginalBounds.Top;
@@ -33,12 +42,13 @@ namespace FlaUI.Core.Capturing
                 g.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 g.DrawImage(cursorBitmap, outputPoint.X, outputPoint.Y, outputWidth, outputHeight);
                 g.InterpolationMode = origInterpolationMode;
-                cursorBitmap.Dispose();
             }
             else
             {
                 g.DrawImage(cursorBitmap, outputPoint.X, outputPoint.Y);
             }
+            // Cleanup
+            cursorBitmap.Dispose();
         }
     }
 }

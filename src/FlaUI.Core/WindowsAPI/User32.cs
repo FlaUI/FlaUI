@@ -81,6 +81,12 @@ namespace FlaUI.Core.WindowsAPI
 
         [DllImport("user32.dll")]
         public static extern IntPtr GetWindowDC(IntPtr ptr);
+
+        [DllImport("user32.dll")]
+        public static extern bool EnumDisplayMonitors(IntPtr hdc, IntPtr lprcClip, Delegates.MonitorEnumDelegate lpfnEnum, IntPtr dwData);
+
+        [DllImport("user32.dll")]
+        public static extern bool GetMonitorInfo(IntPtr hmon, ref MonitorInfo mi);
     }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

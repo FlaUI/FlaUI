@@ -1,4 +1,4 @@
-﻿#if (!NET35 && !NET40)
+﻿#if !NET35 && !NET40
 using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
@@ -9,7 +9,6 @@ using System.IO.Compression;
 using System.IO.Pipes;
 using System.Linq;
 using System.Net;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using FlaUI.Core.Logging;
 using FlaUI.Core.Tools;
@@ -155,6 +154,7 @@ namespace FlaUI.Core.Capturing
             ffmpegIn.Close();
             ffmpegIn.Dispose();
             ffmpegProcess?.WaitForExit();
+            ffmpegProcess?.Dispose();
         }
 
         /// <summary>
@@ -241,23 +241,6 @@ namespace FlaUI.Core.Capturing
             {
                 bitmap.Save(stream, _settings.UseCompressedImages ? ImageFormat.Png : ImageFormat.Bmp);
                 return stream.ToArray();
-            }
-
-            // Previous way
-            BitmapData bmpdata = null;
-            try
-            {
-                bmpdata = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
-                var numbytes = Math.Abs(bmpdata.Stride) * bitmap.Height;
-                var bytedata = new byte[numbytes];
-                var ptr = bmpdata.Scan0;
-                Marshal.Copy(ptr, bytedata, 0, numbytes);
-                return bytedata;
-            }
-            finally
-            {
-                if (bmpdata != null)
-                    bitmap.UnlockBits(bmpdata);
             }
         }
 

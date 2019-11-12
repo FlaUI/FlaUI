@@ -5,8 +5,14 @@ using System;
 
 namespace System
 {
+    /// <summary>
+    /// Polyfill for a 5-parameter action.
+    /// </summary>
     public delegate void Action<T1, T2, T3, T4, T5>(T1 p1, T2 p2, T3 p3, T4 p4, T5 p5);
 
+    /// <summary>
+    /// Polyfills for the <see cref="TimeSpan" /> class.
+    /// </summary>
     public static class TimeSpanExtensions
     {
         /// <summary>
@@ -16,10 +22,13 @@ namespace System
     }
 }
 
+/// <summary>
+/// Polyfills for enums.
+/// </summary>
 public static class EnumExtensions
 {
     /// <summary>
-    /// Exension method for the missing HasFlag on an <see cref="Enum"/>.
+    /// Extension method for the missing HasFlag on an <see cref="Enum"/>.
     /// </summary>
     public static bool HasFlag(this Enum variable, Enum flag)
     {
@@ -37,7 +46,7 @@ public static class EnumExtensions
     }
 
     /// <summary>
-    /// Extension method for the missing TryParse on an  <see cref="Enum"/>.
+    /// Extension method for the missing TryParse on an <see cref="Enum"/>.
     /// </summary>
     public static bool TryParse<TEnum>(string value, out TEnum result) where TEnum : struct
     {
@@ -47,7 +56,7 @@ public static class EnumExtensions
         }
         catch
         {
-            result = default(TEnum);
+            result = default;
             return false;
         }
         return true;

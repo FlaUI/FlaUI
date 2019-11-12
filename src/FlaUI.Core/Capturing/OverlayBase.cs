@@ -7,6 +7,10 @@ namespace FlaUI.Core.Capturing
     /// </summary>
     public abstract class OverlayBase : ICaptureOverlay
     {
+        /// <summary>
+        /// Base constructor for an object inheriting from <see cref="OverlayBase"/>.
+        /// </summary>
+        /// <param name="captureImage">The captured image.</param>
         protected OverlayBase(CaptureImage captureImage)
         {
             CaptureImage = captureImage;

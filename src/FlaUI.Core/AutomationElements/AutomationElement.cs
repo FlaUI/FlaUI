@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
-using System.Windows.Media.Imaging;
+using FlaUI.Core.AutomationElements.Infrastructure;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.EventHandlers;
@@ -13,9 +13,9 @@ using FlaUI.Core.WindowsAPI;
 namespace FlaUI.Core.AutomationElements
 {
     /// <summary>
-    /// Wrapper object for each ui element which is automatable.
+    /// Wrapper object for each ui element which is should be automated.
     /// </summary>
-    public partial class AutomationElement : IEquatable<AutomationElement>
+    public partial class AutomationElement : IEquatable<AutomationElement>, IAutomationElementEventSubscriber
     {
         /// <summary>
         /// Creates a new instance which wraps around the given <see cref="FrameworkAutomationElement"/>.
@@ -262,13 +262,15 @@ namespace FlaUI.Core.AutomationElements
             return Capturing.Capture.Element(this).Bitmap;
         }
 
+#if NETFRAMEWORK
         /// <summary>
-        /// Captures the object as screenshot in a WPF friendly <see cref="BitmapImage"/> format.
+        /// Captures the object as screenshot in a WPF friendly <see cref="System.Windows.Media.Imaging.BitmapImage"/> format.
         /// </summary>
-        public BitmapImage CaptureWpf()
+        System.Windows.Media.Imaging.BitmapImage CaptureWpf()
         {
             return Capturing.Capture.Element(this).BitmapImage;
         }
+#endif
 
         /// <summary>
         /// Captures the object as screenshot directly into the given file.
@@ -298,10 +300,14 @@ namespace FlaUI.Core.AutomationElements
             return FrameworkAutomationElement.TryGetClickablePoint(out point);
         }
 
-        /// <summary>
-        /// Registers the given automation event.
-        /// </summary>
-        public EventHandlerBase RegisterAutomationEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
+        /// <inheritdoc />
+        public ActiveTextPositionChangedEventHandlerBase RegisterActiveTextPositionChangedEvent(TreeScope treeScope, Action<AutomationElement, ITextRange> action)
+        {
+            return FrameworkAutomationElement.RegisterActiveTextPositionChangedEvent(treeScope, action);
+        }
+
+        /// <inheritdoc />
+        public AutomationEventHandlerBase RegisterAutomationEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
         {
             if (Equals(@event, EventId.NotSupportedByFramework))
             {
@@ -310,33 +316,25 @@ namespace FlaUI.Core.AutomationElements
             return FrameworkAutomationElement.RegisterAutomationEvent(@event, treeScope, action);
         }
 
-        /// <summary>
-        /// Registers a property changed event with the given property.
-        /// </summary>
+        /// <inheritdoc />
         public PropertyChangedEventHandlerBase RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, params PropertyId[] properties)
         {
             return FrameworkAutomationElement.RegisterPropertyChangedEvent(treeScope, action, properties);
         }
 
-        /// <summary>
-        /// Registers a structure changed event.
-        /// </summary>
+        /// <inheritdoc />
         public StructureChangedEventHandlerBase RegisterStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action)
         {
             return FrameworkAutomationElement.RegisterStructureChangedEvent(treeScope, action);
         }
 
-        /// <summary>
-        /// Registers a notification event.
-        /// </summary>
+        /// <inheritdoc />
         public NotificationEventHandlerBase RegisterNotificationEvent(TreeScope treeScope, Action<AutomationElement, NotificationKind, NotificationProcessing, string, string> action)
         {
             return FrameworkAutomationElement.RegisterNotificationEvent(treeScope, action);
         }
 
-        /// <summary>
-        /// Registers a text edit text changed event.
-        /// </summary>
+        /// <inheritdoc />
         public TextEditTextChangedEventHandlerBase RegisterTextEditTextChangedEventHandler(TreeScope treeScope, TextEditChangeType textEditChangeType, Action<AutomationElement, TextEditChangeType, string[]> action)
         {
             return FrameworkAutomationElement.RegisterTextEditTextChangedEventHandler(treeScope, textEditChangeType, action);
@@ -435,12 +433,13 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <summary>
-        /// Overrides the string representation of the element with something usefull
+        /// Overrides the string representation of the element with something useful.
         /// </summary>
         public override string ToString()
         {
             return String.Format("AutomationId:{0}, Name:{1}, ControlType:{2}, FrameworkId:{3}",
-                Properties.AutomationId.ValueOrDefault, Properties.Name.ValueOrDefault, Properties.LocalizedControlType.ValueOrDefault, Properties.FrameworkId.ValueOrDefault);
+                Properties.AutomationId.ValueOrDefault, Properties.Name.ValueOrDefault,
+                Properties.LocalizedControlType.ValueOrDefault, Properties.FrameworkId.ValueOrDefault);
         }
 
         /// <summary>
@@ -481,7 +480,7 @@ namespace FlaUI.Core.AutomationElements
             {
                 throw new System.NotSupportedException();
             }
-            return default(TRet);
+            return default;
         }
 
         /// <summary>

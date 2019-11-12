@@ -31,10 +31,12 @@ namespace FlaUI.Core
         private AutomationProperty<string> _frameworkId;
         private AutomationProperty<string> _fullDescription;
         private AutomationProperty<bool> _hasKeyboardFocus;
+        private AutomationProperty<HeadingLevel> _headingLevel;
         private AutomationProperty<string> _helpText;
         private AutomationProperty<bool> _isContentElement;
         private AutomationProperty<bool> _isControlElement;
         private AutomationProperty<bool> _isDataValidForForm;
+        private AutomationProperty<bool> _isDialog;
         private AutomationProperty<bool> _isEnabled;
         private AutomationProperty<bool> _isKeyboardFocusable;
         private AutomationProperty<bool> _isOffscreen;
@@ -44,7 +46,7 @@ namespace FlaUI.Core
         private AutomationProperty<string> _itemStatus;
         private AutomationProperty<string> _itemType;
         private AutomationProperty<AutomationElement> _labeledBy;
-        private AutomationProperty<int> _landmarkType;
+        private AutomationProperty<LandmarkType> _landmarkType;
         private AutomationProperty<int> _level;
         private AutomationProperty<LiveSetting> _liveSetting;
         private AutomationProperty<string> _localizedControlType;
@@ -162,6 +164,11 @@ namespace FlaUI.Core
         public AutomationProperty<bool> HasKeyboardFocus => GetOrCreate(ref _hasKeyboardFocus, PropertyIdLibrary.HasKeyboardFocus);
 
         /// <summary>
+        /// Gets the heading level of the element.
+        /// </summary>
+        public AutomationProperty<HeadingLevel> HeadingLevel => GetOrCreate(ref _headingLevel, PropertyIdLibrary.HeadingLevel);
+
+        /// <summary>
         /// Gets the help text associated with the element.
         /// </summary>
         public AutomationProperty<string> HelpText => GetOrCreate(ref _helpText, PropertyIdLibrary.HelpText);
@@ -180,6 +187,11 @@ namespace FlaUI.Core
         /// Gets a value that indicates whether the entered or selected value is valid for the form rule associated with the element.
         /// </summary>
         public AutomationProperty<bool> IsDataValidForForm => GetOrCreate(ref _isDataValidForForm, PropertyIdLibrary.IsDataValidForForm);
+
+        /// <summary>
+        /// Gets a value that indicates whether the element is a dialog.
+        /// </summary>
+        public AutomationProperty<bool> IsDialog => GetOrCreate(ref _isDialog, PropertyIdLibrary.IsDialog);
 
         /// <summary>
         /// Gets a value that indicates whether the user interface (UI) item referenced by the element is enabled.
@@ -228,8 +240,14 @@ namespace FlaUI.Core
         /// </summary>
         public AutomationProperty<AutomationElement> LabeledBy => GetOrCreate(ref _labeledBy, PropertyIdLibrary.LabeledBy);
 
-        public AutomationProperty<int> LandmarkType => GetOrCreate(ref _landmarkType, PropertyIdLibrary.LandmarkType);
+        /// <summary>
+        /// Gets the landmark type of the element.
+        /// </summary>
+        public AutomationProperty<LandmarkType> LandmarkType => GetOrCreate(ref _landmarkType, PropertyIdLibrary.LandmarkType);
 
+        /// <summary>
+        /// Gets the 1-based integer for the level (hierarchy) for the element.
+        /// </summary>
         public AutomationProperty<int> Level => GetOrCreate(ref _level, PropertyIdLibrary.Level);
 
         /// <summary>
@@ -324,10 +342,12 @@ namespace FlaUI.Core
             AutomationProperty<string> FrameworkId { get; }
             AutomationProperty<string> FullDescription { get; }
             AutomationProperty<bool> HasKeyboardFocus { get; }
+            AutomationProperty<HeadingLevel> HeadingLevel { get; }
             AutomationProperty<string> HelpText { get; }
             AutomationProperty<bool> IsContentElement { get; }
             AutomationProperty<bool> IsControlElement { get; }
             AutomationProperty<bool> IsDataValidForForm { get; }
+            AutomationProperty<bool> IsDialog { get; }
             AutomationProperty<bool> IsEnabled { get; }
             AutomationProperty<bool> IsKeyboardFocusable { get; }
             AutomationProperty<bool> IsOffscreen { get; }
@@ -337,7 +357,7 @@ namespace FlaUI.Core
             AutomationProperty<string> ItemStatus { get; }
             AutomationProperty<string> ItemType { get; }
             AutomationProperty<AutomationElement> LabeledBy { get; }
-            AutomationProperty<int> LandmarkType { get; }
+            AutomationProperty<LandmarkType> LandmarkType { get; }
             AutomationProperty<int> Level { get; }
             AutomationProperty<LiveSetting> LiveSetting { get; }
             AutomationProperty<string> LocalizedControlType { get; }

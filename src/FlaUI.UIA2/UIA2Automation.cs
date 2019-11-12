@@ -2,6 +2,7 @@
 using System.Drawing;
 using FlaUI.Core;
 using FlaUI.Core.AutomationElements;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.EventHandlers;
 using FlaUI.Core.Exceptions;
 using FlaUI.UIA2.Converters;
@@ -16,7 +17,7 @@ namespace FlaUI.UIA2
     /// </summary>
     public class UIA2Automation : AutomationBase
     {
-        public UIA2Automation() : base(new UIA2PropertyLibrary(), new UIA2EventLibrary(), new UIA2PatternLibrary())
+        public UIA2Automation() : base(new UIA2PropertyLibrary(), new UIA2EventLibrary(), new UIA2PatternLibrary(), new UIA2TextAttributeLibrary())
         {
             TreeWalkerFactory = new UIA2TreeWalkerFactory(this);
         }
@@ -39,6 +40,20 @@ namespace FlaUI.UIA2
 
         /// <inheritdoc />
         public override TimeSpan ConnectionTimeout
+        {
+            get => throw new NotSupportedByFrameworkException();
+            set => throw new NotSupportedByFrameworkException();
+        }
+
+        /// <inheritdoc />
+        public override ConnectionRecoveryBehaviorOptions ConnectionRecoveryBehavior
+        {
+            get => throw new NotSupportedByFrameworkException();
+            set => throw new NotSupportedByFrameworkException();
+        }
+
+        /// <inheritdoc />
+        public override CoalesceEventsOptions CoalesceEvents
         {
             get => throw new NotSupportedByFrameworkException();
             set => throw new NotSupportedByFrameworkException();

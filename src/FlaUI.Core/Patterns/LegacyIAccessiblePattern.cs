@@ -1,12 +1,11 @@
-﻿using Accessibility;
-using FlaUI.Core.AutomationElements;
+﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns.Infrastructure;
 using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.Patterns
 {
-    public interface ILegacyIAccessiblePattern : IPattern
+    public partial interface ILegacyIAccessiblePattern : IPattern
     {
         ILegacyIAccessiblePatternPropertyIds PropertyIds { get; }
 
@@ -22,7 +21,6 @@ namespace FlaUI.Core.Patterns
         AutomationProperty<string> Value { get; }
 
         void DoDefaultAction();
-        IAccessible GetIAccessible();
         void Select(int flagsSelect);
         void SetValue(string value);
     }
@@ -41,7 +39,7 @@ namespace FlaUI.Core.Patterns
         PropertyId Value { get; }
     }
 
-    public abstract class LegacyIAccessiblePatternBase<TNativePattern> : PatternBase<TNativePattern>, ILegacyIAccessiblePattern
+    public abstract partial class LegacyIAccessiblePatternBase<TNativePattern> : PatternBase<TNativePattern>, ILegacyIAccessiblePattern
         where TNativePattern : class
     {
         private AutomationProperty<int> _childId;
@@ -73,7 +71,6 @@ namespace FlaUI.Core.Patterns
         public AutomationProperty<string> Value => GetOrCreate(ref _value, PropertyIds.Value);
 
         public abstract void DoDefaultAction();
-        public abstract IAccessible GetIAccessible();
         public abstract void Select(int flagsSelect);
         public abstract void SetValue(string value);
     }

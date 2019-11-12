@@ -2,6 +2,9 @@
 
 namespace FlaUI.Core.Tools
 {
+    /// <summary>
+    /// Class with methods that help formatting strings.
+    /// </summary>
     public static class StringFormatter
     {
         private static readonly string[] SizeSuffixes = { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };

@@ -39,7 +39,7 @@ namespace FlaUI.Core.UITests
             Logger.Default = new NUnitProgressLogger();
             Logger.Default.SetLevel(LogLevel.Debug);
             SystemInfo.RefreshAll();
-            var recorder = new VideoRecorder(new VideoRecorderSettings { VideoQuality = 26, ffmpegPath = @"C:\Users\rbl\Documents\ffmpeg.exe", TargetVideoPath = @"C:\temp\out.mp4" }, r =>
+            var recorder = new VideoRecorder(new VideoRecorderSettings { VideoQuality = 26, ffmpegPath = @"C:\Temp\ffmpeg.exe", TargetVideoPath = @"C:\temp\out.mp4" }, r =>
             {
                 var img = Capture.Screen(1);
                 img.ApplyOverlays(new InfoOverlay(img) { RecordTimeSpan = r.RecordTimeSpan, OverlayStringFormat = @"{rt:hh\:mm\:ss\.fff} / {name} / CPU: {cpu} / RAM: {mem.p.used}/{mem.p.tot} ({mem.p.used.perc})" }, new MouseOverlay(img));
