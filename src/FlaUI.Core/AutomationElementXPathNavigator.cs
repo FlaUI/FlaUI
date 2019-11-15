@@ -17,6 +17,10 @@ namespace FlaUI.Core
         private AutomationElement _currentElement;
         private int _attributeIndex = NoAttributeValue;
 
+        /// <summary>
+        /// Creates a new XPath navigator which uses the given element as the root.
+        /// </summary>
+        /// <param name="rootElement">The element to use as root element.</param>
         public AutomationElementXPathNavigator(AutomationElement rootElement)
         {
             _treeWalker = rootElement.Automation.TreeWalkerFactory.GetControlViewWalker();

@@ -5,8 +5,12 @@ using FlaUI.UIA2.Patterns;
 
 namespace FlaUI.UIA2
 {
+    /// <summary>
+    /// Implements a property library for the UIA2 patterns.
+    /// </summary>
     public class UIA2PropertyLibrary : IPropertyLibrary
     {
+#pragma warning disable 1591
         public UIA2PropertyLibrary()
         {
             PatternAvailability = new UIA2AutomationElementPatternAvailabilityPropertyIds();
@@ -61,5 +65,6 @@ namespace FlaUI.UIA2
         public ITransformPatternPropertyIds Transform { get; }
         public IValuePatternPropertyIds Value { get; }
         public IWindowPatternPropertyIds Window { get; }
+#pragma warning restore 1591
     }
 }

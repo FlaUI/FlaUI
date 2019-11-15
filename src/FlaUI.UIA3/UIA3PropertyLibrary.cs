@@ -5,8 +5,12 @@ using FlaUI.UIA3.Patterns;
 
 namespace FlaUI.UIA3
 {
+    /// <summary>
+    /// Implements a property library for the UIA3 patterns.
+    /// </summary>
     public class UIA3PropertyLibrary : IPropertyLibrary
     {
+#pragma warning disable 1591
         public UIA3PropertyLibrary()
         {
             PatternAvailability = new UIA3AutomationElementPatternAvailabilityPropertyIds();
@@ -61,5 +65,6 @@ namespace FlaUI.UIA3
         public ITransformPatternPropertyIds Transform { get; }
         public IValuePatternPropertyIds Value { get; }
         public IWindowPatternPropertyIds Window { get; }
+#pragma warning restore 1591
     }
 }

@@ -93,19 +93,32 @@ namespace FlaUI.Core
             return automationProperty == null ? default(TVal) : automationProperty.Value;
         }
 
+        /// <summary>
+        /// Compares the value to another value.
+        /// </summary>
+        /// <param name="other">The other value.</param>
+        /// <returns>True if they equal, false otherwise.</returns>
         public bool Equals(TVal other)
         {
             return Value.Equals(other);
         }
 
+        /// <summary>
+        /// Compares this property with another property.
+        /// </summary>
+        /// <param name="other">The other property.</param>
+        /// <returns>True if they are value-equal, false otherwise.</returns>
         public bool Equals(AutomationProperty<TVal> other)
         {
             return other != null && Value.Equals(other.Value);
         }
 
+        /// <summary>
+        /// Returns the value in a readable format.
+        /// </summary>
         public override string ToString()
         {
-            return this.ValueOrDefault?.ToString() ?? "null";
+            return ValueOrDefault?.ToString() ?? "null";
         }
     }
 }

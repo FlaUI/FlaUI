@@ -44,6 +44,9 @@ namespace FlaUI.Core
         private readonly Func<FrameworkAutomationElementBase, TNative, T> _patternCreateFunc;
         private readonly PatternId _patternId;
 
+        /// <summary>
+        /// Creates a new pattern object.
+        /// </summary>
         public AutomationPattern(PatternId patternId, FrameworkAutomationElementBase frameworkAutomationElement, Func<FrameworkAutomationElementBase, TNative, T> patternCreateFunc)
         {
             _patternId = patternId;
@@ -51,6 +54,9 @@ namespace FlaUI.Core
             _patternCreateFunc = patternCreateFunc;
         }
 
+        /// <summary>
+        /// The element which owns this pattern.
+        /// </summary>
         protected FrameworkAutomationElementBase FrameworkAutomationElement { get; }
 
         /// <inheritdoc />
