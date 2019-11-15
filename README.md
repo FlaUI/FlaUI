@@ -41,7 +41,7 @@ Since the application is not related to any UIA library, you need to create the 
 ```csharp
 using FlaUI.UIA3;
 
-var app =  FlaUI.Core.Application.Launch("notepad.exe");
+var app = FlaUI.Core.Application.Launch("notepad.exe");
 using (var automation = new UIA3Automation())
 {
 	var window = app.GetMainWindow(automation);
@@ -50,8 +50,10 @@ using (var automation = new UIA3Automation())
 }
 ```
 ```csharp
+using FlaUI.Core.AutomationElements;
 using FlaUI.UIA3;
 
+// Note: Works only pre-Windows 8 with the legacy calculator
 var app = FlaUI.Core.Application.Launch("calc.exe");
 using (var automation = new UIA3Automation())
 {
