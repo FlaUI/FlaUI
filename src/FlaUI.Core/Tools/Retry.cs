@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Threading;
+using FlaUI.Core.AutomationElements;
 
 namespace FlaUI.Core.Tools
 {
@@ -12,12 +13,12 @@ namespace FlaUI.Core.Tools
         /// <summary>
         /// The default timeout to use for retries without a given timeout. The default is 1000ms.
         /// </summary>
-        public static TimeSpan Timeout { get; set; } = TimeSpan.FromMilliseconds(1000);
+        public static TimeSpan DefaultTimeout { get; set; } = TimeSpan.FromMilliseconds(1000);
 
         /// <summary>
         /// The default interval to use for retries without a given interval. The default is 100ms.
         /// </summary>
-        public static TimeSpan Interval { get; set; } = TimeSpan.FromMilliseconds(100);
+        public static TimeSpan DefaultInterval { get; set; } = TimeSpan.FromMilliseconds(100);
 
         /// <summary>
         /// Retries while the given method evaluates to true and returns the value from the method.
@@ -33,12 +34,12 @@ namespace FlaUI.Core.Tools
         /// <param name="lastValueOnTimeout">A flag indicating if the last value should be returned on timeout. Returns the default if the value could never be fetched.</param>
         /// <param name="defaultOnTimeout">Allows to define a default value in case of a timeout.</param>
         /// <param name="timeoutMessage">The message that should be added to the timeout exception in case a timeout occurs.</param>
-        /// <returns>The value from <paramref name="checkMethod"/> or the default of <typeparamref name="T"/>.</returns>
-        public static RetryResult<T> While<T>(Func<T> retryMethod, Func<T, bool> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false, bool lastValueOnTimeout = false, T defaultOnTimeout = default(T), string timeoutMessage = null)
+        /// <returns>The value from <paramref name="retryMethod"/> or the default of <typeparamref name="T"/>.</returns>
+        public static RetryResult<T> While<T>(Func<T> retryMethod, Func<T, bool> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false, string timeoutMessage = null, bool lastValueOnTimeout = false, T defaultOnTimeout = default(T))
         {
             var retryResult = new RetryResult<T>();
-            timeout = timeout ?? Timeout;
-            interval = interval ?? Interval;
+            timeout = timeout ?? DefaultTimeout;
+            interval = interval ?? DefaultInterval;
             var startTime = DateTime.UtcNow;
             Exception lastException = null;
             T lastValue = defaultOnTimeout;
@@ -70,6 +71,17 @@ namespace FlaUI.Core.Tools
                 throw new TimeoutException(timeoutMessage, lastException);
             }
             return retryResult.Finish(lastValueOnTimeout ? lastValue : defaultOnTimeout, true);
+        }
+
+        /// <summary>
+        /// Retries while the given method evaluates to false and returns the value from the method.
+        /// If it fails, it returns the default of <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the return value.</typeparam>
+        /// <returns>The value from <paramref name="retryMethod"/> or the default of <typeparamref name="T"/>.</returns>
+        public static RetryResult<T> WhileNot<T>(Func<T> retryMethod, Func<T, bool> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false, string timeoutMessage = null, bool lastValueOnTimeout = false, T defaultOnTimeout = default(T))
+        {
+            return While(retryMethod, (x) => !checkMethod(x), timeout, interval, throwOnTimeout, ignoreException, timeoutMessage, lastValueOnTimeout, defaultOnTimeout);
         }
 
         /// <summary>
@@ -165,6 +177,24 @@ namespace FlaUI.Core.Tools
                 return false;
             }
             return DateTime.UtcNow.Subtract(startTime) > timeout;
+        }
+
+        public static AutomationElement[] Find(Func<AutomationElement[]> searchMethod, RetrySettings retrySettings)
+        {
+            if (retrySettings == null)
+            {
+                return searchMethod();
+            }
+            return Retry.WhileEmpty(searchMethod, retrySettings.Timeout, retrySettings.Interval, retrySettings.ThrowOnTimeout, retrySettings.IgnoreException, retrySettings.TimeoutMessage).Result;
+        }
+
+        public static AutomationElement Find(Func<AutomationElement> searchMethod, RetrySettings retrySettings)
+        {
+            if (retrySettings == null)
+            {
+                return searchMethod();
+            }
+            return Retry.WhileNull(searchMethod, retrySettings.Timeout, retrySettings.Interval, retrySettings.ThrowOnTimeout, retrySettings.IgnoreException, retrySettings.TimeoutMessage).Result;
         }
     }
 }
