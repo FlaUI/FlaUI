@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using FlaUI.Core.Definitions;
+﻿using FlaUI.Core.Definitions;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Tools;
+using System.Linq;
 
 namespace FlaUI.Core.AutomationElements
 {
@@ -30,7 +30,7 @@ namespace FlaUI.Core.AutomationElements
         {
             get
             {
-                var header = FindFirstChild(cf => cf.ByName(LocalizedStrings.DataGridViewHeader));
+                var header = FindFirstChild(cf => cf.ByName(LocalizedStrings.DataGridViewHeader).Or(cf.ByControlType(ControlType.Header)));
                 return header == null ? null : new DataGridViewHeader(header.FrameworkAutomationElement);
             }
         }
@@ -42,7 +42,8 @@ namespace FlaUI.Core.AutomationElements
         {
             get
             {
-                var rows = FindAllChildren(cf => cf.ByControlType(ControlType.Custom).And(cf.ByName(LocalizedStrings.DataGridViewHeader).Not()));
+                var rows = FindAllChildren(cf => cf.ByControlType(ControlType.Custom).Or(cf.ByControlType(ControlType.DataItem))
+                    .And(cf.ByName(LocalizedStrings.DataGridViewHeader).Not()));
                 // Remove the last row if we have the "add" row
                 if (HasAddRow)
                 {
@@ -72,7 +73,8 @@ namespace FlaUI.Core.AutomationElements
         {
             get
             {
-                var headerItems = FindAllChildren(cf => cf.ByControlType(ControlType.Header));
+                // WinForms uses Header control type, WPF uses HeaderItem control type
+                var headerItems = FindAllChildren(cf => cf.ByControlType(ControlType.Header).Or(cf.ByControlType(ControlType.HeaderItem)));
                 var convertedHeaderItems = headerItems.Select(x => new DataGridViewHeaderItem(x.FrameworkAutomationElement))
                     .ToList();
                 // Remove the top-left header item if it exists (can be the first or last item)
@@ -126,7 +128,10 @@ namespace FlaUI.Core.AutomationElements
         {
             get
             {
-                var cells = FindAllChildren(cf => cf.ByControlType(ControlType.Header).Not());
+                var cells = FindAllChildren(cf => 
+                    cf.ByControlType(ControlType.Header).Not()
+                    .And(cf.ByControlType(ControlType.HeaderItem).Not())
+                    .And(cf.ByClassName("DataGridDetailsPresenter").Not()));
                 return cells.Select(x => new DataGridViewCell(x.FrameworkAutomationElement)).ToArray();
             }
         }
