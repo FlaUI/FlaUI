@@ -80,6 +80,26 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public AutomationElement CachedParent => FrameworkAutomationElement.GetCachedParent();
 
+        /// <summary>
+        /// A flag that indicates if the element is still available. Can be false if the element is already unloaded from the ui.
+        /// </summary>
+        public bool IsAvailable
+        {
+            get
+            {
+                try
+                {
+                    // ReSharper disable once UnusedVariable
+                    var processId = Properties.ProcessId.Value;
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+
         #region Convenience properties
         /// <summary>
         /// The direct framework type of the element.
