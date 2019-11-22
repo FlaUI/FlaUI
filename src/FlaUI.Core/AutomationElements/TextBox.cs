@@ -12,19 +12,6 @@ namespace FlaUI.Core.AutomationElements
     /// </summary>
     public class TextBox : AutomationElement
     {
-        internal class Win32Constants
-        {
-            public static IntPtr TRUE = new IntPtr(1);
-            public static IntPtr FALSE = new IntPtr(0);
-        }
-        
-        internal class WindowMessages
-        {
-            public static UInt32 WM_SETTEXT = 0x000C;
-            public static UInt32 WM_GETTEXT = 0x000D;
-            public static UInt32 WM_GETTEXTLENGTH = 0x000E;
-        }
-
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         internal static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
 
@@ -58,11 +45,10 @@ namespace FlaUI.Core.AutomationElements
                 {
                     return textPattern.DocumentRange.GetText(Int32.MaxValue);
                 }
-		string textWin32 = GetTextWin32();
-		if (textWin32 != null)
-		{
-			return textWin32;
-		}
+                if (GetTextWin32(out string textWin32) == true)
+                {
+                    return textWin32;
+                }
                 throw new MethodNotSupportedException($"AutomationElement '{ToString()}' supports neither ValuePattern or TextPattern");
             }
             set
@@ -83,60 +69,57 @@ namespace FlaUI.Core.AutomationElements
         
         private bool SetTextWin32(string text)
         {
-		// try with native Win32 function SetWindowText
-		if (Properties.NativeWindowHandle.IsSupported)
-		{
-			var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
-			if (windowHandle != IntPtr.Zero)
-			{
-				IntPtr textPtr = IntPtr.Zero;
-				try
-				{
-					textPtr = Marshal.StringToBSTR(text);
-				}
-				catch { }
-
-				try
-				{
-					if (textPtr != IntPtr.Zero)
-					{
-						if (SendMessage(windowHandle, WindowMessages.WM_SETTEXT, IntPtr.Zero, textPtr) ==
-							Win32Constants.TRUE)
-						{
-							return true; // text successfully set
-						}
-					}
-				}
-				catch { }
-				finally
-				{
-					Marshal.FreeBSTR(textPtr);
-				}
-			}
-		}
-		return false;
+            // try with native Win32 function SetWindowText
+            if (Properties.NativeWindowHandle.IsSupported)
+            {
+	        var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
+                if (windowHandle != IntPtr.Zero)
+                {
+                    IntPtr textPtr = Marshal.StringToBSTR(text);
+                
+                    try
+                    {
+                        if (textPtr != IntPtr.Zero)
+                        {
+                            if (SendMessage(windowHandle, WindowsMessages.WM_SETTEXT, IntPtr.Zero, textPtr) ==
+                                Win32Constants.TRUE)
+                            {
+                                return true; // text successfully set
+                            }
+                        }
+                    }
+                    catch { }
+                    finally
+                    {
+                        Marshal.FreeBSTR(textPtr);
+                    }
+                }
+            }
+            return false;
         }
-	
-	private string GetTextWin32()
-	{
-		// try with native Win32 function SetWindowText
-		if (Properties.NativeWindowHandle.IsSupported)
-		{
-			var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
-			if (windowHandle != IntPtr.Zero)
-			{
-				IntPtr textLengthPtr = SendMessage(hwnd, WindowMessages.WM_GETTEXTLENGTH, IntPtr.Zero, IntPtr.Zero);
-				if (textLengthPtr.ToInt32() > 0)
-				{
-					int textLength = textLengthPtr.ToInt32() + 1;
-					StringBuilder text = new StringBuilder(textLength);
-					SendMessage(hwnd, WindowMessages.WM_GETTEXT, textLength, text);
-					return text.ToString();
-				}
-			}
-		}
-		return null;
-	}
+
+        private bool GetTextWin32(out textOut)
+        {
+            // try with native Win32 function SetWindowText
+            if (Properties.NativeWindowHandle.IsSupported)
+            {
+                var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
+                if (windowHandle != IntPtr.Zero)
+                {
+                    IntPtr textLengthPtr = SendMessage(hwnd, WindowsMessages.WM_GETTEXTLENGTH, IntPtr.Zero, IntPtr.Zero);
+                    if (textLengthPtr.ToInt32() > 0)
+                    {
+                        int textLength = textLengthPtr.ToInt32() + 1;
+                        StringBuilder text = new StringBuilder(textLength);
+                        SendMessage(hwnd, WindowsMessages.WM_GETTEXT, textLength, text);
+                        textOut = text.ToString();
+                        return true; // success
+                    }
+                }
+            }
+            textOut = string.Empty;
+            return false;
+        }
 
         /// <summary>
         /// Gets if the element is read only or not.
