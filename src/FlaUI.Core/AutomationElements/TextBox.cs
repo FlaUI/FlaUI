@@ -11,6 +11,25 @@ namespace FlaUI.Core.AutomationElements
     /// </summary>
     public class TextBox : AutomationElement
     {
+        internal class Win32Constants
+        {
+            public static IntPtr TRUE = new IntPtr(1);
+            public static IntPtr FALSE = new IntPtr(0);
+        }
+        
+        internal class WindowMessages
+        {
+            public static UInt32 WM_SETTEXT = 0x000C;
+            public static UInt32 WM_GETTEXT = 0x000D;
+            public static UInt32 WM_GETTEXTLENGTH = 0x000E;
+        }
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        internal static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
+
+        [DllImport("user32.dll", EntryPoint = "SendMessage", CharSet = CharSet.Auto)]
+        internal static extern bool SendMessage(IntPtr hWnd, uint Msg, int wParam, StringBuilder lParam);
+
         /// <summary>
         /// Creates a <see cref="TextBox"/> element.
         /// </summary>
@@ -48,9 +67,49 @@ namespace FlaUI.Core.AutomationElements
                 }
                 else
                 {
-                    Enter(value);
+                    if (SetTextWin32(value) == false)
+                    {
+                        Enter(value);
+                    }
                 }
             }
+        }
+        
+        private bool SetTextWin32(string text)
+        {
+            // try with native Win32 function SetWindowText
+			if (Properties.NativeWindowHandle.IsSupported)
+            {
+                var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
+                if (windowHandle != IntPtr.Zero)
+                {
+                    IntPtr textPtr = IntPtr.Zero;
+					try
+					{
+						textPtr = Marshal.StringToBSTR(text);
+					}
+					catch { }
+
+					try
+					{
+						if (textPtr != IntPtr.Zero)
+						{
+							if (UnsafeNativeFunctions.SendMessage(windowHandle,
+								WindowMessages.WM_SETTEXT, IntPtr.Zero, textPtr) ==
+								Win32Constants.TRUE)
+							{
+								return true; // text successfully set
+							}
+						}
+					}
+					catch { }
+					finally
+					{
+						Marshal.FreeBSTR(textPtr);
+					}
+                }
+            }
+            return false;
         }
 
         /// <summary>
