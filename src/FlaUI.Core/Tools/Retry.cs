@@ -31,9 +31,9 @@ namespace FlaUI.Core.Tools
         /// <param name="interval">The interval of retries.</param>
         /// <param name="throwOnTimeout">A flag indicating if it should throw on timeout.</param>
         /// <param name="ignoreException">A flag indicating if it should retry on an exception.</param>
+        /// <param name="timeoutMessage">The message that should be added to the timeout exception in case a timeout occurs.</param>
         /// <param name="lastValueOnTimeout">A flag indicating if the last value should be returned on timeout. Returns the default if the value could never be fetched.</param>
         /// <param name="defaultOnTimeout">Allows to define a default value in case of a timeout.</param>
-        /// <param name="timeoutMessage">The message that should be added to the timeout exception in case a timeout occurs.</param>
         /// <returns>The value from <paramref name="retryMethod"/> or the default of <typeparamref name="T"/>.</returns>
         public static RetryResult<T> While<T>(Func<T> retryMethod, Func<T, bool> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false, string timeoutMessage = null, bool lastValueOnTimeout = false, T defaultOnTimeout = default(T))
         {
@@ -74,6 +74,22 @@ namespace FlaUI.Core.Tools
         }
 
         /// <summary>
+        /// Retries while the given method evaluates to true and returns the value from the method.
+        /// If it fails, it returns the default of <typeparamref name="T"/>.
+        /// </summary>
+        /// <param name="retryMethod">The method which is retried.</param>
+        /// <param name="checkMethod">The method which is used to decide if a retry is needed or if the value is correct.</param>
+        /// <param name="retrySettings">The settings to use for retrying.</param>
+        /// <param name="lastValueOnTimeout">A flag indicating if the last value should be returned on timeout. Returns the default if the value could never be fetched.</param>
+        /// <param name="defaultOnTimeout">Allows to define a default value in case of a timeout.</param>
+        /// <typeparam name="T">The type of the return value.</typeparam>
+        /// <returns>The value from <paramref name="retryMethod"/> or the default of <typeparamref name="T"/>.</returns>
+        public static RetryResult<T> While<T>(Func<T> retryMethod, Func<T, bool> checkMethod, RetrySettings retrySettings, bool lastValueOnTimeout = false, T defaultOnTimeout = default(T))
+        {
+            return While<T>(retryMethod, checkMethod, retrySettings?.Timeout, retrySettings?.Interval, retrySettings?.ThrowOnTimeout ?? false, retrySettings?.IgnoreException ?? false, retrySettings?.TimeoutMessage, lastValueOnTimeout, defaultOnTimeout);
+        }
+
+        /// <summary>
         /// Retries while the given method evaluates to false and returns the value from the method.
         /// If it fails, it returns the default of <typeparamref name="T"/>.
         /// </summary>
@@ -82,6 +98,22 @@ namespace FlaUI.Core.Tools
         public static RetryResult<T> WhileNot<T>(Func<T> retryMethod, Func<T, bool> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false, string timeoutMessage = null, bool lastValueOnTimeout = false, T defaultOnTimeout = default(T))
         {
             return While(retryMethod, (x) => !checkMethod(x), timeout, interval, throwOnTimeout, ignoreException, timeoutMessage, lastValueOnTimeout, defaultOnTimeout);
+        }
+
+        /// <summary>
+        /// Retries while the given method evaluates to false and returns the value from the method.
+        /// If it fails, it returns the default of <typeparamref name="T"/>.
+        /// </summary>
+        /// <param name="retryMethod">The method which is retried.</param>
+        /// <param name="checkMethod">The method which is used to decide if a retry is needed or if the value is correct.</param>
+        /// <param name="retrySettings">The settings to use for retrying.</param>
+        /// <param name="lastValueOnTimeout">A flag indicating if the last value should be returned on timeout. Returns the default if the value could never be fetched.</param>
+        /// <param name="defaultOnTimeout">Allows to define a default value in case of a timeout.</param>
+        /// <typeparam name="T">The type of the return value.</typeparam>
+        /// <returns>The value from <paramref name="retryMethod"/> or the default of <typeparamref name="T"/>.</returns>
+        public static RetryResult<T> WhileNot<T>(Func<T> retryMethod, Func<T, bool> checkMethod, RetrySettings retrySettings = null, bool lastValueOnTimeout = false, T defaultOnTimeout = default(T))
+        {
+            return While(retryMethod, (x) => !checkMethod(x), retrySettings, lastValueOnTimeout, defaultOnTimeout);
         }
 
         /// <summary>
@@ -179,6 +211,12 @@ namespace FlaUI.Core.Tools
             return DateTime.UtcNow.Subtract(startTime) > timeout;
         }
 
+        /// <summary>
+        /// Allows searching with retrying for a list of <see cref="AutomationElement"/>s.
+        /// </summary>
+        /// <param name="searchMethod">The method used to search for the element list.</param>
+        /// <param name="retrySettings">The settings to use for retrying.</param>
+        /// <returns>The list of found elements.</returns>
         public static AutomationElement[] Find(Func<AutomationElement[]> searchMethod, RetrySettings retrySettings)
         {
             if (retrySettings == null)
@@ -188,6 +226,12 @@ namespace FlaUI.Core.Tools
             return Retry.WhileEmpty(searchMethod, retrySettings.Timeout, retrySettings.Interval, retrySettings.ThrowOnTimeout, retrySettings.IgnoreException, retrySettings.TimeoutMessage).Result;
         }
 
+        /// <summary>
+        /// Allows searching with retrying for an <see cref="AutomationElement"/>.
+        /// </summary>
+        /// <param name="searchMethod">The method used to search for the element.</param>
+        /// <param name="retrySettings">The settings to use for retrying.</param>
+        /// <returns>The found element.</returns>
         public static AutomationElement Find(Func<AutomationElement> searchMethod, RetrySettings retrySettings)
         {
             if (retrySettings == null)
