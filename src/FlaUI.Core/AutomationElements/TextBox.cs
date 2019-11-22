@@ -3,6 +3,7 @@ using System.Linq;
 using FlaUI.Core.Exceptions;
 using FlaUI.Core.Input;
 using FlaUI.Core.WindowsAPI;
+using System.Runtime.InteropServices;
 
 namespace FlaUI.Core.AutomationElements
 {
@@ -57,6 +58,11 @@ namespace FlaUI.Core.AutomationElements
                 {
                     return textPattern.DocumentRange.GetText(Int32.MaxValue);
                 }
+		string textWin32 = GetTextWin32();
+		if (textWin32 != null)
+		{
+			return textWin32;
+		}
                 throw new MethodNotSupportedException($"AutomationElement '{ToString()}' supports neither ValuePattern or TextPattern");
             }
             set
@@ -77,40 +83,60 @@ namespace FlaUI.Core.AutomationElements
         
         private bool SetTextWin32(string text)
         {
-            // try with native Win32 function SetWindowText
-			if (Properties.NativeWindowHandle.IsSupported)
-            {
-                var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
-                if (windowHandle != IntPtr.Zero)
-                {
-                    IntPtr textPtr = IntPtr.Zero;
-					try
-					{
-						textPtr = Marshal.StringToBSTR(text);
-					}
-					catch { }
+		// try with native Win32 function SetWindowText
+		if (Properties.NativeWindowHandle.IsSupported)
+		{
+			var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
+			if (windowHandle != IntPtr.Zero)
+			{
+				IntPtr textPtr = IntPtr.Zero;
+				try
+				{
+					textPtr = Marshal.StringToBSTR(text);
+				}
+				catch { }
 
-					try
+				try
+				{
+					if (textPtr != IntPtr.Zero)
 					{
-						if (textPtr != IntPtr.Zero)
+						if (SendMessage(windowHandle, WindowMessages.WM_SETTEXT, IntPtr.Zero, textPtr) ==
+							Win32Constants.TRUE)
 						{
-							if (UnsafeNativeFunctions.SendMessage(windowHandle,
-								WindowMessages.WM_SETTEXT, IntPtr.Zero, textPtr) ==
-								Win32Constants.TRUE)
-							{
-								return true; // text successfully set
-							}
+							return true; // text successfully set
 						}
 					}
-					catch { }
-					finally
-					{
-						Marshal.FreeBSTR(textPtr);
-					}
-                }
-            }
-            return false;
+				}
+				catch { }
+				finally
+				{
+					Marshal.FreeBSTR(textPtr);
+				}
+			}
+		}
+		return false;
         }
+	
+	private string GetTextWin32()
+	{
+		// try with native Win32 function SetWindowText
+		if (Properties.NativeWindowHandle.IsSupported)
+		{
+			var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
+			if (windowHandle != IntPtr.Zero)
+			{
+				IntPtr textLengthPtr = SendMessage(hwnd, WindowMessages.WM_GETTEXTLENGTH, IntPtr.Zero, IntPtr.Zero);
+				if (textLengthPtr.ToInt32() > 0)
+				{
+					int textLength = textLengthPtr.ToInt32() + 1;
+					StringBuilder text = new StringBuilder(textLength);
+					SendMessage(hwnd, WindowMessages.WM_GETTEXT, textLength, text);
+					return text.ToString();
+				}
+			}
+		}
+		return null;
+	}
 
         /// <summary>
         /// Gets if the element is read only or not.
