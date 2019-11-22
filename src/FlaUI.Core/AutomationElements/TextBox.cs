@@ -12,12 +12,6 @@ namespace FlaUI.Core.AutomationElements
     /// </summary>
     public class TextBox : AutomationElement
     {
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        internal static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
-
-        [DllImport("user32.dll", EntryPoint = "SendMessage", CharSet = CharSet.Auto)]
-        internal static extern bool SendMessage(IntPtr hWnd, uint Msg, int wParam, StringBuilder lParam);
-
         /// <summary>
         /// Creates a <see cref="TextBox"/> element.
         /// </summary>
@@ -81,7 +75,7 @@ namespace FlaUI.Core.AutomationElements
                     {
                         if (textPtr != IntPtr.Zero)
                         {
-                            if (SendMessage(windowHandle, WindowsMessages.WM_SETTEXT, IntPtr.Zero, textPtr) ==
+                            if (User32.SendMessage(windowHandle, WindowsMessages.WM_SETTEXT, IntPtr.Zero, textPtr) ==
                                 Win32Constants.TRUE)
                             {
                                 return true; // text successfully set
@@ -106,12 +100,12 @@ namespace FlaUI.Core.AutomationElements
                 var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
                 if (windowHandle != IntPtr.Zero)
                 {
-                    IntPtr textLengthPtr = SendMessage(hwnd, WindowsMessages.WM_GETTEXTLENGTH, IntPtr.Zero, IntPtr.Zero);
+                    IntPtr textLengthPtr = User32.SendMessage(hwnd, WindowsMessages.WM_GETTEXTLENGTH, IntPtr.Zero, IntPtr.Zero);
                     if (textLengthPtr.ToInt32() > 0)
                     {
                         int textLength = textLengthPtr.ToInt32() + 1;
                         StringBuilder text = new StringBuilder(textLength);
-                        SendMessage(hwnd, WindowsMessages.WM_GETTEXT, textLength, text);
+                        User32.SendMessage(hwnd, WindowsMessages.WM_GETTEXT, textLength, text);
                         textOut = text.ToString();
                         return true; // success
                     }
