@@ -248,5 +248,14 @@ namespace FlaUI.Core.AutomationElements
             }
             return (AutomationElement)Activator.CreateInstance(type, self.FrameworkAutomationElement);
         }
+
+        /// <summary>
+        /// Generic method to convert the element to the given type.
+        /// </summary>
+        public static AutomationElement As<T>(this AutomationElement self) where T: AutomationElement
+        {
+            var type = typeof(T);
+            return (T)Activator.CreateInstance(type, self.FrameworkAutomationElement);
+        }
     }
 }
