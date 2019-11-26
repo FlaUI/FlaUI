@@ -101,12 +101,12 @@ namespace FlaUI.Core.AutomationElements
                 var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
                 if (windowHandle != IntPtr.Zero)
                 {
-                    IntPtr textLengthPtr = User32.SendMessage(hwnd, WindowsMessages.WM_GETTEXTLENGTH, IntPtr.Zero, IntPtr.Zero);
+                    IntPtr textLengthPtr = User32.SendMessage(windowHandle, WindowsMessages.WM_GETTEXTLENGTH, IntPtr.Zero, IntPtr.Zero);
                     if (textLengthPtr.ToInt32() > 0)
                     {
                         int textLength = textLengthPtr.ToInt32() + 1;
                         StringBuilder text = new StringBuilder(textLength);
-                        User32.SendMessage(hwnd, WindowsMessages.WM_GETTEXT, textLength, text);
+                        User32.SendMessage(windowHandle, WindowsMessages.WM_GETTEXT, textLength, text);
                         textOut = text.ToString();
                         return true; // success
                     }
