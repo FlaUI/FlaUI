@@ -4,6 +4,7 @@ using FlaUI.Core.Exceptions;
 using FlaUI.Core.Input;
 using FlaUI.Core.WindowsAPI;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace FlaUI.Core.AutomationElements
 {
