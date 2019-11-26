@@ -50,12 +50,12 @@
   <Choose>
     <When Condition="'$(EnableSigning)'=='true'">
       <ItemGroup>
-        <PackageReference Include="Interop.UIAutomationClient.Signed" Version="10.0.18362" />
+        <PackageReference Include="Interop.UIAutomationClient.Signed" Version="10.18362.0" />
       </ItemGroup>
     </When>
     <Otherwise>
       <ItemGroup>
-        <PackageReference Include="Interop.UIAutomationClient" Version="10.0.18362" />
+        <PackageReference Include="Interop.UIAutomationClient" Version="10.18362.0" />
       </ItemGroup>
     </Otherwise>
   </Choose>
