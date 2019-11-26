@@ -92,7 +92,7 @@ namespace FlaUI.Core.AutomationElements
             return false;
         }
 
-        private bool GetTextWin32(out textOut)
+        private bool GetTextWin32(out string textOut)
         {
             // try with native Win32 function SetWindowText
             if (Properties.NativeWindowHandle.IsSupported)
