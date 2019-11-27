@@ -149,27 +149,42 @@ Task("Package")
 Task("Push-To-Nuget")
     .Does(() =>
 {
-    // Get the paths to the packages.
+    var apiKey = System.IO.File.ReadAllText(".nugetapikey");
+
+    // Get the paths to the packages
     var packages = GetFiles($"{artifactDir}/*.nupkg");
 
-    // Push the package.
-    NuGetPush(packages, new NuGetPushSettings {
-        Source = "https://www.nuget.org/api/v2/package",
-        ApiKey = "private"
-    });
+    // Push the packages
+    foreach (var package in packages) {
+        if (package.GetFilename().FullPath.Contains(".symbols.")) {
+            continue;
+        }
+        Information($"Pushing {package}");
+        NuGetPush(package, new NuGetPushSettings {
+            Source = "https://nuget.org/api/v2/package",
+            ApiKey = apiKey
+        });
+    }
  });
 
  Task("Push-To-SymbolSource")
     .Does(() =>
 {
-    // Get the paths to the packages.
-    var packages = GetFiles($"{artifactDir}/symbols/*.nupkg");
+    var apiKey = System.IO.File.ReadAllText(".nugetapikey");
 
-    // Push the package.
-    NuGetPush(packages, new NuGetPushSettings {
-        Source = "https://nuget.smbsrc.net",
-        ApiKey = "private"
-    });
+    // Get the paths to the packages
+    var packages = GetFiles($"{artifactDir}/*.nupkg");
+
+    // Push the packages
+    foreach (var package in packages) {
+        if (package.GetFilename().FullPath.Contains(".symbols.")) {
+            Information($"Pushing {package}");
+            NuGetPush(package, new NuGetPushSettings {
+                Source = "https://nuget.smbsrc.net",
+                ApiKey = apiKey
+            });
+        }
+    }
  });
 
 //////////////////////////////////////////////////////////////////////

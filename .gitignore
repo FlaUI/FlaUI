@@ -64,3 +64,5 @@ BundleArtifacts/
 # Cake
 .cake/*
 !.cake/packages.config
+
+.nugetapikey
