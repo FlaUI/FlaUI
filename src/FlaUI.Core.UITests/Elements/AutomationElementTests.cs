@@ -1,13 +1,11 @@
 ﻿using System;
-using FlaUI.Core.Input;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
 {
-    using FlaUI.Core.Definitions;
-
     [TestFixture(AutomationType.UIA2, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
