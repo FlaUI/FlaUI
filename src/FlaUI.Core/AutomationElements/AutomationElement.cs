@@ -246,7 +246,16 @@ namespace FlaUI.Core.AutomationElements
                 var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
                 if (windowHandle != new IntPtr(0))
                 {
+                    uint processId = 0;
+                    uint windowThreadId = User32.GetWindowThreadProcessId(windowHandle, out processId);
+                    uint currentThreadId = User32.GetCurrentThreadId();
+                    
+                    // attach window to the calling thread's message queue
+                    User32.AttachThreadInput(currentThreadId, windowThreadId, true);
                     User32.SetFocus(windowHandle);
+                    // detach the window from the calling thread's message queue
+                    User32.AttachThreadInput(currentThreadId, windowThreadId, false);
+                    
                     Wait.UntilResponsive(this);
                     return;
                 }

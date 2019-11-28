@@ -2102,5 +2102,11 @@ namespace FlaUI.Core.WindowsAPI
         /// </summary>
         CAPTUREBLT = 0x40000000
     }
+    
+    internal class Win32Constants
+    {
+        public static IntPtr TRUE = new IntPtr(1);
+        public static IntPtr FALSE = new IntPtr(0);
+    }
 }
 #pragma warning restore
