@@ -30,13 +30,13 @@ namespace FlaUI.Core.AutomationElements.PatternElements
         {
             get
             {
-                if (Patterns.Toggle.IsSupported)
+                if (GetToggleStateWin32(out ToggleState state) == true)
                 {
-                    return TogglePattern.ToggleState.Value;
+                    return state;
                 }
                 else
                 {
-                    return GetToggleStateWin32();
+                    return TogglePattern.ToggleState.Value;
                 }
             }
             set
@@ -50,17 +50,15 @@ namespace FlaUI.Core.AutomationElements.PatternElements
                     Toggle();
                 }*/ // What is this loop used for? What is "i" used for?
                 
-                if (Patterns.Toggle.IsSupported)
-                {
-                    // Break if we're in the correct state
-                    if (ToggleState == value) return;
-                    // Toggle to the next state
-                    Toggle();
-                }
-                else
-                {
-                    SetToggleStateWin32(value);
-                }
+                // Break if we're in the correct state
+                if (ToggleState == value) return;
+                // Toggle to the next state
+                Toggle();
+                
+                // Break if UIA succeeded
+                if (ToggleState == value) return;
+                // try with Win32 methods
+                SetToggleStateWin32(value);
             }
         }
         
@@ -104,8 +102,9 @@ namespace FlaUI.Core.AutomationElements.PatternElements
             }
         }
         
-        internal ToggleState GetToggleStateWin32()
+        internal bool GetToggleStateWin32(out ToggleState stateOut)
         {
+            stateOut = ToggleState.Off;
             if (Properties.NativeWindowHandle.IsSupported)
             {
                 var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
@@ -121,20 +120,21 @@ namespace FlaUI.Core.AutomationElements.PatternElements
 
                         if (result.ToInt32() == (int)ButtonMessages.BST_UNCHECKED)
                         {
-                            return ToggleState.Off;
+                            stateOut = ToggleState.Off;
                         }
                         else if (result.ToInt32() == (int)ButtonMessages.BST_CHECKED)
                         {
-                            return ToggleState.On;
+                            stateOut = ToggleState.On;
                         }
-                        else if (result.ToInt32() == (int)ButtonMessages.BST_INDETERMINATE)
+                        else // indeterminate
                         {
-                            return ToggleState.Indeterminate;
+                            stateOut = ToggleState.Indeterminate;
                         }
+                        return true;
                     }
                 }
             }
-            return ToggleState.Indeterminate;
+            return false;
         }
 
         /// <summary>
