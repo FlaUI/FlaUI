@@ -1,6 +1,7 @@
 ﻿using System;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Patterns;
+using FlaUI.Core.WindowsAPI;
 using System.Text;
 
 namespace FlaUI.Core.AutomationElements.PatternElements
@@ -71,31 +72,31 @@ namespace FlaUI.Core.AutomationElements.PatternElements
                 if (windowHandle != IntPtr.Zero)
                 {
                     StringBuilder className = new StringBuilder(256);
-                    GetClassName(windowHandle, className, 256);
+                    User32.GetClassName(windowHandle, className, 256);
                     
                     if (className.ToString() == "Button") // Common Win32 Checkbox window
                     {
-                        IntPtr result = SendMessage(windowHandle, ButtonMessages.BM_GETCHECK, IntPtr.Zero, IntPtr.Zero);
+                        IntPtr result = User32.SendMessage(windowHandle, ButtonMessages.BM_GETCHECK, IntPtr.Zero, IntPtr.Zero);
                     
                         if (state == ToggleState.On)
                         {
                             if (result.ToInt32() != (int)ButtonMessages.BST_CHECKED)
                             {
-                                SendMessage(windowHandle, ButtonMessages.BM_SETCHECK, new IntPtr(ButtonMessages.BST_CHECKED), IntPtr.Zero);
+                                User32.SendMessage(windowHandle, ButtonMessages.BM_SETCHECK, new IntPtr(ButtonMessages.BST_CHECKED), IntPtr.Zero);
                             }
                         }
                         else if (state == ToggleState.Off)
                         {
                             if (result.ToInt32() != (int)ButtonMessages.BST_UNCHECKED)
                             {
-                                SendMessage(windowHandle, ButtonMessages.BM_SETCHECK, new IntPtr(ButtonMessages.BST_UNCHECKED), IntPtr.Zero);
+                                User32.SendMessage(windowHandle, ButtonMessages.BM_SETCHECK, new IntPtr(ButtonMessages.BST_UNCHECKED), IntPtr.Zero);
                             }
                         }
                         else // indeterminate state
                         {
                             if (result.ToInt32() != (int)ButtonMessages.BST_INDETERMINATE)
                             {
-                                SendMessage(windowHandle, ButtonMessages.BM_SETCHECK, new IntPtr(ButtonMessages.BST_INDETERMINATE), IntPtr.Zero);
+                                User32.SendMessage(windowHandle, ButtonMessages.BM_SETCHECK, new IntPtr(ButtonMessages.BST_INDETERMINATE), IntPtr.Zero);
                             }
                         }
                     }
@@ -111,11 +112,11 @@ namespace FlaUI.Core.AutomationElements.PatternElements
                 if (windowHandle != IntPtr.Zero)
                 {
                     StringBuilder className = new StringBuilder(256);
-                    GetClassName(windowHandle, className, 256);
+                    User32.GetClassName(windowHandle, className, 256);
                             
                     if (className.ToString() == "Button")  // common Win32 checkbox window
                     {
-                        IntPtr result = UnsafeNativeFunctions.SendMessage(windowHandle,
+                        IntPtr result = User32.SendMessage(windowHandle,
                             ButtonMessages.BM_GETCHECK, IntPtr.Zero, IntPtr.Zero);
 
                         if (result.ToInt32() == (int)ButtonMessages.BST_UNCHECKED)
