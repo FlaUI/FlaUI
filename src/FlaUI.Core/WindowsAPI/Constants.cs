@@ -2108,5 +2108,15 @@ namespace FlaUI.Core.WindowsAPI
         public static IntPtr TRUE = new IntPtr(1);
         public static IntPtr FALSE = new IntPtr(0);
     }
+    
+    internal class ButtonMessages
+    {
+        public static UInt32 BM_SETCHECK = 0x00F1;  // set radio or checkbox button state
+        public static UInt32 BM_GETCHECK = 0x00F0;
+
+        public static UInt32 BST_UNCHECKED = 0x0000;
+        public static UInt32 BST_CHECKED = 0x0001;
+        public static UInt32 BST_INDETERMINATE = 0x0002;
+    }
 }
 #pragma warning restore
