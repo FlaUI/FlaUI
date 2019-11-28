@@ -103,6 +103,9 @@ namespace FlaUI.Core.WindowsAPI
 
         [DllImport("user32.dll")]
         public static extern bool AttachThreadInput(uint idAttach, uint idAttachTo, bool fAttach);
+        
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
     }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }
