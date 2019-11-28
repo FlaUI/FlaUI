@@ -30,15 +30,30 @@ namespace FlaUI.Core.AutomationElements.PatternElements
             set
             {
                 // Loop for all states
-                for (var i = 0; i < Enum.GetNames(typeof(ToggleState)).Length; i++)
+                /*for (var i = 0; i < Enum.GetNames(typeof(ToggleState)).Length; i++)
+                {
+                    // Break if we're in the correct state
+                    if (ToggleState == value) return;
+                    // Toggle to the next state
+                    Toggle();
+                }*/ // What is this loop used for? What is "i" used for?
+                
+                if (Patterns.Toggle.IsSupported)
                 {
                     // Break if we're in the correct state
                     if (ToggleState == value) return;
                     // Toggle to the next state
                     Toggle();
                 }
+                else
+                {
+                    SetToggleStateWin32(value);
+                }
             }
         }
+        
+        internal void SetToggleStateWin32(ToggleState state)
+        {}
 
         /// <summary>
         /// Gets or sets if the element is toggled.
