@@ -1,6 +1,7 @@
 ﻿using System;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Patterns;
+using System.Text;
 
 namespace FlaUI.Core.AutomationElements.PatternElements
 {
@@ -26,7 +27,17 @@ namespace FlaUI.Core.AutomationElements.PatternElements
         /// </summary>
         public ToggleState ToggleState
         {
-            get => TogglePattern.ToggleState.Value;
+            get
+            {
+                if (Patterns.Toggle.IsSupported)
+                {
+                    return TogglePattern.ToggleState.Value;
+                }
+                else
+                {
+                    return GetToggleStateWin32();
+                }
+            }
             set
             {
                 // Loop for all states
@@ -90,6 +101,39 @@ namespace FlaUI.Core.AutomationElements.PatternElements
                     }
                 }
             }
+        }
+        
+        internal ToggleState GetToggleStateWin32()
+        {
+            if (Properties.NativeWindowHandle.IsSupported)
+            {
+                var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
+                if (windowHandle != IntPtr.Zero)
+                {
+                    StringBuilder className = new StringBuilder(256);
+                    GetClassName(windowHandle, className, 256);
+                            
+                    if (className.ToString() == "Button")  // common Win32 checkbox window
+                    {
+                        IntPtr result = UnsafeNativeFunctions.SendMessage(windowHandle,
+                            ButtonMessages.BM_GETCHECK, IntPtr.Zero, IntPtr.Zero);
+
+                        if (result.ToInt32() == (int)ButtonMessages.BST_UNCHECKED)
+                        {
+                            return ToggleState.Off;
+                        }
+                        else if (result.ToInt32() == (int)ButtonMessages.BST_CHECKED)
+                        {
+                            return ToggleState.On;
+                        }
+                        else if (result.ToInt32() == (int)ButtonMessages.BST_INDETERMINATE)
+                        {
+                            return ToggleState.Indeterminate;
+                        }
+                    }
+                }
+            }
+            return ToggleState.Indeterminate;
         }
 
         /// <summary>
