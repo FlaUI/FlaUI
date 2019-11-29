@@ -5,7 +5,7 @@ namespace FlaUI.Core.AutomationElements.PatternElements
     /// <summary>
     /// An element which supports the <see cref="ISelectionItemPattern" />.
     /// </summary>
-    public class SelectionItemAutomationElement : AutomationElement
+    public class SelectionItemAutomationElement : ToggleAutomationElement
     {
         /// <summary>
         /// Creates a <see cref="SelectionItemAutomationElement"/> element.
