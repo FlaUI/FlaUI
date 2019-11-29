@@ -52,5 +52,14 @@ namespace FlaUI.Core.AutomationElements
             ScrollItemPattern?.ScrollIntoView();
             return this;
         }
+        
+        /// <summary>
+        /// Gets or sets if the listbox item is checked.
+        /// </summary>
+        public bool? IsChecked
+        {
+            get => IsToggled;
+            set => IsToggled = value;
+        }
     }
 }
