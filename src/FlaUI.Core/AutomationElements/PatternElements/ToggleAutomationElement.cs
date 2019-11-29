@@ -30,30 +30,34 @@ namespace FlaUI.Core.AutomationElements.PatternElements
         {
             get
             {
-                if (GetToggleStateWin32(out ToggleState state) == true)
+                if (Patterns.Toggle.IsSupported)
                 {
-                    return state;
+                    return TogglePattern.ToggleState.Value;
                 }
                 else
                 {
-                    return TogglePattern.ToggleState.Value;
+                    // Win32 fallback
+                    return GetToggleStateWin32();
                 }
             }
             set
             {
-                // Loop for all states
-                for (var i = 0; i < Enum.GetNames(typeof(ToggleState)).Length; i++)
+                if (Patterns.Toggle.IsSupported)
                 {
-                    // Break if we're in the correct state
-                    if (ToggleState == value) return;
-                    // Toggle to the next state
-                    Toggle();
+                    // Loop for all states
+                    for (var i = 0; i < Enum.GetNames(typeof(ToggleState)).Length; i++)
+                    {
+                        // Break if we're in the correct state
+                        if (ToggleState == value) return;
+                        // Toggle to the next state
+                        Toggle();
+                    }
                 }
-                
-                // Break if UIA succeeded
-                if (ToggleState == value) return;
-                // try with Win32 methods
-                SetToggleStateWin32(value);
+                else
+                {
+                    // try with Win32 methods
+                    SetToggleStateWin32(value);
+                }
             }
         }
         
@@ -97,9 +101,8 @@ namespace FlaUI.Core.AutomationElements.PatternElements
             }
         }
         
-        internal bool GetToggleStateWin32(out ToggleState stateOut)
+        internal ToggleState GetToggleStateWin32()
         {
-            stateOut = ToggleState.Off;
             if (Properties.NativeWindowHandle.IsSupported)
             {
                 var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
@@ -115,21 +118,20 @@ namespace FlaUI.Core.AutomationElements.PatternElements
 
                         if (result.ToInt32() == (int)ButtonMessages.BST_UNCHECKED)
                         {
-                            stateOut = ToggleState.Off;
+                            return ToggleState.Off;
                         }
                         else if (result.ToInt32() == (int)ButtonMessages.BST_CHECKED)
                         {
-                            stateOut = ToggleState.On;
+                            return ToggleState.On;
                         }
-                        else // indeterminate
+                        else if (result.ToInt32() == (int)ButtonMessages.BST_INDETERMINATE)
                         {
-                            stateOut = ToggleState.Indeterminate;
+                            return ToggleState.Indeterminate;
                         }
-                        return true;
                     }
                 }
             }
-            return false;
+            return ToggleState.Indeterminate;
         }
 
         /// <summary>
