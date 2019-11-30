@@ -8,12 +8,15 @@ namespace FlaUI.Core.AutomationElements
     /// </summary>
     public class ListBoxItem: SelectionItemAutomationElement
     {
+        private readonly ToggleAutomationElement _toggleAutomationElement;
+    
         /// <summary>
         /// Creates a <see cref="ListBoxItem"/> element.
         /// </summary>
         public ListBoxItem(FrameworkAutomationElementBase frameworkAutomationElement)
             : base(frameworkAutomationElement)
         {
+            _toggleAutomationElement = new ToggleAutomationElement(frameworkAutomationElement);
         }
 
         /// <summary>
@@ -58,8 +61,8 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public bool? IsChecked
         {
-            get => IsToggled;
-            set => IsToggled = value;
+            get => _toggleAutomationElement.IsToggled;
+            set => _toggleAutomationElement.IsToggled = value;
         }
     }
 }
