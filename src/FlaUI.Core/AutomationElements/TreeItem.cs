@@ -12,6 +12,7 @@ namespace FlaUI.Core.AutomationElements
     {
         private readonly SelectionItemAutomationElement _selectionItemAutomationElement;
         private readonly ExpandCollapseAutomationElement _expandCollapseAutomationElement;
+        private readonly ToggleAutomationElement _toggleAutomationElement;
 
         /// <summary>
         /// Creates a <see cref="TreeItem"/> element.
@@ -20,6 +21,7 @@ namespace FlaUI.Core.AutomationElements
         {
             _selectionItemAutomationElement = new SelectionItemAutomationElement(frameworkAutomationElement);
             _expandCollapseAutomationElement = new ExpandCollapseAutomationElement(frameworkAutomationElement);
+            _toggleAutomationElement = new ToggleAutomationElement(frameworkAutomationElement);
         }
 
         /// <summary>
@@ -114,8 +116,8 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public bool? IsChecked
         {
-            get => _selectionItemAutomationElement.IsToggled;
-            set => _selectionItemAutomationElement.IsToggled = value;
+            get => _toggleAutomationElement.IsToggled;
+            set => _toggleAutomationElement.IsToggled = value;
         }
     }
 }
