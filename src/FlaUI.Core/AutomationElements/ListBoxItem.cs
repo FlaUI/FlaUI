@@ -57,7 +57,7 @@ namespace FlaUI.Core.AutomationElements
         }
         
         /// <summary>
-        /// Gets or sets if the listbox item is checked.
+        /// Gets or sets if the listbox item is checked, if checking is supported
         /// </summary>
         public bool? IsChecked
         {
