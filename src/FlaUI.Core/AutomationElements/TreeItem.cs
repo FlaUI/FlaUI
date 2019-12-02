@@ -112,7 +112,7 @@ namespace FlaUI.Core.AutomationElements
         }
         
         /// <summary>
-        /// Gets or sets if the tree item is checked.
+        /// Gets or sets if the tree item is checked, if checking is supported.
         /// </summary>
         public bool? IsChecked
         {
