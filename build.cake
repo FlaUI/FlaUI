@@ -97,7 +97,7 @@ Task("Run-UI-Tests")
         Results = new[] {
             new NUnit3Result { FileName = resultFile, Format = "nunit3" }
         },
-        ArgumentCustomization = args => args.Append("--params=uia=2")
+        ArgumentCustomization = args => args.Append("--testparam:uia=2")
     });
     if (AppVeyor.IsRunningOnAppVeyor) {
         AppVeyor.UploadTestResults(resultFile, AppVeyorTestResultsType.NUnit3);
@@ -108,7 +108,7 @@ Task("Run-UI-Tests")
         Results = new[] {
             new NUnit3Result { FileName = resultFile, Format = "nunit3" }
         },
-        ArgumentCustomization = args => args.Append("--params=uia=3")
+        ArgumentCustomization = args => args.Append("--testparam:uia=3")
     });
     if (AppVeyor.IsRunningOnAppVeyor) {
         AppVeyor.UploadTestResults(resultFile, AppVeyorTestResultsType.NUnit3);
