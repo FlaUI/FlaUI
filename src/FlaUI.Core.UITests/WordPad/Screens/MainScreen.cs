@@ -50,7 +50,7 @@ namespace FlaUI.Core.UITests.WordPad.Screens
         public int GetCurrentZoomPercent()
         {
             var zoomText = ZoomText.Text;
-            var zoomNumberString = Regex.Match(zoomText, @"^[^\s]*").ToString();
+            var zoomNumberString = Regex.Match(zoomText, @"[0-9]+").ToString();
             return Convert.ToInt32(zoomNumberString);
         }
 
@@ -60,12 +60,13 @@ namespace FlaUI.Core.UITests.WordPad.Screens
             if (Tools.OperatingSystem.CurrentCulture.TwoLetterISOLanguageName == "de")
             {
                 Keyboard.TypeSimultaneously(VirtualKeyShort.ALT, VirtualKeyShort.KEY_D);
+                Keyboard.Type(VirtualKeyShort.KEY_I);
             }
             else
             {
                 Keyboard.TypeSimultaneously(VirtualKeyShort.ALT, VirtualKeyShort.KEY_F);
+                Keyboard.Type(VirtualKeyShort.KEY_T);
             }
-            Keyboard.Type(VirtualKeyShort.KEY_I);
 
             // Do a retry to wait for the window
             return Retry.Find(() => FindFirstChild(cf => cf.ByControlType(ControlType.Window).And(cf.ByName("Info"))),
