@@ -1,6 +1,6 @@
-﻿using Moq;
+﻿using System;
+using NSubstitute;
 using NUnit.Framework;
-using System;
 
 namespace FlaUI.Core.UnitTests.Logging
 {
@@ -11,288 +11,204 @@ namespace FlaUI.Core.UnitTests.Logging
         public void IsTraceEnabled_False_TraceLoggingIsDisabled()
         {
             // Arrange
-            var mock = new Mock<TestLogger>
-            {
-                CallBase = true
-            };
-
-            // This gets us an instance of AbstractBase which has instrumentation
-            // on the abstract trace/debug/info...etc methods.
-            var instance = mock.Object;
-            instance.IsTraceEnabled = false;
+            var mock = Substitute.ForPartsOf<TestLogger>();
+            mock.IsTraceEnabled = false;
 
             // Act
-            instance.Trace(String.Empty);
-            instance.Trace(String.Empty, new Exception());
-            instance.Trace("{0}", 1);
-            instance.Trace("{0}", new Exception(), 1);
+            mock.Trace(String.Empty);
+            mock.Trace(String.Empty, new Exception());
+            mock.Trace("{0}", 1);
+            mock.Trace("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.PublicTrace(It.IsAny<string>()), Times.Never);
+            mock.DidNotReceive().PublicTrace(Arg.Any<string>());
         }
 
         [Test]
         public void IsTraceEnabled_True_TraceLoggingIsEnabled()
         {
             // Arrange
-            var mock = new Mock<TestLogger>
-            {
-                CallBase = true
-            };
-
-            // This gets us an instance of AbstractBase which has instrumentation
-            // on the abstract trace/debug/info...etc methods.
-            var instance = mock.Object;
-            instance.IsTraceEnabled = true;
+            var mock = Substitute.ForPartsOf<TestLogger>();
+            mock.IsTraceEnabled = true;
 
             // Act
-            instance.Trace(String.Empty);
-            instance.Trace(String.Empty, new Exception());
-            instance.Trace("{0}", 1);
-            instance.Trace("{0}", new Exception(), 1);
+            mock.Trace(String.Empty);
+            mock.Trace(String.Empty, new Exception());
+            mock.Trace("{0}", 1);
+            mock.Trace("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.PublicTrace(It.IsAny<string>()), Times.Exactly(4));
+            mock.Received(4).PublicTrace(Arg.Any<string>());
         }
 
         [Test]
         public void IsDebugEnabled_False_DebugLoggingIsDisabled()
         {
             // Arrange
-            var mock = new Mock<TestLogger>
-            {
-                CallBase = true
-            };
-
-            // This gets us an instance of AbstractBase which has instrumentation
-            // on the abstract trace/debug/info...etc methods.
-            var instance = mock.Object;
-            instance.IsDebugEnabled = false;
+            var mock = Substitute.ForPartsOf<TestLogger>();
+            mock.IsDebugEnabled = false;
 
             // Act
-            instance.Debug(String.Empty);
-            instance.Debug(String.Empty, new Exception());
-            instance.Debug("{0}", 1);
-            instance.Debug("{0}", new Exception(), 1);
+            mock.Debug(String.Empty);
+            mock.Debug(String.Empty, new Exception());
+            mock.Debug("{0}", 1);
+            mock.Debug("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.PublicDebug(It.IsAny<string>()), Times.Never);
+            mock.DidNotReceive().PublicDebug(Arg.Any<string>());
         }
 
         [Test]
         public void IsDebugEnabled_True_DebugLoggingIsEnabled()
         {
             // Arrange
-            var mock = new Mock<TestLogger>
-            {
-                CallBase = true
-            };
-
-            // This gets us an instance of AbstractBase which has instrumentation
-            // on the abstract trace/debug/info...etc methods.
-            var instance = mock.Object;
-            instance.IsDebugEnabled = true;
+            var mock = Substitute.ForPartsOf<TestLogger>();
+            mock.IsDebugEnabled = true;
 
             // Act
-            instance.Debug(String.Empty);
-            instance.Debug(String.Empty, new Exception());
-            instance.Debug("{0}", 1);
-            instance.Debug("{0}", new Exception(), 1);
+            mock.Debug(String.Empty);
+            mock.Debug(String.Empty, new Exception());
+            mock.Debug("{0}", 1);
+            mock.Debug("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.PublicDebug(It.IsAny<string>()), Times.Exactly(4));
+            mock.Received(4).PublicDebug(Arg.Any<string>());
         }
 
         [Test]
         public void IsInfoEnabled_False_InfoLoggingIsDisabled()
         {
             // Arrange
-            var mock = new Mock<TestLogger>
-            {
-                CallBase = true
-            };
-
-            // This gets us an instance of AbstractBase which has instrumentation
-            // on the abstract trace/debug/info...etc methods.
-            var instance = mock.Object;
-            instance.IsInfoEnabled = false;
+            var mock = Substitute.ForPartsOf<TestLogger>();
+            mock.IsInfoEnabled = false;
 
             // Act
-            instance.Info(String.Empty);
-            instance.Info(String.Empty, new Exception());
-            instance.Info("{0}", 1);
-            instance.Info("{0}", new Exception(), 1);
+            mock.Info(String.Empty);
+            mock.Info(String.Empty, new Exception());
+            mock.Info("{0}", 1);
+            mock.Info("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.PublicInfo(It.IsAny<string>()), Times.Never);
+            mock.DidNotReceive().PublicInfo(Arg.Any<string>());
         }
 
         [Test]
         public void IsInfoEnabled_True_InfoLoggingIsEnabled()
         {
             // Arrange
-            var mock = new Mock<TestLogger>
-            {
-                CallBase = true
-            };
-
-            // This gets us an instance of AbstractBase which has instrumentation
-            // on the abstract trace/debug/info...etc methods.
-            var instance = mock.Object;
-            instance.IsInfoEnabled = true;
+            var mock = Substitute.ForPartsOf<TestLogger>();
+            mock.IsInfoEnabled = true;
 
             // Act
-            instance.Info(String.Empty);
-            instance.Info(String.Empty, new Exception());
-            instance.Info("{0}", 1);
-            instance.Info("{0}", new Exception(), 1);
+            mock.Info(String.Empty);
+            mock.Info(String.Empty, new Exception());
+            mock.Info("{0}", 1);
+            mock.Info("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.PublicInfo(It.IsAny<string>()), Times.Exactly(4));
+            mock.Received(4).PublicInfo(Arg.Any<string>());
         }
 
         [Test]
         public void IsWarnEnabled_False_WarnLoggingIsDisabled()
         {
             // Arrange
-            var mock = new Mock<TestLogger>
-            {
-                CallBase = true
-            };
-
-            // This gets us an instance of AbstractBase which has instrumentation
-            // on the abstract trace/debug/info...etc methods.
-            var instance = mock.Object;
-            instance.IsWarnEnabled = false;
+            var mock = Substitute.ForPartsOf<TestLogger>();
+            mock.IsWarnEnabled = false;
 
             // Act
-            instance.Warn(String.Empty);
-            instance.Warn(String.Empty, new Exception());
-            instance.Warn("{0}", 1);
-            instance.Warn("{0}", new Exception(), 1);
+            mock.Warn(String.Empty);
+            mock.Warn(String.Empty, new Exception());
+            mock.Warn("{0}", 1);
+            mock.Warn("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.PublicWarn(It.IsAny<string>()), Times.Never);
+            mock.DidNotReceive().PublicWarn(Arg.Any<string>());
         }
 
         [Test]
         public void IsWarnEnabled_True_WarnLoggingIsEnabled()
         {
             // Arrange
-            var mock = new Mock<TestLogger>
-            {
-                CallBase = true
-            };
-
-            // This gets us an instance of AbstractBase which has instrumentation
-            // on the abstract trace/debug/info...etc methods.
-            var instance = mock.Object;
-            instance.IsWarnEnabled = true;
+            var mock = Substitute.ForPartsOf<TestLogger>();
+            mock.IsWarnEnabled = true;
 
             // Act
-            instance.Warn(String.Empty);
-            instance.Warn(String.Empty, new Exception());
-            instance.Warn("{0}", 1);
-            instance.Warn("{0}", new Exception(), 1);
+            mock.Warn(String.Empty);
+            mock.Warn(String.Empty, new Exception());
+            mock.Warn("{0}", 1);
+            mock.Warn("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.PublicWarn(It.IsAny<string>()), Times.Exactly(4));
+            mock.Received(4).PublicWarn(Arg.Any<string>());
         }
 
         [Test]
         public void IsErrorEnabled_False_ErrorLoggingIsDisabled()
         {
             // Arrange
-            var mock = new Mock<TestLogger>
-            {
-                CallBase = true
-            };
-
-            // This gets us an instance of AbstractBase which has instrumentation
-            // on the abstract trace/debug/info...etc methods.
-            var instance = mock.Object;
-            instance.IsErrorEnabled = false;
+            var mock = Substitute.ForPartsOf<TestLogger>();
+            mock.IsErrorEnabled = false;
 
             // Act
-            instance.Error(String.Empty);
-            instance.Error(String.Empty, new Exception());
-            instance.Error("{0}", 1);
-            instance.Error("{0}", new Exception(), 1);
+            mock.Error(String.Empty);
+            mock.Error(String.Empty, new Exception());
+            mock.Error("{0}", 1);
+            mock.Error("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.PublicError(It.IsAny<string>()), Times.Never);
+            mock.DidNotReceive().PublicError(Arg.Any<string>());
         }
 
         [Test]
         public void IsErrorEnabled_True_ErrorLoggingIsEnabled()
         {
             // Arrange
-            var mock = new Mock<TestLogger>
-            {
-                CallBase = true
-            };
-
-            // This gets us an instance of AbstractBase which has instrumentation
-            // on the abstract trace/debug/info...etc methods.
-            var instance = mock.Object;
-            instance.IsErrorEnabled = true;
+            var mock = Substitute.ForPartsOf<TestLogger>();
+            mock.IsErrorEnabled = true;
 
             // Act
-            instance.Error(String.Empty);
-            instance.Error(String.Empty, new Exception());
-            instance.Error("{0}", 1);
-            instance.Error("{0}", new Exception(), 1);
+            mock.Error(String.Empty);
+            mock.Error(String.Empty, new Exception());
+            mock.Error("{0}", 1);
+            mock.Error("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.PublicError(It.IsAny<string>()), Times.Exactly(4));
+            mock.Received(4).PublicError(Arg.Any<string>());
         }
 
         [Test]
         public void IsFatalEnabled_False_FatalLoggingIsDisabled()
         {
             // Arrange
-            var mock = new Mock<TestLogger>
-            {
-                CallBase = true
-            };
-
-            // This gets us an instance of AbstractBase which has instrumentation
-            // on the abstract trace/debug/info...etc methods.
-            var instance = mock.Object;
-            instance.IsFatalEnabled = false;
+            var mock = Substitute.ForPartsOf<TestLogger>();
+            mock.IsFatalEnabled = false;
 
             // Act
-            instance.Fatal(String.Empty);
-            instance.Fatal(String.Empty, new Exception());
-            instance.Fatal("{0}", 1);
-            instance.Fatal("{0}", new Exception(), 1);
+            mock.Fatal(String.Empty);
+            mock.Fatal(String.Empty, new Exception());
+            mock.Fatal("{0}", 1);
+            mock.Fatal("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.PublicFatal(It.IsAny<string>()), Times.Never);
+            mock.DidNotReceive().PublicFatal(Arg.Any<string>());
         }
 
         [Test]
         public void IsFatalEnabled_True_FatalLoggingIsEnabled()
         {
             // Arrange
-            var mock = new Mock<TestLogger>
-            {
-                CallBase = true
-            };
-
-            // This gets us an instance of AbstractBase which has instrumentation
-            // on the abstract trace/debug/info...etc methods.
-            var instance = mock.Object;
-            instance.IsFatalEnabled = true;
+            var mock = Substitute.ForPartsOf<TestLogger>();
+            mock.IsFatalEnabled = true;
 
             // Act
-            instance.Fatal(String.Empty);
-            instance.Fatal(String.Empty, new Exception());
-            instance.Fatal("{0}", 1);
-            instance.Fatal("{0}", new Exception(), 1);
+            mock.Fatal(String.Empty);
+            mock.Fatal(String.Empty, new Exception());
+            mock.Fatal("{0}", 1);
+            mock.Fatal("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.PublicFatal(It.IsAny<string>()), Times.Exactly(4));
+            mock.Received(4).PublicFatal(Arg.Any<string>());
         }
     }
 }
