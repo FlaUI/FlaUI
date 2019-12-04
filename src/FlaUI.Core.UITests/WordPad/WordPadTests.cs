@@ -15,6 +15,8 @@ namespace FlaUI.Core.UITests.WordPad
         public void TestSetup()
         {
             application = Application.Launch("wordpad.exe");
+            // Give the application some time to start
+            System.Threading.Thread.Sleep(1000);
             automation = new UIA3Automation();
         }
 

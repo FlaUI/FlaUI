@@ -69,7 +69,7 @@ namespace FlaUI.Core.UITests.WordPad.Screens
             }
 
             // Do a retry to wait for the window
-            return Retry.Find(() => FindFirstChild(cf => cf.ByControlType(ControlType.Window).And(cf.ByName("Info"))),
+            return Retry.Find(() => FindFirstChild(cf => cf.ByControlType(ControlType.Window)),
                 new RetrySettings
                 {
                     Timeout = TimeSpan.FromSeconds(1),
