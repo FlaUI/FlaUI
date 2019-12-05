@@ -2,7 +2,6 @@
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.WindowsAPI;
-using System.Text;
 
 namespace FlaUI.Core.AutomationElements.PatternElements
 {
@@ -34,11 +33,13 @@ namespace FlaUI.Core.AutomationElements.PatternElements
                 {
                     return TogglePattern.ToggleState.Value;
                 }
-                else
+                // Try the Win32 fallback
+                var state = Win32Fallback.GetToggleStateWin32(this);
+                if (!state.HasValue)
                 {
-                    // Win32 fallback
-                    return GetToggleStateWin32();
+                    throw new Exception("Failed to get state of the toggle");
                 }
+                return state.Value;
             }
             set
             {
@@ -52,86 +53,12 @@ namespace FlaUI.Core.AutomationElements.PatternElements
                         // Toggle to the next state
                         Toggle();
                     }
+                    return;
                 }
-                else
-                {
-                    // try with Win32 methods
-                    SetToggleStateWin32(value);
-                }
-            }
-        }
-        
-        internal void SetToggleStateWin32(ToggleState state)
-        {
-            if (Properties.NativeWindowHandle.IsSupported)
-            {
-                var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
-                if (windowHandle != IntPtr.Zero)
-                {
-                    StringBuilder className = new StringBuilder(256);
-                    User32.GetClassName(windowHandle, className, 256);
-                    
-                    if (className.ToString() == "Button") // Common Win32 Checkbox window
-                    {
-                        IntPtr result = User32.SendMessage(windowHandle, ButtonMessages.BM_GETCHECK, IntPtr.Zero, IntPtr.Zero);
-                    
-                        if (state == ToggleState.On)
-                        {
-                            if (result.ToInt32() != (int)ButtonMessages.BST_CHECKED)
-                            {
-                                User32.SendMessage(windowHandle, ButtonMessages.BM_SETCHECK, new IntPtr(ButtonMessages.BST_CHECKED), IntPtr.Zero);
-                            }
-                        }
-                        else if (state == ToggleState.Off)
-                        {
-                            if (result.ToInt32() != (int)ButtonMessages.BST_UNCHECKED)
-                            {
-                                User32.SendMessage(windowHandle, ButtonMessages.BM_SETCHECK, new IntPtr(ButtonMessages.BST_UNCHECKED), IntPtr.Zero);
-                            }
-                        }
-                        else // indeterminate state
-                        {
-                            if (result.ToInt32() != (int)ButtonMessages.BST_INDETERMINATE)
-                            {
-                                User32.SendMessage(windowHandle, ButtonMessages.BM_SETCHECK, new IntPtr(ButtonMessages.BST_INDETERMINATE), IntPtr.Zero);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-        internal ToggleState GetToggleStateWin32()
-        {
-            if (Properties.NativeWindowHandle.IsSupported)
-            {
-                var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
-                if (windowHandle != IntPtr.Zero)
-                {
-                    StringBuilder className = new StringBuilder(256);
-                    User32.GetClassName(windowHandle, className, 256);
-                            
-                    if (className.ToString() == "Button")  // common Win32 checkbox window
-                    {
-                        IntPtr result = User32.SendMessage(windowHandle,
-                            ButtonMessages.BM_GETCHECK, IntPtr.Zero, IntPtr.Zero);
 
-                        if (result.ToInt32() == (int)ButtonMessages.BST_UNCHECKED)
-                        {
-                            return ToggleState.Off;
-                        }
-                        else if (result.ToInt32() == (int)ButtonMessages.BST_CHECKED)
-                        {
-                            return ToggleState.On;
-                        }
-                        else if (result.ToInt32() == (int)ButtonMessages.BST_INDETERMINATE)
-                        {
-                            return ToggleState.Indeterminate;
-                        }
-                    }
-                }
+                // Try with the win32 fallback
+                Win32Fallback.SetToggleStateWin32(this, value);
             }
-            return ToggleState.Indeterminate;
         }
 
         /// <summary>

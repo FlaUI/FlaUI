@@ -44,7 +44,7 @@ namespace FlaUI.Core.Input
         {
             var currentElement = automationElement;
             var treeWalker = automationElement.Automation.TreeWalkerFactory.GetControlViewWalker();
-            while (currentElement.Properties.NativeWindowHandle.ValueOrDefault == new IntPtr(0))
+            while (currentElement.Properties.NativeWindowHandle.ValueOrDefault == Win32Constants.FALSE)
             {
                 currentElement = treeWalker.GetParent(currentElement);
             }

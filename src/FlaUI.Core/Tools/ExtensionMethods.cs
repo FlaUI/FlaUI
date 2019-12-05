@@ -39,6 +39,16 @@ namespace FlaUI.Core.Tools
         public static int ToInt(this double value) => Convert.ToInt32(value);
 
         /// <summary>
+        /// Converts an enum value to an int.
+        /// </summary>
+        public static int ToInt(this Enum value) => (int)(object)value;
+
+        /// <summary>
+        /// Converts an enum value to an uint.
+        /// </summary>
+        public static uint ToUInt(this Enum value) => (uint)(object)value;
+
+        /// <summary>
         /// Rounds the number down the the next even number.
         /// </summary>
         public static int Even(this int self) => self % 2 == 1 ? self - 1 : self;

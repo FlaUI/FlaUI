@@ -3,8 +3,6 @@ using System.Linq;
 using FlaUI.Core.Exceptions;
 using FlaUI.Core.Input;
 using FlaUI.Core.WindowsAPI;
-using System.Runtime.InteropServices;
-using System.Text;
 
 namespace FlaUI.Core.AutomationElements
 {
@@ -40,7 +38,7 @@ namespace FlaUI.Core.AutomationElements
                 {
                     return textPattern.DocumentRange.GetText(Int32.MaxValue);
                 }
-                if (GetTextWin32(out string textWin32) == true)
+                if (Win32Fallback.GetTextWin32(this, out string textWin32))
                 {
                     return textWin32;
                 }
@@ -51,69 +49,15 @@ namespace FlaUI.Core.AutomationElements
                 if (Patterns.Value.TryGetPattern(out var valuePattern))
                 {
                     valuePattern.SetValue(value);
+                    return;
                 }
-                else
+                // Fallback to Win32
+                if (!Win32Fallback.SetTextWin32(this, value))
                 {
-                    if (SetTextWin32(value) == false)
-                    {
-                        Enter(value);
-                    }
+                    // Fallback to enter the value by keyboard
+                    Enter(value);
                 }
             }
-        }
-        
-        private bool SetTextWin32(string text)
-        {
-            // try with native Win32 function SetWindowText
-            if (Properties.NativeWindowHandle.IsSupported)
-            {
-	        var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
-                if (windowHandle != IntPtr.Zero)
-                {
-                    IntPtr textPtr = Marshal.StringToBSTR(text);
-                
-                    try
-                    {
-                        if (textPtr != IntPtr.Zero)
-                        {
-                            if (User32.SendMessage(windowHandle, WindowsMessages.WM_SETTEXT, IntPtr.Zero, textPtr) ==
-                                Win32Constants.TRUE)
-                            {
-                                return true; // text successfully set
-                            }
-                        }
-                    }
-                    catch { }
-                    finally
-                    {
-                        Marshal.FreeBSTR(textPtr);
-                    }
-                }
-            }
-            return false;
-        }
-
-        private bool GetTextWin32(out string textOut)
-        {
-            // try with native Win32 function SetWindowText
-            if (Properties.NativeWindowHandle.IsSupported)
-            {
-                var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
-                if (windowHandle != IntPtr.Zero)
-                {
-                    IntPtr textLengthPtr = User32.SendMessage(windowHandle, WindowsMessages.WM_GETTEXTLENGTH, IntPtr.Zero, IntPtr.Zero);
-                    if (textLengthPtr.ToInt32() > 0)
-                    {
-                        int textLength = textLengthPtr.ToInt32() + 1;
-                        StringBuilder text = new StringBuilder(textLength);
-                        User32.SendMessage(windowHandle, WindowsMessages.WM_GETTEXT, textLength, text);
-                        textOut = text.ToString();
-                        return true; // success
-                    }
-                }
-            }
-            textOut = string.Empty;
-            return false;
         }
 
         /// <summary>

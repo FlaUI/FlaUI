@@ -244,7 +244,7 @@ namespace FlaUI.Core.AutomationElements
             if (Properties.NativeWindowHandle.IsSupported)
             {
                 var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
-                if (windowHandle != new IntPtr(0))
+                if (windowHandle != Win32Constants.FALSE)
                 {
                     uint processId = 0;
                     uint windowThreadId = User32.GetWindowThreadProcessId(windowHandle, out processId);
@@ -272,7 +272,7 @@ namespace FlaUI.Core.AutomationElements
             if (Properties.NativeWindowHandle.IsSupported)
             {
                 var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
-                if (windowHandle != new IntPtr(0))
+                if (windowHandle != Win32Constants.FALSE)
                 {
                     User32.SetForegroundWindow(windowHandle);
                     Wait.UntilResponsive(this);
