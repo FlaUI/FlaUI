@@ -12,6 +12,7 @@ namespace FlaUI.Core.AutomationElements
     {
         private readonly InvokeAutomationElement _invokeAutomationElement;
         private readonly ExpandCollapseAutomationElement _expandCollapseAutomationElement;
+        private readonly ToggleAutomationElement _toggleAutomationElement;
 
         /// <summary>
         /// Creates a <see cref="MenuItem"/> element.
@@ -20,6 +21,7 @@ namespace FlaUI.Core.AutomationElements
         {
             _invokeAutomationElement = new InvokeAutomationElement(frameworkAutomationElement);
             _expandCollapseAutomationElement = new ExpandCollapseAutomationElement(frameworkAutomationElement);
+            _toggleAutomationElement = new ToggleAutomationElement(frameworkAutomationElement);
         }
 
         /// <summary>
@@ -97,6 +99,42 @@ namespace FlaUI.Core.AutomationElements
         {
             _expandCollapseAutomationElement.Collapse();
             return this;
+        }
+        
+        /// <summary>
+        /// Gets or sets if a menu item is checked or unchecked, if checking is supported.
+        /// </summary>
+        public bool? IsChecked
+        {
+            get
+            {
+                if (Patterns.Toggle.IsSupported)
+                {
+                    return _toggleAutomationElement.IsToggled;
+                }
+                else
+                {
+                    // Toggle pattern is supported only for checked menu items.
+                    // Toggle pattern is not present on menu items that support checking but are unchecked.
+                    // Menu items that doesn't support Toggle pattern are considered unchecked.
+                    return false;
+                }
+            }
+            set
+            {
+                if (Patterns.Toggle.IsSupported)
+                {
+                    _toggleAutomationElement.IsToggled = value;
+                }
+                else
+                {
+                    // here the menu item is unchecked because Toggle pattern is not supported
+                    if (value == true)
+                    {
+                        _invokeAutomationElement.Invoke();
+                    }
+                }
+            }
         }
     }
 }
