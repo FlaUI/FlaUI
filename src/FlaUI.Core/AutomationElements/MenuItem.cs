@@ -108,31 +108,46 @@ namespace FlaUI.Core.AutomationElements
         {
             get
             {
-                if (Patterns.Toggle.IsSupported)
+                if (FrameworkType == FrameworkType.Win32)
                 {
-                    return _toggleAutomationElement.IsToggled;
+                    if (Patterns.Toggle.IsSupported)
+                    {
+                        return _toggleAutomationElement.IsToggled;
+                    }
+                    else
+                    {
+                        // Toggle pattern is supported only for checked menu items. This strange behaviour happens only for Win32 applications.
+                        // Toggle pattern is not present on menu items that support checking but are unchecked.
+                        // Menu items that doesn't support Toggle pattern are considered unchecked.
+                        return false;
+                    }
                 }
                 else
                 {
-                    // Toggle pattern is supported only for checked menu items.
-                    // Toggle pattern is not present on menu items that support checking but are unchecked.
-                    // Menu items that doesn't support Toggle pattern are considered unchecked.
-                    return false;
+                    // WinForms doesn't support Toggle pattern at all. WPF fully supports Toggle pattern.
+                    return _toggleAutomationElement.IsToggled;
                 }
             }
             set
             {
-                if (Patterns.Toggle.IsSupported)
+                if (FrameworkType == FrameworkType.Win32)
                 {
-                    _toggleAutomationElement.IsToggled = value;
+                    if (Patterns.Toggle.IsSupported)
+                    {
+                        _toggleAutomationElement.IsToggled = value;
+                    }
+                    else
+                    {
+                        // here the menu item is unchecked because Toggle pattern is not supported
+                        if (value == true)
+                        {
+                            _invokeAutomationElement.Invoke();
+                        }
+                    }
                 }
                 else
                 {
-                    // here the menu item is unchecked because Toggle pattern is not supported
-                    if (value == true)
-                    {
-                        _invokeAutomationElement.Invoke();
-                    }
+                    _toggleAutomationElement.IsToggled = value;
                 }
             }
         }
