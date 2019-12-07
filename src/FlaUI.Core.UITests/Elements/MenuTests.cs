@@ -64,5 +64,28 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(fancy, Is.Not.Null);
             Assert.That(fancy.Properties.Name.Value, Is.EqualTo("Fancy"));
         }
+        
+        [Test]
+        public void TestCheckedMenuItem()
+        {
+            if (ApplicationType == TestApplicationType.WinForms)
+            {
+                return;
+            }
+            var window = App.GetMainWindow(Automation);
+            var menu = window.FindFirstChild(cf => cf.Menu()).AsMenu();
+            var edit = menu.Items["Edit"];
+            Assert.That(edit, Is.Not.Null);
+            var showLabel = edit.Items["Show Label"];
+            Assert.That(showLabel, Is.Not.Null);
+            showLabel.Checked = false;
+            Assert.That(showLabel.IsChecked, Is.EqualTo(false));
+            var label = window.FindFirstDescendant(cf => cf.ByText("Menu Item Checked")).AsLabel();
+            Assert.That(label, Is.Not.Null);
+            Assert.That(label.Properties.IsOffscreen.Value, Is.EqualTo(true));
+            showLabel.Checked = true;
+            Assert.That(showLabel.IsChecked, Is.EqualTo(true));
+            Assert.That(label.Properties.IsOffscreen.Value, Is.EqualTo(false));
+        }
     }
 }
