@@ -78,14 +78,11 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(edit, Is.Not.Null);
             var showLabel = edit.Items["Show Label"];
             Assert.That(showLabel, Is.Not.Null);
+            Assert.That(showLabel.IsChecked, Is.EqualTo(true));
             showLabel.IsChecked = false;
             Assert.That(showLabel.IsChecked, Is.EqualTo(false));
-            var label = window.FindFirstDescendant(cf => cf.ByText("Menu Item Checked")).AsLabel();
-            Assert.That(label, Is.Not.Null);
-            Assert.That(label.Properties.IsOffscreen.Value, Is.EqualTo(true));
-            //showLabel.IsChecked = true;
-            //Assert.That(showLabel.IsChecked, Is.EqualTo(true));
-            //Assert.That(label.Properties.IsOffscreen.Value, Is.EqualTo(false));
+            showLabel.IsChecked = true;
+            Assert.That(showLabel.IsChecked, Is.EqualTo(true));
         }
     }
 }
