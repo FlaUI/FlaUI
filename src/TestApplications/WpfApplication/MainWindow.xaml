@@ -26,6 +26,7 @@
                     <MenuItem Header="Fancy" />
                 </MenuItem>
                 <MenuItem Header="Paste" />
+                <MenuItem Header="Show Label" IsCheckable="true" IsChecked="true" Click="OnShowLabel"/>
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
@@ -91,6 +92,7 @@
                            Placement="Top"
                            PlacementTarget="{Binding ElementName=PopupToggleButton2}"
                            StaysOpen="False" />
+                    <Label Content="Menu Item Checked" Foreground="Red" x:Name="lblMenuChk"/>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Complex Controls">
