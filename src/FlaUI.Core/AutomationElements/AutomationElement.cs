@@ -246,16 +246,15 @@ namespace FlaUI.Core.AutomationElements
                 var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
                 if (windowHandle != Win32Constants.FALSE)
                 {
-                    uint processId = 0;
-                    uint windowThreadId = User32.GetWindowThreadProcessId(windowHandle, out processId);
-                    uint currentThreadId = User32.GetCurrentThreadId();
-                    
+                    uint windowThreadId = User32.GetWindowThreadProcessId(windowHandle, out _);
+                    uint currentThreadId = Kernel32.GetCurrentThreadId();
+
                     // attach window to the calling thread's message queue
                     User32.AttachThreadInput(currentThreadId, windowThreadId, true);
                     User32.SetFocus(windowHandle);
                     // detach the window from the calling thread's message queue
                     User32.AttachThreadInput(currentThreadId, windowThreadId, false);
-                    
+
                     Wait.UntilResponsive(this);
                     return;
                 }
@@ -431,7 +430,7 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <summary>
-        /// Gets metadata from the UI Automation element that indicates how the information should be interpreted. 
+        /// Gets metadata from the UI Automation element that indicates how the information should be interpreted.
         /// </summary>
         /// <param name="targetId">The property to retrieve.</param>
         /// <param name="metadataId">Specifies the type of metadata to retrieve.</param>

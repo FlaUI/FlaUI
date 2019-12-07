@@ -2,6 +2,9 @@
 #if NET35
 
 using System;
+using System.Diagnostics;
+using System.Security;
+using FlaUI.Core.WindowsAPI;
 
 namespace System
 {
@@ -19,6 +22,32 @@ namespace System
         /// Overload for <see cref="TimeSpan.ToString"/> because <see cref="TimeSpan"/> in .Net3.5 does not take a format parameter.
         /// </summary>
         public static string ToString(this TimeSpan self, string format) => self.ToString();
+    }
+
+    /// <summary>
+    /// Polyfill for missing Environment stuff.
+    /// </summary>
+    public static class PolyFillEnvironment
+    {
+        public static bool Is64BitOperatingSystem
+        {
+            [SecuritySafeCritical]
+            get
+            {
+                if (IntPtr.Size == 8)
+                {
+                    // The current process is 64 bit
+                    return true;
+                }
+                else
+                {
+                    // The process is running in the WOW64 emulator
+                    return WindowsApiTools.DoesWin32MethodExist(Kernel32.KERNEL32, "IsWow64Process")
+                        && Kernel32.IsWow64Process(Process.GetCurrentProcess().Handle, out bool isWow64)
+                        && isWow64;
+                }
+            }
+        }
     }
 }
 

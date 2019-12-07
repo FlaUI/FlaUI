@@ -64,6 +64,21 @@ namespace FlaUI.Core.Tools
         public static CultureInfo CurrentCulture => CultureInfo.InstalledUICulture;
 
         /// <summary>
+        /// Determine if the OS is 32 or 64 bit.
+        /// </summary>
+        public static bool Is64Bit
+        {
+            get
+            {
+#if NET35
+                return PolyFillEnvironment.Is64BitOperatingSystem;
+#else
+                return Environment.Is64BitOperatingSystem;
+#endif
+            }
+        }
+
+        /// <summary>
         /// Checks if the current operating system name contains the given string.
         /// </summary>
         public static bool CurrentProductContains(string name)

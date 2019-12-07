@@ -7,6 +7,7 @@ using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Logging;
 using FlaUI.Core.Tools;
+using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core
 {
@@ -166,7 +167,7 @@ namespace FlaUI.Core
         /// <returns>An application instance which is attached to the process.</returns>
         public static Application Attach(Process process)
         {
-            Logger.Default.Debug($"[Attaching to process:{process.Id}] [Process name:{process.ProcessName}] [Process full path:{process.MainModule.FileName}]");
+            Logger.Default.Debug($"[Attaching to process:{process.Id}] [Process name:{process.ProcessName}] [Process full path:{WindowsApiTools.GetMainModuleFilepath(process)}]");
             return new Application(process);
         }
 
