@@ -29,9 +29,20 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(subitems1, Has.Length.EqualTo(1));
             Assert.That(subitems1[0].Properties.Name, Is.EqualTo("Exit"));
             var subitems2 = items[1].Items;
-            Assert.That(subitems2, Has.Length.EqualTo(2));
+            if (ApplicationType == TestApplicationType.WinForms)
+            {
+                Assert.That(subitems2, Has.Length.EqualTo(2));
+            }
+            else
+            {
+                Assert.That(subitems2, Has.Length.EqualTo(3));
+            }
             Assert.That(subitems2[0].Properties.Name, Is.EqualTo("Copy"));
             Assert.That(subitems2[1].Properties.Name, Is.EqualTo("Paste"));
+            if (ApplicationType != TestApplicationType.WinForms)
+            {
+                Assert.That(subitems2[2].Properties.Name, Is.EqualTo("Show Label"));
+            }
             var subsubitems1 = subitems2[0].Items;
             Assert.That(subsubitems1, Has.Length.EqualTo(2));
             Assert.That(subsubitems1[0].Properties.Name, Is.EqualTo("Plain"));
