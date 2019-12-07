@@ -103,6 +103,8 @@ namespace FlaUI.Core.AutomationElements
         
         /// <summary>
         /// Gets or sets if a menu item is checked or unchecked, if checking is supported.
+        /// For some applications, like WPF, setting this property doesn't execute the action that happens when a user clicks the menu item, only the checked state is changed.
+        /// If you want to execute the action too you need to use Invoke() method.
         /// </summary>
         public bool? IsChecked
         {
