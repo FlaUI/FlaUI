@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
@@ -160,5 +160,37 @@ namespace FlaUI.Core.WindowsAPI
         public uint flags;
     }
 
+    [StructLayout(LayoutKind.Sequential)]
+    public struct POINTER_TOUCH_INFO
+    {
+        public POINTER_INFO pointerInfo;
+        public TouchFlags touchFlags;
+        public TouchMask touchMask;
+        public RECT rcContact;
+        public RECT rcContactRaw;
+        public uint orientation;
+        public uint pressure;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct POINTER_INFO
+    {
+        public PointerInputType pointerType;
+        public uint pointerId;
+        public uint frameId;
+        public PointerFlags pointerFlags;
+        public IntPtr sourceDevice;
+        public IntPtr hwndTarget;
+        public POINT ptPixelLocation;
+        public POINT ptPixelLocationRaw;
+        public POINT ptHimetricLocation;
+        public POINT ptHimetricLocationRaw;
+        public uint dwTime;
+        public uint historyCount;
+        public uint inputData;
+        public uint dwKeyStates;
+        public ulong PerformanceCount;
+        public PointerButtonChangeType ButtonChangeType;
+    }
 }
 #pragma warning restore
