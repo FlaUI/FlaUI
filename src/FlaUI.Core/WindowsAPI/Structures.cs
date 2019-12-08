@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
@@ -138,7 +138,7 @@ namespace FlaUI.Core.WindowsAPI
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct Rect
+    public struct RECT
     {
         public int left;
         public int top;
@@ -155,8 +155,8 @@ namespace FlaUI.Core.WindowsAPI
     public struct MonitorInfo
     {
         public uint size;
-        public Rect monitor;
-        public Rect work;
+        public RECT monitor;
+        public RECT work;
         public uint flags;
     }
 

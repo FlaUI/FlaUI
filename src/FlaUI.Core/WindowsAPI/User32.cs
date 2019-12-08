@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -52,7 +52,7 @@ namespace FlaUI.Core.WindowsAPI
 
         [DllImport("user32.dll", EntryPoint = "SendMessage", CharSet = CharSet.Auto)]
         public static extern bool SendMessage(IntPtr hWnd, uint Msg, int wParam, StringBuilder lParam);
-        
+
         [DllImport("user32.dll", SetLastError = true)]
         public static extern uint SendInput(uint nInputs, [MarshalAs(UnmanagedType.LPArray), In] INPUT[] pInputs, int cbSize);
 
@@ -94,13 +94,13 @@ namespace FlaUI.Core.WindowsAPI
 
         [DllImport("user32.dll")]
         public static extern bool GetMonitorInfo(IntPtr hmon, ref MonitorInfo mi);
-        
+
         [DllImport("user32.dll", SetLastError = true)]
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
 
         [DllImport("user32.dll")]
         public static extern bool AttachThreadInput(uint idAttach, uint idAttachTo, bool fAttach);
-        
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         public static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
     }

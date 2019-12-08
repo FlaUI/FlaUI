@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 // ReSharper disable InconsistentNaming
 #pragma warning disable
@@ -2097,7 +2097,7 @@ namespace FlaUI.Core.WindowsAPI
         /// <summary>dest = WHITE</summary>
         WHITENESS = 0x00FF0062,
         /// <summary>
-        /// Capture window as seen on screen.  This includes layered windows 
+        /// Capture window as seen on screen. This includes layered windows
         /// such as WPF windows with AllowsTransparency="true"
         /// </summary>
         CAPTUREBLT = 0x40000000

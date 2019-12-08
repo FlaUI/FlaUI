@@ -102,11 +102,11 @@ namespace FlaUI.Core.Capturing
         private static Rectangle GetBoundsByScreenIndex(int screenIndex)
         {
             var monitors = new List<MonitorInfo>();
-            User32.EnumDisplayMonitors(IntPtr.Zero, IntPtr.Zero, MonitorDelegate , IntPtr.Zero);
+            User32.EnumDisplayMonitors(IntPtr.Zero, IntPtr.Zero, MonitorDelegate, IntPtr.Zero);
             var monitorRect = monitors[screenIndex].monitor;
             return new Rectangle(monitorRect.left, monitorRect.top, monitorRect.right - monitorRect.left, monitorRect.bottom - monitorRect.top);
-            
-            bool MonitorDelegate(IntPtr hMonitor, IntPtr hdcMonitor, ref Rect lprcMonitor, IntPtr dwData)
+
+            bool MonitorDelegate(IntPtr hMonitor, IntPtr hdcMonitor, ref RECT lprcMonitor, IntPtr dwData)
             {
                 var mi = new MonitorInfo();
                 mi.size = (uint)Marshal.SizeOf(mi);

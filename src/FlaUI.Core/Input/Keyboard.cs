@@ -192,7 +192,18 @@ namespace FlaUI.Core.Input
         /// </summary>
         public static IDisposable Pressing(params VirtualKeyShort[] virtualKeys)
         {
-            return new KeyPressingActivation(virtualKeys);
+            foreach (var key in virtualKeys)
+            {
+                Press(key);
+            }
+
+            return new ActionDisposable(() =>
+            {
+                foreach (var key in virtualKeys.Reverse())
+                {
+                    Release(key);
+                }
+            });
         }
 
         /// <summary>
@@ -255,32 +266,6 @@ namespace FlaUI.Core.Input
                 // An error occured
                 var errorCode = Marshal.GetLastWin32Error();
                 Logger.Default.Warn("Could not send keyboard input. ErrorCode: {0}", errorCode);
-            }
-        }
-
-        /// <summary>
-        /// Disposable class which presses the keys on creation
-        /// and disposes them on destruction.
-        /// </summary>
-        private class KeyPressingActivation : IDisposable
-        {
-            private readonly VirtualKeyShort[] _virtualKeys;
-
-            public KeyPressingActivation(VirtualKeyShort[] virtualKeys)
-            {
-                _virtualKeys = virtualKeys;
-                foreach (var key in _virtualKeys)
-                {
-                    Press(key);
-                }
-            }
-
-            public void Dispose()
-            {
-                foreach (var key in _virtualKeys.Reverse())
-                {
-                    Release(key);
-                }
             }
         }
     }
