@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -103,6 +103,12 @@ namespace FlaUI.Core.WindowsAPI
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         public static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
+
+        [DllImport("User32.dll", SetLastError = true)]
+        public static extern bool InitializeTouchInjection(uint maxCount = 256, InjectedInputVisualizationMode feedbackMode = InjectedInputVisualizationMode.DEFAULT);
+
+        [DllImport("User32.dll", SetLastError = true)]
+        public static extern bool InjectTouchInput(int count, [MarshalAs(UnmanagedType.LPArray), In] POINTER_TOUCH_INFO[] contacts);
     }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

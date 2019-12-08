@@ -90,6 +90,7 @@
     <Compile Include="TestFramework\TestUtilities.cs" />
     <Compile Include="TestFramework\UITestBase.cs" />
     <Compile Include="TestFramework\NUnitProgressLogger.cs" />
+    <Compile Include="TouchTests.cs" />
     <Compile Include="WordPad\Screens\InfoScreen.cs" />
     <Compile Include="WordPad\Screens\MainScreen.cs" />
     <Compile Include="WordPad\WordPadTests.cs" />

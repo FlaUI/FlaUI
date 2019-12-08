@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.Tools
 {
@@ -80,6 +81,14 @@ namespace FlaUI.Core.Tools
         /// <param name="otherY">The x-coordinate of the second point.</param>
         /// <returns>The distance of the points.</returns>
         public static double Distance(this Point self, double otherX, double otherY) => Math.Sqrt(Math.Pow(self.X - otherX, 2) + Math.Pow(self.Y - otherY, 2));
+
+        /// <summary>
+        /// Converts the Point to a Win32-POINT structure.
+        /// </summary>
+        public static POINT ToPOINT(this Point self)
+        {
+            return new POINT { X = self.X, Y = self.Y };
+        }
         #endregion Point extensions
 
         #region Rectangle extensions
