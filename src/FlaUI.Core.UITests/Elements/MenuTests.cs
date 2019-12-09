@@ -31,10 +31,14 @@ namespace FlaUI.Core.UITests.Elements
             var subitems2 = items[1].Items;
             if (ApplicationType == TestApplicationType.WinForms)
             {
+                // WinForms test application remained unchanged, 
+				// "Edit" menu has 2 menu items: "Copy" and "Paste"
                 Assert.That(subitems2, Has.Length.EqualTo(2));
             }
             else
             {
+                // On WPF test application has been added a new menu item "Show Label"
+				// under "Edit" menu, so now "Edit" menu has 3 menu items
                 Assert.That(subitems2, Has.Length.EqualTo(3));
             }
             Assert.That(subitems2[0].Properties.Name, Is.EqualTo("Copy"));
@@ -70,6 +74,7 @@ namespace FlaUI.Core.UITests.Elements
         {
             if (ApplicationType == TestApplicationType.WinForms)
             {
+                Assert.Ignore("UI Automation currently does not support Toggle pattern on menu items in WinForms applications.");
                 return;
             }
             var window = App.GetMainWindow(Automation);
