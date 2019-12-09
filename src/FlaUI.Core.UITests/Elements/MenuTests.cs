@@ -32,13 +32,13 @@ namespace FlaUI.Core.UITests.Elements
             if (ApplicationType == TestApplicationType.WinForms)
             {
                 // WinForms test application remained unchanged, 
-				// "Edit" menu has 2 menu items: "Copy" and "Paste"
+                // "Edit" menu has 2 menu items: "Copy" and "Paste"
                 Assert.That(subitems2, Has.Length.EqualTo(2));
             }
             else
             {
                 // On WPF test application has been added a new menu item "Show Label"
-				// under "Edit" menu, so now "Edit" menu has 3 menu items
+                // under "Edit" menu, so now "Edit" menu has 3 menu items
                 Assert.That(subitems2, Has.Length.EqualTo(3));
             }
             Assert.That(subitems2[0].Properties.Name, Is.EqualTo("Copy"));
