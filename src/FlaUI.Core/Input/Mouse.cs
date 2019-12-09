@@ -57,6 +57,18 @@ namespace FlaUI.Core.Input
         }
 
         /// <summary>
+        /// The number of pixels the mouse is moved per millisecond.
+        /// Used to calculate the duration of a mouse move.
+        /// </summary>
+        public static double MovePixelsPerMillisecond { get; } = 0.5;
+
+        /// <summary>
+        /// The number of pixels the mouse is moved per step.
+        /// Used to calculate the interval of a mouse move.
+        /// </summary>
+        public static double MovePixelsPerStep { get; } = 10;
+
+        /// <summary>
         /// The current position of the mouse cursor.
         /// </summary>
         public static Point Position
@@ -111,10 +123,8 @@ namespace FlaUI.Core.Input
 
             // Calculate some values for duration and interval
             var totalDistance = startPos.Distance(newX, newY);
-            var optimalPixelsPerMillisecond = 1;
-            var duration = TimeSpan.FromMilliseconds(Convert.ToInt32(totalDistance / optimalPixelsPerMillisecond).Clamp(200, 500));
-            var optimalPixelsPerStep = 10;
-            var steps = Convert.ToInt32(totalDistance / optimalPixelsPerStep).Clamp(10, 50);
+            var duration = TimeSpan.FromMilliseconds(Convert.ToInt32(totalDistance / MovePixelsPerMillisecond));
+            var steps = Convert.ToInt32(totalDistance / MovePixelsPerStep);
             var interval = TimeSpan.FromMilliseconds(duration.TotalMilliseconds / steps);
 
             // Execute the movement
