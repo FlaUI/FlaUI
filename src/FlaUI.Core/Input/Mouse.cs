@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
@@ -108,51 +107,18 @@ namespace FlaUI.Core.Input
         {
             // Get starting position
             var startPos = Position;
-            var startX = startPos.X;
-            var startY = startPos.Y;
+            var endPos = new Point(newX, newY);
 
-            // Prepare variables
+            // Calculate some values for duration and interval
             var totalDistance = startPos.Distance(newX, newY);
-
-            // Calculate the duration for the speed
             var optimalPixelsPerMillisecond = 1;
-            var minDuration = 200;
-            var maxDuration = 500;
-            var duration = Convert.ToInt32(totalDistance / optimalPixelsPerMillisecond).Clamp(minDuration, maxDuration);
-
-            // Calculate the steps for the smoothness
+            var duration = TimeSpan.FromMilliseconds(Convert.ToInt32(totalDistance / optimalPixelsPerMillisecond).Clamp(200, 500));
             var optimalPixelsPerStep = 10;
-            var minSteps = 10;
-            var maxSteps = 50;
-            var steps = Convert.ToInt32(totalDistance / optimalPixelsPerStep).Clamp(minSteps, maxSteps);
+            var steps = Convert.ToInt32(totalDistance / optimalPixelsPerStep).Clamp(10, 50);
+            var interval = TimeSpan.FromMilliseconds(duration.TotalMilliseconds / steps);
 
-            // Calculate the interval and the step size
-            var interval = duration / steps;
-            var stepX = (double)(newX - startX) / steps;
-            var stepY = (double)(newY - startY) / steps;
-
-            // Build a list of movement points (except the last one, to set that one perfectly)
-            var movements = new List<Point>();
-            for (var i = 1; i < steps; i++)
-            {
-                var tempX = startX + i * stepX;
-                var tempY = startY + i * stepY;
-                movements.Add(new Point(tempX.ToInt(), tempY.ToInt()));
-            }
-
-            // Add an exact point for the last one, if it does not fit exactly
-            var lastPoint = movements.Last();
-            if (lastPoint.X != newX || lastPoint.Y != newY)
-            {
-                movements.Add(new Point(newX, newY));
-            }
-
-            // Loop thru the steps and set them
-            foreach (var point in movements)
-            {
-                Position = point;
-                Thread.Sleep(interval);
-            }
+            // Execute the movement
+            Interpolation.Execute(point => { Position = point; }, startPos, endPos, duration, interval, true);
             Wait.UntilInputIsProcessed();
         }
 
