@@ -2,4 +2,4 @@
 Verification is intended to assist the Chocolatey moderators and community
 in verifying that this package's contents are trustworthy.
  
-The binaries can be downloaded from https://github.com/Roemer/FlaUI/releases and compared with the ones included in this package.
+The binaries can be downloaded from https://github.com/FlaUI/FlaUI/releases and compared with the ones included in this package.
