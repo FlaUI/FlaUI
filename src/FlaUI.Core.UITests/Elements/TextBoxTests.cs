@@ -60,7 +60,6 @@ namespace FlaUI.Core.UITests.Elements
             var textBox = window.FindFirstDescendant(cf => cf.ByAutomationId("TextBox")).AsTextBox();
             var textRange = textBox.Patterns.Text.Pattern;
             var colorInt = (int)textRange.DocumentRange.GetAttributeValue(Automation.TextAttributeLibrary.ForegroundColor);
-            Console.WriteLine(colorInt);
             var color = Color.FromArgb(colorInt);
             AssertColorEquality(color, Color.FromArgb(0, Color.Green));
         }
