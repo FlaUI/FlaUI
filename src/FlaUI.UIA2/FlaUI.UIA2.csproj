@@ -21,6 +21,7 @@
     <PackageTags>UI Automation UIA2 UIA3 UIA System.Windows.Automation</PackageTags>
     <IncludeSource>True</IncludeSource>
     <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <PropertyGroup Label="Signing" Condition="'$(EnableSigning)'=='true'">
