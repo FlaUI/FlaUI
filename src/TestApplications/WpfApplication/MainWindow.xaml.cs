@@ -26,5 +26,20 @@ namespace WpfApplication
                 }
             }
         }
+        
+        private void OnShowLabel(object sender, RoutedEventArgs e)
+        {
+            MenuItem menuitem = sender as MenuItem;
+            if (menuitem == null) { return; }
+            
+            if (menuitem.IsChecked == true)
+            {
+                lblMenuChk.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                lblMenuChk.Visibility = Visibility.Hidden;
+            }
+        }
     }
 }
