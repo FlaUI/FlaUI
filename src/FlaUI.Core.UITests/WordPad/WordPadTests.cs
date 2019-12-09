@@ -22,6 +22,9 @@ namespace FlaUI.Core.UITests.WordPad
             // Give the application some time to start
             System.Threading.Thread.Sleep(1000);
             automation = new UIA3Automation();
+            // Increase the timeouts
+            automation.ConnectionTimeout = TimeSpan.FromSeconds(automation.ConnectionTimeout.TotalSeconds * 2);
+            automation.TransactionTimeout = TimeSpan.FromSeconds(automation.TransactionTimeout.TotalSeconds * 2);
         }
 
         [TearDown]

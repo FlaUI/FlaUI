@@ -72,7 +72,7 @@ namespace FlaUI.Core.UITests.WordPad.Screens
             return Retry.Find(() => FindFirstChild(cf => cf.ByControlType(ControlType.Window)),
                 new RetrySettings
                 {
-                    Timeout = TimeSpan.FromSeconds(1),
+                    Timeout = TimeSpan.FromSeconds(5),
                     ThrowOnTimeout = true,
                     TimeoutMessage = "Failed to find info screen"
                 })

@@ -84,11 +84,13 @@ namespace FlaUI.Core
 
         /// <summary>
         /// Specifies the length of time that UI Automation will wait for a provider to respond to a client request for information about an automation element.
+        /// The default is 20 seconds.
         /// </summary>
         public abstract TimeSpan TransactionTimeout { get; set; }
 
         /// <summary>
         /// Specifies the length of time that UI Automation will wait for a provider to respond to a client request for an automation element.
+        /// The default is two seconds.
         /// </summary>
         public abstract TimeSpan ConnectionTimeout { get; set; }
 
