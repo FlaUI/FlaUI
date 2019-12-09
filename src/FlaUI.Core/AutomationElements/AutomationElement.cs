@@ -110,7 +110,7 @@ namespace FlaUI.Core.AutomationElements
             get
             {
                 var hasProperty = Properties.FrameworkId.TryGetValue(out string currentFrameworkId);
-                return hasProperty ? FrameworkIds.ConvertToFrameworkType(currentFrameworkId) : FrameworkType.Unknown;
+                return hasProperty ? FrameworkIds.Convert(currentFrameworkId) : FrameworkType.Unknown;
             }
         }
 
