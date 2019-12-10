@@ -11,7 +11,7 @@ namespace FlaUI.Core.UITests.Elements
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class TextBoxTests : UITestBase
+    public class TextBoxTests : FlaUITestBase
     {
         private const string DefaultTextBoxText = "Test TextBox";
 
@@ -22,7 +22,7 @@ namespace FlaUI.Core.UITests.Elements
         [Test]
         public void DirectSetTest()
         {
-            var window = App.GetMainWindow(Automation);
+            var window = Application.GetMainWindow(Automation);
             var textBox = window.FindFirstDescendant(cf => cf.ByAutomationId("TextBox")).AsTextBox();
             var text = textBox.Text;
             Assert.That(text, Is.EqualTo(DefaultTextBoxText));
@@ -36,7 +36,7 @@ namespace FlaUI.Core.UITests.Elements
         [Test]
         public void EnterTest()
         {
-            var window = App.GetMainWindow(Automation);
+            var window = Application.GetMainWindow(Automation);
             var textBox = window.FindFirstDescendant(cf => cf.ByAutomationId("TextBox")).AsTextBox();
             var text = textBox.Text;
             Assert.That(text, Is.EqualTo(DefaultTextBoxText));
@@ -56,7 +56,7 @@ namespace FlaUI.Core.UITests.Elements
                 Assert.Ignore("WinForms currently does not report the color on text boxes.");
                 return;
             }
-            var window = App.GetMainWindow(Automation);
+            var window = Application.GetMainWindow(Automation);
             var textBox = window.FindFirstDescendant(cf => cf.ByAutomationId("TextBox")).AsTextBox();
             var textRange = textBox.Patterns.Text.Pattern;
             var colorInt = (int)textRange.DocumentRange.GetAttributeValue(Automation.TextAttributeLibrary.ForegroundColor);

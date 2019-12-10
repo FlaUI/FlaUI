@@ -7,7 +7,7 @@ namespace FlaUI.Core.UITests.Patterns
 {
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class GridPatternTests : UITestBase
+    public class GridPatternTests : FlaUITestBase
     {
         private AutomationElement _dataGrid;
 
@@ -19,7 +19,7 @@ namespace FlaUI.Core.UITests.Patterns
         [OneTimeSetUp]
         public void SelectTab()
         {
-            var mainWindow = App.GetMainWindow(Automation);
+            var mainWindow = Application.GetMainWindow(Automation);
             var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
             var tabItem = tab.SelectTabItem(1);
             _dataGrid = tabItem.FindFirstDescendant(cf => cf.ByAutomationId("dataGridView"));

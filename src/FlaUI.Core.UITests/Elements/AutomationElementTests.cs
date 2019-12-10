@@ -10,7 +10,7 @@ namespace FlaUI.Core.UITests.Elements
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class AutomationElementTests : UITestBase
+    public class AutomationElementTests : FlaUITestBase
     {
         public AutomationElementTests(AutomationType automationType, TestApplicationType appType)
             : base(automationType, appType)
@@ -20,8 +20,8 @@ namespace FlaUI.Core.UITests.Elements
         [Test]
         public void ParentTest()
         {
-            RestartApp();
-            var window = App.GetMainWindow(Automation);
+            RestartApplication();
+            var window = Application.GetMainWindow(Automation);
             var child = window.FindFirstChild();
             Assert.That(child.Parent.ControlType, Is.EqualTo(ControlType.Window));
         }
@@ -29,8 +29,8 @@ namespace FlaUI.Core.UITests.Elements
         [Test]
         public void IsAvailableTest()
         {
-            RestartApp();
-            var window = App.GetMainWindow(Automation);
+            RestartApplication();
+            var window = Application.GetMainWindow(Automation);
             Assert.That(window.IsAvailable, Is.True);
             window.Close();
             Retry.WhileTrue(() => window.IsAvailable, TimeSpan.FromSeconds(1));

@@ -7,7 +7,7 @@ namespace FlaUI.Core.UITests.Elements
 {
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class PopupTests : UITestBase
+    public class PopupTests : FlaUITestBase
     {
         public PopupTests(AutomationType automationType, TestApplicationType appType)
             : base(automationType, appType)
@@ -17,7 +17,7 @@ namespace FlaUI.Core.UITests.Elements
         [Test]
         public void CheckBoxInPopupTest()
         {
-            var window = App.GetMainWindow(Automation);
+            var window = Application.GetMainWindow(Automation);
             var btn = window.FindFirstDescendant(cf => cf.ByAutomationId("PopupToggleButton1"));
             btn.Click();
             Wait.UntilInputIsProcessed();
@@ -32,7 +32,7 @@ namespace FlaUI.Core.UITests.Elements
         [Test]
         public void MenuInPopupTest()
         {
-            var window = App.GetMainWindow(Automation);
+            var window = Application.GetMainWindow(Automation);
             var btn = window.FindFirstDescendant(cf => cf.ByAutomationId("PopupToggleButton2"));
             btn.Click();
             Wait.UntilInputIsProcessed();

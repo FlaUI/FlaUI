@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -86,6 +86,7 @@
     <Compile Include="Patterns\ScrollItemPatternTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchTests.cs" />
+    <Compile Include="TestFramework\FlaUITestBase.cs" />
     <Compile Include="TestFramework\TestApplicationType.cs" />
     <Compile Include="TestFramework\TestUtilities.cs" />
     <Compile Include="TestFramework\UITestBase.cs" />

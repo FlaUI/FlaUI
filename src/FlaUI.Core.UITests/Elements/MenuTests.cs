@@ -8,7 +8,7 @@ namespace FlaUI.Core.UITests.Elements
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class MenuTests : UITestBase
+    public class MenuTests : FlaUITestBase
     {
         public MenuTests(AutomationType automationType, TestApplicationType appType)
             : base(automationType, appType)
@@ -18,7 +18,7 @@ namespace FlaUI.Core.UITests.Elements
         [Test]
         public void TestMenuWithSubMenus()
         {
-            var window = App.GetMainWindow(Automation);
+            var window = Application.GetMainWindow(Automation);
             var menu = window.FindFirstChild(cf => cf.Menu()).AsMenu();
             Assert.That(menu, Is.Not.Null);
             var items = menu.Items;
@@ -56,7 +56,7 @@ namespace FlaUI.Core.UITests.Elements
         [Test]
         public void TestMenuWithSubMenusByName()
         {
-            var window = App.GetMainWindow(Automation);
+            var window = Application.GetMainWindow(Automation);
             var menu = window.FindFirstChild(cf => cf.Menu()).AsMenu();
             var edit = menu.Items["Edit"];
             Assert.That(edit, Is.Not.Null);
@@ -77,7 +77,7 @@ namespace FlaUI.Core.UITests.Elements
                 Assert.Ignore("UI Automation currently does not support Toggle pattern on menu items in WinForms applications.");
                 return;
             }
-            var window = App.GetMainWindow(Automation);
+            var window = Application.GetMainWindow(Automation);
             var menu = window.FindFirstChild(cf => cf.Menu()).AsMenu();
             var edit = menu.Items["Edit"];
             Assert.That(edit, Is.Not.Null);
@@ -88,6 +88,15 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(showLabel.IsChecked, Is.EqualTo(false));
             showLabel.IsChecked = true;
             Assert.That(showLabel.IsChecked, Is.EqualTo(true));
+        }
+
+        [Test]
+        public void TestMenuItemClick()
+        {
+            var window = Application.GetMainWindow(Automation);
+            var menu = window.FindFirstChild(cf => cf.Menu()).AsMenu();
+            var exitMenuItem = menu.Items["File"].Items["Exit"];
+            exitMenuItem.Click();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace FlaUI.Core.UITests.Elements
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class WindowTests : UITestBase
+    public class WindowTests : FlaUITestBase
     {
         public WindowTests(AutomationType automationType, TestApplicationType appType)
             : base(automationType, appType)
@@ -19,8 +19,8 @@ namespace FlaUI.Core.UITests.Elements
         [Test]
         public void ContextMenuTest()
         {
-            RestartApp();
-            var window = App.GetMainWindow(Automation);
+            RestartApplication();
+            var window = Application.GetMainWindow(Automation);
             var btn = window.FindFirstDescendant(cf => cf.ByName("ContextMenu")).AsButton();
             Mouse.Click(btn.GetClickablePoint(), MouseButton.Right);
             Wait.UntilInputIsProcessed();

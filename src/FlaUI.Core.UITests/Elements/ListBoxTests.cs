@@ -8,7 +8,7 @@ namespace FlaUI.Core.UITests.Elements
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class ListBoxTests : UITestBase
+    public class ListBoxTests : FlaUITestBase
     {
         public ListBoxTests(AutomationType automationType, TestApplicationType appType)
             : base(automationType, appType)
@@ -18,7 +18,7 @@ namespace FlaUI.Core.UITests.Elements
         [Test]
         public void Items()
         {
-            var window = App.GetMainWindow(Automation);
+            var window = Application.GetMainWindow(Automation);
             var listBox = window.FindFirstDescendant(cf => cf.ByAutomationId("ListBox")).AsListBox();
             Assert.That(listBox, Is.Not.Null);
             Assert.That(listBox.Items, Has.Length.EqualTo(2));
@@ -27,7 +27,7 @@ namespace FlaUI.Core.UITests.Elements
         [Test]
         public void SelectByIndex()
         {
-            var window = App.GetMainWindow(Automation);
+            var window = Application.GetMainWindow(Automation);
             var listBox = window.FindFirstDescendant(cf => cf.ByAutomationId("ListBox")).AsListBox();
             Assert.That(listBox, Is.Not.Null);
             Assert.That(listBox.Items, Has.Length.EqualTo(2));
@@ -45,7 +45,7 @@ namespace FlaUI.Core.UITests.Elements
         [Test]
         public void SelectByText()
         {
-            var window = App.GetMainWindow(Automation);
+            var window = Application.GetMainWindow(Automation);
             var listBox = window.FindFirstDescendant(cf => cf.ByAutomationId("ListBox")).AsListBox();
             var item = listBox.Select("ListBox Item #1");
             Assert.That(item.Text, Is.EqualTo("ListBox Item #1"));

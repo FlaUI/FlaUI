@@ -10,7 +10,7 @@ namespace FlaUI.Core.UITests.Elements
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class SliderTests : UITestBase
+    public class SliderTests : FlaUITestBase
     {
         public SliderTests(AutomationType automationType, TestApplicationType appType)
             : base(automationType, appType)
@@ -77,7 +77,7 @@ namespace FlaUI.Core.UITests.Elements
 
         private Slider GetSlider()
         {
-            var element = App.GetMainWindow(Automation).FindFirstDescendant(cf => cf.ByAutomationId("Slider")).AsSlider();
+            var element = Application.GetMainWindow(Automation).FindFirstDescendant(cf => cf.ByAutomationId("Slider")).AsSlider();
             return element;
         }
 
