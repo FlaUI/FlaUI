@@ -150,6 +150,14 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <summary>
+        /// Converts the element to a <see cref="Spinner"/>.
+        /// </summary>
+        public static Spinner AsSpinner(this AutomationElement self)
+        {
+            return self == null ? null : new Spinner(self.FrameworkAutomationElement);
+        }
+
+        /// <summary>
         /// Converts the element to a <see cref="Tab"/>.
         /// </summary>
         public static Tab AsTab(this AutomationElement self)
