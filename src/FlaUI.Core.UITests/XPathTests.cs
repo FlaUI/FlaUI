@@ -99,8 +99,6 @@ namespace FlaUI.Core.UITests
             }
         }
 
-
-
         private string GetFileMenuText()
         {
             switch (OperatingSystem.CurrentCulture.TwoLetterISOLanguageName)
@@ -122,6 +120,5 @@ namespace FlaUI.Core.UITests
                     return "Brushes";
             }
         }
-
     }
 }
