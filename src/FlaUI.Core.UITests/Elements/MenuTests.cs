@@ -1,4 +1,5 @@
-﻿using FlaUI.Core.AutomationElements;
+﻿using System.Threading;
+using FlaUI.Core.AutomationElements;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
 
@@ -88,15 +89,6 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(showLabel.IsChecked, Is.EqualTo(false));
             showLabel.IsChecked = true;
             Assert.That(showLabel.IsChecked, Is.EqualTo(true));
-        }
-
-        [Test]
-        public void TestMenuItemClick()
-        {
-            var window = Application.GetMainWindow(Automation);
-            var menu = window.FindFirstChild(cf => cf.Menu()).AsMenu();
-            var exitMenuItem = menu.Items["File"].Items["Exit"];
-            exitMenuItem.Click();
         }
     }
 }
