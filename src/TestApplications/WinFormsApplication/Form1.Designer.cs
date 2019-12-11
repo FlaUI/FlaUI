@@ -110,6 +110,8 @@
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -270,6 +272,22 @@
             this.Slider.TabIndex = 16;
             this.Slider.Value = 5;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(290, 150);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(57, 13);
+            this.label2.TabIndex = 23;
+            this.label2.Text = "Spinner";
+            // 
+            // numericUpDown1
+            //
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Location = new System.Drawing.Point(340, 147);
+            this.numericUpDown1.Size = new System.Drawing.Size(80, 30);
+            this.numericUpDown1.TabIndex = 24;
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -290,6 +308,8 @@
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.TextBox);
             this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.numericUpDown1);
             this.tabPage1.Controls.Add(this.Slider);
             this.tabPage1.Controls.Add(this.EditableCombo);
             this.tabPage1.Controls.Add(this.ProgressBar);
@@ -629,6 +649,8 @@
         private System.Windows.Forms.ListBox ListBox;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
 
