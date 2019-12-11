@@ -93,7 +93,7 @@ namespace FlaUI.Core.UITests
             {
                 var app = Application.Launch("mspaint.exe");
                 var window = app.GetMainWindow(automation);
-                var unknown = window.FindFirstByXPath("//Unknown");
+                var unknown = window.FindFirstByXPath("//Custom");
                 Assert.That(unknown, Is.Not.Null);
                 app.Close();
             }
