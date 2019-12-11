@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+﻿using System.Threading;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
@@ -8,7 +8,7 @@ namespace FlaUI.Core.UITests.Elements
 {
     [TestFixture(AutomationType.UIA2, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
-    public class SpinnerTests : UITestBase
+    public class SpinnerTests : FlaUITestBase
     {
         public SpinnerTests(AutomationType automationType, TestApplicationType appType)
             : base(automationType, appType)
