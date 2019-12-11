@@ -8,7 +8,7 @@ namespace FlaUI.Core.UITests.Elements
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class RadioButtonTests : FlaUITestBase
+    public class RadioButtonTests : UITestBase
     {
         public RadioButtonTests(AutomationType automationType, TestApplicationType appType) : base(automationType, appType)
         {

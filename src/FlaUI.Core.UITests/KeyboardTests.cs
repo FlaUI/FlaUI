@@ -33,7 +33,7 @@ namespace FlaUI.Core.UITests
 
                 Thread.Sleep(500);
 
-                TestUtilities.CloseWindowWithDontSave(mainWindow);
+                UtilityMethods.CloseWindowWithDontSave(mainWindow);
             }
             app.Dispose();
         }

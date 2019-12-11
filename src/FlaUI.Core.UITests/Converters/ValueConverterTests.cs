@@ -8,7 +8,7 @@ namespace FlaUI.Core.UITests.Converters
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class ValueConverterTests : FlaUITestBase
+    public class ValueConverterTests : UITestBase
     {
         public ValueConverterTests(AutomationType automationType, TestApplicationType appType) : base(automationType, appType)
         {

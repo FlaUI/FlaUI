@@ -7,7 +7,7 @@ namespace FlaUI.Core.UITests.Patterns
 {
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class GridPatternTests : FlaUITestBase
+    public class GridPatternTests : UITestBase
     {
         private AutomationElement _dataGrid;
 

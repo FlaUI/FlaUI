@@ -6,7 +6,7 @@ namespace FlaUI.Core.UITests.Patterns
 {
     [TestFixture(AutomationType.UIA2, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class RangeValuePatternTests : FlaUITestBase
+    public class RangeValuePatternTests : UITestBase
     {
         public RangeValuePatternTests(AutomationType automationType, TestApplicationType appType) : base(automationType, appType)
         {

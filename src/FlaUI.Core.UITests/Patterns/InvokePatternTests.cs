@@ -9,7 +9,7 @@ namespace FlaUI.Core.UITests.Patterns
 {
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class InvokePatternTests : FlaUITestBase
+    public class InvokePatternTests : UITestBase
     {
         public InvokePatternTests(AutomationType automationType, TestApplicationType appType)
             : base(automationType, appType)

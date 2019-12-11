@@ -10,7 +10,7 @@ namespace FlaUI.Core.UITests.Elements
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class SliderTests : FlaUITestBase
+    public class SliderTests : UITestBase
     {
         public SliderTests(AutomationType automationType, TestApplicationType appType)
             : base(automationType, appType)
@@ -24,7 +24,7 @@ namespace FlaUI.Core.UITests.Elements
             var thumb = slider.Thumb;
             var oldPos = thumb.Properties.BoundingRectangle.Value.Center();
             thumb.SlideHorizontally(50);
-            TestUtilities.AssertPointsAreSame(thumb.Properties.BoundingRectangle.Value.Center(), new Point(oldPos.X + 50, oldPos.Y), 1);
+            UtilityMethods.AssertPointsAreSame(thumb.Properties.BoundingRectangle.Value.Center(), new Point(oldPos.X + 50, oldPos.Y), 1);
         }
 
         [Test]

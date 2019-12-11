@@ -2,7 +2,7 @@
 using FlaUI.Core.Capturing;
 using FlaUI.Core.Logging;
 using FlaUI.Core.Tools;
-using FlaUI.Core.UITests.TestFramework;
+using FlaUI.TestUtilities;
 using FlaUI.UIA3;
 using NUnit.Framework;
 

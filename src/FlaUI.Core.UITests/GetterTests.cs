@@ -1,6 +1,7 @@
 ﻿using FlaUI.Core.Definitions;
 using FlaUI.Core.Exceptions;
 using FlaUI.Core.UITests.TestFramework;
+using FlaUI.TestUtilities;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
@@ -8,7 +9,7 @@ namespace FlaUI.Core.UITests
 {
     [TestFixture(AutomationType.UIA2)]
     [TestFixture(AutomationType.UIA3)]
-    public class GetterTests : UITestBase
+    public class GetterTests : FlaUITestBase
     {
         public AutomationType AutomationType { get; }
 
@@ -21,7 +22,7 @@ namespace FlaUI.Core.UITests
 
         protected override AutomationBase GetAutomation()
         {
-            return TestUtilities.GetAutomation(AutomationType);
+            return UtilityMethods.GetAutomation(AutomationType);
         }
 
         protected override Application StartApplication()

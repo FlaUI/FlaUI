@@ -8,7 +8,7 @@ namespace FlaUI.Core.UITests.Patterns
 {
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class ExpandCollapsePatternTests : FlaUITestBase
+    public class ExpandCollapsePatternTests : UITestBase
     {
         private AutomationElement _expander;
 

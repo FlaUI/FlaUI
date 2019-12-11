@@ -11,7 +11,7 @@ namespace FlaUI.Core.UITests
         [Test]
         public void NotepadFindFirst()
         {
-            using (var automation = TestUtilities.GetAutomation(AutomationType.UIA3))
+            using (var automation = UtilityMethods.GetAutomation(AutomationType.UIA3))
             {
                 var app = Application.Launch("notepad.exe");
                 var window = app.GetMainWindow(automation);
@@ -26,7 +26,7 @@ namespace FlaUI.Core.UITests
         [Test]
         public void NotePadFindAll()
         {
-            using (var automation = TestUtilities.GetAutomation(AutomationType.UIA3))
+            using (var automation = UtilityMethods.GetAutomation(AutomationType.UIA3))
             {
                 var app = Application.Launch("notepad.exe");
                 var window = app.GetMainWindow(automation);
@@ -42,7 +42,7 @@ namespace FlaUI.Core.UITests
         [Test]
         public void NotepadFindByAutomationId()
         {
-            using (var automation = TestUtilities.GetAutomation(AutomationType.UIA3))
+            using (var automation = UtilityMethods.GetAutomation(AutomationType.UIA3))
             {
                 var app = Application.Launch("notepad.exe");
                 var window = app.GetMainWindow(automation);
@@ -56,7 +56,7 @@ namespace FlaUI.Core.UITests
         [Test]
         public void NotePadFindAllIndexed()
         {
-            using (var automation = TestUtilities.GetAutomation(AutomationType.UIA3))
+            using (var automation = UtilityMethods.GetAutomation(AutomationType.UIA3))
             {
                 var app = Application.Launch("notepad.exe");
                 var window = app.GetMainWindow(automation);
@@ -75,7 +75,7 @@ namespace FlaUI.Core.UITests
         [Test]
         public void PaintFindElementBelowUnknown()
         {
-            using (var automation = TestUtilities.GetAutomation(AutomationType.UIA3))
+            using (var automation = UtilityMethods.GetAutomation(AutomationType.UIA3))
             {
                 var app = Application.Launch("mspaint.exe");
                 var window = app.GetMainWindow(automation);
@@ -89,7 +89,7 @@ namespace FlaUI.Core.UITests
         [Test]
         public void PaintReferenceElementWithUnknownType()
         {
-            using (var automation = TestUtilities.GetAutomation(AutomationType.UIA3))
+            using (var automation = UtilityMethods.GetAutomation(AutomationType.UIA3))
             {
                 var app = Application.Launch("mspaint.exe");
                 var window = app.GetMainWindow(automation);

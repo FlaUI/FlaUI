@@ -9,7 +9,7 @@ namespace FlaUI.Core.UITests.Elements
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class TreeTests : FlaUITestBase
+    public class TreeTests : UITestBase
     {
         private Tree _tree;
 

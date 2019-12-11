@@ -34,7 +34,7 @@ namespace FlaUI.Core.UITests
                 Mouse.MoveBy(10, 50);
                 Mouse.Up(MouseButton.Left);
                 Thread.Sleep(500);
-                TestUtilities.CloseWindowWithDontSave(mainWindow);
+                UtilityMethods.CloseWindowWithDontSave(mainWindow);
             }
             app.Dispose();
         }

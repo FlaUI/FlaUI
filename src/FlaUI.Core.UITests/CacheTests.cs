@@ -8,7 +8,7 @@ namespace FlaUI.Core.UITests
 {
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class CacheTests : FlaUITestBase
+    public class CacheTests : UITestBase
     {
         private Grid _grid;
 

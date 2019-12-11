@@ -10,7 +10,7 @@ namespace FlaUI.Core.UITests.Patterns
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class ScrollItemPatternTests : FlaUITestBase
+    public class ScrollItemPatternTests : UITestBase
     {
         private AutomationElement _grid;
         public ScrollItemPatternTests(AutomationType automationType, TestApplicationType appType) : base(automationType, appType)

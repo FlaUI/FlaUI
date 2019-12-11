@@ -2,8 +2,8 @@
 using System.Text.RegularExpressions;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Input;
-using FlaUI.Core.UITests.TestFramework;
 using FlaUI.Core.WindowsAPI;
+using FlaUI.TestUtilities;
 using FlaUI.UIA3;
 using NUnit.Framework;
 using OperatingSystem = FlaUI.Core.Tools.OperatingSystem;
@@ -11,7 +11,7 @@ using OperatingSystem = FlaUI.Core.Tools.OperatingSystem;
 namespace FlaUI.Core.UITests
 {
     [TestFixture]
-    public class CalculatorTests : UITestBase
+    public class CalculatorTests : FlaUITestBase
     {
         protected override AutomationBase GetAutomation()
         {

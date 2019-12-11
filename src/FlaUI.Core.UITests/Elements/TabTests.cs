@@ -10,7 +10,7 @@ namespace FlaUI.Core.UITests.Elements
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class TabTests : FlaUITestBase
+    public class TabTests : UITestBase
     {
         public TabTests(AutomationType automationType, TestApplicationType appType)
             : base(automationType, appType)
