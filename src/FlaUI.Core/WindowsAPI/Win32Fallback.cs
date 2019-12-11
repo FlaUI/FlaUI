@@ -154,7 +154,7 @@ namespace FlaUI.Core.WindowsAPI
         }
         
         // get the edit window inside the spinner for Windows Forms
-        private IntPtr GetSpinnerEditWindow(AutomationElement automationElement)
+        internal static IntPtr GetSpinnerEditWindow(AutomationElement automationElement)
         {
             if (!automationElement.Properties.NativeWindowHandle.IsSupported)
             {
