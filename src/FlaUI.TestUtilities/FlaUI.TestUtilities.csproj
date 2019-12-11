@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package">
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageOutputPath>..\..\artifacts</PackageOutputPath>
+    <Version>0.1.0</Version>
+    <Product>FlaUI.TestUtilities</Product>
+    <Authors>Roemer</Authors>
+    <Description>Library that provides some helper classes and methods for easier testing with FlaUI.</Description>
+    <Copyright>Copyright (c) 2019-2019</Copyright>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/FlaUI/FlaUI.TestUtilities</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/FlaUI/FlaUI.TestUtilities</RepositoryUrl>
+    <PackageTags>UI Automation UIA2 UIA3 UIA System.Windows.Automation FlaUI Testing Utilities NUnit</PackageTags>
+    <IncludeSource>True</IncludeSource>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <ItemGroup Label="Additional nuget files">
+    <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.12.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FlaUI.Core\FlaUI.Core.csproj" />
+  </ItemGroup>
+
+</Project>

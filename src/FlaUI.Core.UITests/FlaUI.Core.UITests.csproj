@@ -31,27 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Accessibility" />
-    <Reference Include="FlaUI.TestUtilities, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FlaUI.TestUtilities.0.1.0\lib\netstandard2.0\FlaUI.TestUtilities.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework, Version=3.12.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.12.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Management" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationTests.cs" />
@@ -111,12 +96,16 @@
       <Project>{df81078d-0932-47ba-b5a7-176cff202375}</Project>
       <Name>FlaUI.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FlaUI.TestUtilities\FlaUI.TestUtilities.csproj">
+      <Project>{54da021e-ee2f-4c7a-9484-b71fd02ce513}</Project>
+      <Name>FlaUI.TestUtilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FlaUI.UIA2\FlaUI.UIA2.csproj">
-      <Project>{9060a00a-1718-4976-b6af-02c1be43190c}</Project>
+      <Project>{5ca9827e-e1ad-4741-b4da-42984903230c}</Project>
       <Name>FlaUI.UIA2</Name>
     </ProjectReference>
     <ProjectReference Include="..\FlaUI.UIA3\FlaUI.UIA3.csproj">
-      <Project>{49952cc0-b938-4306-888e-836e247b0768}</Project>
+      <Project>{55fac715-04d7-47e9-a715-5bf3fe2b901f}</Project>
       <Name>FlaUI.UIA3</Name>
     </ProjectReference>
     <ProjectReference Include="..\TestApplications\WinFormsApplication\WinFormsApplication.csproj">
