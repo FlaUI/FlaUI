@@ -8,7 +8,7 @@ namespace FlaUI.Core.UITests.Elements
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class ProgressBarTests : UITestBase
+    public class ProgressBarTests : FlaUITestBase
     {
         public ProgressBarTests(AutomationType automationType, TestApplicationType appType) : base(automationType, appType)
         {
@@ -37,7 +37,7 @@ namespace FlaUI.Core.UITests.Elements
 
         private ProgressBar GetProgressBar()
         {
-            var mainWindow = App.GetMainWindow(Automation);
+            var mainWindow = Application.GetMainWindow(Automation);
             var element = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("ProgressBar")).AsProgressBar();
             return element;
         }

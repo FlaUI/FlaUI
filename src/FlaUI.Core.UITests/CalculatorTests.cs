@@ -4,6 +4,7 @@ using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Input;
 using FlaUI.Core.UITests.TestFramework;
 using FlaUI.Core.WindowsAPI;
+using FlaUI.UIA3;
 using NUnit.Framework;
 using OperatingSystem = FlaUI.Core.Tools.OperatingSystem;
 
@@ -12,22 +13,22 @@ namespace FlaUI.Core.UITests
     [TestFixture]
     public class CalculatorTests : UITestBase
     {
-        public CalculatorTests()
-            : base(AutomationType.UIA3, TestApplicationType.Custom)
+        protected override AutomationBase GetAutomation()
         {
+            return new UIA3Automation();
         }
 
         [Test]
         public void CalculatorTest()
         {
-            var window = App.GetMainWindow(Automation);
+            var window = Application.GetMainWindow(Automation);
             var calc = OperatingSystem.IsWindows10() ? (ICalculator)new Win10Calc(window) : new LegacyCalc(window);
 
             // Switch to default mode
             System.Threading.Thread.Sleep(1000);
             Keyboard.TypeSimultaneously(VirtualKeyShort.ALT, VirtualKeyShort.KEY_1);
             Wait.UntilInputIsProcessed();
-            App.WaitWhileBusy();
+            Application.WaitWhileBusy();
             System.Threading.Thread.Sleep(1000);
 
             // Simple addition
@@ -41,7 +42,7 @@ namespace FlaUI.Core.UITests
             calc.Button7.Click();
             calc.Button8.Click();
             calc.ButtonEquals.Click();
-            App.WaitWhileBusy();
+            Application.WaitWhileBusy();
             var result = calc.Result;
             Assert.That(result, Is.EqualTo("6912"));
 

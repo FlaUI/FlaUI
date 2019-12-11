@@ -9,7 +9,7 @@ namespace FlaUI.Core.UITests.Patterns
 {
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class InvokePatternTests : UITestBase
+    public class InvokePatternTests : FlaUITestBase
     {
         public InvokePatternTests(AutomationType automationType, TestApplicationType appType)
             : base(automationType, appType)
@@ -19,7 +19,7 @@ namespace FlaUI.Core.UITests.Patterns
         [Test]
         public void InvokeWithEventTest()
         {
-            var mainWindow = App.GetMainWindow(Automation);
+            var mainWindow = Application.GetMainWindow(Automation);
             var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
             var tabItem = tab.TabItems[0];
             var button = tabItem.FindFirstDescendant(cf => cf.ByAutomationId("InvokableButton"));

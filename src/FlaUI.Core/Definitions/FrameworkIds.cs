@@ -12,7 +12,6 @@ namespace FlaUI.Core.Definitions
         private static readonly Dictionary<FrameworkType, string> TypeMapping = new Dictionary<FrameworkType, string>
         {
             {FrameworkType.None, ""},
-            {FrameworkType.Unknown, null},
             {FrameworkType.Wpf, "WPF"},
             {FrameworkType.WinForms, "WinForm"},
             {FrameworkType.Win32, "Win32"},
@@ -45,7 +44,7 @@ namespace FlaUI.Core.Definitions
             {
                 return frameworkId;
             }
-            throw new ArgumentOutOfRangeException(nameof(frameworkType), frameworkType, null);
+            return null;
         }
     }
 }

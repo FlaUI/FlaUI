@@ -10,7 +10,7 @@ namespace FlaUI.Core.UITests.Elements
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class TabTests : UITestBase
+    public class TabTests : FlaUITestBase
     {
         public TabTests(AutomationType automationType, TestApplicationType appType)
             : base(automationType, appType)
@@ -20,8 +20,8 @@ namespace FlaUI.Core.UITests.Elements
         [Test]
         public void TabSelectTest()
         {
-            RestartApp();
-            var mainWindow = App.GetMainWindow(Automation);
+            RestartApplication();
+            var mainWindow = Application.GetMainWindow(Automation);
             var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
             Assert.That(tab.TabItems, Has.Length.EqualTo(2));
             Assert.That(tab.SelectedTabItemIndex, Is.EqualTo(0));

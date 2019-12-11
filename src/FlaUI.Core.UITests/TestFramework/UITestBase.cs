@@ -9,175 +9,231 @@ using NUnit.Framework.Interfaces;
 
 namespace FlaUI.Core.UITests.TestFramework
 {
+    public enum VideoRecordingMode
+    {
+        NoVideo,
+        OnePerTest,
+        OnePerFixture,
+    }
+
+    public enum ApplicationStartMode
+    {
+        OncePerTest,
+        OncePerFixture
+    }
+
     /// <summary>
-    /// Base class for ui test with some helper methods
+    /// Base class for ui test with some helper methods.
     /// </summary>
     public abstract class UITestBase
     {
         /// <summary>
-        /// Flag which indicates if any test was run on a new instance of the app.
+        /// Member which holds the current video recorder.
         /// </summary>
-        private bool _wasTestRun;
+        private VideoRecorder _recorder;
 
         /// <summary>
-        /// Flag which indicates if the test fixture has at least one failing test.
+        /// The name of the current test method. Used for the video recorder.
         /// </summary>
-        private bool _hasFailedTest;
-
-        private VideoRecorder _recorder;
         private string _testMethodName;
 
-        protected AutomationType AutomationType { get; }
-
-        protected TestApplicationType ApplicationType { get; }
+        /// <summary>
+        /// Instance of the current used automation object.
+        /// </summary>
+        protected AutomationBase Automation { get; private set; }
 
         /// <summary>
-        /// Path of the directory for the screenshots and videos for failed tests.
+        /// Instance of the current running application.
         /// </summary>
-        protected string FailedTestsData { get; }
+        protected Application Application { get; private set; }
 
         /// <summary>
-        /// Instance of the current running application
+        /// Specifies the mode of the application to start.
+        /// Defaults to OncePerTest.
         /// </summary>
-        protected Application App { get; private set; }
-
-        protected AutomationBase Automation { get; }
-
-        protected UITestBase(AutomationType automationType, TestApplicationType appType)
-        {
-            AutomationType = automationType;
-            ApplicationType = appType;
-            FailedTestsData = @"c:\FailedTestsData";
-            _wasTestRun = false;
-            Automation = TestUtilities.GetAutomation(automationType);
-            Logger.Default = new NUnitProgressLogger();
-        }
+        protected virtual ApplicationStartMode ApplicationStartMode => ApplicationStartMode.OncePerTest;
 
         /// <summary>
-        /// Setup which starts the application (once per test-class)
+        /// Flag to indicate if videos should be kept even if the test did not fail.
+        /// Defaults to false.
         /// </summary>
+        protected virtual bool KeepVideoForSuccessfulTests => false;
+
+        /// <summary>
+        /// Specifies the mode of the video recorder.
+        /// Defaults to OnePerTest.
+        /// </summary>
+        protected virtual VideoRecordingMode VideoRecordingMode => VideoRecordingMode.OnePerTest;
+
+        /// <summary>
+        /// Path of the directory for the screenshots and videos for the tests.
+        /// Defaults to c:\FailedTestsData.
+        /// </summary>
+        protected virtual string TestsMediaPath => @"c:\FailedTestsData";
+
+        /// <summary>
+        /// Gets the automation instance that should be used.
+        /// </summary>
+        protected abstract AutomationBase GetAutomation();
+
+        /// <summary>
+        /// Starts the application which should be tested.
+        /// </summary>
+        protected abstract Application StartApplication();
+
         [OneTimeSetUp]
-        public async Task BaseSetup()
+        public async Task UITestBaseOneTimeSetUp()
         {
-            // Start the recorder
-            SystemInfo.RefreshAll();
-            var ffmpegPath = await VideoRecorder.DownloadFFMpeg(@"C:\temp");
-            _recorder = new VideoRecorder(new VideoRecorderSettings { VideoQuality = 26, ffmpegPath = ffmpegPath, TargetVideoPath = $@"C:\temp\{TestContext.CurrentContext.Test.ClassName}.mp4" }, r =>
+            Logger.Default = new NUnitProgressLogger();
+            Automation = GetAutomation();
+            if (VideoRecordingMode == VideoRecordingMode.OnePerFixture)
             {
-                var testName = TestContext.CurrentContext.Test.ClassName + "." + (_testMethodName ?? "[Setup]");
-                var img = Capture.MainScreen();
-                img.ApplyOverlays(new InfoOverlay(img) { RecordTimeSpan = r.RecordTimeSpan, OverlayStringFormat = @"{rt:hh\:mm\:ss\.fff} / {name} / CPU: {cpu} / RAM: {mem.p.used}/{mem.p.tot} ({mem.p.used.perc}) / " + testName }, new MouseOverlay(img));
-                return img;
-            });
-            await Task.Delay(500);
-            StartTestApplication();
+                await StartVideoRecorder(TestContext.CurrentContext.Test.FullName);
+            }
+
+            if (ApplicationStartMode == ApplicationStartMode.OncePerFixture)
+            {
+                Application = StartApplication();
+            }
         }
 
-        /// <summary>
-        /// Closes the application after all tests were run.
-        /// </summary>
         [OneTimeTearDown]
-        public async Task BaseTeardown()
+        public async Task UITestBaseOneTimeTearDown()
         {
-            Automation.Dispose();
-            StopTestApplication();
-            await Task.Delay(500);
-            _recorder.Stop();
-            if (_hasFailedTest)
+            if (VideoRecordingMode == VideoRecordingMode.OnePerFixture)
             {
-                Directory.CreateDirectory(FailedTestsData);
-                File.Move(_recorder.TargetVideoPath, Path.Combine(FailedTestsData, Path.GetFileName(_recorder.TargetVideoPath)));
+                StopVideoRecorder();
             }
-            else
+            if (ApplicationStartMode == ApplicationStartMode.OncePerFixture)
             {
-                File.Delete(_recorder.TargetVideoPath);
+                CloseApplication();
             }
-            _recorder.Dispose();
+            if (Automation != null)
+            {
+                Automation.Dispose();
+                Automation = null;
+            }
         }
 
         [SetUp]
-        public void BaseTestSetup()
+        public async Task UITestBaseSetUp()
         {
+            // Due to the recorder running in an own thread, it is necessary to save the current method name for that thread
             _testMethodName = TestContext.CurrentContext.Test.MethodName;
+
+            if (VideoRecordingMode == VideoRecordingMode.OnePerTest)
+            {
+                await StartVideoRecorder(TestContext.CurrentContext.Test.FullName);
+            }
+            if (ApplicationStartMode == ApplicationStartMode.OncePerTest)
+            {
+                Application = StartApplication();
+            }
         }
 
-        /// <summary>
-        /// Takes screenshot on failed tests
-        /// </summary>
         [TearDown]
-        public void BaseTestTeardown()
+        public async Task UITestBaseTearDown()
         {
-            // Mark that a test was run on this application
-            _wasTestRun = true;
-            // Make a screenshot if the test failed
             if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
             {
-                _hasFailedTest = true;
                 TakeScreenshot(TestContext.CurrentContext.Test.FullName);
             }
-        }
 
-        /// <summary>
-        /// Method which starts the custom application to test
-        /// </summary>
-        protected virtual Application StartApplication()
-        {
-            return null;
-        }
-
-        /// <summary>
-        /// Restarts the application to test
-        /// </summary>
-        protected void RestartApp()
-        {
-            // Don't restart if no test was already run on it
-            if (!_wasTestRun) return;
-            // Restart the application
-            StopTestApplication();
-            StartTestApplication();
-            _wasTestRun = false;
-        }
-
-        private void StartTestApplication()
-        {
-            switch (ApplicationType)
+            if (ApplicationStartMode == ApplicationStartMode.OncePerTest)
             {
-                case TestApplicationType.Custom:
-                    App = StartApplication();
-                    break;
-                case TestApplicationType.WinForms:
-                    App = Application.Launch(Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WinFormsApplication\bin\WinFormsApplication.exe"));
-                    break;
-                case TestApplicationType.Wpf:
-                    App = Application.Launch(Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe"));
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                CloseApplication();
             }
-            App.WaitWhileMainHandleIsMissing();
+
+            if (VideoRecordingMode == VideoRecordingMode.OnePerTest)
+            {
+                StopVideoRecorder();
+            }
+
+            _testMethodName = null;
         }
 
-        private void StopTestApplication()
+        /// <summary>
+        /// Closes and starts the application.
+        /// </summary>
+        protected void RestartApplication()
         {
-            App.Close();
-            App.Dispose();
-            App = null;
+            CloseApplication();
+            Application = StartApplication();
         }
 
-        private void TakeScreenshot(string screenshotName)
+        private void CloseApplication()
         {
-            var imagename = screenshotName + ".png";
-            imagename = imagename.Replace("\"", String.Empty);
-            var imagePath = Path.Combine(FailedTestsData, imagename);
+            if (Application != null)
+            {
+                Application.Close();
+                Retry.WhileFalse(() => Application.HasExited, TimeSpan.FromSeconds(2), ignoreException: true);
+                Application.Dispose();
+                Application = null;
+            }
+        }
+
+        protected virtual async Task StartVideoRecorder(string videoName)
+        {
+            // Refresh all the system information
+            SystemInfo.RefreshAll();
+            // Download FFMpeg
+            var ffmpegPath = await VideoRecorder.DownloadFFMpeg(@"C:\temp");
+            // Start the recorder
+            var videoRecorderSettings = new VideoRecorderSettings
+            {
+                VideoFormat = VideoFormat.xvid,
+                VideoQuality = 6,
+                ffmpegPath = ffmpegPath,
+                TargetVideoPath = Path.Combine(TestsMediaPath, $"{SanitizeFileName(videoName)}.mp4")
+            };
+            _recorder = new VideoRecorder(videoRecorderSettings, r =>
+            {
+                var testName = TestContext.CurrentContext.Test.ClassName + "." + (_testMethodName ?? "[SetUp]");
+                var img = Capture.MainScreen();
+                img.ApplyOverlays(new InfoOverlay(img)
+                {
+                    RecordTimeSpan = r.RecordTimeSpan,
+                    OverlayStringFormat = @"{rt:hh\:mm\:ss\.fff} / {name} / CPU: {cpu} / RAM: {mem.p.used}/{mem.p.tot} ({mem.p.used.perc}) / " + testName
+                }, new MouseOverlay(img));
+                return img;
+            });
+            await Task.Delay(500);
+        }
+
+        protected void StopVideoRecorder()
+        {
+            if (_recorder != null)
+            {
+                _recorder.Stop();
+                if (!KeepVideoForSuccessfulTests && TestContext.CurrentContext.Result.FailCount == 0)
+                {
+                    File.Delete(_recorder.TargetVideoPath);
+                }
+                _recorder.Dispose();
+                _recorder = null;
+            }
+        }
+
+        private void TakeScreenshot(string testName)
+        {
+            var imageName = SanitizeFileName(testName) + ".png";
+            imageName = imageName.Replace("\"", String.Empty);
+            var imagePath = Path.Combine(TestsMediaPath, imageName);
             try
             {
-                Directory.CreateDirectory(FailedTestsData);
+                Directory.CreateDirectory(TestsMediaPath);
                 Capture.Screen().ToFile(imagePath);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Failed to save screenshot to directory: {0}, filename: {1}, Ex: {2}", FailedTestsData, imagePath, ex);
+                Logger.Default.Warn("Failed to save screenshot to directory: {0}, filename: {1}, Ex: {2}", TestsMediaPath, imagePath, ex);
             }
+        }
+
+        private string SanitizeFileName(string fileName)
+        {
+            fileName = String.Join("_", fileName.Split(Path.GetInvalidFileNameChars()));
+            return fileName;
         }
     }
 }

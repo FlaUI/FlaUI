@@ -230,14 +230,6 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <summary>
-        /// Generic method to convert the element to the given type.
-        /// </summary>
-        public static T AsType<T>(this AutomationElement self) where T : AutomationElement
-        {
-            return (T)Activator.CreateInstance(typeof(T), self.FrameworkAutomationElement);
-        }
-
-        /// <summary>
         /// Method to convert the element to the given type.
         /// </summary>
         public static AutomationElement AsType(this AutomationElement self, Type type)
@@ -246,16 +238,16 @@ namespace FlaUI.Core.AutomationElements
             {
                 throw new ArgumentException("The given type is not an AutomationElement", nameof(type));
             }
-            return (AutomationElement)Activator.CreateInstance(type, self.FrameworkAutomationElement);
+            return self == null ? null : (AutomationElement)Activator.CreateInstance(type, self.FrameworkAutomationElement);
         }
 
         /// <summary>
         /// Generic method to convert the element to the given type.
         /// </summary>
-        public static T As<T>(this AutomationElement self) where T: AutomationElement
+        public static T As<T>(this AutomationElement self) where T : AutomationElement
         {
             var type = typeof(T);
-            return (T)Activator.CreateInstance(type, self.FrameworkAutomationElement);
+            return self == null ? null : (T)Activator.CreateInstance(typeof(T), self.FrameworkAutomationElement);
         }
     }
 }

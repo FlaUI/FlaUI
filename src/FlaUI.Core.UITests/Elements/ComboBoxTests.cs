@@ -11,7 +11,7 @@ namespace FlaUI.Core.UITests.Elements
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class ComboBoxTests : UITestBase
+    public class ComboBoxTests : FlaUITestBase
     {
         private Window _mainWindow;
 
@@ -23,7 +23,7 @@ namespace FlaUI.Core.UITests.Elements
         [OneTimeSetUp]
         public void TestOneTimeSetup()
         {
-            _mainWindow = Retry.WhileNull(() => App.GetMainWindow(Automation), TimeSpan.FromSeconds(1)).Result;
+            _mainWindow = Retry.WhileNull(() => Application.GetMainWindow(Automation), TimeSpan.FromSeconds(1)).Result;
             Assert.That(_mainWindow, Is.Not.Null);
         }
 

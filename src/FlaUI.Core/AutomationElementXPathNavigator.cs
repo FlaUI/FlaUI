@@ -2,6 +2,7 @@
 using System.Xml;
 using System.Xml.XPath;
 using FlaUI.Core.AutomationElements;
+using FlaUI.Core.Definitions;
 
 namespace FlaUI.Core
 {
@@ -57,7 +58,21 @@ namespace FlaUI.Core
         }
 
         /// <inheritdoc />
-        public override string LocalName => IsInAttribute ? GetAttributeName(_attributeIndex) : _currentElement.Properties.ControlType.ValueOrDefault.ToString();
+        public override string LocalName
+        {
+            get
+            {
+                if (IsInAttribute)
+                {
+                    return GetAttributeName(_attributeIndex);
+                }
+                // Map unknown types to custom so they are at least findable
+                var controlType = _currentElement.Properties.ControlType.IsSupported
+                    ? _currentElement.Properties.ControlType.Value
+                    : ControlType.Custom;
+                return controlType.ToString();
+            }
+        }
 
         /// <inheritdoc />
         public override string Name => LocalName;

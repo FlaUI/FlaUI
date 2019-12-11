@@ -9,7 +9,7 @@ namespace FlaUI.Core.UITests.Elements
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class CheckBoxTests : UITestBase
+    public class CheckBoxTests : FlaUITestBase
     {
         public CheckBoxTests(AutomationType automationType, TestApplicationType appType)
             : base(automationType, appType)
@@ -19,8 +19,8 @@ namespace FlaUI.Core.UITests.Elements
         [Test]
         public void ToggleTest()
         {
-            RestartApp();
-            var window = App.GetMainWindow(Automation);
+            RestartApplication();
+            var window = Application.GetMainWindow(Automation);
             var checkBox = window.FindFirstDescendant(cf => cf.ByName("Test Checkbox")).AsCheckBox();
             Assert.That(checkBox.ToggleState, Is.EqualTo(ToggleState.Off));
             checkBox.Toggle();
@@ -30,7 +30,7 @@ namespace FlaUI.Core.UITests.Elements
         [Test]
         public void SetStateTest()
         {
-            var window = App.GetMainWindow(Automation);
+            var window = Application.GetMainWindow(Automation);
             var checkBox = window.FindFirstDescendant(cf => cf.ByText("Test Checkbox")).AsCheckBox();
             checkBox.ToggleState = ToggleState.On;
             Assert.That(checkBox.ToggleState, Is.EqualTo(ToggleState.On));
@@ -43,8 +43,8 @@ namespace FlaUI.Core.UITests.Elements
         [Test]
         public void ThreeWayToggleTest()
         {
-            RestartApp();
-            var window = App.GetMainWindow(Automation);
+            RestartApplication();
+            var window = Application.GetMainWindow(Automation);
             var checkBox = window.FindFirstDescendant(cf => cf.ByText("3-Way Test Checkbox")).AsCheckBox();
             Assert.That(checkBox.ToggleState, Is.EqualTo(ToggleState.Off));
             checkBox.Toggle();
@@ -56,7 +56,7 @@ namespace FlaUI.Core.UITests.Elements
         [Test]
         public void ThreeWaySetStateTest()
         {
-            var window = App.GetMainWindow(Automation);
+            var window = Application.GetMainWindow(Automation);
             var checkBox = window.FindFirstDescendant(cf => cf.ByText("3-Way Test Checkbox")).AsCheckBox();
             checkBox.ToggleState = ToggleState.On;
             Assert.That(checkBox.ToggleState, Is.EqualTo(ToggleState.On));

@@ -10,7 +10,7 @@ namespace FlaUI.Core.UITests.Patterns
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
-    public class ScrollItemPatternTests : UITestBase
+    public class ScrollItemPatternTests : FlaUITestBase
     {
         private AutomationElement _grid;
         public ScrollItemPatternTests(AutomationType automationType, TestApplicationType appType) : base(automationType, appType)
@@ -20,7 +20,7 @@ namespace FlaUI.Core.UITests.Patterns
         [OneTimeSetUp]
         public void SelectTab()
         {
-            var mainWindow = App.GetMainWindow(Automation);
+            var mainWindow = Application.GetMainWindow(Automation);
             var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
             tab.SelectTabItem(1);
             _grid = tab.FindFirstDescendant(cf => cf.ByAutomationId("LargeListView"));
