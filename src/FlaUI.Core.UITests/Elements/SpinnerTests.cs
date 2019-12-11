@@ -45,7 +45,7 @@ namespace FlaUI.Core.UITests.Elements
 
         private Spinner GetSpinner()
         {
-            var element = App.GetMainWindow(Automation).FindFirstDescendant(cf => cf.ByAutomationId("numericUpDown1")).AsSpinner();
+            var element = Application.GetMainWindow(Automation).FindFirstDescendant(cf => cf.ByAutomationId("numericUpDown1")).AsSpinner();
             return element;
         }
     }
