@@ -152,5 +152,36 @@ namespace FlaUI.Core.WindowsAPI
                 }
             }
         }
+        
+        // get the edit window inside the spinner for Windows Forms
+        internal static IntPtr GetSpinnerEditWindow(AutomationElement automationElement)
+        {
+            if (!automationElement.Properties.NativeWindowHandle.IsSupported)
+            {
+                return IntPtr.Zero;
+            }
+            var windowHandle = automationElement.Properties.NativeWindowHandle.ValueOrDefault;
+            if (windowHandle == IntPtr.Zero)
+            {
+                return IntPtr.Zero;
+            }
+
+            IntPtr hwndEdit = IntPtr.Zero;
+            IntPtr hwndChild = User32.FindWindowEx(windowHandle, IntPtr.Zero, null, null);
+            
+            while (hwndChild != IntPtr.Zero)
+            {
+                StringBuilder childClassName = new StringBuilder(256);
+                User32.GetClassName(hwndChild, childClassName, 256);
+                if (childClassName.ToString().ToLower().Contains("edit"))
+                {
+                    hwndEdit = hwndChild;
+                    break;
+                }
+
+                hwndChild = User32.FindWindowEx(windowHandle, hwndChild, null, null);
+            }
+            return hwndEdit;
+        }
     }
 }
