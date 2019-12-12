@@ -19,6 +19,7 @@ namespace FlaUI.Core.UITests.Elements
         public void SetValueTest()
         {
             var spinner = GetSpinner();
+            Assert.That(spinner, Is.Not.Null);
             spinner.Value = 6;
             Assert.That(spinner.Value, Is.EqualTo(6));
             spinner.Value = 4;
@@ -29,8 +30,14 @@ namespace FlaUI.Core.UITests.Elements
         public void IncrementTest()
         {
             var spinner = GetSpinner();
+            Assert.That(spinner, Is.Not.Null);
             spinner.Value = 5;
-            spinner.Increment();
+            //spinner.Increment();
+            var buttons = FindAllChildren(cf => cf.ByControlType(ControlType.Button));
+            Assert.That(buttons.Length, Is.EqualTo(2));
+            var button = buttons[0].AsButton();
+            Assert.That(button, Is.Not.Null);
+            button.Invoke();
             Assert.That(spinner.Value, Is.EqualTo(6));
         }
 
