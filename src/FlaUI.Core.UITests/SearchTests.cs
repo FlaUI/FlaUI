@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
 using System.Threading.Tasks;
-using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
@@ -33,7 +28,6 @@ namespace FlaUI.Core.UITests
                         await Task.Delay(5000);
                         ShowHelpScreen();
                     });
-
 
                     var dialogWindow = Retry.Find(() => window.FindFirstChild(cf => cf.ByControlType(ControlType.Window)),
                         new RetrySettings

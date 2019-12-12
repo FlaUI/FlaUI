@@ -73,6 +73,7 @@ namespace FlaUI.Core.UITests.WordPad.Screens
                 new RetrySettings
                 {
                     Timeout = TimeSpan.FromSeconds(5),
+                    IgnoreException = true,
                     ThrowOnTimeout = true,
                     TimeoutMessage = "Failed to find info screen"
                 })
