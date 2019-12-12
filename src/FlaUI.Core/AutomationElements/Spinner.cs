@@ -138,13 +138,13 @@ namespace FlaUI.Core.AutomationElements
 
         private Button GetIncreaseButton()
         {
-            var buttons = FindAllChildren(cf => cf.ByControlType(ControlType.Button));
+            var buttons = FindAllDescendants(cf => cf.ByControlType(ControlType.Button));
             return buttons.Length >= 1 ? buttons[0].AsButton() : null;
         }
 
         private Button GetDecreaseButton()
-        {       
-            var buttons = FindAllChildren(cf => cf.ByControlType(ControlType.Button));
+        {
+            var buttons = FindAllDescendants(cf => cf.ByControlType(ControlType.Button));
             return buttons.Length >= 2 ? buttons[1].AsButton() : null;
         }
     }
