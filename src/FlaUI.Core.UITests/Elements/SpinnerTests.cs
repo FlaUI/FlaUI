@@ -8,7 +8,7 @@ namespace FlaUI.Core.UITests.Elements
 {
     [TestFixture(AutomationType.UIA2, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
-    public class SpinnerTests : FlaUITestBase
+    public class SpinnerTests : UITestBase
     {
         public SpinnerTests(AutomationType automationType, TestApplicationType appType)
             : base(automationType, appType)
