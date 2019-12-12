@@ -34,7 +34,7 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(spinner.Name, Is.EqualTo("Spinner"));
             spinner.Value = 5;
             //spinner.Increment();
-            var buttons = spinner.FindAllChildren();
+            var buttons = spinner.FindAllDescendants(cf => cf.ByControlType(ControlType.Button));
             Assert.That(buttons.Length, Is.EqualTo(2));
             var button = buttons[0].AsButton();
             Assert.That(button, Is.Not.Null);
