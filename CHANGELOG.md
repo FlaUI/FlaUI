@@ -1,5 +1,85 @@
 # Changelog
 
+## 3.0.0 (2019-12-09)
+### Introduction
+This release combines all changes from the 2.x pre-release versions and also new features.
+The main feature is the .NET Core/.NET Standard compatibility for FlaUI.Core and FlaUI.UIA3.
+
+### Breaking changes
+  * Renamed BasicAutomationElementBase to FrameworkAutomationElementBase
+  * Consistent naming for the *Id interfaces/classes (eg. IDockPatternProperties to IDockPatternPropertyIds)
+  * Reworked events
+  * The `Find...` methods not do not use Retry anymore, the developer himself needs to decide if he wants to use a retry or not.
+  * Moved DrawHighlight to extension methods so that they are fluent and can be made null-safe.
+  * Reworked Retry
+    * New flag: throwOnTimeout - Defines if Retry should throw when the timeout is reached.
+    * New flag: ignoreException - Defines if Retry should continue in case of an exception.
+    * New flag: lastValueOnTimeout - Defines if Retry should return the last successful value when it gets to a timeout.
+    * New flag: defaultOnTimeout - Defines if Retry should return the default value on a timeout.
+    * New Property: timeoutMessage - Allows adding a custom message when a timeout occurs when retrying.
+    * Renamed Retry.While to Retry.WhileTrue
+    * Added new Retry methods: WhileNull, WhileNotNull, WhileEmpty, Retry.WhileFalse
+    * Added a `RetryResult` object that is returned on the `Retry` methods which contains information about the execution of the current `Retry`
+    * Added tests
+  * Moved AutomationElement one up in the namespace tree
+  * Made the `As` methods extension methods again
+  * Removed custom Point/Rectangle and use the one from System.Drawing
+  * Moved `Capture` into the `Capturing` namespace
+  * All `FindIndexed` are consistently renamed to `FindAt`
+  * Renamed `Retry.Interval` to `Retry.DefaultInterval`
+  * Renamed `Retry.Timeout` to `Retry.DefaultTimeout`
+
+### Enhancements
+  * .NET Core and Standard compatibility
+  * Added capture overlays (mouse and info bar)
+  * Added a video recorder (see [Capturing](https://github.com/Roemer/FlaUI/wiki/Capturing))
+  * Updated the interop dlls
+  * Added missing features from .NET 4.7.1 in UIA2
+  * Added missing features from newer interop in UIA3
+    * Transaction- and ConnectionTimeout
+    * Selection2 pattern
+    * New text attributes
+    * New automation properties (CenterPoint, FillColor, ... see f2b444ef7d422344b63a187151112b77ca3299f5 for more)
+    * FindWithOptions
+    * New events
+    * UIA3TextRange3
+    * ConnectionRecoveryBehaviorOptions and CoalesceEventsOptions
+    * MatchSubstring for property searching
+  * Code cleanups
+  * Added generic `AsType`
+  * Use `UtcNow` instead of `Now` for `Retry`
+  * `Wait.UntilInputIsProcessed` now has an optional timespan parameter
+  * Reworked `OperationSystems` a bit
+  * Retry, WaitWhileBusy, WaitWhilemainHandleIsMissing return a bool now to indicate success or failure
+  * Capture does not focus the element anymore before capturing as this could have side effects
+  * Added missing events
+  * Added TextRange3
+  * Made log levels configurable, added a logger where you can notify for logging events, added an NUnitProgressLogger which logs in real time to the nunit console
+  * Added WaitUntilClickable and WaitUntilEnabled
+  * Default value for ControlType (thanks to @lukasvogel)
+  * Implemented mouse drag from point to point
+  * Added a condition to search by a Framework Id (thanks to @SSHenninger)
+  * Added `AnimationDuration` to `ComboBox`
+  * Added a timeout message to `Retry`
+  * Added `TextAttributeLibrary`
+  * Added `Retry.Search` methods
+  * Added `IsAvailable` property
+  * Added `.As<T>` method
+  * Enhanced `DataGrid` support for WPF (thanks @sparerd)
+  * More documentation
+  * Added various fallbacks to Win32 methods when UIA fails (thanks @ddeltasolutions)
+  * Added Touch input support
+  * Exposed MovePixelsPerMillisecond and MovePixelsPerStep in Mouse
+  * Added IsChecked property for menu item (thanks @ddeltasolutions)
+
+### Bug fixes
+  * Added some sleeps to the mouse drag
+  * Made xpath searching more robust (thanks to @lukasvogel)
+  * Correctly use collapse in the expand pattern
+  * Fixed `LabeledBy` property
+  * Fixed null exception when getting the mouse cursor
+  * Fixed an issue that the mouse cursor was not set correctly on multi-monitor environments
+
 ## 1.3.1 (2017-10-19)
 
 ### Bug fixes
