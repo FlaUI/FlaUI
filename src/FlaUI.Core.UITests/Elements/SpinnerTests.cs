@@ -26,39 +26,6 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(spinner.Value, Is.EqualTo(4));
         }
 
-        [Test]
-        public void IncrementTest()
-        {
-            var spinner = GetSpinner();
-            Assert.That(spinner, Is.Not.Null);
-            Assert.That(spinner.Name, Is.EqualTo("Spinner"));
-            spinner.Value = 5;
-            Assert.That(spinner.Value, Is.EqualTo(5));
-            Thread.Sleep(1000);
-            //spinner.Increment();
-            var buttons = spinner.FindAllDescendants(cf => cf.ByControlType(ControlType.Button));
-            Assert.That(buttons.Length, Is.EqualTo(2));
-            var button = buttons[0].AsButton();
-            Assert.That(button, Is.Not.Null);
-            
-            button.Invoke();
-            //button.Invoke();
-            //button.Invoke();
-            
-            Assert.That(spinner.Value, Is.EqualTo(6));
-        }
-
-        /*[Test]
-        public void DecrementTest()
-        {
-            var spinner = GetSpinner();
-            Assert.That(spinner, Is.Not.Null);
-            spinner.Value = 5;
-            Assert.That(spinner.Value, Is.EqualTo(5));
-            spinner.Decrement();
-            Assert.That(spinner.Value, Is.EqualTo(4));
-        }*/
-
         private Spinner GetSpinner()
         {
             var element = Application.GetMainWindow(Automation).FindFirstDescendant(cf => cf.ByAutomationId("numericUpDown1")).AsSpinner();
