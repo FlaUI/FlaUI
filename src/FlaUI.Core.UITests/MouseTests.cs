@@ -38,5 +38,46 @@ namespace FlaUI.Core.UITests
             }
             app.Dispose();
         }
+
+        [Test]
+        public void MoveOnePixelTest()
+        {
+            var startPositon = Mouse.Position;
+
+            Assert.DoesNotThrow(() =>
+            {
+                Mouse.MoveBy(1, 0);
+            }, "Failed to move mouse by 1-x");
+            Assert.That(Mouse.Position.X, Is.EqualTo(startPositon.X + 1));
+            Assert.That(Mouse.Position.Y, Is.EqualTo(startPositon.Y));
+        }
+
+        [Test]
+        public void MoveZeroTest()
+        {
+            var startPositon = Mouse.Position;
+            Assert.DoesNotThrow(() =>
+            {
+                Mouse.MoveBy(0, 10);
+            }, "Failed to move mouse by 0-x");
+            Assert.That(Mouse.Position.X, Is.EqualTo(startPositon.X));
+            Assert.That(Mouse.Position.Y, Is.EqualTo(startPositon.Y + 10));
+
+            startPositon = Mouse.Position;
+            Assert.DoesNotThrow(() =>
+            {
+                Mouse.MoveBy(10, 0);
+            }, "Failed to move mouse by 0-y");
+            Assert.That(Mouse.Position.X, Is.EqualTo(startPositon.X + 10));
+            Assert.That(Mouse.Position.Y, Is.EqualTo(startPositon.Y));
+
+            startPositon = Mouse.Position;
+            Assert.DoesNotThrow(() =>
+            {
+                Mouse.MoveBy(0, 0);
+            }, "Failed to move mouse by 0-x and 0-y");
+            Assert.That(Mouse.Position.X, Is.EqualTo(startPositon.X));
+            Assert.That(Mouse.Position.Y, Is.EqualTo(startPositon.Y));
+        }
     }
 }

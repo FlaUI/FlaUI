@@ -121,10 +121,16 @@ namespace FlaUI.Core.Input
             var startPos = Position;
             var endPos = new Point(newX, newY);
 
+            // Break out if there is no positional change
+            if (startPos == endPos)
+            {
+                return;
+            }
+
             // Calculate some values for duration and interval
             var totalDistance = startPos.Distance(newX, newY);
             var duration = TimeSpan.FromMilliseconds(Convert.ToInt32(totalDistance / MovePixelsPerMillisecond));
-            var steps = Convert.ToInt32(totalDistance / MovePixelsPerStep);
+            var steps = Math.Max(Convert.ToInt32(totalDistance / MovePixelsPerStep), 1); // Make sure to have et least one step
             var interval = TimeSpan.FromMilliseconds(duration.TotalMilliseconds / steps);
 
             // Execute the movement
