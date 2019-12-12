@@ -40,9 +40,9 @@ namespace FlaUI.Core.UITests.Elements
             var button = buttons[0].AsButton();
             Assert.That(button, Is.Not.Null);
             button.Invoke();
-            button.Invoke();
+            
             Thread.Sleep(1000);
-            button.Invoke();
+            
             Assert.That(spinner.Value, Is.EqualTo(6));
         }
 
