@@ -31,9 +31,10 @@ namespace FlaUI.Core.UITests.Elements
         {
             var spinner = GetSpinner();
             Assert.That(spinner, Is.Not.Null);
+            Assert.That(spinner.Name, Is.EqualTo("Spinner"));
             spinner.Value = 5;
             //spinner.Increment();
-            var buttons = spinner.FindAllChildren(cf => cf.ByControlType(ControlType.Button));
+            var buttons = spinner.FindAllChildren();
             Assert.That(buttons.Length, Is.EqualTo(2));
             var button = buttons[0].AsButton();
             Assert.That(button, Is.Not.Null);
@@ -52,7 +53,7 @@ namespace FlaUI.Core.UITests.Elements
 
         private Spinner GetSpinner()
         {
-            var element = Application.GetMainWindow(Automation).FindFirstDescendant(cf => cf.ByAutomationId("numericUpDown1")).AsSpinner();
+            var element = Application.GetMainWindow(Automation).FindFirstDescendant(cf => cf.ByName("numericUpDown1")).AsSpinner();
             return element;
         }
     }
