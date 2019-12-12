@@ -25,14 +25,14 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(spinner.Value, Is.EqualTo(4));
         }
 
-        /*[Test]
+        [Test]
         public void IncrementTest()
         {
             var spinner = GetSpinner();
             spinner.Value = 5;
             spinner.Increment();
             Assert.That(spinner.Value, Is.EqualTo(6));
-        }*/
+        }
 
         /*[Test]
         public void DecrementTest()
