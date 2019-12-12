@@ -138,12 +138,14 @@ namespace FlaUI.Core.AutomationElements
 
         private Button GetIncreaseButton()
         {
-            return FindFirstChild(cf => cf.ByName("Forward")).AsButton();
+            var buttons = FindAllChildren(cf => cf.ByControlType(ControlType.Button));
+            return buttons.Length >= 1 ? buttons[0].AsButton() : null;
         }
 
         private Button GetDecreaseButton()
         {       
-            return FindFirstChild(cf => cf.ByName("Backward")).AsButton();
+            var buttons = FindAllChildren(cf => cf.ByControlType(ControlType.Button));
+            return buttons.Length >= 2 ? buttons[1].AsButton() : null;
         }
     }
 }
