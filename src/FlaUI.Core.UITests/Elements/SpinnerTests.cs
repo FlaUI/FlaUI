@@ -25,6 +25,30 @@ namespace FlaUI.Core.UITests.Elements
             spinner.Value = 4;
             Assert.That(spinner.Value, Is.EqualTo(4));
         }
+        
+        [Test]
+        [Ignore("Ignore increment")]
+        public void IncrementTest()
+        {
+            var spinner = GetSpinner();
+            Assert.That(spinner, Is.Not.Null);
+            spinner.Value = 5;
+            Assert.That(spinner.Value, Is.EqualTo(5));
+            spinner.Increment();
+            Assert.That(spinner.Value, Is.EqualTo(6));
+        }
+
+        [Test]
+        [Ignore("Ignore decrement")]
+        public void DecrementTest()
+        {
+            var spinner = GetSpinner();
+            Assert.That(spinner, Is.Not.Null);
+            spinner.Value = 5;
+            Assert.That(spinner.Value, Is.EqualTo(5));
+            spinner.Decrement();
+            Assert.That(spinner.Value, Is.EqualTo(4));
+        }
 
         private Spinner GetSpinner()
         {
