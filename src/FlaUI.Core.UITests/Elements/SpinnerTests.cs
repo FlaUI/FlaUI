@@ -41,9 +41,10 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(button, Is.Not.Null);
             button.Invoke();
             button.Invoke();
+            button.Invoke();
             Thread.Sleep(1000);
             
-            Assert.That(spinner.Value, Is.EqualTo(7));
+            Assert.That(spinner.Value, Is.EqualTo(8));
         }
 
         /*[Test]
