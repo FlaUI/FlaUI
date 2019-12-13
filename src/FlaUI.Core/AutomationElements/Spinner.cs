@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 namespace FlaUI.Core.AutomationElements
 {
     /// <summary>
-    /// Class to interact with a spinner element.
+    /// Class to interact with a WinForms spinner element.
     /// </summary>
     public class Spinner : AutomationElement
     {
@@ -126,6 +126,7 @@ namespace FlaUI.Core.AutomationElements
         public void Increment()
         {
             IncreaseButton.Invoke();
+            Wait.UntilInputIsProcessed();
         }
 
         /// <summary>
@@ -134,15 +135,22 @@ namespace FlaUI.Core.AutomationElements
         public void Decrement()
         {
             DecreaseButton.Invoke();
+            Wait.UntilInputIsProcessed();
         }
 
-        private Button GetIncreaseButton()
+        /// <summary>
+        /// Method to get the increase button.
+        /// </summary>
+        protected virtual Button GetIncreaseButton()
         {
             var buttons = FindAllDescendants(cf => cf.ByControlType(ControlType.Button));
             return buttons.Length >= 1 ? buttons[0].AsButton() : null;
         }
 
-        private Button GetDecreaseButton()
+        /// <summary>
+        /// Method to get the decrease button.
+        /// </summary>
+        protected virtual Button GetDecreaseButton()
         {
             var buttons = FindAllDescendants(cf => cf.ByControlType(ControlType.Button));
             return buttons.Length >= 2 ? buttons[1].AsButton() : null;

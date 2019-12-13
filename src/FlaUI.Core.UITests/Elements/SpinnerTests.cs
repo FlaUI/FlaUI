@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using FlaUI.Core.AutomationElements;
-using FlaUI.Core.Definitions;
+﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
 
@@ -27,7 +25,6 @@ namespace FlaUI.Core.UITests.Elements
         }
         
         [Test]
-        [Ignore("Ignore increment")]
         public void IncrementTest()
         {
             var spinner = GetSpinner();
@@ -39,7 +36,6 @@ namespace FlaUI.Core.UITests.Elements
         }
 
         [Test]
-        [Ignore("Ignore decrement")]
         public void DecrementTest()
         {
             var spinner = GetSpinner();
