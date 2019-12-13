@@ -130,6 +130,8 @@ namespace FlaUI.Core.AutomationElements
             Wait.UntilInputIsProcessed();
             if (Value == oldValue)
             {
+                SetForeground();
+                Wait.UntilInputIsProcessed();
                 Focus();
                 Wait.UntilInputIsProcessed();
                 Keyboard.Type(VirtualKeyShort.UP);
