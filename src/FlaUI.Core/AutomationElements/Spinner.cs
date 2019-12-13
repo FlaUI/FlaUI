@@ -130,11 +130,17 @@ namespace FlaUI.Core.AutomationElements
             Wait.UntilInputIsProcessed();
             if (Value == oldValue)
             {
+                Console.WriteLine("Send UP key");
                 SetForeground();
-                Wait.UntilInputIsProcessed();
                 Focus();
                 Wait.UntilInputIsProcessed();
                 Keyboard.Type(VirtualKeyShort.UP);
+                Wait.UntilInputIsProcessed();
+            }
+            if (Value == oldValue)
+            {
+                Console.WriteLine("Click on increment btn");
+                IncreaseButton.Click();
                 Wait.UntilInputIsProcessed();
             }
         }
