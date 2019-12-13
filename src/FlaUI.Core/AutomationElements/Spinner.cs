@@ -156,19 +156,24 @@ namespace FlaUI.Core.AutomationElements
             double oldValue = Value;
             DecreaseButton.Invoke();
             Wait.UntilInputIsProcessed();
-            if (Value == oldValue)
+            if (Value != oldValue)
             {
-                SetForeground();
-                Focus();
-                Wait.UntilInputIsProcessed();
-                Keyboard.Type(VirtualKeyShort.DOWN);
-                Wait.UntilInputIsProcessed();
+                return;
             }
-            if (Value == oldValue)
+            
+            SetForeground();
+            Focus();
+            Wait.UntilInputIsProcessed();
+            Keyboard.Type(VirtualKeyShort.DOWN);
+            Wait.UntilInputIsProcessed();
+            
+            if (Value != oldValue)
             {
-                DecreaseButton.Click();
-                Wait.UntilInputIsProcessed();
+                return;
             }
+            
+            DecreaseButton.Click();
+            Wait.UntilInputIsProcessed();
         }
 
         /// <summary>
