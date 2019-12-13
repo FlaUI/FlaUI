@@ -130,9 +130,11 @@ namespace FlaUI.Core.AutomationElements
             Wait.UntilInputIsProcessed();
             if (Value == oldValue)
             {
+                Console.WriteLine("Send UP key to spinner");
                 Focus();
                 Keyboard.Type(VirtualKeyShort.UP);
-                Wait.UntilInputIsProcessed();
+                //Wait.UntilInputIsProcessed();
+                Wait.UntilInputIsProcessed(TimeSpan.FromMilliseconds(2000));
             }
         }
 
