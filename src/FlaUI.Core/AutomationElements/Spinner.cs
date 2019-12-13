@@ -130,7 +130,6 @@ namespace FlaUI.Core.AutomationElements
             Wait.UntilInputIsProcessed();
             if (Value == oldValue)
             {
-                Console.WriteLine("Send UP key");
                 SetForeground();
                 Focus();
                 Wait.UntilInputIsProcessed();
@@ -139,7 +138,6 @@ namespace FlaUI.Core.AutomationElements
             }
             if (Value == oldValue)
             {
-                Console.WriteLine("Click on increment btn");
                 IncreaseButton.Click();
                 Wait.UntilInputIsProcessed();
             }
@@ -150,8 +148,22 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public void Decrement()
         {
+            double oldValue = Value;
             DecreaseButton.Invoke();
             Wait.UntilInputIsProcessed();
+            if (Value == oldValue)
+            {
+                SetForeground();
+                Focus();
+                Wait.UntilInputIsProcessed();
+                Keyboard.Type(VirtualKeyShort.DOWN);
+                Wait.UntilInputIsProcessed();
+            }
+            if (Value == oldValue)
+            {
+                DecreaseButton.Click();
+                Wait.UntilInputIsProcessed();
+            }
         }
 
         /// <summary>
