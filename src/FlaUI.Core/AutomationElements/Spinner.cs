@@ -125,8 +125,15 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public void Increment()
         {
+            double oldValue = Value;
             IncreaseButton.Invoke();
             Wait.UntilInputIsProcessed();
+            if (Value == oldValue)
+            {
+                Focus();
+                Keyboard.Type(VirtualKeyShort.UP);
+                Wait.UntilInputIsProcessed();
+            }
         }
 
         /// <summary>
