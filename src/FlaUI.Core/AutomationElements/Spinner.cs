@@ -132,6 +132,8 @@ namespace FlaUI.Core.AutomationElements
             }
             else // UIA3
             {
+                SetForeground();
+                Wait.UntilInputIsProcessed();
                 IncreaseButton.Click();
                 Wait.UntilInputIsProcessed();
             }
@@ -149,6 +151,8 @@ namespace FlaUI.Core.AutomationElements
             }
             else // UIA3
             {
+                SetForeground();
+                Wait.UntilInputIsProcessed();
                 DecreaseButton.Click();
                 Wait.UntilInputIsProcessed();
             }
