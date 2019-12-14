@@ -125,27 +125,16 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public void Increment()
         {
-            double oldValue = Value;
-            IncreaseButton.Invoke();
-            Wait.UntilInputIsProcessed();
-            if (Value != oldValue)
+            if (AutomationType == AutomationType.UIA2)
             {
-                return;
+                IncreaseButton.Invoke();
+                Wait.UntilInputIsProcessed();
             }
-            
-            SetForeground();
-            Focus();
-            Wait.UntilInputIsProcessed();
-            Keyboard.Type(VirtualKeyShort.UP);
-            Wait.UntilInputIsProcessed();
-            
-            if (Value != oldValue)
+            else // UIA3
             {
-                return;
+                IncreaseButton.Click();
+                Wait.UntilInputIsProcessed();
             }
-            
-            IncreaseButton.Click();
-            Wait.UntilInputIsProcessed();
         }
 
         /// <summary>
