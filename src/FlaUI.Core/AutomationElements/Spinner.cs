@@ -142,27 +142,16 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public void Decrement()
         {
-            double oldValue = Value;
-            DecreaseButton.Invoke();
-            Wait.UntilInputIsProcessed();
-            if (Value != oldValue)
+            if (AutomationType == AutomationType.UIA2)
             {
-                return;
+                DecreaseButton.Invoke();
+                Wait.UntilInputIsProcessed();
             }
-            
-            SetForeground();
-            Focus();
-            Wait.UntilInputIsProcessed();
-            Keyboard.Type(VirtualKeyShort.DOWN);
-            Wait.UntilInputIsProcessed();
-            
-            if (Value != oldValue)
+            else // UIA3
             {
-                return;
+                DecreaseButton.Click();
+                Wait.UntilInputIsProcessed();
             }
-            
-            DecreaseButton.Click();
-            Wait.UntilInputIsProcessed();
         }
 
         /// <summary>
