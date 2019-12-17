@@ -65,27 +65,42 @@ namespace FlaUI.Core.AutomationElements
             {
                 if (FrameworkType == FrameworkType.WinForms)
                 {
-                    IntPtr hwndEdit = Win32Fallback.GetSpinnerEditWindow(this);
-                    if (hwndEdit != IntPtr.Zero)
+                    if (AutomationType == AutomationType.UIA2)
                     {
-                        //get window text
-                        IntPtr textLengthPtr = User32.SendMessage(hwndEdit,
-                            WindowsMessages.WM_GETTEXTLENGTH, IntPtr.Zero, IntPtr.Zero);
-
-                        string windowText = string.Empty;
-                        if (textLengthPtr.ToInt32() > 0)
+                        IntPtr hwndEdit = Win32Fallback.GetSpinnerEditWindow(this);
+                        if (hwndEdit != IntPtr.Zero)
                         {
-                            int textLength = textLengthPtr.ToInt32() + 1;
-                            StringBuilder text = new StringBuilder(textLength);
+                            //get window text
+                            IntPtr textLengthPtr = User32.SendMessage(hwndEdit,
+                                WindowsMessages.WM_GETTEXTLENGTH, IntPtr.Zero, IntPtr.Zero);
 
-                            User32.SendMessage(hwndEdit, WindowsMessages.WM_GETTEXT, textLength, text);
-                            windowText = text.ToString();
-                        }
+                            string windowText = string.Empty;
+                            if (textLengthPtr.ToInt32() > 0)
+                            {
+                                int textLength = textLengthPtr.ToInt32() + 1;
+                                StringBuilder text = new StringBuilder(textLength);
+
+                                User32.SendMessage(hwndEdit, WindowsMessages.WM_GETTEXT, textLength, text);
+                                windowText = text.ToString();
+                            }
                         
-                        double valueDouble = 0.0;
-                        if (double.TryParse(windowText, out valueDouble) == true)
+                            double valueDouble = 0.0;
+                            if (double.TryParse(windowText, out valueDouble) == true)
+                            {
+                                return valueDouble;
+                            }
+                        }
+                    }
+                    else // UIA3
+                    {
+                        var edit = FindFirstChild(cf => cf.ByControlType(ControlType.Edit)).AsTextBox();
+                        if (edit != null)
                         {
-                            return valueDouble;
+                            double valueDouble = 0.0;
+                            if (double.TryParse(edit.Text, out valueDouble) == true)
+                            {
+                                return valueDouble;
+                            }
                         }
                     }
                 }
@@ -96,14 +111,26 @@ namespace FlaUI.Core.AutomationElements
             {
                 if (FrameworkType == FrameworkType.WinForms)
                 {
-                    IntPtr hwndEdit = Win32Fallback.GetSpinnerEditWindow(this);
-                    if (hwndEdit != IntPtr.Zero)
+                    if (AutomationType == AutomationType.UIA2)
                     {
-                        // set spinner value
-                        IntPtr textPtr = Marshal.StringToBSTR(value.ToString());
-                        if (textPtr != IntPtr.Zero)
+                        IntPtr hwndEdit = Win32Fallback.GetSpinnerEditWindow(this);
+                        if (hwndEdit != IntPtr.Zero)
                         {
-                            User32.SendMessage(hwndEdit, WindowsMessages.WM_SETTEXT, IntPtr.Zero, textPtr);
+                            // set spinner value
+                            IntPtr textPtr = Marshal.StringToBSTR(value.ToString());
+                            if (textPtr != IntPtr.Zero)
+                            {
+                                User32.SendMessage(hwndEdit, WindowsMessages.WM_SETTEXT, IntPtr.Zero, textPtr);
+                                return;
+                            }
+                        }
+                    }
+                    else // UIA3
+                    {
+                        var edit = FindFirstChild(cf => cf.ByControlType(ControlType.Edit)).AsTextBox();
+                        if (edit != null)
+                        {
+                            edit.Text = value.ToString();
                             return;
                         }
                     }
