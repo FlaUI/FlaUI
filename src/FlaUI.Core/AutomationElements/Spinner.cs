@@ -112,7 +112,7 @@ namespace FlaUI.Core.AutomationElements
                         SetForeground();
                         // take the edit control at the left of spinner
                         Point pt = new Point(BoundingRectangle.Left - 5, (BoundingRectangle.Top + BoundingRectangle.Bottom) / 2);
-                        var edit = FromPoint(pt).AsTextBox();
+                        var edit = FrameworkAutomationElement.Automation.FromPoint(pt).AsTextBox();
                         return Convert.ToDouble(edit.Text);
                     }
                 }
@@ -154,7 +154,7 @@ namespace FlaUI.Core.AutomationElements
                         SetForeground();
                         // take the edit control at the left of spinner
                         Point pt = new Point(BoundingRectangle.Left - 5, (BoundingRectangle.Top + BoundingRectangle.Bottom) / 2);
-                        var edit = FromPoint(pt).AsTextBox();
+                        var edit = FrameworkAutomationElement.Automation.FromPoint(pt).AsTextBox();
                         edit.Text = value.ToString(CultureInfo.InvariantCulture);
                         return;
                     }
