@@ -111,7 +111,7 @@ namespace FlaUI.Core.AutomationElements
                         SetForeground();
                         // take the edit control at the left of spinner
                         Point pt = new Point(BoundingRectangle.Left - 5, (BoundingRectangle.Top + BoundingRectangle.Bottom) / 2);
-                        AutomationElement edit = FromPoint(pt).AsTextBox();
+                        var edit = FromPoint(pt).AsTextBox();
                         return Convert.ToDouble(edit.Text);
                     }
                 }
@@ -128,7 +128,7 @@ namespace FlaUI.Core.AutomationElements
                         if (hwndEdit != IntPtr.Zero)
                         {
                             // set spinner value
-                            IntPtr textPtr = Marshal.StringToBSTR(value.ToString());
+                            IntPtr textPtr = Marshal.StringToBSTR(value.ToString(CultureInfo.InvariantCulture));
                             if (textPtr != IntPtr.Zero)
                             {
                                 User32.SendMessage(hwndEdit, WindowsMessages.WM_SETTEXT, IntPtr.Zero, textPtr);
@@ -141,9 +141,21 @@ namespace FlaUI.Core.AutomationElements
                         var edit = FindFirstChild(cf => cf.ByControlType(ControlType.Edit)).AsTextBox();
                         if (edit != null)
                         {
-                            edit.Text = value.ToString();
+                            edit.Text = value.ToString(CultureInfo.InvariantCulture);
                             return;
                         }
+                    }
+                }
+                else if (FrameworkType == FrameworkType.Win32 && AutomationType == AutomationType.UIA3)
+                {
+                    if (ControlType == ControlType.Spinner)
+                    {
+                        SetForeground();
+                        // take the edit control at the left of spinner
+                        Point pt = new Point(BoundingRectangle.Left - 5, (BoundingRectangle.Top + BoundingRectangle.Bottom) / 2);
+                        var edit = FromPoint(pt).AsTextBox();
+                        edit.Text = value.ToString(CultureInfo.InvariantCulture);
+                        return;
                     }
                 }
                 
