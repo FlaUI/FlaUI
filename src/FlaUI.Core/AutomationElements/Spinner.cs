@@ -104,6 +104,17 @@ namespace FlaUI.Core.AutomationElements
                         }
                     }
                 }
+                else if (FrameworkType == FrameworkType.Win32 && AutomationType == AutomationType.UIA3)
+                {
+                    if (ControlType == ControlType.Spinner)
+                    {
+                        SetForeground();
+                        // take the edit control at the left of spinner
+                        Point pt = new Point(BoundingRectangle.Left - 5, (BoundingRectangle.Top + BoundingRectangle.Bottom) / 2);
+                        AutomationElement edit = FromPoint(pt).AsTextBox();
+                        return Convert.ToDouble(edit.Text);
+                    }
+                }
                 
                 return IsOnlyValue ? Convert.ToDouble(ValuePattern.Value.Value) : RangeValuePattern.Value.Value;
             }
