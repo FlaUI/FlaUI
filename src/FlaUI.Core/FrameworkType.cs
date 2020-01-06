@@ -33,6 +33,11 @@
         /// <summary>
         /// The framework used is XAML (Universal Application).
         /// </summary>
-        Xaml
+        Xaml,
+
+        /// <summary>
+        /// The framework used is Qt.
+        /// </summary>
+        Qt
     }
 }

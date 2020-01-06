@@ -15,7 +15,8 @@ namespace FlaUI.Core.Definitions
             {FrameworkType.Wpf, "WPF"},
             {FrameworkType.WinForms, "WinForm"},
             {FrameworkType.Win32, "Win32"},
-            {FrameworkType.Xaml, "XAML"}
+            {FrameworkType.Xaml, "XAML"},
+            {FrameworkType.Qt, "Qt"}
         };
         private static readonly Dictionary<string, FrameworkType> StringMapping = TypeMapping.ToDictionary(x => x.Value, x => x.Key);
 
