@@ -32,17 +32,24 @@ namespace FlaUI.Core.WindowsAPI
             if (automationElement.Properties.NativeWindowHandle.IsSupported)
             {
                 var windowHandle = automationElement.Properties.NativeWindowHandle.ValueOrDefault;
-                if (windowHandle != IntPtr.Zero)
+                return GetTextWin32(windowHandle, out textOut);
+            }
+            textOut = string.Empty;
+            return false;
+        }
+
+        internal static bool GetTextWin32(IntPtr elementHwnd, out string textOut)
+        {
+            if (elementHwnd != IntPtr.Zero)
+            {
+                var textLengthPtr = User32.SendMessage(elementHwnd, WindowsMessages.WM_GETTEXTLENGTH, IntPtr.Zero, IntPtr.Zero);
+                if (textLengthPtr.ToInt32() > 0)
                 {
-                    var textLengthPtr = User32.SendMessage(windowHandle, WindowsMessages.WM_GETTEXTLENGTH, IntPtr.Zero, IntPtr.Zero);
-                    if (textLengthPtr.ToInt32() > 0)
-                    {
-                        var textLength = textLengthPtr.ToInt32() + 1;
-                        var text = new StringBuilder(textLength);
-                        User32.SendMessage(windowHandle, WindowsMessages.WM_GETTEXT, textLength, text);
-                        textOut = text.ToString();
-                        return true;
-                    }
+                    var textLength = textLengthPtr.ToInt32() + 1;
+                    var text = new StringBuilder(textLength);
+                    User32.SendMessage(elementHwnd, WindowsMessages.WM_GETTEXT, textLength, text);
+                    textOut = text.ToString();
+                    return true;
                 }
             }
             textOut = string.Empty;
@@ -55,27 +62,33 @@ namespace FlaUI.Core.WindowsAPI
             if (automationElement.Properties.NativeWindowHandle.IsSupported)
             {
                 var windowHandle = automationElement.Properties.NativeWindowHandle.ValueOrDefault;
-                if (windowHandle != IntPtr.Zero)
+                SetTextWin32(windowHandle, text);
+            }
+            return false;
+        }
+
+        internal static bool SetTextWin32(IntPtr elementHwnd, string text)
+        {
+            if (elementHwnd != IntPtr.Zero)
+            {
+                var textPtr = Marshal.StringToBSTR(text);
+                try
                 {
-                    var textPtr = Marshal.StringToBSTR(text);
-                    try
+                    if (textPtr != IntPtr.Zero)
                     {
-                        if (textPtr != IntPtr.Zero)
+                        if (User32.SendMessage(elementHwnd, WindowsMessages.WM_SETTEXT, IntPtr.Zero, textPtr) == Win32Constants.TRUE)
                         {
-                            if (User32.SendMessage(windowHandle, WindowsMessages.WM_SETTEXT, IntPtr.Zero, textPtr) == Win32Constants.TRUE)
-                            {
-                                return true;
-                            }
+                            return true;
                         }
                     }
-                    catch
-                    {
-                        // ignored
-                    }
-                    finally
-                    {
-                        Marshal.FreeBSTR(textPtr);
-                    }
+                }
+                catch
+                {
+                    // ignored
+                }
+                finally
+                {
+                    Marshal.FreeBSTR(textPtr);
                 }
             }
             return false;
@@ -151,6 +164,37 @@ namespace FlaUI.Core.WindowsAPI
                     }
                 }
             }
+        }
+
+        // get the edit window inside the spinner for Windows Forms
+        internal static IntPtr GetSpinnerEditWindow(AutomationElement automationElement)
+        {
+            if (!automationElement.Properties.NativeWindowHandle.IsSupported)
+            {
+                return IntPtr.Zero;
+            }
+            var windowHandle = automationElement.Properties.NativeWindowHandle.ValueOrDefault;
+            if (windowHandle == IntPtr.Zero)
+            {
+                return IntPtr.Zero;
+            }
+
+            IntPtr hwndEdit = IntPtr.Zero;
+            IntPtr hwndChild = User32.FindWindowEx(windowHandle, IntPtr.Zero, null, null);
+
+            while (hwndChild != IntPtr.Zero)
+            {
+                StringBuilder childClassName = new StringBuilder(256);
+                User32.GetClassName(hwndChild, childClassName, 256);
+                if (childClassName.ToString().ToLower().Contains("edit"))
+                {
+                    hwndEdit = hwndChild;
+                    break;
+                }
+
+                hwndChild = User32.FindWindowEx(windowHandle, hwndChild, null, null);
+            }
+            return hwndEdit;
         }
     }
 }
