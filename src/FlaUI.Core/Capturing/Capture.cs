@@ -4,6 +4,7 @@ using FlaUI.Core.WindowsAPI;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace FlaUI.Core.Capturing
@@ -44,6 +45,34 @@ namespace FlaUI.Core.Capturing
                     User32.GetSystemMetrics(SystemMetric.SM_CXVIRTUALSCREEN), User32.GetSystemMetrics(SystemMetric.SM_CYVIRTUALSCREEN));
             }
             return Rectangle(capturingRectangle, settings);
+        }
+
+        /// <summary>
+        /// Captures all screens an element is on.
+        /// </summary>
+        public static CaptureImage ScreensWithElement(AutomationElement element, CaptureSettings settings = null)
+        {
+            var elementRectangle = element.BoundingRectangle;
+            var intersectedScreenBounds = new List<Rectangle>();
+            // Calculate which screens intersect with the element
+            for(var screenIndex = 0; screenIndex < User32.GetSystemMetrics(SystemMetric.SM_CMONITORS); screenIndex++)
+            {
+                var screenRectangle = GetBoundsByScreenIndex(screenIndex);
+                if (screenRectangle.IntersectsWith(elementRectangle)) {
+                    intersectedScreenBounds.Add(screenRectangle);
+                }
+            }
+            if (intersectedScreenBounds.Count > 0)
+            {
+                var minX = intersectedScreenBounds.Min(x => x.Left);
+                var maxX = intersectedScreenBounds.Max(x => x.Right);
+                var minY = intersectedScreenBounds.Min(x => x.Top);
+                var maxY = intersectedScreenBounds.Max(x => x.Bottom);
+                var captureRect = new Rectangle(minX, minY, maxX - minX, maxY - minY);
+                return Rectangle(captureRect, settings);
+            }
+            // Fallback to the whole screen
+            return Screen();
         }
 
         /// <summary>
