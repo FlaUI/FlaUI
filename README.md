@@ -64,6 +64,14 @@ using (var automation = new UIA3Automation())
 }
 ```
 
+# Further Resources
+## YouTube Tutorials
+Have a look at [H Y R Tutorials](https://www.youtube.com/channel/UCzFPWBdClpZ9afmmyhho4Rg). This channel provides some videos to get you started with FlaUI.
+## FlaUI UITests
+FlaUI itself contains quite some UI tests itself. Browse to the code of them [here](https://github.com/FlaUI/FlaUI/tree/master/src/FlaUI.Core.UITests) and look how they work.
+## Chat
+Head over to the [chat](https://gitter.im/FlaUI/Lobby) to ask your specific questions.
+
 ### Contribution
 Feel free to fork FlaUI and send pull requests of your modifications.<br />
 You can also create issues if you find problems or have ideas on how to further improve FlaUI.
