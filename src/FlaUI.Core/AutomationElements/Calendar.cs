@@ -78,7 +78,8 @@ namespace FlaUI.Core.AutomationElements
         }
         
         /// <summary>
-        /// Deselects other selected dates and selects the specified range.
+        /// For calendar with SelectionMode="MultipleRange" this method deselects other selected dates and selects the specified range.
+        /// For any other type of SelectionMode it deselects other selected dates and selects only the last date in the range.
         /// </summary>
         public void SelectRange(DateTime[] dates)
         {
@@ -95,7 +96,8 @@ namespace FlaUI.Core.AutomationElements
         }
         
         /// <summary>
-        /// Adds the specified date to selection.
+        /// For calendar with SelectionMode="MultipleRange" this method adds the specified date to current selection.
+        /// For any other type of SelectionMode it deselects other selected dates and selects the specified date.
         /// </summary>
         public void AddToSelection(DateTime date)
         {
@@ -103,7 +105,8 @@ namespace FlaUI.Core.AutomationElements
         }
         
         /// <summary>
-        /// Adds the specified range to selection.
+        /// For calendar with SelectionMode="MultipleRange" this method adds the specified range to current selection.
+        /// For any other type of SelectionMode it deselects other selected dates and selects only the last date in the range.
         /// </summary>
         public void AddRangeToSelection(DateTime[] dates)
         {
