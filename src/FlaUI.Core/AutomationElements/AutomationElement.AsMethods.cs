@@ -12,6 +12,14 @@ namespace FlaUI.Core.AutomationElements
         {
             return self == null ? null : new Button(self.FrameworkAutomationElement);
         }
+        
+        /// <summary>
+        /// Converts the element to a <see cref="Calendar"/>.
+        /// </summary>
+        public static Calendar AsCalendar(this AutomationElement self)
+        {
+            return self == null ? null : new Calendar(self.FrameworkAutomationElement);
+        }
 
         /// <summary>
         /// Converts the element to a <see cref="CheckBox"/>.
