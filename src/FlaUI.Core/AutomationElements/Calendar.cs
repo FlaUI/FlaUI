@@ -25,7 +25,7 @@ namespace FlaUI.Core.AutomationElements
         {
             get
             {
-                if (FrameworkType == FrameworkType.WPF)
+                if (FrameworkType == FrameworkType.Wpf)
                 {
                     if (Patterns.MultipleView.TryGetPattern(out var multipleViewPattern))
                     {
@@ -113,7 +113,7 @@ namespace FlaUI.Core.AutomationElements
         
         private void SetSelectedDate(DateTime date, bool add)
         {
-            if (FrameworkType == FrameworkType.WPF)
+            if (FrameworkType == FrameworkType.Wpf)
             {
                 // switch to Decade view
                 if (Patterns.MultipleView.TryGetPattern(out var multipleViewPattern))
