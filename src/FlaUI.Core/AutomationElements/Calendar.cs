@@ -3,6 +3,8 @@ using System.Linq;
 using System.Threading;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Patterns;
+using System.Collections.Generic;
+using System.Globalization;
 
 namespace FlaUI.Core.AutomationElements
 {
@@ -188,7 +190,7 @@ namespace FlaUI.Core.AutomationElements
                 for (int i = 3; i < monthButtons.Length; i++)
                 {
                     AutomationElement monthBtn = monthButtons[i];
-                    string[] parts = monthBtn.Name.Split(' ');
+                    parts = monthBtn.Name.Split(' ');
                     if (parts[0] == date.ToString("MMMM"))
                     {
                         if (monthBtn.Patterns.Invoke.TryGetPattern(out var invokePattern))
@@ -202,7 +204,7 @@ namespace FlaUI.Core.AutomationElements
                 for (int i = 3; i < dayButtons.Length; i++)
                 {
                     AutomationElement dayBtn = dayButtons[i];
-                    string[] parts = dayBtn.Name.Split(',');
+                    parts = dayBtn.Name.Split(',');
                     string dayStr = parts[1].Trim();
                     
                     if (dayStr == date.ToString("MMMM d"))
