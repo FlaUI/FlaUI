@@ -12,7 +12,7 @@ namespace FlaUI.Core.UITests.Elements
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class CalendarTests : UITestBase
     {
-        Calendar calendar = null;
+        private Calendar calendar = null;
     
         public CalendarTests(AutomationType automationType, TestApplicationType appType)
             : base(automationType, appType)
@@ -45,6 +45,21 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(selectedDates, Has.Length.EqualTo(2));
             Assert.That(selectedDates[0], Is.EqualTo(new DateTime(2020, 5, 21)));
             Assert.That(selectedDates[1], Is.EqualTo(date));
+        }
+        
+        [Test]
+        public void SelectRangeTest()
+        {
+            DateTime date1 = new DateTime(2021, 3, 8); // 8-Mar-2021
+            DateTime date2 = new DateTime(2021, 3, 9); // 9-Mar-2021
+            DateTime date3 = new DateTime(2021, 3, 11); // 11-Mar-2021
+            DateTime[] dates = new DateTime[] { date1, date2, date3 };
+            calendar.SelectRange(dates);
+            DateTime[] selectedDates = calendar.SelectedDates;
+            Assert.That(selectedDates, Has.Length.EqualTo(3));
+            Assert.That(selectedDates[0], Is.EqualTo(date1));
+            Assert.That(selectedDates[1], Is.EqualTo(date2));
+            Assert.That(selectedDates[2], Is.Equalto(date3));
         }
     }
 }
