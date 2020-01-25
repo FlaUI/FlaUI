@@ -16,7 +16,7 @@ namespace FlaUI.Core.UITests.Elements
         {
         }
 
-        [Test]
+        [OneTimeSetUp]
         public void SelectDateTest()
         {
             //RestartApp();
