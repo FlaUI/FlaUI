@@ -1,0 +1,34 @@
+﻿using FlaUI.Core.AutomationElements;
+using FlaUI.Core.Definitions;
+using FlaUI.Core.Input;
+using FlaUI.Core.UITests.TestFramework;
+using NUnit.Framework;
+
+namespace FlaUI.Core.UITests.Elements
+{
+    [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
+    [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
+    public class CalendarTests : UITestBase
+    {
+        public CalendarTests(AutomationType automationType, TestApplicationType appType)
+            : base(automationType, appType)
+        {
+        }
+
+        [Test]
+        public void SelectDateTest()
+        {
+            //RestartApp();
+            var mainWindow = App.GetMainWindow(Automation);
+            var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
+            tab.SelectTabItem(2);
+            //Wait.UntilInputIsProcessed();
+            var calendar = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("calendar")).AsCalendar();
+            DateTime date = new DateTime(2020, 5, 21); // 21-May-2020
+            calendar.SelectDate(date); 
+            DateTime[] selectedDates = calendar.SelectedDates;
+            Assert.That(selectedDates.Length, Is.EqualTo(1));
+            Assert.That(selectedDates[0], Is.EqualTo(date);
+        }
+    }
+}
