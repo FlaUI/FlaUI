@@ -54,7 +54,7 @@ namespace FlaUI.Core.AutomationElements
                                 string name = dayButton.Name; // name has the form like "Friday, January 24, 2020"
                                 // remove the day name from the beggining of the string
                                 string dateString = name.Remove(0, name.IndexOf(',') + 1).Trim();
-                                DateTime date = DateTime.ParseExact(dateString, "MMMM dd, yyyy", CultureInfo.CurrentCulture);
+                                DateTime date = DateTime.ParseExact(dateString, "MMMM d, yyyy", CultureInfo.CurrentCulture);
                                 result.Add(date);
                             }
                         }
