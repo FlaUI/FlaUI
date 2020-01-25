@@ -45,6 +45,7 @@
     <Compile Include="CaptureTests.cs" />
     <Compile Include="Converters\ValueConverterTests.cs" />
     <Compile Include="Elements\AutomationElementTests.cs" />
+    <Compile Include="Elements\Test.cs" />
     <Compile Include="Elements\CalendarTests.cs" />
     <Compile Include="Elements\CheckBoxTests.cs" />
     <Compile Include="Elements\ComboBoxTests.cs" />
