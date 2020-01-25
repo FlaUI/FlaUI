@@ -61,5 +61,21 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(selectedDates[1], Is.EqualTo(date2));
             Assert.That(selectedDates[2], Is.EqualTo(date3));
         }
+        
+        [Test]
+        public void AddRangeToSelectionTest()
+        {
+            DateTime date1 = new DateTime(2021, 3, 15);
+            DateTime date2 = new DateTime(2021, 3, 17);
+            DateTime[] dates = new DateTime[] { date1, date2 };
+            calendar.AddRangeToSelection(dates);
+            DateTime[] selectedDates = calendar.SelectedDates;
+            Assert.That(selectedDates, Has.Length.EqualTo(5));
+            Assert.That(selectedDates[0], Is.EqualTo(new DateTime(2021, 3, 8)));
+            Assert.That(selectedDates[1], Is.EqualTo(new DateTime(2021, 3, 9)));
+            Assert.That(selectedDates[2], Is.EqualTo(new DateTime(2021, 3, 11)));
+            Assert.That(selectedDates[3], Is.EqualTo(date1));
+            Assert.That(selectedDates[4], Is.EqualTo(date2));
+        }
     }
 }
