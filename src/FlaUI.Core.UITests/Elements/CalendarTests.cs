@@ -27,8 +27,8 @@ namespace FlaUI.Core.UITests.Elements
             DateTime date = new DateTime(2020, 5, 21); // 21-May-2020
             calendar.SelectDate(date); 
             DateTime[] selectedDates = calendar.SelectedDates;
-            Assert.That(selectedDates.Length, Is.EqualTo(1));
-            Assert.That(selectedDates[0], Is.EqualTo(date);
+            Assert.That(selectedDates, Has.Length.EqualTo(1));
+            Assert.That(selectedDates[0], Is.EqualTo(date));
         }
     }
 }
