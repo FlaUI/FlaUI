@@ -1,5 +1,6 @@
 ﻿using System;
 using FlaUI.Core.AutomationElements;
+using FlaUI.Core.Tools;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
 using FlaUI.Core.UITests.TestFramework;
@@ -19,7 +20,6 @@ namespace FlaUI.Core.UITests.Elements
         [OneTimeSetUp]
         public void SelectDateTest()
         {
-            //RestartApp();
             var mainWindow = App.GetMainWindow(Automation);
             /*var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
             tab.SelectTabItem(2);
