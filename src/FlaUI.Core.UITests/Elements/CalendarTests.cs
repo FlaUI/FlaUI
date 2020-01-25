@@ -59,7 +59,7 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(selectedDates, Has.Length.EqualTo(3));
             Assert.That(selectedDates[0], Is.EqualTo(date1));
             Assert.That(selectedDates[1], Is.EqualTo(date2));
-            Assert.That(selectedDates[2], Is.Equalto(date3));
+            Assert.That(selectedDates[2], Is.EqualTo(date3));
         }
     }
 }
