@@ -39,12 +39,14 @@ namespace FlaUI.Core.UITests.Elements
         [Test]
         public void AddToSelectionTest()
         {
-            DateTime date = new DateTime(2020, 5, 23); // 23-May-2020
-            calendar.AddToSelection(date);
+            DateTime date1 = new DateTime(2020, 5, 20); // 20-May-2020
+            calendar.SelectDate(date1);
+            DateTime date2 = new DateTime(2020, 5, 23); // 23-May-2020
+            calendar.AddToSelection(date2);
             DateTime[] selectedDates = calendar.SelectedDates;
             Assert.That(selectedDates, Has.Length.EqualTo(2));
-            Assert.That(selectedDates[0], Is.EqualTo(new DateTime(2020, 5, 21)));
-            Assert.That(selectedDates[1], Is.EqualTo(date));
+            Assert.That(selectedDates[0], Is.EqualTo(date1));
+            Assert.That(selectedDates[1], Is.EqualTo(date2));
         }
         
         [Test]
