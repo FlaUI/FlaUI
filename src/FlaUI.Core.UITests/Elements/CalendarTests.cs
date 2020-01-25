@@ -20,7 +20,8 @@ namespace FlaUI.Core.UITests.Elements
         [OneTimeSetUp]
         public void SelectDateTest()
         {
-            var mainWindow = App.GetMainWindow(Automation);
+            RestartApplication();
+            var mainWindow = Application.GetMainWindow(Automation);
             /*var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
             tab.SelectTabItem(2);
             //Wait.UntilInputIsProcessed();
