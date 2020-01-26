@@ -29,34 +29,18 @@ namespace FlaUI.Core.AutomationElements
             {
                 if (FrameworkType == FrameworkType.Wpf)
                 {
-                    if (Patterns.MultipleView.TryGetPattern(out var multipleViewPattern))
-                    {
-                        int[] views = multipleViewPattern.SupportedViews;
-                        if (views.Length > 0)
-                        {
-                            // Set current view so days are shown
-                            multipleViewPattern.SetCurrentView(views[0]);
-                        }
-                    }
-                    
                     List<DateTime> result = new List<DateTime>();
-                    AutomationElement[] buttons = FindAllChildren(cf => cf.ByControlType(ControlType.Button));
-                    
-                    // skip the first 3 buttons (previous, header and next buttons) and
-                    // iterate through all the day buttons
-                    for (int i = 3; i < buttons.Length; i++)
+                
+                    if (Patterns.Selection.TryGetPattern(out var selectionPattern))
                     {
-                        Button dayButton = buttons[i].AsButton();
-                        if (dayButton.Patterns.SelectionItem.TryGetPattern(out var selectionItemPattern))
+                        AutomationElement[] selection = selectionPattern.Selection;
+                        foreach (AutomationElement selectedElement in selection)
                         {
-                            if (selectionItemPattern.IsSelected)
-                            {
-                                string name = dayButton.Name; // name has the form like "Friday, January 24, 2020"
-                                // remove the day name from the beggining of the string
-                                string dateString = name.Remove(0, name.IndexOf(',') + 1).Trim();
-                                DateTime date = DateTime.ParseExact(dateString, "MMMM d, yyyy", CultureInfo.CurrentCulture);
-                                result.Add(date);
-                            }
+                            string name = selectedElement.Name; // name has the form like "Friday, January 24, 2020"
+                            // remove the day name from the beggining of the string
+                            string dateString = name.Remove(0, name.IndexOf(',') + 1).Trim();
+                            DateTime date = DateTime.ParseExact(dateString, "MMMM d, yyyy", CultureInfo.CurrentCulture);
+                            result.Add(date);
                         }
                     }
                     
