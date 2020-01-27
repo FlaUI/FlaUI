@@ -30,7 +30,6 @@ namespace FlaUI.Core.AutomationElements
                 if (FrameworkType == FrameworkType.Wpf)
                 {
                     List<DateTime> result = new List<DateTime>();
-                
                     if (Patterns.Selection.TryGetPattern(out var selectionPattern))
                     {
                         AutomationElement[] selection = selectionPattern.Selection;
@@ -43,7 +42,6 @@ namespace FlaUI.Core.AutomationElements
                             result.Add(date);
                         }
                     }
-                    
                     return result.ToArray();
                 }
                 else
