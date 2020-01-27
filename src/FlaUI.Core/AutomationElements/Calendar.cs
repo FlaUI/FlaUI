@@ -9,7 +9,7 @@ using System.Globalization;
 namespace FlaUI.Core.AutomationElements
 {
     /// <summary>
-    /// Class to interact with a calendar element.
+    /// Class to interact with a calendar element. It works only for WPF calendar.
     /// </summary>
     public class Calendar : AutomationElement
     {
