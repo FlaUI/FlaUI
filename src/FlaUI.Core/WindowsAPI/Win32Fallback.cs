@@ -332,7 +332,7 @@ namespace FlaUI.Core.WindowsAPI
                 throw new Exception("Not supported for this type of calendar");
             }
             
-            uint styles = User32.GetWindowLong(handle, (int)GWL.GWL_STYLE);
+            uint styles = User32.GetWindowLong(handle, WindowLongParam.GWL_STYLE);
             if ((styles & Win32CalendarStyles.MCS_MULTISELECT) != 0)
             {
                 // multiselect calendar
@@ -384,7 +384,7 @@ namespace FlaUI.Core.WindowsAPI
                 throw new Exception("Dates array length must be 2");
             }
             
-            uint styles = User32.GetWindowLong(handle, (int)GWL.GWL_STYLE);
+            uint styles = User32.GetWindowLong(handle, WindowLongParam.GWL_STYLE);
             if ((styles & Win32CalendarStyles.MCS_MULTISELECT) == 0)
             {
                 // singleselect calendar
