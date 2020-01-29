@@ -2385,14 +2385,6 @@ namespace FlaUI.Core.WindowsAPI
         public static IntPtr FALSE = new IntPtr(0);
     }
     
-    internal class Win32CalendarMessages
-    {
-        public static uint MCM_GETCURSEL = 0x1001;
-        public static uint MCM_SETCURSEL = 0x1002;
-        public static uint MCM_GETSELRANGE = 0x1005;
-        public static uint MCM_SETSELRANGE = 0x1006;
-    }
-    
     [StructLayout(LayoutKind.Sequential)]
     public struct SYSTEMTIME 
     {
@@ -2452,11 +2444,6 @@ namespace FlaUI.Core.WindowsAPI
         GuardModifierflag = 0x100,
         NoCacheModifierflag = 0x200,
         WriteCombineModifierflag = 0x400
-    }
-    
-    internal class Win32CalendarStyles
-    {
-        public static uint MCS_MULTISELECT = 2;
     }
 }
 #pragma warning restore
