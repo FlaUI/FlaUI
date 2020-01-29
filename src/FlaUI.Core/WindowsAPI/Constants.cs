@@ -2455,7 +2455,7 @@ namespace FlaUI.Core.WindowsAPI
     
     internal class Win32CalendarStyles
     {
-        public static int MCS_MULTISELECT = 2;
+        public static uint MCS_MULTISELECT = 2;
     }
 }
 #pragma warning restore
