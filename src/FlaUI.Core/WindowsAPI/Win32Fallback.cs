@@ -208,6 +208,7 @@ namespace FlaUI.Core.WindowsAPI
             return className.ToString();
         }
         
+        // gets the selected date/dates from a Win32 calendar
         internal static DateTime[] GetSelection(IntPtr handle)
         {
             if (handle == IntPtr.Zero || GetWindowClassName(handle) != "SysMonthCal32")
@@ -229,6 +230,7 @@ namespace FlaUI.Core.WindowsAPI
             }
         }
         
+        // gets the first and last date from the selected range in a Win32 calendar that supports multiple selection
         internal static DateTime[] GetSelectedRange(IntPtr handle)
         {
             uint procid = 0;
@@ -281,6 +283,7 @@ namespace FlaUI.Core.WindowsAPI
             return new DateTime[] { date1, date2 };
         }
         
+        // gets the selected date from a Win32 calendar that supports single selection
         internal static DateTime GetSelectedDate(IntPtr handle)
         {
             uint procid = 0;
@@ -363,6 +366,9 @@ namespace FlaUI.Core.WindowsAPI
             CloseHandle(hProcess);
         }
         
+        // Selects a range in a multiple selection Win32 calendar. The range is specified by the first and the last date.
+        // If the calendar is single selection then the second date will be selected.
+        // The "dates" parameter should always contain two dates.
         internal static void SetSelectedRange(IntPtr handle, DateTime[] dates)
         {
             if (handle == IntPtr.Zero || GetWindowClassName(handle) != "SysMonthCal32")
