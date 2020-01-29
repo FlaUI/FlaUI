@@ -204,7 +204,7 @@ namespace FlaUI.Core.WindowsAPI
                 return null;
             }
             StringBuilder className = new StringBuilder(256);
-            GetClassName(handle, className, 256);
+            User32.GetClassName(handle, className, 256);
             return className.ToString();
         }
         
@@ -216,7 +216,7 @@ namespace FlaUI.Core.WindowsAPI
                 throw new Exception("Not supported for this type of calendar");
             }
             
-            uint styles = GetWindowLong(handle, WindowLongParam.GWL_STYLE);
+            uint styles = User32.GetWindowLong(handle, WindowLongParam.GWL_STYLE);
             if ((styles & Win32CalendarStyles.MCS_MULTISELECT) != 0)
             {
                 // multiple selection calendar
@@ -234,27 +234,28 @@ namespace FlaUI.Core.WindowsAPI
         internal static DateTime[] GetSelectedRange(IntPtr handle)
         {
             uint procid = 0;
-            GetWindowThreadProcessId(handle, out procid);
-            IntPtr hProcess = OpenProcess(ProcessAccessFlags.All, false, (int)procid);
+            User32.GetWindowThreadProcessId(handle, out procid);
+            IntPtr hProcess = User32.OpenProcess(ProcessAccessFlags.All, false, (int)procid);
             
             SYSTEMTIME systemtime1 = new SYSTEMTIME();
             SYSTEMTIME systemtime2 = new SYSTEMTIME();
-            IntPtr hMem = VirtualAllocEx(hProcess, IntPtr.Zero, (uint)(2 * Marshal.SizeOf(systemtime1)),
+            IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)(2 * Marshal.SizeOf(systemtime1)),
                 AllocationType.Commit | AllocationType.Reserve, MemoryProtection.ReadWrite);
                 
-            SendMessage(handle, Win32CalendarMessages.MCM_GETSELRANGE, IntPtr.Zero, hMem);
+            User32.SendMessage(handle, Win32CalendarMessages.MCM_GETSELRANGE, IntPtr.Zero, hMem);
             
             IntPtr address = Marshal.AllocHGlobal(2 * Marshal.SizeOf(systemtime1));
             IntPtr lpNumberOfBytesRead = IntPtr.Zero;
-            ReadProcessMemory(hProcess, hMem, address, 2 * Marshal.SizeOf(systemtime1), out lpNumberOfBytesRead);
-                
+            User32.ReadProcessMemory(hProcess, hMem, address, 2 * Marshal.SizeOf(systemtime1), out lpNumberOfBytesRead);
+            
             systemtime1 = (SYSTEMTIME)Marshal.PtrToStructure(address, typeof(SYSTEMTIME));
             IntPtr address2 = new IntPtr(address.ToInt32() + Marshal.SizeOf(systemtime1));
             systemtime2 = (SYSTEMTIME)Marshal.PtrToStructure(address2, typeof(SYSTEMTIME));
             
+            // release memory
             Marshal.FreeHGlobal(address);
-            VirtualFreeEx(hProcess, hMem, 2 * Marshal.SizeOf(systemtime1), AllocationType.Commit | AllocationType.Reserve);
-            CloseHandle(hProcess);
+            User32.VirtualFreeEx(hProcess, hMem, 2 * Marshal.SizeOf(systemtime1), AllocationType.Commit | AllocationType.Reserve);
+            User32.CloseHandle(hProcess);
             
             DateTime date1;
             try
@@ -287,26 +288,27 @@ namespace FlaUI.Core.WindowsAPI
         internal static DateTime GetSelectedDate(IntPtr handle)
         {
             uint procid = 0;
-            GetWindowThreadProcessId(handle, out procid);
-            IntPtr hProcess = OpenProcess(ProcessAccessFlags.All, false, (int)procid);
+            User32.GetWindowThreadProcessId(handle, out procid);
+            IntPtr hProcess = User32.OpenProcess(ProcessAccessFlags.All, false, (int)procid);
             
             SYSTEMTIME systemtime = new SYSTEMTIME();
-            IntPtr hMem = VirtualAllocEx(hProcess, IntPtr.Zero, (uint)Marshal.SizeOf(systemtime), 
+            IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)Marshal.SizeOf(systemtime), 
                 AllocationType.Commit | AllocationType.Reserve, MemoryProtection.ReadWrite);
             
-            SendMessage(handle, Win32CalendarMessages.MCM_GETCURSEL, IntPtr.Zero, hMem);
+            User32.SendMessage(handle, Win32CalendarMessages.MCM_GETCURSEL, IntPtr.Zero, hMem);
             
             IntPtr address = Marshal.AllocHGlobal(Marshal.SizeOf(systemtime));
             IntPtr lpNumberOfBytesRead = IntPtr.Zero;
-            ReadProcessMemory(hProcess, hMem, address, Marshal.SizeOf(systemtime), 
+            User32.ReadProcessMemory(hProcess, hMem, address, Marshal.SizeOf(systemtime), 
                 out lpNumberOfBytesRead);
 
             systemtime = (SYSTEMTIME)Marshal.PtrToStructure(address, typeof(SYSTEMTIME));
             
+            // release memory
             Marshal.FreeHGlobal(address);
-            VirtualFreeEx(hProcess, hMem, Marshal.SizeOf(systemtime), 
+            User32.VirtualFreeEx(hProcess, hMem, Marshal.SizeOf(systemtime), 
                 AllocationType.Commit | AllocationType.Reserve);
-            CloseHandle(hProcess);
+            User32.CloseHandle(hProcess);
             
             DateTime datetime;
             try
@@ -330,7 +332,7 @@ namespace FlaUI.Core.WindowsAPI
                 throw new Exception("Not supported for this type of calendar");
             }
             
-            uint styles = GetWindowLong(handle, (int)GWL.GWL_STYLE);
+            uint styles = User32.GetWindowLong(handle, (int)GWL.GWL_STYLE);
             if ((styles & Win32CalendarStyles.MCS_MULTISELECT) != 0)
             {
                 // multiselect calendar
@@ -339,8 +341,8 @@ namespace FlaUI.Core.WindowsAPI
             }
             
             uint procid = 0;
-            GetWindowThreadProcessId(handle, out procid);
-            IntPtr hProcess = OpenProcess(ProcessAccessFlags.All, false, (int)procid);
+            User32.GetWindowThreadProcessId(handle, out procid);
+            IntPtr hProcess = User32.OpenProcess(ProcessAccessFlags.All, false, (int)procid);
             
             SYSTEMTIME systemtime = new SYSTEMTIME();
             systemtime.Year = (short)date.Year;
@@ -352,18 +354,19 @@ namespace FlaUI.Core.WindowsAPI
             systemtime.Second = (short)date.Second;
             systemtime.Milliseconds = (short)date.Millisecond;
             
-            IntPtr hMem = VirtualAllocEx(hProcess, IntPtr.Zero, (uint)Marshal.SizeOf(systemtime), 
+            IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)Marshal.SizeOf(systemtime), 
                 AllocationType.Commit | AllocationType.Reserve, MemoryProtection.ReadWrite);
             
             IntPtr lpNumberOfBytesWritten = IntPtr.Zero;
-            WriteProcessMemory(hProcess, hMem, systemtime, Marshal.SizeOf(systemtime), 
+            User32.WriteProcessMemory(hProcess, hMem, systemtime, Marshal.SizeOf(systemtime), 
                 out lpNumberOfBytesWritten);
             
-            SendMessage(handle, Win32CalendarMessages.MCM_SETCURSEL, IntPtr.Zero, hMem);
+            User32.SendMessage(handle, Win32CalendarMessages.MCM_SETCURSEL, IntPtr.Zero, hMem);
             
-            VirtualFreeEx(hProcess, hMem, Marshal.SizeOf(systemtime), 
+            // release memory
+            User32.VirtualFreeEx(hProcess, hMem, Marshal.SizeOf(systemtime), 
                 AllocationType.Commit | AllocationType.Reserve);
-            CloseHandle(hProcess);
+            User32.CloseHandle(hProcess);
         }
         
         // Selects a range in a multiple selection Win32 calendar. The range is specified by the first and the last date.
@@ -381,7 +384,7 @@ namespace FlaUI.Core.WindowsAPI
                 throw new Exception("Dates array length must be 2");
             }
             
-            uint styles = GetWindowLong(handle, (int)GWL.GWL_STYLE);
+            uint styles = User32.GetWindowLong(handle, (int)GWL.GWL_STYLE);
             if ((styles & Win32CalendarStyles.MCS_MULTISELECT) == 0)
             {
                 // singleselect calendar
@@ -390,8 +393,8 @@ namespace FlaUI.Core.WindowsAPI
             }
             
             uint procid = 0;
-            GetWindowThreadProcessId(handle, out procid);
-            IntPtr hProcess = OpenProcess(ProcessAccessFlags.All, false, (int)procid);
+            User32.GetWindowThreadProcessId(handle, out procid);
+            IntPtr hProcess = User32.OpenProcess(ProcessAccessFlags.All, false, (int)procid);
             
             SYSTEMTIME systemtime1 = new SYSTEMTIME();
             systemtime1.Year = (short)dates[0].Year;
@@ -413,21 +416,22 @@ namespace FlaUI.Core.WindowsAPI
             systemtime2.Second = (short)dates[1].Second;
             systemtime2.Milliseconds = (short)dates[1].Millisecond;
             
-            IntPtr hMem = VirtualAllocEx(hProcess, IntPtr.Zero, (uint)(2 * Marshal.SizeOf(systemtime1)),
+            IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)(2 * Marshal.SizeOf(systemtime1)),
                 AllocationType.Commit | AllocationType.Reserve, MemoryProtection.ReadWrite);
             
             IntPtr lpNumberOfBytesWritten = IntPtr.Zero;
-            WriteProcessMemory(hProcess, hMem, systemtime1, Marshal.SizeOf(systemtime1), 
+            User32.WriteProcessMemory(hProcess, hMem, systemtime1, Marshal.SizeOf(systemtime1), 
                 out lpNumberOfBytesWritten);
             IntPtr hMem2 = new IntPtr(hMem.ToInt32() + Marshal.SizeOf(systemtime1));
-            WriteProcessMemory(hProcess, hMem2, systemtime2, Marshal.SizeOf(systemtime2), 
+            User32.WriteProcessMemory(hProcess, hMem2, systemtime2, Marshal.SizeOf(systemtime2), 
                 out lpNumberOfBytesWritten);
             
-            SendMessage(handle, Win32CalendarMessages.MCM_SETSELRANGE, IntPtr.Zero, hMem);
+            User32.SendMessage(handle, Win32CalendarMessages.MCM_SETSELRANGE, IntPtr.Zero, hMem);
             
-            VirtualFreeEx(hProcess, hMem, 2 * Marshal.SizeOf(systemtime1),
+            // release memory
+            User32.VirtualFreeEx(hProcess, hMem, 2 * Marshal.SizeOf(systemtime1),
                 AllocationType.Commit | AllocationType.Reserve);
-            CloseHandle(hProcess);
+            User32.CloseHandle(hProcess);
         }
     }
 }
