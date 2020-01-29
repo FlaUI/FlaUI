@@ -249,18 +249,29 @@ namespace FlaUI.Core.WindowsAPI
             uint procid = 0;
             User32.GetWindowThreadProcessId(handle, out procid);
             IntPtr hProcess = User32.OpenProcess(ProcessAccessFlags.All, false, (int)procid);
+            if (hProcess == IntPtr.Zero)
+            {
+                throw new Exception("Insufficient rights");
+            }
             
             SYSTEMTIME systemtime1 = new SYSTEMTIME();
             SYSTEMTIME systemtime2 = new SYSTEMTIME();
             // allocate memory in the process of the calendar
             IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)(2 * Marshal.SizeOf(systemtime1)),
                 AllocationType.Commit | AllocationType.Reserve, MemoryProtection.ReadWrite);
+            if (hMem == IntPtr.Zero)
+            {
+                throw new Exception("Insufficient rights");
+            }
             
             User32.SendMessage(handle, Win32CalendarMessages.MCM_GETSELRANGE, IntPtr.Zero, hMem);
             
             IntPtr address = Marshal.AllocHGlobal(2 * Marshal.SizeOf(systemtime1));
             IntPtr lpNumberOfBytesRead = IntPtr.Zero;
-            User32.ReadProcessMemory(hProcess, hMem, address, 2 * Marshal.SizeOf(systemtime1), out lpNumberOfBytesRead);
+            if (User32.ReadProcessMemory(hProcess, hMem, address, 2 * Marshal.SizeOf(systemtime1), out lpNumberOfBytesRead) == false)
+            {
+                throw new Exception("Insufficient rights");
+            }
             
             systemtime1 = (SYSTEMTIME)Marshal.PtrToStructure(address, typeof(SYSTEMTIME));
             IntPtr address2 = new IntPtr(address.ToInt32() + Marshal.SizeOf(systemtime1));
@@ -304,18 +315,28 @@ namespace FlaUI.Core.WindowsAPI
             uint procid = 0;
             User32.GetWindowThreadProcessId(handle, out procid);
             IntPtr hProcess = User32.OpenProcess(ProcessAccessFlags.All, false, (int)procid);
+            if (hProcess == IntPtr.Zero)
+            {
+                throw new Exception("Insufficient rights");
+            }
             
             SYSTEMTIME systemtime = new SYSTEMTIME();
             // allocate memory in the process of the calendar
             IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)Marshal.SizeOf(systemtime), 
                 AllocationType.Commit | AllocationType.Reserve, MemoryProtection.ReadWrite);
+            if (hMem == IntPtr.Zero)
+            {
+                throw new Exception("Insufficient rights");
+            }
             
             User32.SendMessage(handle, Win32CalendarMessages.MCM_GETCURSEL, IntPtr.Zero, hMem);
             
             IntPtr address = Marshal.AllocHGlobal(Marshal.SizeOf(systemtime));
             IntPtr lpNumberOfBytesRead = IntPtr.Zero;
-            User32.ReadProcessMemory(hProcess, hMem, address, Marshal.SizeOf(systemtime), 
-                out lpNumberOfBytesRead);
+            if (User32.ReadProcessMemory(hProcess, hMem, address, Marshal.SizeOf(systemtime), out lpNumberOfBytesRead) == false)
+            {
+                throw new Exception("Insufficient rights");
+            }
 
             systemtime = (SYSTEMTIME)Marshal.PtrToStructure(address, typeof(SYSTEMTIME));
             
@@ -358,6 +379,10 @@ namespace FlaUI.Core.WindowsAPI
             uint procid = 0;
             User32.GetWindowThreadProcessId(handle, out procid);
             IntPtr hProcess = User32.OpenProcess(ProcessAccessFlags.All, false, (int)procid);
+            if (hProcess == IntPtr.Zero)
+            {
+                throw new Exception("Insufficient rights");
+            }
             
             SYSTEMTIME systemtime = new SYSTEMTIME();
             systemtime.Year = (short)date.Year;
@@ -372,10 +397,16 @@ namespace FlaUI.Core.WindowsAPI
             // allocate memory in the process of the calendar
             IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)Marshal.SizeOf(systemtime), 
                 AllocationType.Commit | AllocationType.Reserve, MemoryProtection.ReadWrite);
+            if (hMem == IntPtr.Zero)
+            {
+                throw new Exception("Insufficient rights");
+            }
             
             IntPtr lpNumberOfBytesWritten = IntPtr.Zero;
-            User32.WriteProcessMemory(hProcess, hMem, systemtime, Marshal.SizeOf(systemtime), 
-                out lpNumberOfBytesWritten);
+            if (User32.WriteProcessMemory(hProcess, hMem, systemtime, Marshal.SizeOf(systemtime), out lpNumberOfBytesWritten) == false)
+            {
+                throw new Exception("Insufficient rights");
+            }
             
             User32.SendMessage(handle, Win32CalendarMessages.MCM_SETCURSEL, IntPtr.Zero, hMem);
             
@@ -411,6 +442,10 @@ namespace FlaUI.Core.WindowsAPI
             uint procid = 0;
             User32.GetWindowThreadProcessId(handle, out procid);
             IntPtr hProcess = User32.OpenProcess(ProcessAccessFlags.All, false, (int)procid);
+            if (hProcess == IntPtr.Zero)
+            {
+                throw new Exception("Insufficient rights");
+            }
             
             SYSTEMTIME systemtime1 = new SYSTEMTIME();
             systemtime1.Year = (short)dates[0].Year;
@@ -435,13 +470,21 @@ namespace FlaUI.Core.WindowsAPI
             // allocate memory in the process of the calendar
             IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)(2 * Marshal.SizeOf(systemtime1)),
                 AllocationType.Commit | AllocationType.Reserve, MemoryProtection.ReadWrite);
+            if (hMem == IntPtr.Zero)
+            {
+                throw new Exception("Insufficient rights");
+            }
             
             IntPtr lpNumberOfBytesWritten = IntPtr.Zero;
-            User32.WriteProcessMemory(hProcess, hMem, systemtime1, Marshal.SizeOf(systemtime1), 
-                out lpNumberOfBytesWritten);
+            if (User32.WriteProcessMemory(hProcess, hMem, systemtime1, Marshal.SizeOf(systemtime1), out lpNumberOfBytesWritten) == false)
+            {
+                throw new Exception("Insufficient rights");
+            }
             IntPtr hMem2 = new IntPtr(hMem.ToInt32() + Marshal.SizeOf(systemtime1));
-            User32.WriteProcessMemory(hProcess, hMem2, systemtime2, Marshal.SizeOf(systemtime2), 
-                out lpNumberOfBytesWritten);
+            if (User32.WriteProcessMemory(hProcess, hMem2, systemtime2, Marshal.SizeOf(systemtime2), out lpNumberOfBytesWritten) == false)
+            {
+                throw new Exception("Insufficient rights");
+            }
             
             User32.SendMessage(handle, Win32CalendarMessages.MCM_SETSELRANGE, IntPtr.Zero, hMem);
             
