@@ -5,11 +5,12 @@ using FlaUI.Core.Definitions;
 using FlaUI.Core.Patterns;
 using System.Collections.Generic;
 using System.Globalization;
+using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.AutomationElements
 {
     /// <summary>
-    /// Class to interact with a calendar element. It works only for WPF calendar.
+    /// Class to interact with a calendar element. Not supported for Windows Forms calendar.
     /// </summary>
     public class Calendar : AutomationElement
     {
@@ -21,7 +22,9 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <summary>
-        /// Gets the selected dates in the calendar.
+        /// Gets the selected dates in the calendar. For Win32 multiple selection calendar the returned array has two 
+        /// dates, the first date and the last date of the selected range. For WPF calendar the returned array contains
+        /// all selected dates.
         /// </summary>
         public DateTime[] SelectedDates
         {
@@ -44,10 +47,19 @@ namespace FlaUI.Core.AutomationElements
                     }
                     return result.ToArray();
                 }
-                else
+                else if (FrameworkType == FrameworkType.Win32)
                 {
-                    throw new NotSupportedException("Supported only for WPF");
+                    if (Properties.NativeWindowHandle.IsSupported)
+                    {
+                        var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
+                        if (windowHandle != IntPtr.Zero)
+                        {
+                            return Win32Fallback.GetSelection(windowHandle);
+                        }
+                    }
                 }
+                
+                throw new NotSupportedException("Not supported");
             }
         }
         
@@ -56,7 +68,25 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public void SelectDate(DateTime date)
         {
-            SetSelectedDate(date, false);
+            if (FrameworkType == FrameworkType.Wpf)
+            {
+                SetSelectedDate(date, false);
+                return;
+            }
+            else if (FrameworkType == FrameworkType.Win32)
+            {
+                if (Properties.NativeWindowHandle.IsSupported)
+                {
+                    var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
+                    if (windowHandle != IntPtr.Zero)
+                    {
+                        Win32Fallback.SetSelectedDate(windowHandle, date);
+                        return;
+                    }
+                }
+            }
+            
+            throw new NotSupportedException("Not supported");
         }
         
         /// <summary>
@@ -78,8 +108,9 @@ namespace FlaUI.Core.AutomationElements
         }
         
         /// <summary>
-        /// For calendar with SelectionMode="MultipleRange" this method adds the specified date to current selection.
+        /// For WPF calendar with SelectionMode="MultipleRange" this method adds the specified date to current selection.
         /// For any other type of SelectionMode it deselects other selected dates and selects the specified date.
+        /// This method is supported only for WPF calendar.
         /// </summary>
         public void AddToSelection(DateTime date)
         {
@@ -87,8 +118,9 @@ namespace FlaUI.Core.AutomationElements
         }
         
         /// <summary>
-        /// For calendar with SelectionMode="MultipleRange" this method adds the specified range to current selection.
+        /// For WPF calendar with SelectionMode="MultipleRange" this method adds the specified range to current selection.
         /// For any other type of SelectionMode it deselects other selected dates and selects only the last date in the range.
+        /// This method is supported only for WPF calendar.
         /// </summary>
         public void AddRangeToSelection(DateTime[] dates)
         {
