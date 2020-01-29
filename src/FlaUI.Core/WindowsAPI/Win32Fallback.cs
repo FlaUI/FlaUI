@@ -252,9 +252,10 @@ namespace FlaUI.Core.WindowsAPI
             
             SYSTEMTIME systemtime1 = new SYSTEMTIME();
             SYSTEMTIME systemtime2 = new SYSTEMTIME();
+            // allocate memory in the process of the calendar
             IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)(2 * Marshal.SizeOf(systemtime1)),
                 AllocationType.Commit | AllocationType.Reserve, MemoryProtection.ReadWrite);
-                
+            
             User32.SendMessage(handle, Win32CalendarMessages.MCM_GETSELRANGE, IntPtr.Zero, hMem);
             
             IntPtr address = Marshal.AllocHGlobal(2 * Marshal.SizeOf(systemtime1));
@@ -305,6 +306,7 @@ namespace FlaUI.Core.WindowsAPI
             IntPtr hProcess = User32.OpenProcess(ProcessAccessFlags.All, false, (int)procid);
             
             SYSTEMTIME systemtime = new SYSTEMTIME();
+            // allocate memory in the process of the calendar
             IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)Marshal.SizeOf(systemtime), 
                 AllocationType.Commit | AllocationType.Reserve, MemoryProtection.ReadWrite);
             
@@ -367,6 +369,7 @@ namespace FlaUI.Core.WindowsAPI
             systemtime.Second = (short)date.Second;
             systemtime.Milliseconds = (short)date.Millisecond;
             
+            // allocate memory in the process of the calendar
             IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)Marshal.SizeOf(systemtime), 
                 AllocationType.Commit | AllocationType.Reserve, MemoryProtection.ReadWrite);
             
@@ -429,6 +432,7 @@ namespace FlaUI.Core.WindowsAPI
             systemtime2.Second = (short)dates[1].Second;
             systemtime2.Milliseconds = (short)dates[1].Millisecond;
             
+            // allocate memory in the process of the calendar
             IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)(2 * Marshal.SizeOf(systemtime1)),
                 AllocationType.Commit | AllocationType.Reserve, MemoryProtection.ReadWrite);
             
