@@ -90,8 +90,11 @@ namespace FlaUI.Core.AutomationElements
         }
         
         /// <summary>
-        /// For calendar with SelectionMode="MultipleRange" this method deselects other selected dates and selects the specified range.
+        /// For WPF calendar with SelectionMode="MultipleRange" this method deselects other selected dates and selects the specified range.
         /// For any other type of SelectionMode it deselects other selected dates and selects only the last date in the range.
+        /// For Win32 multiple selection calendar the "dates" parameter should contain two dates, the first and the last date of the range to be selected.
+        /// For Win32 single selection calendar this method selects only the second date from the "dates" array.
+        /// For WPF calendar all dates should be specified in the "dates" parameter, not only the first and the last date of the range.
         /// </summary>
         public void SelectRange(DateTime[] dates)
         {
@@ -100,11 +103,29 @@ namespace FlaUI.Core.AutomationElements
                 return;
             }
             
-            SetSelectedDate(dates[0], false);
-            for (int i = 1; i < dates.Length; i++)
+            if (FrameworkType == FrameworkType.Wpf)
             {
-                SetSelectedDate(dates[i], true);
+                SetSelectedDate(dates[0], false);
+                for (int i = 1; i < dates.Length; i++)
+                {
+                    SetSelectedDate(dates[i], true);
+                }
+                return;
             }
+            else if (FrameworkType == FrameworkType.Win32)
+            {
+                if (Properties.NativeWindowHandle.IsSupported)
+                {
+                    var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
+                    if (windowHandle != IntPtr.Zero)
+                    {
+                        Win32Fallback.SetSelectedRange(windowHandle, dates);
+                        return;
+                    }
+                }
+            }
+            
+            throw new NotSupportedException("Not supported");
         }
         
         /// <summary>
