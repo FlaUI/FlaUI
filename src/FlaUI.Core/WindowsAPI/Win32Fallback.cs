@@ -24,6 +24,19 @@ namespace FlaUI.Core.WindowsAPI
             public const uint BST_CHECKED = 0x0001;
             public const uint BST_INDETERMINATE = 0x0002;
         }
+        
+        internal static class Win32CalendarMessages
+        {
+            public const uint MCM_GETCURSEL = 0x1001;
+            public const uint MCM_SETCURSEL = 0x1002;
+            public const uint MCM_GETSELRANGE = 0x1005;
+            public const uint MCM_SETSELRANGE = 0x1006;
+        }
+        
+        internal static class Win32CalendarStyles
+        {
+            public const uint MCS_MULTISELECT = 2;
+        }
         // ReSharper restore InconsistentNaming
 
         internal static bool GetTextWin32(AutomationElement automationElement, out string textOut)
