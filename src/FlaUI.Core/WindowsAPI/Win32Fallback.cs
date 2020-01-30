@@ -279,7 +279,7 @@ namespace FlaUI.Core.WindowsAPI
             
             // release memory
             Marshal.FreeHGlobal(address);
-            User32.VirtualFreeEx(hProcess, hMem, 2 * Marshal.SizeOf(systemtime1), AllocationType.Commit | AllocationType.Reserve);
+            User32.VirtualFreeEx(hProcess, hMem, 2 * Marshal.SizeOf(systemtime1), AllocationType.Decommit | AllocationType.Release);
             User32.CloseHandle(hProcess);
             
             DateTime date1;
@@ -343,7 +343,7 @@ namespace FlaUI.Core.WindowsAPI
             // release memory
             Marshal.FreeHGlobal(address);
             User32.VirtualFreeEx(hProcess, hMem, Marshal.SizeOf(systemtime), 
-                AllocationType.Commit | AllocationType.Reserve);
+                AllocationType.Decommit | AllocationType.Release);
             User32.CloseHandle(hProcess);
             
             DateTime datetime;
@@ -412,7 +412,7 @@ namespace FlaUI.Core.WindowsAPI
             
             // release memory
             User32.VirtualFreeEx(hProcess, hMem, Marshal.SizeOf(systemtime), 
-                AllocationType.Commit | AllocationType.Reserve);
+                AllocationType.Decommit | AllocationType.Release);
             User32.CloseHandle(hProcess);
         }
         
@@ -490,7 +490,7 @@ namespace FlaUI.Core.WindowsAPI
             
             // release memory
             User32.VirtualFreeEx(hProcess, hMem, 2 * Marshal.SizeOf(systemtime1),
-                AllocationType.Commit | AllocationType.Reserve);
+                AllocationType.Decommit | AllocationType.Release);
             User32.CloseHandle(hProcess);
         }
     }
