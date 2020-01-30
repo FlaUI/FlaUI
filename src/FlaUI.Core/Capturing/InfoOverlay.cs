@@ -55,6 +55,11 @@ namespace FlaUI.Core.Capturing
         public Color OverlayTextColor { get; set; } = Color.White;
 
         /// <summary>
+        /// The font of the overlay text.
+        /// </summary>
+        public Font OverlayTextFont { get; set; } = new Font("Consolas", 10f);
+
+        /// <summary>
         /// The timespan for the recorded time.
         /// </summary>
         public TimeSpan RecordTimeSpan { get; set; } = TimeSpan.Zero;
@@ -64,7 +69,7 @@ namespace FlaUI.Core.Capturing
         {
             const int textOffsetToBg = 2;
             var overlayString = FormatOverlayString(OverlayStringFormat);
-            var font = new Font("Consolas", 10f);
+            var font = OverlayTextFont;
             var bgBrush = new SolidBrush(OverlayBackgroundColor);
             var fontBrush = new SolidBrush(OverlayTextColor);
             var textSize = g.MeasureString(overlayString, font);
