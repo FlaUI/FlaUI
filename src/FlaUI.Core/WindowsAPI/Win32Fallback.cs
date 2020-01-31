@@ -279,7 +279,7 @@ namespace FlaUI.Core.WindowsAPI
             }
             
             systemtime1 = (SYSTEMTIME)Marshal.PtrToStructure(address, typeof(SYSTEMTIME));
-            IntPtr address2 = new IntPtr(address.ToInt32() + Marshal.SizeOf(systemtime1));
+            IntPtr address2 = address + Marshal.SizeOf(systemtime1);
             systemtime2 = (SYSTEMTIME)Marshal.PtrToStructure(address2, typeof(SYSTEMTIME));
             
             // release memory
@@ -485,7 +485,7 @@ namespace FlaUI.Core.WindowsAPI
             {
                 throw new Exception("Insufficient rights");
             }
-            IntPtr hMem2 = new IntPtr(hMem.ToInt32() + Marshal.SizeOf(systemtime1));
+            IntPtr hMem2 = hMem + Marshal.SizeOf(systemtime1);
             if (User32.WriteProcessMemory(hProcess, hMem2, systemtime2, Marshal.SizeOf(systemtime2), out lpNumberOfBytesWritten) == false)
             {
                 throw new Exception("Insufficient rights");
