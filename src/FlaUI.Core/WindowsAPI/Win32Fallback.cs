@@ -233,7 +233,12 @@ namespace FlaUI.Core.WindowsAPI
             if ((styles & Win32CalendarStyles.MCS_MULTISELECT) != 0)
             {
                 // multiple selection calendar
-                return GetSelectedRange(handle);
+                DateTime[] dates = GetSelectedRange(handle);
+                if (dates.Length == 2 && dates[0] == dates[1])
+                {
+                    return new DateTime[] { dates[0] };
+                }
+                return dates;
             }
             else
             {
@@ -243,7 +248,7 @@ namespace FlaUI.Core.WindowsAPI
             }
         }
         
-        // gets the first and last date from the selected range in a Win32 calendar that supports multiple selection
+        // gets the first and last date of the selected range in a Win32 calendar that supports multiple selection
         internal static DateTime[] GetSelectedRange(IntPtr handle)
         {
             uint procid = 0;
