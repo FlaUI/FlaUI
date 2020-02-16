@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using FlaUI.Core.WindowsAPI;
 using FlaUI.Core.Input;
+using FlaUI.Core.Tools;
 
 namespace FlaUI.Core.AutomationElements
 {
@@ -76,7 +77,7 @@ namespace FlaUI.Core.AutomationElements
                         var windowHandle = Properties.NativeWindowHandle.ValueOrDefault;
                         if (windowHandle != IntPtr.Zero)
                         {
-                            Win32Fallback.SetDTPSelectedDate(windowHandle);
+                            Win32Fallback.SetDTPSelectedDate(windowHandle, value);
                         }
                     }
                 }
