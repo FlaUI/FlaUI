@@ -511,7 +511,7 @@ namespace FlaUI.Core.WindowsAPI
             User32.CloseHandle(hProcess);
         }
         
-        private DateTime GetSelectedDate(IntPtr handle)
+        internal static DateTime GetSelectedDate(IntPtr handle)
         {
             uint procid = 0;
             User32.GetWindowThreadProcessId(handle, out procid);
@@ -561,7 +561,7 @@ namespace FlaUI.Core.WindowsAPI
             return datetime;
         }
         
-        private void SetSelectedDate(IntPtr handle, DateTime? date)
+        internal static void SetSelectedDate(IntPtr handle, DateTime? date)
         {
             if (handle == IntPtr.Zero || GetWindowClassName(handle) != "SysDateTimePick32")
             {
