@@ -511,7 +511,8 @@ namespace FlaUI.Core.WindowsAPI
             User32.CloseHandle(hProcess);
         }
         
-        internal static DateTime GetSelectedDate(IntPtr handle)
+        // gets the selected date from a Win32 DateTimePicker
+        internal static DateTime GetDTPSelectedDate(IntPtr handle)
         {
             uint procid = 0;
             User32.GetWindowThreadProcessId(handle, out procid);
@@ -561,7 +562,9 @@ namespace FlaUI.Core.WindowsAPI
             return datetime;
         }
         
-        internal static void SetSelectedDate(IntPtr handle, DateTime? date)
+        // sets the selected date in a Win32 DateTimePicker.
+        // if "date" parameter is null then the DateTimePicker will be unchecked and grayed out.
+        internal static void SetDTPSelectedDate(IntPtr handle, DateTime? date)
         {
             if (handle == IntPtr.Zero || GetWindowClassName(handle) != "SysDateTimePick32")
             {
