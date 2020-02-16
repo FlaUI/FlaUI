@@ -544,7 +544,7 @@ namespace FlaUI.Core.WindowsAPI
             systemtime = (SYSTEMTIME)Marshal.PtrToStructure(address, typeof(SYSTEMTIME));
             
             Marshal.FreeHGlobal(address);
-            User32.VirtualFreeEx(hProcess, hMem, Marshal.SizeOf(systemtime), FreeType.Decommit | FreeType.Release);
+            User32.VirtualFreeEx(hProcess, hMem, Marshal.SizeOf(systemtime), AllocationType.Decommit | AllocationType.Release);
             User32.CloseHandle(hProcess);
             
             DateTime datetime;
@@ -612,8 +612,7 @@ namespace FlaUI.Core.WindowsAPI
             
             User32.SendMessage(handle, DateTimePicker32Messages.DTM_SETSYSTEMTIME, new IntPtr(DateTimePicker32Constants.GDT_VALID), hMem);
             
-            User32.VirtualFreeEx(hProcess, hMem, Marshal.SizeOf(systemtime), 
-                FreeType.Decommit | FreeType.Release);
+            User32.VirtualFreeEx(hProcess, hMem, Marshal.SizeOf(systemtime), AllocationType.Decommit | AllocationType.Release);
             User32.CloseHandle(hProcess);
         }
     }
