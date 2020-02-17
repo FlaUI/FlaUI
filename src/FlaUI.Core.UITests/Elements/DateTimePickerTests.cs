@@ -21,14 +21,14 @@ namespace FlaUI.Core.UITests.Elements
         public void SelectDateTest()
         {
             //RestartApp();
-            var mainWindow = App.GetMainWindow(Automation);
+            var mainWindow = Application.GetMainWindow(Automation);
             var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
             tab.SelectTabItem(2);
             //Wait.UntilInputIsProcessed();
             var dateTimePicker = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("datePicker")).AsDateTimePicker();
             DateTime date = new DateTime(2020, 5, 21); // 21-May-2020
             dateTimePicker.SelectedDate = date;
-            DateTime selectedDate = dateTimePicker.SelectedDate;
+            DateTime selectedDate = dateTimePicker.SelectedDate.Value;
             Assert.That(selectedDate, Is.EqualTo(date));
         }
     }
