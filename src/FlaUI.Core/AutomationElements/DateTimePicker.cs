@@ -87,10 +87,13 @@ namespace FlaUI.Core.AutomationElements
                     SetForeground();
                     Wait.UntilInputIsProcessed(TimeSpan.FromSeconds(1));
                     
-                    Rectangle boundingRect = Properties.BoundingRectangle.Value;
-                    int x = (int)boundingRect.Right - 5;
-                    int y = (int)((boundingRect.Top + boundingRect.Bottom) / 2);
-                    Mouse.Click(new Point(x, y)); // click the down arrow
+                    //Rectangle boundingRect = Properties.BoundingRectangle.Value;
+                    //int x = (int)boundingRect.Right - 5;
+                    //int y = (int)((boundingRect.Top + boundingRect.Bottom) / 2);
+                    //Mouse.Click(new Point(x, y)); // click the down arrow
+                    Focus();
+                    Wait.UntilInputIsProcessed(TimeSpan.FromSeconds(1));
+                    System.Windows.Forms.SendKeys.Send("%{DOWN}"); // Alt + Down arrow
                     Wait.UntilInputIsProcessed(TimeSpan.FromSeconds(2));
                     
                     //var retryResult = Retry.While(() => Parent.FindFirstDescendant(cf => cf.ByName("Calendar Control").And(cf.ByClassName("SysMonthCal32"))).AsCalendar(), w => w == null, TimeSpan.FromMilliseconds(1000));
