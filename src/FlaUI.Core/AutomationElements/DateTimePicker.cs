@@ -100,7 +100,8 @@ namespace FlaUI.Core.AutomationElements
                     Wait.UntilInputIsProcessed(TimeSpan.FromSeconds(2));
                     
                     //var retryResult = Retry.While(() => Parent.FindFirstDescendant(cf => cf.ByName("Calendar Control").And(cf.ByClassName("SysMonthCal32"))).AsCalendar(), w => w == null, TimeSpan.FromMilliseconds(1000));
-                    var calendar = Parent.FindFirstDescendant(cf => cf.ByName("Calendar Control").And(cf.ByClassName("SysMonthCal32"))).AsCalendar();
+                    //var calendar = Parent.FindFirstDescendant(cf => cf.ByName("Calendar Control").And(cf.ByClassName("SysMonthCal32"))).AsCalendar();
+                    var calendar = Parent.FindFirstDescendant(cf => cf.ByName("Calendar Control")).AsCalendar();
                     //Calendar calendar = retryResult.Result;
                     
                     if (calendar != null)
