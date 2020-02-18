@@ -94,9 +94,9 @@ namespace FlaUI.Core.AutomationElements
                     Focus();
                     Wait.UntilInputIsProcessed(TimeSpan.FromSeconds(1));
                     //System.Windows.Forms.SendKeys.Send("%{DOWN}"); // Alt + Down arrow
-                    Keyboard.PressVirtualKeyCode(VirtualKeyShort.ALT);
-                    Keyboard.TypeVirtualKeyCode(VirtualKeyShort.DOWN);
-                    Keyboard.ReleaseVirtualKeyCode(VirtualKeyShort.ALT);
+                    Keyboard.PressVirtualKeyCode((ushort)(VirtualKeyShort.ALT));
+                    Keyboard.TypeVirtualKeyCode((ushort)(VirtualKeyShort.DOWN));
+                    Keyboard.ReleaseVirtualKeyCode((ushort)(VirtualKeyShort.ALT));
                     Wait.UntilInputIsProcessed(TimeSpan.FromSeconds(2));
                     
                     //var retryResult = Retry.While(() => Parent.FindFirstDescendant(cf => cf.ByName("Calendar Control").And(cf.ByClassName("SysMonthCal32"))).AsCalendar(), w => w == null, TimeSpan.FromMilliseconds(1000));
