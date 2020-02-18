@@ -8,6 +8,8 @@ using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
 {
+    [TestFixture(AutomationType.UIA2, TestApplicationType.WinForms)]
+    [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class DateTimePickerTests : UITestBase
@@ -22,10 +24,20 @@ namespace FlaUI.Core.UITests.Elements
         {
             //RestartApp();
             var mainWindow = Application.GetMainWindow(Automation);
-            var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
-            tab.SelectTabItem(2);
-            //Wait.UntilInputIsProcessed();
-            var dateTimePicker = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("datePicker")).AsDateTimePicker();
+            var dateTimePicker = null;
+            
+            if (TestApplicationType == TestApplicationType.Wpf)
+            {
+                var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
+                tab.SelectTabItem(2);
+                //Wait.UntilInputIsProcessed();
+                dateTimePicker = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("datePicker")).AsDateTimePicker();
+            }
+            else // TestApplicationType.WinForms
+            {
+                dateTimePicker = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("datePicker1")).AsDateTimePicker();
+            }
+            
             DateTime date = new DateTime(2020, 5, 21); // 21-May-2020
             dateTimePicker.SelectedDate = date;
             DateTime selectedDate = dateTimePicker.SelectedDate.Value;
