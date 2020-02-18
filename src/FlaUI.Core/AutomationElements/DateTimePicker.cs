@@ -85,18 +85,18 @@ namespace FlaUI.Core.AutomationElements
                 else if (FrameworkType == FrameworkType.WinForms)
                 {
                     SetForeground();
-                    Wait.UntilInputIsProcessed(TimeSpan.FromSeconds(1));
+                    Wait.UntilInputIsProcessed(TimeSpan.FromSeconds(2));
                     
-                    //Rectangle boundingRect = Properties.BoundingRectangle.Value;
-                    //int x = (int)boundingRect.Right - 5;
-                    //int y = (int)((boundingRect.Top + boundingRect.Bottom) / 2);
-                    //Mouse.Click(new Point(x, y)); // click the down arrow
-                    Focus();
-                    Wait.UntilInputIsProcessed(TimeSpan.FromSeconds(1));
-                    //System.Windows.Forms.SendKeys.Send("%{DOWN}"); // Alt + Down arrow
-                    Keyboard.PressVirtualKeyCode((ushort)(VirtualKeyShort.ALT));
-                    Keyboard.TypeVirtualKeyCode((ushort)(VirtualKeyShort.DOWN));
-                    Keyboard.ReleaseVirtualKeyCode((ushort)(VirtualKeyShort.ALT));
+                    Rectangle boundingRect = Properties.BoundingRectangle.Value;
+                    int x = (int)boundingRect.Right - 5;
+                    int y = (int)((boundingRect.Top + boundingRect.Bottom) / 2);
+                    Mouse.Click(new Point(x, y)); // click the down arrow
+                    //Focus();
+                    //Wait.UntilInputIsProcessed(TimeSpan.FromSeconds(1));
+                    
+                    //Keyboard.PressVirtualKeyCode((ushort)(VirtualKeyShort.ALT)); // Alt + Down arrow
+                    //Keyboard.TypeVirtualKeyCode((ushort)(VirtualKeyShort.DOWN));
+                    //Keyboard.ReleaseVirtualKeyCode((ushort)(VirtualKeyShort.ALT));
                     Wait.UntilInputIsProcessed(TimeSpan.FromSeconds(2));
                     
                     //var retryResult = Retry.While(() => Parent.FindFirstDescendant(cf => cf.ByName("Calendar Control").And(cf.ByClassName("SysMonthCal32"))).AsCalendar(), w => w == null, TimeSpan.FromMilliseconds(1000));
