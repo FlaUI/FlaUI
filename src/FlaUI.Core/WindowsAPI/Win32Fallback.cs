@@ -512,7 +512,7 @@ namespace FlaUI.Core.WindowsAPI
         }
         
         // gets the selected date from a Win32 DateTimePicker
-        internal static DateTime GetDTPSelectedDate(IntPtr handle)
+        internal static DateTime? GetDTPSelectedDate(IntPtr handle)
         {
             uint procid = 0;
             User32.GetWindowThreadProcessId(handle, out procid);
@@ -531,7 +531,14 @@ namespace FlaUI.Core.WindowsAPI
                 throw new Exception("Insufficient rights");
             }
             
-            User32.SendMessage(handle, DateTimePicker32Messages.DTM_GETSYSTEMTIME, IntPtr.Zero, hMem);
+            IntPtr lResult = User32.SendMessage(handle, DateTimePicker32Messages.DTM_GETSYSTEMTIME, IntPtr.Zero, hMem);
+            if (lResult.ToInt32() == (int)(DateTimePicker32Constants.GDT_NONE))
+            {
+                // DateTimePicker is unchecked and grayed out
+                User32.VirtualFreeEx(hProcess, hMem, Marshal.SizeOf(systemtime), AllocationType.Decommit | AllocationType.Release);
+                User32.CloseHandle(hProcess);
+                return null;
+            }
             
             IntPtr address = Marshal.AllocHGlobal(Marshal.SizeOf(systemtime));
             
