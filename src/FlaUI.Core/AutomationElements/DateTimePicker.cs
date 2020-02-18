@@ -26,7 +26,7 @@ namespace FlaUI.Core.AutomationElements
 
         /// <summary>
         /// Gets or sets the selected date in the DateTimePicker.
-        /// For Win32, setting SelectedDate to null will uncheck the DateTimePicker control and disable it.
+        /// For Win32, setting SelectedDate to null will uncheck the DateTimePicker control and disable it. Also for Win32, if the control is unchecked then SelectedDate will return null.
         /// For Windows Forms you can only read the selected date from a DateTimePicker control.
         /// </summary>
         public DateTime? SelectedDate
