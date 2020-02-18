@@ -84,19 +84,24 @@ namespace FlaUI.Core.AutomationElements
                 }
                 else if (FrameworkType == FrameworkType.WinForms)
                 {
+                    SetForeground();
+                    Wait.UntilInputIsProcessed(TimeSpan.FromSeconds(1));
+                    
                     Rectangle boundingRect = Properties.BoundingRectangle.Value;
                     int x = (int)boundingRect.Right - 5;
                     int y = (int)((boundingRect.Top + boundingRect.Bottom) / 2);
                     Mouse.Click(new Point(x, y)); // click the down arrow
+                    Wait.UntilInputIsProcessed(TimeSpan.FromSeconds(2));
                     
-                    var retryResult = Retry.While(() => Parent.FindFirstDescendant(cf => cf.ByName("Calendar Control").And(cf.ByClassName("SysMonthCal32"))).AsCalendar(), w => w == null, TimeSpan.FromMilliseconds(1000));
-                    Calendar calendar = retryResult.Result;
+                    //var retryResult = Retry.While(() => Parent.FindFirstDescendant(cf => cf.ByName("Calendar Control").And(cf.ByClassName("SysMonthCal32"))).AsCalendar(), w => w == null, TimeSpan.FromMilliseconds(1000));
+                    var calendar = Parent.FindFirstDescendant(cf => cf.ByName("Calendar Control").And(cf.ByClassName("SysMonthCal32"))).AsCalendar();
+                    //Calendar calendar = retryResult.Result;
                     
                     if (calendar != null)
                     {
                         calendar.SelectDate(value.Value);
                         Keyboard.Type(' ');
-                        Wait.UntilInputIsProcessed(new TimeSpan(0, 0, 1));
+                        Wait.UntilInputIsProcessed(TimeSpan.FromSeconds(1));
                     }
                     else
                     {
