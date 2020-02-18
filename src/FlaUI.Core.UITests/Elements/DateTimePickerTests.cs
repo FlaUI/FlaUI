@@ -35,7 +35,7 @@ namespace FlaUI.Core.UITests.Elements
             }
             else // TestApplicationType.WinForms
             {
-                dateTimePicker = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("datePicker1")).AsDateTimePicker();
+                dateTimePicker = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("dateTimePicker1")).AsDateTimePicker();
             }
             
             DateTime date = new DateTime(2020, 5, 21); // 21-May-2020
