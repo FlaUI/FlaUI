@@ -115,8 +115,6 @@ namespace FlaUI.Core.AutomationElements
                     {
                         throw new Exception("Unable to set date for this DateTimePicker");
                     }*/
-                    
-                    throw new Exception("Unable to set the selected date for Windows Forms DateTimePicker");
                 }
                 
                 throw new Exception("Unable to set the selected date for this DateTimePicker");
