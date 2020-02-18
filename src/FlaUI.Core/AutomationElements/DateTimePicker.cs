@@ -96,6 +96,11 @@ namespace FlaUI.Core.AutomationElements
                     {
                         calendar.SelectDate(value.Value);
                         Keyboard.Type(' ');
+                        Wait.UntilInputIsProcessed(new TimeSpan(0, 0, 1));
+                    }
+                    else
+                    {
+                        throw new Exception("Unable to set date for this DateTimePicker");
                     }
                 }
             }
