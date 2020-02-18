@@ -24,9 +24,9 @@ namespace FlaUI.Core.UITests.Elements
         {
             //RestartApp();
             var mainWindow = Application.GetMainWindow(Automation);
-            var dateTimePicker = null;
+            DateTimePicker dateTimePicker = null;
             
-            if (TestApplicationType == TestApplicationType.Wpf)
+            if (ApplicationType == TestApplicationType.Wpf)
             {
                 var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
                 tab.SelectTabItem(2);
