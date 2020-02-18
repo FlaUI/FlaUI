@@ -27,6 +27,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Gets or sets the selected date in the DateTimePicker.
         /// For Win32, setting SelectedDate to null will uncheck the DateTimePicker control and disable it.
+        /// For Windows Forms you can only read the selected date from a DateTimePicker control.
         /// </summary>
         public DateTime? SelectedDate
         {
@@ -60,7 +61,7 @@ namespace FlaUI.Core.AutomationElements
                     return date;
                 }
                 
-                return null;
+                throw new Exception("Unable to get the selected date from this DateTimePicker");
             }
             set
             {
@@ -69,6 +70,7 @@ namespace FlaUI.Core.AutomationElements
                     if (Patterns.Value.TryGetPattern(out var valuePattern))
                     {
                         valuePattern.SetValue(value.Value.ToString(CultureInfo.CurrentCulture));
+                        return;
                     }
                 }
                 else if (FrameworkType == FrameworkType.Win32)
@@ -79,6 +81,7 @@ namespace FlaUI.Core.AutomationElements
                         if (windowHandle != IntPtr.Zero)
                         {
                             Win32Fallback.SetDTPSelectedDate(windowHandle, value);
+                            return;
                         }
                     }
                 }
@@ -113,8 +116,10 @@ namespace FlaUI.Core.AutomationElements
                         throw new Exception("Unable to set date for this DateTimePicker");
                     }*/
                     
-                    throw new Exception("Unable to set date for Windows Forms DateTimePicker");
+                    throw new Exception("Unable to set the selected date for Windows Forms DateTimePicker");
                 }
+                
+                throw new Exception("Unable to set the selected date for this DateTimePicker");
             }
         }
     }
