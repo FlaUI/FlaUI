@@ -109,7 +109,7 @@ namespace FlaUI.Core.AutomationElements
                     while (parentOfParent != root)
                     {
                         parent = parentOfParent;
-                        parentOfParent = tw.GetParent(parent);
+                        parentOfParent = parent.Parent;
                     }
                     
                     Wait.UntilInputIsProcessed();
