@@ -30,7 +30,6 @@ namespace FlaUI.Core.UITests.Elements
             {
                 var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
                 tab.SelectTabItem(2);
-                //Wait.UntilInputIsProcessed();
                 dateTimePicker = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("datePicker")).AsDateTimePicker();
             }
             else // TestApplicationType.WinForms
