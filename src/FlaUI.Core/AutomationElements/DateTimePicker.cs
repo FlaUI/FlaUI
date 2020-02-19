@@ -105,11 +105,6 @@ namespace FlaUI.Core.AutomationElements
                         parentOfParent = topLevelParent.Parent;
                     }
                     
-                    if (parentOfParent == null)
-                    {
-                        throw new Exception("Desktop not reached");
-                    }
-                    
                     Wait.UntilInputIsProcessed();
                     var retryResult = Retry.While(() => topLevelParent.FindFirstDescendant(cf => cf.ByName("Calendar Control").And(cf.ByClassName("SysMonthCal32"))).AsCalendar(), w => w == null, TimeSpan.FromMilliseconds(1000));
                     Calendar calendar = retryResult.Result;
