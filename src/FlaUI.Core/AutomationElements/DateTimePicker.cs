@@ -121,6 +121,7 @@ namespace FlaUI.Core.AutomationElements
                         calendar.SelectDate(value.Value);
                         Keyboard.Type(' ');
                         Wait.UntilInputIsProcessed();
+                        return;
                     }
                     else
                     {
