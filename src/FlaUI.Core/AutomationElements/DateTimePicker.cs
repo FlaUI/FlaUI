@@ -27,7 +27,6 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Gets or sets the selected date in the DateTimePicker.
         /// For Win32, setting SelectedDate to null will uncheck the DateTimePicker control and disable it. Also for Win32, if the control is unchecked then SelectedDate will return null.
-        /// For Windows Forms you can only read the selected date from a DateTimePicker control.
         /// </summary>
         public DateTime? SelectedDate
         {
@@ -95,12 +94,6 @@ namespace FlaUI.Core.AutomationElements
                     int y = (int)((boundingRect.Top + boundingRect.Bottom) / 2);
                     Mouse.Click(new Point(x, y)); // click the down arrow
                     
-                    //Focus();
-                    //Wait.UntilInputIsProcessed();
-                    //Keyboard.PressVirtualKeyCode((ushort)(VirtualKeyShort.ALT)); // Alt + Down key
-                    //Keyboard.TypeVirtualKeyCode((ushort)(VirtualKeyShort.DOWN));
-                    //Keyboard.ReleaseVirtualKeyCode((ushort)(VirtualKeyShort.ALT));
-                    
                     AutomationElement topLevelParent = Parent;
                     AutomationElement parentOfParent = topLevelParent.Parent;
                     AutomationElement root = Automation.GetDesktop();
@@ -122,10 +115,6 @@ namespace FlaUI.Core.AutomationElements
                         Keyboard.Type(' ');
                         Wait.UntilInputIsProcessed();
                         return;
-                    }
-                    else
-                    {
-                        throw new Exception("calendar is null");
                     }
                 }
                 
