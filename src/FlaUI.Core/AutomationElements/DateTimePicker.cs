@@ -87,7 +87,7 @@ namespace FlaUI.Core.AutomationElements
                 }
                 else if (FrameworkType == FrameworkType.WinForms)
                 {
-                    /*SetForeground();
+                    SetForeground();
                     Wait.UntilInputIsProcessed();
                     
                     Rectangle boundingRect = Properties.BoundingRectangle.Value;
@@ -101,8 +101,19 @@ namespace FlaUI.Core.AutomationElements
                     //Keyboard.TypeVirtualKeyCode((ushort)(VirtualKeyShort.DOWN));
                     //Keyboard.ReleaseVirtualKeyCode((ushort)(VirtualKeyShort.ALT));
                     
+                    AutomationElement parent = Parent;
+                    AutomationElement parentOfParent = parent.Parent;
+                    AutomationElement root = Automation.GetDesktop();
+                    
+                    // Get the top level window
+                    while (parentOfParent != root)
+                    {
+                        parent = parentOfParent;
+                        parentOfParent = tw.GetParent(parent);
+                    }
+                    
                     Wait.UntilInputIsProcessed();
-                    var retryResult = Retry.While(() => Parent.FindFirstDescendant(cf => cf.ByName("Calendar Control").And(cf.ByClassName("SysMonthCal32"))).AsCalendar(), w => w == null, TimeSpan.FromMilliseconds(1000));
+                    var retryResult = Retry.While(() => parent.FindFirstDescendant(cf => cf.ByName("Calendar Control").And(cf.ByClassName("SysMonthCal32"))).AsCalendar(), w => w == null, TimeSpan.FromMilliseconds(1000));
                     Calendar calendar = retryResult.Result;
                     
                     if (calendar != null)
@@ -113,8 +124,8 @@ namespace FlaUI.Core.AutomationElements
                     }
                     else
                     {
-                        throw new Exception("Unable to set date for this DateTimePicker");
-                    }*/
+                        throw new Exception("calendar is null");
+                    }
                 }
                 
                 throw new Exception("Unable to set the selected date for this DateTimePicker");
