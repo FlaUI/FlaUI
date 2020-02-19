@@ -101,15 +101,15 @@ namespace FlaUI.Core.AutomationElements
                     //Keyboard.TypeVirtualKeyCode((ushort)(VirtualKeyShort.DOWN));
                     //Keyboard.ReleaseVirtualKeyCode((ushort)(VirtualKeyShort.ALT));
                     
-                    AutomationElement parent = Parent;
-                    AutomationElement parentOfParent = parent.Parent;
+                    AutomationElement topLevelParent = Parent;
+                    AutomationElement parentOfParent = topLevelParent.Parent;
                     AutomationElement root = Automation.GetDesktop();
                     
                     // Get the top level window
-                    while (parentOfParent != root)
+                    while (parentOfParent != null && !parentOfParent.Equals(root))
                     {
-                        parent = parentOfParent;
-                        parentOfParent = parent.Parent;
+                        topLevelParent = parentOfParent;
+                        parentOfParent = topLevelParent.Parent;
                     }
                     
                     Wait.UntilInputIsProcessed();
