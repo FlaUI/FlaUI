@@ -41,8 +41,11 @@ namespace FlaUI.Core.UITests.Elements
             {
                 var dateTimePicker = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("dateTimePicker1")).AsDateTimePicker();
                 
+                DateTime date = new DateTime(2021, 5, 17); // 17-May-2021
+                dateTimePicker.SelectedDate = date;
                 DateTime selectedDate = dateTimePicker.SelectedDate.Value;
-                Assert.That(selectedDate, Is.EqualTo(DateTime.Today));
+                //Assert.That(selectedDate, Is.EqualTo(DateTime.Today));
+                Assert.That(selectedDate, Is.EqualTo(date));
             }
         }
     }
