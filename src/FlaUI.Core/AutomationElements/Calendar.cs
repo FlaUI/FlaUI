@@ -38,11 +38,13 @@ namespace FlaUI.Core.AutomationElements
                         AutomationElement[] selection = selectionPattern.Selection;
                         foreach (AutomationElement selectedElement in selection)
                         {
-                            string name = selectedElement.Name; // name has the form like "Friday, January 24, 2020"
-                            // remove the day name from the beggining of the string
-                            string dateString = name.Remove(0, name.IndexOf(',') + 1).Trim();
-                            DateTime date = DateTime.ParseExact(dateString, "MMMM d, yyyy", CultureInfo.CurrentCulture);
-                            result.Add(date);
+                            string dateString = selectedElement.Name; // name has the form like "Friday, January 24, 2020"
+                            try
+                            {
+                                DateTime date = DateTime.Parse(dateString, CultureInfo.CurrentCulture);
+                                result.Add(date);
+                            }
+                            catch { }
                         }
                     }
                     return result.ToArray();
@@ -238,14 +240,25 @@ namespace FlaUI.Core.AutomationElements
                     }
                 }
                 
+                // set day
                 AutomationElement[] dayButtons = FindAllChildren(cf => cf.ByControlType(ControlType.Button));
+                DateTime dateDayMonthYear = new DateTime(date.Year, date.Month, date.Day);
                 for (int i = 3; i < dayButtons.Length; i++)
                 {
                     AutomationElement dayBtn = dayButtons[i];
-                    parts = dayBtn.Name.Split(',');
-                    string dayStr = parts[1].Trim();
+                    string dayStr = dayBtn.Name;
                     
-                    if (dayStr == date.ToString("MMMM d"))
+                    DateTime currentDate;
+                    try
+                    {
+                        currentDate = DateTime.Parse(dayStr, CultureInfo.CurrentCulture);
+                    }
+                    catch 
+                    {
+                        continue;
+                    }
+                    
+                    if (currentDate == dateDayMonthYear)
                     {
                         if (add == true)
                         {

@@ -37,6 +37,18 @@ namespace FlaUI.Core.WindowsAPI
         {
             public const uint MCS_MULTISELECT = 2;
         }
+        
+        internal static class DateTimePicker32Messages
+        {
+            public const uint DTM_GETSYSTEMTIME = 0x1001;
+            public const uint DTM_SETSYSTEMTIME = 0x1002;
+        }
+        
+        internal static class DateTimePicker32Constants
+        {
+            public const uint GDT_VALID = 0;
+            public const uint GDT_NONE = 1;
+        }
         // ReSharper restore InconsistentNaming
 
         internal static bool GetTextWin32(AutomationElement automationElement, out string textOut)
@@ -496,6 +508,118 @@ namespace FlaUI.Core.WindowsAPI
             // release memory
             User32.VirtualFreeEx(hProcess, hMem, 2 * Marshal.SizeOf(systemtime1),
                 AllocationType.Decommit | AllocationType.Release);
+            User32.CloseHandle(hProcess);
+        }
+        
+        // gets the selected date from a Win32 DateTimePicker
+        internal static DateTime? GetDTPSelectedDate(IntPtr handle)
+        {
+            uint procid = 0;
+            User32.GetWindowThreadProcessId(handle, out procid);
+            
+            IntPtr hProcess = User32.OpenProcess(ProcessAccessFlags.All, false, (int)procid);
+            if (hProcess == IntPtr.Zero)
+            {
+                throw new Exception("Insufficient rights");
+            }
+            
+            SYSTEMTIME systemtime = new SYSTEMTIME();
+            IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)Marshal.SizeOf(systemtime), 
+                AllocationType.Commit | AllocationType.Reserve, MemoryProtection.ReadWrite);
+            if (hMem == IntPtr.Zero)
+            {
+                throw new Exception("Insufficient rights");
+            }
+            
+            IntPtr lResult = User32.SendMessage(handle, DateTimePicker32Messages.DTM_GETSYSTEMTIME, IntPtr.Zero, hMem);
+            if (lResult.ToInt32() == (int)(DateTimePicker32Constants.GDT_NONE))
+            {
+                // DateTimePicker is unchecked and grayed out
+                User32.VirtualFreeEx(hProcess, hMem, Marshal.SizeOf(systemtime), AllocationType.Decommit | AllocationType.Release);
+                User32.CloseHandle(hProcess);
+                return null;
+            }
+            
+            IntPtr address = Marshal.AllocHGlobal(Marshal.SizeOf(systemtime));
+            
+            IntPtr lpNumberOfBytesRead = IntPtr.Zero;
+            if (User32.ReadProcessMemory(hProcess, hMem, address, Marshal.SizeOf(systemtime), out lpNumberOfBytesRead) == false)
+            {
+                throw new Exception("Insufficient rights");
+            }
+            
+            systemtime = (SYSTEMTIME)Marshal.PtrToStructure(address, typeof(SYSTEMTIME));
+            
+            Marshal.FreeHGlobal(address);
+            User32.VirtualFreeEx(hProcess, hMem, Marshal.SizeOf(systemtime), AllocationType.Decommit | AllocationType.Release);
+            User32.CloseHandle(hProcess);
+            
+            DateTime datetime;
+            try
+            {
+                datetime = new DateTime(systemtime.Year, systemtime.Month, systemtime.Day, 
+                    systemtime.Hour, systemtime.Minute, systemtime.Second);
+            }
+            catch
+            {
+                datetime = new DateTime(systemtime.Year, systemtime.Month, systemtime.Day, 
+                    0, 0, 0);
+            }
+            
+            return datetime;
+        }
+        
+        // sets the selected date in a Win32 DateTimePicker.
+        // if "date" parameter is null then the DateTimePicker will be unchecked and grayed out.
+        internal static void SetDTPSelectedDate(IntPtr handle, DateTime? date)
+        {
+            if (handle == IntPtr.Zero || GetWindowClassName(handle) != "SysDateTimePick32")
+            {
+                throw new Exception("Not supported for this type of DateTimePicker");
+            }
+            
+            if (date == null)
+            {
+                User32.SendMessage(handle, DateTimePicker32Messages.DTM_SETSYSTEMTIME, new IntPtr(DateTimePicker32Constants.GDT_NONE), IntPtr.Zero);
+                return;
+            }
+            
+            uint procid = 0;
+            User32.GetWindowThreadProcessId(handle, out procid);
+            
+            IntPtr hProcess = User32.OpenProcess(ProcessAccessFlags.All, false, (int)procid);
+            if (hProcess == IntPtr.Zero)
+            {
+                throw new Exception("Insufficient rights");
+            }
+            
+            SYSTEMTIME systemtime = new SYSTEMTIME();
+            systemtime.Year = (short)date.Value.Year;
+            systemtime.Month = (short)date.Value.Month;
+            systemtime.Day = (short)date.Value.Day;
+            systemtime.DayOfWeek = (short)date.Value.DayOfWeek;
+            systemtime.Hour = (short)date.Value.Hour;
+            systemtime.Minute = (short)date.Value.Minute;
+            systemtime.Second = (short)date.Value.Second;
+            systemtime.Milliseconds = (short)date.Value.Millisecond;
+            
+            IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)Marshal.SizeOf(systemtime), 
+                AllocationType.Commit | AllocationType.Reserve, MemoryProtection.ReadWrite);
+            if (hMem == IntPtr.Zero)
+            {
+                throw new Exception("Insufficient rights");
+            }
+            
+            IntPtr lpNumberOfBytesWritten = IntPtr.Zero;
+            if (User32.WriteProcessMemory(hProcess, hMem, systemtime, Marshal.SizeOf(systemtime), 
+                out lpNumberOfBytesWritten) == false)
+            {
+                throw new Exception("Insufficient rights");
+            }
+            
+            User32.SendMessage(handle, DateTimePicker32Messages.DTM_SETSYSTEMTIME, new IntPtr(DateTimePicker32Constants.GDT_VALID), hMem);
+            
+            User32.VirtualFreeEx(hProcess, hMem, Marshal.SizeOf(systemtime), AllocationType.Decommit | AllocationType.Release);
             User32.CloseHandle(hProcess);
         }
     }

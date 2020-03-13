@@ -44,6 +44,14 @@ namespace FlaUI.Core.AutomationElements
         {
             return self == null ? null : new DataGridView(self.FrameworkAutomationElement);
         }
+        
+        /// <summary>
+        /// Converts the element to a <see cref="DateTimePicker"/>.
+        /// </summary>
+        public static DateTimePicker AsDateTimePicker(this AutomationElement self)
+        {
+            return self == null ? null : new DateTimePicker(self.FrameworkAutomationElement);
+        }
 
         /// <summary>
         /// Converts the element to a <see cref="Label"/>.
