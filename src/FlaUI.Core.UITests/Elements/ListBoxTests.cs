@@ -59,5 +59,24 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(item.Text, Is.EqualTo("ListBox Item #1"));
             Assert.That(listBox.SelectedItem.Text, Is.EqualTo("ListBox Item #1"));
         }
+        
+        [Test]
+        public void SelectByTextInLargeList()
+        {
+            var window = Application.GetMainWindow(Automation);
+            var tab = window.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
+            tab.SelectTabItem(2); // Switch to "More Controls" tab
+            
+            var listBox = window.FindFirstDescendant(cf => cf.ByAutomationId("LargeListBox")).AsListBox();
+            var item = listBox.Select("ListBox Item #7");
+            Assert.That(item.Text, Is.EqualTo("ListBox Item #7"));
+            Assert.That(listBox.SelectedItem.Text, Is.EqualTo("ListBox Item #7"));
+            
+            item = listBox.Select("ListBox Item #6");
+            Assert.That(item.Text, Is.EqualTo("ListBox Item #6"));
+            Assert.That(listBox.SelectedItem.Text, Is.EqualTo("ListBox Item #6"));
+            
+            tab.SelectTabItem(0); // Switch back to "Simple Controls"
+        }
     }
 }
