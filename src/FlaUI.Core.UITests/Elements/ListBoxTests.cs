@@ -82,8 +82,8 @@ namespace FlaUI.Core.UITests.Elements
             item = listBox.AddToSelection("ListBox Item #6");
             Assert.That(item.Text, Is.EqualTo("ListBox Item #6"));
             Assert.That(listBox.SelectedItems, Has.Length.EqualTo(2));
-            Assert.That(listBox.SelectedItem[0].Text, Is.EqualTo("ListBox Item #6"));
-            Assert.That(listBox.SelectedItem[1].Text, Is.EqualTo("ListBox Item #7"));
+            Assert.That(listBox.SelectedItems[0].Text, Is.EqualTo("ListBox Item #6"));
+            Assert.That(listBox.SelectedItems[1].Text, Is.EqualTo("ListBox Item #7"));
             
             tab.SelectTabItem(0); // Switch back to "Simple Controls"
         }
