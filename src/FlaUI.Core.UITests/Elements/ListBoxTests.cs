@@ -64,6 +64,11 @@ namespace FlaUI.Core.UITests.Elements
         [Test]
         public void SelectByTextInLargeList()
         {
+            if (ApplicationType != TestApplicationType.Wpf)
+            {
+                return; // test only for WPF, in Windows Forms all list items are loaded at startup
+            }
+        
             var window = Application.GetMainWindow(Automation);
             var tab = window.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
             tab.SelectTabItem(2); // Switch to "More Controls" tab
