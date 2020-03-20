@@ -116,5 +116,30 @@ namespace FlaUI.Core.AutomationElements
             item.RemoveFromSelection();
             return item;
         }
+        
+        /// <summary>
+        /// Remove a row from the selection by text.
+        /// </summary>
+        public ListBoxItem RemoveFromSelection(string text)
+        {
+            var item = Items.FirstOrDefault(x => x.Text.Equals(text));
+            if (item == null)
+            {
+                if (FrameworkType == FrameworkType.Wpf && Patterns.ItemContainer.TryGetPattern(out var itemContainerPattern))
+                {
+                    AutomationElement foundItem = itemContainerPattern.FindItemByProperty(null, FrameworkAutomationElement.PropertyIdLibrary.Name, text);
+                    if (foundItem != null)
+                    {
+                        item = foundItem.AsListBoxItem();
+                    }
+                }
+                if (item == null)
+                {
+                    throw new InvalidOperationException($"Did not find an item with text \"{text}\"");
+                }
+            }
+            item.RemoveFromSelection();
+            return item;
+        }
     }
 }
