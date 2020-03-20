@@ -55,17 +55,14 @@ namespace FlaUI.Core.AutomationElements
             var item = Items.FirstOrDefault(x => x.Text.Equals(text));
             if (item == null)
             {
-                /*if (FrameworkType == FrameworkType.Wpf)
+                if (FrameworkType == FrameworkType.Wpf && Patterns.ItemContainer.TryGetPattern(out var itemContainerPattern))
                 {
-                    if (Patterns.ItemContainer.TryGetPattern(out var itemContainerPattern))
+                    AutomationElement foundItem = itemContainerPattern.FindItemByProperty(null, FrameworkAutomationElement.PropertyIdLibrary.Name, text);
+                    if (foundItem != null)
                     {
-                        AutomationElement foundItem = itemContainerPattern.FindItemByProperty(null, FrameworkAutomationElement.PropertyIdLibrary.Name, text);
-                        if (foundItem != null)
-                        {
-                            item = foundItem.AsListBoxItem();
-                        }
+                        item = foundItem.AsListBoxItem();
                     }
-                }*/
+                }
                 if (item == null)
                 {
                     throw new InvalidOperationException($"Did not find an item with text \"{text}\"");
@@ -81,6 +78,31 @@ namespace FlaUI.Core.AutomationElements
         public ListBoxItem AddToSelection(int index)
         {
             var item = Items.ElementAt(index);
+            item.AddToSelection();
+            return item;
+        }
+        
+        /// <summary>
+        /// Add a row to the selection by text.
+        /// </summary>
+        public ListBoxItem AddToSelection(string text)
+        {
+            var item = Items.FirstOrDefault(x => x.Text.Equals(text));
+            if (item == null)
+            {
+                if (FrameworkType == FrameworkType.Wpf && Patterns.ItemContainer.TryGetPattern(out var itemContainerPattern))
+                {
+                    AutomationElement foundItem = itemContainerPattern.FindItemByProperty(null, FrameworkAutomationElement.PropertyIdLibrary.Name, text);
+                    if (foundItem != null)
+                    {
+                        item = foundItem.AsListBoxItem();
+                    }
+                }
+                if (item == null)
+                {
+                    throw new InvalidOperationException($"Did not find an item with text \"{text}\"");
+                }
+            }
             item.AddToSelection();
             return item;
         }
