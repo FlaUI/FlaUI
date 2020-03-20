@@ -179,6 +179,15 @@
                 <StackPanel>
                     <Calendar AutomationProperties.AutomationId="calendar" SelectionMode="MultipleRange" />
                     <DatePicker AutomationProperties.AutomationId="datePicker"></DatePicker>
+                    <ListBox AutomationProperties.AutomationId="LargeListBox" Height="45" SelectionMode="Extended">
+                        <ListBoxItem>ListBox Item #1</ListBoxItem>
+                        <ListBoxItem>ListBox Item #2</ListBoxItem>
+                        <ListBoxItem>ListBox Item #3</ListBoxItem>
+                        <ListBoxItem>ListBox Item #4</ListBoxItem>
+                        <ListBoxItem>ListBox Item #5</ListBoxItem>
+                        <ListBoxItem>ListBox Item #6</ListBoxItem>
+                        <ListBoxItem>ListBox Item #7</ListBoxItem>
+                    </ListBox>
                 </StackPanel>
             </TabItem>
         </TabControl>
