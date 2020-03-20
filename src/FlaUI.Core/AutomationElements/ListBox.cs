@@ -55,7 +55,7 @@ namespace FlaUI.Core.AutomationElements
             var item = Items.FirstOrDefault(x => x.Text.Equals(text));
             if (item == null)
             {
-                if (FrameworkType == FrameworkType.Wpf)
+                /*if (FrameworkType == FrameworkType.Wpf)
                 {
                     if (Patterns.ItemContainer.TryGetPattern(out var itemContainerPattern))
                     {
@@ -65,7 +65,7 @@ namespace FlaUI.Core.AutomationElements
                             item = foundItem.AsListBoxItem();
                         }
                     }
-                }
+                }*/
                 if (item == null)
                 {
                     throw new InvalidOperationException($"Did not find an item with text \"{text}\"");
