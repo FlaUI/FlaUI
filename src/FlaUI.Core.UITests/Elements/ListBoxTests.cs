@@ -76,11 +76,14 @@ namespace FlaUI.Core.UITests.Elements
             var listBox = window.FindFirstDescendant(cf => cf.ByAutomationId("LargeListBox")).AsListBox();
             var item = listBox.Select("ListBox Item #7");
             Assert.That(item.Text, Is.EqualTo("ListBox Item #7"));
+            Assert.That(listBox.SelectedItems, Has.Length.EqualTo(1));
             Assert.That(listBox.SelectedItem.Text, Is.EqualTo("ListBox Item #7"));
             
-            item = listBox.Select("ListBox Item #6");
+            item = listBox.AddToSelection("ListBox Item #6");
             Assert.That(item.Text, Is.EqualTo("ListBox Item #6"));
-            Assert.That(listBox.SelectedItem.Text, Is.EqualTo("ListBox Item #6"));
+            Assert.That(listBox.SelectedItems, Has.Length.EqualTo(2));
+            Assert.That(listBox.SelectedItem[0].Text, Is.EqualTo("ListBox Item #6"));
+            Assert.That(listBox.SelectedItem[1].Text, Is.EqualTo("ListBox Item #7"));
             
             tab.SelectTabItem(0); // Switch back to "Simple Controls"
         }
