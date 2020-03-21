@@ -37,11 +37,46 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public ListBoxItem SelectedItem => SelectionPattern.Selection.Value.FirstOrDefault()?.AsListBoxItem();
 
+        private ListBoxItem GetWPFListItemByIndex(int index)
+        {
+            if (index < 0)
+            {
+                throw new Exception("index cannot be negative");
+            }
+            
+            if (Patterns.ItemContainer.TryGetPattern(out var itemContainerPattern))
+            {
+                AutomationElement item = null;
+                do
+                {
+                    item = itemContainerPattern.FindItemByProperty(item, null, null);
+                    if (item == null)
+                    {
+                        throw new Exception("index is too big");
+                    }
+                    index--;
+                }
+                while (index >= 0);
+                return item.AsListBoxItem();
+            }
+            
+            return null;
+        }
+
         /// <summary>
         /// Selects an item by index.
         /// </summary>
         public ListBoxItem Select(int index)
         {
+            if (FrameworkType == FrameworkType.Wpf)
+            {
+                ListBoxItem wpfItem = GetWPFListItemByIndex(index);
+                if (wpfItem != null)
+                {
+                    wpfItem.Select();
+                    return wpfItem;
+                }
+            }
             var item = Items.ElementAt(index);
             item.Select();
             return item;
