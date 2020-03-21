@@ -68,7 +68,8 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public ListBoxItem Select(int index)
         {
-            if (FrameworkType == FrameworkType.Wpf)
+            ListBoxItem[] allItems = Items;
+            if (FrameworkType == FrameworkType.Wpf && index >= allItems.Length)
             {
                 ListBoxItem wpfItem = GetWPFListItemByIndex(index);
                 if (wpfItem != null)
@@ -77,7 +78,7 @@ namespace FlaUI.Core.AutomationElements
                     return wpfItem;
                 }
             }
-            var item = Items.ElementAt(index);
+            var item = allItems.ElementAt(index);
             item.Select();
             return item;
         }
@@ -112,7 +113,17 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public ListBoxItem AddToSelection(int index)
         {
-            var item = Items.ElementAt(index);
+            ListBoxItem[] allItems = Items;
+            if (FrameworkType == FrameworkType.Wpf && index >= allItems.Length)
+            {
+                ListBoxItem wpfItem = GetWPFListItemByIndex(index);
+                if (wpfItem != null)
+                {
+                    wpfItem.AddToSelection();
+                    return wpfItem;
+                }
+            }
+            var item = allItems.ElementAt(index);
             item.AddToSelection();
             return item;
         }
@@ -147,7 +158,17 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public ListBoxItem RemoveFromSelection(int index)
         {
-            var item = Items.ElementAt(index);
+            ListBoxItem[] allItems = Items;
+            if (FrameworkType == FrameworkType.Wpf && index >= allItems.Length)
+            {
+                ListBoxItem wpfItem = GetWPFListItemByIndex(index);
+                if (wpfItem != null)
+                {
+                    wpfItem.RemoveFromSelection();
+                    return wpfItem;
+                }
+            }
+            var item = allItems.ElementAt(index);
             item.RemoveFromSelection();
             return item;
         }
