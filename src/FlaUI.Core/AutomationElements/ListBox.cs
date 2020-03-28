@@ -27,24 +27,27 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public ListBoxItem[] Items
         {
-            if (FrameworkType == FrameworkType.Wpf && Patterns.ItemContainer.TryGetPattern(out var itemContainerPattern))
+            get
             {
-                List<ListBoxItem> allItems = new List<ListBoxItem>();
-                AutomationElement item = null;
-                do
+                if (FrameworkType == FrameworkType.Wpf && Patterns.ItemContainer.TryGetPattern(out var itemContainerPattern))
                 {
-                    item = itemContainerPattern.FindItemByProperty(item, null, null);
-                    if (item != null)
+                    List<ListBoxItem> allItems = new List<ListBoxItem>();
+                    AutomationElement item = null;
+                    do
                     {
-                        allItems.Add(item.AsListBoxItem());
+                        item = itemContainerPattern.FindItemByProperty(item, null, null);
+                        if (item != null)
+                        {
+                            allItems.Add(item.AsListBoxItem());
+                        }
                     }
+                    while (item != null);
+                    return allItems.ToArray();
                 }
-                while (item != null);
-                return allItems.ToArray();
-            }
-            else
-            {
-                return FindAllChildren(cf => cf.ByControlType(ControlType.ListItem)).Select(x => x.AsListBoxItem()).ToArray();
+                else
+                {
+                    return FindAllChildren(cf => cf.ByControlType(ControlType.ListItem)).Select(x => x.AsListBoxItem()).ToArray();
+                }
             }
         }
 
