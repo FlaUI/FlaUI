@@ -112,6 +112,7 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(listBox.SelectedItems[0].Text, Is.EqualTo("ListBox Item #7"));
             Assert.That(listBox.SelectedItems[1].Text, Is.EqualTo("ListBox Item #6"));
             
+            // test Items property
             Assert.That(listBox.Items, Has.Length.EqualTo(7));
             Assert.That(listBox.Items[6].Text, Is.EqualTo("ListBox Item #7"));
             
