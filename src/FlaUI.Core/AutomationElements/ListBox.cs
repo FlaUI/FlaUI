@@ -23,9 +23,30 @@ namespace FlaUI.Core.AutomationElements
         protected ISelectionPattern SelectionPattern => Patterns.Selection.Pattern;
 
         /// <summary>
-        /// Returns the items which are currently visible to FlaUI. Might not be the full list (eg. in WPF virtualized lists)!
+        /// Returns all the list box items
         /// </summary>
-        public ListBoxItem[] Items => FindAllChildren(cf => cf.ByControlType(ControlType.ListItem)).Select(x => x.AsListBoxItem()).ToArray();
+        public ListBoxItem[] Items
+        {
+            if (FrameworkType == FrameworkType.Wpf && Patterns.ItemContainer.TryGetPattern(out var itemContainerPattern))
+            {
+                List<ListBoxItem> allItems = new List<ListBoxItem>();
+                AutomationElement item = null;
+                do
+                {
+                    item = itemContainerPattern.FindItemByProperty(item, null, null);
+                    if (item != null)
+                    {
+                        allItems.Add(item.AsListBoxItem());
+                    }
+                }
+                while (item != null);
+                return allItems.ToArray();
+            }
+            else
+            {
+                return FindAllChildren(cf => cf.ByControlType(ControlType.ListItem)).Select(x => x.AsListBoxItem()).ToArray();
+            }
+        }
 
         /// <summary>
         /// Gets all selected items.
