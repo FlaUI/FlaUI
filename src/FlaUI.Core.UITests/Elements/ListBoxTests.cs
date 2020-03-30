@@ -62,6 +62,25 @@ namespace FlaUI.Core.UITests.Elements
         }
         
         [Test]
+        public void ItemsPropertyInLargeList()
+        {
+            if (ApplicationType != TestApplicationType.Wpf)
+            {
+                return; // test only for WPF, in Windows Forms all list items are loaded at startup
+            }
+            
+            var window = Application.GetMainWindow(Automation);
+            var tab = window.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
+            tab.SelectTabItem(2); // Switch to "More Controls" tab
+            
+            var listBox = window.FindFirstDescendant(cf => cf.ByAutomationId("LargeListBox")).AsListBox();
+            Assert.That(listBox.Items, Has.Length.EqualTo(7));
+            Assert.That(listBox.Items[6].Text, Is.EqualTo("ListBox Item #7"));
+            
+            tab.SelectTabItem(0); // Switch back to "Simple Controls"
+        }
+        
+        [Test]
         public void SelectByTextInLargeList()
         {
             if (ApplicationType != TestApplicationType.Wpf)
@@ -111,10 +130,6 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(listBox.SelectedItems, Has.Length.EqualTo(2));
             Assert.That(listBox.SelectedItems[0].Text, Is.EqualTo("ListBox Item #7"));
             Assert.That(listBox.SelectedItems[1].Text, Is.EqualTo("ListBox Item #6"));
-            
-            // test Items property
-            Assert.That(listBox.Items, Has.Length.EqualTo(7));
-            Assert.That(listBox.Items[6].Text, Is.EqualTo("ListBox Item #7"));
             
             tab.SelectTabItem(0); // Switch back to "Simple Controls"
         }
