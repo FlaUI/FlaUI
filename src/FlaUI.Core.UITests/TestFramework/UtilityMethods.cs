@@ -16,15 +16,14 @@ namespace FlaUI.Core.UITests.TestFramework
     {
         public static AutomationBase GetAutomation(AutomationType automationType)
         {
-            if (TestContext.Parameters.Exists("uia"))
+            // Get and validate the version
+            var uiaVersion = GetUiaVersion(automationType);
+            if ((automationType == AutomationType.UIA2 && uiaVersion != AutomationType.UIA2) ||
+                (automationType == AutomationType.UIA3 && uiaVersion != AutomationType.UIA3))
             {
-                var uiaVersion = Convert.ToInt32(TestContext.Parameters["uia"]);
-                if ((automationType == AutomationType.UIA2 && uiaVersion != 2) ||
-                    (automationType == AutomationType.UIA3 && uiaVersion != 3))
-                {
-                    Assert.Inconclusive($"UIA parameter set to {uiaVersion} but automation of type {automationType} is requested");
-                }
+                Assert.Inconclusive($"UIA parameter set to {uiaVersion} but automation of type {automationType} is requested");
             }
+
             switch (automationType)
             {
                 case AutomationType.UIA2:
@@ -33,6 +32,24 @@ namespace FlaUI.Core.UITests.TestFramework
                     return new UIA3Automation();
                 default:
                     throw new ArgumentOutOfRangeException(nameof(automationType), automationType, null);
+            }
+        }
+
+        public static AutomationType GetUiaVersion(AutomationType defaultIfNonExistent)
+        {
+            if (!TestContext.Parameters.Exists("uia"))
+            {
+                return defaultIfNonExistent;
+            }
+            var uiaVersion = Convert.ToInt32(TestContext.Parameters["uia"]);
+            switch (uiaVersion)
+            {
+                case 2:
+                    return AutomationType.UIA2;
+                case 3:
+                    return AutomationType.UIA3;
+                default:
+                    throw new ArgumentOutOfRangeException("uia", uiaVersion, null);
             }
         }
 

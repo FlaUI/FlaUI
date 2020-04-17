@@ -4,6 +4,7 @@ using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
+using FlaUI.Core.UITests.TestFramework;
 using FlaUI.Core.WindowsAPI;
 using FlaUI.UIA3;
 using NUnit.Framework;
@@ -45,6 +46,10 @@ namespace FlaUI.Core.UITests
         [Test]
         public void SearchWithAccessibilityRole()
         {
+            if (UtilityMethods.GetUiaVersion(AutomationType.UIA3) != AutomationType.UIA3)
+            {
+                Assert.Ignore("Only run test in UIA3 context");
+            }
             using (var app = Application.Launch("notepad.exe"))
             {
                 using (var automation = new UIA3Automation())
@@ -53,9 +58,7 @@ namespace FlaUI.Core.UITests
                     Assert.That(window, Is.Not.Null);
                     Assert.That(window.Title, Is.Not.Null);
 
-                    var editableText = Retry.WhileNull(() =>
-                        window.FindFirstChild(new PropertyCondition(automation.PropertyLibrary.LegacyIAccessible.Role, AccessibilityRole.ROLE_SYSTEM_TEXT)),
-                        timeout: TimeSpan.FromSeconds(5)).Result;
+                    var editableText = window.FindFirstChild(new PropertyCondition(automation.PropertyLibrary.LegacyIAccessible.Role, AccessibilityRole.ROLE_SYSTEM_TEXT));
                     Assert.That(editableText, Is.Not.Null);
                     Assert.That(editableText.Patterns.Text.IsSupported, Is.True);
                 }
