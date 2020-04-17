@@ -62,48 +62,12 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public ListBoxItem SelectedItem => SelectionPattern.Selection.Value.FirstOrDefault()?.AsListBoxItem();
 
-        private ListBoxItem GetWPFListItemByIndex(int index)
-        {
-            if (index < 0)
-            {
-                throw new Exception("index cannot be negative");
-            }
-            
-            if (Patterns.ItemContainer.TryGetPattern(out var itemContainerPattern))
-            {
-                AutomationElement item = null;
-                do
-                {
-                    item = itemContainerPattern.FindItemByProperty(item, null, null);
-                    if (item == null)
-                    {
-                        throw new Exception("index is too big");
-                    }
-                    index--;
-                }
-                while (index >= 0);
-                return item.AsListBoxItem();
-            }
-            
-            return null;
-        }
-
         /// <summary>
         /// Selects an item by index.
         /// </summary>
         public ListBoxItem Select(int index)
         {
-            ListBoxItem[] allItems = Items;
-            if (FrameworkType == FrameworkType.Wpf && index >= allItems.Length)
-            {
-                ListBoxItem wpfItem = GetWPFListItemByIndex(index);
-                if (wpfItem != null)
-                {
-                    wpfItem.Select();
-                    return wpfItem;
-                }
-            }
-            var item = allItems.ElementAt(index);
+            var item = Items.ElementAt(index);
             item.Select();
             return item;
         }
@@ -138,17 +102,7 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public ListBoxItem AddToSelection(int index)
         {
-            ListBoxItem[] allItems = Items;
-            if (FrameworkType == FrameworkType.Wpf && index >= allItems.Length)
-            {
-                ListBoxItem wpfItem = GetWPFListItemByIndex(index);
-                if (wpfItem != null)
-                {
-                    wpfItem.AddToSelection();
-                    return wpfItem;
-                }
-            }
-            var item = allItems.ElementAt(index);
+            var item = Items.ElementAt(index);
             item.AddToSelection();
             return item;
         }
@@ -183,17 +137,7 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public ListBoxItem RemoveFromSelection(int index)
         {
-            ListBoxItem[] allItems = Items;
-            if (FrameworkType == FrameworkType.Wpf && index >= allItems.Length)
-            {
-                ListBoxItem wpfItem = GetWPFListItemByIndex(index);
-                if (wpfItem != null)
-                {
-                    wpfItem.RemoveFromSelection();
-                    return wpfItem;
-                }
-            }
-            var item = allItems.ElementAt(index);
+            var item = Items.ElementAt(index);
             item.RemoveFromSelection();
             return item;
         }
