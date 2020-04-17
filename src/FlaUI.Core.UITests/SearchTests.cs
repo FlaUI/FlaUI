@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
@@ -37,6 +38,27 @@ namespace FlaUI.Core.UITests
                         }
                     );
                 }
+                app.Close();
+            }
+        }
+
+        [Test]
+        public void SearchWithAccessibilityRole()
+        {
+            using (var app = Application.Launch("notepad.exe"))
+            {
+                using (var automation = new UIA3Automation())
+                {
+                    var window = app.GetMainWindow(automation);
+                    Assert.That(window, Is.Not.Null);
+                    Assert.That(window.Title, Is.Not.Null);
+
+                    var editableText = window.FindFirstChild(new PropertyCondition(automation.PropertyLibrary.LegacyIAccessible.Role, AccessibilityRole.ROLE_SYSTEM_TEXT));
+                    Assert.That(editableText, Is.Not.Null);
+                    Assert.That(editableText.Patterns.Text.IsSupported, Is.True);
+                }
+
+                app.Close();
             }
         }
 

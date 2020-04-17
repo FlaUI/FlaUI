@@ -4,6 +4,7 @@ using System.Globalization;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Tools;
+using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.UIA3.Converters
 {
@@ -28,6 +29,10 @@ namespace FlaUI.UIA3.Converters
             else if (val is AnnotationType annotationType)
             {
                 val = (int)AnnotationTypeConverter.ToAnnotationTypeNative(annotationType);
+            }
+            else if (val is AccessibilityRole accessibilityRole)
+            {
+                val = (int)accessibilityRole;
             }
             else if (val is Rectangle rect)
             {
