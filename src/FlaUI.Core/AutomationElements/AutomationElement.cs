@@ -292,7 +292,7 @@ namespace FlaUI.Core.AutomationElements
         public void ImageAssert(string filePath)
         {
             var progManager = Automation.GetDesktop().FindFirstChild(cf => cf.ByControlType(ControlType.Pane).And(cf.ByName("Program Manager")));
-            if (progManaged != null)
+            if (progManager != null)
             {
                 var desktopList = progManager.FindFirstChild(cf => cf.ByControlType(ControlType.List).And(cf.ByName("Desktop")));
                 if (desktopList != null)
