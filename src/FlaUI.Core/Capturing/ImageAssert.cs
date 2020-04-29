@@ -17,7 +17,7 @@ namespace FlaUI.Core.Capturing
         /// Also, when calling this method make sure the element is entirely visible on screen.
         /// </summary>
         /// <param name="element">The automation element being compared.</param>
-        /// <param name="filePath">The filepath of file containing the image.</param>
+        /// <param name="filePath">The path of file containing the image.</param>
         public static void AreEqual(AutomationElement element, string filePath)
         {
             var progManager = element.Automation.GetDesktop().FindFirstChild(cf => cf.ByControlType(ControlType.Pane).And(cf.ByName("Program Manager")));
