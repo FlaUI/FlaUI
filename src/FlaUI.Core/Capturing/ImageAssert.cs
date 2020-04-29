@@ -14,7 +14,7 @@ namespace FlaUI.Core.Capturing
         /// Compares the automation element with the image from specified file path.
         /// If the snapshot of the automation element differs from the image in the file then an exception is thrown.
         /// When you create the image file specified as the parameter (using FlaUInspect tool), make sure the element you are taking a snapshot of is entirely visible on the screen and it is not (partially or completely) overlapped by another window.
-        /// Also, when calling ImageAssert method make sure the element is entirely visible on screen.
+        /// Also, when calling this method make sure the element is entirely visible on screen.
         /// </summary>
         /// <param name="element">The automation element being compared.</param>
         /// <param name="filePath">The filepath of file containing the image.</param>
@@ -36,7 +36,7 @@ namespace FlaUI.Core.Capturing
             
             Bitmap crtBitmap = element.Capture();
             
-            // restore focus on the current element
+            // restore focus on the automation element
             element.FrameworkAutomationElement.SetFocus();
             
             Bitmap bitmapFromFile = null;
