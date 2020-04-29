@@ -53,7 +53,7 @@ namespace FlaUI.Core.Capturing
             //compare...
             if (crtBitmap.Height != bitmapFromFile.Height || crtBitmap.Width != bitmapFromFile.Width)
             {
-                throw new Exception("Images have different sizes");
+                throw new Exception($"Images have different sizes. FilePath: \"{filePath}\"");
             }
             
             bool identic = true;
@@ -77,7 +77,7 @@ namespace FlaUI.Core.Capturing
             
             if (identic == false)
             {
-                throw new Exception("Images differ");
+                throw new Exception($"Images differ. FilePath: \"{filePath}\"");
             }
         }
     }
