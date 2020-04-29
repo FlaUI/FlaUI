@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using FlaUI.Core.AutomationElements;
+using FlaUI.Core.Definitions;
 
 namespace FlaUI.Core.Capturing
 {
@@ -28,7 +29,7 @@ namespace FlaUI.Core.Capturing
                     // Set focus on desktop so the tested application will lose the focus.
                     // We want to capture the element without focus. 
                     // Controls and windows look different when they have the focus (on edit control a caret may appear, text may be selected and so on).
-                    desktopList.SetFocus();
+                    desktopList.FrameworkAutomationElement.SetFocus();
                     System.Threading.Thread.Sleep(300);
                 }
             }
@@ -36,7 +37,7 @@ namespace FlaUI.Core.Capturing
             Bitmap crtBitmap = element.Capture();
             
             // restore focus on the current element
-            element.SetFocus();
+            element.FrameworkAutomationElement.SetFocus();
             
             Bitmap bitmapFromFile = null;
             try
