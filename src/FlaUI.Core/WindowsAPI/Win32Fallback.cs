@@ -622,5 +622,15 @@ namespace FlaUI.Core.WindowsAPI
             User32.VirtualFreeEx(hProcess, hMem, Marshal.SizeOf(systemtime), AllocationType.Decommit | AllocationType.Release);
             User32.CloseHandle(hProcess);
         }
+        
+        internal static bool IsTopLevelWindow(IntPtr hWnd)
+        {
+            uint style = User32.GetWindowLong(hWnd, WindowLongParam.GWL_STYLE);
+            if (style == 0)
+            {
+                return false;
+            }
+            return ((style & WindowStyles.WS_CHILD) == 0);
+        }
     }
 }
