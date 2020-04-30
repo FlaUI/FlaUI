@@ -230,8 +230,8 @@ namespace FlaUI.Core.AutomationElements
                 for (int i = 3; i < monthButtons.Length; i++)
                 {
                     AutomationElement monthBtn = monthButtons[i];
-                    parts = monthBtn.Name.Split(' ');
-                    if (parts[0] == date.ToString("MMMM"))
+                    DateTime crtMonthDate = DateTime.Parse(monthBtn.Name, CultureInfo.CurrentCulture);
+                    if (crtMonthDate.Month == date.Month)
                     {
                         if (monthBtn.Patterns.Invoke.TryGetPattern(out var invokePattern))
                         {

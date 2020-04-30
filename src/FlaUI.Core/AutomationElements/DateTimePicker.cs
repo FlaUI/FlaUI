@@ -66,7 +66,7 @@ namespace FlaUI.Core.AutomationElements
             {
                 if (FrameworkType == FrameworkType.Wpf)
                 {
-                    if (Patterns.Value.TryGetPattern(out var valuePattern))
+                    if (value.HasValue && Patterns.Value.TryGetPattern(out var valuePattern))
                     {
                         valuePattern.SetValue(value.Value.ToString(CultureInfo.CurrentCulture));
                         return;
@@ -86,6 +86,11 @@ namespace FlaUI.Core.AutomationElements
                 }
                 else if (FrameworkType == FrameworkType.WinForms)
                 {
+                    if (value.HasValue == false)
+                    {
+                        return; // setting null will do nothing
+                    }
+                
                     SetForeground();
                     Wait.UntilInputIsProcessed();
                     

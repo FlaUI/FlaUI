@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Patterns;
 
@@ -23,9 +24,33 @@ namespace FlaUI.Core.AutomationElements
         protected ISelectionPattern SelectionPattern => Patterns.Selection.Pattern;
 
         /// <summary>
-        /// Returns the items which are currently visible to FlaUI. Might not be the full list (eg. in WPF virtualized lists)!
+        /// Returns all the list box items
         /// </summary>
-        public ListBoxItem[] Items => FindAllChildren(cf => cf.ByControlType(ControlType.ListItem)).Select(x => x.AsListBoxItem()).ToArray();
+        public ListBoxItem[] Items
+        {
+            get
+            {
+                if (FrameworkType == FrameworkType.Wpf && Patterns.ItemContainer.TryGetPattern(out var itemContainerPattern))
+                {
+                    List<ListBoxItem> allItems = new List<ListBoxItem>();
+                    AutomationElement item = null;
+                    do
+                    {
+                        item = itemContainerPattern.FindItemByProperty(item, null, null);
+                        if (item != null)
+                        {
+                            allItems.Add(item.AsListBoxItem());
+                        }
+                    }
+                    while (item != null);
+                    return allItems.ToArray();
+                }
+                else
+                {
+                    return FindAllChildren(cf => cf.ByControlType(ControlType.ListItem)).Select(x => x.AsListBoxItem()).ToArray();
+                }
+            }
+        }
 
         /// <summary>
         /// Gets all selected items.
@@ -55,7 +80,18 @@ namespace FlaUI.Core.AutomationElements
             var item = Items.FirstOrDefault(x => x.Text.Equals(text));
             if (item == null)
             {
-                throw new InvalidOperationException($"Did not find an item with text \"{text}\"");
+                if (FrameworkType == FrameworkType.Wpf && Patterns.ItemContainer.TryGetPattern(out var itemContainerPattern))
+                {
+                    AutomationElement foundItem = itemContainerPattern.FindItemByProperty(null, FrameworkAutomationElement.PropertyIdLibrary.Name, text);
+                    if (foundItem != null)
+                    {
+                        item = foundItem.AsListBoxItem();
+                    }
+                }
+                if (item == null)
+                {
+                    throw new InvalidOperationException($"Did not find an item with text \"{text}\"");
+                }
             }
             item.Select();
             return item;
@@ -70,6 +106,31 @@ namespace FlaUI.Core.AutomationElements
             item.AddToSelection();
             return item;
         }
+        
+        /// <summary>
+        /// Add a row to the selection by text.
+        /// </summary>
+        public ListBoxItem AddToSelection(string text)
+        {
+            var item = Items.FirstOrDefault(x => x.Text.Equals(text));
+            if (item == null)
+            {
+                if (FrameworkType == FrameworkType.Wpf && Patterns.ItemContainer.TryGetPattern(out var itemContainerPattern))
+                {
+                    AutomationElement foundItem = itemContainerPattern.FindItemByProperty(null, FrameworkAutomationElement.PropertyIdLibrary.Name, text);
+                    if (foundItem != null)
+                    {
+                        item = foundItem.AsListBoxItem();
+                    }
+                }
+                if (item == null)
+                {
+                    throw new InvalidOperationException($"Did not find an item with text \"{text}\"");
+                }
+            }
+            item.AddToSelection();
+            return item;
+        }
 
         /// <summary>
         /// Remove a row from the selection by index.
@@ -77,6 +138,31 @@ namespace FlaUI.Core.AutomationElements
         public ListBoxItem RemoveFromSelection(int index)
         {
             var item = Items.ElementAt(index);
+            item.RemoveFromSelection();
+            return item;
+        }
+        
+        /// <summary>
+        /// Remove a row from the selection by text.
+        /// </summary>
+        public ListBoxItem RemoveFromSelection(string text)
+        {
+            var item = Items.FirstOrDefault(x => x.Text.Equals(text));
+            if (item == null)
+            {
+                if (FrameworkType == FrameworkType.Wpf && Patterns.ItemContainer.TryGetPattern(out var itemContainerPattern))
+                {
+                    AutomationElement foundItem = itemContainerPattern.FindItemByProperty(null, FrameworkAutomationElement.PropertyIdLibrary.Name, text);
+                    if (foundItem != null)
+                    {
+                        item = foundItem.AsListBoxItem();
+                    }
+                }
+                if (item == null)
+                {
+                    throw new InvalidOperationException($"Did not find an item with text \"{text}\"");
+                }
+            }
             item.RemoveFromSelection();
             return item;
         }
