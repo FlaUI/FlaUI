@@ -80,7 +80,25 @@ namespace FlaUI.Core.Capturing
         /// </summary>
         public static CaptureImage Element(AutomationElement element, CaptureSettings settings = null)
         {
-            return Rectangle(element.BoundingRectangle, settings);
+            Rectangle rectangle = element.BoundingRectangle;
+            bool isWindows10OrLater = (Environment.OSVersion.Version.Major == 6 && Environment.OSVersion.Version.Minor >= 2) ||
+                Environment.OSVersion.Version.Major >= 7;
+            
+            if (isWindows10OrLater && element.ControlType == ControlType.Window && 
+                element.Properties.NativeWindowHandle.IsSupported && 
+                Win32Fallback.IsTopLevelWindow(element.Properties.NativeWindowHandle.ValueOrDefault))
+            {
+                // For top-level windows in Windows 10 there is an extra border around any window.
+                // The border is transparent and has 8 pixels width to left, 8 pixels to right, 8 pixels height on bottom and 1 pixel on top.
+                // The UIA bounding rectangle is larger then the window itself and capturing using the bounding rectangle as it is will also get a part of what is under our window.
+                // To capture only the window we need to shrink the rectangle a little bit.
+                rectangle.X += 8;
+                rectangle.Y += 1;
+                rectangle.Width -= 16;
+                rectangle.Height -= 9;
+            }
+            
+            return Rectangle(rectangle, settings);
         }
 
         /// <summary>
