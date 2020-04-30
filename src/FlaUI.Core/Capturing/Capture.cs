@@ -1,6 +1,7 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Exceptions;
 using FlaUI.Core.WindowsAPI;
+using FlaUI.Core.Definitions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
