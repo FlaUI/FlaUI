@@ -1,6 +1,9 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
+using System.Text;
 using System.Threading;
 using FlaUI.Core.Input;
+using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
 using FlaUI.UIA3;
 using NUnit.Framework;
@@ -78,6 +81,41 @@ namespace FlaUI.Core.UITests
             }, "Failed to move mouse by 0-x and 0-y");
             Assert.That(Mouse.Position.X, Is.EqualTo(startPosition.X));
             Assert.That(Mouse.Position.Y, Is.EqualTo(startPosition.Y));
+        }
+
+        [Test]
+        public void ScrollTest()
+        {
+            using (var app = Application.Launch("notepad.exe"))
+            {
+                using (var automation = new UIA3Automation())
+                {
+                    var mainWindow = app.GetMainWindow(automation);
+                    var documentElement = mainWindow.FindFirstChild("15");
+                    var sb = new StringBuilder();
+                    for (var i = 0; i < 1000; i++)
+                    {
+                        sb.Append("aaa" + Environment.NewLine);
+                    }
+                    documentElement.Patterns.Value.Pattern.SetValue(sb.ToString());
+                    Mouse.Position = documentElement.BoundingRectangle.Center();
+                    Wait.UntilInputIsProcessed();
+
+                    var initScroll = documentElement.Patterns.Scroll.Pattern.VerticalScrollPercent.Value;
+                    Assert.That(initScroll, Is.EqualTo(0));
+                    Mouse.Scroll(-100);
+                    Wait.UntilInputIsProcessed();
+                    var downScroll = documentElement.Patterns.Scroll.Pattern.VerticalScrollPercent.Value;
+                    Assert.That(downScroll, Is.GreaterThan(initScroll));
+
+                    Mouse.Scroll(100);
+                    Wait.UntilInputIsProcessed();
+                    var upScroll = documentElement.Patterns.Scroll.Pattern.VerticalScrollPercent.Value;
+                    Assert.That(upScroll, Is.LessThan(downScroll));
+
+                    UtilityMethods.CloseWindowWithDontSave(mainWindow);
+                }
+            }
         }
     }
 }
