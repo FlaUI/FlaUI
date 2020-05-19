@@ -60,13 +60,13 @@ namespace FlaUI.Core.Input
         /// The number of pixels the mouse is moved per millisecond.
         /// Used to calculate the duration of a mouse move.
         /// </summary>
-        public static double MovePixelsPerMillisecond { get; } = 0.5;
+        public static double MovePixelsPerMillisecond { get; set; } = 0.5;
 
         /// <summary>
         /// The number of pixels the mouse is moved per step.
         /// Used to calculate the interval of a mouse move.
         /// </summary>
-        public static double MovePixelsPerStep { get; } = 10;
+        public static double MovePixelsPerStep { get; set; } = 10;
 
         /// <summary>
         /// The current position of the mouse cursor.
