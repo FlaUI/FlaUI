@@ -27,6 +27,11 @@ namespace FlaUI.Core
         private bool _disposed;
 
         /// <summary>
+        /// The timeout to wait to close an application gracefully.
+        /// </summary>
+        public TimeSpan CloseTimeout { get; set; } = TimeSpan.FromSeconds(5);
+
+        /// <summary>
         /// Flag to indicate, if the application is a windows store app.
         /// </summary>
         public bool IsStoreApp { get; }
@@ -81,8 +86,9 @@ namespace FlaUI.Core
         /// <summary>
         /// Closes the application. Force-closes it after a small timeout.
         /// </summary>
-        /// <returns>Returns true if the application was closed normally and false if it was force-closed.</returns>
-        public bool Close()
+        /// <param name="killIfCloseFails">A flag to indicate if the process should be killed if closing fails within the <see cref="CloseTimeout"/>.</param>
+        /// <returns>Returns true if the application was closed normally and false if it could not be closed gracefully.</returns>
+        public bool Close(bool killIfCloseFails = true)
         {
             Logger.Default.Debug("Closing application");
             if (_disposed || _process.HasExited)
@@ -94,12 +100,17 @@ namespace FlaUI.Core
             {
                 return true;
             }
-            _process.WaitForExit(5000);
+            // Gracefully wait until it exits
+            _process.WaitForExit((int)CloseTimeout.TotalMilliseconds);
             if (!_process.HasExited)
             {
-                Logger.Default.Info("Application failed to exit, killing process");
-                _process.Kill();
-                _process.WaitForExit(5000);
+                // It hasn't exited yet so kill it
+                Logger.Default.Info("Application failed to exit");
+                if (killIfCloseFails)
+                {
+                    _process.Kill();
+                    _process.WaitForExit(5000);
+                }
                 return false;
             }
             return true;
