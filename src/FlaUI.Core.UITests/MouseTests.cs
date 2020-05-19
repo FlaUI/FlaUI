@@ -86,6 +86,7 @@ namespace FlaUI.Core.UITests
         [Test]
         public void ScrollTest()
         {
+            UtilityMethods.IgnoreOnUIA2();
             using (var app = Application.Launch("notepad.exe"))
             {
                 using (var automation = new UIA3Automation())

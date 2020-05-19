@@ -53,6 +53,14 @@ namespace FlaUI.Core.UITests.TestFramework
             }
         }
 
+        public static void IgnoreOnUIA2()
+        {
+            if (GetUiaVersion(AutomationType.UIA3) != AutomationType.UIA3)
+            {
+                Assert.Ignore("Only run test in UIA3 context");
+            }
+        }
+
         /// <summary>
         /// Closes the given window and invokes the "Don't save" button
         /// </summary>

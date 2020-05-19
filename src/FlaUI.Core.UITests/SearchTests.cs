@@ -46,10 +46,7 @@ namespace FlaUI.Core.UITests
         [Test]
         public void SearchWithAccessibilityRole()
         {
-            if (UtilityMethods.GetUiaVersion(AutomationType.UIA3) != AutomationType.UIA3)
-            {
-                Assert.Ignore("Only run test in UIA3 context");
-            }
+            UtilityMethods.IgnoreOnUIA2();
             using (var app = Application.Launch("notepad.exe"))
             {
                 using (var automation = new UIA3Automation())
