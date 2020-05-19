@@ -1,5 +1,27 @@
 # Changelog
 
+## 3.1.0 (2020-05-19)
+### Breaking changes
+  * None
+
+### Enhancements
+  * Added ByFrameworkType condition
+  * Allow xpath to find unknown types by mapping them to custom
+  * Added support for Qt framework type
+  * Added support for WinForms spinner (thanks @ddeltasolutions)
+  * Added Capture.ScreensWithElement
+  * Added customization of InfoOverlay font (thanks @petrsapak)
+  * Added calendar support (thanks @ddeltasolutions)
+  * Added date time picker support (thanks @ddeltasolutions)
+  * Added support for large lists (thanks @ddeltasolutions)
+  * Added application CloseTimeout and killIfCloseFails flag
+  * Made the mouse movement speeds settable
+
+### Bug fixes
+  * Fixed null error in FrameworkId
+  * Fix moving the mouse by 0 distance
+  * Fixed search by AccessibilityRole
+
 ## 3.0.0 (2019-12-09)
 ### Introduction
 This release combines all changes from the 2.x pre-release versions and also new features.
