@@ -211,9 +211,9 @@ namespace FlaUI.Core
         /// Launches the given executable.
         /// </summary>
         /// <param name="executable">The executable to launch.</param>
-        public static Application Launch(string executable)
+        public static Application Launch(string executable, string arguments = null)
         {
-            var processStartInfo = new ProcessStartInfo(executable);
+            var processStartInfo = new ProcessStartInfo(executable, arguments);
             return Launch(processStartInfo);
         }
 
