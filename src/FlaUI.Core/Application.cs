@@ -211,17 +211,17 @@ namespace FlaUI.Core
         /// Launches the given executable.
         /// </summary>
         /// <param name="executable">The executable to launch.</param>
-        public static Application Launch(string executable)
+        public static Application Launch(string executable, string cParams = null)
         {
             var processStartInfo = new ProcessStartInfo(executable);
-            return Launch(processStartInfo);
+            return Launch(processStartInfo, cParams);
         }
 
         /// <summary>
         /// Launches an application with the given process information.
         /// </summary>
         /// <param name="processStartInfo">The process information used to launch the application.</param>
-        public static Application Launch(ProcessStartInfo processStartInfo)
+        public static Application Launch(ProcessStartInfo processStartInfo, string cParams = null)
         {
             if (String.IsNullOrEmpty(processStartInfo.WorkingDirectory))
             {
@@ -237,7 +237,7 @@ namespace FlaUI.Core
             Process process;
             try
             {
-                process = Process.Start(processStartInfo);
+                process = Process.Start(processStartInfo, cParams);
             }
             catch (Win32Exception ex)
             {
