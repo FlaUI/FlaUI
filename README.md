@@ -16,6 +16,9 @@ It is based on native UI Automation libraries from Microsoft and therefore kind 
 FlaUI wraps almost everything from the UI Automation libraries but also provides the native objects in case someone has a special need which is not covered (yet) by FlaUI.<br />
 Some ideas are copied from the UIAComWrapper project or TestStack.White but rewritten from scratch to have a clean codebase.
 
+### Sponsoring
+If you appreciate my work, feel free to support me by [sponsoring on github](https://github.com/sponsors/Roemer) or with a one-time payment [over at PayPal](https://paypal.me/rbaeriswyl).
+
 ### Why another library?
 There are quite some automation solutions out there. Commercial ones like TestComplete, Ranorex, CodedUI just to name a few. And also free ones which are mainly TestStack.White.<br />
 All of them are based on what Microsoft provides. These are the UI Automation libraries. There are three versions of it:
