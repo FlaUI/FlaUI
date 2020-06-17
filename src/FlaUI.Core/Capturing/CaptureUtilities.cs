@@ -12,6 +12,9 @@ namespace FlaUI.Core.Capturing
     /// </summary>
     public static class CaptureUtilities
     {
+        [DllImport("Gdi32")]
+        public static extern bool DeleteObject(IntPtr ho);
+
         /// <summary>
         /// Calculates a scale factor according to the bounds and capture settings.
         /// </summary>
@@ -170,8 +173,16 @@ namespace FlaUI.Core.Capturing
             }
 
             // Just return the icon converted to a bitmap
-            var icon = Icon.FromHandle(hicon);
-            return icon.ToBitmap();
+            Bitmap result;
+            using (Icon icon = Icon.FromHandle(hicon))
+            {
+                result = icon.ToBitmap();
+            }
+
+            User32.DestroyIcon(hicon);
+            DeleteObject(iconInfo.hbmMask);
+            DeleteObject(iconInfo.hbmColor);
+            return result;
         }
     }
 }
