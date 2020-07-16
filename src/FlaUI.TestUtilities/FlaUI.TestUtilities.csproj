@@ -8,7 +8,7 @@
   <PropertyGroup Label="Package">
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageOutputPath>..\..\artifacts</PackageOutputPath>
-    <Version>0.1.0</Version>
+    <Version>3.2.0</Version>
     <Product>FlaUI.TestUtilities</Product>
     <Authors>Roemer</Authors>
     <Description>Library that provides some helper classes and methods for easier testing with FlaUI.</Description>

@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.2.0 (2020-07-16)
+### Breaking changes
+  * None
+
+### Enhancements
+  * Add params on Process.Start (thanks @brunofmeurer)
+  * Added .NET Core 3.1 Target Framework (thanks @torepaulsson)
+
+### Bug fixes
+  * Fixed GID Handle leak (thanks @ChrisZhang95)
+  * Fixed .NET Core issue were the MainWindowHandle is not refreshed (thanks @torepaulsson)
+
 ## 3.1.0 (2020-05-19)
 ### Breaking changes
   * None
