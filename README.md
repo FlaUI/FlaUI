@@ -79,6 +79,9 @@ Head over to the [chat](https://gitter.im/FlaUI/Lobby) to ask your specific ques
 Feel free to fork FlaUI and send pull requests of your modifications.<br />
 You can also create issues if you find problems or have ideas on how to further improve FlaUI.
 
+### Donors and Sponsors
+- Thank you Gehtsoft USA LLC for the generous donation
+
 ### Acknowledgements
 #### JetBrains
 Thanks to [JetBrains](https://www.jetbrains.com) for providing a free license of [ReSharper](https://www.jetbrains.com/resharper/).
