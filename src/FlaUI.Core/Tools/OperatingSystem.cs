@@ -30,6 +30,8 @@ namespace FlaUI.Core.Tools
         public static readonly Version Windows10_1803 = new Version(10, 0, 17134);
         public static readonly Version Windows10_1809 = new Version(10, 0, 17763);
         public static readonly Version Windows10_1903 = new Version(10, 0, 18362);
+        public static readonly Version Windows10_1909 = new Version(10, 0, 18363);
+        public static readonly Version Windows10_2004 = new Version(10, 0, 19041);
         public static readonly Version WindowsServer2003 = new Version(5, 2, 3790);
         public static readonly Version WindowsServer2008 = WindowsVistaSP1;
         public static readonly Version WindowsServer2008R2 = Windows7;
