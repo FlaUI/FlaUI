@@ -57,6 +57,8 @@ namespace FlaUI.UIA3.Converters
                     return AnnotationType.Mathematics;
                 case UIA.UIA_AnnotationTypes.AnnotationType_MoveChange:
                     return AnnotationType.MoveChange;
+                case UIA.UIA_AnnotationTypes.AnnotationType_Sensitive:
+                    return AnnotationType.Sensitive;
                 case UIA.UIA_AnnotationTypes.AnnotationType_SpellingError:
                     return AnnotationType.SpellingError;
                 case UIA.UIA_AnnotationTypes.AnnotationType_TrackChanges:
@@ -117,6 +119,8 @@ namespace FlaUI.UIA3.Converters
                     return UIA.UIA_AnnotationTypes.AnnotationType_Mathematics;
                 case AnnotationType.MoveChange:
                     return UIA.UIA_AnnotationTypes.AnnotationType_MoveChange;
+                case AnnotationType.Sensitive:
+                    return UIA.UIA_AnnotationTypes.AnnotationType_Sensitive;
                 case AnnotationType.SpellingError:
                     return UIA.UIA_AnnotationTypes.AnnotationType_SpellingError;
                 case AnnotationType.TrackChanges:

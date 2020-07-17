@@ -106,6 +106,11 @@
         MoveChange,
 
         /// <summary>
+        /// (Sensitive content).
+        /// </summary>
+        Sensitive,
+
+        /// <summary>
         /// A spelling error, often denoted by a red squiggly line.
         /// </summary>
         SpellingError,
