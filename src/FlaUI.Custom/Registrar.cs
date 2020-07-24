@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Windows.Automation.Peers;
 using System.Windows.Threading;
 using Interop.UIAutomationCore;
@@ -9,6 +11,20 @@ namespace FlaUI.Custom
 {
     public static class Registrar
     {
+        public static void RegisterPattern()
+        {
+            var patternInfor = new UIAutomationPatternInfo
+            {
+                guid = Guid.NewGuid(),
+            };
+
+            var meth = new UIAutomationMethodInfo();
+            meth.pParameterTypes =  Marshal.AllocCoTaskMem((int)(cTotalParameters * Marshal.SizeOf(typeof(Int32))));
+            typePointer = (IntPtr)(typePointer.ToInt64() + Marshal.SizeOf(typeof(Int32)));
+            var uiaRegistrar = new CUIAutomationRegistrarClass();
+            uiaRegistrar.RegisterPattern();
+        }
+
         public static void RegisterStandaloneProperty(CustomProperty customProperty)
         {
             RegisterPropertyInUIA3(customProperty);
