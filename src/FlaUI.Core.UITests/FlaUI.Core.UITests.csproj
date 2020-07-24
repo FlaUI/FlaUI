@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Interop.UIAutomationCore, Version=10.0.19041.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Interop.UIAutomationCore.10.19041.0\lib\net45\Interop.UIAutomationCore.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
     <Reference Include="nunit.framework, Version=3.12.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.12.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
@@ -44,6 +50,7 @@
     <Compile Include="CalculatorTests.cs" />
     <Compile Include="CaptureTests.cs" />
     <Compile Include="Converters\ValueConverterTests.cs" />
+    <Compile Include="Custom\CustomLabelTests.cs" />
     <Compile Include="Elements\AutomationElementTests.cs" />
     <Compile Include="Elements\CalendarTests.cs" />
     <Compile Include="Elements\CheckBoxTests.cs" />
@@ -99,6 +106,10 @@
       <Project>{df81078d-0932-47ba-b5a7-176cff202375}</Project>
       <Name>FlaUI.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FlaUI.Custom\FlaUI.Custom.csproj">
+      <Project>{3032e604-6130-48ca-addf-d091f0944059}</Project>
+      <Name>FlaUI.Custom</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FlaUI.TestUtilities\FlaUI.TestUtilities.csproj">
       <Project>{54da021e-ee2f-4c7a-9484-b71fd02ce513}</Project>
       <Name>FlaUI.TestUtilities</Name>
@@ -127,7 +138,15 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Interop.UIAutomationCore.10.19041.0\build\Interop.UIAutomationCore.targets" Condition="Exists('..\packages\Interop.UIAutomationCore.10.19041.0\build\Interop.UIAutomationCore.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Interop.UIAutomationCore.10.19041.0\build\Interop.UIAutomationCore.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Interop.UIAutomationCore.10.19041.0\build\Interop.UIAutomationCore.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

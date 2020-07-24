@@ -1,0 +1,60 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup Label="Build">
+    <TargetFrameworks>net35;net40;net45;netcoreapp3.0;netcoreapp3.1;</TargetFrameworks>
+    <UseWPF>true</UseWPF>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package">
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageOutputPath>..\..\artifacts</PackageOutputPath>
+    <Version>3.2.0</Version>
+    <Product>FlaUI</Product>
+    <Authors>Roemer</Authors>
+    <Description>Library which supports custom properties and patterns with FlaUI.</Description>
+    <Copyright>Copyright (c) 2016-2020</Copyright>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/FlaUI/FlaUI</PackageProjectUrl>
+    <PackageIcon>FlaUI.png</PackageIcon>
+    <RepositoryUrl>https://github.com/FlaUI/FlaUI</RepositoryUrl>
+    <PackageTags>UI Automation UIA2 UIA3 UIA System.Windows.Automation Custom Property Pattern</PackageTags>
+    <IncludeSource>True</IncludeSource>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Signing" Condition="'$(EnableSigning)'=='true'">
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>../../FlaUI.snk</AssemblyOriginatorKeyFile>
+    <PublicSign Condition="'$(OS)'!='Windows_NT'">true</PublicSign>
+    <PackageId>FlaUI.Custom.Signed</PackageId>
+    <OutputPath>bin\$(Configuration)\Signed</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\Signed</IntermediateOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' != 'netcoreapp3.0' And '$(TargetFramework)' != 'netcoreapp3.1'">
+    <Reference Include="PresentationCore" />
+  </ItemGroup>
+
+  <ItemGroup Label="Additional nuget files">
+    <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="" />
+    <None Include="..\..\CHANGELOG.md" Pack="true" PackagePath="" />
+    <None Include="..\..\FlaUI.png" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <!-- Interop References -->
+  <Choose>
+    <When Condition="'$(EnableSigning)'=='true'">
+      <ItemGroup>
+        <PackageReference Include="Interop.UIAutomationCore.Signed" Version="10.19041.0" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <PackageReference Include="Interop.UIAutomationCore" Version="10.19041.0" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+
+</Project>
