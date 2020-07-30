@@ -8,13 +8,10 @@ assignees: ''
 ---
 
 **Describe the bug**
-A clear and concise description of what the bug is.
+Describe what you tried and what did not work as expected.
 
-**To Reproduce**
-Code which was executed that lead to the bug.
-
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+**Code snippets**
+Show code snippets of the part that did not work.
 
 **Screenshots**
 Add screenshots of FlaUInspect/Inspect to show your controls with issues.
