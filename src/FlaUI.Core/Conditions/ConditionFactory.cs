@@ -20,9 +20,9 @@ namespace FlaUI.Core.Conditions
         /// <summary>
         /// Creates a condition to search by an automation id.
         /// </summary>
-        public PropertyCondition ByAutomationId(string automationId)
+        public PropertyCondition ByAutomationId(string automationId, PropertyConditionFlags conditionFlags = PropertyConditionFlags.None)
         {
-            return new PropertyCondition(_propertyLibrary.Element.AutomationId, automationId);
+            return new PropertyCondition(_propertyLibrary.Element.AutomationId, automationId, conditionFlags);
         }
 
         /// <summary>
@@ -36,33 +36,33 @@ namespace FlaUI.Core.Conditions
         /// <summary>
         /// Creates a condition to search by a class name.
         /// </summary>
-        public PropertyCondition ByClassName(string className)
+        public PropertyCondition ByClassName(string className, PropertyConditionFlags conditionFlags = PropertyConditionFlags.None)
         {
-            return new PropertyCondition(_propertyLibrary.Element.ClassName, className);
+            return new PropertyCondition(_propertyLibrary.Element.ClassName, className, conditionFlags);
         }
 
         /// <summary>
         /// Creates a condition to search by a name.
         /// </summary>
-        public PropertyCondition ByName(string name)
+        public PropertyCondition ByName(string name, PropertyConditionFlags conditionFlags = PropertyConditionFlags.None)
         {
-            return new PropertyCondition(_propertyLibrary.Element.Name, name);
+            return new PropertyCondition(_propertyLibrary.Element.Name, name, conditionFlags);
         }
 
         /// <summary>
         /// Creates a condition to search by a text (same as <see cref="ByName"/>).
         /// </summary>
-        public PropertyCondition ByText(string text)
+        public PropertyCondition ByText(string text, PropertyConditionFlags conditionFlags = PropertyConditionFlags.None)
         {
-            return ByName(text);
+            return ByName(text, conditionFlags);
         }
 
         /// <summary>
         /// Creates a condition to search by a Framework Id.
         /// </summary>
-        public PropertyCondition ByFrameworkId(string frameworkId)
+        public PropertyCondition ByFrameworkId(string frameworkId, PropertyConditionFlags conditionFlags = PropertyConditionFlags.None)
         {
-            return new PropertyCondition(_propertyLibrary.Element.FrameworkId, frameworkId);
+            return new PropertyCondition(_propertyLibrary.Element.FrameworkId, frameworkId, conditionFlags);
         }
 
         /// <summary>
@@ -85,25 +85,25 @@ namespace FlaUI.Core.Conditions
         /// <summary>
         /// Creates a condition to search by a localized control type.
         /// </summary>
-        public PropertyCondition ByLocalizedControlType(string localizedControlType)
+        public PropertyCondition ByLocalizedControlType(string localizedControlType, PropertyConditionFlags conditionFlags = PropertyConditionFlags.None)
         {
-            return new PropertyCondition(_propertyLibrary.Element.LocalizedControlType, localizedControlType);
+            return new PropertyCondition(_propertyLibrary.Element.LocalizedControlType, localizedControlType, conditionFlags);
         }
 
         /// <summary>
         /// Creates a condition to search by a help text.
         /// </summary>
-        public PropertyCondition ByHelpText(string helpText)
+        public PropertyCondition ByHelpText(string helpText, PropertyConditionFlags conditionFlags = PropertyConditionFlags.None)
         {
-            return new PropertyCondition(_propertyLibrary.Element.HelpText, helpText);
+            return new PropertyCondition(_propertyLibrary.Element.HelpText, helpText, conditionFlags);
         }
 
         /// <summary>
         /// Creates a condition to search by a value.
         /// </summary>
-        public PropertyCondition ByValue(string value)
+        public PropertyCondition ByValue(string value, , PropertyConditionFlags conditionFlags = PropertyConditionFlags.None)
         {
-            return new PropertyCondition(_propertyLibrary.Value.Value, value);
+            return new PropertyCondition(_propertyLibrary.Value.Value, value, conditionFlags);
         }
 
         /// <summary>
