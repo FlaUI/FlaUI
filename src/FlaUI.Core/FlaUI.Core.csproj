@@ -11,7 +11,7 @@
   <PropertyGroup Label="Package">
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageOutputPath>..\..\artifacts</PackageOutputPath>
-    <Version>3.2.0</Version>
+    <Version>3.2.1</Version>
     <Product>FlaUI</Product>
     <Authors>Roemer</Authors>
     <Description>Library with base elements used in the concrete implementations of FlaUI.</Description>

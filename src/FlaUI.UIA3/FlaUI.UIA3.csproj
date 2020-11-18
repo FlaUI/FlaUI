@@ -10,7 +10,7 @@
   <PropertyGroup Label="Package">
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageOutputPath>..\..\artifacts</PackageOutputPath>
-    <Version>3.2.0</Version>
+    <Version>3.2.1</Version>
     <Product>FlaUI</Product>
     <Authors>Roemer</Authors>
     <Description>Library to use FlaUI with UIA3.</Description>
