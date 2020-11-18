@@ -1,7 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project>
+  <Sdk Condition="'$(TargetFramework)' != 'net5.0-windows'" Name="Microsoft.NET.Sdk.WindowsDesktop" />
+  <Sdk Condition="'$(TargetFramework)' == 'net5.0-windows'" Name="Microsoft.NET.Sdk" />
 
   <PropertyGroup Label="Build">
-    <TargetFrameworks>net35;net40;net45;netstandard2.0;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net35;net40;net45;net471;net48;netcoreapp3.0;netcoreapp3.1;net5.0-windows</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
@@ -36,7 +38,7 @@
     <ProjectReference Include="..\FlaUI.Core\FlaUI.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.0' And '$(TargetFramework)' != 'netcoreapp3.0' And '$(TargetFramework)' != 'netcoreapp3.1'">
+  <ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.0' And '$(TargetFramework)' != 'netcoreapp3.0' And '$(TargetFramework)' != 'netcoreapp3.1' And '$(TargetFramework)' != 'net5.0-windows'">
     <Reference Include="Accessibility" />
     <Reference Include="WindowsBase" />
   </ItemGroup>

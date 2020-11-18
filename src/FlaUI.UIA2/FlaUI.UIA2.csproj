@@ -1,7 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project>
+  <Sdk Condition="'$(TargetFramework)' != 'net5.0-windows'" Name="Microsoft.NET.Sdk.WindowsDesktop" />
+  <Sdk Condition="'$(TargetFramework)' == 'net5.0-windows'" Name="Microsoft.NET.Sdk" />
 
   <PropertyGroup Label="Build">
-    <TargetFrameworks>net35;net40;net45;net471;net48;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net35;net40;net45;net471;net48;netcoreapp3.0;netcoreapp3.1;net5.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF> <!-- Needed so System.Windows.Automation is added -->
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
