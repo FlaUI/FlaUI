@@ -39,7 +39,7 @@
     <ProjectReference Include="..\FlaUI.Core\FlaUI.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' != 'netcoreapp3.0' Or '$(TargetFramework)' != 'netcoreapp3.1'">
+  <ItemGroup Condition="'$(TargetFramework)' != 'netcoreapp3.0' And '$(TargetFramework)' != 'netcoreapp3.1'">
     <Reference Include="UIAutomationClient" />
     <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
