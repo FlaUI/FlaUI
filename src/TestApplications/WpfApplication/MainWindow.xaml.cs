@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Win32;
 
 namespace WpfApplication
 {
@@ -39,6 +40,24 @@ namespace WpfApplication
             else
             {
                 lblMenuChk.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void MenuItemOpenOnClick(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                MessageBox.Show(openFileDialog.FileName);
+            }
+        }
+
+        private void MenuItemSaveOnClick(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                MessageBox.Show(saveFileDialog.FileName);
             }
         }
     }
