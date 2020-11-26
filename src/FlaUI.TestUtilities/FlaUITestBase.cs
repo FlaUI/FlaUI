@@ -35,7 +35,7 @@ namespace FlaUI.TestUtilities
         /// <summary>
         /// Instance of the current running application.
         /// </summary>
-        protected Application Application { get; private set; }
+        protected Application Application { get; set; }
 
         /// <summary>
         /// Specifies the starting mode of the application to test.
