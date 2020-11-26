@@ -75,7 +75,7 @@ namespace FlaUI.TestUtilities
         /// Setup method for the test fixture.
         /// </summary>
         [OneTimeSetUp]
-        public async Task UITestBaseOneTimeSetUp()
+        public virtual async Task UITestBaseOneTimeSetUp()
         {
             Logger.Default = new NUnitProgressLogger();
             Automation = GetAutomation();
@@ -94,7 +94,7 @@ namespace FlaUI.TestUtilities
         /// Teardown method of the test fixture.
         /// </summary>
         [OneTimeTearDown]
-        public async Task UITestBaseOneTimeTearDown()
+        public virtual async Task UITestBaseOneTimeTearDown()
         {
             if (VideoRecordingMode == VideoRecordingMode.OnePerFixture)
             {
@@ -115,7 +115,7 @@ namespace FlaUI.TestUtilities
         /// Setup method for each test.
         /// </summary>
         [SetUp]
-        public async Task UITestBaseSetUp()
+        public virtual async Task UITestBaseSetUp()
         {
             // Due to the recorder running in an own thread, it is necessary to save the current method name for that thread
             _testMethodName = TestContext.CurrentContext.Test.MethodName;
@@ -135,7 +135,7 @@ namespace FlaUI.TestUtilities
         /// Teardown method for each test.
         /// </summary>
         [TearDown]
-        public async Task UITestBaseTearDown()
+        public virtual async Task UITestBaseTearDown()
         {
             if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
             {
