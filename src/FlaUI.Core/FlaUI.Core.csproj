@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup Label="Build">
     <TargetFrameworks>net35;net40;net45;netstandard2.0;netcoreapp3.0;netcoreapp3.1;</TargetFrameworks>
@@ -35,19 +35,19 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' Or '$(TargetFramework)' == 'netcoreapp3.0' Or '$(TargetFramework)' == 'netcoreapp3.1'">
     <PackageReference Include="System.Diagnostics.PerformanceCounter">
-      <Version>4.7.0</Version>
+      <Version>5.0.1</Version>
     </PackageReference>
     <PackageReference Include="System.Drawing.Common">
-      <Version>4.7.0</Version>
+      <Version>5.0.2</Version>
     </PackageReference>
     <PackageReference Include="System.Management">
-      <Version>4.7.0</Version>
+      <Version>5.0.0</Version>
     </PackageReference>
     <PackageReference Include="System.Security.Permissions">
-      <Version>4.7.0</Version>
+      <Version>5.0.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Win32.Registry">
-      <Version>4.7.0</Version>
+      <Version>5.0.0</Version>
     </PackageReference>
   </ItemGroup>
 
@@ -63,7 +63,7 @@
   <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
     <Reference Include="System.IO.Compression" />
     <PackageReference Include="System.Management">
-      <Version>4.7.0</Version>
+      <Version>5.0.0</Version>
     </PackageReference>
   </ItemGroup>
 
