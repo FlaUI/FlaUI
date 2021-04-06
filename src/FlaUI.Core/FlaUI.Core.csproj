@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup Label="Build">
     <TargetFrameworks>net35;net40;net45;netstandard2.0;netcoreapp3.0;netcoreapp3.1;</TargetFrameworks>
@@ -13,7 +13,7 @@
     <Product>FlaUI</Product>
     <Authors>Roemer</Authors>
     <Description>Library with base elements used in the concrete implementations of FlaUI.</Description>
-    <Copyright>Copyright (c) 2016-2020</Copyright>
+    <Copyright>Copyright (c) 2016-2021</Copyright>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/FlaUI/FlaUI</PackageProjectUrl>
     <PackageIcon>FlaUI.png</PackageIcon>

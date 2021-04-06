@@ -11,7 +11,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("WpfApplication")]
-[assembly: AssemblyCopyright("Copyright © 2016-2020")]
+[assembly: AssemblyCopyright("Copyright © 2016-2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

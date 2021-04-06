@@ -12,7 +12,7 @@
     <Product>FlaUI</Product>
     <Authors>Roemer</Authors>
     <Description>Library to use FlaUI with UIA3.</Description>
-    <Copyright>Copyright (c) 2016-2020</Copyright>
+    <Copyright>Copyright (c) 2016-2021</Copyright>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/FlaUI/FlaUI</PackageProjectUrl>
     <PackageIcon>FlaUI.png</PackageIcon>
