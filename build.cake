@@ -1,4 +1,4 @@
-#tool nuget:?package=NUnit.ConsoleRunner&version=3.10.0
+#tool nuget:?package=NUnit.ConsoleRunner&version=3.12.0
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
