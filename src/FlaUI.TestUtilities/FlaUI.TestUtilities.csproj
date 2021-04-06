@@ -12,7 +12,7 @@
     <Product>FlaUI.TestUtilities</Product>
     <Authors>Roemer</Authors>
     <Description>Library that provides some helper classes and methods for easier testing with FlaUI.</Description>
-    <Copyright>Copyright (c) 2019-2020</Copyright>
+    <Copyright>Copyright (c) 2019-2021</Copyright>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/FlaUI/FlaUI.TestUtilities</PackageProjectUrl>
     <RepositoryUrl>https://github.com/FlaUI/FlaUI.TestUtilities</RepositoryUrl>
@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NUnit" Version="3.12.0" />
+    <PackageReference Include="NUnit" Version="3.13.1" />
   </ItemGroup>
 
   <ItemGroup>

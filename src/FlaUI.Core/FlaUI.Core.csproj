@@ -15,7 +15,7 @@
     <Product>FlaUI</Product>
     <Authors>Roemer</Authors>
     <Description>Library with base elements used in the concrete implementations of FlaUI.</Description>
-    <Copyright>Copyright (c) 2016-2020</Copyright>
+    <Copyright>Copyright (c) 2016-2021</Copyright>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/FlaUI/FlaUI</PackageProjectUrl>
     <PackageIcon>FlaUI.png</PackageIcon>
@@ -42,19 +42,19 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' Or '$(TargetFramework)' == 'netcoreapp3.0' Or '$(TargetFramework)' == 'netcoreapp3.1'">
     <PackageReference Include="System.Diagnostics.PerformanceCounter">
-      <Version>4.7.0</Version>
+      <Version>5.0.1</Version>
     </PackageReference>
     <PackageReference Include="System.Drawing.Common">
-      <Version>4.7.0</Version>
+      <Version>5.0.2</Version>
     </PackageReference>
     <PackageReference Include="System.Management">
-      <Version>4.7.0</Version>
+      <Version>5.0.0</Version>
     </PackageReference>
     <PackageReference Include="System.Security.Permissions">
-      <Version>4.7.0</Version>
+      <Version>5.0.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Win32.Registry">
-      <Version>4.7.0</Version>
+      <Version>5.0.0</Version>
     </PackageReference>
   </ItemGroup>
 
@@ -91,7 +91,7 @@
   <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
     <Reference Include="System.IO.Compression" />
     <PackageReference Include="System.Management">
-      <Version>4.7.0</Version>
+      <Version>5.0.0</Version>
     </PackageReference>
   </ItemGroup>
 

@@ -247,7 +247,11 @@ namespace FlaUI.Core.Capturing
         public static async Task<string> DownloadFFMpeg(string targetFolder)
         {
             var bits = Environment.Is64BitOperatingSystem ? 64 : 32;
-            var uri = new Uri($"http://ffmpeg.zeranoe.com/builds/win{bits}/static/ffmpeg-latest-win{bits}-static.zip");
+            if (bits == 32)
+            {
+                throw new NotSupportedException("The current FFMPEG builds to not support 32-bit.");
+            }
+            var uri = new Uri($"https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip");
             var archivePath = Path.Combine(Path.GetTempPath(), "ffmpeg.zip");
             var destPath = Path.Combine(targetFolder, "ffmpeg.exe");
             if (!File.Exists(destPath))
