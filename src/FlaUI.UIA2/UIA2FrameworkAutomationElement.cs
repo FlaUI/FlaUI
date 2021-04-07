@@ -109,16 +109,32 @@ namespace FlaUI.UIA2
         /// <inheritdoc />
         public override bool TryGetClickablePoint(out Point point)
         {
-            var success = NativeElement.TryGetClickablePoint(out System.Windows.Point outPoint);
-            if (success)
+            try
             {
-                point = new Point(outPoint.X.ToInt(), outPoint.Y.ToInt());
+                // Variant 1: Directly try getting the point
+                if (NativeElement.TryGetClickablePoint(out System.Windows.Point outPoint))
+                {
+                    point = new Point(outPoint.X.ToInt(), outPoint.Y.ToInt());
+                    return true;
+                }
+                // Variant 2: Try to get it from the property
+                if (Properties.ClickablePoint.TryGetValue(out point))
+                {
+                    return true;
+                }
+                // Variant 3: Get the center of the bounding rectangle
+                if (Properties.BoundingRectangle.TryGetValue(out var br))
+                {
+                    point = br.Center();
+                    return true;
+                }
             }
-            else
+            catch
             {
-                success = Properties.ClickablePoint.TryGetValue(out point);
+                // Noop
             }
-            return success;
+            point = Point.Empty;
+            return false;
         }
 
         /// <inheritdoc />

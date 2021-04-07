@@ -146,17 +146,33 @@ namespace FlaUI.UIA3
         /// <inheritdoc />
         public override bool TryGetClickablePoint(out Point point)
         {
-            var tagPoint = new UIA.tagPOINT { x = 0, y = 0 };
-            var success = Com.Call(() => NativeElement.GetClickablePoint(out tagPoint)) != 0;
-            if (success)
+            try
             {
-                point = new Point(tagPoint.x, tagPoint.y);
+                // Variant 1: Directly try getting the point
+                var tagPoint = new UIA.tagPOINT { x = 0, y = 0 };
+                if (Com.Call(() => NativeElement.GetClickablePoint(out tagPoint)) != 0)
+                {
+                    point = new Point(tagPoint.x, tagPoint.y);
+                    return true;
+                }
+                // Variant 2: Try to get it from the property
+                if (Properties.ClickablePoint.TryGetValue(out point))
+                {
+                    return true;
+                }
+                // Variant 3: Get the center of the bounding rectangle
+                if (Properties.BoundingRectangle.TryGetValue(out var br))
+                {
+                    point = br.Center();
+                    return true;
+                }
             }
-            else
+            catch
             {
-                success = Properties.ClickablePoint.TryGetValue(out point);
+                // Noop
             }
-            return success;
+            point = Point.Empty;
+            return false;
         }
 
         /// <inheritdoc />
