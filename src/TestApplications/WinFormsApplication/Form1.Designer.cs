@@ -99,6 +99,9 @@
             this.context2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.innerContextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
@@ -110,18 +113,17 @@
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.PasswordBox = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Slider)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -195,7 +197,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             // 
             // editToolStripMenuItem
@@ -273,29 +275,6 @@
             this.Slider.TabIndex = 16;
             this.Slider.Value = 5;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(290, 150);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 13);
-            this.label2.TabIndex = 23;
-            this.label2.Text = "Spinner";
-            // 
-            // numericUpDown1
-            //
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Location = new System.Drawing.Point(340, 147);
-            this.numericUpDown1.Size = new System.Drawing.Size(80, 30);
-            this.numericUpDown1.TabIndex = 24;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(10, 230);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
-            this.dateTimePicker1.TabIndex = 25;
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -310,6 +289,7 @@
             // tabPage1
             // 
             this.tabPage1.AutoScroll = true;
+            this.tabPage1.Controls.Add(this.PasswordBox);
             this.tabPage1.Controls.Add(this.ListBox);
             this.tabPage1.Controls.Add(this.panel1);
             this.tabPage1.Controls.Add(this.NonEditableCombo);
@@ -394,12 +374,12 @@
             this.context1ToolStripMenuItem,
             this.context2ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(126, 48);
             // 
             // context1ToolStripMenuItem
             // 
             this.context1ToolStripMenuItem.Name = "context1ToolStripMenuItem";
-            this.context1ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.context1ToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.context1ToolStripMenuItem.Text = "Context 1";
             // 
             // context2ToolStripMenuItem
@@ -407,13 +387,13 @@
             this.context2ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.innerContextToolStripMenuItem});
             this.context2ToolStripMenuItem.Name = "context2ToolStripMenuItem";
-            this.context2ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.context2ToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.context2ToolStripMenuItem.Text = "Context 2";
             // 
             // innerContextToolStripMenuItem
             // 
             this.innerContextToolStripMenuItem.Name = "innerContextToolStripMenuItem";
-            this.innerContextToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.innerContextToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.innerContextToolStripMenuItem.Text = "Inner Context";
             // 
             // TextBox
@@ -424,6 +404,29 @@
             this.TextBox.Size = new System.Drawing.Size(100, 20);
             this.TextBox.TabIndex = 17;
             this.TextBox.Text = "Test TextBox";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(290, 150);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(43, 13);
+            this.label2.TabIndex = 23;
+            this.label2.Text = "Spinner";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(340, 147);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(80, 20);
+            this.numericUpDown1.TabIndex = 24;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(10, 230);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 25;
             // 
             // tabPage2
             // 
@@ -584,6 +587,15 @@
             this.statusStrip1.TabIndex = 18;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // PasswordBox
+            // 
+            this.PasswordBox.Location = new System.Drawing.Point(176, 31);
+            this.PasswordBox.Name = "PasswordBox";
+            this.PasswordBox.PasswordChar = '*';
+            this.PasswordBox.Size = new System.Drawing.Size(121, 20);
+            this.PasswordBox.TabIndex = 26;
+            this.PasswordBox.Text = "MyPassword";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -603,6 +615,7 @@
             this.tabPage1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
@@ -661,6 +674,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.TextBox PasswordBox;
     }
 }
 

@@ -280,6 +280,22 @@ namespace FlaUI.Core
                     return _currentElement.Properties.ClassName.ValueOrDefault;
                 case ElementAttributes.HelpText:
                     return _currentElement.Properties.HelpText.ValueOrDefault;
+                case ElementAttributes.IsPassword:
+                    return _currentElement.Properties.IsPassword.ValueOrDefault.ToString().ToLower();
+                case ElementAttributes.FullDescription:
+                    return _currentElement.Properties.FullDescription.ValueOrDefault;
+                case ElementAttributes.ItemType:
+                    return _currentElement.Properties.ItemType.ValueOrDefault;
+                case ElementAttributes.AcceleratorKey:
+                    return _currentElement.Properties.AcceleratorKey.ValueOrDefault;
+                case ElementAttributes.AccessKey:
+                    return _currentElement.Properties.AccessKey.ValueOrDefault;
+                case ElementAttributes.IsEnabled:
+                    return _currentElement.Properties.IsEnabled.ValueOrDefault.ToString().ToLower();
+                case ElementAttributes.IsOffscreen:
+                    return _currentElement.Properties.IsOffscreen.ValueOrDefault.ToString().ToLower();
+                case ElementAttributes.ProcessId:
+                    return _currentElement.Properties.ProcessId.ValueOrDefault.ToString();
                 default:
                     throw new ArgumentOutOfRangeException(nameof(attributeIndex));
             }
@@ -313,7 +329,15 @@ namespace FlaUI.Core
             AutomationId,
             Name,
             ClassName,
-            HelpText
+            HelpText,
+            IsPassword,
+            FullDescription,
+            ItemType,
+            AcceleratorKey,
+            AccessKey,
+            IsEnabled,
+            IsOffscreen,
+            ProcessId
         }
     }
 }

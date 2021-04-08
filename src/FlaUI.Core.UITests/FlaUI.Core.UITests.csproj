@@ -92,6 +92,7 @@
     <Compile Include="WordPad\Screens\MainScreen.cs" />
     <Compile Include="WordPad\WordPadTests.cs" />
     <Compile Include="XPathTests.cs" />
+    <Compile Include="XPathTests2.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlaUI.Core\FlaUI.Core.csproj">
