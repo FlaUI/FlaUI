@@ -20,7 +20,7 @@ namespace FlaUI.UIA2.Patterns
         public SynchronizedInputPattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.SynchronizedInputPattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
-        
+
         public override void Cancel()
         {
             NativePattern.Cancel();

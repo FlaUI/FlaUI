@@ -43,7 +43,7 @@ namespace FlaUI.Core
         {
             Patterns.Add(pattern);
         }
-        
+
         /// <summary>
         /// Adds a property to the list of properties to cache.
         /// </summary>

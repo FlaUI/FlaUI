@@ -20,7 +20,7 @@ namespace FlaUI.UIA2.Patterns
             NativePattern.Toggle();
         }
     }
-    
+
     public class TogglePatternPropertyIds : ITogglePatternPropertyIds
     {
         public PropertyId ToggleState => TogglePattern.ToggleStateProperty;

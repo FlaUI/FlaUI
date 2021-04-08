@@ -23,7 +23,7 @@ namespace FlaUI.Core.UITests.Elements
             spinner.Value = 4;
             Assert.That(spinner.Value, Is.EqualTo(4));
         }
-        
+
         [Test]
         public void IncrementTest()
         {

@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Globalization;
 using System.Drawing;
+using System.Globalization;
+using System.Runtime.InteropServices;
+using System.Text;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.WindowsAPI;
-using System.Text;
-using System.Runtime.InteropServices;
 
 namespace FlaUI.Core.AutomationElements
 {
@@ -62,7 +62,7 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public double Value
         {
-            get 
+            get
             {
                 if (FrameworkType == FrameworkType.WinForms)
                 {
@@ -84,7 +84,7 @@ namespace FlaUI.Core.AutomationElements
                                 User32.SendMessage(hwndEdit, WindowsMessages.WM_GETTEXT, textLength, text);
                                 windowText = text.ToString();
                             }
-                        
+
                             double valueDouble = 0.0;
                             if (double.TryParse(windowText, out valueDouble) == true)
                             {
@@ -116,7 +116,7 @@ namespace FlaUI.Core.AutomationElements
                         return Convert.ToDouble(edit.Text);
                     }
                 }
-                
+
                 return IsOnlyValue ? Convert.ToDouble(ValuePattern.Value.Value) : RangeValuePattern.Value.Value;
             }
             set
@@ -159,7 +159,7 @@ namespace FlaUI.Core.AutomationElements
                         return;
                     }
                 }
-                
+
                 if (IsOnlyValue)
                 {
                     ValuePattern.SetValue(value.ToString(CultureInfo.InvariantCulture));

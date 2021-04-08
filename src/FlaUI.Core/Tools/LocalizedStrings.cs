@@ -27,7 +27,7 @@
                     WinFormsUIA2HorizontalScrollBarName = "Horizontal Scroll Bar";
                     WinFormsUIA3HorizontalScrollBarName = "Horizontal";
                     HorizontalScrollBar = "Horizontal ScrollBar";
-                    VerticalScrollBar = "Vertical ScrollBar";                
+                    VerticalScrollBar = "Vertical ScrollBar";
                     TableHorizontalScrollBar = "Horizontal Scroll Bar";
                     TableVerticalScrollBar = "Vertical Scroll Bar";
                     DataGridViewHeader = "Top Row";

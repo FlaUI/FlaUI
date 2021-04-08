@@ -6,7 +6,7 @@ using UIA = Interop.UIAutomationClient;
 
 namespace FlaUI.UIA3.EventHandlers
 {
-    public class UIA3ActiveTextPositionChangedEventHandler: ActiveTextPositionChangedEventHandlerBase, UIA.IUIAutomationActiveTextPositionChangedEventHandler
+    public class UIA3ActiveTextPositionChangedEventHandler : ActiveTextPositionChangedEventHandlerBase, UIA.IUIAutomationActiveTextPositionChangedEventHandler
     {
         public UIA3ActiveTextPositionChangedEventHandler(FrameworkAutomationElementBase frameworkElement, Action<AutomationElement, ITextRange> callAction) : base(frameworkElement, callAction)
         {

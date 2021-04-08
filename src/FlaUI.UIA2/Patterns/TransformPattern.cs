@@ -16,7 +16,7 @@ namespace FlaUI.UIA2.Patterns
         public TransformPattern(FrameworkAutomationElementBase frameworkAutomationElement, UIA.TransformPattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
         }
-        
+
         public override void Move(double x, double y)
         {
             NativePattern.Move(x, y);

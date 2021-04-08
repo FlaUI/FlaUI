@@ -68,7 +68,7 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(fancy, Is.Not.Null);
             Assert.That(fancy.Properties.Name.Value, Is.EqualTo("Fancy"));
         }
-        
+
         [Test]
         public void TestCheckedMenuItem()
         {

@@ -12,7 +12,7 @@ namespace FlaUI.Core.AutomationElements
         {
             return self == null ? null : new Button(self.FrameworkAutomationElement);
         }
-        
+
         /// <summary>
         /// Converts the element to a <see cref="Calendar"/>.
         /// </summary>
@@ -44,7 +44,7 @@ namespace FlaUI.Core.AutomationElements
         {
             return self == null ? null : new DataGridView(self.FrameworkAutomationElement);
         }
-        
+
         /// <summary>
         /// Converts the element to a <see cref="DateTimePicker"/>.
         /// </summary>
@@ -164,7 +164,7 @@ namespace FlaUI.Core.AutomationElements
         {
             return self == null ? null : new Slider(self.FrameworkAutomationElement);
         }
-        
+
         /// <summary>
         /// Converts the element to a <see cref="Spinner"/>.
         /// </summary>

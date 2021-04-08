@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Patterns;
 
@@ -106,7 +106,7 @@ namespace FlaUI.Core.AutomationElements
             item.AddToSelection();
             return item;
         }
-        
+
         /// <summary>
         /// Add a row to the selection by text.
         /// </summary>
@@ -141,7 +141,7 @@ namespace FlaUI.Core.AutomationElements
             item.RemoveFromSelection();
             return item;
         }
-        
+
         /// <summary>
         /// Remove a row from the selection by text.
         /// </summary>

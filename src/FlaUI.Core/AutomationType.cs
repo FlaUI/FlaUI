@@ -9,7 +9,7 @@
         /// Use UIA2.
         /// </summary>
         UIA2,
-        
+
         /// <summary>
         /// Use UIA3.
         /// </summary>

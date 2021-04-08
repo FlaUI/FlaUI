@@ -22,7 +22,7 @@ namespace FlaUI.UIA3.Patterns
         {
             _transformPattern = new TransformPattern(frameworkAutomationElement, nativePattern);
         }
-        
+
         public override void Zoom(double zoom)
         {
             Com.Call(() => NativePattern.Zoom(zoom));
@@ -35,7 +35,7 @@ namespace FlaUI.UIA3.Patterns
 
         public override void Move(double x, double y)
         {
-            _transformPattern.Move(x,y);
+            _transformPattern.Move(x, y);
         }
 
         public override void Resize(double width, double height)

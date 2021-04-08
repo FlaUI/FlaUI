@@ -1,8 +1,6 @@
 ﻿using System;
 using FlaUI.Core.AutomationElements;
-using FlaUI.Core.Tools;
 using FlaUI.Core.Definitions;
-using FlaUI.Core.Input;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
 
@@ -13,7 +11,7 @@ namespace FlaUI.Core.UITests.Elements
     public class CalendarTests : UITestBase
     {
         private Calendar calendar = null;
-    
+
         public CalendarTests(AutomationType automationType, TestApplicationType appType)
             : base(automationType, appType)
         {
@@ -29,12 +27,12 @@ namespace FlaUI.Core.UITests.Elements
             //Wait.UntilInputIsProcessed();
             calendar = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("calendar")).AsCalendar();
             DateTime date = new DateTime(2020, 5, 21); // 21-May-2020
-            calendar.SelectDate(date); 
+            calendar.SelectDate(date);
             DateTime[] selectedDates = calendar.SelectedDates;
             Assert.That(selectedDates, Has.Length.EqualTo(1));
             Assert.That(selectedDates[0], Is.EqualTo(date));
         }
-        
+
         [Test]
         public void AddToSelectionTest()
         {
@@ -47,7 +45,7 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(selectedDates[0], Is.EqualTo(date1));
             Assert.That(selectedDates[1], Is.EqualTo(date2));
         }
-        
+
         [Test]
         public void SelectRangeTest()
         {
@@ -62,7 +60,7 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(selectedDates[1], Is.EqualTo(date2));
             Assert.That(selectedDates[2], Is.EqualTo(date3));
         }
-        
+
         [Test]
         public void AddRangeToSelectionTest()
         {

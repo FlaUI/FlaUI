@@ -38,7 +38,7 @@ namespace FlaUI.Core.Logging
 
         protected override void GatedError(string message)
         {
-          OnError?.Invoke(message);
+            OnError?.Invoke(message);
             OnLog?.Invoke(LogLevel.Error, message);
         }
 

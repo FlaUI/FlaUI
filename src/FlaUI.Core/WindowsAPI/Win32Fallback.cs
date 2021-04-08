@@ -24,7 +24,7 @@ namespace FlaUI.Core.WindowsAPI
             public const uint BST_CHECKED = 0x0001;
             public const uint BST_INDETERMINATE = 0x0002;
         }
-        
+
         internal static class Win32CalendarMessages
         {
             public const uint MCM_GETCURSEL = 0x1001;
@@ -32,18 +32,18 @@ namespace FlaUI.Core.WindowsAPI
             public const uint MCM_GETSELRANGE = 0x1005;
             public const uint MCM_SETSELRANGE = 0x1006;
         }
-        
+
         internal static class Win32CalendarStyles
         {
             public const uint MCS_MULTISELECT = 2;
         }
-        
+
         internal static class DateTimePicker32Messages
         {
             public const uint DTM_GETSYSTEMTIME = 0x1001;
             public const uint DTM_SETSYSTEMTIME = 0x1002;
         }
-        
+
         internal static class DateTimePicker32Constants
         {
             public const uint GDT_VALID = 0;
@@ -221,7 +221,7 @@ namespace FlaUI.Core.WindowsAPI
             }
             return hwndEdit;
         }
-        
+
         internal static string GetWindowClassName(IntPtr handle)
         {
             if (handle == IntPtr.Zero)
@@ -232,7 +232,7 @@ namespace FlaUI.Core.WindowsAPI
             User32.GetClassName(handle, className, 256);
             return className.ToString();
         }
-        
+
         // gets the selected date/dates from a Win32 calendar
         internal static DateTime[] GetSelection(IntPtr handle)
         {
@@ -240,7 +240,7 @@ namespace FlaUI.Core.WindowsAPI
             {
                 throw new Exception("Not supported for this type of calendar");
             }
-            
+
             uint styles = User32.GetWindowLong(handle, WindowLongParam.GWL_STYLE);
             if ((styles & Win32CalendarStyles.MCS_MULTISELECT) != 0)
             {
@@ -259,7 +259,7 @@ namespace FlaUI.Core.WindowsAPI
                 return new DateTime[] { date };
             }
         }
-        
+
         // gets the first and last date of the selected range in a Win32 calendar that supports multiple selection
         internal static DateTime[] GetSelectedRange(IntPtr handle)
         {
@@ -270,7 +270,7 @@ namespace FlaUI.Core.WindowsAPI
             {
                 throw new Exception("Insufficient rights");
             }
-            
+
             SYSTEMTIME systemtime1 = new SYSTEMTIME();
             SYSTEMTIME systemtime2 = new SYSTEMTIME();
             // allocate memory in the process of the calendar
@@ -280,52 +280,52 @@ namespace FlaUI.Core.WindowsAPI
             {
                 throw new Exception("Insufficient rights");
             }
-            
+
             User32.SendMessage(handle, Win32CalendarMessages.MCM_GETSELRANGE, IntPtr.Zero, hMem);
-            
+
             IntPtr address = Marshal.AllocHGlobal(2 * Marshal.SizeOf(systemtime1));
             IntPtr lpNumberOfBytesRead = IntPtr.Zero;
             if (User32.ReadProcessMemory(hProcess, hMem, address, 2 * Marshal.SizeOf(systemtime1), out lpNumberOfBytesRead) == false)
             {
                 throw new Exception("Insufficient rights");
             }
-            
+
             systemtime1 = (SYSTEMTIME)Marshal.PtrToStructure(address, typeof(SYSTEMTIME));
             IntPtr address2 = new IntPtr(address.ToInt64() + Marshal.SizeOf(systemtime1));
             systemtime2 = (SYSTEMTIME)Marshal.PtrToStructure(address2, typeof(SYSTEMTIME));
-            
+
             // release memory
             Marshal.FreeHGlobal(address);
             User32.VirtualFreeEx(hProcess, hMem, 2 * Marshal.SizeOf(systemtime1), AllocationType.Decommit | AllocationType.Release);
             User32.CloseHandle(hProcess);
-            
+
             DateTime date1;
             try
             {
-                date1 = new DateTime(systemtime1.Year, systemtime1.Month, systemtime1.Day, 
+                date1 = new DateTime(systemtime1.Year, systemtime1.Month, systemtime1.Day,
                     systemtime1.Hour, systemtime1.Minute, systemtime1.Second);
             }
             catch
             {
-                date1 = new DateTime(systemtime1.Year, systemtime1.Month, systemtime1.Day, 
+                date1 = new DateTime(systemtime1.Year, systemtime1.Month, systemtime1.Day,
                     0, 0, 0);
             }
-            
+
             DateTime date2;
             try
             {
-                date2 = new DateTime(systemtime2.Year, systemtime2.Month, systemtime2.Day, 
+                date2 = new DateTime(systemtime2.Year, systemtime2.Month, systemtime2.Day,
                     systemtime2.Hour, systemtime2.Minute, systemtime2.Second);
             }
             catch
             {
-                date2 = new DateTime(systemtime2.Year, systemtime2.Month, systemtime2.Day, 
+                date2 = new DateTime(systemtime2.Year, systemtime2.Month, systemtime2.Day,
                     0, 0, 0);
             }
-            
+
             return new DateTime[] { date1, date2 };
         }
-        
+
         // gets the selected date from a Win32 calendar that supports single selection
         internal static DateTime GetSelectedDate(IntPtr handle)
         {
@@ -336,18 +336,18 @@ namespace FlaUI.Core.WindowsAPI
             {
                 throw new Exception("Insufficient rights");
             }
-            
+
             SYSTEMTIME systemtime = new SYSTEMTIME();
             // allocate memory in the process of the calendar
-            IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)Marshal.SizeOf(systemtime), 
+            IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)Marshal.SizeOf(systemtime),
                 AllocationType.Commit | AllocationType.Reserve, MemoryProtection.ReadWrite);
             if (hMem == IntPtr.Zero)
             {
                 throw new Exception("Insufficient rights");
             }
-            
+
             User32.SendMessage(handle, Win32CalendarMessages.MCM_GETCURSEL, IntPtr.Zero, hMem);
-            
+
             IntPtr address = Marshal.AllocHGlobal(Marshal.SizeOf(systemtime));
             IntPtr lpNumberOfBytesRead = IntPtr.Zero;
             if (User32.ReadProcessMemory(hProcess, hMem, address, Marshal.SizeOf(systemtime), out lpNumberOfBytesRead) == false)
@@ -356,35 +356,35 @@ namespace FlaUI.Core.WindowsAPI
             }
 
             systemtime = (SYSTEMTIME)Marshal.PtrToStructure(address, typeof(SYSTEMTIME));
-            
+
             // release memory
             Marshal.FreeHGlobal(address);
-            User32.VirtualFreeEx(hProcess, hMem, Marshal.SizeOf(systemtime), 
+            User32.VirtualFreeEx(hProcess, hMem, Marshal.SizeOf(systemtime),
                 AllocationType.Decommit | AllocationType.Release);
             User32.CloseHandle(hProcess);
-            
+
             DateTime datetime;
             try
             {
-                datetime = new DateTime(systemtime.Year, systemtime.Month, systemtime.Day, 
+                datetime = new DateTime(systemtime.Year, systemtime.Month, systemtime.Day,
                     systemtime.Hour, systemtime.Minute, systemtime.Second);
             }
             catch
             {
-                datetime = new DateTime(systemtime.Year, systemtime.Month, systemtime.Day, 
+                datetime = new DateTime(systemtime.Year, systemtime.Month, systemtime.Day,
                     0, 0, 0);
             }
-            
+
             return datetime;
         }
-        
+
         internal static void SetSelectedDate(IntPtr handle, DateTime date)
         {
             if (handle == IntPtr.Zero || GetWindowClassName(handle) != "SysMonthCal32")
             {
                 throw new Exception("Not supported for this type of calendar");
             }
-            
+
             uint styles = User32.GetWindowLong(handle, WindowLongParam.GWL_STYLE);
             if ((styles & Win32CalendarStyles.MCS_MULTISELECT) != 0)
             {
@@ -392,7 +392,7 @@ namespace FlaUI.Core.WindowsAPI
                 SetSelectedRange(handle, new DateTime[] { date, date });
                 return;
             }
-            
+
             uint procid = 0;
             User32.GetWindowThreadProcessId(handle, out procid);
             IntPtr hProcess = User32.OpenProcess(ProcessAccessFlags.All, false, (int)procid);
@@ -400,7 +400,7 @@ namespace FlaUI.Core.WindowsAPI
             {
                 throw new Exception("Insufficient rights");
             }
-            
+
             SYSTEMTIME systemtime = new SYSTEMTIME();
             systemtime.Year = (short)date.Year;
             systemtime.Month = (short)date.Month;
@@ -410,29 +410,29 @@ namespace FlaUI.Core.WindowsAPI
             systemtime.Minute = (short)date.Minute;
             systemtime.Second = (short)date.Second;
             systemtime.Milliseconds = (short)date.Millisecond;
-            
+
             // allocate memory in the process of the calendar
-            IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)Marshal.SizeOf(systemtime), 
+            IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)Marshal.SizeOf(systemtime),
                 AllocationType.Commit | AllocationType.Reserve, MemoryProtection.ReadWrite);
             if (hMem == IntPtr.Zero)
             {
                 throw new Exception("Insufficient rights");
             }
-            
+
             IntPtr lpNumberOfBytesWritten = IntPtr.Zero;
             if (User32.WriteProcessMemory(hProcess, hMem, systemtime, Marshal.SizeOf(systemtime), out lpNumberOfBytesWritten) == false)
             {
                 throw new Exception("Insufficient rights");
             }
-            
+
             User32.SendMessage(handle, Win32CalendarMessages.MCM_SETCURSEL, IntPtr.Zero, hMem);
-            
+
             // release memory
-            User32.VirtualFreeEx(hProcess, hMem, Marshal.SizeOf(systemtime), 
+            User32.VirtualFreeEx(hProcess, hMem, Marshal.SizeOf(systemtime),
                 AllocationType.Decommit | AllocationType.Release);
             User32.CloseHandle(hProcess);
         }
-        
+
         // Selects a range in a multiple selection Win32 calendar. The range is specified by the first and the last date.
         // If the calendar is single selection then the second date will be selected.
         // The "dates" parameter should always contain two dates.
@@ -442,12 +442,12 @@ namespace FlaUI.Core.WindowsAPI
             {
                 throw new Exception("Not supported for this type of calendar");
             }
-            
+
             if (dates.Length != 2)
             {
                 throw new Exception("Dates array length must be 2");
             }
-            
+
             uint styles = User32.GetWindowLong(handle, WindowLongParam.GWL_STYLE);
             if ((styles & Win32CalendarStyles.MCS_MULTISELECT) == 0)
             {
@@ -455,7 +455,7 @@ namespace FlaUI.Core.WindowsAPI
                 SetSelectedDate(handle, dates[1]);
                 return;
             }
-            
+
             uint procid = 0;
             User32.GetWindowThreadProcessId(handle, out procid);
             IntPtr hProcess = User32.OpenProcess(ProcessAccessFlags.All, false, (int)procid);
@@ -463,7 +463,7 @@ namespace FlaUI.Core.WindowsAPI
             {
                 throw new Exception("Insufficient rights");
             }
-            
+
             SYSTEMTIME systemtime1 = new SYSTEMTIME();
             systemtime1.Year = (short)dates[0].Year;
             systemtime1.Month = (short)dates[0].Month;
@@ -473,7 +473,7 @@ namespace FlaUI.Core.WindowsAPI
             systemtime1.Minute = (short)dates[0].Minute;
             systemtime1.Second = (short)dates[0].Second;
             systemtime1.Milliseconds = (short)dates[0].Millisecond;
-            
+
             SYSTEMTIME systemtime2 = new SYSTEMTIME();
             systemtime2.Year = (short)dates[1].Year;
             systemtime2.Month = (short)dates[1].Month;
@@ -483,7 +483,7 @@ namespace FlaUI.Core.WindowsAPI
             systemtime2.Minute = (short)dates[1].Minute;
             systemtime2.Second = (short)dates[1].Second;
             systemtime2.Milliseconds = (short)dates[1].Millisecond;
-            
+
             // allocate memory in the process of the calendar
             IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)(2 * Marshal.SizeOf(systemtime1)),
                 AllocationType.Commit | AllocationType.Reserve, MemoryProtection.ReadWrite);
@@ -491,7 +491,7 @@ namespace FlaUI.Core.WindowsAPI
             {
                 throw new Exception("Insufficient rights");
             }
-            
+
             IntPtr lpNumberOfBytesWritten = IntPtr.Zero;
             if (User32.WriteProcessMemory(hProcess, hMem, systemtime1, Marshal.SizeOf(systemtime1), out lpNumberOfBytesWritten) == false)
             {
@@ -502,35 +502,35 @@ namespace FlaUI.Core.WindowsAPI
             {
                 throw new Exception("Insufficient rights");
             }
-            
+
             User32.SendMessage(handle, Win32CalendarMessages.MCM_SETSELRANGE, IntPtr.Zero, hMem);
-            
+
             // release memory
             User32.VirtualFreeEx(hProcess, hMem, 2 * Marshal.SizeOf(systemtime1),
                 AllocationType.Decommit | AllocationType.Release);
             User32.CloseHandle(hProcess);
         }
-        
+
         // gets the selected date from a Win32 DateTimePicker
         internal static DateTime? GetDTPSelectedDate(IntPtr handle)
         {
             uint procid = 0;
             User32.GetWindowThreadProcessId(handle, out procid);
-            
+
             IntPtr hProcess = User32.OpenProcess(ProcessAccessFlags.All, false, (int)procid);
             if (hProcess == IntPtr.Zero)
             {
                 throw new Exception("Insufficient rights");
             }
-            
+
             SYSTEMTIME systemtime = new SYSTEMTIME();
-            IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)Marshal.SizeOf(systemtime), 
+            IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)Marshal.SizeOf(systemtime),
                 AllocationType.Commit | AllocationType.Reserve, MemoryProtection.ReadWrite);
             if (hMem == IntPtr.Zero)
             {
                 throw new Exception("Insufficient rights");
             }
-            
+
             IntPtr lResult = User32.SendMessage(handle, DateTimePicker32Messages.DTM_GETSYSTEMTIME, IntPtr.Zero, hMem);
             if (lResult.ToInt32() == (int)(DateTimePicker32Constants.GDT_NONE))
             {
@@ -539,36 +539,36 @@ namespace FlaUI.Core.WindowsAPI
                 User32.CloseHandle(hProcess);
                 return null;
             }
-            
+
             IntPtr address = Marshal.AllocHGlobal(Marshal.SizeOf(systemtime));
-            
+
             IntPtr lpNumberOfBytesRead = IntPtr.Zero;
             if (User32.ReadProcessMemory(hProcess, hMem, address, Marshal.SizeOf(systemtime), out lpNumberOfBytesRead) == false)
             {
                 throw new Exception("Insufficient rights");
             }
-            
+
             systemtime = (SYSTEMTIME)Marshal.PtrToStructure(address, typeof(SYSTEMTIME));
-            
+
             Marshal.FreeHGlobal(address);
             User32.VirtualFreeEx(hProcess, hMem, Marshal.SizeOf(systemtime), AllocationType.Decommit | AllocationType.Release);
             User32.CloseHandle(hProcess);
-            
+
             DateTime datetime;
             try
             {
-                datetime = new DateTime(systemtime.Year, systemtime.Month, systemtime.Day, 
+                datetime = new DateTime(systemtime.Year, systemtime.Month, systemtime.Day,
                     systemtime.Hour, systemtime.Minute, systemtime.Second);
             }
             catch
             {
-                datetime = new DateTime(systemtime.Year, systemtime.Month, systemtime.Day, 
+                datetime = new DateTime(systemtime.Year, systemtime.Month, systemtime.Day,
                     0, 0, 0);
             }
-            
+
             return datetime;
         }
-        
+
         // sets the selected date in a Win32 DateTimePicker.
         // if "date" parameter is null then the DateTimePicker will be unchecked and grayed out.
         internal static void SetDTPSelectedDate(IntPtr handle, DateTime? date)
@@ -577,22 +577,22 @@ namespace FlaUI.Core.WindowsAPI
             {
                 throw new Exception("Not supported for this type of DateTimePicker");
             }
-            
+
             if (date == null)
             {
                 User32.SendMessage(handle, DateTimePicker32Messages.DTM_SETSYSTEMTIME, new IntPtr(DateTimePicker32Constants.GDT_NONE), IntPtr.Zero);
                 return;
             }
-            
+
             uint procid = 0;
             User32.GetWindowThreadProcessId(handle, out procid);
-            
+
             IntPtr hProcess = User32.OpenProcess(ProcessAccessFlags.All, false, (int)procid);
             if (hProcess == IntPtr.Zero)
             {
                 throw new Exception("Insufficient rights");
             }
-            
+
             SYSTEMTIME systemtime = new SYSTEMTIME();
             systemtime.Year = (short)date.Value.Year;
             systemtime.Month = (short)date.Value.Month;
@@ -602,23 +602,23 @@ namespace FlaUI.Core.WindowsAPI
             systemtime.Minute = (short)date.Value.Minute;
             systemtime.Second = (short)date.Value.Second;
             systemtime.Milliseconds = (short)date.Value.Millisecond;
-            
-            IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)Marshal.SizeOf(systemtime), 
+
+            IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)Marshal.SizeOf(systemtime),
                 AllocationType.Commit | AllocationType.Reserve, MemoryProtection.ReadWrite);
             if (hMem == IntPtr.Zero)
             {
                 throw new Exception("Insufficient rights");
             }
-            
+
             IntPtr lpNumberOfBytesWritten = IntPtr.Zero;
-            if (User32.WriteProcessMemory(hProcess, hMem, systemtime, Marshal.SizeOf(systemtime), 
+            if (User32.WriteProcessMemory(hProcess, hMem, systemtime, Marshal.SizeOf(systemtime),
                 out lpNumberOfBytesWritten) == false)
             {
                 throw new Exception("Insufficient rights");
             }
-            
+
             User32.SendMessage(handle, DateTimePicker32Messages.DTM_SETSYSTEMTIME, new IntPtr(DateTimePicker32Constants.GDT_VALID), hMem);
-            
+
             User32.VirtualFreeEx(hProcess, hMem, Marshal.SizeOf(systemtime), AllocationType.Decommit | AllocationType.Release);
             User32.CloseHandle(hProcess);
         }

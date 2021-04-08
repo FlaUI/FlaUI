@@ -25,7 +25,7 @@ namespace FlaUI.Core.WindowsAPI
         [DllImport(KERNEL32, SetLastError = true, CallingConvention = CallingConvention.Winapi)]
         [return: MarshalAs(UnmanagedType.Bool)]
         [ResourceExposure(ResourceScope.Machine)]
-        public static extern bool IsWow64Process([In]IntPtr hSourceProcessHandle, [Out, MarshalAs(UnmanagedType.Bool)]out bool isWow64);
+        public static extern bool IsWow64Process([In] IntPtr hSourceProcessHandle, [Out, MarshalAs(UnmanagedType.Bool)] out bool isWow64);
     }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

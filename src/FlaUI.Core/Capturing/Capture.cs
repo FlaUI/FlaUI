@@ -1,11 +1,11 @@
-﻿using FlaUI.Core.AutomationElements;
-using FlaUI.Core.Exceptions;
-using FlaUI.Core.WindowsAPI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
+using FlaUI.Core.AutomationElements;
+using FlaUI.Core.Exceptions;
+using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.Capturing
 {
@@ -55,10 +55,11 @@ namespace FlaUI.Core.Capturing
             var elementRectangle = element.BoundingRectangle;
             var intersectedScreenBounds = new List<Rectangle>();
             // Calculate which screens intersect with the element
-            for(var screenIndex = 0; screenIndex < User32.GetSystemMetrics(SystemMetric.SM_CMONITORS); screenIndex++)
+            for (var screenIndex = 0; screenIndex < User32.GetSystemMetrics(SystemMetric.SM_CMONITORS); screenIndex++)
             {
                 var screenRectangle = GetBoundsByScreenIndex(screenIndex);
-                if (screenRectangle.IntersectsWith(elementRectangle)) {
+                if (screenRectangle.IntersectsWith(elementRectangle))
+                {
                     intersectedScreenBounds.Add(screenRectangle);
                 }
             }

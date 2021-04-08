@@ -1,8 +1,6 @@
 ﻿using System;
 using FlaUI.Core.AutomationElements;
-using FlaUI.Core.Tools;
 using FlaUI.Core.Definitions;
-using FlaUI.Core.Input;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
 
@@ -25,7 +23,7 @@ namespace FlaUI.Core.UITests.Elements
             //RestartApp();
             var mainWindow = Application.GetMainWindow(Automation);
             DateTimePicker dateTimePicker = null;
-            
+
             if (ApplicationType == TestApplicationType.Wpf)
             {
                 var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
@@ -36,7 +34,7 @@ namespace FlaUI.Core.UITests.Elements
             {
                 dateTimePicker = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("dateTimePicker1")).AsDateTimePicker();
             }
-            
+
             DateTime date = new DateTime(2021, 5, 17); // 17-May-2021
             dateTimePicker.SelectedDate = date;
             DateTime selectedDate = dateTimePicker.SelectedDate.Value;

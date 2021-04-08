@@ -24,7 +24,8 @@ namespace FlaUI.Core.Capturing
             var outputPoint = new Point();
             var cursorBitmap = CaptureUtilities.CaptureCursor(ref outputPoint);
             // Early exit
-            if (cursorBitmap == null) {
+            if (cursorBitmap == null)
+            {
                 return;
             }
             // Fix the coordinates for multi-screen scenarios

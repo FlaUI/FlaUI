@@ -1,10 +1,7 @@
 using System;
-using System.Linq;
-using System.Threading;
-using FlaUI.Core.Definitions;
-using FlaUI.Core.Patterns;
 using System.Collections.Generic;
 using System.Globalization;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.WindowsAPI;
 
 namespace FlaUI.Core.AutomationElements
@@ -22,7 +19,7 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <summary>
-        /// Gets the selected dates in the calendar. For Win32 multiple selection calendar the returned array has two 
+        /// Gets the selected dates in the calendar. For Win32 multiple selection calendar the returned array has two
         /// dates, the first date and the last date of the selected range. For WPF calendar the returned array contains
         /// all selected dates.
         /// </summary>
@@ -60,11 +57,11 @@ namespace FlaUI.Core.AutomationElements
                         }
                     }
                 }
-                
+
                 throw new NotSupportedException("Not supported");
             }
         }
-        
+
         /// <summary>
         /// Deselects other selected dates and selects the specified date.
         /// </summary>
@@ -87,10 +84,10 @@ namespace FlaUI.Core.AutomationElements
                     }
                 }
             }
-            
+
             throw new NotSupportedException("Not supported");
         }
-        
+
         /// <summary>
         /// For WPF calendar with SelectionMode="MultipleRange" this method deselects other selected dates and selects the specified range.
         /// For any other type of SelectionMode it deselects other selected dates and selects only the last date in the range.
@@ -104,7 +101,7 @@ namespace FlaUI.Core.AutomationElements
             {
                 return;
             }
-            
+
             if (FrameworkType == FrameworkType.Wpf)
             {
                 SetSelectedDate(dates[0], false);
@@ -126,10 +123,10 @@ namespace FlaUI.Core.AutomationElements
                     }
                 }
             }
-            
+
             throw new NotSupportedException("Not supported");
         }
-        
+
         /// <summary>
         /// For WPF calendar with SelectionMode="MultipleRange" this method adds the specified date to current selection.
         /// For any other type of SelectionMode it deselects other selected dates and selects the specified date.
@@ -139,7 +136,7 @@ namespace FlaUI.Core.AutomationElements
         {
             SetSelectedDate(date, true);
         }
-        
+
         /// <summary>
         /// For WPF calendar with SelectionMode="MultipleRange" this method adds the specified range to current selection.
         /// For any other type of SelectionMode it deselects other selected dates and selects only the last date in the range.
@@ -152,7 +149,7 @@ namespace FlaUI.Core.AutomationElements
                 SetSelectedDate(date, true);
             }
         }
-        
+
         private void SetSelectedDate(DateTime date, bool add)
         {
             if (FrameworkType == FrameworkType.Wpf)
@@ -167,14 +164,14 @@ namespace FlaUI.Core.AutomationElements
                         multipleViewPattern.SetCurrentView(views[2]);
                     }
                 }
-                
+
                 // set year
                 AutomationElement headerBtn = FindFirstChild(cf => cf.ByAutomationId("PART_HeaderButton"));
                 string headerName = headerBtn.Name;
                 string[] parts = headerName.Split('-');
                 int yearLow = Convert.ToInt32(parts[0]);
                 int yearHigh = Convert.ToInt32(parts[1]);
-                
+
                 if (date.Year < yearLow)
                 {
                     AutomationElement prevBtn = FindFirstChild(cf => cf.ByControlType(ControlType.Button));
@@ -211,7 +208,7 @@ namespace FlaUI.Core.AutomationElements
                         }
                     }
                 }
-                
+
                 AutomationElement[] buttons = FindAllChildren(cf => cf.ByControlType(ControlType.Button));
                 for (int i = 3; i < buttons.Length; i++) // iterate through all the year buttons
                 {
@@ -224,7 +221,7 @@ namespace FlaUI.Core.AutomationElements
                         }
                     }
                 }
-                
+
                 // set month
                 AutomationElement[] monthButtons = FindAllChildren(cf => cf.ByControlType(ControlType.Button));
                 for (int i = 3; i < monthButtons.Length; i++)
@@ -239,7 +236,7 @@ namespace FlaUI.Core.AutomationElements
                         }
                     }
                 }
-                
+
                 // set day
                 AutomationElement[] dayButtons = FindAllChildren(cf => cf.ByControlType(ControlType.Button));
                 DateTime dateDayMonthYear = new DateTime(date.Year, date.Month, date.Day);
@@ -247,17 +244,17 @@ namespace FlaUI.Core.AutomationElements
                 {
                     AutomationElement dayBtn = dayButtons[i];
                     string dayStr = dayBtn.Name;
-                    
+
                     DateTime currentDate;
                     try
                     {
                         currentDate = DateTime.Parse(dayStr, CultureInfo.CurrentCulture);
                     }
-                    catch 
+                    catch
                     {
                         continue;
                     }
-                    
+
                     if (currentDate == dateDayMonthYear)
                     {
                         if (add == true)

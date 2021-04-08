@@ -2384,9 +2384,9 @@ namespace FlaUI.Core.WindowsAPI
         public static IntPtr TRUE = new IntPtr(1);
         public static IntPtr FALSE = new IntPtr(0);
     }
-    
+
     [StructLayout(LayoutKind.Sequential)]
-    public struct SYSTEMTIME 
+    public struct SYSTEMTIME
     {
         [MarshalAs(UnmanagedType.U2)] public short Year;
         [MarshalAs(UnmanagedType.U2)] public short Month;
@@ -2397,7 +2397,7 @@ namespace FlaUI.Core.WindowsAPI
         [MarshalAs(UnmanagedType.U2)] public short Second;
         [MarshalAs(UnmanagedType.U2)] public short Milliseconds;
     }
-    
+
     [Flags]
     public enum ProcessAccessFlags : uint
     {
@@ -2415,7 +2415,7 @@ namespace FlaUI.Core.WindowsAPI
         QueryLimitedInformation = 0x00001000,
         Synchronize = 0x00100000
     }
-    
+
     [Flags]
     public enum AllocationType
     {
@@ -2429,7 +2429,7 @@ namespace FlaUI.Core.WindowsAPI
         WriteWatch = 0x200000,
         LargePages = 0x20000000
     }
-    
+
     [Flags]
     public enum MemoryProtection
     {

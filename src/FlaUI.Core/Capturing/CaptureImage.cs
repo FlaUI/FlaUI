@@ -1,9 +1,9 @@
-﻿using FlaUI.Core.Logging;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using FlaUI.Core.Logging;
 
 namespace FlaUI.Core.Capturing
 {

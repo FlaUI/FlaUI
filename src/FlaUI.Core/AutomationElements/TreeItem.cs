@@ -110,7 +110,7 @@ namespace FlaUI.Core.AutomationElements
             return FindAllChildren(cf => cf.ByControlType(ControlType.TreeItem))
                 .Select(e => e.AsTreeItem()).ToArray();
         }
-        
+
         /// <summary>
         /// Gets or sets if the tree item is checked, if checking is supported.
         /// </summary>

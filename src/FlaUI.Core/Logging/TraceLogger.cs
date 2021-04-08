@@ -24,7 +24,7 @@
 
         protected override void GatedTrace(string message)
         {
-             System.Diagnostics.Trace.WriteLine(message);
+            System.Diagnostics.Trace.WriteLine(message);
         }
 
         protected override void GatedWarn(string message)

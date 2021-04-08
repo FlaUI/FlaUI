@@ -33,11 +33,11 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <summary>
         /// Registers a notification event.
         /// </summary>
-        NotificationEventHandlerBase RegisterNotificationEvent(TreeScope treeScope,Action<AutomationElement, NotificationKind, NotificationProcessing, string, string> action);
+        NotificationEventHandlerBase RegisterNotificationEvent(TreeScope treeScope, Action<AutomationElement, NotificationKind, NotificationProcessing, string, string> action);
 
         /// <summary>
         /// Registers a text edit text changed event.
         /// </summary>
-        TextEditTextChangedEventHandlerBase RegisterTextEditTextChangedEventHandler(TreeScope treeScope,TextEditChangeType textEditChangeType, Action<AutomationElement, TextEditChangeType, string[]> action);
+        TextEditTextChangedEventHandlerBase RegisterTextEditTextChangedEventHandler(TreeScope treeScope, TextEditChangeType textEditChangeType, Action<AutomationElement, TextEditChangeType, string[]> action);
     }
 }

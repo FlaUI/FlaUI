@@ -6,10 +6,10 @@ namespace FlaUI.Core.AutomationElements
     /// <summary>
     /// Class to interact with a list box item element.
     /// </summary>
-    public class ListBoxItem: SelectionItemAutomationElement
+    public class ListBoxItem : SelectionItemAutomationElement
     {
         private readonly ToggleAutomationElement _toggleAutomationElement;
-    
+
         /// <summary>
         /// Creates a <see cref="ListBoxItem"/> element.
         /// </summary>
@@ -55,7 +55,7 @@ namespace FlaUI.Core.AutomationElements
             ScrollItemPattern?.ScrollIntoView();
             return this;
         }
-        
+
         /// <summary>
         /// Gets or sets if the listbox item is checked, if checking is supported
         /// </summary>

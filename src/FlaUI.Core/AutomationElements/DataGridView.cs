@@ -1,7 +1,7 @@
-﻿using FlaUI.Core.Definitions;
+﻿using System.Linq;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.Patterns;
 using FlaUI.Core.Tools;
-using System.Linq;
 
 namespace FlaUI.Core.AutomationElements
 {
@@ -128,7 +128,7 @@ namespace FlaUI.Core.AutomationElements
         {
             get
             {
-                var cells = FindAllChildren(cf => 
+                var cells = FindAllChildren(cf =>
                     cf.ByControlType(ControlType.Header).Not()
                     .And(cf.ByControlType(ControlType.HeaderItem).Not())
                     .And(cf.ByClassName("DataGridDetailsPresenter").Not()));
