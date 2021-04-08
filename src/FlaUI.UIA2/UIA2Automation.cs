@@ -32,6 +32,9 @@ namespace FlaUI.UIA2
         public override object NotSupportedValue => UIA.AutomationElement.NotSupported;
 
         /// <inheritdoc />
+        public override object MixedAttributeValue => UIA.TextPattern.MixedAttributeValue;
+
+        /// <inheritdoc />
         public override TimeSpan TransactionTimeout
         {
             get => throw new NotSupportedByFrameworkException();

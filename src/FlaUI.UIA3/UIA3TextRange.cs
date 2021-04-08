@@ -76,7 +76,7 @@ namespace FlaUI.UIA3
             {
                 return null;
             }
-            // If unrolledRects is somehow not a multiple of 4, we still will not 
+            // If unrolledRects is somehow not a multiple of 4, we still will not
             // overrun it, since (x / 4) * 4 <= x for C# integer math.
             var result = new Rectangle[unrolledRects.Length / 4];
             for (var i = 0; i < result.Length; i++)

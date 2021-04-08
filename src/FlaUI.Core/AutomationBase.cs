@@ -83,6 +83,12 @@ namespace FlaUI.Core
         public abstract object NotSupportedValue { get; }
 
         /// <summary>
+        /// Object which represents a mixed attribute value in a textpattern.
+        /// For example if the text contains multiple fonts, the FontName attribute will return this value.
+        /// </summary>
+        public abstract object MixedAttributeValue { get; }
+
+        /// <summary>
         /// Specifies the length of time that UI Automation will wait for a provider to respond to a client request for information about an automation element.
         /// The default is 20 seconds.
         /// </summary>

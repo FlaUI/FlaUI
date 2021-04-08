@@ -34,6 +34,9 @@ namespace FlaUI.UIA3
         public override object NotSupportedValue => NativeAutomation.ReservedNotSupportedValue;
 
         /// <inheritdoc />
+        public override object MixedAttributeValue => NativeAutomation.ReservedMixedAttributeValue;
+
+        /// <inheritdoc />
         public override TimeSpan TransactionTimeout
         {
             get => TimeSpan.FromMilliseconds(NativeAutomation2.TransactionTimeout);
