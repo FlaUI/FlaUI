@@ -14,8 +14,8 @@
     <Description>Library that provides some helper classes and methods for easier testing with FlaUI.</Description>
     <Copyright>Copyright (c) 2019-2021</Copyright>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <PackageProjectUrl>https://github.com/FlaUI/FlaUI.TestUtilities</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/FlaUI/FlaUI.TestUtilities</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/FlaUI/FlaUI</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/FlaUI/FlaUI</RepositoryUrl>
     <PackageTags>UI Automation UIA2 UIA3 UIA System.Windows.Automation FlaUI Testing Utilities NUnit</PackageTags>
     <IncludeSource>True</IncludeSource>
     <IncludeSymbols>True</IncludeSymbols>
