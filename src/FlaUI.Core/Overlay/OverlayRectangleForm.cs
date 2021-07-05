@@ -25,8 +25,7 @@ namespace FlaUI.Core.Overlay
             {
                 var createParams = base.CreateParams;
                 createParams.ExStyle |= (int)WindowStyles.WS_EX_TOPMOST;
-                CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x80;
+                createParams.ExStyle |= 0x80;
                 return createParams;
             }
         }
