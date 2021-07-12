@@ -30,8 +30,24 @@ namespace FlaUI.Core
                 return String.Empty;
             }
             // Get the index
-            var allChildren = parent.FindAllChildren(cf => cf.ByControlType(element.Properties.ControlType));
-            var currentItemText = $"{element.Properties.ControlType.Value}";
+            string controlType = "Custom";
+            try
+            {
+                controlType = element.Properties.ControlType.Value.ToString();
+            }
+            catch
+            { }
+            AutomationElement[] allChildren;
+            if (controlType == "Custom")
+            {
+                allChildren = parent.FindAllChildren(cf => cf.ByControlType(ControlType.Custom));
+            }
+            else
+            {
+                allChildren = parent.FindAllChildren(cf => cf.ByControlType(element.Properties.ControlType));
+            }
+            
+            var currentItemText = $"{controlType}";
             if (allChildren.Length > 1)
             {
                 // There is more than one matching child, find out the index
