@@ -1,3 +1,4 @@
+#tool nuget:?package=NuGet.CommandLine&version=5.11.0
 #tool nuget:?package=NUnit.ConsoleRunner&version=3.12.0
 
 //////////////////////////////////////////////////////////////////////
