@@ -63,7 +63,7 @@
       <Version>4.2.2</Version>
     </PackageReference>
     <PackageReference Include="NUnit">
-      <Version>3.13.1</Version>
+      <Version>3.13.2</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
