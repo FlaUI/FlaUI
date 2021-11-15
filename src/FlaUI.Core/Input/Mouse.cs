@@ -468,7 +468,7 @@ namespace FlaUI.Core.Input
 
         public static void RightDoubleClick(Point point)
         {
-            DoubleClick(point, MouseButton.Left);
+            DoubleClick(point, MouseButton.Right);
         }
 
         #endregion Convenience methods
