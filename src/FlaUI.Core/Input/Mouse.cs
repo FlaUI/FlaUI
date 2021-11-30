@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
 using System.Threading;
-using FlaUI.Core.Logging;
 using FlaUI.Core.Tools;
 using FlaUI.Core.WindowsAPI;
 
@@ -382,7 +382,7 @@ namespace FlaUI.Core.Input
             {
                 // An error occured
                 var errorCode = Marshal.GetLastWin32Error();
-                Logger.Default.Warn("Could not send mouse input. ErrorCode: {0}", errorCode);
+                throw new Win32Exception(errorCode);
             }
         }
 
