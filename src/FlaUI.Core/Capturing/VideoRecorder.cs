@@ -65,10 +65,11 @@ namespace FlaUI.Core.Capturing
                 {
                     var requiredFrames = (int)Math.Floor(sw.Elapsed.TotalSeconds * _settings.FrameRate);
                     var diff = requiredFrames - frameCount;
-                    if (diff >= 5)
+                    if (diff >= 5 && _settings.LogMissingFrames)
                     {
                         Logger.Default.Warn($"Adding many ({diff}) missing frame(s) to \"{Path.GetFileName(TargetVideoPath)}\".");
                     }
+
                     for (var i = 0; i < diff; ++i)
                     {
                         _frames.Add(ImageData.RepeatImage);
@@ -95,7 +96,7 @@ namespace FlaUI.Core.Capturing
                     await Task.Delay(timeTillNextFrame);
                 }
             }
-            if (totalMissedFrames > 0)
+            if (totalMissedFrames > 0 && _settings.LogMissingFrames)
             {
                 Logger.Default.Warn($"Totally added {totalMissedFrames} missing frame(s) to \"{Path.GetFileName(TargetVideoPath)}\".");
             }
