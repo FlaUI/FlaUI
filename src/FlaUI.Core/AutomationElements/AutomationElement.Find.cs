@@ -164,7 +164,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Finds all children with the condition.
         /// </summary>
-        /// <param name="conditionFunc">The condition mehtod.</param>
+        /// <param name="conditionFunc">The condition method.</param>
         /// <returns>The found elements or an empty list if no elements were found.</returns>
         public AutomationElement[] FindAllChildren(Func<ConditionFactory, ConditionBase> conditionFunc)
         {
