@@ -279,7 +279,7 @@ namespace FlaUI.Core.AutomationElements
         /// Finds the child at the given position with the condition.
         /// </summary>
         /// <param name="index">The index of the child to find.</param>
-        /// <param name="conditionFunc">The condition mehtod.</param>
+        /// <param name="conditionFunc">The condition method.</param>
         /// <returns>The found element or null if no element was found.</returns>
         public AutomationElement FindChildAt(int index, Func<ConditionFactory, ConditionBase> conditionFunc)
         {
