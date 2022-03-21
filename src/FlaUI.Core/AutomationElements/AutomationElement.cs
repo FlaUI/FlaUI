@@ -140,7 +140,7 @@ namespace FlaUI.Core.AutomationElements
         public bool IsEnabled => Properties.IsEnabled.Value;
 
         /// <summary>
-        /// Flag if the element off-screen or on-screen(visible).
+        /// Flag if the element is off-screen or on-screen(visible).
         /// </summary>
         public bool IsOffscreen => Properties.IsOffscreen.Value;
 
