@@ -1,6 +1,7 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.UITests.TestFramework;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests
@@ -35,7 +36,7 @@ namespace FlaUI.Core.UITests
             using (cacheRequest.Activate())
             {
                 var rows = _grid.Rows;
-                Assert.That(rows, Has.Length.EqualTo(3));
+                rows.Should().HaveCount(3);
                 CheckRow(rows[0], "1", "10");
                 CheckRow(rows[1], "2", "20");
                 CheckRow(rows[2], "3", "30");
@@ -45,7 +46,7 @@ namespace FlaUI.Core.UITests
         private void CheckRow(GridRow gridRow, string cell1Value, string cell2Value)
         {
             var cells = gridRow.CachedChildren;
-            Assert.That(cells, Has.Length.EqualTo(2));
+            cells.Should().HaveCount(2);
             CheckCellValue(cells[0], cell1Value);
             CheckCellValue(cells[1], cell2Value);
         }
@@ -53,7 +54,7 @@ namespace FlaUI.Core.UITests
         private void CheckCellValue(AutomationElement cell, string cellValue)
         {
             var cellText = cell.AsLabel();
-            Assert.That(cellText.Text, Is.EqualTo(cellValue));
+            cellText.Text.Should().Be(cellValue);
         }
     }
 }

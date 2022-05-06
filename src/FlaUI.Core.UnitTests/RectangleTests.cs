@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using FlaUI.Core.Tools;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UnitTests
@@ -13,9 +14,10 @@ namespace FlaUI.Core.UnitTests
             var rectangle = new Rectangle(0, 0, 0, 0);
             var rectangle2 = new Rectangle(0, 0, 1, 0);
             var rectangle3 = new Rectangle(0, 0, 0, 1);
-            Assert.That(rectangle.IsEmpty, Is.True);
-            Assert.That(rectangle2.IsEmpty, Is.False);
-            Assert.That(rectangle3.IsEmpty, Is.False);
+
+            rectangle.IsEmpty.Should().BeTrue();
+            rectangle2.IsEmpty.Should().BeFalse();
+            rectangle3.IsEmpty.Should().BeFalse();
         }
 
         [Test]
@@ -57,8 +59,8 @@ namespace FlaUI.Core.UnitTests
 
         private void AssertPointsAreSame(Point p1, Point p2)
         {
-            Assert.That(p1.X, Is.EqualTo(p2.X));
-            Assert.That(p1.Y, Is.EqualTo(p2.Y));
+          p1.X.Should().Be(p2.X);
+          p1.Y.Should().Be(p2.Y);
         }
     }
 }

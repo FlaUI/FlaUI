@@ -1,4 +1,5 @@
 ﻿using FlaUI.Core.UITests.TestFramework;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests
@@ -21,7 +22,7 @@ namespace FlaUI.Core.UITests
 
             var window = Application.GetMainWindow(Automation);
             var passwordBox = window.FindFirstByXPath($"//*[@IsPassword=true()]");
-            Assert.That(passwordBox, Is.Not.Null);
+            passwordBox.Should().NotBeNull();
         }
     }
 }

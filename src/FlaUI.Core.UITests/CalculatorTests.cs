@@ -5,6 +5,7 @@ using FlaUI.Core.Input;
 using FlaUI.Core.WindowsAPI;
 using FlaUI.TestUtilities;
 using FlaUI.UIA3;
+using FluentAssertions;
 using NUnit.Framework;
 using OperatingSystem = FlaUI.Core.Tools.OperatingSystem;
 
@@ -44,7 +45,7 @@ namespace FlaUI.Core.UITests
             calc.ButtonEquals.Click();
             Application.WaitWhileBusy();
             var result = calc.Result;
-            Assert.That(result, Is.EqualTo("6912"));
+            result.Should().Be("6912");
 
             // Date comparison
             using (Keyboard.Pressing(VirtualKeyShort.CONTROL))

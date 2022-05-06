@@ -1,7 +1,9 @@
-﻿using FlaUI.Core.Definitions;
+﻿using System;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.Exceptions;
 using FlaUI.Core.UITests.TestFramework;
 using FlaUI.TestUtilities;
+using FluentAssertions;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
@@ -35,9 +37,9 @@ namespace FlaUI.Core.UITests
         public void CorrectPattern()
         {
             var mainWindow = Application.GetMainWindow(Automation);
-            Assert.That(mainWindow, Is.Not.Null);
+            mainWindow.Should().NotBeNull();
             var windowPattern = mainWindow.FrameworkAutomationElement.GetNativePattern<object>(Automation.PatternLibrary.WindowPattern);
-            Assert.That(windowPattern, Is.Not.Null);
+            windowPattern.Should().NotBeNull();
         }
 
         [Test]
@@ -50,9 +52,9 @@ namespace FlaUI.Core.UITests
             using (cacheRequest.Activate())
             {
                 var mainWindow = Application.GetMainWindow(Automation);
-                Assert.That(mainWindow, Is.Not.Null);
+                mainWindow.Should().NotBeNull();
                 var windowPattern = mainWindow.FrameworkAutomationElement.GetNativePattern<object>(Automation.PatternLibrary.WindowPattern);
-                Assert.That(windowPattern, Is.Not.Null);
+                windowPattern.Should().NotBeNull();
             }
         }
 
@@ -60,9 +62,12 @@ namespace FlaUI.Core.UITests
         public void UnsupportedPattern()
         {
             var mainWindow = Application.GetMainWindow(Automation);
-            Assert.That(mainWindow, Is.Not.Null);
-            ActualValueDelegate<object> testDelegate = () => mainWindow.FrameworkAutomationElement.GetNativePattern<object>(Automation.PatternLibrary.ExpandCollapsePattern);
-            Assert.That(testDelegate, Throws.TypeOf<PatternNotSupportedException>().With.Message.Contains("ExpandCollapse"));
+            mainWindow.Should().NotBeNull(); 
+
+            Action act = () => mainWindow.FrameworkAutomationElement.GetNativePattern<object>(Automation.PatternLibrary
+              .ExpandCollapsePattern);
+            act.Should().Throw<PatternNotSupportedException>()
+              .Where(x => x.Message.Contains("ExpandCollapse"));
         }
 
         [Test]
@@ -75,9 +80,10 @@ namespace FlaUI.Core.UITests
             using (cacheRequest.Activate())
             {
                 var mainWindow = Application.GetMainWindow(Automation);
-                Assert.That(mainWindow, Is.Not.Null);
-                ActualValueDelegate<object> testDelegate = () => mainWindow.FrameworkAutomationElement.GetNativePattern<object>(Automation.PatternLibrary.ExpandCollapsePattern);
-                Assert.That(testDelegate, Throws.TypeOf<PatternNotSupportedException>().With.Message.Contains("ExpandCollapse"));
+                mainWindow.Should().NotBeNull();
+                Action act = () => mainWindow.FrameworkAutomationElement.GetNativePattern<object>(Automation.PatternLibrary.ExpandCollapsePattern);
+                act.Should().Throw<PatternNotSupportedException>()
+                  .Where(x => x.Message.Contains("ExpandCollapse"));
             }
         }
 
@@ -91,9 +97,10 @@ namespace FlaUI.Core.UITests
             using (cacheRequest.Activate())
             {
                 var mainWindow = Application.GetMainWindow(Automation);
-                Assert.That(mainWindow, Is.Not.Null);
-                ActualValueDelegate<object> testDelegate = () => mainWindow.FrameworkAutomationElement.GetNativePattern<object>(Automation.PatternLibrary.WindowPattern);
-                Assert.That(testDelegate, Throws.TypeOf<PatternNotCachedException>().With.Message.Contains("Window"));
+                mainWindow.Should().NotBeNull();
+                Action act = () => mainWindow.FrameworkAutomationElement.GetNativePattern<object>(Automation.PatternLibrary.WindowPattern);
+                act.Should().Throw<PatternNotCachedException>()
+                  .Where(x => x.Message.Contains("Window"));
             }
         }
 
@@ -107,9 +114,10 @@ namespace FlaUI.Core.UITests
             using (cacheRequest.Activate())
             {
                 var mainWindow = Application.GetMainWindow(Automation);
-                Assert.That(mainWindow, Is.Not.Null);
-                ActualValueDelegate<object> testDelegate = () => mainWindow.FrameworkAutomationElement.GetNativePattern<object>(Automation.PatternLibrary.ExpandCollapsePattern);
-                Assert.That(testDelegate, Throws.TypeOf<PatternNotCachedException>().With.Message.Contains("ExpandCollapse"));
+                mainWindow.Should().NotBeNull();
+                Action act = () => mainWindow.FrameworkAutomationElement.GetNativePattern<object>(Automation.PatternLibrary.ExpandCollapsePattern);
+                act.Should().Throw<PatternNotCachedException>()
+                  .Where(x => x.Message.Contains("ExpandCollapse"));
             }
         }
         #endregion Pattern
@@ -119,9 +127,9 @@ namespace FlaUI.Core.UITests
         public void CorrectProperty()
         {
             var mainWindow = Application.GetMainWindow(Automation);
-            Assert.That(mainWindow, Is.Not.Null);
+            mainWindow.Should().NotBeNull();
             var windowProperty = mainWindow.FrameworkAutomationElement.GetPropertyValue(Automation.PropertyLibrary.Window.CanMaximize);
-            Assert.That(windowProperty, Is.Not.Null);
+            windowProperty.Should().NotBeNull();
         }
 
         [Test]
@@ -134,9 +142,9 @@ namespace FlaUI.Core.UITests
             using (cacheRequest.Activate())
             {
                 var mainWindow = Application.GetMainWindow(Automation);
-                Assert.That(mainWindow, Is.Not.Null);
+                mainWindow.Should().NotBeNull();
                 var windowProperty = mainWindow.FrameworkAutomationElement.GetPropertyValue(Automation.PropertyLibrary.Window.CanMaximize);
-                Assert.That(windowProperty, Is.Not.Null);
+                windowProperty.Should().NotBeNull();
             }
         }
 
@@ -144,9 +152,10 @@ namespace FlaUI.Core.UITests
         public void UnsupportedProperty()
         {
             var mainWindow = Application.GetMainWindow(Automation);
-            Assert.That(mainWindow, Is.Not.Null);
-            ActualValueDelegate<object> testDelegate = () => mainWindow.FrameworkAutomationElement.GetPropertyValue(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
-            Assert.That(testDelegate, Throws.TypeOf<PropertyNotSupportedException>().With.Message.Contains("ExpandCollapseState"));
+            mainWindow.Should().NotBeNull();
+            Action act = () => mainWindow.FrameworkAutomationElement.GetPropertyValue(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
+            act.Should().Throw<PropertyNotSupportedException>()
+              .Where(x => x.Message.Contains("ExpandCollapseState"));
         }
 
         [Test]
@@ -159,9 +168,10 @@ namespace FlaUI.Core.UITests
             using (cacheRequest.Activate())
             {
                 var mainWindow = Application.GetMainWindow(Automation);
-                Assert.That(mainWindow, Is.Not.Null);
-                ActualValueDelegate<object> testDelegate = () => mainWindow.FrameworkAutomationElement.GetPropertyValue(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
-                Assert.That(testDelegate, Throws.TypeOf<PropertyNotSupportedException>().With.Message.Contains("ExpandCollapseState"));
+                mainWindow.Should().NotBeNull();
+                Action act = () => mainWindow.FrameworkAutomationElement.GetPropertyValue(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
+                act.Should().Throw<PropertyNotSupportedException>()
+                  .Where(x => x.Message.Contains("ExpandCollapseState"));
             }
         }
 
@@ -175,9 +185,10 @@ namespace FlaUI.Core.UITests
             using (cacheRequest.Activate())
             {
                 var mainWindow = Application.GetMainWindow(Automation);
-                Assert.That(mainWindow, Is.Not.Null);
-                ActualValueDelegate<object> testDelegate = () => mainWindow.FrameworkAutomationElement.GetPropertyValue(Automation.PropertyLibrary.Window.CanMaximize);
-                Assert.That(testDelegate, Throws.TypeOf<PropertyNotCachedException>().With.Message.Contains("CanMaximize"));
+                mainWindow.Should().NotBeNull();
+                Action act = () => mainWindow.FrameworkAutomationElement.GetPropertyValue(Automation.PropertyLibrary.Window.CanMaximize);
+                act.Should().Throw<PropertyNotCachedException>()
+                  .Where(x => x.Message.Contains("CanMaximize"));
             }
         }
 
@@ -191,9 +202,10 @@ namespace FlaUI.Core.UITests
             using (cacheRequest.Activate())
             {
                 var mainWindow = Application.GetMainWindow(Automation);
-                Assert.That(mainWindow, Is.Not.Null);
-                ActualValueDelegate<object> testDelegate = () => mainWindow.FrameworkAutomationElement.GetPropertyValue(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
-                Assert.That(testDelegate, Throws.TypeOf<PropertyNotCachedException>().With.Message.Contains("ExpandCollapseState"));
+                mainWindow.Should().NotBeNull();
+                Action act = () => mainWindow.FrameworkAutomationElement.GetPropertyValue(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
+                act.Should().Throw<PropertyNotCachedException>()
+                  .Where(x => x.Message.Contains("ExpandCollapseState"));
             }
         }
         #endregion Property
