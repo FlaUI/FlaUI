@@ -2,6 +2,7 @@
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
@@ -33,10 +34,10 @@ namespace FlaUI.Core.UITests.Elements
             var slider = GetSlider();
             var number1 = AdjustNumberIfOnlyValue(slider, 6);
             slider.Value = number1;
-            Assert.That(slider.Value, Is.EqualTo(number1));
+            slider.Value.Should().Be(number1);
             var number2 = AdjustNumberIfOnlyValue(slider, 4);
             slider.Value = number2;
-            Assert.That(slider.Value, Is.EqualTo(number2));
+            slider.Value.Should().Be(number2);
         }
 
         [Test]
@@ -45,7 +46,7 @@ namespace FlaUI.Core.UITests.Elements
             var slider = GetSlider();
             ResetToCenter(slider);
             slider.SmallIncrement();
-            Assert.That(slider.Value, Is.EqualTo(AdjustNumberIfOnlyValue(slider, 6)));
+            slider.Value.Should().Be(AdjustNumberIfOnlyValue(slider, 6));
         }
 
         [Test]
@@ -54,7 +55,7 @@ namespace FlaUI.Core.UITests.Elements
             var slider = GetSlider();
             ResetToCenter(slider);
             slider.SmallDecrement();
-            Assert.That(slider.Value, Is.EqualTo(AdjustNumberIfOnlyValue(slider, 4)));
+            slider.Value.Should().Be(AdjustNumberIfOnlyValue(slider, 4));
         }
 
         [Test]
@@ -63,7 +64,7 @@ namespace FlaUI.Core.UITests.Elements
             var slider = GetSlider();
             ResetToCenter(slider);
             slider.LargeIncrement();
-            Assert.That(slider.Value, Is.EqualTo(AdjustNumberIfOnlyValue(slider, 9)));
+            slider.Value.Should().Be(AdjustNumberIfOnlyValue(slider, 9));
         }
 
         [Test]
@@ -72,7 +73,7 @@ namespace FlaUI.Core.UITests.Elements
             var slider = GetSlider();
             ResetToCenter(slider);
             slider.LargeDecrement();
-            Assert.That(slider.Value, Is.EqualTo(AdjustNumberIfOnlyValue(slider, 1)));
+            slider.Value.Should().Be(AdjustNumberIfOnlyValue(slider, 1));
         }
 
         private Slider GetSlider()
