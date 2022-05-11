@@ -7,6 +7,7 @@ using FlaUI.Core.Tools;
 using FlaUI.Core.WindowsAPI;
 using FlaUI.TestUtilities;
 using FlaUI.UIA3;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.EventHandlers
@@ -43,7 +44,7 @@ namespace FlaUI.Core.UITests.EventHandlers
             Thread.Sleep(100);
             x.Dispose();
             mainWindow.Close();
-            Assert.That(focusChangedElements.Count, Is.GreaterThan(0));
+            focusChangedElements.Should().HaveCountGreaterThan(0);
         }
 
         private string GetResizeText()
