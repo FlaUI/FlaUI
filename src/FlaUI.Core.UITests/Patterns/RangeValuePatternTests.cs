@@ -1,5 +1,6 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.UITests.TestFramework;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Patterns
@@ -16,21 +17,21 @@ namespace FlaUI.Core.UITests.Patterns
         public void RangeValuePatternTest()
         {
             var slider = GetSlider();
-            Assert.That(slider, Is.Not.Null);
+            slider.Should().NotBeNull();
             var rvPattern = slider.Patterns.RangeValue.Pattern;
-            Assert.That(rvPattern, Is.Not.Null);
-            Assert.That(rvPattern.IsReadOnly.Value, Is.False);
-            Assert.That(rvPattern.Value.Value, Is.EqualTo(5));
-            Assert.That(rvPattern.LargeChange.Value, Is.EqualTo(4));
-            Assert.That(rvPattern.SmallChange.Value, Is.EqualTo(1));
-            Assert.That(rvPattern.Minimum.Value, Is.EqualTo(0));
-            Assert.That(rvPattern.Maximum.Value, Is.EqualTo(10));
+            rvPattern.Should().NotBeNull();
+            rvPattern.IsReadOnly.Value.Should().BeFalse();
+            rvPattern.Value.Value.Should().Be(5);
+            rvPattern.LargeChange.Value.Should().Be(4);
+            rvPattern.SmallChange.Value.Should().Be(1);
+            rvPattern.Minimum.Value.Should().Be(0);
+            rvPattern.Maximum.Value.Should().Be(10);
             var number1 = 6;
             rvPattern.SetValue(number1);
-            Assert.That(rvPattern.Value.Value, Is.EqualTo(number1));
+            rvPattern.Value.Value.Should().Be(number1);
             var number2 = 3;
             rvPattern.SetValue(number2);
-            Assert.That(rvPattern.Value.Value, Is.EqualTo(number2));
+            rvPattern.Value.Value.Should().Be(number2);
         }
 
         private AutomationElement GetSlider()
