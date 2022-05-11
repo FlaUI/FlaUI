@@ -1,6 +1,7 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Input;
 using FlaUI.Core.UITests.TestFramework;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
@@ -22,11 +23,11 @@ namespace FlaUI.Core.UITests.Elements
             btn.Click();
             Wait.UntilInputIsProcessed();
             var popup = window.Popup;
-            Assert.That(popup, Is.Not.Null);
+            popup.Should().NotBeNull();
             var popupChildren = popup.FindAllChildren();
-            Assert.That(popupChildren, Has.Length.EqualTo(1));
+            popupChildren.Should().HaveCount(1);
             var check = popupChildren[0].AsCheckBox();
-            Assert.That(check.Text, Is.EqualTo("This is a popup"));
+            check.Text.Should().Be("This is a popup");
         }
 
         [Test]
@@ -37,13 +38,13 @@ namespace FlaUI.Core.UITests.Elements
             btn.Click();
             Wait.UntilInputIsProcessed();
             var popup = window.Popup;
-            Assert.That(popup, Is.Not.Null);
+            popup.Should().NotBeNull();
             var popupChildren = popup.FindAllChildren();
-            Assert.That(popupChildren, Has.Length.EqualTo(1));
+            popupChildren.Should().HaveCount(1);
             var menu = popupChildren[0].AsMenu();
-            Assert.That(menu.Items, Has.Length.EqualTo(1));
+            menu.Items.Should().HaveCount(1);
             var menuItem = menu.Items[0];
-            Assert.That(menuItem.Text, Is.EqualTo("Some MenuItem"));
+            menuItem.Text.Should().Be("Some MenuItem");
         }
     }
 }
