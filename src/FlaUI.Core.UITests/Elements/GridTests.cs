@@ -1,6 +1,7 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.UITests.TestFramework;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
@@ -32,8 +33,8 @@ namespace FlaUI.Core.UITests.Elements
         public void GridPatternTest()
         {
             var grid = _grid;
-            Assert.That(grid.ColumnCount, Is.EqualTo(2));
-            Assert.That(grid.RowCount, Is.EqualTo(3));
+            grid.ColumnCount.Should().Be(2);
+            grid.RowCount.Should().Be(3);
         }
 
         [Test]
@@ -42,10 +43,10 @@ namespace FlaUI.Core.UITests.Elements
             var grid = _grid;
             var header = grid.Header;
             var columns = header.Columns;
-            Assert.That(header, Is.Not.Null);
-            Assert.That(columns, Has.Length.EqualTo(2));
-            Assert.That(columns[0].Text, Is.EqualTo("Key"));
-            Assert.That(columns[1].Text, Is.EqualTo("Value"));
+            header.Should().NotBeNull();
+            columns.Should().HaveCount(2);
+            columns[0].Text.Should().Be("Key");
+            columns[1].Text.Should().Be("Value");
         }
 
         [Test]
@@ -53,7 +54,7 @@ namespace FlaUI.Core.UITests.Elements
         {
             var grid = _grid;
             var rows = grid.Rows;
-            Assert.That(rows, Has.Length.EqualTo(3));
+            rows.Should().HaveCount(3);
             CheckRow(rows[0], "1", "10");
             CheckRow(rows[1], "2", "20");
             CheckRow(rows[2], "3", "30");
@@ -86,7 +87,7 @@ namespace FlaUI.Core.UITests.Elements
         private void CheckRow(GridRow gridRow, string cell1Value, string cell2Value)
         {
             var cells = gridRow.Cells;
-            Assert.That(cells, Has.Length.EqualTo(2));
+            cells.Should().HaveCount(2);
             CheckCellValue(cells[0], cell1Value);
             CheckCellValue(cells[1], cell2Value);
         }
@@ -94,7 +95,7 @@ namespace FlaUI.Core.UITests.Elements
         private void CheckCellValue(AutomationElement cell, string cellValue)
         {
             var cellText = cell.AsLabel();
-            Assert.That(cellText.Text, Is.EqualTo(cellValue));
+            cellText.Text.Should().Be(cellValue);
         }
     }
 }
