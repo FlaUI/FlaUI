@@ -7,6 +7,7 @@ using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
 using FlaUI.Core.WindowsAPI;
 using FlaUI.UIA3;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests
@@ -22,8 +23,8 @@ namespace FlaUI.Core.UITests
                 using (var automation = new UIA3Automation())
                 {
                     var window = app.GetMainWindow(automation);
-                    Assert.That(window, Is.Not.Null);
-                    Assert.That(window.Title, Is.Not.Null);
+                    window.Should().NotBeNull();
+                    window.Title.Should().NotBeNull();
 
                     Task.Factory.StartNew(async () =>
                     {
@@ -52,12 +53,12 @@ namespace FlaUI.Core.UITests
                 using (var automation = new UIA3Automation())
                 {
                     var window = app.GetMainWindow(automation);
-                    Assert.That(window, Is.Not.Null);
-                    Assert.That(window.Title, Is.Not.Null);
+                    window.Should().NotBeNull();
+                    window.Title.Should().NotBeNull();
 
                     var editableText = window.FindFirstChild(new PropertyCondition(automation.PropertyLibrary.LegacyIAccessible.Role, AccessibilityRole.ROLE_SYSTEM_TEXT));
-                    Assert.That(editableText, Is.Not.Null);
-                    Assert.That(editableText.Patterns.Text.IsSupported, Is.True);
+                    editableText.Should().NotBeNull();
+                    editableText.Patterns.Text.IsSupported.Should().BeTrue();
                 }
 
                 app.Close();

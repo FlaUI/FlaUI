@@ -6,6 +6,7 @@ using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
 using FlaUI.UIA3;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests
@@ -47,40 +48,32 @@ namespace FlaUI.Core.UITests
         {
             var startPosition = Mouse.Position;
 
-            Assert.DoesNotThrow(() =>
-            {
-                Mouse.MoveBy(1, 0);
-            }, "Failed to move mouse by 1-x");
-            Assert.That(Mouse.Position.X, Is.EqualTo(startPosition.X + 1));
-            Assert.That(Mouse.Position.Y, Is.EqualTo(startPosition.Y));
+            Action act = () => Mouse.MoveBy(1, 0);
+            act.Should().NotThrow("Failed to move mouse by 1-x");
+            Mouse.Position.X.Should().Be(startPosition.X + 1);
+            Mouse.Position.Y.Should().Be(startPosition.Y);
         }
 
         [Test]
         public void MoveZeroTest()
         {
             var startPosition = Mouse.Position;
-            Assert.DoesNotThrow(() =>
-            {
-                Mouse.MoveBy(0, 10);
-            }, "Failed to move mouse by 0-x");
-            Assert.That(Mouse.Position.X, Is.EqualTo(startPosition.X));
-            Assert.That(Mouse.Position.Y, Is.EqualTo(startPosition.Y + 10));
+            Action act = () => Mouse.MoveBy(0, 10);
+            act.Should().NotThrow("Failed to move mouse by 0-x");
+            Mouse.Position.X.Should().Be(startPosition.X);
+            Mouse.Position.Y.Should().Be(startPosition.Y + 10);
 
             startPosition = Mouse.Position;
-            Assert.DoesNotThrow(() =>
-            {
-                Mouse.MoveBy(10, 0);
-            }, "Failed to move mouse by 0-y");
-            Assert.That(Mouse.Position.X, Is.EqualTo(startPosition.X + 10));
-            Assert.That(Mouse.Position.Y, Is.EqualTo(startPosition.Y));
+            act = () => Mouse.MoveBy(10, 0);
+            act.Should().NotThrow("Failed to move mouse by 0-x");
+            Mouse.Position.X.Should().Be(startPosition.X + 10);
+            Mouse.Position.Y.Should().Be(startPosition.Y);
 
             startPosition = Mouse.Position;
-            Assert.DoesNotThrow(() =>
-            {
-                Mouse.MoveBy(0, 0);
-            }, "Failed to move mouse by 0-x and 0-y");
-            Assert.That(Mouse.Position.X, Is.EqualTo(startPosition.X));
-            Assert.That(Mouse.Position.Y, Is.EqualTo(startPosition.Y));
+            act = () => Mouse.MoveBy(0, 0);
+            act.Should().NotThrow("Failed to move mouse by 0-x and 0-y");
+            Mouse.Position.X.Should().Be(startPosition.X);
+            Mouse.Position.Y.Should().Be(startPosition.Y);
         }
 
         [Test]
@@ -103,16 +96,16 @@ namespace FlaUI.Core.UITests
                     Wait.UntilInputIsProcessed();
 
                     var initScroll = documentElement.Patterns.Scroll.Pattern.VerticalScrollPercent.Value;
-                    Assert.That(initScroll, Is.EqualTo(0));
+                    initScroll.Should().Be(0);
                     Mouse.Scroll(-100);
                     Wait.UntilInputIsProcessed();
                     var downScroll = documentElement.Patterns.Scroll.Pattern.VerticalScrollPercent.Value;
-                    Assert.That(downScroll, Is.GreaterThan(initScroll));
+                    downScroll.Should().BeGreaterThan(initScroll);
 
                     Mouse.Scroll(100);
                     Wait.UntilInputIsProcessed();
                     var upScroll = documentElement.Patterns.Scroll.Pattern.VerticalScrollPercent.Value;
-                    Assert.That(upScroll, Is.LessThan(downScroll));
+                    upScroll.Should().BeLessThan(downScroll);
 
                     UtilityMethods.CloseWindowWithDontSave(mainWindow);
                 }

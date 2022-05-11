@@ -1,6 +1,7 @@
 ﻿using FlaUI.Core.Definitions;
 using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests
@@ -15,10 +16,10 @@ namespace FlaUI.Core.UITests
             {
                 var app = Application.Launch("notepad.exe");
                 var window = app.GetMainWindow(automation);
-                Assert.That(window, Is.Not.Null);
-                Assert.That(window.Title, Is.Not.Null);
+                window.Should().NotBeNull();
+                window.Title.Should().NotBeNull();
                 var file = window.FindFirstByXPath($"/MenuBar/MenuItem[@Name='{GetFileMenuText()}']");
-                Assert.That(file, Is.Not.Null);
+                file.Should().NotBeNull();
                 app.Close();
             }
         }
@@ -30,11 +31,11 @@ namespace FlaUI.Core.UITests
             {
                 var app = Application.Launch("notepad.exe");
                 var window = app.GetMainWindow(automation);
-                Assert.That(window, Is.Not.Null);
-                Assert.That(window.Title, Is.Not.Null);
+                window.Should().NotBeNull();
+                window.Title.Should().NotBeNull();
                 var items = window.FindAllByXPath("//MenuItem");
-                Assert.That(items, Is.Not.Null);
-                Assert.That(items, Has.Length.EqualTo(6));
+                items.Should().NotBeNull();
+                items.Should().HaveCount(6);
                 app.Close();
             }
         }
@@ -47,8 +48,8 @@ namespace FlaUI.Core.UITests
                 var app = Application.Launch("notepad.exe");
                 var window = app.GetMainWindow(automation);
                 var elem = window.FindAllByXPath("//*[@AutomationId=15]");
-                Assert.That(elem.Length, Is.EqualTo(1));
-                Assert.That(elem[0].ControlType, Is.EqualTo(ControlType.Document));
+                elem.Should().HaveCount(1);
+                elem[0].ControlType.Should().Be(ControlType.Document);
                 app.Close();
             }
         }
@@ -60,14 +61,14 @@ namespace FlaUI.Core.UITests
             {
                 var app = Application.Launch("notepad.exe");
                 var window = app.GetMainWindow(automation);
-                Assert.That(window, Is.Not.Null);
-                Assert.That(window.Title, Is.Not.Null);
+                window.Should().NotBeNull();
+                window.Title.Should().NotBeNull();
                 var items = window.FindAllByXPath("(//MenuBar)[1]/MenuItem");
-                Assert.That(items, Is.Not.Null);
-                Assert.That(items, Has.Length.EqualTo(1));
+                items.Should().NotBeNull();
+                items.Should().HaveCount(1);
                 items = window.FindAllByXPath("(//MenuBar)[2]/MenuItem");
-                Assert.That(items, Is.Not.Null);
-                Assert.That(items, Has.Length.EqualTo(5));
+                items.Should().NotBeNull();
+                items.Should().HaveCount(5);
                 app.Close();
             }
         }
@@ -80,8 +81,7 @@ namespace FlaUI.Core.UITests
                 var app = Application.Launch("mspaint.exe");
                 var window = app.GetMainWindow(automation);
                 var button = window.FindFirstByXPath($"//Button[@Name='{GetPaintBrushName()}']");
-
-                Assert.That(button, Is.Not.Null);
+                button.Should().NotBeNull();
                 app.Close();
             }
         }
@@ -94,7 +94,7 @@ namespace FlaUI.Core.UITests
                 var app = Application.Launch("mspaint.exe");
                 var window = app.GetMainWindow(automation);
                 var unknown = window.FindFirstByXPath("//Custom");
-                Assert.That(unknown, Is.Not.Null);
+                unknown.Should().NotBeNull();
                 app.Close();
             }
         }

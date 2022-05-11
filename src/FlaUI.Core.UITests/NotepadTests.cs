@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using FlaUI.UIA3;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests
@@ -15,8 +16,8 @@ namespace FlaUI.Core.UITests
                 using (var automation = new UIA3Automation())
                 {
                     var window = app.GetMainWindow(automation);
-                    Assert.That(window, Is.Not.Null);
-                    Assert.That(window.Title, Is.Not.Null);
+                    window.Should().NotBeNull();
+                    window.Title.Should().NotBeNull();
                 }
             }
         }
@@ -30,8 +31,8 @@ namespace FlaUI.Core.UITests
                 using (var automation = new UIA3Automation())
                 {
                     var window = app.GetMainWindow(automation);
-                    Assert.That(window, Is.Not.Null);
-                    Assert.That(window.Title, Is.Not.Null);
+                    window.Should().NotBeNull();
+                    window.Title.Should().NotBeNull();
                 }
             }
         }
@@ -46,8 +47,8 @@ namespace FlaUI.Core.UITests
                     using (var automation = new UIA3Automation())
                     {
                         var window = app.GetMainWindow(automation);
-                        Assert.That(window, Is.Not.Null);
-                        Assert.That(window.Title, Is.Not.Null);
+                        window.Should().NotBeNull();
+                        window.Title.Should().NotBeNull();
                     }
                 }
             }
@@ -64,8 +65,8 @@ namespace FlaUI.Core.UITests
                     using (var automation = new UIA3Automation())
                     {
                         var window = app.GetMainWindow(automation);
-                        Assert.That(window, Is.Not.Null);
-                        Assert.That(window.Title, Is.Not.Null);
+                        window.Should().NotBeNull();
+                        window.Title.Should().NotBeNull();
                     }
                 }
             }
@@ -81,8 +82,8 @@ namespace FlaUI.Core.UITests
                     using (var automation = new UIA3Automation())
                     {
                         var window = app.GetMainWindow(automation);
-                        Assert.That(window, Is.Not.Null);
-                        Assert.That(window.Title, Is.Not.Null);
+                        window.Should().NotBeNull();
+                        window.Title.Should().NotBeNull();
                     }
                 }
             }
