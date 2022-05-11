@@ -3,6 +3,7 @@ using System.Threading;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.UITests.TestFramework;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Patterns
@@ -23,10 +24,10 @@ namespace FlaUI.Core.UITests.Patterns
             var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
             var tabItem = tab.TabItems[0];
             var button = tabItem.FindFirstDescendant(cf => cf.ByAutomationId("InvokableButton"));
-            Assert.That(button, Is.Not.Null);
+            button.Should().NotBeNull();
             var origButtonText = button.Properties.Name.Value;
             var invokePattern = button.Patterns.Invoke.Pattern;
-            Assert.That(invokePattern, Is.Not.Null);
+            invokePattern.Should().NotBeNull();
             var invokeFired = false;
             var waitHandle = new ManualResetEventSlim(false);
             var registeredEvent = button.RegisterAutomationEvent(invokePattern.EventIds.InvokedEvent, TreeScope.Element, (element, id) =>
@@ -36,9 +37,9 @@ namespace FlaUI.Core.UITests.Patterns
             });
             invokePattern.Invoke();
             var waitResult = waitHandle.Wait(TimeSpan.FromSeconds(1));
-            Assert.That(waitResult, Is.True);
-            Assert.That(button.Properties.Name, Is.Not.EqualTo(origButtonText));
-            Assert.That(invokeFired, Is.True);
+            waitResult.Should().BeTrue();
+            button.Properties.Name.Value.Should().NotBe(origButtonText);
+            invokeFired.Should().BeTrue();
             registeredEvent.Dispose();
         }
     }
