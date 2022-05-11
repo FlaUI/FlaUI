@@ -3,6 +3,7 @@ using System.Drawing;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Input;
 using FlaUI.Core.UITests.TestFramework;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
@@ -25,11 +26,11 @@ namespace FlaUI.Core.UITests.Elements
             var window = Application.GetMainWindow(Automation);
             var textBox = window.FindFirstDescendant(cf => cf.ByAutomationId("TextBox")).AsTextBox();
             var text = textBox.Text;
-            Assert.That(text, Is.EqualTo(DefaultTextBoxText));
+            text.Should().Be(DefaultTextBoxText);
             var textToSet = "Hello World";
             textBox.Text = textToSet;
             text = textBox.Text;
-            Assert.That(text, Is.EqualTo(textToSet));
+            text.Should().Be(textToSet);
             textBox.Text = DefaultTextBoxText;
         }
 
@@ -39,12 +40,12 @@ namespace FlaUI.Core.UITests.Elements
             var window = Application.GetMainWindow(Automation);
             var textBox = window.FindFirstDescendant(cf => cf.ByAutomationId("TextBox")).AsTextBox();
             var text = textBox.Text;
-            Assert.That(text, Is.EqualTo(DefaultTextBoxText));
+            text.Should().Be(DefaultTextBoxText);
             var textToSet = "Hello World";
             textBox.Enter(textToSet);
             Wait.UntilInputIsProcessed(TimeSpan.FromMilliseconds(500));
             text = textBox.Text;
-            Assert.That(text, Is.EqualTo(textToSet));
+            text.Should().Be(textToSet);
             textBox.Text = DefaultTextBoxText;
         }
 
