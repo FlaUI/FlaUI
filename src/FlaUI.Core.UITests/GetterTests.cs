@@ -67,7 +67,7 @@ namespace FlaUI.Core.UITests
             Action act = () => mainWindow.FrameworkAutomationElement.GetNativePattern<object>(Automation.PatternLibrary
               .ExpandCollapsePattern);
             act.Should().Throw<PatternNotSupportedException>()
-              .Where(x => x.Message.Contains("ExpandCollapse"));
+              .WithMessage("*ExpandCollapse*");
         }
 
         [Test]
@@ -83,7 +83,7 @@ namespace FlaUI.Core.UITests
                 mainWindow.Should().NotBeNull();
                 Action act = () => mainWindow.FrameworkAutomationElement.GetNativePattern<object>(Automation.PatternLibrary.ExpandCollapsePattern);
                 act.Should().Throw<PatternNotSupportedException>()
-                  .Where(x => x.Message.Contains("ExpandCollapse"));
+                  .WithMessage("*ExpandCollapse*");
             }
         }
 
@@ -100,7 +100,7 @@ namespace FlaUI.Core.UITests
                 mainWindow.Should().NotBeNull();
                 Action act = () => mainWindow.FrameworkAutomationElement.GetNativePattern<object>(Automation.PatternLibrary.WindowPattern);
                 act.Should().Throw<PatternNotCachedException>()
-                  .Where(x => x.Message.Contains("Window"));
+                  .WithMessage("*Window*");
             }
         }
 
@@ -117,7 +117,7 @@ namespace FlaUI.Core.UITests
                 mainWindow.Should().NotBeNull();
                 Action act = () => mainWindow.FrameworkAutomationElement.GetNativePattern<object>(Automation.PatternLibrary.ExpandCollapsePattern);
                 act.Should().Throw<PatternNotCachedException>()
-                  .Where(x => x.Message.Contains("ExpandCollapse"));
+                  .WithMessage("*ExpandCollapse*");
             }
         }
         #endregion Pattern
@@ -155,7 +155,7 @@ namespace FlaUI.Core.UITests
             mainWindow.Should().NotBeNull();
             Action act = () => mainWindow.FrameworkAutomationElement.GetPropertyValue(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
             act.Should().Throw<PropertyNotSupportedException>()
-              .Where(x => x.Message.Contains("ExpandCollapseState"));
+              .WithMessage("*ExpandCollapseState*");
         }
 
         [Test]
@@ -171,7 +171,7 @@ namespace FlaUI.Core.UITests
                 mainWindow.Should().NotBeNull();
                 Action act = () => mainWindow.FrameworkAutomationElement.GetPropertyValue(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
                 act.Should().Throw<PropertyNotSupportedException>()
-                  .Where(x => x.Message.Contains("ExpandCollapseState"));
+                  .WithMessage("*ExpandCollapseState*");
             }
         }
 
@@ -188,7 +188,7 @@ namespace FlaUI.Core.UITests
                 mainWindow.Should().NotBeNull();
                 Action act = () => mainWindow.FrameworkAutomationElement.GetPropertyValue(Automation.PropertyLibrary.Window.CanMaximize);
                 act.Should().Throw<PropertyNotCachedException>()
-                  .Where(x => x.Message.Contains("CanMaximize"));
+                  .WithMessage("*CanMaximize*");
             }
         }
 
@@ -205,7 +205,7 @@ namespace FlaUI.Core.UITests
                 mainWindow.Should().NotBeNull();
                 Action act = () => mainWindow.FrameworkAutomationElement.GetPropertyValue(Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
                 act.Should().Throw<PropertyNotCachedException>()
-                  .Where(x => x.Message.Contains("ExpandCollapseState"));
+                  .WithMessage("*ExpandCollapseState*");
             }
         }
         #endregion Property
