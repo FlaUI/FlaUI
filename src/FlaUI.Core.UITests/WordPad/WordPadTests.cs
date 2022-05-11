@@ -3,6 +3,7 @@ using FlaUI.Core.AutomationElements;
 using FlaUI.Core.UITests.WordPad.Screens;
 using FlaUI.TestUtilities;
 using FlaUI.UIA3;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.WordPad
@@ -32,12 +33,12 @@ namespace FlaUI.Core.UITests.WordPad
         public void ZoomTest()
         {
             var mainScreen = Application.GetMainWindow(Automation).As<MainScreen>();
-            Assert.That(mainScreen.GetCurrentZoomPercent(), Is.EqualTo(100));
+            mainScreen.GetCurrentZoomPercent().Should().Be(100);
             mainScreen.ZoomIn();
-            Assert.That(mainScreen.GetCurrentZoomPercent(), Is.EqualTo(110));
+            mainScreen.GetCurrentZoomPercent().Should().Be(110);
             mainScreen.ZoomOut();
             mainScreen.ZoomOut();
-            Assert.That(mainScreen.GetCurrentZoomPercent(), Is.EqualTo(90));
+            mainScreen.GetCurrentZoomPercent().Should().Be(90);
         }
 
         [Test]
@@ -45,11 +46,13 @@ namespace FlaUI.Core.UITests.WordPad
         {
             var mainScreen = Application.GetMainWindow(Automation).As<MainScreen>();
 
-            Assert.DoesNotThrow(() =>
+            Action act = () =>
             {
-                var infoScreen = mainScreen.OpenAndGetInfoScreen();
-                infoScreen.OkButton.Invoke();
-            });
+              var infoScreen = mainScreen.OpenAndGetInfoScreen();
+              infoScreen.OkButton.Invoke();
+            };
+
+            act.Should().NotThrow();
         }
     }
 }
