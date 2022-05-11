@@ -1,6 +1,7 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.UITests.TestFramework;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
@@ -21,8 +22,8 @@ namespace FlaUI.Core.UITests.Elements
         {
             var window = Application.GetMainWindow(Automation);
             var listBox = window.FindFirstDescendant(cf => cf.ByAutomationId("ListBox")).AsListBox();
-            Assert.That(listBox, Is.Not.Null);
-            Assert.That(listBox.Items, Has.Length.EqualTo(2));
+            listBox.Should().NotBeNull();
+            listBox.Items.Should().HaveCount(2);
         }
 
         [Test]
@@ -30,17 +31,16 @@ namespace FlaUI.Core.UITests.Elements
         {
             var window = Application.GetMainWindow(Automation);
             var listBox = window.FindFirstDescendant(cf => cf.ByAutomationId("ListBox")).AsListBox();
-            Assert.That(listBox, Is.Not.Null);
-            Assert.That(listBox.Items, Has.Length.EqualTo(2));
-            Assert.That(listBox.Items[0], Is.InstanceOf<ListBoxItem>());
-            Assert.That(listBox.Items[1], Is.InstanceOf<ListBoxItem>());
-            Assert.IsNull(listBox.SelectedItem);
+            listBox.Should().NotBeNull();
+            listBox.Items.Should().HaveCount(2);
+            listBox.Items.Should().AllBeAssignableTo<ListBoxItem>();
+            listBox.SelectedItem.Should().BeNull();
             var item = listBox.Select(0);
-            Assert.That(item.Text, Is.EqualTo("ListBox Item #1"));
-            Assert.That(listBox.SelectedItem.Text, Is.EqualTo("ListBox Item #1"));
+            item.Text.Should().Be("ListBox Item #1");
+            listBox.SelectedItem.Text.Should().Be("ListBox Item #1");
             item = listBox.Select(1);
-            Assert.That(item.Text, Is.EqualTo("ListBox Item #2"));
-            Assert.That(listBox.SelectedItem.Text, Is.EqualTo("ListBox Item #2"));
+            item.Text.Should().Be("ListBox Item #2");
+            listBox.SelectedItem.Text.Should().Be("ListBox Item #2");
         }
 
         [Test]
@@ -49,16 +49,16 @@ namespace FlaUI.Core.UITests.Elements
             var window = Application.GetMainWindow(Automation);
             var listBox = window.FindFirstDescendant(cf => cf.ByAutomationId("ListBox")).AsListBox();
             var item = listBox.Select("ListBox Item #1");
-            Assert.That(item.Text, Is.EqualTo("ListBox Item #1"));
-            Assert.That(listBox.SelectedItem.Text, Is.EqualTo("ListBox Item #1"));
+            item.Text.Should().Be("ListBox Item #1");
+            listBox.SelectedItem.Text.Should().Be("ListBox Item #1");
 
             item = listBox.Select("ListBox Item #2");
-            Assert.That(item.Text, Is.EqualTo("ListBox Item #2"));
-            Assert.That(listBox.SelectedItem.Text, Is.EqualTo("ListBox Item #2"));
+            item.Text.Should().Be("ListBox Item #2");
+            listBox.SelectedItem.Text.Should().Be("ListBox Item #2");
 
             item = listBox.Select("ListBox Item #1");
-            Assert.That(item.Text, Is.EqualTo("ListBox Item #1"));
-            Assert.That(listBox.SelectedItem.Text, Is.EqualTo("ListBox Item #1"));
+            item.Text.Should().Be("ListBox Item #1");
+            listBox.SelectedItem.Text.Should().Be("ListBox Item #1");
         }
 
         [Test]
@@ -74,8 +74,8 @@ namespace FlaUI.Core.UITests.Elements
             tab.SelectTabItem(2); // Switch to "More Controls" tab
 
             var listBox = window.FindFirstDescendant(cf => cf.ByAutomationId("LargeListBox")).AsListBox();
-            Assert.That(listBox.Items, Has.Length.EqualTo(7));
-            Assert.That(listBox.Items[6].Text, Is.EqualTo("ListBox Item #7"));
+            listBox.Items.Should().HaveCount(7);
+            listBox.Items[6].Text.Should().Be("ListBox Item #7");
 
             tab.SelectTabItem(0); // Switch back to "Simple Controls"
         }
@@ -94,15 +94,15 @@ namespace FlaUI.Core.UITests.Elements
 
             var listBox = window.FindFirstDescendant(cf => cf.ByAutomationId("LargeListBox")).AsListBox();
             var item = listBox.Select("ListBox Item #7");
-            Assert.That(item.Text, Is.EqualTo("ListBox Item #7"));
-            Assert.That(listBox.SelectedItems, Has.Length.EqualTo(1));
-            Assert.That(listBox.SelectedItem.Text, Is.EqualTo("ListBox Item #7"));
+            item.Text.Should().Be("ListBox Item #7");
+            listBox.SelectedItems.Should().HaveCount(1);
+            listBox.SelectedItem.Text.Should().Be("ListBox Item #7");
 
             item = listBox.AddToSelection("ListBox Item #6");
-            Assert.That(item.Text, Is.EqualTo("ListBox Item #6"));
-            Assert.That(listBox.SelectedItems, Has.Length.EqualTo(2));
-            Assert.That(listBox.SelectedItems[0].Text, Is.EqualTo("ListBox Item #7"));
-            Assert.That(listBox.SelectedItems[1].Text, Is.EqualTo("ListBox Item #6"));
+            item.Text.Should().Be("ListBox Item #6");
+            listBox.SelectedItems.Should().HaveCount(2);
+            listBox.SelectedItems[0].Text.Should().Be("ListBox Item #7");
+            listBox.SelectedItems[1].Text.Should().Be("ListBox Item #6");
 
             tab.SelectTabItem(0); // Switch back to "Simple Controls"
         }
@@ -121,15 +121,15 @@ namespace FlaUI.Core.UITests.Elements
 
             var listBox = window.FindFirstDescendant(cf => cf.ByAutomationId("LargeListBox")).AsListBox();
             var item = listBox.Select(6);
-            Assert.That(item.Text, Is.EqualTo("ListBox Item #7"));
-            Assert.That(listBox.SelectedItems, Has.Length.EqualTo(1));
-            Assert.That(listBox.SelectedItem.Text, Is.EqualTo("ListBox Item #7"));
+            item.Text.Should().Be("ListBox Item #7");
+            listBox.SelectedItems.Should().HaveCount(1);
+            listBox.SelectedItem.Text.Should().Be("ListBox Item #7");
 
             item = listBox.AddToSelection(5);
-            Assert.That(item.Text, Is.EqualTo("ListBox Item #6"));
-            Assert.That(listBox.SelectedItems, Has.Length.EqualTo(2));
-            Assert.That(listBox.SelectedItems[0].Text, Is.EqualTo("ListBox Item #7"));
-            Assert.That(listBox.SelectedItems[1].Text, Is.EqualTo("ListBox Item #6"));
+            item.Text.Should().Be("ListBox Item #6");
+            listBox.SelectedItems.Should().HaveCount(2);
+            listBox.SelectedItems[0].Text.Should().Be("ListBox Item #7");
+            listBox.SelectedItems[1].Text.Should().Be("ListBox Item #6");
 
             tab.SelectTabItem(0); // Switch back to "Simple Controls"
         }
