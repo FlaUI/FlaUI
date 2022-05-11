@@ -1,6 +1,7 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.UITests.TestFramework;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
@@ -32,13 +33,13 @@ namespace FlaUI.Core.UITests.Elements
         public void SelectionTest()
         {
             var tree = _tree;
-            Assert.That(tree.SelectedTreeItem, Is.Null);
-            Assert.That(tree.Items, Has.Length.EqualTo(2));
+            tree.SelectedTreeItem.Should().BeNull();
+            tree.Items.Should().HaveCount(2);
             tree.Items[0].Expand();
             tree.Items[0].Items[1].Expand();
             tree.Items[0].Items[1].Items[0].Select();
-            Assert.That(tree.SelectedTreeItem, Is.Not.Null);
-            Assert.That(tree.SelectedTreeItem.Text, Is.EqualTo("Lvl3 a"));
+            tree.SelectedTreeItem.Should().NotBeNull();
+            tree.SelectedTreeItem.Text.Should().Be("Lvl3 a");
         }
     }
 }
