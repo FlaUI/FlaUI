@@ -1,6 +1,7 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.UITests.TestFramework;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Patterns
@@ -29,13 +30,13 @@ namespace FlaUI.Core.UITests.Patterns
         public void GridTest()
         {
             var dataGrid = _dataGrid;
-            Assert.That(dataGrid, Is.Not.Null);
+            dataGrid.Should().NotBeNull();
             var gridPattern = dataGrid.Patterns.Grid.Pattern;
-            Assert.That(gridPattern, Is.Not.Null);
-            Assert.That(gridPattern.ColumnCount.Value, Is.EqualTo(3));
-            Assert.That(gridPattern.RowCount.Value, Is.EqualTo(3));
+            gridPattern.Should().NotBeNull();
+            gridPattern.ColumnCount.Value.Should().Be(3);
+            gridPattern.RowCount.Value.Should().Be(3);
             var item = gridPattern.GetItem(1, 1);
-            Assert.That(item.Properties.Name.Value, Is.EqualTo("24"));
+            item.Properties.Name.Value.Should().Be("24");
         }
     }
 }
