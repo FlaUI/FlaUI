@@ -1,6 +1,7 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Input;
 using FlaUI.Core.UITests.TestFramework;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
@@ -25,13 +26,13 @@ namespace FlaUI.Core.UITests.Elements
             Mouse.Click(btn.GetClickablePoint(), MouseButton.Right);
             Wait.UntilInputIsProcessed();
             var ctxMenu = window.ContextMenu;
-            Assert.That(ctxMenu, Is.Not.Null);
+            ctxMenu.Should().NotBeNull();
             var subMenuLevel1 = ctxMenu.Items;
-            Assert.That(subMenuLevel1, Has.Length.EqualTo(2));
+            subMenuLevel1.Should().HaveCount(2);
             var subMenuLevel2 = subMenuLevel1[1].Items;
-            Assert.That(subMenuLevel2, Has.Length.EqualTo(1));
+            subMenuLevel2.Should().HaveCount(1);
             var innerItem = subMenuLevel2[0];
-            Assert.That(innerItem.Text, Is.EqualTo("Inner Context"));
+            innerItem.Text.Should().Be("Inner Context");
         }
     }
 }
