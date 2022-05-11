@@ -2,6 +2,7 @@
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.UITests.TestFramework;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
@@ -38,7 +39,7 @@ namespace FlaUI.Core.UITests.Elements
             DateTime date = new DateTime(2021, 5, 17); // 17-May-2021
             dateTimePicker.SelectedDate = date;
             DateTime selectedDate = dateTimePicker.SelectedDate.Value;
-            Assert.That(selectedDate, Is.EqualTo(date));
+            selectedDate.Should().Be(date);
         }
     }
 }
