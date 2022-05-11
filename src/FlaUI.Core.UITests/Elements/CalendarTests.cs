@@ -2,6 +2,7 @@
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.UITests.TestFramework;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
@@ -29,8 +30,8 @@ namespace FlaUI.Core.UITests.Elements
             DateTime date = new DateTime(2020, 5, 21); // 21-May-2020
             calendar.SelectDate(date);
             DateTime[] selectedDates = calendar.SelectedDates;
-            Assert.That(selectedDates, Has.Length.EqualTo(1));
-            Assert.That(selectedDates[0], Is.EqualTo(date));
+            selectedDates.Should().HaveCount(1);
+            selectedDates[0].Should().Be(date);
         }
 
         [Test]
@@ -41,9 +42,9 @@ namespace FlaUI.Core.UITests.Elements
             DateTime date2 = new DateTime(2020, 5, 23); // 23-May-2020
             calendar.AddToSelection(date2);
             DateTime[] selectedDates = calendar.SelectedDates;
-            Assert.That(selectedDates, Has.Length.EqualTo(2));
-            Assert.That(selectedDates[0], Is.EqualTo(date1));
-            Assert.That(selectedDates[1], Is.EqualTo(date2));
+            selectedDates.Should().HaveCount(2);
+            selectedDates[0].Should().Be(date1);
+            selectedDates[1].Should().Be(date2);
         }
 
         [Test]
@@ -55,10 +56,10 @@ namespace FlaUI.Core.UITests.Elements
             DateTime[] dates = new DateTime[] { date1, date2, date3 };
             calendar.SelectRange(dates);
             DateTime[] selectedDates = calendar.SelectedDates;
-            Assert.That(selectedDates, Has.Length.EqualTo(3));
-            Assert.That(selectedDates[0], Is.EqualTo(date1));
-            Assert.That(selectedDates[1], Is.EqualTo(date2));
-            Assert.That(selectedDates[2], Is.EqualTo(date3));
+            selectedDates.Should().HaveCount(3);
+            selectedDates[0].Should().Be(date1);
+            selectedDates[1].Should().Be(date2);
+            selectedDates[2].Should().Be(date3);
         }
 
         [Test]
@@ -71,10 +72,10 @@ namespace FlaUI.Core.UITests.Elements
             DateTime[] dates = new DateTime[] { date2, date3 };
             calendar.AddRangeToSelection(dates);
             DateTime[] selectedDates = calendar.SelectedDates;
-            Assert.That(selectedDates, Has.Length.EqualTo(3));
-            Assert.That(selectedDates[0], Is.EqualTo(date1));
-            Assert.That(selectedDates[1], Is.EqualTo(date2));
-            Assert.That(selectedDates[2], Is.EqualTo(date3));
+            selectedDates.Should().HaveCount(3);
+            selectedDates[0].Should().Be(date1);
+            selectedDates[1].Should().Be(date2);
+            selectedDates[2].Should().Be(date3);
         }
     }
 }

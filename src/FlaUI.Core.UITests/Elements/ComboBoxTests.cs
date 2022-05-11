@@ -3,6 +3,7 @@ using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
@@ -24,7 +25,7 @@ namespace FlaUI.Core.UITests.Elements
         public void TestOneTimeSetup()
         {
             _mainWindow = Retry.WhileNull(() => Application.GetMainWindow(Automation), TimeSpan.FromSeconds(1)).Result;
-            Assert.That(_mainWindow, Is.Not.Null);
+            _mainWindow.Should().NotBeNull();
         }
 
         [Test]
@@ -35,8 +36,8 @@ namespace FlaUI.Core.UITests.Elements
             var combo = _mainWindow.FindFirstDescendant(cf => cf.ByAutomationId(comboBoxId)).AsComboBox();
             combo.Items[1].Select();
             var selectedItem = combo.SelectedItem;
-            Assert.That(selectedItem, Is.Not.Null);
-            Assert.That(selectedItem.Text, Is.EqualTo("Item 2"));
+            selectedItem.Should().NotBeNull();
+            selectedItem.Text.Should().Be("Item 2");
         }
 
         [Test]
@@ -47,8 +48,8 @@ namespace FlaUI.Core.UITests.Elements
             var combo = _mainWindow.FindFirstDescendant(cf => cf.ByAutomationId(comboBoxId)).AsComboBox();
             combo.Select(1);
             var selectedItem = combo.SelectedItem;
-            Assert.That(selectedItem, Is.Not.Null);
-            Assert.That(selectedItem.Text, Is.EqualTo("Item 2"));
+            selectedItem.Should().NotBeNull();
+            selectedItem.Text.Should().Be("Item 2");
         }
 
         [Test]
@@ -59,8 +60,8 @@ namespace FlaUI.Core.UITests.Elements
             var combo = _mainWindow.FindFirstDescendant(cf => cf.ByAutomationId(comboBoxId)).AsComboBox();
             combo.Select("Item 2");
             var selectedItem = combo.SelectedItem;
-            Assert.That(selectedItem, Is.Not.Null);
-            Assert.That(selectedItem.Text, Is.EqualTo("Item 2"));
+            selectedItem.Should().NotBeNull();
+            selectedItem.Text.Should().Be("Item 2");
         }
 
         [Test]
@@ -70,19 +71,19 @@ namespace FlaUI.Core.UITests.Elements
         {
             var combo = _mainWindow.FindFirstDescendant(cf => cf.ByAutomationId(comboBoxId)).AsComboBox();
             combo.Expand();
-            Assert.That(combo.ExpandCollapseState, Is.EqualTo(ExpandCollapseState.Expanded));
+            combo.ExpandCollapseState.Should().Be(ExpandCollapseState.Expanded);
             combo.Collapse();
-            Assert.That(combo.ExpandCollapseState, Is.EqualTo(ExpandCollapseState.Collapsed));
+            combo.ExpandCollapseState.Should().Be(ExpandCollapseState.Collapsed);
         }
 
         [Test]
         public void EditableTextTest()
         {
             var combo = _mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("EditableCombo")).AsComboBox();
-            Assert.That(combo, Is.Not.Null);
+            combo.Should().NotBeNull();
             combo.EditableText = "Item 3";
-            Assert.That(combo.SelectedItem, Is.Not.Null);
-            Assert.That(combo.SelectedItem.Text, Is.EqualTo("Item 3"));
+            combo.SelectedItem.Should().NotBeNull();
+            combo.SelectedItem.Text.Should().Be("Item 3");
         }
 
         [Test]
@@ -93,7 +94,7 @@ namespace FlaUI.Core.UITests.Elements
             combo.Items[3].Click();
             var retryResult = Retry.While(() => _mainWindow.FindFirstDescendant(cf => cf.ByClassName("#32770"))?.AsWindow(), w => w == null, TimeSpan.FromMilliseconds(1000));
             var window = retryResult.Result;
-            Assert.That(window, Is.Not.Null, "Expected a window that was shown when combobox item was selected");
+            window.Should().NotBeNull("Expected a window that was shown when combobox item was selected");
             window.FindFirstDescendant(cf => cf.ByAutomationId("Close")).AsButton().Invoke();
         }
 
@@ -106,7 +107,7 @@ namespace FlaUI.Core.UITests.Elements
         {
             var combo = _mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("NonEditableCombo")).AsComboBox();
             var isOffscreen = combo.Items[comboBoxItem].IsOffscreen;
-            Assert.IsFalse(isOffscreen);
+            isOffscreen.Should().BeFalse();
             combo.Collapse();
         }
     }

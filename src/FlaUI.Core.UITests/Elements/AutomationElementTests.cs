@@ -2,6 +2,7 @@
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
@@ -23,7 +24,7 @@ namespace FlaUI.Core.UITests.Elements
             RestartApplication();
             var window = Application.GetMainWindow(Automation);
             var child = window.FindFirstChild();
-            Assert.That(child.Parent.ControlType, Is.EqualTo(ControlType.Window));
+            child.Parent.ControlType.Should().Be(ControlType.Window);
         }
 
         [Test]
@@ -31,10 +32,10 @@ namespace FlaUI.Core.UITests.Elements
         {
             RestartApplication();
             var window = Application.GetMainWindow(Automation);
-            Assert.That(window.IsAvailable, Is.True);
+            window.IsAvailable.Should().BeTrue();
             window.Close();
             Retry.WhileTrue(() => window.IsAvailable, TimeSpan.FromSeconds(1));
-            Assert.That(window.IsAvailable, Is.False);
+            window.IsAvailable.Should().BeFalse();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using FlaUI.Core.Definitions;
 using FlaUI.Core.UITests.TestFramework;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Converters
@@ -19,7 +20,7 @@ namespace FlaUI.Core.UITests.Converters
         {
             var window = Application.GetMainWindow(Automation);
             var checkBox = window.FindFirstDescendant(cf => cf.ByName("Test Checkbox"));
-            Assert.That(ControlType.CheckBox, Is.EqualTo(checkBox.Properties.ControlType));
+            ControlType.CheckBox.Should().Be(checkBox.Properties.ControlType);
         }
     }
 }
