@@ -1,5 +1,6 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.UITests.TestFramework;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
@@ -18,21 +19,21 @@ namespace FlaUI.Core.UITests.Elements
         public void MinimumValueTest()
         {
             var bar = GetProgressBar();
-            Assert.That(bar.Minimum, Is.EqualTo(0));
+            bar.Minimum.Should().Be(0);
         }
 
         [Test]
         public void MaximumValueTest()
         {
             var bar = GetProgressBar();
-            Assert.That(bar.Maximum, Is.EqualTo(100));
+            bar.Maximum.Should().Be(100);
         }
 
         [Test]
         public void ValueTest()
         {
             var bar = GetProgressBar();
-            Assert.That(bar.Value, Is.EqualTo(50));
+            bar.Value.Should().Be(50);
         }
 
         private ProgressBar GetProgressBar()
