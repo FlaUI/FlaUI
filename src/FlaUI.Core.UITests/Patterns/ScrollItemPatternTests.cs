@@ -2,6 +2,7 @@
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Patterns
@@ -30,24 +31,24 @@ namespace FlaUI.Core.UITests.Patterns
         public void Test()
         {
             var grid = _grid;
-            Assert.That(grid, Is.Not.Null);
+            grid.Should().NotBeNull();
             var gridPattern = _grid.Patterns.Grid.Pattern;
-            Assert.That(gridPattern, Is.Not.Null);
-            Assert.That(gridPattern.ColumnCount.Value, Is.EqualTo(2));
-            Assert.That(gridPattern.RowCount.Value, Is.EqualTo(7));
+            gridPattern.Should().NotBeNull();
+            gridPattern.ColumnCount.Value.Should().Be(2);
+            gridPattern.RowCount.Value.Should().Be(7);
             ItemRealizer.RealizeItems(grid);
             var items = grid.AsGrid().Rows;
-            Assert.That(items, Has.Length.EqualTo(gridPattern.RowCount.Value));
+            items.Should().HaveCount(gridPattern.RowCount.Value);
             var scrollPattern = grid.Patterns.Scroll.Pattern;
-            Assert.That(scrollPattern, Is.Not.Null);
-            Assert.That(scrollPattern.VerticalScrollPercent.Value, Is.EqualTo(0));
+            scrollPattern.Should().NotBeNull();
+            scrollPattern.VerticalScrollPercent.Value.Should().Be(0);
             foreach (var item in items)
             {
                 var scrollItemPattern = item.Patterns.ScrollItem.Pattern;
-                Assert.That(scrollItemPattern, Is.Not.Null);
+                scrollItemPattern.Should().NotBeNull();
                 item.ScrollIntoView();
             }
-            Assert.That(scrollPattern.VerticalScrollPercent.Value, Is.GreaterThan(0));
+            scrollPattern.VerticalScrollPercent.Value.Should().BeGreaterThan(0);
         }
     }
 }
