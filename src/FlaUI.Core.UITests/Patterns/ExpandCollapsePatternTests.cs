@@ -2,6 +2,7 @@
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.UITests.TestFramework;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Patterns
@@ -29,14 +30,14 @@ namespace FlaUI.Core.UITests.Patterns
         public void ExpanderTest()
         {
             var expander = _expander;
-            Assert.That(expander, Is.Not.Null);
+            expander.Should().NotBeNull();
             var ecp = expander.Patterns.ExpandCollapse.Pattern;
-            Assert.That(ecp, Is.Not.Null);
-            Assert.That(ecp.ExpandCollapseState.Value, Is.EqualTo(ExpandCollapseState.Collapsed));
+            ecp.Should().NotBeNull();
+            ecp.ExpandCollapseState.Value.Should().Be(ExpandCollapseState.Collapsed);
             ecp.Expand();
-            Assert.That(ecp.ExpandCollapseState.Value, Is.EqualTo(ExpandCollapseState.Expanded));
+            ecp.ExpandCollapseState.Value.Should().Be(ExpandCollapseState.Expanded);
             ecp.Collapse();
-            Assert.That(ecp.ExpandCollapseState.Value, Is.EqualTo(ExpandCollapseState.Collapsed));
+            ecp.ExpandCollapseState.Value.Should().Be(ExpandCollapseState.Collapsed);
         }
     }
 }
