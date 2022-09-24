@@ -1,13 +1,14 @@
-﻿using System;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
+using System;
 
 namespace FlaUI.Core.UITests.Elements
 {
-    [TestFixture(AutomationType.UIA2, TestApplicationType.WinForms)]
+    // The combo box got heavily broken with UIA2/WinForms due to bugs in Windows / .NET.
+    //[TestFixture(AutomationType.UIA2, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]

@@ -4,7 +4,8 @@ using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
 {
-    [TestFixture(AutomationType.UIA2, TestApplicationType.WinForms)]
+    // The spinner control does not work with UIA2/WinForms anymore due to bugs in Windows / .NET.
+    //[TestFixture(AutomationType.UIA2, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
     public class SpinnerTests : UITestBase
     {

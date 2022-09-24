@@ -49,8 +49,16 @@ namespace FlaUI.Core.AutomationElements
                 }
                 else if (FrameworkType == FrameworkType.WinForms)
                 {
-                    string name = Properties.Name.Value;
-                    string dateString = name.Remove(0, name.IndexOf(",") + 1).Trim();
+                    string selectedValue;
+                    if (Patterns.Value.IsSupported)
+                    {
+                        selectedValue = Patterns.Value.Pattern.Value.Value;
+                    }
+                    else
+                    {
+                        selectedValue = Properties.Name.Value;
+                    }
+                    string dateString = selectedValue.Remove(0, selectedValue.IndexOf(",") + 1).Trim();
                     DateTime date = DateTime.Parse(dateString, CultureInfo.CurrentCulture);
                     return date;
                 }
@@ -106,7 +114,7 @@ namespace FlaUI.Core.AutomationElements
                     }
 
                     Wait.UntilInputIsProcessed();
-                    var retryResult = Retry.While(() => topLevelParent.FindFirstDescendant(cf => cf.ByName("Calendar Control").And(cf.ByClassName("SysMonthCal32"))).AsCalendar(), w => w == null, TimeSpan.FromMilliseconds(1000));
+                    var retryResult = Retry.While(() => topLevelParent.FindFirstDescendant(cf => cf.ByControlType(Definitions.ControlType.Pane).And(cf.ByClassName("SysMonthCal32"))).AsCalendar(), w => w == null, TimeSpan.FromMilliseconds(1000));
                     Calendar calendar = retryResult.Result;
 
                     if (calendar != null)

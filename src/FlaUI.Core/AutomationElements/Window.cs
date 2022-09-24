@@ -95,7 +95,10 @@ namespace FlaUI.Core.AutomationElements
             var mainWindow = GetMainWindow();
             if (frameworkType == FrameworkType.WinForms)
             {
-                var ctxMenu = mainWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Menu).And(cf.ByName("DropDown")));
+                var ctxMenu = mainWindow.FindFirstChild(cf =>
+                    new AndCondition(
+                        new OrCondition(cf.ByControlType(ControlType.Menu), cf.ByControlType(ControlType.ToolBar))
+                        , cf.ByName("DropDown")));
                 return ctxMenu.AsMenu();
             }
             if (frameworkType == FrameworkType.Wpf)
