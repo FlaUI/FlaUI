@@ -24,7 +24,15 @@ namespace WinFormsApplication
 
         private void NonEditableCombo_SelectedIndexChanged(object sender, System.EventArgs e)
         {
+            if (sender == null)
+            {
+                return;
+            }
             var comboBox = (ComboBox)sender;
+            if (comboBox.SelectedItem == null)
+            {
+                return;
+            }
             if (comboBox.SelectedItem.ToString() == "Item 4")
             {
                 MessageBox.Show("Do you really want to do it?");
