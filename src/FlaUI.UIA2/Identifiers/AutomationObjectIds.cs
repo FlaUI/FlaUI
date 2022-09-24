@@ -90,9 +90,9 @@ namespace FlaUI.UIA2.Identifiers
     }
 #endif
 
-#if NET471 || NET48
+#if NET48
     /// <summary>
-    /// Additions from .NET 4.7.1.
+    /// Additions from .NET 4.7.1. or higher
     /// </summary>
     public static partial class AutomationObjectIds
     {

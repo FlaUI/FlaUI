@@ -1,5 +1,4 @@
-﻿#if !NET35 && !NET40
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Drawing;
@@ -293,4 +292,3 @@ namespace FlaUI.Core.Capturing
         }
     }
 }
-#endif

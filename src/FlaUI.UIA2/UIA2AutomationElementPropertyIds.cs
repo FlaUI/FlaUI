@@ -66,12 +66,12 @@ namespace FlaUI.UIA2
     }
 
     /// <summary>
-    /// Partial class with additions from .NET 4.7.1
+    /// Partial class with additions from .NET 4.7.1 or higher
     /// </summary>
     public partial class UIA2AutomationElementPropertyIds
     {
 #pragma warning disable 1591
-#if NET471 || NET48
+#if NET48
         public PropertyId LiveSetting => AutomationObjectIds.LiveSettingProperty;
 #else
         public PropertyId LiveSetting => PropertyId.NotSupportedByFramework;

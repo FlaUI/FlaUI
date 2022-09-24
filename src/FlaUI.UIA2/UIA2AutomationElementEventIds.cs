@@ -24,11 +24,11 @@ namespace FlaUI.UIA2
     }
 
     /// <summary>
-    /// Partial class with additions from .NET 4.7.1
+    /// Partial class with additions from .NET 4.7.1 or higher
     /// </summary>
     public partial class UIA2AutomationElementEventIds
     {
-#if NET471
+#if NET48
         public EventId LiveRegionChangedEvent => AutomationObjectIds.LiveRegionChangedEvent;
 #else
         public EventId LiveRegionChangedEvent => EventId.NotSupportedByFramework;

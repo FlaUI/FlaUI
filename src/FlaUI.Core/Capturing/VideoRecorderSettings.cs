@@ -1,5 +1,4 @@
-﻿#if (!NET35 && !NET40)
-namespace FlaUI.Core.Capturing
+﻿namespace FlaUI.Core.Capturing
 {
     /// <summary>
     /// Settings class for the <see cref="VideoRecorder"/>.
@@ -54,4 +53,3 @@ namespace FlaUI.Core.Capturing
         public bool LogMissingFrames { get; set; } = true;
     }
 }
-#endif
