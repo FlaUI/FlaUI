@@ -10,7 +10,8 @@ namespace FlaUI.Core.UITests.Elements
     // The combo box got heavily broken with UIA2/WinForms due to bugs in Windows / .NET.
     //[TestFixture(AutomationType.UIA2, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
-    [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
+    // The combo box got heavily broken with UIA3/WinForms due to bugs in Windows / .NET.
+    //[TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class ComboBoxTests : UITestBase
     {
