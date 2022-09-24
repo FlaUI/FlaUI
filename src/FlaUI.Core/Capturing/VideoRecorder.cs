@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FlaUI.Core.Logging;
+using FlaUI.Core.Tools;
+using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Drawing;
@@ -7,10 +9,8 @@ using System.IO;
 using System.IO.Compression;
 using System.IO.Pipes;
 using System.Linq;
-using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
-using FlaUI.Core.Logging;
-using FlaUI.Core.Tools;
 
 namespace FlaUI.Core.Capturing
 {
@@ -26,6 +26,7 @@ namespace FlaUI.Core.Capturing
         private bool _shouldRecord;
         private Task _writeTask;
         private DateTime _recordStartTime;
+        private static readonly HttpClient _httpClient = new HttpClient();
 
         /// <summary>
         /// Creates the video recorder and starts recording.
@@ -257,10 +258,8 @@ namespace FlaUI.Core.Capturing
             if (!File.Exists(destPath))
             {
                 // Download
-                using (var webClient = new WebClient())
-                {
-                    await webClient.DownloadFileTaskAsync(uri, archivePath);
-                }
+                byte[] fileBytes = await _httpClient.GetByteArrayAsync(uri);
+                File.WriteAllBytes(archivePath, fileBytes);
                 // Extract
                 Directory.CreateDirectory(targetFolder);
                 await Task.Run(() =>

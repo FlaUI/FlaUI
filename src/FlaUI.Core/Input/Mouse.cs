@@ -349,13 +349,8 @@ namespace FlaUI.Core.Input
         /// <summary>
         /// Effectively sends the mouse input command.
         /// </summary>
-        [PermissionSet(SecurityAction.Assert, Name = "FullTrust")]
         private static void SendInput(int x, int y, uint data, MouseEventFlags flags)
         {
-            // Demand the correct permissions
-            var permissions = new PermissionSet(PermissionState.Unrestricted);
-            permissions.Demand();
-
             // Check if we are trying to do an absolute move
             if (flags.HasFlag(MouseEventFlags.MOUSEEVENTF_ABSOLUTE))
             {

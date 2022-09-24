@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
@@ -14,7 +13,6 @@ namespace FlaUI.Core.WindowsAPI
         public static extern uint GetCurrentThreadId();
 
         [DllImport(KERNEL32, CharSet = CharSet.Auto, BestFitMapping = false, SetLastError = true)]
-        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         [ResourceExposure(ResourceScope.Process)]  // Is your module side-by-side?
         public static extern IntPtr GetModuleHandle(String moduleName);
 

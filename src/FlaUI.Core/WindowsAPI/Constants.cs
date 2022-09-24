@@ -2396,6 +2396,25 @@ namespace FlaUI.Core.WindowsAPI
         [MarshalAs(UnmanagedType.U2)] public short Minute;
         [MarshalAs(UnmanagedType.U2)] public short Second;
         [MarshalAs(UnmanagedType.U2)] public short Milliseconds;
+
+        public byte[] ToBytes()
+        {
+            int size = Marshal.SizeOf(this);
+            byte[] arr = new byte[size];
+
+            IntPtr ptr = IntPtr.Zero;
+            try
+            {
+                ptr = Marshal.AllocHGlobal(size);
+                Marshal.StructureToPtr(this, ptr, true);
+                Marshal.Copy(ptr, arr, 0, size);
+            }
+            finally
+            {
+                Marshal.FreeHGlobal(ptr);
+            }
+            return arr;
+        }
     }
 
     [Flags]

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using System.Security.Permissions;
 
 namespace FlaUI.Core.Exceptions
 {
@@ -26,7 +25,6 @@ namespace FlaUI.Core.Exceptions
         {
         }
 
-        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
         protected ElementNotEnabledException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {

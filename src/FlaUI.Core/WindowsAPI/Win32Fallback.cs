@@ -401,15 +401,17 @@ namespace FlaUI.Core.WindowsAPI
                 throw new Exception("Insufficient rights");
             }
 
-            SYSTEMTIME systemtime = new SYSTEMTIME();
-            systemtime.Year = (short)date.Year;
-            systemtime.Month = (short)date.Month;
-            systemtime.Day = (short)date.Day;
-            systemtime.DayOfWeek = (short)date.DayOfWeek;
-            systemtime.Hour = (short)date.Hour;
-            systemtime.Minute = (short)date.Minute;
-            systemtime.Second = (short)date.Second;
-            systemtime.Milliseconds = (short)date.Millisecond;
+            SYSTEMTIME systemtime = new SYSTEMTIME
+            {
+                Year = (short)date.Year,
+                Month = (short)date.Month,
+                Day = (short)date.Day,
+                DayOfWeek = (short)date.DayOfWeek,
+                Hour = (short)date.Hour,
+                Minute = (short)date.Minute,
+                Second = (short)date.Second,
+                Milliseconds = (short)date.Millisecond
+            };
 
             // allocate memory in the process of the calendar
             IntPtr hMem = User32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)Marshal.SizeOf(systemtime),
@@ -420,7 +422,7 @@ namespace FlaUI.Core.WindowsAPI
             }
 
             IntPtr lpNumberOfBytesWritten = IntPtr.Zero;
-            if (User32.WriteProcessMemory(hProcess, hMem, systemtime, Marshal.SizeOf(systemtime), out lpNumberOfBytesWritten) == false)
+            if (User32.WriteProcessMemory(hProcess, hMem, systemtime.ToBytes(), Marshal.SizeOf(systemtime), out lpNumberOfBytesWritten) == false)
             {
                 throw new Exception("Insufficient rights");
             }
@@ -493,12 +495,12 @@ namespace FlaUI.Core.WindowsAPI
             }
 
             IntPtr lpNumberOfBytesWritten = IntPtr.Zero;
-            if (User32.WriteProcessMemory(hProcess, hMem, systemtime1, Marshal.SizeOf(systemtime1), out lpNumberOfBytesWritten) == false)
+            if (User32.WriteProcessMemory(hProcess, hMem, systemtime1.ToBytes(), Marshal.SizeOf(systemtime1), out lpNumberOfBytesWritten) == false)
             {
                 throw new Exception("Insufficient rights");
             }
             IntPtr hMem2 = new IntPtr(hMem.ToInt64() + Marshal.SizeOf(systemtime1));
-            if (User32.WriteProcessMemory(hProcess, hMem2, systemtime2, Marshal.SizeOf(systemtime2), out lpNumberOfBytesWritten) == false)
+            if (User32.WriteProcessMemory(hProcess, hMem2, systemtime2.ToBytes(), Marshal.SizeOf(systemtime2), out lpNumberOfBytesWritten) == false)
             {
                 throw new Exception("Insufficient rights");
             }
@@ -611,7 +613,7 @@ namespace FlaUI.Core.WindowsAPI
             }
 
             IntPtr lpNumberOfBytesWritten = IntPtr.Zero;
-            if (User32.WriteProcessMemory(hProcess, hMem, systemtime, Marshal.SizeOf(systemtime),
+            if (User32.WriteProcessMemory(hProcess, hMem, systemtime.ToBytes(), Marshal.SizeOf(systemtime),
                 out lpNumberOfBytesWritten) == false)
             {
                 throw new Exception("Insufficient rights");

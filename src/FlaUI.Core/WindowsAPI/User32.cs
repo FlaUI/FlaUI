@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
@@ -7,6 +6,7 @@ using System.Text;
 namespace FlaUI.Core.WindowsAPI
 {
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+#pragma warning disable CA1401 // P/Invokes should not be visible
     public static class User32
     {
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
@@ -128,14 +128,14 @@ namespace FlaUI.Core.WindowsAPI
         public static extern bool VirtualFreeEx(IntPtr hProcess, IntPtr lpAddress, int dwSize, AllocationType dwFreeType);
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [SuppressUnmanagedCodeSecurity]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool CloseHandle(IntPtr hObject);
 
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress,
-            [MarshalAs(UnmanagedType.AsAny)] object lpBuffer, int dwSize, out IntPtr lpNumberOfBytesWritten);
+            byte[] lpBuffer, Int32 nSize, out IntPtr lpNumberOfBytesWritten);
     }
+#pragma warning restore CA1401 // P/Invokes should not be visible
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

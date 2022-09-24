@@ -94,7 +94,7 @@ namespace FlaUI.TestUtilities
         /// Teardown method of the test fixture.
         /// </summary>
         [OneTimeTearDown]
-        public virtual async Task UITestBaseOneTimeTearDown()
+        public virtual void UITestBaseOneTimeTearDown()
         {
             if (VideoRecordingMode == VideoRecordingMode.OnePerFixture)
             {
@@ -135,7 +135,7 @@ namespace FlaUI.TestUtilities
         /// Teardown method for each test.
         /// </summary>
         [TearDown]
-        public virtual async Task UITestBaseTearDown()
+        public virtual void UITestBaseTearDown()
         {
             if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
             {
