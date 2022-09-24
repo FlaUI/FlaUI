@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Runtime.InteropServices;
 using Microsoft.Win32;
 
 namespace FlaUI.Core.Tools
@@ -89,6 +90,15 @@ namespace FlaUI.Core.Tools
         }
 
         /// <summary>
+        /// Checks if the current operating system name contains the given string.
+        /// </summary>
+        public static bool BrandingStringContains(string name)
+        {
+            var brandingString = BrandingFormatString("%WINDOWS_LONG%");
+            return brandingString.Contains(name);
+        }
+
+        /// <summary>
         /// Checks if the current operating system is Windows 8.1.
         /// </summary>
         public static bool IsWindows8_1()
@@ -102,6 +112,14 @@ namespace FlaUI.Core.Tools
         public static bool IsWindows10()
         {
             return CurrentProductContains("Windows 10");
+        }
+
+        /// <summary>
+        /// Checks if the current operating system is Windows 11.
+        /// </summary>
+        public static bool IsWindows11()
+        {
+            return BrandingStringContains("Windows 11");
         }
 
         /// <summary>
@@ -182,5 +200,9 @@ namespace FlaUI.Core.Tools
             }
             return default;
         }
+
+        [DllImport("winbrand.dll", CharSet = CharSet.Unicode)]
+        [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+        static extern string BrandingFormatString(string format);
     }
 }
