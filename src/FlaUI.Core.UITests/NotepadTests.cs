@@ -18,6 +18,7 @@ namespace FlaUI.Core.UITests
                     Assert.That(window, Is.Not.Null);
                     Assert.That(window.Title, Is.Not.Null);
                 }
+                app.Close();
             }
         }
 
@@ -33,6 +34,7 @@ namespace FlaUI.Core.UITests
                     Assert.That(window, Is.Not.Null);
                     Assert.That(window.Title, Is.Not.Null);
                 }
+                app.Close();
             }
         }
 
@@ -49,6 +51,7 @@ namespace FlaUI.Core.UITests
                         Assert.That(window, Is.Not.Null);
                         Assert.That(window.Title, Is.Not.Null);
                     }
+                    app.Close();
                 }
             }
         }
@@ -67,6 +70,7 @@ namespace FlaUI.Core.UITests
                         Assert.That(window, Is.Not.Null);
                         Assert.That(window.Title, Is.Not.Null);
                     }
+                    app.Close();
                 }
             }
         }
@@ -84,6 +88,7 @@ namespace FlaUI.Core.UITests
                         Assert.That(window, Is.Not.Null);
                         Assert.That(window.Title, Is.Not.Null);
                     }
+                    app.Close();
                 }
             }
         }

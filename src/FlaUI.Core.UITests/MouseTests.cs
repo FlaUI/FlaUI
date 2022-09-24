@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Text;
 using System.Threading;
+using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
@@ -29,8 +30,8 @@ namespace FlaUI.Core.UITests
             using (var automation = new UIA3Automation())
             {
                 var mainWindow = app.GetMainWindow(automation);
-                var mouseX = mainWindow.Properties.BoundingRectangle.Value.Left + 50;
-                var mouseY = mainWindow.Properties.BoundingRectangle.Value.Top + 200;
+                var mouseX = mainWindow.Properties.BoundingRectangle.Value.Left + 100;
+                var mouseY = mainWindow.Properties.BoundingRectangle.Value.Top + 300;
                 Mouse.Position = new Point(mouseX, mouseY);
                 Mouse.Down(MouseButton.Left);
                 Mouse.MoveBy(100, 10);
@@ -92,7 +93,7 @@ namespace FlaUI.Core.UITests
                 using (var automation = new UIA3Automation())
                 {
                     var mainWindow = app.GetMainWindow(automation);
-                    var documentElement = mainWindow.FindFirstChild("15");
+                    var documentElement = mainWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Document));
                     var sb = new StringBuilder();
                     for (var i = 0; i < 1000; i++)
                     {
