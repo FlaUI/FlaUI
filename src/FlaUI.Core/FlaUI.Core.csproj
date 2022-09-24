@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup Label="Build">
     <TargetFrameworks>net48;netstandard2.0;netcoreapp3.1;net5.0-windows;net6.0-windows</TargetFrameworks>
@@ -9,11 +9,11 @@
   <PropertyGroup Label="Package">
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageOutputPath>..\..\artifacts</PackageOutputPath>
-    <Version>3.2.0</Version>
+    <Version>4.0.0</Version>
     <Product>FlaUI</Product>
     <Authors>Roemer</Authors>
     <Description>Library with base elements used in the concrete implementations of FlaUI.</Description>
-    <Copyright>Copyright (c) 2016-2021</Copyright>
+    <Copyright>Copyright (c) 2016-2022</Copyright>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/FlaUI/FlaUI</PackageProjectUrl>
     <PackageIcon>FlaUI.png</PackageIcon>

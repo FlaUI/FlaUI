@@ -1,5 +1,21 @@
 # Changelog
 
+## 4.0.0 (2022-09-24)
+### Breaking changes
+  * Removed support for .NET Framework below 4.8
+
+### Enhancements
+  * Added Support for .NET 5.0 and 6.0
+  * Allow to skip logging missing frames info
+  * Added support for some more properties in XPath
+  * Added MixedAttributeValue
+  * Made TryGetClickablePoint more resilend and added a Fallback to BoundingRectangle.Center
+  * Extended ConditionFactory (thanks @bence-nagy)
+
+### Bug fixes
+  * Fix mistype in RightDoubleClick mouse method (thanks @kungfux)
+  * Fixed Bug Alt+Tab in OverlayForm (thanks @erimeurer)
+
 ## 3.2.0 (2020-07-16)
 ### Breaking changes
   * None
