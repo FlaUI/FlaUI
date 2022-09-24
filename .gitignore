@@ -31,6 +31,8 @@ TestResult.xml
 UIA2TestResult.xml
 UnitTestResult.xml
 UIA3TestResult.xml
+InternalTrace.*.log
+nunit-agent_*.log
 
 # Artifacts
 artifacts/
