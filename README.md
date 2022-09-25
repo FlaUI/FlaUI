@@ -7,7 +7,7 @@
 | *Chat* | [![Join the chat at https://gitter.im/FlaUI/Lobby](https://badges.gitter.im/FlaUI/Lobby.svg)](https://gitter.im/FlaUI/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) |
 | *Build* | [![Build status](https://ci.appveyor.com/api/projects/status/mwd2o329cma50sxe?svg=true)](https://ci.appveyor.com/project/RomanBaeriswyl/flaui) |
 | *Tests* | ![AppVeyor tests](https://img.shields.io/appveyor/tests/RomanBaeriswyl/flaui) |
-| *Libraries (NuGet)* | ![Nuget](https://img.shields.io/nuget/v/FlaUI.Core?label=FlaUI.Core) ![Nuget](https://img.shields.io/nuget/v/FlaUI.UIA3?label=FlaUI.UIA3) ![Nuget](https://img.shields.io/nuget/v/FlaUI.UIA2?label=FlaUI.UIA2) |
+| *Libraries (NuGet)* | [![Nuget](https://img.shields.io/nuget/v/FlaUI.Core?label=FlaUI.Core)](https://www.nuget.org/packages/FlaUI.Core) [![Nuget](https://img.shields.io/nuget/v/FlaUI.UIA3?label=FlaUI.UIA3)](https://www.nuget.org/packages/FlaUI.UIA3) [![Nuget](https://img.shields.io/nuget/v/FlaUI.UIA2?label=FlaUI.UIA2)](https://www.nuget.org/packages/FlaUI.UIA2) |
 | *CI Artefacts* | [FlaUI CI](https://ci.appveyor.com/project/RomanBaeriswyl/flaui/build/artifacts) |
 
 ### Introduction
