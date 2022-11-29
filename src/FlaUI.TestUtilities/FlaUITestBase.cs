@@ -140,6 +140,9 @@ namespace FlaUI.TestUtilities
             if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
             {
                 TakeScreenShot(TestContext.CurrentContext.Test.FullName);
+                TestContext.AddTestAttachment(
+                    CreateScreenShotPath(TestContext.CurrentContext.Test.FullName),
+                    TestContext.CurrentContext.Test.FullName);
             }
 
             if (ApplicationStartMode == ApplicationStartMode.OncePerTest)
@@ -251,9 +254,7 @@ namespace FlaUI.TestUtilities
         /// </summary>
         private void TakeScreenShot(string testName)
         {
-            var imageName = SanitizeFileName(testName) + ".png";
-            imageName = imageName.Replace("\"", String.Empty);
-            var imagePath = Path.Combine(TestsMediaPath, imageName);
+            var imagePath = CreateScreenShotPath(testName);
             try
             {
                 Directory.CreateDirectory(TestsMediaPath);
@@ -272,6 +273,16 @@ namespace FlaUI.TestUtilities
         {
             fileName = string.Join("_", fileName.Split(Path.GetInvalidFileNameChars()));
             return fileName;
+        }
+        
+        /// <summary>
+        /// Generates full path for screenshot.
+        /// </summary>
+        private string CreateScreenShotPath(string testName)
+        {
+            var imageName = SanitizeFileName(testName) + ".png";
+            imageName = imageName.Replace("\"", String.Empty);
+            return Path.Combine(TestsMediaPath, imageName);
         }
     }
 }
