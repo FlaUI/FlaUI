@@ -69,7 +69,7 @@ using (var automation = new UIA3Automation())
 
 ### Further Resources
 #### YouTube Tutorials
-Have a look at [H Y R Tutorials](https://www.youtube.com/channel/UCzFPWBdClpZ9afmmyhho4Rg). This channel provides some videos to get you started with FlaUI.
+Have a look at [H Y R Tutorials](https://www.youtube.com/playlist?list=PLacgMXFs7kl_fuSSe6lp6YRaeAp6vqra9). This channel provides some videos to get you started with FlaUI.
 #### FlaUI UITests
 FlaUI itself contains quite some UI tests itself. Browse to the code of them [here](https://github.com/FlaUI/FlaUI/tree/master/src/FlaUI.Core.UITests) and look how they work.
 #### Chat
