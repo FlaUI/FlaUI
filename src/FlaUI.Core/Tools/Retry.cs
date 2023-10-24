@@ -56,12 +56,13 @@ namespace FlaUI.Core.Tools
                 }
                 catch (Exception ex)
                 {
-                    if (!ignoreException)
-                    {
-                        throw;
-                    }
                     lastException = ex;
                     retryResult.SetException(ex);
+                    if (!ignoreException)
+                    {
+                        retryResult.Finish(lastValueOnTimeout ? lastValue : defaultOnTimeout, false);
+                        throw;
+                    }
                 }
                 Thread.Sleep(interval.Value);
             } while (!IsTimeoutReached(startTime, timeout.Value));
