@@ -64,7 +64,7 @@ namespace FlaUI.TestUtilities
         /// Path of the directory for the screenshots and videos for the tests.
         /// Defaults to c:\temp\testsmedia.
         /// </summary>
-        protected virtual string TestsMediaPath => $@"c:\temp\testsmedia\{TestContext.CurrentContext.Test.Name}\{_testDateTime}";
+        protected virtual string TestsMediaPath => $@"c:\temp\testsmedia\{SanitizeFileName(TestContext.CurrentContext.Test.Name)}\{_testDateTime}";
 
         /// <summary>
         /// Gets the automation instance that should be used.
