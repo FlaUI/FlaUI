@@ -56,10 +56,15 @@ namespace FlaUI.TestUtilities
         protected virtual VideoRecordingMode VideoRecordingMode => VideoRecordingMode.OnePerTest;
 
         /// <summary>
+        /// static member which holds the current execution date and time
+        /// </summary> 
+        private static string _testDateTime = DateTime.Now.ToString("yyyyMMddHHmmss");
+
+        /// <summary>
         /// Path of the directory for the screenshots and videos for the tests.
         /// Defaults to c:\temp\testsmedia.
         /// </summary>
-        protected virtual string TestsMediaPath => @"c:\temp\testsmedia";
+        protected virtual string TestsMediaPath => $@"c:\temp\testsmedia\{TestContext.CurrentContext.Test.Name}\{_testDateTime}";
 
         /// <summary>
         /// Gets the automation instance that should be used.
