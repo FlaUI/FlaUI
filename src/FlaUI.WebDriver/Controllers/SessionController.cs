@@ -49,7 +49,14 @@ namespace FlaUI.WebDriver.Controllers
                 else
                 {
                     capabilities.TryGetValue("appium:appArguments", out var appArguments);
-                    app = Core.Application.Launch(appPath, appArguments);
+                    try
+                    {
+                        app = Core.Application.Launch(appPath, appArguments);
+                    }
+                    catch(Exception e)
+                    {
+                        throw WebDriverResponseException.InvalidArgument($"Starting app '{appPath}' with arguments '{appArguments}' threw an exception: {e.Message}");
+                    }
                 }
             }
             else if(capabilities.TryGetValue("appium:appTopLevelWindow", out var appTopLevelWindowString))

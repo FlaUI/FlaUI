@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlaUI.TestUtilities", "FlaU
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlaUI.WebDriver", "FlaUI.WebDriver\FlaUI.WebDriver.csproj", "{07FE5EE9-0104-42CE-A79D-88FD7D79B542}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlaUI.WebDriver.UITests", "FlaUI.WebDriver.UITests\FlaUI.WebDriver.UITests.csproj", "{5315D9CF-DDA4-49AE-BA92-AB5814E61901}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{07FE5EE9-0104-42CE-A79D-88FD7D79B542}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07FE5EE9-0104-42CE-A79D-88FD7D79B542}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07FE5EE9-0104-42CE-A79D-88FD7D79B542}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5315D9CF-DDA4-49AE-BA92-AB5814E61901}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5315D9CF-DDA4-49AE-BA92-AB5814E61901}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5315D9CF-DDA4-49AE-BA92-AB5814E61901}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5315D9CF-DDA4-49AE-BA92-AB5814E61901}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -77,6 +83,7 @@ Global
 		{FAEBBDD3-8230-4FC9-A316-05F5243C94DA} = {00BCF82A-388A-4DC9-A1E2-6D6D983BAEE3}
 		{C8276299-FA43-409B-A969-EF030AB56224} = {00BCF82A-388A-4DC9-A1E2-6D6D983BAEE3}
 		{54DA021E-EE2F-4C7A-9484-B71FD02CE513} = {3DFE78D4-89EB-4CEE-A5D1-F5FDDED10959}
+		{5315D9CF-DDA4-49AE-BA92-AB5814E61901} = {3DFE78D4-89EB-4CEE-A5D1-F5FDDED10959}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F2B64231-45B2-4129-960A-9F26AFFD16AE}
