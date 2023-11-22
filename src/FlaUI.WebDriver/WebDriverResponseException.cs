@@ -19,11 +19,11 @@ namespace FlaUI.WebDriver
 
         public static WebDriverResponseException InvalidArgument(string message) => new WebDriverResponseException(message, "invalid argument", 400);
 
-        public static WebDriverResponseException SessionNotFound(string sessionId) => new WebDriverResponseException($"No active session with ID {sessionId}", "invalid session id", 404);
+        public static WebDriverResponseException SessionNotFound(string sessionId) => new WebDriverResponseException($"No active session with ID '{sessionId}'", "invalid session id", 404);
 
-        public static WebDriverResponseException ElementNotFound(string elementId) => new WebDriverResponseException($"No element found with ID {elementId}", "no such element", 404);
+        public static WebDriverResponseException ElementNotFound(string elementId) => new WebDriverResponseException($"No element found with ID '{elementId}'", "no such element", 404);
 
-        public static WebDriverResponseException WindowNotFoundByHandle(string windowHandle) => new WebDriverResponseException($"No window found with handle {windowHandle}", "no such window", 404);
+        public static WebDriverResponseException WindowNotFoundByHandle(string windowHandle) => new WebDriverResponseException($"No window found with handle '{windowHandle}'", "no such window", 404);
 
         public static WebDriverResponseException NoWindowsOpenForSession() => new WebDriverResponseException($"No windows are open for the current session", "no such window", 404);
     }

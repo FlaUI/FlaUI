@@ -1,5 +1,6 @@
 ﻿using FlaUI.WebDriver.UITests.TestUtil;
 using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using System;
 
@@ -9,7 +10,19 @@ namespace FlaUI.WebDriver.UITests
     public class ElementTests
     {
         [Test]
-        public void GetText_Default_IsSupported()
+        public void GetText_Text_ReturnsRenderedText()
+        {
+            var driverOptions = FlaUIDriverOptions.TestApp();
+            using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
+            var element = driver.FindElement(ExtendedBy.AccessibilityId("lblMenuChk"));
+
+            var text = element.Text;
+
+            Assert.That(text, Is.EqualTo("Menu Item Checked"));
+        }
+
+        [Test]
+        public void GetText_TextBox_ReturnsTextBoxText()
         {
             var driverOptions = FlaUIDriverOptions.TestApp();
             using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
@@ -21,7 +34,7 @@ namespace FlaUI.WebDriver.UITests
         }
 
         [Test]
-        public void GetText_Button_IsSupported()
+        public void GetText_Button_ReturnsButtonText()
         {
             var driverOptions = FlaUIDriverOptions.TestApp();
             using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
@@ -30,6 +43,56 @@ namespace FlaUI.WebDriver.UITests
             var text = element.Text;
 
             Assert.That(text, Is.EqualTo("Invoke me!"));
+        }
+
+        [Test]
+        public void Selected_NotCheckedCheckbox_ReturnsFalse()
+        {
+            var driverOptions = FlaUIDriverOptions.TestApp();
+            using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
+            var element = driver.FindElement(ExtendedBy.AccessibilityId("SimpleCheckBox"));
+
+            var selected = element.Selected;
+
+            Assert.That(selected, Is.False);
+        }
+
+        [Test]
+        public void Selected_CheckedCheckbox_ReturnsTrue()
+        {
+            var driverOptions = FlaUIDriverOptions.TestApp();
+            using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
+            var element = driver.FindElement(ExtendedBy.AccessibilityId("SimpleCheckBox"));
+            element.Click();
+
+            var selected = element.Selected;
+
+            Assert.That(selected, Is.True);
+        }
+
+        [Test]
+        public void Selected_NotCheckedRadioButton_ReturnsFalse()
+        {
+            var driverOptions = FlaUIDriverOptions.TestApp();
+            using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
+            var element = driver.FindElement(ExtendedBy.AccessibilityId("RadioButton1"));
+
+            var selected = element.Selected;
+
+            Assert.That(selected, Is.False);
+        }
+
+        [Test]
+        public void Selected_CheckedRadioButton_ReturnsTrue()
+        {
+            var driverOptions = FlaUIDriverOptions.TestApp();
+            using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
+            var element = driver.FindElement(ExtendedBy.AccessibilityId("RadioButton1"));
+            element.Click();
+
+            var selected = element.Selected;
+
+            Assert.That(selected, Is.True);
         }
 
         [Test]

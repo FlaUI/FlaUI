@@ -86,6 +86,53 @@ namespace FlaUI.WebDriver.UITests
             Assert.That(findElement, Throws.Exception.TypeOf<NoSuchElementException>());
         }
 
+        [Test]
+        public void FindElementFromElement_InsideElement_ReturnsElement()
+        {
+            var driverOptions = FlaUIDriverOptions.TestApp();
+            using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
+            var fromElement = driver.FindElement(By.TagName("Tab"));
+
+            var foundElement = fromElement.FindElement(ExtendedBy.AccessibilityId("TextBox"));
+
+            Assert.That(foundElement, Is.Not.Null);
+        }
+
+        [Test]
+        public void FindElementFromElement_OutsideElement_TimesOut()
+        {
+            var driverOptions = FlaUIDriverOptions.TestApp();
+            using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
+            var fromElement = driver.FindElement(ExtendedBy.AccessibilityId("ListBox"));
+
+            var findElement = () => fromElement.FindElement(ExtendedBy.AccessibilityId("TextBox"));
+
+            Assert.That(findElement, Throws.Exception.TypeOf<NoSuchElementException>());
+        }
+
+        [Test]
+        public void FindElementsFromElement_InsideElement_ReturnsElement()
+        {
+            var driverOptions = FlaUIDriverOptions.TestApp();
+            using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
+            var fromElement = driver.FindElement(By.TagName("Tab"));
+
+            var foundElements = fromElement.FindElements(By.TagName("RadioButton"));
+
+            Assert.That(foundElements, Has.Count.EqualTo(2));
+        }
+
+        [Test]
+        public void FindElementsFromElement_OutsideElement_TimesOut()
+        {
+            var driverOptions = FlaUIDriverOptions.TestApp();
+            using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
+            var fromElement = driver.FindElement(ExtendedBy.AccessibilityId("ListBox"));
+
+            var findElements = () => fromElement.FindElements(ExtendedBy.AccessibilityId("TextBox"));
+
+            Assert.That(findElements, Throws.Exception.TypeOf<NoSuchElementException>());
+        }
 
         [Test]
         public void FindElements_Default_ReturnsElements()

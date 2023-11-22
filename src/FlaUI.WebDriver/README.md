@@ -66,6 +66,73 @@ const driver = await remote({
 });
 ```
 
+## Selectors
+
+On Windows, the recommended selectors, in order of reliability are:
+
+| Selector                   | Locator strategy keyword | Supported?         |
+| -------------------------- | ------------------------ | ------------------ |
+| Automation ID              | `"accessibility id"`     | :white_check_mark: |
+| Name                       | `"name"`                 | :white_check_mark: |
+| Class name                 | `"class name"`           | :white_check_mark: |
+| Link text selector         | `"link text"`            | :white_check_mark: |
+| Partial link text selector | `"partial link text"`    | :white_check_mark: |
+| Tag name                   | `"tag name"`             | :white_check_mark: |
+| XPath selector             | `"xpath"`                |                    |
+| CSS selector               | `"css selector"`         |                    |
+
+Using the Selenium C# client requires extending the `OpenQA.Selenium.By` class:
+
+```C#
+using OpenQA.Selenium;
+
+public class ExtendedBy : By
+{
+    public ExtendedBy(string mechanism, string criteria) : base(mechanism, criteria)
+    {
+    }
+
+    public static ExtendedBy AccessibilityId(string accessibilityId) => new ExtendedBy("accessibility id", accessibilityId);
+    public static ExtendedBy NativeName(string name) => new ExtendedBy("name", name);
+    public static ExtendedBy NativeClassName(string name) => new ExtendedBy("class name", name);
+}
+
+driver.FindElement(ExtendedBy.AccessibilityId("TextBox")).Click();
+driver.FindElement(ExtendedBy.NativeName("TextBox")).Click();
+driver.FindElement(ExtendedBy.NativeClassName("TextBox")).Click();
+driver.FindElement(By.LinkText("Button")).Click();
+driver.FindElement(By.PartialLinkText("Button")).Click();
+driver.FindElement(By.TagName("RadioButton")).Click();
+
+```
+
+Using the WebdriverIO JavaScript client (see [WebdriverIO Selectors guide](https://webdriver.io/docs/selectors):
+
+```JavaScript
+await driver.$('~automationId').click();
+await driver.$('[name="Name"]').click();
+await driver.$('.TextBox').click();
+await driver.$('=Button').click();
+await driver.$('*=Button').click();
+await driver.$('<RadioButton />').click();
+```
+
+## Running scripts
+
+The driver supports PowerShell commands.
+
+Using the Selenium C# client:
+
+```C#
+var result = driver.ExecuteScript("powerShell", new Dictionary<string,string> { ["command"] = "1+1" });
+```
+
+Using the WebdriverIO JavaScript client:
+
+```JavaScript
+const result = driver.executeScript("powerShell", [{ command: `1+1` }]);
+```
+
 ## WebDriver Commands
 
 | Method | URI Template                                                   | Command                        | Implemented        |
@@ -97,11 +164,11 @@ const driver = await remote({
 | GET    | /session/{session id}/element/{element id}/shadow              | Get Element Shadow Root        |                    |
 | POST   | /session/{session id}/element                                  | Find Element                   | :white_check_mark: |
 | POST   | /session/{session id}/elements                                 | Find Elements                  | :white_check_mark: |
-| POST   | /session/{session id}/element/{element id}/element             | Find Element From Element      |                    |
-| POST   | /session/{session id}/element/{element id}/elements            | Find Elements From Element     |                    |
+| POST   | /session/{session id}/element/{element id}/element             | Find Element From Element      | :white_check_mark: |
+| POST   | /session/{session id}/element/{element id}/elements            | Find Elements From Element     | :white_check_mark: |
 | POST   | /session/{session id}/shadow/{shadow id}/element               | Find Element From Shadow Root  |                    |
 | POST   | /session/{session id}/shadow/{shadow id}/elements              | Find Elements From Shadow Root |                    |
-| GET    | /session/{session id}/element/{element id}/selected            | Is Element Selected            |                    |
+| GET    | /session/{session id}/element/{element id}/selected            | Is Element Selected            | :white_check_mark: |
 | GET    | /session/{session id}/element/{element id}/attribute/{name}    | Get Element Attribute          |                    |
 | GET    | /session/{session id}/element/{element id}/property/{name}     | Get Element Property           |                    |
 | GET    | /session/{session id}/element/{element id}/css/{property name} | Get Element CSS Value          |                    |
@@ -128,6 +195,6 @@ const driver = await remote({
 | POST   | /session/{session id}/alert/accept                             | Accept Alert                   |                    |
 | GET    | /session/{session id}/alert/text                               | Get Alert Text                 |                    |
 | POST   | /session/{session id}/alert/text                               | Send Alert Text                |                    |
-| GET    | /session/{session id}/screenshot                               | Take Screenshot                |                    |
-| GET    | /session/{session id}/element/{element id}/screenshot          | Take Element Screenshot        |                    |
+| GET    | /session/{session id}/screenshot                               | Take Screenshot                | :white_check_mark: |
+| GET    | /session/{session id}/element/{element id}/screenshot          | Take Element Screenshot        | :white_check_mark: |
 | POST   | /session/{session id}/print                                    | Print Page                     |                    |

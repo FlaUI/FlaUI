@@ -3,6 +3,8 @@ using FlaUI.WebDriver.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace FlaUI.WebDriver.Controllers
@@ -23,7 +25,7 @@ namespace FlaUI.WebDriver.Controllers
         [HttpGet("active")]
         public async Task<ActionResult> GetActiveElement([FromRoute] string sessionId)
         {
-            var session = GetSession(sessionId);
+            var session = GetActiveSession(sessionId);
             var element = session.GetOrAddKnownElement(session.Automation.FocusedElement());
             return await Task.FromResult(WebDriverResult.Success(new FindElementResponse()
             {
@@ -34,7 +36,7 @@ namespace FlaUI.WebDriver.Controllers
         [HttpGet("{elementId}/displayed")]
         public async Task<ActionResult> IsElementDisplayed([FromRoute] string sessionId, [FromRoute] string elementId)
         {
-            var session = GetSession(sessionId);
+            var session = GetActiveSession(sessionId);
             var element = GetElement(session, elementId);
             return await Task.FromResult(WebDriverResult.Success(!element.IsOffscreen));
         }
@@ -42,7 +44,7 @@ namespace FlaUI.WebDriver.Controllers
         [HttpPost("{elementId}/click")]
         public async Task<ActionResult> ElementClick([FromRoute] string sessionId, [FromRoute] string elementId)
         {
-            var session = GetSession(sessionId);
+            var session = GetActiveSession(sessionId);
             var element = GetElement(session, elementId);
 
             ScrollElementContainerIntoView(element);
@@ -58,7 +60,7 @@ namespace FlaUI.WebDriver.Controllers
         [HttpPost("{elementId}/clear")]
         public async Task<ActionResult> ElementClear([FromRoute] string sessionId, [FromRoute] string elementId)
         {
-            var session = GetSession(sessionId);
+            var session = GetActiveSession(sessionId);
             var element = GetElement(session, elementId);
 
             element.AsTextBox().Text = "";
@@ -69,26 +71,71 @@ namespace FlaUI.WebDriver.Controllers
         [HttpGet("{elementId}/text")]
         public async Task<ActionResult> GetElementText([FromRoute] string sessionId, [FromRoute] string elementId)
         {
-            var session = GetSession(sessionId);
+            var session = GetActiveSession(sessionId);
             var element = GetElement(session, elementId);
 
-            var text = element.Patterns.Value.PatternOrDefault?.Value?.ValueOrDefault;
-            if (text == null)
+            string text;
+            if (element.Patterns.Text.IsSupported)
             {
-                text = element.Patterns.Text.PatternOrDefault?.DocumentRange?.GetText(int.MaxValue);
+                text = element.Patterns.Text.Pattern.DocumentRange.GetText(int.MaxValue);
             }
-            if (text == null)
+            else
             {
-                text = element.Name;
+                text = GetRenderedText(element);
             }
 
             return await Task.FromResult(WebDriverResult.Success(text));
         }
 
+        private static string GetRenderedText(AutomationElement element)
+        {
+            var result = new StringBuilder();
+            AddRenderedText(element, result);
+            return result.ToString();
+        }
+
+        private static void AddRenderedText(AutomationElement element, StringBuilder stringBuilder)
+        {
+            if (!string.IsNullOrWhiteSpace(element.Name))
+            {
+                if(stringBuilder.Length > 0)
+                {
+                    stringBuilder.Append(' ');
+                }
+                stringBuilder.Append(element.Name);
+            }
+            foreach (var child in element.FindAllChildren())
+            {
+                if (child.Properties.ClassName.ValueOrDefault == "TextBlock")
+                {
+                    // Text blocks set the `Name` of their parent element already
+                    continue;
+                }
+                AddRenderedText(child, stringBuilder);
+            }
+        }
+
+        [HttpGet("{elementId}/selected")]
+        public async Task<ActionResult> IsElementSelected([FromRoute] string sessionId, [FromRoute] string elementId)
+        {
+            var session = GetActiveSession(sessionId);
+            var element = GetElement(session, elementId);
+            var isSelected = false;
+            if (element.Patterns.SelectionItem.IsSupported)
+            {
+                isSelected = element.Patterns.SelectionItem.PatternOrDefault.IsSelected.ValueOrDefault;
+            }
+            else if (element.Patterns.Toggle.IsSupported)
+            {
+                isSelected = element.Patterns.Toggle.PatternOrDefault.ToggleState.ValueOrDefault == Core.Definitions.ToggleState.On;
+            }
+            return await Task.FromResult(WebDriverResult.Success(isSelected));
+        }
+
         [HttpPost("{elementId}/value")]
         public async Task<ActionResult> ElementSendKeys([FromRoute] string sessionId, [FromRoute] string elementId, [FromBody] ElementSendKeysRequest elementSendKeysRequest)
         {
-            var session = GetSession(sessionId);
+            var session = GetActiveSession(sessionId);
             var element = GetElement(session, elementId);
 
             ScrollElementContainerIntoView(element);
@@ -123,6 +170,16 @@ namespace FlaUI.WebDriver.Controllers
                 throw WebDriverResponseException.ElementNotFound(elementId);
             }
             return element;
+        }
+
+        private Session GetActiveSession(string sessionId)
+        {
+            var session = GetSession(sessionId);
+            if (session.App == null || session.App.HasExited)
+            {
+                throw WebDriverResponseException.NoWindowsOpenForSession();
+            }
+            return session;
         }
 
         private Session GetSession(string sessionId)

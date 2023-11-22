@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using System.Linq;
-using FlaUI.Core;
 using FlaUI.Core.AutomationElements;
 
 namespace FlaUI.WebDriver.Controllers
@@ -27,15 +26,38 @@ namespace FlaUI.WebDriver.Controllers
         [HttpPost("element")]
         public async Task<ActionResult> FindElement([FromRoute] string sessionId, [FromBody] FindElementRequest findElementRequest)
         {
-            var session = GetSession(sessionId);
-            if (session.App == null)
-            {
-                throw WebDriverResponseException.UnsupportedOperation("Finding elements from Root is not supported");
-            }
-            var window = session.CurrentWindow;
+            var session = GetActiveSession(sessionId);
+            return await FindElementFrom(() => session.CurrentWindow, findElementRequest, session);
+        }
+
+        [HttpPost("element/{elementId}/element")]
+        public async Task<ActionResult> FindElementFromElement([FromRoute] string sessionId, [FromRoute] string elementId, [FromBody] FindElementRequest findElementRequest)
+        {
+            var session = GetActiveSession(sessionId);
+            var element = GetElement(session, elementId);
+            return await FindElementFrom(() => element, findElementRequest, session);
+        }
+
+        [HttpPost("elements")]
+        public async Task<ActionResult> FindElements([FromRoute] string sessionId, [FromBody] FindElementRequest findElementRequest)
+        {
+            var session = GetActiveSession(sessionId);
+            return await FindElementsFrom(() => session.CurrentWindow, findElementRequest, session);
+        }
+
+        [HttpPost("element/{elementId}/elements")]
+        public async Task<ActionResult> FindElementsFromElement([FromRoute] string sessionId, [FromRoute] string elementId, [FromBody] FindElementRequest findElementRequest)
+        {
+            var session = GetActiveSession(sessionId);
+            var element = GetElement(session, elementId);
+            return await FindElementsFrom(() => element, findElementRequest, session);
+        }
+
+        private static async Task<ActionResult> FindElementFrom(Func<AutomationElement> startNode, FindElementRequest findElementRequest, Session session)
+        {
             var condition = GetCondition(session.Automation.ConditionFactory, findElementRequest.Using, findElementRequest.Value);
-            AutomationElement element = await Wait.Until(() => window.FindFirstDescendant(condition), element => element != null, session.ImplicitWaitTimeout);
-            
+            AutomationElement? element = await Wait.Until(() => startNode().FindFirstDescendant(condition), element => element != null, session.ImplicitWaitTimeout);
+
             if (element == null)
             {
                 return NoSuchElement(findElementRequest);
@@ -48,17 +70,11 @@ namespace FlaUI.WebDriver.Controllers
             }));
         }
 
-        [HttpPost("elements")]
-        public async Task<ActionResult> FindElements([FromRoute] string sessionId, [FromBody] FindElementRequest findElementRequest)
+        private static async Task<ActionResult> FindElementsFrom(Func<AutomationElement> startNode, FindElementRequest findElementRequest, Session session)
         {
-            var session = GetSession(sessionId);
-            if (session.App == null)
-            {
-                throw WebDriverResponseException.UnsupportedOperation("Finding elements from Root is not supported");
-            }
-            var window = session.CurrentWindow;
             var condition = GetCondition(session.Automation.ConditionFactory, findElementRequest.Using, findElementRequest.Value);
-            AutomationElement[] elements = await Wait.Until(() => window.FindAllDescendants(condition), element => element.Length > 0, session.ImplicitWaitTimeout);
+            AutomationElement[] elements = await Wait.Until(() => startNode().FindAllDescendants(condition), elements => elements.Length > 0, session.ImplicitWaitTimeout);
+
             if (elements.Length == 0)
             {
                 return NoSuchElement(findElementRequest);
@@ -66,7 +82,7 @@ namespace FlaUI.WebDriver.Controllers
 
             var knownElements = elements.Select(session.GetOrAddKnownElement);
             return await Task.FromResult(WebDriverResult.Success(
-            
+
                 knownElements.Select(knownElement => new FindElementResponse()
                 {
                     ElementReference = knownElement.ElementReference
@@ -91,7 +107,7 @@ namespace FlaUI.WebDriver.Controllers
                 case "tag name":
                     return conditionFactory.ByControlType(Enum.Parse<ControlType>(value));
                 default:
-                    throw WebDriverResponseException.UnsupportedOperation($"Selector strategy {@using} is not supported");
+                    throw WebDriverResponseException.UnsupportedOperation($"Selector strategy '{@using}' is not supported");
             }
         }
 
@@ -100,8 +116,28 @@ namespace FlaUI.WebDriver.Controllers
             return WebDriverResult.NotFound(new ErrorResponse()
             {
                 ErrorCode = "no such element",
-                Message = $"No element found with selector {findElementRequest.Using} and value {findElementRequest.Value}"
+                Message = $"No element found with selector '{findElementRequest.Using}' and value '{findElementRequest.Value}'"
             });
+        }
+
+        private AutomationElement GetElement(Session session, string elementId)
+        {
+            var element = session.FindKnownElementById(elementId);
+            if (element == null)
+            {
+                throw WebDriverResponseException.ElementNotFound(elementId);
+            }
+            return element;
+        }
+
+        private Session GetActiveSession(string sessionId)
+        {
+            var session = GetSession(sessionId);
+            if (session.App == null || session.App.HasExited)
+            {
+                throw WebDriverResponseException.NoWindowsOpenForSession();
+            }
+            return session;
         }
 
         private Session GetSession(string sessionId)
