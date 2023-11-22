@@ -24,7 +24,7 @@ namespace FlaUI.WebDriver.Controllers
         public async Task<ActionResult> GetActiveElement([FromRoute] string sessionId)
         {
             var session = GetSession(sessionId);
-            var element = session.AddKnownElement(session.Automation.FocusedElement());
+            var element = session.GetOrAddKnownElement(session.Automation.FocusedElement());
             return await Task.FromResult(WebDriverResult.Success(new FindElementResponse()
             {
                 ElementReference = element.ElementReference

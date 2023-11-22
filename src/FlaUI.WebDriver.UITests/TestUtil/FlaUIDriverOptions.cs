@@ -5,7 +5,7 @@ namespace FlaUI.WebDriver.UITests.TestUtil
 {
     internal class FlaUIDriverOptions : DriverOptions
     {
-        public const string TestAppPath = "..\\..\\..\\..\\TestApplications\\WpfApplication\\bin\\WpfApplication.exe";
+        public const string TestAppPath = "..\\..\\..\\TestApplications\\WpfApplication\\bin\\WpfApplication.exe";
 
         public override ICapabilities ToCapabilities()
         {

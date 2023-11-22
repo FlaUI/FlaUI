@@ -36,7 +36,13 @@ namespace FlaUI.WebDriver.UITests
             System.Threading.Thread.Sleep(5000);
             if (_webDriverProcess.HasExited)
             {
-                throw new Exception($"Could not start WebDriver: {_webDriverProcess.StandardError.ReadToEnd()}");
+                var error = _webDriverProcess.StandardError.ReadToEnd();
+                if (error.Contains("address already in use"))
+                {
+                    // For manual debugging of FlaUI.WebDriver it is nice to be able to start it separately
+                    return;
+                }
+                throw new Exception($"Could not start WebDriver: {error}");
             }
         }
 

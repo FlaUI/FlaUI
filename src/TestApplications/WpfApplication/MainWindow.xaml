@@ -19,6 +19,7 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
                 <MenuItem Header="E_xit" />
+                <MenuItem Header="Open Window 1" Click="MenuItem_Click" />
             </MenuItem>
             <MenuItem Header="_Edit">
                 <MenuItem Header="Copy">

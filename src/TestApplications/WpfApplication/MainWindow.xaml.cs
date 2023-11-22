@@ -41,5 +41,11 @@ namespace WpfApplication
                 lblMenuChk.Visibility = Visibility.Hidden;
             }
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new Window1();
+            window.Show();
+        }
     }
 }

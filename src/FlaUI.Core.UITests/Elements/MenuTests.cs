@@ -26,7 +26,8 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(items[0].Properties.Name, Is.EqualTo("File"));
             Assert.That(items[1].Properties.Name, Is.EqualTo("Edit"));
             var subitems1 = items[0].Items;
-            Assert.That(subitems1, Has.Length.EqualTo(1));
+            Assert.That(subitems1, Has.Length.EqualTo(2));
+            Assert.That(subitems1[0].Properties.Name, Is.EqualTo("Exit"));
             Assert.That(subitems1[0].Properties.Name, Is.EqualTo("Exit"));
             var subitems2 = items[1].Items;
             if (ApplicationType == TestApplicationType.WinForms)

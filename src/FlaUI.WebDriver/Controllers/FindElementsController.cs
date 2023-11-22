@@ -6,6 +6,8 @@ using Microsoft.Extensions.Logging;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using System.Linq;
+using FlaUI.Core;
+using FlaUI.Core.AutomationElements;
 
 namespace FlaUI.WebDriver.Controllers
 {
@@ -30,15 +32,16 @@ namespace FlaUI.WebDriver.Controllers
             {
                 throw WebDriverResponseException.UnsupportedOperation("Finding elements from Root is not supported");
             }
-            var window = session.App.GetMainWindow(session.Automation);
+            var window = session.CurrentWindow;
             var condition = GetCondition(session.Automation.ConditionFactory, findElementRequest.Using, findElementRequest.Value);
-            var element = await Wait.Until(() => window.FindFirstDescendant(condition), element => element != null, session.ImplicitWaitTimeout);
+            AutomationElement element = await Wait.Until(() => window.FindFirstDescendant(condition), element => element != null, session.ImplicitWaitTimeout);
+            
             if (element == null)
             {
                 return NoSuchElement(findElementRequest);
             }
 
-            var knownElement = session.AddKnownElement(element);
+            var knownElement = session.GetOrAddKnownElement(element);
             return await Task.FromResult(WebDriverResult.Success(new FindElementResponse
             {
                 ElementReference = knownElement.ElementReference,
@@ -53,15 +56,15 @@ namespace FlaUI.WebDriver.Controllers
             {
                 throw WebDriverResponseException.UnsupportedOperation("Finding elements from Root is not supported");
             }
-            var window = session.App.GetMainWindow(session.Automation);
+            var window = session.CurrentWindow;
             var condition = GetCondition(session.Automation.ConditionFactory, findElementRequest.Using, findElementRequest.Value);
-            var elements = await Wait.Until(() => window.FindAllDescendants(condition), element => element.Length > 0, session.ImplicitWaitTimeout);
+            AutomationElement[] elements = await Wait.Until(() => window.FindAllDescendants(condition), element => element.Length > 0, session.ImplicitWaitTimeout);
             if (elements.Length == 0)
             {
                 return NoSuchElement(findElementRequest);
             }
 
-            var knownElements = elements.Select(session.AddKnownElement);
+            var knownElements = elements.Select(session.GetOrAddKnownElement);
             return await Task.FromResult(WebDriverResult.Success(
             
                 knownElements.Select(knownElement => new FindElementResponse()

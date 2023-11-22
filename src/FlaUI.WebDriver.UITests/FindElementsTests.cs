@@ -3,6 +3,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using System;
+using System.Linq;
 
 namespace FlaUI.WebDriver.UITests
 {
@@ -79,7 +80,6 @@ namespace FlaUI.WebDriver.UITests
         {
             var driverOptions = FlaUIDriverOptions.TestApp();
             using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.Zero;
 
             var findElement = () => driver.FindElement(ExtendedBy.AccessibilityId("NotExisting"));
 
@@ -103,11 +103,53 @@ namespace FlaUI.WebDriver.UITests
         {
             var driverOptions = FlaUIDriverOptions.TestApp();
             using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.Zero;
 
             var findElements = () => driver.FindElements(ExtendedBy.AccessibilityId("NotExisting"));
 
             Assert.That(findElements, Throws.Exception.TypeOf<NoSuchElementException>());
+        }
+
+        [Test]
+        public void FindElement_InOtherWindow_TimesOut()
+        {
+            var driverOptions = FlaUIDriverOptions.TestApp();
+            using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
+            OpenAndSwitchToAnotherWindow(driver);
+
+            var findElement = () => driver.FindElement(ExtendedBy.AccessibilityId("TextBox"));
+
+            Assert.That(findElement, Throws.Exception.TypeOf<NoSuchElementException>());
+            var elementInNewWindow = driver.FindElement(ExtendedBy.AccessibilityId("Window1TextBox"));
+            Assert.That(elementInNewWindow, Is.Not.Null);
+        }
+
+        [Test]
+        public void FindElements_InOtherWindow_TimesOut()
+        {
+            var driverOptions = FlaUIDriverOptions.TestApp();
+            using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
+            OpenAndSwitchToAnotherWindow(driver);
+
+            var findElements = () => driver.FindElements(ExtendedBy.AccessibilityId("TextBox"));
+
+            Assert.That(findElements, Throws.Exception.TypeOf<NoSuchElementException>());
+            var elementsInNewWindow = driver.FindElements(ExtendedBy.AccessibilityId("Window1TextBox"));
+            Assert.That(elementsInNewWindow, Has.Count.EqualTo(1));
+        }
+
+        private static void OpenAndSwitchToAnotherWindow(RemoteWebDriver driver)
+        {
+            var initialWindowHandles = new[] { driver.CurrentWindowHandle };
+            OpenAnotherWindow(driver);
+            var windowHandlesAfterOpen = driver.WindowHandles;
+            var newWindowHandle = windowHandlesAfterOpen.Except(initialWindowHandles).Single();
+            driver.SwitchTo().Window(newWindowHandle);
+        }
+
+        private static void OpenAnotherWindow(RemoteWebDriver driver)
+        {
+            driver.FindElement(ExtendedBy.NonCssName("_File")).Click();
+            driver.FindElement(ExtendedBy.NonCssName("Open Window 1")).Click();
         }
     }
 }

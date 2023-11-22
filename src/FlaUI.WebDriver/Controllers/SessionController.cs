@@ -75,6 +75,7 @@ namespace FlaUI.WebDriver.Controllers
             }
             var session = new Session(app);
             _sessionRepository.Add(session);
+            _logger.LogInformation("Created session with ID {SessionId}", session.SessionId);
             return await Task.FromResult(WebDriverResult.Success(new CreateSessionResponse()
             {
                 SessionId = session.SessionId,
@@ -105,13 +106,9 @@ namespace FlaUI.WebDriver.Controllers
         public async Task<ActionResult> DeleteSession([FromRoute] string sessionId)
         {
             var session = GetSession(sessionId);
-            if (session.App != null && !session.App.HasExited)
-            {
-                session.App.GetMainWindow(session.Automation, TimeSpan.Zero)?.Close();
-            }
             _sessionRepository.Delete(session);
-            session.Automation.Dispose();
-            session.App?.Dispose();
+            session.Dispose();
+            _logger.LogInformation("Deleted session with ID {SessionId}", sessionId);
             return await Task.FromResult(WebDriverResult.Success());
         }
 

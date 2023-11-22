@@ -38,5 +38,10 @@ namespace WinFormsApplication
                 MessageBox.Show("Do you really want to do it?");
             }
         }
+
+        private void openWindow1ToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }

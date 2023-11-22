@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using System.IO;
+using System.Reflection;
 
 namespace FlaUI.WebDriver
 {
@@ -7,6 +9,9 @@ namespace FlaUI.WebDriver
     {
         public static void Main(string[] args)
         {
+            string assemblyDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
+            Directory.SetCurrentDirectory(assemblyDir);
+
             CreateHostBuilder(args).Build().Run();
         }
 
