@@ -79,7 +79,7 @@ On Windows, the recommended selectors, in order of reliability are:
 | Partial link text selector | `"partial link text"`    | :white_check_mark: |
 | Tag name                   | `"tag name"`             | :white_check_mark: |
 | XPath selector             | `"xpath"`                |                    |
-| CSS selector               | `"css selector"`         |                    |
+| CSS selector               | `"css selector"`         | Only class names   |
 
 Using the Selenium C# client requires extending the `OpenQA.Selenium.By` class:
 
@@ -94,12 +94,11 @@ public class ExtendedBy : By
 
     public static ExtendedBy AccessibilityId(string accessibilityId) => new ExtendedBy("accessibility id", accessibilityId);
     public static ExtendedBy NativeName(string name) => new ExtendedBy("name", name);
-    public static ExtendedBy NativeClassName(string name) => new ExtendedBy("class name", name);
 }
 
 driver.FindElement(ExtendedBy.AccessibilityId("TextBox")).Click();
 driver.FindElement(ExtendedBy.NativeName("TextBox")).Click();
-driver.FindElement(ExtendedBy.NativeClassName("TextBox")).Click();
+driver.FindElement(By.ClassName("TextBox")).Click();
 driver.FindElement(By.LinkText("Button")).Click();
 driver.FindElement(By.PartialLinkText("Button")).Click();
 driver.FindElement(By.TagName("RadioButton")).Click();
@@ -133,7 +132,7 @@ Using the WebdriverIO JavaScript client:
 const result = driver.executeScript("powerShell", [{ command: `1+1` }]);
 ```
 
-## WebDriver Commands
+## Supported WebDriver Commands
 
 | Method | URI Template                                                   | Command                        | Implemented        |
 | ------ | -------------------------------------------------------------- | ------------------------------ | ------------------ |
@@ -161,13 +160,13 @@ const result = driver.executeScript("powerShell", [{ command: `1+1` }]);
 | POST   | /session/{session id}/window/minimize                          | Minimize Window                |                    |
 | POST   | /session/{session id}/window/fullscreen                        | Fullscreen Window              |                    |
 | GET    | /session/{session id}/element/active                           | Get Active Element             | :white_check_mark: |
-| GET    | /session/{session id}/element/{element id}/shadow              | Get Element Shadow Root        |                    |
+| GET    | /session/{session id}/element/{element id}/shadow              | Get Element Shadow Root        | N/A                |
 | POST   | /session/{session id}/element                                  | Find Element                   | :white_check_mark: |
 | POST   | /session/{session id}/elements                                 | Find Elements                  | :white_check_mark: |
 | POST   | /session/{session id}/element/{element id}/element             | Find Element From Element      | :white_check_mark: |
 | POST   | /session/{session id}/element/{element id}/elements            | Find Elements From Element     | :white_check_mark: |
-| POST   | /session/{session id}/shadow/{shadow id}/element               | Find Element From Shadow Root  |                    |
-| POST   | /session/{session id}/shadow/{shadow id}/elements              | Find Elements From Shadow Root |                    |
+| POST   | /session/{session id}/shadow/{shadow id}/element               | Find Element From Shadow Root  | N/A                |
+| POST   | /session/{session id}/shadow/{shadow id}/elements              | Find Elements From Shadow Root | N/A                |
 | GET    | /session/{session id}/element/{element id}/selected            | Is Element Selected            | :white_check_mark: |
 | GET    | /session/{session id}/element/{element id}/attribute/{name}    | Get Element Attribute          |                    |
 | GET    | /session/{session id}/element/{element id}/property/{name}     | Get Element Property           |                    |
@@ -198,3 +197,25 @@ const result = driver.executeScript("powerShell", [{ command: `1+1` }]);
 | GET    | /session/{session id}/screenshot                               | Take Screenshot                | :white_check_mark: |
 | GET    | /session/{session id}/element/{element id}/screenshot          | Take Element Screenshot        | :white_check_mark: |
 | POST   | /session/{session id}/print                                    | Print Page                     |                    |
+
+### WebDriver Interpretation
+
+There is an interpretation to use the WebDriver specification to drive native automation. Appium does not seem to describe that interpretation and leaves it up to the implementer as well. Therefore we describe it here:
+
+| WebDriver term                     | Interpretation                                                                                              |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| browser                            | The Windows OS on which the FlaUI.WebDriver instance is running                                             |
+| top-level browsing contexts        | Any window of the app under test (modal windows too)                                                        |
+| current top-level browsing context | The current selected window of the app under test                                                           |
+| browsing contexts                  | Any window of the app under test (No difference with "top-level browsing contexts")                         |
+| current browsing context           | The current selected window of the app under test (No difference with "current top-level browsing context") |
+| window                             | Any window of the app under test (modal windows too)                                                        |
+| frame                              | Not implemented - frames are only relevant for web drivers                                                  |
+| shadow root                        | Not implemented - shadow roots are only relevant for web drivers                                            |
+| cookie                             | Not implemented - cookies are only relevant for web drivers                                                 |
+
+## Next Steps
+
+Possible next steps for this project:
+
+- Distribute as [Appium driver](http://appium.io/docs/en/2.1/ecosystem/build-drivers/)
