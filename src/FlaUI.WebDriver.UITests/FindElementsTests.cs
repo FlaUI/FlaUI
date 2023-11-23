@@ -32,12 +32,23 @@ namespace FlaUI.WebDriver.UITests
         }
 
         [Test]
-        public void FindElement_ByClassName_ReturnsElement()
+        public void FindElement_ByNativeClassName_ReturnsElement()
         {
             var driverOptions = FlaUIDriverOptions.TestApp();
             using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
 
             var element = driver.FindElement(ExtendedBy.NonCssClassName("TextBlock"));
+
+            Assert.That(element, Is.Not.Null);
+        }
+
+        [Test]
+        public void FindElement_ByCssClassName_ReturnsElement()
+        {
+            var driverOptions = FlaUIDriverOptions.TestApp();
+            using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
+
+            var element = driver.FindElement(By.ClassName("TextBlock"));
 
             Assert.That(element, Is.Not.Null);
         }

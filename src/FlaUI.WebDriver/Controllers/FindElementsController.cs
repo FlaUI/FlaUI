@@ -106,6 +106,13 @@ namespace FlaUI.WebDriver.Controllers
                     return conditionFactory.ByText(value, PropertyConditionFlags.MatchSubstring);
                 case "tag name":
                     return conditionFactory.ByControlType(Enum.Parse<ControlType>(value));
+                case "css selector":
+                    if (value.StartsWith("."))
+                    {
+                        // class name
+                        return conditionFactory.ByClassName(value.Substring(1));
+                    }
+                    throw WebDriverResponseException.UnsupportedOperation($"Selector strategy 'css selector' with value '{value}' is not supported");
                 default:
                     throw WebDriverResponseException.UnsupportedOperation($"Selector strategy '{@using}' is not supported");
             }
