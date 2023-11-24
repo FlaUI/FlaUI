@@ -27,7 +27,13 @@ The following capabilities are supported:
 
 ## Getting Started
 
-Using the Selenium C# client:
+This driver currenlty is only available by building from source.
+Then after it has started, it can be used via WebDriver clients such as for example:
+
+- [Selenium.WebDriver](https://www.nuget.org/packages/Selenium.WebDriver)
+- [WebdriverIO](https://www.npmjs.com/package/webdriverio)
+
+Using the [Selenium.WebDriver](https://www.nuget.org/packages/Selenium.WebDriver) C# client:
 
 ```C#
 using OpenQA.Selenium;
@@ -53,7 +59,7 @@ public class FlaUIDriverOptions : DriverOptions
 var driver = new RemoteWebDriver(new Uri("http://localhost:4723"), FlaUIDriverOptions.App("C:\\YourApp.exe"))
 ```
 
-Using the WebdriverIO JavaScript client:
+Using the [WebdriverIO](https://www.npmjs.com/package/webdriverio) JavaScript client:
 
 ```JavaScript
 import { remote } from 'webdriverio'

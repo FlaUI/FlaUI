@@ -1,5 +1,6 @@
 ﻿using FlaUI.WebDriver.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,11 +11,13 @@ namespace FlaUI.WebDriver.Controllers
     [ApiController]
     public class ExecuteController : ControllerBase
     {
+        private readonly ILogger<ExecuteController> _logger;
         private readonly ISessionRepository _sessionRepository;
 
-        public ExecuteController(ISessionRepository sessionRepository)
+        public ExecuteController(ISessionRepository sessionRepository, ILogger<ExecuteController> logger)
         {
             _sessionRepository = sessionRepository;
+            _logger = logger;
         }
 
         [HttpPost("sync")]
@@ -29,7 +32,7 @@ namespace FlaUI.WebDriver.Controllers
                     throw WebDriverResponseException.UnsupportedOperation("Only 'powerShell' scripts are supported");
             }
         }
-        private static async Task<ActionResult> ExecutePowerShellScript(Session session, ExecuteScriptRequest executeScriptRequest)
+        private async Task<ActionResult> ExecutePowerShellScript(Session session, ExecuteScriptRequest executeScriptRequest)
         {
             if (executeScriptRequest.Args.Count != 1)
             {
@@ -40,6 +43,8 @@ namespace FlaUI.WebDriver.Controllers
             {
                 throw WebDriverResponseException.InvalidArgument("Expected a \"command\" property of the first argument for the PowerShell script");
             }
+
+            _logger.LogInformation("Executing PowerShell command {Command} (session {SessionId})", powerShellCommand, session.SessionId);
 
             var processStartInfo = new ProcessStartInfo("powershell.exe", $"-Command \"{powerShellCommand.Replace("\"", "\\\"")}\"")
             {

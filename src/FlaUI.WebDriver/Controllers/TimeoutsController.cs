@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace FlaUI.WebDriver.Controllers
@@ -8,10 +9,12 @@ namespace FlaUI.WebDriver.Controllers
     public class TimeoutsController : ControllerBase
     {
         private readonly ISessionRepository _sessionRepository;
+        private readonly ILogger<TimeoutsController> _logger;
 
-        public TimeoutsController(ISessionRepository sessionRepository) 
+        public TimeoutsController(ISessionRepository sessionRepository, ILogger<TimeoutsController> logger) 
         {
             _sessionRepository = sessionRepository;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -25,7 +28,10 @@ namespace FlaUI.WebDriver.Controllers
         public async Task<ActionResult> SetTimeouts([FromRoute] string sessionId, [FromBody] TimeoutsConfiguration timeoutsConfiguration)
         {
             var session = GetSession(sessionId);
+            _logger.LogInformation("Setting timeouts to {Timeouts} (session {SessionId})", timeoutsConfiguration, session.SessionId);
+
             session.TimeoutsConfiguration = timeoutsConfiguration;
+
             return await Task.FromResult(WebDriverResult.Success());
         }
 

@@ -26,7 +26,7 @@ namespace FlaUI.WebDriver.Controllers
         {
             var session = GetActiveSession(sessionId);
             var currentWindow = session.CurrentWindow;
-            _logger.LogInformation("Taking screenshot of window with title {WindowTitle}", currentWindow.Title);
+            _logger.LogInformation("Taking screenshot of window with title {WindowTitle} (session {SessionId})", currentWindow.Title, session.SessionId);
             using var bitmap = currentWindow.Capture();
             return await Task.FromResult(WebDriverResult.Success(GetBase64Data(bitmap)));
         }
@@ -36,7 +36,7 @@ namespace FlaUI.WebDriver.Controllers
         {
             var session = GetActiveSession(sessionId);
             var element = GetElement(session, elementId);
-            _logger.LogInformation("Taking screenshot of element with ID {ElementId}", elementId);
+            _logger.LogInformation("Taking screenshot of element with ID {ElementId} (session {SessionId})", elementId, session.SessionId);
             using var bitmap = element.Capture();
             return await Task.FromResult(WebDriverResult.Success(GetBase64Data(bitmap)));
         }

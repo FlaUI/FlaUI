@@ -88,7 +88,7 @@ namespace FlaUI.WebDriver.Controllers
             session.CurrentWindow = window;
             window.SetForeground();
 
-            _logger.LogInformation("Session {SessionId}: Switched to window with title {WindowTitle} (handle {WindowHandle})", sessionId, window.Title, switchWindowRequest.Handle);
+            _logger.LogInformation("Switched to window with title {WindowTitle} (handle {WindowHandle}) (session {SessionId})", window.Title, switchWindowRequest.Handle, session.SessionId);
             return await Task.FromResult(WebDriverResult.Success());
         }
 

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace FlaUI.WebDriver.Controllers
@@ -75,7 +76,7 @@ namespace FlaUI.WebDriver.Controllers
             }
             var session = new Session(app);
             _sessionRepository.Add(session);
-            _logger.LogInformation("Created session with ID {SessionId}", session.SessionId);
+            _logger.LogInformation("Created session with ID {SessionId} and capabilities {Capabilities}", session.SessionId, capabilities);
             return await Task.FromResult(WebDriverResult.Success(new CreateSessionResponse()
             {
                 SessionId = session.SessionId,
