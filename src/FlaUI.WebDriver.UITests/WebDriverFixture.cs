@@ -22,7 +22,9 @@ namespace FlaUI.WebDriver.UITests
             var assemblyConfigurationAttribute = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyConfigurationAttribute>();
             var buildConfigurationName = assemblyConfigurationAttribute?.Configuration;
 
-            var webDriverProcessStartInfo = new ProcessStartInfo($"..\\..\\..\\..\\FlaUI.WebDriver\\bin\\{buildConfigurationName}\\FlaUI.WebDriver.exe", $"--urls={WebDriverUrl}")
+            var webDriverPath = $"..\\..\\..\\..\\FlaUI.WebDriver\\bin\\{buildConfigurationName}\\FlaUI.WebDriver.exe";
+            var webDriverArguments = $"--urls={WebDriverUrl}";
+            var webDriverProcessStartInfo = new ProcessStartInfo(webDriverPath, webDriverArguments)
             {
                 RedirectStandardError = true,
                 RedirectStandardOutput = true
@@ -31,6 +33,7 @@ namespace FlaUI.WebDriver.UITests
             {
                 StartInfo = webDriverProcessStartInfo
             };
+            TestContext.Progress.WriteLine($"Attempting to start web driver with command {webDriverPath} {webDriverArguments}");
             _webDriverProcess.Start();
 
             System.Threading.Thread.Sleep(5000);
@@ -40,6 +43,7 @@ namespace FlaUI.WebDriver.UITests
                 if (error.Contains("address already in use"))
                 {
                     // For manual debugging of FlaUI.WebDriver it is nice to be able to start it separately
+                    TestContext.Progress.WriteLine("Using already running web driver instead");
                     return;
                 }
                 throw new Exception($"Could not start WebDriver: {error}");
@@ -51,10 +55,17 @@ namespace FlaUI.WebDriver.UITests
         {
             if (_webDriverProcess.HasExited)
             {
-                Console.WriteLine("WebDriver has exited");
+                var error = _webDriverProcess.StandardError.ReadToEnd();
+                Console.Error.WriteLine($"WebDriver has exited before end of the test: {error}");
             }
-            _webDriverProcess.Kill();
+            else
+            {
+                TestContext.Progress.WriteLine("Killing web driver");
+                _webDriverProcess.Kill(true);
+            }
+            TestContext.Progress.WriteLine("Disposing web driver");
             _webDriverProcess.Dispose();
+            TestContext.Progress.WriteLine("Finished disposing web driver");
         }
     }
 }

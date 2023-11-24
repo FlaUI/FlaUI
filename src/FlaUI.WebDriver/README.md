@@ -23,12 +23,18 @@ The following capabilities are supported:
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
 | platformName             | Must be set to `windows` (case-insensitive).                                                                                                                                                                                                | `windows`                         |
 | appium:app               | The path to the application. It is also possible to set app to `Root`. In such case the session will be invoked without any explicit target application. Either this capability or `appTopLevelWindow` must be provided on session startup. | `C:\Windows\System32\notepad.exe` |
+| appium:appArguments      | Application arguments string, for example `/?`.                                                                                                                                                                                             |
 | appium:appTopLevelWindow | The hexadecimal handle of an existing application top level window to attach to, for example `0x12345` (should be of string type). Either this capability or app must be provided on session startup.                                       | `0xC0B46`                         |
 
 ## Getting Started
 
-This driver currenlty is only available by building from source.
-Then after it has started, it can be used via WebDriver clients such as for example:
+This driver currenlty is only available by building from source. Start the web driver service with:
+
+```PowerShell
+./FlaUI.WebDriver.exe --urls=http://localhost:4723/
+```
+
+After it has started, it can be used via WebDriver clients such as for example:
 
 - [Selenium.WebDriver](https://www.nuget.org/packages/Selenium.WebDriver)
 - [WebdriverIO](https://www.npmjs.com/package/webdriverio)

@@ -1,11 +1,38 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
+  <PropertyGroup Label="Build">
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
-	<LangVersion>preview</LangVersion>
-	  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <LangVersion>preview</LangVersion>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package">
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageOutputPath>..\..\artifacts</PackageOutputPath>
+    <Version>0.1.0</Version>
+    <Product>FlaUI</Product>
+    <Authors>Roemer</Authors>
+    <Description>W3C WebDriver2 implementation on top of FlaUI with UIA3.</Description>
+    <Copyright>Copyright (c) 2023</Copyright>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/FlaUI/FlaUI</PackageProjectUrl>
+    <PackageIcon>FlaUI.png</PackageIcon>
+    <RepositoryUrl>https://github.com/FlaUI/FlaUI</RepositoryUrl>
+    <PackageTags>WebDriver UI Automation UIA3 UIA System.Windows.Automation</PackageTags>
+    <IncludeSource>True</IncludeSource>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Signing" Condition="'$(EnableSigning)'=='true'">
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>../../FlaUI.snk</AssemblyOriginatorKeyFile>
+    <PublicSign Condition="'$(OS)'!='Windows_NT'">true</PublicSign>
+    <PackageId>FlaUI.WebDriver.Signed</PackageId>
+    <OutputPath>bin\$(Configuration)\Signed</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\Signed</IntermediateOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,6 +42,12 @@
   <ItemGroup>
     <ProjectReference Include="..\FlaUI.Core\FlaUI.Core.csproj" />
     <ProjectReference Include="..\FlaUI.UIA3\FlaUI.UIA3.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Label="Additional nuget files">
+    <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="" />
+    <None Include="..\..\CHANGELOG.md" Pack="true" PackagePath="" />
+    <None Include="..\..\FlaUI.png" Pack="true" PackagePath="" />
   </ItemGroup>
 
 </Project>
