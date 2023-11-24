@@ -116,6 +116,22 @@ await driver.$('*=Button').click();
 await driver.$('<RadioButton />').click();
 ```
 
+## Windows
+
+The driver supports switching windows. The behavior of windows is as following (identical to behavior of e.g. the Chrome driver):
+
+- By default, the window is the window that the application was started with.
+- The window does not change if the app/user opens another window, also not if that window happens to be on the foreground.
+- ~~All open window handles from the same app process (same process ID in Windows) can be retrieved.~~ Currently only the main window and modal windows are returned when getting window handles. See issue below.
+- Other processes spawned by the app that open windows are not visible as window handles.
+  Those can be automated by starting a new driver session with e.g. the `appium:appTopLevelWindow` capability.
+- Closing a window does not automatically switch the window handle.
+  That means that after closing a window, most commands will return an error "no such window" until the window is switched.
+- Switching to a window will set that window in the foreground.
+
+> [!IMPORTANT]
+> Currently only the main window and modal windows are returned when getting window handles. See <https://github.com/FlaUI/FlaUI/issues/596>
+
 ## Running scripts
 
 The driver supports PowerShell commands.
@@ -146,7 +162,7 @@ const result = driver.executeScript("powerShell", [{ command: `1+1` }]);
 | POST   | /session/{session id}/back                                     | Back                           | N/A                |
 | POST   | /session/{session id}/forward                                  | Forward                        | N/A                |
 | POST   | /session/{session id}/refresh                                  | Refresh                        | N/A                |
-| GET    | /session/{session id}/title                                    | Get Title                      |                    |
+| GET    | /session/{session id}/title                                    | Get Title                      | :white_check_mark: |
 | GET    | /session/{session id}/window                                   | Get Window Handle              | :white_check_mark: |
 | DELETE | /session/{session id}/window                                   | Close Window                   | :white_check_mark: |
 | POST   | /session/{session id}/window                                   | Switch To Window               | :white_check_mark: |
@@ -154,8 +170,8 @@ const result = driver.executeScript("powerShell", [{ command: `1+1` }]);
 | POST   | /session/{session id}/window/new                               | New Window                     |                    |
 | POST   | /session/{session id}/frame                                    | Switch To Frame                | N/A                |
 | POST   | /session/{session id}/frame/parent                             | Switch To Parent Frame         | N/A                |
-| GET    | /session/{session id}/window/rect                              | Get Window Rect                |                    |
-| POST   | /session/{session id}/window/rect                              | Set Window Rect                |                    |
+| GET    | /session/{session id}/window/rect                              | Get Window Rect                | :white_check_mark: |
+| POST   | /session/{session id}/window/rect                              | Set Window Rect                | :white_check_mark: |
 | POST   | /session/{session id}/window/maximize                          | Maximize Window                |                    |
 | POST   | /session/{session id}/window/minimize                          | Minimize Window                |                    |
 | POST   | /session/{session id}/window/fullscreen                        | Fullscreen Window              |                    |
@@ -173,14 +189,14 @@ const result = driver.executeScript("powerShell", [{ command: `1+1` }]);
 | GET    | /session/{session id}/element/{element id}/css/{property name} | Get Element CSS Value          |                    |
 | GET    | /session/{session id}/element/{element id}/text                | Get Element Text               | :white_check_mark: |
 | GET    | /session/{session id}/element/{element id}/name                | Get Element Tag Name           |                    |
-| GET    | /session/{session id}/element/{element id}/rect                | Get Element Rect               |                    |
+| GET    | /session/{session id}/element/{element id}/rect                | Get Element Rect               | :white_check_mark: |
 | GET    | /session/{session id}/element/{element id}/enabled             | Is Element Enabled             |                    |
 | GET    | /session/{session id}/element/{element id}/computedrole        | Get Computed Role              |                    |
 | GET    | /session/{session id}/element/{element id}/computedlabel       | Get Computed Label             |                    |
 | POST   | /session/{session id}/element/{element id}/click               | Element Click                  | :white_check_mark: |
 | POST   | /session/{session id}/element/{element id}/clear               | Element Clear                  | :white_check_mark: |
 | POST   | /session/{session id}/element/{element id}/value               | Element Send Keys              | :white_check_mark: |
-| GET    | /session/{session id}/source                                   | Get Page Source                |                    |
+| GET    | /session/{session id}/source                                   | Get Page Source                | N/A                |
 | POST   | /session/{session id}/execute/sync                             | Execute Script                 | :white_check_mark: |
 | POST   | /session/{session id}/execute/async                            | Execute Async Script           |                    |
 | GET    | /session/{session id}/cookie                                   | Get All Cookies                | N/A                |

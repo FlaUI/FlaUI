@@ -148,6 +148,22 @@ namespace FlaUI.WebDriver.Controllers
             return WebDriverResult.Success();
         }
 
+        [HttpGet("{elementId}/rect")]
+        public async Task<ActionResult> GetElementRect([FromRoute] string sessionId, [FromRoute] string elementId)
+        {
+            var session = GetSession(sessionId);
+            var element = GetElement(session, elementId);
+            var elementBoundingRect = element.BoundingRectangle;
+            var elementRect = new ElementRect
+            {
+                X = elementBoundingRect.X,
+                Y = elementBoundingRect.Y,
+                Width = elementBoundingRect.Width,
+                Height = elementBoundingRect.Height
+            };
+            return await Task.FromResult(WebDriverResult.Success(elementRect));
+        }
+
         private static void ScrollElementContainerIntoView(AutomationElement element)
         {
             element.Patterns.ScrollItem.PatternOrDefault?.ScrollIntoView();

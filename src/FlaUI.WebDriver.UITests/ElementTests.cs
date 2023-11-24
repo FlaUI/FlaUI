@@ -132,6 +132,23 @@ namespace FlaUI.WebDriver.UITests
         }
 
         [Test]
+        public void GetElementRect_Default_IsSupported()
+        {
+            var driverOptions = FlaUIDriverOptions.TestApp();
+            using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
+            var element = driver.FindElement(ExtendedBy.AccessibilityId("InvokableButton"));
+
+            var location = element.Location;
+            var size = element.Size;
+
+            var windowLocation = driver.Manage().Window.Position;
+            Assert.That(location.X, Is.EqualTo(windowLocation.X + 11));
+            Assert.That(location.Y, Is.EqualTo(windowLocation.Y + 324));
+            Assert.That(size.Width, Is.EqualTo(607));
+            Assert.That(size.Height, Is.EqualTo(20));
+        }
+
+        [Test]
         public void ActiveElement_Default_IsSupported()
         {
             var driverOptions = FlaUIDriverOptions.TestApp();

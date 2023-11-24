@@ -128,6 +128,7 @@ Task("Run-UI-Tests")
     if (AppVeyor.IsRunningOnAppVeyor) {
         AppVeyor.UploadTestResults(resultFile, AppVeyorTestResultsType.NUnit3);
     }
+    Information("Finished Publishing WebDriver Results");
 });
 
 Task("Run-Tests")

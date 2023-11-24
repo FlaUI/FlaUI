@@ -112,6 +112,14 @@ namespace FlaUI.WebDriver.Controllers
             return await Task.FromResult(WebDriverResult.Success());
         }
 
+        [HttpGet("{sessionId}/title")]
+        public async Task<ActionResult> GetTitle([FromRoute] string sessionId)
+        {
+            var session = GetSession(sessionId);
+            var title = session.CurrentWindow.Title;
+            return await Task.FromResult(WebDriverResult.Success(title));
+        }
+
         private Session GetSession(string sessionId)
         {
             var session = _sessionRepository.FindById(sessionId);

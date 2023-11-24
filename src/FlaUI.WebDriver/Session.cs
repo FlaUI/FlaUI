@@ -16,6 +16,12 @@ namespace FlaUI.WebDriver
             Automation = new UIA3Automation();
             InputState = new InputState();
             TimeoutsConfiguration = new TimeoutsConfiguration();
+
+            if (app != null)
+            {
+                // We have to capture the initial window handle to be able to keep it stable
+                CurrentWindowWithHandle = GetOrAddKnownWindow(app.GetMainWindow(Automation, PageLoadTimeout));
+            }
         }
 
         public string SessionId { get; }
@@ -25,36 +31,32 @@ namespace FlaUI.WebDriver
         private Dictionary<string, KnownElement> KnownElementsByElementReference { get; } = new Dictionary<string, KnownElement>();
         private Dictionary<string, KnownWindow> KnownWindowsByWindowHandle { get; } = new Dictionary<string, KnownWindow>();
         public TimeSpan ImplicitWaitTimeout => TimeSpan.FromMilliseconds(TimeoutsConfiguration.ImplicitWaitTimeoutMs);
+        public TimeSpan PageLoadTimeout => TimeSpan.FromMilliseconds(TimeoutsConfiguration.PageLoadTimeoutMs);
         public TimeSpan? ScriptTimeout => TimeoutsConfiguration.ScriptTimeoutMs.HasValue ? TimeSpan.FromMilliseconds(TimeoutsConfiguration.ScriptTimeoutMs.Value) : null;
 
         public TimeoutsConfiguration TimeoutsConfiguration { get; set; }
 
-        private KnownWindow? _currentWindowCached;
+        private KnownWindow? CurrentWindowWithHandle { get; set; }
 
         public Window CurrentWindow
         {
             get
             {
-                if (App == null)
+                if (App == null || CurrentWindowWithHandle == null)
                 {
                     throw WebDriverResponseException.UnsupportedOperation("This operation is not supported for Root app");
                 }
-                if (_currentWindowCached == null)
-                {
-                    var mainWindow = App.GetMainWindow(Automation);
-                    _currentWindowCached = GetOrAddKnownWindow(mainWindow);
-                }
-                else if (_currentWindowCached.Window.IsMainWindow)
+                if (CurrentWindowWithHandle.Window.IsMainWindow)
                 {
                     // When expanding menus, calling `GetMainWindow` again is necessary to be able to find the expanded menu items
                     // This seems to be a bug (it isn't solved by using `CacheRequest.ForceNoCache()`)
                     return App.GetMainWindow(Automation);
                 }
-                return _currentWindowCached.Window;
+                return CurrentWindowWithHandle.Window;
             }
             set
             {
-                _currentWindowCached = GetOrAddKnownWindow(value);
+                CurrentWindowWithHandle = GetOrAddKnownWindow(value);
             }
         }
 
@@ -62,16 +64,11 @@ namespace FlaUI.WebDriver
         {
             get
             {
-                if (App == null)
+                if (App == null || CurrentWindowWithHandle == null)
                 {
                     throw WebDriverResponseException.UnsupportedOperation("This operation is not supported for Root app");
                 }
-                if (_currentWindowCached == null)
-                {
-                    var mainWindow = App.GetMainWindow(Automation);
-                    _currentWindowCached = GetOrAddKnownWindow(mainWindow);
-                }
-                return _currentWindowCached.WindowHandle;
+                return CurrentWindowWithHandle.WindowHandle;
             }
         }
 
@@ -128,8 +125,6 @@ namespace FlaUI.WebDriver
         {
             if (App != null && !App.HasExited)
             {
-                // This speeds up the app close
-                App.GetMainWindow(Automation).Close();
                 App.Close();
             }
             Automation.Dispose();

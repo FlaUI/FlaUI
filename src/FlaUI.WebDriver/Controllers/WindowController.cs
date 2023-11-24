@@ -1,4 +1,5 @@
-﻿using FlaUI.WebDriver.Models;
+﻿using FlaUI.Core.AutomationElements;
+using FlaUI.WebDriver.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -30,26 +31,21 @@ namespace FlaUI.WebDriver.Controllers
                 throw WebDriverResponseException.NoWindowsOpenForSession();
             }
 
+            // When closing the last window of the application, the `GetAllTopLevelWindows` function times out with an exception
+            // Therefore retrieve windows before closing the current one
+            // https://github.com/FlaUI/FlaUI/issues/596
+            var windowHandlesBeforeClose = GetWindowHandles(session).ToArray();
+
             var currentWindow = session.CurrentWindow;
             session.RemoveKnownWindow(currentWindow);
             currentWindow.Close();
 
-            // When closing the last window of the application, the `GetAllTopLevelWindows` function times out with an exception
-            // Therefore wait for some time
-            await Wait.Until(() => session.App.HasExited, TimeSpan.FromMilliseconds(2000));
-
-            var remainingWindowHandles = GetWindowHandles(session).ToArray();
+            var remainingWindowHandles = windowHandlesBeforeClose.Except(new[] { session.CurrentWindowHandle } );
             if (!remainingWindowHandles.Any())
             {
                 _sessionRepository.Delete(session);
                 session.Dispose();
                 _logger.LogInformation("Closed last window of session and therefore deleted session with ID {SessionId}", sessionId);
-            }
-            else
-            {
-                var mainWindow = session.App.GetMainWindow(session.Automation);
-                session.CurrentWindow = mainWindow;
-                _logger.LogInformation("Switching back to window with title {WindowTitle} (handle {WindowHandle})", mainWindow.Title, session.CurrentWindowHandle);
             }
             return await Task.FromResult(WebDriverResult.Success(remainingWindowHandles));
         }
@@ -66,11 +62,17 @@ namespace FlaUI.WebDriver.Controllers
         public async Task<ActionResult> GetWindowHandle([FromRoute] string sessionId)
         {
             var session = GetSession(sessionId);
+
+            if(session.FindKnownWindowByWindowHandle(session.CurrentWindowHandle) == null)
+            {
+                throw WebDriverResponseException.WindowNotFoundByHandle(session.CurrentWindowHandle);
+            }
+
             return await Task.FromResult(WebDriverResult.Success(session.CurrentWindowHandle));
         }
 
         [HttpPost]
-        public async Task<ActionResult> SwitchWindow([FromRoute] string sessionId, [FromBody] SwitchWindowRequest switchWindowRequest)
+        public async Task<ActionResult> SwitchToWindow([FromRoute] string sessionId, [FromBody] SwitchWindowRequest switchWindowRequest)
         {
             var session = GetSession(sessionId);
             if (session.App == null)
@@ -82,9 +84,50 @@ namespace FlaUI.WebDriver.Controllers
             {
                 throw WebDriverResponseException.WindowNotFoundByHandle(switchWindowRequest.Handle);
             }
+
             session.CurrentWindow = window;
+            window.SetForeground();
+
             _logger.LogInformation("Session {SessionId}: Switched to window with title {WindowTitle} (handle {WindowHandle})", sessionId, window.Title, switchWindowRequest.Handle);
             return await Task.FromResult(WebDriverResult.Success());
+        }
+
+        [HttpGet("rect")]
+        public async Task<ActionResult> GetWindowRect([FromRoute] string sessionId)
+        {
+            var session = GetSession(sessionId);
+            return await Task.FromResult(WebDriverResult.Success(GetWindowRect(session.CurrentWindow)));
+        }
+
+        [HttpPost("rect")]
+        public async Task<ActionResult> SetWindowRect([FromRoute] string sessionId, [FromBody] WindowRect windowRect)
+        {
+            var session = GetSession(sessionId);
+
+            if(!session.CurrentWindow.Patterns.Transform.IsSupported)
+            {
+                throw WebDriverResponseException.UnsupportedOperation("Cannot transform the current window");
+            }
+
+            if (windowRect.Width != null && windowRect.Height != null)
+            {
+                if (!session.CurrentWindow.Patterns.Transform.Pattern.CanResize)
+                {
+                    throw WebDriverResponseException.UnsupportedOperation("Cannot resize the current window");
+                }
+                session.CurrentWindow.Patterns.Transform.Pattern.Resize(windowRect.Width.Value, windowRect.Height.Value);
+            }
+
+            if (windowRect.X != null && windowRect.Y != null)
+            {
+                if (!session.CurrentWindow.Patterns.Transform.Pattern.CanMove)
+                {
+                    throw WebDriverResponseException.UnsupportedOperation("Cannot move the current window");
+                }
+                session.CurrentWindow.Move(windowRect.X.Value, windowRect.Y.Value);
+            }
+
+            return await Task.FromResult(WebDriverResult.Success(GetWindowRect(session.CurrentWindow)));
         }
 
         private IEnumerable<string> GetWindowHandles(Session session)
@@ -97,14 +140,29 @@ namespace FlaUI.WebDriver.Controllers
             {
                 return Enumerable.Empty<string>();
             }
-            if (session.App.GetMainWindow(session.Automation, TimeSpan.Zero) == null)
+            var mainWindow = session.App.GetMainWindow(session.Automation, TimeSpan.Zero);
+            if (mainWindow == null)
             {
                 return Enumerable.Empty<string>();
             }
-            var knownWindows = session.App.GetAllTopLevelWindows(session.Automation)
-                .SelectMany(topLevelWindow => topLevelWindow.ModalWindows.Prepend(topLevelWindow))
+
+            // GetAllTopLevelWindows sometimes times out, so we return only the main window and modal windows
+            // https://github.com/FlaUI/FlaUI/issues/596
+            var knownWindows = mainWindow.ModalWindows.Prepend(mainWindow)
                 .Select(session.GetOrAddKnownWindow);
             return knownWindows.Select(knownWindows => knownWindows.WindowHandle);
+        }
+
+        private WindowRect GetWindowRect(Window window)
+        {
+            var boundingRectangle = window.BoundingRectangle;
+            return new WindowRect
+            {
+                X = boundingRectangle.X, 
+                Y = boundingRectangle.Y,
+                Width = boundingRectangle.Width,
+                Height = boundingRectangle.Height
+            };
         }
 
         private Session GetSession(string sessionId)
