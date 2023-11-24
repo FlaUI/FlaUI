@@ -91,6 +91,9 @@ namespace FlaUI.WebDriver.Controllers
                 case "key":
                     await DispatchKeyAction(session, action);
                     return;
+                case "wheel":
+                    await DispatchWheelAction(session, action);
+                    return;
                 case "none":
                     await DispatchNullAction(session, action);
                     return;
@@ -133,6 +136,37 @@ namespace FlaUI.WebDriver.Controllers
                     return;
                 default:
                     throw WebDriverResponseException.InvalidArgument($"Pointer action subtype {action.SubType} unknown");
+            }
+        }
+
+        private static async Task DispatchWheelAction(Session session, Action action)
+        {
+            switch (action.SubType)
+            {
+                case "scroll":
+                    if (action.X == null || action.Y == null)
+                    {
+                        throw WebDriverResponseException.InvalidArgument("For wheel scroll, X and Y are required");
+                    }
+                    Mouse.MoveTo(action.X.Value, action.Y.Value);
+                    if (action.DeltaX == null || action.DeltaY == null)
+                    {
+                        throw WebDriverResponseException.InvalidArgument("For wheel scroll, delta X and delta Y are required");
+                    }
+                    if (action.DeltaY != 0)
+                    {
+                        Mouse.Scroll(action.DeltaY.Value);
+                    }
+                    if (action.DeltaX != 0)
+                    {
+                        Mouse.HorizontalScroll(action.DeltaX.Value);
+                    }
+                    return;
+                case "pause":
+                    await Task.Yield();
+                    return;
+                default:
+                    throw WebDriverResponseException.InvalidArgument($"Wheel action subtype {action.SubType} unknown");
             }
         }
 
@@ -248,8 +282,11 @@ namespace FlaUI.WebDriver.Controllers
             switch (action.SubType)
             {
                 case "pointerMove":
-                    Point point = new Point(action.X!.Value, action.Y!.Value);
-                    Mouse.MoveTo(point);
+                    if (action.X == null || action.Y == null)
+                    {
+                        throw WebDriverResponseException.InvalidArgument("For pointer move, X and Y are required");
+                    }
+                    Mouse.MoveTo(action.X.Value, action.Y.Value);
                     await Task.Yield();
                     return;
                 case "pointerDown":

@@ -10,6 +10,8 @@ namespace FlaUI.WebDriver.Models
         public string? Origin { get; set; }
         public int? X { get; set; }
         public int? Y { get; set; }
+        public int? DeltaX { get; set; }
+        public int? DeltaY { get; set; }
         public int? Width { get; set; }
         public int? Height { get; set; }
         public int? Pressure { get; set; }

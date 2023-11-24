@@ -14,6 +14,8 @@ namespace FlaUI.WebDriver
             Origin = actionItem.Origin;
             X = actionItem.X;
             Y = actionItem.Y;
+            DeltaX = actionItem.DeltaX;
+            DeltaY = actionItem.DeltaY;
             Width = actionItem.Width;
             Height = actionItem.Height;
             Pressure = actionItem.Pressure;
@@ -35,6 +37,8 @@ namespace FlaUI.WebDriver
             Origin = action.Origin;
             X = action.X;
             Y = action.Y;
+            DeltaX = action.DeltaX;
+            DeltaY = action.DeltaY;
             Width = action.Width;
             Height = action.Height;
             Pressure = action.Pressure;
@@ -54,6 +58,8 @@ namespace FlaUI.WebDriver
         public string? Origin { get; set; }
         public int? X { get; set; }
         public int? Y { get; set; }
+        public int? DeltaX { get; set; }
+        public int? DeltaY { get; set; }
         public int? Width { get; set; }
         public int? Height { get; set; }
         public int? Pressure { get; set; }

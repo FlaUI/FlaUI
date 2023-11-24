@@ -108,7 +108,6 @@ driver.FindElement(By.ClassName("TextBox")).Click();
 driver.FindElement(By.LinkText("Button")).Click();
 driver.FindElement(By.PartialLinkText("Button")).Click();
 driver.FindElement(By.TagName("RadioButton")).Click();
-
 ```
 
 Using the WebdriverIO JavaScript client (see [WebdriverIO Selectors guide](https://webdriver.io/docs/selectors):
