@@ -50,6 +50,7 @@ namespace FlaUI.WebDriver
                 {
                     // When expanding menus, calling `GetMainWindow` again is necessary to be able to find the expanded menu items
                     // This seems to be a bug (it isn't solved by using `CacheRequest.ForceNoCache()`)
+                    // https://github.com/FlaUI/FlaUI/issues/598
                     return App.GetMainWindow(Automation);
                 }
                 return CurrentWindowWithHandle.Window;

@@ -118,7 +118,7 @@ Task("Run-UI-Tests")
     }
 
     resultFile = artifactDir.CombineWithFilePath("WebDriverTestResult.xml");
-    NUnit3(@$"src\FlaUI.WebDriver.UITests\bin\{configuration}\net5.0-windows\FlaUI.WebDriver.UITests.dll", new NUnit3Settings
+    NUnit3(@$"src\FlaUI.WebDriver.UITests\bin\{configuration}\net6.0-windows\FlaUI.WebDriver.UITests.dll", new NUnit3Settings
     {
         Results = new[] {
             new NUnit3Result { FileName = resultFile, Format = "nunit3" }
@@ -128,7 +128,6 @@ Task("Run-UI-Tests")
     if (AppVeyor.IsRunningOnAppVeyor) {
         AppVeyor.UploadTestResults(resultFile, AppVeyorTestResultsType.NUnit3);
     }
-    Information("Finished Publishing WebDriver Results");
 });
 
 Task("Run-Tests")

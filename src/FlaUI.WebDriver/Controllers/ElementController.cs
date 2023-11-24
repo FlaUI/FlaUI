@@ -2,8 +2,6 @@
 using FlaUI.WebDriver.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
