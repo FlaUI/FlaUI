@@ -197,11 +197,11 @@ const result = driver.executeScript("powerShell", [{ command: `1+1` }]);
 | GET    | /session/{session id}/element/{element id}/selected            | Is Element Selected            | :white_check_mark: |
 | GET    | /session/{session id}/element/{element id}/attribute/{name}    | Get Element Attribute          |                    |
 | GET    | /session/{session id}/element/{element id}/property/{name}     | Get Element Property           |                    |
-| GET    | /session/{session id}/element/{element id}/css/{property name} | Get Element CSS Value          |                    |
+| GET    | /session/{session id}/element/{element id}/css/{property name} | Get Element CSS Value          | N/A                |
 | GET    | /session/{session id}/element/{element id}/text                | Get Element Text               | :white_check_mark: |
 | GET    | /session/{session id}/element/{element id}/name                | Get Element Tag Name           |                    |
 | GET    | /session/{session id}/element/{element id}/rect                | Get Element Rect               | :white_check_mark: |
-| GET    | /session/{session id}/element/{element id}/enabled             | Is Element Enabled             |                    |
+| GET    | /session/{session id}/element/{element id}/enabled             | Is Element Enabled             | :white_check_mark: |
 | GET    | /session/{session id}/element/{element id}/computedrole        | Get Computed Role              |                    |
 | GET    | /session/{session id}/element/{element id}/computedlabel       | Get Computed Label             |                    |
 | POST   | /session/{session id}/element/{element id}/click               | Element Click                  | :white_check_mark: |
@@ -237,9 +237,10 @@ There is an interpretation to use the WebDriver specification to drive native au
 | browsing contexts                  | Any window of the app under test (No difference with "top-level browsing contexts")                         |
 | current browsing context           | The current selected window of the app under test (No difference with "current top-level browsing context") |
 | window                             | Any window of the app under test (modal windows too)                                                        |
-| frame                              | Not implemented - frames are only relevant for web drivers                                                  |
-| shadow root                        | Not implemented - shadow roots are only relevant for web drivers                                            |
-| cookie                             | Not implemented - cookies are only relevant for web drivers                                                 |
+| frame                              | Not implemented - frames are only relevant for web browsers                                                 |
+| shadow root                        | Not implemented - shadow DOM is only relevant for web browsers                                              |
+| cookie                             | Not implemented - cookies are only relevant for web browsers                                                |
+| tag name                           | Control type in Windows                                                                                     |
 
 ## Next Steps
 

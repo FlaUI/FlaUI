@@ -39,6 +39,22 @@ namespace FlaUI.WebDriver.Controllers
             return await Task.FromResult(WebDriverResult.Success(!element.IsOffscreen));
         }
 
+        [HttpGet("{elementId}/enabled")]
+        public async Task<ActionResult> IsElementEnabled([FromRoute] string sessionId, [FromRoute] string elementId)
+        {
+            var session = GetActiveSession(sessionId);
+            var element = GetElement(session, elementId);
+            return await Task.FromResult(WebDriverResult.Success(element.IsEnabled));
+        }
+
+        [HttpGet("{elementId}/name")]
+        public async Task<ActionResult> GetElementTagName([FromRoute] string sessionId, [FromRoute] string elementId)
+        {
+            var session = GetActiveSession(sessionId);
+            var element = GetElement(session, elementId);
+            return await Task.FromResult(WebDriverResult.Success(element.ControlType));
+        }
+
         [HttpPost("{elementId}/click")]
         public async Task<ActionResult> ElementClick([FromRoute] string sessionId, [FromRoute] string elementId)
         {
