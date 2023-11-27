@@ -19,13 +19,13 @@ FlaUI.WebDriver is a [W3C WebDriver2](https://www.w3.org/TR/webdriver2/) impleme
 
 The following capabilities are supported:
 
-| Capability Name          | Description                                                                                                                                                                                                                                 | Example value                     |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
-| platformName             | Must be set to `windows` (case-insensitive).                                                                                                                                                                                                | `windows`                         |
-| appium:app               | The path to the application. It is also possible to set app to `Root`. In such case the session will be invoked without any explicit target application. Either this capability, `appTopLevelWindow` or `appTopLevelWindowTitleMatch` must be provided on session startup. | `C:\Windows\System32\notepad.exe` |
-| appium:appArguments      | Application arguments string, for example `/?`.                                                                                                                                                                                             |
-| appium:appTopLevelWindow | The hexadecimal handle of an existing application top level window to attach to, for example `0x12345` (should be of string type). Either this capability, `appTopLevelWindowTitleMatch` or `app` must be provided on session startup.                                       | `0xC0B46`                         |
-| appium:appTopLevelWindowTitleMatch | The title of an existing application top level window to attach to, for example `My App Window Title` (should be of string type). Either this capability, `appTopLevelWindow` or `app` must be provided on session startup.                                       | `My App Window Title - .*`                         |
+| Capability Name                    | Description                                                                                                                                                                                                                                                                | Example value                                       |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| platformName                       | Must be set to `windows` (case-insensitive).                                                                                                                                                                                                                               | `windows`                                           |
+| appium:app                         | The path to the application. It is also possible to set app to `Root`. In such case the session will be invoked without any explicit target application. Either this capability, `appTopLevelWindow` or `appTopLevelWindowTitleMatch` must be provided on session startup. | `C:\Windows\System32\notepad.exe`                   |
+| appium:appArguments                | Application arguments string, for example `/?`.                                                                                                                                                                                                                            |
+| appium:appTopLevelWindow           | The hexadecimal handle of an existing application top level window to attach to, for example `0x12345` (should be of string type). Either this capability, `appTopLevelWindowTitleMatch` or `app` must be provided on session startup.                                     | `0xC0B46`                                           |
+| appium:appTopLevelWindowTitleMatch | The title of an existing application top level window to attach to, for example `My App Window Title` (should be of string type). Either this capability, `appTopLevelWindow` or `app` must be provided on session startup.                                                | `My App Window Title` or `My App Window Title - .*` |
 
 ## Getting Started
 
@@ -83,16 +83,16 @@ const driver = await remote({
 
 On Windows, the recommended selectors, in order of reliability are:
 
-| Selector                   | Locator strategy keyword | Supported?         |
-| -------------------------- | ------------------------ | ------------------ |
-| Automation ID              | `"accessibility id"`     | :white_check_mark: |
-| Name                       | `"name"`                 | :white_check_mark: |
-| Class name                 | `"class name"`           | :white_check_mark: |
-| Link text selector         | `"link text"`            | :white_check_mark: |
-| Partial link text selector | `"partial link text"`    | :white_check_mark: |
-| Tag name                   | `"tag name"`             | :white_check_mark: |
-| XPath selector             | `"xpath"`                |                    |
-| CSS selector               | `"css selector"`         | Only ID, class name or `name` attribute selectors. CSS IDs is interpreted as automation IDs. |
+| Selector                   | Locator strategy keyword | Supported?                                                                           |
+| -------------------------- | ------------------------ | ------------------------------------------------------------------------------------ |
+| Automation ID              | `"accessibility id"`     | :white_check_mark:                                                                   |
+| Name                       | `"name"`                 | :white_check_mark:                                                                   |
+| Class name                 | `"class name"`           | :white_check_mark:                                                                   |
+| Link text selector         | `"link text"`            | :white_check_mark:                                                                   |
+| Partial link text selector | `"partial link text"`    | :white_check_mark:                                                                   |
+| Tag name                   | `"tag name"`             | :white_check_mark:                                                                   |
+| XPath selector             | `"xpath"`                |                                                                                      |
+| CSS selector               | `"css selector"`         | Only ID, class or `name` attribute selectors. IDs are interpreted as automation IDs. |
 
 Using the Selenium C# client requires extending the `OpenQA.Selenium.By` class:
 
@@ -218,18 +218,18 @@ const result = driver.executeScript("powerShell", [{ command: `1+1` }]);
 
 There is an interpretation to use the WebDriver specification to drive native automation. Appium does not seem to describe that interpretation and leaves it up to the implementer as well. Therefore we describe it here:
 
-| WebDriver term                     | Interpretation                                                                                              |
-| ---------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| browser                            | The Windows OS on which the FlaUI.WebDriver instance is running                                             |
-| top-level browsing contexts        | Any window of the app under test (modal windows too)                                                        |
-| current top-level browsing context | The current selected window of the app under test                                                           |
-| browsing contexts                  | Any window of the app under test (No difference with "top-level browsing contexts")                         |
-| current browsing context           | The current selected window of the app under test (No difference with "current top-level browsing context") |
-| window                             | Any window of the app under test (modal windows too)                                                        |
-| frame                              | Not implemented - frames are only relevant for web browsers                                                 |
-| shadow root                        | Not implemented - shadow DOM is only relevant for web browsers                                              |
-| cookie                             | Not implemented - cookies are only relevant for web browsers                                                |
-| tag name                           | Control type in Windows                                                                                     |
+| WebDriver term                     | Interpretation                                                                                    |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------- |
+| browser                            | The Windows OS on which the FlaUI.WebDriver instance is running                                   |
+| top-level browsing contexts        | Any window of the app under test (modal windows too)                                              |
+| current top-level browsing context | The current selected window of the app under test                                                 |
+| browsing contexts                  | Any window of the app under test (equal to "top-level browsing contexts")                         |
+| current browsing context           | The current selected window of the app under test (equal to "current top-level browsing context") |
+| window                             | Any window of the app under test (modal windows too)                                              |
+| frame                              | Not implemented - frames are only relevant for web browsers                                       |
+| shadow root                        | Not implemented - shadow DOM is only relevant for web browsers                                    |
+| cookie                             | Not implemented - cookies are only relevant for web browsers                                      |
+| tag name                           | Control type in Windows                                                                           |
 
 ## Next Steps
 
