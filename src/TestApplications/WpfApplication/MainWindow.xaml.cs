@@ -42,6 +42,23 @@ namespace WpfApplication
             }
         }
 
+        private void OnDisableForm(object sender, RoutedEventArgs e)
+        {
+            textBox.IsEnabled = false;
+            passwordBox.IsEnabled = false;
+            editableCombo.IsEnabled = false;
+            nonEditableCombo.IsEnabled = false;
+            listBox.IsEnabled = false;
+            checkBox.IsEnabled = false;
+            threeStateCheckbox.IsEnabled = false;
+            radioButton1.IsEnabled = false;
+            radioButton2.IsEnabled = false;
+            slider.IsEnabled = false;
+            invokableButton.IsEnabled = false;
+            PopupToggleButton1.IsEnabled = false;
+            lblMenuChk.IsEnabled = false;
+        }
+
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             var window = new Window1();

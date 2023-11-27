@@ -148,6 +148,56 @@ namespace FlaUI.WebDriver.UITests
             Assert.That(size.Height, Is.EqualTo(20));
         }
 
+        [TestCase("TextBox")]
+        [TestCase("PasswordBox")]
+        [TestCase("EditableCombo")]
+        [TestCase("NonEditableCombo")]
+        [TestCase("ListBox")]
+        [TestCase("SimpleCheckBox")]
+        [TestCase("ThreeStateCheckBox")]
+        [TestCase("RadioButton1")]
+        [TestCase("RadioButton2")]
+        [TestCase("Slider")]
+        [TestCase("InvokableButton")]
+        [TestCase("PopupToggleButton1")]
+        [TestCase("Label")]
+        public void GetElementEnabled_Enabled_ReturnsTrue(string elementAccessibilityId)
+        {
+            var driverOptions = FlaUIDriverOptions.TestApp();
+            using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
+            var element = driver.FindElement(ExtendedBy.AccessibilityId(elementAccessibilityId));
+
+            var enabled = element.Enabled;
+
+            Assert.That(enabled, Is.True);
+        }
+
+        [TestCase("TextBox")]
+        [TestCase("PasswordBox")]
+        [TestCase("EditableCombo")]
+        [TestCase("NonEditableCombo")]
+        [TestCase("ListBox")]
+        [TestCase("SimpleCheckBox")]
+        [TestCase("ThreeStateCheckBox")]
+        [TestCase("RadioButton1")]
+        [TestCase("RadioButton2")]
+        [TestCase("Slider")]
+        [TestCase("InvokableButton")]
+        [TestCase("PopupToggleButton1")]
+        [TestCase("Label")]
+        public void GetElementEnabled_Disabled_ReturnsFalse(string elementAccessibilityId)
+        {
+            var driverOptions = FlaUIDriverOptions.TestApp();
+            using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
+            driver.FindElement(ExtendedBy.NonCssName("_Edit")).Click();
+            driver.FindElement(ExtendedBy.NonCssName("Disable Form")).Click();
+            var element = driver.FindElement(ExtendedBy.AccessibilityId(elementAccessibilityId));
+
+            var enabled = element.Enabled;
+
+            Assert.That(enabled, Is.False);
+        }
+
         [Test]
         public void ActiveElement_Default_IsSupported()
         {

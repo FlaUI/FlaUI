@@ -28,6 +28,7 @@
                 </MenuItem>
                 <MenuItem Header="Paste" />
                 <MenuItem Header="Show Label" IsCheckable="true" IsChecked="true" Click="OnShowLabel"/>
+                <MenuItem Header="Disable Form" Click="OnDisableForm" />
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
@@ -37,30 +38,30 @@
             <TabItem Header="Simple Controls">
                 <StackPanel Orientation="Vertical">
                     <Label Content="Test Label" Foreground="Blue" />
-                    <TextBox AutomationProperties.AutomationId="TextBox" Text="Test TextBox" Foreground="Green"/>
-                    <PasswordBox AutomationProperties.AutomationId="PasswordBox" Password="MyPassword" />
-                    <ComboBox Width="120" IsEditable="True" AutomationProperties.AutomationId="EditableCombo">
+                    <TextBox AutomationProperties.AutomationId="TextBox" Text="Test TextBox" Foreground="Green" x:Name="textBox"/>
+                    <PasswordBox AutomationProperties.AutomationId="PasswordBox" Password="MyPassword" x:Name="passwordBox" />
+                    <ComboBox Width="120" IsEditable="True" AutomationProperties.AutomationId="EditableCombo" x:Name="editableCombo">
                         <TextBlock Text="Item 1" AutomationProperties.AutomationId="EditableComboItem1" />
                         <TextBlock Text="Item 2" AutomationProperties.AutomationId="EditableComboItem2" />
                         <TextBlock Text="Item 3" AutomationProperties.AutomationId="EditableComboItem3" />
                     </ComboBox>
                     <ComboBox Width="120" AutomationProperties.AutomationId="NonEditableCombo" IsEditable="False"
-                            SelectionChanged="Selector_OnSelectionChanged">
+                            SelectionChanged="Selector_OnSelectionChanged" x:Name="nonEditableCombo">
                         <TextBlock Text="Item 1" AutomationProperties.AutomationId="EditableComboItem1" />
                         <TextBlock Text="Item 2" AutomationProperties.AutomationId="EditableComboItem2" />
                         <TextBlock Text="Item 3" AutomationProperties.AutomationId="EditableComboItem3" />
                         <TextBlock Text="Item 4" AutomationProperties.AutomationId="EditableComboItem4" />
                     </ComboBox>
-                    <ListBox AutomationProperties.AutomationId="ListBox">
+                    <ListBox AutomationProperties.AutomationId="ListBox" x:Name="listBox">
                         <ListBoxItem>ListBox Item #1</ListBoxItem>
                         <ListBoxItem>ListBox Item #2</ListBoxItem>
                     </ListBox>
-                    <CheckBox Content="Test Checkbox" AutomationProperties.AutomationId="SimpleCheckBox" />
-                    <CheckBox Content="3-Way Test Checkbox" IsThreeState="True" AutomationProperties.AutomationId="ThreeStateCheckBox" />
-                    <RadioButton Content="RadioButton1" AutomationProperties.AutomationId="RadioButton1" />
-                    <RadioButton Content="RadioButton2" AutomationProperties.AutomationId="RadioButton2" />
+                    <CheckBox Content="Test Checkbox" AutomationProperties.AutomationId="SimpleCheckBox" x:Name="checkBox" />
+                    <CheckBox Content="3-Way Test Checkbox" IsThreeState="True" AutomationProperties.AutomationId="ThreeStateCheckBox" x:Name="threeStateCheckbox" />
+                    <RadioButton Content="RadioButton1" AutomationProperties.AutomationId="RadioButton1" x:Name="radioButton1" />
+                    <RadioButton Content="RadioButton2" AutomationProperties.AutomationId="RadioButton2" x:Name="radioButton2" />
                     <ProgressBar Value="50" AutomationProperties.AutomationId="ProgressBar" />
-                    <Slider Width="150" LargeChange="4" Maximum="10" Minimum="0" SmallChange="1" Value="5" AutomationProperties.AutomationId="Slider" />
+                    <Slider Width="150" LargeChange="4" Maximum="10" Minimum="0" SmallChange="1" Value="5" AutomationProperties.AutomationId="Slider" x:Name="slider" />
                     <Button Content="ContextMenu" AutomationProperties.AutomationId="ContextMenu">
                         <Button.ContextMenu>
                             <ContextMenu>
@@ -73,11 +74,11 @@
                     </Button>
                     <Button AutomationProperties.AutomationId="InvokableButton"
                             Command="{Binding InvokeButtonCommand}"
-                            Content="{Binding InvokeButtonText, FallbackValue=InvokableButton}" />
+                            Content="{Binding InvokeButtonText, FallbackValue=InvokableButton}" x:Name="invokableButton" />
                     <ScrollViewer Width="80" Height="80" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                         <Button Width="200" Height="200" Content="BigButton" />
                     </ScrollViewer>
-                    <ToggleButton Name="PopupToggleButton1">Popup Toggle 1</ToggleButton>
+                    <ToggleButton Name="PopupToggleButton1" AutomationProperties.AutomationId="PopupToggleButton1">Popup Toggle 1</ToggleButton>
                     <Popup IsOpen="{Binding IsChecked, ElementName=PopupToggleButton1}"
                            Placement="Bottom"
                            PlacementTarget="{Binding ElementName=PopupToggleButton1}"
@@ -94,7 +95,7 @@
                            Placement="Top"
                            PlacementTarget="{Binding ElementName=PopupToggleButton2}"
                            StaysOpen="False" />
-                    <Label Content="Menu Item Checked" Foreground="Red" x:Name="lblMenuChk"/>
+                    <Label Content="Menu Item Checked" AutomationProperties.AutomationId="Label" Foreground="Red" x:Name="lblMenuChk"/>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Complex Controls">

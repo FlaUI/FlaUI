@@ -38,15 +38,16 @@ namespace FlaUI.Core.UITests.Elements
             }
             else
             {
-                // On WPF test application has been added a new menu item "Show Label"
-                // under "Edit" menu, so now "Edit" menu has 3 menu items
-                Assert.That(subitems2, Has.Length.EqualTo(3));
+                // On WPF test application has been added a new menu item "Show Label" and "Disable Form"
+                // under "Edit" menu, so now "Edit" menu has 4 menu items
+                Assert.That(subitems2, Has.Length.EqualTo(4));
             }
             Assert.That(subitems2[0].Properties.Name, Is.EqualTo("Copy"));
             Assert.That(subitems2[1].Properties.Name, Is.EqualTo("Paste"));
             if (ApplicationType != TestApplicationType.WinForms)
             {
                 Assert.That(subitems2[2].Properties.Name, Is.EqualTo("Show Label"));
+                Assert.That(subitems2[3].Properties.Name, Is.EqualTo("Disable Form"));
             }
             var subsubitems1 = subitems2[0].Items;
             Assert.That(subsubitems1, Has.Length.EqualTo(2));
@@ -59,6 +60,7 @@ namespace FlaUI.Core.UITests.Elements
         {
             var window = Application.GetMainWindow(Automation);
             var menu = window.FindFirstChild(cf => cf.Menu()).AsMenu();
+            Assert.That(menu, Is.Not.Null);
             var edit = menu.Items["Edit"];
             Assert.That(edit, Is.Not.Null);
             Assert.That(edit.Properties.Name.Value, Is.EqualTo("Edit"));
