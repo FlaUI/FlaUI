@@ -26,5 +26,29 @@ namespace FlaUI.WebDriver.UITests.TestUtil
             return options;
         }
 
+        public static DriverOptions AppTopLevelWindow(string windowHandle)
+        {
+            var options = new FlaUIDriverOptions()
+            {
+                PlatformName = "Windows"
+            };
+            options.AddAdditionalOption("appium:appTopLevelWindow", windowHandle);
+            return options;
+        }
+
+        public static DriverOptions AppTopLevelWindowTitleMatch(string match)
+        {
+            var options = new FlaUIDriverOptions()
+            {
+                PlatformName = "Windows"
+            };
+            options.AddAdditionalOption("appium:appTopLevelWindowTitleMatch", match);
+            return options;
+        }
+
+        public static DriverOptions Empty()
+        {
+            return new FlaUIDriverOptions();
+        }
     }
 }

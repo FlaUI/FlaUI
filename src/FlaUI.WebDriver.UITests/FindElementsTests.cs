@@ -115,7 +115,7 @@ namespace FlaUI.WebDriver.UITests
 
             var findElement = () => driver.FindElement(ExtendedBy.AccessibilityId("NotExisting"));
 
-            Assert.That(findElement, Throws.Exception.TypeOf<NoSuchElementException>());
+            Assert.That(findElement, Throws.TypeOf<NoSuchElementException>());
         }
 
         [Test]
@@ -139,7 +139,7 @@ namespace FlaUI.WebDriver.UITests
 
             var findElement = () => fromElement.FindElement(ExtendedBy.AccessibilityId("TextBox"));
 
-            Assert.That(findElement, Throws.Exception.TypeOf<NoSuchElementException>());
+            Assert.That(findElement, Throws.TypeOf<NoSuchElementException>());
         }
 
         [Test]
@@ -163,7 +163,7 @@ namespace FlaUI.WebDriver.UITests
 
             var findElements = () => fromElement.FindElements(ExtendedBy.AccessibilityId("TextBox"));
 
-            Assert.That(findElements, Throws.Exception.TypeOf<NoSuchElementException>());
+            Assert.That(findElements, Throws.TypeOf<NoSuchElementException>());
         }
 
         [Test]
@@ -185,7 +185,7 @@ namespace FlaUI.WebDriver.UITests
 
             var findElements = () => driver.FindElements(ExtendedBy.AccessibilityId("NotExisting"));
 
-            Assert.That(findElements, Throws.Exception.TypeOf<NoSuchElementException>());
+            Assert.That(findElements, Throws.TypeOf<NoSuchElementException>());
         }
 
         [Test]
@@ -197,7 +197,7 @@ namespace FlaUI.WebDriver.UITests
 
             var findElement = () => driver.FindElement(ExtendedBy.AccessibilityId("TextBox"));
 
-            Assert.That(findElement, Throws.Exception.TypeOf<NoSuchElementException>());
+            Assert.That(findElement, Throws.TypeOf<NoSuchElementException>());
             var elementInNewWindow = driver.FindElement(ExtendedBy.AccessibilityId("Window1TextBox"));
             Assert.That(elementInNewWindow, Is.Not.Null);
         }
@@ -211,7 +211,7 @@ namespace FlaUI.WebDriver.UITests
 
             var findElements = () => driver.FindElements(ExtendedBy.AccessibilityId("TextBox"));
 
-            Assert.That(findElements, Throws.Exception.TypeOf<NoSuchElementException>());
+            Assert.That(findElements, Throws.TypeOf<NoSuchElementException>());
             var elementsInNewWindow = driver.FindElements(ExtendedBy.AccessibilityId("Window1TextBox"));
             Assert.That(elementsInNewWindow, Has.Count.EqualTo(1));
         }

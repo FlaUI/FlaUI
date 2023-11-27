@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FlaUI.WebDriver.Controllers
@@ -38,7 +39,7 @@ namespace FlaUI.WebDriver.Controllers
                 return WebDriverResult.Error(new ErrorResponse
                 {
                     ErrorCode = "session not created",
-                    Message = "Required capabilities did not match"
+                    Message = "Required capabilities did not match. Capability `platformName` with value `windows` is required"
                 });
             }
             if (capabilities.TryGetValue("appium:app", out var appPath))
@@ -52,7 +53,8 @@ namespace FlaUI.WebDriver.Controllers
                     capabilities.TryGetValue("appium:appArguments", out var appArguments);
                     try
                     {
-                        app = Core.Application.Launch(appPath, appArguments);
+                        var processStartInfo = new ProcessStartInfo(appPath, appArguments ?? "");
+                        app = Core.Application.Launch(processStartInfo);
                     }
                     catch(Exception e)
                     {
@@ -62,17 +64,17 @@ namespace FlaUI.WebDriver.Controllers
             }
             else if(capabilities.TryGetValue("appium:appTopLevelWindow", out var appTopLevelWindowString))
             {
-                var appTopLevelWindow = Convert.ToInt32(appTopLevelWindowString, 16);
-                var process = Process.GetProcesses().SingleOrDefault(process => process.MainWindowHandle.ToInt32() == appTopLevelWindow);
-                if (process == null)
-                {
-                    throw WebDriverResponseException.InvalidArgument($"Process with main window handle {appTopLevelWindow} could not be found");
-                }
+                Process process = GetProcessByMainWindowHandle(appTopLevelWindowString);
+                app = Core.Application.Attach(process);
+            }
+            else if (capabilities.TryGetValue("appium:appTopLevelWindowTitleMatch", out var appTopLevelWindowTitleMatch))
+            {
+                Process? process = GetProcessByMainWindowTitle(appTopLevelWindowTitleMatch);
                 app = Core.Application.Attach(process);
             }
             else
             {
-                throw WebDriverResponseException.InvalidArgument("Either appium:app or appium:appTopLevelWindow should be passed as a capability");
+                throw WebDriverResponseException.InvalidArgument("One of appium:app, appium:appTopLevelWindow or appium:appTopLevelWindowTitleMatch must be passed as a capability");
             }
             var session = new Session(app);
             _sessionRepository.Add(session);
@@ -82,6 +84,52 @@ namespace FlaUI.WebDriver.Controllers
                 SessionId = session.SessionId,
                 Capabilities = capabilities
             }));
+        }
+
+        private static Process GetProcessByMainWindowTitle(string appTopLevelWindowTitleMatch)
+        {
+            Regex appMainWindowTitleRegex;
+            try
+            {
+                appMainWindowTitleRegex = new Regex(appTopLevelWindowTitleMatch);
+            } 
+            catch(ArgumentException e)
+            {
+                throw WebDriverResponseException.InvalidArgument($"Capability appium:appTopLevelWindowTitleMatch '{appTopLevelWindowTitleMatch}' is not a valid regular expression: {e.Message}");
+            }
+            var processes = Process.GetProcesses().Where(process => appMainWindowTitleRegex.IsMatch(process.MainWindowTitle)).ToArray();
+            if (processes.Length == 0)
+            {
+                throw WebDriverResponseException.InvalidArgument($"Process with main window title matching '{appTopLevelWindowTitleMatch}' could not be found");
+            }
+            else if (processes.Length > 1)
+            {
+                throw WebDriverResponseException.InvalidArgument($"Found multiple ({processes.Length}) processes with main window title matching '{appTopLevelWindowTitleMatch}'");
+            }
+            return processes[0];
+        }
+
+        private static Process GetProcessByMainWindowHandle(string appTopLevelWindowString)
+        {
+            int appTopLevelWindow;
+            try
+            {
+                appTopLevelWindow = Convert.ToInt32(appTopLevelWindowString, 16);
+            }
+            catch (Exception)
+            {
+                throw WebDriverResponseException.InvalidArgument($"Capability appium:appTopLevelWindow '{appTopLevelWindowString}' is not a valid hexadecimal string");
+            }
+            if (appTopLevelWindow == 0)
+            {
+                throw WebDriverResponseException.InvalidArgument($"Capability appium:appTopLevelWindow '{appTopLevelWindowString}' should not be zero");
+            }
+            var process = Process.GetProcesses().SingleOrDefault(process => process.MainWindowHandle.ToInt32() == appTopLevelWindow);
+            if (process == null)
+            {
+                throw WebDriverResponseException.InvalidArgument($"Process with main window handle {appTopLevelWindowString} could not be found");
+            }
+            return process;
         }
 
         private static IEnumerable<Dictionary<string, string>> GetPossibleCapabilities(CreateSessionRequest request)

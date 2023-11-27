@@ -73,7 +73,7 @@ namespace FlaUI.WebDriver.UITests
 
             var getWindowHandle = () => driver.CurrentWindowHandle;
 
-            Assert.That(getWindowHandle, Throws.TypeOf<NoSuchWindowException>());
+            Assert.That(getWindowHandle, Throws.TypeOf<NoSuchWindowException>().With.Message.EqualTo("Test"));
         }
 
         [Test, Ignore("https://github.com/FlaUI/FlaUI/issues/596")]
@@ -113,7 +113,7 @@ namespace FlaUI.WebDriver.UITests
             driver.Close();
 
             var currentWindowHandle = () => driver.CurrentWindowHandle;
-            Assert.That(currentWindowHandle, Throws.Exception.TypeOf<WebDriverException>());        
+            Assert.That(currentWindowHandle, Throws.TypeOf<WebDriverException>().With.Message.StartsWith("No active session"));        
         }
 
         [Test]
