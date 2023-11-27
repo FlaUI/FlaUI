@@ -2,7 +2,6 @@ using FlaUI.WebDriver.UITests.TestUtil;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
-using System;
 using System.Linq;
 
 namespace FlaUI.WebDriver.UITests
@@ -21,7 +20,29 @@ namespace FlaUI.WebDriver.UITests
         }
 
         [Test]
+        public void FindElement_ById_ReturnsElement()
+        {
+            var driverOptions = FlaUIDriverOptions.TestApp();
+            using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
+
+            var element = driver.FindElement(By.Id("TextBox"));
+
+            Assert.That(element, Is.Not.Null);
+        }
+
+        [Test]
         public void FindElement_ByName_ReturnsElement()
+        {
+            var driverOptions = FlaUIDriverOptions.TestApp();
+            using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
+
+            var element = driver.FindElement(By.Name("Test Label"));
+
+            Assert.That(element, Is.Not.Null);
+        }
+
+        [Test]
+        public void FindElement_ByNativeName_ReturnsElement()
         {
             var driverOptions = FlaUIDriverOptions.TestApp();
             using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
@@ -43,7 +64,7 @@ namespace FlaUI.WebDriver.UITests
         }
 
         [Test]
-        public void FindElement_ByCssClassName_ReturnsElement()
+        public void FindElement_ByClassName_ReturnsElement()
         {
             var driverOptions = FlaUIDriverOptions.TestApp();
             using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);

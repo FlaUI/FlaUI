@@ -91,25 +91,13 @@ On Windows, the recommended selectors, in order of reliability are:
 | Partial link text selector | `"partial link text"`    | :white_check_mark: |
 | Tag name                   | `"tag name"`             | :white_check_mark: |
 | XPath selector             | `"xpath"`                |                    |
-| CSS selector               | `"css selector"`         | Only class names   |
+| CSS selector               | `"css selector"`         | Only ID, class name or `name` attribute selectors. CSS IDs is interpreted as automation IDs. |
 
 Using the Selenium C# client requires extending the `OpenQA.Selenium.By` class:
 
 ```C#
-using OpenQA.Selenium;
-
-public class ExtendedBy : By
-{
-    public ExtendedBy(string mechanism, string criteria) : base(mechanism, criteria)
-    {
-    }
-
-    public static ExtendedBy AccessibilityId(string accessibilityId) => new ExtendedBy("accessibility id", accessibilityId);
-    public static ExtendedBy NativeName(string name) => new ExtendedBy("name", name);
-}
-
-driver.FindElement(ExtendedBy.AccessibilityId("TextBox")).Click();
-driver.FindElement(ExtendedBy.NativeName("TextBox")).Click();
+driver.FindElement(By.Id("TextBox")).Click(); // Matches by automation ID
+driver.FindElement(By.Name("TextBox")).Click();
 driver.FindElement(By.ClassName("TextBox")).Click();
 driver.FindElement(By.LinkText("Button")).Click();
 driver.FindElement(By.PartialLinkText("Button")).Click();
