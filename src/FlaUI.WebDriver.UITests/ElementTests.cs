@@ -10,11 +10,11 @@ namespace FlaUI.WebDriver.UITests
     public class ElementTests
     {
         [Test]
-        public void GetText_Text_ReturnsRenderedText()
+        public void GetText_Label_ReturnsRenderedText()
         {
             var driverOptions = FlaUIDriverOptions.TestApp();
             using var driver = new RemoteWebDriver(WebDriverFixture.WebDriverUrl, driverOptions);
-            var element = driver.FindElement(ExtendedBy.AccessibilityId("lblMenuChk"));
+            var element = driver.FindElement(ExtendedBy.AccessibilityId("Label"));
 
             var text = element.Text;
 
