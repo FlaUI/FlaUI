@@ -2,8 +2,6 @@
   <PropertyGroup Label="Build Properties">
     <TargetFramework>net8.0-windows</TargetFramework>
     <LangVersion>12</LangVersion>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
     <UseWindowsForms>true</UseWindowsForms>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <ApplicationIcon>WinFormsApp.ico</ApplicationIcon>

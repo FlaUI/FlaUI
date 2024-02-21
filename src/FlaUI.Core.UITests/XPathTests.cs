@@ -2,7 +2,6 @@
 using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
-using OperatingSystem = FlaUI.Core.Tools.OperatingSystem;
 
 namespace FlaUI.Core.UITests
 {
