@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestApplications", "TestApp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsApplication", "TestApplications\WinFormsApplication\WinFormsApplication.csproj", "{FAEBBDD3-8230-4FC9-A316-05F5243C94DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplication", "TestApplications\WpfApplication\WpfApplication.csproj", "{C8276299-FA43-409B-A969-EF030AB56224}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfApplication", "TestApplications\WpfApplication\WpfApplication.csproj", "{C8276299-FA43-409B-A969-EF030AB56224}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlaUI.TestUtilities", "FlaUI.TestUtilities\FlaUI.TestUtilities.csproj", "{54DA021E-EE2F-4C7A-9484-B71FD02CE513}"
 EndProject
