@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3DFE78D4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlaUI.Core.UnitTests", "FlaUI.Core.UnitTests\FlaUI.Core.UnitTests.csproj", "{AFE453D1-C9B6-43D0-835F-BAE465063453}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlaUI.Core.UITests", "FlaUI.Core.UITests\FlaUI.Core.UITests.csproj", "{93D2F76D-8C08-407B-AE64-0F6475CDB348}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlaUI.Core.UITests", "FlaUI.Core.UITests\FlaUI.Core.UITests.csproj", "{93D2F76D-8C08-407B-AE64-0F6475CDB348}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestApplications", "TestApplications", "{00BCF82A-388A-4DC9-A1E2-6D6D983BAEE3}"
 EndProject
