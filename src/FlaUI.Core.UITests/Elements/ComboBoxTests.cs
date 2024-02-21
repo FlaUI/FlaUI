@@ -108,7 +108,7 @@ namespace FlaUI.Core.UITests.Elements
         {
             var combo = _mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("NonEditableCombo")).AsComboBox();
             var isOffscreen = combo.Items[comboBoxItem].IsOffscreen;
-            Assert.IsFalse(isOffscreen);
+            Assert.That(isOffscreen, Is.False);
             combo.Collapse();
         }
     }

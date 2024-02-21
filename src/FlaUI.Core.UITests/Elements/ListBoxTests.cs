@@ -34,9 +34,10 @@ namespace FlaUI.Core.UITests.Elements
             Assert.That(listBox.Items, Has.Length.EqualTo(2));
             Assert.That(listBox.Items[0], Is.InstanceOf<ListBoxItem>());
             Assert.That(listBox.Items[1], Is.InstanceOf<ListBoxItem>());
-            Assert.IsNull(listBox.SelectedItem);
+            Assert.That(listBox.SelectedItem, Is.Null);
             var item = listBox.Select(0);
             Assert.That(item.Text, Is.EqualTo("ListBox Item #1"));
+            Assert.That(listBox.SelectedItem, Is.Not.Null);
             Assert.That(listBox.SelectedItem.Text, Is.EqualTo("ListBox Item #1"));
             item = listBox.Select(1);
             Assert.That(item.Text, Is.EqualTo("ListBox Item #2"));
