@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlaUI.Core.UITests", "FlaUI
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestApplications", "TestApplications", "{00BCF82A-388A-4DC9-A1E2-6D6D983BAEE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsApplication", "TestApplications\WinFormsApplication\WinFormsApplication.csproj", "{FAEBBDD3-8230-4FC9-A316-05F5243C94DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinFormsApplication", "TestApplications\WinFormsApplication\WinFormsApplication.csproj", "{FAEBBDD3-8230-4FC9-A316-05F5243C94DA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfApplication", "TestApplications\WpfApplication\WpfApplication.csproj", "{C8276299-FA43-409B-A969-EF030AB56224}"
 EndProject
