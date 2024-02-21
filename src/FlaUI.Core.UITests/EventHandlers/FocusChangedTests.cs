@@ -8,6 +8,7 @@ using FlaUI.Core.WindowsAPI;
 using FlaUI.TestUtilities;
 using FlaUI.UIA3;
 using NUnit.Framework;
+using OperatingSystem = FlaUI.Core.Tools.OperatingSystem;
 
 namespace FlaUI.Core.UITests.EventHandlers
 {

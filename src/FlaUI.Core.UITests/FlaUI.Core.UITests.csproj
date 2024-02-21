@@ -1,11 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
+  <PropertyGroup Label="Build Properties">
     <TargetFramework>net8.0-windows</TargetFramework>
+    <LangVersion>12</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <OutputPath>bin\</OutputPath>
   </PropertyGroup>
-  <ItemGroup>
+
+  <ItemGroup Label="Services">
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+
+  <ItemGroup Label="Project References">
     <ProjectReference Include="..\FlaUI.Core\FlaUI.Core.csproj" />
     <ProjectReference Include="..\FlaUI.TestUtilities\FlaUI.TestUtilities.csproj" />
     <ProjectReference Include="..\FlaUI.UIA2\FlaUI.UIA2.csproj" />
@@ -13,15 +21,9 @@
     <ProjectReference Include="..\TestApplications\WinFormsApplication\WinFormsApplication.csproj" />
     <ProjectReference Include="..\TestApplications\WpfApplication\WpfApplication.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="NUnit">
-      <Version>4.0.1</Version>
-    </PackageReference>
-    <PackageReference Include="NUnit3TestAdapter">
-      <Version>4.5.0</Version>
-    </PackageReference>
+
+  <ItemGroup Label="Package References">
+    <PackageReference Include="NUnit" Version="4.0.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
   </ItemGroup>
 </Project>
