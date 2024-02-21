@@ -2,12 +2,10 @@
   <PropertyGroup Label="Build Properties">
     <TargetFramework>net8.0-windows</TargetFramework>
     <LangVersion>12</LangVersion>
+    <OutputType>WinExe</OutputType>
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <ApplicationIcon>WPFApp.ico</ApplicationIcon>
-    <OutputType>WinExe</OutputType>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <OutputPath>bin\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup Label="Resources">
