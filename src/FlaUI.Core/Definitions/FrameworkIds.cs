@@ -38,7 +38,7 @@ namespace FlaUI.Core.Definitions
         /// </summary>
         /// <param name="frameworkType">The <see cref="FrameworkType"/> to convert.</param>
         /// <returns>The matched string.</returns>
-        public static string Convert(FrameworkType frameworkType)
+        public static string? Convert(FrameworkType frameworkType)
         {
             if (TypeMapping.TryGetValue(frameworkType, out var frameworkId))
             {

@@ -30,7 +30,7 @@ namespace FlaUI.Core.Tools
             if (itemContainerPattern != null)
             {
                 // There's the item container pattern so we can go thru all elements and just realize them
-                AutomationElement currentElement = null;
+                AutomationElement? currentElement = null;
                 while (true)
                 {
                     currentElement = itemContainerPattern.FindItemByProperty(currentElement, null, null);
@@ -63,7 +63,7 @@ namespace FlaUI.Core.Tools
             }
         }
 
-        private static void ResetScroll(IScrollPattern scrollPattern, double hScrollPercentage, double vScrollPercentage)
+        private static void ResetScroll(IScrollPattern? scrollPattern, double hScrollPercentage, double vScrollPercentage)
         {
             scrollPattern?.SetScrollPercent(hScrollPercentage, vScrollPercentage);
         }

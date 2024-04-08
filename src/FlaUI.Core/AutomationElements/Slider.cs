@@ -19,9 +19,9 @@ namespace FlaUI.Core.AutomationElements
         {
         }
 
-        private IRangeValuePattern RangeValuePattern => Patterns.RangeValue.PatternOrDefault;
+        private IRangeValuePattern? RangeValuePattern => Patterns.RangeValue.PatternOrDefault;
 
-        private IValuePattern ValuePattern => Patterns.Value.PatternOrDefault;
+        private IValuePattern? ValuePattern => Patterns.Value.PatternOrDefault;
 
         /// <summary>
         /// The minimum value.
@@ -46,17 +46,17 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// The button element used to perform a large increment.
         /// </summary>
-        public Button LargeIncreaseButton => GetLargeIncreaseButton();
+        public Button? LargeIncreaseButton => GetLargeIncreaseButton();
 
         /// <summary>
         /// The button element used to perform a large decrement.
         /// </summary>
-        public Button LargeDecreaseButton => GetLargeDecreaseButton();
+        public Button? LargeDecreaseButton => GetLargeDecreaseButton();
 
         /// <summary>
         /// The element used to drag.
         /// </summary>
-        public Thumb Thumb => FindFirstChild(cf => cf.ByControlType(ControlType.Thumb))?.AsThumb();
+        public Thumb? Thumb => FindFirstChild(cf => cf.ByControlType(ControlType.Thumb))?.AsThumb();
 
         /// <summary>
         /// Flag which indicates if the <see cref="Slider"/> supports range values (min->max) or only values (0-100).
@@ -106,7 +106,7 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public void LargeIncrement()
         {
-            LargeIncreaseButton.Invoke();
+            LargeIncreaseButton?.Invoke();
         }
 
         /// <summary>
@@ -114,10 +114,10 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         public void LargeDecrement()
         {
-            LargeDecreaseButton.Invoke();
+            LargeDecreaseButton?.Invoke();
         }
 
-        private Button GetLargeIncreaseButton()
+        private Button? GetLargeIncreaseButton()
         {
             if (FrameworkType == FrameworkType.Wpf)
             {
@@ -128,7 +128,7 @@ namespace FlaUI.Core.AutomationElements
             var buttons = FindAllChildren(cf => cf.ByControlType(ControlType.Button));
             foreach (var button in buttons)
             {
-                if (button.Properties.BoundingRectangle.Value.Left > Thumb.Properties.BoundingRectangle.Value.Left)
+                if (button.Properties.BoundingRectangle.Value.Left > Thumb?.Properties.BoundingRectangle.Value.Left)
                 {
                     return button.AsButton();
                 }
@@ -136,7 +136,7 @@ namespace FlaUI.Core.AutomationElements
             return null;
         }
 
-        private Button GetLargeDecreaseButton()
+        private Button? GetLargeDecreaseButton()
         {
             if (FrameworkType == FrameworkType.Wpf)
             {
@@ -147,7 +147,7 @@ namespace FlaUI.Core.AutomationElements
             var buttons = FindAllChildren(cf => cf.ByControlType(ControlType.Button));
             foreach (var button in buttons)
             {
-                if (button.Properties.BoundingRectangle.Value.Right < Thumb.Properties.BoundingRectangle.Value.Right)
+                if (button.Properties.BoundingRectangle.Value.Right < Thumb?.Properties.BoundingRectangle.Value.Right)
                 {
                     return button.AsButton();
                 }

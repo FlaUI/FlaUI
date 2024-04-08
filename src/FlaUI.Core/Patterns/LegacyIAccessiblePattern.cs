@@ -42,16 +42,16 @@ namespace FlaUI.Core.Patterns
     public abstract partial class LegacyIAccessiblePatternBase<TNativePattern> : PatternBase<TNativePattern>, ILegacyIAccessiblePattern
         where TNativePattern : class
     {
-        private AutomationProperty<int> _childId;
-        private AutomationProperty<string> _defaultAction;
-        private AutomationProperty<string> _description;
-        private AutomationProperty<string> _help;
-        private AutomationProperty<string> _keyboardShortcut;
-        private AutomationProperty<string> _name;
-        private AutomationProperty<AccessibilityRole> _role;
-        private AutomationProperty<AutomationElement[]> _selection;
-        private AutomationProperty<AccessibilityState> _state;
-        private AutomationProperty<string> _value;
+        private AutomationProperty<int>? _childId;
+        private AutomationProperty<string>? _defaultAction;
+        private AutomationProperty<string>? _description;
+        private AutomationProperty<string>? _help;
+        private AutomationProperty<string>? _keyboardShortcut;
+        private AutomationProperty<string>? _name;
+        private AutomationProperty<AccessibilityRole>? _role;
+        private AutomationProperty<AutomationElement[]>? _selection;
+        private AutomationProperty<AccessibilityState>? _state;
+        private AutomationProperty<string>? _value;
 
         protected LegacyIAccessiblePatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {

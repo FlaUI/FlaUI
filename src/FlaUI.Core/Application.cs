@@ -212,7 +212,7 @@ namespace FlaUI.Core
         /// </summary>
         /// <param name="executable">The executable to launch.</param>
         /// <param name="arguments">Arguments to executable</param>
-        public static Application Launch(string executable, string arguments = null)
+        public static Application Launch(string executable, string? arguments = null)
         {
             var processStartInfo = new ProcessStartInfo(executable, arguments);
             return Launch(processStartInfo);
@@ -238,7 +238,7 @@ namespace FlaUI.Core
             Process process;
             try
             {
-                process = Process.Start(processStartInfo);
+                process = Process.Start(processStartInfo)!;
             }
             catch (Win32Exception ex)
             {
@@ -260,7 +260,7 @@ namespace FlaUI.Core
         /// </summary>
         /// <param name="appUserModelId">The app id of the application to launch.</param>
         /// <param name="arguments">The arguments to pass to the application.</param>
-        public static Application LaunchStoreApp(string appUserModelId, string arguments = null)
+        public static Application LaunchStoreApp(string appUserModelId, string? arguments = null)
         {
             var process = WindowsStoreAppLauncher.Launch(appUserModelId, arguments);
             return new Application(process, true);
@@ -300,7 +300,7 @@ namespace FlaUI.Core
         /// <param name="automation">The automation object to use.</param>
         /// <param name="waitTimeout">An optional timeout. If null is passed, the timeout is infinite.</param>
         /// <returns>The main window object as <see cref="Window" /> or null if no main window was found within the timeout.</returns>
-        public Window GetMainWindow(AutomationBase automation, TimeSpan? waitTimeout = null)
+        public Window? GetMainWindow(AutomationBase automation, TimeSpan? waitTimeout = null)
         {
             WaitWhileMainHandleIsMissing(waitTimeout);
             var mainWindowHandle = MainWindowHandle;

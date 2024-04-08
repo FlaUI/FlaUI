@@ -2,12 +2,14 @@
 using FlaUI.Core.Exceptions;
 using FlaUI.Core.Patterns;
 using FlaUI.UIA2.Patterns;
+using System.Diagnostics.CodeAnalysis;
 using UIA = System.Windows.Automation;
 
 namespace FlaUI.UIA2
 {
     public partial class UIA2FrameworkAutomationElement
     {
+        [DoesNotReturn]
         protected override IAutomationPattern<IAnnotationPattern> InitializeAnnotationPattern()
         {
             throw new NotSupportedByFrameworkException();
@@ -19,11 +21,13 @@ namespace FlaUI.UIA2
                 DockPattern.Pattern, this, (b, p) => new DockPattern(b, p));
         }
 
+        [DoesNotReturn]
         protected override IAutomationPattern<IDragPattern> InitializeDragPattern()
         {
             throw new NotSupportedByFrameworkException();
         }
 
+        [DoesNotReturn]
         protected override IAutomationPattern<IDropTargetPattern> InitializeDropTargetPattern()
         {
             throw new NotSupportedByFrameworkException();
@@ -63,6 +67,7 @@ namespace FlaUI.UIA2
 #endif
         }
 
+        [DoesNotReturn]
         protected override IAutomationPattern<ILegacyIAccessiblePattern> InitializeLegacyIAccessiblePattern()
         {
             throw new NotSupportedByFrameworkException();
@@ -74,6 +79,7 @@ namespace FlaUI.UIA2
                 MultipleViewPattern.Pattern, this, (b, p) => new MultipleViewPattern(b, p));
         }
 
+        [DoesNotReturn]
         protected override IAutomationPattern<IObjectModelPattern> InitializeObjectModelPattern()
         {
             throw new NotSupportedByFrameworkException();
@@ -103,6 +109,7 @@ namespace FlaUI.UIA2
                 SelectionItemPattern.Pattern, this, (b, p) => new SelectionItemPattern(b, p));
         }
 
+        [DoesNotReturn]
         protected override IAutomationPattern<ISelection2Pattern> InitializeSelection2Pattern()
         {
             throw new NotSupportedByFrameworkException();
@@ -114,16 +121,19 @@ namespace FlaUI.UIA2
                 SelectionPattern.Pattern, this, (b, p) => new SelectionPattern(b, p));
         }
 
+        [DoesNotReturn]
         protected override IAutomationPattern<ISpreadsheetItemPattern> InitializeSpreadsheetItemPattern()
         {
             throw new NotSupportedByFrameworkException();
         }
 
+        [DoesNotReturn]
         protected override IAutomationPattern<ISpreadsheetPattern> InitializeSpreadsheetPattern()
         {
             throw new NotSupportedByFrameworkException();
         }
 
+        [DoesNotReturn]
         protected override IAutomationPattern<IStylesPattern> InitializeStylesPattern()
         {
             throw new NotSupportedByFrameworkException();
@@ -151,16 +161,19 @@ namespace FlaUI.UIA2
                 TablePattern.Pattern, this, (b, p) => new TablePattern(b, p));
         }
 
+        [DoesNotReturn]
         protected override IAutomationPattern<ITextChildPattern> InitializeTextChildPattern()
         {
             throw new NotSupportedByFrameworkException();
         }
 
+        [DoesNotReturn]
         protected override IAutomationPattern<ITextEditPattern> InitializeTextEditPattern()
         {
             throw new NotSupportedByFrameworkException();
         }
 
+        [DoesNotReturn]
         protected override IAutomationPattern<IText2Pattern> InitializeText2Pattern()
         {
             throw new NotSupportedByFrameworkException();
@@ -178,6 +191,7 @@ namespace FlaUI.UIA2
                 TogglePattern.Pattern, this, (b, p) => new TogglePattern(b, p));
         }
 
+        [DoesNotReturn]
         protected override IAutomationPattern<ITransform2Pattern> InitializeTransform2Pattern()
         {
             throw new NotSupportedByFrameworkException();

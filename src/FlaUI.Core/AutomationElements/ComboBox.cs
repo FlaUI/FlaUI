@@ -31,7 +31,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Pattern object for the <see cref="ISelectionPattern"/>.
         /// </summary>
-        protected ISelectionPattern SelectionPattern => Patterns.Selection.PatternOrDefault;
+        protected ISelectionPattern? SelectionPattern => Patterns.Selection.PatternOrDefault;
 
         /// <summary>
         /// The text of the editable element inside the combobox.
@@ -125,7 +125,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Gets the first selected item or null otherwise.
         /// </summary>
-        public ComboBoxItem SelectedItem => SelectedItems?.FirstOrDefault();
+        public ComboBoxItem? SelectedItem => SelectedItems.FirstOrDefault();
 
         /// <summary>
         /// Gets all items.
@@ -140,7 +140,7 @@ namespace FlaUI.Core.AutomationElements
                 {
                     // WinForms and Win32
                     var listElement = FindFirstChild(cf => cf.ByControlType(ControlType.List));
-                    items = listElement.FindAllChildren();
+                    items = listElement?.FindAllChildren() ?? Array.Empty<AutomationElement>();
                 }
                 else
                 {
@@ -188,7 +188,7 @@ namespace FlaUI.Core.AutomationElements
             if (FrameworkType == FrameworkType.WinForms)
             {
                 // WinForms
-                var openButton = FindFirstChild(cf => cf.ByControlType(ControlType.Button)).AsButton();
+                var openButton = FindFirstChild(cf => cf.ByControlType(ControlType.Button))!.AsButton();
                 openButton.Invoke();
             }
             else
@@ -213,7 +213,7 @@ namespace FlaUI.Core.AutomationElements
             if (FrameworkType == FrameworkType.WinForms)
             {
                 // WinForms
-                var openButton = FindFirstChild(cf => cf.ByControlType(ControlType.Button)).AsButton();
+                var openButton = FindFirstChild(cf => cf.ByControlType(ControlType.Button))!.AsButton();
                 if (IsEditable)
                 {
                     // WinForms editable combo box only closes on click and not on invoke
@@ -249,14 +249,14 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         /// <param name="textToFind">The text to search for.</param>
         /// <returns>The first found item or null if no item matches.</returns>
-        public ComboBoxItem Select(string textToFind)
+        public ComboBoxItem? Select(string textToFind)
         {
             var foundItem = Items.FirstOrDefault(item => item.Text.Equals(textToFind));
             foundItem?.Select();
             return foundItem;
         }
 
-        private AutomationElement GetEditableElement()
+        private AutomationElement? GetEditableElement()
         {
             return FindFirstChild(cf => cf.ByControlType(ControlType.Edit));
         }

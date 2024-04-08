@@ -23,8 +23,8 @@ namespace FlaUI.Core.Patterns
     public abstract class MultipleViewPatternBase<TNativePattern> : PatternBase<TNativePattern>, IMultipleViewPattern
         where TNativePattern : class
     {
-        private AutomationProperty<int> _currentView;
-        private AutomationProperty<int[]> _supportedViews;
+        private AutomationProperty<int>? _currentView;
+        private AutomationProperty<int[]>? _supportedViews;
 
         protected MultipleViewPatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {

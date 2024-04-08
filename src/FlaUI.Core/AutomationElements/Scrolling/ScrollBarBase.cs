@@ -23,27 +23,27 @@ namespace FlaUI.Core.AutomationElements.Scrolling
         /// <summary>
         /// The <see cref="Button"/> used to scroll by a small decrement.
         /// </summary>
-        protected Button SmallDecrementButton => FindButton(SmallDecrementText);
+        protected Button? SmallDecrementButton => FindButton(SmallDecrementText);
 
         /// <summary>
         /// The <see cref="Button"/> used to scroll by a small increment.
         /// </summary>
-        protected Button SmallIncrementButton => FindButton(SmallIncrementText);
+        protected Button? SmallIncrementButton => FindButton(SmallIncrementText);
 
         /// <summary>
         /// The <see cref="Button"/> used to scroll by a large decrement.
         /// </summary>
-        protected Button LargeDecrementButton => FindButton(LargeDecrementText);
+        protected Button? LargeDecrementButton => FindButton(LargeDecrementText);
 
         /// <summary>
         /// The <see cref="Button"/> used to scroll by a large increment.
         /// </summary>
-        protected Button LargeIncrementButton => FindButton(LargeIncrementText);
+        protected Button? LargeIncrementButton => FindButton(LargeIncrementText);
 
         /// <summary>
         /// The <see cref="Thumb"/> used to scroll with dragging.
         /// </summary>
-        protected Thumb Thumb => FindThumb();
+        protected Thumb? Thumb => FindThumb();
 
         /// <summary>
         /// The current value of the scroll.
@@ -95,13 +95,13 @@ namespace FlaUI.Core.AutomationElements.Scrolling
         /// </summary>
         protected abstract string LargeIncrementText { get; }
 
-        private Button FindButton(string automationId)
+        private Button? FindButton(string automationId)
         {
             var button = FindFirstChild(cf => cf.ByControlType(ControlType.Button).And(cf.ByAutomationId(automationId)));
             return button?.AsButton();
         }
 
-        private Thumb FindThumb()
+        private Thumb? FindThumb()
         {
             var thumb = FindFirstChild(cf => cf.ByControlType(ControlType.Thumb));
             return thumb?.AsThumb();

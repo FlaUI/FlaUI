@@ -46,7 +46,7 @@ namespace FlaUI.Core.Logging
             Log(logLevel, message, null, args);
         }
 
-        public void Log(LogLevel logLevel, string message, Exception exception, params object[] args)
+        public void Log(LogLevel logLevel, string message, Exception? exception, params object[] args)
         {
             switch (logLevel)
             {
@@ -133,7 +133,7 @@ namespace FlaUI.Core.Logging
             Log(LogLevel.Fatal, message, exception, args);
         }
 
-        private string GetFormattedMessage(string message, Exception exception, params object[] args)
+        private string GetFormattedMessage(string? message, Exception? exception, params object[]? args)
         {
             var messageParts = new List<string>();
             if (message != null)

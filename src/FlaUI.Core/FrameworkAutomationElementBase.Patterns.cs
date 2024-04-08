@@ -4,40 +4,40 @@ namespace FlaUI.Core
 {
     public abstract partial class FrameworkAutomationElementBase : FrameworkAutomationElementBase.IFrameworkPatterns
     {
-        private IAutomationPattern<IAnnotationPattern> _annotationPattern;
-        private IAutomationPattern<IDockPattern> _dockPattern;
-        private IAutomationPattern<IDragPattern> _dragPattern;
-        private IAutomationPattern<IDropTargetPattern> _dropTargetPattern;
-        private IAutomationPattern<IExpandCollapsePattern> _expandCollapsePattern;
-        private IAutomationPattern<IGridItemPattern> _gridItemPattern;
-        private IAutomationPattern<IGridPattern> _gridPattern;
-        private IAutomationPattern<IInvokePattern> _invokePattern;
-        private IAutomationPattern<IItemContainerPattern> _itemContainerPattern;
-        private IAutomationPattern<ILegacyIAccessiblePattern> _legacyIAccessiblePattern;
-        private IAutomationPattern<IMultipleViewPattern> _multipleViewPattern;
-        private IAutomationPattern<IObjectModelPattern> _objectModelPattern;
-        private IAutomationPattern<IRangeValuePattern> _rangeValuePattern;
-        private IAutomationPattern<IScrollItemPattern> _scrollItemPattern;
-        private IAutomationPattern<IScrollPattern> _scrollPattern;
-        private IAutomationPattern<ISelectionItemPattern> _selectionItemPattern;
-        private IAutomationPattern<ISelection2Pattern> _selection2Pattern;
-        private IAutomationPattern<ISelectionPattern> _selectionPattern;
-        private IAutomationPattern<ISpreadsheetItemPattern> _spreadsheetItemPattern;
-        private IAutomationPattern<ISpreadsheetPattern> _spreadsheetPattern;
-        private IAutomationPattern<IStylesPattern> _stylesPattern;
-        private IAutomationPattern<ISynchronizedInputPattern> _synchronizedInputPattern;
-        private IAutomationPattern<ITableItemPattern> _tableItemPattern;
-        private IAutomationPattern<ITablePattern> _tablePattern;
-        private IAutomationPattern<ITextChildPattern> _textChildPattern;
-        private IAutomationPattern<ITextEditPattern> _textEditPattern;
-        private IAutomationPattern<IText2Pattern> _text2Pattern;
-        private IAutomationPattern<ITextPattern> _textPattern;
-        private IAutomationPattern<ITogglePattern> _togglePattern;
-        private IAutomationPattern<ITransform2Pattern> _transform2Pattern;
-        private IAutomationPattern<ITransformPattern> _transformPattern;
-        private IAutomationPattern<IValuePattern> _valuePattern;
-        private IAutomationPattern<IVirtualizedItemPattern> _virtualizedItemPattern;
-        private IAutomationPattern<IWindowPattern> _windowPattern;
+        private IAutomationPattern<IAnnotationPattern>? _annotationPattern;
+        private IAutomationPattern<IDockPattern>? _dockPattern;
+        private IAutomationPattern<IDragPattern>? _dragPattern;
+        private IAutomationPattern<IDropTargetPattern>? _dropTargetPattern;
+        private IAutomationPattern<IExpandCollapsePattern>? _expandCollapsePattern;
+        private IAutomationPattern<IGridItemPattern>? _gridItemPattern;
+        private IAutomationPattern<IGridPattern>? _gridPattern;
+        private IAutomationPattern<IInvokePattern>? _invokePattern;
+        private IAutomationPattern<IItemContainerPattern>? _itemContainerPattern;
+        private IAutomationPattern<ILegacyIAccessiblePattern>? _legacyIAccessiblePattern;
+        private IAutomationPattern<IMultipleViewPattern>? _multipleViewPattern;
+        private IAutomationPattern<IObjectModelPattern>? _objectModelPattern;
+        private IAutomationPattern<IRangeValuePattern>? _rangeValuePattern;
+        private IAutomationPattern<IScrollItemPattern>? _scrollItemPattern;
+        private IAutomationPattern<IScrollPattern>? _scrollPattern;
+        private IAutomationPattern<ISelectionItemPattern>? _selectionItemPattern;
+        private IAutomationPattern<ISelection2Pattern>? _selection2Pattern;
+        private IAutomationPattern<ISelectionPattern>? _selectionPattern;
+        private IAutomationPattern<ISpreadsheetItemPattern>? _spreadsheetItemPattern;
+        private IAutomationPattern<ISpreadsheetPattern>? _spreadsheetPattern;
+        private IAutomationPattern<IStylesPattern>? _stylesPattern;
+        private IAutomationPattern<ISynchronizedInputPattern>? _synchronizedInputPattern;
+        private IAutomationPattern<ITableItemPattern>? _tableItemPattern;
+        private IAutomationPattern<ITablePattern>? _tablePattern;
+        private IAutomationPattern<ITextChildPattern>? _textChildPattern;
+        private IAutomationPattern<ITextEditPattern>? _textEditPattern;
+        private IAutomationPattern<IText2Pattern>? _text2Pattern;
+        private IAutomationPattern<ITextPattern>? _textPattern;
+        private IAutomationPattern<ITogglePattern>? _togglePattern;
+        private IAutomationPattern<ITransform2Pattern>? _transform2Pattern;
+        private IAutomationPattern<ITransformPattern>? _transformPattern;
+        private IAutomationPattern<IValuePattern>? _valuePattern;
+        private IAutomationPattern<IVirtualizedItemPattern>? _virtualizedItemPattern;
+        private IAutomationPattern<IWindowPattern>? _windowPattern;
 
         /// <summary>
         /// Provides access to all patterns.

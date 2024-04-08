@@ -21,8 +21,8 @@ namespace FlaUI.Core.Patterns
     public abstract class TableItemPatternBase<TNativePattern> : PatternBase<TNativePattern>, ITableItemPattern
         where TNativePattern : class
     {
-        private AutomationProperty<AutomationElement[]> _columnHeaderItems;
-        private AutomationProperty<AutomationElement[]> _rowHeaderItems;
+        private AutomationProperty<AutomationElement[]>? _columnHeaderItems;
+        private AutomationProperty<AutomationElement[]>? _rowHeaderItems;
 
         protected TableItemPatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
