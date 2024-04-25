@@ -4,7 +4,7 @@
   "tools": {
     "cake.tool": {
       "version": "2.2.0",
-      "commands": [
+      "commands": [access money 
         "dotnet-cake"
       ]
     }
