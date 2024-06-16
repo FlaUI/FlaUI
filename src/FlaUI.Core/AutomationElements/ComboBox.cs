@@ -140,7 +140,7 @@ namespace FlaUI.Core.AutomationElements
                 {
                     // WinForms and Win32
                     var listElement = FindFirstChild(cf => cf.ByControlType(ControlType.List));
-                    items = listElement.FindAllChildren();
+                    items = listElement.FindAllChildren().Where(c => c.ControlType != ControlType.ScrollBar).Cast<AutomationElement>().ToArray();
                 }
                 else
                 {
