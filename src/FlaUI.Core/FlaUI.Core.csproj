@@ -38,7 +38,7 @@
       <Version>5.0.1</Version>
     </PackageReference>
     <PackageReference Include="System.Drawing.Common">
-      <Version>5.0.2</Version>
+      <Version>8.0.3</Version>
     </PackageReference>
     <PackageReference Include="System.Management">
       <Version>5.0.0</Version>
