@@ -46,6 +46,7 @@ namespace FlaUI.Core.Exceptions
 
         public PatternId Pattern { get; }
 
+#if (!NET8_0_OR_GREATER)
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             if (info == null)
@@ -55,5 +56,6 @@ namespace FlaUI.Core.Exceptions
             info.AddValue("Pattern", Pattern);
             base.GetObjectData(info, context);
         }
+#endif
     }
 }

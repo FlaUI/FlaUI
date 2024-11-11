@@ -46,6 +46,7 @@ namespace FlaUI.Core.Exceptions
 
         public PropertyId Property { get; }
 
+#if (!NET8_0_OR_GREATER)
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             if (info == null)
@@ -55,5 +56,6 @@ namespace FlaUI.Core.Exceptions
             info.AddValue("Property", Property);
             base.GetObjectData(info, context);
         }
+#endif
     }
 }
