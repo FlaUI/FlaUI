@@ -1,5 +1,5 @@
-#tool nuget:?package=NuGet.CommandLine&version=6.3.0
-#tool nuget:?package=NUnit.ConsoleRunner&version=3.15.2
+#tool nuget:?package=NuGet.CommandLine&version=6.11.1
+#tool nuget:?package=NUnit.ConsoleRunner&version=3.18.3
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
