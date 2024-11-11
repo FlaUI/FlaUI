@@ -38,11 +38,13 @@ namespace FlaUI.Core.Exceptions
             Pattern = pattern;
         }
 
+#if (!NET8_0_OR_GREATER)
         protected PatternNotCachedException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
             Pattern = (PatternId)info.GetValue("Pattern", typeof(PatternId));
         }
+#endif
 
         public PatternId Pattern { get; }
 
