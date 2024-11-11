@@ -38,11 +38,13 @@ namespace FlaUI.Core.Exceptions
             Property = property;
         }
 
+#if (!NET8_0_OR_GREATER)
         protected PropertyNotCachedException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
             Property = (PropertyId)info.GetValue("Property", typeof(PropertyId));
         }
+#endif
 
         public PropertyId Property { get; }
 

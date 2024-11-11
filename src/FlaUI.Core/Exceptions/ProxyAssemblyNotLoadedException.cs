@@ -25,9 +25,11 @@ namespace FlaUI.Core.Exceptions
         {
         }
 
+#if (!NET8_0_OR_GREATER)
         protected ProxyAssemblyNotLoadedException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
+#endif
     }
 }
