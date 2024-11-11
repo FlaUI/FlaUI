@@ -100,7 +100,7 @@ Task("Run-UI-Tests")
             new NUnit3Result { FileName = resultFile, Format = "nunit3" }
         },
         ArgumentCustomization = args => args.Append("--testparam:uia=2"),
-        HandleExitCode = exitCode => { uia3ExitCode = exitCode; return true; }
+        HandleExitCode = exitCode => { uia2ExitCode = exitCode; return true; }
     });
     Information("Finished UIA2 Tests");
     if (AppVeyor.IsRunningOnAppVeyor) {
