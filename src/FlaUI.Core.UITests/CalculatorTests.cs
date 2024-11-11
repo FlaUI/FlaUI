@@ -22,7 +22,7 @@ namespace FlaUI.Core.UITests
         public void CalculatorTest()
         {
             var window = Application.GetMainWindow(Automation);
-            var calc = OperatingSystem.IsWindows10() ? (ICalculator)new Win10Calc(window) : new LegacyCalc(window);
+            var calc = (OperatingSystem.IsWindows10() || OperatingSystem.IsWindows11()) ? (ICalculator)new Win10Calc(window) : new LegacyCalc(window);
 
             // Switch to default mode
             System.Threading.Thread.Sleep(1000);
