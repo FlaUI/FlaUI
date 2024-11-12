@@ -50,6 +50,12 @@ namespace FlaUI.TestUtilities
         protected virtual bool KeepVideoForSuccessfulTests => false;
 
         /// <summary>
+        /// Flag to indicate if screenshots should be taken in failing tests.
+        /// Defaults to true.
+        /// </summary>
+        protected virtual bool TakeScreenshots => true;
+
+        /// <summary>
         /// Specifies the mode of the video recorder.
         /// Defaults to OnePerTest.
         /// </summary>
@@ -142,7 +148,7 @@ namespace FlaUI.TestUtilities
         [TearDown]
         public virtual void UITestBaseTearDown()
         {
-            if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
+            if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed && TakeScreenshots == true)
             {
                 TakeScreenShot(TestContext.CurrentContext.Test.FullName);
                 TestContext.AddTestAttachment(
