@@ -62,7 +62,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Gets the header item.
         /// </summary>
-        public virtual GridHeader Header
+        public virtual GridHeader? Header
         {
             get
             {
@@ -92,72 +92,72 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Gets the first selected item or null otherwise.
         /// </summary>
-        public GridRow SelectedItem => SelectedItems?.FirstOrDefault();
+        public GridRow? SelectedItem => SelectedItems.FirstOrDefault();
 
         /// <summary>
         /// Select a row by index.
         /// </summary>
-        public GridRow Select(int rowIndex)
+        public GridRow? Select(int rowIndex)
         {
             var gridRow = GetRowByIndex(rowIndex);
-            gridRow.Select();
+            gridRow?.Select();
             return gridRow;
         }
 
         /// <summary>
         /// Select the first row by text in the given column.
         /// </summary>
-        public GridRow Select(int columnIndex, string textToFind)
+        public GridRow? Select(int columnIndex, string textToFind)
         {
             var gridRow = GetRowByValue(columnIndex, textToFind);
-            gridRow.Select();
+            gridRow?.Select();
             return gridRow;
         }
 
         /// <summary>
         /// Add a row to the selection by index.
         /// </summary>
-        public GridRow AddToSelection(int rowIndex)
+        public GridRow? AddToSelection(int rowIndex)
         {
             var gridRow = GetRowByIndex(rowIndex);
-            gridRow.AddToSelection();
+            gridRow?.AddToSelection();
             return gridRow;
         }
 
         /// <summary>
         /// Add a row to the selection by text in the given column.
         /// </summary>
-        public GridRow AddToSelection(int columnIndex, string textToFind)
+        public GridRow? AddToSelection(int columnIndex, string textToFind)
         {
             var gridRow = GetRowByValue(columnIndex, textToFind);
-            gridRow.AddToSelection();
+            gridRow?.AddToSelection();
             return gridRow;
         }
 
         /// <summary>
         /// Remove a row from the selection by index.
         /// </summary>
-        public GridRow RemoveFromSelection(int rowIndex)
+        public GridRow? RemoveFromSelection(int rowIndex)
         {
             var gridRow = GetRowByIndex(rowIndex);
-            gridRow.RemoveFromSelection();
+            gridRow?.RemoveFromSelection();
             return gridRow;
         }
 
         /// <summary>
         /// Remove a row from the selection by text in the given column.
         /// </summary>
-        public GridRow RemoveFromSelection(int columnIndex, string textToFind)
+        public GridRow? RemoveFromSelection(int columnIndex, string textToFind)
         {
             var gridRow = GetRowByValue(columnIndex, textToFind);
-            gridRow.RemoveFromSelection();
+            gridRow?.RemoveFromSelection();
             return gridRow;
         }
 
         /// <summary>
         /// Get a row by index.
         /// </summary>
-        public GridRow GetRowByIndex(int rowIndex)
+        public GridRow? GetRowByIndex(int rowIndex)
         {
             PreCheckRow(rowIndex);
             var gridCell = GridPattern.GetItem(rowIndex, 0).AsGridCell();
@@ -167,7 +167,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Get a row by text in the given column.
         /// </summary>
-        public GridRow GetRowByValue(int columnIndex, string value)
+        public GridRow? GetRowByValue(int columnIndex, string value)
         {
             return GetRowsByValue(columnIndex, value, 1).FirstOrDefault();
         }
@@ -291,7 +291,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Gets the header item of the row.
         /// </summary>
-        public GridHeaderItem Header
+        public GridHeaderItem? Header
         {
             get
             {
@@ -303,7 +303,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Find a cell by a given text.
         /// </summary>
-        public GridCell FindCellByText(string textToFind)
+        public GridCell? FindCellByText(string textToFind)
         {
             return Cells.FirstOrDefault(cell => cell.Value.Equals(textToFind));
         }
@@ -348,7 +348,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Gets the row that contains this cell.
         /// </summary>
-        public GridRow ContainingRow
+        public GridRow? ContainingRow
         {
             get
             {

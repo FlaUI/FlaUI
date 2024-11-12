@@ -26,7 +26,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Gets the header element or null if the header is disabled.
         /// </summary>
-        public virtual DataGridViewHeader Header
+        public virtual DataGridViewHeader? Header
         {
             get
             {

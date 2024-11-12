@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using FlaUI.Core.Identifiers;
 using FlaUI.Core.Patterns.Infrastructure;
 
@@ -18,14 +19,14 @@ namespace FlaUI.Core
         /// <summary>
         /// Gets the pattern or null if it is not supported.
         /// </summary>
-        T PatternOrDefault { get; }
+        T? PatternOrDefault { get; }
 
         /// <summary>
         /// Tries getting the pattern.
         /// </summary>
         /// <param name="pattern">The found pattern or null if it is not supported.</param>
         /// <returns>True if the pattern is supported, false otherwise.</returns>
-        bool TryGetPattern(out T pattern);
+        bool TryGetPattern([NotNullWhen(true)] out T? pattern);
 
         /// <summary>
         /// Gets a boolean value which indicates, if the pattern is supported.
@@ -70,19 +71,19 @@ namespace FlaUI.Core
         }
 
         /// <inheritdoc />
-        public T PatternOrDefault
+        public T? PatternOrDefault
         {
             get
             {
-                TryGetPattern(out T pattern);
+                TryGetPattern(out var pattern);
                 return pattern;
             }
         }
 
         /// <inheritdoc />
-        public bool TryGetPattern(out T pattern)
+        public bool TryGetPattern([NotNullWhen(true)] out T? pattern)
         {
-            if (FrameworkAutomationElement.TryGetNativePattern(_patternId, out TNative nativePattern))
+            if (FrameworkAutomationElement.TryGetNativePattern(_patternId, out TNative? nativePattern))
             {
                 pattern = _patternCreateFunc(FrameworkAutomationElement, nativePattern);
                 return true;

@@ -26,9 +26,9 @@ namespace FlaUI.Core.Patterns
     public abstract class TransformPatternBase<TNativePattern> : PatternBase<TNativePattern>, ITransformPattern
         where TNativePattern : class
     {
-        private AutomationProperty<bool> _canMove;
-        private AutomationProperty<bool> _canResize;
-        private AutomationProperty<bool> _canRotate;
+        private AutomationProperty<bool>? _canMove;
+        private AutomationProperty<bool>? _canResize;
+        private AutomationProperty<bool>? _canRotate;
 
         protected TransformPatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {

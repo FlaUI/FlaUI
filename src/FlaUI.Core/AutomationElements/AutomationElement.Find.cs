@@ -16,7 +16,7 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <inheritdoc />
-        public AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
+        public AutomationElement? FindFirst(TreeScope treeScope, ConditionBase condition)
         {
             return FrameworkAutomationElement.FindFirst(treeScope, condition);
         }
@@ -29,14 +29,14 @@ namespace FlaUI.Core.AutomationElements
         }
 
         /// <inheritdoc />
-        public AutomationElement FindFirstWithOptions(TreeScope treeScope, ConditionBase condition,
+        public AutomationElement? FindFirstWithOptions(TreeScope treeScope, ConditionBase condition,
             TreeTraversalOptions traversalOptions, AutomationElement root)
         {
             return FrameworkAutomationElement.FindFirstWithOptions(treeScope, condition, traversalOptions, root);
         }
 
         /// <inheritdoc />
-        public AutomationElement FindAt(TreeScope treeScope, int index, ConditionBase condition)
+        public AutomationElement? FindAt(TreeScope treeScope, int index, ConditionBase condition)
         {
             return FrameworkAutomationElement.FindAt(treeScope, index, condition);
         }
@@ -44,7 +44,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Finds the first element by iterating thru all conditions.
         /// </summary>
-        public AutomationElement FindFirstNested(params ConditionBase[] nestedConditions)
+        public AutomationElement? FindFirstNested(params ConditionBase[] nestedConditions)
         {
             var currentElement = this;
             foreach (var condition in nestedConditions)
@@ -61,7 +61,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Finds all elements by iterating thru all conditions.
         /// </summary>
-        public AutomationElement[] FindAllNested(params ConditionBase[] nestedConditions)
+        public AutomationElement[]? FindAllNested(params ConditionBase[] nestedConditions)
         {
             var currentElement = this;
             for (var i = 0; i < nestedConditions.Length - 1; i++)
@@ -79,11 +79,11 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Finds for the first item which matches the given xpath.
         /// </summary>
-        public AutomationElement FindFirstByXPath(string xPath)
+        public AutomationElement? FindFirstByXPath(string xPath)
         {
             var xPathNavigator = new AutomationElementXPathNavigator(this);
             var nodeItem = xPathNavigator.SelectSingleNode(xPath);
-            return (AutomationElement)nodeItem?.UnderlyingObject;
+            return (AutomationElement?)nodeItem?.UnderlyingObject;
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace FlaUI.Core.AutomationElements
         /// Finds the first child.
         /// </summary>
         /// <returns>The found element or null if no element was found.</returns>
-        public AutomationElement FindFirstChild()
+        public AutomationElement? FindFirstChild()
         {
             return FindFirst(TreeScope.Children, TrueCondition.Default);
         }
@@ -116,7 +116,7 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         /// <param name="automationId">The automation id.</param>
         /// <returns>The found element or null if no element was found.</returns>
-        public AutomationElement FindFirstChild(string automationId)
+        public AutomationElement? FindFirstChild(string automationId)
         {
             return FindFirst(TreeScope.Children, ConditionFactory.ByAutomationId(automationId));
         }
@@ -126,7 +126,7 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         /// <param name="condition">The condition.</param>
         /// <returns>The found element or null if no element was found.</returns>
-        public AutomationElement FindFirstChild(ConditionBase condition)
+        public AutomationElement? FindFirstChild(ConditionBase condition)
         {
             return FindFirst(TreeScope.Children, condition);
         }
@@ -136,7 +136,7 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         /// <param name="conditionFunc">The condition method.</param>
         /// <returns>The found element or null if no element was found.</returns>
-        public AutomationElement FindFirstChild(Func<ConditionFactory, ConditionBase> conditionFunc)
+        public AutomationElement? FindFirstChild(Func<ConditionFactory, ConditionBase> conditionFunc)
         {
             var condition = conditionFunc(ConditionFactory);
             return FindFirstChild(condition);
@@ -176,7 +176,7 @@ namespace FlaUI.Core.AutomationElements
         /// Finds the first descendant.
         /// </summary>
         /// <returns>The found element or null if no element was found.</returns>
-        public AutomationElement FindFirstDescendant()
+        public AutomationElement? FindFirstDescendant()
         {
             return FindFirst(TreeScope.Descendants, TrueCondition.Default);
         }
@@ -186,7 +186,7 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         /// <param name="automationId">The automation id.</param>
         /// <returns>The found element or null if no element was found.</returns>
-        public AutomationElement FindFirstDescendant(string automationId)
+        public AutomationElement? FindFirstDescendant(string automationId)
         {
             return FindFirst(TreeScope.Descendants, ConditionFactory.ByAutomationId(automationId));
         }
@@ -196,7 +196,7 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         /// <param name="condition">The condition.</param>
         /// <returns>The found element or null if no element was found.</returns>
-        public AutomationElement FindFirstDescendant(ConditionBase condition)
+        public AutomationElement? FindFirstDescendant(ConditionBase condition)
         {
             return FindFirst(TreeScope.Descendants, condition);
         }
@@ -206,7 +206,7 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         /// <param name="conditionFunc">The condition method.</param>
         /// <returns>The found element or null if no element was found.</returns>
-        public AutomationElement FindFirstDescendant(Func<ConditionFactory, ConditionBase> conditionFunc)
+        public AutomationElement? FindFirstDescendant(Func<ConditionFactory, ConditionBase> conditionFunc)
         {
             var condition = conditionFunc(ConditionFactory);
             return FindFirstDescendant(condition);
@@ -247,7 +247,7 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         /// <param name="conditionFunc">The condition method.</param>
         /// <returns>The found element or null if no element was found.</returns>
-        public AutomationElement FindFirstNested(Func<ConditionFactory, IList<ConditionBase>> conditionFunc)
+        public AutomationElement? FindFirstNested(Func<ConditionFactory, IList<ConditionBase>> conditionFunc)
         {
             var conditions = conditionFunc(ConditionFactory);
             return FindFirstNested(conditions.ToArray());
@@ -258,7 +258,7 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         /// <param name="conditionFunc">The condition method.</param>
         /// <returns>The found elements or an empty list if no elements were found.</returns>
-        public AutomationElement[] FindAllNested(Func<ConditionFactory, IList<ConditionBase>> conditionFunc)
+        public AutomationElement[]? FindAllNested(Func<ConditionFactory, IList<ConditionBase>> conditionFunc)
         {
             var conditions = conditionFunc(ConditionFactory);
             return FindAllNested(conditions.ToArray());
@@ -270,7 +270,7 @@ namespace FlaUI.Core.AutomationElements
         /// <param name="index">The index of the child to find.</param>
         /// <param name="condition">The condition.</param>
         /// <returns>The found element or null if no element was found.</returns>
-        public AutomationElement FindChildAt(int index, ConditionBase condition = null)
+        public AutomationElement? FindChildAt(int index, ConditionBase? condition = null)
         {
             return FindAt(TreeScope.Children, index, condition ?? TrueCondition.Default);
         }
@@ -281,7 +281,7 @@ namespace FlaUI.Core.AutomationElements
         /// <param name="index">The index of the child to find.</param>
         /// <param name="conditionFunc">The condition method.</param>
         /// <returns>The found element or null if no element was found.</returns>
-        public AutomationElement FindChildAt(int index, Func<ConditionFactory, ConditionBase> conditionFunc)
+        public AutomationElement? FindChildAt(int index, Func<ConditionFactory, ConditionBase> conditionFunc)
         {
             var condition = conditionFunc(ConditionFactory);
             return FindChildAt(index, condition);

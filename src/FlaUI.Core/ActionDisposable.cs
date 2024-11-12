@@ -8,7 +8,7 @@ namespace FlaUI.Core
     /// </summary>
     public class ActionDisposable : IDisposable
     {
-        private volatile Action disposeAction;
+        private volatile Action? disposeAction;
 
         /// <summary>
         /// Constructs a new disposable with the given action used for disposal.

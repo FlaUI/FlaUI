@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using FlaUI.Core;
@@ -209,7 +210,8 @@ namespace FlaUI.UIA3
             return element;
         }
 
-        public AutomationElement WrapNativeElement(UIA.IUIAutomationElement nativeElement)
+        [return: NotNullIfNotNull(nameof(nativeElement))]
+        public AutomationElement? WrapNativeElement(UIA.IUIAutomationElement? nativeElement)
         {
             return nativeElement == null ? null : new AutomationElement(new UIA3FrameworkAutomationElement(this, nativeElement));
         }

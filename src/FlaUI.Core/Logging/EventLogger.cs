@@ -4,13 +4,13 @@ namespace FlaUI.Core.Logging
 {
     public class EventLogger : LoggerBase
     {
-        public event Action<string> OnTrace;
-        public event Action<string> OnDebug;
-        public event Action<string> OnInfo;
-        public event Action<string> OnWarn;
-        public event Action<string> OnError;
-        public event Action<string> OnFatal;
-        public event Action<LogLevel, string> OnLog;
+        public event Action<string>? OnTrace;
+        public event Action<string>? OnDebug;
+        public event Action<string>? OnInfo;
+        public event Action<string>? OnWarn;
+        public event Action<string>? OnError;
+        public event Action<string>? OnFatal;
+        public event Action<LogLevel, string>? OnLog;
 
         protected override void GatedTrace(string message)
         {

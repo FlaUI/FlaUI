@@ -27,10 +27,10 @@ namespace FlaUI.Core.Patterns
     public abstract class Transform2PatternBase<TNativePattern> : TransformPatternBase<TNativePattern>, ITransform2Pattern
         where TNativePattern : class
     {
-        private AutomationProperty<bool> _canZoom;
-        private AutomationProperty<double> _zoomLevel;
-        private AutomationProperty<double> _zoomMaximum;
-        private AutomationProperty<double> _zoomMinimum;
+        private AutomationProperty<bool>? _canZoom;
+        private AutomationProperty<double>? _zoomLevel;
+        private AutomationProperty<double>? _zoomMaximum;
+        private AutomationProperty<double>? _zoomMinimum;
 
         protected Transform2PatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {

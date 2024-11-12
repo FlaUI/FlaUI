@@ -33,7 +33,7 @@ namespace FlaUI.Core.AutomationElements
                 if (FrameworkType == FrameworkType.Wpf && Patterns.ItemContainer.TryGetPattern(out var itemContainerPattern))
                 {
                     List<ListBoxItem> allItems = new List<ListBoxItem>();
-                    AutomationElement item = null;
+                    AutomationElement? item = null;
                     do
                     {
                         item = itemContainerPattern.FindItemByProperty(item, null, null);
@@ -60,7 +60,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Gets the first selected item or null otherwise.
         /// </summary>
-        public ListBoxItem SelectedItem => SelectionPattern.Selection.Value.FirstOrDefault()?.AsListBoxItem();
+        public ListBoxItem? SelectedItem => SelectionPattern.Selection.Value.FirstOrDefault()?.AsListBoxItem();
 
         /// <summary>
         /// Selects an item by index.
@@ -82,7 +82,7 @@ namespace FlaUI.Core.AutomationElements
             {
                 if (FrameworkType == FrameworkType.Wpf && Patterns.ItemContainer.TryGetPattern(out var itemContainerPattern))
                 {
-                    AutomationElement foundItem = itemContainerPattern.FindItemByProperty(null, FrameworkAutomationElement.PropertyIdLibrary.Name, text);
+                    AutomationElement? foundItem = itemContainerPattern.FindItemByProperty(null, FrameworkAutomationElement.PropertyIdLibrary.Name, text);
                     if (foundItem != null)
                     {
                         item = foundItem.AsListBoxItem();
@@ -117,7 +117,7 @@ namespace FlaUI.Core.AutomationElements
             {
                 if (FrameworkType == FrameworkType.Wpf && Patterns.ItemContainer.TryGetPattern(out var itemContainerPattern))
                 {
-                    AutomationElement foundItem = itemContainerPattern.FindItemByProperty(null, FrameworkAutomationElement.PropertyIdLibrary.Name, text);
+                    AutomationElement? foundItem = itemContainerPattern.FindItemByProperty(null, FrameworkAutomationElement.PropertyIdLibrary.Name, text);
                     if (foundItem != null)
                     {
                         item = foundItem.AsListBoxItem();
@@ -152,7 +152,7 @@ namespace FlaUI.Core.AutomationElements
             {
                 if (FrameworkType == FrameworkType.Wpf && Patterns.ItemContainer.TryGetPattern(out var itemContainerPattern))
                 {
-                    AutomationElement foundItem = itemContainerPattern.FindItemByProperty(null, FrameworkAutomationElement.PropertyIdLibrary.Name, text);
+                    AutomationElement? foundItem = itemContainerPattern.FindItemByProperty(null, FrameworkAutomationElement.PropertyIdLibrary.Name, text);
                     if (foundItem != null)
                     {
                         item = foundItem.AsListBoxItem();

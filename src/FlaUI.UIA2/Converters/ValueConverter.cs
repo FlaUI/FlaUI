@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Globalization;
 using FlaUI.Core.AutomationElements;
@@ -16,7 +17,8 @@ namespace FlaUI.UIA2.Converters
         /// <summary>
         /// Converts the given object to an object the native client expects
         /// </summary>
-        public static object ToNative(object val)
+        [return: NotNullIfNotNull(nameof(val))]
+        public static object? ToNative(object? val)
         {
             if (val == null)
             {

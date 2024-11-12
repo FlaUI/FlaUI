@@ -76,7 +76,7 @@ namespace FlaUI.Core.Capturing
         /// <param name="originalBounds">The original bounds of the captured image.</param>
         /// <param name="captureSettings">The settings to use for the capture.</param>
         /// <returns>The transformed rectangle.</returns>
-        public static Rectangle ScaleAccordingToSettings(Rectangle originalBounds, CaptureSettings captureSettings)
+        public static Rectangle ScaleAccordingToSettings(Rectangle originalBounds, CaptureSettings? captureSettings)
         {
             // Default is the original size
             var outputWidth = originalBounds.Width;
@@ -111,7 +111,7 @@ namespace FlaUI.Core.Capturing
         /// <summary>
         /// Captures the cursor as bitmap and returns the bitmap and the position on screen of the cursor.
         /// </summary>
-        public static Bitmap CaptureCursor(ref Point position)
+        public static Bitmap? CaptureCursor(ref Point position)
         {
             var cursorInfo = new CURSORINFO();
             cursorInfo.cbSize = Marshal.SizeOf(cursorInfo);

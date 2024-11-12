@@ -123,7 +123,7 @@ namespace FlaUI.Core.AutomationElements.Scrolling
         /// </summary>
         public void ScrollUp()
         {
-            SmallDecrementButton.Invoke();
+            SmallDecrementButton?.Invoke();
         }
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace FlaUI.Core.AutomationElements.Scrolling
         /// </summary>
         public void ScrollDown()
         {
-            SmallIncrementButton.Invoke();
+            SmallIncrementButton?.Invoke();
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace FlaUI.Core.AutomationElements.Scrolling
         /// </summary>
         public void ScrollUpLarge()
         {
-            LargeDecrementButton.Invoke();
+            LargeDecrementButton?.Invoke();
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace FlaUI.Core.AutomationElements.Scrolling
         /// </summary>
         public void ScrollDownLarge()
         {
-            LargeIncrementButton.Invoke();
+            LargeIncrementButton?.Invoke();
         }
     }
 }

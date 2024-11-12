@@ -31,13 +31,13 @@ namespace FlaUI.Core.Patterns
     public abstract class StylesPatternBase<TNativePattern> : PatternBase<TNativePattern>, IStylesPattern
         where TNativePattern : class
     {
-        private AutomationProperty<string> _extendedProperties;
-        private AutomationProperty<int> _fillColor;
-        private AutomationProperty<int> _fillPatternColor;
-        private AutomationProperty<string> _fillPatternStyle;
-        private AutomationProperty<string> _shape;
-        private AutomationProperty<StyleType> _style;
-        private AutomationProperty<string> _styleName;
+        private AutomationProperty<string>? _extendedProperties;
+        private AutomationProperty<int>? _fillColor;
+        private AutomationProperty<int>? _fillPatternColor;
+        private AutomationProperty<string>? _fillPatternStyle;
+        private AutomationProperty<string>? _shape;
+        private AutomationProperty<StyleType>? _style;
+        private AutomationProperty<string>? _styleName;
 
         protected StylesPatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {

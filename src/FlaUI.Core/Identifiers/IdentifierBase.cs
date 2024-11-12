@@ -56,12 +56,12 @@ namespace FlaUI.Core.Identifiers
             Name = name;
         }
 
-        public bool Equals(IdentifierBase other)
+        public bool Equals(IdentifierBase? other)
         {
             return other != null && Id.Equals(other.Id);
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return Equals(obj as IdentifierBase);
         }

@@ -22,7 +22,7 @@ namespace FlaUI.Core.Patterns.Infrastructure
 
         public AutomationBase Automation => FrameworkAutomationElement.Automation;
 
-        protected AutomationProperty<T> GetOrCreate<T>(ref AutomationProperty<T> val, PropertyId propertyId)
+        protected AutomationProperty<T> GetOrCreate<T>(ref AutomationProperty<T>? val, PropertyId propertyId)
         {
             return val ?? (val = new AutomationProperty<T>(propertyId, FrameworkAutomationElement));
         }

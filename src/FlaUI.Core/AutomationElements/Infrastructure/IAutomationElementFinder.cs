@@ -22,7 +22,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <param name="treeScope">The scope to search.</param>
         /// <param name="condition">The condition to use.</param>
         /// <returns>The found element or null if no element was found.</returns>
-        AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition);
+        AutomationElement? FindFirst(TreeScope treeScope, ConditionBase condition);
 
         /// <summary>
         /// Find all matching elements in the specified order.
@@ -42,7 +42,7 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <param name="traversalOptions">Value specifying the tree navigation order.</param>
         /// <param name="root">An element with which to begin the search.</param>
         /// <returns>The found element or null if no element was found.</returns>
-        AutomationElement FindFirstWithOptions(TreeScope treeScope, ConditionBase condition, TreeTraversalOptions traversalOptions, AutomationElement root);
+        AutomationElement? FindFirstWithOptions(TreeScope treeScope, ConditionBase condition, TreeTraversalOptions traversalOptions, AutomationElement root);
 
         /// <summary>
         /// Finds the element with the given index with the given condition.
@@ -51,6 +51,6 @@ namespace FlaUI.Core.AutomationElements.Infrastructure
         /// <param name="index">The index of the element to return (0-based).</param>
         /// <param name="condition">The condition to use.</param>
         /// <returns>The found element or null if no element was found.</returns>
-        AutomationElement FindAt(TreeScope treeScope, int index, ConditionBase condition);
+        AutomationElement? FindAt(TreeScope treeScope, int index, ConditionBase condition);
     }
 }

@@ -16,13 +16,13 @@ namespace FlaUI.Core
         /// Gets the XPath to the element until the desktop or the given root element.
         /// Warning: This is quite a heavy operation
         /// </summary>
-        public static string GetXPathToElement(AutomationElement element, AutomationElement rootElement = null)
+        public static string GetXPathToElement(AutomationElement element, AutomationElement? rootElement = null)
         {
             var treeWalker = element.Automation.TreeWalkerFactory.GetControlViewWalker();
             return GetXPathToElement(element, treeWalker, rootElement);
         }
 
-        private static string GetXPathToElement(AutomationElement element, ITreeWalker treeWalker, AutomationElement rootElement = null)
+        private static string GetXPathToElement(AutomationElement element, ITreeWalker treeWalker, AutomationElement? rootElement = null)
         {
             var parent = treeWalker.GetParent(element);
             if (parent == null || (rootElement != null && parent.Equals(rootElement)))
@@ -95,7 +95,7 @@ namespace FlaUI.Core
                 using (cr.Activate())
                 {
                     // Re-find the root element with caching activated
-                    automationElement = automationElement.FindFirst(TreeScope.Element, TrueCondition.Default);
+                    automationElement = automationElement.FindFirst(TreeScope.Element, TrueCondition.Default)!;
                     Details(stringBuilder, automationElement, String.Empty);
                 }
                 return stringBuilder.ToString();

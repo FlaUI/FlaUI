@@ -9,62 +9,62 @@ namespace FlaUI.Core
 {
     public abstract partial class FrameworkAutomationElementBase : FrameworkAutomationElementBase.IProperties
     {
-        private AutomationProperty<string> _acceleratorKey;
-        private AutomationProperty<string> _accessKey;
-        private AutomationProperty<int[]> _annotationObjects;
-        private AutomationProperty<int[]> _annotationTypes;
-        private AutomationProperty<string> _ariaProperties;
-        private AutomationProperty<string> _ariaRole;
-        private AutomationProperty<string> _automationId;
-        private AutomationProperty<Rectangle> _boundingRectangle;
-        private AutomationProperty<Point> _centerPoint;
-        private AutomationProperty<string> _className;
-        private AutomationProperty<Point> _clickablePoint;
-        private AutomationProperty<AutomationElement[]> _controllerFor;
-        private AutomationProperty<ControlType> _controlType;
-        private AutomationProperty<CultureInfo> _culture;
-        private AutomationProperty<AutomationElement[]> _describedBy;
-        private AutomationProperty<int> _fillColor;
-        private AutomationProperty<int> _fillType;
-        private AutomationProperty<AutomationElement[]> _flowsFrom;
-        private AutomationProperty<AutomationElement[]> _flowsTo;
-        private AutomationProperty<string> _frameworkId;
-        private AutomationProperty<string> _fullDescription;
-        private AutomationProperty<bool> _hasKeyboardFocus;
-        private AutomationProperty<HeadingLevel> _headingLevel;
-        private AutomationProperty<string> _helpText;
-        private AutomationProperty<bool> _isContentElement;
-        private AutomationProperty<bool> _isControlElement;
-        private AutomationProperty<bool> _isDataValidForForm;
-        private AutomationProperty<bool> _isDialog;
-        private AutomationProperty<bool> _isEnabled;
-        private AutomationProperty<bool> _isKeyboardFocusable;
-        private AutomationProperty<bool> _isOffscreen;
-        private AutomationProperty<bool> _isPassword;
-        private AutomationProperty<bool> _isPeripheral;
-        private AutomationProperty<bool> _isRequiredForForm;
-        private AutomationProperty<string> _itemStatus;
-        private AutomationProperty<string> _itemType;
-        private AutomationProperty<AutomationElement> _labeledBy;
-        private AutomationProperty<LandmarkType> _landmarkType;
-        private AutomationProperty<int> _level;
-        private AutomationProperty<LiveSetting> _liveSetting;
-        private AutomationProperty<string> _localizedControlType;
-        private AutomationProperty<string> _localizedLandmarkType;
-        private AutomationProperty<string> _name;
-        private AutomationProperty<IntPtr> _nativeWindowHandle;
-        private AutomationProperty<bool> _optimizeForVisualContent;
-        private AutomationProperty<OrientationType> _orientation;
-        private AutomationProperty<int[]> _outlineColor;
-        private AutomationProperty<int[]> _outlineThickness;
-        private AutomationProperty<int> _positionInSet;
-        private AutomationProperty<int> _processId;
-        private AutomationProperty<string> _providerDescription;
-        private AutomationProperty<int> _rotation;
-        private AutomationProperty<int[]> _runtimeId;
-        private AutomationProperty<int[]> _size;
-        private AutomationProperty<int> _sizeOfSet;
-        private AutomationProperty<VisualEffects> _visualEffects;
+        private AutomationProperty<string>? _acceleratorKey;
+        private AutomationProperty<string>? _accessKey;
+        private AutomationProperty<int[]>? _annotationObjects;
+        private AutomationProperty<int[]>? _annotationTypes;
+        private AutomationProperty<string>? _ariaProperties;
+        private AutomationProperty<string>? _ariaRole;
+        private AutomationProperty<string>? _automationId;
+        private AutomationProperty<Rectangle>? _boundingRectangle;
+        private AutomationProperty<Point>? _centerPoint;
+        private AutomationProperty<string>? _className;
+        private AutomationProperty<Point>? _clickablePoint;
+        private AutomationProperty<AutomationElement[]>? _controllerFor;
+        private AutomationProperty<ControlType>? _controlType;
+        private AutomationProperty<CultureInfo>? _culture;
+        private AutomationProperty<AutomationElement[]>? _describedBy;
+        private AutomationProperty<int>? _fillColor;
+        private AutomationProperty<int>? _fillType;
+        private AutomationProperty<AutomationElement[]>? _flowsFrom;
+        private AutomationProperty<AutomationElement[]>? _flowsTo;
+        private AutomationProperty<string>? _frameworkId;
+        private AutomationProperty<string>? _fullDescription;
+        private AutomationProperty<bool>? _hasKeyboardFocus;
+        private AutomationProperty<HeadingLevel>? _headingLevel;
+        private AutomationProperty<string>? _helpText;
+        private AutomationProperty<bool>? _isContentElement;
+        private AutomationProperty<bool>? _isControlElement;
+        private AutomationProperty<bool>? _isDataValidForForm;
+        private AutomationProperty<bool>? _isDialog;
+        private AutomationProperty<bool>? _isEnabled;
+        private AutomationProperty<bool>? _isKeyboardFocusable;
+        private AutomationProperty<bool>? _isOffscreen;
+        private AutomationProperty<bool>? _isPassword;
+        private AutomationProperty<bool>? _isPeripheral;
+        private AutomationProperty<bool>? _isRequiredForForm;
+        private AutomationProperty<string>? _itemStatus;
+        private AutomationProperty<string>? _itemType;
+        private AutomationProperty<AutomationElement>? _labeledBy;
+        private AutomationProperty<LandmarkType>? _landmarkType;
+        private AutomationProperty<int>? _level;
+        private AutomationProperty<LiveSetting>? _liveSetting;
+        private AutomationProperty<string>? _localizedControlType;
+        private AutomationProperty<string>? _localizedLandmarkType;
+        private AutomationProperty<string>? _name;
+        private AutomationProperty<IntPtr>? _nativeWindowHandle;
+        private AutomationProperty<bool>? _optimizeForVisualContent;
+        private AutomationProperty<OrientationType>? _orientation;
+        private AutomationProperty<int[]>? _outlineColor;
+        private AutomationProperty<int[]>? _outlineThickness;
+        private AutomationProperty<int>? _positionInSet;
+        private AutomationProperty<int>? _processId;
+        private AutomationProperty<string>? _providerDescription;
+        private AutomationProperty<int>? _rotation;
+        private AutomationProperty<int[]>? _runtimeId;
+        private AutomationProperty<int[]>? _size;
+        private AutomationProperty<int>? _sizeOfSet;
+        private AutomationProperty<VisualEffects>? _visualEffects;
 
         /// <summary>
         /// Provides access to all properties.
@@ -313,7 +313,7 @@ namespace FlaUI.Core
 
         public AutomationProperty<VisualEffects> VisualEffects => GetOrCreate(ref _visualEffects, PropertyIdLibrary.VisualEffects);
 
-        private AutomationProperty<T> GetOrCreate<T>(ref AutomationProperty<T> val, PropertyId propertyId)
+        private AutomationProperty<T> GetOrCreate<T>(ref AutomationProperty<T>? val, PropertyId propertyId)
         {
             return val ?? (val = new AutomationProperty<T>(propertyId, this));
         }

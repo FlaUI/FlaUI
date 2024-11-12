@@ -18,9 +18,9 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// The currently selected <see cref="TreeItem" />
         /// </summary>
-        public TreeItem SelectedTreeItem => SearchSelectedItem(Items);
+        public TreeItem? SelectedTreeItem => SearchSelectedItem(Items);
 
-        private TreeItem SearchSelectedItem(TreeItem[] treeItems)
+        private TreeItem? SearchSelectedItem(TreeItem[] treeItems)
         {
             // Search for a selected item in the direct children
             var directSelectedItem = treeItems.FirstOrDefault(t => t.IsSelected);

@@ -29,9 +29,9 @@ namespace FlaUI.Core.Patterns
     public abstract class SelectionPatternBase<TNativePattern> : PatternBase<TNativePattern>, ISelectionPattern
         where TNativePattern : class
     {
-        private AutomationProperty<bool> _canSelectMultiple;
-        private AutomationProperty<bool> _isSelectionRequired;
-        private AutomationProperty<AutomationElement[]> _selection;
+        private AutomationProperty<bool>? _canSelectMultiple;
+        private AutomationProperty<bool>? _isSelectionRequired;
+        private AutomationProperty<AutomationElement[]>? _selection;
 
         protected SelectionPatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {

@@ -107,7 +107,7 @@ namespace FlaUI.Core.WindowsAPI
         public static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
 
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string lpszWindow);
+        public static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string? lpszClass, string? lpszWindow);
 
         [DllImport("User32.dll", SetLastError = true)]
         public static extern bool InitializeTouchInjection(uint maxCount = 256, InjectedInputVisualizationMode feedbackMode = InjectedInputVisualizationMode.DEFAULT);

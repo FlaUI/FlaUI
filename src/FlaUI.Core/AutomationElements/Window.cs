@@ -35,7 +35,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Gets the <see cref="TitleBar"/> of the window.
         /// </summary>
-        public TitleBar TitleBar => FindFirstChild(cf => cf.ByControlType(ControlType.TitleBar))?.AsTitleBar();
+        public TitleBar? TitleBar => FindFirstChild(cf => cf.ByControlType(ControlType.TitleBar))?.AsTitleBar();
 
         /// <summary>
         /// Flag to indicate, if the window is the application's main window.
@@ -60,7 +60,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Gets the current WPF popup window.
         /// </summary>
-        public Window Popup
+        public Window? Popup
         {
             get
             {
@@ -74,12 +74,12 @@ namespace FlaUI.Core.AutomationElements
         /// Gets the context menu for the window.
         /// Note: It uses the FrameworkType of the window as lookup logic. Use <see cref="GetContextMenuByFrameworkType" /> if you want to control this.
         /// </summary>
-        public Menu ContextMenu => GetContextMenuByFrameworkType(FrameworkType);
+        public Menu? ContextMenu => GetContextMenuByFrameworkType(FrameworkType);
 
         /// <summary>
         /// Gets the context menu by a given <see cref="FrameworkType"/>.
         /// </summary>
-        public Menu GetContextMenuByFrameworkType(FrameworkType frameworkType)
+        public Menu? GetContextMenuByFrameworkType(FrameworkType frameworkType)
         {
             if (frameworkType == FrameworkType.Win32)
             {
@@ -106,7 +106,7 @@ namespace FlaUI.Core.AutomationElements
             {
                 // In WPF, there is a window (Popup) where the menu is inside
                 var popup = Popup;
-                var ctxMenu = popup.FindFirstChild(cf => cf.ByControlType(ControlType.Menu));
+                var ctxMenu = popup?.FindFirstChild(cf => cf.ByControlType(ControlType.Menu));
                 return ctxMenu.AsMenu();
             }
             // No menu found

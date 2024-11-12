@@ -22,9 +22,9 @@ namespace FlaUI.Core.AutomationElements
         {
         }
 
-        private IRangeValuePattern RangeValuePattern => Patterns.RangeValue.PatternOrDefault;
+        private IRangeValuePattern? RangeValuePattern => Patterns.RangeValue.PatternOrDefault;
 
-        private IValuePattern ValuePattern => Patterns.Value.PatternOrDefault;
+        private IValuePattern? ValuePattern => Patterns.Value.PatternOrDefault;
 
         /// <summary>
         /// The minimum value.
@@ -44,12 +44,12 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// The button element used to perform a large increment.
         /// </summary>
-        public Button IncreaseButton => GetIncreaseButton();
+        public Button? IncreaseButton => GetIncreaseButton();
 
         /// <summary>
         /// The button element used to perform a large decrement.
         /// </summary>
-        public Button DecreaseButton => GetDecreaseButton();
+        public Button? DecreaseButton => GetDecreaseButton();
 
         /// <summary>
         /// Flag which indicates if the <see cref="Spinner"/> supports range values (min->max) or only values (0-100).
@@ -178,14 +178,14 @@ namespace FlaUI.Core.AutomationElements
         {
             if (AutomationType == AutomationType.UIA2)
             {
-                IncreaseButton.Invoke();
+                IncreaseButton?.Invoke();
                 Wait.UntilInputIsProcessed();
             }
             else // UIA3
             {
                 SetForeground();
                 Wait.UntilInputIsProcessed();
-                IncreaseButton.Click();
+                IncreaseButton?.Click();
                 Wait.UntilInputIsProcessed();
             }
         }
@@ -197,14 +197,14 @@ namespace FlaUI.Core.AutomationElements
         {
             if (AutomationType == AutomationType.UIA2)
             {
-                DecreaseButton.Invoke();
+                DecreaseButton?.Invoke();
                 Wait.UntilInputIsProcessed();
             }
             else // UIA3
             {
                 SetForeground();
                 Wait.UntilInputIsProcessed();
-                DecreaseButton.Click();
+                DecreaseButton?.Click();
                 Wait.UntilInputIsProcessed();
             }
         }
@@ -212,7 +212,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Method to get the increase button.
         /// </summary>
-        protected virtual Button GetIncreaseButton()
+        protected virtual Button? GetIncreaseButton()
         {
             var buttons = FindAllDescendants(cf => cf.ByControlType(ControlType.Button));
             return buttons.Length >= 1 ? buttons[0].AsButton() : null;
@@ -221,7 +221,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Method to get the decrease button.
         /// </summary>
-        protected virtual Button GetDecreaseButton()
+        protected virtual Button? GetDecreaseButton()
         {
             var buttons = FindAllDescendants(cf => cf.ByControlType(ControlType.Button));
             return buttons.Length >= 2 ? buttons[1].AsButton() : null;

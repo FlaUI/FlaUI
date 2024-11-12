@@ -4,6 +4,8 @@
     <TargetFrameworks>net48;net6.0-windows;net8.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF> <!-- Needed so System.Windows.Automation is added -->
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Nullable>enable</Nullable>
+    <LangVersion>11.0</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
@@ -47,6 +49,10 @@
     <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="" />
     <None Include="..\..\CHANGELOG.md" Pack="true" PackagePath="" />
     <None Include="..\..\FlaUI.png" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup Label="Linked files">
+    <Compile Include="..\FlaUI.Core\CodeAnalysisAttributes.cs" Link="CodeAnalysisAttributes.cs" />
   </ItemGroup>
 
 </Project>

@@ -74,7 +74,7 @@ namespace FlaUI.UIA2
         public Rectangle[] GetBoundingRectangles()
         {
             var unrolledRects = NativeRange.GetBoundingRectangles();
-            return unrolledRects?.Select(r => (Rectangle)ValueConverter.ToRectangle(r)).ToArray();
+            return unrolledRects.Select(r => (Rectangle)ValueConverter.ToRectangle(r)).ToArray();
         }
 
         public AutomationElement[] GetChildren()

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using FlaUI.Core;
 using FlaUI.Core.AutomationElements;
@@ -115,8 +116,9 @@ namespace FlaUI.UIA2
         {
             return UIA.Automation.Compare(element1.ToNative(), element2.ToNative());
         }
-
-        public AutomationElement WrapNativeElement(UIA.AutomationElement nativeElement)
+        
+        [return: NotNullIfNotNull(nameof(nativeElement))]
+        public AutomationElement? WrapNativeElement(UIA.AutomationElement? nativeElement)
         {
             return nativeElement == null ? null : new AutomationElement(new UIA2FrameworkAutomationElement(this, nativeElement));
         }

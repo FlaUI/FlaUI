@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Globalization;
 using FlaUI.Core.AutomationElements;
@@ -16,7 +17,8 @@ namespace FlaUI.UIA3.Converters
         /// <summary>
         /// Converts the given object to an object the native client expects
         /// </summary>
-        public static object ToNative(object val)
+        [return: NotNullIfNotNull(nameof(val))]
+        public static object? ToNative(object? val)
         {
             if (val == null)
             {
@@ -58,13 +60,15 @@ namespace FlaUI.UIA3.Converters
         /// </summary>
         /// <param name="rectangle">The native rectangle to convert.</param>
         /// <returns>The converted managed rectangle.</returns>
-        public static object ToRectangle(object rectangle)
+        [return: NotNullIfNotNull(nameof(rectangle))]
+        public static object? ToRectangle(object? rectangle)
         {
-            var origValue = (double[])rectangle;
             if (rectangle == null)
             {
                 return null;
             }
+
+            var origValue = (double[])rectangle;
             return new Rectangle(origValue[0].ToInt(), origValue[1].ToInt(), origValue[2].ToInt(), origValue[3].ToInt());
         }
 
@@ -73,13 +77,15 @@ namespace FlaUI.UIA3.Converters
         /// </summary>
         /// <param name="point">The native point to convert.</param>
         /// <returns>The converted managed point.</returns>
-        public static object ToPoint(object point)
+        [return: NotNullIfNotNull(nameof(point))]
+        public static object? ToPoint(object? point)
         {
-            var origValue = (double[])point;
             if (point == null)
             {
                 return null;
             }
+
+            var origValue = (double[])point;
             return new Point(origValue[0].ToInt(), origValue[1].ToInt());
         }
 

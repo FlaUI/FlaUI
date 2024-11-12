@@ -24,9 +24,9 @@ namespace FlaUI.Core.Patterns
     public abstract class SpreadsheetItemPatternBase<TNativePattern> : PatternBase<TNativePattern>, ISpreadsheetItemPattern
         where TNativePattern : class
     {
-        private AutomationProperty<string> _formula;
-        private AutomationProperty<AutomationElement[]> _annotationObjects;
-        private AutomationProperty<AnnotationType[]> _annotationTypes;
+        private AutomationProperty<string>? _formula;
+        private AutomationProperty<AutomationElement[]>? _annotationObjects;
+        private AutomationProperty<AnnotationType[]>? _annotationTypes;
 
         protected SpreadsheetItemPatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {

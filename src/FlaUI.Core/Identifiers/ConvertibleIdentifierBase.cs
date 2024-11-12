@@ -7,7 +7,7 @@ namespace FlaUI.Core.Identifiers
     /// </summary>
     public abstract class ConvertibleIdentifierBase : IdentifierBase
     {
-        private Func<AutomationBase, object, object> _converterMethod;
+        private Func<AutomationBase, object, object>? _converterMethod;
 
         protected ConvertibleIdentifierBase(int id, string name)
             : base(id, name)
