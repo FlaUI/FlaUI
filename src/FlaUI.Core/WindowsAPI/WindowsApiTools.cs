@@ -46,7 +46,7 @@ namespace FlaUI.Core.WindowsAPI
         /// <summary>
         /// Tries to get the executable path for a given process.
         /// </summary>
-        public static string GetMainModuleFilepath(Process process)
+        public static string? GetMainModuleFilepath(Process process)
         {
             // Workaround for when the current process is 32 bit and the otherto get the info is 64 bit.
             if (Tools.OperatingSystem.Is64Bit && !IsCurrentProcess64Bit())
@@ -65,7 +65,7 @@ namespace FlaUI.Core.WindowsAPI
                 }
                 return null;
             }
-            return process.MainModule.FileName;
+            return process.MainModule?.FileName;
         }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using FlaUI.Core.Identifiers;
 
 namespace FlaUI.Core
 {
     /// <summary>
-    /// Inferface for property objects.
+    /// Interface for property objects.
     /// </summary>
     /// <typeparam name="T">The type of the value of the property.</typeparam>
     public interface IAutomationProperty<T>
@@ -19,7 +21,7 @@ namespace FlaUI.Core
         /// Gets the value of the property or the default for this property type if it is not supported.
         /// Throws if the property is accessed in a caching context and it is not cached.
         /// </summary>
-        T ValueOrDefault { get; }
+        T? ValueOrDefault { get; }
 
         /// <summary>
         /// Tries to get the value of the property.
@@ -27,7 +29,7 @@ namespace FlaUI.Core
         /// </summary>
         /// <param name="value">The value of the property. Contains the default if it is not supported.</param>
         /// <returns>True if the property is supported, false otherwise.</returns>
-        bool TryGetValue(out T value);
+        bool TryGetValue([NotNullWhen(true)] out T? value);
 
         /// <summary>
         /// Gets a flag if the property is supported or not.
@@ -66,17 +68,17 @@ namespace FlaUI.Core
         public TVal Value => FrameworkAutomationElement.GetPropertyValue<TVal>(PropertyId);
 
         /// <inheritdoc />
-        public TVal ValueOrDefault
+        public TVal? ValueOrDefault
         {
             get
             {
-                TryGetValue(out TVal value);
+                TryGetValue(out var value);
                 return value;
             }
         }
 
         /// <inheritdoc />
-        public bool TryGetValue(out TVal value)
+        public bool TryGetValue([NotNullWhen(true)] out TVal? value)
         {
             return FrameworkAutomationElement.TryGetPropertyValue(PropertyId, out value);
         }
@@ -88,7 +90,8 @@ namespace FlaUI.Core
         /// Implicit operator to convert the property object directly to its value.
         /// </summary>
         /// <param name="automationProperty">The property object which should be converted.</param>
-        public static implicit operator TVal(AutomationProperty<TVal> automationProperty)
+        [return: NotNullIfNotNull(nameof(automationProperty))]
+        public static implicit operator TVal?(AutomationProperty<TVal>? automationProperty)
         {
             return automationProperty == null ? default(TVal) : automationProperty.Value;
         }
@@ -98,9 +101,9 @@ namespace FlaUI.Core
         /// </summary>
         /// <param name="other">The other value.</param>
         /// <returns>True if they equal, false otherwise.</returns>
-        public bool Equals(TVal other)
+        public bool Equals(TVal? other)
         {
-            return Value.Equals(other);
+            return EqualityComparer<TVal>.Default.Equals(Value, other);
         }
 
         /// <summary>
@@ -108,9 +111,9 @@ namespace FlaUI.Core
         /// </summary>
         /// <param name="other">The other property.</param>
         /// <returns>True if they are value-equal, false otherwise.</returns>
-        public bool Equals(AutomationProperty<TVal> other)
+        public bool Equals(AutomationProperty<TVal>? other)
         {
-            return other != null && Value.Equals(other.Value);
+            return other != null && EqualityComparer<TVal>.Default.Equals(Value, other.Value);
         }
 
         /// <summary>

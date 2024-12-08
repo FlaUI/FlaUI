@@ -27,11 +27,11 @@ namespace FlaUI.Core.Patterns
     public abstract class GridItemPatternBase<TNativePattern> : PatternBase<TNativePattern>, IGridItemPattern
         where TNativePattern : class
     {
-        private AutomationProperty<int> _column;
-        private AutomationProperty<int> _columnSpan;
-        private AutomationProperty<AutomationElement> _containingGrid;
-        private AutomationProperty<int> _row;
-        private AutomationProperty<int> _rowSpan;
+        private AutomationProperty<int>? _column;
+        private AutomationProperty<int>? _columnSpan;
+        private AutomationProperty<AutomationElement>? _containingGrid;
+        private AutomationProperty<int>? _row;
+        private AutomationProperty<int>? _rowSpan;
 
         protected GridItemPatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {

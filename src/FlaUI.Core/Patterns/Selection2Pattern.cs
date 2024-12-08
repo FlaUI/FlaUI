@@ -24,10 +24,10 @@ namespace FlaUI.Core.Patterns
     public abstract class Selection2PatternBase<TNativePattern> : SelectionPatternBase<TNativePattern>, ISelection2Pattern
         where TNativePattern : class
     {
-        private AutomationProperty<AutomationElement> _currentSelectedItem;
-        private AutomationProperty<AutomationElement> _firstSelectedItem;
-        private AutomationProperty<int> _itemCount;
-        private AutomationProperty<AutomationElement> _lastSelectedItem;
+        private AutomationProperty<AutomationElement>? _currentSelectedItem;
+        private AutomationProperty<AutomationElement>? _firstSelectedItem;
+        private AutomationProperty<int>? _itemCount;
+        private AutomationProperty<AutomationElement>? _lastSelectedItem;
 
         protected Selection2PatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {

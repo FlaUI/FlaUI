@@ -105,9 +105,9 @@ namespace FlaUI.UIA3
         }
 
         /// <inheritdoc />
-        public override AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
+        public override AutomationElement? FindFirst(TreeScope treeScope, ConditionBase condition)
         {
-            var nativeFoundElement = CacheRequest.IsCachingActive
+            UIA.IUIAutomationElement? nativeFoundElement = CacheRequest.IsCachingActive
                 ? NativeElement.FindFirstBuildCache((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition), CacheRequest.Current.ToNative(Automation))
                 : NativeElement.FindFirst((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition));
             return AutomationElementConverter.NativeToManaged(Automation, nativeFoundElement);
@@ -124,17 +124,17 @@ namespace FlaUI.UIA3
         }
 
         /// <inheritdoc />
-        public override AutomationElement FindFirstWithOptions(TreeScope treeScope, ConditionBase condition,
+        public override AutomationElement? FindFirstWithOptions(TreeScope treeScope, ConditionBase condition,
             TreeTraversalOptions traversalOptions, AutomationElement root)
         {
-            var nativeFoundElement = CacheRequest.IsCachingActive
+            UIA.IUIAutomationElement? nativeFoundElement = CacheRequest.IsCachingActive
                 ? NativeElement7.FindFirstWithOptionsBuildCache((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition), CacheRequest.Current.ToNative(Automation), (UIA.TreeTraversalOptions)traversalOptions, root.ToNative())
                 : NativeElement7.FindFirstWithOptions((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition), (UIA.TreeTraversalOptions)traversalOptions, root.ToNative());
             return AutomationElementConverter.NativeToManaged(Automation, nativeFoundElement);
         }
 
         /// <inheritdoc />
-        public override AutomationElement FindAt(TreeScope treeScope, int index, ConditionBase condition)
+        public override AutomationElement? FindAt(TreeScope treeScope, int index, ConditionBase condition)
         {
             var nativeFoundElements = CacheRequest.IsCachingActive
                 ? NativeElement.FindAllBuildCache((UIA.TreeScope)treeScope, ConditionConverter.ToNative(Automation, condition), CacheRequest.Current.ToNative(Automation))
@@ -274,7 +274,7 @@ namespace FlaUI.UIA3
             return rawIds.Select(id => PropertyId.Find(Automation.AutomationType, id)).ToArray();
         }
 
-        public override AutomationElement GetUpdatedCache()
+        public override AutomationElement? GetUpdatedCache()
         {
             if (CacheRequest.Current != null)
             {

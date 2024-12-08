@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Linq;
 using FlaUI.Core;
@@ -72,16 +73,17 @@ namespace FlaUI.UIA2
         }
 
         /// <inheritdoc />
-        public override AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
+        public override AutomationElement? FindFirst(TreeScope treeScope, ConditionBase condition)
         {
             var cacheRequest = CacheRequest.IsCachingActive ? CacheRequest.Current.ToNative() : null;
             cacheRequest?.Push();
-            var nativeFoundElement = NativeElement.FindFirst((UIA.TreeScope)treeScope, ConditionConverter.ToNative(condition));
+            var nativeFoundElement = (UIA.AutomationElement?)NativeElement.FindFirst((UIA.TreeScope)treeScope, ConditionConverter.ToNative(condition));
             cacheRequest?.Pop();
             return AutomationElementConverter.NativeToManaged(Automation, nativeFoundElement);
         }
 
         /// <inheritdoc />
+        [DoesNotReturn]
         public override AutomationElement[] FindAllWithOptions(TreeScope treeScope, ConditionBase condition,
             TreeTraversalOptions traversalOptions, AutomationElement root)
         {
@@ -89,6 +91,7 @@ namespace FlaUI.UIA2
         }
 
         /// <inheritdoc />
+        [DoesNotReturn]
         public override AutomationElement FindFirstWithOptions(TreeScope treeScope, ConditionBase condition,
             TreeTraversalOptions traversalOptions, AutomationElement root)
         {
@@ -96,7 +99,7 @@ namespace FlaUI.UIA2
         }
 
         /// <inheritdoc />
-        public override AutomationElement FindAt(TreeScope treeScope, int index, ConditionBase condition)
+        public override AutomationElement? FindAt(TreeScope treeScope, int index, ConditionBase condition)
         {
             var cacheRequest = CacheRequest.IsCachingActive ? CacheRequest.Current.ToNative() : null;
             cacheRequest?.Push();
@@ -168,18 +171,21 @@ namespace FlaUI.UIA2
         }
 
         /// <inheritdoc />
+        [DoesNotReturn]
         public override NotificationEventHandlerBase RegisterNotificationEvent(TreeScope treeScope, Action<AutomationElement, NotificationKind, NotificationProcessing, string, string> action)
         {
             throw new NotSupportedByFrameworkException();
         }
 
         /// <inheritdoc />
+        [DoesNotReturn]
         public override TextEditTextChangedEventHandlerBase RegisterTextEditTextChangedEventHandler(TreeScope treeScope, TextEditChangeType textEditChangeType, Action<AutomationElement, TextEditChangeType, string[]> action)
         {
             throw new NotSupportedByFrameworkException();
         }
 
         /// <inheritdoc />
+        [DoesNotReturn]
         public override void UnregisterActiveTextPositionChangedEventHandler(ActiveTextPositionChangedEventHandlerBase eventHandler)
         {
             throw new NotSupportedByFrameworkException();
@@ -205,12 +211,14 @@ namespace FlaUI.UIA2
         }
 
         /// <inheritdoc />
+        [DoesNotReturn]
         public override void UnregisterNotificationEventHandler(NotificationEventHandlerBase eventHandler)
         {
             throw new NotSupportedByFrameworkException();
         }
 
         /// <inheritdoc />
+        [DoesNotReturn]
         public override void UnregisterTextEditTextChangedEventHandler(TextEditTextChangedEventHandlerBase eventHandler)
         {
             throw new NotSupportedByFrameworkException();
@@ -228,7 +236,7 @@ namespace FlaUI.UIA2
             return raw.Select(r => PropertyId.Find(Automation.AutomationType, r.Id)).ToArray();
         }
 
-        public override AutomationElement GetUpdatedCache()
+        public override AutomationElement? GetUpdatedCache()
         {
             if (CacheRequest.Current != null)
             {
@@ -250,6 +258,7 @@ namespace FlaUI.UIA2
             return AutomationElementConverter.NativeToManaged(Automation, cachedParent);
         }
 
+        [DoesNotReturn]
         public override object GetCurrentMetadataValue(PropertyId targetId, int metadataId)
         {
             throw new NotSupportedByFrameworkException();

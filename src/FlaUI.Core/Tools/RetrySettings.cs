@@ -30,6 +30,6 @@ namespace FlaUI.Core.Tools
         /// <summary>
         /// The message that should be added to the timeout exception in case a timeout occurs.
         /// </summary>
-        public string TimeoutMessage { get; set; }
+        public string? TimeoutMessage { get; set; }
     }
 }

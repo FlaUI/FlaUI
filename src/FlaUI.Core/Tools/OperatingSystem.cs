@@ -143,7 +143,7 @@ namespace FlaUI.Core.Tools
         /// </summary>
         private static string GetProductName()
         {
-            return GetRegistryValue<string>("ProductName");
+            return GetRegistryValue<string>("ProductName") ?? string.Empty;
         }
 
         /// <summary>
@@ -151,7 +151,7 @@ namespace FlaUI.Core.Tools
         /// </summary>
         private static string GetBuildNumber()
         {
-            return GetRegistryValue<string>("CurrentBuild");
+            return GetRegistryValue<string>("CurrentBuild") ?? string.Empty;
         }
 
         /// <summary>
@@ -159,7 +159,7 @@ namespace FlaUI.Core.Tools
         /// </summary>
         private static string GetRelease()
         {
-            return GetRegistryValue<string>("ReleaseId");
+            return GetRegistryValue<string>("ReleaseId") ?? string.Empty;
         }
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace FlaUI.Core.Tools
             return GetRegistryValue<int>("UBR").ToString();
         }
 
-        private static T GetRegistryValue<T>(string keyName)
+        private static T? GetRegistryValue<T>(string keyName)
         {
             var reg = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
             if (reg != null)

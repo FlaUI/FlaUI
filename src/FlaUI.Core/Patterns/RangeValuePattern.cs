@@ -30,12 +30,12 @@ namespace FlaUI.Core.Patterns
     public abstract class RangeValuePatternBase<TNativePattern> : PatternBase<TNativePattern>, IRangeValuePattern
         where TNativePattern : class
     {
-        private AutomationProperty<bool> _isReadOnly;
-        private AutomationProperty<double> _largeChange;
-        private AutomationProperty<double> _maximum;
-        private AutomationProperty<double> _minimum;
-        private AutomationProperty<double> _smallChange;
-        private AutomationProperty<double> _value;
+        private AutomationProperty<bool>? _isReadOnly;
+        private AutomationProperty<double>? _largeChange;
+        private AutomationProperty<double>? _maximum;
+        private AutomationProperty<double>? _minimum;
+        private AutomationProperty<double>? _smallChange;
+        private AutomationProperty<double>? _value;
 
         protected RangeValuePatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {
