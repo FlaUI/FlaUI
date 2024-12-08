@@ -1,5 +1,21 @@
 # Changelog
 
+## 5.0.0 (2024-12-08)
+### Breaking changes
+  * Removed support for .NET Standard, .NET Core 3.1, .NET 5
+
+### Enhancements
+  * Added support for .NET 8
+  * Updated Dependencies
+  * Add screenshot to testresult for XML report (thanks @igorrecioh)
+  * Add delay after pressing keyboard modifiers (thanks @louislefevre)
+  * Added new flag to define usage of screenshots (thanks Igor Recio)
+  * Added nullable annotations (thanks @jonasdoerr)
+
+### Bug fixes
+  * Fixed very large combo boxes (thanks @tomersalem)
+
+
 ## 4.0.0 (2022-09-24)
 ### Breaking changes
   * Removed support for .NET Framework below 4.8

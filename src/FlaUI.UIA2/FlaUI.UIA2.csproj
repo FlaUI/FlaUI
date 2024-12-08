@@ -11,11 +11,11 @@
   <PropertyGroup Label="Package">
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageOutputPath>..\..\artifacts</PackageOutputPath>
-    <Version>4.0.0</Version>
+    <Version>5.0.0</Version>
     <Product>FlaUI</Product>
     <Authors>Roemer</Authors>
     <Description>Library to use FlaUI with UIA2.</Description>
-    <Copyright>Copyright (c) 2016-2022</Copyright>
+    <Copyright>Copyright (c) 2016-2024</Copyright>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/FlaUI/FlaUI</PackageProjectUrl>
     <PackageIcon>FlaUI.png</PackageIcon>
