@@ -84,7 +84,7 @@ namespace FlaUI.Core
         }
 
         /// <inheritdoc />
-        public bool IsSupported => TryGetValue(out TVal _);
+        public bool IsSupported => TryGetValue(out TVal? _);
 
         /// <summary>
         /// Implicit operator to convert the property object directly to its value.
@@ -93,7 +93,7 @@ namespace FlaUI.Core
         [return: NotNullIfNotNull(nameof(automationProperty))]
         public static implicit operator TVal?(AutomationProperty<TVal>? automationProperty)
         {
-            return automationProperty == null ? default(TVal) : automationProperty.Value;
+            return automationProperty == null ? default : automationProperty.Value;
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace FlaUI.Core
         /// <returns>True if they equal, false otherwise.</returns>
         public bool Equals(TVal? other)
         {
-            return EqualityComparer<TVal>.Default.Equals(Value, other);
+            return EqualityComparer<TVal?>.Default.Equals(Value, other);
         }
 
         /// <summary>

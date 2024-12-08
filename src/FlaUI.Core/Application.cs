@@ -212,7 +212,7 @@ namespace FlaUI.Core
         /// </summary>
         /// <param name="executable">The executable to launch.</param>
         /// <param name="arguments">Arguments to executable</param>
-        public static Application Launch(string executable, string? arguments = null)
+        public static Application Launch(string executable, string arguments = "")
         {
             var processStartInfo = new ProcessStartInfo(executable, arguments);
             return Launch(processStartInfo);
@@ -260,7 +260,7 @@ namespace FlaUI.Core
         /// </summary>
         /// <param name="appUserModelId">The app id of the application to launch.</param>
         /// <param name="arguments">The arguments to pass to the application.</param>
-        public static Application LaunchStoreApp(string appUserModelId, string? arguments = null)
+        public static Application LaunchStoreApp(string appUserModelId, string arguments = "")
         {
             var process = WindowsStoreAppLauncher.Launch(appUserModelId, arguments);
             return new Application(process, true);

@@ -166,7 +166,7 @@ namespace FlaUI.Core.AutomationElements
                 }
 
                 // set year
-                AutomationElement headerBtn = FindFirstChild(cf => cf.ByAutomationId("PART_HeaderButton"));
+                AutomationElement headerBtn = FindFirstChild(cf => cf.ByAutomationId("PART_HeaderButton")) ?? throw new Exception("Header button not found");
                 string headerName = headerBtn.Name;
                 string[] parts = headerName.Split('-');
                 int yearLow = Convert.ToInt32(parts[0]);
@@ -174,7 +174,7 @@ namespace FlaUI.Core.AutomationElements
 
                 if (date.Year < yearLow)
                 {
-                    AutomationElement prevBtn = FindFirstChild(cf => cf.ByControlType(ControlType.Button));
+                    AutomationElement prevBtn = FindFirstChild(cf => cf.ByControlType(ControlType.Button)) ?? throw new Exception("Previous button not found");
                     while (date.Year < yearLow)
                     {
                         if (prevBtn.Patterns.Invoke.TryGetPattern(out var invokePattern))
@@ -192,7 +192,7 @@ namespace FlaUI.Core.AutomationElements
                 }
                 else if (date.Year > yearHigh)
                 {
-                    AutomationElement nextBtn = FindFirstChild(cf => cf.ByAutomationId("PART_NextButton"));
+                    AutomationElement nextBtn = FindFirstChild(cf => cf.ByAutomationId("PART_NextButton")) ?? throw new Exception("Next button not found");
                     while (date.Year > yearHigh)
                     {
                         if (nextBtn.Patterns.Invoke.TryGetPattern(out var invokePattern))
