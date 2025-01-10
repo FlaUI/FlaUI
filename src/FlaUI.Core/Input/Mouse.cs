@@ -229,7 +229,9 @@ namespace FlaUI.Core.Input
         /// </summary>
         public static void Scroll(double lines)
         {
-            var amount = (uint)(WheelDelta * lines);
+            // Intermediate cast to int needed in .NET 9+ due to
+            // https://learn.microsoft.com/en-us/dotnet/core/compatibility/jit/9.0/fp-to-integer
+            var amount = (uint)(int)(WheelDelta * lines);
             SendInput(0, 0, amount, MouseEventFlags.MOUSEEVENTF_WHEEL);
         }
 
@@ -238,7 +240,9 @@ namespace FlaUI.Core.Input
         /// </summary>
         public static void HorizontalScroll(double lines)
         {
-            var amount = (uint)(WheelDelta * lines);
+            // Intermediate cast to int needed in .NET 9+ due to
+            // https://learn.microsoft.com/en-us/dotnet/core/compatibility/jit/9.0/fp-to-integer
+            var amount = (uint)(int)(WheelDelta * lines);
             SendInput(0, 0, amount, MouseEventFlags.MOUSEEVENTF_HWHEEL);
         }
 
