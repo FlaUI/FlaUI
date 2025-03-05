@@ -45,9 +45,9 @@ namespace FlaUI.Core.Tools
         public bool Success => !TimedOut;
 
         /// <summary>
-        /// Contains the last occured exception in the retry (if any). Only usefull if "ignoreException" is set to true on the retry.
+        /// Contains the last occurred exception in the retry (if any). Only useful if "ignoreException" is set to true on the retry.
         /// </summary>
-        public Exception LastException { get; private set; }
+        public Exception? LastException { get; private set; }
 
         /// <summary>
         /// Flag which indicates if the retry had an exception or not.
@@ -57,7 +57,7 @@ namespace FlaUI.Core.Tools
         /// <summary>
         /// Contains the final value returned by the retry.
         /// </summary>
-        public T Result { get; internal set; }
+        public T? Result { get; internal set; }
 
         /// <summary>
         /// Time span how long the retry did run.
@@ -75,7 +75,7 @@ namespace FlaUI.Core.Tools
         /// <param name="result">The value to set as result.</param>
         /// <param name="timedOut">The flag which indicates if the retry timed out or not.</param>
         /// <returns>The object itself for fluent usage.</returns>
-        internal RetryResult<T> Finish(T result, bool timedOut = false)
+        internal RetryResult<T> Finish(T? result, bool timedOut = false)
         {
             EndTime = DateTime.UtcNow;
             Result = result;

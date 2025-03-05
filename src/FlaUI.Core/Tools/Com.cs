@@ -54,7 +54,7 @@ namespace FlaUI.Core.Tools
             }
             catch (COMException ex)
             {
-                if (ConvertException(ex, out Exception newEx))
+                if (ConvertException(ex, out var newEx))
                 {
                     throw newEx;
                 }
@@ -79,7 +79,7 @@ namespace FlaUI.Core.Tools
             }
             catch (COMException ex)
             {
-                if (ConvertException(ex, out Exception newEx))
+                if (ConvertException(ex, out var newEx))
                 {
                     throw newEx;
                 }
@@ -99,7 +99,7 @@ namespace FlaUI.Core.Tools
             }
             catch (COMException ex)
             {
-                if (ConvertException(ex, out Exception newEx))
+                if (ConvertException(ex, out var newEx))
                 {
                     throw newEx;
                 }
@@ -111,7 +111,7 @@ namespace FlaUI.Core.Tools
         /// <summary>
         /// Tries to convert a com exception to a more usable exception.
         /// </summary>
-        public static bool ConvertException(COMException ex, out Exception uiaException)
+        public static bool ConvertException(COMException ex, [NotNullWhen(true)] out Exception? uiaException)
         {
             var handled = true;
             switch ((uint)ex.ErrorCode)

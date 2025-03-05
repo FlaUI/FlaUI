@@ -19,7 +19,7 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// The currently selected <see cref="TabItem" />
         /// </summary>
-        public TabItem SelectedTabItem
+        public TabItem? SelectedTabItem
         {
             get { return TabItems.FirstOrDefault(t => t.IsSelected); }
         }

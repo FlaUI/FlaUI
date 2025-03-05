@@ -10,10 +10,6 @@ namespace FlaUI.Core.Exceptions
         private const string DefaultMessage = "The requested property is not supported";
         private const string DefaultMessageWithData = "The requested property '{0}' is not supported";
 
-        public PropertyNotSupportedException() : base(DefaultMessage)
-        {
-        }
-
         public PropertyNotSupportedException(PropertyId property)
             : base(String.Format(DefaultMessageWithData, property))
         {
@@ -38,14 +34,17 @@ namespace FlaUI.Core.Exceptions
             Property = property;
         }
 
+#if (!NET8_0_OR_GREATER)
         protected PropertyNotSupportedException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
             Property = (PropertyId)info.GetValue("Property", typeof(PropertyId));
         }
+#endif
 
         public PropertyId Property { get; }
 
+#if (!NET8_0_OR_GREATER)
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             if (info == null)
@@ -55,5 +54,6 @@ namespace FlaUI.Core.Exceptions
             info.AddValue("Property", Property);
             base.GetObjectData(info, context);
         }
+#endif
     }
 }

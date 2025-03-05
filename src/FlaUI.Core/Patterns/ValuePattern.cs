@@ -36,8 +36,8 @@ namespace FlaUI.Core.Patterns
     public abstract class ValuePatternBase<TNativePattern> : PatternBase<TNativePattern>, IValuePattern
         where TNativePattern : class
     {
-        private AutomationProperty<bool> _isReadOnly;
-        private AutomationProperty<string> _value;
+        private AutomationProperty<bool>? _isReadOnly;
+        private AutomationProperty<string>? _value;
 
         protected ValuePatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {

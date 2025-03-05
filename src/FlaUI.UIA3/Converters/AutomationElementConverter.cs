@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using FlaUI.Core;
 using FlaUI.Core.AutomationElements;
 using UIA = Interop.UIAutomationClient;
@@ -16,7 +17,7 @@ namespace FlaUI.UIA3.Converters
         /// <param name="automation">The automation to use for the conversion.</param>
         /// <param name="nativeElements">The native array to convert.</param>
         /// <returns>The array of managed elements.</returns>
-        public static AutomationElement[] NativeArrayToManaged(AutomationBase automation, object nativeElements)
+        public static AutomationElement[] NativeArrayToManaged(AutomationBase automation, object? nativeElements)
         {
             if (nativeElements == null)
             {
@@ -40,10 +41,11 @@ namespace FlaUI.UIA3.Converters
         /// <param name="automation">The automation to use for the conversion.</param>
         /// <param name="nativeElement">The native element to convert.</param>
         /// <returns>The converted managed element.</returns>
-        public static AutomationElement NativeToManaged(AutomationBase automation, object nativeElement)
+        [return: NotNullIfNotNull(nameof(nativeElement))]
+        public static AutomationElement? NativeToManaged(AutomationBase automation, object? nativeElement)
         {
             var uia3Automation = (UIA3Automation)automation;
-            return uia3Automation.WrapNativeElement((UIA.IUIAutomationElement)nativeElement);
+            return uia3Automation.WrapNativeElement((UIA.IUIAutomationElement?)nativeElement);
         }
 
         /// <summary>
@@ -51,7 +53,8 @@ namespace FlaUI.UIA3.Converters
         /// </summary>
         /// <param name="automationElement">The managed element to convert.</param>
         /// <returns>The converted native element.</returns>
-        public static UIA.IUIAutomationElement ToNative(this AutomationElement automationElement)
+        [return: NotNullIfNotNull(nameof(automationElement))]
+        public static UIA.IUIAutomationElement? ToNative(this AutomationElement? automationElement)
         {
             if (automationElement == null)
             {

@@ -8,7 +8,7 @@
         /// <summary>
         /// The path to ffmpeg.exe.
         /// </summary>
-        public string ffmpegPath { get; set; }
+        public string? ffmpegPath { get; set; }
 
         /// <summary>
         /// The framerate used for capturing and playback.
@@ -19,7 +19,7 @@
         /// <summary>
         /// The path to the target video file.
         /// </summary>
-        public string TargetVideoPath { get; set; }
+        public string? TargetVideoPath { get; set; }
 
         /// <summary>
         /// Flag to indicate if compressed images should be captured.<para />

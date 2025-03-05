@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.AutomationElements.Infrastructure;
@@ -87,7 +88,7 @@ namespace FlaUI.Core
         /// <param name="property">The <see cref="PropertyId"/> of the property to get the value from.</param>
         /// <param name="value">The out object where the value should be put. Is the default if the property is not supported.</param>
         /// <returns>True if the property is supported and false otherwise.</returns>
-        public bool TryGetPropertyValue(PropertyId property, out object value)
+        public bool TryGetPropertyValue(PropertyId property, [NotNullWhen(true)] out object? value)
         {
             return TryGetPropertyValue<object>(property, out value);
         }
@@ -99,7 +100,7 @@ namespace FlaUI.Core
         /// <param name="property">The <see cref="PropertyId"/> of the property to get the value from.</param>
         /// <param name="value">The out object where the value should be put. Is the default if the property is not supported.</param>
         /// <returns>True if the property is supported and false otherwise.</returns>
-        public bool TryGetPropertyValue<T>(PropertyId property, out T value)
+        public bool TryGetPropertyValue<T>(PropertyId property, [NotNullWhen(true)] out T? value)
         {
             if (Equals(property, PropertyId.NotSupportedByFramework))
             {
@@ -175,7 +176,7 @@ namespace FlaUI.Core
         /// <param name="pattern">The <see cref="PatternId"/> of the pattern to get.</param>
         /// <param name="nativePattern">The out object where the pattern should be put. Is null if the pattern is not supported.</param>
         /// <returns>True if the pattern is supported and false otherwise.</returns>
-        public bool TryGetNativePattern<T>(PatternId pattern, out T nativePattern)
+        public bool TryGetNativePattern<T>(PatternId pattern, [NotNullWhen(true)] out T? nativePattern)
         {
             try
             {
@@ -228,16 +229,16 @@ namespace FlaUI.Core
         public abstract AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition);
 
         /// <inheritdoc />
-        public abstract AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition);
+        public abstract AutomationElement? FindFirst(TreeScope treeScope, ConditionBase condition);
 
         /// <inheritdoc />
         public abstract AutomationElement[] FindAllWithOptions(TreeScope treeScope, ConditionBase condition, TreeTraversalOptions traversalOptions, AutomationElement root);
 
         /// <inheritdoc />
-        public abstract AutomationElement FindFirstWithOptions(TreeScope treeScope, ConditionBase condition, TreeTraversalOptions traversalOptions, AutomationElement root);
+        public abstract AutomationElement? FindFirstWithOptions(TreeScope treeScope, ConditionBase condition, TreeTraversalOptions traversalOptions, AutomationElement root);
 
         /// <inheritdoc />
-        public abstract AutomationElement FindAt(TreeScope treeScope, int index, ConditionBase condition);
+        public abstract AutomationElement? FindAt(TreeScope treeScope, int index, ConditionBase condition);
 
         /// <summary>
         /// Tries to get a clickable point.
@@ -282,7 +283,7 @@ namespace FlaUI.Core
 
         public abstract PatternId[] GetSupportedPatterns();
         public abstract PropertyId[] GetSupportedProperties();
-        public abstract AutomationElement GetUpdatedCache();
+        public abstract AutomationElement? GetUpdatedCache();
         public abstract AutomationElement[] GetCachedChildren();
         public abstract AutomationElement GetCachedParent();
         public abstract object GetCurrentMetadataValue(PropertyId targetId, int metadataId);

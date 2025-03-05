@@ -37,12 +37,12 @@ namespace FlaUI.Core.Patterns
     public abstract class ScrollPatternBase<TNativePattern> : PatternBase<TNativePattern>, IScrollPattern
         where TNativePattern : class
     {
-        private AutomationProperty<bool> _horizontallyScrollable;
-        private AutomationProperty<double> _horizontalScrollPercent;
-        private AutomationProperty<double> _horizontalViewSize;
-        private AutomationProperty<bool> _verticallyScrollable;
-        private AutomationProperty<double> _verticalScrollPercent;
-        private AutomationProperty<double> _verticalViewSize;
+        private AutomationProperty<bool>? _horizontallyScrollable;
+        private AutomationProperty<double>? _horizontalScrollPercent;
+        private AutomationProperty<double>? _horizontalViewSize;
+        private AutomationProperty<bool>? _verticallyScrollable;
+        private AutomationProperty<double>? _verticalScrollPercent;
+        private AutomationProperty<double>? _verticalViewSize;
 
         protected ScrollPatternBase(FrameworkAutomationElementBase frameworkAutomationElement, TNativePattern nativePattern) : base(frameworkAutomationElement, nativePattern)
         {

@@ -65,9 +65,9 @@ namespace FlaUI.Core
     public partial class CacheRequest
     {
         [ThreadStatic]
-        private static Stack<CacheRequest> _cacheStack;
+        private static Stack<CacheRequest>? _cacheStack;
         [ThreadStatic]
-        private static Stack<bool> _forceNoCacheStack;
+        private static Stack<bool>? _forceNoCacheStack;
 
         /// <summary>
         /// Checks if a caching is currently active in the current context.
@@ -77,7 +77,7 @@ namespace FlaUI.Core
         /// <summary>
         /// Gets the current cache request object.
         /// </summary>
-        public static CacheRequest Current
+        public static CacheRequest? Current
         {
             get
             {
@@ -139,7 +139,7 @@ namespace FlaUI.Core
 
             public void Dispose()
             {
-                _forceNoCacheStack.Pop();
+                _forceNoCacheStack!.Pop();
             }
         }
     }

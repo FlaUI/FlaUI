@@ -40,7 +40,7 @@ namespace FlaUI.Core.AutomationElements
                 if (String.IsNullOrEmpty(value) || value.Contains("System.Windows.Controls.TreeViewItem"))
                 {
                     var textElement = FindFirstChild(cf => cf.ByControlType(ControlType.Text));
-                    return textElement == null ? String.Empty : textElement.Properties.Name.ValueOrDefault;
+                    return textElement == null ? String.Empty : textElement.Properties.Name.ValueOrDefault ?? String.Empty;
                 }
                 return value;
             }

@@ -31,8 +31,11 @@ namespace FlaUI.Core.AutomationElements
         /// </summary>
         /// <param name="automationElement">The <see cref="AutomationElement"/> which <see cref="FrameworkAutomationElement"/> should be wrapped.</param>
         public AutomationElement(AutomationElement automationElement)
-            : this(automationElement?.FrameworkAutomationElement)
         {
+            if (automationElement == null)
+                throw new ArgumentNullException(nameof(automationElement));
+
+            FrameworkAutomationElement = automationElement.FrameworkAutomationElement;
         }
 
         /// <summary>
@@ -109,8 +112,9 @@ namespace FlaUI.Core.AutomationElements
         {
             get
             {
-                var hasProperty = Properties.FrameworkId.TryGetValue(out string currentFrameworkId);
-                return hasProperty ? FrameworkIds.Convert(currentFrameworkId) : FrameworkType.Unknown;
+                return Properties.FrameworkId.TryGetValue(out var currentFrameworkId)
+                    ? FrameworkIds.Convert(currentFrameworkId)
+                    : FrameworkType.Unknown;
             }
         }
 
@@ -443,13 +447,13 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Compares two elements.
         /// </summary>
-        public bool Equals(AutomationElement other)
+        public bool Equals(AutomationElement? other)
         {
             return other != null && Automation.Compare(this, other);
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return Equals(obj as AutomationElement);
         }
@@ -498,7 +502,7 @@ namespace FlaUI.Core.AutomationElements
         /// <param name="throwIfNotSupported">Flag to indicate if an exception should be thrown if the pattern is not supported.</param>
         /// <param name="func">The function to execute on the pattern.</param>
         /// <returns>The value received from the pattern or the default if the pattern is not supported.</returns>
-        protected internal TRet ExecuteInPattern<TPattern, TRet>(TPattern pattern, bool throwIfNotSupported, Func<TPattern, TRet> func)
+        protected internal TRet? ExecuteInPattern<TPattern, TRet>(TPattern pattern, bool throwIfNotSupported, Func<TPattern, TRet> func)
         {
             if (pattern != null)
             {

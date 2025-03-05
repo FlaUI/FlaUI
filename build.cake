@@ -1,5 +1,5 @@
-#tool nuget:?package=NuGet.CommandLine&version=6.3.0
-#tool nuget:?package=NUnit.ConsoleRunner&version=3.15.2
+#tool nuget:?package=NuGet.CommandLine&version=6.11.1
+#tool nuget:?package=NUnit.ConsoleRunner&version=3.18.3
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -94,11 +94,13 @@ Task("Run-UI-Tests")
     .Does(() =>
 {
     var resultFile = artifactDir.CombineWithFilePath("UIA2TestResult.xml");
+    var uia2ExitCode = 0;
     NUnit3(@"src\FlaUI.Core.UITests\bin\FlaUI.Core.UITests.dll", new NUnit3Settings {
         Results = new[] {
             new NUnit3Result { FileName = resultFile, Format = "nunit3" }
         },
-        ArgumentCustomization = args => args.Append("--testparam:uia=2")
+        ArgumentCustomization = args => args.Append("--testparam:uia=2"),
+        HandleExitCode = exitCode => { uia2ExitCode = exitCode; return true; }
     });
     Information("Finished UIA2 Tests");
     if (AppVeyor.IsRunningOnAppVeyor) {
@@ -106,15 +108,22 @@ Task("Run-UI-Tests")
     }
 
     resultFile = artifactDir.CombineWithFilePath("UIA3TestResult.xml");
+    var uia3ExitCode = 0;
     NUnit3(@"src\FlaUI.Core.UITests\bin\FlaUI.Core.UITests.dll", new NUnit3Settings {
         Results = new[] {
             new NUnit3Result { FileName = resultFile, Format = "nunit3" }
         },
-        ArgumentCustomization = args => args.Append("--testparam:uia=3")
+        ArgumentCustomization = args => args.Append("--testparam:uia=3"),
+        HandleExitCode = exitCode => { uia3ExitCode = exitCode; return true; }
     });
     Information("Finished UIA3 Tests");
     if (AppVeyor.IsRunningOnAppVeyor) {
         AppVeyor.UploadTestResults(resultFile, AppVeyorTestResultsType.NUnit3);
+    }
+
+    // Error if any tests failed
+    if (uia2ExitCode != 0 || uia3ExitCode != 0) {
+        throw new Exception("Some tests failed, aborting");
     }
 });
 

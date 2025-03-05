@@ -37,7 +37,7 @@ FlaUI now tries to provide an interface for UIA2 and UIA3 where the developer ca
 ##### Installation
 To use FlaUI, you need to reference the appropriate assemblies. So you should decide, if you want to use UIA2 or UIA3 and install the appropriate library from NuGet. You can of course always download the source and compile it yourself.
 ##### Usage in Code
-The entry point is usually an application or the desktop so you get an automation element (like a the main window of the application).
+The entry point is usually an application or the desktop so you get an automation element (like the main window of the application).
 On this, you can then search sub-elements and interact with them.
 There is a helper class to launch, attach or close applications.
 Since the application is not related to any UIA library, you need to create the automation you want and use it to get your first element, which then is your entry point.

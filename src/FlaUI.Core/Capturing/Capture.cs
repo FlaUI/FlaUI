@@ -17,7 +17,7 @@ namespace FlaUI.Core.Capturing
         /// <summary>
         /// Captures the main (primary) screen.
         /// </summary>
-        public static CaptureImage MainScreen(CaptureSettings settings = null)
+        public static CaptureImage MainScreen(CaptureSettings? settings = null)
         {
             var primaryScreenBounds = new Rectangle(
                 0, 0,
@@ -28,7 +28,7 @@ namespace FlaUI.Core.Capturing
         /// <summary>
         /// Captures the whole screen (all monitors).
         /// </summary>
-        public static CaptureImage Screen(int screenIndex = -1, CaptureSettings settings = null)
+        public static CaptureImage Screen(int screenIndex = -1, CaptureSettings? settings = null)
         {
             Rectangle capturingRectangle;
             // Take the appropriate screen if requested
@@ -50,7 +50,7 @@ namespace FlaUI.Core.Capturing
         /// <summary>
         /// Captures all screens an element is on.
         /// </summary>
-        public static CaptureImage ScreensWithElement(AutomationElement element, CaptureSettings settings = null)
+        public static CaptureImage ScreensWithElement(AutomationElement element, CaptureSettings? settings = null)
         {
             var elementRectangle = element.BoundingRectangle;
             var intersectedScreenBounds = new List<Rectangle>();
@@ -79,7 +79,7 @@ namespace FlaUI.Core.Capturing
         /// <summary>
         /// Captures an element and returns the image.
         /// </summary>
-        public static CaptureImage Element(AutomationElement element, CaptureSettings settings = null)
+        public static CaptureImage Element(AutomationElement element, CaptureSettings? settings = null)
         {
             return Rectangle(element.BoundingRectangle, settings);
         }
@@ -87,7 +87,7 @@ namespace FlaUI.Core.Capturing
         /// <summary>
         /// Captures a rectangle inside an element and returns the image.
         /// </summary>
-        public static CaptureImage ElementRectangle(AutomationElement element, Rectangle rectangle, CaptureSettings settings = null)
+        public static CaptureImage ElementRectangle(AutomationElement element, Rectangle rectangle, CaptureSettings? settings = null)
         {
             var elementBounds = element.BoundingRectangle;
             // Calculate the rectangle that should be captured
@@ -103,7 +103,7 @@ namespace FlaUI.Core.Capturing
         /// <summary>
         /// Captures a specific area from the screen.
         /// </summary>
-        public static CaptureImage Rectangle(Rectangle bounds, CaptureSettings settings = null)
+        public static CaptureImage Rectangle(Rectangle bounds, CaptureSettings? settings = null)
         {
             // Calculate the size of the output rectangle
             var outputRectangle = CaptureUtilities.ScaleAccordingToSettings(bounds, settings);

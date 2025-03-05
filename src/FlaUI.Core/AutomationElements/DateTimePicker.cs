@@ -115,7 +115,7 @@ namespace FlaUI.Core.AutomationElements
 
                     Wait.UntilInputIsProcessed();
                     var retryResult = Retry.While(() => topLevelParent.FindFirstDescendant(cf => cf.ByControlType(Definitions.ControlType.Pane).And(cf.ByClassName("SysMonthCal32"))).AsCalendar(), w => w == null, TimeSpan.FromMilliseconds(1000));
-                    Calendar calendar = retryResult.Result;
+                    var calendar = retryResult.Result;
 
                     if (calendar != null)
                     {
