@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup Label="Build Properties">
-    <TargetFramework>net9.0-windows</TargetFramework>
-    <LangVersion>14</LangVersion>
+    <TargetFrameworks>net48;net6.0-windows;net8.0-windows</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 

@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup Label="Build Properties">
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <LangVersion>14</LangVersion>
     <OutputType>WinExe</OutputType>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>WPFApp.ico</ApplicationIcon>
@@ -8,9 +9,5 @@
 
   <ItemGroup Label="Resources">
     <Content Include="WPFApp.ico" />
-  </ItemGroup>
-
-  <ItemGroup Label="Package References">
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
   </ItemGroup>
 </Project>
