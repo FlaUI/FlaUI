@@ -22,6 +22,12 @@ namespace FlaUI.Core.Patterns
 
         void Scroll(ScrollAmount horizontalAmount, ScrollAmount verticalAmount);
         void SetScrollPercent(double horizontalPercent, double verticalPercent);
+
+        void ScrollHorizontally(ScrollAmount horizontalAmount);
+        void SetHorizontalScrollPercent(double horizontalPercent);
+
+        void ScrollVertically(ScrollAmount verticalAmount);
+        void SetVerticalScrollPercent(double verticalPercent);
     }
 
     public interface IScrollPatternPropertyIds
@@ -59,5 +65,25 @@ namespace FlaUI.Core.Patterns
 
         public abstract void Scroll(ScrollAmount horizontalAmount, ScrollAmount verticalAmount);
         public abstract void SetScrollPercent(double horizontalPercent, double verticalPercent);
+
+        public void ScrollHorizontally(ScrollAmount horizontalAmount)
+        {
+            Scroll(horizontalAmount, ScrollAmount.NoAmount);
+        }
+
+        public void SetHorizontalScrollPercent(double horizontalPercent)
+        {
+            SetScrollPercent(horizontalPercent, ScrollPatternConstants.NoScroll);
+        }
+
+        public void ScrollVertically(ScrollAmount verticalAmount)
+        {
+            Scroll(ScrollAmount.NoAmount, verticalAmount);
+        }
+
+        public void SetVerticalScrollPercent(double verticalPercent)
+        {
+            SetScrollPercent(ScrollPatternConstants.NoScroll, verticalPercent);
+        }
     }
 }
