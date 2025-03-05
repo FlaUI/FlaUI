@@ -38,7 +38,7 @@ namespace FlaUI.Core.UITests.TestFramework
                     app = Application.Launch(Path.Combine(basePath, @"WinFormsApplication\bin\Debug\net48\WinFormsApplication.exe"));
                     break;
                 case TestApplicationType.Wpf:
-                    app = Application.Launch(Path.Combine(basePath, @"WpfApplication\bin\Debug\net8.0-windows\WpfApplication.exe"));
+                    app = Application.Launch(Path.Combine(basePath, @"WpfApplication\bin\Debug\net9.0-windows\WpfApplication.exe"));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
