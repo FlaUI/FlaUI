@@ -49,7 +49,7 @@ Task("Build")
     });
 
     // Updates workloads to the newest available versions
-    DotNetWorkloadUpdate()
+    DotNetWorkloadUpdate();
 
     // Hide informational warnings for now
     buildSettings.Properties.Add("WarningLevel", new[] { "3" });
