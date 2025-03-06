@@ -23,8 +23,6 @@ Task("Clean")
     .Does(() =>
 {
     CleanDirectory(artifactDir);
-    CleanDirectory(new DirectoryPath(@"src\FlaUI.Core.UnitTests\bin"));
-    CleanDirectory(new DirectoryPath(@"src\FlaUI.Core.UnitTests\obj"));
     DotNetClean(slnFile);
 });
 
