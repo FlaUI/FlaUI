@@ -23,6 +23,7 @@ Task("Clean")
     .Does(() =>
 {
     CleanDirectory(artifactDir);
+    DotNetClean(slnFile);
 });
 
 Task("Restore-NuGet-Packages")
