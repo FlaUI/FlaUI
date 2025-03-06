@@ -23,7 +23,6 @@ Task("Clean")
     .Does(() =>
 {
     CleanDirectory(artifactDir);
-    DotNetClean(slnFile);
 });
 
 Task("Restore-NuGet-Packages")
@@ -47,10 +46,6 @@ Task("Build")
         LogFile = buildLogFile.ToString(),
         MSBuildFileLoggerOutput = MSBuildFileLoggerOutput.All
     });
-
-    // Updates workloads to the newest available versions
-    DotNetWorkloadUpdate();
-
     // Hide informational warnings for now
     buildSettings.Properties.Add("WarningLevel", new[] { "3" });
     // Force restoring
@@ -84,7 +79,7 @@ Task("Run-Unit-Tests")
     .Does(() =>
 {
     var resultFile = artifactDir.CombineWithFilePath("UnitTestResult.xml");
-    NUnit3(@"src\FlaUI.Core.UnitTests\bin\Release\net9.0-windows\FlaUI.Core.UnitTests.dll", new NUnit3Settings {
+    NUnit3(@"src\FlaUI.Core.UnitTests\bin\Release\net8.0-windows\FlaUI.Core.UnitTests.dll", new NUnit3Settings {
         Results = new[] {
             new NUnit3Result { FileName = resultFile, Format = "nunit3" }
         }
@@ -100,7 +95,7 @@ Task("Run-UI-Tests")
 {
     var resultFile = artifactDir.CombineWithFilePath("UIA2TestResult.xml");
     var uia2ExitCode = 0;
-    NUnit3(@"src\FlaUI.Core.UITests\bin\Release\net9.0-windows\FlaUI.Core.UITests.dll", new NUnit3Settings {
+    NUnit3(@"src\FlaUI.Core.UITests\bin\Release\net8.0-windows\FlaUI.Core.UITests.dll", new NUnit3Settings {
         Results = new[] {
             new NUnit3Result { FileName = resultFile, Format = "nunit3" }
         },
@@ -114,7 +109,7 @@ Task("Run-UI-Tests")
 
     resultFile = artifactDir.CombineWithFilePath("UIA3TestResult.xml");
     var uia3ExitCode = 0;
-    NUnit3(@"src\FlaUI.Core.UITests\bin\Release\net9.0-windows\FlaUI.Core.UITests.dll", new NUnit3Settings {
+    NUnit3(@"src\FlaUI.Core.UITests\bin\Release\net8.0-windows\FlaUI.Core.UITests.dll", new NUnit3Settings {
         Results = new[] {
             new NUnit3Result { FileName = resultFile, Format = "nunit3" }
         },

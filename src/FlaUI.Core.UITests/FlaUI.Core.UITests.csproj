@@ -1,7 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup Label="Build Properties">
-    <TargetFramework>net9.0-windows</TargetFramework>
-    <LangVersion>13.0</LangVersion>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <LangVersion>12.0</LangVersion>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
 
   <ItemGroup Label="Services">
@@ -23,3 +43,7 @@
     <PackageReference Include="NUnit3TestAdapter" Version="5.0.0" />
   </ItemGroup>
 </Project>
+
+<!-- TODO: Check original csproj files and see if there are any config settings that put files directly in bin/ -->
+<!-- TODO: Restores changes to RetryTests.cs to force double method if needed -->
+<!-- TODO: Remove any unneeded dotnet-tools.json changes. -->
