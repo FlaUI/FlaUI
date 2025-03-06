@@ -43,7 +43,3 @@
     <PackageReference Include="NUnit3TestAdapter" Version="5.0.0" />
   </ItemGroup>
 </Project>
-
-<!-- TODO: Check original csproj files and see if there are any config settings that put files directly in bin/ -->
-<!-- TODO: Restores changes to RetryTests.cs to force double method if needed -->
-<!-- TODO: Remove any unneeded dotnet-tools.json changes. -->
