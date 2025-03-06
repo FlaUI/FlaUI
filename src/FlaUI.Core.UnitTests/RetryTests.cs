@@ -8,16 +8,12 @@ namespace FlaUI.Core.UnitTests
     [TestFixture]
     public class RetryTests
     {
-        private TimeSpan Seconds1 => TimeSpan.FromSeconds(1.0);
-        private TimeSpan Seconds2 => TimeSpan.FromSeconds(2.0);
-        private TimeSpan Seconds4 => TimeSpan.FromSeconds(4.0);
-
         [Test]
         public void RetryWhileTrue()
         {
             var start = DateTime.UtcNow;
-            var result = Retry.WhileTrue(() => DateTime.UtcNow - start < Seconds1, timeout: Seconds2, throwOnTimeout: false);
-            AssertTookAtLeast(start, Seconds1);
+            var result = Retry.WhileTrue(() => DateTime.UtcNow - start < TimeSpan.FromSeconds(1), timeout: TimeSpan.FromSeconds(2), throwOnTimeout: false);
+            AssertTookAtLeast(start, TimeSpan.FromSeconds(1));
             AssertSuccess(result);
             Assert.That(result.Result, Is.True);
         }
@@ -26,8 +22,8 @@ namespace FlaUI.Core.UnitTests
         public void RetryWhileTrueFails()
         {
             var start = DateTime.UtcNow;
-            var result = Retry.WhileTrue(() => DateTime.UtcNow - start < Seconds4, timeout: Seconds1, throwOnTimeout: false);
-            AssertTookAtLeast(start, Seconds1);
+            var result = Retry.WhileTrue(() => DateTime.UtcNow - start < TimeSpan.FromSeconds(4), timeout: TimeSpan.FromSeconds(1), throwOnTimeout: false);
+            AssertTookAtLeast(start, TimeSpan.FromSeconds(1));
             AssertTimedOut(result);
             Assert.That(result.Result, Is.False);
         }
@@ -38,7 +34,7 @@ namespace FlaUI.Core.UnitTests
             var start = DateTime.UtcNow;
             Assert.Throws<TimeoutException>(() =>
             {
-                Retry.WhileTrue(() => DateTime.UtcNow - start < Seconds4, timeout: Seconds1, throwOnTimeout: true);
+                Retry.WhileTrue(() => DateTime.UtcNow - start < TimeSpan.FromSeconds(4), timeout: TimeSpan.FromSeconds(1), throwOnTimeout: true);
             });
         }
 
@@ -48,7 +44,7 @@ namespace FlaUI.Core.UnitTests
             var start = DateTime.UtcNow;
             Assert.Throws<Exception>(() =>
             {
-                Retry.WhileTrue(() => throw new Exception(), timeout: Seconds1, throwOnTimeout: true, ignoreException: false);
+                Retry.WhileTrue(() => throw new Exception(), timeout: TimeSpan.FromSeconds(1), throwOnTimeout: true, ignoreException: false);
             });
         }
 
@@ -60,15 +56,15 @@ namespace FlaUI.Core.UnitTests
             var result = Retry.WhileTrue(() =>
             {
                 var runtime = DateTime.UtcNow - start;
-                if (runtime < Seconds1)
+                if (runtime < TimeSpan.FromSeconds(1))
                 {
                     exceptionCount++;
                     throw new Exception();
                 }
                 return false;
-            }, timeout: Seconds2, throwOnTimeout: true, ignoreException: true);
+            }, timeout: TimeSpan.FromSeconds(2), throwOnTimeout: true, ignoreException: true);
             Assert.That(exceptionCount, Is.GreaterThan(0));
-            AssertTookAtLeast(start, Seconds1);
+            AssertTookAtLeast(start, TimeSpan.FromSeconds(1));
             AssertHasException(result);
             AssertSuccess(result);
             Assert.That(result.Result, Is.True);
@@ -77,8 +73,8 @@ namespace FlaUI.Core.UnitTests
         public void RetryWhileFalse()
         {
             var start = DateTime.UtcNow;
-            var result = Retry.WhileFalse(() => DateTime.UtcNow - start > Seconds1, timeout: Seconds2, throwOnTimeout: false);
-            AssertTookAtLeast(start, Seconds1);
+            var result = Retry.WhileFalse(() => DateTime.UtcNow - start > TimeSpan.FromSeconds(1), timeout: TimeSpan.FromSeconds(2), throwOnTimeout: false);
+            AssertTookAtLeast(start, TimeSpan.FromSeconds(1));
             AssertSuccess(result);
             Assert.That(result.Result, Is.True);
         }
@@ -87,8 +83,8 @@ namespace FlaUI.Core.UnitTests
         public void RetryWhileFalseFails()
         {
             var start = DateTime.UtcNow;
-            var result = Retry.WhileFalse(() => DateTime.UtcNow - start > Seconds4, timeout: Seconds1, throwOnTimeout: false);
-            AssertTookAtLeast(start, Seconds1);
+            var result = Retry.WhileFalse(() => DateTime.UtcNow - start > TimeSpan.FromSeconds(4), timeout: TimeSpan.FromSeconds(1), throwOnTimeout: false);
+            AssertTookAtLeast(start, TimeSpan.FromSeconds(1));
             AssertTimedOut(result);
             Assert.That(result.Result, Is.False);
         }
@@ -101,14 +97,14 @@ namespace FlaUI.Core.UnitTests
             var result = Retry.WhileException(() =>
             {
                 var runtime = DateTime.UtcNow - start;
-                if (runtime < Seconds1)
+                if (runtime < TimeSpan.FromSeconds(1))
                 {
                     exceptionCount++;
                     throw new Exception();
                 }
-            }, timeout: Seconds2, throwOnTimeout: true);
+            }, timeout: TimeSpan.FromSeconds(2), throwOnTimeout: true);
             Assert.That(exceptionCount, Is.GreaterThan(0));
-            AssertTookAtLeast(start, Seconds1);
+            AssertTookAtLeast(start, TimeSpan.FromSeconds(1));
             AssertHasException(result);
             Assert.That(result.Result, Is.True);
         }
@@ -121,14 +117,14 @@ namespace FlaUI.Core.UnitTests
             var result = Retry.WhileException(() =>
             {
                 var runtime = DateTime.UtcNow - start;
-                if (runtime < Seconds4)
+                if (runtime < TimeSpan.FromSeconds(4))
                 {
                     exceptionCount++;
                     throw new Exception();
                 }
-            }, timeout: Seconds1, throwOnTimeout: false);
+            }, timeout: TimeSpan.FromSeconds(1), throwOnTimeout: false);
             Assert.That(exceptionCount, Is.GreaterThan(0));
-            AssertTookAtLeast(start, Seconds1);
+            AssertTookAtLeast(start, TimeSpan.FromSeconds(1));
             AssertHasException(result);
             AssertTimedOut(result);
             Assert.That(result.Result, Is.False);
@@ -144,16 +140,16 @@ namespace FlaUI.Core.UnitTests
                 var result = Retry.WhileException(() =>
                 {
                     var runtime = DateTime.UtcNow - start;
-                    if (runtime < Seconds4)
+                    if (runtime < TimeSpan.FromSeconds(4))
                     {
                         exceptionCount++;
                         throw new Exception();
                     }
-                }, timeout: Seconds1, throwOnTimeout: true);
+                }, timeout: TimeSpan.FromSeconds(1), throwOnTimeout: true);
             });
             Assert.That(exception.InnerException, Is.Not.Null);
             Assert.That(exceptionCount, Is.GreaterThan(0));
-            AssertTookAtLeast(start, Seconds1);
+            AssertTookAtLeast(start, TimeSpan.FromSeconds(1));
         }
 
         [Test]
@@ -164,15 +160,15 @@ namespace FlaUI.Core.UnitTests
             var result = Retry.WhileException(() =>
             {
                 var runtime = DateTime.UtcNow - start;
-                if (runtime < Seconds1)
+                if (runtime < TimeSpan.FromSeconds(1))
                 {
                     exceptionCount++;
                     throw new Exception();
                 }
                 return 1;
-            }, timeout: Seconds2, throwOnTimeout: true);
+            }, timeout: TimeSpan.FromSeconds(2), throwOnTimeout: true);
             Assert.That(exceptionCount, Is.GreaterThan(0));
-            AssertTookAtLeast(start, Seconds1);
+            AssertTookAtLeast(start, TimeSpan.FromSeconds(1));
             AssertHasException(result);
             AssertSuccess(result);
             Assert.That(result.Result, Is.EqualTo(1));
@@ -186,15 +182,15 @@ namespace FlaUI.Core.UnitTests
             var result = Retry.WhileException(() =>
             {
                 var runtime = DateTime.UtcNow - start;
-                if (runtime < Seconds4)
+                if (runtime < TimeSpan.FromSeconds(4))
                 {
                     exceptionCount++;
                     throw new Exception();
                 }
                 return 1;
-            }, timeout: Seconds1, throwOnTimeout: false);
+            }, timeout: TimeSpan.FromSeconds(1), throwOnTimeout: false);
             Assert.That(exceptionCount, Is.GreaterThan(0));
-            AssertTookAtLeast(start, Seconds1);
+            AssertTookAtLeast(start, TimeSpan.FromSeconds(1));
             AssertHasException(result);
             AssertTimedOut(result);
             Assert.That(result.Result, Is.EqualTo(0));
@@ -210,17 +206,17 @@ namespace FlaUI.Core.UnitTests
                 var result = Retry.WhileException(() =>
                 {
                     var runtime = DateTime.UtcNow - start;
-                    if (runtime < Seconds4)
+                    if (runtime < TimeSpan.FromSeconds(4))
                     {
                         exceptionCount++;
                         throw new Exception();
                     }
                     return 1;
-                }, timeout: Seconds1, throwOnTimeout: true);
+                }, timeout: TimeSpan.FromSeconds(1), throwOnTimeout: true);
             });
             Assert.That(exception.InnerException, Is.Not.Null);
             Assert.That(exceptionCount, Is.GreaterThan(0));
-            AssertTookAtLeast(start, Seconds1);
+            AssertTookAtLeast(start, TimeSpan.FromSeconds(1));
         }
 
         [Test]
@@ -230,13 +226,13 @@ namespace FlaUI.Core.UnitTests
             var result = Retry.WhileNull(() =>
             {
                 var runtime = DateTime.UtcNow - start;
-                if (runtime < Seconds1)
+                if (runtime < TimeSpan.FromSeconds(1))
                 {
                     return null;
                 }
                 return new object();
-            }, timeout: Seconds2, throwOnTimeout: true);
-            AssertTookAtLeast(start, Seconds1);
+            }, timeout: TimeSpan.FromSeconds(2), throwOnTimeout: true);
+            AssertTookAtLeast(start, TimeSpan.FromSeconds(1));
             AssertSuccess(result);
             Assert.That(result.Result, Is.Not.Null);
         }
@@ -248,13 +244,13 @@ namespace FlaUI.Core.UnitTests
             var result = Retry.WhileNull(() =>
             {
                 var runtime = DateTime.UtcNow - start;
-                if (runtime < Seconds4)
+                if (runtime < TimeSpan.FromSeconds(4))
                 {
                     return null;
                 }
                 return new object();
-            }, timeout: Seconds1, throwOnTimeout: false);
-            AssertTookAtLeast(start, Seconds1);
+            }, timeout: TimeSpan.FromSeconds(1), throwOnTimeout: false);
+            AssertTookAtLeast(start, TimeSpan.FromSeconds(1));
             AssertTimedOut(result);
             Assert.That(result.Result, Is.Null);
         }
@@ -266,13 +262,13 @@ namespace FlaUI.Core.UnitTests
             var result = Retry.WhileNotNull(() =>
             {
                 var runtime = DateTime.UtcNow - start;
-                if (runtime < Seconds1)
+                if (runtime < TimeSpan.FromSeconds(1))
                 {
                     return new object();
                 }
                 return null;
-            }, timeout: Seconds2, throwOnTimeout: true);
-            AssertTookAtLeast(start, Seconds1);
+            }, timeout: TimeSpan.FromSeconds(2), throwOnTimeout: true);
+            AssertTookAtLeast(start, TimeSpan.FromSeconds(1));
             AssertSuccess(result);
             Assert.That(result.Result, Is.EqualTo(true));
         }
@@ -284,13 +280,13 @@ namespace FlaUI.Core.UnitTests
             var result = Retry.WhileNotNull(() =>
             {
                 var runtime = DateTime.UtcNow - start;
-                if (runtime < Seconds4)
+                if (runtime < TimeSpan.FromSeconds(4))
                 {
                     return new object();
                 }
                 return null;
-            }, timeout: Seconds1, throwOnTimeout: false);
-            AssertTookAtLeast(start, Seconds1);
+            }, timeout: TimeSpan.FromSeconds(1), throwOnTimeout: false);
+            AssertTookAtLeast(start, TimeSpan.FromSeconds(1));
             AssertTimedOut(result);
             Assert.That(result.Result, Is.EqualTo(false));
         }
@@ -302,13 +298,13 @@ namespace FlaUI.Core.UnitTests
             var result = Retry.WhileNotNull<object>(() =>
             {
                 var runtime = DateTime.UtcNow - start;
-                if (runtime < Seconds4)
+                if (runtime < TimeSpan.FromSeconds(4))
                 {
                     throw new Exception();
                 }
                 return null;
-            }, timeout: Seconds1, throwOnTimeout: false, ignoreException: true);
-            AssertTookAtLeast(start, Seconds1);
+            }, timeout: TimeSpan.FromSeconds(1), throwOnTimeout: false, ignoreException: true);
+            AssertTookAtLeast(start, TimeSpan.FromSeconds(1));
             AssertHasException(result);
             AssertTimedOut(result);
             Assert.That(result.Result, Is.False);
@@ -321,13 +317,13 @@ namespace FlaUI.Core.UnitTests
             var result = Retry.WhileEmpty(() =>
             {
                 var runtime = DateTime.UtcNow - start;
-                if (runtime < Seconds1)
+                if (runtime < TimeSpan.FromSeconds(1))
                 {
                     return null;
                 }
                 return new List<int>() { 1, 2 };
-            }, timeout: Seconds2, throwOnTimeout: true);
-            AssertTookAtLeast(start, Seconds1);
+            }, timeout: TimeSpan.FromSeconds(2), throwOnTimeout: true);
+            AssertTookAtLeast(start, TimeSpan.FromSeconds(1));
             AssertSuccess(result);
             Assert.That(result.Result, Has.Count.EqualTo(2));
         }
@@ -339,13 +335,13 @@ namespace FlaUI.Core.UnitTests
             var result = Retry.WhileEmpty(() =>
             {
                 var runtime = DateTime.UtcNow - start;
-                if (runtime < Seconds4)
+                if (runtime < TimeSpan.FromSeconds(4))
                 {
                     return null;
                 }
                 return new List<int>() { 1, 2 };
-            }, timeout: Seconds1, throwOnTimeout: false);
-            AssertTookAtLeast(start, Seconds1);
+            }, timeout: TimeSpan.FromSeconds(1), throwOnTimeout: false);
+            AssertTookAtLeast(start, TimeSpan.FromSeconds(1));
             AssertTimedOut(result);
             Assert.That(result.Result, Is.Null);
         }
@@ -357,13 +353,13 @@ namespace FlaUI.Core.UnitTests
             var result = Retry.WhileEmpty(() =>
             {
                 var runtime = DateTime.UtcNow - start;
-                if (runtime < Seconds1)
+                if (runtime < TimeSpan.FromSeconds(1))
                 {
                     return null;
                 }
                 return "Test";
-            }, timeout: Seconds2, throwOnTimeout: true);
-            AssertTookAtLeast(start, Seconds1);
+            }, timeout: TimeSpan.FromSeconds(2), throwOnTimeout: true);
+            AssertTookAtLeast(start, TimeSpan.FromSeconds(1));
             AssertSuccess(result);
             Assert.That(result.Result, Is.EqualTo("Test"));
         }
@@ -375,13 +371,13 @@ namespace FlaUI.Core.UnitTests
             var result = Retry.WhileEmpty(() =>
             {
                 var runtime = DateTime.UtcNow - start;
-                if (runtime < Seconds4)
+                if (runtime < TimeSpan.FromSeconds(4))
                 {
                     return null;
                 }
                 return "Test";
-            }, timeout: Seconds1, throwOnTimeout: false);
-            AssertTookAtLeast(start, Seconds1);
+            }, timeout: TimeSpan.FromSeconds(1), throwOnTimeout: false);
+            AssertTookAtLeast(start, TimeSpan.FromSeconds(1));
             AssertTimedOut(result);
             Assert.That(result.Result, Is.Null);
         }
