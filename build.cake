@@ -23,8 +23,6 @@ Task("Clean")
     .Does(() =>
 {
     CleanDirectory(artifactDir);
-    CleanDirectory(new DirectoryPath(@"src\FlaUI.Core.UnitTests\bin"));
-    CleanDirectory(new DirectoryPath(@"src\FlaUI.Core.UnitTests\obj"));
     DotNetClean(slnFile);
 });
 
@@ -49,6 +47,10 @@ Task("Build")
         LogFile = buildLogFile.ToString(),
         MSBuildFileLoggerOutput = MSBuildFileLoggerOutput.All
     });
+
+    // Updates workloads to the newest available versions
+    DotNetWorkloadUpdate()
+
     // Hide informational warnings for now
     buildSettings.Properties.Add("WarningLevel", new[] { "3" });
     // Force restoring
