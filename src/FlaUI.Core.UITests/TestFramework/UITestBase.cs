@@ -35,7 +35,7 @@ namespace FlaUI.Core.UITests.TestFramework
             switch (ApplicationType)
             {
                 case TestApplicationType.WinForms:
-                    app = Application.Launch(Path.Combine(basePath, @"WinFormsApplication\bin\net48\WinFormsApplication.exe"));
+                    app = Application.Launch(Path.Combine(basePath, @"WinFormsApplication\bin\net8.0-windows\WinFormsApplication.exe"));
                     break;
                 case TestApplicationType.Wpf:
                     app = Application.Launch(Path.Combine(basePath, @"WpfApplication\bin\net8.0-windows\WpfApplication.exe"));
