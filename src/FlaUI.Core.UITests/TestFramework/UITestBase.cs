@@ -29,7 +29,7 @@ namespace FlaUI.Core.UITests.TestFramework
 
         protected override Application StartApplication()
         {
-            string basePath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\..\..\TestApplications\");
+            string basePath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\..\TestApplications\");
 
             Application app;
             switch (ApplicationType)
