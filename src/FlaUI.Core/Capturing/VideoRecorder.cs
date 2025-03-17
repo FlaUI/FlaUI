@@ -285,22 +285,10 @@ namespace FlaUI.Core.Capturing
 
         private class ImageData : IDisposable
         {
-            public int Width
-            {
-                get; set;
-            }
-            public int Height
-            {
-                get; set;
-            }
-            public bool IsRepeatFrame
-            {
-                get; private set;
-            }
-            public byte[]? Data
-            {
-                get; set;
-            }
+            public int Width { get; set; }
+            public int Height { get; set; }
+            public bool IsRepeatFrame { get; private set; }
+            public byte[]? Data { get; set; }
 
             public static readonly ImageData RepeatImage = new ImageData { IsRepeatFrame = true };
 
