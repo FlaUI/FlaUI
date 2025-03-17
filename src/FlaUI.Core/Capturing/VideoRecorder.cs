@@ -93,7 +93,15 @@ namespace FlaUI.Core.Capturing
                 var timeTillNextFrame = timestamp + frameInterval - DateTime.UtcNow;
                 if (timeTillNextFrame > TimeSpan.Zero)
                 {
-                    await Task.Delay(timeTillNextFrame);
+                    if (timeTillNextFrame > TimeSpan.FromSeconds(1))
+                    {
+                        // Happens when the system date is set to an earlier time during recording
+                        await Task.Delay(frameInterval);
+                    }
+                    else
+                    {
+                        await Task.Delay(timeTillNextFrame);
+                    }
                 }
             }
             if (totalMissedFrames > 0 && _settings.LogMissingFrames)
@@ -277,10 +285,22 @@ namespace FlaUI.Core.Capturing
 
         private class ImageData : IDisposable
         {
-            public int Width { get; set; }
-            public int Height { get; set; }
-            public bool IsRepeatFrame { get; private set; }
-            public byte[]? Data { get; set; }
+            public int Width
+            {
+                get; set;
+            }
+            public int Height
+            {
+                get; set;
+            }
+            public bool IsRepeatFrame
+            {
+                get; private set;
+            }
+            public byte[]? Data
+            {
+                get; set;
+            }
 
             public static readonly ImageData RepeatImage = new ImageData { IsRepeatFrame = true };
 
