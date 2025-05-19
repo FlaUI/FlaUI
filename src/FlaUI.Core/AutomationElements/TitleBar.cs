@@ -17,12 +17,12 @@ namespace FlaUI.Core.AutomationElements
         /// <summary>
         /// Gets the minimize button element.
         /// </summary>
-        public Button? MinimizeButton => FindButton("Minimize");
+        public Button? MinimizeButton => FindButton("Minimize") ?? FindButton("Minimise");
 
         /// <summary>
         /// Gets the maximize button element.
         /// </summary>
-        public Button? MaximizeButton => FindButton("Maximize");
+        public Button? MaximizeButton => FindButton("Maximize") ?? FindButton("Maximise");
 
         /// <summary>
         /// Gets the restore button element.
