@@ -54,22 +54,6 @@ namespace FlaUI.Core.UITests
         }
 
         [Test]
-        public void NotepadFindAllWithFunction()
-        {
-            using (var automation = UtilityMethods.GetAutomation(AutomationType.UIA3))
-            {
-                var app = Application.Launch("notepad.exe");
-                var window = app.GetMainWindow(automation);
-                // Look for "Line Up" and "Line Down"
-                var elem = window.FindAllByXPath("//*[contains(@Name, 'Line')]");
-                Assert.That(elem.Length, Is.EqualTo(2));
-                Assert.That(elem[0].ControlType, Is.EqualTo(ControlType.Button));
-                Assert.That(elem[1].ControlType, Is.EqualTo(ControlType.Button));
-                app.Close();
-            }
-        }
-
-        [Test]
         public void NotePadFindAllIndexed()
         {
             using (var automation = UtilityMethods.GetAutomation(AutomationType.UIA3))
@@ -95,7 +79,9 @@ namespace FlaUI.Core.UITests
             {
                 var app = Application.Launch("mspaint.exe");
                 var window = app.GetMainWindow(automation);
-                var button = window.FindFirstByXPath($"//Button[@Name='{GetPaintBrushName()}']");
+
+                var elementType = OperatingSystem.IsWindows11() ? "RadioButton":"Button";
+                var button = window.FindFirstByXPath($"//{elementType}[@Name='{GetPaintBrushName()}']");
 
                 Assert.That(button, Is.Not.Null);
                 app.Close();
@@ -111,6 +97,23 @@ namespace FlaUI.Core.UITests
                 var window = app.GetMainWindow(automation);
                 var unknown = window.FindFirstByXPath("//Custom");
                 Assert.That(unknown, Is.Not.Null);
+                app.Close();
+            }
+        }
+
+
+        [Test]
+        public void NotepadFindAllWithXPathFunction()
+        {
+            using (var automation = UtilityMethods.GetAutomation(AutomationType.UIA3))
+            {
+                var app = Application.Launch("notepad.exe");
+                var window = app.GetMainWindow(automation);
+                // Look for "Line Up" and "Line Down"
+                var elem = window.FindAllByXPath("//*[contains(@Name, 'Line')]");
+                Assert.That(elem.Length, Is.EqualTo(2));
+                Assert.That(elem[0].ControlType, Is.EqualTo(ControlType.Button));
+                Assert.That(elem[1].ControlType, Is.EqualTo(ControlType.Button));
                 app.Close();
             }
         }
