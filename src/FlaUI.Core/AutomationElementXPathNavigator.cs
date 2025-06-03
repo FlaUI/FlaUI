@@ -273,23 +273,23 @@ namespace FlaUI.Core
             switch ((ElementAttributes)attributeIndex)
             {
                 case ElementAttributes.AutomationId:
-                    return _currentElement.Properties.AutomationId.ValueOrDefault;
+                    return _currentElement.Properties.AutomationId.ValueOrDefault ?? "";
                 case ElementAttributes.Name:
-                    return _currentElement.Properties.Name.ValueOrDefault;
+                    return _currentElement.Properties.Name.ValueOrDefault ?? "";
                 case ElementAttributes.ClassName:
-                    return _currentElement.Properties.ClassName.ValueOrDefault;
+                    return _currentElement.Properties.ClassName.ValueOrDefault ?? "";
                 case ElementAttributes.HelpText:
-                    return _currentElement.Properties.HelpText.ValueOrDefault;
+                    return _currentElement.Properties.HelpText.ValueOrDefault ?? "";
                 case ElementAttributes.IsPassword:
                     return _currentElement.Properties.IsPassword.ValueOrDefault.ToString().ToLower();
                 case ElementAttributes.FullDescription:
-                    return _currentElement.Properties.FullDescription.ValueOrDefault;
+                    return _currentElement.Properties.FullDescription.ValueOrDefault ?? "";
                 case ElementAttributes.ItemType:
-                    return _currentElement.Properties.ItemType.ValueOrDefault;
+                    return _currentElement.Properties.ItemType.ValueOrDefault ?? "";
                 case ElementAttributes.AcceleratorKey:
-                    return _currentElement.Properties.AcceleratorKey.ValueOrDefault;
+                    return _currentElement.Properties.AcceleratorKey.ValueOrDefault ?? "";
                 case ElementAttributes.AccessKey:
-                    return _currentElement.Properties.AccessKey.ValueOrDefault;
+                    return _currentElement.Properties.AccessKey.ValueOrDefault ?? "";
                 case ElementAttributes.IsEnabled:
                     return _currentElement.Properties.IsEnabled.ValueOrDefault.ToString().ToLower();
                 case ElementAttributes.IsOffscreen:

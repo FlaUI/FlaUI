@@ -54,6 +54,22 @@ namespace FlaUI.Core.UITests
         }
 
         [Test]
+        public void NotepadFindAllWithFunction()
+        {
+            using (var automation = UtilityMethods.GetAutomation(AutomationType.UIA3))
+            {
+                var app = Application.Launch("notepad.exe");
+                var window = app.GetMainWindow(automation);
+                // Look for "Line Up" and "Line Down"
+                var elem = window.FindAllByXPath("//*[contains(@Name, 'Line')]");
+                Assert.That(elem.Length, Is.EqualTo(2));
+                Assert.That(elem[0].ControlType, Is.EqualTo(ControlType.Button));
+                Assert.That(elem[1].ControlType, Is.EqualTo(ControlType.Button));
+                app.Close();
+            }
+        }
+
+        [Test]
         public void NotePadFindAllIndexed()
         {
             using (var automation = UtilityMethods.GetAutomation(AutomationType.UIA3))
