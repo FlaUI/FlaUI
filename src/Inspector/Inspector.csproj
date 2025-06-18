@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- Removed old System.Runtime.InteropServices package -->
+		<FrameworkReference Include="Microsoft.NETCore.App" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\FlaUI.Core\FlaUI.Core.csproj" />
+		<ProjectReference Include="..\FlaUI.UIA3\FlaUI.UIA3.csproj" />
+	</ItemGroup>
+
+</Project>
