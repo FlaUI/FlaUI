@@ -158,7 +158,7 @@ namespace FlaUI.Core.Tools
         /// <summary>
         /// Retries while return value from the given method evaluates to null or has no elements.
         /// </summary>
-        public static RetryResult<T> WhileEmpty<T>(Func<T> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false, string? timeoutMessage = null) where T : IEnumerable?
+        public static RetryResult<T> WhileEmpty<T>(Func<T> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false, string? timeoutMessage = null) where T : IEnumerable
         {
             return While(checkMethod, r => r == null || !r.Cast<object>().Any(), timeout, interval, throwOnTimeout, ignoreException, timeoutMessage: timeoutMessage);
         }
@@ -218,7 +218,7 @@ namespace FlaUI.Core.Tools
         /// <param name="searchMethod">The method used to search for the element list.</param>
         /// <param name="retrySettings">The settings to use for retrying.</param>
         /// <returns>The list of found elements.</returns>
-        public static AutomationElement[]? Find(Func<AutomationElement[]?> searchMethod, RetrySettings? retrySettings)
+        public static AutomationElement[]? Find(Func<AutomationElement[]> searchMethod, RetrySettings? retrySettings)
         {
             if (retrySettings == null)
             {
