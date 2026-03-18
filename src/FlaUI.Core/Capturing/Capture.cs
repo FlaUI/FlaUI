@@ -79,9 +79,57 @@ namespace FlaUI.Core.Capturing
         /// <summary>
         /// Captures an element and returns the image.
         /// </summary>
+        [Obsolete("Capture.Element() produces incorrect results on scaled displays (DPI > 100%). " +
+            "Use Capture.ElementByHandle() for DPI-correct window capture.")]
         public static CaptureImage Element(AutomationElement element, CaptureSettings? settings = null)
+            => Rectangle(element.BoundingRectangle, settings);
+
+        /// <summary>
+        /// Captures a window by its native HWND using PrintWindow for DPI-correct output.
+        /// Use this instead of <see cref="Element"/> on scaled displays (150%, 200%, etc.).
+        /// </summary>
+        /// <param name="hwnd">The native window handle to capture.</param>
+        /// <param name="settings">Optional capture settings.</param>
+        /// <returns>A <see cref="CaptureImage"/> of the window.</returns>
+        public static CaptureImage ByHandle(IntPtr hwnd, CaptureSettings? settings = null)
         {
-            return Rectangle(element.BoundingRectangle, settings);
+            if (hwnd == IntPtr.Zero)
+                throw new ArgumentException("HWND must not be zero.", nameof(hwnd));
+
+            User32.GetWindowRect(hwnd, out RECT rect);
+            var width = rect.right - rect.left;
+            var height = rect.bottom - rect.top;
+            if (width <= 0 || height <= 0)
+                throw new FlaUIException($"Invalid window bounds for HWND {hwnd}: {width}x{height}");
+
+            var bmp = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            using (var g = Graphics.FromImage(bmp))
+            {
+                var hdc = g.GetHdc();
+                try
+                {
+                    // PW_RENDERFULLCONTENT (0x2) captures layered/DirectComposition windows correctly
+                    User32.PrintWindow(hwnd, hdc, 0x2);
+                }
+                finally
+                {
+                    g.ReleaseHdc(hdc);
+                }
+            }
+            return new CaptureImage(bmp, new Rectangle(rect.left, rect.top, width, height), settings);
+        }
+
+        /// <summary>
+        /// Captures an <see cref="AutomationElement"/> using its native HWND for DPI-correct output.
+        /// Resolves the HWND from <see cref="AutomationElement.Properties.NativeWindowHandle"/>.
+        /// Use this instead of <see cref="Element"/> on scaled displays.
+        /// </summary>
+        public static CaptureImage ElementByHandle(AutomationElement element, CaptureSettings? settings = null)
+        {
+            var hwndValue = element.Properties.NativeWindowHandle.ValueOrDefault;
+            if (hwndValue == IntPtr.Zero)
+                throw new FlaUIException("Could not get NativeWindowHandle from element. Ensure the element is a top-level window.");
+            return ByHandle(hwndValue, settings);
         }
 
         /// <summary>
