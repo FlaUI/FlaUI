@@ -212,6 +212,32 @@ namespace FlaUI.Core.Input
         }
 
         /// <summary>
+        /// Checks if the given virtual key code is an extended key.
+        /// Extended keys include the navigation keys (arrows, home, end, page up/down, insert, delete),
+        /// the right-hand modifier keys (RCONTROL, RMENU), and a few others.
+        /// See https://learn.microsoft.com/en-us/windows/win32/inputdev/about-keyboard-input#extended-key-flag
+        /// </summary>
+        private static bool IsExtendedKey(ushort keyCode)
+        {
+            return keyCode == (ushort)VirtualKeyShort.INSERT
+                || keyCode == (ushort)VirtualKeyShort.DELETE
+                || keyCode == (ushort)VirtualKeyShort.HOME
+                || keyCode == (ushort)VirtualKeyShort.END
+                || keyCode == (ushort)VirtualKeyShort.PRIOR
+                || keyCode == (ushort)VirtualKeyShort.NEXT
+                || keyCode == (ushort)VirtualKeyShort.LEFT
+                || keyCode == (ushort)VirtualKeyShort.UP
+                || keyCode == (ushort)VirtualKeyShort.RIGHT
+                || keyCode == (ushort)VirtualKeyShort.DOWN
+                || keyCode == (ushort)VirtualKeyShort.SNAPSHOT
+                || keyCode == (ushort)VirtualKeyShort.NUMLOCK
+                || keyCode == (ushort)VirtualKeyShort.RCONTROL
+                || keyCode == (ushort)VirtualKeyShort.RMENU
+                || keyCode == (ushort)VirtualKeyShort.RWIN
+                || keyCode == (ushort)VirtualKeyShort.DIVIDE;
+        }
+
+        /// <summary>
         /// Checks if a given byte has a specific VkKeyScan-modifier set.
         /// </summary>
         private static bool HasScanModifier(byte b, VkKeyScanModifiers modifierToTest)
@@ -261,6 +287,15 @@ namespace FlaUI.Core.Input
             else
             {
                 keyboardInput.wVk = keyCode;
+                // Set the extended key flag for keys that have both a regular and numpad variant.
+                // Without this flag, Windows treats keys like the arrow keys as numpad keys, which
+                // causes it to internally inject fake modifier key-up/key-down events that break
+                // modifier+key combinations (e.g. Shift+Right for text selection).
+                // See https://learn.microsoft.com/en-us/windows/win32/inputdev/about-keyboard-input#extended-key-flag
+                if (IsExtendedKey(keyCode))
+                {
+                    keyboardInput.dwFlags |= KeyEventFlags.KEYEVENTF_EXTENDEDKEY;
+                }
             }
 
             // Build the input object
