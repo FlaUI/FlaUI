@@ -287,10 +287,12 @@ namespace FlaUI.Core.Input
             else
             {
                 keyboardInput.wVk = keyCode;
-                // Set the extended key flag for keys that have both a regular and numpad variant.
-                // Without this flag, Windows treats keys like the arrow keys as numpad keys, which
-                // causes it to internally inject fake modifier key-up/key-down events that break
-                // modifier+key combinations (e.g. Shift+Right for text selection).
+                // Set the extended key flag for virtual-key-based input on keys that Windows
+                // defines as extended keys (e.g. navigation keys, right-hand modifiers, NUMLOCK,
+                // SNAPSHOT, WIN keys, etc.). Some of these have both regular and numpad variants,
+                // and without this flag Windows may treat them as numpad keys and inject fake
+                // modifier key-up/key-down events that break modifier+key combinations
+                // (e.g. Shift+Right for text selection).
                 // See https://learn.microsoft.com/en-us/windows/win32/inputdev/about-keyboard-input#extended-key-flag
                 if (IsExtendedKey(keyCode))
                 {
