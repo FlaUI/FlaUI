@@ -233,7 +233,9 @@ namespace FlaUI.Core.Input
                 || keyCode == (ushort)VirtualKeyShort.NUMLOCK
                 || keyCode == (ushort)VirtualKeyShort.RCONTROL
                 || keyCode == (ushort)VirtualKeyShort.RMENU
+                || keyCode == (ushort)VirtualKeyShort.LWIN
                 || keyCode == (ushort)VirtualKeyShort.RWIN
+                || keyCode == (ushort)VirtualKeyShort.APPS
                 || keyCode == (ushort)VirtualKeyShort.DIVIDE;
         }
 
