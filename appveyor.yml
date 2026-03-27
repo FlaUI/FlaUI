@@ -1,0 +1,19 @@
+image: Visual Studio 2022
+
+install:
+  # Install .NET 10 SDK
+  - ps: Invoke-WebRequest -Uri 'https://dot.net/v1/dotnet-install.ps1' -OutFile 'dotnet-install.ps1'
+  - ps: ./dotnet-install.ps1 -Channel 10.0 -InstallDir 'C:\Program Files\dotnet'
+
+build_script:
+  - ps: .\build.ps1 --target "Package"
+
+test: off
+
+on_failure:
+  - ps: |
+      if (Test-Path -path c:\temp\testsmedia) {
+        Get-ChildItem c:\temp\testsmedia\*.* -Recurse | % {
+          Push-AppveyorArtifact $_.FullName -FileName $_.Name
+        }
+      }
