@@ -163,7 +163,7 @@ namespace FlaUI.Core.AutomationElements
                     // WinForms
                     var itemsList = FindFirstChild(cf => cf.ByControlType(ControlType.List));
                     // UIA3 does not see the list if it is collapsed
-                    return itemsList == null || itemsList.Properties.IsOffscreen ? ExpandCollapseState.Collapsed : ExpandCollapseState.Expanded;
+                    return itemsList == null || itemsList.Properties.IsOffscreen.ValueOrDefault ? ExpandCollapseState.Collapsed : ExpandCollapseState.Expanded;
                 }
                 // WPF
                 var ecp = Patterns.ExpandCollapse.PatternOrDefault;
