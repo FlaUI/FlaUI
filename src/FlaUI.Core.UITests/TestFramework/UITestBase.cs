@@ -29,14 +29,16 @@ namespace FlaUI.Core.UITests.TestFramework
 
         protected override Application StartApplication()
         {
+            string basePath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\..\TestApplications\");
+
             Application app;
             switch (ApplicationType)
             {
                 case TestApplicationType.WinForms:
-                    app = Application.Launch(Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WinFormsApplication\bin\WinFormsApplication.exe"));
+                    app = Application.Launch(Path.Combine(basePath, @"WinFormsApplication\bin\net8.0-windows\WinFormsApplication.exe"));
                     break;
                 case TestApplicationType.Wpf:
-                    app = Application.Launch(Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe"));
+                    app = Application.Launch(Path.Combine(basePath, @"WpfApplication\bin\net8.0-windows\WpfApplication.exe"));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
