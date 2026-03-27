@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using System.Threading;
 using FlaUI.Core.AutomationElements;
 
@@ -84,9 +85,9 @@ namespace FlaUI.Core.Tools
         /// <param name="defaultOnTimeout">Allows to define a default value in case of a timeout.</param>
         /// <typeparam name="T">The type of the return value.</typeparam>
         /// <returns>The value from <paramref name="retryMethod"/> or the default of <typeparamref name="T"/>.</returns>
-        public static RetryResult<T> While<T>(Func<T> retryMethod, Func<T, bool> checkMethod, RetrySettings retrySettings, bool lastValueOnTimeout = false, T defaultOnTimeout = default(T))
+        public static RetryResult<T> While<T>(Func<T> retryMethod, Func<T, bool> checkMethod, RetrySettings? retrySettings, bool lastValueOnTimeout = false, T? defaultOnTimeout = default(T))
         {
-            return While<T>(retryMethod, checkMethod, retrySettings?.Timeout, retrySettings?.Interval, retrySettings?.ThrowOnTimeout ?? false, retrySettings?.IgnoreException ?? false, retrySettings?.TimeoutMessage, lastValueOnTimeout, defaultOnTimeout);
+            return While(retryMethod, checkMethod, retrySettings?.Timeout, retrySettings?.Interval, retrySettings?.ThrowOnTimeout ?? false, retrySettings?.IgnoreException ?? false, retrySettings?.TimeoutMessage, lastValueOnTimeout, defaultOnTimeout);
         }
 
         /// <summary>
@@ -159,7 +160,7 @@ namespace FlaUI.Core.Tools
         /// </summary>
         public static RetryResult<T> WhileEmpty<T>(Func<T> checkMethod, TimeSpan? timeout = null, TimeSpan? interval = null, bool throwOnTimeout = false, bool ignoreException = false, string? timeoutMessage = null) where T : IEnumerable
         {
-            return While(checkMethod, r => r == null || !r.GetEnumerator().MoveNext(), timeout, interval, throwOnTimeout, ignoreException, timeoutMessage: timeoutMessage);
+            return While(checkMethod, r => r == null || !r.Cast<object>().Any(), timeout, interval, throwOnTimeout, ignoreException, timeoutMessage: timeoutMessage);
         }
 
         /// <summary>
@@ -217,7 +218,7 @@ namespace FlaUI.Core.Tools
         /// <param name="searchMethod">The method used to search for the element list.</param>
         /// <param name="retrySettings">The settings to use for retrying.</param>
         /// <returns>The list of found elements.</returns>
-        public static AutomationElement[] Find(Func<AutomationElement[]> searchMethod, RetrySettings? retrySettings)
+        public static AutomationElement[]? Find(Func<AutomationElement[]> searchMethod, RetrySettings? retrySettings)
         {
             if (retrySettings == null)
             {
@@ -232,7 +233,7 @@ namespace FlaUI.Core.Tools
         /// <param name="searchMethod">The method used to search for the element.</param>
         /// <param name="retrySettings">The settings to use for retrying.</param>
         /// <returns>The found element.</returns>
-        public static AutomationElement Find(Func<AutomationElement> searchMethod, RetrySettings? retrySettings)
+        public static AutomationElement? Find(Func<AutomationElement?> searchMethod, RetrySettings? retrySettings)
         {
             if (retrySettings == null)
             {
