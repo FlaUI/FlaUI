@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Build">
-    <TargetFrameworks>net48;net6.0-windows;net8.0-windows</TargetFrameworks>
+    <TargetFrameworks>net48;net8.0-windows;net10.0-windows</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Nullable>enable</Nullable>
     <LangVersion>11.0</LangVersion>
@@ -14,7 +14,7 @@
     <Product>FlaUI</Product>
     <Authors>Roemer</Authors>
     <Description>Library to use FlaUI with UIA3.</Description>
-    <Copyright>Copyright (c) 2016-2025</Copyright>
+    <Copyright>Copyright (c) 2016-present</Copyright>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/FlaUI/FlaUI</PackageProjectUrl>
     <PackageIcon>FlaUI.png</PackageIcon>
