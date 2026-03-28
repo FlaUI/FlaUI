@@ -51,7 +51,7 @@ namespace FlaUI.Core.Capturing
         /// </summary>
         public TimeSpan RecordTimeSpan => DateTime.UtcNow - _recordStartTime;
 
-        private async Task RecordLoop()
+        private async Task RecordLoopAsync()
         {
             var frameInterval = TimeSpan.FromSeconds(1.0 / _settings.FrameRate);
             var sw = Stopwatch.StartNew();
@@ -110,6 +110,7 @@ namespace FlaUI.Core.Capturing
                 catch (Exception ex)
                 {
                     Logger.Default.Error($"Error while recording video \"{Path.GetFileName(TargetVideoPath)}\".", ex);
+                    await Task.Delay(frameInterval);
                 }
             }
 
@@ -119,23 +120,28 @@ namespace FlaUI.Core.Capturing
             }
         }
 
-        private void WriteLoop()
+        private async Task WriteLoopAsync()
         {
             try
             {
-                var videoPipeName = $"flaui-capture-{Guid.NewGuid()}";
-                var ffmpegIn = new NamedPipeServerStream(videoPipeName, PipeDirection.Out, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous, 10000, 10000);
+                Process? ffmpegProcess = null;
+                try
+                {
+                    var videoPipeName = $"flaui-capture-{Guid.NewGuid()}";
+                    using var ffmpegIn = new NamedPipeServerStream(videoPipeName, PipeDirection.Out, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous, 10000, 10000);
+                    ffmpegProcess = await FrameLoopAsync(
+                        videoPipeName,
+                        ffmpegIn
+                    );
 
-                var ffmpegProcess = FrameLoop(
-                    videoPipeName,
-                    ffmpegIn
-                );
-
-                ffmpegIn.Flush();
-                ffmpegIn.Close();
-                ffmpegIn.Dispose();
-                ffmpegProcess?.WaitForExit();
-                ffmpegProcess?.Dispose();
+                    ffmpegIn.Flush();
+                    ffmpegIn.Close();
+                    ffmpegProcess?.WaitForExit();
+                }
+                finally
+                {
+                    ffmpegProcess?.Dispose();
+                }
             }
             catch (Exception ex)
             {
@@ -143,7 +149,7 @@ namespace FlaUI.Core.Capturing
             }
         }
 
-        private Process? FrameLoop(
+        private async Task<Process?> FrameLoopAsync(
             string videoPipeName,
             NamedPipeServerStream ffmpegIn
         )
@@ -175,18 +181,18 @@ namespace FlaUI.Core.Capturing
                             : $"-c:v libxvid -qscale:v {_settings.VideoQuality}";
                         var videoOutArgs = $"{videouOutCodec} -r {_settings.FrameRate} -vf \"scale={img.Width.Even()}:{img.Height.Even()}\"";
                         ffmpegProcess = StartFFMpeg(_settings.ffmpegPath, $"-y -hide_banner -loglevel warning {videoInArgs} {videoOutArgs} \"{TargetVideoPath}\"");
-                        ffmpegIn.WaitForConnection();
+                        await ffmpegIn.WaitForConnectionAsync();
                     }
 
                     if (img.IsRepeatFrame)
                     {
                         // Repeat the last frame
-                        ffmpegIn.WriteAsync(lastImage.Data, 0, lastImage.Data.Length);
+                        await ffmpegIn.WriteAsync(lastImage.Data, 0, lastImage.Data.Length);
                     }
                     else
                     {
                         // Write the received frame and save it as last image
-                        ffmpegIn.WriteAsync(img.Data, 0, img.Data.Length);
+                        await ffmpegIn.WriteAsync(img.Data, 0, img.Data.Length);
                         if (lastImage != null)
                         {
                             lastImage.Dispose();
@@ -199,7 +205,7 @@ namespace FlaUI.Core.Capturing
                 }
                 catch (Exception ex)
                 {
-                    Logger.Default.Error($"Error while procesing frame for video \"{Path.GetFileName(TargetVideoPath)}\".", ex);
+                    Logger.Default.Error($"Error while processing frame for video \"{Path.GetFileName(TargetVideoPath)}\".", ex);
                 }
             }
 
@@ -213,8 +219,8 @@ namespace FlaUI.Core.Capturing
         {
             _shouldRecord = true;
             _recordStartTime = DateTime.UtcNow;
-            _recordTask = Task.Factory.StartNew(async () => await RecordLoop(), TaskCreationOptions.LongRunning);
-            _writeTask = Task.Factory.StartNew(WriteLoop, TaskCreationOptions.LongRunning);
+            _recordTask = Task.Factory.StartNew(RecordLoopAsync, TaskCreationOptions.LongRunning);
+            _writeTask = Task.Factory.StartNew(WriteLoopAsync, TaskCreationOptions.LongRunning);
         }
 
         /// <summary>
