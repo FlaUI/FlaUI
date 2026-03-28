@@ -1,4 +1,5 @@
-﻿using System.Threading;
+using System.Threading;
+using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Input;
 using FlaUI.Core.UITests.TestFramework;
 using FlaUI.Core.WindowsAPI;
@@ -36,6 +37,52 @@ namespace FlaUI.Core.UITests
                 UtilityMethods.CloseWindowWithDontSave(mainWindow);
             }
             app.Dispose();
+        }
+    }
+
+    [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
+    [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
+    public class KeyboardSelectionTests : UITestBase
+    {
+        public KeyboardSelectionTests(AutomationType automationType, TestApplicationType appType)
+            : base(automationType, appType)
+        {
+        }
+
+        [Test]
+        public void PressingShiftAndArrowSelectsText()
+        {
+            RestartApplication();
+            var window = Application.GetMainWindow(Automation);
+            var textBox = window.FindFirstDescendant(cf => cf.ByAutomationId("TextBox")).AsTextBox();
+
+            // Clear and type known text
+            textBox.Text = "Hello";
+            Wait.UntilInputIsProcessed();
+
+            // Focus the textbox and move cursor to the beginning
+            textBox.Click();
+            Wait.UntilInputIsProcessed();
+            Keyboard.Type(VirtualKeyShort.HOME);
+            Wait.UntilInputIsProcessed();
+
+            // Select all 5 characters using Shift+Right
+            using (Keyboard.Pressing(VirtualKeyShort.LSHIFT))
+            {
+                for (var i = 0; i < 5; i++)
+                {
+                    Keyboard.Type(VirtualKeyShort.RIGHT);
+                    Wait.UntilInputIsProcessed();
+                }
+            }
+            Wait.UntilInputIsProcessed();
+
+            // Type over the selection to verify it worked.
+            // If "Hello" was selected, typing "X" replaces it entirely.
+            // If selection failed (the bug), "X" is inserted and we get "XHello".
+            Keyboard.Type("X");
+            Wait.UntilInputIsProcessed();
+            Assert.That(textBox.Text, Is.EqualTo("X"));
         }
     }
 }
