@@ -51,119 +51,165 @@ namespace FlaUI.Core.Capturing
         /// </summary>
         public TimeSpan RecordTimeSpan => DateTime.UtcNow - _recordStartTime;
 
-        private async Task RecordLoop()
+        private async Task RecordLoopAsync()
         {
             var frameInterval = TimeSpan.FromSeconds(1.0 / _settings.FrameRate);
             var sw = Stopwatch.StartNew();
             var frameCount = 0;
             var totalMissedFrames = 0;
+
             while (_shouldRecord)
             {
-                var timestamp = DateTime.UtcNow;
-
-                if (frameCount > 0)
+                try
                 {
-                    var requiredFrames = (int)Math.Floor(sw.Elapsed.TotalSeconds * _settings.FrameRate);
-                    var diff = requiredFrames - frameCount;
-                    if (diff >= 5 && _settings.LogMissingFrames)
+                    var timestamp = DateTime.UtcNow;
+
+                    if (frameCount > 0)
                     {
-                        Logger.Default.Warn($"Adding many ({diff}) missing frame(s) to \"{Path.GetFileName(TargetVideoPath)}\".");
+                        var requiredFrames = (int)Math.Floor(sw.Elapsed.TotalSeconds * _settings.FrameRate);
+                        var diff = requiredFrames - frameCount;
+                        if (diff >= 5 && _settings.LogMissingFrames)
+                        {
+                            Logger.Default.Warn($"Adding many ({diff}) missing frame(s) to \"{Path.GetFileName(TargetVideoPath)}\".");
+                        }
+
+                        for (var i = 0; i < diff; ++i)
+                        {
+                            _frames.Add(ImageData.RepeatImage);
+                            ++frameCount;
+                            ++totalMissedFrames;
+                        }
                     }
 
-                    for (var i = 0; i < diff; ++i)
+                    using (var img = _captureMethod(this))
                     {
-                        _frames.Add(ImageData.RepeatImage);
+                        var image = new ImageData
+                        {
+                            Data = BitmapToByteArray(img.Bitmap),
+                            Width = img.Bitmap.Width,
+                            Height = img.Bitmap.Height
+                        };
+                        _frames.Add(image);
                         ++frameCount;
-                        ++totalMissedFrames;
+                    }
+
+                    var timeTillNextFrame = timestamp + frameInterval - DateTime.UtcNow;
+                    if (timeTillNextFrame > TimeSpan.Zero)
+                    {
+                        if (timeTillNextFrame > TimeSpan.FromSeconds(1))
+                        {
+                            // Happens when the system date is set to an earlier time during recording
+                            await Task.Delay(frameInterval);
+                        }
+                        else
+                        {
+                            await Task.Delay(timeTillNextFrame);
+                        }
                     }
                 }
-
-                using (var img = _captureMethod(this))
+                catch (Exception ex)
                 {
-                    var image = new ImageData
-                    {
-                        Data = BitmapToByteArray(img.Bitmap),
-                        Width = img.Bitmap.Width,
-                        Height = img.Bitmap.Height
-                    };
-                    _frames.Add(image);
-                    ++frameCount;
-                }
-
-                var timeTillNextFrame = timestamp + frameInterval - DateTime.UtcNow;
-                if (timeTillNextFrame > TimeSpan.Zero)
-                {
-                    if (timeTillNextFrame > TimeSpan.FromSeconds(1))
-                    {
-                        // Happens when the system date is set to an earlier time during recording
-                        await Task.Delay(frameInterval);
-                    }
-                    else
-                    {
-                        await Task.Delay(timeTillNextFrame);
-                    }
+                    Logger.Default.Error($"Error while recording video \"{Path.GetFileName(TargetVideoPath)}\".", ex);
+                    await Task.Delay(frameInterval);
                 }
             }
+
             if (totalMissedFrames > 0 && _settings.LogMissingFrames)
             {
                 Logger.Default.Warn($"Totally added {totalMissedFrames} missing frame(s) to \"{Path.GetFileName(TargetVideoPath)}\".");
             }
         }
 
-        private void WriteLoop()
+        private async Task WriteLoopAsync()
         {
-            var videoPipeName = $"flaui-capture-{Guid.NewGuid()}";
-            var ffmpegIn = new NamedPipeServerStream(videoPipeName, PipeDirection.Out, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous, 10000, 10000);
-            const string pipePrefix = @"\\.\pipe\";
-            Process? ffmpegProcess = null;
+            try
+            {
+                Process? ffmpegProcess = null;
+                try
+                {
+                    var videoPipeName = $"flaui-capture-{Guid.NewGuid()}";
+                    using var ffmpegIn = new NamedPipeServerStream(videoPipeName, PipeDirection.Out, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous, 10000, 10000);
+                    ffmpegProcess = await FrameLoopAsync(
+                        videoPipeName,
+                        ffmpegIn
+                    );
 
+                    ffmpegIn.Flush();
+                    ffmpegIn.Close();
+                    ffmpegProcess?.WaitForExit();
+                }
+                finally
+                {
+                    ffmpegProcess?.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Default.Error($"Error while writing video \"{Path.GetFileName(TargetVideoPath)}\".", ex);
+            }
+        }
+
+        private async Task<Process?> FrameLoopAsync(
+            string videoPipeName,
+            NamedPipeServerStream ffmpegIn
+        )
+        {
+            const string pipePrefix = @"\\.\pipe\";
             var isFirstFrame = true;
             ImageData? lastImage = null;
+            Process? ffmpegProcess = null;
+            
             while (!_frames.IsCompleted)
             {
-                _frames.TryTake(out var img, -1);
-                if (img == null)
+                try
                 {
-                    // Happens when the queue is marked as completed
-                    continue;
-                }
-                if (isFirstFrame)
-                {
-                    isFirstFrame = false;
-                    Directory.CreateDirectory(new FileInfo(TargetVideoPath).Directory.FullName);
-                    var videoInFormat = _settings.UseCompressedImages ? "" : "-f rawvideo"; // Used when sending raw bitmaps to the pipe
-                    var videoInArgs = $"-framerate {_settings.FrameRate} {videoInFormat} -pix_fmt rgb32 -video_size {img.Width}x{img.Height} -i {pipePrefix}{videoPipeName}";
-                    var videouOutCodec = _settings.VideoFormat == VideoFormat.x264
-                        ? $"-c:v libx264 -crf {_settings.VideoQuality} -pix_fmt yuv420p -preset ultrafast"
-                        : $"-c:v libxvid -qscale:v {_settings.VideoQuality}";
-                    var videoOutArgs = $"{videouOutCodec} -r {_settings.FrameRate} -vf \"scale={img.Width.Even()}:{img.Height.Even()}\"";
-                    ffmpegProcess = StartFFMpeg(_settings.ffmpegPath, $"-y -hide_banner -loglevel warning {videoInArgs} {videoOutArgs} \"{TargetVideoPath}\"");
-                    ffmpegIn.WaitForConnection();
-                }
-                if (img.IsRepeatFrame)
-                {
-                    // Repeat the last frame
-                    ffmpegIn.WriteAsync(lastImage.Data, 0, lastImage.Data.Length);
-                }
-                else
-                {
-                    // Write the received frame and save it as last image
-                    ffmpegIn.WriteAsync(img.Data, 0, img.Data.Length);
-                    if (lastImage != null)
+                    _frames.TryTake(out var img, -1);
+                    if (img == null)
                     {
-                        lastImage.Dispose();
-                        lastImage = null;
-                        GC.Collect();
+                        // Happens when the queue is marked as completed
+                        continue;
                     }
-                    lastImage = img;
+
+                    if (isFirstFrame)
+                    {
+                        isFirstFrame = false;
+                        Directory.CreateDirectory(new FileInfo(TargetVideoPath).Directory.FullName);
+                        var videoInFormat = _settings.UseCompressedImages ? "" : "-f rawvideo"; // Used when sending raw bitmaps to the pipe
+                        var videoInArgs = $"-framerate {_settings.FrameRate} {videoInFormat} -pix_fmt rgb32 -video_size {img.Width}x{img.Height} -i {pipePrefix}{videoPipeName}";
+                        var videouOutCodec = _settings.VideoFormat == VideoFormat.x264
+                            ? $"-c:v libx264 -crf {_settings.VideoQuality} -pix_fmt yuv420p -preset ultrafast"
+                            : $"-c:v libxvid -qscale:v {_settings.VideoQuality}";
+                        var videoOutArgs = $"{videouOutCodec} -r {_settings.FrameRate} -vf \"scale={img.Width.Even()}:{img.Height.Even()}\"";
+                        ffmpegProcess = StartFFMpeg(_settings.ffmpegPath, $"-y -hide_banner -loglevel warning {videoInArgs} {videoOutArgs} \"{TargetVideoPath}\"");
+                        await ffmpegIn.WaitForConnectionAsync();
+                    }
+
+                    if (img.IsRepeatFrame)
+                    {
+                        // Repeat the last frame
+                        await ffmpegIn.WriteAsync(lastImage.Data, 0, lastImage.Data.Length);
+                    }
+                    else
+                    {
+                        // Write the received frame and save it as last image
+                        await ffmpegIn.WriteAsync(img.Data, 0, img.Data.Length);
+                        if (lastImage != null)
+                        {
+                            lastImage.Dispose();
+                            lastImage = null;
+                            GC.Collect();
+                        }
+
+                        lastImage = img;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Default.Error($"Error while processing frame for video \"{Path.GetFileName(TargetVideoPath)}\".", ex);
                 }
             }
 
-            ffmpegIn.Flush();
-            ffmpegIn.Close();
-            ffmpegIn.Dispose();
-            ffmpegProcess?.WaitForExit();
-            ffmpegProcess?.Dispose();
+            return ffmpegProcess ?? throw new NullReferenceException("FFMpeg process was not started, no frames were captured.");
         }
 
         /// <summary>
@@ -173,8 +219,8 @@ namespace FlaUI.Core.Capturing
         {
             _shouldRecord = true;
             _recordStartTime = DateTime.UtcNow;
-            _recordTask = Task.Factory.StartNew(async () => await RecordLoop(), TaskCreationOptions.LongRunning);
-            _writeTask = Task.Factory.StartNew(WriteLoop, TaskCreationOptions.LongRunning);
+            _recordTask = Task.Factory.StartNew(RecordLoopAsync, TaskCreationOptions.LongRunning);
+            _writeTask = Task.Factory.StartNew(WriteLoopAsync, TaskCreationOptions.LongRunning);
         }
 
         /// <summary>
