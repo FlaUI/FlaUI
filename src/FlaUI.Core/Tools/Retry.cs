@@ -80,7 +80,7 @@ namespace FlaUI.Core.Tools
         /// </summary>
         /// <param name="retryMethod">The method which is retried.</param>
         /// <param name="checkMethod">The method which is used to decide if a retry is needed or if the value is correct.</param>
-        /// <param name="retrySettings">The settings to use for retrying.</param>
+        /// <param name="retrySettings">The settings to use for retrying. Default values are used when null is passed.</param>
         /// <param name="lastValueOnTimeout">A flag indicating if the last value should be returned on timeout. Returns the default if the value could never be fetched.</param>
         /// <param name="defaultOnTimeout">Allows to define a default value in case of a timeout.</param>
         /// <typeparam name="T">The type of the return value.</typeparam>
@@ -217,7 +217,7 @@ namespace FlaUI.Core.Tools
         /// </summary>
         /// <param name="searchMethod">The method used to search for the element list.</param>
         /// <param name="retrySettings">The settings to use for retrying.</param>
-        /// <returns>The list of found elements.</returns>
+        /// <returns>The list of found elements or null if no elements are found.</returns>
         public static AutomationElement[]? Find(Func<AutomationElement[]> searchMethod, RetrySettings? retrySettings)
         {
             if (retrySettings == null)
@@ -232,7 +232,7 @@ namespace FlaUI.Core.Tools
         /// </summary>
         /// <param name="searchMethod">The method used to search for the element.</param>
         /// <param name="retrySettings">The settings to use for retrying.</param>
-        /// <returns>The found element.</returns>
+        /// <returns>The found element or null if no element is found.</returns>
         public static AutomationElement? Find(Func<AutomationElement?> searchMethod, RetrySettings? retrySettings)
         {
             if (retrySettings == null)
