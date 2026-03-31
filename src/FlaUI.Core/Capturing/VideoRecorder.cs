@@ -211,8 +211,8 @@ namespace FlaUI.Core.Capturing
         {
             _shouldRecord = true;
             _recordStartTime = DateTime.UtcNow;
-            _recordTask = Task.Factory.StartNew(RecordLoopAsync, TaskCreationOptions.LongRunning);
-            _writeTask = Task.Factory.StartNew(WriteLoopAsync, TaskCreationOptions.LongRunning);
+            _recordTask = Task.Factory.StartNew(RecordLoopAsync, TaskCreationOptions.LongRunning).Unwrap();
+            _writeTask = Task.Factory.StartNew(WriteLoopAsync, TaskCreationOptions.LongRunning).Unwrap();
         }
 
         /// <summary>
@@ -223,20 +223,38 @@ namespace FlaUI.Core.Capturing
             if (_recordTask != null)
             {
                 _shouldRecord = false;
-                _recordTask.Wait();
-                _recordTask = null;
+                try
+                {
+                    _recordTask.Wait();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Default.Warn(ex.Message, ex);
+                }
+                finally
+                {
+                    _recordTask = null;
+                }
             }
-            _frames.CompleteAdding();
+
+            if (!_frames.IsAddingCompleted)
+            {
+                _frames.CompleteAdding();
+            }
+
             if (_writeTask != null)
             {
                 try
                 {
                     _writeTask.Wait();
-                    _writeTask = null;
                 }
                 catch (Exception ex)
                 {
                     Logger.Default.Warn(ex.Message, ex);
+                }
+                finally
+                {
+                    _writeTask = null;
                 }
             }
         }

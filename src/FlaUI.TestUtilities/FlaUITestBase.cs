@@ -251,14 +251,12 @@ namespace FlaUI.TestUtilities
             if (_recorder != null)
             {
                 _recorder.Stop();
-                var videoPath = _recorder.TargetVideoPath;
-                _recorder.Dispose();
-                _recorder = null;
-
                 if (!KeepVideoForSuccessfulTests && TestContext.CurrentContext.Result.FailCount == 0)
                 {
-                    File.Delete(videoPath);
+                    File.Delete(_recorder.TargetVideoPath);
                 }
+                _recorder.Dispose();
+                _recorder = null;
             }
         }
 
