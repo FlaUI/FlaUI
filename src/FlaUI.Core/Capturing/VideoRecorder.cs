@@ -124,24 +124,16 @@ namespace FlaUI.Core.Capturing
         {
             try
             {
-                Process? ffmpegProcess = null;
-                try
-                {
-                    var videoPipeName = $"flaui-capture-{Guid.NewGuid()}";
-                    using var ffmpegIn = new NamedPipeServerStream(videoPipeName, PipeDirection.Out, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous, 10000, 10000);
-                    ffmpegProcess = await FrameLoopAsync(
-                        videoPipeName,
-                        ffmpegIn
-                    );
+                var videoPipeName = $"flaui-capture-{Guid.NewGuid()}";
+                using var ffmpegIn = new NamedPipeServerStream(videoPipeName, PipeDirection.Out, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous, 10000, 10000);
+                using var ffmpegProcess = await FrameLoopAsync(
+                    videoPipeName,
+                    ffmpegIn
+                );
 
-                    ffmpegIn.Flush();
-                    ffmpegIn.Close();
-                    ffmpegProcess?.WaitForExit();
-                }
-                finally
-                {
-                    ffmpegProcess?.Dispose();
-                }
+                ffmpegIn.Flush();
+                ffmpegIn.Close();
+                ffmpegProcess?.WaitForExit();
             }
             catch (Exception ex)
             {
