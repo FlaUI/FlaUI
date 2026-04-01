@@ -141,7 +141,7 @@ namespace FlaUI.Core.Capturing
             }
         }
 
-        private async Task<Process?> FrameLoopAsync(
+        private async Task<Process> FrameLoopAsync(
             string videoPipeName,
             NamedPipeServerStream ffmpegIn
         )
@@ -164,7 +164,6 @@ namespace FlaUI.Core.Capturing
 
                     if (isFirstFrame)
                     {
-                        isFirstFrame = false;
                         Directory.CreateDirectory(new FileInfo(TargetVideoPath).Directory.FullName);
                         var videoInFormat = _settings.UseCompressedImages ? "" : "-f rawvideo"; // Used when sending raw bitmaps to the pipe
                         var videoInArgs = $"-framerate {_settings.FrameRate} {videoInFormat} -pix_fmt rgb32 -video_size {img.Width}x{img.Height} -i {pipePrefix}{videoPipeName}";
@@ -174,6 +173,7 @@ namespace FlaUI.Core.Capturing
                         var videoOutArgs = $"{videouOutCodec} -r {_settings.FrameRate} -vf \"scale={img.Width.Even()}:{img.Height.Even()}\"";
                         ffmpegProcess = StartFFMpeg(_settings.ffmpegPath, $"-y -hide_banner -loglevel warning {videoInArgs} {videoOutArgs} \"{TargetVideoPath}\"");
                         await ffmpegIn.WaitForConnectionAsync();
+                        isFirstFrame = false;
                     }
 
                     if (img.IsRepeatFrame)
@@ -189,7 +189,6 @@ namespace FlaUI.Core.Capturing
                         {
                             lastImage.Dispose();
                             lastImage = null;
-                            GC.Collect();
                         }
 
                         lastImage = img;
