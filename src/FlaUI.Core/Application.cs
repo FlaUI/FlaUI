@@ -22,6 +22,11 @@ namespace FlaUI.Core
         private Process _process;
 
         /// <summary>
+        /// Flag to indicate if FlaUI created the current process instance and should dispose it.
+        /// </summary>
+        private bool _disposeProcess;
+
+        /// <summary>
         /// Flag to indicate if Dispose has already been called.
         /// </summary>
         private bool _disposed;
@@ -68,7 +73,7 @@ namespace FlaUI.Core
         /// <param name="processId">The process id.</param>
         /// <param name="isStoreApp">Flag to define if it's a store app or not.</param>
         public Application(int processId, bool isStoreApp = false)
-            : this(FindProcess(processId), isStoreApp)
+            : this(FindProcess(processId), isStoreApp, true)
         {
         }
 
@@ -78,8 +83,14 @@ namespace FlaUI.Core
         /// <param name="process">The process.</param>
         /// <param name="isStoreApp">Flag to define if it's a store app or not.</param>
         public Application(Process process, bool isStoreApp = false)
+            : this(process, isStoreApp, false)
+        {
+        }
+
+        private Application(Process process, bool isStoreApp, bool disposeProcess)
         {
             _process = process ?? throw new ArgumentNullException(nameof(process));
+            _disposeProcess = disposeProcess;
             IsStoreApp = isStoreApp;
         }
 
@@ -156,7 +167,7 @@ namespace FlaUI.Core
             }
             if (disposing)
             {
-                _process?.Dispose();
+                DisposeProcess();
             }
             _disposed = true;
         }
@@ -168,7 +179,7 @@ namespace FlaUI.Core
         /// <returns>An application instance which is attached to the process.</returns>
         public static Application Attach(int processId)
         {
-            return Attach(FindProcess(processId));
+            return Attach(FindProcess(processId), true);
         }
 
         /// <summary>
@@ -178,8 +189,13 @@ namespace FlaUI.Core
         /// <returns>An application instance which is attached to the process.</returns>
         public static Application Attach(Process process)
         {
+            return Attach(process, false);
+        }
+
+        private static Application Attach(Process process, bool disposeProcess)
+        {
             Logger.Default.Debug($"[Attaching to process:{process.Id}] [Process name:{process.ProcessName}] [Process full path:{WindowsApiTools.GetMainModuleFilepath(process)}]");
-            return new Application(process);
+            return new Application(process, false, disposeProcess);
         }
 
         /// <summary>
@@ -193,7 +209,7 @@ namespace FlaUI.Core
             var processes = FindProcess(executable);
             if (processes.Length > index)
             {
-                return Attach(processes[index]);
+                return Attach(processes[index], true);
             }
             throw new Exception("Unable to find process with name: " + executable);
         }
@@ -204,7 +220,7 @@ namespace FlaUI.Core
         public static Application AttachOrLaunch(ProcessStartInfo processStartInfo)
         {
             var processes = FindProcess(processStartInfo.FileName);
-            return processes.Length == 0 ? Launch(processStartInfo) : Attach(processes[0]);
+            return processes.Length == 0 ? Launch(processStartInfo) : Attach(processes[0], true);
         }
 
         /// <summary>
@@ -252,7 +268,7 @@ namespace FlaUI.Core
                 throw;
             }
 
-            return new Application(process);
+            return new Application(process, false, true);
         }
 
         /// <summary>
@@ -263,7 +279,7 @@ namespace FlaUI.Core
         public static Application LaunchStoreApp(string appUserModelId, string arguments = "")
         {
             var process = WindowsStoreAppLauncher.Launch(appUserModelId, arguments);
-            return new Application(process, true);
+            return new Application(process, true, true);
         }
 
         /// <summary>
@@ -287,9 +303,7 @@ namespace FlaUI.Core
             var waitTime = waitTimeout ?? TimeSpan.FromMilliseconds(-1);
             return Retry.WhileTrue(() =>
             {
-                int processId = _process.Id;
-                _process.Dispose();
-                _process = FindProcess(processId);
+                RefreshProcess();
                 return _process.MainWindowHandle == IntPtr.Zero;
             }, waitTime, TimeSpan.FromMilliseconds(50)).Result;
         }
@@ -342,6 +356,22 @@ namespace FlaUI.Core
         private static Process[] FindProcess(string executable)
         {
             return Process.GetProcessesByName(Path.GetFileNameWithoutExtension(executable));
+        }
+
+        private void RefreshProcess()
+        {
+            var processId = _process.Id;
+            DisposeProcess();
+            _process = FindProcess(processId);
+            _disposeProcess = true;
+        }
+
+        private void DisposeProcess()
+        {
+            if (_disposeProcess)
+            {
+                _process?.Dispose();
+            }
         }
     }
 }

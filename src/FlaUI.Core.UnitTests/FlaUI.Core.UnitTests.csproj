@@ -40,6 +40,7 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationTests.cs" />
     <Compile Include="Logging\LoggerBaseTests.cs" />
     <Compile Include="Logging\TestLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
