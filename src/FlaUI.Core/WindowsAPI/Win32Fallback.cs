@@ -87,7 +87,7 @@ namespace FlaUI.Core.WindowsAPI
             if (automationElement.Properties.NativeWindowHandle.IsSupported)
             {
                 var windowHandle = automationElement.Properties.NativeWindowHandle.ValueOrDefault;
-                SetTextWin32(windowHandle, text);
+                return SetTextWin32(windowHandle, text);
             }
             return false;
         }
