@@ -89,7 +89,9 @@ namespace FlaUI.Core.UITests.Elements
         {
             var window = Application.GetMainWindow(Automation);
             var fallbackElement = window.FindAllDescendants()
-                .FirstOrDefault(element => element.Properties.ClassName.ValueOrDefault?.StartsWith("WindowsForms10.RichEdit", StringComparison.Ordinal) == true);
+                .FirstOrDefault(element =>
+                    element.Properties.AutomationId.ValueOrDefault == "Win32FallbackLabel" &&
+                    element.Properties.ClassName.ValueOrDefault?.StartsWith("WindowsForms10.STATIC", StringComparison.OrdinalIgnoreCase) == true);
             Assert.That(fallbackElement, Is.Not.Null);
             Assert.That(fallbackElement.Patterns.Value.IsSupported, Is.False);
             Assert.That(fallbackElement.Properties.NativeWindowHandle.ValueOrDefault, Is.Not.EqualTo(IntPtr.Zero));
