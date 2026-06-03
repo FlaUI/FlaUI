@@ -62,6 +62,24 @@ namespace FlaUI.Core.UITests.Elements
         }
 
         [Test]
+        public void TemplatedItemTextTest()
+        {
+            if (ApplicationType != TestApplicationType.Wpf)
+            {
+                return;
+            }
+
+            var window = Application.GetMainWindow(Automation);
+            var listBox = window.FindFirstDescendant(cf => cf.ByAutomationId("TemplatedListBox")).AsListBox();
+            Assert.That(listBox.Items[0].Text, Is.EqualTo("Templated List Item 1"));
+            Assert.That(listBox.Items[1].Text, Is.EqualTo("Templated List Item 2"));
+
+            var item = listBox.Select("Templated List Item 2");
+            Assert.That(item.Text, Is.EqualTo("Templated List Item 2"));
+            Assert.That(listBox.SelectedItem.Text, Is.EqualTo("Templated List Item 2"));
+        }
+
+        [Test]
         public void ItemsPropertyInLargeList()
         {
             if (ApplicationType != TestApplicationType.Wpf)

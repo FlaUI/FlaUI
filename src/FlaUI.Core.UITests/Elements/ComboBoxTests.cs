@@ -66,6 +66,19 @@ namespace FlaUI.Core.UITests.Elements
         }
 
         [Test]
+        public void TemplatedItemTextTest()
+        {
+            var combo = _mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("TemplatedCombo")).AsComboBox();
+            Assert.That(combo.Items[0].Text, Is.EqualTo("Templated Combo Item 1"));
+            Assert.That(combo.Items[1].Text, Is.EqualTo("Templated Combo Item 2"));
+
+            combo.Select("Templated Combo Item 2");
+            var selectedItem = combo.SelectedItem;
+            Assert.That(selectedItem, Is.Not.Null);
+            Assert.That(selectedItem.Text, Is.EqualTo("Templated Combo Item 2"));
+        }
+
+        [Test]
         [TestCase("EditableCombo")]
         [TestCase("NonEditableCombo")]
         public void ExpandCollapseTest(string comboBoxId)

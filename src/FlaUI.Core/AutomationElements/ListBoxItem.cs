@@ -28,13 +28,10 @@ namespace FlaUI.Core.AutomationElements
             {
                 if (FrameworkType == FrameworkType.Wpf)
                 {
-                    // In WPF, the text is actually an inner content only (text) element
-                    // which can be accessed only with a raw walker.
-                    var rawTreeWalker = Automation.TreeWalkerFactory.GetRawViewWalker();
-                    var rawElement = rawTreeWalker.GetFirstChild(this);
-                    if (rawElement != null)
+                    var text = ItemTextResolver.FindFirstTextDescendantName(this);
+                    if (text != null)
                     {
-                        return rawElement.Properties.Name.Value;
+                        return text;
                     }
                 }
 

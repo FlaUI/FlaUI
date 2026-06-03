@@ -50,9 +50,41 @@
                         <TextBlock Text="Item 3" AutomationProperties.AutomationId="EditableComboItem3" />
                         <TextBlock Text="Item 4" AutomationProperties.AutomationId="EditableComboItem4" />
                     </ComboBox>
+                    <ComboBox Width="190" AutomationProperties.AutomationId="TemplatedCombo">
+                        <StackPanel Orientation="Horizontal">
+                            <Button AutomationProperties.Name="Icon" IsEnabled="False" Width="16" Height="16">
+                                <Border Background="Gray" />
+                            </Button>
+                            <TextBlock Text="Templated Combo Item 1" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Button AutomationProperties.Name="Icon" IsEnabled="False" Width="16" Height="16">
+                                <Border Background="Gray" />
+                            </Button>
+                            <TextBlock Text="Templated Combo Item 2" />
+                        </StackPanel>
+                    </ComboBox>
                     <ListBox AutomationProperties.AutomationId="ListBox">
                         <ListBoxItem>ListBox Item #1</ListBoxItem>
                         <ListBoxItem>ListBox Item #2</ListBoxItem>
+                    </ListBox>
+                    <ListBox AutomationProperties.AutomationId="TemplatedListBox">
+                        <ListBoxItem>
+                            <StackPanel Orientation="Horizontal">
+                                <Button AutomationProperties.Name="Icon" IsEnabled="False" Width="16" Height="16">
+                                    <Border Background="Gray" />
+                                </Button>
+                                <TextBlock Text="Templated List Item 1" />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <StackPanel Orientation="Horizontal">
+                                <Button AutomationProperties.Name="Icon" IsEnabled="False" Width="16" Height="16">
+                                    <Border Background="Gray" />
+                                </Button>
+                                <TextBlock Text="Templated List Item 2" />
+                            </StackPanel>
+                        </ListBoxItem>
                     </ListBox>
                     <CheckBox Content="Test Checkbox" AutomationProperties.AutomationId="SimpleCheckBox" />
                     <CheckBox Content="3-Way Test Checkbox" IsThreeState="True" AutomationProperties.AutomationId="ThreeStateCheckBox" />
