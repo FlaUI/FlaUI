@@ -59,10 +59,12 @@ namespace FlaUI.Core.UITests.Elements
         public void SelectByTextTest(string comboBoxId)
         {
             var combo = _mainWindow.FindFirstDescendant(cf => cf.ByAutomationId(comboBoxId)).AsComboBox();
-            combo.Select("Item 2");
-            var selectedItem = combo.SelectedItem;
-            Assert.That(selectedItem, Is.Not.Null);
+    
+            var selectedItem = combo.Select("Item 2");
             Assert.That(selectedItem.Text, Is.EqualTo("Item 2"));
+
+            var ex = Assert.Throws<ArgumentException>(() => combo.Select("NonExistingItem"));
+            Assert.That(ex.Message, Does.Contain("Item with text 'NonExistingItem' not found in ComboBox."));
         }
 
         [Test]

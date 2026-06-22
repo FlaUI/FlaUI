@@ -248,11 +248,16 @@ namespace FlaUI.Core.AutomationElements
         /// Select the first item which matches the given text.
         /// </summary>
         /// <param name="textToFind">The text to search for.</param>
-        /// <returns>The first found item or null if no item matches.</returns>
+        /// <returns>The first found item.</returns>
+        /// <exception cref="ArgumentException">Thrown if no item matches the specified text.</exception>
         public ComboBoxItem? Select(string textToFind)
         {
             var foundItem = Items.FirstOrDefault(item => item.Text.Equals(textToFind));
-            foundItem?.Select();
+            if (foundItem == null)
+            {
+                throw new ArgumentException($"Item with text '{textToFind}' not found in ComboBox.");
+            }
+            foundItem.Select();
             return foundItem;
         }
 
