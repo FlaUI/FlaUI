@@ -6,6 +6,7 @@ using NUnit.Framework;
 namespace FlaUI.Core.UnitTests
 {
     [TestFixture]
+    [Parallelizable(ParallelScope.All)]
     public class RetryTests
     {
         [Test]

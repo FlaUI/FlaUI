@@ -5,6 +5,7 @@ using NUnit.Framework;
 namespace FlaUI.Core.UnitTests.Logging
 {
     [TestFixture]
+    [Parallelizable(ParallelScope.All)]
     public class TestLoggerTests
     {
         [Test]
