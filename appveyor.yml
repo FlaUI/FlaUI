@@ -1,5 +1,8 @@
 image: Visual Studio 2022
 
+environment:
+  FLAUI_TEST_VIDEO_RECORDING_MODE: NoVideo
+
 install:
   # Install .NET 10 SDK
   - ps: |
