@@ -29,7 +29,7 @@ Task("Restore-NuGet-Packages")
     .IsDependentOn("Clean")
     .Does(() =>
 {
-    NuGetRestore(slnFile);
+    DotNetRestore(slnFile);
 });
 
 Task("Build")
@@ -78,14 +78,23 @@ Task("Run-Unit-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    var resultFile = artifactDir.CombineWithFilePath("UnitTestResult.xml");
-    NUnit3(@"src\FlaUI.Core.UnitTests\bin\FlaUI.Core.UnitTests.dll", new NUnit3Settings {
-        Results = new[] {
-            new NUnit3Result { FileName = resultFile, Format = "nunit3" }
+    var unitTestProject = @"src\FlaUI.Core.UnitTests\FlaUI.Core.UnitTests.csproj";
+    foreach (var framework in new[] { "net48", "net10.0-windows" }) {
+        var resultFileName = $"UnitTestResult-{framework}.trx";
+        var resultFile = artifactDir.CombineWithFilePath(resultFileName);
+        DotNetTest(unitTestProject, new DotNetTestSettings {
+            Configuration = configuration,
+            Framework = framework,
+            NoBuild = true,
+            NoRestore = true,
+            NoLogo = true,
+            PathType = DotNetTestPathType.Project,
+            ResultsDirectory = artifactDir,
+            Loggers = new[] { $"trx;LogFileName={resultFileName}" }
+        });
+        if (AppVeyor.IsRunningOnAppVeyor) {
+            AppVeyor.UploadTestResults(resultFile, AppVeyorTestResultsType.MSTest);
         }
-    });
-    if (AppVeyor.IsRunningOnAppVeyor) {
-        AppVeyor.UploadTestResults(resultFile, AppVeyorTestResultsType.NUnit3);
     }
 });
 
@@ -93,9 +102,12 @@ Task("Run-UI-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
+    // UI tests need an interactive desktop. Keep the established AppVeyor/NUnit
+    // execution on .NET Framework; the solution build compiles both UI test TFMs.
+    var uiTestAssembly = $@"src\FlaUI.Core.UITests\bin\{configuration}\net48\FlaUI.Core.UITests.dll";
     var resultFile = artifactDir.CombineWithFilePath("UIA2TestResult.xml");
     var uia2ExitCode = 0;
-    NUnit3(@"src\FlaUI.Core.UITests\bin\FlaUI.Core.UITests.dll", new NUnit3Settings {
+    NUnit3(uiTestAssembly, new NUnit3Settings {
         Results = new[] {
             new NUnit3Result { FileName = resultFile, Format = "nunit3" }
         },
@@ -109,7 +121,7 @@ Task("Run-UI-Tests")
 
     resultFile = artifactDir.CombineWithFilePath("UIA3TestResult.xml");
     var uia3ExitCode = 0;
-    NUnit3(@"src\FlaUI.Core.UITests\bin\FlaUI.Core.UITests.dll", new NUnit3Settings {
+    NUnit3(uiTestAssembly, new NUnit3Settings {
         Results = new[] {
             new NUnit3Result { FileName = resultFile, Format = "nunit3" }
         },

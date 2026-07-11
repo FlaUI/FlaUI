@@ -33,16 +33,44 @@ namespace FlaUI.Core.UITests.TestFramework
             switch (ApplicationType)
             {
                 case TestApplicationType.WinForms:
-                    app = Application.Launch(Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WinFormsApplication\bin\WinFormsApplication.exe"));
+                    app = Application.Launch(GetTestApplicationPath("WinFormsApplication"));
                     break;
                 case TestApplicationType.Wpf:
-                    app = Application.Launch(Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe"));
+                    app = Application.Launch(GetTestApplicationPath("WpfApplication"));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
             app.WaitWhileMainHandleIsMissing();
             return app;
+        }
+
+        private static string GetTestApplicationPath(string projectName)
+        {
+            var targetFrameworkDirectory = new DirectoryInfo(TestContext.CurrentContext.TestDirectory);
+            var configurationDirectory = targetFrameworkDirectory.Parent;
+            var binDirectory = configurationDirectory?.Parent;
+            var uiTestsProjectDirectory = binDirectory?.Parent;
+            var srcDirectory = uiTestsProjectDirectory?.Parent;
+            if (configurationDirectory == null || binDirectory == null || srcDirectory == null)
+            {
+                throw new DirectoryNotFoundException($"Could not determine the repository layout from '{targetFrameworkDirectory.FullName}'.");
+            }
+
+            var applicationPath = Path.Combine(
+                srcDirectory.FullName,
+                "TestApplications",
+                projectName,
+                "bin",
+                configurationDirectory.Name,
+                targetFrameworkDirectory.Name,
+                projectName + ".exe");
+
+            if (!File.Exists(applicationPath))
+            {
+                throw new FileNotFoundException($"The {projectName} test application was not built for the current test target.", applicationPath);
+            }
+            return applicationPath;
         }
     }
 }
