@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.UITests.WordPad.Screens;
 using FlaUI.TestUtilities;
@@ -21,11 +23,23 @@ namespace FlaUI.Core.UITests.WordPad
 
         protected override Application StartApplication()
         {
-            var application = Application.Launch("wordpad.exe");
-            application.WaitWhileMainHandleIsMissing();
-            // Give the application some additional time to start
-            System.Threading.Thread.Sleep(1000);
-            return application;
+            try
+            {
+                var startInfo = new ProcessStartInfo("wordpad.exe")
+                {
+                    UseShellExecute = true
+                };
+                var application = Application.Launch(startInfo);
+                application.WaitWhileMainHandleIsMissing();
+                // Give the application some additional time to start
+                System.Threading.Thread.Sleep(1000);
+                return application;
+            }
+            catch (Win32Exception exception) when (exception.NativeErrorCode == 2 || exception.NativeErrorCode == 3)
+            {
+                Assert.Ignore("WordPad is not installed on this Windows environment and no repository-owned replacement covers its ribbon UI.");
+                throw;
+            }
         }
 
         [Test]

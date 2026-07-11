@@ -22,6 +22,8 @@ namespace FlaUI.Core.UITests.TestFramework
 
         protected override ApplicationStartMode ApplicationStartMode => ApplicationStartMode.OncePerFixture;
 
+        protected virtual bool StartWinFormsOnComplexControls => false;
+
         protected override AutomationBase GetAutomation()
         {
             return UtilityMethods.GetAutomation(AutomationType);
@@ -33,7 +35,8 @@ namespace FlaUI.Core.UITests.TestFramework
             switch (ApplicationType)
             {
                 case TestApplicationType.WinForms:
-                    app = Application.Launch(GetTestApplicationPath("WinFormsApplication"));
+                    var arguments = StartWinFormsOnComplexControls ? "--complex-controls" : string.Empty;
+                    app = Application.Launch(GetTestApplicationPath("WinFormsApplication"), arguments);
                     break;
                 case TestApplicationType.Wpf:
                     app = Application.Launch(GetTestApplicationPath("WpfApplication"));

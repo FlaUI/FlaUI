@@ -18,12 +18,17 @@ namespace FlaUI.Core.UITests.Elements
         {
         }
 
+        protected override bool StartWinFormsOnComplexControls => true;
+
         [OneTimeSetUp]
         public void SelectTab()
         {
             var mainWindow = Application.GetMainWindow(Automation);
             var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
-            tab.SelectTabItem(1);
+            if (ApplicationType == TestApplicationType.Wpf)
+            {
+                tab.SelectTabItem(1);
+            }
             var tree = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("treeView1")).AsTree();
             _tree = tree;
         }

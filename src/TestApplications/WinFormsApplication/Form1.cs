@@ -7,9 +7,18 @@ namespace WinFormsApplication
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        public Form1() : this(false)
+        {
+        }
+
+        public Form1(bool showComplexControls)
         {
             InitializeComponent();
+
+            if (showComplexControls)
+            {
+                tabControl1.SelectedIndex = 1;
+            }
 
             var list = new List<DataGridViewItem>()
             {
