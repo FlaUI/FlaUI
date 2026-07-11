@@ -88,7 +88,6 @@ Task("Run-Unit-Tests")
             NoBuild = true,
             NoRestore = true,
             NoLogo = true,
-            PathType = DotNetTestPathType.Project,
             ResultsDirectory = artifactDir,
             Loggers = new[] { $"trx;LogFileName={resultFileName}" }
         });
