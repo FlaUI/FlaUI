@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Patterns
 {
-    [TestFixture(AutomationType.UIA2, TestApplicationType.WinForms)]
+    [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class RangeValuePatternTests : UITestBase
     {

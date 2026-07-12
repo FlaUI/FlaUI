@@ -116,7 +116,7 @@ Task("Run-UI-Tests")
             Loggers = new[] { $"trx;LogFileName={resultFileName}" },
             ArgumentCustomization = args => args
                 .Append("--")
-                .Append($"NUnit.TestParameters.uia={uiaVersion}")
+                .Append($"TestRunParameters.Parameter(name=\\\"uia\\\",value=\\\"{uiaVersion}\\\")")
         });
         Information($"Finished UIA{uiaVersion} Tests");
         if (AppVeyor.IsRunningOnAppVeyor) {

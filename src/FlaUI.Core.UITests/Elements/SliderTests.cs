@@ -22,9 +22,25 @@ namespace FlaUI.Core.UITests.Elements
         {
             var slider = GetSlider();
             var thumb = slider.Thumb;
+            var originalValue = slider.Value;
+            slider.Value = slider.Minimum;
+            var minimumPosition = slider.Thumb.BoundingRectangle.Center();
+            slider.Value = slider.Maximum;
+            var maximumPosition = slider.Thumb.BoundingRectangle.Center();
+            slider.Value = originalValue;
+            thumb = slider.Thumb;
             var oldPos = thumb.Properties.BoundingRectangle.Value.Center();
             thumb.SlideHorizontally(50);
-            UtilityMethods.AssertPointsAreSame(thumb.Properties.BoundingRectangle.Value.Center(), new Point(oldPos.X + 50, oldPos.Y), 1);
+            var newPos = thumb.Properties.BoundingRectangle.Value.Center();
+
+            var travelWidth = maximumPosition.X - minimumPosition.X;
+            var valueRange = slider.Maximum - slider.Minimum;
+            var expectedValue = originalValue + 50D / travelWidth * valueRange;
+            var valueStep = slider.IsOnlyValue ? 10 : slider.SmallChange;
+            Assert.That(slider.Value, Is.EqualTo(expectedValue).Within(valueStep / 2D));
+
+            var expectedX = minimumPosition.X + (slider.Value - slider.Minimum) / valueRange * travelWidth;
+            UtilityMethods.AssertPointsAreSame(newPos, new Point((int)System.Math.Round(expectedX), oldPos.Y), 1);
         }
 
         [Test]

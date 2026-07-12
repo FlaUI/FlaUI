@@ -55,7 +55,7 @@ namespace FlaUI.Core.UITests
                     Assert.That(window, Is.Not.Null);
                     Assert.That(window.Title, Is.Not.Null);
 
-                    var editableText = window.FindFirstChild(new PropertyCondition(automation.PropertyLibrary.LegacyIAccessible.Role, AccessibilityRole.ROLE_SYSTEM_TEXT));
+                    var editableText = window.FindFirstDescendant(new PropertyCondition(automation.PropertyLibrary.LegacyIAccessible.Role, AccessibilityRole.ROLE_SYSTEM_TEXT));
                     Assert.That(editableText, Is.Not.Null);
                     Assert.That(editableText.Patterns.Text.IsSupported, Is.True);
                 }

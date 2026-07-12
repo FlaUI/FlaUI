@@ -57,7 +57,7 @@ namespace FlaUI.TestUtilities
 
         /// <summary>
         /// Specifies the mode of the video recorder.
-        /// Defaults to OnePerTest and can be overridden with the
+        /// Defaults to NoVideo and can be overridden with the
         /// FLAUI_TEST_VIDEO_RECORDING_MODE environment variable.
         /// </summary>
         protected virtual VideoRecordingMode VideoRecordingMode
@@ -68,7 +68,7 @@ namespace FlaUI.TestUtilities
                 var configuredMode = Environment.GetEnvironmentVariable(environmentVariable);
                 if (String.IsNullOrWhiteSpace(configuredMode))
                 {
-                    return VideoRecordingMode.OnePerTest;
+                    return VideoRecordingMode.NoVideo;
                 }
                 if (Enum.TryParse(configuredMode, true, out VideoRecordingMode mode))
                 {

@@ -1,5 +1,6 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.UITests.TestFramework;
+using FlaUI.TestUtilities;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
@@ -14,6 +15,8 @@ namespace FlaUI.Core.UITests.Elements
             : base(automationType, appType)
         {
         }
+
+        protected override ApplicationStartMode ApplicationStartMode => ApplicationStartMode.OncePerTest;
 
         [Test]
         public void TestMenuWithSubMenus()
@@ -72,6 +75,11 @@ namespace FlaUI.Core.UITests.Elements
         [Test]
         public void TestCheckedMenuItem()
         {
+            if (ApplicationType == TestApplicationType.WinForms)
+            {
+                Assert.Ignore("UI Automation currently does not support Toggle pattern on menu items in WinForms applications.");
+                return;
+            }
             var window = Application.GetMainWindow(Automation);
             var menu = window.FindFirstChild(cf => cf.Menu()).AsMenu();
             var edit = menu.Items["Edit"];

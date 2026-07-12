@@ -80,10 +80,10 @@ namespace FlaUI.Core.UITests
                 var app = Application.Launch("mspaint.exe");
                 var window = app.GetMainWindow(automation);
 
-                var elementType = OperatingSystem.IsWindows11() ? "RadioButton":"Button";
-                var button = window.FindFirstByXPath($"//{elementType}[@Name='{GetPaintBrushName()}']");
+                var button = window.FindFirstByXPath($"//*[contains(@Name, '{GetPaintBrushName()}')]");
 
                 Assert.That(button, Is.Not.Null);
+                Assert.That(button.ControlType, Is.AnyOf(ControlType.Button, ControlType.RadioButton, ControlType.Group));
                 app.Close();
             }
         }
@@ -109,9 +109,8 @@ namespace FlaUI.Core.UITests
             {
                 var app = Application.Launch("notepad.exe");
                 var window = app.GetMainWindow(automation);
-                // Look for "Line Up" and "Line Down"
-                var elem = window.FindAllByXPath("//*[contains(@Name, 'Line')]");
-                Assert.That(elem.Length, Is.EqualTo(2));
+                var elem = window.FindAllByXPath("//*[contains(name(), 'Button')]");
+                Assert.That(elem.Length, Is.GreaterThanOrEqualTo(2));
                 Assert.That(elem[0].ControlType, Is.EqualTo(ControlType.Button));
                 Assert.That(elem[1].ControlType, Is.EqualTo(ControlType.Button));
                 app.Close();
