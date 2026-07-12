@@ -2,6 +2,7 @@
 using System.Threading;
 using FlaUI.Core.AutomationElements.PatternElements;
 using FlaUI.Core.Definitions;
+using FlaUI.Core.Tools;
 
 namespace FlaUI.Core.AutomationElements
 {
@@ -69,9 +70,37 @@ namespace FlaUI.Core.AutomationElements
                         Thread.Sleep(50);
                     } while (state != ExpandCollapseState.Expanded);
                 }
-                var childItems = FindAllChildren(cf => cf.ByControlType(ControlType.MenuItem)).Select(e => e.AsMenuItem());
-                return new MenuItems(childItems);
+                var childItems = FindAllChildren(cf => cf.ByControlType(ControlType.MenuItem));
+                if (childItems.Length == 0 && FrameworkType == FrameworkType.WinForms)
+                {
+                    if (!Patterns.ExpandCollapse.IsSupported)
+                    {
+                        Click();
+                    }
+                    var bounds = BoundingRectangle;
+                    var itemCenter = bounds.Center();
+                    var popup = FindPopupMenuAt(new System.Drawing.Point(bounds.Left + bounds.Width / 2, bounds.Bottom + 5), itemCenter)
+                        ?? FindPopupMenuAt(new System.Drawing.Point(bounds.Right + 15, bounds.Top + bounds.Height / 2), itemCenter);
+                    childItems = popup?.FindAllChildren(cf => cf.ByControlType(ControlType.MenuItem)) ?? childItems;
+                }
+                return new MenuItems(childItems.Select(e => e.AsMenuItem()));
             }
+        }
+
+        private Menu? FindPopupMenuAt(System.Drawing.Point point, System.Drawing.Point sourceItemCenter)
+        {
+            var element = Automation.FromPoint(point);
+            var treeWalker = Automation.TreeWalkerFactory.GetControlViewWalker();
+            while (element != null)
+            {
+                if ((element.ControlType == ControlType.Menu || element.ControlType == ControlType.ToolBar) &&
+                    !element.BoundingRectangle.Contains(sourceItemCenter))
+                {
+                    return element.AsMenu();
+                }
+                element = treeWalker.GetParent(element);
+            }
+            return null;
         }
 
         /// <summary>

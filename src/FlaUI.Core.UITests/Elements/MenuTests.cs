@@ -1,5 +1,6 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.UITests.TestFramework;
+using FlaUI.TestUtilities;
 using NUnit.Framework;
 
 namespace FlaUI.Core.UITests.Elements
@@ -14,6 +15,8 @@ namespace FlaUI.Core.UITests.Elements
             : base(automationType, appType)
         {
         }
+
+        protected override ApplicationStartMode ApplicationStartMode => ApplicationStartMode.OncePerTest;
 
         [Test]
         public void TestMenuWithSubMenus()

@@ -160,8 +160,8 @@ namespace FlaUI.Core.AutomationElements
         public GridRow? GetRowByIndex(int rowIndex)
         {
             PreCheckRow(rowIndex);
-            var gridCell = GridPattern.GetItem(rowIndex, 0).AsGridCell();
-            return gridCell.ContainingRow;
+            var gridCell = GridPattern.GetItem(rowIndex, 0)?.AsGridCell();
+            return gridCell?.ContainingRow ?? Rows.ElementAtOrDefault(rowIndex);
         }
 
         /// <summary>
@@ -183,13 +183,16 @@ namespace FlaUI.Core.AutomationElements
         {
             PreCheckColumn(columnIndex);
             var gridPattern = GridPattern;
+            var rows = Rows;
             var returnList = new List<GridRow>();
             for (var rowIndex = 0; rowIndex < RowCount; rowIndex++)
             {
-                var currentCell = gridPattern.GetItem(rowIndex, columnIndex).AsGridCell();
-                if (currentCell.Value == value)
+                var currentCell = gridPattern.GetItem(rowIndex, columnIndex)?.AsGridCell();
+                var currentRow = currentCell?.ContainingRow ?? rows.ElementAtOrDefault(rowIndex);
+                currentCell ??= currentRow?.Cells.ElementAtOrDefault(columnIndex);
+                if (currentCell?.Value == value && currentRow != null)
                 {
-                    returnList.Add(currentCell.ContainingRow);
+                    returnList.Add(currentRow);
                     if (maxItems > 0 && returnList.Count >= maxItems)
                     {
                         break;

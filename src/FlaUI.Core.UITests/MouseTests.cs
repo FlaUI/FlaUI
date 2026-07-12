@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Text;
 using System.Threading;
+using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
@@ -99,7 +100,15 @@ namespace FlaUI.Core.UITests
                     {
                         sb.Append("aaa" + Environment.NewLine);
                     }
-                    documentElement.Patterns.Value.Pattern.SetValue(sb.ToString());
+                    if (documentElement.Patterns.Value.TryGetPattern(out var valuePattern))
+                    {
+                        valuePattern.SetValue(sb.ToString());
+                    }
+                    else
+                    {
+                        documentElement.AsTextBox().Text = sb.ToString();
+                    }
+                    documentElement.Focus();
                     Mouse.Position = documentElement.BoundingRectangle.Center();
                     Wait.UntilInputIsProcessed();
 

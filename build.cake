@@ -1,5 +1,4 @@
 #tool nuget:?package=NuGet.CommandLine&version=7.3.0
-#tool nuget:?package=NUnit.ConsoleRunner&version=3.22.0
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -29,7 +28,7 @@ Task("Restore-NuGet-Packages")
     .IsDependentOn("Clean")
     .Does(() =>
 {
-    NuGetRestore(slnFile);
+    DotNetRestore(slnFile);
 });
 
 Task("Build")
@@ -78,14 +77,21 @@ Task("Run-Unit-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    var resultFile = artifactDir.CombineWithFilePath("UnitTestResult.xml");
-    NUnit3(@"src\FlaUI.Core.UnitTests\bin\FlaUI.Core.UnitTests.dll", new NUnit3Settings {
-        Results = new[] {
-            new NUnit3Result { FileName = resultFile, Format = "nunit3" }
-        }
+    var unitTestProject = @"src\FlaUI.Core.UnitTests\FlaUI.Core.UnitTests.csproj";
+    var framework = "net10.0-windows";
+    var resultFileName = $"UnitTestResult-{framework}.trx";
+    var resultFile = artifactDir.CombineWithFilePath(resultFileName);
+    DotNetTest(unitTestProject, new DotNetTestSettings {
+        Configuration = configuration,
+        Framework = framework,
+        NoBuild = true,
+        NoRestore = true,
+        NoLogo = true,
+        ResultsDirectory = artifactDir,
+        Loggers = new[] { $"trx;LogFileName={resultFileName}" }
     });
     if (AppVeyor.IsRunningOnAppVeyor) {
-        AppVeyor.UploadTestResults(resultFile, AppVeyorTestResultsType.NUnit3);
+        AppVeyor.UploadTestResults(resultFile, AppVeyorTestResultsType.MSTest);
     }
 });
 
@@ -93,37 +99,29 @@ Task("Run-UI-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    var resultFile = artifactDir.CombineWithFilePath("UIA2TestResult.xml");
-    var uia2ExitCode = 0;
-    NUnit3(@"src\FlaUI.Core.UITests\bin\FlaUI.Core.UITests.dll", new NUnit3Settings {
-        Results = new[] {
-            new NUnit3Result { FileName = resultFile, Format = "nunit3" }
-        },
-        ArgumentCustomization = args => args.Append("--testparam:uia=2"),
-        HandleExitCode = exitCode => { uia2ExitCode = exitCode; return true; }
-    });
-    Information("Finished UIA2 Tests");
-    if (AppVeyor.IsRunningOnAppVeyor) {
-        AppVeyor.UploadTestResults(resultFile, AppVeyorTestResultsType.NUnit3);
-    }
-
-    resultFile = artifactDir.CombineWithFilePath("UIA3TestResult.xml");
-    var uia3ExitCode = 0;
-    NUnit3(@"src\FlaUI.Core.UITests\bin\FlaUI.Core.UITests.dll", new NUnit3Settings {
-        Results = new[] {
-            new NUnit3Result { FileName = resultFile, Format = "nunit3" }
-        },
-        ArgumentCustomization = args => args.Append("--testparam:uia=3"),
-        HandleExitCode = exitCode => { uia3ExitCode = exitCode; return true; }
-    });
-    Information("Finished UIA3 Tests");
-    if (AppVeyor.IsRunningOnAppVeyor) {
-        AppVeyor.UploadTestResults(resultFile, AppVeyorTestResultsType.NUnit3);
-    }
-
-    // Error if any tests failed
-    if (uia2ExitCode != 0 || uia3ExitCode != 0) {
-        throw new Exception("Some tests failed, aborting");
+    // UI automation requires an interactive Windows desktop. The CI agent must
+    // provide one when it runs this net10.0-windows test target.
+    var uiTestProject = @"src\FlaUI.Core.UITests\FlaUI.Core.UITests.csproj";
+    var framework = "net10.0-windows";
+    foreach (var uiaVersion in new[] { 2, 3 }) {
+        var resultFileName = $"UIA{uiaVersion}TestResult-{framework}.trx";
+        var resultFile = artifactDir.CombineWithFilePath(resultFileName);
+        DotNetTest(uiTestProject, new DotNetTestSettings {
+            Configuration = configuration,
+            Framework = framework,
+            NoBuild = true,
+            NoRestore = true,
+            NoLogo = true,
+            ResultsDirectory = artifactDir,
+            Loggers = new[] { $"trx;LogFileName={resultFileName}" },
+            ArgumentCustomization = args => args
+                .Append("--")
+                .Append($"TestRunParameters.Parameter(name=\\\"uia\\\",value=\\\"{uiaVersion}\\\")")
+        });
+        Information($"Finished UIA{uiaVersion} Tests");
+        if (AppVeyor.IsRunningOnAppVeyor) {
+            AppVeyor.UploadTestResults(resultFile, AppVeyorTestResultsType.MSTest);
+        }
     }
 });
 
@@ -199,7 +197,7 @@ Task("Push-To-Nuget")
 //////////////////////////////////////////////////////////////////////
 
 Task("Default")
-    .IsDependentOn("Run-Unit-Tests");
+    .IsDependentOn("Run-Tests");
 
 //////////////////////////////////////////////////////////////////////
 // EXECUTION

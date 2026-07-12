@@ -100,6 +100,10 @@ namespace FlaUI.Core.AutomationElements
                     new AndCondition(
                         new OrCondition(cf.ByControlType(ControlType.Menu), cf.ByControlType(ControlType.ToolBar))
                         , cf.ByName("DropDown"))), TimeSpan.FromSeconds(1)).Result;
+                ctxMenu ??= Retry.WhileNull(() => Automation.GetDesktop().FindFirstDescendant(cf =>
+                    new AndCondition(
+                        new OrCondition(cf.ByControlType(ControlType.Menu), cf.ByControlType(ControlType.ToolBar)),
+                        cf.ByProcessId(Properties.ProcessId))), TimeSpan.FromSeconds(1)).Result;
                 return ctxMenu.AsMenu();
             }
             if (frameworkType == FrameworkType.Wpf)

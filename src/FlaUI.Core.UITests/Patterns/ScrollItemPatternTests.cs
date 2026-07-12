@@ -17,12 +17,17 @@ namespace FlaUI.Core.UITests.Patterns
         {
         }
 
+        protected override bool StartWinFormsOnComplexControls => true;
+
         [OneTimeSetUp]
         public void SelectTab()
         {
             var mainWindow = Application.GetMainWindow(Automation);
             var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
-            tab.SelectTabItem(1);
+            if (ApplicationType == TestApplicationType.Wpf)
+            {
+                tab.SelectTabItem(1);
+            }
             _grid = tab.FindFirstDescendant(cf => cf.ByAutomationId("LargeListView"));
         }
 
