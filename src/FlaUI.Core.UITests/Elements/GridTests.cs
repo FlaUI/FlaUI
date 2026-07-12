@@ -1,5 +1,6 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
+using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
 
@@ -70,10 +71,10 @@ namespace FlaUI.Core.UITests.Elements
             IgnoreWinFormsSelectionOnNet10();
             var grid = _grid;
             grid.Select(1);
-            var selectedRow = grid.SelectedItem;
+            var selectedRow = WaitForSelectedRow(grid, "2");
             CheckRow(selectedRow, "2", "20");
             grid.Select(2);
-            selectedRow = grid.SelectedItem;
+            selectedRow = WaitForSelectedRow(grid, "3");
             CheckRow(selectedRow, "3", "30");
         }
 
@@ -83,11 +84,25 @@ namespace FlaUI.Core.UITests.Elements
             IgnoreWinFormsSelectionOnNet10();
             var grid = _grid;
             grid.Select(1, "20");
-            var selectedRow = grid.SelectedItem;
+            var selectedRow = WaitForSelectedRow(grid, "2");
             CheckRow(selectedRow, "2", "20");
             grid.Select(1, "30");
-            selectedRow = grid.SelectedItem;
+            selectedRow = WaitForSelectedRow(grid, "3");
             CheckRow(selectedRow, "3", "30");
+        }
+
+        private static GridRow WaitForSelectedRow(Grid grid, string expectedFirstCellValue)
+        {
+            var selectedRow = Retry.WhileNull(() =>
+            {
+                var row = grid.SelectedItem;
+                var cells = row?.Cells;
+                return cells?.Length > 0 && cells[0].AsLabel().Text == expectedFirstCellValue ? row : null;
+            }, timeout: System.TimeSpan.FromSeconds(1), interval: System.TimeSpan.FromMilliseconds(50)).Result;
+
+            Assert.That(selectedRow, Is.Not.Null,
+                $"The grid did not report the row beginning with '{expectedFirstCellValue}' as selected.");
+            return selectedRow;
         }
 
         private void CheckRow(GridRow gridRow, string cell1Value, string cell2Value)
