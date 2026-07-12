@@ -1,4 +1,5 @@
-﻿using FlaUI.Core.AutomationElements;
+﻿using System.Linq;
+using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
@@ -96,13 +97,39 @@ namespace FlaUI.Core.UITests.Elements
             var selectedRow = Retry.WhileNull(() =>
             {
                 var row = grid.SelectedItem;
-                var cells = row?.Cells;
-                return cells?.Length > 0 && cells[0].AsLabel().Text == expectedFirstCellValue ? row : null;
+                if (GetFirstCellValue(row) == expectedFirstCellValue)
+                {
+                    return row;
+                }
+
+                // Some modern providers update the item-level SelectionItem.IsSelected state while
+                // leaving the container's aggregate Selection result stale.
+                return grid.Rows.FirstOrDefault(candidate =>
+                    candidate.IsSelected && GetFirstCellValue(candidate) == expectedFirstCellValue);
             }, timeout: System.TimeSpan.FromSeconds(1), interval: System.TimeSpan.FromMilliseconds(50)).Result;
 
-            Assert.That(selectedRow, Is.Not.Null,
-                $"The grid did not report the row beginning with '{expectedFirstCellValue}' as selected.");
+            if (selectedRow == null)
+            {
+                Assert.Fail(
+                    $"The grid did not report the row beginning with '{expectedFirstCellValue}' as selected. " +
+                    DescribeSelectionState(grid));
+            }
             return selectedRow;
+        }
+
+        private static string GetFirstCellValue(GridRow row)
+        {
+            var cells = row?.Cells;
+            return cells?.Length > 0 ? cells[0].AsLabel().Text : null;
+        }
+
+        private static string DescribeSelectionState(Grid grid)
+        {
+            var containerSelection = System.String.Join(", ",
+                grid.SelectedItems.Select(row => GetFirstCellValue(row) ?? "<empty>"));
+            var rowStates = System.String.Join(", ",
+                grid.Rows.Select(row => $"{GetFirstCellValue(row) ?? "<empty>"}: IsSelected={row.IsSelected}"));
+            return $"Container selection: [{containerSelection}]. Row states: [{rowStates}].";
         }
 
         private void CheckRow(GridRow gridRow, string cell1Value, string cell2Value)
