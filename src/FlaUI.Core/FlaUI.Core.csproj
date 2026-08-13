@@ -11,7 +11,7 @@
   <PropertyGroup Label="Package">
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageOutputPath>..\..\artifacts</PackageOutputPath>
-    <Version>5.0.0</Version>
+    <Version>6.0.0</Version>
     <Product>FlaUI</Product>
     <Authors>Roemer</Authors>
     <Description>Library with base elements used in the concrete implementations of FlaUI.</Description>
@@ -50,9 +50,6 @@
     </PackageReference>
     <PackageReference Include="System.Security.Permissions">
       <Version>10.0.5</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Win32.Registry">
-      <Version>5.0.0</Version>
     </PackageReference>
   </ItemGroup>
 

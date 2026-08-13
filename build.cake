@@ -1,4 +1,4 @@
-#tool nuget:?package=NuGet.CommandLine&version=7.3.0
+#tool nuget:?package=NuGet.CommandLine&version=7.9.0
 #tool nuget:?package=NUnit.ConsoleRunner&version=3.22.0
 
 //////////////////////////////////////////////////////////////////////

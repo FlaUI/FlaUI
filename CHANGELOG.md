@@ -1,5 +1,20 @@
 # Changelog
 
+## 6.0.0 (2026-08-13)
+### Breaking changes
+  * Update dependencies, add .net 10, remove .net 6 (thanks @TomBeech85)
+### Enhancements
+  * Add scroll overloads (thanks @louislefevre)
+  * Add minimise and maximise button ID alternatives (thanks @louislefevre)
+### Bug fixes
+  * Fix copyright years (thanks @louislefevre)
+  * Handle incorrect time offset when system time changes during recording (thanks @t4m45)
+  * Fix XPath exceptions when using XPath functions on attributes that may not exist on elements (thanks @jasonpastor)
+  * Fix modifier keys being toggled when typing extended keys like arrows (#731) (thanks @TomBeech85)
+  * Fixing nullable annotations and warnings in Retry (#716) (thanks @algirdasN)
+  * Fix unsupporedexception (#704) (thanks @NeverMorewd)
+  * Prevent RecordLoop & WriteLoop exceptions from being swallowed (#726) (thanks @BrammyS)
+
 ## 5.0.0 (2024-12-08)
 ### Breaking changes
   * Removed support for .NET Standard, .NET Core 3.1, .NET 5
