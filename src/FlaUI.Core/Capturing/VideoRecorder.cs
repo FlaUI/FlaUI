@@ -339,7 +339,11 @@ namespace FlaUI.Core.Capturing
             {
                 throw new NotSupportedException("The current FFMPEG builds to not support 32-bit.");
             }
-            var uri = new Uri($"https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip");
+            // Get the latest ffmpeg version
+            var versionUrl = "https://www.gyan.dev/ffmpeg/builds/release-version";
+            var version = await _httpClient.GetStringAsync(versionUrl);
+            // Prepare the url
+            var uri = new Uri(@$"https://github.com/GyanD/codexffmpeg/releases/download/{version}/ffmpeg-{version}-essentials_build.zip");
             var archivePath = Path.Combine(Path.GetTempPath(), "ffmpeg.zip");
             var destPath = Path.Combine(targetFolder, "ffmpeg.exe");
             if (!File.Exists(destPath))

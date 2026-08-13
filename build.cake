@@ -93,9 +93,11 @@ Task("Run-UI-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
+    Information("Starting UIA2 Tests");
     var resultFile = artifactDir.CombineWithFilePath("UIA2TestResult.xml");
     var uia2ExitCode = 0;
     NUnit3(@"src\FlaUI.Core.UITests\bin\FlaUI.Core.UITests.dll", new NUnit3Settings {
+        Labels = NUnit3Labels.Before,
         Results = new[] {
             new NUnit3Result { FileName = resultFile, Format = "nunit3" }
         },
@@ -107,9 +109,11 @@ Task("Run-UI-Tests")
         AppVeyor.UploadTestResults(resultFile, AppVeyorTestResultsType.NUnit3);
     }
 
+    Information("Starting UIA3 Tests");
     resultFile = artifactDir.CombineWithFilePath("UIA3TestResult.xml");
     var uia3ExitCode = 0;
     NUnit3(@"src\FlaUI.Core.UITests\bin\FlaUI.Core.UITests.dll", new NUnit3Settings {
+        Labels = NUnit3Labels.Before,
         Results = new[] {
             new NUnit3Result { FileName = resultFile, Format = "nunit3" }
         },
