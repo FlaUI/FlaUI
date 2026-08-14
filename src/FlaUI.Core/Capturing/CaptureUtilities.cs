@@ -15,6 +15,12 @@ namespace FlaUI.Core.Capturing
         [DllImport("Gdi32")]
         public static extern bool DeleteObject(IntPtr ho);
 
+        [DllImport("user32.dll")]
+        private static extern void mouse_event(int dwFlags, int dx, int dy, int dwData, int dwExtraInfo);
+
+        private const int MOUSEEVENTF_MOVE = 0x0001;
+
+
         /// <summary>
         /// Calculates a scale factor according to the bounds and capture settings.
         /// </summary>
@@ -113,6 +119,12 @@ namespace FlaUI.Core.Capturing
         /// </summary>
         public static Bitmap? CaptureCursor(ref Point position)
         {
+            // Workaround for headless environments or inactive sessions:
+            // Windows may suppress drawing the cursor (CURSOR_SUPPRESSED) unless there's recent mouse activity.
+            // This emulates a minimal movement to force Windows to update the cursor state.
+            mouse_event(MOUSEEVENTF_MOVE, 1, 1, 0, 0);
+            mouse_event(MOUSEEVENTF_MOVE, -1, -1, 0, 0);
+
             var cursorInfo = new CURSORINFO();
             cursorInfo.cbSize = Marshal.SizeOf(cursorInfo);
             if (!User32.GetCursorInfo(out cursorInfo))
@@ -142,7 +154,7 @@ namespace FlaUI.Core.Capturing
 
             using (var maskBitmap = Image.FromHbitmap(iconInfo.hbmMask))
             {
-                // Special handling for monchome icons
+                // Special handling for monochrome icons
                 if (maskBitmap.Height == maskBitmap.Width * 2)
                 {
                     var cursor = new Bitmap(maskBitmap.Width, maskBitmap.Width, PixelFormat.Format32bppArgb);
@@ -168,6 +180,7 @@ namespace FlaUI.Core.Capturing
                             }
                         }
                     }
+
                     return cursor;
                 }
             }
