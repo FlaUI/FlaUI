@@ -102,6 +102,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.Win32FallbackLabel = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
@@ -289,6 +290,7 @@
             // tabPage1
             // 
             this.tabPage1.AutoScroll = true;
+            this.tabPage1.Controls.Add(this.Win32FallbackLabel);
             this.tabPage1.Controls.Add(this.PasswordBox);
             this.tabPage1.Controls.Add(this.ListBox);
             this.tabPage1.Controls.Add(this.panel1);
@@ -427,6 +429,14 @@
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 25;
+            // 
+            // Win32FallbackLabel
+            // 
+            this.Win32FallbackLabel.Location = new System.Drawing.Point(10, 260);
+            this.Win32FallbackLabel.Name = "Win32FallbackLabel";
+            this.Win32FallbackLabel.Size = new System.Drawing.Size(200, 50);
+            this.Win32FallbackLabel.TabIndex = 27;
+            this.Win32FallbackLabel.Text = "";
             // 
             // tabPage2
             // 
@@ -675,6 +685,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.TextBox PasswordBox;
+        private System.Windows.Forms.Label Win32FallbackLabel;
     }
 }
 

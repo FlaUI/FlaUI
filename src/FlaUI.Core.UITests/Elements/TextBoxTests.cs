@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Input;
 using FlaUI.Core.UITests.TestFramework;
@@ -72,6 +73,42 @@ namespace FlaUI.Core.UITests.Elements
                     $"Expected: Color[A = {expected.A}, R = {expected.R}, G = {expected.G}, B = {expected.B}]{Environment.NewLine}But was:  Color[A = {actual.A}, R = {actual.R}, G = {actual.G}, B = {actual.B}]";
                 Assert.Fail(message);
             }
+        }
+    }
+
+    [TestFixture(AutomationType.UIA2, TestApplicationType.WinForms)]
+    [TestFixture(AutomationType.UIA3, TestApplicationType.WinForms)]
+    public class Win32FallbackTextBoxTests : UITestBase
+    {
+        public Win32FallbackTextBoxTests(AutomationType automationType, TestApplicationType appType) : base(automationType, appType)
+        {
+        }
+
+        [Test]
+        public void DirectSetDoesNotEnterTextThroughKeyboardAfterSuccessfulWin32Fallback()
+        {
+            var window = Application.GetMainWindow(Automation);
+            var fallbackElement = window.FindAllDescendants()
+                .FirstOrDefault(element =>
+                    element.Properties.AutomationId.ValueOrDefault == "Win32FallbackLabel" &&
+                    element.Properties.ClassName.ValueOrDefault?.StartsWith("WindowsForms10.STATIC", StringComparison.OrdinalIgnoreCase) == true);
+            Assert.That(fallbackElement, Is.Not.Null);
+            Assert.That(fallbackElement.Patterns.Value.IsSupported, Is.False);
+            Assert.That(fallbackElement.Properties.NativeWindowHandle.ValueOrDefault, Is.Not.EqualTo(IntPtr.Zero));
+
+            var focusedTextBox = window.FindFirstDescendant(cf => cf.ByAutomationId("TextBox")).AsTextBox();
+            const string focusedTextBoxValue = "Focused textbox sentinel";
+            focusedTextBox.Text = focusedTextBoxValue;
+            focusedTextBox.Focus();
+            Assert.That(Automation.Compare(Automation.FocusedElement(), focusedTextBox), Is.True);
+
+            var fallbackTextBox = fallbackElement.AsTextBox();
+            const string fallbackTextBoxValue = "Win32 fallback text";
+            fallbackTextBox.Text = fallbackTextBoxValue;
+
+            Assert.That(fallbackTextBox.Text, Is.EqualTo(fallbackTextBoxValue));
+            Assert.That(focusedTextBox.Text, Is.EqualTo(focusedTextBoxValue));
+            Assert.That(Automation.Compare(Automation.FocusedElement(), focusedTextBox), Is.True);
         }
     }
 }
