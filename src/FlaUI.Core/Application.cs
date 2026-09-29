@@ -27,6 +27,14 @@ namespace FlaUI.Core
         private bool _disposed;
 
         /// <summary>
+        /// Flag to indicate whether this instance owns the <see cref="_process"/> and should dispose it.
+        /// When <see langword="false"/> (e.g. created via <see cref="Attach(Process)"/> or
+        /// <see cref="Application(Process, bool)"/> with an externally-owned process), the caller
+        /// retains ownership and FlaUI will not dispose or replace the <see cref="Process"/> object.
+        /// </summary>
+        private readonly bool _ownsProcess;
+
+        /// <summary>
         /// The timeout to wait to close an application gracefully.
         /// </summary>
         public TimeSpan CloseTimeout { get; set; } = TimeSpan.FromSeconds(5);
@@ -64,11 +72,12 @@ namespace FlaUI.Core
 
         /// <summary>
         /// Creates an application object with the given process id.
+        /// FlaUI looks up the process internally and therefore owns the resulting <see cref="Process"/> object.
         /// </summary>
         /// <param name="processId">The process id.</param>
         /// <param name="isStoreApp">Flag to define if it's a store app or not.</param>
         public Application(int processId, bool isStoreApp = false)
-            : this(FindProcess(processId), isStoreApp)
+            : this(FindProcess(processId), isStoreApp, ownsProcess: true)
         {
         }
 
@@ -77,10 +86,30 @@ namespace FlaUI.Core
         /// </summary>
         /// <param name="process">The process.</param>
         /// <param name="isStoreApp">Flag to define if it's a store app or not.</param>
+        /// <remarks>
+        /// The caller retains ownership of <paramref name="process"/>. FlaUI will not dispose it.
+        /// If you want FlaUI to manage the process lifetime, use <see cref="Application(int, bool)"/> or
+        /// one of the <see cref="Launch(string, string)"/> factory methods instead.
+        /// </remarks>
         public Application(Process process, bool isStoreApp = false)
+            : this(process, isStoreApp, ownsProcess: false)
+        {
+        }
+
+        /// <summary>
+        /// Internal constructor that allows specifying process ownership explicitly.
+        /// </summary>
+        /// <param name="process">The process to wrap.</param>
+        /// <param name="isStoreApp">Flag to define if it's a store app or not.</param>
+        /// <param name="ownsProcess">
+        /// <see langword="true"/> if this instance should dispose <paramref name="process"/> when it is disposed;
+        /// <see langword="false"/> to leave ownership with the caller.
+        /// </param>
+        private Application(Process process, bool isStoreApp, bool ownsProcess)
         {
             _process = process ?? throw new ArgumentNullException(nameof(process));
             IsStoreApp = isStoreApp;
+            _ownsProcess = ownsProcess;
         }
 
         /// <summary>
@@ -154,7 +183,7 @@ namespace FlaUI.Core
             {
                 return;
             }
-            if (disposing)
+            if (disposing && _ownsProcess)
             {
                 _process?.Dispose();
             }
@@ -168,18 +197,21 @@ namespace FlaUI.Core
         /// <returns>An application instance which is attached to the process.</returns>
         public static Application Attach(int processId)
         {
-            return Attach(FindProcess(processId));
+            var process = FindProcess(processId);
+            Logger.Default.Debug($"[Attaching to process:{process.Id}] [Process name:{process.ProcessName}] [Process full path:{WindowsApiTools.GetMainModuleFilepath(process)}]");
+            return new Application(process, isStoreApp: false, ownsProcess: true);
         }
 
         /// <summary>
         /// Attaches to a given process.
+        /// The caller retains ownership of <paramref name="process"/>; FlaUI will not dispose it.
         /// </summary>
         /// <param name="process">The process to attach to.</param>
         /// <returns>An application instance which is attached to the process.</returns>
         public static Application Attach(Process process)
         {
             Logger.Default.Debug($"[Attaching to process:{process.Id}] [Process name:{process.ProcessName}] [Process full path:{WindowsApiTools.GetMainModuleFilepath(process)}]");
-            return new Application(process);
+            return new Application(process, isStoreApp: false, ownsProcess: false);
         }
 
         /// <summary>
@@ -252,7 +284,7 @@ namespace FlaUI.Core
                 throw;
             }
 
-            return new Application(process);
+            return new Application(process, isStoreApp: false, ownsProcess: true);
         }
 
         /// <summary>
@@ -263,7 +295,7 @@ namespace FlaUI.Core
         public static Application LaunchStoreApp(string appUserModelId, string arguments = "")
         {
             var process = WindowsStoreAppLauncher.Launch(appUserModelId, arguments);
-            return new Application(process, true);
+            return new Application(process, isStoreApp: true, ownsProcess: true);
         }
 
         /// <summary>
@@ -287,9 +319,22 @@ namespace FlaUI.Core
             var waitTime = waitTimeout ?? TimeSpan.FromMilliseconds(-1);
             return Retry.WhileTrue(() =>
             {
-                int processId = _process.Id;
-                _process.Dispose();
-                _process = FindProcess(processId);
+                // Refresh the Process object so the MainWindowHandle cache is cleared.
+                // When FlaUI owns the process it can safely dispose and re-fetch; otherwise
+                // a fresh Process snapshot is used temporarily without touching the caller's instance.
+                if (_ownsProcess)
+                {
+                    int processId = _process.Id;
+                    _process.Dispose();
+                    _process = FindProcess(processId);
+                }
+                else
+                {
+                    // We don't own the process — use a temporary snapshot to read the current handle
+                    // without disposing or replacing the caller's Process instance.
+                    using var snapshot = FindProcess(_process.Id);
+                    return snapshot.MainWindowHandle == IntPtr.Zero;
+                }
                 return _process.MainWindowHandle == IntPtr.Zero;
             }, waitTime, TimeSpan.FromMilliseconds(50)).Result;
         }
