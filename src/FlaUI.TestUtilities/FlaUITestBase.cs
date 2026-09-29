@@ -151,9 +151,22 @@ namespace FlaUI.TestUtilities
             if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed && TakeScreenshots == true)
             {
                 TakeScreenShot(TestContext.CurrentContext.Test.FullName);
-                TestContext.AddTestAttachment(
-                    CreateScreenShotPath(TestContext.CurrentContext.Test.FullName),
-                    TestContext.CurrentContext.Test.FullName);
+                try
+                {
+                    // NUnit's AddTestAttachment can throw FileNotFoundException when the full file path
+                    // exceeds the OS path-length limit (see https://github.com/nunit/nunit/issues/4353).
+                    // Catch this specific failure so that CloseApplication() always runs and the original
+                    // test failure is preserved rather than being replaced by this secondary exception.
+                    TestContext.AddTestAttachment(
+                        CreateScreenShotPath(TestContext.CurrentContext.Test.FullName),
+                        TestContext.CurrentContext.Test.FullName);
+                }
+                catch (FileNotFoundException ex)
+                {
+                    Logger.Default.Warn("Failed to attach screenshot — the file path may exceed the OS path-length limit. " +
+                        "Consider shortening the test name or overriding TestsMediaPath. " +
+                        "Screenshot path: {0}, Ex: {1}", CreateScreenShotPath(TestContext.CurrentContext.Test.FullName), ex);
+                }
             }
 
             if (ApplicationStartMode == ApplicationStartMode.OncePerTest)
