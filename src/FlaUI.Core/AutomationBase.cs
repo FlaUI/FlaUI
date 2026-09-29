@@ -126,6 +126,16 @@ namespace FlaUI.Core
         public abstract AutomationElement FromHandle(IntPtr hwnd);
 
         /// <summary>
+        /// Creates an <see cref="AutomationElement" /> from a given windows handle (HWND).
+        /// </summary>
+        /// <param name="hwnd">
+        /// The native window handle as an <see cref="int"/>.
+        /// This is a convenience overload for interop scenarios where the handle is returned as <see cref="int"/>
+        /// (e.g. <c>IUIAutomationElement.CurrentNativeWindowHandle</c> in UIA3) to avoid an explicit cast.
+        /// </param>
+        public AutomationElement FromHandle(int hwnd) => FromHandle(new IntPtr(hwnd));
+
+        /// <summary>
         /// Gets the currently focused element as an <see cref="AutomationElement"/>.
         /// </summary>
         /// <returns></returns>
